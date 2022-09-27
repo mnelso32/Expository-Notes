@@ -1,0 +1,1576 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Riemann Integration
+\end_layout
+
+\begin_layout Section
+Partitions and Step Functions
+\end_layout
+
+\begin_layout Subsection
+Partition of a Closed Interval
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+partition 
+\begin_inset Formula $P$
+\end_inset
+
+ 
+\series default
+of the interval 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+ is a finite strictly increasing sequence 
+\begin_inset Formula $(x_{0},x_{1},\dots,x_{n})$
+\end_inset
+
+ where 
+\begin_inset Formula $n$
+\end_inset
+
+ is a nonnegative integer, 
+\begin_inset Formula $x_{0}=a$
+\end_inset
+
+, and 
+\begin_inset Formula $x_{n}=b$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $P$
+\end_inset
+
+ is the partition 
+\begin_inset Formula $(x_{0},x_{1},\dots,x_{n})$
+\end_inset
+
+ of the interval 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+, then the numbers 
+\begin_inset Formula $x_{0},x_{1},\dots,x_{n}$
+\end_inset
+
+ are called the 
+\series bold
+points
+\series default
+, and, for 
+\begin_inset Formula $j=1,2,\dots,n$
+\end_inset
+
+, the intervals 
+\begin_inset Formula $[x_{j-1},x_{j}]$
+\end_inset
+
+ and 
+\begin_inset Formula $(x_{j-1},x_{j})$
+\end_inset
+
+ are respectively called the 
+\series bold
+closed intervals 
+\series default
+and the 
+\series bold
+open intervals 
+\series default
+of the partition 
+\begin_inset Formula $P$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A partition 
+\begin_inset Formula $Q$
+\end_inset
+
+ of an interval 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+ is said to be a 
+\series bold
+refinement 
+\series default
+of a partition 
+\begin_inset Formula $P$
+\end_inset
+
+ if every point of 
+\begin_inset Formula $P$
+\end_inset
+
+ is also a point of 
+\begin_inset Formula $Q$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $Q$
+\end_inset
+
+ are partitions of an interval 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+, then their 
+\series bold
+common refinement
+\series default
+, written 
+\begin_inset Formula $P\cup Q$
+\end_inset
+
+, is the partition whose points are the numbers that are either points of
+ 
+\begin_inset Formula $P$
+\end_inset
+
+ or points of 
+\begin_inset Formula $Q$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+If 
+\begin_inset Formula $P$
+\end_inset
+
+ is the partition 
+\begin_inset Formula $(x_{0},x_{1},\dots,x_{n})$
+\end_inset
+
+ of an interval 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+, then the largest of the lengths of the invervals of 
+\begin_inset Formula $P$
+\end_inset
+
+ is called the 
+\series bold
+mesh 
+\series default
+of the partition 
+\begin_inset Formula $P$
+\end_inset
+
+ and is written as 
+\begin_inset Formula $\|P\|$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula 
+\[
+\|P\|=\max\left\{ x_{j}-x_{j-1}\mid j=1,2,\dots,n\right\} .
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Definition of a Step Function
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $P=(x_{0},x_{1},\dots,x_{n})$
+\end_inset
+
+ be a partition of a given interval 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+ and let 
+\begin_inset Formula $f$
+\end_inset
+
+ be a function defined on 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+.
+ We say that the function 
+\begin_inset Formula $f$
+\end_inset
+
+ 
+\series bold
+steps within the partition 
+\series default
+
+\begin_inset Formula $P$
+\end_inset
+
+ if 
+\begin_inset Formula $f$
+\end_inset
+
+ is constant in each of the open intervals 
+\begin_inset Formula $(x_{j-1},x_{j})$
+\end_inset
+
+ of 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Riemann Integral of a Function on 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+box 
+\series default
+
+\begin_inset Formula $B$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ is a Cartesian product 
+\begin_inset Formula 
+\[
+B:=\prod_{m=1}^{n}I^{m},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $I^{m}$
+\end_inset
+
+ is a bounded interval in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $m=1,2,\dots,n$
+\end_inset
+
+.
+ Note that we are thinking of 
+\begin_inset Formula $m$
+\end_inset
+
+ in the superscript as an index (and 
+\emph on
+not 
+\emph default
+as an exponent).
+\end_layout
+
+\begin_layout Subsubsection*
+Intersection of Boxes is a Box
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $B_{1}=\prod_{m=1}^{n}I_{1}^{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{2}=\prod_{m=1}^{n}I_{2}^{m}$
+\end_inset
+
+ be two boxes in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ Then their intersection 
+\begin_inset Formula $B_{1}\cap B_{2}$
+\end_inset
+
+ is a box since 
+\begin_inset Formula 
+\[
+B_{1}\cap B_{2}=\prod_{m=1}^{n}I_{1}^{m}\cap I_{2}^{m}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Finite Collection of Boxes
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $P=\{B_{1},\dots,B_{k}\}$
+\end_inset
+
+ and 
+\begin_inset Formula $P'=\{B'_{1},\dots,B'_{k'}\}$
+\end_inset
+
+ be two finite collections of boxes.
+ We define 
+\begin_inset Formula $P\star P'$
+\end_inset
+
+ to be the collection of boxes given by 
+\begin_inset Formula 
+\[
+P\star P'=\bigcup_{\substack{1\leq j'\leq k'\\
+1\leq j\leq k
+}
+}\left(B_{j}\cap B_{j'}^{'}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Partitions of a Box
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+partition 
+\series default
+
+\begin_inset Formula $P$
+\end_inset
+
+ of a box 
+\begin_inset Formula $B=\prod_{m=1}^{n}I^{m}$
+\end_inset
+
+ is a finite collection of boxes 
+\begin_inset Formula $\{B_{1},\dots,B_{k}\}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ such that
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\overline{B}=\bigcup_{j=1}^{k}\overline{B}_{j}$
+\end_inset
+
+ and,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\text{int}(B_{i})\cap\text{int}(B_{j})=\emptyset$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i<j\leq k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Refinements
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $P=\{B_{1},\dots,B_{k}\}$
+\end_inset
+
+ and 
+\begin_inset Formula $P'=\{B'_{1},\dots,B'_{k'}\}$
+\end_inset
+
+ be two partitions.
+ We say that 
+\begin_inset Formula $P'$
+\end_inset
+
+ 
+\series bold
+refines 
+\series default
+
+\begin_inset Formula $P$
+\end_inset
+
+ if each 
+\begin_inset Formula $\overline{B}'_{j'}$
+\end_inset
+
+ in 
+\begin_inset Formula $P'$
+\end_inset
+
+ is contained in some 
+\begin_inset Formula $\overline{B}_{j}$
+\end_inset
+
+ in 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ The 
+\series bold
+refinement 
+\series default
+of 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $P'$
+\end_inset
+
+, denoted 
+\begin_inset Formula $P\star P'$
+\end_inset
+
+, is given by 
+\begin_inset Formula 
+\[
+P\star P'=\bigcup_{\substack{1\leq j'\leq k'\\
+1\leq j\leq k
+}
+}\left(B'_{j'}\cap B_{j}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Paraxial Refinements
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+paraxial plane 
+\series default
+in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ is a plane of the form
+\begin_inset Formula 
+\[
+V(\ell,r):=\{(x^{1},\dots,x^{n})\in\mathbb{R}^{n}\mid x^{\ell}=r\}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\ell\in\{1,\dots,n\}$
+\end_inset
+
+ and 
+\begin_inset Formula $r\in\mathbb{R}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $B$
+\end_inset
+
+ be a closed box and let 
+\begin_inset Formula $P$
+\end_inset
+
+ be a partition of 
+\begin_inset Formula $B$
+\end_inset
+
+ into closed boxes.
+ Suppose that 
+\begin_inset Formula $\text{int}(E_{0})\cap V(\ell,r)\neq\emptyset$
+\end_inset
+
+ for some 
+\begin_inset Formula $E_{0}\in P$
+\end_inset
+
+, 
+\begin_inset Formula $\ell\in\{1,\dots,n\}$
+\end_inset
+
+, and 
+\begin_inset Formula $r\in\mathbb{R}$
+\end_inset
+
+.
+ Express 
+\begin_inset Formula $E$
+\end_inset
+
+ in terms of its Cartesian product as 
+\begin_inset Formula $E_{0}=\prod_{m=1}^{n}[a^{m},b^{m}]$
+\end_inset
+
+ and define the closed boxes 
+\begin_inset Formula $E_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{2}$
+\end_inset
+
+ to be
+\begin_inset Formula 
+\[
+E_{1}=\left(\prod_{j=1}^{\ell-1}[a^{j},b^{j}]\right)\times[a^{\ell},r]\times\left(\prod_{m=\ell+1}^{n}[a^{m},b^{m}]\right)\quad\text{and}\quad E_{2}=\left(\prod_{j=1}^{\ell-1}[a^{j},b^{j}]\right)\times[r,b^{\ell}]\times\left(\prod_{m=\ell+1}^{n}[a^{m},b^{m}]\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then the partition 
+\begin_inset Formula $P\cup\{E_{1},E_{2}\}$
+\end_inset
+
+ refines the partition 
+\begin_inset Formula $P$
+\end_inset
+
+, it is called a 
+\series bold
+paraxial refinement of
+\series default
+ 
+\begin_inset Formula $P$
+\end_inset
+
+ 
+\series bold
+with length 
+\begin_inset Formula $1$
+\end_inset
+
+
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+More generally, let 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $Q$
+\end_inset
+
+ be partitions of 
+\begin_inset Formula $B$
+\end_inset
+
+ into closed boxes and let 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $Q$
+\end_inset
+
+ is a 
+\series bold
+paraxial refinement of
+\series default
+ 
+\begin_inset Formula $P$
+\end_inset
+
+ 
+\series bold
+with length 
+\begin_inset Formula $k$
+\end_inset
+
+
+\series default
+ if there exists an increasing sequence
+\begin_inset Formula 
+\[
+P=P_{0}\subset P_{1}\subset\cdots\subset P_{k}=Q
+\]
+
+\end_inset
+
+of partitions 
+\begin_inset Formula $P_{0},P_{1},\dots,P_{k}$
+\end_inset
+
+ of 
+\begin_inset Formula $B$
+\end_inset
+
+ into closed boxes, such that the partition 
+\begin_inset Formula $P_{j}$
+\end_inset
+
+ is a paraxial refinement of the partition 
+\begin_inset Formula $P_{j-1}$
+\end_inset
+
+ with length 
+\begin_inset Formula $1$
+\end_inset
+
+ for all 
+\begin_inset Formula $j=1,\dots,k$
+\end_inset
+
+.
+ We say that 
+\begin_inset Formula $Q$
+\end_inset
+
+ is a 
+\series bold
+paraxial refinement of
+\series default
+ 
+\begin_inset Formula $P$
+\end_inset
+
+ if there exists 
+\begin_inset Formula $k\geq1$
+\end_inset
+
+ such that 
+\begin_inset Formula $Q$
+\end_inset
+
+ is a 
+\series bold
+paraxial refinement of
+\series default
+ 
+\begin_inset Formula $P$
+\end_inset
+
+ 
+\series bold
+of length 
+\series default
+
+\begin_inset Formula $k$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Paraxial Refinement
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $Q$
+\end_inset
+
+ be two partitions of a closed box 
+\begin_inset Formula $B$
+\end_inset
+
+ into closed boxes.
+ Suppose that 
+\begin_inset Formula $P\star Q=\{E_{1},\dots,E_{k}\}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $j\in\{1,\dots,k\}$
+\end_inset
+
+, express 
+\begin_inset Formula $E_{j}$
+\end_inset
+
+ in terms of its Cartesian product as 
+\begin_inset Formula 
+\[
+E_{j}=\prod_{m=1}^{n}[a_{j}^{m},b_{j}^{m}].
+\]
+
+\end_inset
+
+We define 
+\begin_inset Formula $P*Q$
+\end_inset
+
+ to be the paraxial refinement of 
+\begin_inset Formula $P\star Q$
+\end_inset
+
+ obtained by successively taking paraxial refinements with length 
+\begin_inset Formula $1$
+\end_inset
+
+ using the planes 
+\begin_inset Formula $V(\ell,a_{j}^{\ell})$
+\end_inset
+
+ and 
+\begin_inset Formula $V(\ell,b_{j}^{\ell})$
+\end_inset
+
+ for each 
+\begin_inset Formula $j\in\{1,\dots,k\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\ell\in\{1,\dots,m\}$
+\end_inset
+
+ on the boxes 
+\begin_inset Formula $E_{i}$
+\end_inset
+
+ for each 
+\begin_inset Formula $i\in\{1,\dots k\}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Volume of a Box
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $B=\prod_{m=1}^{n}I^{m}$
+\end_inset
+
+ be a box.
+ Express 
+\begin_inset Formula $\overline{B}$
+\end_inset
+
+ in terms of its Cartesian product as
+\begin_inset Formula 
+\[
+\overline{B}=\prod_{m=1}^{n}[a^{m},b^{m}],
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $a^{m},b^{m}\in\mathbb{R}$
+\end_inset
+
+ for all 
+\begin_inset Formula $m=1,2,\dots,n$
+\end_inset
+
+.
+ We define the 
+\series bold
+volume 
+\series default
+of 
+\begin_inset Formula $B$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\text{vol}(B)$
+\end_inset
+
+, to be 
+\begin_inset Formula 
+\[
+\text{vol}(B):=\prod_{m=1}^{n}\left(b^{m}-a^{m}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propparaxialrefinement}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $B=\prod_{m=1}^{n}[a^{m},b^{m}]$
+\end_inset
+
+ be a closed box, let 
+\begin_inset Formula $P$
+\end_inset
+
+ be a partition of 
+\begin_inset Formula $B$
+\end_inset
+
+ into closed boxes, and let 
+\begin_inset Formula $Q$
+\end_inset
+
+ be a paraxial refinement of 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\sum_{E\in P}\text{vol}(E)=\sum_{E\in Q}\text{vol}(E)
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ We prove by induction on the length 
+\begin_inset Formula $k$
+\end_inset
+
+ of the pariaxial refinement.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Base case
+\series default
+: Let 
+\begin_inset Formula $P$
+\end_inset
+
+ be a partition of 
+\begin_inset Formula $B$
+\end_inset
+
+ into closed boxes and let 
+\begin_inset Formula $Q$
+\end_inset
+
+ be a paraxial refinement of 
+\begin_inset Formula $P$
+\end_inset
+
+ with length 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $E_{0}\in P$
+\end_inset
+
+ such that 
+\begin_inset Formula $\text{int}(E_{0})\cap V(\ell,r)\neq\emptyset$
+\end_inset
+
+ for some 
+\begin_inset Formula $E_{0}\in P$
+\end_inset
+
+, 
+\begin_inset Formula $\ell\in\{1,\dots,n\}$
+\end_inset
+
+, 
+\begin_inset Formula $r\in\mathbb{R}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $Q=P\cup\{E_{1},E_{2}\}$
+\end_inset
+
+, where 
+\begin_inset Formula $E_{0}=\prod_{m=1}^{n}[a^{m},b^{m}]$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+E_{1}=\left(\prod_{j=1}^{\ell-1}[a^{j},b^{j}]\right)\times[a^{\ell},r]\times\left(\prod_{m=\ell+1}^{n}[a^{m},b^{m}]\right)\quad\text{and}\quad E_{2}=\left(\prod_{j=1}^{\ell-1}[a^{j},b^{j}]\right)\times[r,b^{\ell}]\times\left(\prod_{m=\ell+1}^{n}[a^{m},b^{m}]\right).
+\]
+
+\end_inset
+
+Observe that 
+\begin_inset Formula 
+\begin{align*}
+\text{vol}(E_{1})+\text{vol}(E_{2}) & =\left((b^{\ell}-r)+(r-a^{\ell})\right)\prod_{\begin{subarray}{c}
+m=1\\
+m\neq\ell
+\end{subarray}}^{n}(b^{m}-a^{m})\\
+ & =\left(b^{\ell}-a^{\ell}\right)\prod_{\begin{subarray}{c}
+m=1\\
+m\neq\ell
+\end{subarray}}^{n}(b^{m}-a^{m})\\
+ & =\prod_{\begin{subarray}{c}
+m=1\end{subarray}}^{n}(b_{m}-a_{m})\\
+ & =\text{vol}(E_{0}).
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula 
+\begin{align*}
+\sum_{E\in Q}\text{vol}(E) & =\sum_{\substack{E\in P\backslash\{E_{0}\}}
+}\text{vol}(E)+\text{vol}(E_{1})+\text{vol}(E_{2})\\
+ & =\sum_{E\in P\backslash\{E_{0}\}}\text{vol}(E)+\text{vol}(E_{0})\\
+ & =\sum_{E\in P}\text{vol}(E).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Induction step
+\series default
+: Assume the proposition is true for all partitions 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $Q$
+\end_inset
+
+ of 
+\begin_inset Formula $B$
+\end_inset
+
+ into closed boxes such that 
+\begin_inset Formula $Q$
+\end_inset
+
+ is paraxial refinement of 
+\begin_inset Formula $P$
+\end_inset
+
+ with length 
+\begin_inset Formula $k\geq1$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $P$
+\end_inset
+
+ be a partition of 
+\begin_inset Formula $B$
+\end_inset
+
+ into closed boxes and let 
+\begin_inset Formula $Q$
+\end_inset
+
+ be a paraxial refinement of 
+\begin_inset Formula $P$
+\end_inset
+
+ with length 
+\begin_inset Formula $k+1$
+\end_inset
+
+.
+ Choose an increasing sequence
+\begin_inset Formula 
+\[
+P=P_{0}\subset P_{1}\subset\cdots\subset P_{k+1}=Q
+\]
+
+\end_inset
+
+of partitions 
+\begin_inset Formula $P_{0},P_{1},\dots,P_{k+1}$
+\end_inset
+
+ of 
+\begin_inset Formula $B$
+\end_inset
+
+ into closed boxes, such that the partition 
+\begin_inset Formula $P_{j}$
+\end_inset
+
+ is a paraxial refinement of the partition 
+\begin_inset Formula $P_{j-1}$
+\end_inset
+
+ for all 
+\begin_inset Formula $j=1,\dots,k$
+\end_inset
+
+.
+ The combining the induction step with the base case step, we see that 
+\begin_inset Formula 
+\[
+\sum_{E\in Q}\text{vol}(E)=\sum_{E\in P_{k}}\text{vol}(E)=\sum_{E\in P}\text{vol}(E).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{corvolumeunique}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $B$
+\end_inset
+
+ be a box in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $P$
+\end_inset
+
+ be a partition of 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\text{vol}(B)=\sum_{E\in P}\text{vol}(E).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\overline{P}$
+\end_inset
+
+ be the partition of the closed box 
+\begin_inset Formula $\overline{B}$
+\end_inset
+
+ obtained by taking the closures of each box in 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ Then
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\text{vol}(B) & =\text{vol}(\overline{B})\\
+ & =\sum_{E\in\overline{B}*\overline{P}}\text{vol}(E)\\
+ & =\sum_{\overline{E}\in\overline{P}}\text{vol}(\overline{E})\\
+ & =\sum_{E\in P}\text{vol}(E).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Volume of a Collection of Boxes
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $P=\{B_{1},\dots,B_{k}\}$
+\end_inset
+
+ and let 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P\star P=\bigcup_{\substack{1\leq j'\leq k'\\
+1\leq j\leq k
+}
+}\left(B'_{j'}\cap B_{j}\right).
+\]
+
+\end_inset
+
+be a collection of boxes such that 
+\begin_inset Formula $\text{int}(B_{i})\cap\text{int}(B_{j})=\emptyset$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i<j\leq k$
+\end_inset
+
+.
+ Then we define the 
+\series bold
+volume 
+\series default
+of their union 
+\begin_inset Formula $\bigcup_{j=1}^{k}B_{j}$
+\end_inset
+
+ by the formula
+\begin_inset Formula 
+\[
+\text{vol}\left(\bigcup_{j=1}^{k}B_{j}\right)=\sum_{j=1}^{k}\text{vol}(B_{j}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We are justified in making this definition by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Corollary~(
+\backslash
+ref{corvolumeunique})
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $P=\{B_{1},\dots,B_{k}\}$
+\end_inset
+
+ be a collection of boxes such that 
+\begin_inset Formula $\text{int}(B_{i})\cap\text{int}(B_{j})=\emptyset$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i<j\leq k$
+\end_inset
+
+.
+ Then we define the 
+\series bold
+volume 
+\series default
+of their union 
+\begin_inset Formula $\bigcup_{j=1}^{k}B_{j}$
+\end_inset
+
+ by the formula
+\begin_inset Formula 
+\[
+\text{vol}\left(\bigcup_{j=1}^{k}B_{j}\right)=\sum_{j=1}^{k}\text{vol}(B_{j}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We are justified in making this definition by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Corollary~(
+\backslash
+ref{corvolumeunique})
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_body
+\end_document

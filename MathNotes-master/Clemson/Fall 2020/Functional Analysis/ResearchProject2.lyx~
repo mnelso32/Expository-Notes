@@ -1,0 +1,2134 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Research Project
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+Let us state up front the theorem we wish to prove:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a compact Hausdorff space, let 
+\begin_inset Formula $C(X)$
+\end_inset
+
+ be the space of continuous real-valued functions on 
+\begin_inset Formula $X$
+\end_inset
+
+ equipped with the supremum norm, and let 
+\begin_inset Formula $\ell$
+\end_inset
+
+ be a linear functional on 
+\begin_inset Formula $C(X)$
+\end_inset
+
+.
+ Then there exists a unique Baire measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on 
+\begin_inset Formula $X$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\ell(f)=\int_{X}f\mathrm{d}\mu
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mu$
+\end_inset
+
+ be a signed Baire measure in 
+\begin_inset Formula $\mathcal{M}(X)$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $\ell_{\mu}\colon C(X)\to\mathbb{R}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\ell_{\mu}(f)=\int_{X}f\mathrm{d}\mu
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+.
+ The map 
+\begin_inset Formula $\ell_{\mu}$
+\end_inset
+
+ is a bounded linear functional 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Linearity of 
+\begin_inset Formula $\ell_{\mu}$
+\end_inset
+
+ follows from linearity of integration.
+ To see that 
+\begin_inset Formula $\ell_{\mu}$
+\end_inset
+
+ is bounded, note that
+\begin_inset Formula 
+\begin{align*}
+\ell_{\mu}(f) & =\int_{X}f\mathrm{d}\mu\\
+ & \leq\|f\|_{\infty}\mu(X)
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+.
+ Taking 
+\begin_inset Formula $f$
+\end_inset
+
+ to be the constant function 
+\begin_inset Formula $1$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\|\ell_{\mu}\|=\mu(X)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a topological space.
+ We say 
+\begin_inset Formula $X$
+\end_inset
+
+ is 
+\series bold
+extremally disconnected 
+\series default
+if each open subset of 
+\begin_inset Formula $X$
+\end_inset
+
+ has open closure, that is, if 
+\begin_inset Formula $U$
+\end_inset
+
+ is an open subset of 
+\begin_inset Formula $X$
+\end_inset
+
+, then 
+\begin_inset Formula $\overline{U}$
+\end_inset
+
+ is a clopen
+\series bold
+ 
+\series default
+subset of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Equivalently, every pair of disjoint open subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ have disjoint closures.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a compact Hausdorff space, let 
+\begin_inset Formula $C(X)$
+\end_inset
+
+ be the space of continuous real-valued functions on 
+\begin_inset Formula $X$
+\end_inset
+
+ equipped with the supremum norm, and let 
+\begin_inset Formula $\ell$
+\end_inset
+
+ be a linear functional on 
+\begin_inset Formula $C(X)$
+\end_inset
+
+.
+ Then there exists a unique Baire measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on 
+\begin_inset Formula $X$
+\end_inset
+
+ such that 
+\begin_inset Formula $\ell=\ell_{\mu}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We first show existence.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 1: 
+\series default
+Suppose that 
+\begin_inset Formula $X$
+\end_inset
+
+ is equipped with the discrete topology.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be an extremally disconnected space.
+ Then the Baire sets in 
+\begin_inset Formula $X$
+\end_inset
+
+ are generated by the algebra 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ of clopen sets and the simple functions based on clopen sets are uniformly
+ dense in 
+\begin_inset Formula $C($
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Notation and Conventions
+\end_layout
+
+\begin_layout Subsubsection
+Category Theory
+\end_layout
+
+\begin_layout Standard
+In this document, we consider the following categories:
+\end_layout
+
+\begin_layout Itemize
+The category of all compact Hausdorff spaces and continuous maps between
+ them, denoted 
+\begin_inset Formula $\mathbf{Comp}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+The category of all Banach spaces and bounded linear maps between them,
+ denoted 
+\begin_inset Formula $\mathbf{Ban}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Standard
+We will also be interested in the following functors:
+\end_layout
+
+\begin_layout Itemize
+The functor 
+\begin_inset Formula $M\colon\mathbf{Comp}\to\mathbf{\mathbf{Ban}}$
+\end_inset
+
+ defined as follows: given a compact Hausdorff space 
+\begin_inset Formula $X$
+\end_inset
+
+, we set 
+\begin_inset Formula $M(X)$
+\end_inset
+
+ to be the Banach space of signed Baire measures on 
+\begin_inset Formula $X$
+\end_inset
+
+, and given a continuous function 
+\begin_inset Formula $f\colon X\to Y$
+\end_inset
+
+ between two compact Hausdorff spaces 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+, we set 
+\begin_inset Formula $M(f)\colon M(X)\to M(Y)$
+\end_inset
+
+ to be the bounded linear map defined by 
+\begin_inset Formula 
+\[
+M(\mu)=\mu\circ f^{-1}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\mu\in M(X)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+The functor 
+\begin_inset Formula $C\colon\mathbf{Comp}\to\mathbf{\mathbf{Ban}}$
+\end_inset
+
+ defined as follows: given a compact Hausdorff space 
+\begin_inset Formula $X$
+\end_inset
+
+, we set 
+\begin_inset Formula $C(X)$
+\end_inset
+
+ be the Banach space of continuous real-valued functions on 
+\begin_inset Formula $X$
+\end_inset
+
+ equipped with the supremum norm, and given a continuous function 
+\begin_inset Formula $f\colon X\to Y$
+\end_inset
+
+ between two compact Hausdorff spaces 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+, we set 
+\begin_inset Formula $C(f)=f^{\#}$
+\end_inset
+
+ where 
+\begin_inset Formula $f^{\#}\colon C(Y)\to C(X)$
+\end_inset
+
+ is bounded linear map defined by 
+\begin_inset Formula 
+\[
+f^{\#}(g)=g\circ f
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $g\in C(Y)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+The functor 
+\begin_inset Formula $C^{*}\colon\mathbf{Comp}\to\mathbf{\mathbf{Ban}}$
+\end_inset
+
+ defined as follows: given a compact Hausdorff space 
+\begin_inset Formula $X$
+\end_inset
+
+, we set 
+\begin_inset Formula $C^{*}(X)=C(X)^{*}$
+\end_inset
+
+ to be the dual of 
+\begin_inset Formula $C(X)$
+\end_inset
+
+, and given a continuous function 
+\begin_inset Formula $f\colon X\to Y$
+\end_inset
+
+ between two compact Hausdorff spaces 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+, we set 
+\begin_inset Formula $C^{*}(f)=f^{\#\#}$
+\end_inset
+
+ where 
+\begin_inset Formula $f^{\#\#}\colon C(X)^{*}\to C(Y)^{*}$
+\end_inset
+
+ is the bounded linear map defined by 
+\begin_inset Formula 
+\[
+f^{\#\#}(\ell)=\ell\circ f^{\#}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\ell\in C(X)^{*}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a compact Hausdorff space.
+ We denote by 
+\begin_inset Formula $C(X)$
+\end_inset
+
+ to be the space of real-valued continuous functions on 
+\begin_inset Formula $X$
+\end_inset
+
+ equipped with the supremum norm.
+ Recall that if 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ is any collection of subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+, then we denote by 
+\begin_inset Formula $\sigma(\mathcal{C})$
+\end_inset
+
+ to be the smallest 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra which contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula 
+\[
+\mathcal{C}=\{f
+\]
+
+\end_inset
+
+
+\begin_inset Formula $\tau$
+\end_inset
+
+ denotes the collection of all open subset of 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+, then 
+\begin_inset Formula $\sigma(\tau)$
+\end_inset
+
+ is the Borel 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-
+\end_layout
+
+\begin_layout Subsection
+Baire 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a compact Hausdorff space.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+Borel 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\series default
+
+\begin_inset Formula $\mathcal{B}_{X}$
+\end_inset
+
+ is the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra generated by all open sets subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+Baire 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\mathcal{M}_{X}$
+\end_inset
+
+ 
+\series default
+is the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra generated by all sets of the form 
+\begin_inset Formula $f^{-1}(U)$
+\end_inset
+
+ where 
+\begin_inset Formula $U$
+\end_inset
+
+ is an open subset of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ and where 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $\mathcal{M}_{X}$
+\end_inset
+
+ is the smallest 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra which makes every 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+ measurable.
+ 
+\end_layout
+
+\begin_layout Enumerate
+A measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is called a 
+\series bold
+Baire measure 
+\series default
+if it satisfies the following conditions:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The domain of 
+\begin_inset Formula $\mu$
+\end_inset
+
+ contains 
+\begin_inset Formula $\mathcal{M}_{X}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mu(K)<\infty$
+\end_inset
+
+ for all compact Baire measureable sets 
+\begin_inset Formula $K$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mu$
+\end_inset
+
+ is inner regular, that is, for each Baire measurable set 
+\begin_inset Formula $E$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+\mu(E)=\sup\{\mu(K)\mid K\text{ is a compact Baire measurable set such that }K\subseteq E\}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mu$
+\end_inset
+
+ is outer regular, that is, for each Baire measurable set 
+\begin_inset Formula $E$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+\mu(E)=\inf\{\mu(U)\mid U\text{ is an open Baire measurable set such that }E\subseteq U\}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We will prove the following form of the Riesz representation theorem:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a compact Hausdorff space, let 
+\begin_inset Formula $C(X)$
+\end_inset
+
+ be the space of continuous real-valued functions on 
+\begin_inset Formula $X$
+\end_inset
+
+ equipped with the supremum norm, and let 
+\begin_inset Formula $\ell$
+\end_inset
+
+ be a positive linear functional on 
+\begin_inset Formula $C(X)$
+\end_inset
+
+.
+ Then there exists a unique Baire measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on 
+\begin_inset Formula $X$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\ell(f)=\int_{X}f\mathrm{d}\mu
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Banach Space of Signed Measures
+\end_layout
+
+\begin_layout Section
+Extra
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a compact Hausdorff space.
+ We denote by 
+\begin_inset Formula $C(X)$
+\end_inset
+
+ be the Banach space of continuous real-valued functions on 
+\begin_inset Formula $X$
+\end_inset
+
+ equipped with the supremum norm.
+ As usual, we will denote by 
+\begin_inset Formula $C(X)^{*}$
+\end_inset
+
+ to be the dual space of 
+\begin_inset Formula $C(X)$
+\end_inset
+
+.
+ We also denote by 
+\begin_inset Formula $M(X)$
+\end_inset
+
+ to be the Banach space of signed Baire measures on 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemmauniqueness}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu$
+\end_inset
+
+ be two Baire measures such that
+\begin_inset Formula 
+\[
+\int_{X}f\mathrm{d}\mu=\int_{X}f\mathrm{d}\nu
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mu=\nu$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathcal{M}_{X}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a compact 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+-set.
+ Express 
+\begin_inset Formula $K$
+\end_inset
+
+ as an countable intersection of open sets, say
+\begin_inset Formula 
+\[
+K=\bigcap_{n=1}^{\infty}U_{n}.
+\]
+
+\end_inset
+
+For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, there exists a continuous function 
+\begin_inset Formula $f_{n}\colon X\to[0,1]$
+\end_inset
+
+ such that 
+\begin_inset Formula $f_{n}|_{K}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{n}|_{X\backslash U_{n}}=0$
+\end_inset
+
+ by Urysohn's lemma.
+ Note that since 
+\begin_inset Formula $K$
+\end_inset
+
+ is compact, we have 
+\begin_inset Formula $\mu(K)<\infty$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu(K)<\infty$
+\end_inset
+
+ since both 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu$
+\end_inset
+
+ are Baire measures.
+ In particular, the simple function 
+\begin_inset Formula $1_{K}$
+\end_inset
+
+ is a nonnegative 
+\begin_inset Formula $\mu$
+\end_inset
+
+-integrable and 
+\begin_inset Formula $\nu$
+\end_inset
+
+-integrable function which dominates each 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+.
+ Moreover the sequence 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ converges pointwise to 
+\begin_inset Formula $1_{K}$
+\end_inset
+
+.
+ Thus by the Lebesgue Dominated Convergence Theorem, we have
+\begin_inset Formula 
+\begin{align*}
+\mu(K) & =\int_{X}1_{K}\mathrm{d}\mu\\
+ & =\lim_{n\to\infty}\int_{X}f_{n}\mathrm{d}\mu\\
+ & =\lim_{n\to\infty}\int_{X}f_{n}\mathrm{d}\nu\\
+ & =\int_{X}1_{K}\mathrm{d}\nu\\
+ & =\nu(K).
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $K$
+\end_inset
+
+ is an arbitrary compact 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+-set and 
+\begin_inset Formula $\mathcal{M}_{X}$
+\end_inset
+
+ is generated by the collection of all of these types of sets, it follows
+ that 
+\begin_inset Formula $\mu=\nu$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathcal{M}_{X}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a topological space.
+ We say 
+\begin_inset Formula $X$
+\end_inset
+
+ is 
+\series bold
+extremally disconnected 
+\series default
+if each open set of 
+\begin_inset Formula $X$
+\end_inset
+
+ has open closure, that is, if 
+\begin_inset Formula $U$
+\end_inset
+
+ is an open subset of 
+\begin_inset Formula $X$
+\end_inset
+
+, then 
+\begin_inset Formula $\overline{U}$
+\end_inset
+
+ is a clopen
+\series bold
+ 
+\series default
+subset of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Equivalently, every pair of disjoint open subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ have disjoint closures.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $X$
+\end_inset
+
+ is extremally disconnected compact Hausdorff space.
+ Let 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ be the algebra of clopen sets of 
+\begin_inset Formula $X$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathcal{V}=\mathrm{span}_{\mathbb{R}}\{1_{O}\mid O\in\mathcal{O}\}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ is uniformly dense in 
+\begin_inset Formula $C(X)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+ and let 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset
+
+, let
+\begin_inset Formula 
+\[
+A_{k}=\left\{ x\in X\mid k/n<f(x)<(k+1)/n\right\} .
+\]
+
+\end_inset
+
+Then each 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+ is open and are pairwise disjoint from each other.
+ Letting 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+ denote the closure of 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+ for each 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset
+
+, then since 
+\begin_inset Formula $X$
+\end_inset
+
+ is extremally disconnected, each 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+ is clopen and pairwise disjoint from each other.
+ Furthermore since 
+\begin_inset Formula $X$
+\end_inset
+
+ is compact, only finitely many of the 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+ are nonempty.
+ Thus the sets 
+\begin_inset Formula $B=\bigcup_{k\in\mathbb{Z}}B_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $X\backslash B$
+\end_inset
+
+ are also clopen.
+ For each 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset
+
+, let
+\begin_inset Formula 
+\[
+C_{k}=\{x\in X\backslash B\mid f(x)=k/n\}.
+\]
+
+\end_inset
+
+Then each 
+\begin_inset Formula $C_{k}$
+\end_inset
+
+ is clopen.
+ Indeed, 
+\begin_inset Formula $C_{k}$
+\end_inset
+
+ is closed since it is the intersection of two closed sets, and 
+\begin_inset Formula $C_{k}$
+\end_inset
+
+ is open since it is the complement of a closed set, namely 
+\begin_inset Formula $C_{k}=X\backslash\overline{\{f\neq k/n\}}$
+\end_inset
+
+.
+ Thus we have the following 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-simple function
+\begin_inset Formula 
+\[
+\varphi_{n}=\sum_{k\in\mathbb{Z}}\frac{k}{n}(1_{B_{k}}+1_{C_{k}})
+\]
+
+\end_inset
+
+which is easily seen to satisfy 
+\begin_inset Formula $|\varphi_{n}-f|<1/n$
+\end_inset
+
+.
+ Thus the sequence 
+\begin_inset Formula $(\varphi_{n})$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-simple functions converges uniformly to 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be an extremally disconnected compact Hausdorf space and let 
+\begin_inset Formula $\ell\colon C(X)\to\mathbb{R}$
+\end_inset
+
+ be a positive linear functional.
+ Then there exists a unique Baire measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\ell_{\mu}(f)=\int_{X}f\mathrm{d}\mu
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{lemmauniqueness})
+\end_layout
+
+\end_inset
+
+ implies uniqueness of 
+\begin_inset Formula $\mu$
+\end_inset
+
+, so it suffices to show existence.
+ Define 
+\begin_inset Formula $\nu\colon\mathcal{O}\to[0,\infty)$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\nu(A)=\ell(1_{A})
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $A\in\mathcal{O}$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $(X,\mathcal{O},\nu)$
+\end_inset
+
+ is a finite premeasure space.
+ Indeed, it is straightforward to check that 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ is an algebra and that 
+\begin_inset Formula $\nu(\emptyset)=0$
+\end_inset
+
+.
+ Furthermore, suppose that 
+\begin_inset Formula $(A_{n})$
+\end_inset
+
+ is a disjoint sequence of sets in 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ whose union
+\begin_inset Formula 
+\[
+A=\bigcup_{n=1}^{\infty}A_{n}
+\]
+
+\end_inset
+
+is also in 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $A$
+\end_inset
+
+ is compact since 
+\begin_inset Formula $A$
+\end_inset
+
+ is closed and 
+\begin_inset Formula $X$
+\end_inset
+
+ is a compact Hausdorff space.
+ It follows that only finitely many of the 
+\begin_inset Formula $A_{n}$
+\end_inset
+
+ can be nonempty, say 
+\begin_inset Formula $A_{n_{1}},\dots,A_{n_{k}}$
+\end_inset
+
+.
+ Thus we have
+\begin_inset Formula 
+\begin{align*}
+\nu\left(\bigcup_{n=1}^{\infty}A_{n}\right) & =\nu\left(\bigcup_{i=1}^{k}A_{n_{i}}\right)\\
+ & =\ell\left(1_{\bigcup_{i=1}^{k}A_{n_{i}}}\right)\\
+ & =\ell\left(\sum_{i=1}^{k}1_{A_{n_{i}}}\right)\\
+ & =\sum_{i=1}^{k}\ell(1_{A_{n_{i}}}).\\
+ & =\sum_{i=1}^{k}\nu(A_{n_{i}})\\
+ & =\sum_{n=1}^{\infty}\nu(A_{n}).
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $(X,\mathcal{O},\nu)$
+\end_inset
+
+ is a finite premeasure space.
+ Therefore by the Caratheodory Extension Theorem, the premeasure 
+\begin_inset Formula $\nu$
+\end_inset
+
+ extends to a unique measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ defined on 
+\begin_inset Formula $\sigma(\mathcal{O})$
+\end_inset
+
+.
+ Now we claim that 
+\begin_inset Formula $\sigma(\mathcal{O})=\mathcal{M}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is in fact a Baire measure.
+ Indeed, we have 
+\begin_inset Formula $\sigma(\mathcal{O})\subseteq\mathcal{M}$
+\end_inset
+
+ since each clopen set is a Baire set: if 
+\begin_inset Formula $A\in\mathcal{O}$
+\end_inset
+
+ then taking 
+\begin_inset Formula $f\colon X\to X$
+\end_inset
+
+ to be the identity function we see that 
+\begin_inset Formula $A=f^{-1}(A)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To show 
+\begin_inset Formula $\mathcal{M}_{X}\subseteq\sigma(\mathcal{O})$
+\end_inset
+
+, it will suffice to show that each 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+ is a 
+\begin_inset Formula $\sigma(\mathcal{O})$
+\end_inset
+
+-measurable function.
+ Let 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+ and let 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ set 
+\begin_inset Formula $A_{n}=\{f<c+1/n\}$
+\end_inset
+
+ and set 
+\begin_inset Formula $A=\{f\leq c\}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $A_{n}$
+\end_inset
+
+ is open, it follows that 
+\begin_inset Formula $\overline{A}_{n}$
+\end_inset
+
+ is clopen, and since
+\begin_inset Formula 
+\[
+A_{n}\subseteq\overline{A}_{n}\subseteq\{f\leq c+1/n\},
+\]
+
+\end_inset
+
+it follows that 
+\begin_inset Formula $A=\bigcap_{n=1}^{\infty}\overline{A}_{n}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $A\in\sigma(\mathcal{O})$
+\end_inset
+
+, which implies 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula $\sigma(\mathcal{O})$
+\end_inset
+
+-measurable.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be an extremally disconnected compact Hausdorf space.
+ Then 
+\begin_inset Formula $\mathcal{M}_{X}=\sigma(\mathcal{O})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Recall that 
+\begin_inset Formula $ $
+\end_inset
+
+Since each set in 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ is a compact 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+-set, we have 
+\begin_inset Formula $\sigma(\mathcal{O})\subseteq\mathcal{M}_{X}$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

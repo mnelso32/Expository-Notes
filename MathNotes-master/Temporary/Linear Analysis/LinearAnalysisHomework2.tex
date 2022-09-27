@@ -1,0 +1,357 @@
+%% LyX 2.3.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,english]{article}
+\usepackage[osf]{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[paperwidth=30cm,paperheight=35cm]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm}
+\setlength{\parindent}{0bp}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\makeatletter
+\@ifundefined{date}{}{\date{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\title{Linear Analysis Homework 2}
+\author{Michael Nelson}
+
+\maketitle
+Throughout this homework, let $\mathscr{V}$ be an inner-product space
+over $\mathbb{C}$. If $x\in\mathscr{V}$ and $r>0$, then we define
+\[
+B_{r}(x):=\{y\in\mathscr{V}\mid\|y-x\|<r\}
+\]
+to be the \textbf{open ball centered at $x$ and of radius $r$}.
+We also define 
+\[
+B_{r}[x]:=\{y\in\mathscr{V}\mid\|y-x\|\leq r\}
+\]
+to be the \textbf{closed ball centered at $x$ and of radius $r$}. 
+
+\subsection*{Problem 1}
+
+\begin{prop}\label{prop} Let $a\in\mathscr{V}$ and $r>0$. Then
+\[
+B_{r}(a)=a+rB_{1}(0).
+\]
+\end{prop}
+
+\begin{proof} We prove this in two steps. 
+
+\hfill
+
+\textbf{Step 1: }We show $B_{r}(a)=a+B_{r}(0)$: Let $x\in B_{r}(a)$,
+so $\|x-a\|<r$. This implies $x-a\in B_{r}(0)$. Thus
+\begin{align*}
+x & =a+(x-a)\\
+ & \in a+B_{r}(0).
+\end{align*}
+Therefore $B_{r}(a)\subseteq a+B_{r}(0)$. 
+
+~~~Conversely, let $a+y\in a+B_{r}(0)$ where $y\in B_{r}(0)$,
+so $\|y\|<r$. This implies $\|(a+y)-a\|<r$. In other words, $a+y\in B_{r}(a)$.
+Therefore $a+B_{r}(0)\subseteq B_{r}(a)$. 
+
+\hfill
+
+\textbf{Step 2: }We show $B_{r}(0)=rB_{1}(0)$: Let $x\in B_{r}(0)$,
+so $\|x\|<r$. Then since $r>0$, we have
+\begin{align*}
+1 & >(1/r)\|x\|\\
+ & =\|x/r\|.
+\end{align*}
+In other words, $x/r\in B_{1}(0)$. Thus
+\begin{align*}
+x & =r(x/r)\\
+ & \in rB_{1}(0).
+\end{align*}
+Therefore $B_{r}(0)\subseteq rB_{1}(0)$. 
+
+~~~Conversely, let $ry\in rB_{1}(0)$ where $y\in B_{1}(0)$, so
+$\|y\|<1$. Then since $r>0$, we have
+\begin{align*}
+\|ry\| & =r\|y\|\\
+ & <1.
+\end{align*}
+In other words, $ry\in B_{1}(0)$. Therefore $rB_{1}(0)\subseteq B_{r}(0)$.
+\end{proof}
+
+\subsection*{Problem 2}
+
+\begin{lemma}\label{lemmasequence1overn} Let $x\in\mathscr{V}$ and
+for each $n\in\mathbb{N}$ let $x_{n}\in\mathscr{V}$ such that $\|x_{n}-x\|<1/n$.
+Then $x_{n}\to x$. \end{lemma}
+
+\begin{proof} Let $\varepsilon>0$. Choose $N\in\mathbb{N}$ such
+that $1/N<\varepsilon$. Then $n\geq N$ implies
+\begin{align*}
+\|x_{n}-x\| & <1/n\\
+ & \leq1/N\\
+ & <\varepsilon.
+\end{align*}
+\end{proof}
+
+\begin{prop}\label{prop} Let $a\in\mathscr{V}$ and $r>0$. Then
+\[
+\overline{B_{r}(a)}=B_{r}[a].
+\]
+\end{prop}
+
+\begin{proof} Let $x\in\overline{B_{r}(a)}$. Choose a sequence $(x_{n})$
+of elements in $B_{r}(a)$ such that $x_{n}\to x$. Let $\varepsilon>0$
+and choose $N\in\mathbb{N}$ such that $\|x_{N}-x\|<\varepsilon$.
+Then
+\begin{align*}
+\|x-a\| & =\|x-x_{N}+x_{N}-a\|\\
+ & \leq\|x-x_{N}\|+\|x_{N}-a\|\\
+ & <\varepsilon+r.
+\end{align*}
+Thus $\|x-a\|<r+\varepsilon$ for all $\varepsilon>0$. This implies
+$\|x-a\|\leq r$, or in other words, $x\in B_{r}[a]$. Thus $\overline{B_{r}(a)}\subseteq B_{r}[a]$. 
+
+~~~Conversely, let $x\in B_{r}[a]$ and let $n\in\mathbb{N}$.
+We first observe that for each $t\in(0,1)$, we have
+\begin{align*}
+\|(x+t(a-x))-a\| & =\|(1-t)x-(1-t)a\|\\
+ & =(1-t)\|x-a\|\\
+ & <r.
+\end{align*}
+Thus $x+t(a-x)\in B_{r}(a)$ for all $t\in(0,1)$. Now let $n\in\mathbb{N}$.
+Choose $t_{n}\in(0,1)$ such that $t_{n}<\|x-a\|/n$. Then
+\begin{align*}
+\|(x+t_{n}(a-x))-x\| & =\|t_{n}(x-a)\|\\
+ & =t_{n}\|x-a\|\\
+ & <1/n.
+\end{align*}
+Thus $(x+t_{n}(a-x))$ is a sequence of elements of elements in $B_{r}(a)$
+such that $x+t_{n}(a-x)\to x$ (by Lemma~(\ref{lemmasequence1overn})),
+hence $x\in\overline{B_{r}(a)}$. Thus $B_{r}[a]\subseteq\overline{B_{r}(a)}$.
+\end{proof}
+
+\subsection*{Problem 3a}
+
+\begin{lemma}\label{lemma} Let $A\subseteq\mathscr{V}$. \end{lemma}
+
+\begin{prop}\label{prop} Let $A\subseteq\mathscr{V}$ and let $C_{1},C_{2}\subseteq\mathscr{V}$
+such that $C_{1}$ and $C_{2}$ are closed. Then 
+\begin{enumerate}
+\item $\overline{A}$ is a closed set.
+\item $\overline{A}$ is the smallest closed set that contains $A$, i.e.,
+for any closed set $B$ such that $A\subseteq B$ we have $\overline{A}\subseteq B$.
+In particular, $\overline{A}=A$ if and only if $A$ is closed. 
+\item The union of $C_{1}$ and $C_{2}$ is closed.
+\item The intersection of $C_{1}$ and $C_{2}$ is closed. 
+\item An infinite union of closed sets may not be closed. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof} \hfill
+\begin{enumerate}
+\item We will show that $\overline{A}$ is closed by showing that $\mathscr{V}\backslash\overline{A}$
+is open. To show that $\mathscr{V}\backslash\overline{A}$ is open,
+it suffices to show that for each $x\in\mathscr{V}\backslash\overline{A}$
+there exists an open neighborhood of $x$ which is contained in $\mathscr{V}\backslash\overline{A}$.
+Assume (for a contradiction) that $\mathscr{V}\backslash\overline{A}$
+is not open. Choose $x\in\mathscr{V}\backslash\overline{A}$ such
+that every open neighborhood of $x$ meets $\overline{A}$. In particular,
+for each $n\in\mathbb{N}$, there exists $x_{n}\in B_{1/n}(x)\cap\overline{A}$.
+Choose such $x_{n}$ for all $n\in\mathbb{N}$. Then by Lemma~(\ref{lemmasequence1overn}),
+we must have $x_{n}\to x$, and hence $x\in\overline{\overline{A}}=\overline{A}$.
+This is a contradiction.
+\item Let $B$ be any closed set which contains $A$. Suppose $x\in\overline{A}$.
+Choose a sequence $(x_{n})$ of elements in $A$ such that $x_{n}\to x$.
+Assume (for a contradiction) that $x\in\mathscr{V}\backslash B$.
+Choose $\varepsilon>0$ such that $B_{\varepsilon}(x)\cap B=\emptyset$
+(we can do this since $\mathscr{V}\backslash B$ is open). But then
+the sequence $(x_{n})$ of elements in $B$ cannot converge to $x$
+since $x_{n}\notin B_{\varepsilon}(x)$ for all $n\in\mathbb{N}$.
+This is a contradiction. For the last statement. If $A$ is closed,
+then since $\overline{A}$ is the smallest\emph{ }closed set containing
+$A$, we must have $A=\overline{A}$. And if $A=\overline{A}$, then
+since $\overline{A}$ is the smallest\emph{ }closed set containing
+$A$, the set $A$ itself must be closed. 
+\item Combining 2 with an identity we proved in class, we have
+\begin{align*}
+C_{1}\cup C_{2} & =\overline{C}_{1}\cup\overline{C}_{2}\\
+ & =\overline{C_{1}\cup C_{2}}.
+\end{align*}
+Therefore $C_{1}\cup C_{2}$ is closed. 
+\item Combining 2 with a couple identities that we proved in class, we have
+\begin{align*}
+\overline{C_{1}\cap C_{2}} & \supseteq C_{1}\cap C_{2}\\
+ & =\overline{C}_{1}\cap\overline{C}_{2}\\
+ & \supseteq\overline{C_{1}\cap C_{2}}.
+\end{align*}
+Therefore $C_{1}\cap C_{2}$ is closed. 
+\item Consider $\mathscr{V}=\mathbb{R}$ and $C_{n}=[0,1-1/n]$ for all
+$n\in\mathbb{N}$. Then $\bigcup_{n=1}^{\infty}C_{n}=[0,1)$, which
+is not closed in $\mathbb{R}$. 
+\end{enumerate}
+\end{proof}
+
+\subsection*{Problem 4}
+
+\begin{prop}\label{prop} Let $E\subseteq\mathscr{V}$ and let $x,y\in\mathscr{V}$.
+Then 
+\begin{enumerate}
+\item $d(x,E)=0$ if and only if $x\in\overline{E}$;
+\item $|d(x,E)-d(y,E)|\leq\|x-y\|$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}\hfill
+\begin{enumerate}
+\item First suppose that $d(x,E)=0$. For each $n\in\mathbb{N}$, choose
+$x_{n}\in E$ such that $\|x_{n}-x\|<1/n$ (if we couldn't find such
+an $x_{n}$, then $0$ would not be the infinum). Now we apply Lemma~(\ref{lemmasequence1overn})
+to find that $(x_{n})$ is a sequence of elements in $E$ such that
+$x_{n}\to x$. Therefore $x\in\overline{E}$. Conversely, suppose
+that $x\in\overline{E}$. Choose a sequence $(x_{n})$ of elements
+in $E$ such that $x_{n}\to x$. Then we have 
+\[
+0\leq d(x,E)<\|x_{n}-x\|
+\]
+for all $n\in\mathbb{N}$. This implies $d(x,E)=0$. 
+\item Without loss of generality, we may assume that $d(x,E)\geq d(y,E)$.
+Thus we are trying to show that $d(x,E)\leq\|x-y\|+d(y,E)$. Choose
+$y_{n}\in E$ such that $\|y_{n}-y\|<d(y,E)+1/n$ for all $n\in\mathbb{N}$.
+Then 
+\begin{align*}
+d(x,E) & \leq\|x-y_{n}\|\\
+ & =\|x-y+y-y_{n}\|\\
+ & \leq\|x-y\|+\|y-y_{n}\|\\
+ & <\|x-y\|+d(y,E)+1/n.
+\end{align*}
+Taking $n\to\infty$ gives us our desired result. 
+\end{enumerate}
+\end{proof}
+
+\subsection*{Problem 5}
+
+\begin{prop}\label{prop} Let $\mathscr{H}$ be a Hilbert space of
+$\mathbb{C}$, let $\mathscr{K}$ be a closed subspace of $\mathscr{H}$,
+let $x,y\in\mathscr{H}$, and let $\lambda\in\mathbb{C}$. Then 
+\begin{enumerate}
+\item $d(\lambda x,\mathscr{K})=|\lambda|d(x,\mathscr{K})$;
+\item $d(x+y,\mathscr{K})\leq d(x,\mathscr{K})+d(y,\mathscr{K})$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof} \hfill
+\begin{enumerate}
+\item Choose a sequence $(y_{n})$ of elements in $\mathcal{A}$ such that
+\[
+\|x-y_{n}\|<d(x,\mathcal{A})-1/n
+\]
+for all $n\in\mathbb{N}$. Then
+\begin{align*}
+\|\lambda x-\lambda y_{n}\| & =|\lambda|\|x-y_{n}\|\\
+ & <|\lambda|d(x,\mathcal{A})-|\lambda|/n
+\end{align*}
+\[
+|\lambda|d(x,\mathcal{A})\leq|\lambda|\|x-y_{n}\|<d(x,\mathcal{A})-1/n
+\]
+\item Let $a$ be the unique element in $\mathscr{K}$ such that $d(x,\mathscr{K})=\|x-a\|$.
+Then $\lambda a\in\mathscr{K}$, and so
+\begin{align*}
+|\lambda|d(x,\mathscr{K}) & =|\lambda|\|x-a\|\\
+ & =\|\lambda x-\lambda a\|\\
+ & \geq d(\lambda x,\mathscr{K}).
+\end{align*}
+Conversely, let $b$ be the unique element in $\mathscr{K}$ such
+that $d(\lambda x,\mathscr{K})=\|x-b\|$. Then $b/\lambda\in\mathscr{K}$,
+and so
+\begin{align*}
+d(\lambda x,\mathscr{K}) & =\|\lambda x-b\|\\
+ & =|\lambda|\|x-b/\lambda\|\\
+ & \geq|\lambda|d(x,\mathscr{K}).
+\end{align*}
+\item Let $a$ be the unique element in $\mathscr{K}$ such that $d(x,\mathscr{K})=\|x-a\|$
+and let $b$ be the unique element in $\mathscr{K}$ such that $d(y,\mathscr{K})=\|y-b\|$.
+Then $a+b\in\mathscr{K}$, and so 
+\begin{align*}
+d(x+y,\mathscr{K}) & \leq\|x+y-(a+b)\|\\
+ & =\|x-a\|+\|y-b\|\\
+ & =d(x,\mathscr{K})+d(y,\mathscr{K}).
+\end{align*}
+\end{enumerate}
+\end{proof}
+\end{document}

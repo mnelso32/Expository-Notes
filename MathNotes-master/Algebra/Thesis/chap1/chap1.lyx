@@ -1,0 +1,452 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In this thesis, we study some homological constructions over a ring 
+\begin_inset Formula $R$
+\end_inset
+
+ of characteristic 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ The reason we specialize to case where the ring has characteristic 
+\begin_inset Formula $2$
+\end_inset
+
+ is merely for simplicity.
+ Indeed, nearly all of our results can be generalized by replacing 
+\begin_inset Formula $R$
+\end_inset
+
+ with any ring with arbitary characteristic.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In the second chapter, we introduce preliminary material.
+ Section 2.1 of deals with the theory of Gröbner bases.
+ The main references we used for this section are 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{CLO15}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{GP08}
+\end_layout
+
+\end_inset
+
+.
+ Section 2.2 deals with graded rings and modules.
+ In this section we used various references, namely 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{GP08}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{BH98}
+\end_layout
+
+\end_inset
+
+, and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{E99}
+\end_layout
+
+\end_inset
+
+.
+ Section 2.3 deals with homological algebra.
+ Here, our main reference is 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{E99}
+\end_layout
+
+\end_inset
+
+, but we also used 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{KCExterior}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{BH98}
+\end_layout
+
+\end_inset
+
+, and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{stack}
+\end_layout
+
+\end_inset
+
+ as well.
+ Section 2.4 deals with simplicial complexes and simplicial homology.
+ We use 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{MP99}
+\end_layout
+
+\end_inset
+
+ as a reference here.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In the third chapter, we study some homological constructions over a field
+ 
+\begin_inset Formula $K$
+\end_inset
+
+ of characteristic 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ In section 3.1, we construct some chain complexes over 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ We first show how the polynomial ring 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ can be equipped with the differential 
+\begin_inset Formula $d:=\sum_{\lambda=1}^{n}\partial_{x_{\lambda}}$
+\end_inset
+
+ so that it becomes a chain complex over 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ We then use the theory of Gröbner bases to show how 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]/I$
+\end_inset
+
+ can be equipped with a differential so that it becomes a chain over 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ In section 3.2, we study differential graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebras.
+ In particular, we classify which of these chain complexes are differential
+ graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebras.
+ In section 3.3, we study the homology of these chain complexes, and in section
+ 3.4, we give a topological interpretation of these homologies.
+ Namely, we show how the homology of a chain complex we construct in 3.1
+ corresponds to the simplicial homology of a simplicial complex.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In the fourth and final chapter, we study some homological constructions
+ over a ring 
+\begin_inset Formula $R$
+\end_inset
+
+ of characteristic 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ In contrast to the third chapter, which has more of a topological flavor,
+ this chapter has more of an algebraic flavor.
+ In this chapter, we show that every finitely-generated commutative differential
+ graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra is isomorphic to an 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra of the form 
+\begin_inset Formula $R[x_{1},\dots,x_{n}]/I$
+\end_inset
+
+ equipped a differential defined as linear combination of partial derivatives.
+ We also show how Koszul complexes and blowup algebras can be interpretted
+ as differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras in this way.
+ We end this chapter with some basic homology calculations.
+ 
+\end_layout
+
+\end_body
+\end_document

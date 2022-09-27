@@ -1,0 +1,8258 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Gröbner Bases
+\end_layout
+
+\begin_layout Section
+Some Basic Terminology and Motivation
+\end_layout
+
+\begin_layout Subsection
+Terminology
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\series bold
+monomial 
+\series default
+in 
+\begin_inset Formula $x_{1},\dots,x_{n}$
+\end_inset
+
+ is a product of the form 
+\begin_inset Formula 
+\[
+x_{1}^{\alpha_{1}}x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}},
+\]
+
+\end_inset
+
+where all of the exponents 
+\begin_inset Formula $\alpha_{1},\dots\alpha_{n}$
+\end_inset
+
+ are nonnegative integers.
+ The 
+\series bold
+total degree 
+\series default
+of this monomial, denoted 
+\begin_inset Formula $|x^{\alpha}|$
+\end_inset
+
+, is the sum 
+\begin_inset Formula $\alpha_{1}+\alpha_{2}+\cdots+\alpha_{n}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ We can simplify the notation for monomials as follows: Let 
+\begin_inset Formula $\alpha=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+ be an 
+\begin_inset Formula $n$
+\end_inset
+
+-tuple of nonnegative integers.
+ Then we set
+\begin_inset Formula 
+\[
+x^{\alpha}:=x_{1}^{\alpha_{1}}x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $x^{\alpha}=1$
+\end_inset
+
+ when 
+\begin_inset Formula $\alpha=(0,\dots,0)$
+\end_inset
+
+.
+ We also denote 
+\begin_inset Formula $|\alpha|:=\alpha_{1}+\alpha_{2}+\cdots+\alpha_{n}$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\series bold
+polynomial 
+\series default
+
+\begin_inset Formula $f$
+\end_inset
+
+ in 
+\begin_inset Formula $x_{1},\dots,x_{n}$
+\end_inset
+
+ with coefficients in a field 
+\begin_inset Formula $K$
+\end_inset
+
+ is a finite linear combination of monomials.
+ We will write a polynomial 
+\begin_inset Formula $f$
+\end_inset
+
+ in the form 
+\begin_inset Formula 
+\[
+f=\sum_{\alpha}a_{\alpha}x^{\alpha},\quad a_{\alpha}\in K,
+\]
+
+\end_inset
+
+where the sum is over a finite number of 
+\begin_inset Formula $n$
+\end_inset
+
+-tuples 
+\begin_inset Formula $\alpha=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+.
+ The set of all polynomials in 
+\begin_inset Formula $x_{1},\dots,x_{n}$
+\end_inset
+
+ with coefficients in 
+\begin_inset Formula $K$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f=\sum_{\alpha}a_{\alpha}x^{\alpha}$
+\end_inset
+
+ be a polynomial in 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+We call 
+\begin_inset Formula $a_{\alpha}$
+\end_inset
+
+ the 
+\series bold
+coefficient 
+\series default
+of the monomial 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $a_{\alpha}\neq0$
+\end_inset
+
+, then we call 
+\begin_inset Formula $a_{\alpha}x^{\alpha}$
+\end_inset
+
+ a term of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+total degree 
+\series default
+of 
+\begin_inset Formula $f\neq0$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\mbox{deg}(f)$
+\end_inset
+
+, is the maximum 
+\begin_inset Formula $|\alpha|$
+\end_inset
+
+ such that the coefficient 
+\begin_inset Formula $a_{\alpha}$
+\end_inset
+
+ is nonzero.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Motivation
+\end_layout
+
+\begin_layout Subsubsection
+Euclidean's Algorithm
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The ring 
+\begin_inset Formula $K[x]$
+\end_inset
+
+ has some very nice properties.
+ For instance, 
+\begin_inset Formula $K[x]$
+\end_inset
+
+ is a principal ideal domain.
+ This means that every ideal 
+\begin_inset Formula $I$
+\end_inset
+
+ in 
+\begin_inset Formula $K[x]$
+\end_inset
+
+ is generated by a single element: 
+\begin_inset Formula $I=\langle g\rangle$
+\end_inset
+
+ for some 
+\begin_inset Formula $g\in K[x]$
+\end_inset
+
+.
+ In fact, 
+\begin_inset Formula $K[x]$
+\end_inset
+
+ is a Euclidean domain, which is stronger than just being a principal ideal
+ domain.
+ In particular, there is a nice way to check whether an element 
+\begin_inset Formula $f\in K[x]$
+\end_inset
+
+ belongs to the ideal 
+\begin_inset Formula $\langle g\rangle$
+\end_inset
+
+: we divide 
+\begin_inset Formula $g$
+\end_inset
+
+ into 
+\begin_inset Formula $f$
+\end_inset
+
+ to get
+\begin_inset Formula 
+\[
+f=gq+r,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $q,r\in K[x]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f\in\langle g\rangle$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $r=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We'd like to generalize what's described in the preceding paragraph to 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ Unfortunately, the ring 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ is not a Euclidean domain (and not even a principal ideal domain) when
+ 
+\begin_inset Formula $n>1$
+\end_inset
+
+.
+ It turns out however that there is still a nice generalization which goes
+ as follows: for any ideal 
+\begin_inset Formula $I$
+\end_inset
+
+ in 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+, there is a 
+\emph on
+nice 
+\emph default
+basis 
+\begin_inset Formula $\{g_{1},\dots,g_{t}\}$
+\end_inset
+
+ of 
+\begin_inset Formula $I$
+\end_inset
+
+, that is 
+\begin_inset Formula $I=\langle g_{1},\dots,g_{t}\rangle$
+\end_inset
+
+, called a 
+\series bold
+Gröbner basis 
+\series default
+of 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ As in the case of 
+\begin_inset Formula $K[x]$
+\end_inset
+
+, there is a nice way to check whether an element 
+\begin_inset Formula $f\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ belongs to the ideal 
+\begin_inset Formula $I=\langle g_{1},\dots,g_{t}\rangle$
+\end_inset
+
+: we divide 
+\begin_inset Formula $g_{1},\dots,g_{t}$
+\end_inset
+
+ into 
+\begin_inset Formula $f$
+\end_inset
+
+ to get
+\begin_inset Formula 
+\[
+f=g_{1}q_{1}+\cdots+q_{t}g_{t}+r,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $q_{i},r\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f\in I$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $r=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Gaussian Elimination
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Consider the system of equations
+\begin_inset Formula 
+\begin{align}
+x_{1}+x_{3}-3 & =0\nonumber \\
+x_{1}+x_{2}-1 & =0\label{eq:system}\\
+2x_{1}+3x_{2}-x_{3} & =0.\nonumber 
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To solve this system, we eliminate the variable 
+\begin_inset Formula $x_{3}$
+\end_inset
+
+.
+ We do this by row-reducing the matrix of the system to reduced row echelon
+ form:
+\begin_inset Formula 
+\begin{align*}
+\begin{pmatrix}1 & 0 & 1 & -3\\
+1 & 1 & 0 & -1\\
+2 & 3 & -1 & 0
+\end{pmatrix} & =e_{21}(1)\begin{pmatrix}1 & 0 & 1 & -3\\
+0 & 1 & -1 & 2\\
+2 & 3 & -1 & 0
+\end{pmatrix}\\
+ & =e_{31}(2)e_{21}(1)\begin{pmatrix}1 & 0 & 1 & -3\\
+0 & 1 & -1 & 2\\
+0 & 3 & -3 & 6
+\end{pmatrix}\\
+ & =e_{32}(3)e_{31}(2)e_{21}(1)\begin{pmatrix}1 & 0 & 1 & -3\\
+0 & 1 & -1 & 2\\
+0 & 0 & 0 & 0
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus, the system of equations in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:system})
+\end_layout
+
+\end_inset
+
+ is equivalent to the system of equations given by
+\begin_inset Formula 
+\begin{align*}
+x_{1}+x_{3}-3 & =0\\
+x_{2}-x_{3}+2 & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The form of this system of equations shows that 
+\begin_inset Formula $x_{3}$
+\end_inset
+
+ is a free variable, and setting 
+\begin_inset Formula $x_{3}=t$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+x_{1} & =-t+3\\
+x_{2} & =t-2\\
+x_{3} & =t.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These are parametric equations for a line 
+\begin_inset Formula $L$
+\end_inset
+
+ in 
+\begin_inset Formula $K^{3}$
+\end_inset
+
+.
+ The original system of equations presents 
+\begin_inset Formula $L$
+\end_inset
+
+ as an affine variety.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let's do another example.
+ Consider the system 
+\begin_inset Formula 
+\begin{align*}
+x_{1} & =t_{1}+t_{2}+1\\
+x_{2} & =t_{1}-t_{2}+3\\
+x_{3} & =2t_{1}-2\\
+x_{4} & =t_{1}+2t_{2}-3.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We want to eliminate the variables 
+\begin_inset Formula $t_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $t_{2}$
+\end_inset
+
+.
+ We rewrite the equations by subtracting the 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ terms and constants from both sides and apply the row reduction algorithm
+ to the corresponding matrix: 
+\begin_inset Formula 
+\[
+\begin{pmatrix}1 & 1 & -1 & 0 & 0 & 0 & -1\\
+1 & -1 & 0 & -1 & 0 & 0 & -3\\
+2 & 0 & 0 & 0 & -1 & 0 & 2\\
+1 & 2 & 0 & 0 & 0 & -1 & 3
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(where the coefficients of the 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ have been placed after the coefficients of the 
+\begin_inset Formula $t_{j}$
+\end_inset
+
+ in each row.) We obtain the reduced row echeleon form:
+\begin_inset Formula 
+\[
+\begin{pmatrix}1 & 0 & 0 & 0 & -1/2 & 0 & 1\\
+0 & 1 & 0 & 0 & 1/4 & -1/2 & 1\\
+0 & 0 & 1 & 0 & -1/4 & -1/2 & 3\\
+0 & 0 & 0 & 1 & -3/4 & 1/2 & 3
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Because the entries in the first two columns of rows 
+\begin_inset Formula $3$
+\end_inset
+
+ and 
+\begin_inset Formula $4$
+\end_inset
+
+ are zero, the last two rows of this matrix correspond to the following
+ two equations with no 
+\begin_inset Formula $t_{j}$
+\end_inset
+
+ terms
+\begin_inset Formula 
+\begin{align*}
+x_{1}-(1/4)x_{3}-(1/2)x_{4} & =3\\
+x_{2}-(3/4)x_{3}+(1/2)x_{4} & =3.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These two equations define 
+\begin_inset Formula $V$
+\end_inset
+
+ in 
+\begin_inset Formula $K^{4}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Our goal will be to develop extensions of the methods used in these examples
+ to systems of polynomial equations of any degrees in any number of variables.
+ What we will see is that a sort of 
+\begin_inset Quotes eld
+\end_inset
+
+combination
+\begin_inset Quotes erd
+\end_inset
+
+ of row-reduction and division of polynomials–the method of Grobner bases
+ mentioned at the outset allows us to handle all these problems.
+ 
+\end_layout
+
+\begin_layout Section*
+Orderings on the Monomials in 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A key ingredient in both the division algorithm in 
+\begin_inset Formula $K[x]$
+\end_inset
+
+ and the row-reduction algorithm for systems of linear equations is the
+ notion of 
+\series bold
+ordering of terms 
+\series default
+in polynomials.
+ For example, when dividing 
+\begin_inset Formula $f(x)=x^{5}-3x^{2}+1$
+\end_inset
+
+ by 
+\begin_inset Formula $g(x)=x^{2}-4x+7$
+\end_inset
+
+ by the standard method, we would:
+\end_layout
+
+\begin_layout Itemize
+Write the terms in the polynomials in decreasing order by degree in 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+At the first step, the leading term in 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ is 
+\begin_inset Formula $x^{5}=x^{3}\cdot(\mbox{leading term in }g(x)).$
+\end_inset
+
+ Thus we would subtract 
+\begin_inset Formula $x^{3}\cdot g(x)$
+\end_inset
+
+ from 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ to cancel the leading term, leaving 
+\begin_inset Formula $4x^{4}-7x^{3}-3x^{2}+1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Then, we would repeat the same process on 
+\begin_inset Formula $f(x)-x^{3}\cdot g(x)$
+\end_inset
+
+, etc., until we obtain a polynomial of degree less than 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+For the division algorithm on polynomials in one variable, we are dealing
+ with the degree ordering on the one-variable monomials:
+\begin_inset Formula 
+\[
+\cdots>x^{m+1}>x^{m}>\cdots>x^{2}>x>1.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The success of the algorithm depends on working systematically with the
+ leading terms in 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $g(x)$
+\end_inset
+
+, and not removing terms 
+\begin_inset Quotes eld
+\end_inset
+
+at random
+\begin_inset Quotes erd
+\end_inset
+
+ from 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ using arbitrary terms from 
+\begin_inset Formula $g(x)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\series bold
+monomial ordering 
+\series default
+
+\begin_inset Formula $>$
+\end_inset
+
+ on 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ is a total ordering 
+\begin_inset Formula $>$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+, or equivalently, a total ordering on the set of monomials 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+, 
+\begin_inset Formula $\alpha\in\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+, satisfying
+\begin_inset Formula 
+\[
+x^{\alpha}>x^{\beta}\implies x^{\gamma}x^{\alpha}>x^{\gamma}x^{\beta},
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\alpha,\beta,\gamma\in\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+.
+ Furthermore, 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $>$
+\end_inset
+
+ is called a 
+\series bold
+global ordering 
+\series default
+if 
+\begin_inset Formula $x^{\alpha}>1$
+\end_inset
+
+ for all 
+\begin_inset Formula $\alpha\neq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $>$
+\end_inset
+
+ is called a 
+\series bold
+local ordering 
+\series default
+if 
+\begin_inset Formula $1>x^{\alpha}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\alpha\neq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $>$
+\end_inset
+
+ is called a 
+\series bold
+mixed ordering 
+\series default
+if it is neither global nor local.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem1}
+\end_layout
+
+\end_inset
+
+ By a total ordering, we mean for all distinct pairs of monomials 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+ and 
+\begin_inset Formula $x^{\beta}$
+\end_inset
+
+, we either have 
+\begin_inset Formula $x^{\alpha}>x^{\beta}$
+\end_inset
+
+ or 
+\begin_inset Formula $x^{\beta}>x^{\alpha}$
+\end_inset
+
+.
+ This property is used in induction arguments.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Of course, if we turn the ordering around by setting 
+\begin_inset Formula $x^{\alpha}>'x^{\beta}$
+\end_inset
+
+ if 
+\begin_inset Formula $x^{\beta}>x^{\alpha}$
+\end_inset
+
+, then 
+\begin_inset Formula $>'$
+\end_inset
+
+ is global if and only if 
+\begin_inset Formula $>$
+\end_inset
+
+ is local.
+ However, local and global (and mixed) orderings have quite different properties.
+ We want to describe the most important characterizations of a global ordering,
+ but first we need to state Dickson's Lemma.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $M\subset\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+ be any subset.
+ Then there is a finite set 
+\begin_inset Formula $B\subset M$
+\end_inset
+
+ such that for all 
+\begin_inset Formula $\alpha\in M$
+\end_inset
+
+, there exists 
+\begin_inset Formula $\beta\in B$
+\end_inset
+
+ such that 
+\begin_inset Formula $\alpha\geq_{\mbox{nat}}\beta$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ We call 
+\begin_inset Formula $B$
+\end_inset
+
+ a 
+\series bold
+Dickson basis 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For now, we simply state Dickson's Lemma without proof.
+ It is a good exercise to understand why Dickson's Lemma is true.
+ Later on we will prove a slight variation of Dickson's Lemma in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{dicksonlemma})
+\end_layout
+
+\end_inset
+
+.
+ With Dickson's Lemma in hand, we now describe the most important characterizati
+ons of a global ordering.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma1.2.5}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $>$
+\end_inset
+
+ be a monomial ordering, then the following conditions are equivalent.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $>$
+\end_inset
+
+ is a well-ordering, i.e.
+ every nonempty set of monomials has a smallest element, or equivalently,
+ every decreasing sequence 
+\begin_inset Formula 
+\[
+x^{\alpha(1)}>x^{\alpha(2)}>x^{\alpha(3)}>\cdots
+\]
+
+\end_inset
+
+eventually terminates.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $x_{i}>1$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,\dots,n$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $>$
+\end_inset
+
+ is global.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\alpha\geq_{\mbox{nat}}\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha\neq\beta$
+\end_inset
+
+ implies 
+\begin_inset Formula $x^{\alpha}>x^{\beta}$
+\end_inset
+
+, where 
+\begin_inset Formula $\geq_{\mbox{nat}}$
+\end_inset
+
+ is a partial order on 
+\begin_inset Formula $\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+ defined by 
+\begin_inset Formula 
+\[
+(\alpha_{1},\dots,\alpha_{n})\geq_{\mbox{nat}}(\beta_{1},\dots,\beta_{n})\mbox{ if and only if }\alpha_{i}\geq\beta_{i}\mbox{ for all }i.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+(1
+\begin_inset Formula $\implies$
+\end_inset
+
+2): If 
+\begin_inset Formula $1>x_{i}$
+\end_inset
+
+ for some 
+\begin_inset Formula $i$
+\end_inset
+
+, then 
+\begin_inset Formula $1>x_{i}^{p-1}>x_{i}^{p}$
+\end_inset
+
+, yielding a set of monomials without a smallest element.
+\end_layout
+
+\begin_layout Enumerate
+(2
+\begin_inset Formula $\implies$
+\end_inset
+
+3): Write 
+\begin_inset Formula $x^{\alpha}=x^{\alpha'}x_{j}$
+\end_inset
+
+ for some 
+\begin_inset Formula $j$
+\end_inset
+
+ and use induction.
+ 
+\end_layout
+
+\begin_layout Enumerate
+(3
+\begin_inset Formula $\implies$
+\end_inset
+
+4): Let 
+\begin_inset Formula $(\alpha_{1},\dots,\alpha_{n})\geq_{\mbox{nat}}(\beta_{1},\dots,\beta_{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha\neq\beta$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\alpha-\beta\in\mathbb{N}^{n}$
+\end_inset
+
+, hence 
+\begin_inset Formula $x^{\alpha-\beta}>1$
+\end_inset
+
+, and therefore 
+\begin_inset Formula $x^{\alpha}=x^{\beta}x^{\alpha-\beta}>x^{\beta}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+(4
+\begin_inset Formula $\implies$
+\end_inset
+
+1): Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a non-empty set of monomials.
+ By Dickson's Lemma, there is a finite subset 
+\begin_inset Formula $B\subset M$
+\end_inset
+
+ such that for each 
+\begin_inset Formula $x^{\alpha}\in M$
+\end_inset
+
+, there is an 
+\begin_inset Formula $x^{\beta}\in B$
+\end_inset
+
+ with 
+\begin_inset Formula $\alpha\geq_{\mbox{nat}}\beta$
+\end_inset
+
+.
+ By assumption, 
+\begin_inset Formula $x^{\alpha}>x^{\beta}$
+\end_inset
+
+ or 
+\begin_inset Formula $x^{\alpha}=x^{\beta}$
+\end_inset
+
+, that is, 
+\begin_inset Formula $B$
+\end_inset
+
+ contains a smallest element of 
+\begin_inset Formula $M$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $>$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Examples of Monomial Orderings
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We now describe some important examples of monomial orderings.
+ First we go over some global orderings: Let 
+\begin_inset Formula $\alpha,\beta\in\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+(Lexicographical ordering): We say 
+\begin_inset Formula $x^{\alpha}>_{lp}x^{\beta}$
+\end_inset
+
+ if 
+\begin_inset Formula 
+\[
+\mbox{there exists \ensuremath{1\leq i\leq n} such that \ensuremath{\alpha_{1}=\beta_{1},\dots,\alpha_{i-1}=\beta_{i-1},\alpha_{i}>\beta_{i}}.}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+(Degree reverse lexicographical ordering) We say 
+\begin_inset Formula $x^{\alpha}>_{dp}x^{\beta}$
+\end_inset
+
+ if 
+\begin_inset Formula 
+\[
+|\alpha|=\sum_{i=1}^{n}\alpha_{i}>|\beta|=\sum_{i=1}^{n}\beta_{i},\quad\mbox{or}\quad|\alpha|=|\beta|\mbox{ and there exists }1\leq i\leq n\mbox{ such that }\alpha_{n}=\beta_{n},\dots,\alpha_{i+1}=\beta_{i+1},\alpha_{i}<\beta_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+(Degree lexicographical ordering) We say 
+\begin_inset Formula $x^{\alpha}>_{Dp}x^{\beta}$
+\end_inset
+
+ if 
+\begin_inset Formula 
+\[
+|\alpha|=\sum_{i=1}^{n}\alpha_{i}>|\beta|=\sum_{i=1}^{n}\beta_{i},\quad\mbox{or}\quad|\alpha|=|\beta|\mbox{ and there exists }1\leq i\leq n\mbox{ such that }\alpha_{1}=\beta_{1},\dots,\alpha_{i-1}=\beta_{i-1},\alpha_{i}>\beta_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ With respect to the lexicographical ordering on 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+, we have 
+\begin_inset Formula $x^{3}y^{2}z>_{lp}x^{3}yz^{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $xy^{2}z>_{lp}xyz^{2}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ With respect to the degree reverse lexicographical ordering on 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+, we have 
+\begin_inset Formula $x^{2}y^{2}z^{2}>_{dp}x^{3}yz^{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $z^{2}>_{dp}x$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ With respect to the degree lexicographical ordering on 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+, we have 
+\begin_inset Formula $x^{3}yz^{3}>_{Dp}x^{2}y^{2}z^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $z^{2}>_{Dp}x$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f=\sum_{\alpha}c_{\alpha}x^{\alpha}$
+\end_inset
+
+ be a nonzero polynomial in 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ and let 
+\begin_inset Formula $>$
+\end_inset
+
+ be a monomial order.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+multidegree 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\mbox{multdeg}(f)=\mbox{max}(\alpha\in\mathbb{Z}_{\geq0}^{n}\mid c_{\alpha}\neq0).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+leading coefficient 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\mbox{LC}(f)=c_{\mbox{multdeg}(f)}\in K.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+leading monomial 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\mbox{LM}(f)=x^{\mbox{multdeg}(f)}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+leading term 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\mbox{LT}(f)=\mbox{LC}(f)\cdot\mbox{LM}(f).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To illustrate, let 
+\begin_inset Formula $f=4xy^{2}z+4z^{2}-5x^{3}+7x^{2}z^{2}$
+\end_inset
+
+ as before and let 
+\begin_inset Formula $>$
+\end_inset
+
+ denote lex orer.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\mbox{multdeg}(f) & =(3,0,0)\\
+\mbox{LC}(f) & =-5\\
+\mbox{LM}(f) & =x^{3}\\
+\mbox{LT}(f) & =-5x^{3}.
+\end{align*}
+
+\end_inset
+
+Now let 
+\begin_inset Formula $>$
+\end_inset
+
+ denote grlex order.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\mbox{multdeg}(f) & =(2,0,2)\\
+\mbox{LC}(f) & =7\\
+\mbox{LM}(f) & =x^{2}z^{2}\\
+\mbox{LT}(f) & =7x^{2}z^{2}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f,g\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ be nonzero polynomials.
+ Then:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mbox{multdeg}(fg)=\mbox{multdeg}(f)+\mbox{multdeg}(g).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $f+g\neq0$
+\end_inset
+
+, then 
+\begin_inset Formula $\mbox{multdeg}(f+g)\leq\mbox{max}(\mbox{multdeg}(f),\mbox{multdeg}(g))$
+\end_inset
+
+.
+ If, in addition, 
+\begin_inset Formula $\mbox{multdeg}(f)\neq\mbox{multdeg}(g)$
+\end_inset
+
+, then equality occurs.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $f=\sum_{\alpha}c_{\alpha}x^{\alpha}$
+\end_inset
+
+ and 
+\begin_inset Formula $g=\sum_{\beta}d_{\beta}x^{\beta}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+fg=\sum_{\gamma}\left(\sum_{\alpha+\beta=\gamma}c_{\alpha}d_{\beta}\right)x^{\gamma}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f=c_{2,1,1}x^{2}yz+c_{1,1,2}xyz^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $g=c_{1,0,0}x+c_{0,0,1}z$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+fg=c_{2,1,1}c_{1,0,0}x^{3}yz+(c_{2,1,1}c_{0,0,1}+c_{1,1,2}c_{1,0,0})x^{2}yz^{2}+c_{1,1,2}c_{0,0,1}xyz^{3}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+A Division Algorithm in 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Input: 
+\begin_inset Formula $f_{1},\dots,f_{s},f$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Output: 
+\begin_inset Formula $q_{1},\dots,q_{s},r$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $q_{1}:=0;\cdots;q_{s}:=0;r:=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $p:=f$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+WHILE 
+\begin_inset Formula $p\neq0$
+\end_inset
+
+ DO
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $i:=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $divisionoccured:=$
+\end_inset
+
+false
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+WHILE 
+\begin_inset Formula $i\leq s$
+\end_inset
+
+ AND 
+\begin_inset Formula $divisionoccured=$
+\end_inset
+
+false DO
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+IF 
+\begin_inset Formula $\mbox{LT}(f_{i})$
+\end_inset
+
+ divides 
+\begin_inset Formula $\mbox{LT}(p)$
+\end_inset
+
+ THEN 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $q_{i}:=q_{i}+\mbox{LT}(p)/\mbox{LT}(f_{i})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $p:=p-(\mbox{LT}(p)/\mbox{LT}(f_{i}))f_{i}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $divisionoccured:=$
+\end_inset
+
+true
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\emph on
+ELSE
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $i:=i+1$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+IF 
+\begin_inset Formula $divisionoccured=$
+\end_inset
+
+false THEN
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $r:=r+\mbox{LT}(p)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $p:=p-\mbox{LT}(p)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+RETURN 
+\begin_inset Formula $q_{1},\dots,q_{s},r$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Divide 
+\begin_inset Formula $f=xy^{2}+1$
+\end_inset
+
+ by 
+\begin_inset Formula $f_{1}=xy+1$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=y+1$
+\end_inset
+
+ using lex order with 
+\begin_inset Formula $x>y$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Divide 
+\begin_inset Formula $f=x^{2}y+xy^{2}+y^{2}$
+\end_inset
+
+ by 
+\begin_inset Formula $f_{1}=xy-1$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=y^{2}-1$
+\end_inset
+
+ using lex order with 
+\begin_inset Formula $x>y$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Unfortunately, this simple division algorithm has its problems.
+ For example, the remainder need not be uniquely determined.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Divide 
+\begin_inset Formula $f=x^{2}y+xy^{2}+y^{2}$
+\end_inset
+
+ by 
+\begin_inset Formula $f_{1}=y^{2}-1$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=xy-1$
+\end_inset
+
+ using lex order with 
+\begin_inset Formula $x>y$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+So the orderings of the 
+\begin_inset Formula $s$
+\end_inset
+
+-tuple of polynomials matters.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ (Elimination) Divide 
+\begin_inset Formula $f=z^{2}x+zy+yx^{3}+x$
+\end_inset
+
+ by 
+\begin_inset Formula $f_{1}=y-x^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=z-x^{3}$
+\end_inset
+
+ using lex order with 
+\begin_inset Formula $z>y>x$
+\end_inset
+
+.
+ Then switch the ordering of 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Monomial Ideals
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ An ideal 
+\begin_inset Formula $I\subseteq K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ is a 
+\series bold
+monomial ideal 
+\series default
+if there is a subset 
+\begin_inset Formula $A\subset\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+ (possibly infinite) such that 
+\begin_inset Formula $I$
+\end_inset
+
+ consists of all polynomials which are finite sums of the form 
+\begin_inset Formula $\sum_{\alpha\in A}h_{\alpha}x^{\alpha}$
+\end_inset
+
+, where 
+\begin_inset Formula $h_{\alpha}\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ In this case, we write 
+\begin_inset Formula $I=\langle x^{\alpha}\mid\alpha\in A\rangle$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ An example of a monomial ideal is given by 
+\begin_inset Formula $I=\langle x^{4}y^{2},x^{3}y^{4},x^{2}y^{5}\rangle\subseteq K[x,y]$
+\end_inset
+
+.
+ A nontrivial example of a monomial ideal is given by 
+\begin_inset Formula $J=\langle f_{1},f_{2},f_{3},f_{4}\rangle=\langle x^{2}+x^{2}y^{3},-x^{2}y^{3}+y^{3},x^{4},y^{6}\rangle$
+\end_inset
+
+.
+ It's easy to see that 
+\begin_inset Formula $J\subset\langle x^{2},y^{3}\rangle$
+\end_inset
+
+, let's show the reverse inclusion.
+ Write
+\begin_inset Formula 
+\begin{align*}
+x^{2} & =f_{1}-x^{2}f_{2}-y^{3}f_{3}\\
+y^{3} & =f_{1}+y^{3}f_{2}-x^{2}f_{4}.
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula $\langle x^{2},y^{3}\rangle\subset J$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{monomialdivisible}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I=\langle x^{\alpha}\mid\alpha\in A\rangle$
+\end_inset
+
+ be a monomial ideal.
+ Then a monomial 
+\begin_inset Formula $x^{\beta}$
+\end_inset
+
+ lies in 
+\begin_inset Formula $I$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $x^{\beta}$
+\end_inset
+
+ is divisible by 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+ for some 
+\begin_inset Formula $\alpha\in A$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $x^{\beta}$
+\end_inset
+
+ is a multiple of 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+ for some 
+\begin_inset Formula $\alpha\in A$
+\end_inset
+
+, then 
+\begin_inset Formula $x^{\beta}\in I$
+\end_inset
+
+ by the definition of the ideal.
+ Conversely, if 
+\begin_inset Formula $x^{\beta}\in I$
+\end_inset
+
+, then 
+\begin_inset Formula $x^{\beta}=\sum_{i=1}^{s}h_{i}x^{\alpha(i)}$
+\end_inset
+
+, where 
+\begin_inset Formula $h_{i}\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha(i)\in A$
+\end_inset
+
+.
+ If we expand each 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+ as a sum of terms, we obtain
+\begin_inset Formula 
+\[
+x^{\beta}=\sum_{i=1}^{s}h_{i}x^{\alpha(i)}=\sum_{i=1}^{s}\left(\sum_{j}c_{i,j}x^{\beta(i,j)}\right)x^{\alpha(i)}=\sum_{i,j}c_{i,j}x^{\beta(i,j)}x^{\alpha(i)}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After collecting terms of the same multidegree, every term on the right
+ side of the equation is divisible by some 
+\begin_inset Formula $x^{\alpha(i)}$
+\end_inset
+
+.
+ Hence, the left side 
+\begin_inset Formula $x^{\beta}$
+\end_inset
+
+ must have the same property.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{dicksonlemma}
+\end_layout
+
+\end_inset
+
+ (Dickson's Lemma.) Let 
+\begin_inset Formula $I=\langle x^{\alpha}\mid\alpha\in A\rangle$
+\end_inset
+
+ be a monomial ideal.
+ Then 
+\begin_inset Formula $I$
+\end_inset
+
+ can be written as 
+\begin_inset Formula $I=\langle x^{\alpha(1)},\dots,x^{\alpha(s)}\rangle$
+\end_inset
+
+ where 
+\begin_inset Formula $\alpha(1),\dots,\alpha(s)\in A$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ (By induction on 
+\begin_inset Formula $n$
+\end_inset
+
+, the number of variables.) If 
+\begin_inset Formula $n=1$
+\end_inset
+
+, then 
+\begin_inset Formula $I$
+\end_inset
+
+ is generated by the monomials 
+\begin_inset Formula $x_{1}^{\alpha}$
+\end_inset
+
+, where 
+\begin_inset Formula $\alpha\in A\subseteq\mathbb{Z}_{\geq0}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathbb{Z}_{\geq0}$
+\end_inset
+
+ is well-ordered, there exists a smallest element of 
+\begin_inset Formula $A$
+\end_inset
+
+, call it 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\beta\leq\alpha$
+\end_inset
+
+ for all 
+\begin_inset Formula $\alpha\in A$
+\end_inset
+
+, so that 
+\begin_inset Formula $x_{1}^{\beta}$
+\end_inset
+
+ divides all other generators 
+\begin_inset Formula $x_{1}^{\alpha}$
+\end_inset
+
+.
+ From here, it follows 
+\begin_inset Formula $I=\langle x^{\beta}\rangle$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now assume 
+\begin_inset Formula $n>1$
+\end_inset
+
+ and that the theorem is true for 
+\begin_inset Formula $n-1$
+\end_inset
+
+.
+ We will write the variables as 
+\begin_inset Formula $x_{1},\dots,x_{n-1},y$
+\end_inset
+
+, so that monomials in 
+\begin_inset Formula $K[x_{1},\dots,x_{n-1},y]$
+\end_inset
+
+ can be written as 
+\begin_inset Formula $x^{\alpha}y^{m}$
+\end_inset
+
+, where 
+\begin_inset Formula $\alpha=(\alpha_{1},\dots,\alpha_{n-1})\in\mathbb{Z}_{\geq0}^{n-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $m\in\mathbb{Z}_{\geq0}$
+\end_inset
+
+.
+ Suppose that 
+\begin_inset Formula $I\subseteq K[x_{1},\dots,x_{n-1},y]$
+\end_inset
+
+ is a monomial ideal.
+ To find generators for 
+\begin_inset Formula $I$
+\end_inset
+
+, let 
+\begin_inset Formula $J=I:y^{\infty}\cap K[x_{1},\dots,x_{n-1}]$
+\end_inset
+
+ be the ideal in 
+\begin_inset Formula $K[x_{1},\dots,x_{n-1}]$
+\end_inset
+
+ generated by the monomials 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+ for which 
+\begin_inset Formula $x^{\alpha}y^{m}\in I$
+\end_inset
+
+ for some 
+\begin_inset Formula $m\geq0$
+\end_inset
+
+.
+ From the induction hypothesis, we obtain that 
+\begin_inset Formula $J$
+\end_inset
+
+ is finitely generated, say 
+\begin_inset Formula $J=\langle x^{\alpha(1)},\dots,x^{\alpha(s)}\rangle$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $i$
+\end_inset
+
+ between 
+\begin_inset Formula $1$
+\end_inset
+
+ and 
+\begin_inset Formula $s$
+\end_inset
+
+, the definition of 
+\begin_inset Formula $J$
+\end_inset
+
+ tells us that 
+\begin_inset Formula $x^{\alpha(i)}y^{m_{i}}\in I$
+\end_inset
+
+ for some 
+\begin_inset Formula $m_{i}\geq0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $m$
+\end_inset
+
+ be the largest 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+.
+ Then for each 
+\begin_inset Formula $\ell$
+\end_inset
+
+ between 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $m-1$
+\end_inset
+
+, consider the ideal 
+\begin_inset Formula $J_{\ell}=I:y^{\ell}\cap K[x_{1},\dots,x_{n-1}]$
+\end_inset
+
+ generated by the monomials 
+\begin_inset Formula $x^{\beta}$
+\end_inset
+
+ such that 
+\begin_inset Formula $x^{\beta}y^{\ell}\in I$
+\end_inset
+
+.
+ One can think of 
+\begin_inset Formula $J_{\ell}$
+\end_inset
+
+ as the 
+\begin_inset Quotes eld
+\end_inset
+
+slice
+\begin_inset Quotes erd
+\end_inset
+
+ of 
+\begin_inset Formula $I$
+\end_inset
+
+ generated by monomials containing 
+\begin_inset Formula $y$
+\end_inset
+
+ exactly to the 
+\begin_inset Formula $\ell$
+\end_inset
+
+th power.
+ Clearly we have 
+\begin_inset Formula 
+\[
+J=J_{m}\supset J_{m-1}\cdots\supset J_{1}\supset J_{0}=I\cap K[x_{1},\dots,x_{n-1}].
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using our inductive hypothesis again, 
+\begin_inset Formula $J_{\ell}$
+\end_inset
+
+ has a finite generating set of monomials, say 
+\begin_inset Formula $J_{\ell}=\langle x^{\alpha_{\ell}(1)},\dots,x^{\alpha_{\ell}(s_{\ell})}\rangle$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We claim that 
+\begin_inset Formula $I$
+\end_inset
+
+ is generated by the monomials in the following list: 
+\begin_inset Formula 
+\begin{align*}
+\mbox{from }J_{0}: & x^{\alpha_{0}(1)},\dots,x^{\alpha_{0}(s_{0})},\\
+\mbox{from }J_{1}: & x^{\alpha_{1}(1)}y,\dots,x^{\alpha_{1}(s_{1})}y,\\
+\vdots\\
+\mbox{from }J_{m-1}: & x^{\alpha_{m-1}(1)}y^{m-1},\dots,x^{\alpha_{m-1}(s_{m-1})}y^{m-1},\\
+\mbox{from }J: & x^{\alpha(1)}y^{m},\dots,x^{\alpha(s)}y^{m}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+First note that every monomial in 
+\begin_inset Formula $I$
+\end_inset
+
+ is divisible by one on the list.
+ To see why, let 
+\begin_inset Formula $x^{\alpha}y^{p}\in I$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $p\geq m$
+\end_inset
+
+, then 
+\begin_inset Formula $x^{\alpha}y^{p}$
+\end_inset
+
+ is divisible by some 
+\begin_inset Formula $x^{\alpha(i)}y^{m}$
+\end_inset
+
+ by the construction of 
+\begin_inset Formula $J$
+\end_inset
+
+: Since 
+\begin_inset Formula $x^{\alpha}y^{p}\in I$
+\end_inset
+
+, we have 
+\begin_inset Formula $x^{\alpha}\in J$
+\end_inset
+
+.
+ So by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{monomialdivisible})
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+ is divisible by some 
+\begin_inset Formula $x^{\alpha(i)}$
+\end_inset
+
+, and since 
+\begin_inset Formula $p\geq m$
+\end_inset
+
+, 
+\begin_inset Formula $x^{\alpha}y^{p}$
+\end_inset
+
+ is divisible by 
+\begin_inset Formula $x^{\alpha(i)}y^{m}$
+\end_inset
+
+.
+ On the other hand, if 
+\begin_inset Formula $p\leq m-1$
+\end_inset
+
+, then 
+\begin_inset Formula $x^{\alpha}y^{p}$
+\end_inset
+
+ is divisible by some 
+\begin_inset Formula $x^{\alpha_{p}(j)}y^{p}$
+\end_inset
+
+ by the construction of 
+\begin_inset Formula $J_{p}$
+\end_inset
+
+, for the same reason as above.
+ It follows from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{monomialdivisible})
+\end_layout
+
+\end_inset
+
+ that the above monomials generate an ideal having the same monomials as
+ 
+\begin_inset Formula $I$
+\end_inset
+
+, and this forces the ideals to be the same.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let's illustrate how the proof works when 
+\begin_inset Formula $I=\langle x^{4},x^{3}y^{2}z,x^{2}yz^{3},xy^{3}z^{2},y^{4},z^{4}\rangle$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $J$
+\end_inset
+
+ be the ideal in 
+\begin_inset Formula $K[y,z]$
+\end_inset
+
+ generated by the monomials 
+\begin_inset Formula $y^{m_{1}}z^{m_{2}}$
+\end_inset
+
+ for which 
+\begin_inset Formula $x^{m}y^{m_{1}}z^{m_{1}}\in I$
+\end_inset
+
+ for some 
+\begin_inset Formula $m\geq0$
+\end_inset
+
+, and let 
+\begin_inset Formula $J_{\ell}$
+\end_inset
+
+ be defined as in the theorem above.
+ Then
+\begin_inset Formula 
+\begin{align*}
+J_{0} & =\langle y^{4},z^{4}\rangle\\
+J_{1} & =\langle y^{4},z^{4},y^{3}z^{2}\rangle\\
+J_{2} & =\langle y^{4},z^{4},y^{3}z^{2},yz^{3}\rangle\\
+J_{3} & =\langle y^{4},z^{4},yz^{3},y^{2}z\rangle\\
+J & =\langle1\rangle.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The theorem then tells us that 
+\begin_inset Formula $I$
+\end_inset
+
+ is generated by the monomials in the following list:
+\begin_inset Formula 
+\begin{align*}
+\mbox{from }J: & x^{4}\\
+\mbox{from }J_{0}: & y^{4},z^{4}\\
+\mbox{from }J_{1}: & y^{4}x,z^{4}x,y^{3}z^{2}x\\
+\mbox{from }J_{2}: & y^{4}x^{2},z^{4}x^{2},y^{3}z^{2}x^{2},yz^{3}x^{2}\\
+\mbox{from }J_{3}: & y^{4}x^{3},z^{4}x^{3},yz^{3}x^{3},y^{2}zx^{2}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Hilbert Basis Theorem and Grobner Bases
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I\subseteq K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ be an ideal other than 
+\begin_inset Formula $\{0\}$
+\end_inset
+
+, and fix a monomial ordering on 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ Then 
+\end_layout
+
+\begin_layout Enumerate
+We denote by 
+\begin_inset Formula $\mbox{LT}(I)$
+\end_inset
+
+ the set of leading terms of nonzero elements of 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula 
+\[
+\mbox{LT}(I)=\{cx^{\alpha}\mid\mbox{there exists }f\in I\setminus\{0\}\mbox{ with LT}(f)=cx^{\alpha}\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+We denote by 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+ be the ideal generated by the elements of 
+\begin_inset Formula $\mbox{LT}(I)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+ is clearly a monomial ideal, hence it is finitely generated.
+ That is, there are 
+\begin_inset Formula $g_{1},\dots,g_{t}\in I$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mbox{LT}(I)=\langle\mbox{LT}(g_{1}),\dots,\mbox{LT}(g_{t})\rangle$
+\end_inset
+
+.
+ If we are given an arbitrary finite generating set for 
+\begin_inset Formula $I$
+\end_inset
+
+, say 
+\begin_inset Formula $I=\langle f_{1},\dots,f_{s}\rangle$
+\end_inset
+
+, then 
+\begin_inset Formula $\langle\mbox{LT}(f_{1}),\dots,\mbox{LT}(f_{s})\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+ may be 
+\emph on
+different 
+\emph default
+ideals.
+ To see this, consider the following example.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I=\langle f_{1},f_{2}\rangle$
+\end_inset
+
+, where 
+\begin_inset Formula $f_{1}=x^{3}-2xy$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=x^{2}y-2y^{2}+x$
+\end_inset
+
+, and use grlex ordering on monomials in 
+\begin_inset Formula $K[x,y]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+x\cdot(x^{2}y-2y^{2}+x)-y\cdot(x^{3}-2xy)=x^{2},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so that 
+\begin_inset Formula $x^{2}\in I$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $x^{2}=\mbox{LT}(x^{2})\in\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+.
+ However 
+\begin_inset Formula $x^{2}$
+\end_inset
+
+ is not divisible by 
+\begin_inset Formula $\mbox{LT}(f_{1})=x^{3}$
+\end_inset
+
+ or 
+\begin_inset Formula $\mbox{LT}(f_{2})=x^{2}y$
+\end_inset
+
+, so that 
+\begin_inset Formula $x^{2}\notin\langle\mbox{LT}(f_{1}),\mbox{LT}(f_{2})\rangle$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Fix a monomial order on the polynomial ring 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ A finite subset 
+\begin_inset Formula $G=\{g_{1},\dots,g_{t}\}$
+\end_inset
+
+ of an ideal 
+\begin_inset Formula $I\subseteq K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ different from 
+\begin_inset Formula $\{0\}$
+\end_inset
+
+ is said to be a 
+\series bold
+Grobner basis 
+\series default
+if 
+\begin_inset Formula 
+\[
+\langle\mbox{LT}(g_{1}),\dots,\mbox{LT}(g_{t})\rangle=\langle\mbox{LT}(I)\rangle.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The next theorem justifies our use of the word 
+\begin_inset Quotes eld
+\end_inset
+
+basis
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset Quotes eld
+\end_inset
+
+Grobner basis
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\end_layout
+
+\end_inset
+
+ (Hilbert Basis Theorem).
+ Every ideal 
+\begin_inset Formula $I\subseteq K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ has a finite generating set.
+ In other words, 
+\begin_inset Formula $I=\langle g_{1},\dots,g_{t}\rangle$
+\end_inset
+
+ for some 
+\begin_inset Formula $g_{1},\dots,g_{t}\in I$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $I=\{0\}$
+\end_inset
+
+, we take our generating set to be 
+\begin_inset Formula $\{0\}$
+\end_inset
+
+, which is certainly finite.
+ If 
+\begin_inset Formula $I$
+\end_inset
+
+ contains some nonzero polynomial, then a generating set 
+\begin_inset Formula $g_{1},\dots,g_{t}$
+\end_inset
+
+ for 
+\begin_inset Formula $I$
+\end_inset
+
+ can be constructed as follows.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We first select one particular monomial order to use in the division algorithm
+ and in computing leading terms.
+ Then 
+\begin_inset Formula $I$
+\end_inset
+
+ has an ideal of leading terms 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+ is a monomial ideal, there are 
+\begin_inset Formula $g_{1},\dots,g_{t}\in I$
+\end_inset
+
+ such that 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle=\langle\mbox{LT}(g_{1}),\dots,\mbox{LT}(g_{t})\rangle$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $I=\langle g_{1},\dots,g_{t}\rangle$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $f\in I$
+\end_inset
+
+ be any polynomial.
+ If we apply the division algorithm to divide 
+\begin_inset Formula $f$
+\end_inset
+
+ by 
+\begin_inset Formula $(g_{1},\dots,g_{t})$
+\end_inset
+
+, then we get an expression of the form
+\begin_inset Formula 
+\[
+f=q_{1}g_{1}+\cdots+q_{t}g_{t}+r
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where no term of 
+\begin_inset Formula $r$
+\end_inset
+
+ is divisible by any of 
+\begin_inset Formula $\mbox{LT}(g_{1}),\dots,\mbox{LT}(g_{t})$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $r=0$
+\end_inset
+
+.
+ To see this, note that 
+\begin_inset Formula 
+\[
+r=f-q_{1}g_{1}-\cdots-q_{t}g_{t}\in I.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $r\neq0$
+\end_inset
+
+, then 
+\begin_inset Formula $\mbox{LT}(r)\in\mbox{LT}(I)=\langle\mbox{LT}(g_{1}),\dots,\mbox{LT}(g_{t})\rangle$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\mbox{LT}(r)$
+\end_inset
+
+ must be divisible by some 
+\begin_inset Formula $\mbox{LT}(g_{i})$
+\end_inset
+
+.
+ This contradicts what it means to be a remainder, and, consequently, 
+\begin_inset Formula $r$
+\end_inset
+
+ must be zero.
+ Thus, 
+\begin_inset Formula 
+\[
+f=q_{1}g_{1}+\cdots q_{t}g_{t}+0\in\langle g_{1},\dots,g_{t}\rangle,
+\]
+
+\end_inset
+
+ which shows that 
+\begin_inset Formula $I\subseteq\langle g_{1},\dots,g_{t}\rangle$
+\end_inset
+
+.
+ The reverse inclusion is trivial.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Properties of Grobner Bases
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I\subseteq K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ be an ideal and let 
+\begin_inset Formula $G=\{g_{1},\dots,g_{t}\}$
+\end_inset
+
+ be a Grobner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ Then given 
+\begin_inset Formula $f\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+, there is a unique 
+\begin_inset Formula $r\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ with the following two properties:
+\end_layout
+
+\begin_layout Enumerate
+No term of 
+\begin_inset Formula $r$
+\end_inset
+
+ is divisible by any of 
+\begin_inset Formula $\mbox{LT}(g_{1}),\dots,\mbox{LT}(g_{t})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+There is 
+\begin_inset Formula $g\in I$
+\end_inset
+
+ such that 
+\begin_inset Formula $f=g+r$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In particular, 
+\begin_inset Formula $r$
+\end_inset
+
+ is the remainder on division of 
+\begin_inset Formula $f$
+\end_inset
+
+ by 
+\begin_inset Formula $G$
+\end_inset
+
+ no matter how the elements of 
+\begin_inset Formula $G$
+\end_inset
+
+ are listed when using the division algorithm.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The division algorithm gives 
+\begin_inset Formula $f=q_{1}g_{1}+\cdots+q_{t}g_{t}+r$
+\end_inset
+
+ where 
+\begin_inset Formula $r$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $(1)$
+\end_inset
+
+.
+ We can also satisfy 
+\begin_inset Formula $(2)$
+\end_inset
+
+ by setting 
+\begin_inset Formula $g=q_{1}g_{1}+\cdots+q_{t}g_{t}\in I$
+\end_inset
+
+.
+ This proves the existence of 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To prove uniqueness, suppose 
+\begin_inset Formula $f=g+r=g'+r'$
+\end_inset
+
+ satisfy 
+\begin_inset Formula $(1)$
+\end_inset
+
+ and 
+\begin_inset Formula $(2)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $r-r'=g'-g\in I$
+\end_inset
+
+, so that if 
+\begin_inset Formula $r\neq r'$
+\end_inset
+
+, then 
+\begin_inset Formula $\mbox{LT}(r-r')\in\langle\mbox{LT}(I)\rangle=\langle\mbox{LT}(g_{1}),\cdots,\mbox{LT}(g_{t})\rangle$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\mbox{LT}(r-r')$
+\end_inset
+
+ is divisible by some 
+\begin_inset Formula $\mbox{LT}(g_{i})$
+\end_inset
+
+.
+ This is impossible since no term of 
+\begin_inset Formula $r$
+\end_inset
+
+,
+\begin_inset Formula $r'$
+\end_inset
+
+ is divisible by one of 
+\begin_inset Formula $\mbox{LT}(g_{1}),\dots\mbox{LT}(g_{t})$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $r-r'$
+\end_inset
+
+ must be zero, and uniqueness is proved.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ We will write 
+\begin_inset Formula $\bar{f}^{F}$
+\end_inset
+
+ for the remainder on division of 
+\begin_inset Formula $f$
+\end_inset
+
+ by the ordered 
+\begin_inset Formula $s$
+\end_inset
+
+-tuple 
+\begin_inset Formula $F=(f_{1},\dots,f_{s})$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $F$
+\end_inset
+
+ is a Grobner basis for 
+\begin_inset Formula $\langle f_{1},\dots,f_{s}\rangle$
+\end_inset
+
+, then we can regard 
+\begin_inset Formula $F$
+\end_inset
+
+ as a set (without any particular order).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula $S$
+\end_inset
+
+-polynomials
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ We will write 
+\begin_inset Formula $\bar{f}^{F}$
+\end_inset
+
+ for the remainder on division of 
+\begin_inset Formula $f$
+\end_inset
+
+ by the ordered 
+\begin_inset Formula $s$
+\end_inset
+
+-tuple 
+\begin_inset Formula $F=(f_{1},\dots,f_{s})$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $F$
+\end_inset
+
+ is a Gröbner basis of 
+\begin_inset Formula $\langle f_{1},\dots,f_{s}\rangle$
+\end_inset
+
+, then we can regard 
+\begin_inset Formula $F$
+\end_inset
+
+ as a set (without any particular order).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For instance, with 
+\begin_inset Formula $F=(x^{2}y-y^{2},x^{4}y^{2}-y^{2})\subseteq K[x,y]$
+\end_inset
+
+, using the lex order, we have 
+\begin_inset Formula 
+\[
+\overline{x^{5}y}^{F}=xy^{3}
+\]
+
+\end_inset
+
+ since the division algorithm yields 
+\begin_inset Formula 
+\[
+x^{5}y=(x^{3}+xy)(x^{2}y-y^{2})+0\cdot(x^{4}y^{2}-y^{2})+xy^{3}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The obstruction to 
+\begin_inset Formula $\{f_{1},\dots,f_{s}\}$
+\end_inset
+
+ being a Grobner basis is the possible occurence polynomial combinatios
+ of the 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ whose leading terms are not in the ideal generated by the 
+\begin_inset Formula $\mbox{LT}(f_{i})$
+\end_inset
+
+.
+ One way this can occur is if the leading terms in a suitable combination
+ 
+\begin_inset Formula 
+\[
+ax^{\alpha}f_{i}-bx^{\beta}f_{j}
+\]
+
+\end_inset
+
+ cancel, leaving only smaller terms.
+ On the other hand, 
+\begin_inset Formula $ax^{\alpha}f_{i}-bx^{\beta}f_{j}\in I$
+\end_inset
+
+, so its leading term is in 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f,g\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ be nonzero polynomials.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\mbox{multdeg}(f)=\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\mbox{multdeg}(g)=\beta$
+\end_inset
+
+, then let 
+\begin_inset Formula $\gamma=(\gamma_{1},\dots,\gamma_{n})$
+\end_inset
+
+, where 
+\begin_inset Formula $\gamma_{i}=\mbox{max}(\alpha_{i},\beta_{i})$
+\end_inset
+
+ for each 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ We call 
+\begin_inset Formula $x^{\gamma}$
+\end_inset
+
+ the 
+\series bold
+least common multiple 
+\series default
+of 
+\begin_inset Formula $\mbox{LM}(f)$
+\end_inset
+
+ and 
+\begin_inset Formula $\mbox{LM}(g)$
+\end_inset
+
+, written 
+\begin_inset Formula $x^{\gamma}=\mbox{lcm}(\mbox{LM}(f),\mbox{LM}(g))$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The 
+\begin_inset Formula $S$
+\end_inset
+
+-
+\series bold
+polynomial 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ is the combination
+\begin_inset Formula 
+\[
+S(f,g)=\frac{x^{\gamma}}{\mbox{LT}(f)}\cdot f-\frac{x^{\gamma}}{\mbox{LT}(g)}\cdot g.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{buchbergercriterion}
+\end_layout
+
+\end_inset
+
+ (Buchberger's Criterion).
+ Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be a polynomial ideal.
+ Then a basis 
+\begin_inset Formula $G=\{g_{1},\dots,g_{t}\}$
+\end_inset
+
+ of 
+\begin_inset Formula $I$
+\end_inset
+
+ is a Gröbner basis of 
+\begin_inset Formula $I$
+\end_inset
+
+ if and only if for all pairs 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+, the remainder on division of 
+\begin_inset Formula $S(g_{i},g_{j})$
+\end_inset
+
+ by 
+\begin_inset Formula $G$
+\end_inset
+
+ is zero.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{grobnerexample}
+\end_layout
+
+\end_inset
+
+ Consider the ring 
+\begin_inset Formula $\mathbb{Q}[x,y]$
+\end_inset
+
+ with grlex order, and let 
+\begin_inset Formula $I=\langle f_{1},f_{2}\rangle=\langle x^{3}-2xy,x^{2}y-2y^{2}+x\rangle$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\{f_{1},f_{2}\}$
+\end_inset
+
+ is not a Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+ since 
+\begin_inset Formula $\mbox{LT}(S(f_{1},f_{2}))=-x^{2}\notin\langle\mbox{LT}(f_{1}),\mbox{LT}(f_{2})\rangle$
+\end_inset
+
+.
+ Thus, we should add in 
+\begin_inset Formula $f_{3}=-x^{2}$
+\end_inset
+
+ into our generating set.
+ So setting 
+\begin_inset Formula $F=(f_{1},f_{2},f_{3})$
+\end_inset
+
+, we compute 
+\begin_inset Formula 
+\begin{align*}
+S(f_{1},f_{2}) & =f_{3},\mbox{ so}\\
+\overline{S(f_{1},f_{2})}^{F} & =0,\\
+S(f_{1},f_{3}) & =-2xy,\mbox{ but}\\
+\overline{S(f_{1},f_{3})}^{F} & =-2xy\neq0.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus, we must add 
+\begin_inset Formula $f_{4}=-2xy$
+\end_inset
+
+ to our generating set.
+ If we let 
+\begin_inset Formula $F=(f_{1},f_{2},f_{3},f_{4})$
+\end_inset
+
+, then we have 
+\begin_inset Formula 
+\begin{align*}
+\overline{S(f_{1},f_{2})}^{F} & =\overline{S(f_{1},f_{3})}^{F}=0,\\
+S(f_{1},f_{4}) & =-2xy^{2},\mbox{ so}\\
+\overline{S(f_{1},f_{4})}^{F} & =0,\\
+\overline{S(f_{2},f_{3})}^{F} & =-2y^{2}+x,\mbox{ but}\\
+\overline{S(f_{2},f_{3})}^{F} & =-2y^{2}+x\neq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Hence, we must also add 
+\begin_inset Formula $f_{5}=-2y^{2}+x$
+\end_inset
+
+ to our generating set.
+ Setting 
+\begin_inset Formula $F=(f_{1},f_{2},f_{3},f_{4},f_{5})$
+\end_inset
+
+, one can compute that 
+\begin_inset Formula 
+\[
+\overline{S(f_{i},f_{j})}^{F}=0\mbox{ for all }1\leq i<j\leq5.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{buchbergercriterion})
+\end_layout
+
+\end_inset
+
+, it follows that a grlex Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\[
+\{f_{1},f_{2},f_{3},f_{4},f_{5}\}=\{x^{3}-2xy,x^{2}y-2y^{2}+x,-x^{2},-2xy,-2y^{2}+x\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{buchbergeralgorithm}
+\end_layout
+
+\end_inset
+
+ (Buchberger's Algorithm).
+ Let 
+\begin_inset Formula $I=\langle f_{1},\dots,f_{s}\rangle\neq\{0\}$
+\end_inset
+
+ be a polynomial ideal.
+ Then a Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+ can be constructed in a finite number of steps by the described algorithm.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Why does this algorithm terminate? We need to consider what happens after
+ each pass through the main loop.
+ The set 
+\begin_inset Formula $G$
+\end_inset
+
+ consists of 
+\begin_inset Formula $G'$
+\end_inset
+
+ (the old 
+\begin_inset Formula $G$
+\end_inset
+
+) together with the nonzero remainders of 
+\begin_inset Formula $S$
+\end_inset
+
+-polynomials of elements of 
+\begin_inset Formula $G'$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{equation}
+\langle\mbox{LT}(G')\rangle\subseteq\langle\mbox{LT}(G)\rangle\label{eq:successive}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $G'\subseteq G$
+\end_inset
+
+.
+ Furthermore, if 
+\begin_inset Formula $G'\neq G$
+\end_inset
+
+, we claim that 
+\begin_inset Formula $\langle\mbox{LT}(G')\rangle$
+\end_inset
+
+ is strictly smaller than 
+\begin_inset Formula $\langle\mbox{LT}(G)\rangle$
+\end_inset
+
+.
+ To see this, suppose that a nonzero remainder 
+\begin_inset Formula $r$
+\end_inset
+
+ of and 
+\begin_inset Formula $S$
+\end_inset
+
+-polynomial has been adjoined to 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $r$
+\end_inset
+
+ is a remainder on division by 
+\begin_inset Formula $G'$
+\end_inset
+
+, 
+\begin_inset Formula $\mbox{LT}(r)$
+\end_inset
+
+ is not divisible by the leading terms of elements of 
+\begin_inset Formula $G'$
+\end_inset
+
+, and thus 
+\begin_inset Formula $\mbox{LT}(r)\notin\langle\mbox{LT}(G')\rangle$
+\end_inset
+
+ by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{monomialdivisible})
+\end_layout
+
+\end_inset
+
+.
+ Yet 
+\begin_inset Formula $\mbox{LT}(r)\in\langle\mbox{LT}(G)\rangle$
+\end_inset
+
+, which proves our claim.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+By 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:successive})
+\end_layout
+
+\end_inset
+
+, the ideal 
+\begin_inset Formula $\langle\mbox{LT}(G')\rangle$
+\end_inset
+
+ from successive iterations of the loop form an ascending chain of ideals
+ in 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ Thus, the Ascending Chain Condition implies that after a finite number
+ of iterations the chain will stabilize, so that 
+\begin_inset Formula $\langle\mbox{LT}(G')\rangle=\langle\mbox{LT}(G)\rangle$
+\end_inset
+
+ must happen eventually.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Gröbner bases computed using the algorithm of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{buchbergeralgorithm})
+\end_layout
+
+\end_inset
+
+ are often bigger than necessary.
+ We can eliminate some unneeded generators by using the following fact.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{eliminate}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $G$
+\end_inset
+
+ be a Gröbner basis of 
+\begin_inset Formula $I\subseteq K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $p\in G$
+\end_inset
+
+ be a polynomial such that 
+\begin_inset Formula $\mbox{LT}(p)\in\langle\mbox{LT}(G\setminus\{p\})\rangle$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $G\setminus\{p\}$
+\end_inset
+
+ is also a Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We know that 
+\begin_inset Formula $\langle\mbox{LT}(G)\rangle=\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mbox{LT}(p)\in\langle\mbox{LT}(G\setminus\{p\})\rangle$
+\end_inset
+
+, then we have 
+\begin_inset Formula $\langle\mbox{LT}(G\setminus\{p\})\rangle=\langle\mbox{LT}(G)\rangle$
+\end_inset
+
+.
+ By definition, it follows that 
+\begin_inset Formula $G\setminus\{p\}$
+\end_inset
+
+ is also a Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+By adjusting constants to make all leading coefficients equal to 
+\begin_inset Formula $1$
+\end_inset
+
+ and removing any 
+\begin_inset Formula $p$
+\end_inset
+
+ with 
+\begin_inset Formula $\mbox{LT}(p)\in\langle\mbox{LT}(G\setminus\{p\}\rangle$
+\end_inset
+
+ from 
+\begin_inset Formula $G$
+\end_inset
+
+, we arrive at what we will call a 
+\series bold
+minimal Gröbner basis
+\series default
+.
+ We can construct a minimal Gröbner basis for a given nonzero ideal by applying
+ the algorithm of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{buchbergeralgorithm})
+\end_layout
+
+\end_inset
+
+ and then using 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{eliminate})
+\end_layout
+
+\end_inset
+
+ to eliminate any unneeded generators that might have been included.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To illustrate this procedure, we return to the ideal 
+\begin_inset Formula $I$
+\end_inset
+
+ studied in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Example~(
+\backslash
+ref{grobnerexample})
+\end_layout
+
+\end_inset
+
+.
+ Using grlex order, we found the Gröbner basis 
+\begin_inset Formula 
+\begin{align*}
+f_{1} & =x^{3}-2xy,\\
+f_{2} & =x^{2}y-2y^{2}+x,\\
+f_{3} & =-x^{2},\\
+f_{4} & =-2xy,\\
+f_{5} & =-2y^{2}+x.
+\end{align*}
+
+\end_inset
+
+Since some of the leading coefficients are different from 
+\begin_inset Formula $1$
+\end_inset
+
+, the first step is to multiply the generators by suitable constants to
+ make this true.
+ Then note that 
+\begin_inset Formula $\mbox{LT}(f_{1})=x^{3}=-x\cdot\mbox{LT}(f_{3})$
+\end_inset
+
+.
+ By 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{eliminate})
+\end_layout
+
+\end_inset
+
+, we can dispense with 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ in the minimal Gröbner basis.
+ Similarly, since 
+\begin_inset Formula $\mbox{LT}(f_{2})=x^{2}y=-(1/2)x\cdot\mbox{LT}(f_{4})$
+\end_inset
+
+, we can also eliminate 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+.
+ There are no further cases where the leading term of a generator divides
+ the leading term of another generator.
+ Hence 
+\begin_inset Formula 
+\begin{align*}
+\tilde{f}_{3} & =x^{2},\\
+\tilde{f}_{4} & =xy,\\
+\tilde{f}_{5} & =y^{2}-(1/2)x
+\end{align*}
+
+\end_inset
+
+ is a minimal Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+When 
+\begin_inset Formula $G$
+\end_inset
+
+ is a minimal Gröbner basis, the leading terms of 
+\begin_inset Formula $\mbox{LT}(p)$
+\end_inset
+
+, 
+\begin_inset Formula $p\in G$
+\end_inset
+
+, form the unique minimal basis of 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+.
+ Unfortunately, the original ideal 
+\begin_inset Formula $I$
+\end_inset
+
+ may have many minimal Gröbner bases.
+ For example, in the ideal 
+\begin_inset Formula $I$
+\end_inset
+
+ considered above, it is easy to check that 
+\begin_inset Formula 
+\begin{align*}
+\tilde{f}_{3} & =x^{2}+axy,\\
+\tilde{f}_{4} & =xy,\\
+\tilde{f}_{5} & =y^{2}-(1/2)x
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+is also a minimal Gröbner basis, where 
+\begin_inset Formula $a\in\mathbb{Q}$
+\end_inset
+
+ is any constant.
+ Thus, we can produce infinitely many minimal Gröbner bases.
+ Fortunately, we can single out one minimal basis that is better than others.
+ The definition is as follows.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\series bold
+reduced Gröbner basis 
+\series default
+for a polynomial ideal 
+\begin_inset Formula $I$
+\end_inset
+
+ is a Gröbner basis 
+\begin_inset Formula $G$
+\end_inset
+
+ for 
+\begin_inset Formula $I$
+\end_inset
+
+ such that: 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mbox{LC}(p)=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $p\in G$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For all 
+\begin_inset Formula $p\in G$
+\end_inset
+
+, no monomial of 
+\begin_inset Formula $p$
+\end_inset
+
+ lies in 
+\begin_inset Formula $\langle\mbox{LT}(G\setminus\{p\}\rangle$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To conclude this section, we will indicate briefly some of the connections
+ between Buchberger's algorithm and Gaussian elimination.
+ Consider the system of linear equations
+\begin_inset Formula 
+\begin{align*}
+x-2y-z-w & =0,\\
+3x-6y-2z & =0,\\
+2x-4y+4w & =0.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To solve it, we apply Gaussian elimination to the coefficient matrix
+\begin_inset Formula 
+\[
+\begin{pmatrix}1 & -2 & -1 & -1\\
+3 & -6 & -2 & 0\\
+2 & -4 & 0 & 4
+\end{pmatrix}\to\begin{pmatrix}1 & -2 & -1 & -1\\
+0 & 0 & 1 & 3\\
+0 & 0 & 0 & 0
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The resulting matrix is in row echelon form, but to get it into 
+\emph on
+reduced 
+\emph default
+row echelon form, we need to make sure that each leading 
+\begin_inset Formula $1$
+\end_inset
+
+ is the only nonzero entry in its column.
+ This leads to the matrix
+\begin_inset Formula 
+\[
+\begin{pmatrix}1 & -2 & 0 & 2\\
+0 & 0 & 1 & 3\\
+0 & 0 & 0 & 0
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To translate the computations into algebra, let 
+\begin_inset Formula $I$
+\end_inset
+
+ be the ideal 
+\begin_inset Formula $I=\langle3x-6y-2z,2x-4y+4w,x-2y-z-w\rangle\subseteq K[x,y,z,w]$
+\end_inset
+
+ corresponding to the original system of equations.
+ We will use lex order with 
+\begin_inset Formula $x>y>z>w$
+\end_inset
+
+.
+ Then the row echelon form matrix gives a minimal Gröbner basis 
+\begin_inset Formula $I=\langle x-2y-z-w,z+3w\rangle$
+\end_inset
+
+ and the reduced row echelon form gives the reduced Gröbner basis 
+\begin_inset Formula $I=\langle x-2y+2w,z+3w\rangle$
+\end_inset
+
+.
+ Recall from linear algebra that every matrix can be put in reduced row
+ echelon form in a unique way.
+ This can be viewed as a special case of the uniqueness of reduced Gröbner
+ bases.
+ 
+\end_layout
+
+\begin_layout Section*
+Applications
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Consider the parametric curve 
+\begin_inset Formula $V:$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+x & =t^{4}\\
+y & =t^{3}\\
+z & =t^{2}
+\end{align*}
+
+\end_inset
+
+in 
+\begin_inset Formula $\mathbb{C}^{3}$
+\end_inset
+
+.
+ The image below shows a piece of 
+\begin_inset Formula $V$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{R}^{3}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[view={30}{30},] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot3[domain=-5:5, samples =60, samples y=0, color=red]({x^4 }, {x^3
+ }, {x^2 });
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We compute a Gröbner basis 
+\begin_inset Formula $G$
+\end_inset
+
+ of 
+\begin_inset Formula $I=\langle f_{1},f_{2},f_{3}\rangle=\langle t^{4}-x,t^{3}-y,t^{2}-z\rangle$
+\end_inset
+
+ with respect to lex order in 
+\begin_inset Formula $\mathbb{C}[t,x,y,z]$
+\end_inset
+
+, so 
+\begin_inset Formula $t>x>y>z$
+\end_inset
+
+.
+ Setting 
+\begin_inset Formula $F=(f_{1},f_{2},f_{3})$
+\end_inset
+
+, we compute 
+\begin_inset Formula 
+\begin{align*}
+S(f_{1},f_{2}) & =ty-x,\mbox{ but}\\
+\overline{S(f_{1},f_{2})}^{F} & =ty-x.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus, we must add 
+\begin_inset Formula $f_{4}=ty-x$
+\end_inset
+
+ to our generating set.
+ Setting 
+\begin_inset Formula $F=(f_{1},f_{2},f_{3},f_{4})$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\begin{align*}
+S(f_{2},f_{3}) & =tz-y,\mbox{ but}\\
+\overline{S(f_{2},f_{3})}^{F} & =tz-y.
+\end{align*}
+
+\end_inset
+
+Thus, we must add 
+\begin_inset Formula $f_{5}=tz-y$
+\end_inset
+
+ to our generating set.
+ Setting 
+\begin_inset Formula $F=(f_{1},f_{2},f_{3},f_{4},f_{5})$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\begin{align*}
+S(f_{1},f_{3}) & =t^{2}z-x,\mbox{ but}\\
+\overline{S(f_{1},f_{3})}^{F} & =-x+z^{2}
+\end{align*}
+
+\end_inset
+
+Thus, we must add 
+\begin_inset Formula $f_{6}=-x+z^{2}$
+\end_inset
+
+ to our generating set.
+ Setting 
+\begin_inset Formula $F=(f_{1},f_{2},f_{3},f_{4},f_{5},f_{6})$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+S(f_{4},f_{5}) & =xz-y^{2},\mbox{ but}\\
+\overline{S(f_{2},f_{3})}^{F} & =-y^{2}+z^{3}.
+\end{align*}
+
+\end_inset
+
+Thus, we must add 
+\begin_inset Formula $f_{7}=-y^{2}+z^{3}$
+\end_inset
+
+ to our generating set.
+ Setting 
+\begin_inset Formula $F=(f_{1},f_{2},f_{3},f_{4},f_{5},f_{6},f_{7})$
+\end_inset
+
+, one can compute that 
+\begin_inset Formula 
+\[
+\overline{S(f_{i},f_{j})}^{F}=0\mbox{ for all }1\leq i<j\leq7.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, 
+\begin_inset Formula $\{f_{1},f_{2},f_{3},f_{4},f_{5},f_{6},f_{7}\}$
+\end_inset
+
+ forms a Gröbner basis of 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ One can compute that the minimal reduced Gröbner basis is
+\begin_inset Formula 
+\[
+G=\{t^{2}-z,ty-z^{2},tz-y,x-z^{2},y^{2}-z^{3}\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The last two polynomials depend only on 
+\begin_inset Formula $x,y,z$
+\end_inset
+
+, so they define an affine variety of 
+\begin_inset Formula $\mathbb{C}^{3}$
+\end_inset
+
+ containing our curve 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Since there are two equations, we guess that they define a curve in 
+\begin_inset Formula $\mathbb{C}^{3}$
+\end_inset
+
+.
+ The remaining question to answer is whether 
+\begin_inset Formula $V=\mathbf{V}(x-z^{2},y^{2}-z^{3})$
+\end_inset
+
+, that is, is 
+\begin_inset Formula $V$
+\end_inset
+
+ the entire intersection of the two surfaces 
+\begin_inset Formula $\{(x,y,z)\in K^{3}\mid x-z^{2}=0\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\{(x,y,z)\in K^{3}\mid y^{2}-z^{3}=0\}$
+\end_inset
+
+.
+ Might there be other curves (or even surfaces) in the intersection? The
+ answer is no.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Consider the tangent surface of the twisted cubic in 
+\begin_inset Formula $\mathbb{R}^{3}$
+\end_inset
+
+.
+ The surface is parametrized by 
+\begin_inset Formula 
+\begin{align*}
+x & =t+u,\\
+y & =t^{2}+2tu,\\
+z & =t^{3}+3t^{2}u.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We use singular to compute a Gröbner basis 
+\begin_inset Formula $G$
+\end_inset
+
+ for this ideal relative to the lex order defined by 
+\begin_inset Formula $t>u>x>y>z$
+\end_inset
+
+.
+ The code for this is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ring A = 0,(t,u,x,y,z),lp; 
+\end_layout
+
+\begin_layout Standard
+ideal I = x-t-u, y-t2-2tu, z-t3+3t2u;
+\end_layout
+
+\begin_layout Standard
+groebner(I);
+\end_layout
+
+\begin_layout Standard
+_[1]=20x3z+15x2y2-18xyz-16y3-z2 
+\end_layout
+
+\begin_layout Standard
+_[2]=20uy3-2uz2+20x2yz-5xy3-2xz2-13y2z 
+\end_layout
+
+\begin_layout Standard
+_[3]=2uxz+4uy2+2x2z-xy2-yz 
+\end_layout
+
+\begin_layout Standard
+_[4]=5uxy+uz-5x2y+xz+4y2 
+\end_layout
+
+\begin_layout Standard
+_[5]=10ux2-4uy-10x3+9xy+z 
+\end_layout
+
+\begin_layout Standard
+_[6]=u2-x2+y 
+\end_layout
+
+\begin_layout Standard
+_[7]=t+u-x 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Singular outputs 
+\begin_inset Formula $G=\{f_{1},f_{2},f_{3},f_{4},f_{5},f_{6},f_{7}\}$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\begin{align*}
+f_{1} & =20x^{3}z+15x^{2}y^{2}-18xyz-16y^{3}-z^{2},\\
+f_{2} & =20uy^{3}-2uz^{2}+20x^{2}yz-5xy^{3}-2xz^{2}-13y^{2}z,\\
+f_{3} & =2uxz+4uy^{2}+2x^{2}z-xy^{2}-yz\\
+f_{4} & =5uxy+uz-5x^{2}y+xz+4y^{2}\\
+f_{5} & =10ux^{2}-4uy-10x^{3}+9xy+z\\
+f_{6} & =u^{2}-x^{2}+y\\
+f_{7} & =t+u-x
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We notice that 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ is the only polynomial involving only 
+\begin_inset Formula $x,y,z$
+\end_inset
+
+ terms.
+ The variety 
+\begin_inset Formula $V=\mathbf{V}(f_{1})$
+\end_inset
+
+ defined by this equation is a surface containing the tangent surface to
+ the twisted cubic.
+ However, it is possible that 
+\begin_inset Formula $V$
+\end_inset
+
+ is strictly bigger than the tangent surface, i.e.
+ there may be solutions to 
+\begin_inset Formula $f_{1}=0$
+\end_inset
+
+ that do not correspond to points on the tangent surface.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Algorithmic Computations in 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]/I$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{remainderrep}
+\end_layout
+
+\end_inset
+
+ Fix a monomial ordering on 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ and let 
+\begin_inset Formula $I\subseteq K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ be an ideal.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Every 
+\begin_inset Formula $f\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ is congruent modulo 
+\begin_inset Formula $I$
+\end_inset
+
+ to a unique polynomial 
+\begin_inset Formula $r$
+\end_inset
+
+ which is a 
+\begin_inset Formula $K$
+\end_inset
+
+-linear combination of monomials in the complement of 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The elements of 
+\begin_inset Formula $\{x^{\alpha}\mid x^{\alpha}\notin\langle\mbox{LT}(I)\rangle\}$
+\end_inset
+
+ are 
+\begin_inset Quotes eld
+\end_inset
+
+linearly independent modulo 
+\begin_inset Formula $I$
+\end_inset
+
+,
+\begin_inset Quotes erd
+\end_inset
+
+ i.e., if we have 
+\begin_inset Formula 
+\[
+\sum_{\alpha}c_{\alpha}x^{\alpha}\equiv0\mbox{ mod }I,
+\]
+
+\end_inset
+
+ where the 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+ are all in the complement of 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+, then 
+\begin_inset Formula $c_{\alpha}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $G$
+\end_inset
+
+ be a Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+ and let 
+\begin_inset Formula $f\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ By the division algorithm, the remainder 
+\begin_inset Formula $r=\overline{f}^{G}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $f=q+r$
+\end_inset
+
+, where 
+\begin_inset Formula $q\in I$
+\end_inset
+
+.
+ Hence, 
+\begin_inset Formula $f-r=q\in I$
+\end_inset
+
+, so 
+\begin_inset Formula $f\equiv r\mbox{ mod }I$
+\end_inset
+
+.
+ The division algorithm also tells us that 
+\begin_inset Formula $r$
+\end_inset
+
+ is a 
+\begin_inset Formula $K$
+\end_inset
+
+-linear combination of the monomials 
+\begin_inset Formula $x^{\alpha}\notin\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $G$
+\end_inset
+
+ is a Gröbner basis, 
+\begin_inset Formula $r$
+\end_inset
+
+ is also unique.
+\end_layout
+
+\begin_layout Enumerate
+Suppose we have 
+\begin_inset Formula 
+\[
+\sum_{\alpha}c_{\alpha}x^{\alpha}\equiv0\mbox{ mod }I,
+\]
+
+\end_inset
+
+ where the 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+ are all in the complement of 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\sum_{\alpha}c_{\alpha}x^{\alpha}=\sum_{\beta}d_{\beta}x^{\beta}
+\]
+
+\end_inset
+
+ where the 
+\begin_inset Formula $x^{\beta}$
+\end_inset
+
+ are in 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+.
+ Since the set of all monomials forms a 
+\begin_inset Formula $K$
+\end_inset
+
+-basis, we must have 
+\begin_inset Formula $c_{\alpha}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I=\langle xy^{3}-x^{2},x^{3}y^{2}-y\rangle$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{R}[x,y]$
+\end_inset
+
+ and use graded lex order.
+ We find that 
+\begin_inset Formula 
+\[
+G=\{x^{3}y^{2}-y,x^{4}-y^{2},xy^{3}-x^{2},y^{4}-xy\}
+\]
+
+\end_inset
+
+is a Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ Hence, 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle=\langle x^{3}y^{2},x^{4},xy^{3},y^{4}\rangle$
+\end_inset
+
+.
+ Given any 
+\begin_inset Formula $f\in\mathbb{R}[x,y]$
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{remainderrep})
+\end_layout
+
+\end_inset
+
+, implies that the remainder 
+\begin_inset Formula $\bar{f}^{G}$
+\end_inset
+
+ will be an 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-linear combination of the 
+\begin_inset Formula $12$
+\end_inset
+
+ monomials: 
+\begin_inset Formula 
+\[
+1,x,x^{2},x^{3},y,xy,x^{2}y,x^{3}y,y^{2},xy^{2},x^{2}y^{2},y^{3}.
+\]
+
+\end_inset
+
+Note that in this case the remainders all belong to a finite-dimensional
+ vector subspace of 
+\begin_inset Formula $\mathbb{R}[x,y]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We may also ask what happens if we use a different monomial order in 
+\begin_inset Formula $\mathbb{R}[x,y]$
+\end_inset
+
+ with the same ideal.
+ If we use lex order instead of grlex, with the variables ordered 
+\begin_inset Formula $y>x$
+\end_inset
+
+, we find that a Gröbner basis in this case is 
+\begin_inset Formula 
+\[
+G=\{y-x^{7},x^{12}-x^{2}\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Hence, for this monomial order, 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle=\langle y,x^{12}\rangle$
+\end_inset
+
+.
+ Thus, for every 
+\begin_inset Formula $f\in\mathbb{R}[x,y]$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\bar{f}\in\mbox{Span}(1,x,x^{2},\dots,x^{12})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Normal Forms and Standard Bases
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $>$
+\end_inset
+
+ be a fixed monomial ordering and let, in this section, 
+\begin_inset Formula 
+\[
+R=K[x_{1},\dots,x_{n}]_{>}
+\]
+
+\end_inset
+
+be the localization of 
+\begin_inset Formula $K[x]=K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $>$
+\end_inset
+
+.
+ Recall that 
+\begin_inset Formula $R=S_{>}^{-1}K[x]$
+\end_inset
+
+ with 
+\begin_inset Formula $S_{>}=\{u\in K[x]\backslash\{0\}\mid\mbox{LM}(u)=1\}$
+\end_inset
+
+, and that 
+\begin_inset Formula $R=K[x]$
+\end_inset
+
+ if 
+\begin_inset Formula $>$
+\end_inset
+
+ is global and 
+\begin_inset Formula $R=K[x]_{\langle x\rangle}$
+\end_inset
+
+ if 
+\begin_inset Formula $>$
+\end_inset
+
+ is local.
+ In any case, 
+\begin_inset Formula $R$
+\end_inset
+
+ may be considered as a subring of the ring 
+\begin_inset Formula $K[[x]]$
+\end_inset
+
+ of formal power series.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn1}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I\subset R$
+\end_inset
+
+ be an ideal.
+ 
+\end_layout
+
+\begin_layout Enumerate
+A finite set 
+\begin_inset Formula $G\subset R$
+\end_inset
+
+ is called a 
+\series bold
+standard basis 
+\series default
+of 
+\begin_inset Formula $I$
+\end_inset
+
+ if 
+\begin_inset Formula 
+\[
+G\subset I\quad\mbox{and}\quad L(I)=L(G).
+\]
+
+\end_inset
+
+ That is, 
+\begin_inset Formula $G$
+\end_inset
+
+ is a standard basis if the leading monomials of the elements of 
+\begin_inset Formula $G$
+\end_inset
+
+ generate the leading ideal of 
+\begin_inset Formula $I$
+\end_inset
+
+, or in other words, if for any 
+\begin_inset Formula $f\in I\backslash\{0\}$
+\end_inset
+
+ there exists a 
+\begin_inset Formula $g\in G$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mbox{LM}(g)\mid\mbox{LM}(f)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $>$
+\end_inset
+
+ is global, a standard basis is also called a 
+\series bold
+Gröbner basis
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If we just say that 
+\begin_inset Formula $G$
+\end_inset
+
+ is a standard basis, we mean that 
+\begin_inset Formula $G$
+\end_inset
+
+ is a standard basis of the ideal 
+\begin_inset Formula $\langle G\rangle_{R}$
+\end_inset
+
+ generated by 
+\begin_inset Formula $G$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn2}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $G\subset R$
+\end_inset
+
+ be any subset.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $G$
+\end_inset
+
+ is called 
+\series bold
+interreduced 
+\series default
+if 
+\begin_inset Formula $0\notin G$
+\end_inset
+
+ and if 
+\begin_inset Formula $\mbox{LM}(g)\not\mid\mbox{LM}(f)$
+\end_inset
+
+ for any two elements 
+\begin_inset Formula $f\neq g$
+\end_inset
+
+ in 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ An interreduced standard basis is also called 
+\series bold
+minimal
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $f\in R$
+\end_inset
+
+ is called (
+\series bold
+completely
+\series default
+) 
+\series bold
+reduced 
+\series default
+with respect to 
+\begin_inset Formula $G$
+\end_inset
+
+ if no monomial of the power series expansion of 
+\begin_inset Formula $f$
+\end_inset
+
+ is contained in 
+\begin_inset Formula $L(G)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $G$
+\end_inset
+
+ is called (
+\series bold
+completely
+\series default
+) 
+\series bold
+reduced 
+\series default
+if 
+\begin_inset Formula $G$
+\end_inset
+
+ is interreduced and if, for any 
+\begin_inset Formula $g\in G$
+\end_inset
+
+, 
+\begin_inset Formula $\mbox{LC}(g)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\mbox{tail}(g)$
+\end_inset
+
+ is completely reduced with respect to 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example1}
+\end_layout
+
+\end_inset
+
+ Consider the ring 
+\begin_inset Formula $\mathbb{Q}[x,y]$
+\end_inset
+
+ with grlex order, and let 
+\begin_inset Formula $I=\langle x^{3}-2xy,x^{2}y-2y^{2}+x\rangle$
+\end_inset
+
+.
+ A Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+ is given by 
+\begin_inset Formula $G=\{f_{1},f_{2},f_{3},f_{4},f_{5}\}$
+\end_inset
+
+, where
+\begin_inset Formula 
+\begin{align*}
+f_{1} & =x^{3}-2xy\\
+f_{2} & =x^{2}y-2y^{2}+x\\
+f_{3} & =-x^{2}\\
+f_{4} & =-2xy\\
+f_{5} & =-2y^{2}+x.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However 
+\begin_inset Formula $G$
+\end_inset
+
+ is not completely reduced.
+ Since some of the leading coefficients are different from 
+\begin_inset Formula $1$
+\end_inset
+
+, the first step is to multiply the generators by suitable constants to
+ make this true.
+ Then note that 
+\begin_inset Formula $\mbox{LM}(f_{3})\mid\mbox{LM}(f_{1})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn3}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ denote the set of all finite lists 
+\begin_inset Formula $G\subset R$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\[
+\mbox{NF}:R\times\mathcal{G}\to R,\qquad(f,G)\mapsto f^{G}
+\]
+
+\end_inset
+
+is called a 
+\series bold
+normal form 
+\series default
+on 
+\begin_inset Formula $R$
+\end_inset
+
+ if for all 
+\begin_inset Formula $G\in\mathcal{G}$
+\end_inset
+
+ and 
+\begin_inset Formula $f\in R$
+\end_inset
+
+, 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $0^{G}=0,$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $f^{G}\neq0$
+\end_inset
+
+ implies 
+\begin_inset Formula $\mbox{LM}(f^{G})\notin L(G)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $G=\{g_{1},\dots,g_{s}\}$
+\end_inset
+
+, then 
+\begin_inset Formula $f-f^{G}$
+\end_inset
+
+ has a 
+\series bold
+standard representation
+\series default
+, that is, 
+\begin_inset Formula 
+\[
+f-f^{G}=\sum_{i=1}^{s}a_{i}g_{i},\quad a_{i}\in R,\quad s\geq0,
+\]
+
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\mbox{LM}(\sum_{i=1}^{s}a_{i}g_{i})\geq\mbox{LM}(a_{i}g_{i})$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $a_{i}g_{i}\neq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mbox{NF}$
+\end_inset
+
+ is called a 
+\series bold
+reduced normal form
+\series default
+, if, moreover, 
+\begin_inset Formula $f^{G}$
+\end_inset
+
+ is reduced with respect to 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ In the case of a global ordering, for any polynomial 
+\begin_inset Formula $f$
+\end_inset
+
+ and any ideal 
+\begin_inset Formula $I$
+\end_inset
+
+, there is a unique normal form 
+\begin_inset Formula $\mbox{NF}(f\mid I)$
+\end_inset
+
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $I$
+\end_inset
+
+, such that no monomial of 
+\begin_inset Formula $\mbox{NF}(f\mid I)$
+\end_inset
+
+ is in the leading ideal 
+\begin_inset Formula $L(I)$
+\end_inset
+
+.
+ This can be used to decide, for instance, whether 
+\begin_inset Formula $f$
+\end_inset
+
+ is in the ideal 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ In the general case, the above property turns out to be too strong.
+ Hence, the requirements for a normal form have to be weakened.
+ For instance, for the decision whether a polynomial is in an ideal or not,
+ only the leading term of the normal form 
+\begin_inset Formula $\mbox{NF}(f\mid I)$
+\end_inset
+
+ is important.
+ Thus, for this purpose, it is enough to require that 
+\begin_inset Formula $\mbox{NF}(f\mid I)$
+\end_inset
+
+ is either 
+\begin_inset Formula $0$
+\end_inset
+
+ or has a leading term, which is not in 
+\begin_inset Formula $L(I)$
+\end_inset
+
+.
+ After weakening the requirements, there is no more uniqueness statement
+ for the normal form.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

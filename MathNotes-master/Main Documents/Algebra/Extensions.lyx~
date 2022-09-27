@@ -1,0 +1,787 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Extensions
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a noetherian domain which is integrally closed in its field of fractions
+ 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $L\slash K$
+\end_inset
+
+ be a finite field extension with 
+\begin_inset Formula $n=[L:K]$
+\end_inset
+
+ and let 
+\begin_inset Formula $B$
+\end_inset
+
+ be the integral closure of 
+\begin_inset Formula $A$
+\end_inset
+
+ in 
+\begin_inset Formula $L$
+\end_inset
+
+.
+ We want to know under what conditions is 
+\begin_inset Formula $B$
+\end_inset
+
+ a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ The following proposition gives one such condition:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $L\slash K$
+\end_inset
+
+ is separable, then 
+\begin_inset Formula $B$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ We first define a symmetric non-denerate 
+\begin_inset Formula $K$
+\end_inset
+
+-bilinear form 
+\begin_inset Formula $\langle\cdot,\cdot\rangle\colon L\times L\to K$
+\end_inset
+
+ as follows: given 
+\begin_inset Formula $y,y'\in L$
+\end_inset
+
+, we set
+\begin_inset Formula 
+\[
+\langle y,y'\rangle:=\mathrm{Tr}_{L\slash K}(yy').
+\]
+
+\end_inset
+
+Indeed, it is clearly symmetric and bilinear since the usual multiplication
+ map on 
+\begin_inset Formula $L$
+\end_inset
+
+ is symmetric and 
+\begin_inset Formula $K$
+\end_inset
+
+-bilinear and since the trace map is 
+\begin_inset Formula $K$
+\end_inset
+
+-linear.
+ Recall that 
+\begin_inset Formula $\mathrm{Tr}_{L\slash K}=0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $L\slash K$
+\end_inset
+
+ is nonseparable.
+ Equivalently, 
+\begin_inset Formula $\mathrm{Tr}_{L\slash K}$
+\end_inset
+
+ is onto if and only if 
+\begin_inset Formula $L\slash K$
+\end_inset
+
+ is separable.
+ Since 
+\begin_inset Formula $L\slash K$
+\end_inset
+
+ is separable, there exists a 
+\begin_inset Formula $\widetilde{y}\in L$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathrm{Tr}_{L\slash K}(\widetilde{y})\neq0$
+\end_inset
+
+.
+ In particular, if 
+\begin_inset Formula $y\neq0$
+\end_inset
+
+ is in 
+\begin_inset Formula $L$
+\end_inset
+
+, then 
+\begin_inset Formula $\langle y,y^{-1}\widetilde{y}\rangle\neq0$
+\end_inset
+
+, hence 
+\begin_inset Formula $\langle\cdot,\cdot\rangle$
+\end_inset
+
+ is non-degenerate as well.
+ We claim that the trace map restricted to 
+\begin_inset Formula $B$
+\end_inset
+
+ lands in 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ To see this, we first choose a finite extension 
+\begin_inset Formula $L'\slash L$
+\end_inset
+
+ such that 
+\begin_inset Formula $L'\slash K$
+\end_inset
+
+ is Galois.
+ Then for each 
+\begin_inset Formula $b\in B$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{equation}
+\mathrm{Tr}_{L\slash K}(b)=\sum_{\sigma\colon L\hookrightarrow L'}\sigma(b)\label{eq:tracesumintegral}
+\end{equation}
+
+\end_inset
+
+where the sum in 
+\begin_inset Formula $L'$
+\end_inset
+
+ is taken over all 
+\begin_inset Formula $K$
+\end_inset
+
+-embeddings 
+\begin_inset Formula $\sigma\colon L\hookrightarrow L'$
+\end_inset
+
+.
+ Each 
+\begin_inset Formula $\sigma(b)$
+\end_inset
+
+ is integral over 
+\begin_inset Formula $A$
+\end_inset
+
+ since 
+\begin_inset Formula $b$
+\end_inset
+
+ is integral over 
+\begin_inset Formula $A$
+\end_inset
+
+, and thus the sum 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:tracesumintegral})
+\end_layout
+
+\end_inset
+
+ is also integral over 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathrm{Tr}_{L\slash K}(b)\in K$
+\end_inset
+
+ and is integral over 
+\begin_inset Formula $A$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $\mathrm{Tr}_{L\slash K}(b)\in A$
+\end_inset
+
+.
+ Now for each 
+\begin_inset Formula $y\in L$
+\end_inset
+
+, we obtain a 
+\begin_inset Formula $K$
+\end_inset
+
+-linear map 
+\begin_inset Formula $\ell_{y}\colon L\to K$
+\end_inset
+
+ where 
+\begin_inset Formula $\ell_{y}(y')=\langle y,y'\rangle$
+\end_inset
+
+ for all 
+\begin_inset Formula $y'\in L$
+\end_inset
+
+.
+ Given an 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule 
+\begin_inset Formula $M$
+\end_inset
+
+ of 
+\begin_inset Formula $L$
+\end_inset
+
+, we set
+\begin_inset Formula 
+\[
+M^{\lor}=\{y\in L\mid\ell_{y}(M)\subseteq A\}=\{y\in L\mid\langle y,u\rangle\in A\text{ for all }u\in M\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Suppose that 
+\begin_inset Formula $e_{1},\dots,e_{n}$
+\end_inset
+
+ is a 
+\begin_inset Formula $K$
+\end_inset
+
+-basis of 
+\begin_inset Formula $L$
+\end_inset
+
+, and by rescaling the 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ if necessary, we may also assume that each 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ is in 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $i$
+\end_inset
+
+, we let 
+\begin_inset Formula $e_{i}^{\lor}$
+\end_inset
+
+ be the unique element in 
+\begin_inset Formula $L$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\langle e_{i}^{\lor},e_{j}\rangle=\begin{cases}
+1 & \text{if }i=j\\
+0 & \text{else}
+\end{cases}
+\]
+
+\end_inset
+
+Indeed, 
+\begin_inset Formula $e_{i}^{\lor}$
+\end_inset
+
+ is unique precisely because 
+\begin_inset Formula $\langle\cdot,\cdot\rangle$
+\end_inset
+
+ is non-degenerate.
+ If we set 
+\begin_inset Formula $F=\sum_{i}Ae_{i}$
+\end_inset
+
+ to be the free 
+\begin_inset Formula $A$
+\end_inset
+
+-module spanned by the 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+, then clearly we have 
+\begin_inset Formula $F^{\lor}=\sum_{i}Ae_{i}^{\lor}$
+\end_inset
+
+.
+ Furthermore we have inclusions: 
+\begin_inset Formula 
+\[
+F\subseteq B\subseteq B^{\lor}\subseteq F^{\lor}.
+\]
+
+\end_inset
+
+In particular, 
+\begin_inset Formula $B$
+\end_inset
+
+ is contained in a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module, and since 
+\begin_inset Formula $A$
+\end_inset
+
+ is noetherian, it follows that 
+\begin_inset Formula $B$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ The condition stated in the proposition above is not the only condition
+ that implies 
+\begin_inset Formula $B$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ One can show that if 
+\begin_inset Formula $A$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra where 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+ is a field, then 
+\begin_inset Formula $B$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ Similarly one can show that if 
+\begin_inset Formula $A$
+\end_inset
+
+ is a complete discrete valuation ring, then 
+\begin_inset Formula $B$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For now on, we now assume that 
+\begin_inset Formula $B$
+\end_inset
+
+ is finitely generated as an 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ We also assume that 
+\begin_inset Formula $\dim A=1$
+\end_inset
+
+, hence 
+\begin_inset Formula $A$
+\end_inset
+
+ is a Dedekind domain.
+ This implies 
+\begin_inset Formula $\dim B=1$
+\end_inset
+
+ since 
+\begin_inset Formula $B$
+\end_inset
+
+ is integral over 
+\begin_inset Formula $A$
+\end_inset
+
+, and thus 
+\begin_inset Formula $B$
+\end_inset
+
+ is a Dedekind domain too.
+ In this case, if we are given a nonzero prime 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+, then we have a decomposition
+\begin_inset Formula 
+\[
+\mathfrak{p}B=\prod_{\mathfrak{q}|\mathfrak{p}}\mathfrak{q}^{e_{\mathfrak{p}}}
+\]
+
+\end_inset
+
+where the 
+\begin_inset Formula $e_{\mathfrak{q}}\in\mathbb{Z}_{\geq0}$
+\end_inset
+
+ are uniquely determined.
+ Since there are only 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

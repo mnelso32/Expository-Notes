@@ -1,0 +1,1457 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Computational Algebraic Geometry Homework 1
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Consider the system of equations
+\begin_inset Formula 
+\begin{align*}
+x^{2}+y^{2}-1 & =0\\
+xy-1 & =0
+\end{align*}
+
+\end_inset
+
+These equations describe the intersection of a circle and a hyperbola.
+\end_layout
+
+\begin_layout Enumerate
+Symbolically find all four solutions to this system of equations.
+\end_layout
+
+\begin_layout Enumerate
+Find a polynomial of degree four whose roots are 
+\begin_inset Formula $x$
+\end_inset
+
+-values of the solutions you found in part 1.
+\end_layout
+
+\begin_layout Enumerate
+Show that the polynomial that you got from part 2 lies in the ideal 
+\begin_inset Formula $I=\langle x^{2}+y^{2}-1,xy-1\rangle$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+1.
+ There are no real solutions to this system of equations, as can be seen
+ in the image below:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $x$, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $y$, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-2,xmax=2,ymin=-2,ymax=2,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick={-2,2},ytick={-2,2},
+\end_layout
+
+\begin_layout Plain Layout
+
+axis equal,
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,samples=80] ({cos(deg(x))},{sin(deg(x))}); 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,samples=80] {1/x};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+However there are complex solutions, which we will find now.
+ From the first equation, we have 
+\begin_inset Formula $y^{2}=1-x^{2}$
+\end_inset
+
+.
+ After squaring the second equation and a substitution, we obtain 
+\begin_inset Formula $(1-x^{2})x^{2}=1$
+\end_inset
+
+.
+ In other words, 
+\begin_inset Formula 
+\begin{equation}
+x^{4}-x^{2}+1=0.\label{eq:polydegxcoord}
+\end{equation}
+
+\end_inset
+
+Observe that 
+\begin_inset Formula $x^{4}-x^{2}+1$
+\end_inset
+
+ is the 
+\begin_inset Formula $12$
+\end_inset
+
+th cyclotomic polynomial, which factors as
+\begin_inset Formula 
+\[
+x^{4}-x^{2}+1=(x-\zeta_{12})(x-\zeta_{12}^{5})(x-\zeta_{12}^{7})(x-\zeta_{12}^{11}),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\zeta_{12}=e^{2\pi i/12}$
+\end_inset
+
+.
+ It follows that the 
+\begin_inset Formula $x$
+\end_inset
+
+-coordinates of the four solutions are of the form 
+\begin_inset Formula $\zeta_{12}^{a}$
+\end_inset
+
+ where 
+\begin_inset Formula $a\in\{1,5,7,11\}$
+\end_inset
+
+.
+ In fact, we claim that the four solutions to the system of equations above
+ are of the form 
+\begin_inset Formula $(\zeta_{12}^{a},\zeta_{12}^{-a})$
+\end_inset
+
+ where 
+\begin_inset Formula $a\in\{1,5,7,11\}$
+\end_inset
+
+.
+ Indeed, it is clear that the points 
+\begin_inset Formula $(\zeta_{12}^{a},\zeta_{12}^{-a})$
+\end_inset
+
+ are solutions to the second equation for all 
+\begin_inset Formula $a\in\{1,5,7,11\}$
+\end_inset
+
+.
+ To see why they satisfy the first equation, first note that 
+\begin_inset Formula 
+\begin{align*}
+(\zeta_{12})^{2}+(\zeta_{12}^{-1})^{2} & =\zeta_{12}^{2}+\zeta_{12}^{-2}\\
+ & =2\cos(\pi/6)\\
+ & =2\cdot\frac{1}{2}\\
+ & =1.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $(\zeta_{12},\zeta_{12}^{-1})$
+\end_inset
+
+ is a solution to the first equation.
+ This implies
+\begin_inset Formula 
+\begin{align*}
+(\zeta_{12}^{5})^{2}+(\zeta_{12}^{-5})^{2} & =\zeta_{12}^{10}+\zeta_{12}^{-10}\\
+ & =\zeta_{12}^{-2}+\zeta_{12}^{2}\\
+ & =1,
+\end{align*}
+
+\end_inset
+
+which shows that 
+\begin_inset Formula $(\zeta_{12}^{5},\zeta_{12}^{-5})$
+\end_inset
+
+ is a solution to the first equation, and
+\begin_inset Formula 
+\begin{align*}
+(\zeta_{12}^{7})^{2}+(\zeta_{12}^{-7})^{2} & =\zeta_{12}^{14}+\zeta_{12}^{-14}\\
+ & =\zeta_{12}^{2}+\zeta_{12}^{-2}\\
+ & =1,
+\end{align*}
+
+\end_inset
+
+which shows that 
+\begin_inset Formula $(\zeta_{12}^{7},\zeta_{12}^{-7})$
+\end_inset
+
+ is a solution to the first equation, and
+\begin_inset Formula 
+\begin{align*}
+(\zeta_{12}^{11})^{2}+(\zeta_{12}^{-11})^{2} & =\zeta_{12}^{22}+\zeta_{12}^{-22}\\
+ & =\zeta_{12}^{-2}+\zeta_{12}^{2}\\
+ & =1,
+\end{align*}
+
+\end_inset
+
+ which shows that 
+\begin_inset Formula $(\zeta_{12}^{11},\zeta_{12}^{-11})$
+\end_inset
+
+ is a solution to the first equation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ They polynomial 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:polydegxcoord})
+\end_layout
+
+\end_inset
+
+ is of degree four whose roots are 
+\begin_inset Formula $x$
+\end_inset
+
+-values of the four solutions to the system of equations.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ One can obtain 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:polydegxcoord})
+\end_layout
+
+\end_inset
+
+ another way, via Buchberger's algorithm.
+ Namely, set 
+\begin_inset Formula $f_{1}=x^{2}+y^{2}-1$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=xy-1$
+\end_inset
+
+.
+ Using lexicographic ordering with 
+\begin_inset Formula $y>x$
+\end_inset
+
+, we calculate the 
+\begin_inset Formula $S$
+\end_inset
+
+-polynomial 
+\begin_inset Formula $S(f_{1},f_{2})$
+\end_inset
+
+.
+ We have
+\begin_inset Formula 
+\begin{align*}
+S(f_{1},f_{2}) & =xf_{1}-yf_{2}\\
+ & =x(y^{2}+x^{2}-1)-y(yx-1)\\
+ & =x^{3}-x+y\\
+ & =y+x^{3}-x.
+\end{align*}
+
+\end_inset
+
+Next we set 
+\begin_inset Formula $f_{3}=S(f_{1},f_{2})$
+\end_inset
+
+ and calculate the 
+\begin_inset Formula $S$
+\end_inset
+
+-polynomial 
+\begin_inset Formula $S(f_{3},f_{2})$
+\end_inset
+
+.
+ We have
+\begin_inset Formula 
+\begin{align*}
+S(f_{3},f_{2}) & =xf_{3}-f_{2}\\
+ & =x(y+x^{3}-x)-(yx-1)\\
+ & =x^{4}-x^{2}+1.
+\end{align*}
+
+\end_inset
+
+In particular, this shows that 
+\begin_inset Formula $x^{4}-x^{2}+1\in I$
+\end_inset
+
+ since 
+\begin_inset Formula 
+\begin{align*}
+x^{4}-x^{2}+1 & =xf_{3}-f_{2}\\
+ & =x(xf_{1}-yf_{2})-f_{2}\\
+ & =x^{2}f_{1}+(-xy-1)f_{2}.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal of 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ Show that 
+\begin_inset Formula $G=\{g_{1},\dots,g_{s}\}\subseteq I$
+\end_inset
+
+ is a Gröbner basis of 
+\begin_inset Formula $I$
+\end_inset
+
+ if and only if the leading term of any element of 
+\begin_inset Formula $I$
+\end_inset
+
+ is divisible by a leading term 
+\begin_inset Formula $g_{r}$
+\end_inset
+
+ for some 
+\begin_inset Formula $1\leq r\leq s$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Denote denote 
+\begin_inset Formula $m_{r}=\mathrm{LT}(g_{r})$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq r\leq s$
+\end_inset
+
+.
+ First suppose 
+\begin_inset Formula $G$
+\end_inset
+
+ is a Gröbner basis of 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ By definition, this means 
+\begin_inset Formula $\mathrm{LT}(I)=\langle m_{1},\dots,m_{s}\rangle$
+\end_inset
+
+, where
+\begin_inset Formula 
+\[
+\mathrm{LT}(I)=\{\text{monomials }m\mid m=\mathrm{LT}(f)\text{ for some }f\in I\}.
+\]
+
+\end_inset
+
+In particular, if 
+\begin_inset Formula $m$
+\end_inset
+
+ is the lead term of an element 
+\begin_inset Formula $f\in I$
+\end_inset
+
+, then 
+\begin_inset Formula $m\in\langle m_{1},\dots,m_{s}\rangle$
+\end_inset
+
+ which implies
+\begin_inset Formula 
+\begin{equation}
+m=f_{1}m_{1}+\cdots+f_{s}m_{s}\label{eq:rightsideof}
+\end{equation}
+
+\end_inset
+
+for some 
+\begin_inset Formula $f_{1},\dots,f_{s}\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ Now clearly every monomial term on the right-hand side of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:rightsideof})
+\end_layout
+
+\end_inset
+
+ is divisible by some 
+\begin_inset Formula $m_{r}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $m$
+\end_inset
+
+ must be divisible by some 
+\begin_inset Formula $m_{r}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Conversely, suppose the leading term of every element of 
+\begin_inset Formula $I$
+\end_inset
+
+ is divisible by 
+\begin_inset Formula $m_{r}$
+\end_inset
+
+ for some 
+\begin_inset Formula $1\leq r\leq s$
+\end_inset
+
+ (where 
+\begin_inset Formula $m_{r}$
+\end_inset
+
+ depends on the element in question).
+ This implies 
+\begin_inset Formula $\mathrm{LT}(I)\supseteq\langle m_{1},\dots,m_{s}\rangle$
+\end_inset
+
+.
+ Since each 
+\begin_inset Formula $g_{r}\in I$
+\end_inset
+
+, the reverse inclusion holds as well.
+ Thus 
+\begin_inset Formula $\mathrm{LT}(I)=\langle m_{1},\dots,m_{s}\rangle$
+\end_inset
+
+, or equivalently, 
+\begin_inset Formula $G$
+\end_inset
+
+ is a Gröbner basis of 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ An ideal 
+\begin_inset Formula $I$
+\end_inset
+
+ is a 
+\series bold
+radical ideal 
+\series default
+if whenever 
+\begin_inset Formula $f^{k}\in I$
+\end_inset
+
+, then 
+\begin_inset Formula $f\in I$
+\end_inset
+
+.
+ The 
+\series bold
+radical 
+\series default
+of an ideal 
+\begin_inset Formula $I$
+\end_inset
+
+ is defined as 
+\begin_inset Formula $\sqrt{I}=\{f\mid f^{k}\in I\text{ for some }k\in\mathbb{N}_{\geq1}\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $X\subseteq\mathbb{A}_{K}^{n}$
+\end_inset
+
+ and prove that 
+\begin_inset Formula $\mathcal{I}(X)$
+\end_inset
+
+ is a radical ideal.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $I$
+\end_inset
+
+ and 
+\begin_inset Formula $J$
+\end_inset
+
+ be ideals such that 
+\begin_inset Formula $\sqrt{I}=\sqrt{J}$
+\end_inset
+
+.
+ Prove that 
+\begin_inset Formula $\mathcal{V}(I)=\mathcal{V}(J)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Suppose that 
+\begin_inset Formula $f^{k}\in\mathcal{I}(X)$
+\end_inset
+
+ for some 
+\begin_inset Formula $k\in\mathbb{N}_{\geq1}$
+\end_inset
+
+.
+ This means 
+\begin_inset Formula $f^{k}(x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $K$
+\end_inset
+
+ is a field, the only nilpotent element in 
+\begin_inset Formula $K$
+\end_inset
+
+ is the zero element, and thus 
+\begin_inset Formula $f(x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $f\in\mathcal{I}(X)$
+\end_inset
+
+; in particular, 
+\begin_inset Formula $\mathcal{I}(X)$
+\end_inset
+
+ is a radical ideal.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ First note that 
+\begin_inset Formula $\mathcal{V}(I)=\mathcal{V}(\sqrt{I})$
+\end_inset
+
+.
+ Indeed, we have 
+\begin_inset Formula $\mathcal{V}(I)\supseteq\mathcal{V}(\sqrt{I})$
+\end_inset
+
+ since 
+\begin_inset Formula $I\subseteq\sqrt{I}$
+\end_inset
+
+ and since 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ is inclusion-reversing.
+ For the reverse inclusion, suppose 
+\begin_inset Formula $x\in\mathcal{V}(I)$
+\end_inset
+
+ and 
+\begin_inset Formula $f\in\sqrt{I}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f^{k}(x)=0$
+\end_inset
+
+ for some 
+\begin_inset Formula $k\in\mathbb{N}_{\geq1}$
+\end_inset
+
+.
+ As noted above, this implies 
+\begin_inset Formula $f(x)=0$
+\end_inset
+
+ since 
+\begin_inset Formula $K$
+\end_inset
+
+ is a field.
+ Since 
+\begin_inset Formula $f\in\sqrt{I}$
+\end_inset
+
+ is arbitrary, it follows that 
+\begin_inset Formula $x\in\mathcal{V}(\sqrt{I})$
+\end_inset
+
+, and since 
+\begin_inset Formula $x\in\mathcal{V}(I)$
+\end_inset
+
+ is arbitrary, it follows that 
+\begin_inset Formula $\mathcal{V}(I)\subseteq\mathcal{V}(\sqrt{I})$
+\end_inset
+
+.
+ Thus, we have
+\begin_inset Formula 
+\begin{align*}
+\mathcal{V}(I) & =\mathcal{V}(\sqrt{I})\\
+ & =\mathcal{V}(\sqrt{J})\\
+ & =\mathcal{V}(J).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $V$
+\end_inset
+
+ be an algebraic variety.
+ We say 
+\begin_inset Formula $V$
+\end_inset
+
+ is 
+\series bold
+reducible 
+\series default
+if there exist algebraic varieties 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{2}$
+\end_inset
+
+ that are properly contained in 
+\begin_inset Formula $V$
+\end_inset
+
+ such that 
+\begin_inset Formula $V=V_{1}\cup V_{2}$
+\end_inset
+
+.
+ A variety is 
+\series bold
+irreducible 
+\series default
+if it is not reducible.
+ Prove that 
+\begin_inset Formula $V$
+\end_inset
+
+ is irreducible if and only if 
+\begin_inset Formula $\mathcal{I}(V)$
+\end_inset
+
+ is a prime ideal.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $\mathcal{I}(V)$
+\end_inset
+
+ is a prime ideal and suppose 
+\begin_inset Formula $V=V_{1}\cup V_{2}$
+\end_inset
+
+ where 
+\begin_inset Formula $V_{1},V_{2}$
+\end_inset
+
+ are two varieties properly contained in 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\mathcal{I}(V) & =\mathcal{I}(V_{1}\cup V_{2})\\
+ & =\mathcal{I}(V_{1})\cap\mathcal{I}(V_{2})
+\end{align*}
+
+\end_inset
+
+and since 
+\begin_inset Formula $\mathcal{I}(V)$
+\end_inset
+
+ is prime, we must either have 
+\begin_inset Formula $\mathcal{I}(V)\supseteq\mathcal{I}(V_{1})$
+\end_inset
+
+ or 
+\begin_inset Formula $\mathcal{I}(V)\supseteq\mathcal{I}(V_{2})$
+\end_inset
+
+.
+ Without loss of generality, assume 
+\begin_inset Formula $\mathcal{I}(V)\supseteq\mathcal{I}(V_{1})$
+\end_inset
+
+.
+ Now we apply 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ to both sides to get 
+\begin_inset Formula $V\subseteq V_{1}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $V$
+\end_inset
+
+ is irreducible.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Conversely, suppose 
+\begin_inset Formula $V$
+\end_inset
+
+ is irreducible and suppose 
+\begin_inset Formula $fg\in\mathcal{I}(V)$
+\end_inset
+
+ for some 
+\begin_inset Formula $f,g\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\langle fg\rangle\subseteq\mathcal{I}(V)$
+\end_inset
+
+, and after applying 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ to both sides, we obtain
+\begin_inset Formula 
+\begin{align*}
+V & \subseteq\mathcal{V}(\langle fg\rangle)\\
+ & =\mathcal{V}(f)\cup\mathcal{V}(g).
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $V$
+\end_inset
+
+ is irreducible, either 
+\begin_inset Formula $\mathcal{V}(f)\supseteq V$
+\end_inset
+
+ or 
+\begin_inset Formula $\mathcal{V}(g)\supseteq V$
+\end_inset
+
+.
+ Without loss of generality, say 
+\begin_inset Formula $\mathcal{V}(f)\supseteq V$
+\end_inset
+
+.
+ Applying 
+\begin_inset Formula $\mathcal{I}$
+\end_inset
+
+ to both sides, we obtain 
+\begin_inset Formula $f\in\mathcal{I}\mathcal{V}(f)\subseteq\mathcal{I}(V)$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\mathcal{I}(V)$
+\end_inset
+
+ is prime.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Complete the introductory quiz.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Done.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,2827 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Number Theory
+
+
+
+
+
+Algebraic Number Theory
+
+Ideal Factorization
+
+
+\backslash
+begin{defn} For ideals 
+\backslash
+mathfrak{a} and 
+\backslash
+mathfrak{b} in a commutative ring, write 
+\backslash
+mathfrak{a}
+\backslash
+mid
+\backslash
+mathfrak{b} if 
+\backslash
+mathfrak{b}=
+\backslash
+mathfrak{ac} for an ideal 
+\backslash
+mathfrak{c}.
+ 
+\backslash
+end{defn}
+
+If 
+\backslash
+mathfrak{a}
+\backslash
+mid
+\backslash
+mathfrak{b}, then 
+\backslash
+mathfrak{a}
+\backslash
+supset
+\backslash
+mathfrak{b}.
+ The converse may fail in some rings, but in the ring of integers of a number
+ field it will turn out that containment implies divisibility.
+ 
+
+
+\backslash
+begin{theorem}
+\backslash
+label{primecontainthm} In any commutative ring A, an ideal 
+\backslash
+mathfrak{p} is prime if and only if for all ideals 
+\backslash
+mathfrak{a} and 
+\backslash
+mathfrak{b} in A, 
+\backslash
+mathfrak{p}
+\backslash
+supset
+\backslash
+mathfrak{ab}
+\backslash
+Rightarrow
+\backslash
+mathfrak{p}
+\backslash
+supset
+\backslash
+mathfrak{a}
+\backslash
+mbox{ or }
+\backslash
+mathfrak{p}
+\backslash
+supset
+\backslash
+mathfrak{b}.
+
+
+\backslash
+end{theorem}
+
+
+\backslash
+begin{proof} Suppose 
+\backslash
+mathfrak{p}
+\backslash
+supset
+\backslash
+mathfrak{ab} and 
+\backslash
+mathfrak{p}
+\backslash
+not
+\backslash
+subset
+\backslash
+mathfrak{a}.
+ Choose x
+\backslash
+in
+\backslash
+mathfrak{a} such that x
+\backslash
+notin
+\backslash
+mathfrak{p}.
+ For every element y
+\backslash
+in
+\backslash
+mathfrak{b}, xy
+\backslash
+in
+\backslash
+mathfrak{p}.
+ Since 
+\backslash
+mathfrak{p} is prime and x
+\backslash
+notin
+\backslash
+mathfrak{p}, we must have y
+\backslash
+in
+\backslash
+mathfrak{p}, for every y
+\backslash
+in
+\backslash
+mathfrak{b}.
+ So 
+\backslash
+mathfrak{p}
+\backslash
+supset
+\backslash
+mathfrak{b}.
+ Conversely, suppose 
+\backslash
+mathfrak{p} is an ideal in A which satisfies the property (
+\backslash
+ref{eq:primecontain}) for all ideals 
+\backslash
+mathfrak{a} and 
+\backslash
+mathfrak{b} in A.
+ If xy
+\backslash
+in
+\backslash
+mathfrak{p} for some x,y
+\backslash
+in A, then 
+\backslash
+mathfrak{p}
+\backslash
+supset(xy)=(x)(y), and so 
+\backslash
+mathfrak{p} contains either (x) or (y), which means either x or y is in
+ 
+\backslash
+mathfrak{p}.
+
+
+\backslash
+end{proof}
+
+
+\backslash
+begin{cor} Let K be a number field.
+ In 
+\backslash
+mathcal{O}_{K}, if 
+\backslash
+mathfrak{p
+\backslash
+supset p}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{r} where all the ideals are nonzero and prime, then for some
+ i, 
+\backslash
+mathfrak{p=p}_{i}..
+ 
+
+
+\backslash
+end{cor}
+
+
+\backslash
+begin{proof} By Theorem~
+\backslash
+ref{primecontainthm}, 
+\backslash
+mathfrak{p
+\backslash
+supset p}_{i} for some i.
+ Since nonzero prime ideals in 
+\backslash
+mathcal{O}_{K} are maximal, 
+\backslash
+mathfrak{p=
+\backslash
+mathfrak{p}_{i}}.
+ 
+
+
+\backslash
+end{proof}
+
+
+\backslash
+begin{defn} A 
+\backslash
+textbf{fractional ideal} I in K is a nonzero 
+\backslash
+mathcal{O}_{K}-submodule of K such that for some d
+\backslash
+in
+\backslash
+mathcal{O}_{K}
+\backslash
+setminus
+\backslash
+{0
+\backslash
+}, dI
+\backslash
+subset
+\backslash
+mathcal{O}_{K}.
+ Such a d is called a 
+\backslash
+textbf{common denominator} for I.
+ 
+
+
+\backslash
+end{defn}
+
+
+\backslash
+begin{theorem} The following properties of an 
+\backslash
+mathcal{O}_{K}-submodule of K are equivalent:
+
+I is a fractional ideal.
+
+dI
+\backslash
+subset
+\backslash
+mathcal{O}_{K} for some d
+\backslash
+in
+\backslash
+mathbb{Z}
+\backslash
+setminus
+\backslash
+{0
+\backslash
+}.
+
+I=x
+\backslash
+mathfrak{a} for some x
+\backslash
+in K^{
+\backslash
+times} and some nonzero ideal 
+\backslash
+mathfrak{a} in 
+\backslash
+mathcal{O}_{K}.
+
+I is a nonzero finitely generated 
+\backslash
+mathcal{O}_{K}-submodule of K.
+
+
+\backslash
+end{theorem}
+
+
+\backslash
+begin{proof}(1
+\backslash
+Rightarrow2): Since I is a fractional ideal, there is a c
+\backslash
+in
+\backslash
+mathcal{O}_{K}
+\backslash
+setminus
+\backslash
+{0
+\backslash
+} such that cI
+\backslash
+subset
+\backslash
+mathcal{O}_{K}.
+ Set d=N_{K/
+\backslash
+mathbb{Q}}(c)
+\backslash
+in
+\backslash
+mathbb{Z}
+\backslash
+setminus
+\backslash
+{0
+\backslash
+}.
+ Since c
+\backslash
+mid d, we also have dI
+\backslash
+subset
+\backslash
+mathcal{O}_{K}.
+ (2
+\backslash
+Rightarrow3): dI is an 
+\backslash
+mathcal{O}_{K}-submodule of 
+\backslash
+mathcal{O}_{K}, thus it must be some nonzero ideal 
+\backslash
+mathfrak{a} in 
+\backslash
+mathcal{O}_{K}.
+ Set x=
+\backslash
+frac{1}{d}.
+ Then x
+\backslash
+mathfrak{a}=
+\backslash
+frac{1}{d}(dI)=I.
+ (3
+\backslash
+Rightarrow4): Since 
+\backslash
+mathcal{O}_{K} is noetherian, 
+\backslash
+mathfrak{a} is finitely generated, which implies I is finitely generated
+ too.
+ (4
+\backslash
+Rightarrow1): Write I=(
+\backslash
+frac{a_{1}}{b_{1}},
+\backslash
+dots,
+\backslash
+frac{a_{n}}{b_{n}}) where a_{i},b_{i}
+\backslash
+in
+\backslash
+mathcal{O}_{K} for 1
+\backslash
+le i
+\backslash
+leq n.
+ Set d=b_{1}
+\backslash
+cdots b_{n}.
+ Then dI
+\backslash
+subset
+\backslash
+mathcal{O}_{K}.
+ 
+
+
+\backslash
+end{proof}
+
+
+\backslash
+begin{defn} For a fractional ideal I in 
+\backslash
+mathcal{O}_{K}, set 
+\backslash
+tilde{I}=
+\backslash
+{x
+\backslash
+in K
+\backslash
+mid xI
+\backslash
+subset
+\backslash
+mathcal{O}_{K}
+\backslash
+}=
+\backslash
+mathcal{O}_{K}:_{K}I
+\backslash
+end{defn}
+
+
+\backslash
+tilde{I} is a fractional ideal in K.
+ To see this, choose any y
+\backslash
+in I, then y
+\backslash
+tilde{I}
+\backslash
+subset
+\backslash
+mathcal{O}_{K}, so 
+\backslash
+tilde{I}
+\backslash
+subset(1/y)
+\backslash
+mathcal{O}_{K}.
+ Therefore 
+\backslash
+tilde{I} is a submodule of a finite free 
+\backslash
+mathbb{Z}-module, so 
+\backslash
+tilde{I} is a finitely generated 
+\backslash
+mathbb{Z}-module, hence finitely generated as an 
+\backslash
+mathcal{O}_{K}-module too.
+ 
+
+
+\backslash
+begin{prop}
+\backslash
+tilde{I}
+\backslash
+cong Hom_{
+\backslash
+mathcal{O}_{K}}(I,
+\backslash
+mathcal{O}_{K})
+\backslash
+end{prop}
+
+
+\backslash
+begin{proof} Suppose c
+\backslash
+in
+\backslash
+tilde{I}.
+ Then multiplication by c is an 
+\backslash
+mathcal{O}_{K}-linear map from I to 
+\backslash
+mathcal{O}_{K}.
+ Conversely, suppose
+\backslash
+varphi
+\backslash
+in Hom_{
+\backslash
+mathcal{O}_{K}}(I,
+\backslash
+mathcal{O}_{K}).
+ We need to show that 
+\backslash
+varphi has the form 
+\backslash
+varphi(x)=cx for some c
+\backslash
+in K and for all x
+\backslash
+in I.
+ In other words, we need to show that 
+\backslash
+varphi(x)/x is independent of x:
+\backslash
+frac{
+\backslash
+varphi(x)}{x}
+\backslash
+stackrel{?}{=}
+\backslash
+frac{
+\backslash
+varphi(y)}{y}
+\backslash
+iff y
+\backslash
+varphi(x)
+\backslash
+stackrel{?}{=}x
+\backslash
+varphi(y)
+\backslash
+qquad
+\backslash
+forall x,y
+\backslash
+in I.
+
+We can't pull in the x and y inside 
+\backslash
+varphi yet since x and y may not lie in 
+\backslash
+mathcal{O}_{K}.
+ Since I is a fractional ideal though, we know that there exists a nonzero
+ d
+\backslash
+in
+\backslash
+mathcal{O}_{K} such that dx,dy
+\backslash
+in
+\backslash
+mathcal{O}_{K}.
+ Choose such a d.
+ Then since I is torsion-free, we havey
+\backslash
+varphi(x)-x
+\backslash
+varphi(y)
+\backslash
+stackrel{?}{=}0
+\backslash
+iff d(y
+\backslash
+varphi(x)-x
+\backslash
+varphi(y))
+\backslash
+stackrel{?}{=}0
+\backslash
+iff
+\backslash
+varphi(dyx)-
+\backslash
+varphi(dxy)
+\backslash
+stackrel{
+\backslash
+checkmark}{=}0
+\backslash
+qquad
+\backslash
+forall x,y
+\backslash
+in I.
+ 
+
+
+\backslash
+end{proof}
+
+
+\backslash
+begin{theorem} Let I be a fractional ideal in the number field K.
+ If I admits a fractional ideal inverse then the inverse must be 
+\backslash
+tilde{I}.
+ 
+\backslash
+end{theorem}
+
+
+\backslash
+begin{proof} Let J be a multiplicative inverse of I.
+ Certainly we have J
+\backslash
+subset
+\backslash
+tilde{I} since for each j
+\backslash
+in J, jI
+\backslash
+subset
+\backslash
+mathcal{O}_{K}.
+ Conversely, since IJ=
+\backslash
+mathcal{O}_{K}, we have i_{1}j_{1}+
+\backslash
+cdots+i_{n}j_{n}=1 where i_{1},
+\backslash
+dots,i_{n}
+\backslash
+in I and j_{1},
+\backslash
+dots j_{n}
+\backslash
+in J.
+ Then given x
+\backslash
+in
+\backslash
+tilde{I}, we have (xi_{1})j_{1}+
+\backslash
+cdots(xi_{n})j_{n}=x, where xi_{1},
+\backslash
+dots xi_{n}
+\backslash
+in
+\backslash
+mathcal{O}_{K}, and so x
+\backslash
+in J.
+ 
+\backslash
+end{proof} 
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop} Let A be a Noetherian ring and let 
+\backslash
+mathfrak{a} be a nonzero ideal in A.
+ Then 
+\backslash
+mathfrak{a} contains a product of prime ideals.
+ 
+\backslash
+end{prop}
+
+
+\backslash
+begin{proof} Assume for a contradiction that 
+\backslash
+mathfrak{a} does not contain a product of prime ideals.
+ Let 
+\backslash
+mathcal{S} denote the set of all nonzero ideals in A which do not contain
+ a product of prime ideals.
+ Note that 
+\backslash
+mathcal{S} is nonempty since 
+\backslash
+mathfrak{a}
+\backslash
+in
+\backslash
+mathcal{S} and note that A
+\backslash
+notin
+\backslash
+mathcal{S} since every ring contains a prime ideal (let alone a product
+ of prime ideals).
+ Since A is a Noetherian ring, we see that 
+\backslash
+mathcal{S} has a maximal element.
+ Choose 
+\backslash
+mathfrak{b}
+\backslash
+in
+\backslash
+mathcal{S} to be such a maximal element.
+ Now 
+\backslash
+mathfrak{b} cannot be a prime ideal since it would then contain itself as
+ a prime ideal.
+ In particular, there exists a,b
+\backslash
+in A such that ab
+\backslash
+in
+\backslash
+mathfrak{b} and neither a nor b is in 
+\backslash
+mathfrak{b}.
+ By maximality of 
+\backslash
+mathfrak{b}, we see that 
+\backslash
+mathfrak{b}+
+\backslash
+langle a
+\backslash
+rangle
+\backslash
+notin
+\backslash
+mathcal{S} and 
+\backslash
+mathfrak{b}+
+\backslash
+langle b
+\backslash
+rangle
+\backslash
+notin
+\backslash
+mathcal{S}.
+ In particular, both 
+\backslash
+mathfrak{b}+
+\backslash
+langle a
+\backslash
+rangle and 
+\backslash
+mathfrak{b}+
+\backslash
+langle b
+\backslash
+rangle contains a product of prime ideals respectively, say
+\backslash
+mathfrak{b}+
+\backslash
+langle a
+\backslash
+rangle=
+\backslash
+mathfrak{p}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{m}
+\backslash
+quad
+\backslash
+text{and}
+\backslash
+quad
+\backslash
+mathfrak{b}+
+\backslash
+langle b
+\backslash
+rangle=
+\backslash
+mathfrak{q}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{q}_{n}.Then observe that
+\backslash
+mathfrak{p}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{m}
+\backslash
+mathfrak{q}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{q}_{n}	=(
+\backslash
+mathfrak{b}+
+\backslash
+langle a
+\backslash
+rangle)(
+\backslash
+mathfrak{b}+
+\backslash
+langle b
+\backslash
+rangle)
+	=
+\backslash
+mathfrak{b}^{2}+
+\backslash
+mathfrak{b}
+\backslash
+langle b
+\backslash
+rangle+
+\backslash
+langle a
+\backslash
+rangle
+\backslash
+mathfrak{b}+
+\backslash
+langle ab
+\backslash
+rangle
+	
+\backslash
+subseteq
+\backslash
+mathfrak{b}.This contradicts the fact that 
+\backslash
+mathfrak{b}
+\backslash
+in
+\backslash
+mathcal{S}.
+ 
+\backslash
+end{proof}
+
+
+\backslash
+begin{lemma}
+\backslash
+label{containprime} Every nonzero ideal in 
+\backslash
+mathcal{O}_{K} contains a product of prime ideals.
+\backslash
+end{lemma}
+
+
+\backslash
+begin{proof} First, we show that every nonzero ideal of 
+\backslash
+mathcal{O}_{K} has finite index (this requires knowledge of finitely generated
+ modules over PID's).
+ Suppose 
+\backslash
+mathfrak{a} is a nonzero ideal of 
+\backslash
+mathcal{O}_{K}.
+ Choose a nonzero element a
+\backslash
+in
+\backslash
+mathfrak{a}.
+ Then we have inclusionsa
+\backslash
+mathcal{O}_{K}
+\backslash
+subset
+\backslash
+mathfrak{a}
+\backslash
+subset
+\backslash
+mathcal{O}_{K}
+\backslash
+mathcal{O}_{K} and a
+\backslash
+mathcal{O}_{K} are both free 
+\backslash
+mathbb{Z}-modules of rank n, so 
+\backslash
+mathfrak{a} must be free of rank n as well.
+ If 
+\backslash
+{e_{1},
+\backslash
+dots,e_{n}
+\backslash
+} is a 
+\backslash
+mathbb{Z}-basis of 
+\backslash
+mathcal{O}_{K}, and 
+\backslash
+{f_{1},
+\backslash
+dots,f_{n}
+\backslash
+} is a 
+\backslash
+mathbb{Z}-basis of 
+\backslash
+mathfrak{a}, where f_{i}=
+\backslash
+sum a_{ji}e_{j}, then |
+\backslash
+mathcal{O}_{K}/
+\backslash
+mathfrak{a}|=
+\backslash
+det(a_{ji})
+
+which is clearly finite.
+ Now assume the lemma is false and let 
+\backslash
+mathfrak{a} be a nonzero ideal of least index which does not contain a product
+ of primes.
+ Then 
+\backslash
+mathfrak{a}
+\backslash
+neq
+\backslash
+mathcal{O}_{K} since 
+\backslash
+mathcal{O}_{K} contains nonzero prime ideals, so [
+\backslash
+mathcal{O}_{K}:
+\backslash
+mathfrak{a}]
+\backslash
+geq2.
+ Since 
+\backslash
+mathfrak{a} is not a prime ideal, there exists x,y
+\backslash
+in
+\backslash
+mathcal{O}_{K} such that xy
+\backslash
+in
+\backslash
+mathfrak{a} and neither x nor y is in 
+\backslash
+mathfrak{a}.
+ Then 
+\backslash
+mathfrak{a}+(x) and 
+\backslash
+mathfrak{a}+(y) have smaller indexes than 
+\backslash
+mathfrak{a}, and thus must each contain primes, say 
+\backslash
+mathfrak{a}+(x)
+\backslash
+supset
+\backslash
+mathfrak{
+\backslash
+mathfrak{p}}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{r} and 
+\backslash
+mathfrak{a}+(y)
+\backslash
+supset
+\backslash
+mathfrak{q}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{q}_{k}.
+ So 
+\backslash
+mathfrak{
+\backslash
+mathfrak{p}}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{r}
+\backslash
+mathfrak{q}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{q}_{k}
+\backslash
+subset(
+\backslash
+mathfrak{a}+(x))(
+\backslash
+mathfrak{a}+(y))=
+\backslash
+mathfrak{a}^{2}+
+\backslash
+mathfrak{a}(y)+
+\backslash
+mathfrak{a}(x)+(xy)
+\backslash
+subset
+\backslash
+mathfrak{a}
+
+Which is a contradiction.
+ 
+\backslash
+end{proof}
+
+We can't say for sure yet that every nonzero ideal in 
+\backslash
+mathcal{O}_{K} is equal to a product of primes.
+ We can only say it contains a product of primes.
+
+
+\backslash
+begin{theorem} For each nonzero prime ideal 
+\backslash
+mathfrak{p} of 
+\backslash
+mathcal{O}_{K}, the fractional ideal 
+\backslash
+tilde{
+\backslash
+mathfrak{p}} satisfies the following properties
+
+
+\backslash
+mathcal{O}_{K}
+\backslash
+subset
+\backslash
+tilde{
+\backslash
+mathfrak{p}} and the containment is strict.
+
+
+\backslash
+mathfrak{p}
+\backslash
+tilde{
+\backslash
+mathfrak{p}}=
+\backslash
+mathcal{O}_{K}.
+
+
+\backslash
+end{theorem}
+
+
+\backslash
+begin{proof} We construct an 
+\backslash
+alpha
+\backslash
+in
+\backslash
+tilde{
+\backslash
+mathfrak{p}} such that 
+\backslash
+alpha
+\backslash
+notin
+\backslash
+mathcal{O}_{K} as follows: Choose any x
+\backslash
+in
+\backslash
+mathfrak{p}.
+ By Lemma~
+\backslash
+ref{primecontainthm}, (x)
+\backslash
+supset
+\backslash
+mathfrak{p}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{r} for some nonzero prime ideals 
+\backslash
+mathfrak{p}_{1},
+\backslash
+dots
+\backslash
+mathfrak{p}_{r} of 
+\backslash
+mathcal{O}_{K}.
+ Choose r to be minimal.
+ Since 
+\backslash
+mathfrak{p}
+\backslash
+supset(x)
+\backslash
+supset
+\backslash
+mathfrak{p}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{r}, 
+\backslash
+mathfrak{p} must be equal to one of the 
+\backslash
+mathfrak{p}_{1},
+\backslash
+dots
+\backslash
+mathfrak{p}_{r}.
+ Without loss of generality 
+\backslash
+mathfrak{p}=
+\backslash
+mathfrak{p}_{1}.
+ If r=1, then 
+\backslash
+mathfrak{p}=(x) .
+ In which case (1/x)
+\backslash
+mathfrak{p}
+\backslash
+subset
+\backslash
+mathcal{O}_{K}, so 
+\backslash
+alpha=1/x works.
+ So assume r
+\backslash
+geq2.
+ Since r is minimal, there exists a y
+\backslash
+in
+\backslash
+mathfrak{p}_{2}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{r} such that y
+\backslash
+notin(x).
+ Then 
+\backslash
+alpha=y/x works since (y/x)
+\backslash
+mathfrak{p}
+\backslash
+subset(1/x)
+\backslash
+mathfrak{p}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{r}
+\backslash
+subset
+\backslash
+mathcal{O}_{K} and y/x
+\backslash
+notin
+\backslash
+mathcal{O}_{K}.
+ 
+
+   Now we show the second part (which is more interesting) follows from
+ the first part.
+ Given 
+\backslash
+alpha
+\backslash
+in
+\backslash
+tilde{
+\backslash
+mathfrak{p}} such that 
+\backslash
+alpha
+\backslash
+notin
+\backslash
+mathcal{O}_{K}, we claim 
+\backslash
+tilde{
+\backslash
+mathfrak{p}}=
+\backslash
+mathcal{O}_{K}+
+\backslash
+alpha
+\backslash
+mathcal{O}_{K}.
+ We have 
+\backslash
+mathfrak{p}
+\backslash
+tilde{
+\backslash
+mathfrak{p}}=
+\backslash
+mathfrak{p}
+\backslash
+mathcal{O}_{K}+
+\backslash
+alpha
+\backslash
+mathfrak{p}
+\backslash
+mathcal{O}_{K}
+\backslash
+subset
+\backslash
+mathcal{O}_{K}.
+ Since 
+\backslash
+mathfrak{p}
+\backslash
+subset
+\backslash
+mathfrak{p}
+\backslash
+mathcal{O}_{K}+
+\backslash
+alpha
+\backslash
+mathfrak{p}
+\backslash
+mathcal{O}_{K}
+\backslash
+subset
+\backslash
+mathcal{O}_{K} and 
+\backslash
+mathfrak{p} is maximal, we must have 
+\backslash
+mathfrak{p}
+\backslash
+mathcal{O}_{K}+
+\backslash
+alpha
+\backslash
+mathfrak{p}
+\backslash
+mathcal{O}_{K}=
+\backslash
+mathfrak{p} or 
+\backslash
+mathfrak{p}
+\backslash
+mathcal{O}_{K}+
+\backslash
+alpha
+\backslash
+mathfrak{p}
+\backslash
+mathcal{O}_{K}=
+\backslash
+mathcal{O}_{K}.
+ If 
+\backslash
+mathfrak{p}
+\backslash
+mathcal{O}_{K}+
+\backslash
+alpha
+\backslash
+mathfrak{p}
+\backslash
+mathcal{O}_{K}=
+\backslash
+mathfrak{p}, then 
+\backslash
+alpha
+\backslash
+mathfrak{p}
+\backslash
+subset
+\backslash
+mathfrak{p}, but this would mean 
+\backslash
+alpha is integral over 
+\backslash
+mathbb{Z}, and hence 
+\backslash
+alpha
+\backslash
+in
+\backslash
+mathcal{O}_{K}, which is a contradiction.
+
+
+\backslash
+end{proof}
+
+
+\backslash
+begin{rem} In the proof above, we used the fact that if 
+\backslash
+alpha
+\backslash
+mathfrak{p}
+\backslash
+subset
+\backslash
+mathfrak{p}, then 
+\backslash
+alpha
+\backslash
+in
+\backslash
+mathcal{O}_{K}.
+ In fact, for any prime ideal 
+\backslash
+mathfrak{p} of 
+\backslash
+mathcal{O}_{K}, 
+\backslash
+mathcal{O}_{K} is the set 
+\backslash
+{
+\backslash
+alpha
+\backslash
+in K
+\backslash
+mid
+\backslash
+alpha
+\backslash
+mathfrak{p}
+\backslash
+subset
+\backslash
+mathfrak{p}
+\backslash
+}.
+ This is the key step to the proof above.
+ Later on, when we study 
+\backslash
+hyperlink{order}{orders}, we will see that the proof that the above proof
+ almost carries over.
+ Given an order 
+\backslash
+mathcal{O}, there will be a special ideal 
+\backslash
+mathfrak{c} of 
+\backslash
+mathcal{O}, called the conductor, which has the following property: For
+ any prime ideal 
+\backslash
+mathfrak{p} of 
+\backslash
+mathcal{O} such that 
+\backslash
+mathfrak{p} is relatively prime to the conductor, then 
+\backslash
+mathcal{O} is the set 
+\backslash
+{
+\backslash
+alpha
+\backslash
+in K
+\backslash
+mid
+\backslash
+alpha
+\backslash
+mathfrak{p}
+\backslash
+subset
+\backslash
+mathfrak{p}
+\backslash
+}.
+ It will then follow that every prime ideal 
+\backslash
+mathfrak{p} of 
+\backslash
+mathcal{O} which is relatively prime to the conductor 
+\backslash
+mathfrak{c}, is invertible.
+ 
+\backslash
+end{rem}
+
+We are now ready to prove the main theorem:
+
+
+\backslash
+begin{theorem} Every nonzero proper ideal of 
+\backslash
+mathcal{O}_{K} is uniquely a product of nonzero prime ideals in 
+\backslash
+mathcal{O}_{K}.
+\backslash
+end{theorem}
+
+
+\backslash
+begin{proof} First, we prove existence.
+ We will prove by induction on r
+\backslash
+geq1 that if a nonzero proper ideal 
+\backslash
+mathfrak{a}
+\backslash
+subset
+\backslash
+mathcal{O}_{K} contains a product of r nonzero prime ideals then it equals
+ a product of nonzero prime ideals.
+ In the case r=1, we have the inclusions
+\backslash
+mathfrak{p}
+\backslash
+subset
+\backslash
+mathfrak{a}
+\backslash
+subset
+\backslash
+mathcal{O}_{K}.
+
+If 
+\backslash
+mathfrak{a} is a proper ideal in 
+\backslash
+mathcal{O}_{K}, then 
+\backslash
+mathfrak{a=p} since prime ideals are maximal in 
+\backslash
+mathcal{O}_{K}.
+ Now assume the result is true for r and suppose 
+\backslash
+mathfrak{a}
+\backslash
+supset
+\backslash
+mathfrak{p}_{1}
+\backslash
+mathfrak{p}_{2}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{r+1}.
+
+Since 
+\backslash
+mathfrak{a} is a proper ideal, it is contained in some prime 
+\backslash
+mathfrak{p}, and by the usual argument, we conclude 
+\backslash
+mathfrak{p=
+\backslash
+mathfrak{p}_{i}} for some 1
+\backslash
+leq i
+\backslash
+leq r+1.
+ Without loss of generality, 
+\backslash
+mathfrak{p=p}_{1}.
+ Now apply 
+\backslash
+mathfrak{p}^{-1} to the inclusion of ideals given by
+\backslash
+mathfrak{p}
+\backslash
+supset
+\backslash
+mathfrak{a
+\backslash
+supset pp}_{2}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{r+1}
+
+to obtain the inclusion of ideals given by 
+\backslash
+mathcal{O}_{K}
+\backslash
+supset
+\backslash
+mathfrak{p}^{-1}
+\backslash
+mathfrak{a}
+\backslash
+supset
+\backslash
+mathfrak{p}_{2}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{r+1}
+
+This tells us that 
+\backslash
+mathfrak{p}^{-1}
+\backslash
+mathfrak{a} is an ideal in 
+\backslash
+mathcal{O}_{K} which contains a product of r nonzero prime ideals.
+ Therefore by induction, 
+\backslash
+mathfrak{p}^{-1}
+\backslash
+mathfrak{a} is equal to a product of nonzero prime ideals, hence 
+\backslash
+mathfrak{a} is a product of nonzero prime ideals.
+ This proves existence.
+ To prove uniqueness, suppose for some ideal 
+\backslash
+mathfrak{a}
+\backslash
+subset
+\backslash
+mathcal{O}_{K} we have 
+\backslash
+mathfrak{a}=
+\backslash
+mathfrak{p}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{r}=
+\backslash
+mathfrak{q}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{q}_{s}
+\backslash
+qquad
+\backslash
+mbox{for prime ideals 
+\backslash
+ensuremath{
+\backslash
+mathfrak{p}_{1}},
+\backslash
+ensuremath{
+\backslash
+dots},
+\backslash
+ensuremath{
+\backslash
+mathfrak{p}_{r}} and 
+\backslash
+ensuremath{
+\backslash
+mathfrak{q}_{1}},
+\backslash
+ensuremath{
+\backslash
+dots},
+\backslash
+ensuremath{
+\backslash
+mathfrak{q}_{s}}.}We can cancel any common prime ideals on both sides and
+ thus may suppose 
+\backslash
+mathfrak{p}_{i}
+\backslash
+neq
+\backslash
+mathfrak{q}_{j} for all i and j.
+ Since 
+\backslash
+mathfrak{p}_{1}
+\backslash
+supset
+\backslash
+mathfrak{p}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{p}_{r}=
+\backslash
+mathfrak{q}_{1}
+\backslash
+cdots
+\backslash
+mathfrak{q}_{s}, 
+\backslash
+mathfrak{p}_{1} is equal to some 
+\backslash
+mathfrak{q}_{j}, which is a contradiction.
+ 
+
+
+\backslash
+end{proof}
+
+Analogues in F[X]
+
+Many properties of 
+\backslash
+mathbb{Z} can be carried over to F[x], where F is a field.
+ Both 
+\backslash
+mathbb{Z} and F[x] have division with remainder, and thus are PID's.
+ The table below indicates some further similarities.
+
+
+
+Analogies are even
+ strongest when F is a finite field, but here we allow any F.
+ We want to adapt the methods from number fields to the “function field”
+ case: if K is a finite extension of F(x), does the integral closure of
+ F[x] in K have unique factorization of ideals? A key idea running through
+ the proofs in this section was induction on the index of nonzero ideals
+ in a ring of integers.
+ We can't directly use this idea for the integral closure of F[x] in K,
+ since ideals in F[x] don't have finite index if F is an infinite field.
+ For example, representatives in 
+\backslash
+mathbb{Q}[x]/(x^{3}-2) are a+bx+cx^{2} with rational a,b,c and there are
+ infinitely many of these.
+ However, there is something finite about this example: it is finite dimensional
+ over 
+\backslash
+mathbb{Q} with dimension 3.
+ More generally, if f(x) has degree d
+\backslash
+geq0 in F[x] then F[x]/(f(x)) has dimension d as an F-vector space (with
+ basis 
+\backslash
+{1,x,x^{2},
+\backslash
+dots,x^{d-1}
+\backslash
+}).
+ So if we count dimension over F rather than count index in F[x], then F[x]/(f(x
+)) has a finiteness property we can take advantage of.
+
+   Let K/F(x) be
+ a finite separable extension of degree n and let A be the integral closure
+ of F[x] in K.
+ This is an analogue of the ring of integers of a number field.
+ For any 
+\backslash
+alpha
+\backslash
+in A, Tr_{K/F(x)}(
+\backslash
+alpha) and N_{K/F(x)}(
+\backslash
+alpha) are in F[x].
+ More generally, the characteristic polynomial 
+\backslash
+chi_{K/F(x),
+\backslash
+alpha}(t) is in F[x][t].
+ 
+
+
+\backslash
+begin{example} Suppose K=
+\backslash
+mathbb{C}(x), B=
+\backslash
+mathbb{C}[x], and y=
+\backslash
+sqrt{x^{3}+1}, then K(y)/K is a finite separable extension of degree 2.
+ Indeed, the minimal polynomial for y is given by 
+\backslash
+pi(t)=t^{2}-(x^{3}+1), which is irreducible and separable of degree 2.
+ The integral closure of B in K(y) is B[y].
+ Given 
+\backslash
+alpha
+\backslash
+in B[y], write
+\backslash
+alpha=f(x)+g(x)y.
+ The matrix representation of the multiplication by 
+\backslash
+alpha is given by[m_{
+\backslash
+alpha}]=
+\backslash
+begin{pmatrix}f(x) & g(x)(x^{3}+1)
+\backslash
+
+\backslash
+
+g(x) & f(x)
+
+\backslash
+end{pmatrix}
+
+So Tr_{K(y)/K}(
+\backslash
+alpha)=2f(x) and N_{K(y)/K}(
+\backslash
+alpha)=f(x)^{2}-g(x)^{2}(x^{3}+1).
+ 
+\backslash
+end{example}
+
+
+\backslash
+begin{theorem} With the notation as above, A is a finite free F[x]-module
+ of rank n, any nonzero ideal 
+\backslash
+mathfrak{a} in A is a finite free F[x]-module of rank n, and A/
+\backslash
+mathfrak{a} is finite dimensional over F.
+\backslash
+end{theorem}
+
+
+\backslash
+begin{proof} The proof that a ring of integers is a finite free 
+\backslash
+mathbb{Z}-module uses the nonvanishing of discriminants and the fact that
+ 
+\backslash
+mathbb{Z} is a PID.
+ Specifically, if 
+\backslash
+{
+\backslash
+alpha_{1},
+\backslash
+dots
+\backslash
+alpha_{n}
+\backslash
+} is a 
+\backslash
+mathbb{Q}-basis of K consisting entirely of algebraic integers, then we
+ can squeeze 
+\backslash
+mathcal{O}_{K} in between two 
+\backslash
+mathbb{Z}-modules of rank n
+\backslash
+mathbb{Z}
+\backslash
+alpha_{1}+
+\backslash
+cdots+
+\backslash
+mathbb{Z}
+\backslash
+alpha_{n}
+\backslash
+subset
+\backslash
+mathcal{O}_{K}
+\backslash
+subset
+\backslash
+frac{1}{
+\backslash
+Delta}(
+\backslash
+mathbb{Z}
+\backslash
+alpha_{1}+
+\backslash
+cdots+
+\backslash
+mathbb{Z}
+\backslash
+alpha_{n})
+
+where 
+\backslash
+Delta=disc_{K/
+\backslash
+mathbb{Q}}(
+\backslash
+alpha_{1},
+\backslash
+dots,
+\backslash
+alpha_{n}), hence 
+\backslash
+mathcal{O}_{K} must be a free 
+\backslash
+mathbb{Z}-module of rank n.
+ Let's discuss why 
+\backslash
+mathcal{O}_{K}
+\backslash
+subset
+\backslash
+frac{1}{
+\backslash
+Delta}(
+\backslash
+mathbb{Z}
+\backslash
+alpha_{1}+
+\backslash
+cdots+
+\backslash
+mathbb{Z}
+\backslash
+alpha_{n})
+
+since it is such a nice proof.
+ Given 
+\backslash
+alpha
+\backslash
+in
+\backslash
+mathcal{O}_{K}, write 
+\backslash
+alpha=a_{1}
+\backslash
+alpha_{1}+
+\backslash
+cdots+a_{n}
+\backslash
+alpha_{n}
+\backslash
+qquad
+\backslash
+mbox{where }a_{i}
+\backslash
+in
+\backslash
+mathbb{Q}
+\backslash
+mbox{ for }1
+\backslash
+le i
+\backslash
+leq n.
+
+We want to show that 
+\backslash
+Delta a_{i}
+\backslash
+in
+\backslash
+mathbb{Z} for all 1
+\backslash
+le i
+\backslash
+le n.
+ The key is to use the elements 
+\backslash
+sigma_{i}
+\backslash
+in
+\backslash
+mbox{Gal}(K/
+\backslash
+mathbb{Q}).
+ 
+\backslash
+begin{pmatrix}
+\backslash
+sigma_{1}(
+\backslash
+alpha_{1}) & 
+\backslash
+sigma_{1}(
+\backslash
+alpha_{2}) & 
+\backslash
+cdots & 
+\backslash
+sigma_{1}(
+\backslash
+alpha_{n})
+\backslash
+
+\backslash
+
+
+\backslash
+sigma_{2}(
+\backslash
+alpha_{1}) & 
+\backslash
+sigma_{2}(
+\backslash
+alpha_{2}) & 
+\backslash
+cdots & 
+\backslash
+sigma_{2}(
+\backslash
+alpha_{n})
+\backslash
+
+\backslash
+
+
+\backslash
+vdots & 
+\backslash
+vdots & 
+\backslash
+vdots & 
+\backslash
+vdots
+\backslash
+
+\backslash
+
+
+\backslash
+sigma_{n}(
+\backslash
+alpha_{1}) & 
+\backslash
+sigma_{n}(
+\backslash
+alpha_{2}) & 
+\backslash
+cdots & 
+\backslash
+sigma_{n}(
+\backslash
+alpha_{n})
+
+\backslash
+end{pmatrix}
+\backslash
+begin{pmatrix}a_{1}
+\backslash
+
+\backslash
+
+a_{2}
+\backslash
+
+\backslash
+
+
+\backslash
+vdots
+\backslash
+
+\backslash
+
+a_{n}
+
+\backslash
+end{pmatrix}=
+\backslash
+begin{pmatrix}
+\backslash
+sigma_{1}(
+\backslash
+alpha)
+\backslash
+
+\backslash
+
+
+\backslash
+sigma_{2}(
+\backslash
+alpha)
+\backslash
+
+\backslash
+
+
+\backslash
+vdots
+\backslash
+
+\backslash
+
+
+\backslash
+sigma_{n}(
+\backslash
+alpha)
+
+\backslash
+end{pmatrix}
+
+By Cramer's rule, a_{i}=
+\backslash
+frac{
+\backslash
+gamma_{i}}{
+\backslash
+delta}
+
+where 
+\backslash
+gamma_{i}
+\backslash
+in
+\backslash
+mathcal{O}_{K}^{
+\backslash
+times} is the determinant of the matrix M
+\backslash
+in
+\backslash
+mbox{GL}_{n}(
+\backslash
+mathcal{O}_{K}), obtained by replacing the i'th column of matrix (
+\backslash
+sigma_{i}(
+\backslash
+alpha_{j})) with the column vector (
+\backslash
+alpha_{i}), and 
+\backslash
+delta
+\backslash
+in
+\backslash
+mathcal{O}_{K}^{
+\backslash
+times} is the determinant of the matrix (
+\backslash
+sigma_{i}(
+\backslash
+alpha_{j})).
+ Thus, 
+\backslash
+delta^{2}=
+\backslash
+DeltaMultiply both sides of equation~(
+\backslash
+ref{eq:cramer}) by 
+\backslash
+Delta to obtain
+\backslash
+Delta a_{i}=
+\backslash
+delta
+\backslash
+gamma_{i}
+
+The left side of equation~(
+\backslash
+ref{eq:cramer2}) is rational number, while the right side of equation~(
+\backslash
+ref{eq:cramer2}) is an algebraic integer.
+ Therefore since 
+\backslash
+mathcal{O}_{K}^{
+\backslash
+times}
+\backslash
+cap
+\backslash
+mathbb{Q}=
+\backslash
+mathbb{Z}, we have 
+\backslash
+Delta a_{i}
+\backslash
+in
+\backslash
+mathbb{Z}.
+ Since F[x], like 
+\backslash
+mathbb{Z}, is a PID, and K/F(x) is a separable extension, the proof that
+ a ring of integers is a finite free 
+\backslash
+mathbb{Z}-module carries over to show A is a finite free F[x]-module.
+ If K/F(x) were an inseparable extension, then 
+\backslash
+Delta=0 since there would be a repeated row in the matrix (
+\backslash
+sigma_{i}(
+\backslash
+alpha_{j})).
+ Similarly the proof which shows every nonzero ideal in 
+\backslash
+mathcal{O}_{K} is a free 
+\backslash
+mathbb{Z}-module of rank n carries over to show every nonzero ideal in A
+ is a free F[x]-module of rank n.
+ From the structure of finitely generated modules over a PID, given a nonzero
+ ideal 
+\backslash
+mathfrak{a} of A, there is an F[x]-basis y_{1},
+\backslash
+dots y_{n} of A and nonzero f_{1},
+\backslash
+dots,f_{n} in F[x] such that f_{1}y_{1},
+\backslash
+dots,f_{n}y_{n} is an F[x]-basis of 
+\backslash
+mathfrak{a}, soA/
+\backslash
+mathfrak{a}=(
+\backslash
+bigoplus_{i=1}^{n}F[x]y_{i})/(
+\backslash
+bigoplus_{i=1}^{n}F[x]f_{i}y_{i})
+\backslash
+cong
+\backslash
+bigoplus_{i=1}^{n}(F[x]/(f_{i}))
+\backslash
+overline{y}_{i}
+
+Each F[x]/(f_{i}) has finite dimension over F and there
+ are finitely many of these, so A/
+\backslash
+mathfrak{a} is finite dimensional over F.
+ 
+\backslash
+end{proof}
+
+
+\backslash
+begin{cor} Every nonzero prime ideal in A is a maximal ideal.
+\backslash
+end{cor}
+
+
+\backslash
+begin{proof} For any nonzero prime ideal 
+\backslash
+mathfrak{p} of A, A/
+\backslash
+mathfrak{p} is a domain that is finite-dimensional over F.
+ A domain that is finite-dimensional over a field is itself a field, so
+ 
+\backslash
+mathfrak{p} is maximal.
+\backslash
+end{proof}
+
+   Define a fractional A-ideal I to be a nonzero A-module in
+ K with a common denominator: aI
+\backslash
+subset A for some nonzero a
+\backslash
+in A.
+ All of the theorems in the previous section carry over to fractional A-ideals
+ in K.
+ For instance, fractional A-ideals are precisely the nonzero finitely generated
+ A-modules in K and each is a free F[x]-module of rank n=[K:F(X)].
+ 
+
+Totally ramified primes and Eisenstein polynomials
+
+Let p be a prime
+ and let f(T) be a monic polynomial in 
+\backslash
+mathbb{Z}[T] and expressed asf=T^{n}+c_{n-1}T^{n-1}+
+\backslash
+cdots+c_{1}T+c_{0}.We say f is p-Eisenstein if p
+\backslash
+mid c_{i} for all i and p^{2}
+\backslash
+nmid c_{0}.
+ Now suppose 
+\backslash
+alpha is a root of f.
+ Note that since f is monic and irreducible (Eisenstein's criterion), we
+ see that f is the minimal polynomial of 
+\backslash
+alpha over 
+\backslash
+mathbb{Q}.
+ Let K=
+\backslash
+mathbb{Q}(
+\backslash
+alpha) and let 
+\backslash
+mathcal{O}_{K} be the corresponding ring of integers (that is, the integral
+ closure of 
+\backslash
+mathbb{Z} in K).
+ Our goal in this subsection is to show that p
+\backslash
+nmid[
+\backslash
+mathcal{O}_{K}
+\backslash
+colon
+\backslash
+mathbb{Z}[
+\backslash
+alpha]].
+
+
+\backslash
+begin{lemma}
+\backslash
+label{eisensteinlemmacong0modp} For a_{0},a_{1},
+\backslash
+dots,a_{n-1}
+\backslash
+in
+\backslash
+mathbb{Z}, if a_{0}+a_{1}
+\backslash
+alpha+
+\backslash
+cdots+a_{n-1}
+\backslash
+alpha^{n-1}
+\backslash
+equiv0
+\backslash
+,
+\backslash
+,
+\backslash
+mathrm{mod}
+\backslash
+,p
+\backslash
+mathcal{O}_{K},then a_{i}
+\backslash
+equiv0
+\backslash
+,
+\backslash
+,
+\backslash
+mathrm{mod}
+\backslash
+,p
+\backslash
+mathbb{Z} for all i.
+ 
+\backslash
+end{lemma}
+
+
+\backslash
+begin{proof} Assume for j
+\backslash
+in
+\backslash
+{0,1,
+\backslash
+dots,n-1
+\backslash
+} that a_{i}
+\backslash
+equiv0
+\backslash
+,
+\backslash
+,
+\backslash
+mathrm{mod}
+\backslash
+,
+\backslash
+,p
+\backslash
+mathbb{Z} for i<j (this is an empty condition if j=0).
+ We will prove a_{j}
+\backslash
+equiv0
+\backslash
+,
+\backslash
+,
+\backslash
+mathrm{mod}
+\backslash
+,
+\backslash
+,p
+\backslash
+mathbb{Z}.
+ Since a_{i}
+\backslash
+equiv0
+\backslash
+,
+\backslash
+,
+\backslash
+mathrm{mod}
+\backslash
+,p
+\backslash
+mathbb{Z} for i<j, (
+\backslash
+ref{eq:eisensteinlemma1}) impliesa_{j}
+\backslash
+alpha^{j}+a_{j+1}
+\backslash
+alpha^{j+1}+
+\backslash
+cdots+a_{n-1}
+\backslash
+alpha^{n-1}
+\backslash
+equiv0
+\backslash
+,
+\backslash
+,
+\backslash
+mathrm{mod}
+\backslash
+,p
+\backslash
+mathcal{O}_{K}.Multiply through this congruence by 
+\backslash
+alpha^{n-1-j}, making all but the first term a_{j}
+\backslash
+alpha^{n-1} a multiple of 
+\backslash
+alpha^{n}.
+ Since 
+\backslash
+alpha is the root of an Eisenstein polynomial at p, we have 
+\backslash
+alpha^{n}
+\backslash
+equiv0
+\backslash
+,
+\backslash
+,
+\backslash
+mathrm{mod}
+\backslash
+,
+\backslash
+,p
+\backslash
+mathcal{O}_{K}, soa_{j}
+\backslash
+alpha^{n-1}
+\backslash
+equiv0
+\backslash
+,
+\backslash
+,
+\backslash
+mathrm{mod}
+\backslash
+,
+\backslash
+,p
+\backslash
+mathcal{O}_{K}.Write this congruence as an equation, say a_{j}
+\backslash
+alpha^{n-1}=p
+\backslash
+gamma with 
+\backslash
+gamma
+\backslash
+in
+\backslash
+mathcal{O}_{K}.
+ Now take norms of both sides down to 
+\backslash
+mathbb{Z}:(-1)^{n-1}a_{j}^{n}c_{0}^{n-1}=p^{n}
+\backslash
+mathrm{N}_{K
+\backslash
+slash
+\backslash
+mathbb{Q}}(
+\backslash
+gamma).The right side is an integral multiple of p^{n}.
+ On the left side, c_{0}^{n-1} (the norm of 
+\backslash
+alpha^{n-1} up to a sign) is divisible by p exactly once (Eisenstein condition!).
+ It follows that p
+\backslash
+mid a_{j}.
+ Thus a_{i}
+\backslash
+equiv0
+\backslash
+,
+\backslash
+,
+\backslash
+mathrm{mod}
+\backslash
+,
+\backslash
+,p
+\backslash
+mathbb{Z} for i<j+1.
+ Repeat this for j=1,1,
+\backslash
+dots,n-1 to get p
+\backslash
+mid a_{i} for all i.
+ 
+\backslash
+end{proof}
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemmaeisensteinrationalpdenom} For r_{0},r_{1},
+\backslash
+dots,r_{n-1}
+\backslash
+in
+\backslash
+mathbb{Q}, ifr_{0}+r_{1}
+\backslash
+alpha+
+\backslash
+cdots+r_{n-1}
+\backslash
+alpha^{n-1}
+\backslash
+in
+\backslash
+mathcal{O}_{K},then r_{i} has no p in its denominator for all i.
+ 
+\backslash
+end{lemma}
+
+
+\backslash
+begin{proof} Assume some r_{i} has a p in its denominator.
+ Let d be the least common denominator of the r_{i}'s, so p
+\backslash
+mid d.
+ Write r_{i}=a_{i}/d where a_{i}
+\backslash
+in
+\backslash
+mathbb{Z}, so some a_{i} is not divisible by p (otherwise d, being divisible
+ by p, would not be the least common denominator).
+ Then (
+\backslash
+ref{eq:eisensteinlemma2}) implies
+\backslash
+frac{a_{0}+a_{1}
+\backslash
+alpha+
+\backslash
+cdots+a_{n-1}
+\backslash
+alpha^{n-1}}{d}
+\backslash
+in
+\backslash
+mathcal{O}_{K}.Multiply through by the integer d to geta_{0}+a_{1}
+\backslash
+alpha+
+\backslash
+cdots+a_{n-1}
+\backslash
+alpha^{n-1}	
+\backslash
+in d
+\backslash
+mathcal{O}_{K}
+\backslash
+subseteq p
+\backslash
+mathcal{O}_{K}.Then Lemma~(
+\backslash
+ref{eisensteinlemmacong0modp}) tells us a_{i}
+\backslash
+in p
+\backslash
+mathbb{Z} for every i.
+ This is a contradiction.
+ 
+\backslash
+end{proof}
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorempdoesntodivideindexeisenstein} We have p
+\backslash
+nmid[
+\backslash
+mathcal{O}_{K}
+\backslash
+colon
+\backslash
+mathbb{Z}[
+\backslash
+alpha]].
+ 
+\backslash
+end{theorem}
+
+
+\backslash
+begin{proof} Assume for a contradiction that p
+\backslash
+mid[
+\backslash
+mathcal{O}_{K}:
+\backslash
+mathbb{Z}[
+\backslash
+alpha]].
+ Then 
+\backslash
+mathcal{O}_{K}
+\backslash
+slash
+\backslash
+mathbb{Z}[
+\backslash
+alpha], viewed as a finite abelian group, has an element of order p: there
+ is some 
+\backslash
+gamma
+\backslash
+in
+\backslash
+mathcal{O}_{K} such that 
+\backslash
+gamma
+\backslash
+notin
+\backslash
+mathbb{Z}[
+\backslash
+alpha] but p
+\backslash
+gamma
+\backslash
+in
+\backslash
+mathbb{Z}[
+\backslash
+alpha].
+ Using the basis 
+\backslash
+{1,
+\backslash
+alpha,
+\backslash
+dots,
+\backslash
+alpha^{n-1}
+\backslash
+} for K
+\backslash
+slash
+\backslash
+mathbb{Q}, write
+\backslash
+gamma=r_{0}+r_{1}
+\backslash
+alpha+
+\backslash
+cdots+r_{n-1}
+\backslash
+alpha^{n-1}with r_{i}
+\backslash
+in
+\backslash
+mathbb{Q}.
+ Since 
+\backslash
+gamma
+\backslash
+notin
+\backslash
+mathbb{Z}[
+\backslash
+alpha], some r_{i} is not in 
+\backslash
+mathbb{Z}.
+ Since p
+\backslash
+gamma
+\backslash
+in
+\backslash
+mathbb{Z}[
+\backslash
+alpha] we have pr_{i}
+\backslash
+in
+\backslash
+mathbb{Z}.
+ Hence r_{i} has a p in its denominator, which contradicts Lemma~(
+\backslash
+ref{lemmaeisensteinrationalpdenom}).
+ 
+\backslash
+end{proof}
+
+
+\backslash
+begin{example}
+\backslash
+label{example} We show the ring of algebraic integers of 
+\backslash
+mathbb{Q}(
+\backslash
+sqrt[3]{2}) is 
+\backslash
+mathbb{Z}[
+\backslash
+sqrt[3]{2}].
+ Let 
+\backslash
+mathcal{O} be the full ring of algebraic integers of 
+\backslash
+mathbb{Q}(
+\backslash
+sqrt[3]{2}), so 
+\backslash
+mathbb{Z}[
+\backslash
+sqrt[3]{2}]
+\backslash
+subseteq
+\backslash
+mathcal{O} and
+\backslash
+mathrm{disc}
+\backslash
+,
+\backslash
+mathbb{Z}[
+\backslash
+sqrt[3]{2}]=[
+\backslash
+mathcal{O}:
+\backslash
+mathbb{Z}[
+\backslash
+sqrt[3]{2}]]^{2}
+\backslash
+,
+\backslash
+mathrm{disc}
+\backslash
+,
+\backslash
+mathcal{O}By an explicit calculation, 
+\backslash
+mathrm{disc}
+\backslash
+,
+\backslash
+mathbb{Z}[
+\backslash
+sqrt[3]{2}]=-2^{2}3^{3}, so 2 and 3 are the only primes that could divide
+ [
+\backslash
+mathcal{O}:
+\backslash
+mathbb{Z}[
+\backslash
+sqrt[3]{2}]].
+ Since the minimal polynomial of 
+\backslash
+sqrt[3]{2} over 
+\backslash
+mathbb{Q} is T^{3}-2, which is 2-Eisenstein, we see that 2 does not divide
+ [
+\backslash
+mathcal{O}
+\backslash
+colon
+\backslash
+mathbb{Z}[
+\backslash
+sqrt[3]{2}]] by Theorem~(
+\backslash
+ref{theorempdoesntodivideindexeisenstein}).
+ T
+\end_layout
+
+\end_body
+\end_document

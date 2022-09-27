@@ -1,0 +1,3077 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Commutative Algebra Homework 5
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain with identity and suppose 
+\begin_inset Formula $x,y\in R\backslash\{0\}$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ have a 
+\series bold
+greatest common divisor 
+\series default
+if there exists a 
+\begin_inset Formula $d\in R$
+\end_inset
+
+ which satisfies the following two properties:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $d\mid x$
+\end_inset
+
+ and 
+\begin_inset Formula $d\mid y$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+if there exists 
+\begin_inset Formula $d'\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula $d'\mid x$
+\end_inset
+
+ and 
+\begin_inset Formula $d'\mid y$
+\end_inset
+
+, then 
+\begin_inset Formula $d'\mid d$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+If such a 
+\begin_inset Formula $d$
+\end_inset
+
+ exists, then using the fact that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain, it is easy to see that the set of all greatest common divisors
+ of 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ is 
+\begin_inset Formula $\{ud\mid u\in R^{\times}\}$
+\end_inset
+
+.
+ Indeed, 
+\begin_inset Formula $d$
+\end_inset
+
+ and 
+\begin_inset Formula $d'$
+\end_inset
+
+ are greatest common divisors of 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $d\mid d'$
+\end_inset
+
+ and 
+\begin_inset Formula $d'\mid d$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $d'=ud$
+\end_inset
+
+ for some 
+\begin_inset Formula $u\in R^{\times}$
+\end_inset
+
+.
+ If a greatest common divisor of 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ exists, then we often choose one of their greatest common divisors and
+ denote it by 
+\begin_inset Formula $\gcd(x,y)$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\gcd(x,y)$
+\end_inset
+
+ is well-defined up to a unit.
+ If we write 
+\begin_inset Formula $\gcd(x,y)=\gcd(x',y')$
+\end_inset
+
+, then it is understood that this means 
+\begin_inset Formula $\gcd(x,y)\mid\gcd(x',y')$
+\end_inset
+
+ and 
+\begin_inset Formula $\gcd(x',y')\mid\gcd(x,y)$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $R$
+\end_inset
+
+ is a 
+\series bold
+GCD domain
+\series default
+ if every pair of nonzero elements in 
+\begin_inset Formula $R$
+\end_inset
+
+ has a greatest common divisor.
+
+\series bold
+ 
+\series default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a GCD domain and let 
+\begin_inset Formula $a,b,c,x\in R$
+\end_inset
+
+ be nonzero.
+ Show the following.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\gcd(ax,bx)=x\gcd(a,b)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+if 
+\begin_inset Formula $d=\gcd(a,b)$
+\end_inset
+
+, then 
+\begin_inset Formula $\gcd(a/d,b/d)=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\gcd(x,a)=\gcd(x,b)=1$
+\end_inset
+
+, then 
+\begin_inset Formula $\gcd(x,ab)=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\gcd(x,a)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+ divides 
+\begin_inset Formula $ab$
+\end_inset
+
+, then 
+\begin_inset Formula $x$
+\end_inset
+
+ divides 
+\begin_inset Formula $b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Show that 
+\begin_inset Formula $R$
+\end_inset
+
+ is integrally closed.
+\end_layout
+
+\begin_layout Enumerate
+Show that 
+\begin_inset Formula $R$
+\end_inset
+
+ is Bezout if and only if 
+\begin_inset Formula $\gcd(a,b)$
+\end_inset
+
+ is a linear combination of 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Let 
+\begin_inset Formula $d=\gcd(a,b)$
+\end_inset
+
+ and let 
+\begin_inset Formula $e=\gcd(ax,bx)$
+\end_inset
+
+.
+ Write
+\begin_inset Formula 
+\begin{align*}
+a_{1}d & =a\\
+b_{1}d & =b\\
+a_{2}e & =ax\\
+b_{2}e & =bx
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $a_{1},a_{2},b_{1},b_{2}\in R$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $a_{1}xd=ax$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{1}xd=bx$
+\end_inset
+
+ implies 
+\begin_inset Formula $xd\mid ax$
+\end_inset
+
+ and 
+\begin_inset Formula $xd\mid bx$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $e$
+\end_inset
+
+ is the greatest common divisor of 
+\begin_inset Formula $ax$
+\end_inset
+
+ and 
+\begin_inset Formula $bx$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $xd\mid e$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula $yxd=e$
+\end_inset
+
+ for some 
+\begin_inset Formula $y\in R$
+\end_inset
+
+.
+ In particular, note that 
+\begin_inset Formula $e/x=dy\in R$
+\end_inset
+
+.
+ Next observe that 
+\begin_inset Formula $a_{2}(e/x)=ax/x=a$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{2}(e/x)=bx/x=b$
+\end_inset
+
+ implies 
+\begin_inset Formula $(e/x)\mid a$
+\end_inset
+
+ and 
+\begin_inset Formula $(e/x)\mid b$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $d$
+\end_inset
+
+ is the greatest common divisor of 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $d\mid(e/x)$
+\end_inset
+
+, and hence 
+\begin_inset Formula $dx\mid e$
+\end_inset
+
+.
+ Since both 
+\begin_inset Formula $dx\mid e$
+\end_inset
+
+ and 
+\begin_inset Formula $e\mid dx$
+\end_inset
+
+, we see that 
+\begin_inset Formula $e=dx$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Let 
+\begin_inset Formula $e=\gcd(a/d,b/d)$
+\end_inset
+
+.
+ By 1, we have
+\begin_inset Formula 
+\begin{align*}
+de & =d\gcd(a/d,b/d)\\
+ & =\gcd(d(a/d),d(b/d))\\
+ & =\gcd(a,b)\\
+ & =d.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $d\ne0$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $e=1$
+\end_inset
+
+ since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Let 
+\begin_inset Formula $d=\gcd(x,ab)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $d\mid x$
+\end_inset
+
+ and 
+\begin_inset Formula $d\mid ab$
+\end_inset
+
+, we see that in particular, we have 
+\begin_inset Formula $d\mid xb$
+\end_inset
+
+ and 
+\begin_inset Formula $d\mid ab$
+\end_inset
+
+.
+ Since
+\begin_inset Formula 
+\begin{align*}
+\gcd(xb,ab) & =b\gcd(x,a)\\
+ & =b\cdot1\\
+ & =b,
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+it follows that 
+\begin_inset Formula $d\mid b$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $d\mid x$
+\end_inset
+
+ and 
+\begin_inset Formula $d\mid b$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\gcd(x,b)=1$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $d\mid1$
+\end_inset
+
+.
+ Since we already have 
+\begin_inset Formula $1\mid d$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\gcd(x,ab)=1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\gcd(xb,ab) & =b\gcd(x,a)\\
+ & =b\cdot1\\
+ & =b,
+\end{align*}
+
+\end_inset
+
+Thus if 
+\begin_inset Formula $x\mid ab$
+\end_inset
+
+, then since already 
+\begin_inset Formula $x\mid xb$
+\end_inset
+
+, we see that 
+\begin_inset Formula $x\mid b$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+5.
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be the field of fractions of 
+\begin_inset Formula $R$
+\end_inset
+
+ and let 
+\begin_inset Formula $c/d\in K^{\times}$
+\end_inset
+
+ where we may assume that 
+\begin_inset Formula $\gcd(c,d)=1$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $\gcd(c,d)=e$
+\end_inset
+
+, then write 
+\begin_inset Formula $c'e=c$
+\end_inset
+
+ and 
+\begin_inset Formula $d'e=d$
+\end_inset
+
+ where 
+\begin_inset Formula $c',d'\in R$
+\end_inset
+
+ and replace 
+\begin_inset Formula $c/d$
+\end_inset
+
+ with 
+\begin_inset Formula $c'/d'$
+\end_inset
+
+.
+ Then we have 
+\begin_inset Formula $c/d=c'e/d'e=c'/d'$
+\end_inset
+
+ and by part 2 of this problem we have 
+\begin_inset Formula $\gcd(c',d')=1$
+\end_inset
+
+).
+ Suppose 
+\begin_inset Formula $c/d$
+\end_inset
+
+ is integral over 
+\begin_inset Formula $R$
+\end_inset
+
+, say 
+\begin_inset Formula 
+\[
+\frac{c^{n}}{d^{n}}+a_{n-1}\frac{c^{n-1}}{d^{n-1}}+a_{n-1}\frac{c^{n-2}}{d^{n-2}}+\cdots+a_{0}=0
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{0},\dots,a_{n-1}\in R$
+\end_inset
+
+.
+ Clearing denominators and rearranging terms gives us
+\begin_inset Formula 
+\[
+c^{n}=-d(a_{n-1}c^{n-1}+a_{n-2}dc^{n-2}+\cdots+a_{0}d^{n-1})
+\]
+
+\end_inset
+
+In particular, we see that 
+\begin_inset Formula $d\mid c^{n}$
+\end_inset
+
+.
+ On the other hand, note that 
+\begin_inset Formula $\gcd(c,d)=1$
+\end_inset
+
+ implies 
+\begin_inset Formula $\gcd(c^{2},d)=1$
+\end_inset
+
+ by part 3 of this problem.
+ An easy induction argument also shows 
+\begin_inset Formula $\gcd(c^{n},d)=1$
+\end_inset
+
+ too.
+ Since 
+\begin_inset Formula $d\mid c^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $d\mid d$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $d\mid1$
+\end_inset
+
+.
+ In other words, 
+\begin_inset Formula $d$
+\end_inset
+
+ must be a unit in 
+\begin_inset Formula $R$
+\end_inset
+
+, which implies 
+\begin_inset Formula $c/d\in R$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $R$
+\end_inset
+
+ is integrally closed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+6.
+ Suppose 
+\begin_inset Formula $R$
+\end_inset
+
+ is a Bezout domain.
+ Then 
+\begin_inset Formula $\langle a,b\rangle=\langle d\rangle$
+\end_inset
+
+ for some 
+\begin_inset Formula $d\in R$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $d$
+\end_inset
+
+ is a greatest common divisor of 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ Indeed, we clearly have 
+\begin_inset Formula $a'd=a$
+\end_inset
+
+ and 
+\begin_inset Formula $b'd=b$
+\end_inset
+
+ for some 
+\begin_inset Formula $a',b'\in R$
+\end_inset
+
+ since 
+\begin_inset Formula $\langle a,b\rangle=\langle d\rangle$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $d\mid a$
+\end_inset
+
+ and 
+\begin_inset Formula $d\mid b$
+\end_inset
+
+, which means 
+\begin_inset Formula $d$
+\end_inset
+
+ is a divisor of 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ Moreover, suppose there exists 
+\begin_inset Formula $d'\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula $d'\mid a$
+\end_inset
+
+ and 
+\begin_inset Formula $d'\mid b$
+\end_inset
+
+, say 
+\begin_inset Formula $a''d'=a$
+\end_inset
+
+ and 
+\begin_inset Formula $b''d'=b$
+\end_inset
+
+ for some 
+\begin_inset Formula $a'',b''\in R$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\langle a,b\rangle=\langle d\rangle$
+\end_inset
+
+ there exists 
+\begin_inset Formula $x,y\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula $ax+by=d$
+\end_inset
+
+.
+ Then observe that
+\begin_inset Formula 
+\begin{align*}
+d & =ax+by\\
+ & =a''d'x+b''d'y\\
+ & =(a''x+b''y)d'
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $d'\mid d$
+\end_inset
+
+ since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain.
+ It follows that 
+\begin_inset Formula $d=\gcd(a,b)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $d=ax+by$
+\end_inset
+
+ shows us that 
+\begin_inset Formula $\gcd(a,b)$
+\end_inset
+
+ is a linear combination of 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Conversely, let 
+\begin_inset Formula $d=\gcd(a,b)$
+\end_inset
+
+ and suppose 
+\begin_inset Formula $d$
+\end_inset
+
+ is a linear combination of 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+, say 
+\begin_inset Formula $ax+by=d$
+\end_inset
+
+ for some 
+\begin_inset Formula $x,y\in R$
+\end_inset
+
+.
+ Then this implies 
+\begin_inset Formula $\langle a,b\rangle\subseteq\langle d\rangle$
+\end_inset
+
+.
+ Furthermore, since 
+\begin_inset Formula $d$
+\end_inset
+
+ is a divisor of 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+, we have 
+\begin_inset Formula $a=a'd$
+\end_inset
+
+ and 
+\begin_inset Formula $b=b'd$
+\end_inset
+
+ for some 
+\begin_inset Formula $a',b'\in R$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $\langle a,b\rangle\supseteq\langle d\rangle$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula $\langle a,b\rangle=\langle d\rangle$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a Bezout domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a semiquasilocal domain and let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an invertible ideal.
+ Then 
+\begin_inset Formula $I$
+\end_inset
+
+ is principal.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathfrak{m}_{1},\dots,\mathfrak{m}_{n}$
+\end_inset
+
+ be the maximal ideals of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $I$
+\end_inset
+
+ is invertible, we have 
+\begin_inset Formula $II^{-1}=R$
+\end_inset
+
+.
+ In particular, for each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+ there exists 
+\begin_inset Formula $x_{i}\in I$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}\in I^{-1}$
+\end_inset
+
+ such that 
+\begin_inset Formula $x_{i}y_{i}\notin\mathfrak{m}_{i}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+, choose 
+\begin_inset Formula $z_{ji}\in\mathfrak{m}_{j}\backslash\mathfrak{m}_{i}$
+\end_inset
+
+.
+ Setting 
+\begin_inset Formula $z_{i}=\prod_{i\neq j}z_{ji}$
+\end_inset
+
+, we see that 
+\begin_inset Formula $z_{i}\in\mathfrak{m}_{j}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+ and 
+\begin_inset Formula $z_{i}\notin\mathfrak{m}_{i}$
+\end_inset
+
+.
+ Finally set
+\begin_inset Formula 
+\[
+z=\sum_{i=1}^{n}z_{i}y_{i}.
+\]
+
+\end_inset
+
+Clearly 
+\begin_inset Formula $z\in I^{-1}$
+\end_inset
+
+, and thus 
+\begin_inset Formula $zI$
+\end_inset
+
+ is an ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $zI=R$
+\end_inset
+
+.
+ To see this, assume for a contradiction that 
+\begin_inset Formula $zI$
+\end_inset
+
+ is contained in a maximal ideal.
+ By relabeling indices if necessary, we may assume that 
+\begin_inset Formula $zI\subseteq\mathfrak{m}_{1}$
+\end_inset
+
+.
+ First note that
+\begin_inset Formula 
+\[
+zx_{1}=z_{1}y_{1}x_{1}+\sum_{i=2}^{n}z_{i}y_{i}x_{1}.
+\]
+
+\end_inset
+
+By construction, we have 
+\begin_inset Formula $z_{1}y_{1}x_{1}\notin\mathfrak{m}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $z_{i}y_{i}x_{i}\in\mathfrak{m}_{1}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\neq1$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $zx_{1}$
+\end_inset
+
+ is the sum of an element in 
+\begin_inset Formula $\mathfrak{m}_{1}$
+\end_inset
+
+ with an element not in 
+\begin_inset Formula $\mathfrak{m}_{1}$
+\end_inset
+
+.
+ This is a contradiction since 
+\begin_inset Formula $zx_{1}\in\mathfrak{m}_{1}$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $zI=R$
+\end_inset
+
+, and hence 
+\begin_inset Formula $I=\langle z^{-1}\rangle$
+\end_inset
+
+ is principal.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Notation: 
+\series default
+We write 
+\begin_inset Formula $\mathbb{N}=\{1,2,\dots\}$
+\end_inset
+
+, so 
+\begin_inset Formula $0\notin\mathbb{N}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Build a Noetherian domain of infinite Krull dimension.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field and let 
+\begin_inset Formula $R=K[\{x_{n}\mid n\in\mathbb{N}\}]$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+, let 
+\begin_inset Formula $\mathfrak{p}_{k}=\langle x_{2^{k-1}},x_{2^{k-1}+1},\dots,x_{2^{k}-1}\rangle$
+\end_inset
+
+.
+ The sequence of ideals 
+\begin_inset Formula $(\mathfrak{p}_{k})$
+\end_inset
+
+ starts out as
+\begin_inset Formula 
+\begin{align*}
+\mathfrak{p}_{1} & =\langle x_{1}\rangle\\
+\mathfrak{p}_{2} & =\langle x_{2},x_{3}\rangle\\
+\mathfrak{p}_{3} & =\langle x_{4},x_{5},x_{6},x_{7}\rangle\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+Note that each 
+\begin_inset Formula $\mathfrak{p}_{k}$
+\end_inset
+
+ is a prime ideal.
+ Indeed, suppose 
+\begin_inset Formula $f,g\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula $fg\in\mathfrak{p}_{k}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ are polynomials, we must have 
+\begin_inset Formula $f,g\in R_{N}$
+\end_inset
+
+ where 
+\begin_inset Formula $R_{N}=K[x_{1},x_{2},\dots,x_{N}]$
+\end_inset
+
+ for some 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+.
+ By choosing 
+\begin_inset Formula $N$
+\end_inset
+
+ large enough, we may assume that 
+\begin_inset Formula $2^{k}-1\leq N$
+\end_inset
+
+ (in fact we already have this since 
+\begin_inset Formula $fg\in\mathfrak{p}_{k}$
+\end_inset
+
+).
+ Then 
+\begin_inset Formula $\mathfrak{p}_{k}\cap R_{N}$
+\end_inset
+
+ is a prime ideal, so either 
+\begin_inset Formula $f\in\mathfrak{p}_{k}\cap R_{N}$
+\end_inset
+
+ or 
+\begin_inset Formula $g\in\mathfrak{p}_{k}\cap R_{N}$
+\end_inset
+
+.
+ We already have 
+\begin_inset Formula $f,g\in R_{N}$
+\end_inset
+
+, so either 
+\begin_inset Formula $f\in\mathfrak{p}_{k}$
+\end_inset
+
+ or 
+\begin_inset Formula $g\in\mathfrak{p}_{k}$
+\end_inset
+
+.
+ It follows that each 
+\begin_inset Formula $\mathfrak{p}_{k}$
+\end_inset
+
+ is prime.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now let 
+\begin_inset Formula $S$
+\end_inset
+
+ be the multiplicative set
+\begin_inset Formula 
+\[
+S=R\backslash\left(\bigcup_{k\in\mathbb{N}}\mathfrak{p}_{k}\right).
+\]
+
+\end_inset
+
+This set is multiplicatively closed since each 
+\begin_inset Formula $\mathfrak{p}_{k}$
+\end_inset
+
+ is a prime ideal.
+ We claim that 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ is a Noetherian ring of infinite dimension.
+ We will show this in two steps.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 1: 
+\series default
+We prove a generalized prime avoidance for 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ In particular, suppose 
+\begin_inset Formula $I$
+\end_inset
+
+ is an ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+ such that 
+\begin_inset Formula $I\subseteq\bigcup_{k\in\mathbb{N}}\mathfrak{p}_{k}$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $I\subseteq\mathfrak{p}_{k}$
+\end_inset
+
+ for some 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+.
+ Indeed, assume for a contradiction that 
+\begin_inset Formula $I\not\subseteq\mathfrak{p}_{k}$
+\end_inset
+
+ for any 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+.
+ Clearly then 
+\begin_inset Formula $I\neq0$
+\end_inset
+
+.
+ Choose a nonzero polynomial 
+\begin_inset Formula $f\in I$
+\end_inset
+
+ and express it in terms of its monomials as
+\begin_inset Formula 
+\begin{equation}
+f=a_{1}x^{\alpha_{1}}+\cdots+a_{m}x^{\alpha_{m}}\label{eq:expressfaspoly}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $a_{1},\dots,a_{m}\in K\backslash\{0\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha_{1},\dots,\alpha_{m}\in\mathcal{F}$
+\end_inset
+
+ where 
+\begin_inset Formula $\alpha_{i}\neq\alpha_{i'}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i<i'\leq m$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Before proceeding with the proof, let us explain our notation in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:expressfaspoly})
+\end_layout
+
+\end_inset
+
+.
+ Given a function 
+\begin_inset Formula $\alpha\colon\mathbb{N}\to\mathbb{Z}_{\geq0}$
+\end_inset
+
+, we define its 
+\series bold
+support
+\series default
+, denoted 
+\begin_inset Formula $\mathrm{supp}\,\alpha$
+\end_inset
+
+, to be the set
+\begin_inset Formula 
+\[
+\mathrm{supp}\,\alpha=\{m\in\mathbb{N}\mid\alpha(m)\neq0\}.
+\]
+
+\end_inset
+
+We denote by 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ to be the set
+\begin_inset Formula 
+\[
+\mathcal{F}=\{\alpha\colon\mathbb{N}\to\mathbb{Z}_{\geq0}\mid\mathrm{supp}\,\alpha\text{ is finite}\}.
+\]
+
+\end_inset
+
+We also denote by 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ to be the set of all monomials in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ There is a bijection from 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ given by assigning 
+\begin_inset Formula $\alpha\in\mathcal{F}$
+\end_inset
+
+ to the monomial
+\begin_inset Formula 
+\[
+x^{\alpha}:=\prod_{m\in\mathbb{N}}x_{m}^{\alpha(m)}=\prod_{m\in\mathrm{supp}\,\alpha}x_{m}^{\alpha(m)}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For instance, suppose 
+\begin_inset Formula $\alpha\colon\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+ is defined by
+\begin_inset Formula 
+\[
+\alpha(m)=\begin{cases}
+3 & \text{if }m=2\\
+2 & \text{if }m=6\\
+4 & \text{if }m=11\\
+0 & \text{if }m\in\mathbb{N}\backslash\{2,6,11\}
+\end{cases}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $x^{\alpha}=x_{3}^{3}x_{6}^{2}x_{11}^{4}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{supp}\,\alpha=\{2,6,11\}$
+\end_inset
+
+.
+ We often pass back and forth between functions 
+\begin_inset Formula $\alpha\in\mathcal{F}$
+\end_inset
+
+ and monimals 
+\begin_inset Formula $x^{\alpha}\in\mathcal{M}$
+\end_inset
+
+.
+ For example, given a monimal 
+\begin_inset Formula $x^{\alpha}\in\mathcal{M}$
+\end_inset
+
+, we define its 
+\series bold
+support
+\series default
+, denoted 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha}$
+\end_inset
+
+, to be 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha}=\mathrm{supp}\,\alpha$
+\end_inset
+
+.
+ Finally, in the monomial expansion of 
+\begin_inset Formula $f$
+\end_inset
+
+ given in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:expressfaspoly})
+\end_layout
+
+\end_inset
+
+, we refer to the 
+\begin_inset Formula $a_{i}x^{\alpha_{i}}$
+\end_inset
+
+ as the 
+\series bold
+terms 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+, and we refer to the 
+\begin_inset Formula $x^{\alpha_{i}}$
+\end_inset
+
+ as the 
+\series bold
+monomials 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+With our notation explained, we now proceed with the proof.
+ For each 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+, we denote by 
+\begin_inset Formula $C_{k}$
+\end_inset
+
+ to be the set
+\begin_inset Formula 
+\[
+C_{k}=\{2^{k-1},2^{k-1}+1,\dots,2^{k}-1\}.
+\]
+
+\end_inset
+
+Observe that 
+\begin_inset Formula $f\in\mathfrak{p}_{k}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha_{i}}\cap C_{k}\neq\emptyset$
+\end_inset
+
+ for all monomials 
+\begin_inset Formula $x^{\alpha_{i}}$
+\end_inset
+
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ Or from the contrapositive point of view, we have 
+\begin_inset Formula $f\notin\mathfrak{p}_{k}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha_{i}}\cap C_{k}=\emptyset$
+\end_inset
+
+ for some monomial 
+\begin_inset Formula $x^{\alpha_{i}}$
+\end_inset
+
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha_{i}}$
+\end_inset
+
+ is finite for all monomials 
+\begin_inset Formula $x^{\alpha_{i}}$
+\end_inset
+
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha_{i}}\cap C_{k}\neq\emptyset$
+\end_inset
+
+ for only finitely many 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ has only finitely many monomials, it follows that there exists finitely
+ many 
+\begin_inset Formula $C_{k}$
+\end_inset
+
+'s such that 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha_{i}}\cap C_{k}\neq\emptyset$
+\end_inset
+
+ for some monomial 
+\begin_inset Formula $x^{\alpha_{i}}$
+\end_inset
+
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $C_{k_{1}},\dots,C_{k_{s}}$
+\end_inset
+
+ be this finite collection, where 
+\begin_inset Formula $k_{r}\in\mathbb{N}$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq r\leq s$
+\end_inset
+
+ and 
+\begin_inset Formula $k_{1}\neq\cdots\neq k_{s}$
+\end_inset
+
+.
+ So given 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+, if 
+\begin_inset Formula $k\neq k_{r}$
+\end_inset
+
+ for any 
+\begin_inset Formula $1\leq r\leq s$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\begin{equation}
+\mathrm{supp}\,x^{\alpha_{i}}\cap C_{k}=\emptyset\label{eq:remark}
+\end{equation}
+
+\end_inset
+
+for all monomials 
+\begin_inset Formula $x^{\alpha_{i}}$
+\end_inset
+
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ In particular, this implies 
+\begin_inset Formula $f\notin\mathfrak{p}_{k}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $f$
+\end_inset
+
+ is contained in at most finitely many of the 
+\begin_inset Formula $\mathfrak{p}_{k}$
+\end_inset
+
+'s.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now note that if 
+\begin_inset Formula $I\subseteq\bigcup_{r=1}^{s}\mathfrak{p}_{k_{r}}$
+\end_inset
+
+, then by the usual prime avoidance argument, we would obtain 
+\begin_inset Formula $I\subseteq\mathfrak{p}_{k_{r}}$
+\end_inset
+
+ for some 
+\begin_inset Formula $1\leq r\leq s$
+\end_inset
+
+, which would be a contradiction, thus we cannot have we 
+\begin_inset Formula $I\subseteq\bigcup_{r=1}^{s}\mathfrak{p}_{k_{r}}$
+\end_inset
+
+.
+ Hence there exists a 
+\begin_inset Formula $g\in I$
+\end_inset
+
+ and an 
+\begin_inset Formula $l\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $l\neq k_{r}$
+\end_inset
+
+ for any 
+\begin_inset Formula $1\leq r\leq s$
+\end_inset
+
+ and 
+\begin_inset Formula $g\in\mathfrak{p}_{l}\backslash\bigcup_{r=1}^{s}\mathfrak{p}_{k_{r}}$
+\end_inset
+
+.
+ Express 
+\begin_inset Formula $g$
+\end_inset
+
+ in terms of its monomials as
+\begin_inset Formula 
+\begin{equation}
+g=b_{1}x^{\beta_{1}}+\cdots+b_{n}x^{\beta_{n}}\label{eq:expressfaspoly-1}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $b_{1},\dots,b_{n}\in K\backslash\{0\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta_{1},\dots,\beta_{n}\in\mathcal{F}$
+\end_inset
+
+ where 
+\begin_inset Formula $\beta_{j}\neq\beta_{j'}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq j<j'\leq m$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $g\in\mathfrak{p}_{l}$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\mathrm{supp}\,x^{\beta_{j}}\cap C_{l}\neq\emptyset$
+\end_inset
+
+ for all monomials 
+\begin_inset Formula $x^{\beta_{j}}$
+\end_inset
+
+ of 
+\begin_inset Formula $g$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha_{i}}\cap C_{l}=\emptyset$
+\end_inset
+
+ for all monomials 
+\begin_inset Formula $x^{\alpha_{i}}$
+\end_inset
+
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+ (take 
+\begin_inset Formula $k=l$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:remark})
+\end_layout
+
+\end_inset
+
+), it follows that 
+\begin_inset Formula $\alpha_{i}\neq\beta_{j}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+ and 
+\begin_inset Formula $1\leq j\leq n$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $x^{\alpha_{i}}\neq x^{\beta_{j}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+ and 
+\begin_inset Formula $1\leq j\leq n$
+\end_inset
+
+.
+ Thus every monomial of 
+\begin_inset Formula $f+g$
+\end_inset
+
+ has the form 
+\begin_inset Formula $x^{\alpha_{i}}$
+\end_inset
+
+ for some 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+ or 
+\begin_inset Formula $x^{\beta_{j}}$
+\end_inset
+
+ for some 
+\begin_inset Formula $1\leq j\leq n$
+\end_inset
+
+ (there is no combination between a monomial of 
+\begin_inset Formula $f$
+\end_inset
+
+ and a monomial in 
+\begin_inset Formula $g$
+\end_inset
+
+ in the monomial expansion of 
+\begin_inset Formula $f+g$
+\end_inset
+
+).
+ We claim that 
+\begin_inset Formula $f+g\notin\mathfrak{p}_{k}$
+\end_inset
+
+ for any 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+.
+ Indeed, let 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+.
+ We consider two cases: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 1: 
+\series default
+Suppose 
+\begin_inset Formula $k=k_{r}$
+\end_inset
+
+ for some 
+\begin_inset Formula $1\leq r\leq s$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $g\notin\mathfrak{p}_{k_{r}}$
+\end_inset
+
+, there exists a monomial 
+\begin_inset Formula $x^{\beta_{j}}$
+\end_inset
+
+ of 
+\begin_inset Formula $g$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathrm{supp}\,x^{\beta_{j}}\cap C_{k_{r}}=\emptyset$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $x^{\beta_{j}}$
+\end_inset
+
+ is also a monomial of 
+\begin_inset Formula $f+g$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $f+g\notin\mathfrak{p}_{k_{r}}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 2: 
+\series default
+Suppose 
+\begin_inset Formula $k\neq k_{r}$
+\end_inset
+
+ for any 
+\begin_inset Formula $1\leq r\leq s$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha_{i}}\cap C_{l}=\emptyset$
+\end_inset
+
+ for all monomials 
+\begin_inset Formula $x^{\alpha_{i}}$
+\end_inset
+
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+ (as in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:remark})
+\end_layout
+
+\end_inset
+
+), so in particular 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha_{1}}\cap C_{l}=\emptyset$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $x^{\alpha_{1}}$
+\end_inset
+
+ is also a monomial of 
+\begin_inset Formula $f+g$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $f+g\notin\mathfrak{p}_{l}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus we have constructed a polynomial 
+\begin_inset Formula $f+g$
+\end_inset
+
+ in 
+\begin_inset Formula $I$
+\end_inset
+
+ which does not belong to 
+\begin_inset Formula $\mathfrak{p}_{k}$
+\end_inset
+
+ for any 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+.
+ This is a contradiction since 
+\begin_inset Formula $I\subseteq\bigcup_{k\in\mathbb{N}}\mathfrak{p}_{k}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 2: 
+\series default
+We show that 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ satisfies the conditions of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{lemmanoetheriancriterion})
+\end_layout
+
+\end_inset
+
+ (stated and proved in appendix) which implies 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ is Noetherian.
+ We will also show that 
+\begin_inset Formula $\dim R_{S}=\infty$
+\end_inset
+
+.
+ First, let us describe the maximal ideals in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+.
+ Recall that the prime ideals in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ correspond to the prime ideals in 
+\begin_inset Formula $R$
+\end_inset
+
+ which are disjoint from 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ For any prime ideal 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ in 
+\begin_inset Formula $R$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\mathfrak{p}\cap S=\emptyset & \iff\mathfrak{p}\subseteq\bigcup_{k\in\mathbb{N}}\mathfrak{p}_{k}\\
+ & \iff\mathfrak{p}\subseteq\mathfrak{p}_{k}\text{ for some }k\in\mathbb{N},
+\end{align*}
+
+\end_inset
+
+where the last if and only if follows from step 1.
+ In particular, we see that the maximal ideals of 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ are precisely the localizations of the 
+\begin_inset Formula $\mathfrak{p}_{k}$
+\end_inset
+
+'s, that is, they are of the form 
+\begin_inset Formula $\mathfrak{p}_{k,S}=S^{-1}\mathfrak{p}_{k}$
+\end_inset
+
+ for some 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+.
+ By transitivity of localization, we have 
+\begin_inset Formula $(R_{S})_{\mathfrak{p}_{k,S}}\cong R_{\mathfrak{p}_{k}}$
+\end_inset
+
+, and 
+\begin_inset Formula $R_{\mathfrak{p}_{k}}$
+\end_inset
+
+ is Noetherian since it is a localization of a Noetherian ring, namely
+\begin_inset Formula 
+\begin{equation}
+R_{\mathfrak{p}_{k}}\cong K(\{x_{m}\mid\{x_{n}\mid n\in\mathbb{N}\backslash C_{k}\})[\{x_{n}\mid n\in C_{k}\}]_{\langle\{x_{n}\mid n\in C_{k}\}\rangle}.\label{eq:isomorphism}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus the first condition in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{lemmanoetheriancriterion})
+\end_layout
+
+\end_inset
+
+ is satisfied.
+ The second condition, recall in step 1 we showed that every nonzero 
+\begin_inset Formula $f\in R$
+\end_inset
+
+ is contained in only finitely many of the 
+\begin_inset Formula $\mathfrak{p}_{k}$
+\end_inset
+
+'s, and so certainly every nonzero 
+\begin_inset Formula $f/s\in R_{S}$
+\end_inset
+
+ is contained in only finitely many of the 
+\begin_inset Formula $\mathfrak{p}_{k,S}$
+\end_inset
+
+'s.
+ Thus both conditions of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{lemmanoetheriancriterion})
+\end_layout
+
+\end_inset
+
+ hold, and hence 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ is Noetherian.
+ Finally, note that the isomorphism 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:isomorphism})
+\end_layout
+
+\end_inset
+
+ also shows us that
+\begin_inset Formula 
+\begin{align*}
+\dim R_{S} & \geq\dim R_{\mathfrak{p}_{k}}\\
+ & =2^{k-1}
+\end{align*}
+
+\end_inset
+
+Taking 
+\begin_inset Formula $k\to\infty$
+\end_inset
+
+ gives us 
+\begin_inset Formula $\dim R_{S}=\infty$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemmanoetheriancriterion}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring with identity such that
+\end_layout
+
+\begin_layout Enumerate
+for each maximal ideal 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+, the local ring 
+\begin_inset Formula $R_{\mathfrak{m}}$
+\end_inset
+
+ is Noetherian;
+\end_layout
+
+\begin_layout Enumerate
+for each 
+\begin_inset Formula $x\in R\backslash\{0\}$
+\end_inset
+
+, the set of maximal ideals of 
+\begin_inset Formula $R$
+\end_inset
+
+ which contain 
+\begin_inset Formula $x$
+\end_inset
+
+ is finite.
+\end_layout
+
+\begin_layout Standard
+Then 
+\begin_inset Formula $R$
+\end_inset
+
+ is Noetherian.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be a nonzero ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ By the hypothesis of 
+\begin_inset Formula $R$
+\end_inset
+
+, only finitely many maximal ideals can contain 
+\begin_inset Formula $I$
+\end_inset
+
+, say 
+\begin_inset Formula $\mathfrak{m}_{1},\dots,\mathfrak{m}_{r}$
+\end_inset
+
+.
+ Choose any nonzero 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ in 
+\begin_inset Formula $I$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathfrak{m}_{1},\dots,\mathfrak{m}_{r+s}$
+\end_inset
+
+ be the maximal ideals which contain 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathfrak{m}_{r+1},\dots,\mathfrak{m}_{r+s}$
+\end_inset
+
+ do not contain 
+\begin_inset Formula $I$
+\end_inset
+
+, there exists 
+\begin_inset Formula $x_{j}\in I$
+\end_inset
+
+ such that 
+\begin_inset Formula $x_{j}\notin\mathfrak{m}_{r+j}$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq j\leq s$
+\end_inset
+
+.
+ Since for each 
+\begin_inset Formula $1\leq i\leq r$
+\end_inset
+
+ the localization 
+\begin_inset Formula $R_{\mathfrak{m}_{i}}$
+\end_inset
+
+ is Noetherian, we see that 
+\begin_inset Formula $I_{\mathfrak{m}_{i}}$
+\end_inset
+
+ is finitely-generated.
+ Thus there exists 
+\begin_inset Formula $x_{s+1},\dots,x_{t}$
+\end_inset
+
+ in 
+\begin_inset Formula $I$
+\end_inset
+
+ whose images in 
+\begin_inset Formula $R_{\mathfrak{m}_{i}}$
+\end_inset
+
+ generated 
+\begin_inset Formula $I_{\mathfrak{m}_{i}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq r$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We claim that 
+\begin_inset Formula $I_{\mathfrak{m}}=\langle x_{0},\dots,x_{t}\rangle_{\mathfrak{m}}$
+\end_inset
+
+ for all maximal ideals 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $\mathfrak{m}\neq\mathfrak{m}_{k}$
+\end_inset
+
+ for any 
+\begin_inset Formula $1\leq k\leq r+s$
+\end_inset
+
+, then 
+\begin_inset Formula $x_{0}\notin\mathfrak{m}$
+\end_inset
+
+.
+ Thus the image of 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ is a unit in 
+\begin_inset Formula $I_{\mathfrak{m}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle x_{0},\dots,x_{t}\rangle_{\mathfrak{m}}$
+\end_inset
+
+, and hence
+\begin_inset Formula 
+\[
+I_{\mathfrak{m}}=R_{\mathfrak{m}}=\langle x_{0},\dots,x_{t}\rangle_{\mathfrak{m}}.
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $\mathfrak{m}=\mathfrak{m}_{r+j}$
+\end_inset
+
+ for some 
+\begin_inset Formula $1\leq j\leq s$
+\end_inset
+
+, then 
+\begin_inset Formula $x_{j}\notin\mathfrak{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $I\cap(R\backslash\mathfrak{m})\neq\emptyset$
+\end_inset
+
+.
+ Thus again we have 
+\begin_inset Formula 
+\[
+I_{\mathfrak{m}}=R_{\mathfrak{m}}=\langle x_{0},\dots,x_{t}\rangle_{\mathfrak{m}}.
+\]
+
+\end_inset
+
+Finally, if 
+\begin_inset Formula $\mathfrak{m}=\mathfrak{m}_{i}$
+\end_inset
+
+ for some 
+\begin_inset Formula $1\leq i\leq r$
+\end_inset
+
+, then by construction, we have 
+\begin_inset Formula $I_{\mathfrak{m}}=\langle x_{0},\dots,x_{t}\rangle_{\mathfrak{m}}$
+\end_inset
+
+.
+ Thus our claim is proved.
+ Since 
+\begin_inset Formula $I_{\mathfrak{m}}=\langle x_{0},\dots,x_{t}\rangle_{\mathfrak{m}}$
+\end_inset
+
+ for all maximal ideals 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $I=\langle x_{0},\dots,x_{t}\rangle$
+\end_inset
+
+.
+ In particular, we see that 
+\begin_inset Formula $I$
+\end_inset
+
+ is finitely-generated, and hence 
+\begin_inset Formula $R$
+\end_inset
+
+ is Noetherian.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

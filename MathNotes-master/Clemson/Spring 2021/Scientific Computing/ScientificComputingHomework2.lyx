@@ -1,0 +1,1181 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Scientific Computing Homework 2
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Consider the following problems
+\end_layout
+
+\begin_layout Enumerate
+Compute the 64 bit floating point format of the number 
+\begin_inset Formula $x=71.625$
+\end_inset
+
+ (give sign, mantissa, exponent in binary notation, you can use 
+\begin_inset Quotes eld
+\end_inset
+
+...
+\begin_inset Quotes erd
+\end_inset
+
+ to denote large number of zeros).
+\end_layout
+
+\begin_layout Enumerate
+What is the next representable number bigger than 
+\begin_inset Formula $x$
+\end_inset
+
+? Derive this from your answer in part 1, and give an approximate value
+ in decimal.
+\end_layout
+
+\begin_layout Enumerate
+What is the smallest integer 
+\begin_inset Formula $n$
+\end_inset
+
+ that is not representable in 64 bit floating point format, so 
+\begin_inset Formula $fl(n)\neq n$
+\end_inset
+
+.
+ What is 
+\begin_inset Formula $fl(n)$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Note that
+\begin_inset Formula 
+\[
+71.625=2^{6}+2^{2}+2^{1}+2^{0}+2^{-1}+2^{-3},
+\]
+
+\end_inset
+
+so the binary representation of 
+\begin_inset Formula $71.625$
+\end_inset
+
+ is 
+\begin_inset Formula $1000111.101$
+\end_inset
+
+.
+ In particular if 
+\begin_inset Formula $e$
+\end_inset
+
+ denotes the exponent, then 
+\begin_inset Formula $e=1023+6=1029$
+\end_inset
+
+.
+ The binary representation of 
+\begin_inset Formula $1029$
+\end_inset
+
+ is 
+\begin_inset Formula $10000000101$
+\end_inset
+
+.
+ Thus the 64 bit floating point format of 
+\begin_inset Formula $71.625$
+\end_inset
+
+ is given in the table below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sign
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Exponent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10000000101$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mantisa
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0001111010000000000000000000000000000000000000000000$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ The next representable number bigger than 
+\begin_inset Formula $x$
+\end_inset
+
+ is obtained by adding a 
+\begin_inset Formula $1$
+\end_inset
+
+ at the very end of the Mantisa.
+ Thus the next number is given in the table below in 64 bit floating point
+ format:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sign
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Exponent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10000000101$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mantisa
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0001111010000000000000000000000000000000000000000001$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In decimal format, this number is approximately
+\begin_inset Formula 
+\[
+71.625+2^{-52+6}\approx71.6250000000000142108547152020037174224853515625
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ The largest positive number that may be represented using 
+\begin_inset Formula $64$
+\end_inset
+
+ bits is given in the table below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sign
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Exponent
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $01111111111$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mantisa
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1111111111111111111111111111111111111111111111111111$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This number is given by
+\begin_inset Formula 
+\[
+\left(1+\sum_{i=1}^{52}2^{-i}\right)2^{1023}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Consider the Euclidean norm
+\begin_inset Formula 
+\[
+\|x\|_{2}=\left(\sum_{i=1}^{n}x_{i}^{2}\right)^{1/2}
+\]
+
+\end_inset
+
+computed using floating point arithmetic.
+\end_layout
+
+\begin_layout Enumerate
+Explain how you would implement this sum to minimize roundoff error in the
+ computation.
+ Give an example where the result is more accurate than the obvious implementati
+on.
+\end_layout
+
+\begin_layout Enumerate
+Give an example where the obvious implementation can create an overflow
+ and discuss how one could avoid this problem.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Implement Gauss Elimination with partial pivoting (for each column, swap
+ two rows so that the largest absolute value is on the diagonal before eliminati
+ng the entries below).
+ You can test your work on
+\begin_inset Formula 
+\[
+\begin{pmatrix}0 & 1 & 0\\
+1 & 1 & 2\\
+2 & 2 & 0
+\end{pmatrix}\begin{pmatrix}x_{1}\\
+x_{2}\\
+x_{3}
+\end{pmatrix}=\begin{pmatrix}4\\
+6\\
+1
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Submit: GaussPartialPivoting.m
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ be the set of invertible 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ lower triangular matrices.
+ Show:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $L_{1}L_{2}\in\mathcal{L}$
+\end_inset
+
+ for 
+\begin_inset Formula $L_{1},L_{2}\in\mathcal{L}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $L^{-1}\in\mathcal{L}$
+\end_inset
+
+ if 
+\begin_inset Formula $L\in\mathcal{L}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+A lower triangular matrix 
+\begin_inset Formula $L$
+\end_inset
+
+ is invertible if and only if the diagonal has no zero entry.
+\end_layout
+
+\begin_layout Enumerate
+The product 
+\begin_inset Formula $A=LDU$
+\end_inset
+
+ is unique if it exists (
+\begin_inset Formula $L$
+\end_inset
+
+ is lower triangular, 
+\begin_inset Formula $U$
+\end_inset
+
+ is upper triangular, 
+\begin_inset Formula $D$
+\end_inset
+
+ is diagonal, 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $U$
+\end_inset
+
+ have ones on the diagonal).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Write 
+\begin_inset Formula $L_{1}=(a_{ij})$
+\end_inset
+
+ and 
+\begin_inset Formula $L_{2}=(b_{ij})$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ are lower triangular, we have 
+\begin_inset Formula $a_{ij}=0=b_{ij}$
+\end_inset
+
+ whenever 
+\begin_inset Formula $i<j$
+\end_inset
+
+.
+ Now the entry in the 
+\begin_inset Formula $i$
+\end_inset
+
+th row and 
+\begin_inset Formula $j$
+\end_inset
+
+th column of 
+\begin_inset Formula $L_{1}L_{2}$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\begin{equation}
+\sum_{k=1}^{n}a_{ik}b_{kj}.\label{eq:term}
+\end{equation}
+
+\end_inset
+
+Now asumme that 
+\begin_inset Formula $i<j$
+\end_inset
+
+.
+ Then if 
+\begin_inset Formula $k<j$
+\end_inset
+
+, then 
+\begin_inset Formula $b_{kj}=0$
+\end_inset
+
+, and if 
+\begin_inset Formula $k\geq j$
+\end_inset
+
+, then 
+\begin_inset Formula $i<k$
+\end_inset
+
+ which implies 
+\begin_inset Formula $a_{ik}=0$
+\end_inset
+
+.
+ In either case, we see that each term in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:term})
+\end_layout
+
+\end_inset
+
+ is zero whenever 
+\begin_inset Formula $i<j$
+\end_inset
+
+.
+ Thus the 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ entry of 
+\begin_inset Formula $L_{1}L_{2}$
+\end_inset
+
+ is zero whenever 
+\begin_inset Formula $i<j$
+\end_inset
+
+, which implies 
+\begin_inset Formula $L_{1}L_{2}$
+\end_inset
+
+ is lower triangular.
+ To see that 
+\begin_inset Formula $L_{1}L_{2}$
+\end_inset
+
+ is also invertible, note that 
+\begin_inset Formula 
+\[
+\det(L_{1}L_{2})=\det(L_{1})\det(L_{2})\neq0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Write 
+\begin_inset Formula $L=(a_{ij})$
+\end_inset
+
+.
+ We prove the contrapositive: 
+\begin_inset Formula $L$
+\end_inset
+
+ is not invertible if and only if all diagonal entries are zero.
+ Equivalently, we prove 
+\begin_inset Formula $\det L=0$
+\end_inset
+
+ if and only if all diagonal entries are zero.
+ From the Leibniz formula of the determinant, we have
+\begin_inset Formula 
+\begin{align*}
+\det L & =\sum_{\sigma\in S_{n}}\left(\mathrm{sgn}(\sigma)\prod_{i=1}^{n}a_{i\sigma(i)}\right)\\
+ & =\prod_{i=1}^{n}a_{ii},
+\end{align*}
+
+\end_inset
+
+where we used the fact that if 
+\begin_inset Formula $\sigma\in S_{n}$
+\end_inset
+
+ is not the identity permutation, then there exists an 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $i<\sigma(i)$
+\end_inset
+
+, which implies 
+\begin_inset Formula $a_{i\sigma(i)}=0$
+\end_inset
+
+ since 
+\begin_inset Formula $L$
+\end_inset
+
+ is lower triangular; hence 
+\begin_inset Formula $\prod_{i=1}^{n}a_{i\sigma(i)}=0$
+\end_inset
+
+.
+ Now it is clear that 
+\begin_inset Formula $\det L\neq0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $a_{ii}\neq0$
+\end_inset
+
+ for all  
+\begin_inset Formula $i$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

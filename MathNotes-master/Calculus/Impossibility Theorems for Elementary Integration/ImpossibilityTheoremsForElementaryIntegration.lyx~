@@ -1,0 +1,1915 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Impossibility Theorems for Elementary Integration
+\end_layout
+
+\begin_layout Section
+Analytic Functions
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $U$
+\end_inset
+
+ be an open subset of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f\colon U\to\mathbb{R}$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\series bold
+analytic 
+\series default
+if it is locally expressible as a convergent Taylor series.
+ This means that for each 
+\begin_inset Formula $a\in U$
+\end_inset
+
+, there exists an open neighborhood 
+\begin_inset Formula $U_{a}$
+\end_inset
+
+ of 
+\begin_inset Formula $a$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f(x)=\sum_{n=0}^{\infty}a_{n}(x-a)^{n}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in U_{a}$
+\end_inset
+
+.
+ For each open subset 
+\begin_inset Formula $U$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+, let
+\begin_inset Formula 
+\[
+C_{\mathbb{R}}^{\omega}(U):=\{f\colon U\to\mathbb{R}\mid f\text{ is analytic}\}.
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $f,g\in C_{\mathbb{R}}^{\omega}$
+\end_inset
+
+, then 
+\begin_inset Formula $fg\in C_{\mathbb{R}}^{\omega}$
+\end_inset
+
+: indeed, let 
+\begin_inset Formula $a\in U$
+\end_inset
+
+.
+ Then we can express 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ as a power series in the neighborhoods 
+\begin_inset Formula $U_{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{a}$
+\end_inset
+
+ of 
+\begin_inset Formula $a$
+\end_inset
+
+ respetively as 
+\begin_inset Formula 
+\[
+f(x)=\sum_{n=0}^{\infty}a_{n}(x-a)^{n}\quad\text{and}\quad g(x)=\sum_{n=0}^{\infty}b_{n}(x-a)^{n}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in U_{a}\cap V_{a}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+(fg)(x) & =f(x)g(x)\\
+ & =\sum_{n=0}^{\infty}a_{n}(x-a)^{n}\sum_{n=0}^{\infty}b_{n}(x-a)^{n}\\
+ & =\sum_{n=0}^{\infty}\left(\sum_{i=0}^{n}a_{i}b_{n-i}\right)(x-a)^{n}\\
+ & =\sum_{n=0}^{\infty}c_{n}(x-a)^{n},
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{n}:=\sum_{i=0}^{n}a_{i}b_{n-i}$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Calculus with 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+-valued functions
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $f\colon\mathbb{R}\to\mathbb{C}$
+\end_inset
+
+ be a 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+-valued function on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ can be written as 
+\begin_inset Formula $f=u+iv$
+\end_inset
+
+, where 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $v$
+\end_inset
+
+ are 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-valued functions.
+ We will say 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\series bold
+continuous
+\series default
+ (respectively if 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $v$
+\end_inset
+
+ are continuous.
+\end_layout
+
+\begin_layout Subsubsection
+Logarithm
+\end_layout
+
+\begin_layout Standard
+If a 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+-valued function 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ is analytic and non-vanishing, then 
+\begin_inset Formula $f'/f$
+\end_inset
+
+ is analytic as well, so upon choosing a point 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ the integral 
+\begin_inset Formula 
+\[
+(\log f)(x):=\int_{x_{0}}^{x}\frac{f'(t)}{f(t)}dt
+\]
+
+\end_inset
+
+is analytic funciton called a 
+\series bold
+logarithm 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ Such a function depends on the choice of 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ up to an additive constant, but such ambiguity is irrelevant for our purposes
+ so we will ignore it.
+ Thus, we can equivalently consider a logarithm of 
+\begin_inset Formula $f$
+\end_inset
+
+ to be a solution to the differential equation 
+\begin_inset Formula $y'=f'/f$
+\end_inset
+
+.
+ In the special case 
+\begin_inset Formula $x_{0}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $f(t)=t$
+\end_inset
+
+ (on the interval 
+\begin_inset Formula $(0,\infty)$
+\end_inset
+
+) this recovers the traditional logarithm function.
+ If we add a suitable constant to a logarithm of 
+\begin_inset Formula $f$
+\end_inset
+
+ then we can arrange that 
+\begin_inset Formula $e^{\log(f)}=f$
+\end_inset
+
+, so the terminology is reasonable.
+\end_layout
+
+\begin_layout Section
+Elementary Fields and Elementary Functions
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $f_{1},\dots,f_{n}$
+\end_inset
+
+ are meromorphic functions, then 
+\begin_inset Formula $\mathbb{C}(f_{1},\dots,f_{n})$
+\end_inset
+
+ denotes the set of meromorphic functions 
+\begin_inset Formula $h$
+\end_inset
+
+ of the form 
+\begin_inset Formula 
+\[
+h=\frac{p(f_{1},\dots,f_{n})}{q(f_{1},\dots,f_{n})}=\frac{\sum a_{e_{1},\dots,e_{n}}f_{1}^{e_{1}}\cdots f_{n}^{e_{n}}}{\sum b_{j_{1},\dots,j_{n}}f_{1}^{j_{1}}\cdots f_{n}^{j_{n}}}
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $n$
+\end_inset
+
+-variable polynomials 
+\begin_inset Formula 
+\[
+p(X_{1},\dots,X_{n})=\sum a_{e_{1},\dots,e_{n}}X_{1}^{e_{1}}\cdots X_{n}^{e_{n}},\quad\text{and}\quad q(X_{1},\dots,X_{n})=\sum b_{j_{1},\dots,j_{n}}X_{1}^{j_{1}}\cdots X_{n}^{j_{n}}
+\]
+
+\end_inset
+
+in 
+\begin_inset Formula $\mathbb{C}[X_{1},\dots,X_{n}]$
+\end_inset
+
+ with 
+\begin_inset Formula $q(f_{1},\dots,f_{n})\neq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ The field 
+\begin_inset Formula $K=\mathbb{C}(x,\sin(x),\cos(x))$
+\end_inset
+
+ is the set of ratios 
+\begin_inset Formula 
+\[
+\frac{p(x,\sin(x),\cos(x))}{q(x,\sin(x),\cos(x))}
+\]
+
+\end_inset
+
+for polynomials 
+\begin_inset Formula $p,q\in\mathbb{C}[X,Y,Z]$
+\end_inset
+
+ such that 
+\begin_inset Formula $q(x,\sin(x),\cos(x))\neq0$
+\end_inset
+
+.
+ For example, we cannot use 
+\begin_inset Formula $q=Y^{2}+Z^{2}-1$
+\end_inset
+
+ since 
+\begin_inset Formula $\sin(x)^{2}+\cos(x)^{2}-1=0$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula 
+\[
+\sin(x)=\frac{e^{ix}-e^{-ix}}{2i},\quad\cos(x)=\frac{e^{ix}+e^{-ix}}{2},\quad\text{and}\quad e^{ix}=\cos(x)+i\sin(x),
+\]
+
+\end_inset
+
+we have 
+\begin_inset Formula $K=\mathbb{C}(x,e^{ix})$
+\end_inset
+
+.
+ So elements in 
+\begin_inset Formula $K$
+\end_inset
+
+ can also be written in the form 
+\begin_inset Formula $g(x,e^{ix})/h(x,e^{ix})$
+\end_inset
+
+ with 
+\begin_inset Formula $g,h\in\mathbb{C}[X,Y]$
+\end_inset
+
+ and 
+\begin_inset Formula $h\neq0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ A field 
+\begin_inset Formula $K$
+\end_inset
+
+ of meromorphic functions is an 
+\series bold
+elementary field 
+\series default
+if 
+\begin_inset Formula $K=\mathbb{C}(x,f_{1},\dots,f_{n})$
+\end_inset
+
+ with each 
+\begin_inset Formula $f_{j}$
+\end_inset
+
+ either an exponential or logarithm of an element of 
+\begin_inset Formula $K_{j-1}=\mathbb{C}(x,f_{1},\dots,f_{j-1})$
+\end_inset
+
+ or else algebraic over 
+\begin_inset Formula $K_{j-1}$
+\end_inset
+
+ in the sense that 
+\begin_inset Formula $P(f_{j})=0$
+\end_inset
+
+ for some 
+\begin_inset Formula $P(T)=T^{m}+a_{m-1}T^{m-1}+\cdots+a_{0}\in K_{j-1}[T]$
+\end_inset
+
+ with all 
+\begin_inset Formula $a_{k}\in K_{j-1}$
+\end_inset
+
+.
+ A meromorphic function 
+\begin_inset Formula $f$
+\end_inset
+
+ is an 
+\series bold
+elementary function 
+\series default
+if it lies in an elementary field of meromorphic functions.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be an elementary field with transcendence degree 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $K$
+\end_inset
+
+ is isomorphic to a finite algebraic extension of the abstract field 
+\begin_inset Formula $\mathbb{C}(T_{1},\dots,T_{n})$
+\end_inset
+
+.
+ For example, consider the field 
+\begin_inset Formula $K=\mathbb{C}(x,\sin x,\cos x)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $K\cong\mathbb{C}\left(T_{1},T_{2},\sqrt{1-T_{2}^{2}}\right)$
+\end_inset
+
+, where the isomorphism is uniquely determined by 
+\begin_inset Formula $T_{1}\mapsto x$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{2}\mapsto\sin x$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula 
+\[
+\sin(x)=\frac{e^{ix}-e^{-ix}}{2i},\quad\cos(x)=\frac{e^{ix}+e^{-ix}}{2},\quad\text{and}\quad e^{ix}=\cos(x)+i\sin(x),
+\]
+
+\end_inset
+
+we also have 
+\begin_inset Formula $K=\mathbb{C}(x,e^{ix})\cong\mathbb{C}(T_{1}',T_{2}')$
+\end_inset
+
+, where the isomorphism is uniquely determined by 
+\begin_inset Formula $T_{1}'\mapsto x$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{2}'\mapsto e^{ix}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\mathbb{C}(T_{1}',T_{2}')\cong\mathbb{C}\left(T_{1},T_{2},\sqrt{1-T_{2}^{2}}\right)$
+\end_inset
+
+ where the isomorphism is uniquely determined by 
+\begin_inset Formula $T_{1}'\mapsto T_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{2}'\mapsto\sqrt{1-T_{2}^{2}}+iT_{1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Consider the elementary field 
+\begin_inset Formula 
+\[
+L=\mathbb{C}\left(x,\sqrt{x^{3}-1}\right).
+\]
+
+\end_inset
+
+This field arises as the function field of the irreducible algebraic set
+ 
+\begin_inset Formula $V(T_{2}^{2}-T_{1}^{3}+1)\subseteq\mathbb{A}^{2}(\mathbb{C})$
+\end_inset
+
+.
+ It is a finite extension of the field 
+\begin_inset Formula $K=\mathbb{C}(x)$
+\end_inset
+
+.
+ On the other hand, the elementary field 
+\begin_inset Formula 
+\[
+E=\mathbb{C}\left(x,e^{ix}\right)
+\]
+
+\end_inset
+
+is a transcendental extension of the field 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Is 
+\begin_inset Formula $E\cong\mathbb{C}(X,Y)$
+\end_inset
+
+? We claim that this is indeed the case.
+ Let 
+\begin_inset Formula $\varphi\colon\mathbb{C}(X,Y)\to\mathbb{C}(x,e^{ix})$
+\end_inset
+
+ be given by 
+\begin_inset Formula 
+\[
+\varphi\left(\frac{p(X,Y)}{q(X,Y)}\right)=\frac{p\left(x,e^{ix}\right)}{q\left(x,e^{ix}\right)}.
+\]
+
+\end_inset
+
+We just need to check that 
+\begin_inset Formula $q\left(x,e^{ix}\right)\neq0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $q\left(x,e^{ix}\right)=0$
+\end_inset
+
+, then
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Consider the function 
+\begin_inset Formula 
+\[
+f=\frac{\pi x^{2}-3x\log x}{\sqrt{e^{x}-\sin\left(x/(x^{3}-7)\right)}}\in C_{\mathbb{R}}^{\omega}(\sqrt[3]{7},\infty).
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is contained in the elementary field 
+\begin_inset Formula 
+\[
+\mathbb{C}\left(x,\log x,e^{x},e^{ix/(x^{3}-7)},\sqrt{e^{x}-\sin\left(x/(x^{3}-7)\right)}\right).
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula 
+\[
+\mathbb{C}\left(x,\log x,e^{x},\sin\left(x/(x^{3}-7)\right),\sqrt{e^{x}-\sin\left(x/(x^{3}-7)\right)}\right)
+\]
+
+\end_inset
+
+is 
+\emph on
+not 
+\emph default
+an elementary field.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremelementaryisdifferential}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $K$
+\end_inset
+
+ is an elementary field, then it is closed under the operation of differentiatio
+n.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ We write 
+\begin_inset Formula $K=\mathbb{C}(x,f_{1},\dots,f_{n})$
+\end_inset
+
+ and we induct on 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ The case 
+\begin_inset Formula $n=0$
+\end_inset
+
+ is the case 
+\begin_inset Formula $K=\mathbb{C}(x)$
+\end_inset
+
+.
+ It follows from the usual formulas for derivatives of sums, products, and
+ ratios that 
+\begin_inset Formula $\mathbb{C}(x)$
+\end_inset
+
+ is closed under differentiation.
+ For the general case, by induction 
+\begin_inset Formula $K_{0}=\mathbb{C}(x,f_{1},\dots,f_{n-1})$
+\end_inset
+
+ is closed under differentiation, and we have 
+\begin_inset Formula $K=K_{0}(f_{n})$
+\end_inset
+
+ with 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ either algebraic over 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+ or a logarithm or exponential of an element of 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+.
+ Let us now check that it suffices to prove 
+\begin_inset Formula $f_{n}'\in K_{0}(f_{n})$
+\end_inset
+
+.
+ Under this assumption, for any polynomial 
+\begin_inset Formula $P(T)=\sum_{j\geq0}a_{j}T^{j}\in K_{0}[T]$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+P(f_{n})'=a_{0}'+\sum_{j\geq1}(a_{j}'f_{n}^{j}+ja_{j-1}f_{n}^{j-1}f_{n}')\in K_{0}(f_{n})
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $a_{j}'\in K_{0}$
+\end_inset
+
+ for all 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Thus, if 
+\begin_inset Formula $P,Q\in K_{0}[T]$
+\end_inset
+
+ are polynomials over 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $Q(f_{n})\neq0$
+\end_inset
+
+, then
+\begin_inset Formula 
+\[
+\left(\frac{P(f_{n})}{Q(f_{n})}\right)^{'}=\frac{Q(f_{n})P(f_{n})'-P(f_{n})Q(f_{n})'}{Q(f_{n})^{2}}\in K_{0}(f_{n})=K
+\]
+
+\end_inset
+
+since the numerator and denominator lie in 
+\begin_inset Formula $K_{0}(f_{n})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+It remains to check that the function 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ that is either algebraic over 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+ or is an exponential or logarithm of an element of 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+ has derivative 
+\begin_inset Formula $f_{n}'$
+\end_inset
+
+ that lies in 
+\begin_inset Formula $K_{0}(f_{n})$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $f_{n}=e^{g}$
+\end_inset
+
+ for some 
+\begin_inset Formula $g\in K_{0}$
+\end_inset
+
+, then 
+\begin_inset Formula $f_{n}'=g'f_{n}\in K_{0}(f_{n})$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $f_{n}=\log(g)$
+\end_inset
+
+ for some 
+\begin_inset Formula $g\in K_{0}$
+\end_inset
+
+, then 
+\begin_inset Formula $f_{n}'=g'/g\in K_{0}(f_{n})$
+\end_inset
+
+.
+ Finally, we treat the algebraic case.
+ Suppose 
+\begin_inset Formula $P(f_{n})=0$
+\end_inset
+
+ for a polynomial 
+\begin_inset Formula 
+\[
+P=T^{m}+a_{m-1}(x)T^{m-1}+\cdots+a_{0}(x)\in K_{0}[T].
+\]
+
+\end_inset
+
+Take 
+\begin_inset Formula $P$
+\end_inset
+
+ with minimal degree, so 
+\begin_inset Formula 
+\[
+P'(T):=mT^{m-1}+(m-1)a_{m-1}(x)T^{m-2}+\cdots+2a_{2}(x)T+a_{1}(x)
+\]
+
+\end_inset
+
+with degree 
+\begin_inset Formula $m-1$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $P'(f_{n})\neq0$
+\end_inset
+
+.
+ But 
+\begin_inset Formula 
+\begin{align*}
+0 & =P(f_{n})'\\
+ & =\left(f_{n}^{m}+a_{m-1}(x)f_{n}^{m-1}+\cdots+a_{0}(x)\right)'\\
+ & =(f_{n}^{m})'+(a_{m-1}(x)f_{n}^{m-1})'+\cdots+a_{0}'(x)\\
+ & =mf_{n}^{m-1}f_{n}'+(a_{m-1}'(x)f_{n}^{m-1}+(m-1)a_{m-1}f_{n}^{m-2}f_{n}')+\cdots+a_{0}'(x)\\
+ & =\sum_{j>0}ja_{j}(x)f_{n}^{j-1}f_{n}'+\sum_{j<m}a_{j}'(x)f_{n}^{j}\\
+ & =P'(f_{n})f_{n}'+\sum_{j<m}a_{j}'(x)f_{n}^{j},
+\end{align*}
+
+\end_inset
+
+so 
+\begin_inset Formula $P'(f_{n})f'_{n}=-\sum_{j<m}a_{j}'(x)f_{n}^{j}\in K_{0}[f_{n}]$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $P'(f_{n})\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $P'(f_{n})\in K_{0}(f_{n})$
+\end_inset
+
+, we have 
+\begin_inset Formula $f_{n}'\in K_{0}(f_{n})$
+\end_inset
+
+ by division.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ A field 
+\begin_inset Formula $K$
+\end_inset
+
+ of meromorphic functions that is closed under differentiation si called
+ a 
+\series bold
+differential field
+\series default
+.
+ The preceding theorem says that elementary fields are examples of differential
+ fields, but the method of proof shows more: if 
+\begin_inset Formula $K=K_{0}(f)$
+\end_inset
+
+ with 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+ any differential field and 
+\begin_inset Formula $f$
+\end_inset
+
+ either algebraic over 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+ or an exponential or logarithm of an element of 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+, then 
+\begin_inset Formula $K$
+\end_inset
+
+ is a differential field.
+ The field 
+\begin_inset Formula $\mathbb{C}(x,\sin(x),\cos(x))$
+\end_inset
+
+ is a differential field since 
+\begin_inset Formula $\sin'(x)=\cos(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $\cos'(x)=-\sin(x)$
+\end_inset
+
+.
+ In contrast, 
+\begin_inset Formula $\mathbb{C}(x,\sin(x))$
+\end_inset
+
+ is 
+\emph on
+not 
+\emph default
+a differential field.
+ More specifically, 
+\begin_inset Formula $\sin'(x)=\cos(x)$
+\end_inset
+
+ but 
+\begin_inset Formula $\cos(x)$
+\end_inset
+
+ is not an element of 
+\begin_inset Formula $\mathbb{C}(x,\sin(x))$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ A meromorphic function 
+\begin_inset Formula $f$
+\end_inset
+
+ can be 
+\series bold
+integrated in elementary terms 
+\series default
+if 
+\begin_inset Formula $f=g'$
+\end_inset
+
+ for an elementary function 
+\begin_inset Formula $g$
+\end_inset
+
+ (and so 
+\begin_inset Formula $f$
+\end_inset
+
+ is necessarily elementary, by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremelementaryisdifferential})
+\end_layout
+
+\end_inset
+
+).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ If we only considered 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-valued functions (and not 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+-valued functions), then the definition above would give the 
+\emph on
+wrong 
+\emph default
+concept of elementary integration.
+ For example, we would want to say that 
+\begin_inset Formula $1/(1+x^{2})$
+\end_inset
+
+ admits an elementary integral (such as 
+\begin_inset Formula $\arctan(x)$
+\end_inset
+
+).
+ This is the case in the 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+-valued setting, since we know that 
+\begin_inset Formula $\arctan(x)=\frac{i}{2}\log\left(\frac{1-ix}{1+ix}\right)$
+\end_inset
+
+.
+ However, if we work in the 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-valued setting and permit only the operations of eponentiation, logarithm,
+ and solving of algebraic equations, then it can be proved that 
+\begin_inset Formula $1/(1+x^{2})$
+\end_inset
+
+ is 
+\emph on
+not 
+\emph default
+integrable (over 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+) in such elementary terms.
+ A way around this technical glitch in the 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-valued case is to incorporate all of the usual trigonometric functions
+ and their inverses (and not merely exponentials and logarithms) in an 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-valued definition of “integration in elementary terms”.
+ Unfortunately, this change in definitions is disastrous for the attempt
+ to push through an 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-valued analogue of Liouville’s results because such trigonometric functions
+ and their inverses are not solutions to simple first-order differential
+ equations.
+ Since our main interest is in impossibility results, Liouville’s work in
+ the 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+-valued setting will give what we require.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Integrability Criterion and Applications
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremliouville}
+\end_layout
+
+\end_inset
+
+ (Liouville) Let 
+\begin_inset Formula $f$
+\end_inset
+
+ be an elementary function and let 
+\begin_inset Formula $K$
+\end_inset
+
+ be an elementary field containing 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ The function 
+\begin_inset Formula $f$
+\end_inset
+
+ can be integrated in elementary terms if and only if there exist nonzero
+ 
+\begin_inset Formula $c_{1},\dots,c_{n}\in\mathbb{C}$
+\end_inset
+
+, nonzero 
+\begin_inset Formula $g_{1},\dots,g_{n}\in K$
+\end_inset
+
+, and an element 
+\begin_inset Formula $h\in K$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f=\sum c_{j}\frac{g_{j}'}{g_{j}}+h'.
+\]
+
+\end_inset
+
+The key point is that the 
+\begin_inset Formula $g_{j}$
+\end_inset
+
+'s and 
+\begin_inset Formula $h$
+\end_inset
+
+ can be found in 
+\emph on
+any 
+\emph default
+elementary field 
+\begin_inset Formula $K$
+\end_inset
+
+ containing 
+\begin_inset Formula $f$
+\end_inset
+
+; 
+\begin_inset Formula $\sum c_{j}\log(g_{j})+h$
+\end_inset
+
+ is then an elementary integral of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Consider 
+\begin_inset Formula $f=e^{-x^{2}}$
+\end_inset
+
+.
+ This lies in the elementary field 
+\begin_inset Formula $K=\mathbb{C}(x,e^{-x^{2}})$
+\end_inset
+
+.
+ Hence, Liouville's theorem says that an elementary anti-derivative of 
+\begin_inset Formula $f$
+\end_inset
+
+ 
+\emph on
+must 
+\emph default
+have the special form 
+\begin_inset Formula $\sum c_{j}\log(g_{j})+h$
+\end_inset
+
+ for some 
+\begin_inset Formula $h\in\mathbb{C}(x,e^{-x^{2}})$
+\end_inset
+
+ and nonzero 
+\begin_inset Formula $c_{j}\in\mathbb{C}$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{j}\in\mathbb{C}(x,e^{-x^{2}})$
+\end_inset
+
+.
+ It is not obvious how to prove the non-existence of such 
+\begin_inset Formula $h$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{j}$
+\end_inset
+
+'s, but this still represents a significant advance over the problem of
+ contemplating all elementary functions as candidates for elementary anti-deriva
+tives of 
+\begin_inset Formula $e^{-x^{2}}$
+\end_inset
+
+ .
+ We will soon see that the possible form of such an elementary anti-derivative
+ of 
+\begin_inset Formula $e^{-x^{2}}$
+\end_inset
+
+ can be made even more special, and so it becomes a problem that we can
+ solve without too much difficulty.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ There is a very interesting class of integrals for which Liouville’s result
+ in the above form is immediately applicable without an extra simplification:
+ elliptic integrals.
+ Just as trignometric functions may be introduced through inversion of integral
+ functions of the form 
+\begin_inset Formula $\int dx/\sqrt{x^{2}-1}$
+\end_inset
+
+ that arise from calculation of arc length along a unit circle, the theory
+ of elliptic functions grew out of a study of inversion of integral functions
+ of the form 
+\begin_inset Formula $\int dx/\sqrt{P(x)}$
+\end_inset
+
+ for certain cubic and quartic polynomials 
+\begin_inset Formula $P(X)\in\mathbb{R}[X]$
+\end_inset
+
+ without repeated roots; such integrals arise in the calculation of arc
+ length along an ellipse.
+ In general, if 
+\begin_inset Formula $P(X)\in\mathbb{R}[X]$
+\end_inset
+
+ is any monic polynomial with degree 
+\begin_inset Formula $\geq3$
+\end_inset
+
+ and no repeated roots then we claim that 
+\begin_inset Formula $\int dx/\sqrt{P(x)}$
+\end_inset
+
+ is not an elementary function.
+ Since 
+\begin_inset Formula $K=\mathbb{C}(x,\sqrt{P})$
+\end_inset
+
+ is an elementary field, by the criterion in Liouville's theorem, it suffices
+ to prove that there does not exist an identity of the form
+\begin_inset Formula 
+\[
+\frac{1}{\sqrt{P(x)}}=\sum c_{j}\frac{g_{j}'}{g_{j}}+h'
+\]
+
+\end_inset
+
+with nonzero 
+\begin_inset Formula $c_{1},\dots,c_{n}\in\mathbb{C}$
+\end_inset
+
+, nonzero 
+\begin_inset Formula $g_{1},\dots,g_{n}\in K$
+\end_inset
+
+, and an element 
+\begin_inset Formula $h\in K$
+\end_inset
+
+.
+ Such impossibility is a consequence of general facts from the theory of
+ compact Riemann surfaces.
+ More specifically, the above identity is equivalent to the equality of
+ meromorphic 
+\begin_inset Formula $1$
+\end_inset
+
+-forms 
+\begin_inset Formula 
+\[
+\frac{dx}{y}=\sum c_{j}\frac{dg_{j}}{g_{j}}+dh
+\]
+
+\end_inset
+
+on the compact Riemann surface 
+\begin_inset Formula $C$
+\end_inset
+
+ associated to the equation 
+\begin_inset Formula $y^{2}=P(x)$
+\end_inset
+
+, and for 
+\begin_inset Formula $\deg(P)>2$
+\end_inset
+
+ the left side is a nonzero holomorphic 
+\begin_inset Formula $1$
+\end_inset
+
+-form on 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ But a nonzero holomorphic 
+\begin_inset Formula $1$
+\end_inset
+
+-form on a compact Riemann surface never admits an expression as a linear
+ combination of logarithmic meromorphic differentials 
+\begin_inset Formula $dg/g$
+\end_inset
+
+ and exact meromorphic differentials 
+\begin_inset Formula $dh$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Choose 
+\begin_inset Formula $f,g\in\mathbb{C}(X)$
+\end_inset
+
+ with 
+\begin_inset Formula $f\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ nonconstant.
+ The function 
+\begin_inset Formula $f(x)e^{g(x)}$
+\end_inset
+
+ can be integrated in elementary terms if and only if there exists a rational
+ function 
+\begin_inset Formula $R\in\mathbb{C}(X)$
+\end_inset
+
+ such that 
+\begin_inset Formula $R'(X)+g'(X)R(X)=f(X)$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{C}(X)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The content of the criterion in this theorem is not that the differential
+ equation 
+\begin_inset Formula $R'(x)+g'(x)R(x)=f(x)$
+\end_inset
+
+ has a solution as a 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+-valued differentiable function of 
+\begin_inset Formula $x$
+\end_inset
+
+ (indeed, one such solution is given by 
+\begin_inset Formula $e^{g'(x)x}\left(\int_{0}^{x}f(t)e^{-g'(t)t}dt\right).$
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

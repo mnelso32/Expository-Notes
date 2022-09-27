@@ -1,0 +1,800 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Uniqueness of Measure Extensions
+\end_layout
+
+\begin_layout Subsubsection*
+Uniqueness of Extensions when Target Space is Hausdorff
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propuniquenessofextensions}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a topological space and let 
+\begin_inset Formula $f\colon A\to Y$
+\end_inset
+
+ be a continuous function from a dense subspace 
+\begin_inset Formula $A$
+\end_inset
+
+ of 
+\begin_inset Formula $X$
+\end_inset
+
+ to a Hausdorff space 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ If there exists a continuous extension of 
+\begin_inset Formula $f$
+\end_inset
+
+ to all of 
+\begin_inset Formula $X$
+\end_inset
+
+, then it must be unique.
+ In other words, suppose 
+\begin_inset Formula $\widetilde{f}_{1}\colon X\to Y$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{f}_{2}\colon X\to Y$
+\end_inset
+
+ are continuous functions such that
+\begin_inset Formula 
+\[
+\widetilde{f}_{1}|_{A}=f=\widetilde{f}_{2}|_{A}.
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\widetilde{f}_{1}=\widetilde{f}_{2}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ To prove uniqueness, assume for a contradiction that 
+\begin_inset Formula $\widetilde{f}_{1}\colon X\to Y$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{f}_{2}\colon X\to Y$
+\end_inset
+
+ are two continuous extensions of 
+\begin_inset Formula $f$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widetilde{f}_{1}\neq\widetilde{f}_{2}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widetilde{f}_{1}(x)\neq\widetilde{f}_{2}(x)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $Y$
+\end_inset
+
+ is Hausdorff, we may choose open neighborhoods 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{2}$
+\end_inset
+
+ of 
+\begin_inset Formula $\widetilde{f}_{1}(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{f}_{2}(x)$
+\end_inset
+
+ respectively such that 
+\begin_inset Formula $V_{1}\cap V_{2}=\emptyset$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\widetilde{f}_{1}^{-1}(V_{1})\cap\widetilde{f}_{2}^{-1}(V_{2})$
+\end_inset
+
+ is an open neighborhood of 
+\begin_inset Formula $x$
+\end_inset
+
+, and so it must have a nonempty intersection with 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $a\in A\cap\widetilde{f}_{1}^{-1}(V_{1})\cap\widetilde{f}_{2}^{-1}(V_{2})$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+f(a) & =\widetilde{f}_{1}(a)\\
+ & \in V_{1}.
+\end{align*}
+
+\end_inset
+
+Similarly, 
+\begin_inset Formula 
+\begin{align*}
+f(a) & =\widetilde{f}_{2}(a)\\
+ & \in V_{2}.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $f(a)\in V_{1}\cap V_{2}$
+\end_inset
+
+, which is a contradiction since 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{2}$
+\end_inset
+
+ were chosen to disjoint from one another.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Continuity of Finite Measure
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ be an algebra and let 
+\begin_inset Formula $\mu$
+\end_inset
+
+ be a measure on 
+\begin_inset Formula $\sigma(\mathcal{A})$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+(\mu|_{\mathcal{A}})^{*}(A)\geq\mu(A)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $A\in\sigma(\mathcal{A})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A\in\sigma(\mathcal{A})$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+(\mu|_{\mathcal{A}})^{*}(A) & =\inf\left\{ \sum_{n=1}^{\infty}(\mu|_{\mathcal{A}})(E_{n})\mid(E_{n})\text{ is a sequence in }\mathcal{A}\text{ such that }A\subseteq\bigcup_{n=1}^{\infty}E_{n}\right\} \\
+ & =\inf\left\{ \sum_{n=1}^{\infty}\mu(E_{n})\mid(E_{n})\text{ is a sequence in }\mathcal{A}\text{ such that }A\subseteq\bigcup_{n=1}^{\infty}E_{n}\right\} \\
+ & \geq\inf\left\{ \mu\left(\bigcup_{n=1}^{\infty}E_{n}\right)\mid(E_{n})\text{ is a sequence in }\mathcal{A}\text{ such that }A\subseteq\bigcup_{n=1}^{\infty}E_{n}\right\} \\
+ & \geq\mu(A),
+\end{align*}
+
+\end_inset
+
+where we used countable subadditivity of 
+\begin_inset Formula $\mu$
+\end_inset
+
+ to get from the second line to the third line, and where we used monotonicity
+ of 
+\begin_inset Formula $\mu$
+\end_inset
+
+ to get from the third line to the fourth line.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propcontinuousme}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ be an algebra and let 
+\begin_inset Formula $\mu$
+\end_inset
+
+ be a finite measure on 
+\begin_inset Formula $\sigma(\mathcal{A})$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is Lipschitz continuous with respect to 
+\begin_inset Formula $\mathrm{d}_{\mu|_{\mathcal{A}}}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A,B\in\sigma(\mathcal{A})$
+\end_inset
+
+.
+ Assume without loss of generality that 
+\begin_inset Formula $\mu(A)\geq\mu(B)$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\mu(A)-\mu(B) & \leq\mu(A\backslash B)\\
+ & \leq\mu((A\backslash B)\cup(B\backslash A))\\
+ & =\mu(A\Delta B)\\
+ & \leq(\mu|_{\mathcal{A}})^{*}(A\Delta B)\\
+ & =\mathrm{d}_{\mu|_{\mathcal{A}}}(A,B),
+\end{align*}
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is finite in the first line.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Uniqueness of Extension for Measures
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu$
+\end_inset
+
+ be two finite measures defined on 
+\begin_inset Formula $\sigma(\mathcal{A})$
+\end_inset
+
+ which coincide on 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mu=\nu$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We first note that 
+\begin_inset Formula $\mathrm{d}_{\mu|_{\mathcal{A}}}=\mathrm{d}_{\nu|_{\mathcal{A}}}$
+\end_inset
+
+ since 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu$
+\end_inset
+
+ agree on 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+.
+ Indeed, let 
+\begin_inset Formula $A,B\in\sigma(\mathcal{A})$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}_{\mu|_{\mathcal{A}}}(A,B) & =(\mu|_{\mathcal{A}})^{*}(A\Delta B)\\
+ & =\inf\left\{ \sum_{n=1}^{\infty}(\mu|_{\mathcal{A}})(E_{n})\mid(E_{n})\text{ is a sequence in }\mathcal{A}\text{ such that }A\Delta B\subseteq\bigcup_{n=1}^{\infty}E_{n}\right\} \\
+ & =\inf\left\{ \sum_{n=1}^{\infty}(\nu|_{\mathcal{A}})(E_{n})\mid(E_{n})\text{ is a sequence in }\mathcal{A}\text{ such that }A\Delta B\subseteq\bigcup_{n=1}^{\infty}E_{n}\right\} \\
+ & =(\nu|_{\mathcal{A}})^{*}(A\Delta B)\\
+ & =\mathrm{d}_{\nu|_{\mathcal{A}}}(A,B).
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\mathrm{d}_{\mu|_{\mathcal{A}}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{d}_{\nu|_{\mathcal{A}}}$
+\end_inset
+
+ induce a common topology on 
+\begin_inset Formula $\sigma(\mathcal{A})$
+\end_inset
+
+.
+ Both 
+\begin_inset Formula $\mu\colon\sigma(\mathcal{A})\to[0,\infty]$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu\colon\sigma(\mathcal{A})\to[0,\infty]$
+\end_inset
+
+ are continuous extensions of 
+\begin_inset Formula $\mu|_{\mathcal{A}}=\nu|_{\mathcal{A}}$
+\end_inset
+
+ with respect to this common topology by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propcontinuousme})
+\end_layout
+
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $[0,\infty]$
+\end_inset
+
+ is Hausdorff and since 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is dense in 
+\begin_inset Formula $\sigma(\mathcal{A})$
+\end_inset
+
+ with respect to this common topology, it follows from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propuniquenessofextensions})
+\end_layout
+
+\end_inset
+
+ that 
+\begin_inset Formula $\mu=\nu$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

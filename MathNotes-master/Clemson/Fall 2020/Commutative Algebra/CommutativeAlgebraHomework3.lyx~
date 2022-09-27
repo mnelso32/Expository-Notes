@@ -1,0 +1,2722 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Commutative Algebra Homework 3
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring (maybe without identity).
+ We say 
+\begin_inset Formula $R$
+\end_inset
+
+ is 
+\series bold
+von Neumann regular 
+\series default
+if for every 
+\begin_inset Formula $x\in R$
+\end_inset
+
+ there exists 
+\begin_inset Formula $y\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula $x=xyx$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Show that any direct product or direct sum of fields is von Neumann regular.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\{K_{\lambda}\}_{\lambda\in\Lambda}$
+\end_inset
+
+ be a collection of fields indexed over a set 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+.
+ First let us show that 
+\begin_inset Formula $\prod_{\lambda}K_{\lambda}$
+\end_inset
+
+ is von Neumann regular.
+ Let 
+\begin_inset Formula $(x_{\lambda})$
+\end_inset
+
+ be an arbitrary element in 
+\begin_inset Formula $\prod K_{\lambda}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $\lambda\in\Lambda$
+\end_inset
+
+, note that 
+\begin_inset Formula $K_{\lambda}$
+\end_inset
+
+ is von Neumann regular.
+ Indeed, 
+\begin_inset Formula $K_{\lambda}$
+\end_inset
+
+ is a field, so if 
+\begin_inset Formula $x_{\lambda}\neq0$
+\end_inset
+
+, we can choose 
+\begin_inset Formula $y_{\lambda}=x_{\lambda}^{-1}$
+\end_inset
+
+, and if 
+\begin_inset Formula $x_{\lambda}=0$
+\end_inset
+
+, we can choose 
+\begin_inset Formula $y_{\lambda}=0$
+\end_inset
+
+.
+ In any case, we see that 
+\begin_inset Formula $(y_{\lambda})\in\prod K_{\lambda}$
+\end_inset
+
+ satisfies
+\begin_inset Formula 
+\begin{align*}
+(x_{\lambda})(y_{\lambda})(x_{\lambda}) & =(x_{\lambda}y_{\lambda}x_{\lambda})\\
+ & =(x_{\lambda}).
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\prod_{\lambda}K_{\lambda}$
+\end_inset
+
+ is von Neumann regular.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The same proof also shows 
+\begin_inset Formula $\bigoplus_{\lambda}K_{\lambda}$
+\end_inset
+
+ is von Neumann regular.
+ Indeed, we view 
+\begin_inset Formula $\bigoplus_{\lambda}K_{\lambda}$
+\end_inset
+
+ as a subring of 
+\begin_inset Formula $\prod_{\lambda}K_{\lambda}$
+\end_inset
+
+ given by the set of all sequences 
+\begin_inset Formula $(x_{\lambda})\in\prod_{\lambda}K_{\lambda}$
+\end_inset
+
+ such that there exists a finite subset 
+\begin_inset Formula $\Lambda_{0}$
+\end_inset
+
+ of 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ where 
+\begin_inset Formula $x_{\lambda}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda\in\Lambda\backslash\Lambda_{0}$
+\end_inset
+
+.
+ In this case, for each 
+\begin_inset Formula $\lambda_{0}\in\Lambda_{0}$
+\end_inset
+
+, we choose 
+\begin_inset Formula $y_{\lambda_{0}}\in K_{\lambda_{0}}$
+\end_inset
+
+ such that 
+\begin_inset Formula $x_{\lambda_{0}}y_{\lambda_{0}}x_{\lambda_{0}}=x_{\lambda_{0}}$
+\end_inset
+
+ as before, and for each 
+\begin_inset Formula $\lambda\in\Lambda\backslash\Lambda_{0}$
+\end_inset
+
+, we simply set 
+\begin_inset Formula $y_{\lambda}=0$
+\end_inset
+
+.
+ Then clearly 
+\begin_inset Formula $(y_{\lambda})\in\bigoplus_{\lambda}K_{\lambda}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula 
+\begin{align*}
+(x_{\lambda})(y_{\lambda})(x_{\lambda}) & =(x_{\lambda}y_{\lambda}x_{\lambda})\\
+ & =(x_{\lambda}).
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\bigoplus_{\lambda}K_{\lambda}$
+\end_inset
+
+ is von Neumann regular.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring with identity.
+ Suppose 
+\begin_inset Formula $R$
+\end_inset
+
+ is von Neumann regular.
+ Then 
+\begin_inset Formula $R$
+\end_inset
+
+ is 
+\begin_inset Formula $0$
+\end_inset
+
+-dimensional.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Assume for a contradiction that 
+\begin_inset Formula $R$
+\end_inset
+
+ is not 
+\begin_inset Formula $0$
+\end_inset
+
+-dimensional.
+ Choose primes 
+\begin_inset Formula $\mathfrak{p},\mathfrak{q}\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathfrak{p}\subset\mathfrak{q}$
+\end_inset
+
+ where the inclusion is strict.
+ Clearly 
+\begin_inset Formula $R\slash\mathfrak{p}$
+\end_inset
+
+ is von Neumann, so by passing the to quotient 
+\begin_inset Formula $R\slash\mathfrak{p}$
+\end_inset
+
+ if necessary, we may as well assume that 
+\begin_inset Formula $R$
+\end_inset
+
+ is an integral domain, that 
+\begin_inset Formula $\mathfrak{p}=0$
+\end_inset
+
+, and that 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+ is a nonzero ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Choose a nonzero element 
+\begin_inset Formula $x\in\mathfrak{q}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is von Neumann, there exists 
+\begin_inset Formula $y\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula $xyx=x$
+\end_inset
+
+.
+ This implies
+\begin_inset Formula 
+\[
+x(yx-1)=0.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $x\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain, we see that 
+\begin_inset Formula $yx=1$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $x$
+\end_inset
+
+ is a unit.
+ This contradicts the fact that 
+\begin_inset Formula $x\in\mathfrak{q}$
+\end_inset
+
+ (prime ideals do not contain units!).
+ Thus our assumption that 
+\begin_inset Formula $R$
+\end_inset
+
+ is not 
+\begin_inset Formula $0$
+\end_inset
+
+-dimensional leads to a contradiction, so 
+\begin_inset Formula $R$
+\end_inset
+
+ must be 
+\begin_inset Formula $0$
+\end_inset
+
+-dimensional.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring with identity.
+ Suppose 
+\begin_inset Formula $R$
+\end_inset
+
+ is von Neumann regular and let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be a prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $R_{\mathfrak{p}}\cong R\slash\mathfrak{p}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Note that since 
+\begin_inset Formula $R$
+\end_inset
+
+ is 
+\begin_inset Formula $0$
+\end_inset
+
+-dimensional (by problem 2) we see that 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is a maximal ideal, and thus 
+\begin_inset Formula $R\slash\mathfrak{p}$
+\end_inset
+
+ is a field.
+ In particular, it follows that 
+\begin_inset Formula $R\slash\mathfrak{p}\cong(R\slash\mathfrak{p})_{\mathfrak{p}\slash\mathfrak{p}}=(R\slash\mathfrak{p})_{\mathfrak{p}}$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $R_{\mathfrak{p}}$
+\end_inset
+
+ is also a field.
+ Indeed, to this, it suffices to show that the maximal ideal 
+\begin_inset Formula $\mathfrak{p}R_{\mathfrak{p}}=0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $x/s\in\mathfrak{p}R_{\mathfrak{p}}$
+\end_inset
+
+ where 
+\begin_inset Formula $x\in\mathfrak{p}$
+\end_inset
+
+ and 
+\begin_inset Formula $s\notin\mathfrak{p}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $y\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula $xyx=x$
+\end_inset
+
+.
+ In other words, we have have 
+\begin_inset Formula $(xy-1)x=0$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $xy-1\notin\mathfrak{p}$
+\end_inset
+
+ since 
+\begin_inset Formula $xy\in\mathfrak{p}$
+\end_inset
+
+ and 
+\begin_inset Formula $1\notin\mathfrak{p}$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $x/s=0$
+\end_inset
+
+ in 
+\begin_inset Formula $R_{\mathfrak{p}}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\mathfrak{p}R_{\mathfrak{p}}=0$
+\end_inset
+
+.
+ In particular, it follows that 
+\begin_inset Formula $R_{\mathfrak{p}}\cong R_{\mathfrak{p}}\slash\mathfrak{p}R_{\mathfrak{p}}$
+\end_inset
+
+.
+ Finally, since localization is exact, we already have 
+\begin_inset Formula $R_{\mathfrak{p}}\slash\mathfrak{p}R_{\mathfrak{p}}\cong(R\slash\mathfrak{p})_{\mathfrak{p}}$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\[
+R_{\mathfrak{p}}\cong R_{\mathfrak{p}}\slash\mathfrak{p}R_{\mathfrak{p}}\cong(R\slash\mathfrak{p})_{\mathfrak{p}}\cong R\slash\mathfrak{p}.
+\]
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain.
+ Then 
+\begin_inset Formula $R$
+\end_inset
+
+ is a unique factorization domain if and only if 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ is a unique factorization domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We give two solutions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ First suppose 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ is a unique factorization domain.
+ Let 
+\begin_inset Formula $a$
+\end_inset
+
+ be a nonzero nonunit in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then viewing 
+\begin_inset Formula $a$
+\end_inset
+
+ as a constant polynomial in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ we see that 
+\begin_inset Formula $a$
+\end_inset
+
+ has an irreducible factorization, say
+\begin_inset Formula 
+\begin{equation}
+a=p_{1}(X)\cdots p_{m}(X)\label{eq:factorizationirr}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $p_{1},\dots,p_{m}$
+\end_inset
+
+ are irreducible polynomials in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+.
+ By taking degrees on both sides of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:factorizationirr})
+\end_layout
+
+\end_inset
+
+, we obtain
+\begin_inset Formula 
+\begin{equation}
+0=\deg(p_{1}\cdots p_{m})=\deg p_{1}+\cdots+\deg p_{m},\label{eq:domaindegree}
+\end{equation}
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain to get the equality on the right in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:domaindegree})
+\end_layout
+
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $\deg p_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ Thus each 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ is a constant polynomial.
+ Irreducible constant polynomials in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ are precisely the irreducible elements in 
+\begin_inset Formula $R$
+\end_inset
+
+, so 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:factorizationirr})
+\end_layout
+
+\end_inset
+
+ is an irreducible factorization in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Furthermore, the factorization 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:factorizationirr})
+\end_layout
+
+\end_inset
+
+ is unique since 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ is a unique factorization domain.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now suppose 
+\begin_inset Formula $R$
+\end_inset
+
+ is a unique factorization domain.
+ Let 
+\begin_inset Formula $f(X)$
+\end_inset
+
+ be a nonzero nonunit in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ and let 
+\begin_inset Formula $K$
+\end_inset
+
+ be the fraction field of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ First note that 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ is Noetherian, and thus 
+\begin_inset Formula $f$
+\end_inset
+
+ has an irreducible factorization (see Appendix for proof of this).
+ Suppose 
+\begin_inset Formula 
+\[
+p_{1}(X)\cdots p_{m}(X)=f(T)=q_{1}(X)\cdots q_{n}(X)
+\]
+
+\end_inset
+
+are two irreducible factorizations of 
+\begin_inset Formula $f$
+\end_inset
+
+ in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+.
+ By Gauss' Lemma, each 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{j}$
+\end_inset
+
+ is irreducible in 
+\begin_inset Formula $K[X]$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $K[X]$
+\end_inset
+
+ is a unique factorization domain, we see that 
+\begin_inset Formula $m=n$
+\end_inset
+
+ and (perhaps after relabeling) 
+\begin_inset Formula $p_{i}\sim q_{i}$
+\end_inset
+
+ in 
+\begin_inset Formula $K[X]$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $p_{i}=x_{i}q_{i}$
+\end_inset
+
+ for some 
+\begin_inset Formula $x_{i}\in K[X]^{\times}=K^{\times}$
+\end_inset
+
+.
+ Note that since 
+\begin_inset Formula $p_{i},q_{i}\in R[X]$
+\end_inset
+
+, we must have 
+\begin_inset Formula $x_{i}\in R\backslash\{0\}$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\begin{align*}
+0 & =p_{1}(X)\cdots p_{m}(X)-q_{1}(X)\cdots q_{m}(X)\\
+ & =p_{1}(X)\cdots p_{m}(X)-x_{1}\cdots x_{m}p_{1}(X)\cdots p_{m}(X)\\
+ & =p_{1}(X)\cdots p_{m}(X)(1-x_{1}\cdots x_{m})\\
+ & =f(X)(1-x_{1}\cdots x_{m}),
+\end{align*}
+
+\end_inset
+
+and since 
+\begin_inset Formula $f\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ is a domain, this implies 
+\begin_inset Formula $1=x_{1}\cdots x_{n}$
+\end_inset
+
+, which implies each 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is a unit in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $p_{i}\sim q_{i}$
+\end_inset
+
+ in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ is a unique factorization domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ By the same proof as in the solution above, we see that if 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ is a unique factorization domain, then 
+\begin_inset Formula $R$
+\end_inset
+
+ is a unique factorization domain.
+ We want to give an alternative proof for the converse direction.
+ Suppose 
+\begin_inset Formula $R$
+\end_inset
+
+ is a unique factorization domain.
+ Let 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+ be a prime ideal in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathfrak{q}\cap R$
+\end_inset
+
+ is a prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a unique factorization domain, there exists a prime element of 
+\begin_inset Formula $R$
+\end_inset
+
+ which is contained in 
+\begin_inset Formula $\mathfrak{q}\cap R$
+\end_inset
+
+, say 
+\begin_inset Formula $a\in\mathfrak{q}\cap R$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $a$
+\end_inset
+
+ is a prime element of 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ which is contained in 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+.
+ Indeed, suppose 
+\begin_inset Formula $a=fg$
+\end_inset
+
+ where 
+\begin_inset Formula $f,g\in R[X]$
+\end_inset
+
+.
+ By taking degrees on both sides, we see that 
+\begin_inset Formula $\deg f=0=\deg g$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $f,g\in R$
+\end_inset
+
+, which means either 
+\begin_inset Formula $f\in\langle a\rangle$
+\end_inset
+
+ or 
+\begin_inset Formula $g\in\langle a\rangle$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $a$
+\end_inset
+
+ is a prime element of 
+\begin_inset Formula $R[X]$
+\end_inset
+
+.
+ It follows that every prime ideal in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ contains a prime element, thus 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ is a unique factorization domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring with identity.
+ Characterize 
+\begin_inset Formula $(R[X])^{\times}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f(X)\in R[X]$
+\end_inset
+
+ and it express it as
+\begin_inset Formula 
+\[
+f(X)=a_{m}X^{m}+\cdots+a_{1}X+a_{0}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $a_{0},a_{1},\dots,a_{m}\in R$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $f$
+\end_inset
+
+ is a unit in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $a_{0}$
+\end_inset
+
+ is a unit in 
+\begin_inset Formula $R$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ is nilpotent for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To see this, first suppose 
+\begin_inset Formula $a_{0}$
+\end_inset
+
+ is a unit in 
+\begin_inset Formula $R$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ is nilpotent for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ Then each 
+\begin_inset Formula $a_{i}X^{i}$
+\end_inset
+
+ is also nilpotent, and since the sum of two nilpotent elements is nilpotent,
+ we see that 
+\begin_inset Formula $\sum_{i=1}^{m}a_{i}X^{i}$
+\end_inset
+
+ is nilpotent.
+ Also since 
+\begin_inset Formula $a_{0}$
+\end_inset
+
+ is a unit in 
+\begin_inset Formula $R$
+\end_inset
+
+, it is also a unit in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $f$
+\end_inset
+
+ is the sum of a unit plus a nilpotent element.
+ This implies 
+\begin_inset Formula $f$
+\end_inset
+
+ is a unit since the sum of a unit plus a nilpotent element is always a
+ unit (if 
+\begin_inset Formula $u$
+\end_inset
+
+ is a unit with 
+\begin_inset Formula $uv=1$
+\end_inset
+
+, and 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ is a nilpotent element with 
+\begin_inset Formula $\varepsilon^{m}=0$
+\end_inset
+
+, then 
+\begin_inset Formula $(u+\varepsilon)\sum_{i=1}^{m}v^{i}\varepsilon^{i-1}=1$
+\end_inset
+
+).
+ This establishes one direction.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For the reverse direction, suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is a unit in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+.
+ We consider two steps:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 1: 
+\series default
+Assume that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain.
+ In this case, we want to show that 
+\begin_inset Formula $a_{0}$
+\end_inset
+
+ is a unit in 
+\begin_inset Formula $R$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ To see this, first we assume for a contradiction that 
+\begin_inset Formula $a_{i}\neq0$
+\end_inset
+
+ for some 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ By relabeling if necessary, we may in fact that assume 
+\begin_inset Formula $a_{m}\neq0$
+\end_inset
+
+ where 
+\begin_inset Formula $a_{m}$
+\end_inset
+
+ is the lead coefficient of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ Now let 
+\begin_inset Formula $g(X)\in R[X]$
+\end_inset
+
+ such that 
+\begin_inset Formula $fg=1$
+\end_inset
+
+ and it express it as
+\begin_inset Formula 
+\[
+g(X)=b_{n}X^{n}+\cdots+b_{1}X+b_{0}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $b_{0},b_{1},\dots,b_{n}\in R$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{n}\neq0$
+\end_inset
+
+.
+ Then the lead term of 
+\begin_inset Formula $fg$
+\end_inset
+
+ is just 
+\begin_inset Formula $a_{m}b_{n}X^{m+n}$
+\end_inset
+
+ since 
+\begin_inset Formula $a_{m}\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{n}\neq0$
+\end_inset
+
+.
+ This is a contradiction since 
+\begin_inset Formula $fg=1$
+\end_inset
+
+ and 
+\begin_inset Formula $m+n\geq1$
+\end_inset
+
+.
+ Thus we must have 
+\begin_inset Formula $a_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ By the same proof, we must also have 
+\begin_inset Formula $b_{j}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq j\leq n$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $f(X)=a_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $g(X)=b_{0}$
+\end_inset
+
+, and 
+\begin_inset Formula $fg=1$
+\end_inset
+
+ implies 
+\begin_inset Formula $a_{0}b_{0}=1$
+\end_inset
+
+ which implies 
+\begin_inset Formula $a_{0}$
+\end_inset
+
+ is a unit.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 2: 
+\series default
+Now we consider the more general case where 
+\begin_inset Formula $R$
+\end_inset
+
+ may not be a domain.
+ First, to see why 
+\begin_inset Formula $a_{0}$
+\end_inset
+
+ is a unit, note that 
+\begin_inset Formula $a_{0}$
+\end_inset
+
+ is in the image of the unit 
+\begin_inset Formula $f$
+\end_inset
+
+ under the evaluation map 
+\begin_inset Formula $\mathrm{ev}_{0}\colon R[X]\to R$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathrm{ev}_{0}$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\mathrm{ev}_{0}(h)=h(0)$
+\end_inset
+
+ for all 
+\begin_inset Formula $h(X)\in R[X]$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $a_{0}=\mathrm{ev}_{0}(f)$
+\end_inset
+
+ is a unit since 
+\begin_inset Formula $f$
+\end_inset
+
+ is a unit and 
+\begin_inset Formula $\mathrm{ev}_{0}$
+\end_inset
+
+ is a ring homomorphism (which preserves the identity element).
+ Next, to see why 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ is nilpotent for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+, first note that for any prime ideal 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ in 
+\begin_inset Formula $R$
+\end_inset
+
+, the quotient 
+\begin_inset Formula $R\slash\mathfrak{p}$
+\end_inset
+
+ is a domain.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is a unit in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+, its image 
+\begin_inset Formula $\overline{f}$
+\end_inset
+
+ is a unit in 
+\begin_inset Formula $(R\slash\mathfrak{p})[X]$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\overline{f}$
+\end_inset
+
+ is obtained from 
+\begin_inset Formula $f$
+\end_inset
+
+ by reducing coefficients modulo 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+, we see from step 1 above that 
+\begin_inset Formula $a_{i}\in\mathfrak{p}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ was arbitrary, we see that
+\begin_inset Formula 
+\[
+a_{i}\in\bigcap_{\mathfrak{p}\in\mathrm{Spec}\,R}\mathfrak{p}=\mathrm{N}(R)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathrm{N}(R)$
+\end_inset
+
+ is the set of all nilpotents in 
+\begin_inset Formula $R$
+\end_inset
+
+ (see homework 1 for why 
+\begin_inset Formula $\bigcap\mathfrak{p}=\mathrm{N}(R)$
+\end_inset
+
+).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 6
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defnmaximal}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring with identity and let 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+ be a chain of ideals between the ideals 
+\begin_inset Formula $I\subseteq J$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $(I_{\lambda})$
+\end_inset
+
+ is 
+\series bold
+maximal 
+\series default
+if any ideal 
+\begin_inset Formula $\mathfrak{a}\subseteq R$
+\end_inset
+
+ that is comparable to every ideal in 
+\begin_inset Formula $(I_{\lambda})$
+\end_inset
+
+, must in fact belong to 
+\begin_inset Formula $(I_{\lambda})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Show that for any ideals 
+\begin_inset Formula $I\subseteq J$
+\end_inset
+
+, there is a maximal chain of ideals between 
+\begin_inset Formula $I$
+\end_inset
+
+ and 
+\begin_inset Formula $J$
+\end_inset
+
+ (inclusive of 
+\begin_inset Formula $I$
+\end_inset
+
+ and 
+\begin_inset Formula $J$
+\end_inset
+
+).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $I=J$
+\end_inset
+
+, then clearly 
+\begin_inset Formula $(I,J)$
+\end_inset
+
+ is a maximal chain, so assume 
+\begin_inset Formula $I\subset J$
+\end_inset
+
+ is a proper inclusion.
+ Let 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ be the family of all chains of ideals between 
+\begin_inset Formula $I$
+\end_inset
+
+ and 
+\begin_inset Formula $J$
+\end_inset
+
+ which include 
+\begin_inset Formula $I$
+\end_inset
+
+ and 
+\begin_inset Formula $J$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}\in\mathcal{F}$
+\end_inset
+
+ means the following:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ is a totally ordered set with a minimal and maximal element.
+ To each 
+\begin_inset Formula $\lambda\in\Lambda$
+\end_inset
+
+ we have an ideal 
+\begin_inset Formula $I_{\lambda}$
+\end_inset
+
+ such that if 
+\begin_inset Formula $\lambda<\mu$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Note by 
+\begin_inset Formula $\lambda<\mu$
+\end_inset
+
+ we mean 
+\begin_inset Formula $\lambda\leq\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda\neq\mu$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, then 
+\begin_inset Formula $I_{\lambda}\subset I_{\mu}$
+\end_inset
+
+, where the inclusion is proper.
+ If 
+\begin_inset Formula $\lambda_{0}$
+\end_inset
+
+ is the minimal element of 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda_{1}$
+\end_inset
+
+ is the maximal element of 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+, then 
+\begin_inset Formula $I=I_{\lambda_{0}}$
+\end_inset
+
+ and 
+\begin_inset Formula $J=I_{\lambda_{1}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+We give 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ the structure of a partially ordered set via set inclusion.
+ In particular, if this means that if 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+ and 
+\begin_inset Formula $(I_{\lambda'})_{\lambda'\in\Lambda'}$
+\end_inset
+
+ are two members of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+, then we say 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}\subseteq(I_{\lambda'})_{\lambda'\in\Lambda'}$
+\end_inset
+
+ if 
+\begin_inset Formula $\Gamma\subseteq\Lambda$
+\end_inset
+
+, or in other words, if every member of 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+ is also a member of 
+\begin_inset Formula $(I_{\lambda'})_{\lambda'\in\Lambda'}$
+\end_inset
+
+.
+ We say the chain 
+\begin_inset Formula $(I_{\lambda'})_{\lambda'\in\Lambda'}$
+\end_inset
+
+ is 
+\series bold
+larger 
+\series default
+than the chain 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+ if
+\series bold
+ 
+\series default
+
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}\subseteq(I_{\lambda'})_{\lambda'\in\Lambda'}$
+\end_inset
+
+ and 
+\begin_inset Formula $(I_{\lambda'})_{\lambda'\in\Lambda'}\not\subseteq(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Note that 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is nonempty since 
+\begin_inset Formula $(I,J)\in\mathcal{F}$
+\end_inset
+
+.
+ We claim that every totally ordered subset of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ has an upper bound.
+ Indeed, let 
+\begin_inset Formula 
+\begin{equation}
+((I_{\lambda})_{\lambda\in\Lambda(\alpha)})_{\alpha\in A}\label{eq:totallyorderedsubsetchain}
+\end{equation}
+
+\end_inset
+
+be a totally ordered subset of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+.
+ In detail, this means:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $A$
+\end_inset
+
+ is a totally ordered set.
+ To each 
+\begin_inset Formula $\alpha\in A$
+\end_inset
+
+, we have a chain of ideals 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda(\alpha)}$
+\end_inset
+
+ such that if 
+\begin_inset Formula $\alpha<\beta$
+\end_inset
+
+, then 
+\begin_inset Formula $\Lambda(\alpha)\subset\Lambda(\beta)$
+\end_inset
+
+ where this inclusion is strict.
+ 
+\end_layout
+
+\begin_layout Standard
+Clearly an upper bound of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:totallyorderedsubsetchain})
+\end_layout
+
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\[
+(I_{\lambda})_{\lambda\in\bigcup_{\alpha\in A}\Lambda(\alpha)}.
+\]
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is nonempty and every totally ordered subset of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ has an upper bound.
+ It follows from Zorn's Lemma that 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ has a maximal element, say 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+.
+ In fact, 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+ is maximal in the sense of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Definition~(
+\backslash
+ref{defnmaximal})
+\end_layout
+
+\end_inset
+
+.
+ To see this, assume for a contradiction that 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+ is note maximal in the sense of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Definition~(
+\backslash
+ref{defnmaximal})
+\end_layout
+
+\end_inset
+
+.
+ Then there exists an ideal 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ in 
+\begin_inset Formula $R$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ is suppose 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ is comparable to every ideal in 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{a}\neq I_{\lambda}$
+\end_inset
+
+ for any 
+\begin_inset Formula $\lambda\in\Lambda$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $\widetilde{\Lambda}=\Lambda\cup\{\widetilde{\lambda}\}$
+\end_inset
+
+ and set 
+\begin_inset Formula $I_{\widetilde{\lambda}}=\mathfrak{a}$
+\end_inset
+
+ .
+ Then observe that chain 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\widetilde{\Lambda}}$
+\end_inset
+
+ is larger than 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+, contradicting maximality of 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+ is maximal in the sense of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Definition~(
+\backslash
+ref{defnmaximal})
+\end_layout
+
+\end_inset
+
+.
+ Furthermore, the chain 
+\begin_inset Formula $(I_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+ contains 
+\begin_inset Formula $I$
+\end_inset
+
+ and 
+\begin_inset Formula $J$
+\end_inset
+
+ by definition of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+, so we are done.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Subsection*
+Nonzero Nonunits in Noetherian Domains have Irreducible Factorizations
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a Noetherian domain and let 
+\begin_inset Formula $a$
+\end_inset
+
+ be a nonzero nonunit in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $a$
+\end_inset
+
+ has an irreducible factorization.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $a$
+\end_inset
+
+ is irreducible, then we are done, so assume that 
+\begin_inset Formula $a$
+\end_inset
+
+ is reducible.
+ We assume for a contradiction that 
+\begin_inset Formula $a$
+\end_inset
+
+ cannot be factored into irreducible.
+ Since 
+\begin_inset Formula $a$
+\end_inset
+
+ is reducible, there is a factorization of 
+\begin_inset Formula $a$
+\end_inset
+
+ into nonzero nonunits, say
+\begin_inset Formula 
+\[
+a=a_{1}b_{1}.
+\]
+
+\end_inset
+
+If both 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{1}$
+\end_inset
+
+ can be factored into irreducibles, then so can 
+\begin_inset Formula $a$
+\end_inset
+
+, so at least one of them cannot be factored into irreducible elements,
+ say 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+ is reducible, and thus there is factorization of 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+ into nonzero nonunits, say
+\begin_inset Formula 
+\[
+a_{1}=a_{2}b_{2}.
+\]
+
+\end_inset
+
+By the same reasoning above, we may assume that 
+\begin_inset Formula $a_{2}$
+\end_inset
+
+ cannot be factored into irreducibles.
+ Proceeding inductively, we construct sequences 
+\begin_inset Formula $(a_{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $(b_{n})$
+\end_inset
+
+ in 
+\begin_inset Formula $R$
+\end_inset
+
+ where each 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ is reducible and each
+\series bold
+ 
+\series default
+
+\begin_inset Formula $b_{n}$
+\end_inset
+
+ is a nonzero nonunit, furthermore we have the factorization
+\begin_inset Formula 
+\[
+a_{n}=a_{n+1}b_{n+1}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ In particular, we have an ascending chain of ideals 
+\begin_inset Formula $(\langle a_{n}\rangle)$
+\end_inset
+
+.
+ Indeed, 
+\begin_inset Formula $\langle a_{n}\rangle\subseteq\langle a_{n+1}\rangle$
+\end_inset
+
+ because 
+\begin_inset Formula $a_{n}=a_{n+1}b_{n+1}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is Noetherian, this ascending chain must terminate, say at 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+.
+ In particular, we have 
+\begin_inset Formula $\langle a_{N}\rangle=\langle a_{N+1}\rangle$
+\end_inset
+
+.
+ This implies there exists 
+\begin_inset Formula $c_{N}\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+a_{N}c_{N}=a_{N+1}.
+\]
+
+\end_inset
+
+Thus we have
+\begin_inset Formula 
+\begin{align*}
+0 & =a_{N}-a_{N+1}b_{N+1}\\
+ & =a_{N}-a_{N}c_{N}b_{N+1}\\
+ & =a_{N}(1-c_{N}b_{N+1}).
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is an integral domain, this implies 
+\begin_inset Formula $b_{N+1}c_{N}=1$
+\end_inset
+
+ (as 
+\begin_inset Formula $a_{N}\neq0$
+\end_inset
+
+), which implies 
+\begin_inset Formula $b_{N+1}$
+\end_inset
+
+ is a unit.
+ This is a contradiction.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

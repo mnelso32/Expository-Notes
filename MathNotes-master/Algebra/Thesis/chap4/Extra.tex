@@ -1,0 +1,241 @@
+%% LyX 2.3.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,english]{article}
+\usepackage[osf]{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[paperwidth=30cm,paperheight=35cm]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm}
+\setlength{\parindent}{0bp}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\subsection*{Classifying $d$-Stable Ideals}
+
+~~~Let $(R[x_{1},\dots,x_{n}]/I,r_{1},\dots,r_{n})$ be a differential
+graded $R$-algebra. Suppose that there are \textbf{$t_{1},\dots,t_{m}\in R$
+}such that $\langle r_{1},\dots,r_{n}\rangle=\langle t_{1},\dots,t_{m}\rangle$
+and $(R[y_{1},\dots,y_{m}]/I,t_{1},\dots,t_{m})$ is also a differential
+graded $R$-algebra. Then for all $1\leq\lambda\leq n$ and $1\leq\mu\leq n$,
+there are $a_{\lambda\mu}$ and $b_{\lambda\mu}$ in $R$ such that
+\[
+r_{\lambda}=\sum_{\mu=1}^{m}a_{\lambda\mu}t_{\mu}\text{ and }t_{\mu}=\sum_{\lambda=1}^{n}b_{\lambda\mu}r_{\lambda}.
+\]
+~~~Let $\varphi:R[x_{1},\dots,x_{n}]\to R[y_{1},\dots,y_{m}]$
+be the unique graded $R$-algebra homomorphism such that $\varphi(x_{\lambda})=\sum_{\mu=1}^{m}a_{\lambda\mu}y_{\mu}$
+for all $\lambda=1,\dots,n$. Then $\varphi$ induces a graded $R$-algebra
+homomorphism $\overline{\varphi}:R[x_{1},\dots,x_{n}]/I\to R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle$
+which in turn induces a homomorphism of differential graded $R$-algebras
+$\overline{\varphi}:(R[x_{1},\dots,x_{n}]/I,r_{1},\dots,r_{n})\to(R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle,t_{1},\dots,t_{m})$.
+Indeed, let us denote the differentials as
+\[
+d_{r}:=\sum_{\lambda=1}^{n}r_{\lambda}\partial_{x_{\lambda}}\text{ and }d_{t}:=\sum_{\mu=1}^{m}t_{\mu}\partial_{y_{\mu}}.
+\]
+
+We first show that $\varphi d_{r}=d_{t}\varphi$. It is enough to
+show that $\varphi d_{r}(x_{\lambda})=d_{t}\varphi(x_{\lambda})$
+for all $\lambda=1,\dots,n$. We have 
+\begin{align*}
+d_{t}\varphi(x_{\lambda}) & =d_{t}\left(\sum_{\mu=1}^{m}a_{\lambda\mu}y_{\mu}\right)\\
+ & =\sum_{\mu=1}^{m}a_{\lambda\mu}t_{\mu}\\
+ & =r_{\lambda}\\
+ & =d_{r}(x_{\lambda})\\
+ & =\varphi(d_{r}(x_{\lambda})).
+\end{align*}
+Now we show that $(R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle,t_{1},\dots,t_{m})$
+is a differential graded $R$-algebra. We do this by showing that
+$\langle\varphi(I)\rangle$ is $d_{t}$-stable. Let $\sum_{\kappa=1}^{r}g_{\kappa}\varphi(f_{\kappa})\in\varphi(I)$.
+Then
+\begin{align*}
+d_{t}\left(\sum_{\kappa=1}^{r}g_{\kappa}\varphi(f_{\kappa})\right) & =\sum_{\kappa=1}^{r}d_{t}(g_{\kappa})\varphi(f_{\kappa})+\sum_{\kappa=1}^{r}g_{\kappa}d_{t}(\varphi(f_{\kappa}))\\
+ & =\sum_{\kappa=1}^{r}d_{t}(g_{\kappa})\varphi(f_{\kappa})+\sum_{\kappa=1}^{r}g_{\kappa}\varphi(d_{r}(f_{\kappa}))\in\langle\varphi(I)\rangle.
+\end{align*}
+
+Similarly, let $\psi:R[y_{1},\dots,y_{m}]\to R[x_{1},\dots,x_{n}]$
+be the unique graded $R$-algebra homomorphism such that $\psi(y_{\mu})=\sum_{\lambda=1}^{n}b_{\lambda\mu}x_{\lambda}$
+for all $\mu=1,\dots,m$. Then $\varphi$ induces a graded $R$-algebra
+homomorphism $\overline{\psi}:R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle\to R[x_{1},\dots,x_{n}]/\langle\psi(\varphi(I))\rangle$
+which in turn induces a homomorphism of differential graded $R$-algebras
+$\overline{\psi}(R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle,t_{1},\dots,t_{m})\to(R[x_{1},\dots,x_{n}]/\langle\psi(\varphi(I))\rangle,r_{1},\dots,r_{n})$. 
+
+\subsubsection{Evalutation Map}
+
+~~~Let $(S/I,r_{1},\dots,r_{n})$ be a differential graded $R$-algebra
+such that $I$ is contained in $\langle x_{1},\dots,x_{n}\rangle$.
+Let $Q=\langle r_{1},\dots,r_{n}\rangle$ and $\text{Ev}_{r}:S\to R$
+be the unique $R$-algebra homomorphism such that $\text{Ev}_{r}(x_{\lambda})=r_{\lambda}$
+for all $\lambda=1,\dots,n$. We are interested in the ideal $\text{Ev}_{r}(I)$
+in $R$. Clearly we have $\text{Ev}_{r}(I)\subset Q$. Suppose $a\in Q\backslash\text{Ev}_{r}(I)$.
+Then $a=\sum_{\lambda=1}^{n}a_{\lambda}r_{\lambda}$ for some $a_{\lambda}\in R$.
+This implies $x:=\sum_{\lambda=1}^{n}a_{\lambda}x_{\lambda}\notin I$.
+Now $J=I+\langle x,a\rangle$ is an ideal strictly larger than $I$
+such that $J$ is $d$-stable $\text{Ev}_{r}(J)$ is strictly larger
+than $\text{Ev}_{r}(I)$. This implies that we can find an ideal $I$
+such that $\text{Ev}_{r}(I)=Q$.
+
+\begin{defn}\label{defn} We say $I$ is $(Q,d)$-maximal if $I$
+is $d$-stable and $\text{Ev}_{r}(I)=Q$. \end{defn}
+
+~~~~Assume that $I$ is $(Q,d)$-maximal. By the paragraph above,
+a change of basis of the ideal $Q$ induces an $R$-algebra map $\phi:(S/I,r_{1},\dots,r_{n})\to(S/J,r_{1},\dots,r_{n}),$
+where $\text{Ev}_{r}(I)=\text{Ev}_{r}(J)$. Thus $J$ is $(Q,d)$-maximal
+too. 
+
+\section{The Case of a Local Ring}
+
+~~~Assume that $R$ is a local ring with maximal ideal $\mathfrak{m}=\langle r_{1},\dots,r_{n}\rangle$
+and residue field $K:=R/\mathfrak{m}$. Let $(S/I,r_{1},\dots,r_{n})$
+be a differential graded $R$-algebra such that $I$ is contained
+in $\langle x_{1},\dots,x_{n}\rangle$ and let $\text{Ev}_{r}:S\to R$
+be the unique $R$-algebra homomorphism such that $\text{Ev}_{r}(x_{\lambda})=r_{\lambda}$
+for all $\lambda=1,\dots,n$. Then $\text{Ev}_{r}$ induces an $R$-algebra
+homomorphism $\text{Ev}_{r}:S/I\to K$, since $\text{Ev}_{r}(I)\subset\mathfrak{m}$. 
+
+\subsection{Long Exact Sequence}
+
+~~~It is straightforward to check that 
+
+\begin{equation}\label{sesdga}\begin{tikzcd}[row sep=5] 0 \arrow[r] & (S_w (-j) /(I:g) \text{,}\overline{d} ) \arrow[r, "\cdot g"] & (S/I \text{,} \overline{d}) \arrow[r] & (S/\langle I \text{,} g \rangle \text{,} \overline{d}) \arrow[r] & 0 \\ & \overline{f} \arrow[r,mapsto,shorten >=0.5cm,shorten <=0.5cm] & \overline{fg} \end{tikzcd}\end{equation}
+
+is short exact sequence of chain complexes. The short exact sequence
+(\ref{sesdga}) gives rise to a long exact sequence in homology:
+
+\begin{center}\begin{tikzcd}[row sep=40]  && \cdots \arrow[r] \arrow[d, phantom, ""{coordinate, name=Z'}] & H_{i+1} (S_w  / \langle I \text{,} g \rangle  ) \arrow[dll, " \lambda  ", swap, rounded corners, to path={ -- ([xshift=2ex]\tikztostart.east) |- (Z') [near end]\tikztonodes -| ([xshift=-2ex]\tikztotarget.west) -- (\tikztotarget)}] 
+
+
+
+\\  & H_{i-j} (S_w /( I:g )) \arrow[r, "\cdot g"] & H_{i} (S_w / I) \arrow[r] \arrow[d, phantom, ""{coordinate, name=Z}] & H_{i} (S_w / \langle I \text{,} g \rangle  ) \arrow[dll, " \lambda ", swap, rounded corners, to path={ -- ([xshift=2ex]\tikztostart.east) |- (Z) [near end]\tikztonodes -| ([xshift=-2ex]\tikztotarget.west) -- (\tikztotarget)}] 
+
+\\ & H_{i-j-1} (S_w /( I:g ) ) \arrow[r, "\cdot g "] & H_{i-1} (S_w / I ) \arrow[r] & \cdots 
+
+\end{tikzcd}\end{center}
+
+~~~Let us work out the details of the connecting map: Let $\overline{f}$
+be a homogeneous element in $S_{w}/\langle I,g\rangle$ which represents
+a class in $H_{i}(S_{w}/\langle I,g\rangle)$. In particular, $f\in S$
+and $d(f)\in\langle I,g\rangle$. We lift $\overline{f}\in S_{w}/\langle I,g\rangle$
+to $S_{w}/I$ and then apply $d$ to get $\overline{d(f)}\in S_{w}/I$.
+Since $d(f)\in\langle I,g\rangle$, we can write $d(f)=p+gq$ where
+$p\in I$. Thus, $\overline{d(f)}=\overline{gq}$, and this pulls
+back to $\overline{q}$ in $S_{w}/(I:g)$. 
+
+~~~Let $(A,d_{A})$ be a differential graded $R$-algebra. If we
+start with a chain complex over $R$, then we can construct a differential
+graded $A$-module. Indeed, suppose that $(B,d_{B})$ is a chain complex
+over $R$. Then $A\otimes_{R}B$ is an $A$-module and a graded $R$-module
+whose homogeneous component in degree $k$ is
+\[
+(A\otimes_{R}B)_{k}:=\bigoplus_{i+j=k}A_{i}\otimes_{R}B_{j}.
+\]
+
+We define a differential $d$ on $A\otimes_{R}B$ by first definining
+it on the elementary tensors as
+\[
+d(a\otimes b):=d_{A}(a)\otimes b+(-1)^{\text{deg}(a)}a\otimes d_{B}(b),
+\]
+
+
+\subsubsection{Tensor product of differential graded $R$-algebras}
+
+~~~Let $(R[x_{1},\dots,x_{n}]/I,d_{r})$ and $(R[y_{1},\dots,y_{m}]/J,d_{t})$
+be two differential graded $R$-algebras, where 
+\[
+d_{r}:=\sum_{\lambda=1}^{n}r_{\lambda}\partial_{x_{\lambda}}\text{ and }d_{t}:=\sum_{\mu=1}^{m}t_{\mu}\partial_{y_{\mu}}.
+\]
+for $r_{\lambda},t_{\mu}\in R$ for all $\lambda=1,\dots,n$ and $\mu=1,\dots,m$.
+Then their tensor product over $R$ is 
+\[
+(R[x_{1},\dots,x_{n}]/I,d_{r})\otimes_{R}(R[y_{1},\dots,y_{m}]/J,d_{t})\cong(R[x_{1},\dots,x_{n},y_{1},\dots,y_{m}]/(I+J),d_{r}+d_{t}).
+\]
+
+\begin{example}\label{example} The Koszul complex $\mathcal{K}(r_{1},\dots,r_{n})$
+can be realized as a tensor product:
+\[
+\mathcal{K}(r_{1},\dots,r_{n})\cong\mathcal{K}(r_{1})\otimes\cdots\otimes\mathcal{K}(r_{n}).
+\]
+
+\end{example} 
+
+~~~Let $M$ be an $R$-module, and let $(S/I,r_{1},\dots,r_{n})$
+be a differential graded $R$-algebra. Recall that $(M\otimes_{R}S/I,d)$
+is an $(S/I)$-module. 
+\end{document}

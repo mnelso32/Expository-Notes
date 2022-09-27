@@ -1,0 +1,3166 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Mathematical Programming Project
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+An index is a number that represents the aggregate value of a group of items.
+ In particular, a financial index is composed of a collection of assets,
+ such as stocks or bonds, which captures the value of a specific market
+ or a segment of it.
+ A stock or a bond market index is effectively equivalent to a hypothetical
+ portfolio of assets in the sense that we cannot invest directly on it,
+ i.e., an index is not a financial instrument that we can trade.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ The S&P 500 Index, or Standard & Poor's 500 Index, is a market-capitalization-w
+eighted index of 500 leading publicly traded companies in the U.S.
+ It is not an exact list of the top 500 U.S.
+ companies by market cap because there are other criteria that the index
+ includes.
+ Still, the S&P 500 index is regarded as one of the best gauges of prominent
+ American equities' performance, and by extension, that of the stock market
+ overall.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename S&P500.jpg
+	lyxscale 75
+	scale 125
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Index Tracking
+\end_layout
+
+\begin_layout Standard
+It is not possible to trade an index directly.
+ In order to gain access to an index we need to use other financial instruments
+ such as options, futures, and exchange traded funds (ETFs), or create a
+ portfolio of assets that tracks closely a given index.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ The SPDR S&P 500 ETF Trust, also known as the SPY ETF, is one of the most
+ popular funds that aims to track the Standard & Poor’s (S&P) 500 index.
+ These stocks are selected by a committee based on market size, liquidity,
+ and industry.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename SPY.jpg
+	lyxscale 80
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Its top 10 holdings are heavily weighted in technology companies such as
+ Apple, Microsoft, and Amazon.
+ Approximately one-quarter of the SPY ETF is invested in the technology
+ sector.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename SPYholdings.jpg
+	lyxscale 80
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+The Goal of the Paper
+\end_layout
+
+\begin_layout Standard
+With this background material understood, here's the abstract of the paper
+ that my project is based on, which perfectly summarizes the goal of that
+ work:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quote
+\begin_inset Quotes eld
+\end_inset
+
+We consider the problem of reproducing the performance of a stock market
+ index, but without purchasing all of the stocks that make up the index,
+ index tracking.
+ We also consider the problem of outperforming the index, enhanced indexation.
+ We present mixed-integer linear programming formulations of these problems.
+ Our formulations include transaction costs, a constraint limiting the number
+ of stocks that can be purchased and a limit on the total transaction cost
+ that can be incurred.
+ As our formulations of these problems are mixed-integer linear programs
+ we can use a standard solver (Cplex).
+ Numeric results are presented for eight data sets drawn from major markets.
+ The largest of these data sets involves over 2000 stocks
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In particular, we want to create our own Tracking Portfolio (denoted TP)
+ which is optimized with respect to some mixed-integer linear program.
+ We use regression analysis in order to determine how successful our TP
+ is.
+ For instance, if 
+\begin_inset Formula $X$
+\end_inset
+
+ represents the monthly return of the S&P 500 and 
+\begin_inset Formula $Y$
+\end_inset
+
+ represents the monthly return of our TP, then the least squares regression
+ line (where we are regressing the returns from the portfolio against the
+ returns from the index) has the form
+\begin_inset Formula 
+\[
+Y=\alpha+\beta X.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note here that if our TP perfectly tracks the index, then we would have
+ a regression intercept (alpha) of zero, and a regression slope (beta) of
+ one.
+ Enhanced indexation (sometimes referred to as enhanced index tracking)
+ aims to reproduce the performance of a stock market index, but to generate
+ excess return (return over and above the return achieved by the index).
+ One phrase often encountered with regard to enhanced indexation is ‘‘adding
+ alpha”.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem Formulation
+\end_layout
+
+\begin_layout Standard
+Let us now introduce notation which is used in the paper.
+ We observe over time 
+\begin_inset Formula $0,1,2,\dots,T$
+\end_inset
+
+ the value of 
+\begin_inset Formula $N$
+\end_inset
+
+ stocks, as well as the index we are tracking.
+ We are interested in deciding the best set of 
+\begin_inset Formula $K$
+\end_inset
+
+ stocks to hold (where 
+\begin_inset Formula $K<N$
+\end_inset
+
+), as well as their appropriate quantities.
+ Let
+\begin_inset Formula 
+\begin{align*}
+\varepsilon_{i} & =\text{ be the minimum proportion of the TP\text{ that must be held in stock \ensuremath{i} if any of the stock is held} }\\
+\delta_{i} & =\text{ be the maximum proportion of the TP that can be held in stock \ensuremath{i} if any of the stock is held}\\
+X_{i} & =\text{ be the number of units of stock \ensuremath{i} in the current TP}\\
+V_{i,t} & =\text{ be the value (price) of one unit of stock \ensuremath{i} at time \ensuremath{t}}\\
+I_{t} & =\text{ be the value of the index at time \ensuremath{t}}\\
+R_{t} & =\text{ be the single period continuous time return for the index at time \ensuremath{t}, i.e. \ensuremath{R_{t}=\ln(I_{t}/I_{t-1})}}\\
+r_{i,t} & =\text{ be the single period continuous time return for stock \ensuremath{i} at time \ensuremath{t}, i.e. \ensuremath{r_{i,t}=\ln(V_{i,t}/V_{i,t-1})}}\\
+C & =\text{ the total value (\ensuremath{\geq0}) of the current TP at time \ensuremath{T}, i.e. \ensuremath{C=\sum_{i=1}^{n}X_{i}V_{i,T}} plus cash change ;}\\
+f_{i}^{s} & =\text{ be the fractional cost of selling one unit of stock \ensuremath{i} at time \ensuremath{T}}\\
+f_{i}^{b} & =\text{ be the fractional cost of buying one unit of stock \ensuremath{i} at time \ensuremath{T}}\\
+\gamma & =\text{ be the limit \ensuremath{(0\leq\gamma\leq1)} on the proportion of \ensuremath{C} that can be consumed by transaction cost}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Decision Variables
+\end_layout
+
+\begin_layout Standard
+Our decision variables are:
+\begin_inset Formula 
+\begin{align*}
+x_{i} & =\text{ the number of units (\ensuremath{\geq0}) of stock \ensuremath{i} that we choose to hold in the new TP}\\
+G_{i} & =\text{ the transaction cost (\ensuremath{\geq0}) incurred in selling/buying stock \ensuremath{i}}\\
+z_{i} & =\text{ \ensuremath{=1} if any stock of \ensuremath{i} is held in the new TP, \ensuremath{=0} otherwise}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Without significant loss of generality (since the sums of money involved
+ are large) we allow 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ to take fractional values.
+\end_layout
+
+\begin_layout Subsubsection*
+Constraints associated with index tracking problem
+\end_layout
+
+\begin_layout Standard
+The constraints associated with the index tracking problem are:
+\begin_inset Formula 
+\begin{align}
+\sum_{i=1}^{N}z_{i}=K\label{eq:1}\\
+\varepsilon_{i}z_{i}\leq x_{i}V_{i,T}\leq\delta_{i}z_{i} &  & 1\leq i\leq N\label{eq:2}\\
+G_{i}\geq f_{i}^{s}(X_{i}-x_{i})V_{i,T} &  & 1\leq i\leq N\label{eq:3}\\
+G_{i}\geq f_{i}^{b}(x_{i}-X_{i})V_{i,T} &  & 1\leq i\leq N\label{eq:4}\\
+\sum_{i=1}^{N}G_{i}\leq\gamma C\label{eq:5}\\
+\sum_{i=1}^{N}x_{i}V_{i,T}=C-\sum_{i=1}^{N}G_{i}\label{eq:6}\\
+x_{i},G_{i}\geq0 &  & 1\leq i\leq N\label{eq:7}\\
+z_{i}\in[0,1] &  & 1\leq i\leq N\label{eq:8}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Equation~(
+\backslash
+ref{eq:1})
+\end_layout
+
+\end_inset
+
+ ensures that there are exactly 
+\begin_inset Formula $K$
+\end_inset
+
+ stocks in the new TP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Equation~(
+\backslash
+ref{eq:2})
+\end_layout
+
+\end_inset
+
+ ensures that if a stock 
+\begin_inset Formula $i$
+\end_inset
+
+ is not in the new TP 
+\begin_inset Formula $(z_{i}=0$
+\end_inset
+
+) then 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is also zero; it also ensures that if the stock is chosen to be in the
+ new TP (
+\begin_inset Formula $z_{i}=1$
+\end_inset
+
+) then the amount of the stock held satisfies the proportion limits defined.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Equations~(
+\backslash
+ref{eq:3}) and (
+\backslash
+ref{eq:4})
+\end_layout
+
+\end_inset
+
+ define the transaction cost and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Equation~(
+\backslash
+ref{eq:5})
+\end_layout
+
+\end_inset
+
+ limits the total transaction cost incurred.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Equation~(
+\backslash
+ref{eq:6})
+\end_layout
+
+\end_inset
+
+ is a balance constraint such that the total value of the new TP at time
+ 
+\begin_inset Formula $T$
+\end_inset
+
+ equals the value of the current TP at time 
+\begin_inset Formula $T$
+\end_inset
+
+ plus the cash change (i.e.
+ 
+\begin_inset Formula $C$
+\end_inset
+
+) minus the total transaction cost.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Index Tracking Objective
+\end_layout
+
+\begin_layout Standard
+Adopting the regression viewpoint for index tracking we have that ideally
+ our TP would be chosen such that when we perform a regression of TP returns
+ against index returns we would find that the regression line has an intercept
+ (alpha) of zero, and a slope (beta) of one.
+ However achieving this ideal is not straightforward.
+ There are a number of complications to achieving this ideal within the
+ context of a linear (or linearisable) formulation, as will become apparent
+ below.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The single period continuous time return for the TP in period 
+\begin_inset Formula $t$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\ln\left(\sum_{i=1}^{N}x_{i}V_{i,t}/\sum_{i=1}^{N}x_{i}V_{i,t-1}\right).
+\]
+
+\end_inset
+
+This is a nonlinear function of the decision variables.
+ In the paper, the authors show how to approximate this nonlinear function
+ by a linear one; namely the (linear approximate) return for the TP in period
+ 
+\begin_inset Formula $t$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\sum_{i=1}^{N}w_{i}r_{i,t}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $r_{i,t}$
+\end_inset
+
+ represents the return for stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at time 
+\begin_inset Formula $t$
+\end_inset
+
+ and is given by the formula 
+\begin_inset Formula $r_{i,t}=\ln(V_{i,t}/V_{i,t-1})$
+\end_inset
+
+ and where 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ represents the proportion invested in stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at time 
+\begin_inset Formula $T$
+\end_inset
+
+ and is given by 
+\begin_inset Formula 
+\begin{equation}
+w_{i}=v_{i}x_{i}\qquad1\leq i\leq N\label{eq:9}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $v_{i}=V_{i,T}/(C-\gamma C)$
+\end_inset
+
+ (see the Appendix for more details as to how this is done).
+ Using the log-sum inequality it is possible to prove (assuming we spend
+ 
+\begin_inset Formula $\gamma C$
+\end_inset
+
+ in transaction cost) that the average return from this approximation 
+\begin_inset Formula 
+\[
+\sum_{t=1}^{T}\sum_{i=1}^{N}w_{i}r_{i.t}/T
+\]
+
+\end_inset
+
+ over-estimates average tracking portfolio 
+\begin_inset Formula 
+\[
+\sum_{t=1}^{T}\ln\left(\sum_{i=1}^{N}x_{i}V_{i,t}/\sum_{i=1}^{N}x_{i}V_{i,t-1}\right)/T
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If we regress these TP returns from standard regression theory that the
+ ordinary least-squares estimates, 
+\begin_inset Formula $\widehat{\alpha}$
+\end_inset
+
+ and 
+\begin_inset Formula $\widehat{\beta}$
+\end_inset
+
+, for the intercept and slope of the regression line are given by:
+\begin_inset Formula 
+\begin{align}
+\alpha & =\sum_{i=1}^{N}w_{i}\alpha_{i}\label{eq:10}\\
+\beta & =\sum_{i=1}^{N}w_{i}\beta_{i}\label{eq:11}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta_{i}$
+\end_inset
+
+ are the ordinary least-squares regression intercept and slope when we regress
+ the returns from stock 
+\begin_inset Formula $i$
+\end_inset
+
+ (
+\begin_inset Formula $r_{i,t}$
+\end_inset
+
+) against the index returns (
+\begin_inset Formula $R_{t}$
+\end_inset
+
+).
+ Ideally we would like, for index tracking, to choose 
+\begin_inset Formula $K$
+\end_inset
+
+ stocks and their associated quantities 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq i\leq N$
+\end_inset
+
+ such that we achieve 
+\begin_inset Formula $\alpha=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+.
+ For real life data this may not, however, be achievable.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Mixed-Integer Linear Program
+\end_layout
+
+\begin_layout Standard
+In order to acheive this, the authors adopted a two stage approach: where
+ the primary objective is to achieve the desired slope of one and the secondary
+ objective is to achieve the desired intercept of zero, i.e.
+\begin_inset Formula 
+\begin{equation}
+\text{first minimize }|\alpha|\text{ and then minimize }|\beta-1|.\label{eq:milp}
+\end{equation}
+
+\end_inset
+
+The modulus objectives above are not linear, however there is a standard
+ way to linearize them: introduce variables 
+\begin_inset Formula $D$
+\end_inset
+
+ and 
+\begin_inset Formula $E$
+\end_inset
+
+ where
+\begin_inset Formula 
+\begin{align}
+D & \geq\alpha\label{eq:12}\\
+D & \geq-\alpha\label{eq:1-1}\\
+E & \geq\beta-1\label{eq:14}\\
+E & \geq-(\beta-1)\label{eq:15}\\
+D,E & \geq0\label{eq:16}
+\end{align}
+
+\end_inset
+
+Then our full mixed-integer linear programming formulation for solving the
+ index tracking problem in the first-stage (primary objective to achieve
+ the desired intercept of zero) is
+\begin_inset Formula 
+\begin{align*}
+\text{minimize } & D\\
+\text{subject to } & \text{Equations 1-11, 13-14, and 17}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the second-stage, where the emphasis is on achieving the desired slope
+ of one, then when we solve we constrain the intercept 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ so that it retains the value that it achieved at the first-stage.
+ Formally let 
+\begin_inset Formula $\alpha^{\mathrm{opt}}$
+\end_inset
+
+ be the numeric value for 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ when our first minimization problem is solved.
+ Then in the second-stage we
+\begin_inset Formula 
+\begin{align*}
+\text{minimize } & E\\
+\text{subject to } & \text{Equations 1-11, 15-16, and 17}\\
+ & \,\alpha=\alpha^{\mathrm{opt}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Our goal is to formulate this MILP using MATLAB.
+ In particuar, we will formulate the first-step.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+MATLAB Function
+\end_layout
+
+\begin_layout Standard
+We write a MATLAB function denoted 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+function [R, r, C, a, b, v, alpha, beta] = TrackingPortfolio(I,V, X, cash)
+\end_layout
+
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $\boldsymbol{v}=(v_{1},\dots,v_{N})^{\top}$
+\end_inset
+
+ is the vector with 
+\begin_inset Formula $v_{i}=V_{i,T}/(C-\gamma C)$
+\end_inset
+
+ (in particular, 
+\begin_inset Formula $\boldsymbol{w}=(w_{1},\dots,w_{N})$
+\end_inset
+
+ is the vector with 
+\begin_inset Formula $w_{i}=v_{i}x_{i}$
+\end_inset
+
+ where 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ represents the proportion invested in stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at time 
+\begin_inset Formula $T$
+\end_inset
+
+).
+ We also have 
+\begin_inset Formula $\boldsymbol{a}=(a_{1},\dots,a_{N})^{\top}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{b}=(b_{1},\dots,b_{N})^{\top}$
+\end_inset
+
+ where 
+\begin_inset Formula $a_{i}=\alpha_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{i}=\beta_{i}$
+\end_inset
+
+ are the ordinary least-squares regression intercept and slope when we regress
+ the returns 
+\begin_inset Formula $\boldsymbol{r}_{i}$
+\end_inset
+
+ from stock 
+\begin_inset Formula $i$
+\end_inset
+
+ against the returns 
+\begin_inset Formula $\boldsymbol{R}$
+\end_inset
+
+ of the S&P 500.
+ Thus
+\begin_inset Formula 
+\[
+\alpha=\boldsymbol{a}^{\top}\boldsymbol{w}=\sum_{i=1}^{N}a_{i}v_{i}x_{i}\quad\text{and}\quad\beta=\boldsymbol{b}^{\top}\boldsymbol{w}=\sum_{i=1}^{N}b_{i}v_{i}x_{i},
+\]
+
+\end_inset
+
+where MATLAB stores these functions as vectors: 
+\begin_inset Formula $\alpha=(v_{1}a_{1},\dots,v_{N}a_{N})^{\top}$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=(v_{1}b_{1},\dots,v_{N}b_{N})^{\top}$
+\end_inset
+
+.
+ The code is given below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [R,r,C,a,b,Vf,v,alpha,beta] = TrackingPortfolio(I,V,X,cash,gamma)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% I(t) = value of S&P 500 at time t 
+\end_layout
+
+\begin_layout Plain Layout
+
+% V(i,t) = value of stock i at time t.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% X(i) = number of shares of stock i in the current TP.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% cash = either new cash to be invested or cash to be taken out.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% N = number of stocks 
+\end_layout
+
+\begin_layout Plain Layout
+
+% T = final time.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% R(t) = return of S&P at time t.
+\end_layout
+
+\begin_layout Plain Layout
+
+% r(i,t) = return of stock i at time t.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% C = total value of the current TP at time T.
+\end_layout
+
+\begin_layout Plain Layout
+
+% regressing r(i,:) against R.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% p has the form p = bx + a.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+sz = size(V); 
+\end_layout
+
+\begin_layout Plain Layout
+
+N = sz(1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+T = sz(2);
+\end_layout
+
+\begin_layout Plain Layout
+
+Vf = V(:,T); 
+\end_layout
+
+\begin_layout Plain Layout
+
+R = zeros(1,T-1);
+\end_layout
+
+\begin_layout Plain Layout
+
+r = zeros(N,T-1);
+\end_layout
+
+\begin_layout Plain Layout
+
+a = zeros(N,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+b = zeros(N,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+v = zeros(N,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+p = zeros(N,2);
+\end_layout
+
+\begin_layout Plain Layout
+
+C = dot(X,Vf) + cash; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for t = 1:T-1        
+\end_layout
+
+\begin_layout Plain Layout
+
+    R(1,t) = log(I(t+1)/I(t));
+\end_layout
+
+\begin_layout Plain Layout
+
+end; 
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:N     
+\end_layout
+
+\begin_layout Plain Layout
+
+      for t = 1:T-1         
+\end_layout
+
+\begin_layout Plain Layout
+
+         r(i,t) = log(V(i,t+1)/V(i,t));     
+\end_layout
+
+\begin_layout Plain Layout
+
+      end; 
+\end_layout
+
+\begin_layout Plain Layout
+
+end; 
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:N     
+\end_layout
+
+\begin_layout Plain Layout
+
+   p(i,:) = polyfit(R,r(i,:),1);  
+\end_layout
+
+\begin_layout Plain Layout
+
+   a(i) = p(i,2);     
+\end_layout
+
+\begin_layout Plain Layout
+
+   b(i) = p(i,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+   v(i) = Vf(i)/(C-gamma*C);
+\end_layout
+
+\begin_layout Plain Layout
+
+end; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+alpha = v.*a; 
+\end_layout
+
+\begin_layout Plain Layout
+
+beta = v.*b;    
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Example
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example1}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\boldsymbol{I}=(I_{0},I_{1},\dots,I_{12})^{\top}$
+\end_inset
+
+ be the vector where the component 
+\begin_inset Formula $I_{t}$
+\end_inset
+
+ denotes the value of the S&P 500 at the end of month 
+\begin_inset Formula $t$
+\end_inset
+
+ (where 
+\begin_inset Formula $t=0$
+\end_inset
+
+ corresponds to Dec 2020, 
+\begin_inset Formula $t=1$
+\end_inset
+
+ corresponds to Jan 2021, and so on...).
+ Thus the vector 
+\begin_inset Formula $\boldsymbol{I}$
+\end_inset
+
+ is given (rounding to the nearest integer) by
+\begin_inset Formula 
+\[
+\boldsymbol{I}=(3756,3714,3811,3973,4181,4204,4298,4395,4523,4308,4605,4567,4766)^{\top}.
+\]
+
+\end_inset
+
+Next let 
+\begin_inset Formula $\boldsymbol{R}=(R_{1},\dots,R_{12})^{\top}$
+\end_inset
+
+ be the vector where the component 
+\begin_inset Formula $R_{t}$
+\end_inset
+
+ denotes the single period time return fo the S&P 500 at the end of month
+ 
+\begin_inset Formula $t$
+\end_inset
+
+ (where 
+\begin_inset Formula $t=1$
+\end_inset
+
+ corresponds to Jan 2021, 
+\begin_inset Formula $t=2$
+\end_inset
+
+ corresponds to Feb 2021, and so on...).
+ In other words, 
+\begin_inset Formula $R_{t}=\ln(I_{t}/I_{t-1})$
+\end_inset
+
+.
+ Thus the vector 
+\begin_inset Formula $\boldsymbol{R}$
+\end_inset
+
+ is given (rounding to the fourth decimal place) by
+\begin_inset Formula 
+\[
+\boldsymbol{R}=(-0.0112,0.0258,0.0416,0.0510,0.0055,0.0221,0.0223,0.0287,-0.0487,0.0667,-0.0083,0.0427)^{\top}.
+\]
+
+\end_inset
+
+Below is the graph of the S&P500 during 2021:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename SP500.jpg
+	lyxscale 30
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For instance, we see that the S&P 500 did poorly in the month of September.
+ This corresopnds to the fact that 
+\begin_inset Formula $R_{9}=-0.0487$
+\end_inset
+
+.
+ Next, let 
+\begin_inset Formula $\boldsymbol{V}_{i}=(V_{i,0},V_{i,1},\dots,V_{i,12})^{\top}$
+\end_inset
+
+ be the vector where the component 
+\begin_inset Formula $V_{i,t}$
+\end_inset
+
+ denotes the value of one share of stock 
+\begin_inset Formula $i$
+\end_inset
+
+ (where 
+\begin_inset Formula $i=1$
+\end_inset
+
+ corresponds to Amazon , 
+\begin_inset Formula $i=2$
+\end_inset
+
+ corresponds to Facebook, and 
+\begin_inset Formula $i=3$
+\end_inset
+
+ corresponds to Apple) at the end of month 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Similarly, let 
+\begin_inset Formula $\boldsymbol{r}_{i}=(r_{i,1},\dots,r_{i,12})$
+\end_inset
+
+ be the vector where the the component 
+\begin_inset Formula $r_{i,t}$
+\end_inset
+
+ denotes the single period time return for stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at the end of month 
+\begin_inset Formula $t$
+\end_inset
+
+ (where 
+\begin_inset Formula $t=1$
+\end_inset
+
+ corresponds to Jan 2021, 
+\begin_inset Formula $t=2$
+\end_inset
+
+ corresponds to Feb 2021, and so on...).
+ In other words, 
+\begin_inset Formula $r_{i,t}=\ln(V_{i,t}/V_{i,t-1})$
+\end_inset
+
+.
+ Thus the vectors 
+\begin_inset Formula $\boldsymbol{V}_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{V}_{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $\boldsymbol{V}_{3}$
+\end_inset
+
+ are given (rounding to the nearest integer) by
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{V}_{1} & =(3257,3206,3093,3094,3467,3223,3440,3328,3471,3285,3372,3507,3304)^{\top}\\
+\boldsymbol{V}_{2} & =(273,259,258,295,325,329,348,356,379,339,323,324,335)^{\top}.\\
+\boldsymbol{V}_{3} & =(133,132,121,122,131,125,137,146,152,141,150,165,178)^{\top}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\boldsymbol{X}=(X_{1},X_{2},X_{3})^{\top}$
+\end_inset
+
+ be the vector where 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ denotes number of shares of stock 
+\begin_inset Formula $i$
+\end_inset
+
+ in the current TP.
+ We will assume that 
+\begin_inset Formula $\boldsymbol{X}=(10,50,100)^{\top}$
+\end_inset
+
+.
+ Finally, suppose 
+\begin_inset Formula $\gamma=0.1$
+\end_inset
+
+ and suppose we have 
+\begin_inset Formula $100,000$
+\end_inset
+
+ dollars in cash change.
+ In Matlab, we write
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+I = [3756,3714,3811,3973,4181,4204,4298,4395,4523,4308,4605,4567,4766];
+\end_layout
+
+\begin_layout Plain Layout
+
+V = [3257,3206,3093,3094,3467,3223,3440,3328,3471,3285,3372,3507,3304;
+\end_layout
+
+\begin_layout Plain Layout
+
+273,259,258,295,325,329,348,356,379,339,323,324,335; 
+\end_layout
+
+\begin_layout Plain Layout
+
+133,132,121,122,131,125,137,146,152,141,150,165,178];
+\end_layout
+
+\begin_layout Plain Layout
+
+X = [10;50;100];
+\end_layout
+
+\begin_layout Plain Layout
+
+cash = 100000;
+\end_layout
+
+\begin_layout Plain Layout
+
+gamma = 0.1;
+\end_layout
+
+\begin_layout Plain Layout
+
+[R, r, C, a, b, Vf, v, alpha, beta] = TrackingPortfolio(I, V, X, cash, gamma);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Matlab gives us
+\begin_inset Formula 
+\begin{align*}
+C & =167590\\
+\boldsymbol{v} & =(0.022,0.002,0.001)^{\top}\\
+\boldsymbol{a} & =(-0.013,-0.009,0.005)^{\top}\\
+\boldsymbol{b} & =(0.718,1.295,0.969)^{\top}.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For instance, since 
+\begin_inset Formula $b_{2}=1.295$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{2}=-0.009$
+\end_inset
+
+, we see that the return of Facebook against the S&P 500 is given by 
+\begin_inset Formula 
+\[
+\boldsymbol{r}_{2}=-0.009+1.295\boldsymbol{R}.
+\]
+
+\end_inset
+
+We plot this using the code below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+t0 = min(R);
+\end_layout
+
+\begin_layout Plain Layout
+
+t1 = max(R);
+\end_layout
+
+\begin_layout Plain Layout
+
+t = linspace(t0,t1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(R,r(2,:),'o',t,polyval(p(2,:),t),'r');
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+MATLAB gives us the following plot:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename facebookregresssp500.jpg
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For instance, since 
+\begin_inset Formula $b_{3}=0.969$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{3}=0.005$
+\end_inset
+
+, we see that the return of Apple against the S&P 500 is given by 
+\begin_inset Formula 
+\[
+\boldsymbol{r}_{3}=0.005+0.969\boldsymbol{R}.
+\]
+
+\end_inset
+
+MATLAB gives us the following plot:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename appleregresssp500.jpg
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Replicating the Results
+\end_layout
+
+\begin_layout Standard
+We want to replicate the results in the paper, however we shall consider
+ a slight variation.
+ Today, one does not need to worry about transaction costs: for instance,
+ if you have an Ameritrade account, it costs precisely 
+\begin_inset Formula $0$
+\end_inset
+
+ dollars to trade any stock on the S&P 500.
+ Thus, we shall ignore the variables 
+\begin_inset Formula $f_{i}^{s}$
+\end_inset
+
+, 
+\begin_inset Formula $f_{i}^{b}$
+\end_inset
+
+, and 
+\begin_inset Formula $G_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq N$
+\end_inset
+
+, however we still keep 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ (where 
+\begin_inset Formula $(1-\gamma)C$
+\end_inset
+
+ represents the amount we are willing to invest in our new TP).
+ With this in mind, first we solve the following MILP:
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad D\nonumber \\
+\text{subject to} & \quad\sum_{i=1}^{N}a_{i}v_{i}x_{i}\leq D\nonumber \\
+ & \quad-\sum_{i=1}^{N}a_{i}v_{i}x_{i}\leq D\nonumber \\
+ & \quad\varepsilon_{i}z_{i}\leq(V_{i,T}/C)x_{i}\leq\delta_{i}z_{i} & 1\leq i\leq N\label{eq:MILP1}\\
+ & \quad\sum_{i=1}^{N}v_{i}x_{i}=1\nonumber \\
+ & \quad\sum_{i=1}^{N}z_{i}=K\nonumber \\
+ & \quad x_{i},D\geq0 & 1\leq i\leq N\nonumber \\
+ & \quad z_{i}\in\{0,1\} & 1\leq i\leq N\nonumber 
+\end{align}
+
+\end_inset
+
+where we recall that 
+\begin_inset Formula $v_{i}=V_{i,T}/(1-\gamma)C$
+\end_inset
+
+, or in other words, 
+\begin_inset Formula $V_{i,T}=(1-\gamma)Cv_{i}$
+\end_inset
+
+.
+ We will find an optimal solution to this MILP problem using MATLAB, which
+ has a built-in function whose purpose is to solve MILP problems like this.
+ The syntax for this function is 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+[x,cval] = intlinprog(c,intcon,Ain,bin,Aeq,beq,lb,ub)
+\end_layout
+
+\end_inset
+
+, where the MILP solver assumes that the MILP has the form:
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad\boldsymbol{c}^{\top}\boldsymbol{x}\\
+\text{subject to} & \quad A_{\mathrm{in}}\boldsymbol{x}\leq\boldsymbol{b}_{\mathrm{in}}\\
+ & \quad A_{\mathrm{eq}}\boldsymbol{x}=\boldsymbol{b}_{eq}\\
+ & \quad\boldsymbol{lb}\leq\boldsymbol{x}\leq\boldsymbol{ub}\\
+ & \quad\boldsymbol{x}(\mathrm{intcon})\text{ are integers}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\boldsymbol{c}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{x}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathrm{intcon}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{b}_{\mathrm{in}}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{b}_{\mathrm{eq}}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{lb}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{ub}$
+\end_inset
+
+ are vectors.
+ In order to use this function, we need to convert our MILP into this form.
+ First let 
+\begin_inset Formula 
+\[
+\boldsymbol{x}=(x_{1},\dots,x_{N},x_{N+1},\dots,x_{2N},x_{2N+1})=(x_{1},\dots,x_{n},z_{1},\dots,z_{n},D)^{\top}.
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathrm{intcon}=(N+1,N+2,\dots,2N)^{\top}\in\mathbb{R}^{N}$
+\end_inset
+
+ (this tells us that the variables 
+\begin_inset Formula $x_{N+1},x_{N+2},\dots,x_{2N}$
+\end_inset
+
+ are integers).
+ Let 
+\begin_inset Formula $\boldsymbol{lb}=(0,\dots,0)^{\top}$
+\end_inset
+
+ where 
+\begin_inset Formula $\boldsymbol{lb}\in\mathbb{R}^{2N+1}$
+\end_inset
+
+ (this tells us that 
+\begin_inset Formula $\boldsymbol{x}\geq0$
+\end_inset
+
+), and let 
+\begin_inset Formula $\boldsymbol{ub}=(\mathrm{Inf},\dots,\mathrm{Inf},1,\dots,1,\mathrm{Inf})\in\mathbb{R}^{2N+1}$
+\end_inset
+
+, that is
+\begin_inset Formula 
+\[
+(ub)_{i}=\begin{cases}
+\infty & \text{if }1\leq i\leq N\\
+1 & \text{if }N+1\leq i\leq2N\\
+\infty & \text{if }i=2N+1
+\end{cases}
+\]
+
+\end_inset
+
+This tells us that 
+\begin_inset Formula $x_{i},x_{2N+1}\leq\infty$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{N+i}\leq1$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq N$
+\end_inset
+
+.
+ In particular, since 
+\begin_inset Formula $x_{N+i}\in\mathbb{Z}$
+\end_inset
+
+, we must have 
+\begin_inset Formula $x_{N+i}\in\{0,1\}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq N$
+\end_inset
+
+.
+ With this notation, we can rewrite 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:MILP1})
+\end_layout
+
+\end_inset
+
+ as
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad\boldsymbol{c}^{\top}\boldsymbol{x}\nonumber \\
+\text{subject to} & \quad\sum_{i=1}^{N}\alpha_{i}v_{i}x_{i}-x_{2N+1}\leq0\nonumber \\
+ & \quad-\sum_{i=1}^{N}\alpha_{i}v_{i}x_{i}-x_{2N+1}\leq0\nonumber \\
+ & \quad(1-\gamma)v_{i}x_{i}-\delta_{i}x_{N+i}\leq0 & 1\leq i\leq N\nonumber \\
+ & \quad\varepsilon_{i}x_{N+i}-(1-\gamma)v_{i}x_{i}\leq0 & 1\leq i\leq N\label{eq:MILP2}\\
+ & \quad\sum_{i=1}^{N}v_{i}x_{i}=1\nonumber \\
+ & \quad\sum_{i=1}^{N}x_{N+i}=K\nonumber \\
+ & \quad\boldsymbol{lb}\leq\boldsymbol{x}\leq\boldsymbol{ub}\nonumber \\
+ & \quad\boldsymbol{x}(\mathrm{intcon})\text{ are integers}\nonumber 
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\boldsymbol{c}^{\top}=(0,\dots,0,1)^{\top}\in\mathbb{R}^{2N+1}$
+\end_inset
+
+ is the vector with 
+\begin_inset Formula $c_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq2N$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{2N+1}=1$
+\end_inset
+
+.
+ Let
+\begin_inset Formula 
+\[
+A_{\mathrm{eq}}=\begin{pmatrix}v_{1} & \cdots & v_{N} & 0 & \cdots & 0 & 0\\
+0 & \cdots & 0 & 1 & \cdots & 1 & 0
+\end{pmatrix}\quad\text{and}\quad\boldsymbol{b}_{\mathrm{eq}}=\begin{pmatrix}1\\
+K
+\end{pmatrix}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $A_{\mathrm{eq}}\in\mathbb{R}^{2\times(2N+1)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{b}_{\mathrm{eq}}\in\mathbb{R}^{2}$
+\end_inset
+
+.
+ Next, let
+\begin_inset Formula 
+\[
+A_{\mathrm{in}}^{1}=\begin{pmatrix}\alpha_{1}v_{1} & \cdots & \alpha_{N}v_{N} & 0 & \cdots & 0 & -1\\
+-\alpha_{1}v_{1} & \cdots & -\alpha_{N}v_{N} & 0 & \cdots & 0 & -1
+\end{pmatrix}\quad\text{and}\quad\boldsymbol{b}_{\mathrm{in}}^{1}=\begin{pmatrix}0\\
+0
+\end{pmatrix}.
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $A_{\mathrm{in}}^{1}\in\mathbb{R}^{2\times(2N+1)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{b}_{\mathrm{in}}^{1}\in\mathbb{R}^{2}$
+\end_inset
+
+.
+ Next, let
+\begin_inset Formula 
+\[
+A_{\mathrm{in}}^{2}=\begin{pmatrix}(1-\gamma)v_{1} &  & 0 & -\delta_{1} &  & 0 & 0\\
+ & \ddots &  &  & \ddots &  & \vdots\\
+0 &  & (1-\gamma)v_{n} & 0 &  & -\delta_{N} & 0
+\end{pmatrix}\quad\text{and}\quad\boldsymbol{b}_{\mathrm{in}}^{2}=\begin{pmatrix}0\\
+\vdots\\
+0
+\end{pmatrix}.
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $A_{\mathrm{in}}^{2}\in\mathbb{R}^{N\times(2N+1)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{b}_{\mathrm{in}}^{2}\in\mathbb{R}^{N}$
+\end_inset
+
+.
+ Next, let
+\begin_inset Formula 
+\[
+A_{\mathrm{in}}^{3}=\begin{pmatrix}(\gamma-1)v_{1} &  & 0 & \varepsilon_{1} &  & 0 & 0\\
+ & \ddots &  &  & \ddots &  & \vdots\\
+0 &  & (\gamma-1)v_{n} & 0 &  & \varepsilon_{N} & 0
+\end{pmatrix}\quad\text{and}\quad\boldsymbol{b}_{\mathrm{in}}^{3}=\begin{pmatrix}0\\
+\vdots\\
+0
+\end{pmatrix}.
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $A_{\mathrm{in}}^{3}\in\mathbb{R}^{N\times(2N+1)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{b}_{\mathrm{in}}^{3}\in\mathbb{R}^{N}$
+\end_inset
+
+.
+ Finally, let
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\begin_inset Formula 
+\[
+A_{\mathrm{in}}=\begin{pmatrix}A_{\mathrm{in}}^{1}\\
+A_{\mathrm{in}}^{2}\\
+A_{\mathrm{in}}^{3}
+\end{pmatrix}\quad\text{and}\quad\boldsymbol{b}_{\mathrm{in}}=\begin{pmatrix}\boldsymbol{b}_{\mathrm{in}}^{1}\\
+\boldsymbol{b}_{\mathrm{in}}^{2}\\
+\boldsymbol{b}_{\mathrm{in}}^{3}
+\end{pmatrix},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $A_{\mathrm{in}}\in\mathbb{R}^{(2N+2)\times(2N+1)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{b}_{\mathrm{in}}\in\mathbb{R}^{2N+2}$
+\end_inset
+
+.
+ Finally, we can rewrite 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:MILP2})
+\end_layout
+
+\end_inset
+
+ as 
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad\boldsymbol{c}^{\top}\boldsymbol{x}\\
+\text{subject to} & \quad A_{\mathrm{in}}\boldsymbol{x}\leq\boldsymbol{b}_{\mathrm{in}}\\
+ & \quad A_{\mathrm{eq}}\boldsymbol{x}=\boldsymbol{b}_{eq}\\
+ & \quad\boldsymbol{lb}\leq\boldsymbol{x}\leq\boldsymbol{ub}\\
+ & \quad\boldsymbol{x}(\mathrm{intcon})\text{ are integers}
+\end{align*}
+
+\end_inset
+
+which is the desired form.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Example
+\end_layout
+
+\begin_layout Standard
+We are now ready to work in MATLAB.
+ Let 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+function [x,cval] = MinimizeAlpha(I,V,X,cash,gamma,epsilon,delta,K)
+\end_layout
+
+\end_inset
+
+ be the MATLAB function which we code below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [x,cval] = MinimizeAlpha(I,V,X,cash,gamma,epsilon,delta,K);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[R, r, C, a, b, Vf, v, alpha, beta] = TrackingPortfolio(I, V, X, cash ,
+ gamma);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+N = length(v);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+c = [zeros(2*N,1);1];
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Aeq = [v' , zeros(1,N+1) ; zeros(1,N), ones(1,N), 0]; 
+\end_layout
+
+\begin_layout Plain Layout
+
+beq = [1; K]; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Ain1 = [(a.*v)', zeros(1,N), -1; -(a.*v)', zeros(1,N), -1];
+\end_layout
+
+\begin_layout Plain Layout
+
+Ain2 = [diag((1-gamma)*v), diag(-delta), zeros(N,1)];
+\end_layout
+
+\begin_layout Plain Layout
+
+Ain3 = [diag((gamma-1)*v), diag(epsilon), zeros(N,1)];
+\end_layout
+
+\begin_layout Plain Layout
+
+Ain = [Ain1; Ain2; Ain3];
+\end_layout
+
+\begin_layout Plain Layout
+
+bin = zeros(2*N+2,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+intcon = N+1:2*N;
+\end_layout
+
+\begin_layout Plain Layout
+
+intcon = intcon'
+\end_layout
+
+\begin_layout Plain Layout
+
+lb = [zeros(2*N+1,1)];
+\end_layout
+
+\begin_layout Plain Layout
+
+ub = [Inf(N,1); ones(N,1) ; Inf];
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[x, cval] = intlinprog(c,intcon,Ain,bin,Aeq,beq,lb,ub);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ We continue with the notation as in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Example~(
+\backslash
+ref{example1})
+\end_layout
+
+\end_inset
+
+.
+ If we set 
+\begin_inset Formula $K=1$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{\varepsilon}=(0;0;0)^{\top}$
+\end_inset
+
+, and 
+\begin_inset Formula $\boldsymbol{\delta}=(1;1;1)^{\top}$
+\end_inset
+
+, then we should expect our program to tell us that holding shares in Apple
+ is the optimal solution since 
+\begin_inset Formula $|a_{3}|=|\alpha_{3}|=0.005$
+\end_inset
+
+ is optimal (we have 
+\begin_inset Formula $|a_{1}|=0.013$
+\end_inset
+
+ and 
+\begin_inset Formula $|a_{2}|=0.009$
+\end_inset
+
+, and clearly 
+\begin_inset Formula $|a_{3}|<|a_{1}|$
+\end_inset
+
+ and 
+\begin_inset Formula $|a_{3}|<|a_{2}|$
+\end_inset
+
+).
+ In MATLAB, we write
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+I = [3756,3714,3811,3973,4181,4204,4298,4395,4523,4308,4605,4567,4766];
+\end_layout
+
+\begin_layout Plain Layout
+
+V = [3257,3206,3093,3094,3467,3223,3440,3328,3471,3285,3372,3507,3304;
+\end_layout
+
+\begin_layout Plain Layout
+
+273,259,258,295,325,329,348,356,379,339,323,324,335; 
+\end_layout
+
+\begin_layout Plain Layout
+
+133,132,121,122,131,125,137,146,152,141,150,165,178];
+\end_layout
+
+\begin_layout Plain Layout
+
+X = [10;50;100];
+\end_layout
+
+\begin_layout Plain Layout
+
+cash = 100000;
+\end_layout
+
+\begin_layout Plain Layout
+
+epsilon = [0;0;0];
+\end_layout
+
+\begin_layout Plain Layout
+
+delta = [1;1;0];
+\end_layout
+
+\begin_layout Plain Layout
+
+gamma = 0.1;
+\end_layout
+
+\begin_layout Plain Layout
+
+K = 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+[x,cval] = MinimizeAlpha(I,V,X,cash,gamma,epsilon,delta,K);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+MATLAB tells us that the optimal solution is 
+\begin_inset Formula $\boldsymbol{x}=(0,0,847.37,0,0,1,0.005)^{\top}$
+\end_inset
+
+ which corresponds to holding 
+\begin_inset Formula $\approx847$
+\end_inset
+
+ shares of Apple (and no shares of Amazon or Facebook).
+ Notice that
+\begin_inset Formula 
+\[
+847\text{ shares of Apple}\cdot178\,\text{dollars}=150,766\text{\,value of new TP}.
+\]
+
+\end_inset
+
+Furthermore, we have 
+\begin_inset Formula $(1-\gamma)C=150,831$
+\end_inset
+
+, so this also satisfies our constraint.
+ Next, suppose we set 
+\begin_inset Formula $\boldsymbol{\delta}=(1;1;0)^{\top}$
+\end_inset
+
+.
+ Then we should expect our program to tell use that holding shares in Facebook
+ is the optimal solution since 
+\begin_inset Formula $|a_{2}|<|a_{1}|$
+\end_inset
+
+.
+ Replacing 
+\begin_inset Formula $\boldsymbol{\delta}$
+\end_inset
+
+ in the code above and running it through MATLAB again, we see that MATLAB
+ gives us the optimal solution 
+\begin_inset Formula $\boldsymbol{x}=(0,450.2418,0,0,1,0,0.0086)^{\top}$
+\end_inset
+
+ which corresponds to holding 
+\begin_inset Formula $\approx450$
+\end_inset
+
+ shares of Facebook (and no shares of Amazon or Apple).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Conclusion
+\end_layout
+
+\begin_layout Standard
+In this project, we introduced MATLAB code which solves the first-step in
+ the MILP introduced in the paper under consideration.
+ Today, most trading accounts have no transaction costs, thus we do not
+ need to consider the variables 
+\begin_inset Formula $f_{i}^{s}$
+\end_inset
+
+, 
+\begin_inset Formula $f_{i}^{b}$
+\end_inset
+
+, and 
+\begin_inset Formula $G_{i}$
+\end_inset
+
+.
+ We still keep the variable 
+\begin_inset Formula $\gamma\in(0,1)$
+\end_inset
+
+ since this can be used to represent how much of the total value of our
+ account that we'd like to invest.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Standard
+Adopting the regression viewpoint for index tracking we have that ideally
+ our TP would be chosen such that when we perform a regression of TP returns
+ against index returns we would find that the regression line has an intercept
+ (alpha) of zero, and a slope (beta) of one.
+ However achieving this ideal is not straightforward.
+ There are a number of complications to achieving this ideal within the
+ context of a linear (or linearisable) formulation, as will become apparent
+ below.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The single period continuous time return for the TP in period 
+\begin_inset Formula $t$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\ln\left(\sum_{i=1}^{N}x_{i}V_{i,t}/\sum_{i=1}^{N}x_{i}V_{i,t-1}\right).
+\]
+
+\end_inset
+
+This is a nonlinear function of the decision variables.
+ In order to linearize (in an approximate fashion) this return we shall
+ assume that it can be expressed as a linear weighted sum of individual
+ stock returns, where the weights, summing to one, reflect the proportion
+ invested in each stock at time 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ The assumption that portfolio return can be expressed as a linear weighted
+ sum of individual stock returns is a common assumption in finance.
+ Hence the return on the TP at time 
+\begin_inset Formula $t$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\sum_{i=1}^{N}W_{i,t}r_{i,t}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $r_{i,t}=\ln(V_{i,t}/V_{i,t-1})$
+\end_inset
+
+ and where
+\begin_inset Formula 
+\[
+W_{i,t}=x_{i}V_{i,t}/\sum_{j=1}^{N}x_{j}V_{j,t}
+\]
+
+\end_inset
+
+is the weight associated with investment in stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at time 
+\begin_inset Formula $t$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{i=1}^{N}W_{i,t}=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Now the 
+\begin_inset Formula $W_{i,t}$
+\end_inset
+
+ are nonlinear expressions involving our decision variables 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+, as well as the value 
+\begin_inset Formula $\sum_{j=1}^{N}x_{j}V_{j,t}$
+\end_inset
+
+ of the TP at time 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ In order to proceed, we shall approximate 
+\begin_inset Formula $W_{i,t}$
+\end_inset
+
+ by a constant term which is independent of time; namely replace 
+\begin_inset Formula $W_{i,t}$
+\end_inset
+
+ by 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+w_{i}=x_{i}V_{i,T}/\sum_{j=1}^{N}x_{j}V_{j,T}
+\]
+
+\end_inset
+
+represents the proportion invested in stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at time 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ Hence the return on the TP at time 
+\begin_inset Formula $t$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\sum_{i=1}^{N}w_{i}r_{i,t}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The expresssion for 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ is still nonlinear in the 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ so to linearize it we use the constraint 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:6})
+\end_layout
+
+\end_inset
+
+ to replace 
+\begin_inset Formula $\sum_{j=1}^{N}x_{j}V_{j,T}$
+\end_inset
+
+ by 
+\begin_inset Formula $C-\sum_{j=1}^{N}G_{j}$
+\end_inset
+
+.
+ This is also a function of our variables, but we know from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:5})
+\end_layout
+
+\end_inset
+
+ that 
+\begin_inset Formula $\sum_{j=1}^{N}G_{j}$
+\end_inset
+
+ is bounded above by 
+\begin_inset Formula $\gamma C$
+\end_inset
+
+.
+ Hence we approximate 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ using the linear expression:
+\begin_inset Formula 
+\[
+w_{i}=x_{i}V_{i,T}/(C-\gamma C)\quad1\leq i\leq N.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally therefore we have a linear expression (approximation) for the returns
+ on the TP as
+\begin_inset Formula 
+\[
+\sum_{i=1}^{N}w_{i}r_{i,t}\qquad1\leq t\leq T
+\]
+
+\end_inset
+
+Using the log-sum inequality it is possible to prove (assuming we spend
+ 
+\begin_inset Formula $\gamma C$
+\end_inset
+
+ in transaction cost) that the average return from this approximation 
+\begin_inset Formula 
+\[
+\sum_{t=1}^{T}\sum_{i=1}^{N}w_{i}r_{i.t}/T
+\]
+
+\end_inset
+
+ over-estimates average tracking portfolio 
+\begin_inset Formula 
+\[
+\sum_{t=1}^{T}\ln\left(\sum_{i=1}^{N}x_{i}V_{i,t}/\sum_{i=1}^{N}x_{i}V_{i,t-1}\right)/T
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

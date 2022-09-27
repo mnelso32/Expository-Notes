@@ -1,0 +1,6271 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Complex Integration
+\end_layout
+
+\begin_layout Section
+Parametrized Curves
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+parametrized curve 
+\series default
+is a function 
+\begin_inset Formula $\gamma\colon[a,b]\to\mathbb{C}$
+\end_inset
+
+.
+ We say the parametrized curve is 
+\series bold
+smooth 
+\series default
+if 
+\begin_inset Formula $\dot{\gamma}(t)$
+\end_inset
+
+ exists and is continuous on 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+, and moreover 
+\begin_inset Formula $\gamma'(t)\neq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $t\in[a,b]$
+\end_inset
+
+.
+ At the points 
+\begin_inset Formula $t=a$
+\end_inset
+
+ and 
+\begin_inset Formula $t=b$
+\end_inset
+
+, the quantities 
+\begin_inset Formula $\gamma'(a)$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma'(b)$
+\end_inset
+
+ are interpreted as one-sided limits
+\begin_inset Formula 
+\[
+\gamma'(a)=\lim_{\substack{h\to0\\
+h>0
+}
+}\frac{\gamma(a+h)-\gamma(a)}{h}\quad\text{and}\quad\gamma'(b)=\lim_{\substack{h\to0\\
+h<0
+}
+}\frac{\gamma(b+h)-\gamma(b)}{h}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general, these quantities are called the right-hand derivative of 
+\begin_inset Formula $\gamma(t)$
+\end_inset
+
+ at 
+\begin_inset Formula $a$
+\end_inset
+
+, and the left-hand derivative of 
+\begin_inset Formula $\gamma(t)$
+\end_inset
+
+ at 
+\begin_inset Formula $b$
+\end_inset
+
+, respectively.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Similarly, we say that the parametrized curve is 
+\series bold
+piecewise-smooth 
+\series default
+if 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is continuous on 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+ and if there exist points 
+\begin_inset Formula 
+\[
+a=x_{0}<x_{1}<\cdots<x_{n}=b,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\gamma(t)$
+\end_inset
+
+ is smooth in the intervals 
+\begin_inset Formula $[x_{k},x_{k+1}]$
+\end_inset
+
+.
+ In particular, the right-hand derivative at 
+\begin_inset Formula $x_{k}$
+\end_inset
+
+ may differ from the left-hand derivative at 
+\begin_inset Formula $x_{k}$
+\end_inset
+
+, for 
+\begin_inset Formula $k=1,\dots,n-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Equivalence of Parametrized Curves
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\gamma_{1}\colon[a,b]\to\mathbb{C}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{2}\colon[c,d]\to\mathbb{C}$
+\end_inset
+
+ be two parametrized curves.
+ We say 
+\begin_inset Formula $\gamma_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{2}$
+\end_inset
+
+ are 
+\series bold
+equivalent
+\series default
+, denoted 
+\begin_inset Formula $\gamma_{1}\sim\gamma_{2}$
+\end_inset
+
+, if there exists a continuously differentiable bijection 
+\begin_inset Formula $\varphi\colon[c,d]\to[a,b]$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi'(s)>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{2}(s)=\gamma_{1}(\varphi(s))$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in[c,d]$
+\end_inset
+
+.
+ The condition 
+\begin_inset Formula $\varphi'(s)>0$
+\end_inset
+
+ says precisely that the orientation is preserved: as 
+\begin_inset Formula $s$
+\end_inset
+
+ travels from 
+\begin_inset Formula $c$
+\end_inset
+
+ to 
+\begin_inset Formula $d$
+\end_inset
+
+, then 
+\begin_inset Formula $\varphi(s)$
+\end_inset
+
+ travels from 
+\begin_inset Formula $a$
+\end_inset
+
+ to 
+\begin_inset Formula $b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The family of all parametrizations that are equivalent to 
+\begin_inset Formula $\gamma(t)$
+\end_inset
+
+ determines a 
+\series bold
+smooth curve 
+\begin_inset Formula $\Gamma\subset\mathbb{C}$
+\end_inset
+
+
+\series default
+, namely the image of 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+ under 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ with the orientation given by 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ as 
+\begin_inset Formula $t$
+\end_inset
+
+ travels from 
+\begin_inset Formula $a$
+\end_inset
+
+ to 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ We can define a curve 
+\begin_inset Formula $\Gamma^{-}$
+\end_inset
+
+ obtained from the curve 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ by reversing the orientation.
+ As a particular parametrization for 
+\begin_inset Formula $\Gamma^{-}$
+\end_inset
+
+, we can take 
+\begin_inset Formula $\gamma^{-}:[a,b]\to\mathbb{C}$
+\end_inset
+
+ defined by 
+\begin_inset Formula 
+\[
+\gamma^{-}(t)=\gamma(b+a-t),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\gamma:[a,b]\to\mathbb{C}$
+\end_inset
+
+ is a parametrization for 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Note that a continuously differentiable bijection 
+\begin_inset Formula $s\mapsto\varphi(s)$
+\end_inset
+
+ from 
+\begin_inset Formula $[c,d]$
+\end_inset
+
+ to 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+ such that 
+\begin_inset Formula $\dot{\varphi}(s)>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in[c,d]$
+\end_inset
+
+ is automatically a diffeomorphism.
+ This is because 
+\begin_inset Formula $[c,d]$
+\end_inset
+
+ is compact and 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+ is Hausdorff implies the inverse function 
+\begin_inset Formula $\varphi^{-1}$
+\end_inset
+
+ is continuous, and moreover it is continuously differentiable, with its
+ derivative given by
+\begin_inset Formula 
+\[
+\varphi'^{-1}(t)=\frac{1}{\varphi'(\varphi^{-1}(t))}>0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Conversely, if 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is an 
+\series bold
+orientation preserving diffeomorphism
+\series default
+, then 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is a continuously differentiable bijection such that 
+\begin_inset Formula $\varphi'(s)>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in[c,d]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{examplestandardinterval}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The map 
+\begin_inset Formula $\varphi\colon[a,b]\to[0,1]$
+\end_inset
+
+, given by 
+\begin_inset Formula $\varphi(s)=\frac{s-a}{b-a}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in[a,b]$
+\end_inset
+
+, has as derivative 
+\begin_inset Formula $\dot{\varphi}(s)=\frac{1}{b-a}>0$
+\end_inset
+
+.
+ The inverse of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\varphi^{-1}(t)=t(b-a)+a$
+\end_inset
+
+ and has as derivative 
+\begin_inset Formula $\dot{\varphi}^{-1}(t)=b-a>0$
+\end_inset
+
+.
+ Therefore if 
+\begin_inset Formula $\gamma\colon[a,b]\to\mathbb{C}$
+\end_inset
+
+, then 
+\begin_inset Formula $\gamma\sim\gamma\circ\varphi^{-1}$
+\end_inset
+
+, where 
+\begin_inset Formula $\gamma\circ\varphi^{-1}:[0,1]\to\mathbb{C}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $z\in\mathbb{C}$
+\end_inset
+
+ and consider the constant map 
+\begin_inset Formula $\gamma_{z}:[0,1]\to\mathbb{C}$
+\end_inset
+
+, given by 
+\begin_inset Formula $\gamma_{z}(t)=z$
+\end_inset
+
+ for all 
+\begin_inset Formula $t\in[0,1]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\dot{\gamma}_{z}(t)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $t\in[0,1]$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $\{z\}$
+\end_inset
+
+ is not a smooth curve.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+It is also clear how to define a 
+\series bold
+piecewise-smooth curve
+\series default
+.
+ The point 
+\begin_inset Formula $\gamma(a)$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma(b)$
+\end_inset
+
+ are called the 
+\series bold
+end-points 
+\series default
+of the curve and are independent on the parametrization.
+ If 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ parametrizes the curve 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+, we say 
+\begin_inset Formula $\gamma(a)$
+\end_inset
+
+ is the 
+\series bold
+source 
+\series default
+of 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma(b)$
+\end_inset
+
+ is the 
+\series bold
+target 
+\series default
+of 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ carries an orientation, it is natural to say that 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ begins at 
+\begin_inset Formula $\gamma(a)$
+\end_inset
+
+ and ends at 
+\begin_inset Formula $\gamma(b)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A smooth or piecewise-smooth curve is 
+\series bold
+closed 
+\series default
+if 
+\begin_inset Formula $\gamma(a)=\gamma(b)$
+\end_inset
+
+ for any of its parametrizations.
+ Finally, a smooth or piecewise-smooth curve is 
+\series bold
+simple 
+\series default
+if it is not self-intersecting, that is, 
+\begin_inset Formula $\gamma(t)\neq\gamma(s)$
+\end_inset
+
+ unless 
+\begin_inset Formula $s=t$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For brevity, we shall call any piecewise-smooth curve a 
+\series bold
+curve
+\series default
+, since these will be the objects we shall be primarily concerned with.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $z$
+\end_inset
+
+ and 
+\begin_inset Formula $z'$
+\end_inset
+
+ be distinct points in 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ be the line segment from from 
+\begin_inset Formula $z$
+\end_inset
+
+ to 
+\begin_inset Formula $z'$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ can be parametrized by the function 
+\begin_inset Formula $\gamma:[0,1]\to\Gamma$
+\end_inset
+
+ where 
+\begin_inset Formula $\gamma(t)=tz'+(1-t)z$
+\end_inset
+
+ for all 
+\begin_inset Formula $t\in[0,1]$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\dot{\gamma}(t)=z'-z\neq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $t\in[0,1]$
+\end_inset
+
+, and so 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is a smooth curve.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $C_{r}(z_{0})=\{z\in\mathbb{C}\mid|z-z_{0}|=r\}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $C_{r}(z_{0})$
+\end_inset
+
+ is the circle centered at 
+\begin_inset Formula $z_{0}$
+\end_inset
+
+ and of radius 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ The 
+\series bold
+positive orientation 
+\series default
+(counterclockwise) is the one that is given by the standard parametrization
+\begin_inset Formula 
+\[
+\gamma(t)=z_{0}+re^{2\pi it},\quad\text{where }t\in[0,1],
+\]
+
+\end_inset
+
+while the 
+\series bold
+negative orientation 
+\series default
+(clockwise)
+\begin_inset Formula 
+\[
+\gamma(t)=z_{0}+re^{-2\pi it},\quad\text{where }t\in[0,1].
+\]
+
+\end_inset
+
+We usually denote by 
+\begin_inset Formula $C$
+\end_inset
+
+ a general 
+\emph on
+positively 
+\emph default
+oriented circle.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Concatenation
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ be an open subset of 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\gamma_{1}\colon I\to\mathbb{C}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{2}\colon I\to\mathbb{C}$
+\end_inset
+
+ be two parametrized smooth curves such that 
+\begin_inset Formula $\gamma_{1}(1)=\gamma_{2}(0)$
+\end_inset
+
+.
+ Then we define a piecewise smooth parametrized curve 
+\begin_inset Formula $\gamma_{2}\star\gamma_{1}\colon I\to\mathbb{C}$
+\end_inset
+
+ by the formula
+\begin_inset Formula 
+\[
+(\gamma_{2}\star\gamma_{1})(t)=\begin{cases}
+\gamma_{1}(2t) & 0\le t\le\frac{1}{2}\\
+\gamma_{2}\left(2\left(t-\frac{1}{2}\right)\right) & \frac{1}{2}<t\leq1.
+\end{cases}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $t\in[0,1]$
+\end_inset
+
+.
+ The idea is that we traverse 
+\begin_inset Formula $\gamma_{1}$
+\end_inset
+
+ and then 
+\begin_inset Formula $\gamma_{2}$
+\end_inset
+
+ all in one day.
+ The 
+\begin_inset Formula $2t$
+\end_inset
+
+ in 
+\begin_inset Formula $\gamma_{1}(2t)$
+\end_inset
+
+ comes from the fact that we need to traverse 
+\begin_inset Formula $\gamma_{1}$
+\end_inset
+
+ twice as fast, the 
+\begin_inset Formula $t-\frac{1}{2}$
+\end_inset
+
+ in 
+\begin_inset Formula $\gamma_{2}\left(2\left(t-\frac{1}{2}\right)\right)$
+\end_inset
+
+ comes from the fact that we need to wait half a day before we start traversing
+ 
+\begin_inset Formula $\gamma_{2}$
+\end_inset
+
+, and the 
+\begin_inset Formula $2\left(t-\frac{1}{2}\right)$
+\end_inset
+
+ in 
+\begin_inset Formula $\gamma_{2}\left(2\left(t-\frac{1}{2}\right)\right)$
+\end_inset
+
+ comes from the fact that we need to traverse 
+\begin_inset Formula $\gamma_{2}$
+\end_inset
+
+ twice as fast.
+ Note that 
+\begin_inset Formula $(\gamma_{2}\star\gamma_{1})'\left(\frac{1}{2}\right)$
+\end_inset
+
+ need not exist since its left-hand derivative is 
+\begin_inset Formula 
+\[
+2\lim_{t^{+}\to1/2}\gamma_{1}'(2t)=2\gamma_{1}'(1)
+\]
+
+\end_inset
+
+and its right-hand derivative is 
+\begin_inset Formula 
+\[
+2\lim_{t^{-}\to1/2}\gamma_{2}'\left(2t-1\right)=2\gamma_{2}'(0),
+\]
+
+\end_inset
+
+and these need not be equal.
+ On the other hand, 
+\begin_inset Formula $\gamma_{2}\star\gamma_{1}$
+\end_inset
+
+ is clearly piecewise smooth.
+ 
+\end_layout
+
+\begin_layout Subsection
+Integrating along a Smooth Curve
+\end_layout
+
+\begin_layout Standard
+Given a smooth curve 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ parametrized by 
+\begin_inset Formula $\gamma:[a,b]\to\mathbb{C}$
+\end_inset
+
+, and 
+\begin_inset Formula $f$
+\end_inset
+
+ a continuous function on 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, we define the 
+\series bold
+integral of 
+\begin_inset Formula $f$
+\end_inset
+
+ along 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ 
+\series default
+by 
+\begin_inset Formula 
+\[
+\int_{\Gamma}f(z)dz=\int_{a}^{b}f(\gamma(t))\dot{\gamma}(t)dt.
+\]
+
+\end_inset
+
+In order for this definition to be meaningful, we must show that the right-hand
+ integral is independent of the parametrization chosen for 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+.
+ Say that 
+\begin_inset Formula $\gamma_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{2}$
+\end_inset
+
+ are two equivalent parametrizations for 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+.
+ Then the change of variables formula and the chain rule imply that 
+\begin_inset Formula 
+\[
+\int_{a}^{b}f(\gamma_{1}(t))\dot{\gamma}_{1}(t)dt=\int_{c}^{d}f(\gamma_{1}(\varphi(s)))\dot{\gamma}_{1}(\varphi(s))\dot{\varphi}(s)ds=\int_{a}^{b}f(\gamma_{2}(s))\dot{\gamma}_{2}(s)ds.
+\]
+
+\end_inset
+
+This proves that the integral of 
+\begin_inset Formula $f$
+\end_inset
+
+ over 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is well defined.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+If 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is piecewise smooth, then the integral of 
+\begin_inset Formula $f$
+\end_inset
+
+ over 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is simply the sum of the integrals of 
+\begin_inset Formula $f$
+\end_inset
+
+ over the smooth parts of 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+, so if 
+\begin_inset Formula $\gamma(t)$
+\end_inset
+
+ is a piecewise-smooth parametrization as before, then 
+\begin_inset Formula 
+\[
+\int_{\Gamma}f(z)dz=\sum_{k=0}^{n-1}\int_{a_{k}}^{a_{k+1}}f(\gamma(t))\dot{\gamma}(t)dt.
+\]
+
+\end_inset
+
+By definition, the 
+\series bold
+length 
+\series default
+of the smooth curve 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\text{length}(\Gamma)=\int_{a}^{b}|\dot{\gamma}(t)|dt.
+\]
+
+\end_inset
+
+Arguing as we just did, it is clear that this definition is also independent
+ of the parametrization.
+ Also, if 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is only piecewise-smooth, then its length is the sum of the lengths of
+ its smooth parts.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Integration of continuous functions over curves satisfies the following
+ properties: 
+\end_layout
+
+\begin_layout Enumerate
+It is linear, that is, if 
+\begin_inset Formula $\alpha,\beta\in\mathbb{C}$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+\int_{\Gamma}(\alpha f(z)+\beta g(z))dz=\alpha\int_{\Gamma}f(z)dz+\beta\int_{\Gamma}g(z)dz.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\Gamma^{-}$
+\end_inset
+
+ is 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ with reverse orientation, then 
+\begin_inset Formula 
+\[
+\int_{\Gamma}f(z)dz=-\int_{\Gamma^{-}}f(z)dz.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\Gamma=\Gamma_{2}\star\Gamma_{1}$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+\int_{\Gamma}f(z)dz=\int_{\Gamma_{1}}f(z)dz+\int_{\Gamma_{2}}f(z)dz.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+One has the inequality 
+\begin_inset Formula 
+\[
+\left|\int_{\Gamma}f(z)dz\right|\leq\sup_{z\in\Gamma}\left|f(z)\right|\cdot\text{length}\left(\Gamma\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Follows from the definition and the linearity of the Riemann integral.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\gamma:[a,b]\to\mathbb{C}$
+\end_inset
+
+ be a parametrization of 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\gamma^{-}:[a,b]\to\mathbb{C}$
+\end_inset
+
+ is a parametrization of 
+\begin_inset Formula $\Gamma^{-}$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\begin{align*}
+\int_{\Gamma^{-}}f(z)dz & =-\int_{b}^{a}f(\gamma(b+a-t))\dot{\gamma}(b+a-t)dt\\
+ & =-\int_{a}^{b}f(\gamma(s))\dot{\gamma}(s)ds\\
+ & =-\int_{\Gamma}f(z)dz,
+\end{align*}
+
+\end_inset
+
+where we used the change of variable 
+\begin_inset Formula $s=b+a-t$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\gamma_{1}:[0,1]\to\mathbb{C}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{2}:[0,1]\to\mathbb{C}$
+\end_inset
+
+ be parametrizations of 
+\begin_inset Formula $\Gamma_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Gamma_{2}$
+\end_inset
+
+ respectively.
+ Then 
+\begin_inset Formula $\gamma_{2}\star\gamma_{1}:[0,1]\to\mathbb{C}$
+\end_inset
+
+ is a parametrization of 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+, where
+\begin_inset Formula 
+\[
+(\gamma_{2}\star\gamma_{1})(t)=\begin{cases}
+\gamma_{1}(2t) & 0\le t\le\frac{1}{2}\\
+\gamma_{2}\left(2\left(t-\frac{1}{2}\right)\right) & \frac{1}{2}<t\leq1.
+\end{cases}
+\]
+
+\end_inset
+
+Therefore
+\begin_inset Formula 
+\begin{align*}
+\int_{\Gamma}f(z)dz & =\int_{0}^{1}f((\gamma_{2}\star\gamma_{1})(t))\frac{d}{dt}(\gamma_{2}\star\gamma_{1})(t)dt\\
+ & =2\int_{0}^{1/2}f(\gamma_{1}(2t))\dot{\gamma}_{1}(2t)dt+2\int_{0}^{1/2}f(\gamma_{2}\left(2t-1\right))\dot{\gamma}_{1}(2t-1)dt\\
+ & =\int_{0}^{1}f(\gamma_{1}(s))\dot{\gamma}_{1}(s)dt+\int_{0}^{1}f(\gamma_{2}\left(u\right))\dot{\gamma}_{1}(u)dt\\
+ & =\int_{\Gamma_{1}}f(z)dz+\int_{\Gamma_{2}}f(z)dz,
+\end{align*}
+
+\end_inset
+
+where we used the change of variables 
+\begin_inset Formula $s=2t$
+\end_inset
+
+ and 
+\begin_inset Formula $u=2t-1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ be a parametrization of 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\left|\int_{\Gamma}f(z)dz\right| & =\left|\int_{a}^{b}f(\gamma(t))\dot{\gamma}(t)dt\right|\\
+ & \leq\int_{a}^{b}\left|f(\gamma(t))\dot{\gamma}(t)\right|dt\\
+ & =\int_{a}^{b}\left|f(\gamma(t))\right|\left|\dot{\gamma}(t)\right|dt\\
+ & \leq\sup_{t\in[a,b]}\left|f(\gamma(t))\right|\int_{a}^{b}\left|\dot{\gamma}(t)\right|dt\\
+ & =\sup_{z\in\Gamma}\left|f(z)\right|\cdot\text{length}\left(\Gamma\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is a function on the open set 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ A 
+\series bold
+primitive 
+\series default
+for 
+\begin_inset Formula $f$
+\end_inset
+
+ on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is a function 
+\begin_inset Formula $F$
+\end_inset
+
+ that is holomorphic on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ and such that 
+\begin_inset Formula $F'(z)=f(z)$
+\end_inset
+
+ for all 
+\begin_inset Formula $z\in\Omega$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ If a continuous function 
+\begin_inset Formula $f$
+\end_inset
+
+ has a primitive 
+\begin_inset Formula $F$
+\end_inset
+
+ in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, and 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is a curve in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ that begins at 
+\begin_inset Formula $w_{1}$
+\end_inset
+
+ and ends at 
+\begin_inset Formula $w_{2}$
+\end_inset
+
+, then
+\begin_inset Formula 
+\[
+\int_{\Gamma}f(z)dz=F(w_{2})-F(w_{1}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is smooth, the proof is a simple application of the chain rule and the
+ fundamental theorem of calculus.
+ Indeed, if 
+\begin_inset Formula $\gamma(t):[a,b]\to\mathbb{C}$
+\end_inset
+
+ is a parametrization for 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+, then 
+\begin_inset Formula $\gamma(a)=w_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma(b)=w_{2}$
+\end_inset
+
+, and we have 
+\begin_inset Formula 
+\begin{align*}
+\int_{\Gamma}f(z)dz & =\int_{a}^{b}f(\gamma(t))\dot{\gamma}(t)dt\\
+ & =\int_{a}^{b}F'(\gamma(t))\dot{\gamma}(t)dt\\
+ & =\int_{a}^{b}\frac{d}{dt}\left(F(\gamma(t))\right)dt\\
+ & =F(\gamma(b))-F(\gamma(a)).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is only piecewise-smooth, then arguing as we just did, we obtain a telescopic
+ sum, and we have 
+\begin_inset Formula 
+\begin{align*}
+\int_{\Gamma}f(z)dz & =\sum_{k=0}^{n-1}F(\gamma(a_{k+1}))-F(\gamma(a_{k}))\\
+ & =F(\gamma(a_{n}))-F(\gamma(a_{0}))\\
+ & =F(\gamma(b))-F(\gamma(a)).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{corintegralclosedcurve}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is a closed curve in an open set 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, and 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous and has a primitive in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+\int_{\Gamma}f(z)dz=0.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ This is immediate since the end-points of a closed curve coincide.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ A connected open subset in 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ is called a 
+\series bold
+region
+\series default
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ In 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+, a connected open subset is path-connected.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in a region 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ and 
+\begin_inset Formula $f'=0$
+\end_inset
+
+, then 
+\begin_inset Formula $f$
+\end_inset
+
+ is constant.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Fix a point 
+\begin_inset Formula $w_{0}\in\Omega$
+\end_inset
+
+.
+ It suffices to show that 
+\begin_inset Formula $f(w)=f(w_{0})$
+\end_inset
+
+ for all 
+\begin_inset Formula $w\in\Omega$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is connected, for any 
+\begin_inset Formula $w\in\Omega$
+\end_inset
+
+, there exists a curve 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ which joins 
+\begin_inset Formula $w_{0}$
+\end_inset
+
+ to 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is clearly a primitive for 
+\begin_inset Formula $f'$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+\int_{\Gamma}f'(z)dz=f(w)-f(w_{0}).
+\]
+
+\end_inset
+
+By assumption, 
+\begin_inset Formula $f'=0$
+\end_inset
+
+, so the integral on the left is 
+\begin_inset Formula $0$
+\end_inset
+
+, and we conclude that 
+\begin_inset Formula $f(w)=f(w_{0})$
+\end_inset
+
+ as desired.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Cauchy's Theorem and its Applications
+\end_layout
+
+\begin_layout Standard
+Roughly speaking, Cauchy's Theorem states that if 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in an open set 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ and 
+\begin_inset Formula $\Gamma\subset\Omega$
+\end_inset
+
+ is a closed curve whose interior is also contained in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+\int_{\Gamma}f(z)dz=0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Many results that follow, and in particular the calculus of residues, are
+ related in one way or another to this fact.
+ We first prove this in the special case that our curve 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is a triangle:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ (Goursat's Theorem) If 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is an open set in 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+, and 
+\begin_inset Formula $T\subset\Omega$
+\end_inset
+
+ is a triangle whose interior is also contained in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+\int_{T}f(z)dz=0,
+\]
+
+\end_inset
+
+whenever 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We call 
+\begin_inset Formula $T^{(0)}$
+\end_inset
+
+ our original triangle (with a fixed orientation which we choose to be positive)
+, and let 
+\begin_inset Formula $d^{(0)}$
+\end_inset
+
+ and 
+\begin_inset Formula $p^{(0)}$
+\end_inset
+
+ denote the diameter and perimeter of 
+\begin_inset Formula $T^{(0)}$
+\end_inset
+
+, respectively.
+ The first step in our construction consists of bisecting each side of the
+ triangle and connected the midpoints.
+ This creates four new smaller triangles, denote 
+\begin_inset Formula $T_{1}^{(1)}$
+\end_inset
+
+, 
+\begin_inset Formula $T_{2}^{(1)}$
+\end_inset
+
+, 
+\begin_inset Formula $T_{3}^{(1)}$
+\end_inset
+
+, and 
+\begin_inset Formula $T_{4}^{(1)}$
+\end_inset
+
+ that are similar to the original triangle.
+ The orientation is chosen to be consistent with that of the original triangle,
+ and so after cancellations arising from integration over the same side
+ in two opposite directions, we have 
+\begin_inset Formula 
+\[
+\int_{T^{(0)}}f(z)dz=\int_{T_{1}^{(1)}}f(z)dz+\int_{T_{2}^{(1)}}f(z)dz+\int_{T_{3}^{(1)}}f(z)dz+\int_{T_{4}^{(1)}}f(z)dz.
+\]
+
+\end_inset
+
+By triangle inequality, we must have 
+\begin_inset Formula 
+\[
+\left|\int_{T^{(0)}}f(z)dz\right|\leq4\left|\int_{T_{j}^{(1)}}f(z)dz\right|
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for some 
+\begin_inset Formula $j\in\{1,2,3,4\}$
+\end_inset
+
+.
+ Without loss of generality, assume 
+\begin_inset Formula $j=1$
+\end_inset
+
+.
+ Observe that if 
+\begin_inset Formula $d^{(1)}$
+\end_inset
+
+ and 
+\begin_inset Formula $p^{(1)}$
+\end_inset
+
+ denote the diameter and perimeter of 
+\begin_inset Formula $T^{(1)}$
+\end_inset
+
+, respectively, then 
+\begin_inset Formula $d^{(1)}=(1/2)d^{(0)}$
+\end_inset
+
+ and 
+\begin_inset Formula $p^{(1)}=(1/2)p^{(0)}$
+\end_inset
+
+.
+ We now repeat this process for the triangle 
+\begin_inset Formula $T^{(1)}$
+\end_inset
+
+, bisecting into four smaller triangles.
+ Continuing this process, we obtain a sequence of triangles
+\begin_inset Formula 
+\[
+T^{(0)},T^{(1)},\dots,T^{(n)},\dots
+\]
+
+\end_inset
+
+with the properties that 
+\begin_inset Formula 
+\[
+\left|\int_{T^{(0)}}f(z)dz\right|\leq4^{n}\left|\int_{T^{(n)}}f(z)dz\right|
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+d^{(n)}=2^{-n}d^{(0)},\quad p^{(n)}=2^{-n}p^{(0)},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $d^{(n)}$
+\end_inset
+
+ and 
+\begin_inset Formula $p^{(n)}$
+\end_inset
+
+ denote the diameter and perimeter of 
+\begin_inset Formula $T^{(n)}$
+\end_inset
+
+, respectively.
+ We also denote 
+\begin_inset Formula $\mathcal{T}^{(n)}$
+\end_inset
+
+ the 
+\emph on
+solid 
+\emph default
+closed triangle with boundary 
+\begin_inset Formula $T^{(n)}$
+\end_inset
+
+, and observe that our construction yields a sequence of nested compact
+ sets
+\begin_inset Formula 
+\[
+\mathcal{T}^{(0)}\supset\mathcal{T}^{(1)}\supset\cdots\supset\mathcal{T}^{(n)}\supset\cdots
+\]
+
+\end_inset
+
+whose diameter goes to 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Thus, by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propsequenceofcompactsets})
+\end_layout
+
+\end_inset
+
+, there exists a unique point 
+\begin_inset Formula $z_{0}$
+\end_inset
+
+ that belongs to all the solid triangles 
+\begin_inset Formula $\mathcal{T}^{(n)}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic at 
+\begin_inset Formula $z_{0}$
+\end_inset
+
+, we can write 
+\begin_inset Formula 
+\[
+f(z)=f(z_{0})+f'(z_{0})(z-z_{0})+\psi(z)(z-z_{0}),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\psi(z)\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $z\to z_{0}$
+\end_inset
+
+.
+ Since the constant 
+\begin_inset Formula $f(z_{0})$
+\end_inset
+
+ and the linear function 
+\begin_inset Formula $f'(z_{0})(z-z_{0})$
+\end_inset
+
+ have primitives, we can integrate the above equality and, using 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Corollary~(
+\backslash
+ref{corintegralclosedcurve})
+\end_layout
+
+\end_inset
+
+, we obtain 
+\begin_inset Formula 
+\[
+\int_{T^{(n)}}f(z)dz=\int_{T^{(n)}}\psi(z)(z-z_{0})dz.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now 
+\begin_inset Formula $z_{0}$
+\end_inset
+
+ belongs to the closure of the triangle 
+\begin_inset Formula $\mathcal{T}^{(n)}$
+\end_inset
+
+ and 
+\begin_inset Formula $z$
+\end_inset
+
+ to its boundary, so we must have 
+\begin_inset Formula $|z-z_{0}|\leq d^{(n)}$
+\end_inset
+
+, and so we estimate 
+\begin_inset Formula 
+\[
+\left|\int_{T^{(n)}}f(z)dz\right|\leq\varepsilon_{n}d^{(n)}p^{(n)},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\varepsilon_{n}=\sup_{z\in T^{(n)}}|\psi(z)|\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\[
+\left|\int_{T^{(n)}}f(z)dz\right|\le\varepsilon_{n}4^{-n}d^{(0)}p^{(0)},
+\]
+
+\end_inset
+
+which yields our final estimate 
+\begin_inset Formula 
+\[
+\left|\int_{T^{(0)}}f(z)dz\right|\leq4^{n}\left|\int_{T^{(n)}}f(z)dz\right|\le\varepsilon_{n}d^{(0)}p^{(0)}.
+\]
+
+\end_inset
+
+Letting 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ concludes the proof since 
+\begin_inset Formula $\varepsilon_{n}\to0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in an open set 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ that contains a rectangle 
+\begin_inset Formula $R$
+\end_inset
+
+ and its interior, then 
+\begin_inset Formula 
+\[
+\int_{R}f(z)dz=0.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We simply decompose the rectangle into two triangles, and integrate over
+ the two triangles.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Local existence of primitives and Cauchy's theorem in a disc
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ A set 
+\begin_inset Formula $E\subset\mathbb{C}$
+\end_inset
+
+ is said to be 
+\series bold
+convex 
+\series default
+if whenever 
+\begin_inset Formula $x,y\in E$
+\end_inset
+
+ and 
+\begin_inset Formula $0<t<1$
+\end_inset
+
+, the point 
+\begin_inset Formula $(1-t)x+ty$
+\end_inset
+
+ also lies in 
+\begin_inset Formula $E$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Existence of primitives for holomorphic functions
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem2.1}
+\end_layout
+
+\end_inset
+
+ A holomorphic function in an open disc has a primitive in that disc.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ After a translation, we may assume without loss of generality that the
+ disc, say 
+\begin_inset Formula $D$
+\end_inset
+
+, is centered at the origin.
+ Given a point 
+\begin_inset Formula $z\in D$
+\end_inset
+
+, consider the piecewise-smooth curve that joins 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $z$
+\end_inset
+
+ first by moving in the horizontal direction form 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $\text{Re}(z)$
+\end_inset
+
+, and then in the vertical direction from 
+\begin_inset Formula $\text{Re}(z)$
+\end_inset
+
+ to 
+\begin_inset Formula $z$
+\end_inset
+
+.
+ We choose the orientation from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $z$
+\end_inset
+
+, and denote this polygonal line by 
+\begin_inset Formula $\Gamma_{z}$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula 
+\[
+F(z)=\int_{\Gamma_{z}}f(w)dw.
+\]
+
+\end_inset
+
+The choice of 
+\begin_inset Formula $\Gamma_{z}$
+\end_inset
+
+ gives an unambigious definition of the function 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ We contend that 
+\begin_inset Formula $F$
+\end_inset
+
+ is holomorphic in 
+\begin_inset Formula $D$
+\end_inset
+
+ and that 
+\begin_inset Formula $F'(z)=f(z)$
+\end_inset
+
+ for all 
+\begin_inset Formula $z\in D$
+\end_inset
+
+.
+ To prove this, fix 
+\begin_inset Formula $z\in D$
+\end_inset
+
+ and let 
+\begin_inset Formula $h\in\mathbb{C}$
+\end_inset
+
+ be sufficiently small so that 
+\begin_inset Formula $z+h$
+\end_inset
+
+ also belongs to the disc.
+ Now consider the difference
+\begin_inset Formula 
+\[
+F(z+h)-F(z)=\int_{\Gamma_{z+h}}f(w)dw-\int_{\Gamma_{z}}f(w)dw.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The function 
+\begin_inset Formula $f$
+\end_inset
+
+ is first integrated along 
+\begin_inset Formula $\Gamma_{z+h}$
+\end_inset
+
+ with the original orientation, and then along 
+\begin_inset Formula $\Gamma_{z}$
+\end_inset
+
+ with the reverse orientation.
+ Since we integrate 
+\begin_inset Formula $f$
+\end_inset
+
+ over the line segment starting at the origin in two opposite directions,
+ it cancels.
+ Then we complete the square and triangle, so that after an application
+ of Goursat's theorem for triangles and rectangles, we are left with the
+ line segment from 
+\begin_inset Formula $z$
+\end_inset
+
+ to 
+\begin_inset Formula $z+h$
+\end_inset
+
+.
+ Hence, we have 
+\begin_inset Formula 
+\[
+F(z+h)-F(z)=\int_{\eta}f(w)dw,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\eta$
+\end_inset
+
+ is the straight line segment from 
+\begin_inset Formula $z$
+\end_inset
+
+ to 
+\begin_inset Formula $z+h$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous at 
+\begin_inset Formula $z$
+\end_inset
+
+ we can write 
+\begin_inset Formula 
+\[
+f(w)=f(z)+\psi(w)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\psi(w):=f(w)-f(z)\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $w\to z$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\[
+F(z+h)-F(z)=\int_{\eta}f(z)dw+\int_{\eta}\psi(w)dw=f(z)\int_{\eta}dw+\int_{\eta}\psi(w)dw.
+\]
+
+\end_inset
+
+On the one hand, the constant 
+\begin_inset Formula $1$
+\end_inset
+
+ has 
+\begin_inset Formula $w$
+\end_inset
+
+ as a primitive, so the first integral is simply 
+\begin_inset Formula $h$
+\end_inset
+
+.
+ On the other hand, we have
+\begin_inset Formula 
+\[
+\left|\int_{\eta}\psi(w)dw\right|\leq\sup_{w\in\eta}|\psi(w)|\cdot|h|.
+\]
+
+\end_inset
+
+Since the supremum above goes to 
+\begin_inset Formula $0$
+\end_inset
+
+ as 
+\begin_inset Formula $h$
+\end_inset
+
+ tends to 
+\begin_inset Formula $0$
+\end_inset
+
+, we conclude that 
+\begin_inset Formula 
+\[
+\lim_{h\to0}\frac{F(z+h)-F(z)}{h}=f(z),
+\]
+
+\end_inset
+
+thereby proving that 
+\begin_inset Formula $F$
+\end_inset
+
+ is a primitive for 
+\begin_inset Formula $f$
+\end_inset
+
+ on the disc.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in a disc, then 
+\begin_inset Formula 
+\[
+\int_{\Gamma}f(z)dz=0
+\]
+
+\end_inset
+
+for any closed curve 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ in that disc.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ has a primitive, we can apply 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Corollary~(
+\backslash
+ref{corintegralclosedcurve})
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ We show that if 
+\begin_inset Formula $y\in\mathbb{R}$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+e^{-\pi y^{2}}=\int_{\mathbb{R}}e^{-\pi x^{2}}e^{-2\pi ixy}dx.
+\]
+
+\end_inset
+
+This gives a new proof of the fact that 
+\begin_inset Formula $e^{-\pi x^{2}}$
+\end_inset
+
+ is its own Fourier transform.
+ If 
+\begin_inset Formula $y=0$
+\end_inset
+
+, then the equality becomes 
+\begin_inset Formula 
+\[
+1=\int_{\mathbb{R}}e^{-\pi x^{2}}dx.
+\]
+
+\end_inset
+
+Now suppose that 
+\begin_inset Formula $y>0$
+\end_inset
+
+ and consider the function 
+\begin_inset Formula $f(z)=e^{-\pi z^{2}}$
+\end_inset
+
+, which is entire, and in particular holomorphic in the interior of the
+ toy contour 
+\begin_inset Formula $\Gamma_{R}$
+\end_inset
+
+, where 
+\begin_inset Formula $\Gamma_{r}$
+\end_inset
+
+ consists of a rectangle with vertices 
+\begin_inset Formula $R$
+\end_inset
+
+, 
+\begin_inset Formula $R+iy$
+\end_inset
+
+, 
+\begin_inset Formula $-R+iy$
+\end_inset
+
+, 
+\begin_inset Formula $-R$
+\end_inset
+
+ and the positive counterclockwise orientation.
+ By Cauchy's theorem, 
+\begin_inset Formula 
+\[
+\int_{\Gamma_{R}}f(z)dz=0.
+\]
+
+\end_inset
+
+The integral over the real segment is simply 
+\begin_inset Formula 
+\[
+\int_{-R}^{R}e^{-\pi x^{2}}dx,
+\]
+
+\end_inset
+
+which converges to 
+\begin_inset Formula $1$
+\end_inset
+
+ as 
+\begin_inset Formula $R\to\infty$
+\end_inset
+
+.
+ The integral on the vertical side on the right is 
+\begin_inset Formula 
+\[
+I(R)=\int_{0}^{y}f(R+it)idt=\int_{0}^{y}e^{-\pi(R^{2}+2iRt-t^{2})}idt.
+\]
+
+\end_inset
+
+This integral goes to 
+\begin_inset Formula $0$
+\end_inset
+
+ as 
+\begin_inset Formula $R\to\infty$
+\end_inset
+
+ since 
+\begin_inset Formula $y$
+\end_inset
+
+ is fixed and we may estimate it by 
+\begin_inset Formula 
+\[
+\left|I(R)\right|\leq Ce^{-\pi R^{2}}.
+\]
+
+\end_inset
+
+Similarly, the integral over the vertical segment on the left also goes
+ to 
+\begin_inset Formula $0$
+\end_inset
+
+ as 
+\begin_inset Formula $R\to\infty$
+\end_inset
+
+ for the same reasons.
+ Finally, the integral over the horizontal segment on top is 
+\begin_inset Formula 
+\[
+\int_{R}^{-R}e^{-\pi(x+iy)^{2}}dx=e^{-\pi x^{2}}\int_{-R}^{R}e^{-\pi x^{2}}e^{-2\pi ixy}dx.
+\]
+
+\end_inset
+
+Therefore we find in the limit as 
+\begin_inset Formula $R\to\infty$
+\end_inset
+
+ that 
+\begin_inset Formula 
+\[
+0=1-e^{-\pi x^{2}}\int_{-R}^{R}e^{-\pi x^{2}}e^{-2\pi ixy}dx,
+\]
+
+\end_inset
+
+and our desired formula is established.
+ In the case 
+\begin_inset Formula $y<0$
+\end_inset
+
+, we then consider the symmetric rectangle in the lower half-plane.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Cauchy's Integral Formula
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ (Cauchy's Integral Formula) Suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in an open set that contains the closure of a disc 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $C$
+\end_inset
+
+ denotes the boundary circle of this disc with positive orientation, then
+ 
+\begin_inset Formula 
+\[
+f(z)=\frac{1}{2\pi i}\int_{C}\frac{f(w)}{w-z}dw
+\]
+
+\end_inset
+
+for any point 
+\begin_inset Formula $z\in D$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Fix 
+\begin_inset Formula $z\in D$
+\end_inset
+
+ and consider the 
+\begin_inset Quotes eld
+\end_inset
+
+keyhole
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $\Gamma_{\delta,\varepsilon}$
+\end_inset
+
+ which omits the point 
+\begin_inset Formula $z$
+\end_inset
+
+.
+ Here 
+\begin_inset Formula $\delta$
+\end_inset
+
+ is the width of the corridor, and 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ is the radius of the small circle centered at 
+\begin_inset Formula $z$
+\end_inset
+
+.
+ Since the function 
+\begin_inset Formula $f(w)/(w-z)$
+\end_inset
+
+ is holomorphic away from the point 
+\begin_inset Formula $w=z$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+\int_{\Gamma_{\delta,\varepsilon}}\frac{f(w)}{w-z}dw=0
+\]
+
+\end_inset
+
+by Cauchy's theorem for the chosen toy contour.
+ Now we make the corridor narrower by letting 
+\begin_inset Formula $\delta$
+\end_inset
+
+ tend to 
+\begin_inset Formula $0$
+\end_inset
+
+, and use the continuity of 
+\begin_inset Formula $f(w)/(w-z)$
+\end_inset
+
+ to see that in the limit, the integrals over the two sides of the corridor
+ cancel out.
+ The remaining part consists of two curves, the large boundary circle 
+\begin_inset Formula $C$
+\end_inset
+
+ with the positive orientation, and a small circle 
+\begin_inset Formula $C_{\varepsilon}$
+\end_inset
+
+ centered at 
+\begin_inset Formula $z$
+\end_inset
+
+ of radius 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ and oriented negatively, that is, clockwise.
+ To see what happens to the integral over the small circle, we write
+\begin_inset Formula 
+\[
+\frac{f(w)}{w-z}=\frac{f(w)-f(z)}{w-z}+\frac{f(z)}{w-z}
+\]
+
+\end_inset
+
+and note that since 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic, the first term on the right-hand is bounded so that its
+ integral over 
+\begin_inset Formula $C_{\varepsilon}$
+\end_inset
+
+ tends to 
+\begin_inset Formula $0$
+\end_inset
+
+ as 
+\begin_inset Formula $\varepsilon\to0$
+\end_inset
+
+.
+ To conclude the proof, it suffices to observe that 
+\begin_inset Formula 
+\begin{align*}
+\int_{C_{\varepsilon}}\frac{f(z)}{w-z}dw & =f(z)\int_{C_{\varepsilon}}\frac{dw}{w-z}\\
+ & =-f(z)\int_{0}^{2\pi}\frac{\varepsilon ie^{-it}}{\varepsilon e^{-it}}dt\\
+ & =-f(z)2\pi i
+\end{align*}
+
+\end_inset
+
+so that in the limit we find 
+\begin_inset Formula 
+\[
+0=\int_{C}\frac{f(w)}{w-z}dw-2\pi if(z),
+\]
+
+\end_inset
+
+as was to be shown.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in an open set 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, then 
+\begin_inset Formula $f$
+\end_inset
+
+ has infinitely many complex derivatives in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ Moreover, if 
+\begin_inset Formula $C\subset\Omega$
+\end_inset
+
+ is a circle whose interior is also contained in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+f^{(n)}(z)=\frac{n!}{2\pi i}\int_{C}\frac{f(w)}{(w-z)^{n+1}}dw
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $z$
+\end_inset
+
+ in the interior of 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The proof is by induction on 
+\begin_inset Formula $n$
+\end_inset
+
+, the case 
+\begin_inset Formula $n=0$
+\end_inset
+
+ being simply the Cauchy integral formula.
+ Suppose that 
+\begin_inset Formula $f$
+\end_inset
+
+ has up to 
+\begin_inset Formula $n-1$
+\end_inset
+
+ complex derivatives and that 
+\begin_inset Formula 
+\[
+f^{(n-1)}(z)=\frac{(n-1)!}{2\pi i}\int_{C}\frac{f(w)}{(w-z)^{n}}dw.
+\]
+
+\end_inset
+
+Now for small 
+\begin_inset Formula $h$
+\end_inset
+
+, the difference quotient for 
+\begin_inset Formula $f^{(n-1)}$
+\end_inset
+
+ takes the form 
+\begin_inset Formula 
+\begin{align*}
+\frac{f^{(n-1)}(z+h)-f^{(n-1)}(z)}{h} & =\frac{(n-1)!}{2\pi i}\int_{C}\frac{f(w)}{h}\left(\left(\frac{1}{w-(z+h)}\right)^{n}-\left(\frac{1}{w-z}\right)^{n}\right)dw\\
+ & =\frac{(n-1)!}{2\pi i}\int_{C}\frac{f(w)}{h}\left(\frac{1}{(w-(z+h))}-\frac{1}{(w-z)}\right)\left(\sum_{m=0}^{n-1}\left(\frac{1}{w-(z+h)}\right)^{n-m-1}\left(\frac{1}{w-z}\right)^{m}\right)dw\\
+ & =\frac{(n-1)!}{2\pi i}\int_{C}f(w)\left(\frac{1}{(w-(z+h))(w-z)}\right)\left(\sum_{m=0}^{n-1}\left(\frac{1}{w-(z+h)}\right)^{n-m-1}\left(\frac{1}{w-z}\right)^{m}\right)dw
+\end{align*}
+
+\end_inset
+
+Now observe that if 
+\begin_inset Formula $h$
+\end_inset
+
+ is small, then 
+\begin_inset Formula $z+h$
+\end_inset
+
+ and 
+\begin_inset Formula $z$
+\end_inset
+
+ stay at a finite distance from the boundary circle 
+\begin_inset Formula $C$
+\end_inset
+
+, so in the limit as 
+\begin_inset Formula $h$
+\end_inset
+
+ tends to 
+\begin_inset Formula $0$
+\end_inset
+
+, we find that the quotient converges to 
+\begin_inset Formula 
+\[
+\frac{(n-1)!}{2\pi i}\int_{C}f(w)\left(\frac{1}{(w-z)^{2}}\right)\left(\frac{n}{(w-z)^{n-1}}\right)dw=\frac{n!}{2\pi i}\int_{C}\frac{f(w)}{(w-z)^{n+1}}dw,
+\]
+
+\end_inset
+
+which completes the induction argument and proves the theorem.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Taylor's Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ (Taylor's Theorem) Suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in an open set 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $D$
+\end_inset
+
+ is a disc centered at 
+\begin_inset Formula $a$
+\end_inset
+
+ and whose closure is contained in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, then 
+\begin_inset Formula $f$
+\end_inset
+
+ has a power series expansion at 
+\begin_inset Formula $a$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f(z)=\sum_{n=0}^{\infty}a_{n}(z-a)^{n}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $z\in D$
+\end_inset
+
+, and the coefficients are given by 
+\begin_inset Formula 
+\[
+a_{n}=\frac{f^{(n)}(a)}{n!}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\geq0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Fix 
+\begin_inset Formula $z\in D$
+\end_inset
+
+.
+ By the Cauchy integral formula, we have
+\begin_inset Formula 
+\[
+f(z)=\frac{1}{2\pi i}\int_{C}\frac{f(w)}{w-z}dw,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $C$
+\end_inset
+
+ denotes the boundary of the disc 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ The idea is to write 
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{w-z} & =\frac{1}{w-a-(z-a)}\\
+ & =\left(\frac{1}{w-a}\right)\left(\frac{1}{1-\left(\frac{z-a}{w-a}\right)}\right)
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $|w-a|<|z-a|$
+\end_inset
+
+ for all 
+\begin_inset Formula $w\in C$
+\end_inset
+
+, there exists 
+\begin_inset Formula $0<r<1$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\left|\frac{z-a}{w-a}\right|<r,
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $w\in C$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\[
+\frac{1}{1-\left(\frac{z-a}{w-a}\right)}=\sum_{n=0}^{\infty}\left(\frac{z-a}{w-a}\right)^{n}
+\]
+
+\end_inset
+
+where the series converges uniformly for 
+\begin_inset Formula $w\in C$
+\end_inset
+
+.
+ Indeed, given 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, we can find an 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $n\geq N$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\begin{align*}
+\left|\sum_{m=0}^{n}\left(\frac{z-a}{w-a}\right)^{m}-\sum_{n=0}^{\infty}\left(\frac{z-a}{w-a}\right)^{n}\right| & =\left|\sum_{m=n+1}^{\infty}\left(\frac{z-a}{w-a}\right)^{m}\right|\\
+ & \leq\sum_{m=n+1}^{\infty}\left|\frac{z-a}{w-a}\right|^{m}\\
+ & \leq\sum_{m=n+1}^{\infty}r^{m}\\
+ & =\frac{r^{n+1}}{1-r}\\
+ & <\varepsilon.
+\end{align*}
+
+\end_inset
+
+ The series converging uniformly allows us to interchange the infinite sum
+ with the integral, thereby obtaining
+\begin_inset Formula 
+\begin{align*}
+f(z) & =\frac{1}{2\pi i}\int_{C}\frac{f(w)}{w-z}dw\\
+ & =\frac{1}{2\pi i}\int_{C}f(w)\left(\frac{1}{w-a}\right)\left(\frac{1}{1-\left(\frac{z-a}{w-a}\right)}\right)dw\\
+ & =\frac{1}{2\pi i}\int_{C}f(w)\left(\frac{1}{w-a}\right)\sum_{n=0}^{\infty}\left(\frac{z-a}{w-a}\right)^{n}dw\\
+ & =\sum_{n=0}^{\infty}\left(\frac{1}{2\pi i}\int_{C}\frac{f(w)}{(w-a)^{n+1}}dw\right)(z-a)^{n}.\\
+ & =\sum_{n=0}^{\infty}\left(\frac{f^{(n)}(a)}{n!}\right)(z-a)^{n}.\\
+ & =\sum_{n=0}^{\infty}a_{n}(z-a)^{n}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Limit of Holomorphic Functions Converging Uniformly on Compact Subsets is
+ Holomorphic
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ be an open subset of 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ and let 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ be a sequence of holomorphic functions on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ that converges uniformly to 
+\begin_inset Formula $f$
+\end_inset
+
+ on each compact subset of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic and 
+\begin_inset Formula $(f_{n}')$
+\end_inset
+
+ converges uniformly to 
+\begin_inset Formula $f'$
+\end_inset
+
+ on each compact subset.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Choose 
+\begin_inset Formula $a\in\Omega$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\overline{D}\subseteq\Omega$
+\end_inset
+
+ be a closed disc of radius 
+\begin_inset Formula $r>0$
+\end_inset
+
+ containing 
+\begin_inset Formula $a$
+\end_inset
+
+ in its interior.
+ So 
+\begin_inset Formula 
+\[
+\frac{1}{2\pi i}\int_{\gamma}\frac{f_{n}(z)}{z-a}dz=f_{n}(a),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ traverses the boundary 
+\begin_inset Formula $\overline{D}$
+\end_inset
+
+ once counterclockwise.
+ Since 
+\begin_inset Formula $f_{n}\to f$
+\end_inset
+
+ uniformly on 
+\begin_inset Formula $\overline{D}$
+\end_inset
+
+, 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous on 
+\begin_inset Formula $\overline{D}$
+\end_inset
+
+, so 
+\begin_inset Formula $f(z)/(z-a)$
+\end_inset
+
+ is integrable along 
+\begin_inset Formula $\gamma$
+\end_inset
+
+.
+ Letting the maximum value of a function 
+\begin_inset Formula $g$
+\end_inset
+
+ on 
+\begin_inset Formula $\overline{D}$
+\end_inset
+
+ be written 
+\begin_inset Formula $\|g\|_{\overline{D}}$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\left|\frac{1}{2\pi i}\int_{\gamma}\frac{f_{n}(z)}{z-a}dz-\frac{1}{2\pi i}\int_{\gamma}\frac{f(z)}{z-a}dz\right| & =\left|\frac{1}{2\pi i}\int_{\gamma}\frac{f_{n}(z)-f(z)}{z-a}dz\right|\\
+ & \leq\frac{1}{2\pi}\|f_{n}-f\|_{\overline{D}}\left|\int_{\gamma}\frac{dz}{z-a}\right|\\
+ & =\|f_{n}-f\|_{\overline{D}}\\
+ & \to0.
+\end{align*}
+
+\end_inset
+
+So
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{2\pi i}\int_{\gamma}\frac{f(z)}{z-a}dz & =\lim_{n\to\infty}f_{n}(a)\\
+ & =f(a).
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $a$
+\end_inset
+
+ was arbitrary, 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic.
+ To show 
+\begin_inset Formula $f_{n}'\to f'$
+\end_inset
+
+ uniformly on compact subsets of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, it suffices to work with closed discs.
+ Let 
+\begin_inset Formula $\overline{D}$
+\end_inset
+
+ be a closed disc in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ with radius 
+\begin_inset Formula $r>0$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $a$
+\end_inset
+
+ in the interior of 
+\begin_inset Formula $\overline{D}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+f_{n}'(a)=\frac{1}{2\pi i}\int_{\gamma}\frac{f_{n}(z)}{(z-a)^{2}}dz,\quad\text{and}\quad f'(a)=\frac{1}{2\pi i}\int_{\gamma}\frac{f(z)}{(z-a)^{2}}dz.
+\]
+
+\end_inset
+
+Therefore
+\begin_inset Formula 
+\begin{align*}
+|f_{n}'(a)-f'(a)| & \leq\frac{\|f_{n}-f\|_{\overline{D}}}{r}\\
+ & \to0.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Cauchy's Inequalities
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ (Cauchy's inequality) If 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in a given set that contains the closure of a disc 
+\begin_inset Formula $D$
+\end_inset
+
+ centered at 
+\begin_inset Formula $z_{0}$
+\end_inset
+
+ and of radius 
+\begin_inset Formula $R$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+\left|f^{(n)}(z_{0})\right|\leq\frac{n!}{R^{n}}\sup_{z\in C}\left|f(z)\right|.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Applying Cauchy's Integral Formula for 
+\begin_inset Formula $f^{(n)}(z_{0})$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\begin{align*}
+\left|f^{(n)}(z_{0})\right| & =\left|\frac{n!}{2\pi i}\int_{C}\frac{f(\zeta)}{(\zeta-z)^{n+1}}d\zeta\right|\\
+ & =\frac{n!}{2\pi}\left|\int_{0}^{2\pi}\frac{f(z_{0}+Re^{it})}{R^{n}e^{int}}d\zeta\right|\\
+ & \leq\frac{n!}{R^{n}}\sup_{z\in C}\left|f(z)\right|.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Louiville's Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremlouiville}
+\end_layout
+
+\end_inset
+
+ (Louiville's Theorem) Every bounded entire function must be constant.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The theorem follows from the fact that holomorphic functions are analytic.
+ If 
+\begin_inset Formula $f$
+\end_inset
+
+ is an entire function, it can be represented by its Taylor series about
+ 
+\begin_inset Formula $0:$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f(z)=\sum_{k=0}^{\infty}a_{k}z^{k}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\begin{align*}
+a_{k} & =\frac{f^{(k)}(0)}{k!}\\
+ & =\frac{1}{2\pi i}\int_{\Gamma_{r}}\frac{f(z)}{z^{k+1}}dz\\
+ & =\int_{0}^{1}\frac{f(re^{2\pi it})}{r^{k}e^{2\pi ikt}}dt.
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $\Gamma_{r}$
+\end_inset
+
+ is the circle about 
+\begin_inset Formula $0$
+\end_inset
+
+ of radius 
+\begin_inset Formula $r>0$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is bounded, i.e.
+ there exists a constant 
+\begin_inset Formula $M$
+\end_inset
+
+ such that 
+\begin_inset Formula $|f(z)|\leq M$
+\end_inset
+
+ for all 
+\begin_inset Formula $z$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+|a_{k}| & =\left|\int_{0}^{1}\frac{f(re^{2\pi it})}{r^{k}e^{2\pi ikt}}dt\right|\\
+ & \leq\int_{0}^{1}\left|\frac{f(re^{2\pi it})}{r^{k}e^{2\pi ikt}}\right|dt\\
+ & \leq\frac{M}{r^{k}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Letting 
+\begin_inset Formula $r$
+\end_inset
+
+ tend to 
+\begin_inset Formula $\infty$
+\end_inset
+
+ gives us 
+\begin_inset Formula $a_{k}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\geq1$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $f(z)=a_{0}$
+\end_inset
+
+, which proves the theorem.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Fundamental Theorem of Algebra
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ Every non-constant polynomial 
+\begin_inset Formula $P(z)=a_{n}z^{n}+\cdots+a_{1}z+a_{0}$
+\end_inset
+
+ with complex coefficients has a root in 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $P(z)$
+\end_inset
+
+ has no roots, then 
+\begin_inset Formula $Q(z):=1/P(z)$
+\end_inset
+
+ is a bounded holomorphic function.
+ To see this, we can of course assume that 
+\begin_inset Formula $a_{n}\neq0$
+\end_inset
+
+ and write 
+\begin_inset Formula 
+\[
+Q(z)=\frac{1}{a_{n}z^{n}+\cdots+a_{1}z+a_{0}}=\left(\frac{1}{z^{n}}\right)\left(\frac{1}{\frac{a_{0}}{z^{n}}+\frac{a_{1}}{z^{n-1}}+\cdots+a_{n}}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As 
+\begin_inset Formula $z\to\infty$
+\end_inset
+
+, the denominator of the second term in the round brackets converges to
+ 
+\begin_inset Formula $a_{n}\neq0$
+\end_inset
+
+, hence the second term itself goes to 
+\begin_inset Formula $1/a_{n}$
+\end_inset
+
+.
+ But the first term tends to zero, hence 
+\begin_inset Formula 
+\[
+\lim_{z\to\infty}Q(z)=0.
+\]
+
+\end_inset
+
+In particular, 
+\begin_inset Formula $|Q(z)|$
+\end_inset
+
+ is bounded by 
+\begin_inset Formula $1$
+\end_inset
+
+ outside of some circle 
+\begin_inset Formula $|z|=r$
+\end_inset
+
+.
+ Inside this circle, 
+\begin_inset Formula $|Q(z)|$
+\end_inset
+
+ is continuous, hence bounded.
+ Thus 
+\begin_inset Formula $|Q(z)|$
+\end_inset
+
+, and therefore 
+\begin_inset Formula $Q(z)$
+\end_inset
+
+ itself is bounded on the whole complex plane.
+ By Liousville's theorem, we then conclude that 
+\begin_inset Formula $Q(z)$
+\end_inset
+
+ is constant.
+ This contradicts our assumption that 
+\begin_inset Formula $P(z)$
+\end_inset
+
+ is nonconstant and proves the corollary.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremidentitytheorem}
+\end_layout
+
+\end_inset
+
+ (Identity Theorem) Let 
+\begin_inset Formula $f,g$
+\end_inset
+
+ be holomorphic functions on a connected open set 
+\begin_inset Formula $D$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $f=g$
+\end_inset
+
+ on a nonempty open subset of 
+\begin_inset Formula $D$
+\end_inset
+
+, then 
+\begin_inset Formula $f=g$
+\end_inset
+
+ on 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{remidentitytheorem}
+\end_layout
+
+\end_inset
+
+ This says that a holomorphic function is completely determined by its values
+ on a (possibly quite small) neighborhood in 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ This is not true for real-differentiable functions.
+ In comparison, holomorphy is a much more rigid notion.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be the set of all 
+\begin_inset Formula $z\in D$
+\end_inset
+
+ such that 
+\begin_inset Formula $f(z)=g(z)$
+\end_inset
+
+.
+ We show that 
+\begin_inset Formula $S$
+\end_inset
+
+ is open and closed, and hence must be 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f-g$
+\end_inset
+
+ is continuous, and 
+\begin_inset Formula $S=(f-g)^{-1}\{0\}$
+\end_inset
+
+, we see that 
+\begin_inset Formula $S$
+\end_inset
+
+ is closed.
+ To show, that 
+\begin_inset Formula $S$
+\end_inset
+
+ is open, suppose 
+\begin_inset Formula $w$
+\end_inset
+
+ lies in 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Then, because the Taylor series of 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ at 
+\begin_inset Formula $w$
+\end_inset
+
+ have non-zero radius of convergence, the open disk 
+\begin_inset Formula $B_{r}(w)$
+\end_inset
+
+ also lies in 
+\begin_inset Formula $S$
+\end_inset
+
+ for some 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Further Applications
+\end_layout
+
+\begin_layout Subsubsection
+Morera's Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{morerastheorem}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is a continuous function in the open disc 
+\begin_inset Formula $D$
+\end_inset
+
+ such that for any triangle 
+\begin_inset Formula $T$
+\end_inset
+
+ cotained in 
+\begin_inset Formula $D$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+\int_{T}f(z)dz=0,
+\]
+
+\end_inset
+
+then 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ By the proof of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theorem2.1})
+\end_layout
+
+\end_inset
+
+, the function 
+\begin_inset Formula $f$
+\end_inset
+
+ has a primitive 
+\begin_inset Formula $F$
+\end_inset
+
+ in 
+\begin_inset Formula $D$
+\end_inset
+
+ that satisfies 
+\begin_inset Formula $F'=f.$
+\end_inset
+
+ By the regularity theorem, we know that 
+\begin_inset Formula $F$
+\end_inset
+
+ is indefinitely (and hence twice) complex differentiable, and therefore
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem5.2}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $\{f_{n}\}_{n=1}^{\infty}$
+\end_inset
+
+ is a sequence of holomorphic functions that converges uniformly to a function
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ in every compact subset of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, then 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $D$
+\end_inset
+
+ be any disc whose closure is contained in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ and 
+\begin_inset Formula $T$
+\end_inset
+
+ any triangle in that disc.
+ Then, since each 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is holomorphic, Goursat's theorem implies 
+\begin_inset Formula 
+\[
+\int_{T}f_{n}(z)dz=0
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ By assumption, 
+\begin_inset Formula $f_{n}\to f$
+\end_inset
+
+ uniformly in the closure of 
+\begin_inset Formula $D$
+\end_inset
+
+, so 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous and 
+\begin_inset Formula 
+\[
+\int_{T}f_{n}(z)dz\to\int_{T}f(z)dz.
+\]
+
+\end_inset
+
+As a result, we find 
+\begin_inset Formula $\int_{T}f(z)dz=0$
+\end_inset
+
+ and by Morera's theorem, we conclude that 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ Since this conclusion is true for every 
+\begin_inset Formula $D$
+\end_inset
+
+ whose closure is contained in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, we find that 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in all of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sequence of Holomorphic Functions
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem5.4}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $F(z,s)$
+\end_inset
+
+ be defined for 
+\begin_inset Formula $(z,s)\in\Omega\times[0,1]$
+\end_inset
+
+ where 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is an open set in 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $F$
+\end_inset
+
+ satisfies the following properties:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $F(z,s)$
+\end_inset
+
+ is holomorphic in 
+\begin_inset Formula $z$
+\end_inset
+
+ for each 
+\begin_inset Formula $s$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $F$
+\end_inset
+
+ is continuous on 
+\begin_inset Formula $\Omega\times[0,1]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Then the function 
+\begin_inset Formula $f$
+\end_inset
+
+ defined on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ by 
+\begin_inset Formula 
+\[
+f(z)=\int_{0}^{1}F(z,s)ds
+\]
+
+\end_inset
+
+is holomorphic.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ The second condition says that 
+\begin_inset Formula $F$
+\end_inset
+
+ is jointly continuous in both arguments.
+ To prove this result, it suffices to prove that 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in any disc 
+\begin_inset Formula $D$
+\end_inset
+
+ contained in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, and by Morera's theorem this could be achieved by showing that for any
+ triangle 
+\begin_inset Formula $T$
+\end_inset
+
+ contained in 
+\begin_inset Formula $D$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\[
+\int_{T}\int_{0}^{1}F(z,s)dsdz=0.
+\]
+
+\end_inset
+
+Interchanging the order of integration, and using property (1) would then
+ yield the desired result.
+ We can, however, get around the issue of justifying the change in the order
+ of integration by arguing differently.
+ The idea is to interpret the integral as a 
+\begin_inset Quotes eld
+\end_inset
+
+uniform
+\begin_inset Quotes erd
+\end_inset
+
+ limit of Riemann sums, and then apply the results of the previous section.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ For each 
+\begin_inset Formula $n\geq1,$
+\end_inset
+
+ we consider the Riemann sum
+\begin_inset Formula 
+\[
+f_{n}(z)=(1/n)\sum_{k=1}^{n}F(z,k/n).
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is holomorphic in all of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ by property (1), and we claim that on any disc 
+\begin_inset Formula $D$
+\end_inset
+
+ whose closure is contained in 
+\begin_inset Formula $\Omega,$
+\end_inset
+
+ the sequence 
+\begin_inset Formula $\{f_{n}\}_{n=1}^{\infty}$
+\end_inset
+
+ converges uniformly to 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ To see this, we recall that a continuous function on a compact set is uniformly
+ continuous, so if 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ there exists 
+\begin_inset Formula $\delta>0$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\sup_{z\in D}\left|F(z,s_{1})-F(z,s_{2})\right|<\varepsilon\quad\text{whenever }\left|s_{1}-s_{2}\right|<\delta.
+\]
+
+\end_inset
+
+Then if 
+\begin_inset Formula $n>1/\delta,$
+\end_inset
+
+ and 
+\begin_inset Formula $z\in D$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+\left|f_{n}(z)-f(z)\right| & =\left|\sum_{k=1}^{n}\int_{(k-1)/n}^{k/n}F(z,k/n)-F(z,s)ds\right|\\
+ & \leq\sum_{k=1}^{n}\int_{(k-1)/n}^{k/n}\left|F(z,k/n)-F(z,s)\right|ds\\
+ & <\sum_{k=1}^{n}\frac{\varepsilon}{n}\\
+ & <\varepsilon.
+\end{align*}
+
+\end_inset
+
+This proves the claim, and by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theorem5.2})
+\end_layout
+
+\end_inset
+
+, we conclude that 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ As a consequence, 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, as was to be shown.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Scwarz reflection principle
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ be an open subset of 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ that is symmetric with respect to the real line, that is 
+\begin_inset Formula $z\in\Omega$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\overline{z}\in\Omega$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\Omega^{+}$
+\end_inset
+
+ denote the part of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ that lies in the upper half-plane and 
+\begin_inset Formula $\Omega^{-}$
+\end_inset
+
+ that part that lies in the lower half-plane.
+ Also, let 
+\begin_inset Formula $I=\Omega\cap\mathbb{R}$
+\end_inset
+
+ so that 
+\begin_inset Formula $I$
+\end_inset
+
+ denotes the interior of that part of the boundary of 
+\begin_inset Formula $\Omega^{+}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Omega^{-}$
+\end_inset
+
+ that lies on the real axis.
+ Then we have 
+\begin_inset Formula 
+\[
+\Omega^{+}\cup I\cup\Omega^{-}=\Omega
+\]
+
+\end_inset
+
+and the only interesting case of the next theorem occurs, of course, when
+ 
+\begin_inset Formula $I$
+\end_inset
+
+ is nonempty.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremsymmetryprinciple}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $f^{+}$
+\end_inset
+
+ and 
+\begin_inset Formula $f^{-}$
+\end_inset
+
+ are holomorphic functions in 
+\begin_inset Formula $\Omega^{+}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Omega^{-}$
+\end_inset
+
+ respectively, that extend continuously to 
+\begin_inset Formula $I$
+\end_inset
+
+ and 
+\begin_inset Formula $f^{+}(x)=f^{-}(x)$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in I$
+\end_inset
+
+, then the function 
+\begin_inset Formula $f$
+\end_inset
+
+ defined on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ by 
+\begin_inset Formula 
+\[
+f(z)=\begin{cases}
+f^{+}(z) & \text{if }z\in\Omega^{+},\\
+f^{+}(z)=f^{-}(z) & \text{if }z\in I,\\
+f^{-}(z) & \text{if }z\in\Omega^{-}
+\end{cases}
+\]
+
+\end_inset
+
+is holomorphic on all of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ One first notes that 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous on 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ The only difficulty is to prove that 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic at points of 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $D$
+\end_inset
+
+ is a disc centered at a point on 
+\begin_inset Formula $I$
+\end_inset
+
+ and entirely contained in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ We prove that 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in 
+\begin_inset Formula $D$
+\end_inset
+
+ by Morera's theorem.
+ Suppose 
+\begin_inset Formula $T$
+\end_inset
+
+ is a triangle in 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $T$
+\end_inset
+
+ does not intersect 
+\begin_inset Formula $I$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+\int_{T}f(z)dz=0
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in the upper and lower half-discs.
+ Suppose now that one side or vertex of 
+\begin_inset Formula $T$
+\end_inset
+
+ is contained in 
+\begin_inset Formula $I$
+\end_inset
+
+, and the rest of
+\begin_inset Formula $T$
+\end_inset
+
+ is in, say the upper half-disc.
+ If 
+\begin_inset Formula $T_{\varepsilon}$
+\end_inset
+
+ is the triangle obained from 
+\begin_inset Formula $T$
+\end_inset
+
+ by slightly raising the edge or vertex which lies on 
+\begin_inset Formula $I$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+\int_{T_{\varepsilon}}f(z)dz=0
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $T_{\varepsilon}$
+\end_inset
+
+ is entirely contained in the upper half-disc.
+ We then let 
+\begin_inset Formula $\varepsilon\to0$
+\end_inset
+
+, and by continuity we conclude that
+\begin_inset Formula 
+\[
+\int_{T}f(z)dz=0.
+\]
+
+\end_inset
+
+If the interior of 
+\begin_inset Formula $T$
+\end_inset
+
+ intersects 
+\begin_inset Formula $I$
+\end_inset
+
+, we can reduce the siutation to the previous one by writing 
+\begin_inset Formula $T$
+\end_inset
+
+ as the union of triangles each of which has an edge or vertex on 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ By Morera's theorem, we conclude that 
+\begin_inset Formula $f$
+\end_inset
+
+ is holomorphic in 
+\begin_inset Formula $D$
+\end_inset
+
+, as was to be shown.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ (Schwarz reflection principle) Suppose that 
+\begin_inset Formula $f$
+\end_inset
+
+ is a holomorphic function in 
+\begin_inset Formula $\Omega^{+}$
+\end_inset
+
+ that extends continuously to 
+\begin_inset Formula $I$
+\end_inset
+
+ and such that 
+\begin_inset Formula $f$
+\end_inset
+
+ is real-valued on 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ Then there exists a function 
+\begin_inset Formula $F$
+\end_inset
+
+ holomorphic in all of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ such that 
+\begin_inset Formula $F=f$
+\end_inset
+
+ on 
+\begin_inset Formula $\Omega^{+}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The idea is simply to define 
+\begin_inset Formula $F(z)$
+\end_inset
+
+ for 
+\begin_inset Formula $z\in\Omega^{-}$
+\end_inset
+
+ by 
+\begin_inset Formula $F(z)=\overline{f(\overline{z})}.$
+\end_inset
+
+ To prove that 
+\begin_inset Formula $F$
+\end_inset
+
+ is holomorphic in 
+\begin_inset Formula $\Omega^{-}$
+\end_inset
+
+ we note that if 
+\begin_inset Formula $z,z_{0}\in\Omega^{-}$
+\end_inset
+
+, then 
+\begin_inset Formula $\overline{z},\overline{z}_{0}\in\Omega^{+}$
+\end_inset
+
+ and hence, the power series expansion of 
+\begin_inset Formula $f$
+\end_inset
+
+ near 
+\begin_inset Formula $\overline{z}_{0}$
+\end_inset
+
+ gives 
+\begin_inset Formula 
+\[
+f(\overline{z})=\sum_{n=0}^{\infty}a_{n}\left(\overline{z}-\overline{z}_{0}\right)^{n}.
+\]
+
+\end_inset
+
+As a consequence we see that 
+\begin_inset Formula 
+\[
+F(z)=\sum_{n=0}^{\infty}\overline{a}_{n}\left(z-z_{0}\right)^{n}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $F$
+\end_inset
+
+ is holomorphic in 
+\begin_inset Formula $\Omega^{-}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is real valued on 
+\begin_inset Formula $I$
+\end_inset
+
+, we have 
+\begin_inset Formula $\overline{f(x)}=f(x)$
+\end_inset
+
+ whenever 
+\begin_inset Formula $x\in I$
+\end_inset
+
+ and hence 
+\begin_inset Formula $F$
+\end_inset
+
+ extends continuously up to 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ The proof is complete once we invoke the symmetry principle.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem4.8}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is a holomorphic function in a region 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ that vanishes on a sequence of distinct points with a limit point in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is identically 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Suppose that 
+\begin_inset Formula $z_{0}\in\Omega$
+\end_inset
+
+ is a limit point for the sequence 
+\begin_inset Formula $\{w_{k}\}_{k=1}^{\infty}$
+\end_inset
+
+ and that 
+\begin_inset Formula $f(\omega_{k})=0$
+\end_inset
+
+.
+ First, we show that 
+\begin_inset Formula $f$
+\end_inset
+
+ is idenitcally zero in a small disc containing 
+\begin_inset Formula $z_{0}$
+\end_inset
+
+.
+ For that, we choose a disc 
+\begin_inset Formula $D$
+\end_inset
+
+ centered at 
+\begin_inset Formula $z_{0}$
+\end_inset
+
+ and contained in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, and consider the power series expansion of 
+\begin_inset Formula $f$
+\end_inset
+
+ in that disc
+\begin_inset Formula 
+\[
+\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}.
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $f$
+\end_inset
+
+ is not identically zero, there exists a smallest integer 
+\begin_inset Formula $m$
+\end_inset
+
+ such that 
+\begin_inset Formula $a_{m}\neq0$
+\end_inset
+
+.
+ But then we can write 
+\begin_inset Formula 
+\[
+f(z)=a_{m}(z-z_{0})^{m}(1+g(z-z_{0})),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $g(z-z_{0})$
+\end_inset
+
+ converges to 
+\begin_inset Formula $0$
+\end_inset
+
+ as 
+\begin_inset Formula $z\to z_{0}$
+\end_inset
+
+.
+ Taking 
+\begin_inset Formula $z=w_{k}\neq z_{0}$
+\end_inset
+
+ for a sequence of points converging to 
+\begin_inset Formula $z_{0}$
+\end_inset
+
+, we get a contradiction since 
+\begin_inset Formula $a_{m}(w_{k}-z_{0})^{m}\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $1+g(w_{k}-z_{0})\neq0$
+\end_inset
+
+, but 
+\begin_inset Formula $f(w_{k})=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We conclude the proof using the fact that 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is connected.
+ Let 
+\begin_inset Formula $U$
+\end_inset
+
+ denote the interior of the set of points where 
+\begin_inset Formula $f(z)=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $U$
+\end_inset
+
+ is open by definition and nonempty by the argument just given.
+ The set 
+\begin_inset Formula $U$
+\end_inset
+
+ is also closed since if 
+\begin_inset Formula $z_{n}\in U$
+\end_inset
+
+ and 
+\begin_inset Formula $z_{n}\to z$
+\end_inset
+
+, then 
+\begin_inset Formula $f(z)=0$
+\end_inset
+
+ by continuity, and 
+\begin_inset Formula $f$
+\end_inset
+
+ vanishes in a neighborhood of 
+\begin_inset Formula $z$
+\end_inset
+
+ by the argument above.
+ Hence, 
+\begin_inset Formula $z\in U$
+\end_inset
+
+.
+ Now if we let 
+\begin_inset Formula $V$
+\end_inset
+
+ denote the complement of 
+\begin_inset Formula $U$
+\end_inset
+
+ in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, we conclude that 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ are both open, disjoint, and 
+\begin_inset Formula 
+\[
+\Omega=U\cup V.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is connected we conclude that either 
+\begin_inset Formula $U$
+\end_inset
+
+ or 
+\begin_inset Formula $V$
+\end_inset
+
+ is empty.
+ Since 
+\begin_inset Formula $z_{0}\in U$
+\end_inset
+
+, we find that 
+\begin_inset Formula $U=\Omega$
+\end_inset
+
+ and the proof is complete.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ are holomorphic in a region 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ and 
+\begin_inset Formula $f(z)=g(z)$
+\end_inset
+
+ for all 
+\begin_inset Formula $z$
+\end_inset
+
+ in some nonempty open subset of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ (or more generally for 
+\begin_inset Formula $z$
+\end_inset
+
+ in some sequence of distinct points with limit point in 
+\begin_inset Formula $\Omega$
+\end_inset
+
+).
+ Then 
+\begin_inset Formula $f(z)=g(z)$
+\end_inset
+
+ througout 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Suppose we are given a pair of functions 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $F$
+\end_inset
+
+ analytic in regions 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ and 
+\begin_inset Formula $\Omega'$
+\end_inset
+
+, respectively, with 
+\begin_inset Formula $\Omega\subset\Omega'$
+\end_inset
+
+.
+ If the two functions agree on the smaller set 
+\begin_inset Formula $\Omega$
+\end_inset
+
+, we say that 
+\begin_inset Formula $F$
+\end_inset
+
+ is an 
+\series bold
+analytic continuiation 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ into the region 
+\begin_inset Formula $\Omega'$
+\end_inset
+
+ The corollary then guarantees that there can be only one such analytic
+ continuation, since 
+\begin_inset Formula $F$
+\end_inset
+
+ is uniquely determined by 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_body
+\end_document

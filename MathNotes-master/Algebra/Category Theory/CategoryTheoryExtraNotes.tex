@@ -1,0 +1,2580 @@
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[a4paper,english]{article}
+\usepackage[osf]{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\setlength{\parindent}{0bp}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\pdfpageheight\paperheight
+\pdfpagewidth\paperwidth
+
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\newcommand{\liminj}{\varinjlim}
+\newcommand{\limproj}{\varprojlim}
+
+\newcommand{\define}[1]{{\bf{\boldmath{#1}}}}
+
+\DeclareMathOperator{\Aut}{Aut}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\title{Category Theory Extra Notes}
+
+\maketitle
+\pagebreak{}
+
+\tableofcontents{}
+
+\pagebreak{}
+
+
+\section*{Analogy/Reference Tables}
+
+\begin{center}
+\begin{tabular}{c}
+\begin{tabular}{|c|c|c|}
+\hline 
+$\textbf{monic}$ & $\textbf{characteristic arrow}$ & $\textbf{subobject classifier}$\tabularnewline
+\hline 
+$\tau:F\hookrightarrow G$ & $(\chi_{\tau})_{V}(x)=\{U\subseteq V\mid G_{U}^{V}(x)\in F(U)$ & $\Omega(V)$ is the set of all $V$-sieves\tabularnewline
+\hline 
+$i:(X,\lambda)\to(Y,\mu)$  & $\chi_{i}(y)=\{m\mid\mu_{m}(y)\in X\}$  & $L_{m}$ set of all left ideals\tabularnewline
+\hline 
+$k:(A,q)\to(B,p)$ & $\chi_{k}(b)=(p(b),[p(A\cap U_{b})]_{p(b)})$ & $B_{\Omega}=\bigcup\limits _{x\in X}\Omega_{x}$\tabularnewline
+\hline 
+\end{tabular}\tabularnewline
+\tabularnewline
+\begin{tabular}{|c|c|}
+\hline 
+$\top:1\to\Omega$ & $\bot:1\to\Omega$\tabularnewline
+\hline 
+$\top_{U}(0)=\mathbf{O}(V)$ (varies with $U$) & $\mathbf{O}(\emptyset)$ \tabularnewline
+\hline 
+$\top(0)=M$ (fixed) & $\bot(x)=\emptyset$\tabularnewline
+\hline 
+$\top(x)=(x,[X]_{x})$ (varies with $x$) & $\bot(x)=(x,[\emptyset]_{x})$\tabularnewline
+\hline 
+\end{tabular}\tabularnewline
+\end{tabular}
+\par\end{center}
+
+\pagebreak{}
+
+
+\part{Presheaf Topoi}
+
+Let's discuss a few examples of presheaf categories and describe them
+as elementary topoi. Recall that an elementary topos is a cartesian
+closed category $\mathbf{C}$ which has a subobject classifier $\Omega$.
+So we just need to show that the category has:
+\begin{enumerate}
+\item pullbacks and a terminal object (finitely complete).
+\item an exponential object (finitely complete + exponential object = cartesian
+closed).
+\item a subobject classifier. 
+\end{enumerate}
+
+\section{$\mathbf{Set\times Set}$}
+
+\begin{example} Let $\mathbf{C}$ be a $\emph{discrete}$ category
+with two objects. So it looks like this: \begin{center} \begin{tikzcd} \bullet \arrow[loop left,"1_{\bullet}"] & \bullet \arrow[loop right,"1_{\bullet}"] \end{tikzcd} \end{center}
+
+\begin{flushleft}
+Thus, the presheaf category $\mathbf{Set^{\mathbf{C}}}$ is just $\mathbf{Set\times Set}$.
+Here is what the objects and morphisms look like:
+\par\end{flushleft}
+
+\begin{center}
+\begin{tabular}{ccccc}
+ &  &  &  & \tabularnewline
+$\underline{\textbf{Objects}}$ &  &  &  & $\underline{\textbf{Morphisms}}$\tabularnewline
+ &  &  &  & \tabularnewline
+\begin{tikzcd} A & B \end{tikzcd} &  &  &  & \begin{tikzcd} A \arrow[r,"f"] & C \\ B \arrow[r,"g" swap]  & D \end{tikzcd}\tabularnewline
+ &  &  &  & \tabularnewline
+object $(A,B)$ &  &  &  & arrow $(f,g)$\tabularnewline
+\end{tabular}
+\par\end{center}
+
+
+\subsubsection{terminal object}
+
+A terminal object in this category is a pair $(\{0\},\{0\})$ of terminal
+objects in $\mathbf{Set}$. 
+
+\begin{center}\begin{tikzcd} {0} & {0} \end{tikzcd}\end{center}
+
+pullback
+
+Given two morphisms $(f,g):(A,B)\to(E,F)$ and $(h,k):(C,D)\to(E,F)$,
+the pullback is just a pair of pullbacks in $\mathbf{Set}$.
+
+\begin{center}
+\begin{tabular}{ccccc}
+ &  &  &  & \tabularnewline
+\begin{tikzcd} P \arrow[d,"i" swap] \arrow[r,"j"] & C \arrow[d,"h"] \\ A \arrow[r,"f" swap] & E \end{tikzcd} &  &  &  & \begin{tikzcd} Q \arrow[d,"u" swap] \arrow[r,"v"] & D \arrow[d,"k"] \\ B \arrow[r,"g" swap] & F \end{tikzcd}\tabularnewline
+ &  &  &  & \tabularnewline
+\end{tabular}
+\par\end{center}
+
+
+\subsubsection{exponential object}
+
+$(A,B)^{(C,D)}=(A^{C},B^{D})$ 
+
+
+\subsubsection{subobject classifier}
+
+The subobject classifier is a pair $(\Omega,\Omega)$ of subobject
+classifiers in $\mathbf{Set}$.
+
+\end{example}
+
+
+\section{$\mathbf{Set}^{\mathbf{n}}$}
+
+
+\subsection{Arrow Category}
+
+\begin{example} Let $\mathbf{2}$ be a category with only two objects
+$0$ and $1$, and only one non-identity morphism, $0\to1$. This
+category is typically called the $\textbf{arrow category}$, and it
+looks like this:
+
+\begin{center}\begin{tikzcd} 0 \arrow[loop above, " id_0 "] \arrow[r] & 1 \arrow[loop above, "id_1 "] \end{tikzcd}\end{center}$\mathbf{Set^{2}}$
+is called the $\textbf{arrow category}$ of $\mathbf{Set}$. In general,
+for any category $\mathbf{C}$, the presheaf category $\mathbf{C^{2}}$
+is called the $\textbf{arrow category}$ of $\mathbf{C}$. How do
+we describe objects and morphisms in $\mathbf{Set^{2}}$? Here's how:
+
+\begin{center}
+\begin{tabular}{ccccc}
+ &  &  &  & \tabularnewline
+$\underline{\textbf{Objects}}$ &  &  &  & $\underline{\textbf{Morphisms}}$\tabularnewline
+ &  &  &  & \tabularnewline
+\begin{tikzcd} S_0 \arrow[r,"S_{01}"] & S_1 \end{tikzcd} &  &  &  & \begin{tikzcd} S_0 \arrow[d,"f_{0}" swap] \arrow[r," S_{01} "] & S_{1} \arrow[d,"f_{1}"] \\ T_{0} \arrow[r," T_{01} " swap] & T_{1} \end{tikzcd}\tabularnewline
+ &  &  &  & \tabularnewline
+object $S_{01}$ &  &  &  & arrow $(f_{0},f_{1})$\tabularnewline
+ &  &  &  & \tabularnewline
+\end{tabular}
+\par\end{center}
+
+Here, $S_{0},S_{1},T_{0},T_{1}$ are sets, and $f_{0},f_{1},S_{01},T_{01}$
+are functions. We now describe the topos structure of $\mathbf{Set^{2}}$. 
+
+
+\subsubsection{terminal object}
+
+The terminal object $1$ is the identity function from the terminal
+set to itself $id_{\{0\}}:\{0\}\to\{0\}$.
+
+\begin{center}\begin{tikzcd} \{ 0 \} \arrow[r, "id_{ \{ 0 \} }"] & \{ 0 \} \end{tikzcd}\end{center}
+
+
+\subsubsection{pullback}
+
+Given two morphisms $(f_{0},f_{1}):S_{01}\to T_{01}$ and $(g_{0},g_{1}):R_{01}\to T_{01}$,
+we obtain part of a cube
+
+\begin{center}\begin{tikzcd}[row sep=scriptsize, column sep=scriptsize] & & & R_0 \arrow[dl," R_{01} " swap] \arrow[dd, " g_0 "] \\ & & R_1 \\ & S_0 \arrow[dl, " S_{01} ", near start, swap] \arrow[rr," f_0 ", near start] & & T_0 \arrow[dl, " T_{01} ", near start] \\ S_1 \arrow[rr, " f_1 ", swap] & & T_1 \arrow[from=uu, crossing over, " g_1 ", near start] \end{tikzcd}\end{center} 
+
+to complete the cube, form the pullbacks
+
+\begin{center}
+\begin{tabular}{ccccc}
+ &  &  &  & \tabularnewline
+\begin{tikzcd} Z_0 \arrow[d," q_0 " swap] \arrow[r," p_0 "] & R_0 \arrow[d," g_0 "] \\ S_0 \arrow[r," f_0 " swap] & T_0 \end{tikzcd} &  &  &  & \begin{tikzcd} Z_1 \arrow[d," q_1 " swap] \arrow[r," p_1 "] & R_1 \arrow[d," g_1 "] \\ S_1 \arrow[r," f_1 " swap] & T_1 \end{tikzcd}\tabularnewline
+ &  &  &  & \tabularnewline
+\end{tabular}
+\par\end{center}
+
+in $\mathbf{Set}$, and now we get something that looks like this 
+
+\begin{center}\begin{tikzcd}[row sep=scriptsize, column sep=scriptsize] & Z_0 \arrow[dl," Z_{01} " swap] \arrow[rr," p_0 "] \arrow[dd," q_0 " near end, swap] & & R_0 \arrow[dl," R_{01} " swap] \arrow[dd, " g_0 "] \\ Z_1  \arrow[rr, crossing over, " p_1 " near end] \arrow[dd," q_1 " swap] & & R_1 \\ & S_0 \arrow[dl, " S_{01} " near start, swap] \arrow[rr," f_0 " near start] & & T_0 \arrow[dl, " T_{01} " near start] \\ S_1 \arrow[rr, " f_1 " swap] & & T_1 \arrow[from=uu, crossing over, " g_1 " near start]\\ \end{tikzcd}\end{center} 
+
+Here, $Z_{01}$ is uniquely determined by the universal property of
+$Z_{1}$. Let's understand why this is. All we need to show is that
+$Z_{0}$ is a contender, i.e.:
+\[
+f_{1}\circ S_{01}\circ q_{0}=T_{01}\circ g_{0}\circ p_{0}
+\]
+
+
+We know that $f_{1}\circ S_{01}=T_{01}\circ f_{0}$ and $f_{0}\circ q_{0}=g_{0}\circ p_{0}$
+by the commutative diagrams, so using this we get:
+\[
+f_{1}\circ S_{01}\circ q_{0}=T_{01}\circ f_{0}\circ q_{0}=T_{01}\circ g_{0}\circ p_{0}
+\]
+
+
+And we are done.
+
+
+\subsubsection{exponential object}
+
+
+\subsubsection{subobject classifier}
+
+The object $\Omega$ is the function $\Omega_{01}:\Omega_{0}\to\Omega_{1}$
+where:
+\[
+\Omega_{0}=\{0,\frac{1}{2},1\}\mbox{ and }\Omega_{1}=\{0,1\}
+\]
+\[
+\Omega_{01}(0)=0\mbox{, }\Omega_{01}(\frac{1}{2})=1\mbox{, and }\Omega(1)=1
+\]
+
+
+The classifier arrow $\top:1\to\Omega$, is given by a pair 
+\[
+\top_{0}:\{0\}\to\Omega_{0}\mbox{ \ensuremath{\mid}\ }\top_{0}(0)=1
+\]
+\[
+\top_{1}:\{0\}\to\Omega_{1}\mbox{ \ensuremath{\mid} }\top_{1}(0)=1
+\]
+ 
+
+The reason we need an extra element $\frac{1}{2}$ in the domain is
+because we might have a subobject $(i_{0},i_{1}):S_{01}\to T_{01}$,
+with $i_{0}$ and $i_{1}$ being inclusions, that looks like this:
+
+\hfill \break \hfill \break
+
+\begin{tikzpicture} \draw plot [smooth cycle] coordinates {(0,0)(4,0)(4,8)(0,8)} node[circle, fill=black, inner sep=1.5pt, label=below:$y$] (y) at (2,5) {} node[circle, fill=black, inner sep=1.5pt, label=below:$z$] (z) at (2,7) {} node[label=below:$ T_0 $] (C) at (1,8) {};  \draw plot [smooth cycle] coordinates {(1,1)(3,1)(3,4)(1,4)}          node[circle, fill=black, inner sep=1.5pt, label=below:$x$] (x) at (2,3) {} node[label=below:$ S_0 $] (A) at (1.25,3) {}; \draw plot [smooth cycle] coordinates {(8,0) (12,0) (12, 8) (8,8)} node[circle, fill=black, inner sep=1.5pt, label=below:$ T_{01}(y) $] (y') at (10,4) {} node[circle, fill=black, inner sep=1.5pt, label=below:$T_{01}(z)$] (z') at (10,7) {} node[label=below:$T_1$] (D) at (9,8) {};     \draw plot [smooth cycle] coordinates {(9,1) (11,1) (11, 4) (9,4)}  node[circle, fill=black, inner sep=1.5pt, label=below:$T_{01}(x) \text{=} S_{01}(x)$] (x') at (10,2) {} node[label=below:$ S_1 $] (B) at (9.25,3) {}    ; \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (x) edge[out=-20, in=160] node[below] {} (x'); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (y) edge[out=-20, in=160] node[below] {} (y'); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (z) edge[out=-20, in=160] node[below] {} (z'); \end{tikzpicture} 
+
+\hfill \break \hfill \break
+
+Let's see what goes wrong if $\Omega$ is just a function $id_{\{0,1\}}:\{0,1\}\to\{0,1\}$:
+Given the subobject $(i_{0},i_{1}):S_{01}\to T_{01}$ which we drew
+above, we could try defining a characteristic function $\chi_{_{S_{01}}}\vcentcolon=(\chi_{_{0}},\chi_{_{1}}):T_{01}\to id_{\{0,1\}}$
+by letting $\chi_{_{0}}=\chi_{_{S_{0}}}$ and $\chi_{_{1}}=\chi_{_{S_{1}}}$
+(i.e. the characteristic functions in set). But then this wouldn't
+be a commutative diagram: $\chi_{_{S_{0}}}$
+
+\begin{center}\begin{tikzcd} S_{01} \arrow[d,"!" swap] \arrow[r, "  (i_0 \text{,} i_1)  "] & T_{01} \arrow[d," \chi _{_{S_{01}}} "] \\ 1 \arrow[r," \top " swap] & \Omega \end{tikzcd}\end{center}
+
+$T_{01}(y)$ is sent to $1$, since it is contained in $S_{1}$, and
+$y$ to $0$, since it is not contained in $S_{0}$. This is why we
+need to introduce a new element $\frac{1}{2}$ in the domain of $\Omega_{01}$.
+The idea is that the element $y$ will be contained in $S_{1}$, but
+not yet! In general, an element $t\in T_{0}$ is classified in three
+ways
+\begin{enumerate}
+\item $t\in S_{0}$, or
+\item $t\notin S_{0}$, but $T_{01}(t)\in S_{1}$, or
+\item $t\notin S_{0}$, and $T_{01}(t)\notin S_{1}$
+\end{enumerate}
+define $\chi_{_{0}}:T_{0}\to\Omega_{0}$ by
+
+\[
+\chi_{_{0}}(x)=\begin{cases}
+1 & \emph{\emph{(1) holds}}\\
+\frac{1}{2} & \emph{\emph{(2) holds}}\\
+0 & \emph{\emph{(3) holds}}
+\end{cases}
+\]
+
+
+and define $\chi_{_{1}}:T_{1}\to\Omega_{1}$ to be the characteristic
+function of $S_{1}$ in $\mathbf{Set}$, $\chi_{_{S_{1}}}$.
+
+Now form the cube demonstrates $(\chi_{_{0}},\chi_{_{1}})$ is the
+unique arrow that corresponds to the monic $(i_{0},i_{1})$ .
+
+\begin{center}\begin{tikzcd}[row sep=scriptsize, column sep=scriptsize] & S_0 \arrow[dl," S_{01} " swap] \arrow[rr," i_0 "] \arrow[dd," ! " near end, swap] & & T_0 \arrow[dl," T_{01} " swap] \arrow[dd, " \chi _{_{0}} ", shift right=1] \\ S_1 \arrow[rr, crossing over, " i_1 " near end] \arrow[dd," ! " swap] & & T_q \\ & \{ 0 \} \arrow[dl, "id_{ \{ 0 \} }" near start, swap] \arrow[rr," \top _0 " near start] & & \Omega _0 \arrow[dl, " \Omega _{01} " near start] \\ \{ 0 \}  \arrow[rr, " \top _1 " swap] & & \Omega_{1} \arrow[from=uu, crossing over, " \chi _{_{1}} " near start]\\ \end{tikzcd}\end{center} 
+
+\end{example}
+
+
+\subsection{``Sets through time''}
+
+\begin{example} We can easily generalize everything we did in the
+arrow category of set by replacing the poset category $\mathbf{2}$
+with the poset $\boldsymbol{\omega}$, i.e. the poset of all finite
+ordinals under their natural ordering. It looks like this:
+
+\begin{center}\begin{tikzcd} 0 \arrow[loop above, " id_0 "] \arrow[r] & 1 \arrow[r] \arrow[loop above, "id_1 "] & 2 \arrow[r] \arrow[loop above, "id_2 "] & \cdots \arrow[r] & n \arrow[loop above, "id_n "] \arrow[r] & n+1 \arrow[loop above, "id_{n+1}"]  \arrow[r] & \cdots \end{tikzcd}\end{center}How
+do we describe objects and morphisms in the presheaf category $\mathbf{Set}^{\boldsymbol{\omega}}$,
+here's how:
+
+\begin{center}
+\begin{tabular}{ccccc}
+ &  &  &  & \tabularnewline
+$\underline{\textbf{Objects}}$ &  &  &  & $\underline{\textbf{Morphisms}}$\tabularnewline
+ &  &  &  & \tabularnewline
+\begin{tikzcd} S_{0}  \arrow[r, " S_{01} "] & S_{1} \arrow[r, " S_{12} "]  & S_2 \arrow[r, "S_{23}"] & \cdots  \end{tikzcd} &  &  &  & \begin{tikzcd} S_{0}  \arrow[r, " S_{01} "] \arrow[d," f_0 "] & S_{1} \arrow[r, " S_{12} "] \arrow[d," f_1 "] & S_2 \arrow[r, "S_{23}"] \arrow[d," f_2 "] & \cdots \\  T_{0}  \arrow[r, " T_{01} " swap] & T_{1} \arrow[r, " T_{12} " swap]  & T_2 \arrow[r, "T_{23}" swap] & \cdots  \end{tikzcd} \tabularnewline
+ &  &  &  & \tabularnewline
+object $(S_{01},S_{12},\dots)$ &  &  &  & arrow $(f_{0},f_{1},\dots)$\tabularnewline
+ &  &  &  & \tabularnewline
+\end{tabular}
+\par\end{center}
+
+Here, $S_{0},S_{1},\dots,T_{0},T_{1},\dots$ are sets, and $f_{0},f_{1},\dots,S_{01},S_{12},\dots,T_{01},T_{12},\dots$
+are functions. It has been suggested by Lawvere that such an object
+$(S_{01},S_{12},\dots)$ be considered as a ``set through time'',
+where each $S_{n}$ is regarded as the state of the variable set $S$
+at the (discrete) time $n$. If $m<n-1$, we define: 
+\[
+S_{mn}\vcentcolon=S_{(n-1)n}\circ\cdots\circ S_{m(m+1)}
+\]
+
+
+For example, $S_{02}=S_{12}\circ S_{01}$. We now describe the topos
+structure of $\mathbf{Set}^{\boldsymbol{\omega}}$. 
+
+
+\subsubsection{terminal object}
+
+The terminal object $1$ is simply $(id_{\{0\}},id_{\{0\}},\dots)$.
+
+\begin{center}\begin{tikzcd} \{ 0 \}  \arrow[r, " id_{ \{ 0 \} } "] & \{ 0 \}  \arrow[r, " id_{ \{ 0 \} } "]  & \{ 0 \}  \arrow[r, " id_{ \{ 0 \} } "] & \cdots  \end{tikzcd} \end{center}
+
+
+\subsubsection{pullback}
+
+Pullbacks in $\mathbf{Set}^{\boldsymbol{\omega}}$ are constructed
+very similarly to the arrow category of $\mathbf{Set}$. Given two
+morphisms $(f_{0},f_{1},f_{2},\dots):(S_{01},S_{12},\dots)\to(T_{01},T_{12},\dots)$
+and $(g_{0},g_{1},g_{2},\dots):(R_{01},R_{12},\dots)\to(T_{01},T_{12},\dots)$
+we first find the pullbacks at each $n$:
+
+\begin{center}
+\begin{tabular}{cccccccc}
+ &  &  &  &  &  &  & \tabularnewline
+\begin{tikzcd} Z_0 \arrow[d," q_0 " swap] \arrow[r," p_0 "] & R_0 \arrow[d," g_0 "] \\ S_0 \arrow[r," f_0 " swap] & T_0 \end{tikzcd} &  &  &  & \begin{tikzcd} Z_1 \arrow[d," q_1 " swap] \arrow[r," p_1 "] & R_1 \arrow[d," g_1 "] \\ S_1 \arrow[r," f_1 " swap] & T_1 \end{tikzcd} &  &  & $\cdots$\tabularnewline
+ &  &  &  &  &  &  & \tabularnewline
+\end{tabular}
+\par\end{center}
+
+in $\mathbf{Set}$, and by the universal properties of $Z_{1},Z_{2},\dots$,
+we get unique maps $Z_{01}:Z_{0}\to Z_{1}$, $Z_{12}:Z_{1}\to Z_{2}$,
+and so on. The pullback then is $(Z_{01},Z_{12},\dots)$.
+
+
+\subsubsection{exponential object}
+
+
+\subsubsection{subobject classifier}
+
+In $\mathbf{Set}^{\boldsymbol{\omega}}$, $\Omega$ is the object
+$(\Omega_{01},\Omega_{12},\dots)$ where:
+\[
+\{\emptyset,0,1,2,\dots\}=\Omega_{0}=\Omega_{1}=\Omega_{2}=\dots
+\]
+\[
+\Omega_{01}(\emptyset)=\emptyset\mbox{, }\Omega_{01}(0)=0,\mbox{\mbox{ }}\Omega_{01}(1)=0,\mbox{\mbox{ }}\Omega_{01}(2)=1,\mbox{ }\Omega_{01}(3)=2,\mbox{\mbox{ }\ensuremath{\dots}}
+\]
+\[
+\Omega_{12}(\emptyset)=\emptyset\mbox{, }\Omega_{12}(0)=0,\mbox{\mbox{ }}\Omega_{12}(1)=0,\mbox{\mbox{ }}\Omega_{12}(2)=1,\mbox{ }\Omega_{12}(3)=2,\mbox{\mbox{ }\ensuremath{\dots}}
+\]
+\[
+\dots
+\]
+ 
+
+The classifier arrow $\top:1\to\Omega$, is given by: 
+\[
+\top_{0}:\{0\}\to\Omega_{0}\mbox{ \ensuremath{\mid}\ }\top_{0}(0)=0
+\]
+\[
+\top_{1}:\{0\}\to\Omega_{1}\mbox{ \ensuremath{\mid} }\top_{1}(0)=0
+\]
+\[
+\dots
+\]
+ 
+
+\hfill \break \hfill \break
+
+\begin{tikzpicture}[scale = 1/2] 
+
+\node[] (u) at (1,7.5) {\large $T_{0}$};
+\node[] (u) at (9,7.5) {\large $T_{1}$};
+\node[] (u) at (17,7.5) {\large $T_{2}$};
+\node[] (u) at (25,7.5) {\large $T_{3}$};
+
+\node[] (u) at (2,1.5) {\large $S_{0}$};
+\node[] (u) at (10,1.5) {\large $S_{1}$};
+\node[] (u) at (18,1.5) {\large $S_{2}$};
+\node[] (u) at (26,1.5) {\large $S_{3}$};
+
+\node[circle, fill=black, inner sep=1.5pt, label=below:$x$] (x) at (2,8) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$T_{01}(x)$] (x') at (10,6.5) {}; 
+\node[circle, fill=black, inner sep=1.5pt, label=below:$T_{02}(x)$] (x'') at (18,5.5) {}; 
+\node[circle, fill=black, inner sep=1.5pt, label=below:$T_{03}(x)$] (x''') at (26,3.5) {};
+
+
+\draw plot [smooth cycle] coordinates {(0,0)(4,0)(4,8)(0,8)};  
+\draw plot [smooth cycle] coordinates {(1,1)(3,1)(3,4)(1,4)}; 
+         
+\draw plot [smooth cycle] coordinates {(8,0) (12,0) (12, 8) (8,8)};
+\draw plot [smooth cycle] coordinates {(9,1) (11,1) (11, 4) (9,4)};
+
+\draw plot [smooth cycle] coordinates {(16,0) (20,0) (20, 8) (16,8)};
+\draw plot [smooth cycle] coordinates {(17,1) (19,1) (19, 4) (17,4)};
+
+\draw plot [smooth cycle] coordinates {(24,0) (28,0) (28, 8) (24,8)};
+\draw plot [smooth cycle] coordinates {(25,1) (27,1) (27, 4) (25,4)};
+ 
+
+\draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (x) edge[out=-20, in=160] node[below] {$$} (x'); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (x') edge[out=-20, in=160] node[below] {$$} (x''); 
+\draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (x'') edge[out=-20, in=160] node[below] {$$} (x'''); \end{tikzpicture} 
+
+\hfill \break \hfill \break
+
+The characteristic function $\chi_{_{S}}=(\chi_{_{0}},\chi_{_{1}},\dots)$
+has a nice interpretation. For example, in the image above, $x\notin S_{0}$,
+but $T_{03}(x)\in S_{3}$. We think of this as saying, ``$x$ is
+in $S$ three seconds later''. So we set $\chi_{_{0}}(x)=3$ 
+
+\end{example}
+
+
+\section{$\mathbf{M}$-set}
+
+\begin{center}\begin{tikzpicture} \node (t) at (6.25,2.5) {{$ \bullet $}}; \node (t') at (6.16,4.2) {{\small $ 1 ( \bullet ) $}}; \node (t'') at (6.093,5.12) {{\scriptsize $ 2( \bullet ) $}}; \node (t''') at (6.05,5.55) {{\tiny $ 3( \bullet ) $}};   \draw plot [smooth cycle] coordinates  {(2,2)(10,2)(10,10)(2,10)}; \draw plot [smooth cycle] coordinates  {(4,4)(8,4)(8,8)(4,8)}; \draw plot [smooth cycle] coordinates  {(5,5)(7,5)(7,7)(5,7)}; \draw plot [smooth cycle] coordinates  {(5.5,5.5)(6.5,5.5)(6.5,6.5)(5.5,6.5)}; \draw plot [smooth cycle] coordinates  {(5.75,5.75)(6.25,5.75)(6.25,6.25)(5.75,6.25)}; \draw plot [smooth cycle] coordinates  {(5.87,5.87)(6.13,5.87)(6.13,6.13)(5.87,6.13)}; \draw plot [smooth cycle] coordinates  {(5.95,5.95)(6.07,5.95)(6.07,6.07)(5.95,6.07)}; \draw plot [smooth cycle] coordinates  {(5.99,5.99)(6.03,5.99)(6.03,6.03)(5.99,6.03)};  \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (t) edge[bend right=40] node[right] { \scriptsize $$} (t'');   \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (t) edge[shorten >=-.5 , bend right = 10] node[right] { \scriptsize $$} (t'); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (t) edge[shorten >=-.5 , bend right=70] node[right] { \scriptsize $$} (t'''); \end{tikzpicture} \end{center} 
+
+\begin{example} Let $M$ be a monoid (which may be thought of as
+a category with one object) an object in $\mathbf{Set}^{M}$ is called
+an $M$-set. We can think of an $M$-set as a pair $(X,\lambda)$,
+where $\lambda:M\times X\to X$ is a function such that gives us for
+each $m$ a function $\lambda_{m}$ such that:
+\begin{itemize}
+\item $\lambda_{e}(x)=x$ for $e$ the identity in $M$.
+\item $\lambda_{m\cdot n}=\lambda_{m}\circ\lambda_{n}$ 
+\end{itemize}
+A morphism $f:(X,\lambda)\to(Y,\mu)$ is an equivariant, or action-preserving
+function $f:X\to Y$, i.e. one such that for all $m\in M$, the following
+diagram commutes:
+
+\begin{center}\begin{tikzcd} X \arrow[d," \lambda _m " swap] \arrow[r,"f"] & Y \arrow[d," \mu _m "] \\ X \arrow[r,"f" swap] & Y \end{tikzcd}\end{center}
+
+
+\subsubsection{terminal object}
+
+A terminal object in this category is $(\{0\},\lambda)$, where $\{0\}$
+is the terminal object in $\mathbf{Set}$ and $\lambda_{m}(0)=0$
+for all $m\in M$. 
+
+
+\subsubsection{pullback}
+
+Given arrows $g:(Y,\mu)\to(Z,\gamma)$ and $f:(X,\lambda)\to(Z,\gamma)$,
+the pullback of $f$ and $g$ is $(X\times_{Z}Y,\delta)$, where $X\times_{Z}Y$
+is the pullback of $f$ and $g$ in $\mathbf{Set}$, and $\delta_{m}=\lambda_{m}\times\mu_{m}$. 
+
+
+\subsubsection{subobject classifier}
+
+\begin{defn} A $\textbf{left ideal}$ of a monoid $M$ is a subset
+$I$ of $M$ which is closed under left-multiplication, i.e. $m\cdot i\in I$
+for all $i\in I$ and $m\in M$. If the monoid is commutative, we
+will drop the adjective and just say ``ideal''.
+
+\begin{rem} 
+
+Don't get this confused with left ideals in ring theory. Every ideal
+in a ring is a left ideal of the underlying monoid $(R,\cdot,1)$,
+but there are usually many more ideals of the underlying monoid that
+are not ideals of the ring. This is because an ideal $J$ in a ring
+is required to be compatible with the underlying group $(R,+,0)$
+of the ring, i.e. non-empty and for all $x,y\in J$, $x-y\in J$.
+
+\end{rem}
+
+\end{defn}
+
+Define $\Omega=(L_{M},\omega)$ where $L_{M}$ is the set of left
+ideals of $M$, and $\omega(I)=I:m$, where $I:m$ is defined as $\{n\in M\mid n\cdot m\in I\}$.
+The classifier arrow $\top:1\to\Omega$ is the function that picks
+out the largest left ideal of $M$, namely $\top(0)=M$. Here are
+some important facts about $I:m$:
+\begin{itemize}
+\item $m\in I$ if and only if $I:m=M$.
+\item If $m\in I'$ and $I'\cap I=\emptyset$, then $I:m=\emptyset$.
+\item $\emptyset:m=\emptyset$ and $M:m=M$.
+\item If $M$ is a $\emph{commutative}$ monoid, then $I\subseteq I:m$
+for all $m\in M$.
+\end{itemize}
+Let's try to understand how the subobject classifier works. If $i:(X,\lambda)\to(Y,\mu)$
+is monic, then we may assume that $X$ is a subset of $Y$ and the
+action $\mu$ of $Y$ restricts to the action $\lambda$ of $X$.
+Since $i$ is equivariant, for each $m\in M$, the action $\lambda_{m}$
+must map an element in $X$ to another element in $X$. On the other
+hand, $\mu_{m}$ might map an element in $Y$ to an element in $X$.
+The character $\chi_{i}:(Y,\mu)\to\Omega$ of $k$ is defined by $\chi_{i}(y)=\{m\mid\mu_{m}(y)\in X\}$.
+
+\begin{center}\begin{tikzpicture} \node (S) at (1.4,3) {\LARGE $X$}; \node (S') at (1,8) {\LARGE $Y$}; \draw plot [smooth cycle] coordinates {(0,0)(4,0)(4,8)(0,8)}  node[circle, fill=black, inner sep=1.5pt, label=above:$y$] (z) at (2,7) {};  \draw plot [smooth cycle] coordinates {(1,1)(3,1)(3,4)(1,4)}          node[circle, fill=black, inner sep=1.5pt, label=below:$x$] (x) at (1.5,2) {};  \node[circle, fill=black, inner sep=1.5pt, label=below:$y'$] (y') at (2,4) {};       \node[circle, fill=black, inner sep=1.5pt, label=above:$x'$] (x') at (2.8,3) {}    ; \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (x) edge[bend right=40] node[below] {$ \lambda _{m} $} (x');  \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (z) edge[bend right=30] node[left] {$ \mu _{m}  $} (y'); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (y') edge[bend right=30] node[right] {$ ! \exists \mu _{m^{-1}} $} (z);\end{tikzpicture} \end{center}
+
+Since the classifier arrow $\top:1\to\Omega$ picks out the largest
+ideal $M$, then if $y\in X$, $\chi_{i}(y)$ must be $M$. This is
+true since $\mu_{m}$ restricts to $\lambda_{m}$ on $X$, and $\lambda_{m}$
+maps every element in $X$ to another element in $X$ by the equivariance
+of $i$. Notice that if $y\notin X$ and $\mu_{m}$ maps $y$ into
+$X$, then $\mu_{m^{-1}}$ cannot exist, which just means that $m$
+is not invertible. Also notice that if $y\notin X$ and $\mu_{m}$
+maps $y$ into $X$, then $\mu_{n\cdot m}=\mu_{n}\circ\mu_{m}$ maps
+$y$ into $X$ too, so $\chi_{i}(y)$ really is a left ideal. 
+
+
+\subsubsection{exponential object}
+
+Given $(X,\lambda)$ and $(Y,\mu)$, we define the exponential $(Y,\mu)^{(X,\lambda)}=(E,\sigma)$,
+where $E$ is the set of equivariant maps $f$ of the form $f:(M,\cdot)\times(X,\lambda)\to(Y,\mu)$
+and $\sigma_{m}:E\to E$ takes such an $f$ to the function $\sigma_{m}(f):M\times X\to Y$
+given by $g(n,x)=f(m\cdot n,x)$. The evaluation arrow $ev:(E,\sigma)\times(X,\lambda)\to(Y,\mu)$
+have $ev(f,x)=f(e,x)$. Then given an arrow $f:(X,\lambda)\times(Y,\mu)\to(Z,\delta)$,
+the exponential adjoint $\hat{f}:(X,\lambda)\to(Z,\delta)^{(Y,\mu)}$
+takes $x$ to the equivariant map $\hat{f_{x}}:M\times Y\to Z$ having
+$\hat{f_{x}}(m,y)=f(\lambda_{m}(x),y)$. Categories of the form $\mathbf{M}$-set
+frovide a rich source of examples, particularly of topoi that have
+``non-classical'' properties. 
+
+\end{example}
+
+\begin{example} $(\mathbb{N},+,0)$ is the monoid of natural numbers
+under addtion. The set of left ideals are of the form $[n]=\{n,n+1,\dots\}$,
+hence the set of left ideals corresponds with the set of natural numbers.
+The ideal $[n]:m$ is also easy to describe. 
+
+\begin{center}
+If $m\geq n$, then $[n]:m=\mathbb{N}$. 
+\par\end{center}
+
+\begin{center}
+If $m<n$, then $[n]:m=[n-m]$. 
+\par\end{center}
+
+\end{example}
+
+\begin{example} Recall the monoid from the other set of notes:
+
+\begin{center}\begin{tikzcd} \bullet \arrow[loop right, "f"] \arrow[loop left, "1_{\bullet}"] \end{tikzcd}\end{center}
+
+with this multiplication table:
+
+\begin{center}
+\begin{tabular}{c|c|c}
+$\circ$ & $e$ & $f$\tabularnewline
+\hline 
+$e$ & $e$ & $f$\tabularnewline
+\hline 
+$f$ & $f$ & $f$\tabularnewline
+\end{tabular}
+\par\end{center}
+
+\begin{flushleft}
+Let's denote this monoid $\mathbf{G_{2}}$. Now, what is the subobject
+classifier in the category of $\mathbf{G_{2}}$-sets? We need to compute
+the left ideals of $\mathbf{G_{2}}$, and the corresponding action.
+This is presented in the table below: 
+\par\end{flushleft}
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+$\omega$ & $\{e,f\}$ & $\{f\}$ & $\emptyset$\tabularnewline
+\hline 
+$e$ & $\{e,f\}$ & $\{f\}$ & $\emptyset$\tabularnewline
+\hline 
+$f$ & $\{e,f\}$ & $\{e,f\}$ & $\emptyset$\tabularnewline
+\end{tabular}
+\par\end{center}
+
+Let's go over an example of a $\mathbf{G_{2}}$-set $Y$ with six
+elements. So suppose $Y=\{1,2,3,4,5,6\}$, i.e. just a set with five
+elements. We need two functions $\mu_{f}$,$\mu_{e}$ from $Y$ to
+$Y$ which satisfy the following identities:
+\[
+\mu_{e}\circ\mu_{f}=\mu_{f}\circ\mu_{e}=\mu_{f}
+\]
+\[
+\mu_{e}\circ\mu_{e}=\mu_{e}
+\]
+\[
+\mu_{f}\circ\mu_{f}=\mu_{f}
+\]
+
+
+These work:
+
+\begin{center}\begin{tikzpicture} \node[circle, fill=black, inner sep=1.5pt, label=above:$1$] (a) at (1,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=above:$2$] (b) at (2,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=above:$3$] (c) at (3,3) {};\node[circle, fill=black, inner sep=1.5pt, label=above:$4$] (d) at (4,3) {};\node[circle, fill=black, inner sep=1.5pt, label=above:$5$] (e) at (5,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=above:$6$] (f) at (6,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$1$] (a') at (1,0) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$2$] (b') at (2,0) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$3$] (c') at (3,0) {};\node[circle, fill=black, inner sep=1.5pt, label=below:$4$] (d') at (4,0) {};\node[circle, fill=black, inner sep=1.5pt, label=below:$5$] (e') at (5,0) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$6$] (f') at (6,0) {}; \draw[-{Straight Barb[length=5pt,width=5pt]}] (a) edge[out=250,in=80] node[left] {$ \mu _{f} $} (a'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (b) edge[out=250,in=80] node[above] {$$} (b'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (c) edge[out=250,in=80] node[above] {$$} (c');  \draw[-{Straight Barb[length=5pt,width=5pt]}] (d) edge[out=270,in=83] node[above] {$$} (c');  \draw[-{Straight Barb[length=5pt,width=5pt]}] (e) edge[out=270,in=75] node[above] {$$} (c'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (f) edge[out=250,in=80] node[above] {$$} (f');  \end{tikzpicture}\end{center} 
+
+\begin{center}\begin{tikzpicture} \node[circle, fill=black, inner sep=1.5pt, label=above:$1$] (a) at (1,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=above:$2$] (b) at (2,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=above:$3$] (c) at (3,3) {};\node[circle, fill=black, inner sep=1.5pt, label=above:$4$] (d) at (4,3) {};\node[circle, fill=black, inner sep=1.5pt, label=above:$5$] (e) at (5,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=above:$6$] (f) at (6,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$1$] (a') at (1,0) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$2$] (b') at (2,0) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$3$] (c') at (3,0) {};\node[circle, fill=black, inner sep=1.5pt, label=below:$4$] (d') at (4,0) {};\node[circle, fill=black, inner sep=1.5pt, label=below:$5$] (e') at (5,0) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$6$] (f') at (6,0) {}; \draw[-{Straight Barb[length=5pt,width=5pt]}] (a) edge[out=250,in=80] node[left] {$ \mu _{e} $} (a'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (b) edge[out=250,in=80] node[above] {$$} (b'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (c) edge[out=250,in=80] node[above] {$$} (c');  \draw[-{Straight Barb[length=5pt,width=5pt]}] (d) edge[out=250,in=80] node[above] {$$} (d');  \draw[-{Straight Barb[length=5pt,width=5pt]}] (e) edge[out=250,in=80] node[above] {$$} (e'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (f) edge[out=250,in=80] node[above] {$$} (f');  \end{tikzpicture}\end{center} 
+
+Now, let's find a subobject $i:(X,\lambda)\to(Y,\mu)$ of $(Y,\mu)$.
+Since $i$ is monic, can assume that $X$ is a subset of $Y$, say
+$X=\{1,2,3,4\}$. We mentioned earlier that we can then assume that
+$\lambda_{m}$ is just the restriction of $\mu_{m}$ onto $X$. Let's
+explicitly show why this is the case. So we need two functions $\lambda_{f}$,$\lambda_{e}$
+from $X$ to $X$ which satisfies the following identities:
+
+\[
+\lambda_{e}\circ\lambda_{f}=\lambda_{f}\circ\lambda_{e}=\lambda_{f}
+\]
+\[
+\lambda_{e}\circ\lambda_{e}=\lambda_{e}
+\]
+\[
+\lambda_{f}\circ\lambda_{f}=\lambda_{f}
+\]
+
+
+We also need $\lambda_{f}$,$\lambda_{e}$ to satisfy the following
+commutative diagrams:
+
+\begin{center}\begin{tikzcd} \bullet \arrow[d,"f" swap] && X \arrow[r, hookrightarrow, "i"] \arrow[d, "\lambda _{f}" swap] & Y \arrow[d, "\mu _{f}"] \\ \bullet &&  X \arrow[r, hookrightarrow, "i" swap]  & Y \end{tikzcd}\end{center}
+
+\begin{center}\begin{tikzcd} \bullet \arrow[d,"id_{\bullet}" swap] && X \arrow[r, hookrightarrow, "i"] \arrow[d, "\lambda _{e}" swap] & Y \arrow[d, "\mu _{e}"] \\ \bullet &&  X \arrow[r, hookrightarrow, "i" swap]  & Y \end{tikzcd}\end{center}
+
+The arrows $f:\bullet\to\bullet$ and $id_{\bullet}:\bullet\to\bullet$
+are there to remind the reader that $i$ is a natural transformation.
+Now since we already specified what $i$ is the commutative diagrams
+above force us to take:
+
+\begin{center}\begin{tikzpicture} \node[circle, fill=black, inner sep=1.5pt, label=above:$1$] (a) at (1,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=above:$2$] (b) at (2,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=above:$3$] (c) at (3,3) {};\node[circle, fill=black, inner sep=1.5pt, label=above:$4$] (d) at (4,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$1$] (a') at (1,0) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$2$] (b') at (2,0) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$3$] (c') at (3,0) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$4$] (d') at (4,0) {};\draw[-{Straight Barb[length=5pt,width=5pt]}] (a) edge[out=250,in=80] node[left] {$ \lambda _{e} $} (a'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (b) edge[out=250,in=80] node[above] {$$} (b'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (c) edge[out=250,in=80] node[above] {$$} (c');  \draw[-{Straight Barb[length=5pt,width=5pt]}] (d) edge[out=250,in=80] node[above] {$$} (d'); \end{tikzpicture}\end{center} 
+
+Now, let's highlight the subset $X$ of $Y$ in red: 
+
+\begin{center}\begin{tikzpicture} \node[circle, fill=red, inner sep=1.5pt, label=above:$1$] (a) at (1,3) {}; \node[circle, fill=red, inner sep=1.5pt, label=above:$2$] (b) at (2,3) {}; \node[circle, fill=red, inner sep=1.5pt, label=above:$3$] (c) at (3,3) {};\node[circle, fill=red, inner sep=1.5pt, label=above:$4$] (d) at (4,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=above:$5$] (e) at (5,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=above:$6$] (f) at (6,3) {}; \node[circle, fill=red, inner sep=1.5pt, label=below:$1$] (a') at (1,0) {}; \node[circle, fill=red, inner sep=1.5pt, label=below:$2$] (b') at (2,0) {}; \node[circle, fill=red, inner sep=1.5pt, label=below:$3$] (c') at (3,0) {};\node[circle, fill=red, inner sep=1.5pt, label=below:$4$] (d') at (4,0) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$5$] (e') at (5,0) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$6$] (f') at (6,0) {}; \draw[-{Straight Barb[length=5pt,width=5pt]}] (a) edge[out=250,in=80] node[left] {$ \mu _{f} | _{X} = \lambda _{f} $} (a'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (b) edge[out=250,in=80] node[above] {$$} (b'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (c) edge[out=250,in=80] node[above] {$$} (c');  \draw[-{Straight Barb[length=5pt,width=5pt]}] (d) edge[out=270,in=83] node[above] {$$} (c');  \draw[-{Straight Barb[length=5pt,width=5pt]}] (e) edge[out=270,in=75] node[above] {$$} (c'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (f) edge[out=250,in=80] node[right] {$ \mu _{f} $} (f');  \end{tikzpicture}\end{center} 
+
+\begin{center}\begin{tikzpicture} \node[circle, fill=red, inner sep=1.5pt, label=above:$1$] (a) at (1,3) {}; \node[circle, fill=red, inner sep=1.5pt, label=above:$2$] (b) at (2,3) {}; \node[circle, fill=red, inner sep=1.5pt, label=above:$3$] (c) at (3,3) {};\node[circle, fill=red, inner sep=1.5pt, label=above:$4$] (d) at (4,3) {};\node[circle, fill=black, inner sep=1.5pt, label=above:$5$] (e) at (5,3) {}; \node[circle, fill=black, inner sep=1.5pt, label=above:$6$] (f) at (6,3) {}; \node[circle, fill=red, inner sep=1.5pt, label=below:$1$] (a') at (1,0) {}; \node[circle, fill=red, inner sep=1.5pt, label=below:$2$] (b') at (2,0) {}; \node[circle, fill=red, inner sep=1.5pt, label=below:$3$] (c') at (3,0) {};\node[circle, fill=red, inner sep=1.5pt, label=below:$4$] (d') at (4,0) {};\node[circle, fill=black, inner sep=1.5pt, label=below:$5$] (e') at (5,0) {}; \node[circle, fill=black, inner sep=1.5pt, label=below:$6$] (f') at (6,0) {}; \draw[-{Straight Barb[length=5pt,width=5pt]}] (a) edge[out=250,in=80] node[left] {$ \mu _{e} | _{X} = \lambda _{e} $} (a'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (b) edge[out=250,in=80] node[above] {$$} (b'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (c) edge[out=250,in=80] node[above] {$$} (c');  \draw[-{Straight Barb[length=5pt,width=5pt]}] (d) edge[out=250,in=80] node[above] {$$} (d');  \draw[-{Straight Barb[length=5pt,width=5pt]}] (e) edge[out=250,in=80] node[above] {$$} (e'); \draw[-{Straight Barb[length=5pt,width=5pt]}] (f) edge[out=250,in=80] node[right] {$ \mu _{e} $} (f');  \end{tikzpicture}\end{center} 
+
+Now, how does $\Omega=(L_{m},\omega)$ classify this subobject? Recall,
+that $\chi_{i}(y)=\{m\mid\mu_{m}(y)\in X\}$. So we have:
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c|c}
+$\chi_{i}(n)$ & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
+\hline 
+$\chi_{i}$ & $\{e,f\}$ & $\{e,f\}$ & $\{e,f\}$ & $\{e,f\}$ & $\{f\}$ & $\emptyset$\tabularnewline
+\end{tabular}
+\par\end{center}
+
+So far, this looks similar to how we classified subobjects in $\mathbf{Set^{2}}$,
+but there are some important fundamental differences. We will discuss
+this more at a later section.
+
+\end{example}
+
+
+\section{Slice Categories}
+
+
+\subsection{Bundles }
+
+\begin{samepage}\begin{defn} The $\textbf{slice category}$ $\mathbf{C}/c$
+of a category $\mathbf{C}$ over an object $c\in\mathbf{C}$ has
+\begin{itemize}
+\item objects are all arrows $f$ with codomain $c$.
+\item morphisms from $f$ to $f'$ are all arrows $g$ such that $f'\circ g=f$ 
+\end{itemize}
+\begin{center}
+\begin{tabular}{ccccc}
+ &  &  &  & \tabularnewline
+$\underline{\textbf{Objects}}$ &  &  &  & $\underline{\textbf{Morphisms}}$\tabularnewline
+ &  &  &  & \tabularnewline
+\begin{tikzcd} d \arrow[r,"f"] & c \end{tikzcd} &  &  &  & \begin{tikzcd}[column sep=small] d \arrow[dr,"f" swap] \arrow[rr,"g"] && d' \arrow[dl,"f'"] \\ & c \end{tikzcd}\tabularnewline
+ &  &  &  & \tabularnewline
+object $(d,f)$  &  &  &  & morphism $g$\tabularnewline
+ &  &  &  & \tabularnewline
+\end{tabular}
+\par\end{center}
+
+\begin{note} $\mathbf{C}/c$ is sometimes called the $\textbf{over category}$.
+
+\end{note}
+
+\end{defn}
+
+\end{samepage}
+
+\begin{example} An object $(B,p)\in\mathbf{Set}/S$ can be pictured
+like this: \end{example} \hfill \break \hfill \break
+
+\begin{tikzpicture} \node (S) at (1.25,1) {\LARGE $S$}; \node (Bx) at (2,10) {\LARGE $B_{x}$}; \node (By) at (5,10) {\LARGE $B_{y}$}; \node (Bz) at (8,10) {\LARGE $B_{z}$}; \draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (0,4.5) -- (0,10.5) node [black,midway,xshift=-0.7cm] (B)  {\LARGE $B$} ; \draw plot [smooth cycle] coordinates  {(1,0)(9,0)(9,2)(5,2.5)(1,2)}   node[circle, fill=black, inner sep=1.5pt, label=below:$y$] (y) at (5,1.6) {} node[circle, fill=black, inner sep=1.5pt, label=below:$z$] (z) at (8,1) {};  \draw plot [smooth cycle] coordinates {(1.5,5)(2.5,5)(2.5,10)(1.5,10)}          node[circle, fill=black, inner sep=1.5pt, label=below:$x$] (x) at (2,1) {}; \draw plot [smooth cycle] coordinates {(4.5,5) (5.5,5) (5.5, 10) (4.5,10)} node[] (yy) at (5,4.6) {} node[circle, fill=black, inner sep=1.5pt, label=below:$y'$] (y') at (5,6) {} node[circle, fill=black, inner sep=1.5pt, label=below:$y''$] (y'') at (5,7.5) {} node[circle, fill=black, inner sep=1.5pt, label=below:$y'''$] (y''') at (5,9) {} node[] (zz) at (8,4.6) {} node[circle, fill=black, inner sep=1.5pt, label=below:$z'$] (z') at (8,6) {} node[circle, fill=black, inner sep=1.5pt, label=below:$z''$] (z'') at (8,7.5) {} node[circle, fill=black, inner sep=1.5pt, label=below:$z'''$] (z''') at (8,9) {};     \draw plot [smooth cycle] coordinates {(7.5,5) (8.5,5) (8.5, 10) (7.5,10)} node[] (xx) at (2,4.6) {} node[circle, fill=black, inner sep=1.5pt, label=below:$x'$] (x') at (2,6) {} node[circle, fill=black, inner sep=1.5pt, label=below:$x''$] (x'') at (2,7.5) {} node[circle, fill=black, inner sep=1.5pt, label=below:$x'''$] (x''') at (2,9) {}   ; \draw[-{Straight Barb[length=5pt,width=5pt]}] (xx) edge[] node[right] {\LARGE $p_{x}$} (x); \draw[-{Straight Barb[length=5pt,width=5pt]}] (yy) edge[] node[right] {\LARGE $p_{y}$} (y); \draw[-{Straight Barb[length=5pt,width=5pt]}] (zz) edge[] node[right] {\LARGE $p_{z}$} (z); \draw[-{Straight Barb[length=5pt,width=5pt]}] (B) edge[bend right=30] node[left] {\LARGE $p$} (S); \end{tikzpicture} 
+
+\hfill \break \hfill \break
+
+Let's take a moment to reflect on this image, because it will serve
+as a nice visualization tool for other categories. For each element
+$s\in S$, there is an associated set $B_{s}$, which is just the
+inverse image of $s$ under $p$, i.e. $p^{-1}(s)=B_{s}$. $B_{s}$
+is typically called the $\textbf{stalk}$, or $\textbf{fiber}$ of
+$p$ over $s$, and elements of $B_{s}$ are called $\emph{germs}$
+at $s$. Notice that for any distinct $s,s'\in S$, $B_{s}\cap B_{s'}=\emptyset$,
+and that $\bigcup_{s}B_{s}=B$. We also have functions $p_{s}$, which
+is just the restriction of $p$ to $B_{s}$. The commutativity condition
+for morphisms in the slice category tells us that a morphism from
+$(B,p)$ to $(B',p')$ maps at $s$ in $(B,p)$ to germs at $s$ in
+$(B',p')$. The whole structure is called a $\textbf{bundle}$ of
+sets over the $\textbf{base space}$ $X$, with $B$ being called
+the $\textbf{total space}$ and $p$ being called the $\textbf{projection}$.
+What do morphisms $(A,q)\to(B,q)$ look like in $\mathbf{Set}/S$?
+The commutative diagram tells us that they should be functions $f:A\to B$
+that preserve fibers likeso:
+
+\begin{center}\begin{tikzpicture}[scale=1/2] 
+
+%Nodes
+
+\node[] (yy) at (5,4.7) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$x$] (y) at (5,1.6) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$a$] (yyy) at (5,6) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$a'$] (yyyy) at (5,7.5) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$a''$] (yyyyy) at (5,9) {};
+
+
+\node[] (yy') at (19,4.7) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$f(x)$] (y') at (19,1.6) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$b$] (yyy') at (19,6) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$b'$] (yyyy') at (19,7.5) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$b''$] (yyyyy') at (19,9) {};
+ 
+
+
+%Plots
+
+\draw plot [smooth cycle] coordinates  {(1,0)(9,0)(9,2)(5,2.5)(1,2)};   
+\draw plot [smooth cycle] coordinates {(4.5,5) (5.5,5) (5.5, 10) (4.5,10)};   
+
+\draw plot [smooth cycle] coordinates  {(15,0)(23,0)(23,2)(19,2.5)(15,2)};   
+\draw plot [smooth cycle] coordinates {(18.5,5) (19.5,5) (19.5, 10) (18.5,10)}; 
+
+
+%Arrows
+
+
+\draw[-{Straight Barb[length=5pt,width=5pt]}] (yy) edge[] node[right] {\LARGE $$} (y);  
+
+\draw[-{Straight Barb[length=5pt,width=5pt]}] (yy') edge[] node[right] {\LARGE $$} (y'); 
+
+\draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (yyy) edge[out=10,in=170] node[above] {$$} (yyy'); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (yyyy) edge[out=10,in=170] node[above] {$$} (yyyy'); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (yyyyy) edge[out=10,in=170] node[above] {$$} (yyyyy'); 
+\draw[-{Straight Barb[length=5pt,width=5pt]}] (y) edge[out=10,in=170] node[above] {$$} (y'); 
+
+\end{tikzpicture}\end{center} 
+
+Now, let's describe the topos structure of $\mathbf{Set}/S$.
+
+
+\subsubsection{terminal object}
+
+The terminal object for $\mathbf{Set}/S$ is $(S,id_{S})$. The stalk
+of $id_{S}$ over $s$ is $\{s\}$, which is just the terminal object
+in $\mathbf{Set}$. So the terminal object in $\mathbf{Set}/S$ is
+just a ``bundle'' of terminal objects in $\mathbf{Set}$ over $S$.
+A morphism from the terminal object $(S,id_{S})$ to any other object
+$(B,p)$ in $\mathbf{Set}/S$ is just a section of $p$. 
+
+
+\subsubsection{pullback}
+
+Given arrows $f:(B,p)\to(A,q)$ and $g:(C,r)\to(A,q)$, the pullback
+object of $f$ and $g$ in $\mathbf{Set}/S$ will have the form $(Z,j)$.
+To figure out what this object is, we forget about the arrows $p,q,r,$
+and $j$, and compute the object $Z$ by forming the pullback of $f$
+and $g$ in $\mathbf{Set}$
+
+\begin{center}\begin{tikzcd} Z  \arrow[d,"n" swap] \arrow[r,"m"] & B  \arrow[d,"f"] \\ C \arrow[r,"g" swap] & A  \end{tikzcd}\end{center}
+
+Now that we have $Z$, the $j$ is the unique arrow which makes the
+following diagram commutative
+
+\begin{center}\begin{tikzcd} Z  \arrow[dd,"n" swap] \arrow[rr,"m"] \arrow[dr, "j"] && B \arrow[dl,"p"] \arrow[dd,"f"] \\ & S \\ C \arrow[rr,"g" swap] \arrow[ur, "r"] && A \arrow[ul, "q"] \end{tikzcd}\end{center}
+
+Now if $B_{s}$, $A_{s}$, $C_{s}$ are the stalks over $s$ for the
+bundles $(B,p)$, $(A,q)$, and $(C,r)$ respectively, then the pullback
+of 
+
+\begin{center}\begin{tikzcd}  & B_{s}  \arrow[d,"f_{s}"] \\ C_{s} \arrow[r,"g_{s}" swap] & A_{s}  \end{tikzcd}\end{center}
+
+is the same as the stalk over $s$ for $(Z,j)$. Thus, the pullback
+$(Z,j)$ is a ``bundle'' of pullbacks in $\mathbf{Set}$. 
+
+
+\subsubsection{subobject classifier}
+
+$\Omega$ is $(2\times S,p_{S})$ where $2=\{0,1\}$ and $p_{S}(x,y)=y$.
+So the stalk over a typical element $s$ consists of two elements:
+$\{0,s\}$ and $\{1,s\}$. The arrow $\top:1\to\Omega$ is a section
+of $\Omega$, which is defined by $\top(s)=(1,s)$. $\top$ can be
+thought of as a bundle of copies of the set function $\emph{true}$.
+Now, given a monic $i:(A,q)\to(B,p)$, we may assume $A\subseteq B$
+and $\left.p\right|_{A}=q$. We wish to define the character $\chi_{i}:(B,p)\to\Omega$
+so that the following diagram commutes
+
+\begin{center}\begin{tikzcd} A  \arrow[dd,"q" swap] \arrow[rr,"i"] \arrow[dr, "q"] && B \arrow[dl,"p"] \arrow[dd," \chi _{i}"] \\ & S \\ S \arrow[rr," \top " swap] \arrow[ur, " id_{S} "] && 2 \times S \arrow[ul, " p_{S} "] \end{tikzcd}\end{center}
+
+It's easy to see that we get a ``bundle'' of characteristic functions.
+
+\begin{center}
+
+\begin{tikzpicture}[scale=1/2] \draw plot [smooth cycle] coordinates {(0,6)(4,6)(4,14)(0,14)} node[circle, fill=black, inner sep=1.5pt, label=above:$a$] (x') at (2,9) {} node[circle, fill=black, inner sep=1.5pt, label=above:$b$] (x'') at (2,13) {};  \draw plot [smooth cycle] coordinates {(1,7)(3,7)(3,10)(1,10)}          ;               \node (S) at (5.25,1) {\LARGE $S$}; \node (I) at (17,7) {\LARGE $ \{ 1 \} \times S $}; \node (I) at (17,11) {\LARGE $ \{ 0 \} \times S $}; \node (B) at (1,13) {\LARGE $B$}; \node (B) at (1,13) {\LARGE $B$}; \node (B) at (1.6,8) {\LARGE $A$}; \draw plot [smooth cycle] coordinates  {(5,0)(13,0)(13,2)(9,2.5)(5,2)} node[circle, fill=black, inner sep=1.5pt, label=below:$x$] (x) at (8,1) {}; \draw plot [smooth cycle] coordinates  {(11,6)(19,6)(19,8)(15,8.5)(11,8)}   node[circle, fill=black, inner sep=1.5pt, label=above:$ \emph{(1,x)} $] (y) at (14,7) {};  \draw plot [smooth cycle] coordinates  {(11,10)(19,10)(19,12)(15,12.5)(11,12)}   node[circle, fill=black, inner sep=1.5pt, label=above:$ \emph{(0,x)}$] (y') at (14,11) {};  \draw[-{Straight Barb[length=5pt,width=5pt]}] (y) edge[] node[right] {} (x); \draw[-{Straight Barb[length=5pt,width=5pt]}] (y') edge[] node[right] {} (x); \draw[-{Straight Barb[length=5pt,width=5pt]}] (x') edge[] node[right] {} (x); \draw[-{Straight Barb[length=5pt,width=5pt]}] (x'') edge[] node[right] {$$} (x); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (x') edge[out=-20, in=160] node[below] {$true$} (y); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (x'') edge[out=-20, in=160] node[below] {$false$} (y');  \end{tikzpicture} 
+
+\end{center}
+
+
+\subsection{Etale Spaces}
+
+Now, let's consider an object $(B,p)\in\mathbf{Top}/X$. This time,
+$X$ and $B$ are topological spaces and $p$ is continuous. 
+
+\begin{defn} A $\textbf{local homeomorphism}$ is a continuous map
+$p:B\to X$ with the additional property that for each point $b\in B$
+there exists an open neighborhood $U_{b}$ in $B$ such that $p(U_{b})$
+is open in $X$, and $p$ restricts to a homeomorphism $\left.p\right|_{U_{b}}:U_{b}\to p(U_{b})$. 
+
+\begin{rem} Intuitively, a local homeomorphism preserves ``local
+structure''. For example, $B$ is locally compact if and only if
+$p(B)$ is. 
+
+\end{rem}
+
+\end{defn}
+
+\begin{prop} Let $p:B\to X$ be a local homeomorphism, then $p$
+is an open map, i.e. it maps open sets to open sets. \end{prop}
+
+\begin{proof} Let $U$ be open in $B$, we need to show that $p(U)$
+is open in $X$. For each $b\in U$, $U\cap U_{b}$ is open in $U_{b}$,
+and since homeomorphisms are open maps, $\left.p\right|_{U_{b}}(U\cap U_{b})$
+is open in $p(U_{b})$ in the subspace topology. Since $p(U_{b})$
+is open in $X$, $p(U\cap U_{b})$ is open in $X$ too. Finally, since
+$\bigcup\limits _{b\in U}p(U\cap U_{b})=p(U)$, $p(U)$ is open in
+$X$.
+
+\end{proof}
+
+\begin{example} Every \hyperlink{covering map}{covering map} is
+a local homeomorphism. \end{example}
+
+\begin{example} If $X$ is a topological space and $Y$ is a discrete
+space, then the projection $Y\times X\to X$ is a local homeomorphism.
+\end{example}
+
+\begin{example} On the other hand, the projection map $\mathbb{R}\times X\to X$
+is never a local homeomorphism, because no product neighborhood is
+projected homeomorphically into $X$. For much the same reason, a
+nontrivial vector bundle is never a locally homeomorphism either.
+\end{example}
+
+\begin{defn} An $\textbf{etale space}$ over $X$ is an object $(B,p)\in\mathbf{Top}/X$
+such that $p$ is a local homeomorphism. $\mathbf{Etale}(X)$ is the
+category whose objects are pairs $\textbf{etale spaces }$over $X$
+and morphisms being the same as in $\mathbf{Top}/X$. 
+
+\begin{rem} $\mathbf{Etale}(X)$ is a full subcategory of $\mathbf{Top}/X$.
+
+\end{rem}
+
+\end{defn}
+
+Here's how $\mathbf{Etale}(X)$ looks as a topos:
+
+
+\subsubsection{terminal object}
+
+The terminal object for $\mathbf{Etale}(X)$ is $(X,id_{X})$.
+
+\begin{defn} A morphism $s$ from the terminal object $(X,id_{X})$
+to any other object $(B,p)$ in $\mathbf{Etale}(X)$ is called a $\textbf{global section}$
+of $p$.
+
+\begin{center}\begin{tikzcd}[column sep=small] X \arrow[dr," id_X " swap] \arrow[rr,"s"] && B \arrow[dl,"p"] \\ & X \end{tikzcd}\end{center}
+
+\end{defn}
+
+So a global section is just a continuous map $s:X\to B$ such that
+$p\circ s$ is the identity map $id_{X}:X\to X$. We will also be
+interested in $\textbf{local sections}$ of $p$, which are continuous
+maps defined on an open subset $U\subset X$ to $B$, such that $p\circ s$
+is the inclusion $U\hookrightarrow X$. A $\textbf{section}$ of a
+local homeomorphism $p$ will always mean a local section $s$ of
+$p$ defined on some open subset $U\subset X$. Sometimes the words
+section and local section are used interchangeably, however we will
+always include the adjective ``global'' when referring to global
+sections.
+
+\begin{prop} If $p:B\to X$ is a local homeomorphism and $U\subset X$
+is open, the pullback
+
+\begin{center}\begin{tikzcd} B_U \arrow[d] \arrow[r] & B \arrow[d] \\ U \arrow[r] & X \end{tikzcd}\end{center}
+
+$B_{U}\to U$ is also a local homeomorphism. 
+
+\begin{rem} A local section of $p$ is just a global section of $B_{U}$,
+for some open subset $U$ of $X$. \end{rem}
+
+\end{prop}
+
+\begin{prop} If $p:B\to X$ is a local homeomorphism and $b$ is
+any element of $B$, then there exists a local section of $p$ defined
+on some open subset $V$, such that $b\in s(V)$ \end{prop}
+
+\begin{proof} $\left.p\right|_{U_{b}}^{-1}$ is a local section of
+$p$ defined on $p(U_{b})$, it maps $p(b)$ to $b$.\end{proof} 
+
+\begin{defn} We say that $s$ and $t$ have the same $\textbf{germ}$
+at a point $x\in X$ when they agree in some open neighborhood of
+$x$. We write $[s]\sim_{x}[t]$ if $s$ and $t$ have the same germ
+at $x$.\end{defn}
+
+\begin{prop} Given $b\in B$, $x\in X$, with $p(b)=x$, any local
+section $s$ of $p$ with $b$ in its image has the same germ as $\left.p\right|_{U_{b}}^{-1}$
+at $x$. \end{prop}
+
+\begin{proof}Suppose $s$ maps $x$ to $b$. Set$W=s^{-1}(U_{b})$,
+which is an open neighborhood of $x$. Since $s$ and $\left.p\right|_{U_{b}}^{-1}$
+agree on $W$, $[s]\sim_{x}[\left.p\right|_{U_{b}}^{-1}]$. \end{proof}
+
+\begin{prop} A local section $s$ of $p$ defined on an open set
+$U\subset X$ is an open map. The images $sU$ of all local sections
+form a base for the topology of $B$. If $s$ and $t$ are two local
+sections, then the set $W=\{x\mid sx=tx\}$ of points where they are
+both defined and agree is open in $X$. \end{prop}
+
+\begin{ex} Prove this. \end{ex}
+
+For ease of notation, we simply write $p$ instead of $p|_{U_{b}}$.
+Whenever there is a potential source of confusion, we will use $p|_{U_{b}}$.
+
+
+\subsubsection{subobject classifier}
+
+Let $\mathbf{O}(X)$ be the collection of open subset of $X$. Consider
+the following equivalence relation on this collection: $U\sim_{x}V$
+if and only if there is some open set $W$ such that $x\in W$ and
+$U\cap W=V\cap W$. The idea is that $U\sim_{x}V$ when the points
+in $U$ that are close to $x$ are the same as those that are in $V$
+and close to $x$, i.e. ``locally'' around $x$, $U$ and $V$ look
+the same, i.e. the statement $"U=V"$ is ``locally true'' at $x$.
+The equivalence class $[U]_{x}=\{V:U\sim_{x}V\}$ is called the germ
+of $U$ at $x$. It ``represents'' the collection of all points
+in $U$ that are ``close'' to $x$. The stalk then is $\Omega_{x}=\{(x,[U]_{x})\mid U\subseteq X\}$.
+Now let 
+
+\begin{center}
+\begin{tabular}{ccccc}
+$B_{\Omega}=\bigcup\limits _{x\in X}\Omega_{x}$ be the total space &  &  &  & $p:B_{\Omega}\to X$ the obvious projection map\tabularnewline
+\end{tabular}
+\par\end{center}
+
+Then we have $\Omega=(B_{\Omega},p)$. The topology on the total space
+$\hat{\Omega}$ has as base all sets of the form 
+
+\begin{center}
+$[U,V]=\{(x,[U]_{x})\mid x\in V$ and $U\subseteq V\}$
+\par\end{center}
+
+Here are some important facts about germs of open sets:
+\begin{itemize}
+\item $[U]_{x}=[X]_{x}$ if and only if $x\in U$, i.e. $[X]_{x}$ is the
+collection of all open neighborhoods of $x$.
+\item $[U]_{x}=[\emptyset]_{x}$ if and only if $x$ is $\textbf{separated}$
+from $U$, i.e. there exists an open neighborhood $V$ of $x$ and
+$U\cap V=\emptyset$.
+\end{itemize}
+\begin{prop}Every open set in $X$ gives rise to a continuous global
+section $s_{U}(x)=(x,[U]_{x})$, conversely, if $s:1\to\Omega$ is
+any continuous global section of $\Omega$ then $s^{-1}([X,X])=\{x\mid s(x)=(x,[X]_{x})\}$
+is open and $s=s_{s^{-1}([X,X])}$. Thus, there is a one to one correspondence
+between the truth values in $\mathbf{Top}(X)$ and the open subsets
+of $X$. \begin{rem}Compare this with $\mathbf{Bn}(X)$, where we
+found that there was a one to one correspondence between truth values
+in $\mathbf{Bn}(S)$ and subsets of $S$. \end{rem} \end{prop}
+
+\begin{ex} Prove this.\end{ex}
+
+\begin{example}
+
+Consider the topology on the finite set $X=\{a,b,c\}$ where the open
+sets are highlighted in red: \hypertarget{topology1}{}
+
+\begin{center}\begin{tikzcd}  &  \textcolor{red}{ \{ a,b,c \} } \\ \textcolor{red}{ \{ a,b \} } \arrow[ur] & \textcolor{red}{ \{ a,c \} } \arrow[u] & \{ b,c \} \arrow[lu] \\ \textcolor{red}{ \{ a \}} \arrow[u] \arrow[ur] & \{ b \} \arrow[ul] \arrow[ur]  & \textcolor{red}{ \{ c \} } \arrow[u] \arrow[lu] \\ & \textcolor{red}{ \emptyset } \arrow[u] \arrow[lu] \arrow[ru] \end{tikzcd}\end{center}
+
+What is the stalk at point $a$? We have two elements:
+\[
+X\sim_{a}\{a,b\}\sim_{a}\{a,c\}\sim_{a}\{a\}
+\]
+\[
+\emptyset\sim_{a}\{c\}
+\]
+
+
+What is the stalk at point $b$? We have three elements: 
+\[
+X\sim_{b}\{a,b\}
+\]
+\[
+\{a\}\sim_{b}\{a,c\}
+\]
+\[
+\emptyset\sim_{b}\{c\}
+\]
+
+
+What is the stalk at point $c$? We have two elements: 
+\[
+X\sim_{c}\{a,c\}\sim_{c}\{c\}
+\]
+\[
+\emptyset\sim_{c}\{a\}\sim_{c}\{a,b\}
+\]
+
+
+So our entire space $\Omega$ consists of 7 elements:
+
+\hfill \break \hfill \break
+
+\begin{center}\begin{tikzpicture} \node (da) at (1,2) {}; \node (da') at (1,4) {}; \node (db) at (3,2) {}; \node (db') at (3,4) {}; \node (dc) at (5,2) {}; \node (dc') at (5,4) {}; \node (a) at (1,1) {$a$}; \node (b) at (3,1) {$b$}; \node(c) at (5,1) {$c$}; \node (a') at (1,5) {$(a,[ \emptyset ]_{a})$}; \node (b') at (3,5) {$(b,[ \emptyset ]_{b})$}; \node (c') at (5,5) {$(c,[ \emptyset ]_{c})$}; \node (b'') at (3,7) {$(b,[ \{ a \} ]_{b})$}; \node (a''') at (1,9) {$(a,[X]_{a})$}; \node (b''') at (3,9) {$(b,[X]_{b})$}; \node (c''') at (5,9) {$(c,[X]_{c})$}; \draw plot [smooth cycle] coordinates  {(0.5,4.5)(5.5,4.5)(5.5,5.5)(0.5,5.5)}; \draw plot [smooth cycle] coordinates  {(0.5,8.5)(5.5,8.5)(5.5,9.5)(0.5,9.5)}; \draw plot [smooth cycle] coordinates  {(0.3,8.5)(2.5,6.5)(3.8,6.5)(3.7,7.5)(1.5,9.5)(0.5,9.5)};  \draw[-{Straight Barb[length=5pt,width=5pt]}] (da') edge[] node[right] {} (da); \draw[-{Straight Barb[length=5pt,width=5pt]}] (db') edge[] node[right] {} (db); \draw[-{Straight Barb[length=5pt,width=5pt]}] (dc') edge[] node[right] {} (dc); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (c') edge[] node[right] {} (c'''); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (b') edge[] node[right] {} (b''); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (b'') edge[] node[right] {} (b'''); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (a') edge[] node[right] {} (a'''); \end{tikzpicture} \end{center}
+
+\hfill \break \hfill \break
+
+Notice that for each point in $x\in\Omega$ there exists an open neighborhood
+$U_{x}$ (not necessarily unique!) of $b$ such that $p:U_{x}\to p(U_{x})$
+is a homeomorphism. In the example above, the three neighborhoods
+we picked out are:
+\[
+[X,X]=\{(a,[X]_{a}),(b,[X]_{b}),(c,[X]_{c})\}
+\]
+\[
+[\emptyset,X]=\{(a,[\emptyset]_{a}),(b,[\emptyset]_{b}),(c,[\emptyset]_{c})\}
+\]
+\[
+[\{a\},\{a,b\}]=\{(a,[X]_{a}),(b,[\{a\}]_{b})\}
+\]
+
+
+Now, you may be wondering what the dotted arrows mean. Well, it turns
+out that there is a partial ordering $\leq$ on each stalk $\Omega_{x}$
+which comes from the partial ordering $\subseteq$ on $\mathbf{O}(X)$:
+
+\begin{center}
+\begin{tabular}{c}
+$[U]_{x}\leq[V]_{x}$ if and only if there is some open set $W$ such
+that $x\in W$ and $U\cap W\subseteq V\cap W$.\tabularnewline
+\end{tabular}
+\par\end{center}
+
+i.e. if and only if the statement ``$U\subseteq V$'' is locally
+true at $x$. We will use this partial ordering to measure ``closeness''. 
+
+\end{example}
+
+Now let's see how the subobject classifier works. The arrow $\top:1\to\Omega$
+is the continuous section $\top:X\to B_{\Omega}$ that has $\top(x)=(x,[X]_{x})$,
+for all $x\in X$. Now suppose we have a monic arrow $k:(A,q)\to(B,p)$
+so that the following diagram commutes:
+
+\begin{center}\begin{tikzcd}[column sep=small]  A \arrow[rr,"k", hookrightarrow] \arrow[dr,"q" swap] && B \arrow[dl, "p"] \\ & X \end{tikzcd}\end{center}
+
+We may think of $A$ as an open subset of $B$. The character $\chi_{k}:(B,p)\to\Omega$
+associated to the monic $k$ is defined as follows: If $b\in B$,
+choose a neighborhood of $U_{b}$ of $b$ on which $p$ restricts
+to a homeomorphism $p:U_{b}\to p(U_{b})$. Then $\chi_{k}(b)=(x,[p(A\cap U_{b})]_{x})$,
+where $p(b)=x.$ Intuitively, the germ of $p(A\cap U_{b})$ at $x$
+represents the set of points in $A$ close to $b$. For example, if
+$b\in A$, we would say that $b$ is as close to $A$ as possible,
+so this should mean 
+\[
+(x,[p(A\cap U_{b})]_{x})=(x,[X]_{x})=\top(x)
+\]
+
+
+which is indeed true since $p(A\cap U_{b})$ is an open neighborhood
+of $x$. On the other hand, if $b$ is separated from $A$, then we
+would say that $b$ is as far away from $A$ as possible, and this
+should mean
+\[
+(x,[p(A\cap U_{b})]_{x})=(x,[\emptyset]_{x})
+\]
+
+
+which again is true. Now in set theory, these are our only two choices;
+either $b\in A$ or $b\notin A$. However now, using the partial ordering
+$\leq$ on the germs over $x$, we can obtain more subtle distinctions.
+Under this partial ordering over a given stalk $\Omega_{x}$, $(x,[X]_{x})$
+is always the largest germ, $(x,[\emptyset]_{x})$ is always the smallest
+germ, and everything else is in between. Thus, the larger the germ$[p(A\cap U_{b})]_{x}$
+is in terms of this ordering, the closer $b$ will be to $A$. 
+
+\begin{example} Continuing on the previous example, how close is
+$b$ to the open set $\{a\}$? Well it's certainly not in $\{a\}$,
+at the same time, it's not separated from $\{a\}$ either; it's somewhere
+in between. Now the open set $\{a\}$ is a subobject of $1$, hence
+there exists a unique map $\chi_{\{a\}}:1\to\Omega$, i.e. a continuous
+global section of $B_{\Omega}$, and indeed $b$ is mapped to the
+germ $(b,[\{a\}]_{b})$.
+
+\end{example}
+
+
+\subsubsection{exponential object}
+
+...
+
+
+\section{$\mathbf{Set^{O(X)^{op}}}$}
+
+
+\subsection{Presheaves and Sheaves}
+
+\begin{defn}$\mathbf{O}(X)$ is the poset category with open subsets
+of $X$ as objects and inclusions as morphisms. \begin{rem}$\mathbf{O}(X)$
+is an example of a complete heyting algebra, or a poset that is cartesian
+closed and with finite sums (finite co-complete).\end{rem}\end{defn}
+
+Recall that a presheaf is just a functor $F$ from a category $\mathbf{C}^{op}$
+to the category $\mathbf{Set}$. Historically however, presheaves
+were first defined on the category $\mathbf{O}(X)^{op}$. 
+
+\begin{defn} Let $X$ be any topological space. A $\mbox{\textbf{presheaf}}$
+$F$ $\textbf{on}$ $X$ assigns to each open set $U$ in $X$ a set,
+$F(X)$, and to every pair of nested open sets $U\subset V\subset X$,
+a restriction map
+\[
+F_{U}^{V}:F(V)\to F(U)
+\]
+
+
+satisfying the basic properties that 
+\[
+F_{U}^{U}=\emph{identity}
+\]
+
+
+and for all $U\subset V\subset W\subset X$, we have
+\[
+F_{U}^{V}\circ F_{V}^{W}=F_{U}^{W}
+\]
+
+
+The elements $F(U)$ are called sections of $F$ over $U$; elements
+of $F(X)$ are called global sections. 
+
+\end{defn}
+
+\begin{ex} Check that this agrees with the functor definition. \end{ex}
+
+Presheaves on a topological space $X$ are top-down constructions;
+we can restrict information from larger to smaller sets. However,
+many objects in mathematics are bottom-up constructions; they are
+defined by locally, which we then piece together to obtain something
+global. Presheaves do not provide the means to deduce global properties
+from the properties we find locally in the open sets of $X$. This
+is where the idea of sheaves come in.
+
+\begin{defn} A $\textbf{sheaf}$ on $X$ is a presheaf $F$ on $X$
+which satisfies the following $\textbf{sheaf axiom:}$:
+\begin{itemize}
+\item If $(U_{i})$ is an open covering of an open set $U$, with $i\in I$
+for some indexing set $I$, and if for each $i$ a section $s_{i}\in F(U_{i})$
+is given such that for each pair $U_{j}$,$U_{k}$$\in(U_{i})$ of
+the covering sets the restrictions of $s_{j}|_{U_{j}\cap U_{k}}=s_{k}|_{U_{j}\cap U_{k}}$,
+then there exists a unique section $s\in F(U)$ such that $s|_{U_{i}}=s_{i}$
+for each $i\in I$. 
+\end{itemize}
+\end{defn}
+
+\begin{defn} $\mathbf{Sh}(X)$ is the full subcategory of $\mathbf{Set}^{\mathbf{O}(X)^{op}}$,
+whose objects are sheaves on $X$ and morphisms being natural transformations.
+\end{defn}
+
+\begin{prop} The sheaf axioms imply that any sheaf has exactly one
+section of the empty set. \end{prop}
+
+\begin{proof}The empty set $\emptyset$ can be written as the union
+of an empty family (that is, the indexing set $I$ is $\emptyset$).
+The condition given for the sheaf property is vacuously true. So there
+must exist a unique section in $F(\emptyset)$. \end{proof}
+
+\begin{ex}Show that the sheaf property can be stated in a more categorical
+way like this: the following diagram is an equalizer:
+
+\begin{center}\begin{tikzcd} F(U) \arrow[r] & \prod _i F(U_i ) \arrow[r, shift left] \arrow[r,shift right] & \prod _{i,j} F(U_i \cap U_j ) \end{tikzcd} \end{center}
+
+\end{ex}
+
+
+\subsubsection{Examples of Sheaves}
+
+\begin{example} Given a topological space $X$, a point $x\in X$,
+and a set $S$, the skyscraper sheaf $skyscr_{x}(S)$ is defined as
+follows: 
+\[
+skyscr_{x}(S)(U)=\begin{cases}
+S & \emph{if x\ensuremath{\in}U}\\
+* & \emph{otherwise}
+\end{cases}
+\]
+
+
+\begin{rem} The skyscraper sheaf $skyscr_{x}(S)$ is the direct image
+of $S$ under the geometric morphism $x:\mathbf{Set}\to\mathbf{Sh}(X)$
+which defines the point of a topos given by $x\in X$.
+
+\end{rem}
+
+\end{example}
+
+\begin{example} Let $X=\{a,b,c\}$ be given the discrete topology
+so that every subset of $X$ is open. Sheaves on $X$ are completely
+determined by their values on the singleton sets. Namely, if $F$
+is a sheaf which takes values $\{a\}\to A$, $\{b\}\to B$, $\{c\}\to C$
+for some sets $A,B,C$, then $F$ will take this diagram: 
+
+\begin{center}\begin{tikzcd}  &   \{ a,b,c \}  \\  \{ a,b \}  \arrow[ur] &  \{ a,c \}  \arrow[u] & \{ b,c \} \arrow[lu] \\  \{ a \} \arrow[u] \arrow[ur] & \{ b \} \arrow[ul] \arrow[ur]  &  \{ c \}  \arrow[u] \arrow[lu] \\ &  \emptyset  \arrow[u] \arrow[lu] \arrow[ru] \end{tikzcd}\end{center}
+
+and turn it into this diagram:
+
+\begin{center}\begin{tikzcd}  &   A \times B \times C  \arrow[dl] \arrow[d] \arrow[dr] \\  A \times B  \arrow[d] \arrow[dr] &  A \times C  \arrow[dl] \arrow[dr] & B \times C \arrow[dl] \arrow[d] \\  A \arrow[dr]  & B \arrow[d]  &  C  \arrow[dl] \\ &  \{ 0 \} \end{tikzcd}\end{center}
+
+\end{example}
+
+\begin{example}
+
+Let $X=\{a,b,c\}$ with the topology given as in example 1.10, where
+the open sets are highlighted in red:
+
+\begin{center}\begin{tikzcd}  &  \textcolor{red}{ \{ a,b,c \} } \\ \textcolor{red}{ \{ a,b \} } \arrow[ur] & \textcolor{red}{ \{ a,c \} } \arrow[u] & \{ b,c \} \arrow[lu] \\ \textcolor{red}{ \{ a \}} \arrow[u] \arrow[ur] & \{ b \} \arrow[ul] \arrow[ur]  & \textcolor{red}{ \{ c \} } \arrow[u] \arrow[lu] \\ & \textcolor{red}{ \emptyset } \arrow[u] \arrow[lu] \arrow[ru] \end{tikzcd}\end{center}
+
+This time a sheaf $F$ on $X$ is completely determined by its values
+on$\{a\}$, $\{c\}$, and $\{a,b\}$. So let's say $F$ takes values
+$\{a\}\to A$, $\{c\}\to C$, and $\{a,b\}\to B$. The sheaf $F$
+will take this diagram: 
+
+\begin{center}\begin{tikzcd}  &   \{ a,b,c \}  \\  \{ a,b \}  \arrow[ur] &  \{ a,c \}  \arrow[u] &  \\  \{ a \} \arrow[u] \arrow[ur] &&  \{ c \}  \arrow[lu] \\ &  \emptyset  \arrow[lu] \arrow[ru] \end{tikzcd}\end{center}
+
+and turn it into this diagram:
+
+\begin{center}\begin{tikzcd}  &  B \times C  \arrow[dl] \arrow[d] \\  B  \arrow[d] &  A \times C  \arrow[dl] \arrow[dr]  \\  A \arrow[dr]  & &  C  \arrow[dl] \\ &  \{ 0 \}  \end{tikzcd}\end{center}
+
+\end{example}
+
+$\textbf{Note:}$ It may seem as if sheaves take colimits to limits.
+This isn't true for all diagrams! However, if our diagram is a collection
+of open subsets that is closed under finite intersections, then will
+take a colimit of this diagram, namely the union of this collection,
+to a limit of the corresponding diagram in $\mathbf{Set}$. 
+
+
+\subsubsection{Presheaves that are not Sheaves}
+
+\begin{example} Let $F$ be a presheaf on the real line $\mathbb{R}$,
+defined as follows:
+\[
+F(U)=\begin{cases}
+\{0,1\} & \emph{if U=\ensuremath{\mathbb{R}}}\\
+\{0\} & otherwise
+\end{cases}
+\]
+
+
+locally, this presheaf is just $\{0\}$, so where did this extra element
+$1$ come from? It can't be a sheaf. It would, however, be a sheaf
+if we got rid of the element $1$.
+
+\end{example}
+
+\begin{example} Let $F$ be the presheaf of continuous bounded functions
+from $\mathbb{R}$ to $\mathbb{R}$. Why is this not a sheaf? Hint:
+Try gluing a bunch of continuous bounded functions to form a continuous
+unbounded function on $\mathbb{R}$. We can turn this thing into a
+sheaf if we adjoin continuous unbounded functions. \end{example}
+
+$\textbf{Note:}$ Notice in the previous two examples we either needed
+to remove elements to turn a presheaf into a sheaf, or we needed to
+adjoin elements to turn a presheaf into a sheaf. This process of removing
+or adjoining elements of a presheaf to obtain a sheaf is known as
+$\textbf{sheafification}$.
+
+
+\subsubsection{Stalks}
+
+In general, if for each $x\in X$, we can find the smallest neighborhood
+containing $x$, say $U_{x}$, we can determine the sheaf completely
+by computing the values of the sheaf on these open sets. The problem
+is that the limit of the diagram which consists of all open neighborhoods
+of $x$ may not exist, i.e. we may not have a smallest open neighborhood.
+However, colimits do exist in $\mathbf{Set}$, and there's nothing
+stopping from looking at colimits in the diagram of $F$-images of
+neighborhoods of $x$. It turns out this is precisely what we need.
+
+\begin{defn} Let $F$ be a presheaf on a topological space $X$.
+For each $x\in X$, the collection $\{F(V)\mid x\in V\}$ of $F$-images
+of neighborhoods of $x$, together with their associated restricting
+maps, forms a diagram in $\mathbf{Set}$. The $\mathbf{stalk}$ of
+$F$ at $x$, denoted $F_{x}$, is defined to be the colimit $\varinjlim _{x \in V} F(V)$
+of this diagram. Explicitly, an equivalence relation $\sim_{x}$ is
+defined on $\cup\{F(V)\mid x\in V\}$: if $s_{i}\in F(V_{i})$ and
+$s_{j}\in F(V_{j})$ (where $V_{i}$ and $V_{j}$ are neighborhoods
+of $x$), we put 
+
+\begin{center}
+\begin{tabular}{cccc}
+$s_{i}\sim_{x}s_{j}$  & if and only if & $F_{k}^{i}(s_{i})=F_{k}^{j}(s_{j})$ & for some $x$-neighborhood $V_{k}\subseteq V_{i}\cap V_{j}$ \tabularnewline
+\end{tabular}
+\par\end{center}
+
+\begin{rem} Thus, $s_{i}\sim_{x}s_{j}$ when they are ``locally
+equal''.\end{rem}
+
+\end{defn}
+
+The elements in $F_{x}$ are called $\textbf{germs}$. This terminology
+was also used when discussed various objects in slice categories.
+Is there a connection? Yes, there is. And it's not just any old connection,
+but in fact an adjunction! Stay tuned for that.
+
+
+\subsection{$Set^{O(X)^{op}}$ as a topos}
+
+Now we discuss the topos aspect to $\mathbf{Set}^{\mathbf{O}(X)^{op}}$ 
+
+
+\subsubsection{terminal object}
+
+Easy exercise.
+
+
+\subsubsection{pullback}
+
+Easy exercise.
+
+
+\subsubsection{subobject classifier}
+
+\begin{defn} Let $X$ be a topological space. Given an object $V\in\mathbf{O}(X)$,
+a $V$-sieve, $S_{V}$, is a collection ${\cal C}$ of open subsets
+of $V$ such that if $V\in C$ and $W$ is an open subset of $U$,
+then $W\in{\cal C}$. \end{defn}
+
+The classifying presheaf in the presheaf category $\mathbf{Set}^{\mathbf{O}(X)^{op}}$
+is defined as follows: $\Omega(V)$ is the set of all $V$-sieves.
+The classifier arrow is a natural transformation $\top:1\to\Omega$,
+which has components $\top_{V}:\{0\}\to\Omega(V)$ given by:
+
+\begin{center}
+\begin{tabular}{ccc}
+ &  & \tabularnewline
+$\top_{V}(0)=\mathbf{O}(V)$ &  & the largest $V$-sieve, i.e. the set of all open subsets of $V$.\tabularnewline
+ &  & \tabularnewline
+\end{tabular}
+\par\end{center}
+
+Given a monic arrow $\tau:F\to G$ of presheaves, with each $\tau_{V}$
+being the inclusion $F(V)\hookrightarrow G(V)$, the character $\chi_{\tau}:G\to\Omega$
+has components given by:
+
+\begin{center}
+\begin{tabular}{c}
+\tabularnewline
+$\chi_{V}(x)=\{U\subseteq V\mid G_{U}^{V}(x)\in F(U)$\tabularnewline
+\tabularnewline
+\end{tabular}
+\par\end{center}
+
+\begin{example} Let $X$ be finite topological space we considered
+\hypertarget{topology1}{earlier}. Let's compute some sieves on it.
+How many sieves are there on $\{a,b,c\}$? There are eight:
+
+\begin{center}
+\begin{tabular}{ccc}
+ &  & \tabularnewline
+$S_{X}^{X}=\{X,\{a,b\},\{a,c\},\{a\},\{c\},\emptyset\}$ &  & generated by $X$\tabularnewline
+ &  & \tabularnewline
+$S_{X}^{\{a,b\},\{a,c\}}=\{\{a,b\},\{a,c\},\{a\},\{c\},\emptyset\}$  &  & generated by $\{a,b\}$ and $\{a,c\}$\tabularnewline
+ &  & \tabularnewline
+$S_{X}^{\{a,c\}}=\{\{a,c\},\{a\},\{c\},\emptyset\}$ &  & generated by $\{a,c\}$\tabularnewline
+ &  & \tabularnewline
+$S_{X}^{\{a,b\}}=\{\{a,b\},\{a\},\emptyset\}$ &  & generated by $\{a,b\}$\tabularnewline
+ &  & \tabularnewline
+$S_{X}^{\{a\},\{c\}}=\{\{a\},\{c\},\emptyset\}$ &  & generated by $\{a\}$ and $\{c\}$\tabularnewline
+ &  & \tabularnewline
+$S_{X}^{\{a\}}=\{\{a\},\emptyset\}$ &  & generated by $\{a\}$\tabularnewline
+ &  & \tabularnewline
+$S_{X}^{\{c\}}=\{\{c,\emptyset\}$ &  & generated by $\{c\}$\tabularnewline
+ &  & \tabularnewline
+$S_{X}^{\emptyset}=\{\emptyset\}$ &  & generated by $\emptyset$ \tabularnewline
+ &  & \tabularnewline
+\end{tabular}
+\par\end{center}
+
+The superscript of $S$ denotes the generators of the sieve, and the
+subscript denotes the object the sieve is on. Is this a sheaf? The
+answer no: The open sets $\{a,c\}$ and $\{a,b\}$ cover $X$, (i.e.
+$X\subseteq\{a,c\}\cup\{a,b\}$). We also have $\{a,c\}\cap\{a,b\}=\{a\}$.
+Let's compute $\Omega(\{a\})$, $\Omega(\{a,c\})$, and $\Omega(\{a,b\})$:
+\[
+\Omega(\{a\})=\{S_{\{a\}}^{\{a\}},S_{\{a\}}^{\emptyset}\}
+\]
+\[
+\Omega(\{a,c\})=\{S_{\{a,c\}}^{\{a,c\}},S_{\{a,c\}}^{\{a\},\{c\}},S_{\{a,c\}}^{\{c\}},S_{\{a,c\}}^{\{a\}},S_{\{a,c\}}^{\emptyset}\}
+\]
+\[
+\Omega(\{a,b\})=\{S_{\{a,b\}}^{\{a,b\}},S_{\{a,b\}}^{\{a\}},S_{\{a,b\}}^{\emptyset}\}
+\]
+
+
+Since $S_{\{a,b\}}^{\{a,b\}}$ is defined on $\{a,b\}$ and restricts
+to $S_{\{a\}}^{\{a\}}$ on $\{a\}$, and $S_{\{a,c\}}^{\{a,c\}},S_{\{a,c\}}^{\{a\},\{c\}},S_{\{a,c\}}^{\{a\}}$
+are all defined on $\{a,c\}$ and restrict to $S_{\{a\}}^{\{a\}}$
+on $\{a\}$ , then if $\Omega$ were a sheaf, we should be able to
+glue these together to form three unique elements in $\Omega(X)$.
+But there are several problems we run into. For one, $S_{\{a,b\}}^{\{a,b\}}$
+and $S_{\{a,c\}}^{\{a,c\}}$ can glue together to form $S_{X}^{\{a,b\},\{a,c\}}$
+or $S_{X}^{X}$, which is not unique. Also, we can't even glue $S_{\{a,b\}}^{\{a,b\}}$
+and $S_{\{a,c\}}^{\{a\},\{c\}}$ together, it doesn't exist. These
+sieves generated by more than one open set are causing us problems.
+If we were to remove them, would we then get a sheaf? Indeed we would.
+
+\end{example}
+
+
+\subsection{$Sh(X)$ as a topos}
+
+Now we discuss the topos structure of $\mathbf{Sh}(X)$ 
+
+
+\subsubsection{terminal object}
+
+Easy exercise.
+
+
+\subsubsection{pullback}
+
+Easy exercise.
+
+
+\subsubsection{subobject classifier}
+
+The classifying sheaf is defined as follows: $\Omega_{j}(U)$ is the
+set of all open subsets of $U$. This is also the same thing as the
+set of all $U$-sieves generated by a single element! The classifier
+arrow is a natural transformation $\top:1\to\Omega$, which has components
+$\top_{U}:\{0\}\to\Omega_{j}(U)$ given by:
+
+\begin{center}
+\begin{tabular}{ccc}
+ &  & \tabularnewline
+$\top_{U}(0)=\mathbf{O}(V)$ &  & the largest $U$-sieve, i.e. the set of all open subsets of $V$.\tabularnewline
+ &  & \tabularnewline
+\end{tabular}
+\par\end{center}
+
+Now, given a monic arrow $\tau:F\to G$ of presheaves, with each $\tau_{U}$
+being the inclusion $F(U)\hookrightarrow G(U)$, the character $\chi_{\tau}:G\to\Omega$
+has components given by:
+
+\begin{center}
+\begin{tabular}{c}
+\tabularnewline
+$(\chi_{\tau})_{U}(x)=\{V\subseteq U\mid G_{V}^{U}(x)\in F(U)$\tabularnewline
+\tabularnewline
+\end{tabular}
+\par\end{center}
+
+\begin{example}
+
+\hypertarget{classifyingsheaf}{}Let $X$ be the finite topological
+space we considered \hyperlink{topology1}{earlier}. $\Omega_{j}(U)$
+is the set of open subsets of $U$. In our case, we have:
+
+\begin{center}
+$\Omega_{j}(\emptyset)=\{\emptyset\}$
+\par\end{center}
+
+\begin{center}
+$\Omega_{j}(\{a\})=\{\{a\},\emptyset\}$
+\par\end{center}
+
+\begin{center}
+$\Omega_{j}(\{c\})=\{\{c\},\emptyset\}$
+\par\end{center}
+
+\begin{center}
+$\Omega_{j}(\{a,b\})=\{\{a,b\},\{a\},\emptyset\}$
+\par\end{center}
+
+\begin{center}
+$\Omega_{j}(\{a,c\})=\{\{a,c\},\{a\},\{c\},\emptyset\}$
+\par\end{center}
+
+\begin{center}
+$\Omega_{j}(X)=\{X,\{a,b\},\{a,c\},\{a\},\{c\},\emptyset\}$
+\par\end{center}
+
+\end{example}
+
+Now we ask, what is the relationship between $\Omega_{j}$ and $\Omega$?
+To answer this, we first need to define two natural transformations
+$j:\Omega\to\Omega$, $e:\Omega_{j}\to\Omega$. 
+
+\begin{center}\begin{tikzcd} V \arrow[from=d, hookrightarrow] && \Omega ( V ) \arrow[r, "j _{ V }"] \arrow[d, " \Omega ^{V} _{U} " swap] & \Omega (V) \arrow[d, "\Omega ^{V} _{U}"] \\ U && \Omega (U) \arrow[r, "j _{U}" swap]  & \Omega (U) \end{tikzcd}\end{center}let
+$e:\Omega_{j}\to\Omega$ be the natural transformation which has components
+$e_{V}(\mathbf{O}(V))\to\Omega(V)$ given by:
+\[
+e_{V}(U)=\mathbf{O}(U)=S_{V}^{U}
+\]
+
+
+So $e$ acts like an inclusion. Using our example above, we have $e_{X}(X)=S_{X}^{X}$,
+$e_{X}(\{a,b\})=S_{X}^{\{a,b\}}$, and so on. Every sieve that is
+generated by a single open set is mapped to, and conversely every
+open set is mapped to a sieve generated by one open set. This gives
+us a one-one correspondence between sieves generated by a single open
+set (also known as $\textbf{principal sieves}$, and open sets. We
+are now ready to state the relationship between $\Omega_{j}$ and
+$\Omega$.
+
+\begin{prop} The following diagram is an equalizer $\mathbf{Set}^{\mathbf{O}(X)^{op}}$:
+
+\begin{center}\begin{tikzcd}  \Omega _j \arrow[r, " e "]  & \Omega \arrow[r, "1 _{ \Omega } ", shift left =1] \arrow[r, "j", shift right = 1, swap] & \Omega \end{tikzcd}\end{center}
+
+\end{prop}
+
+
+\subsection{Sheaves with Algebraic Structure}
+
+\begin{defn} A $\textbf{presheaf \ensuremath{P} of abelian groups}$
+on a space $X$ is defined to be an abelian group object in $\mathbf{Set}^{\mathbf{O}(X)^{op}}$.
+\end{defn}
+
+Thus, a presheaf of abelian groups consists of natural transformations:
+
+``group multiplication'' $m:P\times P\to P$
+
+\begin{center}\begin{tikzcd} V \arrow[from=d, hookrightarrow] && P ( V ) \times P ( V ) \arrow[r, " m_V "] \arrow[d, " P ^{V} _{U} \times P ^{V} _{U} " swap] & P(V) \arrow[d, "P ^{V} _{U}"] \\ U && P ( U ) \times P ( U ) \arrow[r, " m_U " swap]  & P(U) \end{tikzcd}\end{center}
+
+\begin{flushleft}
+An ``inclusion of identity element'' $e:1\to P$: 
+\par\end{flushleft}
+
+\begin{center}\begin{tikzcd} V \arrow[from=d, hookrightarrow] && \{ 0 \} \arrow[r, " e_V "] \arrow[d, " ! " swap] & P(V) \arrow[d, "P ^{V} _{U}"] \\ U && \{ 0 \} \arrow[r, " e_U " swap]  & P(U) \end{tikzcd}\end{center}
+
+\begin{flushleft}
+An ``inverse operation'' $inv:P\to P$:
+\par\end{flushleft}
+
+\begin{center}\begin{tikzcd} V \arrow[from=d, hookrightarrow] && P(V) \arrow[r, " inv_V "] \arrow[d, " P ^V _U " swap] & P(V) \arrow[d, "P ^{V} _{U}"] \\ U && P(U) \arrow[r, " inv_U " swap]  & P(U) \end{tikzcd}\end{center}
+
+
+\section{Functor Categories}
+
+With these examples in mind, we now describe the topos structure of
+$\mathbf{Set^{C}}$, where $\mathbf{C}$ is any small category.
+
+
+\subsubsection{terminal object}
+
+A terminal object in this category is the constant functor $1:\mathbf{C\to Set}$,
+which takes every object $c\in\mathbf{C}$ to the terminal object
+in $\mathbf{Set}$, $\{0\}$, and it takes every morphism $f:c\to c'$
+in $\mathbf{C}$ to the identity morphism $id_{\{0\}}\{0\}\to\{0\}$. 
+
+
+\subsubsection{pullback}
+
+All limits and colimits in $\mathbf{Set}^{\mathbf{C}}$ are defined
+componentwise (hence, pullbacks are defined componentwise in particular).
+So given $\tau:F\to H$ and $\sigma:G\to H$, for each object $c\in\mathbf{C}$,
+form the pullback of:
+
+\begin{center}\begin{tikzcd} Z(c) \arrow[d," \lambda _c " swap] \arrow[r," \mu _c "] & G(c) \arrow[d," \sigma _c "] \\ F(c) \arrow[r," \tau _c " swap] & H(c) \end{tikzcd}\end{center}
+
+in $\mathbf{Set}$ of the components $\tau_{c}$ and $\sigma_{c}$.
+Now, the assignment $c$ to $Z(c)$ for each object $c$ establishes
+a functor $\mathbf{C\to Set}$. Given an arrow $f:c\to c'$ in $\mathbf{C}$,
+we get a unique function $Z(f):Z(c)\to Z(c')$ which comes from the
+cube:
+
+\begin{center}\begin{tikzcd}[row sep=scriptsize, column sep=scriptsize] & Z(c) \arrow[dl," Z(f) " swap] \arrow[rr," \mu _c "] \arrow[dd," \lambda _c " near end, swap] & & G(c) \arrow[dl," G(f) " swap] \arrow[dd, " \sigma _c "] \\ Z(c') \arrow[rr, crossing over, " \mu _{c'} " near end] \arrow[dd," \lambda _{c'} " swap] & & G(c') \\ & F(c) \arrow[dl, " F(f) " near start, swap] \arrow[rr," \tau _c " near start] & & H(c) \arrow[dl, " H(f) " near start] \\ F(c') \arrow[rr, " \tau _{c'} " swap] & & H(c') \arrow[from=uu, crossing over, " \sigma _{c'} " near start]\\ \end{tikzcd}\end{center} 
+
+The $\lambda_{c}$'s and $\mu_{c}$'s are components for the natural
+transformations $\lambda:Z\to F$ and $\mu:Z\to G$ that make the
+following diagram a pullback in $\mathbf{Set^{C}}$:
+
+\begin{center}\begin{tikzcd} Z \arrow[d," \lambda  " swap] \arrow[r," \mu  "] & G \arrow[d," \sigma "] \\ F \arrow[r," \tau " swap] & H \end{tikzcd}\end{center}
+
+Compare this with the arrow category of $\mathbf{Set}$.
+
+
+\subsubsection{subobject classifier}
+
+\begin{defn} A $c$-cosieve is a collection $S_{c}$ of arrows with
+common domain $c$, which is closed under left composition, i.e. if
+$f:c\to c'$ is in $S_{c}$ and $g:c'\to c''$ is any other arrow,
+then $g\circ fc\to c''$ is in $S_{c}$. \begin{rem} Equivalently,
+a $c$-cosieve is a subfunctor of $Hom(c,-)$. Prove this.\end{rem}
+
+\end{defn}
+
+\begin{example}
+
+What do $c$-sieves look like in the poset category $\mathbf{3}$?
+There are three $2$-sieves: $S_{2}=\{0\to2\}$, $S_{2}^{'}=\{0\to2,1\to2\}$,
+and $S_{2}^{''}=\{0\to2,1\to2,2\to2\}$ 
+
+\end{example}
+
+\begin{example}
+
+What do sieves look like in a monoid $M$ (i.e. a category with one
+object $\bullet$)? A sieve $S_{\bullet}$ on the object $\bullet$
+is simply a left ideal in the set of arrows in $M$ . 
+
+\end{example}
+
+Define $\Omega(c)$ to be the set of all $c$-cosieves, and for an
+arrow $f:c\to c'$ in $\mathbf{C}$, let $\Omega(f):\Omega(c)\to\Omega(c')$
+be the function that takes the $c$-sieve $S_{c}$ to the $c'$-sieve
+$\{g:c'\to c''\mid g\circ f\in S_{c}\}$. Notice that if $f\in S_{c}$,
+then $\Omega(f)$ sends $S_{c}$ to Hom$(c,-)$ (compare this with
+$M$-set). Now, define $\top:1\to\Omega$ to be the natural transformation
+that has components $\top_{c}:\{0\}\to\Omega(c)$ given by $\top_{c}(0)=Hom(c,-)$
+(the largest $c$-sieve). To see how $\top$ works, suppose $F\to G$
+is a monic arrow in $\mathbf{Set^{C}}$. We may assume it is an inclusion
+$F(c)\hookrightarrow G(c)$ at each component. Now the character $\chi_{\tau}$
+of $\tau$ is to be a natural transformation with the component $(\chi_{\tau})_{c}$
+a set function from $G(c)$ to $\Omega(c)$. Thus, $(\chi_{\tau})_{c}$
+assigns to each $x\in G(c)$, a $c$-sieve $(\chi_{\tau})_{c}(x)$.
+Now, when is an arrow $f:c\to c'$ in $(\chi_{\tau})_{c}(x)$? Given
+such an $f$, we have a commutative diagram: \begin{center}\begin{tikzcd} F(c) \arrow[d," F(f) " swap] \arrow[r," \tau _c  " hookrightarrow] & G(c) \arrow[d," G(f) "] \\ F(c') \arrow[r," \tau _b " swap, hookrightarrow] & G(c') \end{tikzcd}\end{center}
+
+$f$ is in $(\chi_{\tau})_{c}(x)$ if and only if $G(f)$ maps $x$
+into $F(c')$. Thus, $(\chi_{\tau})_{c}(x)=\{f:c\to c'\mid G(f)(x)\in F(c')\}$.
+More generally, assuming only that $\tau_{c}$ is a function, perhaps
+not an inclusion, we put
+\[
+(\chi_{\tau})_{c}(x)=\{f:c\to c'\mid G(f)(x)\in\tau_{c}(F(c'))\}
+\]
+
+
+
+\subsection{Representable Functors}
+
+Recall, the functor $Hom(c,-):\mathbf{C\to Set}$, which takes an
+object $d\in\mathbf{C}$ to the set of all morphisms from $c$ to
+$d$, and takes a morphism $f:d\to d'$ to a function $Hom(c,f):Hom(c,d)\to Hom(c,d')$,
+sending $g:c\to d$ to $f\circ g:c\to d\to d'$:
+
+\begin{center}\begin{tikzcd} d \arrow[d, "f", swap] && Hom(c,d) \arrow[d, " Hom(c \text{,} f)", swap] & g \arrow[d, mapsto] \\ d' && Hom(c,d')  & f \circ g \end{tikzcd}\end{center}
+
+\begin{example} Let $\mathbf{O}(X)$ be the poset category with open
+sets as objects and inclusions are morphisms. $Hom(U,-)$ is easy
+to describe:
+\[
+Hom(U,V)=\begin{cases}
+0 & \mbox{ if }U\nsubseteq V\\
+1 & \mbox{ if }U\subseteq V
+\end{cases}
+\]
+
+
+and given an inclusion $i:W\hookrightarrow V$
+\[
+Hom(U,i):\{U\hookrightarrow W\}\to\{U\hookrightarrow W\hookrightarrow V\}=\{U\hookrightarrow V\}
+\]
+
+
+This is actually a sheaf, can you see why? 
+
+\end{example}
+
+\begin{lemma}Let $F$ be a functor from a category $\mathbf{C}$
+to $\mathbf{Set}$. The set of natural transformations from Hom$(c,-)$
+to $F$ are in one-to-one correspondence with the elements of $F(c)$,
+i.e.
+\[
+\mbox{Nat}(\mbox{Hom}(c,-),F)\cong F(c)
+\]
+
+
+\end{lemma}
+
+\begin{proof} The idea is that any natural transformation $\tau:Hom(c,-)\to F$
+is completely determined by $\tau_{c}(id_{c})$.
+
+\begin{center}\begin{tikzcd} c \arrow[d, "f", swap] && Hom(c,c) \arrow[r, " \tau _c "] \arrow[d, " Hom(c \text{,} f)", swap] & F(c) \arrow[d, " F(f) "] \\ d && Hom(c,d) \arrow[r, "\tau _{d}", swap]  & F(d) \end{tikzcd}\end{center}
+
+For each $d\in\mathbf{C}$, we must show how $\tau_{d}$ is completely
+determined by$\tau_{c}(id_{c})$. The commutative diagram above tells
+us that $\tau_{d}(f)=F(f)(\tau_{c}(id_{c}))$. So as soon as we assign
+a value to $\tau_{c}(id_{c})$, then $\tau_{d}(f)$ is determined
+for all objects $d$ and morphisms $f:c\to d$.
+
+\end{proof}
+
+
+\part{Sheaves as Etale Spaces}
+
+
+\section{An equivalence of categories}
+
+We start with the main theorem:
+
+\begin{theorem} For any space $X$ there is a pair of adjoint functors
+
+\begin{center} \begin{tikzcd}  \mathbf{Top} / X \arrow[r, " \Gamma ", shift left = 1] & \mathbf{Set}^{O(X)^{op}} \arrow[l, " \varLambda ", shift left=1] \end{tikzcd} \end{center}
+
+where $\Gamma$ assigns to each object in $(B,p)\in\mathbf{Top}/X$,
+the sheaf of all sections $F_{p}$ of $p$, while its left adjoint
+$\varLambda$ assigns to each preasheaf $F$, the etale space $(B_{F},p_{F})$.
+There are natural transformations
+
+\begin{center}
+\begin{tabular}{ccc}
+$\eta_{F}:F\to\Gamma\varLambda F$ &  & $\epsilon_{B}:\varLambda\Gamma B\to B$\tabularnewline
+\end{tabular}
+\par\end{center}
+
+for a presheaf $F$ and an object $(B,p)\in\mathbf{Top}/X$ , which
+are unit and counit making $\varLambda$ a left adjoint for $\Gamma$.
+If $F$ is a sheaf, $\eta_{F}$ is an isomorphism, while if $B$ is
+etale, $\epsilon_{B}$ is an isomorphism.
+
+\end{theorem}
+
+We will 
+
+
+\subsubsection{From $\mathbf{Top}/X$ to $\mathbf{Sh}(X)$ }
+
+We are now ready to discuss the relationship between sheaves and etale
+spaces. Given an object $(B,p)\in\mathbf{Top}/X$, we can associate
+a sheaf $F_{p}$ as follows:
+
+\begin{center}
+$F_{p}(U)=\{s\mid s$ is a section of $p$ defined on $U$$\}$ 
+\par\end{center}
+
+\hfill \break \hfill \break
+
+\begin{tikzpicture} \draw [decorate,decoration={brace,amplitude=10pt},xshift=-4pt,yshift=0pt] (2.5,4) -- (2.5,7.2) node [black,midway,xshift=-1.2cm] (B)  {\LARGE $F_p \text(U) $}; \node (S) at (1,-.3) {\LARGE $X$}; \node (S'') at (3.6,-.3) {\LARGE $U$}; \node (S') at (0.2,7) {\LARGE $B$}; \node (z') at (7,0) {\LARGE $)$}; \node (z) at (3,0) {\LARGE $($}; \node (y) at (5,1) {}; \node (y') at (5,3) {}; \draw plot [smooth cycle] coordinates  {(3.2,7)(4,7.1)(5,6.9)(6,7.1)(6.8,7)(6.8,7)(6,7.1)(5,6.9)(4,7.1)(3.2,7)}; \draw plot [smooth cycle] coordinates  {(3.2,6)(4,5.8)(5.5,6.2)(6.8,6)(6.8,6)(5.5,6.2)(4,5.8)(3.2,6)}; \draw plot [smooth cycle] coordinates  {(3.2,5)(5,4.8)(6.8,5)(6.8,5)(5,4.8)(3.2,5)}; \draw plot [smooth cycle] coordinates  {(3.2,4)(5,4.2)(6.8,4)(6.8,4)(5,4.2)(3.2,4)}; \draw plot [smooth cycle] coordinates  {(1,0)(9,0)(9,0)(1,0)};  \draw plot [smooth cycle] coordinates  {(0,4)(10,4)(10,7.5)(0,7.5)} ;  \draw[-{Straight Barb[length=5pt,width=5pt]}] (y') edge[] node[right] {} (y); \end{tikzpicture} 
+
+\hfill \break \hfill \break
+
+For an inclusion $U\hookrightarrow V$, $F_{pU}^{V}$ is the obvious
+restriction map that assigns to each section $s:V\to B$, its restriction
+$s|_{U}:U\to B$ to $U$. $F_{p}$ is called the $\textbf{sheaf of sections of \ensuremath{p}}$.
+We need to check that this is indeed a sheaf, and not just a presheaf,
+which certainly isn't obvious. 
+
+\begin{prop} $F_{p}$ is a sheaf. \end{prop}
+
+\begin{proof}
+
+Suppose $(U_{i})$ is an open covering of an open set $U$, with $i\in I$
+for some indexing set $I$, and that for each $i$ a local section
+$s_{i}\in F_{p}(U_{i})$ is given such that for each pair $U_{j}$,$U_{k}$$\in(U_{i})$
+of the covering sets the restrictions of $s_{j}|_{U_{j}\cap U_{k}}=s_{k}|_{U_{j}\cap U_{k}}$.
+We need to show that there exists a unique section $s\in F(U)$ such
+that $s|_{U_{i}}=s_{i}$ for each $i\in I$. We can construct a unique
+$s$ like this: if $x\in U$, choose some $U_{i}$ that has $x\in U_{i}$,
+and set $s(x)=s_{i}(x)$. This isn't as obvious as it looks. We need
+to check a few things:
+\begin{itemize}
+\item $\textbf{Why is it well defined?}$
+\end{itemize}
+Whenever you make a construction where you have to choose something,
+you always need to check and see if your construction is well-defined.
+In the construction we just made, we chose an open neighborhood of
+$x$. Now it's easy to see that this choice is irrelevant since we
+could have chosen another open neighborhood $U_{j}$ of $x$, and
+set $s(x)=s_{j}(x)$, and because $s_{i}=s_{j}$ on $U_{i}\cap U_{j}$,
+we'd obtain the same value. This is a basic example of what is called
+a $\textbf{gluing construction}$. In more general contexts, gluing
+constructions will look very similar to what we just did. Namely,
+there will be a pair $(s_{i},U_{i})$, where $(U_{i})$ covers $U$,
+however the equality between $s_{i}$ and $s_{j}$ may be replaced
+with an equivalence, a group action, or maybe something even more
+general.
+\begin{itemize}
+\item $\textbf{Why is \ensuremath{s} continuous?}$
+\end{itemize}
+Because given an open subset$V$ of $B$, $s^{-1}(V)=\bigcup_{i}s_{i}^{-1}(V)$,
+hence $s^{-}(V)$ is open. 
+\begin{itemize}
+\item $\textbf{Why is \ensuremath{s} unique?}$
+\end{itemize}
+The uniqueness of $s$ comes from how we constructed it in the first
+place, for if $t:U\to B$ has $t|U_{i}=s_{i}$ for all $i\in I$,
+then $t=s$. 
+
+\end{proof}
+
+Let $k:(A,q)\to(B,p)$ be an arrow in $\mathbf{Top}/X$. For each
+open set $U$, define $k_{U}:F_{q}(U)\to F_{p}(U)$ to be the function
+that maps a section $s\in F_{q}(U)$ to $k\circ s$. The maps $k_{U}$
+are the components of a natural transformation from $F_{q}\to F_{p}$.
+Thus, we have constructed a functor $\Gamma:\mbox{\ensuremath{\mathbf{Top}}}/X\to\mathbf{Sh}(X)$. 
+
+
+\subsubsection{From $\mathbf{Set^{O(X)^{op}}}$ to $\mathbf{Etale}(X)$}
+
+The functor from $\varLambda:\mathbf{Set}^{\mathbf{O}(X)^{op}}\to\mathbf{Etale}(X)$
+is constructed using the idea of the stalk $F_{x}$ of a presheaf
+$F$ at a given point $x$. We remind the reader that elements in
+the stalk space $F_{x}$ are equivalence classes $[s]_{x}=\{t\mid s\sim_{x}t\}$,
+where the equivalence relation $\sim_{x}$ is defined on $\cup\{F(V)\mid x\in V\}$:
+if $s_{i}\in F(V_{i})$ and $s_{j}\in F(V_{j})$ (where $V_{i}$ and
+$V_{j}$ are neighborhoods of $x$), we put 
+
+\begin{center}
+\begin{tabular}{cccc}
+$s_{i}\sim_{x}s_{j}$  & if and only if & $F_{k}^{i}(s_{i})=F_{k}^{j}(s_{j})$ & for some $x$-neighborhood $V_{k}\subseteq V_{i}\cap V_{j}$ \tabularnewline
+\end{tabular}
+\par\end{center}
+
+We will conveniently write elements in $F_{x}$ like this: $(x,[s]_{x})$.
+Now, suppose $F$ is a presheaf on $X$. We can construct an local
+homeomorphism $p_{F}:B_{F}\to X$ as follows: First set $B_{F}=\bigcup_{x}F_{x}$,
+and let $p_{F}$ be the obvious projection map. For each open subset
+$V$ of $X$ and $s\in F(V)$, let $[s,V]=\{(x,[s]_{x})\mid x\in V\}$.
+The collection of all $[s,V]$ generates a topology on $B_{F}$, making
+$p_{F}$ a local homeomorphism. 
+
+\begin{example} Let $X$ be the finite topological space we considered
+\hyperlink{topology1}{earlier}. We constructed the classifying sheaf
+$\Omega_{j}$ in this \hyperlink{classifyingsheaf}{example}. Let's
+compute the stalk of this sheaf at point $b$. We know that they need
+to consist of equivalence classes like this: $[s]_{b}$, where $s$
+is a section defined on some open set containing $b$. Since every
+element in $\Omega)_{j}(\{a,b\})$ is a restriction of an element
+in $\Omega_{j}(X)$, we can choose representatives of this equivalence
+class in $\Omega_{j}(X)$, so given that
+
+\begin{center}
+$\Omega_{j}(X)=\{X,\{a,b\},\{a,c\},\{a\},\{c\},\emptyset\}$
+\par\end{center}
+
+It's easy to check that we have three elements: 
+\[
+X\sim_{b}\{a,b\}
+\]
+\[
+\{a\}\sim_{b}\{a,c\}
+\]
+\[
+\emptyset\sim_{b}\{c\}
+\]
+
+
+We already compute this earlier though. We also said from earlier
+that the collection of sets $[U,V]$ where $U,V$ are open and $U\subseteq V$
+generate a topology on $B_{\Omega_{j}}$, which is the same thing
+as saying $[s,V]$ generates a topology on $B_{\Omega_{j}}$, where
+$s$ is a section on $V$. Notice that the global sections of our
+classifying sheaf $\Omega_{j}$ are all open subsets of $X$. 
+
+\end{example}
+
+\begin{example} Now let's sheafify the classifying presheaf $\Omega$
+in $\mathbf{Set}^{\mathbf{O}(X)^{op}}$ on $X$. Let's compute the
+stalk of this presheaf at point $b$. We know that they need to consist
+of equivalence classes like this: $[s]_{b}$, where $s$ is a section
+defined on some open set containing $b$. Since every element in $\Omega(\{a,b\})$
+is a restriction of an element in $\Omega(X)$, we can choose representatives
+of this equivalence class in $\Omega(X)$, so given that
+
+\begin{center}
+$\Omega(X)=\{S_{X}^{\{a,b,c\}},S_{X}^{\{a,b\}\{a,c\}},S_{X}^{\{a,c\}},S_{X}^{\{a,b\}},S_{X}^{\{a\}\{c\}},S_{X}^{\{a\}},S_{X}^{\{c\}},S_{X}^{\emptyset}\}$
+\par\end{center}
+
+It's easy to check that we have three elements:
+
+\[
+S_{X}^{\{a,b,c\}}\sim_{b}S_{X}^{\{a,b\}}\sim_{b}S_{X}^{\{a,b\}\{a,c\}}
+\]
+\[
+S_{X}^{\{a\}}\sim_{b}S_{X}^{\{a,c\}}\sim_{b}S_{X}^{\{a\}\{c\}}
+\]
+\[
+S_{X}\sim_{b}S_{X}^{\{c\}}
+\]
+
+
+For example, the reason we have $S_{X}^{\{a,b\}}\sim_{b}S_{X}^{\{a,b\},\{a,c\}}$
+is because they both restrict to $S_{\{a,b\}}^{\{a,b\}}$ on $\{a,b\}$.
+So the elements with two generators restrict to an element with one
+generator on a small enough open set. Indeed, it can easily be shown
+that $S_{X}^{\{U\},\{V\}}\sim_{x}S_{X}^{\{U\cup V\}}$ for two open
+sets $U,V$. So the sheafification of the classifying presheaf is
+``the same thing'' as the sheafification of the classifying sheaf. 
+
+\end{example}
+
+
+\subsubsection{co-unit}
+
+Let $p:B\to X$ be any local homeomorphism, $F_{p}$ its sheaf of
+sections, and $p_{F_{p}}:B_{F_{p}}\to X$ the associated sheaf of
+germs. Define a map $k:B\to B_{F_{p}}$ as follow: If $b\in B$, there
+exist a local section $s$ of $p$ through $b$, defined on an open
+set $V$, i.e. $b\in s(V)$ (we proved this earlier). Let $k(b)=(f(b),[s]_{f(b)})$
+be the germ of $s$ at $f(b)$. The definition of $k(b)$ does not
+depend on which section through $b$ is chosen (we proved this earlier
+too). This gives us the following commutative diagram:
+
+\begin{center}\begin{tikzcd}[column sep=small] B \arrow[dr,"p" swap] \arrow[rr,"k"] && B_{F_{p}} \arrow[dl," p_{F_{p}} "] \\ & X \end{tikzcd}\end{center}
+
+And $k$ is a $\mathbf{Etale}(X)$-arrow from $p$ to $p_{F_{p}}$,
+in fact, it is an iso. 
+
+
+\subsubsection{unit}
+
+Define $\tau_{U}:F(U)\to F_{p_{F}}(U)$ by putting, for $s\in F(U)$,
+$\tau_{U}(s)=s_{U}$, where $s_{U}:U\to A_{F}$ is defined by putting
+$s_{U}(x)=(x,[s]_{x})$ for all $x\in U$...
+
+
+\subsection{Geometric Morphism}
+
+A continuous map of spaces, $f:X\to Y$, will induce functors in both
+directions, forward and backward, on the associated categories of
+sheaves. 
+
+\begin{defn} Given a presheaf $F$ on $X$ and a continuous map $f:X\to Y$,
+the pushforward of $F$ under $f$ is a sheaf $f_{*}F$ on $Y$ is
+defined on open sets $U$ of $Y$ by: 
+\[
+(f_{*}F)(U)=F(f^{-1}U)
+\]
+
+
+Moreover, $f_{*}$ is a functor from $\mathbf{Sh}(X)$ to $\mathbf{Sh}(Y)$.
+Given the natural transformation $\tau$:
+
+\begin{center}\begin{tikzcd} V && F( V ) \arrow[r, "\tau _V "] \arrow[d] & G( V ) \arrow[d, ] \\ U \arrow[u, hookrightarrow] && F( U ) \arrow[r, " \tau _U " swap]  & G( U) \end{tikzcd}\end{center}
+
+$f_{*}$ turns this into:
+
+\begin{center}\begin{tikzcd}[column sep=large] f^{-1}(V) && F( f^{-1}(V) ) \arrow[r, "\tau _{f^{-1}(V)} "] \arrow[d] & G( f^{-1}(V) ) \arrow[d, ] \\ f^{-1}(U) \arrow[u, hookrightarrow] && F( f^{-1}(U) ) \arrow[r, " \tau _{f^{-1}(V)} " swap]  & G( f^{-1}(U) ) \end{tikzcd}\end{center}
+
+\end{defn}
+
+Now that we have defined the direct image of a presheaf $F$ under
+$f$, let's try to define an pullback presheaf $f^{*}$. We could
+try something like this:
+\[
+(f^{*}F)(U)=F(fU)
+\]
+
+
+we run into a problem though: $f(U)$ is not necessarily open. On
+the other hand, given an object in $(B,p)\in\mathbf{Top}/Y$, and
+a continuous map $f:X\to Y$, the pullback functor $f^{*}:\mathbf{Top}/Y\to\mathbf{Top}/X$
+is easy to define. For example, the stalk over $x$ is given by $B_{f(x)}$.
+
+\begin{center}\begin{tikzpicture}[scale=1/2] 
+
+%Nodes
+
+\node[] (u) at (2.8,1.2) {\large $f^{-1}(U)$};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$x$] (y) at (5,1.6) {};
+
+
+\node[] (u') at (22,1.2) {\large $U$};
+\node[] (yy') at (19,4.7) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$f(x)$] (y') at (19,1.6) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$b$] (yyy') at (19,6) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$b'$] (yyyy') at (19,7.5) {};
+\node[circle, fill=black, inner sep=1.5pt, label=below:$b''$] (yyyyy') at (19,9) {};
+ 
+
+
+%Plots
+
+\draw plot [smooth cycle] coordinates  {(1,0)(9,0)(9,2)(5,2.5)(1,2)};   
+  
+
+\draw plot [smooth cycle] coordinates  {(15,0)(23,0)(23,2)(19,2.5)(15,2)};   
+\draw plot [smooth cycle] coordinates {(18.5,5) (19.5,5) (19.5, 10) (18.5,10)}; 
+
+
+%Arrows
+  
+
+\draw[-{Straight Barb[length=5pt,width=5pt]}] (yy') edge[] node[right] {\LARGE $$} (y'); 
+
+\draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (yyy') edge[out=170,in=30] node[above] {$$} (y); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (yyyy') edge[out=170,in=30] node[above] {$$} (y); \draw[-{Straight Barb[length=5pt,width=5pt]}, dashed] (yyyyy') edge[out=170,in=30] node[above] {$$} (y); 
+\draw[-{Straight Barb[length=5pt,width=5pt]}] (y) edge[out=10,in=170] node[above] {$$} (y'); 
+
+\end{tikzpicture}\end{center} 
+
+\begin{defn} A $\textbf{geometric morphism}$ $f:\mathbf{C\to\mathbf{D}}$
+of elementary topoi $\mathbf{C}$ and $\mathbf{D}$, is a pair $(f^{*},f_{*})$
+of functors of the form 
+
+\begin{center} \begin{tikzcd}  \mathbf{C} \arrow[r, " f_{*} ", shift left = 1] & \mathbf{D} \arrow[l, " f^{*} ", shift left=1] \end{tikzcd} \end{center}
+
+such that $f^{*}$ is left exact and left adjoint to $f_{*}$. $f^{*}$
+is called the inverse image part, and $f_{*}$ the direct image part,
+of the geometric morphism. 
+
+\end{defn}
+
+So $f^{*}$ preserves finite limits and arbitrary colimits.
+
+
+\part{Grothendieck Pretopology}
+
+
+\section{Motivation}
+
+The fundamental group $\pi_{1}(X)$ of a space $X$ can be thought
+of as a Galois (automorphism) group Gal$(\hat{X}/X)$, where $\hat{X}$
+is the universal covering space of $X$. 
+
+\begin{defn} \hypertarget{covering map}{}Assume $X$ is connected,
+a continuous map $p:Y\to X$ is call a $\textbf{covering}$ if for
+any $x\in X$, there is an open neighborhood $U$ of $x$ such that
+$p^{-1}(U)$ is a disjoint union of open sets in $Y$, each of which
+is mapped homeomorphically onto $U$ by $p$. More formally, the pullback
+$Y\times_{X}U$ is a coproduct:
+\[
+Y\times_{X}U=U\amalg U\amalg U\cdots
+\]
+The set of homeomorphisms $\alpha:Y\to Y$ over $X$ such that $p\circ\alpha=p$
+forms a group, Aut$(Y/X)$, called the group of covering transformations
+of $p:Y\to X$. \end{defn}
+
+\begin{example} Coverings of $S^{1}$. 
+\begin{itemize}
+\item Define $p_{n}:S^{1}\to S^{1}$ to be the function $p_{n}(z)=z^{n}$
+where $n$ is a positive integer and we view $z$ as a complex number
+with norm $1$. 
+\item Define $p_{\infty}:\mathbb{R}^{1}\to S^{1}$ to be the function $p_{\infty}(x)=(\cos2\pi x,\sin2\pi x)$.
+\end{itemize}
+\end{example}
+
+We now restrict our attention to connected covering spaces, since
+a general covering space is a disjoint union of connected ones.
+
+\begin{defn} A covering $p:Y\to X$ is called $\textbf{Galois}$
+if for each $x\in X$ and each pair of lifts $\tilde{x}$, $\tilde{x}'$
+of $x$ , there is a covering transformation taking $\tilde{x}$ to
+$\tilde{x}'$. For a Galois covering $p:Y\to X$, we call Aut$(Y/X)$
+the Galois group of $Y$ over $X$ and denote it by Gal$(Y/X)$ \end{defn}
+
+Intuitively, a Galois covering is one with maximal symmetry, in analogy
+with Galois extensions, which as splitting fields of polynomials,
+can be considered \textquotedblleft maximally symmetric.\textquotedblright{}
+Recall that the main theorem of Galois theory gives a bijective correspondence
+between intermediate field extensions and subgroups of the Galois
+group. There is a similar version of the main theorem for coverings,
+which relates connected coverings of a given space $X$ and subgroups
+of $\pi_{1}(X)$.
+
+\begin{theorem} The induced map $p_{*}:\pi_{1}(Y,y)\to\pi_{1}(X,x)$
+is injective, and there is a bijection 
+
+\begin{center}
+\begin{tabular}{ccc}
+$\{$connected coverings $p:Y\to X\}$/isom.  & $\cong$ & $\{$subgroups of $\pi_{1}(X,x)\}$/conj. \tabularnewline
+\end{tabular}
+\par\end{center}
+
+with the property that $p:Y\to X$ is a Galois covering if and only
+if $p_{*}(\pi_{1}(Y,y))$ is a normal subgroup of $\pi_{1}(X,x)$.
+In this case, 
+
+\begin{center}
+Gal$(Y/X)\cong\pi_{1}(X,x)/p_{*}(\pi_{1}(Y,y))$. 
+\par\end{center}
+
+\end{theorem}
+
+So the analogy between Galois coverings and Galois extensions clearly
+involves some sort of dualization. Spaces over $X$ are epimorphisms
+to $X$, while extensions of a field $K$ are monomorphisms from $K$.
+In the category of spaces $Y\to X$, the product is the pullback $Y\times_{X}Y'\to X$,
+the coproduct is the disjoint union $Y\amalg Y'\to X$. The category
+of fields however, does not have duals of these operations, but if
+we embed fields in the larger category of commutative rings, we do
+get products and coproducts. The product of any indexed family of
+rings $R_{i}$ is the cartesian product $\prod R_{i}$ with termwise
+ring operations. The coproduct of two rings $R,S$ is the tensor product
+$R\otimes S$. 
+
+\begin{defn} The covering $p:\hat{X}\to X$ which corresponds to
+the identity subgroup of $\pi_{1}(X,x)$ is called the $\textbf{universal covering}$
+of $X$.\end{defn}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline 
+$\textbf{Galois Coverings}$ & $\textbf{Galois Extensions}$\tabularnewline
+\hline 
+\hline 
+Spaces over $X$  & extensions of a field $K$\tabularnewline
+\hline 
+Product given by $Y\times_{X}Y'\to X$ & Product given by $\prod R_{i}$ \tabularnewline
+\hline 
+Coproduct given by $Y\amalg Y'\to X$ & Coproduct given by $R\otimes_{K}R'$ \tabularnewline
+\hline 
+$\pi_{1}(Y,y)$ & $Gal(N/K)$\tabularnewline
+\hline 
+factorizations $Y\to Y'\to X$  & extensions $K\to L\to N$ \tabularnewline
+\hline 
+subgroups of $\pi_{1}(Y,y)$ & subgroups of $Gal(N/K)$\tabularnewline
+\hline 
+$Y\times_{X}U=U\amalg U\amalg U\cdots$ & $L\otimes_{K}N\cong N[x]/(x-\alpha_{1})(x-\alpha_{2})\dots(x-\alpha_{n})$\tabularnewline
+\hline 
+monomorphism $U\to X$ ``splits'' covering space & splitting field $N$ splits extension $K\to L$.\tabularnewline
+\hline 
+ & \tabularnewline
+\hline 
+ & \tabularnewline
+\hline 
+ & \tabularnewline
+\hline 
+ & \tabularnewline
+\hline 
+\end{tabular}
+\par\end{center}
+
+$L\otimes_{K}N\cong N[x]/(x-\alpha_{1})(x-\alpha_{2})\dots(x-\alpha_{n})$
+example: $K=\mathbb{Q}$, $L=\mathbb{Q}(\sqrt[3]{2})$, $N=\mathbb{Q}(\sqrt[3]{2},\zeta_{3})$
+where $\zeta_{3}$ is a nontrivial cube root of unity (for example
+$\zeta_{3}=\exp^{\frac{2\pi i}{3}}$). 
+
+
+\section{Pretopologies}
+
+\begin{defn}A $\emph{pretopology}$ on a category $\mathbf{C}$ is
+an assignment to each object $c\in\mathbf{C}$, a collection $Cov_{\mathbf{C}}(c)$
+of sets of morphisms with codomain $c$, called covers of $c$, such
+that:
+\begin{enumerate}
+\item If $f:c'\to c$ is an isomorphism, then $\{f:c'\to c\}\in Cov_{\mathbf{C}}(c)$.
+\item If $\{f_{i}:c_{i}\to c\}\in Cov_{\mathbf{C}}(c)$, and for each $i$
+we have $\{f_{j}^{i}:c_{j}^{i}\to c_{i}\}\in Cov(c_{i})$, then $\{f_{i}\circ f_{j}^{i}:c_{j}^{i}\to c\}\in Cov_{\mathbf{C}}(c)$. 
+\item If $\{f_{i}:c_{i}\to c\}\in Cov_{\mathbf{C}}(c)$, and $g:c'\to c$,
+then for each $i$, the pullback of $f_{i}$ along $g$ exists, and
+$\{g_{i}:c'\times_{c}c_{i}\to c'\}\in Cov_{\mathbf{C}}(c')$:
+\end{enumerate}
+\begin{center}\begin{tikzcd} c' \times _c c_i \arrow[r] \arrow[d,"g_i " swap] & c_i \arrow[d, "f_i "] \\ c' \arrow[r, "g"] & c \end{tikzcd}\end{center}
+
+The pair $(\mathbf{C},Cov_{\mathbf{C}})$ of the category is called
+a $\emph{site}$.
+
+\end{defn}
+
+\begin{example}$(\mathbf{O}(X),Cov_{\mathbf{O}(X)})$ is a site,
+where for open $U\in\mathbf{O}(X)$, $Cov_{\mathbf{O}(X)}(U)=\{U_{i}\mid U_{i}$
+is open and $\bigcup\limits _{i}U_{i}=U\}$. \end{example}
+
+\begin{example}
+
+Consider the poset category $\mathbf{3}$, which looks like this:
+
+\begin{center}\begin{tikzcd} 0 \arrow[loop above, " id_0 " ] \arrow[r] & 1 \arrow[r] \arrow[loop above, " id_1 "] & 2 \arrow[loop above, "id_2 "]\end{tikzcd}\end{center}
+
+Consider these collections of sets:
+
+
+
+\begin{center}
+\begin{tabular}{c|c}
+$Cov_{\mathbf{3}}(2)$ & $\{$$\{2\to2\}$,$\{1\to2,2\to2\}$$\}$ \tabularnewline
+\hline 
+$Cov_{\mathbf{3}}(1)$ & $\{$$\{1\to1\}$,$\{1\to1,0\to1\}$,$\{0\to1\}$$\}$ \tabularnewline
+\hline 
+$Cov_{\mathbf{3}}(0)$ & $\{$$\{0\to0\}$$\}$ \tabularnewline
+\end{tabular}
+\par\end{center}
+
+Is this a pretopology? No, because these collection of sets fail to
+satisfy the second condition of our definition. We can turn this into
+a pretopology by adding in some sets into $Cov_{\mathbf{3}}(2)$ like
+this:
+
+\begin{center}
+\begin{tabular}{c|c}
+$Cov_{\mathbf{3}}(2)$ & $\{$$\{2\to2\}$,$\{1\to2,2\to2\}$,$\{0\to2,2\to2\}$,$\{0\to2,1\to2,2\to2\}$$\}$ \tabularnewline
+\hline 
+$Cov_{\mathbf{3}}(1)$ & $\{$$\{1\to1\}$,$\{1\to1,0\to1\}$,$\{0\to1\}$$\}$ \tabularnewline
+\hline 
+$Cov_{\mathbf{3}}(0)$ & $\{$$\{0\to0\}$$\}$ \tabularnewline
+\end{tabular}
+\par\end{center}
+
+\end{example}
+
+This is related to multicategories. For example, axiom 2 says add
+in compositions in a multicategory.
+
+
+\section{Sheaves on pretopologies}
+
+Sheaves on a pretopology have a simple description. For each covering
+family $\{f_{i}:c_{i}\to c\}\in Cov_{\mathbf{C}}(c)$, the diagram
+\begin{center}\begin{tikzcd} F(c) \arrow[r] & \prod\limits_{i} F(c_i ) \arrow[r, shift left] \arrow[r,shift right] & \prod\limits_{i,j} F(c_i \prod _c c_j ) \end{tikzcd}\end{center}
+
+must be an equalizer. Here's another way we can describe this. 
+
+\begin{center}
+\begin{tabular}{ccccc}
+ &  &  &  & \tabularnewline
+\begin{tikzcd} c_i \times _c c_j \arrow[d] \arrow[r] & c_j \arrow[d, " f_j "] \\ c_i \arrow[r, " f_i " swap] & c \end{tikzcd} &  &  &  & \begin{tikzcd} F( c_i \times _c c_j ) & F( c_j ) \arrow[l] \\ F( c_i ) \arrow[u] & F(c) \arrow[l,"F( f_i )"] \arrow[u, "F( f_x )" swap] \end{tikzcd}\tabularnewline
+ &  &  &  & \tabularnewline
+\end{tabular}
+\par\end{center}
+
+Given any cover $\{f_{i}:c_{i}\to c\}\in Cov_{\mathbf{C}}(c)$ of
+$c$, and any selection of elements $x_{i}\in F(c_{i})$ that are
+pairwise compatible, i.e. $F_{j}^{i}(c_{i})=F_{i}^{j}(c_{j})$, then
+there is exactly one $x\in F(c)$ such that $F_{i}(c)=s_{i}$.
+
+\begin{example}$(\mathbf{O}(X),Cov_{\mathbf{O}(X)})$ is a site,
+where for open $U\in\mathbf{O}(X)$, $Cov_{\mathbf{O}(X)}(U)=\{U_{i}\mid U_{i}$
+is open and $\bigcup\limits _{i}U_{i}=U\}$. \end{example}
+
+
+\part{Logic}
+
+
+\section{Origins in Algebraic Geometry}
+
+In algebraic geometry, the relation between sets of polynomials and
+their zero sets is given by an antitone Galois connection. Fix a natural
+number $n$ and a field $\mathbb{K}$ and let ${\cal C}$ be the set
+of all subsets of the polynomial ring $\mathbb{K}[x_{1},x_{2},\dots,x_{n}]$
+ordered by inclusion $\subseteq$, and let B be the set of all subsets
+of Kn ordered by inclusion \ensuremath{\subseteq}. If S is a set of
+polynomials, define the variety of zeros as
+
+\begin{defn}
+
+Given a set $S$ of polynomials, define the $\textbf{variety of zeros}$
+${\cal V}(S)$ as the set of common zeros of polynomials in $S$:
+
+\[
+{\cal V}(S)=\{x\in\mathbb{K}^{n}\mid f(x)=0\mbox{ for all }f\in S\}
+\]
+
+
+Given a subset $X$ of $\mathbb{K}[x_{1},x_{2},\dots,x_{n}]$, define
+the $\textbf{ideal of polynomials}$ ${\cal I}(X)$ as the set of
+all polynomials that vanish on $X$:
+\[
+{\cal I}(X)=\{f\in\mathbb{K}[x_{1},x_{2},\dots,x_{n}]\mid f(x)=0\mbox{ for all }x\in X\}
+\]
+
+
+\end{defn}
+
+\begin{prop}
+
+There is an adjunction between lattice of ideals $(\mathbf{I}(R),\subseteq)$
+and the lattice of varieties $(\mathbf{V}(X),\subseteq)^{op}$:
+
+\begin{center} \begin{tikzcd}  (I, \subseteq ) \arrow[r, " \Gamma ", shift left = 1] & \mathbf{Set}^{O(X)^{op}} \arrow[l, " \varLambda ", shift left=1] \end{tikzcd} \end{center}
+
+\end{prop}
+\[
+X={\cal V}({\cal I}(X))\mbox{ and }I\subseteq{\cal I}({\cal V}(I))
+\]
+
+
+Given ideals $I,J\in\mathbf{I}(R)$, we have: 
+
+\[
+{\cal V}(I+J)={\cal V}(I)\cap{\cal V}(J)
+\]
+\[
+{\cal V}(I\otimes J)={\cal V}(I\cap J)={\cal V}(I)\cup{\cal V}(J)
+\]
+
+
+In a noetherian ring we have primary decomposition:
+\[
+I=P_{1}\cap P_{2}\cap\dots\cap P_{k}
+\]
+
+
+The corresponding variety is:
+\[
+V(I)=V(P_{1})\cup V(P_{2})\cup\dots\cup V(P_{k})
+\]
+
+
+Using this adjunction, we can translate geometric concepts to algebraic
+ones, and vice-versa. For example, a variety $X$ is $\textbf{irreducible}$,
+i.e. it can not be written as a union $X=X_{1}\cup X_{2}$ of two
+non-empty proper subvarieties $X_{1},X_{2}$ of $X$, if and only
+if ${\cal I}(X)$ is a prime ideal.
+
+\begin{defn} The $\textbf{radical}$ of and ideal $I$, denoted $\sqrt{I}$
+is:
+\[
+\sqrt{I}=\{f\in R\mid f^{n}\in I\mbox{ for some }n\in\mathbb{N}\}
+\]
+
+
+\end{defn}
+
+
+\section{Lattices}
+
+\begin{defn} A $\textbf{distributive lattice}$ is a lattice $(L,\leq)$
+that satisfies the distributive law, i.e. for all $a,b,c$ in the
+lattice:
+\[
+a\wedge(b\vee c)=(a\wedge b)\vee(a\wedge c)\quad\forall a,b,c\in L
+\]
+
+
+\begin{rem} Notice that every distributive lattice is modular.
+
+\end{rem}
+
+\end{defn}
+
+\begin{defn} An element $y$ in a lattice $(L,\leq)$ is said to
+be a $\textbf{complement}$ of $x$ if:
+\[
+x\vee y=1\mbox{ and }x\wedge y=0
+\]
+
+
+\end{defn}
+
+\begin{defn} A $\textbf{boolean algebra}$ is a distributive lattice
+with the property that every element has a complement. 
+
+\end{defn}
+
+\begin{example} $(\mathbf{P}(X),\subseteq)$ is a complete boolean
+algebra, with set inclusion $\subseteq$ being the partial order,
+set intersection $\cap$ being meet, and set union $\cup$ being join.
+Given a subset $S\subset X$, the lattice complement of $S$ is the
+set complement $S^{c}=X\setminus S=\{x\in X\mid x\notin S\}$. The
+initial object is $\emptyset$. The terminal object is $X$.
+
+\begin{center}\begin{tikzpicture}
+
+\draw [fill=red!30!white] (-4,-4) rectangle (4,4);
+\draw [fill=green!0!white] (330:1.2) circle (2);
+
+
+\node at (3.8,4.5) {\LARGE $X$};
+\node at ( 90:3) {\LARGE $ S^c $}; 
+\node at (330:2) { \LARGE $S$}; 
+\end{tikzpicture}\end{center}
+
+\end{example}
+
+\begin{defn} A $\textbf{modular lattice}$ is a lattice $(L,\leq)$
+that satisfies the self-dual condition:
+\[
+a\leq c\mbox{ implies }a\vee(b\wedge c)=(a\vee b)\wedge c\quad\forall a,b,c\in L
+\]
+
+
+\begin{rem} Notice that every distributive lattice is modular.
+
+\end{rem}
+
+\end{defn}
+
+\begin{example} Smallest example of a non-modular lattice: 
+\[
+a\vee(b\wedge c)=a\vee0=x\neq c=1\wedge c=(a\vee b)\wedge c
+\]
+
+
+\begin{center}\begin{tikzcd} & 1 \\ c \arrow[ur] \\ && b \arrow[uul] \\ a \arrow[uu] \\ & 0 \arrow[ul] \arrow[uur] \end{tikzcd}\end{center}
+
+\end{example}
+
+\begin{defn} Given a commutative ring with identity $R$, let $\mathbf{I}(R)$
+be the set of all ideals in $R$. 
+
+\end{defn}
+
+\begin{example} $(\mathbf{I}(R),\subseteq)$ is a complete modular
+lattice, with ideal inclusion $\subseteq$ being the partial order,
+the sum $+$ of ideals being join, and the $\cap$ intersection of
+ideals being meet. The initial object is $\emptyset$. The terminal
+object is $R$.
+
+\end{example}
+
+\begin{defn} If $A$ is a subset of a lattice $(L,\leq)$, then $z\in L$
+is an $\textbf{upper bound}$ of $A$, denoted $A\leq z$, if $x\leq z$
+whenever $x\in A$. If moreover, $z\leq y$ whenever $A\le y$, then
+$z$ is a $\textbf{least upper bound}$ of $A$.
+
+\end{defn}
+
+\begin{defn} We say that $z$ is the $\textbf{greatest element}$
+of $A$ if $z$ is a least upper bound of $A$ and also a member of
+$A$. Thus, $A$ has a greatest element precisely when one of its
+members is a least upper bound of $A$. 
+
+\end{defn}
+
+\begin{defn} If $(L,\leq)$ is a lattice and $x\in L$, then $y\in L$
+is the $\textbf{pseudo complement}$ of $x$ if and only if $y$ is
+the greatest element of $L$ disjoint from $x$, i.e. greatest element
+of the set: 
+\[
+\{z\in L\mid x\wedge z=0\}
+\]
+
+
+If every member of $L$ has a pseudo complement, $L$ is called a
+$\textbf{pseudo complemented lattice}$.
+
+\end{defn}
+
+\begin{example}
+
+If $M$ is a monoid, then the lattice of left ideals $(L_{M},\subseteq)$
+is a pseudo complemented lattice. Given a left ideal $I\in L_{M}$,
+define $\lnot I=\{m\mid I:m=\emptyset\}$. Then $\lnot I$ is the
+pseudo complement of $I$, since $J\subseteq\lnot I$ if and only
+if $J\cap I=\emptyset$ for all left ideals $J\in L_{M}$. Let's show
+this: First, we show that $\lnot I$ is an ideal. If $m\in\lnot I$,
+then $n\cdot m$ must be in $\lnot I$ too. since if $k\in I:n\cdot m$,
+then $k\cdot(n\cdot m)\in I$, but this means that $(k\cdot n)\cdot m\in I$,
+which is a contradiction. Now we show $\lnot I\cap I=\emptyset$.
+If $m\in\lnot I\cap I$, then $I:m=M$, which is a contradiction.
+Finally, we show that $\lnot I$ is the greatest element of the set
+of all left ideals disjoint from $I$. If $j\in J$ and $J\cap I=\emptyset$,
+then $I:j=\emptyset$ ($J$ swallows everything up!). So $\lnot I$
+contains all left ideals $J$ disjoint from $I$. 
+
+\end{example}
+
+\begin{example} If $X$ is a topological space, then the lattice
+of open sets $(\mathbf{O}(X),\subseteq)$ is a pseudo complemented
+lattice. Even though the set complement $X\setminus U$ is not necessarily
+open, the interior $(X\setminus U)^{\circ},$ i.e. the largest open
+set contained in $X\setminus U$, is. So, $(X\setminus U)^{\circ}$
+is the pseudo complement of $U$ since have $V\subseteq(X\setminus U)^{\circ}$
+if and only if $U\cap V=\emptyset$, for all open $V\in\mathbf{O}(X)$.
+In this case, $(X\setminus U)^{\circ}$ is simply the union of all
+open sets disjoint from $U$. Since arbitrary unions of open sets
+are open, we are done. Notice that this is not the argument we used
+for $(L_{M},\subseteq)$. 
+
+\end{example}
+
+\begin{defn}The notion of pseudo complement can be generalized by
+replacing the initial object $0$ by some other object $y$, to obtain
+the pseudo complement of $x$ $\textbf{relative}$ to $y$. This,
+if it exists, is the greatest element of the set: 
+\[
+\{w\mid x\wedge w\leq y\}
+\]
+
+
+So, the pseudo complement of $x$ relative to $y$ is the greatest
+element $z$ such that $x\wedge z\leq y$. 
+
+\end{defn}
+
+\begin{example} If $S,T\in(\mathbf{P}(X),\subseteq)$, then $S^{c}\cup T$
+is the pseudo complement of $S$ relative to $T$.
+
+\begin{center}\begin{tikzpicture}
+
+\draw [fill=red!30!white] (-4,-4) rectangle (4,4);
+\draw [fill=green!0!white] (330:1.2) circle (2);
+\draw [fill=red!30!white] (210:1.2) circle (2);
+
+\node at (3.8,4.5) {\LARGE $X$};
+\node at ( 90:3) {\LARGE $S^{c} \cup T $}; 
+\node at (210:2) {\LARGE $T$}; 
+\node at (330:2) { \LARGE $S$}; 
+\end{tikzpicture}\end{center}
+
+\end{example}
+
+\begin{example}If $I,J\in(L_{M},\subseteq)$, then the pseudo complement
+of $I$ relative to $J$ is $\{m\mid I:m\subseteq J:m\}$. If $I\subseteq J$,
+then the pseudo complement of $I$ relative to $J$ is $M$. If $I\cap J=\emptyset$,
+then the pseudo complement of $I$ relative to $J$ contains $J$,
+but is disjoint from $I$. 
+
+\end{example}
+
+\begin{example}If $U,V\in(\mathbf{O}(X),\subseteq)$, then the pseudo
+complement of $U$ relative to $V$ is $((X\setminus U)\cup V)^{\circ}$.
+
+\end{example}
+
+\begin{defn} Given a lattice $(L,\leq)$, the pseudo complement of
+$x$ relative to $y$, when it exists, is denoted $x\Rightarrow y$.
+And if $x\Rightarrow y$ exists for every $x,y\in L$, then $L$ is
+called a $\textbf{Heyting Algebra}$. We use the notation $(H,\leq)$
+to denote a Heyting Algebra. We also define $\lnot:H\to H$ by setting
+$\lnot x$ equal to $x\Rightarrow0$.
+
+\end{defn}
+
+\begin{ex} Check that this is the same definition as we gave in the
+other set of notes, i.e. a Heyting Algebra is a poset that has finite
+limits, finite colimits, and is cartesian closed.\end{ex}
+
+\begin{prop} A Heyting Algebra is distributive. 
+
+\end{prop}
+
+
+\section{Propositional Calculus}
+\end{document}

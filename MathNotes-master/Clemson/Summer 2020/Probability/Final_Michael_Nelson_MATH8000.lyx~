@@ -1,0 +1,1122 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Final Exam
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+We first calculate the probability that the target is destroyed after 
+\begin_inset Formula $1$
+\end_inset
+
+ bomb is fired.
+ Let 
+\begin_inset Formula $D_{r}(x_{0},y_{0})$
+\end_inset
+
+ denote the disc centered at 
+\begin_inset Formula $(x_{0},y_{0})$
+\end_inset
+
+ of radius 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\mathrm{P}(\text{target destroyed after }1\text{ bomb fired}) & =\int_{D_{2}(3,2)}f_{X,Y}(x,y|3,2)\mathrm{d}x\mathrm{d}y\\
+ & =\frac{1}{2\pi}\int_{D_{2}(3,2)}e^{-\frac{1}{2}\left((x-3)^{2}+(y-2)^{2}\right)}\mathrm{d}x\mathrm{d}y\\
+ & =\frac{1}{2\pi}\int_{D_{2}(0,0)}e^{-\frac{1}{2}(u^{2}+v^{2})}\mathrm{d}u\mathrm{d}v &  & u=x-3,\quad v=y-2\\
+ & =\frac{1}{2\pi}\int_{0}^{2\pi}\int_{0}^{2}e^{-\frac{1}{2}r^{2}}r\mathrm{d}r\mathrm{d}\theta &  & r=\sqrt{u^{2}+v^{2}},\quad\theta=\tan^{-1}(u/v)\\
+ & =\frac{1}{2\pi}\int_{0}^{2\pi}\left(-e^{-\frac{1}{2}r^{2}}\Big|_{0}^{2}\right)d\theta\\
+ & =\frac{1}{2\pi}\int_{0}^{2\pi}(1-e^{-2})d\theta\\
+ & =1-e^{-2}.
+\end{align*}
+
+\end_inset
+
+Since the point of impact for each bomb is independent, the probability
+ that the target is destroyed after 
+\begin_inset Formula $10$
+\end_inset
+
+ bombs are fired is
+\begin_inset Formula 
+\begin{align*}
+\mathrm{P}(\text{target destroyed after }10\text{ bombs fired}) & =1-\mathrm{P}(\text{target not destroyed after }10\text{ bombs fired})\\
+ & =1-(1-(1-e^{-2}))^{10}\\
+ & =1-e^{-20}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 2 
+\end_layout
+
+\begin_layout Subsection*
+Problem 2.a
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $F_{X,Y}^{\alpha}(x,y)$
+\end_inset
+
+ is symmetric with respect to swapping 
+\begin_inset Formula $X$
+\end_inset
+
+ with 
+\begin_inset Formula $Y$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+ with 
+\begin_inset Formula $y$
+\end_inset
+
+, it suffices to show that the marginal cdf of 
+\begin_inset Formula $Y$
+\end_inset
+
+ is given by 
+\begin_inset Formula $F_{Y}(y)$
+\end_inset
+
+.
+ First note that
+\begin_inset Formula 
+\begin{align*}
+f_{X,Y}^{\alpha}(x,y) & =\partial_{x}\partial_{y}F_{X,Y}^{\alpha}(x,y)\\
+ & =\partial_{x}\partial_{y}\left(F_{X}(x)F_{Y}(y)\left(1+\alpha(1-F_{X}(x))(1-F_{Y}(y))\right)\right)\\
+ & =\partial_{x}\partial_{y}\left(F_{X}(x)F_{Y}(y)+\alpha F_{X}(x)F_{Y}(y)-\alpha F_{X}^{2}(x)F_{Y}(y)-\alpha F_{X}(x)F_{Y}^{2}(y)+\alpha F_{X}^{2}(x)F_{Y}^{2}(y)\right)\\
+ & =\partial_{x}\left(F_{X}(x)f_{Y}(y)+\alpha F_{X}(x)f_{Y}(y)-\alpha F_{X}^{2}(x)f_{Y}(y)-2\alpha F_{X}(x)F_{Y}(y)f_{Y}(y)+2\alpha F_{X}^{2}(x)F_{Y}(y)f_{Y}(y)\right)\\
+ & =f_{X}(x)f_{Y}(y)+\alpha f_{X}(x)f_{Y}(y)-2\alpha F_{X}(x)f_{X}(x)f_{Y}(y)-2\alpha f_{X}(x)F_{Y}(y)f_{Y}(y)+4\alpha F_{X}(x)F_{Y}(y)f_{X}(x)f_{Y}(y)\\
+ & =f_{X}(x)f_{Y}(y)\left(1+\alpha-2\alpha F_{X}(x)-2\alpha F_{Y}(y)+4\alpha F_{X}(x)F_{Y}(y)\right)\\
+ & =f_{X}(x)f_{Y}(y)\left(1+\alpha(1-2F_{X}(x))(1-2F_{Y}(y))\right).
+\end{align*}
+
+\end_inset
+
+Therefore
+\begin_inset Formula 
+\begin{align*}
+f_{Y}^{\alpha}(y) & =\int_{\mathbb{R}}f_{X}(x)f_{Y}(y)\left(1+\alpha(1-2F_{X}(x))(1-2F_{Y}(y))\right)\mathrm{d}x\\
+ & =f_{Y}(y)\int_{\mathbb{R}}f_{X}(x)\left(1+\alpha(1-2F_{X}(x))(1-2F_{Y}(y))\right)\mathrm{d}x\\
+ & =f_{Y}(y)\int_{\mathbb{R}}f_{X}(x)\mathrm{d}x+\alpha(1-2F_{Y}(y))\int_{\mathbb{R}}f_{X}(x)(1-2F_{X}(x))\mathrm{d}x\\
+ & =f_{Y}(y)\cdot F_{X}(x)\Big|_{-\infty}^{\infty}+\alpha(1-2F_{Y}(y))\left(F_{X}(x)\Big|_{-\infty}^{\infty}-F_{X}^{2}(x)\Big|_{-\infty}^{\infty}\right)\\
+ & =f_{Y}(y)\cdot1+\alpha(1-2F_{Y}(y))\left(1-1\right)\\
+ & =f_{Y}(y).
+\end{align*}
+
+\end_inset
+
+It follows that the marginal pdf of 
+\begin_inset Formula $Y$
+\end_inset
+
+ is 
+\begin_inset Formula $f_{Y}(y)$
+\end_inset
+
+, which implies the marginal cdf of 
+\begin_inset Formula $Y$
+\end_inset
+
+ is 
+\begin_inset Formula $F_{Y}(y)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Problem 2.b
+\end_layout
+
+\begin_layout Standard
+The random variables 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ are independent precisely when 
+\begin_inset Formula $\alpha=0$
+\end_inset
+
+.
+ Indeed, they are independent when 
+\begin_inset Formula $\alpha=0$
+\end_inset
+
+ since their joint pdf can be expressed as the product of the marginal pdfs
+ when 
+\begin_inset Formula $\alpha=0$
+\end_inset
+
+, that is, since 
+\begin_inset Formula 
+\begin{equation}
+f_{X,Y}^{\alpha}(x,y)=f_{X}(x)f_{Y}(y)\left(1+\alpha(1-2F_{X}(x))(1-2F_{Y}(y))\right)\label{eq:jointdistofalphaxy}
+\end{equation}
+
+\end_inset
+
+as calculated above, we have in particular
+\begin_inset Formula 
+\[
+f_{X,Y}^{0}(x,y)=f_{X}(x)f_{Y}(y).
+\]
+
+\end_inset
+
+Also if 
+\begin_inset Formula $\alpha\neq0$
+\end_inset
+
+, then 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ are independent if and only if 
+\begin_inset Formula $1+\alpha(1-2F_{X}(x))(1-2F_{Y}(y))=c$
+\end_inset
+
+ where 
+\begin_inset Formula $c$
+\end_inset
+
+ is constant.
+ In other words, 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ are independent if and only if
+\begin_inset Formula 
+\begin{equation}
+(1-2F_{X}(x))(1-2F_{Y}(y))=(c-1)/\alpha.\label{eq:notind}
+\end{equation}
+
+\end_inset
+
+This is impossible however since on the one hand, taking 
+\begin_inset Formula $x\to\infty$
+\end_inset
+
+ and 
+\begin_inset Formula $y\to-\infty$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:notind})
+\end_layout
+
+\end_inset
+
+ gives us 
+\begin_inset Formula $-1=(c-1)/\alpha$
+\end_inset
+
+, and on the other hand taking taking 
+\begin_inset Formula $x\to\infty$
+\end_inset
+
+ and 
+\begin_inset Formula $y\to\infty$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:notind})
+\end_layout
+
+\end_inset
+
+ gives us 
+\begin_inset Formula $1=(c-1)/\alpha$
+\end_inset
+
+, which is a contradiction.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Problem 2.c
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:jointdistofalphaxy})
+\end_layout
+
+\end_inset
+
+ shows that the support of 
+\begin_inset Formula $f_{X,Y}^{\alpha}(x,y)$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathrm{supp}(X)\times\mathrm{supp}(Y)$
+\end_inset
+
+.
+ Thus in this particular case, 
+\begin_inset Formula $\mathrm{supp}(f_{X,Y}^{\alpha})=\mathbb{R}_{>0}^{2}$
+\end_inset
+
+.
+ Using 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:jointdistofalphaxy})
+\end_layout
+
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+f_{X,Y}^{\alpha}(x,y) & =e^{-x}e^{-y}\left(1+\alpha(1-2(1-e^{-x}))(1-2(1-e^{-y}))\right)\\
+ & =e^{-(x+y)}\left(1+\alpha(1-2+2e^{-x}))(1-2+2e^{-y}))\right)\\
+ & =e^{-(x+y)}\left(1+\alpha(-1+2e^{-x}))(-1+2e^{-y}))\right)\\
+ & =e^{-(x+y)}\left(1+\alpha(1-2e^{-x}))(1-2e^{-y}))\right),
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $(x,y)\in\mathbb{R}_{>0}^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Problem 2.d
+\end_layout
+
+\begin_layout Standard
+We have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(XY) & =\int_{0}^{\infty}\int_{0}^{\infty}xye^{-(x+y)}\left(1+\alpha(1-2e^{-x})(1-2e^{-y})\right)\mathrm{d}x\mathrm{d}y\\
+ & =\int_{0}^{\infty}y\int_{0}^{\infty}xe^{-(x+y)}\left(1+\alpha(1-2e^{-x})(1-2e^{-y})\right)\mathrm{d}x\mathrm{d}y\\
+ & =\int_{0}^{\infty}y\left(\int_{0}^{\infty}xe^{-(x+y)}\mathrm{d}x+\alpha(1-2e^{-y})\int_{0}^{\infty}xe^{-(x+y)}(1-2e^{-x})\mathrm{d}x\right)\mathrm{d}y\\
+ & =\int_{0}^{\infty}y\left(\int_{0}^{\infty}xe^{-(x+y)}\mathrm{d}x+\alpha(1-2e^{-y})\left(\int_{0}^{\infty}xe^{-(x+y)}\mathrm{d}x-\int_{0}^{\infty}2xe^{-(2x+y)}\mathrm{d}x\right)\right)\mathrm{d}y\\
+ & =\int_{0}^{\infty}y\left(e^{-y}+\alpha(1-2e^{-y})\left(e^{-y}-\frac{1}{2}e^{-y}\right)\right)\mathrm{d}y\\
+ & =\int_{0}^{\infty}ye^{-y}\mathrm{d}y+\frac{\alpha}{2}\int_{0}^{\infty}y(1-2e^{-y})e^{-y}\mathrm{d}y\\
+ & =1+\frac{\alpha}{4}.
+\end{align*}
+
+\end_inset
+
+Therefore
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Cov}(X,Y) & =\mathrm{E}(XY)-\mathrm{E}(X)\mathrm{E}(Y)\\
+ & =1+\frac{\alpha}{4}-1\cdot1\\
+ & =\frac{\alpha}{4}.
+\end{align*}
+
+\end_inset
+
+It follows that
+\begin_inset Formula 
+\begin{align*}
+\rho_{XY} & =\frac{\mathrm{Cov}(X,Y)}{\sigma_{X}\sigma_{Y}}\\
+ & =\frac{\alpha}{4}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+First note that 
+\begin_inset Formula $\mathrm{supp}\,T=(0,1)$
+\end_inset
+
+.
+ Now let 
+\begin_inset Formula $t\in(0,1)$
+\end_inset
+
+ and let 
+\begin_inset Formula $n\in\mathbb{Z}_{\geq1}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+F_{T|n}(t|n) & =\mathrm{P}(T<t|N=n)\\
+ & =\mathrm{P}(X_{i}<t\text{ for some }1\leq i\leq n)\\
+ & =1-\mathrm{P}(X_{i}\geq t\text{ for all }1\leq i\leq n)\\
+ & =1-(1-t)^{n}.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $f_{T|n}(t|n)=n(1-t)^{n-1}$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\begin{align*}
+f_{T}(t) & =\sum_{n=1}^{\infty}f_{T,N}(t,n)\\
+ & =\sum_{n=1}^{\infty}f_{T|n}(t|n)f_{N}(n)\\
+ & =\sum_{n=1}^{\infty}n(1-t)^{n-1}\frac{c}{n!}\\
+ & =c\sum_{n=1}^{\infty}\frac{(1-t)^{n-1}}{(n-1)!}\\
+ & =c\sum_{m=0}^{\infty}\frac{(1-t)^{m}}{m!}\\
+ & =ce^{1-t}.
+\end{align*}
+
+\end_inset
+
+Thus the expected value of 
+\begin_inset Formula $T$
+\end_inset
+
+ is
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(T) & =\int_{0}^{1}cte^{1-t}\mathrm{d}t\\
+ & =c(e-2)\\
+ & =\frac{e-2}{e-1}.
+\end{align*}
+
+\end_inset
+
+Now we verify this calculation using the law of iterated expectation.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(T) & =\mathrm{E}(\mathrm{E}(T|N))\\
+ & =\sum_{n=1}^{\infty}\mathrm{E}(T|n)f_{N}(n)\\
+ & =\sum_{n=1}^{\infty}\int_{0}^{1}nt(1-t)^{n-1}\mathrm{d}t\frac{c}{n!}\\
+ & =\sum_{n=1}^{\infty}\frac{1}{n+1}\frac{c}{n!}\\
+ & =c\sum_{n=1}^{\infty}\frac{1}{(n+1)!}\\
+ & =c\sum_{m=2}^{\infty}\frac{1}{m!}\\
+ & =c\cdot\left(e-2\right)\\
+ & =\frac{e-2}{e-1},
+\end{align*}
+
+\end_inset
+
+as expected (no pun intended; I'm sure you've heard that before!).
+\end_layout
+
+\begin_layout Section*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+Set 
+\begin_inset Formula $\mathcal{A}=\mathbb{R}_{>0}^{2}$
+\end_inset
+
+ and define 
+\begin_inset Formula $g=(g_{1},g_{2})\colon\mathcal{A}\to\mathbb{R}^{2}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+g_{1}(x_{1},x_{2})=\frac{x_{1}+x_{2}}{2},\qquad\text{and}\qquad g_{2}(x_{1},x_{2})=\frac{-x_{1}+x_{2}}{2}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $(x_{1},x_{2})\in\mathcal{A}$
+\end_inset
+
+.
+ Denote 
+\begin_inset Formula $\mathcal{B}=\mathrm{im}\,g=\{(u,v)\in\mathbb{R}^{2}\mid0\leq|v|<u\}$
+\end_inset
+
+ and denote 
+\begin_inset Formula $U=g_{1}(X_{1},X_{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $V=g_{2}(X_{1},X_{2})$
+\end_inset
+
+.
+ Note that in our notation we have 
+\begin_inset Formula $\overline{X}=U$
+\end_inset
+
+ and 
+\begin_inset Formula $Y=V$
+\end_inset
+
+.
+ Now observe that 
+\begin_inset Formula $g$
+\end_inset
+
+ is a diffeomorphism (it's just a linear transformation) with inverse 
+\begin_inset Formula $h=(h_{1},h_{2})\colon\mathcal{B}\to\mathcal{A}$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\[
+h_{1}(u,v)=u-v\qquad\text{and}\qquad h_{2}(u,v)=u+v
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $(u,v)\in\mathcal{B}$
+\end_inset
+
+.
+ The absolute value of the Jacobian of 
+\begin_inset Formula $h$
+\end_inset
+
+ at 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+|J_{u,v}(h)| & =\left|\begin{pmatrix}1 & -1\\
+1 & 1
+\end{pmatrix}\right|\\
+ & =2.
+\end{align*}
+
+\end_inset
+
+Therefore the joint distribution of 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+f_{U,V}(u,v) & =f_{X,Y}(h(u,v))\cdot\left|J_{u,v}(h)\right|\\
+ & =2f_{X,Y}(u-v,u+v)\\
+ & =2f_{X}(u-v)f_{Y}(u+v)\\
+ & =2e^{-(u-v)}e^{-(u+v)}\\
+ & =2e^{-2u}.
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $(u,v)\in\mathcal{B}$
+\end_inset
+
+.
+ Now note that 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is 
+\emph on
+not 
+\emph default
+a cross product, that is, we do not have 
+\begin_inset Formula $\mathcal{B}=A\times B$
+\end_inset
+
+ for some 
+\begin_inset Formula $A,B\subseteq\mathbb{R}$
+\end_inset
+
+.
+ Indeed, to check membership of 
+\begin_inset Formula $(u,v)\in\mathcal{B}$
+\end_inset
+
+, we must check not only 
+\begin_inset Formula $0<u<\infty$
+\end_inset
+
+ but also 
+\begin_inset Formula $0\leq|v|<u$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ are not independent.
+ 
+\end_layout
+
+\begin_layout Section*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+Set 
+\begin_inset Formula $\mathcal{A}=\mathbb{R}_{>0}^{2}$
+\end_inset
+
+ and define 
+\begin_inset Formula $g=(g_{1},g_{2})\colon\mathcal{A}\to\mathbb{R}^{2}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+g_{1}(x_{1},x_{2})=\frac{x_{1}}{x_{1}+x_{2}},\qquad\text{and}\qquad g_{2}(x_{1},x_{2})=x_{2}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $(x_{1},x_{2})\in\mathcal{A}$
+\end_inset
+
+.
+ Denote 
+\begin_inset Formula $\mathcal{B}=\mathrm{im}\,g=(0,1)\times\mathbb{R}_{>0}$
+\end_inset
+
+ and denote 
+\begin_inset Formula $U=g_{1}(X_{1},X_{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $V=g_{2}(X_{1},X_{2})$
+\end_inset
+
+.
+ Note that in our notation we have 
+\begin_inset Formula $Y=U$
+\end_inset
+
+.
+ Now observe that 
+\begin_inset Formula $g$
+\end_inset
+
+ is a diffeomorphism with inverse 
+\begin_inset Formula $h=(h_{1},h_{2})\colon\mathcal{B}\to\mathcal{A}$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\[
+h_{1}(u,v)=\frac{uv}{1-u}\qquad\text{and}\qquad h_{2}(u,v)=v
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $(u,v)\in\mathcal{B}$
+\end_inset
+
+.
+ The absolute value of the Jacobian of 
+\begin_inset Formula $h$
+\end_inset
+
+ at 
+\begin_inset Formula $(u,v)$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+|J_{u,v}(h)| & =\left|\begin{pmatrix}\frac{v}{(1-u)^{2}} & \frac{u}{1-u}\\
+0 & 1
+\end{pmatrix}\right|\\
+ & =\frac{v}{(1-u)^{2}}.
+\end{align*}
+
+\end_inset
+
+Therefore the joint distribution of 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+f_{U,V}(u,v) & =f_{X_{1},X_{2}}(h(u,v))\cdot\left|J_{u,v}(h)\right|\\
+ & =f_{X_{1}}\left(\frac{uv}{1-u}\right)f_{X_{2}}(v)\frac{v}{(1-u)^{2}}\\
+ & =\frac{1}{\Gamma(\alpha)\beta^{\alpha}}\left(\frac{uv}{1-u}\right)^{\alpha-1}e^{-\frac{1}{\beta}\frac{uv}{1-u}}\frac{1}{\Gamma(\alpha)\beta^{\alpha}}v^{\alpha-1}e^{-\frac{1}{\beta}v}\frac{v}{(1-u)^{2}}\\
+ & =\frac{1}{\Gamma(\alpha)^{2}\beta^{2\alpha}}\frac{u^{\alpha-1}v^{2\alpha-1}}{(1-u)^{\alpha+1}}e^{-\frac{1}{\beta}\left(v+\frac{uv}{1-u}\right)}\\
+ & =\frac{1}{\Gamma(\alpha)^{2}\beta^{2\alpha}}\frac{u^{\alpha-1}v^{2\alpha-1}}{(1-u)^{\alpha+1}}e^{-\frac{v}{\beta(1-u)}}
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $(u,v)\in\mathcal{B}$
+\end_inset
+
+.
+ Therefore the marginal distribution of 
+\begin_inset Formula $U$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+f_{U}(u) & =\int_{0}^{\infty}\frac{1}{\Gamma(\alpha)^{2}\beta^{2\alpha}}\frac{u^{\alpha-1}v^{2\alpha-1}}{(1-u)^{\alpha+1}}e^{-\frac{v}{\beta(1-u)}}\mathrm{d}v\\
+ & =\frac{1}{\Gamma(\alpha)^{2}\beta^{2\alpha}}\frac{u^{\alpha-1}}{(1-u)^{\alpha+1}}\int_{0}^{\infty}v^{2\alpha-1}e^{-\frac{v}{\beta(1-u)}}\mathrm{d}v\\
+ & =\frac{1}{\Gamma(\alpha)^{2}\beta^{2\alpha}}\frac{u^{\alpha-1}}{(1-u)^{\alpha+1}}\Gamma(2\alpha)(\beta(1-u))^{2\alpha} &  & \text{gamma distribution integral}\\
+ & =\frac{\Gamma(2\alpha)}{\Gamma(\alpha)\Gamma(\alpha)}u^{\alpha-1}(1-u)^{\alpha-1}
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $u\in(0,1)$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $U\sim\mathrm{beta}(\alpha,\alpha)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section*
+Problem 6
+\end_layout
+
+\begin_layout Standard
+Since the function 
+\begin_inset Formula $z\mapsto e^{z}$
+\end_inset
+
+ is convex, it follows from Jensen's inequality that
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(X) & =\mathrm{E}(e^{Z})\\
+ & \geq e^{\mathrm{E}(Z)}\\
+ & =1.
+\end{align*}
+
+\end_inset
+
+where inequality is strict unless 
+\begin_inset Formula $\mathrm{P}(Z=0)=1$
+\end_inset
+
+, but since 
+\begin_inset Formula $\mathrm{V}(Z)>0$
+\end_inset
+
+, we cannot have 
+\begin_inset Formula $\mathrm{P}(Z=0)=1$
+\end_inset
+
+ (
+\begin_inset Formula $\mathrm{V}(0)=0\neq\mathrm{V}(Z))$
+\end_inset
+
+, so the inequality is strict.
+ 
+\end_layout
+
+\begin_layout Section*
+Problem 7
+\end_layout
+
+\begin_layout Standard
+First note that 
+\begin_inset Formula $\mathrm{supp}\,Y=\mathbb{Z}_{\geq1}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $n\in\mathbb{Z}_{\geq1}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $i\in\mathbb{Z}_{\geq1}$
+\end_inset
+
+, the probability that 
+\begin_inset Formula $X_{i}|\lambda=0$
+\end_inset
+
+ is 
+\begin_inset Formula $p=e^{-\lambda}$
+\end_inset
+
+.
+ Since the sequence 
+\begin_inset Formula $(X_{i}|\lambda)$
+\end_inset
+
+ of random variables is pairwise independent, we can view 
+\begin_inset Formula $(X_{i}|\lambda)$
+\end_inset
+
+ as a sequence of coin flips, where 
+\begin_inset Formula $X_{i}|\lambda=0$
+\end_inset
+
+ translates to 
+\begin_inset Quotes eld
+\end_inset
+
+the 
+\begin_inset Formula $i$
+\end_inset
+
+th coin lands heads
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Formula $X_{i}|\lambda\neq0$
+\end_inset
+
+ translates to 
+\begin_inset Quotes eld
+\end_inset
+
+the 
+\begin_inset Formula $i$
+\end_inset
+
+th coins lands tails
+\begin_inset Quotes erd
+\end_inset
+
+.
+ In this case, the probability that 
+\begin_inset Formula $Y|\lambda=n$
+\end_inset
+
+ translates to the probability that 
+\begin_inset Quotes eld
+\end_inset
+
+the 
+\begin_inset Formula $n$
+\end_inset
+
+th coin is the first to land heads
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\begin{align*}
+\mathrm{P}(Y=n|\lambda) & =\mathrm{P}(n\text{th coin is first to land heads})\\
+ & =(1-p)^{n-1}p\\
+ & =(1-e^{-\lambda})^{n-1}e^{-\lambda}.
+\end{align*}
+
+\end_inset
+
+Therefore we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{P}(Y=n) & =\frac{1}{\theta}\int_{0}^{\theta}\mathrm{P}(Y=n|\lambda)\mathrm{d}\lambda\\
+ & =\frac{1}{\theta}\int_{0}^{\theta}(1-e^{-\lambda})^{n-1}e^{-\lambda}\mathrm{d}\lambda\\
+ & =\frac{1}{\theta}\int_{0}^{\theta}(1-e^{-\lambda})^{n-1}e^{-\lambda}\mathrm{d}\lambda\\
+ & =\frac{1}{\theta}\left(\frac{(1-e^{-\lambda})^{n}}{n}\Bigg|_{0}^{\theta}\right)\\
+ & =\frac{(1-e^{-\theta})^{n}}{\theta n}.
+\end{align*}
+
+\end_inset
+
+In particular, this implies 
+\begin_inset Formula $Y$
+\end_inset
+
+ has a logarithmic distribution, namely 
+\begin_inset Formula $Y\sim\mathrm{logarithmic}(1-e^{-\theta})$
+\end_inset
+
+.
+ The expectation and variance of logarithmic distributions are well known,
+ but let's calculate them again anyway.
+ The mean is given by
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(Y) & =\sum_{n=1}^{\infty}n\mathrm{P}(Y=n)\\
+ & =\frac{1}{\theta}\sum_{n=1}^{\infty}(1-e^{-\theta})^{n}\\
+ & =\frac{1}{\theta}\frac{1-e^{-\theta}}{1-(1-e^{-\theta})}\\
+ & =\frac{1}{\theta}\frac{1-e^{-\theta}}{e^{-\theta}}\\
+ & =\frac{1}{\theta}(e^{\theta}-1).
+\end{align*}
+
+\end_inset
+
+Similarly, we calculate
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(Y^{2}) & =\sum_{n=1}^{\infty}n^{2}\mathrm{P}(Y=n)\\
+ & =\frac{1}{\theta}\sum_{n=1}^{\infty}n(1-e^{-\theta})^{n}\\
+ & =\frac{1}{\theta}\frac{1-e^{-\theta}}{(1-(1-e^{-\theta}))^{2}}\\
+ & =\frac{1}{\theta}\frac{1-e^{-\theta}}{e^{-2\theta}}\\
+ & =\frac{1}{\theta}e^{\theta}(e^{\theta}-1).
+\end{align*}
+
+\end_inset
+
+Therefore the variance is given by
+\begin_inset Formula 
+\begin{align*}
+\mathrm{V}(Y^{2}) & =\mathrm{E}(Y^{2})-\mathrm{E}(Y)^{2}\\
+ & =\frac{1}{\theta}e^{\theta}(e^{\theta}-1)-\frac{1}{\theta^{2}}(e^{\theta}-1)^{2}\\
+ & =\frac{1}{\theta}(e^{\theta}-1)\left(e^{\theta}-\frac{1}{\theta}(e^{\theta}-1)\right)\\
+ & =\frac{1}{\theta}(e^{\theta}-1)\left(\frac{\theta e^{\theta}-e^{\theta}+1}{\theta}\right)\\
+ & =\frac{1}{\theta^{2}}(e^{\theta}-1)\left(e^{\theta}(\theta-1)+1\right).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,12692 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Graded Modules and Hilbert Functions
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Graded Rings and Graded Modules
+\end_layout
+
+\begin_layout Subsection
+Graded Rings and Graded 
+\begin_inset Formula $K$
+\end_inset
+
+-Algebras
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $H$
+\end_inset
+
+ be an additive semigroup with identity 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ An 
+\begin_inset Formula $H$
+\end_inset
+
+-
+\begin_inset Formula $\textbf{graded ring}$
+\end_inset
+
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ is a ring together with a direct sum decomposition 
+\begin_inset Formula 
+\[
+A=\bigoplus_{h\in H}A_{h},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the 
+\begin_inset Formula $A_{h}$
+\end_inset
+
+ are abelian groups which satisfy the property that if 
+\begin_inset Formula $a_{h_{1}}\in A_{h_{1}}$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{h_{2}}\in A_{h_{2}}$
+\end_inset
+
+, then 
+\begin_inset Formula $a_{h_{1}}a_{h_{2}}\in A_{h_{1}+h_{2}}$
+\end_inset
+
+ (an equivalent way of saying this is 
+\begin_inset Formula $A_{h_{1}}A_{h_{2}}\subseteq A_{h_{1}+h_{2}}$
+\end_inset
+
+).
+ The 
+\begin_inset Formula $A_{h}$
+\end_inset
+
+ are called 
+\series bold
+homogeneous components 
+\series default
+and the elements of 
+\begin_inset Formula $A_{h}$
+\end_inset
+
+ are called 
+\series bold
+homogeneous elements 
+\series default
+of 
+\series bold
+degree 
+\series default
+
+\begin_inset Formula $h$
+\end_inset
+
+.
+ A 
+\series bold
+graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra
+\series default
+ is a 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra which is an 
+\begin_inset Formula $N_{0}$
+\end_inset
+
+-graded ring such that 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ is a 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space for all 
+\begin_inset Formula $i\geq0$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{0}=K$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+We are mostly interested in the case where 
+\begin_inset Formula $H=\mathbb{N}_{0}$
+\end_inset
+
+ or 
+\begin_inset Formula $H=\mathbb{Z}$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbb{N}_{0}:=\mathbb{N}\cup\{0\}$
+\end_inset
+
+.
+ Unless otherwise specified, when we omit 
+\begin_inset Formula $H$
+\end_inset
+
+ and simply say 
+\begin_inset Quotes eld
+\end_inset
+
+let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a graded ring
+\begin_inset Quotes erd
+\end_inset
+
+, we mean 
+\begin_inset Formula $A$
+\end_inset
+
+ is an 
+\begin_inset Formula $N_{0}$
+\end_inset
+
+-graded ring.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $A=\bigoplus_{i\geq0}A_{i}$
+\end_inset
+
+ be an graded ring, then 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+ is a subring of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ This follows since 
+\begin_inset Formula $1\cdot1=1$
+\end_inset
+
+, hence 
+\begin_inset Formula $1\in A_{0}$
+\end_inset
+
+.
+ This makes 
+\begin_inset Formula $A$
+\end_inset
+
+ into a graded 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+-algebra.
+ For a 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra 
+\begin_inset Formula $A$
+\end_inset
+
+, this implies already 
+\begin_inset Formula $K\subset A_{0}$
+\end_inset
+
+, but to be a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra, we require even 
+\begin_inset Formula $K=A_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be any ring, then 
+\begin_inset Formula $A_{0}:=A$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{i}:=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i>0$
+\end_inset
+
+ defines a trivial structure of a graded ring for 
+\begin_inset Formula $A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+One of the most basic examples of a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra is the polynomial ring 
+\begin_inset Formula $A:=K[x,y,z]$
+\end_inset
+
+: Let 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ be the 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space generated by the monomials 
+\begin_inset Formula $x^{\alpha_{1}}y^{\alpha_{2}}z^{\alpha_{3}}\in A$
+\end_inset
+
+ such that 
+\begin_inset Formula $\alpha_{1}+\alpha_{2}+\alpha_{3}=i$
+\end_inset
+
+.
+ We clearly have 
+\begin_inset Formula $A_{i}A_{j}\subseteq A_{i+j}$
+\end_inset
+
+.
+ We also have a direct sum decomposition 
+\begin_inset Formula 
+\[
+A=\bigoplus_{i\ge0}A_{i},
+\]
+
+\end_inset
+
+The first few homogeneous components of 
+\begin_inset Formula $A$
+\end_inset
+
+ start out as
+\begin_inset Formula 
+\begin{align*}
+A_{0} & =K\\
+A_{1} & =Kx+Ky+Kz\\
+A_{2} & =Kx^{2}+Kxy+Kxz+Ky^{2}+Kyz+Kz^{2}\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The next proposition gives us a generalization of this construction.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x_{1},\dots,x_{n}]$
+\end_inset
+
+, 
+\begin_inset Formula $w=(w_{1},\dots,w_{n})$
+\end_inset
+
+ be a vector of positive integers, and let 
+\begin_inset Formula $A_{d}$
+\end_inset
+
+ be the 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space generated by all monomials of the form 
+\begin_inset Formula $x_{1}^{\alpha_{1}}\cdots x_{n}^{\alpha_{n}}$
+\end_inset
+
+ with 
+\begin_inset Formula $w_{1}\alpha_{1}+\cdots+w_{n}\alpha_{n}=d$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A=\oplus_{i\geq0}A_{i}$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We clearly have 
+\begin_inset Formula $A_{0}=K$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $x_{1}^{\alpha_{1}}\cdots x_{n}^{\alpha_{n}}\in A_{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{1}^{\beta_{1}}\cdots x_{n}^{\beta_{n}}\in A_{d'}$
+\end_inset
+
+, then
+\begin_inset Formula 
+\[
+w_{1}(\alpha_{1}+\beta_{1})+\cdots+w_{n}(\alpha_{n}+\beta_{n})=w_{1}\alpha_{1}+w_{1}\beta_{1}\cdots+w_{n}\alpha_{n}+w_{n}\beta_{n}=d+d'
+\]
+
+\end_inset
+
+implies 
+\begin_inset Formula $x_{1}^{\alpha_{1}}\cdots x_{n}^{\alpha_{n}}\cdot x_{1}^{\beta_{1}}\cdots x_{n}^{\beta_{n}}\in A_{d+d'}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Note that for each 
+\begin_inset Formula $i$
+\end_inset
+
+ we have 
+\begin_inset Formula $x_{i}\in A_{w_{i}}$
+\end_inset
+
+.
+ The elements of 
+\begin_inset Formula $A_{d}$
+\end_inset
+
+ are called 
+\series bold
+quasihomogeneous 
+\series default
+or 
+\series bold
+weighted homogeneous 
+\series default
+polynomials of 
+\series bold
+weighted degree 
+\series default
+
+\begin_inset Formula $d$
+\end_inset
+
+ with respect to the weights 
+\begin_inset Formula $w_{1},\dots,w_{n}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $w_{1}=\cdots=w_{n}=1$
+\end_inset
+
+, we obtain the usual notion of homogeneous polynomials.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For example, let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the polynomial ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+.
+ There is a direct sum decomposition 
+\begin_inset Formula 
+\[
+A=\bigoplus_{0\le i}A_{i},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ is 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space generated by the monomials 
+\begin_inset Formula $x^{\alpha_{1}}y^{\alpha_{2}}z^{\alpha_{3}}\in A$
+\end_inset
+
+ where 
+\begin_inset Formula $\alpha_{1}+2\alpha_{2}+3\alpha_{3}=i$
+\end_inset
+
+.
+ This gives 
+\begin_inset Formula $A$
+\end_inset
+
+ the structure of a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra with respect to the weights 
+\begin_inset Formula $w=(1,2,3)$
+\end_inset
+
+.
+ The homogeneous components of 
+\begin_inset Formula $A$
+\end_inset
+
+ start out as
+\begin_inset Formula 
+\begin{align*}
+A_{0} & =K\\
+A_{1} & =Kx\\
+A_{2} & =Kx^{2}+Ky\\
+A_{3} & =Kx^{3}+Kxy+Kz\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Graded Modules
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=\bigoplus_{i\geq0}A_{i}$
+\end_inset
+
+ be a graded ring.
+ An 
+\begin_inset Formula $A$
+\end_inset
+
+-module 
+\begin_inset Formula $M$
+\end_inset
+
+, together with a direct sum decomposition 
+\begin_inset Formula $M=\bigoplus_{i\in\mathbb{Z}}M_{i}$
+\end_inset
+
+ into abelian groups is called a 
+\series bold
+graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module 
+\series default
+if 
+\begin_inset Formula $A_{i}M_{j}\subset M_{i+j}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\geq0$
+\end_inset
+
+ and 
+\begin_inset Formula $j\in\mathbb{Z}$
+\end_inset
+
+.
+ The elements of 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ are called 
+\series bold
+homogeneous 
+\series default
+of 
+\series bold
+degree 
+\series default
+
+\begin_inset Formula $i$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $m=\sum_{i}m_{i}$
+\end_inset
+
+, with 
+\begin_inset Formula $m_{i}\in M_{i}$
+\end_inset
+
+, then 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+ is called the 
+\series bold
+homogeneous part 
+\series default
+of 
+\series bold
+degree 
+\series default
+
+\begin_inset Formula $i$
+\end_inset
+
+ of 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Again, we can easily generalize this construction to 
+\begin_inset Formula $H$
+\end_inset
+
+-graded modules, but for our purposes, we are mainly interested in 
+\begin_inset Formula $H=\mathbb{Z}$
+\end_inset
+
+ or 
+\begin_inset Formula $H=\mathbb{N}_{0}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=\bigoplus_{i\geq0}A_{i}$
+\end_inset
+
+ be a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra and consider the free module 
+\begin_inset Formula $A^{m}=\bigoplus_{i=1}^{m}Ae_{i}$
+\end_inset
+
+ where 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ denotes the standard basis element in 
+\begin_inset Formula $A^{m}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $k=(k_{1},\dots,k_{m})\in\mathbb{Z}^{m}$
+\end_inset
+
+, define 
+\begin_inset Formula $\mbox{deg}(e_{i}):=k_{i}$
+\end_inset
+
+, and let 
+\begin_inset Formula $M_{k}$
+\end_inset
+
+ be the 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+-module generated by all 
+\begin_inset Formula $fe_{i}$
+\end_inset
+
+ with 
+\begin_inset Formula $f\in A_{k-k_{i}}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A^{m}=\bigoplus_{k\in\mathbb{Z}}M_{k}$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{gradedmoduleex}
+\end_layout
+
+\end_inset
+
+ Continuing 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Example~(
+\backslash
+ref{gradedringex})
+\end_layout
+
+\end_inset
+
+, let 
+\begin_inset Formula $M$
+\end_inset
+
+ be the graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module 
+\begin_inset Formula $A^{2}$
+\end_inset
+
+ with weights 
+\begin_inset Formula $k=(1,2)$
+\end_inset
+
+.
+ The homogeneous components of 
+\begin_inset Formula $M$
+\end_inset
+
+ start out as
+\begin_inset Formula 
+\begin{align*}
+ & \vdots\\
+M_{0} & =0\\
+M_{1} & =Ke_{1}\\
+M_{2} & =Kxe_{1}+Ke_{2}\\
+M_{3} & =Kx^{2}e_{1}+Kye_{1}+Kxe_{2}\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $M=\bigoplus_{i\in\mathbb{Z}}M_{i}$
+\end_inset
+
+ be a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module and define 
+\begin_inset Formula $M(d):=\bigoplus_{i\in\mathbb{Z}}M(d)_{i}$
+\end_inset
+
+ with 
+\begin_inset Formula $M(d)_{i}:=M_{i+d}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $M(d)$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module, especially 
+\begin_inset Formula $A(d)$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ 
+\begin_inset Formula $M(d)$
+\end_inset
+
+ is called the 
+\begin_inset Formula $d$
+\end_inset
+
+'
+\series bold
+th
+\series default
+ 
+\series bold
+twist 
+\series default
+or the 
+\begin_inset Formula $d$
+\end_inset
+
+'
+\series bold
+th shift 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ The module 
+\begin_inset Formula $M$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Example~(
+\backslash
+ref{gradedmoduleex})
+\end_layout
+
+\end_inset
+
+ is isomorphic to 
+\begin_inset Formula $A(-1)\oplus A(-2)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{gradedsubmodule}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $M=\bigoplus_{i\in\mathbb{Z}}M_{i}$
+\end_inset
+
+ be a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module and 
+\begin_inset Formula $N\subset M$
+\end_inset
+
+ a submodule.
+ The following conditions are equivalent:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $N$
+\end_inset
+
+ is graded with the induced grading, that is 
+\begin_inset Formula $N=\bigoplus_{i\in\mathbb{Z}}(M_{i}\cap N)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $N$
+\end_inset
+
+ is generated by homogeneous elements.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $m=\sum m_{i}$
+\end_inset
+
+ with 
+\begin_inset Formula $m_{i}\in M_{i}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $m\in N$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $m_{i}\in N$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ A submodule 
+\begin_inset Formula $N\subset M$
+\end_inset
+
+ satisfying the equivalent conditions of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{gradedsubmodule})
+\end_layout
+
+\end_inset
+
+ is called a 
+\series bold
+graded 
+\series default
+(or 
+\series bold
+homogeneous
+\series default
+) submodule.
+ A graded submodule of a graded ring is called a 
+\series bold
+graded 
+\series default
+(or 
+\series bold
+homogeneous
+\series default
+) ideal.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=\bigoplus_{i\geq0}A_{i}$
+\end_inset
+
+ be a graded ring, and let 
+\begin_inset Formula $I\subset A$
+\end_inset
+
+ be a homogeneous ideal.
+ Then the quotient 
+\begin_inset Formula $A/I$
+\end_inset
+
+ has an induced structure as a graded ring: 
+\begin_inset Formula $A/I=\bigoplus_{i\geq0}(A_{i}+I)/I\cong\bigoplus_{i\geq0}A_{i}/(I\cap A_{i})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y]$
+\end_inset
+
+ and 
+\begin_inset Formula $I=\langle xy+y^{2},x^{3}\rangle$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal, and therefore is graded with the induced grading
+ 
+\begin_inset Formula $I=\bigoplus_{i\in\mathbb{Z}}(A_{i}\cap I)$
+\end_inset
+
+.
+ Before we write down the first few homogeneous components of 
+\begin_inset Formula $I$
+\end_inset
+
+, we first use Singular to compute a Gröbner basis of 
+\begin_inset Formula $G$
+\end_inset
+
+ of 
+\begin_inset Formula $I$
+\end_inset
+
+ with respect to graded reverse lex order.
+ We obtain 
+\begin_inset Formula $G=\{f_{1},f_{2},f_{3}\}$
+\end_inset
+
+.
+ where 
+\begin_inset Formula $f_{1}=xy+y^{2}$
+\end_inset
+
+, 
+\begin_inset Formula $f_{2}=x^{3}$
+\end_inset
+
+, and 
+\begin_inset Formula $f_{3}=y^{4}$
+\end_inset
+
+.
+ Now we write the first few homogeneous components of 
+\begin_inset Formula $I$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+I_{0} & =0\\
+I_{1} & =0\\
+I_{2} & =Kf_{1}\\
+I_{3} & =Kxf_{1}+Kyf_{1}+Kf_{2}\\
+I_{4} & =Kx^{2}f_{1}+Kxyf_{1}+Ky^{2}f_{1}+Kxf_{2}+Kyf_{2}\\
+I_{5} & =A_{5}\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The quotient 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is also graded.
+ Using the Gröbner basis we just calculated, we see that the homogeneous
+ components of the quotient start out as
+\begin_inset Formula 
+\begin{align*}
+(A/I)_{0} & =K\cdot\overline{1}\\
+(A/I)_{1} & =K\overline{x}+K\overline{y}\\
+(A/I)_{2} & =K\overline{x}^{2}+K\overline{y}^{2}\\
+(A/I)_{3} & =K\overline{y}^{3}\\
+(A/I)_{4} & =0\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $S=K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ and 
+\begin_inset Formula $I$
+\end_inset
+
+ be a homogeneous ideal in 
+\begin_inset Formula $S$
+\end_inset
+
+, so 
+\begin_inset Formula $S/I$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra.
+ Define 
+\begin_inset Formula $S_{I}:=\text{Span}_{K}(x^{\alpha}\mid x^{\alpha}\notin\langle\text{LT}(I)\rangle)$
+\end_inset
+
+.
+ There is an obvious decompostion of 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ into homogeneous pieces 
+\begin_inset Formula $(S_{I})_{i}$
+\end_inset
+
+, where 
+\begin_inset Formula $(S_{I})_{i}=\text{Span}_{K}(x^{\alpha}\mid x^{\alpha}\notin\langle\text{LT}(I)\rangle\text{ and }|\alpha|=i)$
+\end_inset
+
+.
+ In fact, 
+\begin_inset Formula $S/I$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ are isomorphic as graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebras.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To see this, let 
+\begin_inset Formula $G=\{g_{1},g_{2}\dots,g_{r}\}$
+\end_inset
+
+ be the reduced Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+ with respect to a fixed monomial ordering.
+ Recall that 
+\begin_inset Formula $f\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ can be written in the form 
+\begin_inset Formula $f=g+r$
+\end_inset
+
+, where 
+\begin_inset Formula $g\in I$
+\end_inset
+
+ and no term of 
+\begin_inset Formula $r$
+\end_inset
+
+ is divisible by any element of 
+\begin_inset Formula $\text{LT}(I),$
+\end_inset
+
+ and, moreover, 
+\begin_inset Formula $g$
+\end_inset
+
+ and 
+\begin_inset Formula $r$
+\end_inset
+
+ are uniquely determined.
+ We use the notation 
+\begin_inset Formula $f^{G}:=r$
+\end_inset
+
+ and call this the 
+\series bold
+normal form of
+\series default
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ 
+\series bold
+with respect to 
+\begin_inset Formula $I$
+\end_inset
+
+ 
+\series default
+(or simply the 
+\series bold
+normal form of 
+\begin_inset Formula $f$
+\end_inset
+
+ 
+\series default
+if the there is no confusion of the ideal 
+\begin_inset Formula $I$
+\end_inset
+
+).
+ It follows from uniqueness of 
+\begin_inset Formula $f^{G}$
+\end_inset
+
+ and 
+\begin_inset Formula $f-f^{G}$
+\end_inset
+
+ that taking the normal form of a polynomial is a 
+\begin_inset Formula $K$
+\end_inset
+
+-linear map:
+\begin_inset Formula 
+\begin{equation}
+c_{1}f_{1}^{G}+c_{2}f_{2}^{G}=(c_{1}f_{1}+c_{2}f_{2})^{G}\qquad\text{for all }c_{1},c_{2}\in K\text{ and }f_{1},f_{2}\in S.\label{eq:Klinearity}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The isomorphism from 
+\begin_inset Formula $S/I$
+\end_inset
+
+ to 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ is given by mapping 
+\begin_inset Formula $\overline{f}\in(S/I)$
+\end_inset
+
+ to 
+\begin_inset Formula $f^{G}\in S_{I}$
+\end_inset
+
+, where 
+\begin_inset Formula $K$
+\end_inset
+
+-linearity follows from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:Klinearity})
+\end_layout
+
+\end_inset
+
+.
+ The inverse to this isomorphism is given by mapping 
+\begin_inset Formula $f\in S_{I}$
+\end_inset
+
+ to 
+\begin_inset Formula $\overline{f}\in S/I$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Using this isomorphism, we can carry multiplication from 
+\begin_inset Formula $S/I$
+\end_inset
+
+ over to 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ to turn 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ into a 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra: For 
+\begin_inset Formula $f_{1},f_{2}\in S_{I}$
+\end_inset
+
+, we define multiplication as
+\begin_inset Formula 
+\[
+f_{1}\cdot f_{2}=(f_{1}f_{2})^{G}.
+\]
+
+\end_inset
+
+Bilinearity of 
+\begin_inset Formula $\cdot$
+\end_inset
+
+ follows from bilinearity of multiplication and linearity of 
+\begin_inset Formula $-^{G}$
+\end_inset
+
+.
+ Also, 
+\begin_inset Formula $-^{G}$
+\end_inset
+
+ preserves homogeneity, and so 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ is isomorphic to 
+\begin_inset Formula $S/I$
+\end_inset
+
+ as a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y,z]$
+\end_inset
+
+ and 
+\begin_inset Formula $I=\langle y^{3}-z^{2},x^{3}-z\rangle$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $I$
+\end_inset
+
+ is homogeneous if we consider 
+\begin_inset Formula $A$
+\end_inset
+
+ as a graded ring with respect to the weights 
+\begin_inset Formula $w=(1,2,3)$
+\end_inset
+
+.
+ Next let 
+\begin_inset Formula $M=\langle(y^{3}-z^{2})e_{1}+(x^{3}-z)e_{2},x^{3}e_{1}+e_{2}\rangle$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $M$
+\end_inset
+
+ is a homogeneous submodule of 
+\begin_inset Formula $A^{2}$
+\end_inset
+
+ if we consider 
+\begin_inset Formula $A^{2}$
+\end_inset
+
+ as a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module with respect to weights 
+\begin_inset Formula $k=(0,3)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example1}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y,z]$
+\end_inset
+
+ and 
+\begin_inset Formula $I=\langle y^{5}-z^{2},x^{3}-z,x^{6}-y^{5}\rangle$
+\end_inset
+
+.
+ Can we give 
+\begin_inset Formula $A$
+\end_inset
+
+ a grading so that 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal? Yes.
+ To find a grading for 
+\begin_inset Formula $A$
+\end_inset
+
+ such that 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal, we need to solve the following system of equations
+\begin_inset Formula 
+\begin{align*}
+5w_{2}-2w_{3} & =0\\
+3w_{1}-w_{3} & =0\\
+6w_{1}-5w_{2} & =0
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $w_{1},w_{2},w_{3}\in\mathbb{Z}$
+\end_inset
+
+.
+ A solution to this is given by 
+\begin_inset Formula $w_{1}=5$
+\end_inset
+
+, 
+\begin_inset Formula $w_{2}=6$
+\end_inset
+
+, and 
+\begin_inset Formula $w_{3}=15$
+\end_inset
+
+.
+ On the other hand, 
+\begin_inset Formula $J=\langle y^{5}-z^{2},x^{3}-z,x^{7}-y^{5}\rangle$
+\end_inset
+
+ cannot be made into a homogeneous ideal with respect to some grading since
+ 
+\begin_inset Formula 
+\[
+\left|\begin{pmatrix}0 & 5 & -2\\
+3 & 0 & -1\\
+7 & -5 & 0
+\end{pmatrix}\right|=-5\neq0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=\bigoplus_{i\geq0}A_{i}$
+\end_inset
+
+ be a graded ring and 
+\begin_inset Formula $M=\bigoplus_{i\in\mathbb{Z}}M_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $N=\bigoplus_{i\in\mathbb{Z}}N_{i}$
+\end_inset
+
+ be graded 
+\begin_inset Formula $A$
+\end_inset
+
+-modules.
+ A homomorphism 
+\begin_inset Formula $\varphi:M\to N$
+\end_inset
+
+ is called 
+\series bold
+homogeneous 
+\series default
+(or 
+\series bold
+graded
+\series default
+) of degree 
+\begin_inset Formula $d$
+\end_inset
+
+ if 
+\begin_inset Formula $\varphi(M_{i})\subset N_{i+d}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is homogeneous of degree zero we call 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ just 
+\series bold
+homogeneous
+\series default
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let be the graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra 
+\begin_inset Formula $K[x,y,z,t]$
+\end_inset
+
+ with respect to the weights 
+\begin_inset Formula $w=(1,1,1,1)$
+\end_inset
+
+.
+ Then the matrix
+\begin_inset Formula 
+\[
+\varphi=\begin{pmatrix}x+y+z & w^{2}-x^{2} & x^{3}\\
+1 & x & xy+z^{2}
+\end{pmatrix}
+\]
+
+\end_inset
+
+defines a homomorphism 
+\begin_inset Formula $\varphi:A(-1)\oplus A(-2)\oplus A(-3)\to A\oplus A(-1)$
+\end_inset
+
+ which is graded of degree zero.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a ring and let 
+\begin_inset Formula $Q$
+\end_inset
+
+ be an ideal in 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The 
+\series bold
+associated graded ring of 
+\begin_inset Formula $A$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $Q$
+\end_inset
+
+ 
+\series default
+is 
+\begin_inset Formula 
+\[
+\mbox{Gr}_{Q}(A)=\bigoplus_{i=0}^{\infty}Q^{i}/Q^{i+1}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The multiplication in 
+\begin_inset Formula $\mbox{Gr}_{Q}(A)$
+\end_inset
+
+ is induced by the multiplication 
+\begin_inset Formula $Q^{i}\times Q^{j}\to Q^{i+j}$
+\end_inset
+
+, and 
+\begin_inset Formula $\mbox{Gr}_{Q}(A)$
+\end_inset
+
+ is a graded ring with 
+\begin_inset Formula $\mbox{Gr}_{Q}(A)_{0}=A/Q$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $M$
+\end_inset
+
+ is an 
+\begin_inset Formula $A$
+\end_inset
+
+-module, one similarly constructs the 
+\series bold
+associated graded module 
+\series default
+
+\begin_inset Formula 
+\[
+\mbox{Gr}_{Q}(M)=\bigoplus_{i=0}^{\infty}Q^{i}M/Q^{i+1}M.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is straightforward to verify that 
+\begin_inset Formula $\mbox{Gr}_{Q}(M)$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $\mbox{Gr}_{Q}(A)$
+\end_inset
+
+-module.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y,z]$
+\end_inset
+
+ and let 
+\begin_inset Formula $Q=\langle x^{2},xy\rangle$
+\end_inset
+
+.
+ We want to compute 
+\begin_inset Formula $\mbox{Gr}_{Q}(A)$
+\end_inset
+
+.
+ An easy computation shows that 
+\begin_inset Formula $Q^{2}=\langle x^{4},x^{3}y,x^{2}y^{2}\rangle$
+\end_inset
+
+.
+ Let us write down the first few homogeneous components of 
+\begin_inset Formula $\text{Gr}_{Q}(A)$
+\end_inset
+
+ using a 
+\begin_inset Formula $K$
+\end_inset
+
+-basis:
+\begin_inset Formula 
+\begin{align*}
+\text{Gr}_{Q}(A)_{0} & =A/Q=K+K\overline{x}+K\overline{y}+K\overline{y}^{2}+K\overline{y}^{3}+K\overline{y}^{4}+K\overline{y}^{5}+K\overline{y}^{6}+K\overline{y}^{7}+K\overline{y}^{8}\cdots\\
+\text{Gr}_{Q}(A)_{1} & =Q/Q^{2}=K\overline{x}^{2}+K\overline{xy}+K\overline{x}^{3}+K\overline{x}^{2}\overline{y}+K\overline{x}\overline{y}^{2}+K\overline{x}\overline{y}^{3}+K\overline{x}\overline{y}^{4}+K\overline{x}\overline{y}^{5}+\cdots\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This way of writing things down isn't very illuminating.
+ However, there is another way to think of 
+\begin_inset Formula $\text{Gr}_{Q}(A)$
+\end_inset
+
+.
+ First we note that we have a surjective morphism of graded 
+\begin_inset Formula $(A/Q)$
+\end_inset
+
+-algebras 
+\begin_inset Formula 
+\[
+\varphi:(A/Q)[s,t]\to\mbox{Gr}_{Q}(A)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is the map induced by mapping 
+\begin_inset Formula $s\mapsto\overline{x}^{2}\in Q/Q^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $t\mapsto\overline{xy}\in Q/Q^{2}$
+\end_inset
+
+.
+ However, this map is not injective, because 
+\begin_inset Formula 
+\begin{align*}
+\varphi(\overline{y}s-\overline{x}t) & =\overline{y}\varphi(s)-\overline{x}\varphi(t)\\
+ & =\overline{y}\overline{x}^{2}-\overline{x}\overline{xy}\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $\overline{y}s-\overline{x}t\neq0$
+\end_inset
+
+ in 
+\begin_inset Formula $(A/Q)[s,t]$
+\end_inset
+
+.
+ This isn't the only nontrivial relation though.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=\bigoplus_{i\geq0}A_{i}$
+\end_inset
+
+ be a Noetherian graded ring and let 
+\begin_inset Formula $M=\bigoplus_{i\in\mathbb{Z}}M_{i}$
+\end_inset
+
+ be a finitely generated graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ Then 
+\end_layout
+
+\begin_layout Enumerate
+There exists 
+\begin_inset Formula $m\in\mathbb{Z}$
+\end_inset
+
+ such that 
+\begin_inset Formula $M_{i}=\langle0\rangle$
+\end_inset
+
+ for 
+\begin_inset Formula $i<m;$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+-module for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ In particular, if 
+\begin_inset Formula $A$
+\end_inset
+
+ is a Noetherian graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra, then 
+\begin_inset Formula $\mbox{dim}_{K}(M_{i})$
+\end_inset
+
+ is finite for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Is obvious because 
+\begin_inset Formula $M$
+\end_inset
+
+ is finitely generated and a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ 
+\end_layout
+
+\begin_layout Enumerate
+First we show 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+-module for each 
+\begin_inset Formula $i\geq0$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $A$
+\end_inset
+
+ is Noetherian, 
+\begin_inset Formula $\langle A_{i}\rangle$
+\end_inset
+
+ is finitely generated, say by 
+\begin_inset Formula $x_{1},\dots,x_{\lambda_{i}}\in A$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $1\in A_{0}$
+\end_inset
+
+, 
+\begin_inset Formula $1\cdot x_{j}=x_{j}$
+\end_inset
+
+ implies 
+\begin_inset Formula $x_{j}\in A_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $j=1,\dots,\lambda_{i}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\langle A_{i}\rangle & =\langle x_{1},\dots,x_{\lambda_{i}}\rangle\\
+ & =Ax_{1}+\cdots+Ax_{\lambda_{i}}\\
+ & =(A_{0}x_{1}+\cdots+A_{0}x_{\lambda_{i}})\oplus(A_{1}x_{1}+\cdots+A_{1}x_{\lambda_{i}})\oplus(A_{2}x_{1}+\cdots+A_{2}x_{\lambda_{i}})\oplus\cdots.
+\end{align*}
+
+\end_inset
+
+ Clearly 
+\begin_inset Formula $A_{i}=A_{0}x_{1}+\cdots+A_{0}x_{\lambda_{i}}$
+\end_inset
+
+, since 
+\begin_inset Formula $A_{j}x_{1}+\cdots+A_{j}x_{\lambda_{i}}\in A_{i+j}$
+\end_inset
+
+ for all 
+\begin_inset Formula $j>0$
+\end_inset
+
+, which shows 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+-module.
+ Next, since 
+\begin_inset Formula $M$
+\end_inset
+
+ is finitely generated, there exists finitely many homogeneous elements
+ 
+\begin_inset Formula $m_{1},\dots,m_{k}$
+\end_inset
+
+ in 
+\begin_inset Formula $M$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+M=Am_{1}+\cdots+Am_{k}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $m_{i}\in M_{e_{i}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i=1,\dots,k$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+M_{n}=A_{n-e_{1}}m_{1}+\cdots+A_{n-e_{k}}m_{k}.
+\]
+
+\end_inset
+
+ This implies that 
+\begin_inset Formula $M_{n}$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+-module because the 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ are finitely generated 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+-modules.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $H$
+\end_inset
+
+ be an additive semigroup with identity 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ A 
+\series bold
+semigroup ordering 
+\series default
+on 
+\begin_inset Formula $H$
+\end_inset
+
+ is a partial ordering 
+\begin_inset Formula $>$
+\end_inset
+
+ on 
+\begin_inset Formula $H$
+\end_inset
+
+ such that
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $>$
+\end_inset
+
+ is a total ordering, i.e.
+ either 
+\begin_inset Formula $h_{\alpha}>h_{\beta}$
+\end_inset
+
+ or 
+\begin_inset Formula $h_{\beta}>h_{\alpha}$
+\end_inset
+
+ for all 
+\begin_inset Formula $h_{\alpha},h_{\beta}\in H$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $>$
+\end_inset
+
+ is translate invariant, i.e.
+ 
+\begin_inset Formula $h_{\alpha}>h_{\beta}$
+\end_inset
+
+ implies 
+\begin_inset Formula $h_{\alpha}+h_{\gamma}>h_{\beta}+h_{\gamma}$
+\end_inset
+
+ for all 
+\begin_inset Formula $h_{\alpha},h_{\beta},h_{\gamma}\in H$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $>$
+\end_inset
+
+ is a well-ordering, i.e.
+ every non-empty subset of 
+\begin_inset Formula $H$
+\end_inset
+
+ has a least element in this ordering.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ The integers 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+ and the natural numbers 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+ can be equipped with the usual semigroup ordering 
+\begin_inset Formula $>$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a Noetherian graded module over a Noetherian graded ring 
+\begin_inset Formula $A$
+\end_inset
+
+, where the grading is by a semigroup 
+\begin_inset Formula $H$
+\end_inset
+
+ equipped with a semigroup ordering 
+\begin_inset Formula $>$
+\end_inset
+
+.
+ Then every associated prime 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ of 
+\begin_inset Formula $M$
+\end_inset
+
+ is a homogeneous ideal.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is an associated prime of 
+\begin_inset Formula $M$
+\end_inset
+
+, it is the annihilator of a nonzero element
+\begin_inset Formula 
+\[
+u=u_{j_{1}}+\cdots+u_{j_{t}}\in M,
+\]
+
+\end_inset
+
+where the 
+\begin_inset Formula $u_{j_{\nu}}$
+\end_inset
+
+ are nonzero homogeneous elements of degrees 
+\begin_inset Formula $j_{1}<\cdots<j_{t}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $u$
+\end_inset
+
+ such that 
+\begin_inset Formula $t$
+\end_inset
+
+ is as small as possible.
+ Suppose that 
+\begin_inset Formula 
+\[
+a=a_{i_{1}}+\cdots+a_{i_{s}}
+\]
+
+\end_inset
+
+kills 
+\begin_inset Formula $u$
+\end_inset
+
+, where for every 
+\begin_inset Formula $\nu$
+\end_inset
+
+, 
+\begin_inset Formula $a_{i_{\nu}}$
+\end_inset
+
+ has degree 
+\begin_inset Formula $i_{\nu}$
+\end_inset
+
+, and 
+\begin_inset Formula $i_{1}<\cdots<i_{s}$
+\end_inset
+
+.
+ We shall show that every 
+\begin_inset Formula $a_{i_{\nu}}$
+\end_inset
+
+ kills 
+\begin_inset Formula $u$
+\end_inset
+
+, which proves that 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is homogeneous.
+ It suffices to show that 
+\begin_inset Formula $a_{i_{1}}$
+\end_inset
+
+ kills 
+\begin_inset Formula $u$
+\end_inset
+
+ (since 
+\begin_inset Formula $a-a_{i_{1}}$
+\end_inset
+
+ kills 
+\begin_inset Formula $u$
+\end_inset
+
+ and we can proceed by induction).
+ Since 
+\begin_inset Formula $au=0$
+\end_inset
+
+, the unique least degree term 
+\begin_inset Formula $a_{i_{1}}u_{j_{1}}=0$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\[
+u'=a_{i_{1}}u=a_{i_{1}}u_{j_{2}}+\cdots+a_{i_{1}}u_{j_{t}}.
+\]
+
+\end_inset
+
+If this element is nonzero, its annihilator is still 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+, since 
+\begin_inset Formula $Au\cong A/\mathfrak{p}$
+\end_inset
+
+ and every nonzero element has annihilator 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $a_{i_{1}}u_{j_{\nu}}$
+\end_inset
+
+ is homogeneous of degree 
+\begin_inset Formula $i_{1}+j_{\nu}$
+\end_inset
+
+, or else is 
+\begin_inset Formula $0$
+\end_inset
+
+, 
+\begin_inset Formula $u'$
+\end_inset
+
+ has fewer nonzero homogeneous components than 
+\begin_inset Formula $u$
+\end_inset
+
+ does, contradicting our choice of 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal of a Noetherian ring 
+\begin_inset Formula $A$
+\end_inset
+
+ graded by a semigroup 
+\begin_inset Formula $H$
+\end_inset
+
+ equipped with a semigroup ordering 
+\begin_inset Formula $>$
+\end_inset
+
+, then every minimal prime of 
+\begin_inset Formula $I$
+\end_inset
+
+ is homogeneous.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ This is immediate, since the minimal primes of 
+\begin_inset Formula $I$
+\end_inset
+
+ are among the associated primes of 
+\begin_inset Formula $A/I$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a graded ring, where the grading is by a semigroup 
+\begin_inset Formula $H$
+\end_inset
+
+ equipped with a semigroup ordering 
+\begin_inset Formula $>$
+\end_inset
+
+ and let 
+\begin_inset Formula $I$
+\end_inset
+
+ be a homogeneous ideal.
+ Then 
+\begin_inset Formula $\sqrt{I}$
+\end_inset
+
+ is homogeneous.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let
+\begin_inset Formula 
+\[
+f_{i_{1}}+\cdots+f_{i_{k}}\in\sqrt{I}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $i_{1}<\cdots<i_{k}$
+\end_inset
+
+ and each 
+\begin_inset Formula $f_{i_{j}}$
+\end_inset
+
+ nonzero of degree 
+\begin_inset Formula $i_{j}$
+\end_inset
+
+.
+ We need to show that every 
+\begin_inset Formula $f_{i_{j}}\in\sqrt{I}$
+\end_inset
+
+.
+ If any of the components are in 
+\begin_inset Formula $\sqrt{I}$
+\end_inset
+
+, we may subtract them off, giving a similar sum whose terms are the homogeneous
+ components not in 
+\begin_inset Formula $\sqrt{I}$
+\end_inset
+
+.
+ Therefore it suffices to show that 
+\begin_inset Formula $f_{i_{1}}\in\sqrt{I}$
+\end_inset
+
+.
+ But
+\begin_inset Formula 
+\[
+\left(f_{i_{1}}+\cdots+f_{i_{k}}\right)^{N}\in I
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $N>0$
+\end_inset
+
+.
+ When we expand, there is a unique term formally of least degree, namely
+ 
+\begin_inset Formula $f_{i_{1}}^{N}$
+\end_inset
+
+, and therefore this term is in 
+\begin_inset Formula $I$
+\end_inset
+
+, since 
+\begin_inset Formula $I$
+\end_inset
+
+ is homogeneous.
+ But this means that 
+\begin_inset Formula $f_{i_{1}}\in\sqrt{I}$
+\end_inset
+
+, as required.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a finitely generated graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra and let 
+\begin_inset Formula $\mathfrak{m}=\bigoplus_{d=1}^{\infty}A_{d}$
+\end_inset
+
+ be the homogeneous maximal ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\text{dim}(A)=\text{height}(\mathfrak{m})=\text{dim}(A_{\mathfrak{m}})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The dimension of 
+\begin_inset Formula $A$
+\end_inset
+
+ will be equal to the dimension of 
+\begin_inset Formula $A/\mathfrak{p}$
+\end_inset
+
+ for one of the minimal primes 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is minimal, it is an associated prime and therefore is homogeneous.
+ Hence, 
+\begin_inset Formula $\mathfrak{p}\subseteq\mathfrak{m}$
+\end_inset
+
+.
+ The domain 
+\begin_inset Formula $A/\mathfrak{p}$
+\end_inset
+
+ is finitely generated over 
+\begin_inset Formula $K$
+\end_inset
+
+, and therefore its dimension is equal to the height of every maximal ideal
+ including, in particular, 
+\begin_inset Formula $\mathfrak{m}/\mathfrak{p}$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula 
+\[
+\text{dim}(A)=\text{dim}(A/\mathfrak{p})=\text{dim}((A/\mathfrak{p})_{\mathfrak{m}})\leq\text{dim}(A_{\mathfrak{m}})\leq\text{dim}(A),
+\]
+
+\end_inset
+
+and so equality holds throughout, as required.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Hilbert Function and Dimension
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The Hilbert function of a graded module associates to an integer 
+\begin_inset Formula $n$
+\end_inset
+
+ the dimension of the 
+\begin_inset Formula $n$
+\end_inset
+
+th graded part of the given module.
+ For sufficiently large 
+\begin_inset Formula $n$
+\end_inset
+
+, the values of this function are given by a polynomial, the Hilbert polynomial.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=\bigoplus_{i\geq0}A_{i}$
+\end_inset
+
+ be a Noetherian graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra and let 
+\begin_inset Formula $M=\bigoplus_{i\in\mathbb{Z}}M_{i}$
+\end_inset
+
+ be a finitely generated graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ The 
+\series bold
+Hilbert function 
+\series default
+
+\begin_inset Formula $H_{M}:\mathbb{Z}\to\mathbb{Z}$
+\end_inset
+
+ of 
+\begin_inset Formula $M$
+\end_inset
+
+ is defined by 
+\begin_inset Formula 
+\[
+H_{M}(n):=\mbox{dim}_{K}(M_{n}),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and the 
+\series bold
+Hilbert-Poincare series 
+\begin_inset Formula $\mbox{HP}_{M}$
+\end_inset
+
+ 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+ is defined by 
+\begin_inset Formula 
+\[
+\mbox{HP}_{M}(t):=\sum_{n\in\mathbb{Z}}H_{M}(n)t^{n}\in\mathbb{Z}[[t]][t^{-1}].
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+By definition, 
+\begin_inset Formula $H_{M}$
+\end_inset
+
+ (and, hence, 
+\begin_inset Formula $\mbox{HP}_{M})$
+\end_inset
+
+ depend only on the graded structure of 
+\begin_inset Formula $M$
+\end_inset
+
+, i.e.
+ the 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ are 
+\begin_inset Formula $K$
+\end_inset
+
+-vector spaces, hence, if 
+\begin_inset Formula $\varphi:B\to A$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra map, then it does not matter whether we consider 
+\begin_inset Formula $M$
+\end_inset
+
+ as an 
+\begin_inset Formula $A$
+\end_inset
+
+-module or 
+\begin_inset Formula $B$
+\end_inset
+
+-module.
+ In particular, since 
+\begin_inset Formula $A/\mbox{Ann}_{A}(M)$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-algebra, we may always consider 
+\begin_inset Formula $M$
+\end_inset
+
+ as an 
+\begin_inset Formula $A/\mbox{Ann}_{A}(M)$
+\end_inset
+
+-module when computing the hilbert function.
+ 
+\end_layout
+
+\begin_layout Subsection
+Properties of the Hilbert Function and Hilbert-Poincare Series
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{Hidentities}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=\bigoplus_{i\geq0}A_{i}$
+\end_inset
+
+ be a Noetherian graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra, and let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a finitely generated graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $N\subset M$
+\end_inset
+
+ be a graded submodule, then 
+\begin_inset Formula 
+\[
+H_{M}(n)=H_{N}(n)+H_{M/N}(n)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $n$
+\end_inset
+
+, in particular, 
+\begin_inset Formula $\mbox{HP}_{M}(t)=\mbox{HP}_{N}(t)+\mbox{HP}_{M/N}(t).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $d$
+\end_inset
+
+ be an integer, then 
+\begin_inset Formula 
+\[
+H_{M(d)}(n)=H_{M}(n+d)
+\]
+
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+, in particular, 
+\begin_inset Formula $\mbox{HP}_{M(d)}(t)=t^{-d}\mbox{HP}_{M}(t).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $d$
+\end_inset
+
+ be a non-negative integer, let 
+\begin_inset Formula $f\in A_{d}$
+\end_inset
+
+, and let 
+\begin_inset Formula $\varphi:M(-d)\to M$
+\end_inset
+
+ be defined by 
+\begin_inset Formula $\varphi(m):=f\cdot m$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mbox{Ker}\varphi$
+\end_inset
+
+ and 
+\begin_inset Formula $\mbox{Coker}\varphi$
+\end_inset
+
+ are graded 
+\begin_inset Formula $(A/f)$
+\end_inset
+
+-modules with the induced gradings and 
+\begin_inset Formula 
+\[
+H_{M}(n)-H_{M}(n-d)=H_{\text{Coker}(\varphi)}(n)-H_{\text{Ker}(\varphi)}(n-d),
+\]
+
+\end_inset
+
+ in particular, 
+\begin_inset Formula $\mbox{HP}_{M}(t)-t^{d}\mbox{HP}_{M}(t)=\mbox{HP}_{\text{Coker}(\varphi)}(t)-t^{d}\mbox{HP}_{\text{Ker}(\varphi)}(t).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Holds, because 
+\begin_inset Formula $N_{i}=N\cap M_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $(M/N)_{i}=M_{i}/N_{i}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+An immediate consequence of the definition of 
+\begin_inset Formula $M(d)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Consequence of (1) and (2).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Reading off the Hilbert Function from a Free Resolution
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop1}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=\bigoplus_{i\geq0}A_{i}$
+\end_inset
+
+ be a Noetherian graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra on 
+\begin_inset Formula $n$
+\end_inset
+
+ generators and let 
+\begin_inset Formula $M=\bigoplus_{i\in\mathbb{Z}}M_{i}$
+\end_inset
+
+ be a finitely generated graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ Suppose
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep=40] 0 
+\backslash
+arrow[r] & 
+\backslash
+bigoplus _{j 
+\backslash
+in 
+\backslash
+mathbb{Z}} A(-m_{r
+\backslash
+text{,}j}) 
+\backslash
+arrow[r, "
+\backslash
+varphi _r "] & 
+\backslash
+cdots 
+\backslash
+arrow[r, "
+\backslash
+varphi _2 "] & 
+\backslash
+bigoplus _{j 
+\backslash
+in 
+\backslash
+mathbb{Z}} A(-m_{1
+\backslash
+text{,}j}) 
+\backslash
+arrow[r, "
+\backslash
+varphi _1 "] & 
+\backslash
+bigoplus _{j 
+\backslash
+in 
+\backslash
+mathbb{Z}} A(-m_{0
+\backslash
+text{,}j}) 
+\backslash
+arrow{r} & M 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+is an exact sequence of graded 
+\begin_inset Formula $A$
+\end_inset
+
+-modules.
+ Then 
+\begin_inset Formula 
+\[
+\mbox{HP}_{M}(t)=\frac{\sum_{i=0}^{r}(-1)^{i}\left(\sum_{j}t^{m_{i,j}}\right)}{(1-t)^{n}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The exact sequence of graded 
+\begin_inset Formula $A$
+\end_inset
+
+-modules
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep=40] 0 
+\backslash
+arrow[r] & 
+\backslash
+bigoplus _{j 
+\backslash
+in 
+\backslash
+mathbb{Z}} A(-m_{r
+\backslash
+text{,}j}) 
+\backslash
+arrow[r, "
+\backslash
+varphi _r "] & 
+\backslash
+cdots 
+\backslash
+arrow[r, "
+\backslash
+varphi _2 "] & 
+\backslash
+bigoplus _{j 
+\backslash
+in 
+\backslash
+mathbb{Z}} A(-m_{1
+\backslash
+text{,}j}) 
+\backslash
+arrow[r, "
+\backslash
+varphi _1 "] & 
+\backslash
+bigoplus _{j 
+\backslash
+in 
+\backslash
+mathbb{Z}} A(-m_{0
+\backslash
+text{,}j}) 
+\backslash
+arrow{r} & M 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+gives rise to an exact sequence of 
+\begin_inset Formula $K$
+\end_inset
+
+-vector spaces
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep=40] 0 
+\backslash
+arrow[r] & 
+\backslash
+bigoplus _{j 
+\backslash
+in 
+\backslash
+mathbb{Z}} (A(-m_{r
+\backslash
+text{,}j}))_i 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\backslash
+arrow[r] & 
+\backslash
+bigoplus _{j 
+\backslash
+in 
+\backslash
+mathbb{Z}} (A(-m_{1
+\backslash
+text{,}j}))_i 
+\backslash
+arrow[r] & 
+\backslash
+bigoplus _{j 
+\backslash
+in 
+\backslash
+mathbb{Z}} (A(-m_{0
+\backslash
+text{,}j}))_i 
+\backslash
+arrow{r} & M 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for each 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ Now apply 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{Hidentities})
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+The Structure of the Hilbert-Poincare Series
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem1}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=\bigoplus_{i\ge0}A_{i}$
+\end_inset
+
+ be a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra, and assume that 
+\begin_inset Formula $A$
+\end_inset
+
+ is generated, as a 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra, by 
+\begin_inset Formula $x_{1},\dots,x_{r}\in A_{1}$
+\end_inset
+
+.
+ Then, for any finitely generated (positively) graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module 
+\begin_inset Formula $M=\bigoplus_{i\geq0}M_{i}$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+\mbox{HP}_{M}(t)=\frac{Q(t)}{(1-t)^{r}}
+\]
+
+\end_inset
+
+ for some 
+\begin_inset Formula $Q(t)\in\mathbb{Z}[t]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We prove the theorem using induction on 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ In the case 
+\begin_inset Formula $r=0$
+\end_inset
+
+, 
+\begin_inset Formula $M$
+\end_inset
+
+ is a finite dimensional 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space, and therefore, there exists an integer 
+\begin_inset Formula $n$
+\end_inset
+
+ such that 
+\begin_inset Formula $M_{i}=\langle0\rangle$
+\end_inset
+
+ for 
+\begin_inset Formula $i\geq n$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $\mbox{HP}_{M}(t)\in\mathbb{Z}[t]$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Assume that 
+\begin_inset Formula $r\geq0$
+\end_inset
+
+ and consider the map 
+\begin_inset Formula $\varphi:M(-1)\to M$
+\end_inset
+
+ defined by 
+\begin_inset Formula $\varphi(m):=x_{1}\cdot m$
+\end_inset
+
+.
+ Using 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{Hidentities})
+\end_layout
+
+\end_inset
+
+, we obtain 
+\begin_inset Formula 
+\[
+(1-t)\cdot\mbox{HP}_{M}(t)=\text{HP}_{\text{Coker}(\varphi)}(t)-t\cdot\mbox{HP}_{\text{Ker}(\varphi)}(t).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now both 
+\begin_inset Formula $\text{Ker}(\varphi)$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Coker}(\varphi)$
+\end_inset
+
+ are graded 
+\begin_inset Formula $(A/x_{1})$
+\end_inset
+
+-modules.
+ Using the induction hypothesis we obtain 
+\begin_inset Formula $\text{HP}_{\text{Coker}(\varphi)}(t)=Q_{1}(t)/(1-t)^{r-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mbox{HP}_{\text{Ker}(\varphi)}(t)=Q_{2}(t)/(1-t)^{r-1}$
+\end_inset
+
+ for some 
+\begin_inset Formula $Q_{1},Q_{2}\in\mathbb{Z}[t]$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula 
+\[
+\mbox{HP}_{M}(t)=\frac{Q_{1}(t)-tQ_{2}(t)}{(1-t)^{r}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=\bigoplus_{i\ge0}A_{i}$
+\end_inset
+
+ be a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra, and assume that 
+\begin_inset Formula $A$
+\end_inset
+
+ is generated, as a 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra, by 
+\begin_inset Formula $x_{1},\dots,x_{r}$
+\end_inset
+
+ where 
+\begin_inset Formula $x_{i}\in A_{w_{i}}$
+\end_inset
+
+.
+ Then, for any finitely generated (positively) graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module 
+\begin_inset Formula $M=\bigoplus_{i\geq0}M_{i}$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+\mbox{HP}_{M}(t)=\frac{Q(t)}{(1-t^{w_{1}})(1-t^{w_{2}})\cdots(1-t^{w_{n}})}
+\]
+
+\end_inset
+
+ for some 
+\begin_inset Formula $Q(t)\in\mathbb{Z}[t]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The proof is nearly identical to the proof of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theorem1})
+\end_layout
+
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Hilbert polynomial and the second Hilbert series
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $A=\bigoplus_{\nu\geq0}A_{\nu}$
+\end_inset
+
+ be a Noetherian graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra, and let 
+\begin_inset Formula $M=\bigoplus_{\nu\geq0}M_{\nu}$
+\end_inset
+
+ be a finitely generated (positively) graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ From 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theorem1})
+\end_layout
+
+\end_inset
+
+, we know that 
+\begin_inset Formula $\mbox{HP}_{M}(t)=Q(t)/(1-t)^{r}$
+\end_inset
+
+, where 
+\begin_inset Formula $Q(t)\in\mathbb{Z}[t]$
+\end_inset
+
+.
+ After canceling all common factors in the numerator and denominator of
+ 
+\begin_inset Formula $\mbox{HP}_{M}(t)$
+\end_inset
+
+, and we obtain 
+\begin_inset Formula 
+\[
+\mbox{HP}_{M}(t)=\frac{G(t)}{(1-t)^{s}},\qquad0\leq s\leq r,\qquad G(t)=\sum_{i=0}^{d}g_{i}t^{i}\in\mathbb{Z}[t],
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+such that 
+\begin_inset Formula $g_{d}\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $G(1)\neq0$
+\end_inset
+
+, that is, 
+\begin_inset Formula $s$
+\end_inset
+
+ is the pole order of 
+\begin_inset Formula $\mbox{HP}_{M}(t)$
+\end_inset
+
+ at 
+\begin_inset Formula $t=1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The polynomial 
+\begin_inset Formula $Q(t)$
+\end_inset
+
+, respectively 
+\begin_inset Formula $G(t)$
+\end_inset
+
+, defined above, is called the 
+\series bold
+first Hilbert series
+\series default
+, respectively the 
+\series bold
+second Hilbert series
+\series default
+, of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $d$
+\end_inset
+
+ be the degree of the second Hilbert series 
+\begin_inset Formula $G(t)$
+\end_inset
+
+, and let 
+\begin_inset Formula $s$
+\end_inset
+
+ be the pole order of the Hilbert-Poincare series 
+\begin_inset Formula $\mbox{HP}_{M}(t)$
+\end_inset
+
+ at 
+\begin_inset Formula $t=1$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+P_{M}:=\sum_{i=0}^{d}g_{i}\cdot{s-1+n-i \choose s-1}\in\mathbb{Q}[n]
+\]
+
+\end_inset
+
+ is called the 
+\series bold
+Hilbert polynomial 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+ (with 
+\begin_inset Formula ${n \choose k}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k<0$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{intpoly}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $P(x)\in\mathbb{Q}(x)$
+\end_inset
+
+ be a polynomial of degree 
+\begin_inset Formula $s-1$
+\end_inset
+
+.
+ Then the following conditions are equivalent:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $P(n)\in\mathbb{Z}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{Z}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+There exists 
+\begin_inset Formula $a_{0},\dots,a_{s-1}\in\mathbb{Z}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+P(x)=\sum_{i=0}^{s-1}a_{i}{x \choose i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ (2) implies (1) is trivial.
+ For the converse, observe that the polynomials 
+\begin_inset Formula ${x \choose i}$
+\end_inset
+
+, where 
+\begin_inset Formula $i\in\mathbb{N}$
+\end_inset
+
+, form a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-basis of 
+\begin_inset Formula $\mathbb{Q}[x]$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $P(x)=\sum_{i=0}^{s-1}a_{i}{x \choose i}$
+\end_inset
+
+ with 
+\begin_inset Formula $a_{i}\in\mathbb{Q}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\Delta:\mathbb{Q}[x]\to\mathbb{Q}[x]$
+\end_inset
+
+ denote the forward difference operator, given by 
+\begin_inset Formula $(\Delta f)(x)=f(x+1)-f(x)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+a_{k}=(\Delta^{k}P)(0)=P(k)-P(0)\in\mathbb{Z}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\end_layout
+
+\end_inset
+
+ With the above assumptions, 
+\begin_inset Formula $P_{M}$
+\end_inset
+
+ is a polynomial in 
+\begin_inset Formula $n$
+\end_inset
+
+ with rational coefficients, of degree 
+\begin_inset Formula $s-1$
+\end_inset
+
+, and satisfies 
+\begin_inset Formula $P_{M}(n)=H_{M}(n)$
+\end_inset
+
+ for 
+\begin_inset Formula $n\geq d$
+\end_inset
+
+.
+ Moreover, there exist 
+\begin_inset Formula $a_{i}\in\mathbb{Z}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+P_{M}(n)=\sum_{i=0}^{s-1}a_{i}\cdot{n \choose i}=\frac{a_{s-1}}{(s-1)!}\cdot n^{s-1}+\mbox{ lower terms in }n,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $a_{s-1}=G(1)>0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The equality 
+\begin_inset Formula $1/(1-t)^{s}=\sum_{i=0}^{\infty}{s-1+i \choose s-1}\cdot t^{i}$
+\end_inset
+
+ implies 
+\begin_inset Formula 
+\[
+\sum_{i=0}^{\infty}H_{M}(i)t^{i}=\mbox{HP}_{M}(t)=\left(\sum_{i=0}^{d}g_{i}t^{i}\right)\cdot\sum_{j=0}^{\infty}{s-1+j \choose s-1}\cdot t^{j}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After expressing 
+\begin_inset Formula $P_{M}(n)$
+\end_inset
+
+ in long form notation, we see that the leading term of 
+\begin_inset Formula $P_{M}$
+\end_inset
+
+ is 
+\begin_inset Formula $G(1)\cdot n^{s-1}/(s-1)!$
+\end_inset
+
+.
+ In particular, we obtain 
+\begin_inset Formula $\mbox{deg}(P_{M})=s-1$
+\end_inset
+
+.
+ Next, we have to prove that 
+\begin_inset Formula $P_{M}=\sum_{i=0}^{s-1}a_{i}\cdot{n \choose i}$
+\end_inset
+
+ for suitable 
+\begin_inset Formula $a_{i}\in\mathbb{Z}$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{s-1}>0$
+\end_inset
+
+.
+ Suppose that we can find such 
+\begin_inset Formula $a_{i}\in\mathbb{Z}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+P_{M}(n)=\frac{a_{s-1}}{(s-1)!}\cdot n^{s-1}+\mbox{ lower terms in }n.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now, 
+\begin_inset Formula $P_{M}(n)=H_{M}(n)>0$
+\end_inset
+
+ for 
+\begin_inset Formula $n$
+\end_inset
+
+ sufficiently large implies 
+\begin_inset Formula $a_{s-1}>0$
+\end_inset
+
+.
+ Finally, the existence of suitable integer coefficients 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ is a consequence 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{intpoly})
+\end_layout
+
+\end_inset
+
+, since 
+\begin_inset Formula $P_{M}(n)\in\mathbb{Z}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{Z}$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let's compute some explicit examples of hilbert polynomials.
+ First assume 
+\begin_inset Formula $d=2$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+H_{M}(t)=\left(g_{0}+g_{1}t+g_{2}t^{2}\right)\left({s-1 \choose s-1}+{s-1+1 \choose s-1}t+{s-1+2 \choose s-1}t^{2}+{s-1+3 \choose s-1}t^{3}+\cdots\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After expanding, we see that 
+\begin_inset Formula 
+\begin{align*}
+H_{M}(0) & =g_{0}{s-1 \choose s-1}\\
+H_{M}(1) & =g_{0}{s-1+1 \choose s-1}+g_{1}{s-1 \choose s-1}\\
+H_{M}(2) & =g_{0}{s-1+2 \choose s-1}+g_{1}{s-1+1 \choose s-1}+g_{2}{s-1 \choose s-1}=P_{M}(2)\\
+H_{M}(3) & =g_{0}{s-1+3 \choose s-1}+g_{1}{s-1+2 \choose s-1}+g_{2}{s-1+1 \choose s-1}=P_{M}(3)\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So we've defined a rational polynomial 
+\begin_inset Formula $P_{M}$
+\end_inset
+
+ in a way so that 
+\begin_inset Formula $P_{M}(n)=H_{M}(n)$
+\end_inset
+
+ for 
+\begin_inset Formula $n\geq2$
+\end_inset
+
+.
+ Now assume 
+\begin_inset Formula $s=1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+P_{M}(n)=g_{0}{n \choose 0}+g_{1}{n-1 \choose 0}+g_{2}{n-2 \choose 0}=g_{0}+g_{1}+g_{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now assume 
+\begin_inset Formula $s=2$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+P_{M}(n)=g_{0}{n+1 \choose 1}+g_{1}{n \choose 1}+g_{2}{n-1 \choose 1}=(g_{0}+g_{1}+g_{2})n+(g_{0}-g_{2})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now assume 
+\begin_inset Formula $s=3$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+P_{M}(n)=g_{0}{n+2 \choose 2}+g_{1}{n+1 \choose 2}+g_{2}{n \choose 2}==\frac{(g_{0}+g_{1}+g_{2})n^{2}+(3g_{0}+g_{1}-g_{2})n+2}{2}
+\]
+
+\end_inset
+
+Now assume 
+\begin_inset Formula $s=4$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+P_{M}(n)=g_{0}{n+3 \choose 3}+g_{1}{n+2 \choose 3}+g_{2}{n+1 \choose 3}=\frac{(g_{0}+g_{1}+g_{2})n^{3}+(6g_{0}+3g_{1})n^{2}+(11g_{0}+2g_{1}-g_{2})n+6}{6}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Properties of the Hilbert Polynomial
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In this section we prove that, for a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra 
+\begin_inset Formula $A=K[x_{1},\dots,x_{r}]/I$
+\end_inset
+
+, we have 
+\begin_inset Formula $\text{dim}(A)-1$
+\end_inset
+
+ is equal to the degree of the Hilbert polynomial 
+\begin_inset Formula $P_{A}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=\bigoplus_{\nu\geq0}A_{\nu}$
+\end_inset
+
+ be a Noetherian graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra, and let 
+\begin_inset Formula $M=\bigoplus_{\nu\in\mathbb{Z}}M_{\nu}$
+\end_inset
+
+ be a finitely generated, (not necessarily positively) graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ Then we introduce
+\begin_inset Formula 
+\[
+M^{(0)}:=\bigoplus_{\nu\geq0}M_{\nu},
+\]
+
+\end_inset
+
+and define the 
+\series bold
+Hilbert polynomial 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+ to be the Hilbert polynomial of 
+\begin_inset Formula $M^{(0)}$
+\end_inset
+
+, that is, 
+\begin_inset Formula $P_{M}:=P_{M^{(0)}}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=\bigoplus_{\nu\geq0}A_{\nu}$
+\end_inset
+
+ be a Noetherian graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra.
+ Then 
+\begin_inset Formula 
+\[
+P_{A(d)}(n)=P_{A}(n+d)=P_{A}(n)+\text{terms of lower degree in }n.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a Noetherian graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra and 
+\begin_inset Formula $M$
+\end_inset
+
+ a finitely generated graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module, and let 
+\begin_inset Formula $P_{M}=\sum_{i=0}^{s-1}a_{i}\cdot{n \choose i}$
+\end_inset
+
+ be the Hilbert polynomial of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Then we set 
+\begin_inset Formula 
+\[
+d(M):=\text{deg}(P_{M})=s-1,
+\]
+
+\end_inset
+
+and we define the 
+\series bold
+degree 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+\text{deg}(M):=a_{s-1}.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $M$
+\end_inset
+
+ is positively graded and 
+\begin_inset Formula $\text{HP}_{M}(t)=G(t)/(1-t)^{s}$
+\end_inset
+
+ with 
+\begin_inset Formula $G(1)\neq0$
+\end_inset
+
+, then 
+\begin_inset Formula $d(M)=s-1$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{deg}(M)=G(1)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop5.3.6}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a Noetherian graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra, and let 
+\begin_inset Formula $M,N$
+\end_inset
+
+ be finitely generated graded 
+\begin_inset Formula $A$
+\end_inset
+
+-modules.
+ Then
+\end_layout
+
+\begin_layout Enumerate
+If there is a surjective graded morphism 
+\begin_inset Formula $\varphi:M\to N$
+\end_inset
+
+, then 
+\begin_inset Formula $d(M)\geq d(N)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $d(M)\leq d(A)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If there is a homogeneous element 
+\begin_inset Formula $m\in M$
+\end_inset
+
+ such that 
+\begin_inset Formula $\text{Ann}_{A}(m)=0$
+\end_inset
+
+, then 
+\begin_inset Formula $d(M)=d(A)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $x\in A_{d}$
+\end_inset
+
+ be a homogeneous nonzerodivisor for 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+d(M/xM)=d(M)-1,\qquad\text{deg}(M/xM)=d\cdot\text{deg}(M).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\varphi:M\to N$
+\end_inset
+
+ be a graded and surjective homomorphism of 
+\begin_inset Formula $A$
+\end_inset
+
+-modules.
+ Then, for all 
+\begin_inset Formula $n$
+\end_inset
+
+, the restriction to 
+\begin_inset Formula $M_{n}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\varphi_{\mid M_{n}}:M_{n}\to N_{n}$
+\end_inset
+
+, is surjective too.
+ This implies
+\begin_inset Formula 
+\[
+H_{M}(n)=\text{dim}_{K}(M_{n})\geq\text{dim}_{K}(N_{n})=H_{N}(n).
+\]
+
+\end_inset
+
+Hence 
+\begin_inset Formula $P_{M}(n)\geq P_{N}(n)$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+ sufficiently large, which is only possible if 
+\begin_inset Formula $\text{deg}(P_{M})\geq\text{deg}(P_{N})$
+\end_inset
+
+, since the leading coefficients are positive.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $M$
+\end_inset
+
+ is finitely generated, we may choose homogeneous generators 
+\begin_inset Formula $m_{1},\dots,m_{k}$
+\end_inset
+
+ of degree 
+\begin_inset Formula $d_{1},\dots,d_{k}$
+\end_inset
+
+.
+ Now consider the map 
+\begin_inset Formula 
+\[
+\varphi:\bigoplus_{i=1}^{k}A(-d_{i})\to M
+\]
+
+\end_inset
+
+defined by 
+\begin_inset Formula $\varphi(a_{1},\dots,a_{k})=\sum_{i=1}^{k}a_{i}m_{i}$
+\end_inset
+
+.
+ Obviously, 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is graded and surjective.
+ Using (1), we obtain 
+\begin_inset Formula 
+\[
+d\left(\bigoplus_{i=1}^{k}A(-d_{i})\right)\geq d(M).
+\]
+
+\end_inset
+
+On the other hand, for 
+\begin_inset Formula $n$
+\end_inset
+
+ sufficiently large, we have 
+\begin_inset Formula 
+\begin{align*}
+P_{\bigoplus_{i=1}^{k}A(-d_{i})}(n) & =\sum_{i=1}^{k}P_{A(-d_{i})}(n)\\
+ & =\sum_{i=1}^{k}P_{A}(n-d_{i})\\
+ & =k\cdot P_{A}(n)+\text{terms of lower degree in }n,
+\end{align*}
+
+\end_inset
+
+which implies 
+\begin_inset Formula 
+\[
+d\left(\bigoplus_{i=1}^{k}A(-d_{i})\right)=d(A).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $m\in M_{d}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\text{Ann}_{A}(m)=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi:A(-d)\to M$
+\end_inset
+
+ defined by 
+\begin_inset Formula $\varphi(a):=am$
+\end_inset
+
+ is graded and injective.
+ This implies that, for 
+\begin_inset Formula $n$
+\end_inset
+
+ sufficiently large, 
+\begin_inset Formula $P_{A}(n-d)=P_{A(-d)}(n)\leq P_{M}(n)$
+\end_inset
+
+, which is only possible if 
+\begin_inset Formula $\text{deg}(P_{M})\geq\text{deg}(P_{A})$
+\end_inset
+
+.
+ Together with (2), this implies 
+\begin_inset Formula $d(M)=d(A)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Using the exact sequence 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & M(-d) 
+\backslash
+arrow[r, "x"]  & M 
+\backslash
+arrow[r]  & M/xM 
+\backslash
+arrow[r]  & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+ of graded 
+\begin_inset Formula $A$
+\end_inset
+
+-modules, we obtain, by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{Hidentities})
+\end_layout
+
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+(1-t^{d})\text{HP}_{M}(t)=\text{HP}_{M/xM}(t).
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $\text{HP}_{M}(t)=G(t)/(1-t)^{d(M)+1}$
+\end_inset
+
+ with 
+\begin_inset Formula $G(1)\ne0$
+\end_inset
+
+, then
+\begin_inset Formula 
+\[
+\text{HP}_{M/xM}(t)=\frac{G(t)(1-t^{d})}{(1-t)^{d(M)}(1-t)}=\frac{G(t)\cdot\sum_{\nu=0}^{d-1}t^{\nu}}{(1-t)^{d(M)}}.
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\text{HP}_{M/xM}$
+\end_inset
+
+ has pole order 
+\begin_inset Formula $d(M)$
+\end_inset
+
+ at 
+\begin_inset Formula $t=1$
+\end_inset
+
+, hence, 
+\begin_inset Formula 
+\[
+d(M/xM)=d(M)-1\quad\text{and}\quad\text{deg}(M/xM)=\left(G(t)\cdot\sum_{\nu=0}^{d-1}t^{\nu}\right)_{\mid t=1}=\text{deg}(M)\cdot d.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I\subset K[x_{1},\dots,x_{r}]$
+\end_inset
+
+ be a homogeneous ideal.
+ Then 
+\begin_inset Formula 
+\[
+\text{dim}(K[x_{1},\dots,x_{r}]/I)=d(K[x_{1},\dots,x_{r}]/I)+1.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Using Noether normalization, 
+\begin_inset Formula $K[x_{1},\dots,x_{r}]/I$
+\end_inset
+
+ can be considered as a finitely generated graded 
+\begin_inset Formula $K[y_{1},\dots,y_{s}]$
+\end_inset
+
+-module.
+ The assumptions of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop5.3.6})~(3)
+\end_layout
+
+\end_inset
+
+ are satisfied and, therefore, 
+\begin_inset Formula 
+\begin{align*}
+\text{deg}(P_{K[x_{1},\dots,x_{r}]/I}) & =\text{deg}(P_{K[y_{1},\dots,y_{s}]})\\
+ & =s-1\\
+ & =\text{dim}(K[x_{1},\dots,x_{r}]/I)-1.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Examples
+\end_layout
+
+\begin_layout Standard
+We now wish to give several examples which demonstrate concepts introduced
+ above.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ with respect to the weights 
+\begin_inset Formula $w=(1,1,1)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\mbox{HP}_{A}(t)=\frac{1}{(1-t)^{3}}\quad\mbox{and}\quad P_{A}(n)={2+n \choose 2}=\frac{n^{2}+3n+2}{2}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{gradedringex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ with respect to the weights 
+\begin_inset Formula $w=(1,2,3)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+H_{A}(n)=\{(a,b,c)\in\mathbb{Z}_{\geq0}\mid a+2b+3c=n\}\quad\mbox{and}\quad\mbox{HP}_{A}(t)=\frac{1}{(1-t)(1-t^{2})(1-t^{3})}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ with respect to the weights 
+\begin_inset Formula $w=(1,2,3)$
+\end_inset
+
+, 
+\begin_inset Formula $B$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ with respect to the weights 
+\begin_inset Formula $w=(1,1,3)$
+\end_inset
+
+, 
+\begin_inset Formula $M$
+\end_inset
+
+ be the graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module 
+\begin_inset Formula $A^{2}$
+\end_inset
+
+ with respect to weights 
+\begin_inset Formula $k=(1,2)$
+\end_inset
+
+, and 
+\begin_inset Formula $N$
+\end_inset
+
+ be the graded 
+\begin_inset Formula $B$
+\end_inset
+
+-module 
+\begin_inset Formula $B$
+\end_inset
+
+ with weight 
+\begin_inset Formula $k_{1}=1$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\mbox{HP}_{M}(t) & =(t+t^{2})\mbox{HP}_{A}(t)\\
+ & =\frac{t+t^{2}}{(1-t)(1-t^{2})(1-t^{3})}\\
+ & =\frac{t}{(1-t)^{2}(1-t^{3})}\\
+ & =\mbox{HP}_{N}(t).
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $M$
+\end_inset
+
+ and 
+\begin_inset Formula $N$
+\end_inset
+
+ have the same graded structure.
+ Moreover, one can check that the map from 
+\begin_inset Formula $M_{n}\to N_{n}$
+\end_inset
+
+ given by 
+\begin_inset Formula $e_{2}\mapsto ye_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $y\mapsto y^{2}$
+\end_inset
+
+, and fixing everything else the same, is an isomorphism of 
+\begin_inset Formula $K$
+\end_inset
+
+-vector spaces.
+ We can interpret 
+\begin_inset Formula $H_{M}(n)$
+\end_inset
+
+ as the number of elements 
+\begin_inset Formula $(a,b,c)\in\mathbb{Z}_{\geq0}^{3}$
+\end_inset
+
+ such that 
+\begin_inset Formula $a+2b+3c=n-1$
+\end_inset
+
+ plus the number of elements 
+\begin_inset Formula $(a,b,c)\in\mathbb{Z}_{\geq0}^{3}$
+\end_inset
+
+ such that 
+\begin_inset Formula $a+2b+3c=n-2$
+\end_inset
+
+.
+ Similarly, we can interpret 
+\begin_inset Formula $H_{N}(n)$
+\end_inset
+
+ as the number of elements 
+\begin_inset Formula $(a,b,c)\in\mathbb{Z}_{\geq0}^{3}$
+\end_inset
+
+ such that 
+\begin_inset Formula $a+b+3c=n-1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example2}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ with respect to weights 
+\begin_inset Formula $w=(1,1,1)$
+\end_inset
+
+ and let 
+\begin_inset Formula $I=\langle x^{2},y^{2},z^{2}\rangle$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $I$
+\end_inset
+
+ is homogeneous, 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ The homogenous components of 
+\begin_inset Formula $A/I$
+\end_inset
+
+ are
+\begin_inset Formula 
+\begin{align*}
+(A/I)_{0} & =K\\
+(A/I)_{1} & =K\bar{x}+K\bar{y}+K\bar{z}\\
+(A/I)_{2} & =K\bar{x}\bar{y}+K\bar{x}\bar{z}+K\bar{y}\bar{z}\\
+(A/I)_{3} & =K\bar{x}\bar{y}\bar{z}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In particular, 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is an 
+\begin_inset Formula $8$
+\end_inset
+
+-dimensional 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ with respect to weights 
+\begin_inset Formula $w=(1,1,1)$
+\end_inset
+
+, let 
+\begin_inset Formula $I=\langle x^{3}+y^{3}+z^{3}\rangle$
+\end_inset
+
+, and let 
+\begin_inset Formula $J=\langle x^{3}+y^{3}+z^{3},x\rangle$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $I$
+\end_inset
+
+ and 
+\begin_inset Formula $J$
+\end_inset
+
+ are homogeneous, 
+\begin_inset Formula $A/I$
+\end_inset
+
+ and 
+\begin_inset Formula $A/J$
+\end_inset
+
+ are graded 
+\begin_inset Formula $A$
+\end_inset
+
+-modules.
+ We have an exact sequence of graded 
+\begin_inset Formula $A$
+\end_inset
+
+-modules:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep=60] 0 
+\backslash
+arrow[r] & A(-3) 
+\backslash
+arrow[r, " 
+\backslash
+cdot ( x^3 + y^3 + z^3 )"] & A 
+\backslash
+arrow[r] & A/I 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop1})
+\end_layout
+
+\end_inset
+
+, we conclude that
+\begin_inset Formula 
+\begin{align*}
+\mbox{HP}_{A/I}(t) & =\frac{1-t^{3}}{(1-t)^{3}}\\
+ & =\frac{1+t+t^{2}}{(1-t)^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the reduced expression of 
+\begin_inset Formula $\mbox{HP}_{A/I}(t)$
+\end_inset
+
+, we see that 
+\begin_inset Formula 
+\[
+P_{A/I}(n)={n+1 \choose 1}+{n \choose 1}+{n-1 \choose 1}=3n.
+\]
+
+\end_inset
+
+By tensoring the exact sequence above with 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzcd}   A(-1) 
+\backslash
+arrow[r, " 
+\backslash
+cdot x "] & A 
+\backslash
+end{tikzcd}
+\end_layout
+
+\end_inset
+
+, we obtain another exact sequence of graded 
+\begin_inset Formula $A$
+\end_inset
+
+-modules 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep=70, ampersand replacement=
+\backslash
+&] 0 
+\backslash
+arrow[r] 
+\backslash
+& A(-4) 
+\backslash
+arrow{r}{
+\backslash
+begin{pmatrix} -x^3 - y^3 - z^3 
+\backslash
+
+\backslash
+  x 
+\backslash
+end{pmatrix} } 
+\backslash
+& A(-1) 
+\backslash
+oplus A(-3) 
+\backslash
+arrow{r}{ 
+\backslash
+begin{pmatrix} x & x^3 + y^3 + z^3 
+\backslash
+end{pmatrix} } 
+\backslash
+& A 
+\backslash
+arrow{r} 
+\backslash
+& A/J 
+\backslash
+arrow[r] 
+\backslash
+& 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop1})
+\end_layout
+
+\end_inset
+
+, we conclude that
+\begin_inset Formula 
+\begin{align*}
+\mbox{HP}_{A/J}(t) & =\frac{1-t-t^{3}+t^{4}}{(1-t)^{3}}\\
+ & =\frac{1+t+t^{2}}{1-t}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that 
+\begin_inset Formula $(1-t)\mbox{HP}_{A/J}(t)=\mbox{HP}_{A/I}(t)$
+\end_inset
+
+ because of the way tensoring complexes works.
+ From the reduced expression of 
+\begin_inset Formula $\mbox{HP}_{A/J}(t)$
+\end_inset
+
+, we see that 
+\begin_inset Formula 
+\[
+P_{A/J}(n)={n \choose 0}+{n-1 \choose 0}+{n-2 \choose 0}=3.
+\]
+
+\end_inset
+
+The graded parts of 
+\begin_inset Formula $A/J$
+\end_inset
+
+ starts out as
+\begin_inset Formula 
+\begin{align*}
+ & \vdots\\
+(A/J)_{0} & =K\\
+(A/J)_{1} & =K\bar{y}+K\bar{z}\\
+(A/J)_{2} & =K\bar{y}^{2}+K\bar{y}\bar{z}+K\bar{z}^{2}\\
+(A/J)_{3} & =K\bar{y}^{2}\overline{z}+K\bar{y}\bar{z}^{2}+K\bar{z}^{3}\\
+(A/J)_{4} & =K\bar{y}^{2}\overline{z}^{2}+K\bar{y}\bar{z}^{3}+K\bar{z}^{4}\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As we can see, the dimension of the graded parts eventually agrees with
+ the hilbert polynomial, which is just 
+\begin_inset Formula $3$
+\end_inset
+
+.
+ Also, note that we could have also calculated 
+\begin_inset Formula $P_{A/J}(n)$
+\end_inset
+
+ by 
+\begin_inset Formula 
+\[
+P_{A/J}(n)=P_{A}(n)-P_{A}(n-3)-P_{A}(n-1)+P_{A}(n-4).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now let 
+\begin_inset Formula $\text{LT}(J)$
+\end_inset
+
+ be the ideal generated by lead terms of elements in 
+\begin_inset Formula $J$
+\end_inset
+
+ with respect to graded lex ordering.
+ From the theory of Gröbner bases, this is just 
+\begin_inset Formula $\text{LT}(J)=\langle x,y^{3}+z^{3}\rangle.$
+\end_inset
+
+ The graded parts of 
+\begin_inset Formula $A/\text{LT}(J)$
+\end_inset
+
+ starts out as 
+\begin_inset Formula 
+\begin{align*}
+ & \vdots\\
+(A/\text{LT}(J))_{0} & =K\\
+(A/\text{LT}(J))_{1} & =K\bar{y}+K\bar{z}\\
+(A/\text{LT}(J))_{2} & =K\bar{y}^{2}+K\bar{y}\bar{z}+K\bar{z}^{2}\\
+(A/\text{LT}(J))_{3} & =K\bar{y}^{2}\overline{z}+K\bar{y}\bar{z}^{2}+K\bar{z}^{3}\\
+(A/\text{LT}(J))_{4} & =K\bar{y}^{2}\overline{z}^{2}+K\bar{y}\bar{z}^{3}+K\bar{z}^{4}\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that 
+\begin_inset Formula $A/J$
+\end_inset
+
+ and 
+\begin_inset Formula $A/\text{LT}(J)$
+\end_inset
+
+ have the same graded structure.
+ 
+\begin_inset Formula 
+\[
+G=\{g_{0},g_{1},f_{1},f_{2},f_{3}\}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+g_{0} & =xz+z^{2}\\
+g_{1} & =xy+y^{2}\\
+g_{2} & =y^{2}z-yz^{2}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g_{0},g_{1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+xg_{0},yg_{0},zg_{0},xg_{1},yg_{1},g_{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x^{2}g_{0},xyg_{0},y^{2}g_{0},yzg_{0},z^{2}g_{0},x^{2}g_{1},xyg_{1},y^{2}g_{1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Formally set
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+d(g_{0})=d(g_{1})=d(g_{2})=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now what about 
+\begin_inset Formula $S/I?$
+\end_inset
+
+ First observe that we have an isomorphism
+\begin_inset Formula 
+\[
+S/S\cap I\to\text{Span}_{K}\{\text{monomials }m\in S\mid m\notin\text{LT}(I)\},
+\]
+
+\end_inset
+
+given by mapping 
+\begin_inset Formula $\overline{f}$
+\end_inset
+
+ to 
+\begin_inset Formula $\overline{f}^{G}$
+\end_inset
+
+, where 
+\begin_inset Formula $\overline{f}^{G}$
+\end_inset
+
+ is division of 
+\begin_inset Formula $f\in I$
+\end_inset
+
+ by 
+\begin_inset Formula $G$
+\end_inset
+
+.
+  
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+yg_{0}-zg_{1}=z^{2}y-y^{2}z
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+S(g_{1},g_{2})=y^{3}z+xyz^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x,y]$
+\end_inset
+
+ with respect to weights 
+\begin_inset Formula $w=(1,1)$
+\end_inset
+
+ and let 
+\begin_inset Formula $I$
+\end_inset
+
+ be the ideal in 
+\begin_inset Formula $A$
+\end_inset
+
+ given by 
+\begin_inset Formula $I=\langle x^{2},xy\rangle$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ A free resolution of 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is given by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep=80, ampersand replacement=
+\backslash
+&] A(-3) 
+\backslash
+arrow{r}{
+\backslash
+begin{pmatrix} -y 
+\backslash
+
+\backslash
+ x 
+\backslash
+end{pmatrix} } 
+\backslash
+& A(-2)^2 
+\backslash
+arrow{r}{ 
+\backslash
+begin{pmatrix} x^2 & xy  
+\backslash
+end{pmatrix} } 
+\backslash
+& A 
+\backslash
+arrow{r} 
+\backslash
+& A/I 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop1})
+\end_layout
+
+\end_inset
+
+, we conclude that
+\begin_inset Formula 
+\begin{align*}
+\mbox{HP}_{A/I}(t) & =\frac{1-2t^{2}+t^{3}}{(1-t)^{2}}\\
+ & =\frac{1+t-t^{2}}{1-t}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the reduced expression of 
+\begin_inset Formula $\mbox{HP}_{A/I}(t)$
+\end_inset
+
+, we see that 
+\begin_inset Formula 
+\[
+P_{A/I}(n)={n \choose 0}+{n-1 \choose 0}-{n-2 \choose 0}=1.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ with respect to weights 
+\begin_inset Formula $w=(1,1,1)$
+\end_inset
+
+ and let 
+\begin_inset Formula $I$
+\end_inset
+
+ be the ideal in 
+\begin_inset Formula $A$
+\end_inset
+
+ given by 
+\begin_inset Formula $I=\langle xz,yz\rangle$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ A free resolution of 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is given by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep=80, ampersand replacement=
+\backslash
+&] A(-3) 
+\backslash
+arrow{r}{
+\backslash
+begin{pmatrix} -y 
+\backslash
+
+\backslash
+ x 
+\backslash
+end{pmatrix} } 
+\backslash
+& A(-2)^2 
+\backslash
+arrow{r}{ 
+\backslash
+begin{pmatrix} xz & yz  
+\backslash
+end{pmatrix} } 
+\backslash
+& A 
+\backslash
+arrow{r} 
+\backslash
+& A/I 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop1})
+\end_layout
+
+\end_inset
+
+, we conclude that
+\begin_inset Formula 
+\begin{align*}
+\mbox{HP}_{A/I}(t) & =\frac{1-2t^{2}+t^{3}}{(1-t)^{3}}\\
+ & =\frac{1+t-t^{2}}{(1-t)^{2}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the reduced expression of 
+\begin_inset Formula $\mbox{HP}_{A/I}(t)$
+\end_inset
+
+, we see that 
+\begin_inset Formula 
+\[
+P_{A/I}(n)={n+1 \choose 1}+{n \choose 1}-{n-1 \choose 1}=n+2.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The graded parts of 
+\begin_inset Formula $A/I$
+\end_inset
+
+ starts out as
+\begin_inset Formula 
+\begin{align*}
+ & \vdots\\
+(A/I)_{0} & =K\\
+(A/I)_{1} & =K\bar{x}+K\bar{y}+K\overline{z}\\
+(A/I)_{2} & =K\overline{x}^{2}+K\bar{x}\bar{y}+K\bar{y}^{2}+K\overline{z}^{2}\\
+(A/I)_{3} & =K\bar{x}^{3}+K\bar{x}^{2}\bar{y}+K\bar{x}\overline{y}^{2}+K\overline{y}^{3}+K\overline{z}^{3}\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that
+\begin_inset Formula 
+\begin{align*}
+(A/I)_{n} & =(A/\langle xz,yz\rangle)_{n}\\
+ & =(A/(\langle z\rangle\cap\langle x,y\rangle))_{n}\\
+ & \cong((A/\langle z\rangle)\oplus(A/\langle x,y\rangle))_{n}\\
+ & \cong(A/\langle z\rangle)_{n}\oplus(A/\langle x,y\rangle){}_{n}
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ with weights 
+\begin_inset Formula $w=(1,2,3)$
+\end_inset
+
+, 
+\begin_inset Formula $I$
+\end_inset
+
+ be the ideal in 
+\begin_inset Formula $A$
+\end_inset
+
+ given by 
+\begin_inset Formula $I=\langle x^{3}+z\rangle$
+\end_inset
+
+, and 
+\begin_inset Formula $B$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[s,t]$
+\end_inset
+
+ with respect to weights 
+\begin_inset Formula $w=(1,2)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ We have an exact sequence of graded 
+\begin_inset Formula $A$
+\end_inset
+
+-modules 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep=40] 0 
+\backslash
+arrow[r] & A(-3) 
+\backslash
+arrow[r,"
+\backslash
+cdot (x^3 + z)"] &  A 
+\backslash
+arrow[r] & A/I 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop1})
+\end_layout
+
+\end_inset
+
+, we conclude that
+\begin_inset Formula 
+\begin{align*}
+\mbox{HP}_{A/I}(t) & =\frac{1-t^{3}}{(1-t)(1-t^{2})(1-t^{3})}\\
+ & =\frac{1}{(1-t)(1-t^{2})}\\
+ & =\mbox{HP}_{B}(t).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ with weights 
+\begin_inset Formula $w=(1,2,3)$
+\end_inset
+
+ and let 
+\begin_inset Formula $I=\langle x^{3}+z,y^{3}+z^{2}\rangle$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ We have an exact sequence of graded 
+\begin_inset Formula $A$
+\end_inset
+
+-modules
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep=70, ampersand replacement=
+\backslash
+&] 0 
+\backslash
+arrow[r] 
+\backslash
+& A(-9) 
+\backslash
+arrow{r}{
+\backslash
+begin{pmatrix} -y^3 - z^2 
+\backslash
+
+\backslash
+  x^3 + z 
+\backslash
+end{pmatrix} } 
+\backslash
+& A(-3) 
+\backslash
+oplus A(-6) 
+\backslash
+arrow{r}{ 
+\backslash
+begin{pmatrix} x^3 + z & y^3 +z^2 
+\backslash
+end{pmatrix} } 
+\backslash
+& A 
+\backslash
+arrow{r} 
+\backslash
+& A/I 
+\backslash
+arrow[r] 
+\backslash
+& 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop1})
+\end_layout
+
+\end_inset
+
+, we conclude that
+\begin_inset Formula 
+\begin{align*}
+\mbox{HP}_{A/I}(t) & =\frac{1-t^{3}-t^{6}+t^{9}}{(1-t)(1-t^{2})(1-t^{3})}\\
+ & =\frac{(1-t+t^{2})(1+t+t^{2})}{1-t.}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ (Twisted Cubic) Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x,y,z,w]$
+\end_inset
+
+ with respect to weights 
+\begin_inset Formula $w=(1,1,1,1)$
+\end_inset
+
+, 
+\begin_inset Formula $B$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[s,t]$
+\end_inset
+
+ with respect to weights 
+\begin_inset Formula $w=(1,1)$
+\end_inset
+
+, 
+\begin_inset Formula $I$
+\end_inset
+
+ be the ideal in 
+\begin_inset Formula $A$
+\end_inset
+
+ given by 
+\begin_inset Formula $I=\langle xz-y^{2},yw-z^{2},xw-yz\rangle$
+\end_inset
+
+, and 
+\begin_inset Formula $M$
+\end_inset
+
+ be the 
+\begin_inset Formula $B$
+\end_inset
+
+-module 
+\begin_inset Formula $B^{3}$
+\end_inset
+
+ with respect to weights 
+\begin_inset Formula $k=(0,1,1)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ A free resolution of 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is given by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep=120, ampersand replacement=
+\backslash
+&] A(-3)^2 
+\backslash
+arrow{r}{
+\backslash
+begin{pmatrix} w & z 
+\backslash
+
+\backslash
+ y & x 
+\backslash
+
+\backslash
+ -z & -y 
+\backslash
+end{pmatrix} } 
+\backslash
+& A(-2)^3 
+\backslash
+arrow{r}{ 
+\backslash
+begin{pmatrix} xz - y^2 & yw - z^2 & xw - yz  
+\backslash
+end{pmatrix} } 
+\backslash
+& A 
+\backslash
+arrow{r} 
+\backslash
+& A/I 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop1})
+\end_layout
+
+\end_inset
+
+, we conclude that
+\begin_inset Formula 
+\begin{align*}
+\mbox{HP}_{A/I}(t) & =\frac{1-3t^{2}+2t^{3}}{(1-t)^{4}}\\
+ & =\frac{1+2t}{(1-t)^{2}}\\
+ & =\mbox{HP}_{M}(t).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let's write out the graded components of 
+\begin_inset Formula $A/I$
+\end_inset
+
+ and 
+\begin_inset Formula $M$
+\end_inset
+
+ side by side: 
+\begin_inset Formula 
+\[
+A/I=\langle1\rangle\oplus\langle x,w,y,z\rangle\oplus\langle x^{2},w^{2},xw,xy,xz,yw,zw\rangle\oplus\cdots\qquad M=\langle e_{0}\rangle\oplus\langle se_{0},te_{0}e_{1},e_{2}\rangle\oplus\langle s^{2}e_{0},ste_{0},t^{2}e_{0},se_{1},se_{2},te_{1},te_{2}\rangle\oplus\cdots
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It's easy to see that we get an isomorphism of 
+\begin_inset Formula $K$
+\end_inset
+
+-vector spaces 
+\begin_inset Formula $(A/I)_{n}\to M_{n}$
+\end_inset
+
+ by mapping 
+\begin_inset Formula $x\mapsto se_{0}$
+\end_inset
+
+, 
+\begin_inset Formula $w\mapsto te_{0}$
+\end_inset
+
+, 
+\begin_inset Formula $y\mapsto e_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $z\mapsto e_{2}$
+\end_inset
+
+, and treating 
+\begin_inset Formula $e_{0}$
+\end_inset
+
+ as the identity.
+ The idea is that the twisted cubic is really a one dimensional object,
+ which is why the 
+\begin_inset Formula $K[x,y,z,w]$
+\end_inset
+
+-module 
+\begin_inset Formula $A/I$
+\end_inset
+
+ and the 
+\begin_inset Formula $K[s,t]$
+\end_inset
+
+-module 
+\begin_inset Formula $M$
+\end_inset
+
+ have the same graded structure.
+ From the reduced expression of 
+\begin_inset Formula $\mbox{HP}_{A/I}(t)$
+\end_inset
+
+ and 
+\begin_inset Formula $\mbox{HP}_{M}(t)$
+\end_inset
+
+, we see that 
+\begin_inset Formula 
+\[
+P_{A/I}(n)=P_{M}(n)={n+1 \choose 1}+2{n \choose 1}=3n+1.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x_{1},\dots,x_{r}]$
+\end_inset
+
+ with respect to weights 
+\begin_inset Formula $w=(1,1\dots,1)$
+\end_inset
+
+ and let 
+\begin_inset Formula $f\in A$
+\end_inset
+
+ be a homogeneous polynomial of degree 
+\begin_inset Formula $d$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\langle f\rangle$
+\end_inset
+
+ is a homogeneous ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $A/f$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ We have an exact sequence of graded 
+\begin_inset Formula $A$
+\end_inset
+
+-modules 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  A(-d) 
+\backslash
+arrow[r, " 
+\backslash
+cdot f "] & A 
+\backslash
+arrow[r] &  A/ f 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop1})
+\end_layout
+
+\end_inset
+
+, we conclude that 
+\begin_inset Formula 
+\begin{align*}
+\mbox{HP}_{A/f}(t) & =\frac{1-t^{d}}{(1-t)^{r}}\\
+ & =\frac{1+t+t^{2}+\cdots+t^{d-1}}{(1-t)^{r-1}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the reduced expression of 
+\begin_inset Formula $\mbox{HP}_{A/I}(t)$
+\end_inset
+
+, we see that 
+\begin_inset Formula 
+\[
+P_{A/f}(n)={r-2+n \choose r-2}+{r-2+n-1 \choose r-2}+\cdots+{r-2+n-d-1 \choose r-2}=\frac{d}{(r-2)!}n^{r-2}+\mbox{ terms of lower degree}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For example, if 
+\begin_inset Formula $r=3$
+\end_inset
+
+ and 
+\begin_inset Formula $d=4$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+P_{A/f}={n+1 \choose 1}+{n \choose 1}+{n-1 \choose 1}+{n-2 \choose 1}=4n-2.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Filtrations and the Lemma of Artin-Rees
+\end_layout
+
+\begin_layout Standard
+Throughout this section, let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a Noetherian ring and 
+\begin_inset Formula $Q\subset A$
+\end_inset
+
+ be an ideal.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ A set 
+\begin_inset Formula $\{M_{n}\}_{n\geq0}$
+\end_inset
+
+ of submodules of an 
+\begin_inset Formula $A$
+\end_inset
+
+-module 
+\begin_inset Formula $M$
+\end_inset
+
+ is called a 
+\begin_inset Formula $Q$
+\end_inset
+
+-
+\series bold
+filtration 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+ if 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $M=M_{0}\supset M_{1}\supset M_{2}\supset\cdots$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $QM_{n}\subset M_{n+1}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\geq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtration 
+\begin_inset Formula $\{M_{n}\}_{n\geq0}$
+\end_inset
+
+ of 
+\begin_inset Formula $M$
+\end_inset
+
+ is called 
+\series bold
+stable 
+\series default
+if 
+\begin_inset Formula $QM_{n}=M_{n+1}$
+\end_inset
+
+ for all sufficiently large 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be an 
+\begin_inset Formula $A$
+\end_inset
+
+-module and 
+\begin_inset Formula $M_{n}:=Q^{n}M$
+\end_inset
+
+ for 
+\begin_inset Formula $n\geq0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\{M_{n}\}_{n\ge0}$
+\end_inset
+
+ is a stable 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtration of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\{M_{n}\}_{n\geq0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\{N_{n}\}_{n\geq0}$
+\end_inset
+
+ be two stable 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtrations of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Then there exists some non-negative integer 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ such that 
+\begin_inset Formula $M_{n_{0}+n}\subset N_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $N_{n+n_{0}}\subset M_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\geq0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Without loss of generality, assume 
+\begin_inset Formula $N_{n}:=Q^{n}M$
+\end_inset
+
+.
+ Now 
+\begin_inset Formula $\{M_{n}\}_{n\geq0}$
+\end_inset
+
+ being stable implies that there exists some non-negative integer 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ such that 
+\begin_inset Formula $M_{n_{0}+n}=Q^{n}M_{n_{0}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\geq0$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula 
+\begin{align*}
+M_{n+n_{0}} & =Q^{n}M_{n_{0}}\\
+ & \subset Q^{n}M\\
+ & =N_{n}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Conversely, as 
+\begin_inset Formula $\{M_{n}\}_{n\geq0}$
+\end_inset
+
+ is a 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtration, we have 
+\begin_inset Formula $QM_{n}\subset M_{n+1}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\ge0$
+\end_inset
+
+, which implies, in particular
+\begin_inset Formula 
+\begin{align*}
+N_{n+n_{0}} & \subset N_{n}\\
+ & =Q^{n}M\\
+ & =Q^{n}M_{0}\\
+ & \subset M_{n}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On the other hand, 
+\begin_inset Formula $Q^{n}M_{n_{0}}\subset Q^{n}M=N_{n}$
+\end_inset
+
+ implies 
+\begin_inset Formula $M_{n+n_{0}}\subset N$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\varphi:N\to M$
+\end_inset
+
+ be an 
+\begin_inset Formula $A$
+\end_inset
+
+-linear map of 
+\begin_inset Formula $A$
+\end_inset
+
+-modules, and let 
+\begin_inset Formula $\{M_{n}\}_{n\geq0}$
+\end_inset
+
+ be a 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtration of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\{\varphi^{-1}(M_{n})\}_{n\geq0}$
+\end_inset
+
+ is a 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtration of 
+\begin_inset Formula $N$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We have 
+\begin_inset Formula $Q\varphi^{-1}(M_{n})\subset\varphi^{-1}(QM_{n})\subset\varphi^{-1}(M_{n+1})$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\geq0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defnblowup}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a ring, 
+\begin_inset Formula $Q\subset A$
+\end_inset
+
+ an ideal, and 
+\begin_inset Formula $M$
+\end_inset
+
+ and 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ The 
+\series bold
+blowup algebra of 
+\begin_inset Formula $Q$
+\end_inset
+
+ in 
+\begin_inset Formula $A$
+\end_inset
+
+ 
+\series default
+is the 
+\begin_inset Formula $A$
+\end_inset
+
+-algebra
+\begin_inset Formula 
+\[
+B_{Q}(A):=A+tQ+t^{2}Q^{2}+t^{3}Q^{3}+\cdots.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The multiplication in 
+\begin_inset Formula $B_{Q}(A)$
+\end_inset
+
+ is induced by the multiplication 
+\begin_inset Formula $Q^{i}\times Q^{j}\to Q^{i+j}$
+\end_inset
+
+.
+ We also define the 
+\series bold
+blowup module 
+\begin_inset Formula 
+\[
+B_{Q}(M):=M+tQM+t^{2}Q^{2}M+t^{3}Q^{3}M+\cdots.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ Note that 
+\begin_inset Formula $B_{Q}(A)/QB_{Q}(A)\cong\text{Gr}_{Q}(A)$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{Q}(M)/QB_{Q}(M)\cong\text{Gr}_{Q}(M)$
+\end_inset
+
+.
+  
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propblowupofneotherianisnoetherian}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a Noetherian ring and 
+\begin_inset Formula $Q\subset A$
+\end_inset
+
+ an ideal.
+ Then 
+\begin_inset Formula $B_{Q}(A)$
+\end_inset
+
+ is a Noetherian ring.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Since 
+\begin_inset Formula $A$
+\end_inset
+
+ is Noetherian, 
+\begin_inset Formula $Q$
+\end_inset
+
+ is finitely generated, say 
+\begin_inset Formula $Q=\langle f_{1},\dots,f_{r}\rangle$
+\end_inset
+
+.
+ Then the map 
+\begin_inset Formula $\varphi:A[x_{1},\dots,x_{r}]\to B_{Q}(A)$
+\end_inset
+
+, induced by 
+\begin_inset Formula $\varphi(x_{i})=tf_{i}$
+\end_inset
+
+, is a surjective ring homomorphism from a Noetherian ring.
+ Therefore 
+\begin_inset Formula $B_{Q}(A)$
+\end_inset
+
+ is a Noetherian ring.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y]/\langle y^{2}-x^{3}-x^{2}\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $Q=\langle x,y\rangle$
+\end_inset
+
+.
+ Then the map 
+\begin_inset Formula $\varphi:K[x,y,u,v]\to B_{Q}(A)$
+\end_inset
+
+, induced by 
+\begin_inset Formula $u\mapsto xt$
+\end_inset
+
+, and 
+\begin_inset Formula $v\mapsto yt$
+\end_inset
+
+, is a surjective ring homomorphism.
+ The kernel of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is an ideal which is homogeneous in the variables 
+\begin_inset Formula $u,v$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\text{Ker}(\varphi)=\langle v^{2}-(x+1)u^{2},xv-yu,y^{2}-x^{3}-x^{2}\rangle.
+\]
+
+\end_inset
+
+In particular, 
+\begin_inset Formula $B_{Q}(A)$
+\end_inset
+
+ corresponds to an algebraic subset 
+\begin_inset Formula $Z\subset\mathbb{A}^{2}\times\mathbb{P}^{1}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R=\mathbb{F}_{2}[x,y]/\langle y^{2}+x^{3}+x^{2}\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{m}=\langle\overline{x},\overline{y}\rangle\subset R$
+\end_inset
+
+.
+ Then the map 
+\begin_inset Formula $\varphi:\mathbb{F}_{2}[x,y,u,v]\to B_{\mathfrak{m}}(R)$
+\end_inset
+
+, induced by 
+\begin_inset Formula $u\mapsto\overline{x}t$
+\end_inset
+
+, and 
+\begin_inset Formula $v\mapsto\overline{y}t$
+\end_inset
+
+, is a surjective ring homomorphism.
+ The kernel of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is an ideal which is homogeneous in the variables 
+\begin_inset Formula $u,v$
+\end_inset
+
+ and is given by 
+\begin_inset Formula $\text{Ker}(\varphi)=\langle f_{1},f_{2},f_{3},f_{4},f_{5}\rangle$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\begin{align*}
+f_{1} & =yu^{3}+u^{2}v+v^{3}\\
+f_{2} & =xu^{2}+u^{2}+v^{2}\\
+f_{3} & =x^{2}u+xu+yv\\
+f_{4} & =xv+yu\\
+f_{5} & =x^{3}+x^{2}+y^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, 
+\begin_inset Formula $K[x,y,u,v]/\langle f_{1},f_{2},f_{3},f_{4},f_{5}\rangle\cong B_{\mathfrak{m}}(R)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\text{Ker}(\varphi)=\langle yu^{3}+u^{2}v+v^{3},xu^{2}+u^{2}+v^{2},x^{2}u+xu+yv,xv+yu,x^{3}+x^{2}+y^{2}\rangle.
+\]
+
+\end_inset
+
+In particular, 
+\begin_inset Formula $B_{Q}(A)$
+\end_inset
+
+ corresponds to an algebraic subset 
+\begin_inset Formula $Z\subset\mathbb{A}^{2}\times\mathbb{P}^{1}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\varphi:K[y_{1},\dots,y_{m}]\to K[x_{1},\dots,x_{n}]/I$
+\end_inset
+
+ be a 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra homomorphism, induced by mapping 
+\begin_inset Formula $y_{i}\mapsto\overline{f}_{i}$
+\end_inset
+
+, and let 
+\begin_inset Formula $J$
+\end_inset
+
+ be the ideal in 
+\begin_inset Formula $K[y_{1},\dots,y_{m},x_{1},\dots,x_{n}]$
+\end_inset
+
+ given by 
+\begin_inset Formula 
+\[
+J=IK[y_{1},\dots,y_{m},x_{1},\dots,x_{n}]+\langle f_{1}-y_{1},\dots,f_{m}-y_{m}\rangle.
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\text{Ker}(\varphi)=J\cap K[y_{1},\dots,y_{m}]$
+\end_inset
+
+.
+ In the example above, we can view 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ as ring homomorphism from 
+\begin_inset Formula $K[x,y,u,v]$
+\end_inset
+
+ to 
+\begin_inset Formula $K[x,y,t]/\langle y^{2}-x^{3}-x^{2}\rangle$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y]/\langle x^{2}+y^{2}-z^{2}\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $Q=\langle x,y,z\rangle$
+\end_inset
+
+.
+ Then the map 
+\begin_inset Formula $\varphi:K[x,y,z,u,v,w]\to B_{Q}(A)$
+\end_inset
+
+, induced by 
+\begin_inset Formula $u\mapsto xt$
+\end_inset
+
+, 
+\begin_inset Formula $v\mapsto yt$
+\end_inset
+
+, and 
+\begin_inset Formula $w\mapsto zt$
+\end_inset
+
+ is a surjective ring homomorphism.
+ Since 
+\begin_inset Formula $B_{Q}(A)\subset A[t]=K[t,x,y,z]/\langle x^{2}+y^{2}-z^{2}\rangle$
+\end_inset
+
+, we can view 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ as a map from 
+\begin_inset Formula $K[x,y,z,u,v,w]$
+\end_inset
+
+ to 
+\begin_inset Formula $K[t,x,y,z]/\langle x^{2}+y^{2}-z^{2}\rangle$
+\end_inset
+
+.
+ Then the kernel of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ can be computed by eliminating 
+\begin_inset Formula $t$
+\end_inset
+
+ from the ideal generated by 
+\begin_inset Formula $J=\langle u-xt,v-yt,w-zt,x^{2}+y^{2}-z^{2}\rangle\subset K[t,x,y,z,u,v,w]$
+\end_inset
+
+.
+ We obtain
+\begin_inset Formula 
+\[
+\text{Ker}(\varphi)=\langle u^{2}+v^{2}-w^{2},yw-zv,xw-zu,xv-yu,xu+yv-zw,x^{2}+y^{2}-z^{2}\rangle.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{artinrees}
+\end_layout
+
+\end_inset
+
+ (Artin-Rees) Let 
+\begin_inset Formula $\{M_{n}\}_{n\geq0}$
+\end_inset
+
+ be a stable 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtration of the finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module 
+\begin_inset Formula $M$
+\end_inset
+
+ and 
+\begin_inset Formula $N\subset M$
+\end_inset
+
+ a submodule, then 
+\begin_inset Formula $\{M_{n}\cap N\}_{n\ge0}$
+\end_inset
+
+ is a stable 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtration of 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To prove the lemma, we need a criterion for stability.
+ Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module and 
+\begin_inset Formula $\{M_{n}\}_{n\geq0}$
+\end_inset
+
+ be a 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtration.
+ Let
+\begin_inset Formula 
+\begin{align*}
+B_{Q}(A) & :=A+tQ+t^{2}Q^{2}+t^{3}Q^{3}+\cdots\\
+B_{Q}(M) & :=M+tQM+t^{2}Q^{2}M+t^{3}Q^{3}M+\cdots\\
+\overline{M} & :=M+tM_{1}+t^{2}M_{2}+t^{3}M_{3}+\cdots\\
+\overline{M}_{1} & :=M+tM_{1}+t^{2}QM_{1}+t^{3}Q^{2}M_{1}+\cdots\\
+\overline{M}_{2} & :=M+tM_{1}+t^{2}M_{2}+t^{3}QM_{2}+\cdots\\
+\overline{M}_{n} & :=M+M_{1}t+\cdots+M_{n-1}t^{n-1}+B_{Q}(A)M_{n}t^{n}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\end_layout
+
+\end_inset
+
+ (Criterion for stability).
+ 
+\begin_inset Formula $\overline{M}$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $B_{Q}(A)$
+\end_inset
+
+-module if and only if 
+\begin_inset Formula $\{M_{n}\}_{n\geq0}$
+\end_inset
+
+ is 
+\begin_inset Formula $Q$
+\end_inset
+
+-stable.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Since 
+\begin_inset Formula $A$
+\end_inset
+
+ is Noetherian and 
+\begin_inset Formula $M$
+\end_inset
+
+ is finitely generated, it follows that the submodules 
+\begin_inset Formula $M_{n}$
+\end_inset
+
+, 
+\begin_inset Formula $n\geq0$
+\end_inset
+
+, are finitely generated.
+ Let 
+\begin_inset Formula 
+\begin{align*}
+\overline{M}_{n} & :=M+M_{1}t+\cdots+M_{n-1}t^{n-1}+B_{Q}(A)M_{n}t^{n}\\
+ & =M+M_{1}t+\cdots+M_{n-1}t^{n-1}+M_{n}t^{n}+QM_{n}t^{n+1}+Q^{2}M_{n}t^{n+2}+\cdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+then 
+\begin_inset Formula $\overline{M}_{n}$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $B_{Q}(A)$
+\end_inset
+
+-module, because 
+\begin_inset Formula $\bigoplus_{i=0}^{n}M_{i}$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ Moreover, 
+\begin_inset Formula $\overline{M}_{n}\subset\overline{M}_{n+1}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\geq0$
+\end_inset
+
+ and 
+\begin_inset Formula $\bigcup_{n=0}^{\infty}\overline{M}_{n}=\overline{M}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+By 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propblowupofneotherianisnoetherian})
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Formula $B_{Q}(A)$
+\end_inset
+
+ is a Noetherian ring.
+ This implies that 
+\begin_inset Formula $\overline{M}$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $B_{Q}(A)$
+\end_inset
+
+-module if and only if there exists a non-negative integer 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\overline{M}_{n_{0}}=\overline{M}$
+\end_inset
+
+.
+ This is the case if and only if 
+\begin_inset Formula $M_{n_{0}+r}=Q^{r}M_{n_{0}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $r\geq0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a Noetherian ring, 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be a prime ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+, and 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ For any map 
+\begin_inset Formula $\varphi:I\to A/\mathfrak{p}$
+\end_inset
+
+, there exists a number 
+\begin_inset Formula $d$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ factors through 
+\begin_inset Formula $I/(\mathfrak{p}^{d}\cap I)\cong(\mathfrak{p}^{d}+I)/\mathfrak{p}^{d}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ By Artin-Rees, 
+\begin_inset Formula $\{I\cap\mathfrak{p}^{n}\}_{n\geq0}$
+\end_inset
+
+ is a stable 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+-filtration.
+ Therefore 
+\begin_inset Formula $I\cap\mathfrak{p}^{d}=\mathfrak{p}\left(I\cap\mathfrak{p}^{d-1}\right)$
+\end_inset
+
+ for some 
+\begin_inset Formula $d\geq1$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $I\cap\mathfrak{p}^{d}\subset\text{Ker}(\varphi)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a ring, 
+\begin_inset Formula $Q$
+\end_inset
+
+ an ideal in 
+\begin_inset Formula $A$
+\end_inset
+
+, and let 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & M_1 
+\backslash
+arrow[r] & M_2 
+\backslash
+arrow[r] & M_3 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+be a short exact sequence of 
+\begin_inset Formula $A$
+\end_inset
+
+-modules.
+ Then 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & B_Q (M_1 ) 
+\backslash
+arrow[r] & B_Q (M_2 ) 
+\backslash
+arrow[r] & B_Q (M_3 ) 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+is exact.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+The Hilbert-Samuel Function
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In the previous section, we defined Hilbert functions and Hilbert polynomials
+ for graded modules over a Noetherian graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra.
+ It turns out that we can define something analagous for modules over local
+ Noetherian rings.
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a local Noetherian ring with maximal ideal 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+.
+ We assume (for simplicity) that 
+\begin_inset Formula $K=A/\mathfrak{m}\subset A$
+\end_inset
+
+.
+ Moreover, let 
+\begin_inset Formula $Q$
+\end_inset
+
+ be an 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+-primary ideal and 
+\begin_inset Formula $M$
+\end_inset
+
+ a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{hsp}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\{M_{n}\}_{n\ge0}$
+\end_inset
+
+ be a stable 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtration of 
+\begin_inset Formula $M$
+\end_inset
+
+ and let 
+\begin_inset Formula 
+\[
+\mbox{HS}_{\{M_{n}\}_{n\geq0}}(k):=\mbox{dim}_{K}(M/M_{k}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Moreover, suppose that 
+\begin_inset Formula $Q$
+\end_inset
+
+ is generated by 
+\begin_inset Formula $r$
+\end_inset
+
+ elements.
+ Then 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mbox{HS}_{\{M_{n}\}_{n\geq0}}(k)<\infty$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\geq0$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+There exists a polynomial 
+\begin_inset Formula $\mbox{HSP}_{\{M_{n}\}_{n\geq0}}(t)\in\mathbb{Q}[t]$
+\end_inset
+
+ of degree at most 
+\begin_inset Formula $r$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mbox{HS}_{\{M_{n}\}_{n\geq0}}(k)=\mbox{HSP}_{\{M_{n}\}_{n\geq0}}(k)$
+\end_inset
+
+ for all sufficiently large 
+\begin_inset Formula $k$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+The degree of 
+\begin_inset Formula $\mbox{HSP}_{\{M_{n}\}_{n\geq0}}$
+\end_inset
+
+ and its leading coefficient do not depend on the choice of a stable 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtration 
+\begin_inset Formula $\{M_{n}\}_{n\geq0}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Recall that 
+\begin_inset Formula $\mbox{Gr}_{Q}(A)=\bigoplus_{i\geq0}Q^{i}/Q^{i+1}$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $(A/Q)$
+\end_inset
+
+-algebra which is generated by 
+\begin_inset Formula $r$
+\end_inset
+
+ elements of degree 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Now, let 
+\begin_inset Formula 
+\[
+\mbox{Gr}_{\{M_{n}\}}(M):=\overline{M}/Q\overline{M}=\bigoplus_{i\geq0}M_{i}/M_{i+1}.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\{M_{n}\}_{n\ge0}$
+\end_inset
+
+ is a stable 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtration, 
+\begin_inset Formula $\overline{M}$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $B_{Q}(A)$
+\end_inset
+
+-module.
+ Thus, 
+\begin_inset Formula $\mbox{Gr}_{\{M_{n}\}}(M)$
+\end_inset
+
+ is a finitely generated 
+\begin_inset Formula $\mbox{Gr}_{Q}(A)$
+\end_inset
+
+-module.
+ Now as 
+\begin_inset Formula $QM_{i}\subset M_{i+1}$
+\end_inset
+
+, the quotients 
+\begin_inset Formula $M_{i}/M_{i+1}$
+\end_inset
+
+, 
+\begin_inset Formula $i\geq0$
+\end_inset
+
+, are annihilated by 
+\begin_inset Formula $Q$
+\end_inset
+
+ and, therefore, are finitely generated 
+\begin_inset Formula $(A/Q)$
+\end_inset
+
+-modules, but 
+\begin_inset Formula $A/Q$
+\end_inset
+
+ is a finite dimensional 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space since 
+\begin_inset Formula $Q$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+-primary.
+ Hence 
+\begin_inset Formula $\mbox{dim}_{K}(M_{i}/M_{i+1})<\infty$
+\end_inset
+
+, and therefore 
+\begin_inset Formula 
+\[
+\mbox{dim}_{K}(M/M_{n})=\sum_{i=1}^{n}\mbox{dim}_{K}(M_{i-1}/M_{i})<\infty.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Note that 
+\begin_inset Formula $H_{\mbox{Gr}_{\{M_{n}\}}(M)}(k)=\mbox{dim}_{K}(M_{k}/M_{k+1})$
+\end_inset
+
+.
+ For sufficiently large 
+\begin_inset Formula $k$
+\end_inset
+
+, 
+\begin_inset Formula $H_{\mbox{Gr}_{\{M_{n}\}}(M)}(k)=P_{\mbox{Gr}_{\{M_{n}\}}(M)}(k)$
+\end_inset
+
+, and 
+\begin_inset Formula $P_{\mbox{Gr}_{\{M_{n}\}}(M)}$
+\end_inset
+
+ is a polynomial of degree at most 
+\begin_inset Formula $r-1$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\[
+P_{\mbox{Gr}_{\{M_{n}\}}(M)}(k)=\sum_{i=0}^{r-1}a_{i}{k \choose i},
+\]
+
+\end_inset
+
+ then we have 
+\begin_inset Formula 
+\begin{align*}
+\mbox{HS}_{\{M_{n}\}_{n\geq0}}(k+1)-\mbox{HS}_{\{M_{n}\}_{n\geq0}}(k) & =\mbox{dim}_{K}(M/M_{k+1})-\mbox{dim}_{K}(M/M_{k})\\
+ & =\mbox{dim}_{K}(M_{k}/M_{k+1})\\
+ & =H_{\mbox{Gr}_{\{M_{n}\}}(M)}(k)\\
+ & =P_{\mbox{Gr}_{\{M_{n}\}}(M)}(k),
+\end{align*}
+
+\end_inset
+
+ for sufficiently large 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ On the other hand
+\begin_inset Formula 
+\[
+\sum_{i=1}^{r}a_{i-1}{k+1 \choose i}-\sum_{i=1}^{r}a_{i-1}{k \choose i}=\sum_{i=0}^{r-1}a_{i}{k \choose i}=\mbox{HS}_{\{M_{n}\}_{n\geq0}}(k+1)-\mbox{HS}_{\{M_{n}\}_{n\geq0}}(k).
+\]
+
+\end_inset
+
+Hence 
+\begin_inset Formula $\mbox{HS}_{\{M_{n}\}_{n\geq0}}(k)-\sum_{i=1}^{r}a_{i-1}{k \choose i}$
+\end_inset
+
+ is constant if 
+\begin_inset Formula $k$
+\end_inset
+
+ is sufficiently large.
+ Let 
+\begin_inset Formula $C$
+\end_inset
+
+ be this constant and set 
+\begin_inset Formula $\mbox{HSP}_{\{M_{n}\}_{n\geq0}}(k):=\sum_{i=1}^{r}a_{i-1}{k \choose i}+C$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mbox{HS}_{\{M_{n}\}_{n\geq0}}(k)=\mbox{HSP}_{\{M_{n}\}_{n\geq0}}(k)$
+\end_inset
+
+, a polynomial of degree at most 
+\begin_inset Formula $r$
+\end_inset
+
+, for sufficiently large 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\{M'_{n}\}_{n\geq0}$
+\end_inset
+
+ be another stable 
+\begin_inset Formula $Q$
+\end_inset
+
+-filtration of 
+\begin_inset Formula $M$
+\end_inset
+
+, and choose 
+\begin_inset Formula $k_{0}$
+\end_inset
+
+ such that 
+\begin_inset Formula $M_{k+k_{0}}\subset M_{k}'$
+\end_inset
+
+ and 
+\begin_inset Formula $M'_{k+k_{0}}\subset M_{k}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\geq0$
+\end_inset
+
+.
+ This implies the inequalities 
+\begin_inset Formula $\mbox{HS}_{\{M_{n}\}_{n\geq0}}(k)\leq\mbox{HS}_{\{M'_{n}\}_{n\geq0}}(k+k_{0})$
+\end_inset
+
+ and 
+\begin_inset Formula $\mbox{HS}_{\{M'_{n}\}_{n\geq0}}(k)\leq\mbox{HS}_{\{M_{n}\}_{n\geq0}}(k+k_{0})$
+\end_inset
+
+ and, therefore 
+\begin_inset Formula 
+\[
+1=\lim_{k\to\infty}\frac{\mbox{HS}_{\{M_{n}\}}(k)}{\mbox{HS}_{\{M'_{n}\}}(k)}=\lim_{k\to\infty}\frac{\mbox{HSP}_{\{M_{n}\}_{n\geq0}}(k)}{\mbox{HSP}_{\{M'_{n}\}_{n\geq0}}(k)}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ With the notation of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{hsp})
+\end_layout
+
+\end_inset
+
+ we define:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mbox{HS}_{M,Q}:=\mbox{HS}_{\{Q^{n}M\}_{n\geq0}}=\mbox{dim}_{K}(M/Q^{n}M)$
+\end_inset
+
+ is called the 
+\series bold
+Hilbert
+\series default
+-
+\series bold
+Samuel function 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $Q$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\text{HSP}_{M,Q}:=\text{HSP}_{\{Q^{n}M\}_{n\geq0}}$
+\end_inset
+
+ is called the 
+\series bold
+Hilbert-Samuel polynomial 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $Q$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\text{HSP}_{M,Q}(k)=\sum_{\nu=0}^{d}a_{\nu}k^{\nu}$
+\end_inset
+
+ with 
+\begin_inset Formula $a_{d}\neq0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\text{mult}(M,Q):=d!a_{d}$
+\end_inset
+
+ is called the 
+\series bold
+Hilbert-Samuel multiplicity 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $Q$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\text{mult}(M):=\text{mult}(M,\mathfrak{m})$
+\end_inset
+
+ is called the 
+\series bold
+Hilbert-Samuel multiplicity 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{remarkk}
+\end_layout
+
+\end_inset
+
+ Let 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & N 
+\backslash
+arrow[r]  & M 
+\backslash
+arrow[r]  & M/N 
+\backslash
+arrow[r]  & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+be an exact sequence of finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-modules, and 
+\begin_inset Formula $Q$
+\end_inset
+
+ an 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+-primary ideal.
+ Then 
+\begin_inset Formula 
+\[
+\text{HSP}_{M,Q}=\text{HSP}_{M/N,Q}+\text{HSP}_{N,Q}-R,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $R$
+\end_inset
+
+ is a polynomial of degree strictly smaller than that of 
+\begin_inset Formula $\text{HSP}_{N,Q}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The exact sequence
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & N 
+\backslash
+arrow[r]  & M 
+\backslash
+arrow[r]  & M/N 
+\backslash
+arrow[r]  & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+induces the exact sequence
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & N/(Q^n M 
+\backslash
+cap N) 
+\backslash
+arrow[r]  & M/ Q^n M 
+\backslash
+arrow[r]  & (M/N)/ Q^n (M/N) 
+\backslash
+arrow[r]  & 0.
+ 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, 
+\begin_inset Formula 
+\[
+\text{HSP}_{M,Q}=\text{HSP}_{M/N,Q}+\text{HSP}_{\{Q^{n}M\cap N\}}.
+\]
+
+\end_inset
+
+The proof of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{hsp})
+\end_layout
+
+\end_inset
+
+ shows that, indeed, 
+\begin_inset Formula 
+\[
+\text{HSP}_{\{Q^{n}M\cap N\}}=\text{HSP}_{N,Q}-R,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $R$
+\end_inset
+
+ is a polynomial of degree strictly smaller than that of 
+\begin_inset Formula $\text{HSP}_{N,Q}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the proof of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(Lemma~(
+\backslash
+ref{hsp})
+\end_layout
+
+\end_inset
+
+, we actually proved more than just the claim.
+ We can summarize the additional results as a comparison between the Hilbert-Sam
+uel polynomial of 
+\begin_inset Formula $M$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $Q$
+\end_inset
+
+ and the Hilbert polynomial of the graded 
+\begin_inset Formula $\text{Gr}_{Q}(A)$
+\end_inset
+
+-module 
+\begin_inset Formula $\text{Gr}_{Q}(M)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(A,\mathfrak{m})$
+\end_inset
+
+ be a Noetherian local ring, 
+\begin_inset Formula $Q\subset A$
+\end_inset
+
+ be an 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+-primary ideal, and 
+\begin_inset Formula $M$
+\end_inset
+
+ a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ Then 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\text{HSP}_{M,Q}(k+1)-\text{HSP}_{M,Q}(k)=P_{\text{Gr}_{Q}(M)}(k).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $P_{\text{Gr}_{Q}(M)}(k)=\sum_{\nu=0}^{s-1}a_{\nu}{k \choose \nu}$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+\text{HSP}_{M,Q}(k)=\sum_{\nu=1}^{s}a_{\nu-1}{k \choose \nu}+c
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $c=\text{dim}_{K}(M/Q^{\ell}M)-\sum_{\nu=1}^{s}a_{\nu-1}{\ell \choose \nu}$
+\end_inset
+
+ for any sufficiently large 
+\begin_inset Formula $\ell$
+\end_inset
+
+.
+ In particular, we obtain 
+\begin_inset Formula $\text{mult}(M,Q)=\text{deg}(\text{Gr}_{Q}(M))$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\text{deg}(\text{HSP}_{M,Q})=\text{deg}(P_{\text{Gr}_{Q}(M)})+1.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y,z]_{\langle x,y,z\rangle}/\langle x^{2}+y^{3}+z^{4},xy+xz+z^{3}\rangle$
+\end_inset
+
+.
+ A standard basis for 
+\begin_inset Formula $\langle x^{2}+y^{3}+z^{4},xy+xz+z^{3}\rangle$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $ds$
+\end_inset
+
+ order is given by 
+\begin_inset Formula 
+\begin{align*}
+f_{1} & =x^{2}+y^{3}+z^{4}\\
+f_{2} & =xy+xz+z^{3}\\
+f_{3} & =y^{4}+y^{3}z-xz^{3}+yz^{4}+z^{5}
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\mbox{Gr}_{\mathfrak{m}}(A)\cong K[x,y,z]/\langle x^{2},xy+xz,y^{4}+y^{3}z-xz^{3}\rangle$
+\end_inset
+
+.
+ A free resolution 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ of 
+\begin_inset Formula $\mbox{Gr}_{\mathfrak{m}}(A)$
+\end_inset
+
+ is given by 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[ampersand replacement=
+\backslash
+&] A(-3) 
+\backslash
+oplus A(-5) 
+\backslash
+arrow{rrr}{
+\backslash
+begin{pmatrix} x & y^3 
+\backslash
+
+\backslash
+ -y-z & -z^3 
+\backslash
+
+\backslash
+ 0 & -x 
+\backslash
+end{pmatrix} } 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& A(-2) 
+\backslash
+oplus A(-2) 
+\backslash
+oplus A(-4) 
+\backslash
+arrow{rrrrr}{ 
+\backslash
+begin{pmatrix} xy + xz & x^2 & y^4 +y^3 z - xz^3  
+\backslash
+end{pmatrix} } 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& A 
+\backslash
+arrow{r} 
+\backslash
+& A/I 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mbox{Gr}_{\mathfrak{m}}(A)\cong K[x,y,z]/\langle x^{2},xy+xz,y^{4}+y^{3}z-xz^{3}\rangle
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop1})
+\end_layout
+
+\end_inset
+
+, we conclude that
+\begin_inset Formula 
+\begin{align*}
+\mbox{HP}_{\text{Gr}_{\mathfrak{m}}(A)}(t) & =\frac{1-\left(t^{2}+t^{2}+t^{4}\right)+\left(t^{3}+t^{5}\right)}{(1-t)^{3}}\\
+ & =\frac{1+2t+t^{2}+t^{3}}{1-t}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In particular, 
+\begin_inset Formula $\text{deg}(\text{Gr}_{\mathfrak{m}}(A))=5$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{deg}(P_{\text{Gr}_{\mathfrak{m}}(A)})=0$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\text{mult}(A,\mathfrak{m})=5$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{deg}(\text{HSP}_{M,Q})=1$
+\end_inset
+
+.
+ Finally, we list the first few graded pieces of 
+\begin_inset Formula $\text{Gr}_{\mathfrak{m}}(A)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+A/\mathfrak{m} & =K\\
+\mathfrak{m}/\mathfrak{m}^{2} & =Kx+Ky+Kz\\
+\mathfrak{m}^{2}/\mathfrak{m}^{3} & =Kxz+Ky^{2}+Kyz+Kz^{2}\\
+\mathfrak{m}^{3}/\mathfrak{m}^{4} & =Kxz^{2}+Ky^{3}+Ky^{2}z+Kyz^{2}+Kz^{3}\\
+\mathfrak{m}^{4}/\mathfrak{m}^{5} & =Kxz^{3}+Ky^{3}z+Ky^{2}z^{2}+Kyz^{3}+Kz^{4}\\
+\mathfrak{m}^{5}/\mathfrak{m}^{6} & =Kxz^{4}+Ky^{3}z^{2}+Ky^{2}z^{3}+Kyz^{4}+Kz^{5}\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Characterization of the Dimension of Local Rings
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a Noetherian local ring and 
+\begin_inset Formula $M$
+\end_inset
+
+ a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module such that 
+\begin_inset Formula $\text{Ann}_{A}(M)=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\text{deg}(\text{HSP}_{M,\mathfrak{m}})=\text{deg}(\text{HSP}_{A,\mathfrak{m}}).
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a Noetherian local ring, 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ its maximal ideal and assume 
+\begin_inset Formula $k=A/\mathfrak{m}\subset A$
+\end_inset
+
+.
+ We shall prove that the dimension of a local ring is equal to the degree
+ of the Hilbert-Samuel polynomial and equal to the least number of generators
+ of an 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+-primary ideal.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ We introduce the following non-negative integers: 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\delta(A):=$
+\end_inset
+
+ the minimal number of generators of an 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+-primary ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $d(A):=\mbox{deg(HSP}_{A,\mathfrak{m}})$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mbox{edim}(A):=$
+\end_inset
+
+ the 
+\series bold
+embedding dimension 
+\series default
+of 
+\begin_inset Formula $A$
+\end_inset
+
+, defined as the minimal number of generators for 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+.
+ Hence, 
+\begin_inset Formula $\mbox{edim}(A)=\mbox{dim}_{K}(\mathfrak{m}/\mathfrak{m}^{2})$
+\end_inset
+
+, by Nakayama's Lemma.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(A,\mathfrak{m})$
+\end_inset
+
+ be a Noetherian local ring.
+ Then, with the above notation, 
+\begin_inset Formula $\delta(A)=d(A)=\mbox{dim}(A)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We first prove the following proposition:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(A,\mathfrak{m})$
+\end_inset
+
+ be a Noetherian local ring, let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-module, and let 
+\begin_inset Formula $Q$
+\end_inset
+
+ be an 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+-primary ideal.
+ Then 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mbox{deg(HSP}_{M,Q})=\mbox{deg(HSP}_{M,\mathfrak{m}})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Moreover, if 
+\begin_inset Formula $x\in A$
+\end_inset
+
+ is a nonzerodivisor for 
+\begin_inset Formula $M$
+\end_inset
+
+, then 
+\begin_inset Formula $\mbox{deg(HSP}_{M/xM,Q})\leq\mbox{deg(HSP}_{M,Q})-1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Suppose 
+\begin_inset Formula $\mathfrak{m}=\langle x_{1},\dots,x_{r}\rangle$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $s$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathfrak{m}\supset Q\supset\mathfrak{m}^{s}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathfrak{m}^{k}\supset Q^{k}\supset\mathfrak{m}^{sk}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
+\end_inset
+
+ implies 
+\begin_inset Formula $\mbox{HSP}_{M,\mathfrak{m}}(k)\leq\mbox{HSP}_{M,Q}(k)\leq\mbox{HSP}_{M,\mathfrak{m}}(sk)$
+\end_inset
+
+ for sufficiently large 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ But this is only possible if 
+\begin_inset Formula $\mbox{deg(HSP}_{M,Q})=\mbox{deg(HSP}_{M,\mathfrak{m}})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Apply 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{remarkk})
+\end_layout
+
+\end_inset
+
+ to the exact sequence 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & M 
+\backslash
+arrow[r," 
+\backslash
+cdot x "] & M 
+\backslash
+arrow[r] & M/xM 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+ and conclude that 
+\begin_inset Formula $\mbox{deg(HSP}_{M/xM,Q})\leq\mbox{deg(HSP}_{M,Q})-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(A,\mathfrak{m})$
+\end_inset
+
+ be a Noetherian local ring and let 
+\begin_inset Formula $d=\mbox{dim}(A)$
+\end_inset
+
+, 
+\begin_inset Formula $\{x_{1},\dots,x_{d}\}$
+\end_inset
+
+ is called a 
+\series bold
+system of parameters 
+\series default
+of 
+\begin_inset Formula $A$
+\end_inset
+
+, if 
+\begin_inset Formula $\langle x_{1},\dots,x_{d}\rangle$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+-primary.
+ If moreover, 
+\begin_inset Formula $\langle x_{1},\dots,x_{d}\rangle=\mathfrak{m}$
+\end_inset
+
+, then it is called a 
+\series bold
+regular system of parameters
+\series default
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $>$
+\end_inset
+
+ be a local degree ordering, 
+\begin_inset Formula $A=K[x_{1},\dots,x_{r}]$
+\end_inset
+
+, and let 
+\begin_inset Formula $I\subset\langle x\rangle=\langle x_{1},\dots,x_{r}\rangle\subset K[x]$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula 
+\begin{align*}
+(A/I)/\mathfrak{m}^{k}(A/I) & \cong(A/I)/(\mathfrak{m}^{k}/I\cap\mathfrak{m}^{k})\\
+ & \cong(A/I)/((I+\mathfrak{m}^{k})/I)\\
+ & \cong A/(I+\mathfrak{m}^{k})\\
+ & =A/(I+\langle x\rangle^{k}),
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+we see that 
+\begin_inset Formula $\mbox{HS}_{A/I,\mathfrak{m}}(k)=\mbox{dim}_{K}(A/(I+\langle x\rangle^{k}))$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $>$
+\end_inset
+
+ be a local degree ordering on 
+\begin_inset Formula $K[x]=K[x_{1},\dots,x_{r}]$
+\end_inset
+
+, and let 
+\begin_inset Formula $I\subset\langle x\rangle=\langle x_{1},\dots,x_{r}\rangle\subset K[x]$
+\end_inset
+
+ be an ideal.
+ Then 
+\begin_inset Formula 
+\[
+\mbox{HS}_{K[x]_{\langle x\rangle}/I,\langle x\rangle}=\mbox{HS}_{K[x]_{\langle x\rangle}/L(I),\langle x\rangle}.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We have to prove that 
+\begin_inset Formula 
+\[
+\mbox{dim}_{K}K[x]_{\langle x\rangle}/(I+\langle x\rangle^{k})_{\langle x\rangle}=\mbox{dim}_{K}K[x]_{\langle x\rangle}/(L(I)+\langle x\rangle^{k})_{\langle x\rangle}.
+\]
+
+\end_inset
+
+Clearly, for each 
+\begin_inset Formula $k\geq0$
+\end_inset
+
+, the set 
+\begin_inset Formula $S:=\{x^{\alpha}\notin L(I)\mid\mbox{deg}(x^{\alpha})<k\}$
+\end_inset
+
+ represents a 
+\begin_inset Formula $K$
+\end_inset
+
+-basis of 
+\begin_inset Formula $K[x]_{\langle x\rangle}/(L(I)+\langle x\rangle^{k})_{\langle x\rangle}\cong\left(K[x]/(L(I)+\langle x\rangle^{k})\right)_{\langle x\rangle}\cong K[x]/(L(I)+\langle x\rangle^{k})$
+\end_inset
+
+.
+ On the other hand, using reduction by a standard basis of 
+\begin_inset Formula $I$
+\end_inset
+
+, we can write each 
+\begin_inset Formula $f\in K[x]$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+f=g+\sum_{x^{\alpha}\in S}c_{\alpha}x^{\alpha}\mbox{ mod }\langle x\rangle^{k}
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $g\in I$
+\end_inset
+
+ and uniquely determined 
+\begin_inset Formula $c_{\alpha}\in K$
+\end_inset
+
+.
+ This is possible without multiplying 
+\begin_inset Formula $f$
+\end_inset
+
+ by a unit, because we are working modulo 
+\begin_inset Formula $\langle x\rangle^{k}$
+\end_inset
+
+.
+ Therefore, 
+\begin_inset Formula $S$
+\end_inset
+
+ also represents a 
+\begin_inset Formula $K$
+\end_inset
+
+-basis of 
+\begin_inset Formula $K[x]/(I+\langle x\rangle^{k})\cong\left(K[x]/(L(I)+\langle x\rangle^{k})\right)_{\langle x\rangle}\cong K[x]_{\langle x\rangle}/(L(I)+\langle x\rangle^{k})_{\langle x\rangle}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y,z]_{\langle x,y,z\rangle}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathfrak{m}=\langle x,y,z\rangle$
+\end_inset
+
+, 
+\begin_inset Formula $I=\langle y^{2}\rangle$
+\end_inset
+
+, and let 
+\begin_inset Formula $J=\langle y^{2},xyz+y^{4}\rangle$
+\end_inset
+
+.
+ The table below gives the first few values various Hilbert-Samuel functions:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mbox{HS}_{A,\mathfrak{m}}(k)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mbox{HS}_{A/I,\mathfrak{m}}(k)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mbox{HS}_{A/J,\mathfrak{m}}(k)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10-1=9$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10-1=9$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $20$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $20-3=17$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $20-3-1=16$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $5$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $35$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $35-6=29$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $35-6-3+1=27$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $6$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $56$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $56-10=46$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $56-10-6+3=43$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y,z]_{\langle x,y,z\rangle}/\langle z^{2}-z,yz-y\rangle$
+\end_inset
+
+.
+ The table below gives the first few values various Hilbert-Samuel functions:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mbox{HS}_{A,\mathfrak{m}}(k)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mbox{HS}_{A/I,\mathfrak{m}}(k)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mbox{HS}_{A/J,\mathfrak{m}}(k)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10-1=9$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10-1=9$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $20$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $20-3=17$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $20-3-1=16$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $5$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $35$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $35-6=29$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $35-6-3+1=27$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $6$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $56$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $56-10=46$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $56-10-6+3=43$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y]_{\langle x,y\rangle}/\langle y^{2}-x^{3}-x^{2}\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{m}=\langle x,y\rangle$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\mathfrak{m} & =\langle x,y\rangle\\
+\mathfrak{m}^{2} & =\langle x^{2},xy,y^{2}\rangle\\
+\mathfrak{m}^{3} & =\langle x^{2}-y^{2},xy^{2},y^{3}\rangle\\
+\mathfrak{m}^{4} & =\langle x^{2}-y^{2}+x^{3},xy^{3},y^{4}\rangle\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The ring homomorphism 
+\begin_inset Formula $\varphi:K[s,t]\to\mbox{Gr}_{\mathfrak{m}}(A)$
+\end_inset
+
+ given by 
+\begin_inset Formula $s\mapsto x$
+\end_inset
+
+ and 
+\begin_inset Formula $t\mapsto y$
+\end_inset
+
+ has kernel 
+\begin_inset Formula $\langle s^{2}-t^{2}\rangle$
+\end_inset
+
+.
+ Therefore we have an isomorphism 
+\begin_inset Formula $\mbox{Gr}_{\mathfrak{m}}(A)\cong K[s,t]/\langle s^{2}-t^{2}\rangle$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the graded ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ with respect to weights 
+\begin_inset Formula $w=(1,1,1)$
+\end_inset
+
+ and let 
+\begin_inset Formula $I$
+\end_inset
+
+ be the ideal in 
+\begin_inset Formula $A$
+\end_inset
+
+ given by 
+\begin_inset Formula $I=\langle x^{2},xy+xz,y^{4}+y^{3}z-xz^{3}\rangle$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ A free resolution of 
+\begin_inset Formula $A/I$
+\end_inset
+
+ is given by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[ampersand replacement=
+\backslash
+&] A(-3) 
+\backslash
+oplus A(-5) 
+\backslash
+arrow{rrr}{
+\backslash
+begin{pmatrix} x & y^3 
+\backslash
+
+\backslash
+ -y-z & -z^3 
+\backslash
+
+\backslash
+ 0 & -x 
+\backslash
+end{pmatrix} } 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& A(-2) 
+\backslash
+oplus A(-2) 
+\backslash
+oplus A(-4) 
+\backslash
+arrow{rrrrr}{ 
+\backslash
+begin{pmatrix} xy + xz & x^2 & y^4 +y^3 z - xz^3  
+\backslash
+end{pmatrix} } 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& A 
+\backslash
+arrow{r} 
+\backslash
+& A/I 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop1})
+\end_layout
+
+\end_inset
+
+, we conclude that
+\begin_inset Formula 
+\begin{align*}
+\mbox{HP}_{A/I}(t) & =\frac{1-\left(t^{2}+t^{2}+t^{4}\right)+\left(t^{3}+t^{5}\right)}{(1-t)^{3}}\\
+ & =\frac{1+2t+t^{2}+t^{3}}{1-t}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The graded parts of 
+\begin_inset Formula $A/I$
+\end_inset
+
+ starts out as
+\begin_inset Formula 
+\begin{align*}
+ & \vdots\\
+(A/I)_{0} & =K\\
+(A/I)_{1} & =K\bar{x}+K\bar{y}+K\overline{z}\\
+(A/I)_{2} & =K\overline{x}^{2}+K\bar{x}\bar{y}+K\bar{y}^{2}+K\overline{z}^{2}\\
+(A/I)_{3} & =K\bar{x}^{3}+K\bar{x}^{2}\bar{y}+K\bar{x}\overline{y}^{2}+K\overline{y}^{3}+K\overline{z}^{3}\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that
+\begin_inset Formula 
+\begin{align*}
+(A/I)_{n} & =(A/\langle xz,yz\rangle)_{n}\\
+ & =(A/(\langle z\rangle\cap\langle x,y\rangle))_{n}\\
+ & \cong((A/\langle z\rangle)\oplus(A/\langle x,y\rangle))_{n}\\
+ & \cong(A/\langle z\rangle)_{n}\oplus(A/\langle x,y\rangle){}_{n}
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

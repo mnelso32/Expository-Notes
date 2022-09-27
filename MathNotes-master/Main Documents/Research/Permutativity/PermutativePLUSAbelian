@@ -1,0 +1,62 @@
+ring R=0,(c(1..2)(1..2)(1..2)),lp;
+matrix a[2][2] = 1,1,0,1;
+ideal I;
+for(int i1 = 1; i1 <= 2; i1++)
+{for(int i2 = 1; i2 <= 2; i2++)
+{for(int i3 = 1; i3 <= 2; i3++)
+{for(int i4 = 1; i4 <= 2; i4++)
+{for(int k = 1; k <= 2; k++)
+	{
+        poly f(i1)(i2)(i3)(i4)(k);
+	for (int j1 = 1; j1 <= 2; j1++)
+        {for (int j2 = 1; j2 <= 2; j2++)
+        {for (int j3 = 1; j3 <= 2; j3++)
+        {for (int k1 = 1; k1 <= 2; k1++)
+        {for (int k2 = 1; k2 <= 2; k2++)
+                {
+                f(i1)(i2)(i3)(i4)(k) = f(i1)(i2)(i3)(i4)(k) + 
+                a[j1,i1]*a[j2,i2]*a[j3,k1]*c(k1)(i3)(i4)*c(k2)(j1)(j2)*c(k)(k2)(j3) - a[j1,i3]*a[j2,i4]*a[j3,k1]*c(k1)(i1)(i2)*c(k2)(j1)(j2)*c(k)(j3)(k2);
+                }
+        }}}}
+        I= I+f(i1)(i2)(i3)(i4)(k);
+        }
+}}}};
+
+
+// permutative law
+
+for (int i = 1; i <= 2; i++)
+{for (int j = 1; j <= 2; j++)
+{for (int k = 1; k <= 2; k++)
+{
+poly g(k)(i)(j) = c(k)(i)(j) - c(k)(j)(i);
+I = I + g(k)(i)(j);
+}}}
+
+// permutative law + abelian 
+
+I = std(I);
+ring A=0,(x1,x2,x3,x4,x5,x6,x7,x8),lp;
+ideal M = fetch(R,I);
+LIB "primdec.lib";
+minAssGTZ(M);
+
+
+[1]:
+   _[1]=x7
+   _[2]=x6-x7
+   _[3]=x5
+   _[4]=x2-x3
+   _[5]=x1
+[2]:
+   _[1]=x4^2*x5+x4*x5*x8+2*x4*x7*x8+x7*x8^2+x8^3
+   _[2]=x3*x8-x4*x7
+   _[3]=2*x3*x4*x5+x3*x5*x8+4*x3*x7*x8+x4*x5*x7+2*x7^2*x8+2*x7*x8^2
+   _[4]=x3^2*x5+x3*x5*x7+2*x3*x7^2+x7^3+x7^2*x8
+   _[5]=x1*x8-x4*x5
+   _[6]=x1*x7-x3*x5
+   _[7]=2*x1*x4+x1*x8+x4*x5+4*x4*x7+2*x7*x8+2*x8^2
+   _[8]=2*x1*x3+x1*x7+x3*x5+4*x3*x7+2*x7^2+2*x7*x8
+   _[9]=x1^2+x1*x5+2*x1*x7+x5*x7+x5*x8
+   _[10]=x6-x7
+   _[11]=x2-x3

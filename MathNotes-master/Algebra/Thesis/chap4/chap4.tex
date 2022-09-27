@@ -1,0 +1,589 @@
+%% LyX 2.2.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,english]{article}
+\usepackage[osf]{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[paperwidth=30cm,paperheight=35cm]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm}
+\setlength{\parindent}{0bp}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\title{Homological Constructions over a Ring of Characteristic 2}
+
+\maketitle
+~~~Throughout this chapter, let $R$ be a ring of characteristic
+$2$. 
+
+\section{Constructing All Finitely-Generated Differential Graded $R$-Algebras}
+
+\begin{theorem}\label{theoremallfinitelygenerateddgalgebra} Let $S_{w}$
+denote the weighted polynomial ring $R[x_{1},\dots,x_{n}]$ with respect
+to the weighted vector $w=(w_{1},\dots,w_{n})$. Define the map 
+\[
+d:=\sum_{\lambda=1}^{n}f_{\lambda}\partial_{x_{\lambda}},
+\]
+where $f_{\lambda}$ is a nonzero homogeneous polynomial in $S_{w}$
+of weighted degree $w_{\lambda}-1$ for all $\lambda=1,\dots,n$.
+Then 
+\begin{enumerate}
+\item $d$ is a graded endomorphism $d:S_{w}\to S_{w}$ of degree $-1$
+which satisfies Leibniz law. 
+\item Moreover, let $I\subset S_{w}$ be any $d$-stable homogeneous ideal
+such that $d(f_{\lambda})\in I$ for all $\lambda=1,\dots,n$. Then
+$d$ induces a map $\overline{d}:S_{w}/I\to S_{w}/I$, given by $\overline{d}(\overline{f})=\overline{d(f)}$
+for all $\overline{f}\in S_{w}/I$, and $(S_{w}/I,\overline{d})$
+is a differential graded $R$-algebra.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} We first show that $d$ is a graded endomorphism $d:S_{w}\to S_{w}$
+of degree $-1$ which satisfies Leibniz law:
+\begin{itemize}
+\item $R$-linearity: We have 
+\begin{align*}
+d(r_{1}g_{1}+r_{2}g_{2}) & =\sum_{\lambda=1}^{n}f_{\lambda}\partial_{x_{\lambda}}(r_{1}g_{1}+r_{2}g_{2})\\
+ & =\sum_{\lambda=1}^{n}f_{\lambda}(r_{1}\partial_{x_{\lambda}}(g_{1})+r_{2}\partial_{x_{\lambda}}(g_{2}))\\
+ & =r_{1}\sum_{\lambda=1}^{n}f_{\lambda}\partial_{x_{\lambda}}(g_{1})+r_{2}\sum_{\lambda=1}^{n}f_{\lambda}\partial_{x_{\lambda}}(g_{2}))\\
+ & =r_{1}d(g_{1})+r_{2}d(g_{2}),
+\end{align*}
+for all $r_{1},r_{2}\in R$ and $g_{1},g_{2}\in S_{w}$. 
+\item Leibniz law: We have 
+\begin{align*}
+d(g_{1}g_{2}) & =\sum_{\lambda=1}^{n}f_{\lambda}\partial_{x_{\lambda}}(g_{1}g_{2})\\
+ & =\sum_{\lambda=1}^{n}f_{\lambda}(\partial_{x_{\lambda}}(g_{1})g_{2}+g_{1}\partial_{x_{\lambda}}(g_{2}))\\
+ & =\left(\sum_{\lambda=1}^{n}f_{\lambda}\partial_{x_{\lambda}}(g_{1})\right)g_{2}+g_{1}\left(\sum_{\lambda=1}^{n}f_{\lambda}\partial_{x_{\lambda}}(g_{2}))\right)\\
+ & =d(g_{1})g_{2}+g_{1}d(g_{2}),
+\end{align*}
+for all $g_{1},g_{2}\in S_{w}$. 
+\item Graded of degree $-1$: By $R$-linearity, we only need to check this
+on monomials. Let $x_{1}^{\alpha_{1}}\cdots x_{n}^{\alpha_{n}}$ be
+a monomial of weighted degree $i$. A term in $d(x_{1}^{\alpha_{1}}\cdots x_{n}^{\alpha_{n}})$
+has the form $\alpha_{\lambda}f_{\lambda}x_{1}^{\alpha_{1}}\cdots x_{\lambda}^{\alpha_{\lambda}-1}\cdots x_{n}^{\alpha_{n}}$
+where $\alpha_{\lambda}\equiv1\text{ mod }3$, and 
+\begin{align*}
+\text{deg}_{w}\left(\alpha_{\lambda}f_{\lambda}x_{1}^{\alpha_{1}}\cdots x_{\lambda}^{\alpha_{\lambda}-1}\cdots x_{n}^{\alpha_{n}}\right) & =\text{deg}_{w}\left(f_{\lambda}x_{1}^{\alpha_{1}}\cdots x_{\lambda}^{\alpha_{\lambda}-1}\cdots x_{n}^{\alpha_{n}}\right)\\
+ & =\text{deg}_{w}\left(f_{\lambda}\right)+\text{deg}_{w}\left(x_{1}^{\alpha_{1}}\cdots x_{\lambda}^{\alpha_{\lambda}-1}\cdots x_{n}^{\alpha_{n}}\right)\\
+ & =w_{\lambda}-1+w_{1}\alpha_{1}+\cdots+w_{\lambda}(\alpha_{\lambda}-1)+\cdots+w_{n}\alpha_{n}\\
+ & =-1+w_{1}\alpha_{1}+\cdots+w_{\lambda}\alpha_{\lambda}+\cdots+w_{n}\alpha_{n}\\
+ & =-1+i.
+\end{align*}
+So every term in $x_{1}^{\alpha_{1}}\cdots x_{n}^{\alpha_{n}}$ has
+weighted degree $-1+i$. This implies that $d$ is graded of degree
+$-1$. 
+\end{itemize}
+~~~Now we will show that $(S_{w}/I,\overline{d})$ is a differential
+graded $R$-algebra. Since $I$ is $d$-stable, the map $\overline{d}$
+is well-defined. The map $\overline{d}$ inherits the properties of
+being a graded endomorphism of degree $-1$ which satisfies Leibniz
+law from $d$, thus we just need to show that $\overline{d}^{2}=0$,
+or in other words, that $d^{2}(g)\in I$ for all $g\in S_{w}$. So
+let $g\in S_{w}$. Then
+\begin{align*}
+d^{2}(g) & =d\left(\sum_{\lambda=1}^{n}f_{\lambda}\partial_{x_{\lambda}}(g)\right)\\
+ & =\sum_{\lambda=1}^{n}d(f_{\lambda}\partial_{x_{\lambda}}(g))\\
+ & =\sum_{\lambda=1}^{n}d(f_{\lambda})\partial_{x_{\lambda}}(g)+f_{\lambda}d(\partial_{x_{\lambda}}(g)))\\
+ & =\sum_{\lambda=1}^{n}d(f_{\lambda})\partial_{x_{\lambda}}(g)\in I,
+\end{align*}
+where we used the fact that $\partial_{x_{\lambda}}^{2}=0$ and $\partial_{x_{\mu}}\partial_{x_{\lambda}}=\partial_{x_{\lambda}}\partial_{x_{\mu}}$
+to conclude that
+\begin{align*}
+\sum_{\lambda=1}^{n}f_{\lambda}d(\partial_{x_{\lambda}}(g)) & =\sum_{\lambda=1}^{n}f_{\lambda}\sum_{\mu=1}^{n}f_{\mu}\partial_{x_{\mu}}(\partial_{x_{\lambda}}(g))\\
+ & =0.
+\end{align*}
+
+\end{proof}
+
+\begin{rem} \hfill
+\begin{enumerate}
+\item We often denote this differential graded $R$-algebra as $(S_{w}/I,f_{1},\dots f_{n})$
+instead of $(S_{w}/I,\overline{d})$. 
+\item When we write ``let $(S_{w}/I,f_{1},\dots f_{n})$ be a differential
+graded $R$-algebra'', it is understood that the conditions in Theorem~(\ref{theoremallfinitelygenerateddgalgebra})
+are satisfied. Note that $I$ is a \emph{proper }ideal of $S_{w}$. 
+\end{enumerate}
+\end{rem}
+
+\begin{prop}\label{prop} Let $(S_{w}/I,f_{1},\dots,f_{n})$ be a
+differential graded $R$-algebra and let $g$ be a homogeneous polynomial
+in $S$ of degree $j$ such that $d(g)$ is in $I$. Then $(S_{w}/\langle I,g\rangle,f_{1},\dots,f_{n})$
+and $(S/(I:g),f_{1},\dots,f_{n})$ are differential graded $R$-algebras.
+\end{prop}
+
+\begin{proof} First note that $d(f_{\lambda})\in I$ implies $d(f_{\lambda})\in\langle I,g\rangle$
+and $d(f_{\lambda})\in I:g$ for all $\lambda=1,\dots,n$. So we just
+need to show that $\langle I,g\rangle$ and $I:g$ are $d$-stable.
+Since$d(g)$ is in $I$, Proposition~(\ref{propcriteriondstable})
+implies that $\langle I,g\rangle$ is $d$-stable. Therefore $S/\langle I,g\rangle$
+is a differential graded $R$-algebra. To prove that $I:g$ is $d$-stable,
+let $f\in I:g$. Then since $fg\in I$ and $I$ is $d$-stable, it
+follows that $d(fg)=d(f)g+fd(g)\in I$. Which implies $d(f)g\in I$,
+since $d(g)\in I$. Therefore $d(f)\in I:g$, which implies that $I:g$
+is $d$-stable. \end{proof}
+
+\subsection{Classification of all Finitely-Generated Commutative Differential
+Graded $R$-Algebras}
+
+\begin{theorem}\label{theoremclassificationdgalgebra} Every finitely-generated
+commutative differential graded $R$-algebra is isomorphic to one
+described in Theorem~(\ref{theoremallfinitelygenerateddgalgebra}).
+\end{theorem}
+
+\begin{proof} Let $(A,d_{A})$ be a finitely generated differential
+graded $R$-algebra with generators $a_{1},\dots,a_{n}$. Then for
+each $\lambda=1,\dots n$, we have $a_{\lambda}\in A_{w_{\lambda}}$,
+where $w_{\lambda}\in\mathbb{Z}_{\geq0}$. Let $S_{w}$ denote the
+weighted polynomial ring $R[x_{1},\dots,x_{n}]$ with respect to the
+weighted vector $w=(w_{1},\dots,w_{n})$, and let $\varphi:S_{w}\to A$
+be the unique morphism of graded $R$-algebras such that $\varphi(x_{\lambda})=a_{\lambda}$
+for all $\lambda=1,\dots,n$. Then $A$ is isomorphic to $S_{w}/\text{Ker}(\varphi)$
+as graded $R$-algebras. Choose $f_{\lambda}\in S$ such that $\varphi(f_{\lambda})=d_{A}(a_{\lambda})$
+and define the map $d:S_{w}\to S_{w}$ as 
+\[
+d:=\sum_{\lambda=1}^{n}f_{\lambda}\partial_{x_{\lambda}}.
+\]
+Then $d$ is a graded endomorphism of degree $-1$ which satisfies
+Leibniz law, by Theorem~(\ref{theoremallfinitelygenerateddgalgebra}).
+We claim that $\text{Ker}(\varphi)$ is $d$-stable and that $d(f_{\lambda})\in\text{Ker}(\varphi)$
+for all $\lambda=1,\dots,n$. We do this in two steps:
+
+\hfill
+
+\textbf{Step 1: }We will show that $\varphi d=d_{A}\varphi$. It suffices
+to show that for all monomials $m$, we have $\varphi(d(m))=d_{A}(\varphi(m))$.
+We prove this by induction on $\text{deg}(m)$. For the base case
+$\text{deg}(m)=1$, we have $m=x_{\lambda}$ for some $\lambda\in\{1,\dots,n\}$.
+Then 
+\begin{align*}
+\varphi(d(x_{\lambda})) & =\varphi(f_{\lambda})\\
+ & =d_{A}(a_{\lambda})\\
+ & =d_{A}(\varphi(x_{\lambda})).
+\end{align*}
+Now suppose that $\varphi(d(m))=d_{A}(\varphi(m))$ for all monomials
+$m$ in $S$ of degree less than $i$, where $i>1$. Let $x_{1}^{\alpha_{1}}\cdots x_{n}^{\alpha_{n}}$
+be a monomial in $S$ whose degree is $i+1$. We may assume that $\alpha_{1},\alpha_{\lambda}\geq1$
+for some $\lambda\in\{1,\dots,n\}$. Then using Leibniz law together
+with induction, we obtain
+\begin{align*}
+\varphi(d(x_{1}^{\alpha_{1}}x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}})) & =\varphi(d(x_{1}^{\alpha_{1}})x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}}+x_{1}^{\alpha_{1}}d(x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}}))\\
+ & =\varphi(d(x_{1}^{\alpha_{1}})\varphi(x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}})+\varphi(x_{1}^{\alpha_{1}})\varphi(d(x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}}))\\
+ & =\varphi(d(x_{1}^{\alpha_{1}}))a_{2}^{\alpha_{2}}\cdots a_{n}^{\alpha_{n}}+a_{1}^{\alpha_{1}}\varphi(d(x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}}))\\
+ & =d_{A}(a_{1}^{\alpha_{1}})a_{2}^{\alpha_{2}}\cdots a_{n}^{\alpha_{n}}+a_{1}^{\alpha_{1}}d_{A}(a_{2}^{\alpha_{2}}\cdots a_{n}^{\alpha_{n}})\\
+ & =d_{A}(a_{1}^{\alpha_{1}}a_{2}^{\alpha_{2}}\cdots a_{n}^{\alpha_{n}})\\
+ & =d_{A}(\varphi(x_{1}^{\alpha_{1}}x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}})).
+\end{align*}
+This establishes Step 1. 
+
+\hfill
+
+\textbf{Step 2: }We show that $\text{Ker}(\varphi)$ is $d$-stable
+and that $d(f_{\lambda})\in\text{Ker}(\varphi)$ for all $\lambda=1,\dots,n$.
+Let $g\in\text{Ker}(\varphi)$. Then by Step 1, we have 
+\begin{align*}
+\varphi(d(f)) & =d_{A}(\varphi(f))\\
+ & =d_{A}(0)\\
+ & =0.
+\end{align*}
+Thus $d(f)\in\text{Ker}(\varphi)$, which implies $\text{Ker}(\varphi)$
+is $d$-stable. Step 1 also implies 
+\begin{align*}
+\varphi(d(f_{\lambda})) & =d_{A}(\varphi(f_{\lambda}))\\
+ & =d_{A}(d_{A}(f_{\lambda}))\\
+ & =0,
+\end{align*}
+for all $\lambda=1,\dots,n$. 
+
+\hfill
+
+~~~Now Theorem~(\ref{theoremallfinitelygenerateddgalgebra}) implies
+that $(S_{w}/\text{Ker}(\varphi),\overline{d})$ is a differential
+graded $R$-algebra. Moreover, Step 1 implies $\varphi:(S_{w}/\text{Ker}(\varphi),\overline{d})\to(A,d_{A})$
+is an isomorphism of differential graded $R$-algebras. \end{proof}
+
+\section{Constructing the Differential Graded $R$-algebra $(S/I,r_{1},\dots,r_{n})$}
+
+~~~We now want to consider some special cases of Theorem~(\ref{theoremallfinitelygenerateddgalgebra}).
+In particular, we want to consider the case where the weighted vector
+is $w=(1,\dots,1)$. We will write $S$ to denote the polynomial ring
+$R[x_{1},\dots,x_{n}]$ equipped with this grading. Let $r_{1},\dots,r_{n}$
+be nonzero elements in $R$, and define $d:S\to S$ by 
+\[
+d:=\sum_{\lambda=1}^{n}r_{\lambda}\partial_{x_{\lambda}}.
+\]
+Since $d(r_{\lambda})=0$ for all $\lambda=1,\dots,n$, it follows
+from Theorem~(\ref{theoremallfinitelygenerateddgalgebra}) that $(S,r_{1},\dots,r_{n})$
+is a differential graded $R$-algebra. Moreover, if $I$ is a $d$-stable
+ideal, then $(S/I,r_{1},\dots,r_{n})$ is a differential graded $R$-algebra.
+The next proposition gives a necessary and sufficient condition for
+a finitely generated ideal $I$ to be $d$-stable.
+
+\begin{prop}\label{propcriteriondstable} Let $I$ be a homogeneous
+ideal in $S$. Then $I$ is $d$-stable if and only if for some generating
+set $F=\{f_{1},\dots,f_{r}\}$ of $I$, we have $d(f_{\lambda})\in I$
+for all $\lambda=1,\dots,r$. \end{prop}
+
+\begin{proof} One direction is trivial, so let's prove the other
+direction. Let $F=\{f_{1},\dots,f_{r}\}$ be a generating set for
+$I$ such that $d(f_{\lambda})\in I$ for all $\lambda=1,\dots,r$
+and let $f\in I$. Since $\{f_{1},\dots,f_{r}\}$ generates $I$,
+we can write $f=\sum_{\lambda=1}^{r}q_{\lambda}f_{\lambda}$ for some
+$q_{1},\dots,q_{r}\in S$. Thus, by Leibniz law, we have
+\begin{align*}
+d(f) & =d\left(\sum_{\lambda=1}^{r}q_{\lambda}f_{\lambda}\right)\\
+ & =\sum_{\lambda=1}^{r}d(q_{\lambda}f_{\lambda})\\
+ & =\sum_{\lambda=1}^{r}(d(q_{\lambda})f_{\lambda}+q_{\lambda}d(f_{\lambda}))\in I.
+\end{align*}
+Thus, $I$ is $d$-stable. \end{proof} 
+
+\subsection{Koszul Complex}
+
+~~~Recall from Example~(\ref{examplekoszulcomplex}) that the Koszul
+complex $\mathcal{K}(r_{1},\dots,r_{n})$ is a differential graded
+$R$-algebra. Indeed, $\mathcal{K}(r_{1},\dots,r_{n})$ is isomorphic
+to the differential graded $R$-algebra $(S/I,r_{1},\dots,r_{n})$,
+where $I$ is generated by $\left\{ x_{1}^{2},\dots,x_{n}^{2}\right\} $.C
+learly $I$ is $d$-stable since $d(x_{\lambda}^{2})=0$ for all $\lambda=1,\dots,n$. 
+
+\begin{example}\label{example} Let $R=\mathbb{F}_{2}[x,y]/\langle xy\rangle$
+and let $r_{1}=x$ and $r_{2}=y$. Then $S=R[u,v]$ has a differential
+graded $R$-algebra structure with the differential $d$ given by
+\[
+d:=x\partial_{u}+y\partial_{v}.
+\]
+Using graded lexicographical ordering on the monomials, we can explicitly
+write $S$ as a chain complex over $R$ using matrices as the linear
+maps:
+
+\begin{center}\begin{tikzcd}[ampersand replacement=\&] \cdots  \arrow[r] \& R^4 \arrow{rrrr}{\begin{pmatrix} x & y & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & x & y \end{pmatrix}} \& \& \& \& R^3 \arrow{rrr}{\begin{pmatrix} 0 & y & 0 \\ 0 & x & 0 \end{pmatrix}}  \& \& \& R^2 \arrow{rr}{\begin{pmatrix} x & y \end{pmatrix}}  \& \& R \arrow[r] \& 0  \end{tikzcd}\end{center}
+
+~~~Now let $I$ be the homogeneous ideal in $S$ generated by $\{x^{2},y^{2}\}$.
+Then $(S/I,r_{1},r_{2})$ is isomorphic to the Koszul complex $\mathcal{K}(r_{1},r_{2})$.
+Using graded lexicographical ordering on the monomials, we can explicitly
+write $S/I$ as a chain complex over $R$ using matrices as the linear
+maps:
+
+\begin{center}\begin{tikzcd}[ampersand replacement=\&] 0 \arrow[r] \& R \arrow{rr}{\begin{pmatrix} y \\ x \end{pmatrix}}   \& \& R^2 \arrow{rr}{\begin{pmatrix} x & y \end{pmatrix}}  \& \& R \arrow[r] \& 0  \end{tikzcd}\end{center}
+
+\end{example}
+
+\subsection{Blowup algebras}
+
+\begin{prop}\label{propblowupalgaisdgalg} Let $Q$ be a finitely
+generated ideal in $R$ with generating set $\{a_{1},\dots,a_{n}\}$.
+Then the blowup algebra $B_{Q}(R)$ can be given the structure of
+differential graded $R$-algebra. \end{prop}
+
+\begin{proof} Let $\varphi:S\to B_{Q}(R)$ be the unique graded $R$-algebra
+homomorphism such that $\varphi(x_{\lambda})=ta_{\lambda}$ for all
+$\lambda=1,\dots,n$ and let $d:=\sum_{\lambda=1}^{n}a_{\lambda}\partial_{\lambda}$.
+We claim that $\text{Ker}(\varphi)$ is $d$-stable. Indeed, let $f\in\text{Ker}(\varphi)$.
+Since $\text{Ker}(\varphi)$ is homogeneous, we may assume that $f$
+is homogeneous. Write $f$ and $d(f)$ in terms of the monomial basis:
+\[
+f=\sum_{\lambda=1}^{r}b_{\lambda}x_{1}^{\alpha_{1\lambda}}\cdots x_{n}^{\alpha_{n\lambda}}\qquad\text{and}\qquad d(f)=\sum_{\substack{1\leq\mu\leq n\\
+1\leq\lambda\leq r
+}
+}\alpha_{\mu\lambda}a_{\mu}b_{\lambda}x_{1}^{\alpha_{1\lambda}}\cdots x_{\mu}^{\alpha_{\mu\lambda}-1}\cdots x_{n}^{\alpha_{n\lambda}}.
+\]
+where $b_{\lambda}\in R$ and $\alpha_{\mu\lambda}\in\mathbb{Z}_{\geq0}$
+for all $\lambda=1,\dots,r$ and $\mu=1,\dots n$. Observe that 
+\begin{align*}
+0 & =\varphi(f)\\
+ & =\varphi\left(\sum_{\lambda=1}^{r}b_{\lambda}x_{1}^{\alpha_{1\lambda}}\cdots x_{n}^{\alpha_{n\lambda}}\right)\\
+ & =\sum_{\lambda=1}^{r}b_{\lambda}\varphi(x_{1})^{\alpha_{1\lambda}}\cdots\varphi(x_{n})^{\alpha_{n\lambda}}\\
+ & =t^{i}\left(\sum_{\lambda=1}^{r}b_{\lambda}a_{1}^{\alpha_{1\lambda}}\cdots a_{n}{}^{\alpha_{n\lambda}}\right)
+\end{align*}
+implies that $\sum_{\lambda=1}^{r}b_{\lambda}a_{1}^{\alpha_{1\lambda}}\cdots a_{n}{}^{\alpha_{n\lambda}}=0$.
+Therefore
+\begin{align*}
+\varphi(d(f)) & =\varphi\left(\sum_{\substack{1\leq\mu\leq n\\
+1\leq\lambda\leq r
+}
+}\alpha_{\mu\lambda}a_{\mu}b_{\lambda}x_{1}^{\alpha_{1\lambda}}\cdots x_{\mu}^{\alpha_{\mu\lambda}-1}\cdots x_{n}^{\alpha_{n\lambda}}\right)\\
+ & =\sum_{\substack{1\leq\mu\leq n\\
+1\leq\lambda\leq r
+}
+}\alpha_{\mu\lambda}a_{\mu}b_{\lambda}\varphi(x_{1})^{\alpha_{1\lambda}}\cdots\varphi(x_{\mu})^{\alpha_{\mu\lambda}-1}\cdots\varphi(x_{n})^{\alpha_{n\lambda}}\\
+ & =t^{i-1}\left(\sum_{\substack{1\leq\mu\leq n\\
+1\leq\lambda\leq r
+}
+}\alpha_{\mu\lambda}a_{\mu}b_{\lambda}a_{1}^{\alpha_{1\lambda}}\cdots a_{\mu}^{\alpha_{\mu\lambda}-1}\cdots a_{n}^{\alpha_{n\lambda}}\right)\\
+ & =t^{i-1}\left(\left(\sum_{\mu=1}^{n}\alpha_{\mu\lambda}\right)\left(\sum_{\lambda=1}^{r}b_{\lambda}a_{1}^{\alpha_{1\lambda}}\cdots a_{n}{}^{\alpha_{n\lambda}}\right)\right)\\
+ & =0.
+\end{align*}
+Therefore $(S/\text{Ker}(\varphi),a_{1},\dots,a_{n})$ is a differential
+graded $R$-algebra where $S/\text{Ker}(\varphi)\cong B_{Q}(R)$.
+\end{proof}
+
+\begin{rem}\label{rem} It isn't too difficult to show that this differential
+graded $R$-algebra is $(B_{Q}(R),\partial_{t})$, where $\partial_{t}$
+is defined in the obvious way. \end{rem}
+
+\begin{example}\label{exampleblowupalgebra} Let $R=\mathbb{F}_{2}[x,y]/\langle y^{2}+x^{3}+x^{2}\rangle$,
+$\mathfrak{m}$ be the maximal ideal in $R$ generated by $\{\overline{x},\overline{y}\}$,
+$S$ denote the polynomial ring $R[u,v]$, and $d=\overline{x}\partial_{u}+\overline{y}\partial_{v}$.
+There is a surjective $R$-algebra homomorphism from $S$ to the blowup
+algebra at $\mathfrak{m}$ given by
+\[
+\varphi:S:=\mathbb{F}_{2}[x,y,u,v]/\langle y^{2}+x^{3}+x^{2}\rangle\to B_{\mathfrak{m}}(R),
+\]
+where $\varphi$ is induced by $\varphi(u)=t\overline{x}$ and $v\mapsto t\overline{y}$.
+Using Singular, we find that the kernel of $\varphi$ is an ideal
+which is homogeneous in the variables $u,v,$ and is generated by
+the set $\{f_{1},f_{2},f_{3}\}$, where 
+\begin{align*}
+f_{1} & =\overline{x}v+\overline{y}u\\
+f_{2} & =\overline{x}u^{2}+u^{2}+v^{2}\\
+f_{3} & =\overline{x}^{2}u+\overline{x}u+\overline{y}v
+\end{align*}
+Note that $d(f_{1})=d(f_{2})=d(f_{3})\in\text{Ker}(\varphi)$. It
+follows from Proposition~(\ref{propcriteriondstable}) that $\text{Ker}(\varphi)$
+is $d$-stable, which we already knew from Proposition~(\ref{propblowupalgaisdgalg}).
+\end{example}
+
+\subsection{Homology Calculations}
+
+\begin{prop}\label{propSmodIr1rnisfree} Let $(S/I,r_{1},\dots,r_{n})$
+be a differential graded $R$-algebra. Suppose that there are \textbf{$t_{1},\dots,t_{n}\in R$
+}such 
+\begin{equation}
+\sum_{\lambda=1}^{n}t_{\lambda}r_{\lambda}=1.\label{eq:unitideal}
+\end{equation}
+Then $H(S/I,r_{1},\dots,r_{n})=0$. \end{prop}
+
+\begin{proof} First note that $\sum_{\lambda=1}^{n}t_{\lambda}x_{\lambda}\notin I$,
+otherwise $d\left(\sum_{\lambda=1}^{n}t_{\lambda}x_{\lambda}\right)=1\notin I$
+would imply that $I$ is not $d$-stable. Let $f$ be a homogeneous
+polynomial of degree $i$ such $d(f)\in I$; so $f$ represents a
+cycle of $(S/I,\overline{d})$. Then
+\begin{align*}
+d\left(\left(\sum_{\lambda=1}^{n}t_{\lambda}x_{\lambda}\right)f\right) & =d\left(\sum_{\lambda=1}^{n}t_{\lambda}x_{\lambda}\right)f+\left(\sum_{\lambda=1}^{n}t_{\lambda}x_{\lambda}\right)d(f)\\
+ & =\left(\sum_{\lambda=1}^{n}t_{\lambda}r_{\lambda}\right)f+\left(\sum_{\lambda=1}^{n}t_{\lambda}x_{\lambda}\right)d(f)\\
+ & =f+\left(\sum_{\lambda=1}^{n}t_{\lambda}x_{\lambda}\right)d(f)\\
+ & \equiv f\text{ mod }I.
+\end{align*}
+thus $\text{Ker}(\overline{d})=\text{Im}(\overline{d})$, which proves
+the claim. \end{proof}
+
+\begin{rem}\label{remSIisfreeforspecialG} \hfill
+\begin{enumerate}
+\item By setting $I=0$, we also find that $H(S)=0$. 
+\item The condition (\ref{eq:unitideal}) is equivalent to saying that $\{r_{1},\dots,r_{n}\}$
+generates the unit ideal. 
+\end{enumerate}
+\end{rem}
+
+\subsubsection{Long Exact Sequence}
+
+~~~It is straightforward to check that 
+
+\begin{equation}\label{sesdga}\begin{tikzcd}[row sep=5] 0 \arrow[r] & (S_w (-j) /(I:g) \text{,}\overline{d} ) \arrow[r, "\cdot g"] & (S/I \text{,} \overline{d}) \arrow[r] & (S/\langle I \text{,} g \rangle \text{,} \overline{d}) \arrow[r] & 0 \\ & \overline{f} \arrow[r,mapsto,shorten >=0.5cm,shorten <=0.5cm] & \overline{fg} \end{tikzcd}\end{equation}
+
+is short exact sequence of chain complexes. The short exact sequence
+(\ref{sesdga}) gives rise to a long exact sequence in homology:
+
+\begin{center}\begin{tikzcd}[row sep=40]  && \cdots \arrow[r] \arrow[d, phantom, ""{coordinate, name=Z'}] & H_{i+1} (S_w  / \langle I \text{,} g \rangle  ) \arrow[dll, " \lambda  ", swap, rounded corners, to path={ -- ([xshift=2ex]\tikztostart.east) |- (Z') [near end]\tikztonodes -| ([xshift=-2ex]\tikztotarget.west) -- (\tikztotarget)}] 
+
+
+
+\\  & H_{i-j} (S_w /( I:g )) \arrow[r, "\cdot g"] & H_{i} (S_w / I) \arrow[r] \arrow[d, phantom, ""{coordinate, name=Z}] & H_{i} (S_w / \langle I \text{,} g \rangle  ) \arrow[dll, " \lambda ", swap, rounded corners, to path={ -- ([xshift=2ex]\tikztostart.east) |- (Z) [near end]\tikztonodes -| ([xshift=-2ex]\tikztotarget.west) -- (\tikztotarget)}] 
+
+\\ & H_{i-j-1} (S_w /( I:g ) ) \arrow[r, "\cdot g "] & H_{i-1} (S_w / I ) \arrow[r] & \cdots 
+
+\end{tikzcd}\end{center}
+
+~~~Let us work out the details of the connecting map: Let $\overline{f}$
+be a homogeneous element in $S_{w}/\langle I,g\rangle$ which represents
+a class in $H_{i}(S_{w}/\langle I,g\rangle)$. In particular, $f\in S$
+and $d(f)\in\langle I,g\rangle$. We lift $\overline{f}\in S_{w}/\langle I,g\rangle$
+to $S_{w}/I$ and then apply $d$ to get $\overline{d(f)}\in S_{w}/I$.
+Since $d(f)\in\langle I,g\rangle$, we can write $d(f)=p+gq$ where
+$p\in I$. Thus, $\overline{d(f)}=\overline{gq}$, and this pulls
+back to $\overline{q}$ in $S_{w}/(I:g)$. 
+
+\section{Extra}
+
+\subsection{Classifying $d$-Stable Ideals}
+
+~~~Let $(R[x_{1},\dots,x_{n}]/I,r_{1},\dots,r_{n})$ be a differential
+graded $R$-algebra. Suppose that there are \textbf{$t_{1},\dots,t_{m}\in R$
+}such that $\langle r_{1},\dots,r_{n}\rangle=\langle t_{1},\dots,t_{m}\rangle$
+and $(R[y_{1},\dots,y_{m}]/I,t_{1},\dots,t_{m})$ is also a differential
+graded $R$-algebra. Then for all $1\leq\lambda\leq n$ and $1\leq\mu\leq n$,
+there are $a_{\lambda\mu}$ and $b_{\lambda\mu}$ in $R$ such that
+\[
+r_{\lambda}=\sum_{\mu=1}^{m}a_{\lambda\mu}t_{\mu}\text{ and }t_{\mu}=\sum_{\lambda=1}^{n}b_{\lambda\mu}r_{\lambda}.
+\]
+~~~Let $\varphi:R[x_{1},\dots,x_{n}]\to R[y_{1},\dots,y_{m}]$
+be the unique graded $R$-algebra homomorphism such that $\varphi(x_{\lambda})=\sum_{\mu=1}^{m}a_{\lambda\mu}y_{\mu}$
+for all $\lambda=1,\dots,n$. Then $\varphi$ induces a graded $R$-algebra
+homomorphism $\overline{\varphi}:R[x_{1},\dots,x_{n}]/I\to R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle$
+which in turn induces a homomorphism of differential graded $R$-algebras
+$\overline{\varphi}:(R[x_{1},\dots,x_{n}]/I,r_{1},\dots,r_{n})\to(R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle,t_{1},\dots,t_{m})$.
+Indeed, let us denote the differentials as
+\[
+d_{r}:=\sum_{\lambda=1}^{n}r_{\lambda}\partial_{x_{\lambda}}\text{ and }d_{t}:=\sum_{\mu=1}^{m}t_{\mu}\partial_{y_{\mu}}.
+\]
+
+We first show that $\varphi d_{r}=d_{t}\varphi$. It is enough to
+show that $\varphi d_{r}(x_{\lambda})=d_{t}\varphi(x_{\lambda})$
+for all $\lambda=1,\dots,n$. We have 
+\begin{align*}
+d_{t}\varphi(x_{\lambda}) & =d_{t}\left(\sum_{\mu=1}^{m}a_{\lambda\mu}y_{\mu}\right)\\
+ & =\sum_{\mu=1}^{m}a_{\lambda\mu}t_{\mu}\\
+ & =r_{\lambda}\\
+ & =d_{r}(x_{\lambda})\\
+ & =\varphi(d_{r}(x_{\lambda})).
+\end{align*}
+Now we show that $(R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle,t_{1},\dots,t_{m})$
+is a differential graded $R$-algebra. We do this by showing that
+$\langle\varphi(I)\rangle$ is $d_{t}$-stable. Let $\sum_{\kappa=1}^{r}g_{\kappa}\varphi(f_{\kappa})\in\varphi(I)$.
+Then
+\begin{align*}
+d_{t}\left(\sum_{\kappa=1}^{r}g_{\kappa}\varphi(f_{\kappa})\right) & =\sum_{\kappa=1}^{r}d_{t}(g_{\kappa})\varphi(f_{\kappa})+\sum_{\kappa=1}^{r}g_{\kappa}d_{t}(\varphi(f_{\kappa}))\\
+ & =\sum_{\kappa=1}^{r}d_{t}(g_{\kappa})\varphi(f_{\kappa})+\sum_{\kappa=1}^{r}g_{\kappa}\varphi(d_{r}(f_{\kappa}))\in\langle\varphi(I)\rangle.
+\end{align*}
+
+Similarly, let $\psi:R[y_{1},\dots,y_{m}]\to R[x_{1},\dots,x_{n}]$
+be the unique graded $R$-algebra homomorphism such that $\psi(y_{\mu})=\sum_{\lambda=1}^{n}b_{\lambda\mu}x_{\lambda}$
+for all $\mu=1,\dots,m$. Then $\varphi$ induces a graded $R$-algebra
+homomorphism $\overline{\psi}:R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle\to R[x_{1},\dots,x_{n}]/\langle\psi(\varphi(I))\rangle$
+which in turn induces a homomorphism of differential graded $R$-algebras
+$\overline{\psi}(R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle,t_{1},\dots,t_{m})\to(R[x_{1},\dots,x_{n}]/\langle\psi(\varphi(I))\rangle,r_{1},\dots,r_{n})$. 
+
+\subsubsection{Evalutation Map}
+
+~~~Let $(S/I,r_{1},\dots,r_{n})$ be a differential graded $R$-algebra
+such that $I$ is contained in $\langle x_{1},\dots,x_{n}\rangle$.
+Let $Q=\langle r_{1},\dots,r_{n}\rangle$ and $\text{Ev}_{r}:S\to R$
+be the unique $R$-algebra homomorphism such that $\text{Ev}_{r}(x_{\lambda})=r_{\lambda}$
+for all $\lambda=1,\dots,n$. We are interested in the ideal $\text{Ev}_{r}(I)$
+in $R$. Clearly we have $\text{Ev}_{r}(I)\subset Q$. Suppose $a\in Q\backslash\text{Ev}_{r}(I)$.
+Then $a=\sum_{\lambda=1}^{n}a_{\lambda}r_{\lambda}$ for some $a_{\lambda}\in R$.
+This implies $x:=\sum_{\lambda=1}^{n}a_{\lambda}x_{\lambda}\notin I$.
+Now $J=I+\langle x,a\rangle$ is an ideal strictly larger than $I$
+such that $J$ is $d$-stable $\text{Ev}_{r}(J)$ is strictly larger
+than $\text{Ev}_{r}(I)$. This implies that we can find an ideal $I$
+such that $\text{Ev}_{r}(I)=Q$.
+
+\begin{prop}\label{prop} Let $(S/I,r_{1},\dots,r_{n})$ be a differential
+graded $R$-algebra and let $Q=\langle r_{1},\dots,r_{n}\rangle$
+be an ideal in $R$. Suppose that $\text{Ev}_{r}(I)=0$. Then there
+exists a unique homomorphism $\varphi$ which makes the following
+diagram commute
+
+\begin{center}\begin{tikzcd}  & B_Q (R) \arrow[dr, "\text{Ev} _1 "] 
+
+\\ 
+
+S/I \arrow[ur,"\varphi " ,dashrightarrow] \arrow[rr, "\text{Ev} _r " , swap] && R
+
+\end{tikzcd}\end{center}
+
+\end{prop}
+
+\subsubsection{Tensor product of differential graded $R$-algebras}
+
+~~~Let $(R[x_{1},\dots,x_{n}]/I,d_{r})$ and $(R[y_{1},\dots,y_{m}]/J,d_{t})$
+be two differential graded $R$-algebras, where 
+\[
+d_{r}:=\sum_{\lambda=1}^{n}r_{\lambda}\partial_{x_{\lambda}}\text{ and }d_{t}:=\sum_{\mu=1}^{m}t_{\mu}\partial_{y_{\mu}}.
+\]
+for $r_{\lambda},t_{\mu}\in R$ for all $\lambda=1,\dots,n$ and $\mu=1,\dots,m$.
+Then their tensor product over $R$ is 
+\[
+(R[x_{1},\dots,x_{n}]/I,d_{r})\otimes_{R}(R[y_{1},\dots,y_{m}]/J,d_{t})\cong(R[x_{1},\dots,x_{n},y_{1},\dots,y_{m}]/(I+J),d_{r}+d_{t}).
+\]
+
+\begin{example}\label{example} The Koszul complex $\mathcal{K}(r_{1},\dots,r_{n})$
+can be realized as a tensor product:
+\[
+\mathcal{K}(r_{1},\dots,r_{n})\cong\mathcal{K}(r_{1})\otimes\cdots\otimes\mathcal{K}(r_{n}).
+\]
+
+\end{example} 
+
+~~~Let $M$ be an $R$-module, and let $(S/I,r_{1},\dots,r_{n})$
+be a differential graded $R$-algebra. Recall that $(M\otimes_{R}S/I,d)$
+is an $(S/I)$-module. 
+\end{document}

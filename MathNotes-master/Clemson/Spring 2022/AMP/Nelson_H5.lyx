@@ -1,0 +1,2228 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Linear Programming Homework 5
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=x_{1}^{3}+5x_{1}^{2}x_{2}+7x_{1}x_{2}^{2}+2x_{2}^{3}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\boldsymbol{x}^{0}=(-2,3)^{\top}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Problem 1.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Calculate the gradient of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\boldsymbol{x}^{0}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+\nabla f(\boldsymbol{x}^{0}) & =\begin{pmatrix}3x_{1}^{2}+10x_{1}x_{2}+7x_{2}^{2}\\
+5x_{1}^{2}+14x_{1}x_{2}+6x_{2}^{2}
+\end{pmatrix}\Bigg|_{(-2,3)}\\
+ & =\begin{pmatrix}12-60+63\\
+20-84+54
+\end{pmatrix}\\
+ & =\begin{pmatrix}15\\
+-10
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 1.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Calculate the Hessian of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\boldsymbol{x}^{0}$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{H}_{f}(\boldsymbol{x}^{0}) & =\begin{pmatrix}6x_{1}+10x_{2} & 10x_{1}+14x_{2}\\
+10x_{1}+14x_{2} & 14x_{1}+12x_{2}
+\end{pmatrix}\Bigg|_{(-2,3)}\\
+ & =\begin{pmatrix}-12+30 & -20+42\\
+-20+42 & -28+36
+\end{pmatrix}\\
+ & =\begin{pmatrix}18 & 22\\
+22 & 8
+\end{pmatrix}.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 1.c
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Using the point 
+\begin_inset Formula $\boldsymbol{x}^{0}$
+\end_inset
+
+ write the Taylor series expansion with three terms.
+ Derive the resulting quadratic function.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Taylor series of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\boldsymbol{x}^{0}$
+\end_inset
+
+ expressed with three terms is given by
+\begin_inset Formula 
+\begin{align*}
+f(\boldsymbol{x}) & =Q(\boldsymbol{x})+R(\boldsymbol{x})\\
+ & =f(\boldsymbol{x}^{0})+\nabla f(\boldsymbol{x}^{0})^{\top}(\boldsymbol{x}-\boldsymbol{x}^{0})+\frac{1}{2}(\boldsymbol{x}-\boldsymbol{x}^{0})^{\top}\mathrm{H}f(\boldsymbol{x}^{0})(\boldsymbol{x}-\boldsymbol{x}^{0})+R(\boldsymbol{x})\\
+ & =-20+15(x_{1}+2)-10(x_{2}-3)+9(x_{1}+2)^{2}+22(x_{1}+2)(x_{2}-3)+4(x_{2}-3)^{2}+R(\boldsymbol{x})\\
+ & =-20-15x_{1}+10x_{2}+9x_{1}^{2}+22x_{1}x_{2}+4x_{2}^{2}+R(\boldsymbol{x}).
+\end{align*}
+
+\end_inset
+
+Here, 
+\begin_inset Formula $Q(\boldsymbol{x})$
+\end_inset
+
+ is the second degree Taylor polynomial of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\boldsymbol{x}^{0}$
+\end_inset
+
+ (or the quadratic function) given by
+\begin_inset Formula 
+\[
+Q(\boldsymbol{x})=-20-15x_{1}+10x_{2}+9x_{1}^{2}+22x_{1}x_{2}+4x_{2}^{2}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $R(\boldsymbol{x})$
+\end_inset
+
+ is a remainder term.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 1.d
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find the approximate value of the function 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\boldsymbol{x}=(-1.9,3.2)$
+\end_inset
+
+ using your work.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+f(-1.9,3.2) & \approx Q(-1.9,3.2)\\
+ & =-19.81
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 1.e
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Calculate the true value of the function 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\boldsymbol{x}=(-1.9,3.2)$
+\end_inset
+
+ and compare it with the approximate value.
+ What do you observe? 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ The true value is 
+\begin_inset Formula $f(-1.9,3.2)=-19.755$
+\end_inset
+
+.
+ We notice that the approximate value is an underestimate of the true value.
+ Also we notice that the remainder term is given by
+\begin_inset Formula 
+\begin{align*}
+R(-1.9,3.2) & =f(-1.9,3.2)-Q(-1.9,3.2)\\
+ & =-19.755+19.81\\
+ & =0.055,
+\end{align*}
+
+\end_inset
+
+In general, 
+\begin_inset Formula $R(\boldsymbol{x})$
+\end_inset
+
+ tends to zero more rapidly than 
+\begin_inset Formula $\|\boldsymbol{x}-\boldsymbol{x}^{0}\|^{2}$
+\end_inset
+
+ tends to zero as 
+\begin_inset Formula $\boldsymbol{x}\to\boldsymbol{x}^{0}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=(1/4)(x_{1}-2)^{2}+(1/9)(x_{2}-3)^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Problem 2.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Write the defining complete statement of the level curve of value 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Clearly draw this level curve.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ The level of curve of 
+\begin_inset Formula $f$
+\end_inset
+
+ with value 
+\begin_inset Formula $1$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\[
+C=\{\boldsymbol{x}\in\mathbb{R}^{2}\mid f(\boldsymbol{x})=1\}.
+\]
+
+\end_inset
+
+The curve 
+\begin_inset Formula $C$
+\end_inset
+
+ is just the ellipse centered at 
+\begin_inset Formula $(2,3)$
+\end_inset
+
+ with width 
+\begin_inset Formula $4$
+\end_inset
+
+ and with height 
+\begin_inset Formula $6$
+\end_inset
+
+.
+ We draw this curve (in red) below and we also draw the point 
+\begin_inset Formula $\boldsymbol{x}^{0}=(3,3+(3/2)\sqrt{3})^{\top}$
+\end_inset
+
+ and the tangent line (in blue) of 
+\begin_inset Formula $C$
+\end_inset
+
+ at 
+\begin_inset Formula $\boldsymbol{x}^{0}$
+\end_inset
+
+ as well:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $x$, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $y$, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-2,xmax=8,ymin=-1,ymax=10,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick={2,4,6,8},ytick={1,3,5,7},
+\end_layout
+
+\begin_layout Plain Layout
+
+axis equal,
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100] ({2*cos(deg(x))+2},{3*sin(deg(x))+3});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,samples=100,domain=-2:8] {8.23-0.87*x}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=above right:$ 
+\backslash
+boldsymbol{x}^{0}$] (x) at (axis cs:3,5.6) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection*
+Problem 2.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Calculate the gradient vector 
+\begin_inset Formula $\nabla f(\boldsymbol{x})$
+\end_inset
+
+ at 
+\begin_inset Formula $\boldsymbol{x}^{0}=(3,3+(3/2)\sqrt{3})^{\top}$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+\nabla f(\boldsymbol{x}^{0}) & =\begin{pmatrix}\frac{x_{1}-2}{2}\\
+\frac{2(x_{2}-3)}{9}
+\end{pmatrix}\Bigg|_{(3,3+(3/2)\sqrt{3})}\\
+ & =\begin{pmatrix}\frac{1}{2}\\
+\frac{\sqrt{3}}{3}
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2.c
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Derive the equation of the tangent line to the level curve of value 
+\begin_inset Formula $1$
+\end_inset
+
+ at 
+\begin_inset Formula $\boldsymbol{x}^{0}$
+\end_inset
+
+.
+ Show your work.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $L$
+\end_inset
+
+ be the tangent line of 
+\begin_inset Formula $C$
+\end_inset
+
+ at 
+\begin_inset Formula $\boldsymbol{x}^{0}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $L$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+L & =\{\boldsymbol{x}\in\mathbb{R}^{2}\mid\nabla f(\boldsymbol{x}^{0})^{\top}(\boldsymbol{x}-\boldsymbol{x}^{0})=0\}\\
+ & =\left\{ \boldsymbol{x}\in\mathbb{R}^{2}\Bigg|\,\frac{1}{2}\left(x_{1}-3\right)+\frac{\sqrt{3}}{3}\left(x_{2}-\frac{6+3\sqrt{3}}{2}\right)=0\right\} 
+\end{align*}
+
+\end_inset
+
+In particular the equation of the tangent line is
+\begin_inset Formula 
+\[
+\frac{1}{2}\left(x_{1}-3\right)+\frac{\sqrt{3}}{3}\left(x_{2}-\frac{6+3\sqrt{3}}{2}\right)=0.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(x)=xe^{-2x}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all local/global minimizers and maximizers.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ First note that 
+\begin_inset Formula $f$
+\end_inset
+
+ is a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ function since it is a product of 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ functions (we only need that 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{2}$
+\end_inset
+
+ for this problem).
+ First we find all possible places where 
+\begin_inset Formula $f$
+\end_inset
+
+ has a potential local extremum point.
+ Since 
+\begin_inset Formula $f'(x)=e^{-2x}(1-2x)$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+f\text{ has a potential local extremum at }c\in\mathbb{R} & \iff f'(c)=0\\
+ & \iff e^{-2c}(1-2c)=0\\
+ & \iff1-2c=0\\
+ & \iff c=1/2.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $f$
+\end_inset
+
+ has a potential local extremum only at 
+\begin_inset Formula $c=1/2$
+\end_inset
+
+.
+ To see if this is a genuine local extremum (and whether it is a local max
+ or local min), we check concavity of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $c=1/2$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f''(x)=4e^{-2x}(x-1)$
+\end_inset
+
+, we have 
+\begin_inset Formula $f''(1/2)=-2/e<0$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $f$
+\end_inset
+
+ is concave down at 
+\begin_inset Formula $c=1/2$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $c=1/2$
+\end_inset
+
+ is a local maximum.
+ Since 
+\begin_inset Formula $c=1/2$
+\end_inset
+
+ is the only critical point of 
+\begin_inset Formula $f$
+\end_inset
+
+, we also conclude that 
+\begin_inset Formula $c=1/2$
+\end_inset
+
+ is a global maximum of 
+\begin_inset Formula $f$
+\end_inset
+
+ too.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all inflections points.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ First we find all possible places where 
+\begin_inset Formula $f$
+\end_inset
+
+ has a potential inflection point:
+\begin_inset Formula 
+\begin{align*}
+f\text{ has a potential inflection point at }c\in\mathbb{R} & \iff f''(c)=0\\
+ & \iff4e^{-2c}(c-1)=0\\
+ & \iff c-1=0\\
+ & \iff c=1.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $f$
+\end_inset
+
+ has a potential inflection point only at 
+\begin_inset Formula $c=1$
+\end_inset
+
+.
+ To see if this is a genuine inflection point at 
+\begin_inset Formula $c=1$
+\end_inset
+
+, we need to check that 
+\begin_inset Formula $f$
+\end_inset
+
+ changes concavity at 
+\begin_inset Formula $c=1$
+\end_inset
+
+.
+ Observe that if 
+\begin_inset Formula $x<1$
+\end_inset
+
+, then 
+\begin_inset Formula $f''(x)=4e^{-2x}(x-1)<0$
+\end_inset
+
+ (where we used the fact to 
+\begin_inset Formula $e^{-2x}$
+\end_inset
+
+ is always positive).
+ This implies 
+\begin_inset Formula $f$
+\end_inset
+
+ is concave down for all 
+\begin_inset Formula $x<1$
+\end_inset
+
+.
+ Similarly, observe that if 
+\begin_inset Formula $x>1$
+\end_inset
+
+, the 
+\begin_inset Formula $f''(x)=4e^{-2x}(x-1)>0$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $f$
+\end_inset
+
+ is concave up for all 
+\begin_inset Formula $x>1$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $f$
+\end_inset
+
+ does in fact change concavity at 
+\begin_inset Formula $c=1$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $f$
+\end_inset
+
+ has an inflection point 
+\begin_inset Formula $c=1$
+\end_inset
+
+, and this is the only one.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 4 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ For a certain industrial process it is necessary to build a tank that has
+ the shape of a circular cylinder of radius 
+\begin_inset Formula $r$
+\end_inset
+
+ and height 
+\begin_inset Formula $h$
+\end_inset
+
+.
+ Within the cylinder is a conical funnel equal in radius at its top to the
+ radius of the cylinder, and having straight sides ending in a point of
+ negligable radius in the center of the bottom face of the tank.
+ The cylindrical tank, its circular bottom, and the cone are all to be fabricate
+d from the same material, which weighs 
+\begin_inset Formula $3$
+\end_inset
+
+ 
+\begin_inset Formula $\mathrm{lb/ft^{2}}$
+\end_inset
+
+.
+ The assembly is open on top and must not weigh more than 
+\begin_inset Formula $3000$
+\end_inset
+
+ 
+\begin_inset Formula $\mathrm{lb}$
+\end_inset
+
+ when completed.
+ Formulate a nonlinear program to find 
+\begin_inset Formula $r$
+\end_inset
+
+ and 
+\begin_inset Formula $h$
+\end_inset
+
+ so as to maximize the volume contained between the cylinder walls and the
+ cone.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A_{c}$
+\end_inset
+
+ represent the surface area (in square feet units) of the cone and let 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ represent the surface area of the tank.
+ Then 
+\begin_inset Formula $A_{c}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{t}$
+\end_inset
+
+ can of as functions of 
+\begin_inset Formula $r$
+\end_inset
+
+ and 
+\begin_inset Formula $h$
+\end_inset
+
+, expressed as
+\begin_inset Formula 
+\begin{align*}
+A_{c} & =\pi r\sqrt{r^{2}+h^{2}}\\
+A_{t} & =\pi r^{2}+2\pi rh.
+\end{align*}
+
+\end_inset
+
+The total weight of the cone (in pounds units) is 
+\begin_inset Formula 
+\[
+\text{total weight of cone }=\left(A_{c}\cdot\mathrm{ft}^{2}\right)\cdot\left(3\cdot\frac{\mathrm{lb}}{\mathrm{ft}^{2}}\right)=3A_{c}\cdot\mathrm{lb}.
+\]
+
+\end_inset
+
+Similarly, the total weight of the tank is 
+\begin_inset Formula $3A_{t}\cdot\mathrm{lb}$
+\end_inset
+
+.
+ To simplify notation, we may safely ignore the units in what follows.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now let us determine what the constraints to this problem are.
+ First, obviously 
+\begin_inset Formula $r$
+\end_inset
+
+ and 
+\begin_inset Formula $h$
+\end_inset
+
+ need to be positive, so 
+\begin_inset Formula $r,h\geq0$
+\end_inset
+
+.
+ The other constraint that the problem tells us is we must have 
+\begin_inset Formula $3000\geq3A_{c}+3A_{t}$
+\end_inset
+
+.
+ In other words, we must have
+\begin_inset Formula 
+\begin{align*}
+1000 & \geq A_{c}+A_{t}\\
+ & =\pi r\sqrt{r^{2}+h^{2}}+\pi r^{2}+2\pi rh\\
+ & =\pi\left(r\sqrt{r^{2}+h^{2}}+r^{2}+2rh\right).
+\end{align*}
+
+\end_inset
+
+If we set 
+\begin_inset Formula $g(r,h)=1000/\pi-r\sqrt{r^{2}+h^{2}}-r^{2}-2rh$
+\end_inset
+
+, then we must have 
+\begin_inset Formula $g(r,h)\geq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next let us determine the objective function.
+ Let 
+\begin_inset Formula $V_{c}$
+\end_inset
+
+ represent the volume inside the cone and let 
+\begin_inset Formula $V_{t}$
+\end_inset
+
+ represent the volume inside the tank.
+ Again, these can be thought of as functions of 
+\begin_inset Formula $r$
+\end_inset
+
+ and 
+\begin_inset Formula $h$
+\end_inset
+
+, expressed as
+\begin_inset Formula 
+\begin{align*}
+V_{c} & =\frac{1}{3}\pi r^{2}h\\
+V_{t} & =\pi r^{2}h
+\end{align*}
+
+\end_inset
+
+Thus if 
+\begin_inset Formula $V$
+\end_inset
+
+ represents the volume contained between the cylinder walls and the cone,
+ then
+\begin_inset Formula 
+\begin{align*}
+V & =V_{t}-V_{c}\\
+ & =\pi r^{2}h-\frac{1}{3}\pi r^{2}h\\
+ & =\frac{2}{3}\pi r^{2}h.
+\end{align*}
+
+\end_inset
+
+The 
+\begin_inset Formula $V(r,h)=(2\pi/3)r^{2}h$
+\end_inset
+
+ is our objective function.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+With the constraints and objective function determined, we can now formulate
+ the nonlinear program to find 
+\begin_inset Formula $r$
+\end_inset
+
+ and 
+\begin_inset Formula $h$
+\end_inset
+
+ so as to maximize the volume contained between the cylinder walls and the
+ cone:
+\begin_inset Formula 
+\begin{align*}
+\text{maximize} & \quad V=(2\pi/3)r^{2}h\\
+\text{subject to} & \quad g(r,h)\geq0\\
+ & \quad r,h\geq0.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=2x_{1}^{2}+2x_{1}x_{2}+x_{2}^{2}-x_{2}x_{3}+2x_{3}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Problem 5.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Is 
+\begin_inset Formula $f$
+\end_inset
+
+ convex? 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Note that 
+\begin_inset Formula $f$
+\end_inset
+
+ is twice differentiable (in fact 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+) and thus it is convex if and only if its Hessian 
+\begin_inset Formula $\mathrm{H}_{f}(\boldsymbol{x})$
+\end_inset
+
+ is positive semi-definite for all 
+\begin_inset Formula $\boldsymbol{x}\in\mathbb{R}^{3}$
+\end_inset
+
+.
+ The Hessian of 
+\begin_inset Formula $f$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+\mathrm{H}_{f}(\boldsymbol{x}) & =\begin{pmatrix}4 & 2 & 0\\
+2 & 2 & -1\\
+0 & -1 & 4
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+The leading principal minors of 
+\begin_inset Formula $\mathrm{H}_{f}(\boldsymbol{x})$
+\end_inset
+
+ are
+\begin_inset Formula 
+\[
+D_{1}(\boldsymbol{x})=4,\qquad D_{2}(\boldsymbol{x})=\left|\begin{pmatrix}4 & 2\\
+2 & 2
+\end{pmatrix}\right|=4,\qquad D_{3}(\boldsymbol{x})=\left|\begin{pmatrix}4 & 2 & 0\\
+2 & 2 & -1\\
+0 & -1 & 4
+\end{pmatrix}\right|=12.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $D_{1}(\boldsymbol{x}),D_{2}(\boldsymbol{x}),D_{3}(\boldsymbol{x})>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\boldsymbol{x}\in\mathbb{R}^{3}$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\mathrm{H}_{f}(\boldsymbol{x})$
+\end_inset
+
+ is positive definite for all 
+\begin_inset Formula $\boldsymbol{x}\in\mathbb{R}^{3}$
+\end_inset
+
+ which implies 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\emph on
+strictly 
+\emph default
+convex everywhere in 
+\begin_inset Formula $\mathbb{R}^{3}$
+\end_inset
+
+ (thus certainly 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 5.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Is 
+\begin_inset Formula $f$
+\end_inset
+
+ strictly convex? 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Yes, by our solution for 5.a.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 6
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=2x_{1}^{2}x_{2}^{-1}$
+\end_inset
+
+ and let 
+\begin_inset Formula $A=\{\boldsymbol{x}\in\mathbb{R}^{2}\mid x_{1},x_{2}>0\}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Problem 6.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Is 
+\begin_inset Formula $f$
+\end_inset
+
+ convex over 
+\begin_inset Formula $A$
+\end_inset
+
+? 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ The Hessian of 
+\begin_inset Formula $f$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+\mathrm{H}_{f}(\boldsymbol{x}) & =\begin{pmatrix}\frac{4}{x_{2}} & -\frac{4x_{1}}{x_{2}^{2}}\\
+-\frac{4x_{1}}{x_{2}^{2}} & \frac{4x_{1}^{2}}{x_{2}^{3}}
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+The principal minors of 
+\begin_inset Formula $\mathrm{H}_{f}(\boldsymbol{x})$
+\end_inset
+
+ are
+\begin_inset Formula 
+\[
+\Delta_{1}(\boldsymbol{x})=\frac{4}{x_{2}},\qquad\Delta_{2}(\boldsymbol{x})=\frac{4x_{1}^{2}}{x_{2}^{3}},\qquad\Delta_{3}(\boldsymbol{x})=\left|\begin{pmatrix}\frac{4}{x_{2}} & -\frac{4x_{1}}{x_{2}^{2}}\\
+-\frac{4x_{1}}{x_{2}^{2}} & \frac{4x_{1}^{2}}{x_{2}^{3}}
+\end{pmatrix}\right|=0.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\Delta_{1}(\boldsymbol{x}),\Delta_{2}(\boldsymbol{x}),\Delta_{3}(\boldsymbol{x})\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\boldsymbol{x}\in A$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\mathrm{H}_{f}(\boldsymbol{x})$
+\end_inset
+
+ is positive semidefinite for all 
+\begin_inset Formula $\boldsymbol{x}\in A$
+\end_inset
+
+ which implies 
+\begin_inset Formula $f$
+\end_inset
+
+ is convex over 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 6.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Is 
+\begin_inset Formula $f$
+\end_inset
+
+ strictly convex over 
+\begin_inset Formula $A$
+\end_inset
+
+? 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ No because 
+\begin_inset Formula $\Delta_{3}(\boldsymbol{x})\not>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\boldsymbol{x}\in A$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

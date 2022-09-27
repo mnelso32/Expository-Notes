@@ -1,0 +1,3476 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Commutative Algebra Homework 1
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $S\subseteq R$
+\end_inset
+
+ be a subset.
+ Then 
+\begin_inset Formula $S$
+\end_inset
+
+ is saturated and multiplicatively closed if and only if 
+\begin_inset Formula $S$
+\end_inset
+
+ is the complement of a set-theoretic union of prime ideals.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ In 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+, the set 
+\begin_inset Formula $\{\pm2^{n}\}_{n=0}^{\infty}$
+\end_inset
+
+ is the complement of the union of all odd prime ideals.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $S$
+\end_inset
+
+ is multiplicatively closed and saturated.
+ Let 
+\begin_inset Formula $x\in S^{c}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\langle x\rangle\cap S=\emptyset$
+\end_inset
+
+ since 
+\begin_inset Formula $S$
+\end_inset
+
+ is saturated.
+ Choose a prime ideal 
+\begin_inset Formula $\mathfrak{p}_{x}$
+\end_inset
+
+ such that 
+\begin_inset Formula $x\in\mathfrak{p}_{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{p}_{x}\cap S=\emptyset$
+\end_inset
+
+.
+ Then observe that
+\begin_inset Formula 
+\[
+S^{c}=\bigcup_{x\notin S}\langle x\rangle=\bigcup_{x\notin S}\mathfrak{p}_{x}.
+\]
+
+\end_inset
+
+Conversely, suppose 
+\begin_inset Formula $S$
+\end_inset
+
+ is the complement of a set-theoretic union of prime ideals.
+ Let 
+\begin_inset Formula $s,t\in S$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $s$
+\end_inset
+
+ and 
+\begin_inset Formula $t$
+\end_inset
+
+ are in any primes in the complement of 
+\begin_inset Formula $S$
+\end_inset
+
+ and so neither is 
+\begin_inset Formula $st$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $S$
+\end_inset
+
+ is multiplicatively closed.
+ Also if 
+\begin_inset Formula $xy\in S$
+\end_inset
+
+, then neither 
+\begin_inset Formula $x$
+\end_inset
+
+ nor 
+\begin_inset Formula $y$
+\end_inset
+
+ can be in any of the ideals in 
+\begin_inset Formula $S^{c}$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $S$
+\end_inset
+
+ is saturated.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Unique Factorization Domains
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain.
+ We say 
+\begin_inset Formula $R$
+\end_inset
+
+ is 
+\series bold
+atomic 
+\series default
+if every nonzero nonunit is a product of atoms (irreducibles).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an atomic domain.
+ We say 
+\begin_inset Formula $R$
+\end_inset
+
+ is a unique factorization domain if given irreducible factorizations in
+ 
+\begin_inset Formula $R$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\alpha_{1}\alpha_{2}\cdots\alpha_{n}=\beta_{1}\beta_{2}\cdots\beta_{m}
+\]
+
+\end_inset
+
+we have 
+\begin_inset Formula $n=m$
+\end_inset
+
+ and there exists a 
+\begin_inset Formula $\sigma\in S_{n}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\alpha_{i}=u_{i}\beta_{\sigma(i)}$
+\end_inset
+
+ where 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ is a unit.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain and 
+\begin_inset Formula $x\in R$
+\end_inset
+
+ can be represented as a product of primes then the representation is unique
+ up to ordering and units.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain and let 
+\begin_inset Formula $S$
+\end_inset
+
+ be the set of elements which are expressible as a product of primes and
+ units.
+ Then 
+\begin_inset Formula $S$
+\end_inset
+
+ is multiplicatively closed and saturated 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ are units or products of primes then so is 
+\begin_inset Formula $xy$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $S$
+\end_inset
+
+ is multiplicatively closed.
+ Now suppose 
+\begin_inset Formula $xy\in S$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $xy$
+\end_inset
+
+ is a unit, then clearly 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ are units.
+ On the other hand, if not, then
+\begin_inset Formula 
+\[
+xy=p_{1}p_{2}\cdots p_{n}
+\]
+
+\end_inset
+
+with each 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ prime.
+ Each 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ is prime and without loss of generality we may assume that 
+\begin_inset Formula $p_{1}\mid x$
+\end_inset
+
+and 
+\begin_inset Formula $x=x'p_{1}$
+\end_inset
+
+.
+ We get
+\begin_inset Formula 
+\[
+x'y=p_{2}\cdots p_{n}
+\]
+
+\end_inset
+
+By induction, 
+\begin_inset Formula $x,y\in S$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ An integral domain 
+\begin_inset Formula $R$
+\end_inset
+
+ is a UFD if and only if every nonzero nonunit is a product of primes.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $R$
+\end_inset
+
+ is a UFD.
+ Then all irreducibles are prime.
+ This gives us one direction.
+ For the other direction, suppose every nonzero nonunit is a product of
+ primes.
+ Then 
+\begin_inset Formula $R$
+\end_inset
+
+ is atomic and uniqueness follows from the proposition above.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain.
+ The following conditions are equivalent:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R$
+\end_inset
+
+ is a UFD.
+\end_layout
+
+\begin_layout Enumerate
+Every nonzero prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ contains a nonzero prime element.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $R$
+\end_inset
+
+ is a UFD and let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be a prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Choose any 
+\begin_inset Formula $x\in\mathfrak{p}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $x$
+\end_inset
+
+ can be factored as a product of primes, say
+\begin_inset Formula 
+\[
+x=p_{1}\cdots p_{n}.
+\]
+
+\end_inset
+
+Then observe that 
+\begin_inset Formula $p_{i}\in\mathfrak{p}$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+ since 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is a prime ideal.
+ This proves one direction.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Conversely, suppose every nonzero prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ contains a nonzero prime element.
+ Let 
+\begin_inset Formula 
+\[
+S=\{x\in R\mid x\text{ is a unit or product of primes}\}.
+\]
+
+\end_inset
+
+Then by the proposition above, 
+\begin_inset Formula $S$
+\end_inset
+
+ is multiplicatively closed and saturated.
+ It suffices to show 
+\begin_inset Formula $S=R\backslash\{0\}$
+\end_inset
+
+.
+ Assume for a contradiction that 
+\begin_inset Formula $S\neq R\backslash\{0\}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $x\in R\backslash\{0\}$
+\end_inset
+
+ that is not in 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Consider the ideal 
+\begin_inset Formula $\langle x\rangle$
+\end_inset
+
+ generated by 
+\begin_inset Formula $x$
+\end_inset
+
+ and note that 
+\begin_inset Formula $\langle x\rangle\cap S=\emptyset$
+\end_inset
+
+ as 
+\begin_inset Formula $S$
+\end_inset
+
+ is saturated.
+ Since 
+\begin_inset Formula $\langle x\rangle\cap S=\emptyset$
+\end_inset
+
+ there exists a prime ideal 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ which contains 
+\begin_inset Formula $x$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathfrak{p}\cap S=\emptyset$
+\end_inset
+
+.
+ But 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ must contain a prime element which cannot belong to 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ This is a contradiction.
+ Thus 
+\begin_inset Formula $S=R\backslash\{0\}$
+\end_inset
+
+ and we are done.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ In 
+\begin_inset Formula $\mathbb{Z}\slash6\mathbb{Z}$
+\end_inset
+
+ there are two prime ideals, namely 
+\begin_inset Formula $\{\overline{0},\overline{3}\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\{\overline{0},\overline{2},\overline{4}\}$
+\end_inset
+
+.
+ Both contain prime elements.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring and let 
+\begin_inset Formula $M$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-module.
+ If 
+\begin_inset Formula $I$
+\end_inset
+
+ is any ideal that is maximal among all annihilators of nonzero elements
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $I$
+\end_inset
+
+ is prime.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Choose 
+\begin_inset Formula $u\in M$
+\end_inset
+
+ such that 
+\begin_inset Formula $I=0:u$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $xy\in I$
+\end_inset
+
+ and 
+\begin_inset Formula $y\notin I$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $y\notin I$
+\end_inset
+
+ we see that 
+\begin_inset Formula $yu\neq0$
+\end_inset
+
+.
+ On the other hand, 
+\begin_inset Formula $xyu=0$
+\end_inset
+
+, hence 
+\begin_inset Formula $x\in0:yu$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $0:yu\supseteq0:u$
+\end_inset
+
+, we have 
+\begin_inset Formula $0:yu=0:u$
+\end_inset
+
+ by maximality of 
+\begin_inset Formula $I=0:u$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $x\in I$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring with identity.
+ The following conditions are equivalent:
+\end_layout
+
+\begin_layout Enumerate
+Every ascending chain of ideals of 
+\begin_inset Formula $R$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+I_{1}\subseteq I_{2}\subseteq\cdots\subseteq I_{n}\subseteq\cdots
+\]
+
+\end_inset
+
+stabilizes.
+ In other words there exists 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $I_{m}=I_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $m,n\geq N$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Every ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+ is finitely generated.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Any ring satisfying any of the equivalent conditions above is called a
+ 
+\series bold
+Noetherian 
+\series default
+ring.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $R$
+\end_inset
+
+ is Noetherian if and only if every prime ideal is finitely generated.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ If every ideal is finitely generated then every prime ideal is finitely
+ generated.
+ Conversely suppose every prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ is finitely generated and let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Assume for a contradiction that 
+\begin_inset Formula $I$
+\end_inset
+
+ is not finitely generated.
+ Then 
+\begin_inset Formula $I$
+\end_inset
+
+ is contained in some ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+ that is maximal with respect to not being finitely generated, say 
+\begin_inset Formula $J\supseteq I$
+\end_inset
+
+.
+ Let
+\begin_inset Formula 
+\[
+\Gamma=\{\text{ideals }\mathfrak{a}\mid I\subseteq\mathfrak{a}\subseteq R\text{ and }\mathfrak{a}\text{ not finitely generated}\}.
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is partially ordered by inclusion and is nonempty as 
+\begin_inset Formula $I\in\Gamma$
+\end_inset
+
+.
+ Furthermore, every totally ordered subset of 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ has an upper bound.
+ Indeed, if 
+\begin_inset Formula $(\mathfrak{a}_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+ is a chain in 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+, then 
+\begin_inset Formula $\bigcup_{\lambda\in\Lambda}\mathfrak{a}_{\lambda}$
+\end_inset
+
+ is an upper bound.
+ Thus by Zorn's Lemma, 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ has a maximal element, say 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is prime.
+ Assume for a contradiction that 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is not prime.
+ Then there exists 
+\begin_inset Formula $a,b\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula $ab\in\mathfrak{p}$
+\end_inset
+
+ with 
+\begin_inset Formula $a,b\notin\mathfrak{p}$
+\end_inset
+
+.
+ Consider the ideal
+\begin_inset Formula 
+\[
+\mathfrak{p}:a=\{x\in R\mid xa\in\mathfrak{p}\}.
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\mathfrak{p}:a$
+\end_inset
+
+ properly contains 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ since 
+\begin_inset Formula $\mathfrak{p}\subseteq\mathfrak{p}:a$
+\end_inset
+
+ and 
+\begin_inset Formula $b\in\mathfrak{p}:a$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\mathfrak{p}:a$
+\end_inset
+
+ is finitely generated by maximality of 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+.
+ Now also 
+\begin_inset Formula $\langle\mathfrak{p},a\rangle$
+\end_inset
+
+ is finitely generated, say
+\begin_inset Formula 
+\[
+\langle\mathfrak{p},a\rangle=\langle x_{1},x_{2},\dots,x_{n},a\rangle.
+\]
+
+\end_inset
+
+We claim that
+\begin_inset Formula 
+\[
+\mathfrak{p}=\langle x_{1},x_{2},\dots,x_{n}\rangle+(\mathfrak{p}:a)a.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So we've shown that if 
+\begin_inset Formula $R$
+\end_inset
+
+ has an ideal that is not finitely generated, then it has a prime ideal
+ that is not finitely generated.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $\{\mathfrak{p}_{\lambda}\}_{\lambda\in\Lambda}$
+\end_inset
+
+ is a chain of primes, then
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\bigcap_{\lambda\in\Lambda}\mathfrak{p}_{\lambda}$
+\end_inset
+
+ is a prime ideal.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\bigcup_{\lambda\in\Lambda}\mathfrak{p}_{\lambda}$
+\end_inset
+
+ is a prime ideal.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be a prime ideal containing 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ can be shrunk to a prime ideal minimal among prime ideals containing 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+So in a commutative ring with identity, minimal prime ideals exist.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathfrak{p}\subset\mathfrak{q}$
+\end_inset
+
+ be distinct prime ideals in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then there exist distinct primes 
+\begin_inset Formula $\mathfrak{p}_{1}\subset\mathfrak{q}_{1}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\mathfrak{p}\subseteq\mathfrak{p}_{1}\subset\mathfrak{q}_{1}\subseteq\mathfrak{q}
+\]
+
+\end_inset
+
+with no prime properly in between 
+\begin_inset Formula $\mathfrak{p}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{q}_{1}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Use Zorn's Lemma to find a maximal chain of primes between 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+ and select some 
+\begin_inset Formula $x\in\mathfrak{q}\backslash\mathfrak{p}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathfrak{p}_{1}$
+\end_inset
+
+ be the union of primes in this maximal chain that do not contain 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathfrak{q}_{1}$
+\end_inset
+
+ be the intersection of the primes in this maximal chain containing 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathfrak{p}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{q}_{1}$
+\end_inset
+
+ are primes and 
+\begin_inset Formula 
+\[
+\mathfrak{p}\subseteq\mathfrak{p}_{1}\subset\mathfrak{q}_{1}\subseteq\mathfrak{q}.
+\]
+
+\end_inset
+
+We claim that there is no prime in between 
+\begin_inset Formula $\mathfrak{p}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{q}_{1}$
+\end_inset
+
+.
+ Indeed, assume for a contradiction that 
+\begin_inset Formula $\mathfrak{p}'$
+\end_inset
+
+ is a prime in between 
+\begin_inset Formula $\mathfrak{p}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{q}_{1}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathfrak{p}'$
+\end_inset
+
+ is an element of the maximal chain.
+ But if 
+\begin_inset Formula $x\in\mathfrak{p}'$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathfrak{p}'\supseteq\mathfrak{q}_{1}$
+\end_inset
+
+, and if 
+\begin_inset Formula $x\notin\mathfrak{p}'$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathfrak{p}'\subseteq\mathfrak{p}_{1}$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $\mathfrak{p}'=\mathfrak{p}_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $\mathfrak{p}'=\mathfrak{q}_{1}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Localizations
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain and let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be a prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ The set 
+\begin_inset Formula $S=R\backslash\mathfrak{p}$
+\end_inset
+
+ is a saturated multiplicatively closed set.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Consider 
+\begin_inset Formula 
+\[
+R=\mathbb{F}[x;\mathbb{Q}_{0}^{+}]=\left\{ \sum_{k=0}^{n}a_{k}x^{q_{k}}\mid a_{k}\in\mathbb{F}\text{ and }q_{k}\in\mathbb{Q}_{0}^{+}\right\} 
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\mathfrak{m}=\langle x^{\beta}\mid\beta>0\rangle$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $R_{\mathfrak{m}}$
+\end_inset
+
+ is a 1-dimensional nondiscrete valuation domain.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $R\neq0$
+\end_inset
+
+ has no identity, then 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ is never Noetherian.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ In 
+\begin_inset Formula $R[X]$
+\end_inset
+
+, the element 
+\begin_inset Formula $X$
+\end_inset
+
+ is prime if and only if 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $X$
+\end_inset
+
+ is prime.
+ Then 
+\begin_inset Formula $\langle X\rangle$
+\end_inset
+
+ is a prime ideal and 
+\begin_inset Formula $R[X]\slash\langle X\rangle\cong R$
+\end_inset
+
+ is a domain.
+ Conversely, suppose 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain.
+ Then 
+\begin_inset Formula $\langle X\rangle$
+\end_inset
+
+ is prime similar to above, so 
+\begin_inset Formula $X$
+\end_inset
+
+ is prime.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring with identity and 
+\begin_inset Formula $f(x)=a_{n}x^{n}+\cdots+a_{1}x+a_{0}\in R[x]$
+\end_inset
+
+ with 
+\begin_inset Formula $a_{n}\neq0$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $\deg(f(x))=n$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be commutative with 
+\begin_inset Formula $1$
+\end_inset
+
+ and let 
+\begin_inset Formula $f,g\in R[x]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\deg(f+g)\leq\max(\deg(f),\deg(g))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\deg(fg)\leq\deg(f)+\deg(g)$
+\end_inset
+
+ (equality holds if 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain, then 
+\begin_inset Formula $R[x]$
+\end_inset
+
+ is a domain.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $R$
+\end_inset
+
+ has 
+\begin_inset Formula $1$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $R[x]$
+\end_inset
+
+ has 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $f,g\in R[x]$
+\end_inset
+
+ such that that 
+\begin_inset Formula $\langle fg\rangle=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a domain.
+ Then 
+\begin_inset Formula $(R[X])^{\times}=R^{\times}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Power Series
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain if and only if 
+\begin_inset Formula $\langle x\rangle$
+\end_inset
+
+ is a prime ideal of 
+\begin_inset Formula $R[[x]]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain, then so is 
+\begin_inset Formula $R[[x]]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $(R[[x]])^{\times}=\{f(x)\in R[[x]]\mid f(0)\in R^{\times}\}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $F$
+\end_inset
+
+ is a field, then every nonzero element of 
+\begin_inset Formula $F[[x]]$
+\end_inset
+
+ is of the form 
+\begin_inset Formula $x^{n}u(x)$
+\end_inset
+
+ where 
+\begin_inset Formula $n\geq0$
+\end_inset
+
+ and 
+\begin_inset Formula $u(x)\in(F[[x]])^{\times}$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Note in 
+\begin_inset Formula $R[[x]]$
+\end_inset
+
+ if 
+\begin_inset Formula $f(x)\neq0$
+\end_inset
+
+, then 
+\begin_inset Formula $f(x)=x^{n}g(x)$
+\end_inset
+
+ with 
+\begin_inset Formula $g(0)\neq0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $R$
+\end_inset
+
+ is a field, then 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ is a unit.
+ So if 
+\begin_inset Formula $F$
+\end_inset
+
+ is a field, then 
+\begin_inset Formula $F[[x]]$
+\end_inset
+
+ is a valuation domain.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $a\in R$
+\end_inset
+
+ is irreducible, then 
+\begin_inset Formula $a+xf(x)$
+\end_inset
+
+ is irreducible in 
+\begin_inset Formula $R[[x]]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $a+xf(x)=(b+xg(x))(c+xh(x))$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $a=bc$
+\end_inset
+
+ which implies 
+\begin_inset Formula $b$
+\end_inset
+
+ or 
+\begin_inset Formula $c$
+\end_inset
+
+ is a unit.
+ Therefore 
+\begin_inset Formula $b+xg(x)$
+\end_inset
+
+ or 
+\begin_inset Formula $c+xh(x)$
+\end_inset
+
+ is a unit.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The converse is not true.
+ Indeed, 
+\begin_inset Formula $4+x$
+\end_inset
+
+ is irreducible in 
+\begin_inset Formula $\mathbb{Z}[[x]]$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $4+x$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{Z}[[x]]$
+\end_inset
+
+, we can assume it factors as
+\begin_inset Formula 
+\[
+(2+a_{1}x+a_{2}x^{2}+\cdots)(2+b_{1}x+b_{2}x^{2}+\cdots)=4+x.
+\]
+
+\end_inset
+
+So 
+\begin_inset Formula $2a_{1}+2b_{1}=1$
+\end_inset
+
+ which is a contradiction.
+ Note that 
+\begin_inset Formula $6+x$
+\end_inset
+
+ is irreducible in 
+\begin_inset Formula $\mathbb{Z}[x]$
+\end_inset
+
+ but not in 
+\begin_inset Formula $\mathbb{Z}[[x]]$
+\end_inset
+
+.
+ Indeed, we have
+\begin_inset Formula 
+\[
+6+x=(2+x+x^{2}+\cdots)(3-x-x^{2}-\cdots)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring with 
+\begin_inset Formula $1$
+\end_inset
+
+ and 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $I[[x]]$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle I,x\rangle$
+\end_inset
+
+ are ideals of 
+\begin_inset Formula $R[[x]]$
+\end_inset
+
+.
+ Moreover,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R[[x]]\slash I[[x]]\cong(R\slash I)[[x]]$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R[[x]]\slash\langle I,x\rangle\cong R\slash I$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In particular, 
+\begin_inset Formula $I[[x]]$
+\end_inset
+
+ (resp 
+\begin_inset Formula $\langle I,x\rangle$
+\end_inset
+
+) is prime if and only if 
+\begin_inset Formula $I$
+\end_inset
+
+ is prime.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Another difference: let 
+\begin_inset Formula $I\subseteq R$
+\end_inset
+
+ be an ideal.
+ Then in 
+\begin_inset Formula $R[x]$
+\end_inset
+
+, we have 
+\begin_inset Formula $I[x]=IR[x]$
+\end_inset
+
+.
+ However in 
+\begin_inset Formula $R[[x]]$
+\end_inset
+
+, we only have 
+\begin_inset Formula $IR[[x]]\subseteq I[[x]]$
+\end_inset
+
+.
+ In fact there exists rings with prime 
+\begin_inset Formula $P$
+\end_inset
+
+ and uncountably many primes between 
+\begin_inset Formula $PR[[x]]$
+\end_inset
+
+ (which is not a prime in general) and 
+\begin_inset Formula $P[[x]]$
+\end_inset
+
+ (which is a prime).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring with identity.
+ Then there exists a 1-1 correspondence between maximal ideals of 
+\begin_inset Formula $R$
+\end_inset
+
+ and maximal ideals of 
+\begin_inset Formula $R[[x]]$
+\end_inset
+
+, given by 
+\begin_inset Formula $\mathfrak{m}\leftrightarrow\langle\mathfrak{m},x\rangle$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $R$
+\end_inset
+
+ is (semi)quasilocal then 
+\begin_inset Formula $R[[x]]$
+\end_inset
+
+ is (semi)quasilocal.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Integrality
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field, and 
+\begin_inset Formula $R\subseteq K$
+\end_inset
+
+ a ring, and 
+\begin_inset Formula $I\subseteq R$
+\end_inset
+
+ a proper ideal.
+ Then there exists a valuation domain 
+\begin_inset Formula $V$
+\end_inset
+
+ where 
+\begin_inset Formula $R\subseteq V\subseteq K$
+\end_inset
+
+ such that 
+\begin_inset Formula $K$
+\end_inset
+
+ is the quotient field of 
+\begin_inset Formula $V$
+\end_inset
+
+ and 
+\begin_inset Formula $I$
+\end_inset
+
+ survives in 
+\begin_inset Formula $V$
+\end_inset
+
+, that is, 
+\begin_inset Formula $IV\neq V$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Consider all pairs 
+\begin_inset Formula $(R_{j},I_{j})$
+\end_inset
+
+ where 
+\begin_inset Formula $R_{j}$
+\end_inset
+
+ is a ring between 
+\begin_inset Formula $R$
+\end_inset
+
+ and 
+\begin_inset Formula $K$
+\end_inset
+
+, 
+\begin_inset Formula $I_{j}\subseteq R_{j}$
+\end_inset
+
+ is a proper ideal containing 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ We partially order this set of pairs via: 
+\begin_inset Formula $(R_{\alpha},I_{\alpha})\leq(R_{\beta},I_{\beta})$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $R_{\alpha}\subseteq R_{\beta}$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{\alpha}\subseteq I_{\beta}$
+\end_inset
+
+.
+ We use Zorn's Lemma to find a maximal element of this set.
+ Let 
+\begin_inset Formula $\{(R_{\alpha},I_{\alpha})\}$
+\end_inset
+
+ be a chain.
+ Consider 
+\begin_inset Formula $(T,J)$
+\end_inset
+
+ where 
+\begin_inset Formula $T=\bigcup_{\alpha}R_{\alpha}$
+\end_inset
+
+ and 
+\begin_inset Formula $J=\bigcup_{\alpha}I_{\alpha}$
+\end_inset
+
+.
+ It is easy to see that 
+\begin_inset Formula $(T,J)$
+\end_inset
+
+ is an upper bound.
+ By Zorn, there exists a maximal element which we will call 
+\begin_inset Formula $(V,J)$
+\end_inset
+
+.
+ To see 
+\begin_inset Formula $V$
+\end_inset
+
+ is a valuatoin domain with quotient field 
+\begin_inset Formula $K$
+\end_inset
+
+, it suffices to show 
+\begin_inset Formula $u$
+\end_inset
+
+ or 
+\begin_inset Formula $u^{-1}$
+\end_inset
+
+ is in 
+\begin_inset Formula $V$
+\end_inset
+
+ for all 
+\begin_inset Formula $u\in K$
+\end_inset
+
+.
+ By previous proposition, we have 
+\begin_inset Formula $J$
+\end_inset
+
+ survives in 
+\begin_inset Formula $V[u]$
+\end_inset
+
+ or 
+\begin_inset Formula $V[u^{-1}]$
+\end_inset
+
+.
+ But 
+\begin_inset Formula $(V,J)$
+\end_inset
+
+ was a maximal pair.
+ So either 
+\begin_inset Formula $V[u]=V$
+\end_inset
+
+ or 
+\begin_inset Formula $V[u^{-1}]=V$
+\end_inset
+
+ (so 
+\begin_inset Formula $u$
+\end_inset
+
+ or 
+\begin_inset Formula $u^{-1}$
+\end_inset
+
+ is in 
+\begin_inset Formula $V$
+\end_inset
+
+).
+ So 
+\begin_inset Formula $V$
+\end_inset
+
+ is a valuation domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain with quotient field 
+\begin_inset Formula $K$
+\end_inset
+
+ and integral closure 
+\begin_inset Formula $\overline{R}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\overline{R}=\bigcap_{R\subseteq V\subseteq K}V
+\]
+
+\end_inset
+
+where the integration is take over all valuation domains 
+\begin_inset Formula $V$
+\end_inset
+
+ such that 
+\begin_inset Formula $R\subseteq V\subseteq K$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ We say the domain 
+\begin_inset Formula $R$
+\end_inset
+
+ is a 
+\series bold
+Bezout domain 
+\series default
+if every finitely generated ideal is principal.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Noetherian Bezout domain is a principal ideal domain.
+ The ring of entire functions on the complex plane is a Bezout domain.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain.
+ Then 
+\begin_inset Formula $R$
+\end_inset
+
+ is a valuation domain if and only if 
+\begin_inset Formula $R$
+\end_inset
+
+ is a local Bezout domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ One direction is easy.
+ For the reverse direction, consider the ideal 
+\begin_inset Formula $\langle a,b\rangle$
+\end_inset
+
+ in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is Bezout, we see that 
+\begin_inset Formula $\langle a,b\rangle=\langle d\rangle$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $a=a'd$
+\end_inset
+
+, 
+\begin_inset Formula $b=b'd$
+\end_inset
+
+, and 
+\begin_inset Formula $ra+sb=d$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain, this implies 
+\begin_inset Formula $ra'+sb'=1$
+\end_inset
+
+.
+ Note also that 
+\begin_inset Formula $R$
+\end_inset
+
+ is quasilocal with maximal ideal 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+.
+ So either 
+\begin_inset Formula $ra'$
+\end_inset
+
+ or 
+\begin_inset Formula $sb'$
+\end_inset
+
+ is not in 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+, say 
+\begin_inset Formula $ra'\notin\mathfrak{m}$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $ra'$
+\end_inset
+
+, hence 
+\begin_inset Formula $a'$
+\end_inset
+
+ is a unit.
+ Therefore 
+\begin_inset Formula $a=a'd\mid b'd=b$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+ is a valuation domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Fractional Ideals
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a domain with quotient field 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ A 
+\end_layout
+
+\end_body
+\end_document

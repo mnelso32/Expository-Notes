@@ -1,0 +1,2286 @@
+%% LyX 2.3.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,english]{article}
+\usepackage[osf]{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[paperwidth=30cm,paperheight=35cm]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm}
+\setlength{\parindent}{0bp}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\makeatletter
+\@ifundefined{date}{}{\date{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\title{Functional Analysis}
+\author{Michael Nelson}
+
+\maketitle
+\tableofcontents{}
+
+\newpage{}
+
+\part{Class Notes}
+
+\section{Introduction}
+
+Given a measure $\mu$, the $n$th \textbf{moment }is by definition
+$\int_{I}t^{n}\mathrm{d}\mu(t)$ where $Ij$ is a subinterval of $\mathbb{R}$.
+The moment problem says that if we are given a sequence $(a_{n})$
+of real numbers, can we find a measure $\mu$ such that
+\[
+a_{n}=\int_{I}t^{n}\mathrm{d}\mu(t).
+\]
+for all $n\in\mathbb{N}$. If $I=[0,1]$, then this is called the
+Hausdorff moment problem. If $I=[0,\infty)$, then this is called
+the Stieltjes moment problem. If $I=(-\infty,\infty)$, then this
+is called the Hamburger moment problem. 
+
+~~~Let us start with some intuition on how we can solve this problem.
+For a function $f$ and a measure $\mu$, let us denote
+\begin{equation}
+\langle f,\mu\rangle=\int_{I}f\mathrm{d}\mu\label{eq:innerproductfunctionmeasure}
+\end{equation}
+In some sense, (\ref{eq:innerproductfunctionmeasure}) behaves like
+an inner-product. Of course, $f$ and $\mu$ are different types of
+mathematical objects; one is a function and the other is a measure.
+So for all functions $f$ and measures $\mu$. 
+
+\subsection{Convex Sets}
+
+\begin{proof} Let $V$ be an $\mathbb{R}$-vector space and let $C$
+be a subset of $V$. We say $C$ is \textbf{convex }if for all $t\in(0,1)$
+and $x,y\in S$, we have $tx+(1-t)y\in C$. \end{proof}
+
+\begin{prop}\label{propconvexlinearcombinc} Let $V$ be an $\mathbb{R}$-vector
+space and let $C$ be a convex subset of $V$. Then for all $n\in\mathbb{N}$,
+$x_{1},\dots,x_{n}\in C$, and $t_{1},\dots,t_{n}\in(0,1)$ such that
+$\sum_{i=1}^{n}t_{i}=1$, we have $\sum_{i=1}^{n}t_{i}x_{i}\in C$.
+
+\end{prop}
+
+\begin{proof} Let $x=\sum_{i=1}^{n}t_{i}x_{i}$ and assume that $n$
+is minimal in the sense that if $x=\sum_{i'=1}^{n'}t_{i'}'x_{i'}$
+is another representation of $x$, where each $x_{i'}\in S$ and $t_{i'}'\in(0,1)$
+such that $\sum_{i'=1}^{n'}t_{i'}'=1$, then we must have $n\leq n'$.
+Assume for a contradiction that $x\notin C$, so $n>2$. Then observe
+that
+\begin{align*}
+\sum_{i=1}^{n-1}\frac{t_{i}}{1-t_{n}}((1-t_{n})x_{i}+t_{n}x_{n}) & =\sum_{i=1}^{n-1}t_{i}x_{i}+\left(\sum_{i=1}^{n-1}\frac{t_{i}}{1-t_{n}}\right)t_{n}x_{n}\\
+ & =\sum_{i=1}^{n-1}t_{i}x_{i}+\left(\frac{1-t_{n}}{1-t_{n}}\right)t_{n}x_{n}\\
+ & =\sum_{i=1}^{n-1}t_{i}x_{i}+t_{n}x_{n}\\
+ & =\sum_{i=1}^{n}t_{i}x_{i}\\
+ & =x,
+\end{align*}
+gives another representation with $n-1$ terms, a contradiction. \end{proof}
+
+\subsubsection{Convex Closure and Closed Convex Closure}
+
+\begin{defn}\label{defn} Let $V$ be an $\mathbb{R}$-vector space
+and let $S$ be a subset of $V$. The \textbf{convex closure }of $S$
+is defined by
+\[
+\mathrm{conv}(S)=\left\{ tx+(1-t)y\mid t\in(0,1)\text{ and }x,y\in S\right\} .
+\]
+Moreover, suppose $\|\cdot\|$ is a norm on $V$, so that $(V,\|\cdot\|)$
+is a normed linear space. The \textbf{closed convex closure }of $S$
+is defined to be the smallest closed convex set which contains $S$
+and is denoted by $\overline{\mathrm{conv}}(S)$. \end{defn}
+
+\begin{prop}\label{prop} With the notation as above, $\mathrm{conv}(S)$
+is the smallest convex set which contains $S$. Furthermore, we have
+$\overline{\mathrm{conv}(S)}=\overline{\mathrm{conv}}(S)$. \end{prop}
+
+\begin{proof} Let us first show that $\mathrm{conv}(S)$ is in fact
+a convex set. Let $s,t,t'\in(0,1)$ and let $x,x',y,y'\in S$. Then
+observe that
+\[
+s(tx+(1-t)y)+(1-s)(t'x'+(1-t')y')=stx+s(1-t)y+(1-s)t'x'+(1-s)(1-t')y'\in\mathrm{conv}(S),
+\]
+where we used Proposition~(\ref{propconvexlinearcombinc}) together
+with the fact that
+\[
+st+s(1-t)+(1-s)t'+(1-s)(1-t')=1.
+\]
+It follows that $\mathrm{conv}(S)$ is convex. It is also the smallest
+convex set which contains $S$ since if $C$ is a convex set which
+contains $S$, then we must have $tx+(1-t)y\in C$ for all $t\in(0,1)$
+and $x,y\in S$, which implies $\mathrm{conv}(S)\subseteq C$.
+
+~~~Now we will show $\overline{\mathrm{conv}(S)}=\overline{\mathrm{conv}}(S)$.
+To see this, first note that since $\overline{\mathrm{conv}}(S)$
+is convex, we have $\mathrm{conv}(S)\subseteq\overline{\mathrm{conv}}(S)$,
+and hence
+\begin{align*}
+\overline{\mathrm{conv}(S)} & \subseteq\overline{\overline{\mathrm{conv}}(S)}\\
+ & =\overline{\mathrm{conv}}(S).
+\end{align*}
+For the reverse inclusion, it suffices to show that $\overline{\mathrm{conv}(S)}$
+is convex, since then $\overline{\mathrm{conv}(S)}$ would be a closed
+convex set, and so $\overline{\mathrm{conv}}(S)\subseteq\overline{\mathrm{conv}(S)}$
+by definition of $\overline{\mathrm{conv}}(S)$. In fact, we will
+show that the closure of a convex set is convex. To this end, suppose
+$C$ is a convex set and let $t\in(0,1)$ and $x,y\in\overline{C}$.
+Choose sequences $(x_{n})$ and $(y_{n})$ in $C$ such that $x_{n}\to x$
+and $y_{n}\to y$. Then $(tx_{n}+(1-t)y_{n})$ is a sequence in $C$
+(as $C$ is convex) which converges to $tx+(1-t)y$. It follows that
+$tx+(1-t)y\in\overline{C}$, and hence $\overline{C}$ is convex.
+\end{proof} 
+
+\subsubsection{Convex Closure Preserves Minkowski Sum}
+
+\begin{defn}\label{defn} Let $V$ be an $\mathbb{R}$-vector space
+and let $S_{1},S_{2}$ be subsets of $V$. We define the \textbf{Minkowski
+sum }of $S_{1}$ and $S_{2}$ to be the set
+\[
+S_{1}+S_{2}=\{x_{1}+x_{2}\mid x_{1}\in S_{1}\text{ and }x_{2}\in S_{2}\}.
+\]
+\end{defn}
+
+\begin{prop}\label{prop} Let $V$ be an $\mathbb{R}$-vector space
+and let $C_{1},C_{2}$ be convex subsets of $V$. Then $C_{1}+C_{2}$
+is convex. \end{prop}
+
+\begin{proof} Let $t\in(0,1)$, let $c_{1},c_{1}'\in C_{1}$, and
+let $c_{2},c_{2}'\in C_{2}$. Then we have
+\[
+t(c_{1}+c_{2})+(1-t)(c_{1}'+c_{2}')=(tc_{1}+(1-t)c_{1}')+(tc_{2}+(1-t)c_{2}')\in C_{1}+C_{2},
+\]
+since both $C_{1}$ and $C_{2}$ are convex. It follows that $C_{1}+C_{2}$
+is convex. \end{proof}
+
+\begin{prop}\label{prop} Let $V$ be an $\mathbb{R}$-vector space
+and let $S_{1},S_{2}$ be subsets of $V$. Then we have $\mathrm{conv}(S_{1}+S_{2})=\mathrm{conv}(S_{1})+\mathrm{conv}(S_{2})$.
+\end{prop}
+
+\begin{proof} Note that $\mathrm{conv}(S_{1})+\mathrm{conv}(S_{2})$
+is a convex set which contains $S_{1}+S_{2}$. Thus
+\[
+\mathrm{conv}(S_{1}+S_{2})\subseteq\mathrm{conv}(S_{1})+\mathrm{conv}(S_{2}).
+\]
+For the reverse inclusion, let $z_{1}\in\mathrm{conv}(S_{1})$ and
+$z_{2}\in\mathrm{conv}(S_{2})$ and express them as $z_{1}=t_{1}x_{1}+(1-t_{1})y_{1}$
+and $z_{2}=t_{2}x_{2}+(1-t_{1})y_{2}$ where $x_{1},y_{1}\in S_{1}$,
+$x_{2},y_{2}\in S_{2}$, and $t_{1},t_{2}\in(0,1)$. Then note that
+\begin{align*}
+z_{1}+z_{2} & =t_{1}x_{1}+(1-t_{1})y_{1}+t_{2}x_{2}+(1-t_{2})y_{2}\\
+ & =t_{1}x_{1}+t_{2}x_{2}+y_{1}-t_{1}y_{1}+y_{2}-t_{2}y_{2}\\
+ & =(t_{1}-t_{2})(x_{1}+y_{2})+t_{2}(x_{1}+x_{2})+(1-t_{1})(y_{1}+y_{2}),
+\end{align*}
+where $(t_{1}-t_{2})+t_{2}+(1-t_{1})=1$ and where $x_{1}+y_{2},x_{1}+x_{2},y_{1}+y_{2}\in S_{1}+S_{2}$.
+It follows that $z_{1}+z_{2}\in\mathrm{conv}(S_{1}+S_{2})$. Thus
+we have the reverse inclusion
+\[
+\mathrm{conv}(S_{1}+S_{2})\supseteq\mathrm{conv}(S_{1})+\mathrm{conv}(S_{2}).
+\]
+ \end{proof}
+
+\subsection{Convex Cones}
+
+\begin{defn}\label{defn} Let $V$ be an $\mathbb{R}$-vector space.
+A set $P\subseteq V$ is said to be a \textbf{convex cone }if
+\begin{enumerate}
+\item if $x,y\in P$ then $x+y\in P$
+\item if $x\in P$ and $\alpha\geq0$, then $\alpha x\in P$. 
+\end{enumerate}
+\end{defn}
+
+~~~Given a convex cone $P\subseteq V$, we can define a partial
+order on $V$ as follows: if $x,y\in V$, then we say $x\leq_{P}y$
+if $y-x\in P$. To see that this is a preorder, note that reflexivity
+of $\leq_{P}$ follows from the fact that $0\in P$. Transitivity
+of $\leq_{P}$ follows from the fact that $P$ is closed under addition:
+if $x\leq_{P}y$ and $y\leq_{P}z$, then $z-x=(z-y)+(y-x)\in P$ shows
+$x\leq_{P}z$. Thus $\leq_{P}$ is in fact a preorder. If we assume
+in addition that $-P\cap P=0$, then we also have antisymmetry of
+$\leq_{P}.$ In this case, $\leq_{P}$ is a partial order. Note that,
+we will have $0\leq_{P}x$ for all $x\in P$, thus it makes sense
+to call the elements of $P$ the \textbf{positive }elements with respect
+to the preorder $\leq_{P}$. 
+
+\subsection{Marcel Riesz Extension Theorem}
+
+\begin{theorem}\label{theorem} (Marcel Riesz Extension Theorem) Let
+$V$ be an $\mathbb{R}$-vector space, let $W\subseteq V$ be a subspace
+of $V$, and let $P\subseteq V$ be a convex cone. Suppose $V=W+P$
+and $\psi\colon W\to\mathbb{R}$ is a linear functional such that
+$\psi|_{P\cap W}\geq0$. Then there exists a linear functional $\widetilde{\psi}\colon V\to\mathbb{R}$
+such that $\widetilde{\psi}|_{W}=\psi$ and $\widetilde{\psi}|_{P}\geq0$.
+\end{theorem}
+
+\begin{proof} Let $v\in V\backslash W$. We will first show that
+we can extend $\psi$ to a linear functional $\widetilde{\psi}\colon W+\mathbb{R}v\to\mathbb{R}$
+such that $\widetilde{\psi}$ preserves the positivity condition.
+Define two sets $A=\{x\in W\mid-x\leq_{P}v\}$ and $B=\{y\in W\mid v\leq_{P}y\}$.
+Note that $A$ and $B$ are nonempty since $V=W+P$. We claim that
+\begin{equation}
+\sup\{-\psi(x)\mid x\in A\}\leq\inf\{\psi(y)\mid y\in B\}.\label{eq:convexconeineq-1-1}
+\end{equation}
+Indeed, let $x\in A$ and let $y\in B$. Then note that $-x\leq_{P}v\leq_{P}y$
+implies $x+y\in C$. It follows that
+\begin{align*}
+0 & \leq\psi(x+y)\\
+ & =\psi(x)+\psi(y).
+\end{align*}
+In other words, $-\psi(x)\leq\psi(y)$, which implies (\ref{eq:convexconeineq-1-1}). 
+
+~~~We set $\widetilde{\psi}(v)$ to be any number between $\sup\{-\psi(x)\mid x\in A\}$
+and $\inf\{\psi(y)\mid y\in B\}$ and we define we define $\widetilde{\psi}\colon W+\mathbb{R}v\to\mathbb{R}$
+by
+\begin{equation}
+\widetilde{\psi}(w+\lambda v)=\psi(w)+\lambda\widetilde{\psi}(v)\label{eq:welldefinedpsitilde-1-1-1}
+\end{equation}
+for all $w+\lambda v\in W+\mathbb{R}v$. Note that (\ref{eq:welldefinedpsitilde-1-1-1})
+is well-defined since $v$ is linearly independent from $W$. It is
+easy to check that (\ref{eq:welldefinedpsitilde-1-1-1}) gives us
+a linear functional $\widetilde{\psi}\colon W+\mathbb{R}v\to\mathbb{R}$
+such that $\widetilde{\psi}|_{W}=\psi$. Furthermore we have
+\[
+-\psi(x)\leq\widetilde{\psi}(v)\leq\psi(y)
+\]
+for all $x\in A$ and $y\in B$. The only thing left is to check that
+$\widetilde{\psi}$ satisfies the positivity condition. Let $w+\lambda v\in P\cap(W+\mathbb{R}v)$.
+We consider the following cases:
+
+\hfill
+
+\textbf{Case 1: }Assume that $\lambda>0$. Then note that $(1/\lambda)w+v=(1/\lambda)(w+\lambda v)\in P$
+since $P$ is a convex cone. This implies $(1/\lambda)w\in A$. Thus
+\begin{align*}
+0 & \leq\lambda(\psi((1/\lambda)w)+\widetilde{\psi}(v))\\
+ & =\psi(w)+\lambda\widetilde{\psi}(v)\\
+ & =\widetilde{\psi}(w+\lambda v).
+\end{align*}
+\textbf{Case 2: }Assume that $\lambda<0$. Then note that $(-1/\lambda)w-v=(-1/\lambda)(w+\lambda v)\in P$
+since $P$ is a convex cone. This implies $(-1/\lambda)w\in B$. Thus
+\begin{align*}
+0 & \leq-\lambda(\psi((-1/\lambda)w)-\widetilde{\psi}(v))\\
+ & =\psi(w)+\lambda\widetilde{\psi}(v)\\
+ & =\widetilde{\psi}(w+\lambda v).
+\end{align*}
+
+\textbf{Case 3: }Assume that $\lambda=0$. Then $w\in P\cap W$, and
+hence $0\leq\psi(w)=\widetilde{\psi}(w)$. 
+
+\hfill
+
+In all three cases, we see that the positivity condition is satisfied.
+Thus we can extend $\psi$ to a linear functional on $W+\mathbb{R}v$
+while preserving the positivity condition. 
+
+~~~Now to extend $\psi$ to all of $V$, we must appeal to Zorn's
+Lemma. More specifically, we define a partially ordered set $(\mathcal{F},\leq)$
+as follows: the underlying set $\mathcal{F}$ is given by
+\[
+\mathcal{F}=\{\text{linear functionals }\psi'\colon W'\to\mathbb{R}\mid W'\supseteq W,\text{ }\psi'|_{W}=\psi\text{, and }\psi'|_{W'\cap C=P}\geq0\}.
+\]
+A member of $\mathcal{F}$ is denoted by an ordered pair: $(\psi',W')$.
+If $(\psi_{1},W_{1})$ and $(\psi_{2},W_{2})$ are two members of
+$\mathcal{F}$ then we say $(\psi_{1},W_{1})\leq(\psi_{2},W_{2})$
+if $W_{1}\subseteq W_{2}$ and $\psi_{2}|_{W_{1}}=\psi_{1}$. Observe
+that every totally ordered subset in $(\mathcal{F},\leq)$ has an
+upper bound. Indeed, suppose $\{(\psi_{i},W_{i})\}_{i\in I}$ is a
+totally ordered subset in $(\mathcal{F},\leq)$. Then if we set $W'=\bigcup_{i\in I}W_{i}$
+and if we define $\psi'\colon W\to\mathbb{R}$ as follows: if $x\in W$,
+then $x\in W_{i}$ for some $i$ and we set $\psi'(x)=\psi_{i}(x)$.
+Then it is easy to check that $(\psi',W')$ is a member of $\mathcal{F}$
+and that it is an upper bound of $\{(\psi_{i},W_{i})\}_{i\in I}$.
+Since $\mathcal{F}$ is nonempty (it contains $(\psi,W)$) and every
+totally ordered subset of $\mathcal{F}$ has an upper bound, we can
+apply Zorn's Lemma to obtain a \emph{maximal }element in $(\mathcal{F},\leq)$.
+This maximal element \emph{must }be defined on all of $V$, otherwise
+we can extend it to a larger subspace as shown above and obtain a
+contradiction. \end{proof}
+
+\subsection{Hausdorff Moment Problem }
+
+Now we consider $\mathcal{M}=C[0,1]$, $\mathcal{N}=P[0,1]$, and
+$\mathcal{P}=\{\text{nonnegative continuous functions on }[0,1]\}$.
+Thus $f\in\mathcal{P}$ if and only if $f(x)\geq0$ for all $x\in[0,1]$.
+Clearly $\mathcal{P}$ is a convex cone. For $p\in\mathcal{N}$ we
+write it as
+\[
+p(x)=b_{n}x^{n}+b_{n-1}x^{n-1}+\cdots+b_{1}x+b_{0},
+\]
+and we define 
+\[
+\psi(p)=b_{n}a_{n}+b_{n-1}a_{n-1}+\cdots+b_{1}a_{1}+b_{0}a_{0}.
+\]
+Note that $\psi(x^{i})=a_{i}$. This is clearly a linear functional
+on $\mathcal{N}$. The first crucial step is to show $\psi(p)\geq0$
+for all $p\in\mathcal{P}\cap\mathcal{N}$. We'll need to use the following
+theorem of Bernstein:
+
+\begin{theorem}\label{theorem} (S. Bernstein) A polynomial $p$ is
+non-negative on $[0,1]$ if and only if it can be represented as
+\[
+p(x)=A_{0}x^{n}+A_{1}x^{n-1}(1-x)+A_{2}x^{n-2}(1-x)^{2}+\cdots+A_{n-1}x(1-x)^{n-1}+A_{n}(1-x)^{n}
+\]
+with $A_{0},A_{1},\dots,A_{n}\geq0$. \end{theorem}
+
+~~~If $\psi(x^{i}(1-x)^{j})\geq0$ for all $i,j\geq0$ then by
+the previous theorem of Bernstein, we will have $\psi(p)\geq0$ for
+all $p\in\mathcal{P}\cap\mathcal{N}$. It turns out that this is a
+sufficient condition too. We write
+\[
+x^{i}(1-x)^{j}=x^{i}\sum_{k=0}^{j}{j \choose k}(-1)^{k}x^{k}=\sum_{k=0}^{j}{j \choose k}(-1)^{k}x^{i+k}.
+\]
+Thus
+\begin{align*}
+\psi(x^{i}(1-x)^{j}) & =\sum_{k=0}^{j}{j \choose k}(-1)^{k}\psi(x^{i+k})\\
+ & =\sum_{k=0}^{j}{j \choose k}(-1)^{k}a_{i+k}.
+\end{align*}
+So we need to impose the condition
+\[
+\sum_{k=0}^{j}{j \choose k}(-1)^{k}a_{i+k}\geq0
+\]
+for all $i,j\geq0$. Under this condition, we have that all conditions
+of the Marcel Riesz extension theorem are satisfied, namely we need
+to check that $\mathcal{M}=\mathcal{P}+\mathcal{N}$. However this
+is clear: if $f\in\mathcal{M}$, then $f$ is bounded, say $f\leq M$.
+Then 
+\[
+f=(f-M)+M,
+\]
+where $f-M\in\mathcal{P}$ and $M\in\mathcal{N}$. So applying the
+Marcel Riesz extension theorem, there exists $\widetilde{\psi}\colon\mathcal{M}\to\mathbb{R}$
+such that $\widetilde{\psi}(p)=\psi(p)$ for any polynomial $p$ and
+$\widetilde{\psi}(f)\geq0$ whenever $f\in\mathcal{P}$. The final
+important ingredient is the Riesz Representation Theorem:
+
+\subsubsection{Riesz Representation Theorem}
+
+\begin{lemma}\label{lemmadinnistheorem} (Dini's Theorem) Let $X$
+be a compact topological space and let $(f_{n}\colon X\to\mathbb{R})$
+be an increasing sequence of continuous functions which converges
+pointwise to a continuous function $f\colon X\to\mathbb{R}$. Then
+$(f_{n})$ converges uniformly to $f$. \end{lemma}
+
+\begin{proof} Let $\varepsilon>0$. For each $n\in\mathbb{N}$, let
+$g_{n}=f-f_{n}$ and let $E_{n}=\{g_{n}<\varepsilon\}$. Each $g_{n}$
+is continuous and thus each $E_{n}$ is open. Since $(f_{n})$ is
+increasing, each $(g_{n})$ is decreasing, and thus the sequence of
+sets $(E_{n})$ is ascending. Since $(f_{n})$ converges pointwise
+to $f$, it follows that the collection $\{E_{n}\}$ forms an open
+cover of $X$. By compactness of $X$, we can choose a finite subcover
+of $\{E_{n}\}$, and since $(E_{n})$ is ascending, this means that
+there is an $N\in\mathbb{N}$ such that $E_{N}=X$. Choosing such
+an $N$, we see that $n\geq N$ implies
+\begin{align*}
+\varepsilon & >g_{n}(x)\\
+ & =f(x)-f_{n}(x)\\
+ & =|f(x)-f_{n}(x)|
+\end{align*}
+for all $x\in X$. It follows that $(f_{n})$ converges uniformly
+to $f$. \end{proof}
+
+\begin{theorem}\label{theorem} (Riesz Representation Theorem) Let
+$\ell\colon C[0,1]\to\mathbb{R}$ be a linear functional such that
+$\ell(f)\geq0$ for all $f\geq0$. Then there exists a unique finite
+(positive) measure $\mu$ on $[0,1]$ such that
+\[
+\ell(f)=\int_{0}^{1}f\mathrm{d}\mu
+\]
+
+for all $f\in C[0,1]$. \end{theorem}
+
+\begin{proof} Uniqueness is clear. Let's prove existence. Let $B[0,1]$
+be the space of all bounded functions $f\colon[0,1]\to\mathbb{R}$
+and let $N[0,1]$ be the space of all nonnegative bounded functions
+$f\colon[0,1]\to\mathbb{R}$. Clearly $B[0,1]$ contains $C[0,1]$
+as subspace and it is easy to see that $B[0,1]=C[0,1]+N[0,1]$. Indeed,
+for any bounded function $f\in B[0,1]$ there exists a continuous
+function $g\in C[0,1]$ such that $g\leq f$. Then
+\[
+f=(f-g)+g
+\]
+where $f-g\in N[0,1]$ and $g\in C[0,1]$. Furthermore, $N[0,1]$
+is a convex cone and by assumption we have $\ell(f)\geq0$ for all
+$f\in C[0,1]\cap N[0,1]$. So by the Marcel Riesz extension theorem,
+there exists a linear functional $\widetilde{\ell}\colon B[0,1]\to\mathbb{R}$
+such that $\widetilde{\ell}|_{C[0,1]}=\ell$ and $\widetilde{\ell}|_{N[0,1]}\geq0$.
+Now we define a measure $\mu$ on $\mathcal{B}[0,1]$ by
+\[
+\mu(E)=\widetilde{\ell}(1_{E})
+\]
+for each $E\in\mathcal{B}[0,1]$. We next show that $\mu$ is a measure.
+Let $(E_{n})$ be a sequence of pairwise disjoint sets in $\mathcal{B}[0,1]$.
+Then
+\begin{align*}
+\mu\left(\bigcup_{n=1}^{\infty}E_{n}\right) & =\widetilde{\ell}\left(1_{\bigcup_{n=1}^{\infty}E_{n}}\right)\\
+ & =\\
+\end{align*}
+Observe
+\[
+f_{n}-f,f-f_{n}\leq|f_{n}-f|\leq\|f_{n}-f\|_{\mathrm{sup}}
+\]
+ By the positivity of $\widetilde{\ell}$ we have
+\[
+\widetilde{\ell}(f_{n}-f),\widetilde{\ell}(f-f_{n})\leq\widetilde{\ell}(\|f_{n}-f\|_{\mathrm{sup}}).
+\]
+Equivalently,
+\[
+|\widetilde{\ell}(f_{n}-f)|\leq\widetilde{\ell}(\|f_{n}-f\|_{\mathrm{sup}})=\|f_{n}-f\|_{\mathrm{sup}}\widetilde{\ell}(1).
+\]
+Therefore if $f_{n}\to f$ uniformly. Thus $\widetilde{\ell}$ is
+continuous with respect to the sup norm. 
+
+~~~Now if $(f_{n})$ is an increasing sequence which converges
+pointwise to $f$, then $f_{n}\to f$ uniformly (Dini's Theorem).
+Thus if $(f_{n})$ is increasing and converges pointwise to $f$,
+then $\widetilde{\ell}(f_{n})\to\widetilde{\ell}(f)$. Observe that
+$(1_{\bigcup_{n=1}^{N}E_{n}})$ is increasing and converges pointwise
+to $1_{\bigcup_{n=1}^{\infty}E_{n}}$. It follows that
+\begin{align*}
+\mu\left(\bigcup_{n=1}^{\infty}E_{n}\right) & =\widetilde{\ell}\left(1_{\bigcup_{n=1}^{\infty}E_{n}}\right)\\
+ & =\lim_{N\to\infty}\widetilde{\ell}\left(1_{\bigcup_{n=1}^{N}E_{n}}\right)\\
+ & =\lim_{N\to\infty}\widetilde{\ell}\left(\sum_{n=1}^{N}1_{E_{n}}\right)\\
+ & =\lim_{N\to\infty}\sum_{n=1}^{N}\widetilde{\ell}(E_{n})\\
+ & =\lim_{N\to\infty}\sum_{n=1}^{N}\mu(E_{n})\\
+ & =\sum_{n=1}^{\infty}\mu(E_{n}).
+\end{align*}
+Thus $\mu$ is a Borel measure on $[0,1]$. It is finite since $\mu([0,1])=\widetilde{\ell}(1_{[0,1]})<\infty$.
+Let $f\in C[0,1]$. Choose an increasing sequence $(\varphi_{n})$
+of simple functions which converges pointwise to $f$. Then by MCT
+we have
+\[
+\int_{0}^{1}\varphi_{n}\mathrm{d}\mu\to\int_{0}^{1}f\mathrm{d}\mu.
+\]
+If $\varphi=\sum_{k=1}^{n}a_{k}1_{A_{k}}$, then
+\begin{align*}
+\int_{0}^{1}\varphi\mathrm{d}\mu & =\sum_{k=1}^{n}a_{k}\mu(A_{k})\\
+ & =\sum_{k=1}^{n}a_{k}\widetilde{\ell}(1_{A_{k}})\\
+ & =\widetilde{\ell}\left(\sum_{k=1}^{n}a_{k}1_{A_{k}}\right)\\
+ & =\widetilde{\ell}(\varphi).
+\end{align*}
+So $\widetilde{\ell}(\varphi_{n})\to\widetilde{\ell}(f)=\ell(f)$.
+We have
+\[
+\int_{0}^{1}\varphi_{n}\mathrm{d}\mu\to\ell(f)
+\]
+Thus $\widetilde{\ell}(f)=\int f\mathrm{d}\mu$ for any $f$ continuous.
+\end{proof}
+
+Another formulation of the Riesz Representation Theorem is given by:
+
+\begin{theorem}\label{theorem} (Riesz Representation Theorem) For
+any bounded (with respect to the supremum norm) linear functional
+$\ell\colon C[0,1]\to\mathbb{R}$ such that $\ell(f)\geq0$ for all
+$f\geq0$, there exists a unique finite (signed) measure $\mu$ on
+$[0,1]$ such that
+\[
+\ell(f)=\int_{0}^{1}f\mathrm{d}\mu.
+\]
+\end{theorem}
+
+And a more general version of the Riesz Representation Theorem is
+given by:
+
+\begin{theorem}\label{theorem} (Kakutani general version of the Riesz
+Representation Theorem) Let $X$ be a compact Hausdorff topological
+space and let $C(X)$ be the Banach space of all continuous functions
+$f\colon X\to\mathbb{R}$ equipped with the supremum norm:
+\[
+\|f\|_{\infty}=\sup_{x\in X}|f(x)|.
+\]
+For any bounded linear functional $\ell\colon C(X)\to\mathbb{R}$
+there exists a unique Borel regular measure $\mu$ on $X$ such that
+\[
+\ell(f)=\int_{X}f\mathrm{d}\mu.
+\]
+ \end{theorem}
+
+Let $f\in C[0,1]$. Then $f$ is uniformly continuous. For each $n\in\mathbb{N}$
+define a partition
+\[
+0<x_{0}^{(n)}<x_{1}^{(n)}<\cdots<x_{n}^{(n)}=1
+\]
+of $[0,1]$ such that none of these points are discontinuities of
+$f$ and such that
+\[
+|x_{i+1}^{(n)}-x_{i}^{(n)}|<\frac{2}{n}
+\]
+for all $i=0,1,\dots,n$. Now define $\varphi_{n}\colon[0,1]\to\mathbb{R}$
+by
+\[
+\varphi_{n}(x)=\sum_{i=0}^{n-1}f(x_{i}^{(n)})1_{(x_{i}^{(n)},x_{i+1}^{(n)}]}
+\]
+for all $x\in[0,1]$. Since $f$ is uniformly continuous, we see that
+$(\varphi_{n})$ converges uniformly to $f$. Therefore $\widetilde{\ell}(\varphi_{n})\to\widetilde{\ell}(f)$
+and $\int_{0}^{1}\varphi_{n}\mathrm{d}\mu\to\int_{0}^{1}f\mathrm{d}\mu$.
+So it suffices to show
+\[
+\int_{0}^{1}\varphi_{n}\mathrm{d}\mu=\widetilde{\ell}(\varphi_{n}).
+\]
+Thus
+\begin{align*}
+\widetilde{\ell}(\varphi_{n}) & =\widetilde{\ell}(\sum_{i=0}^{n-1}f(x_{i}^{(n)})1_{(x_{i}^{(n)},x_{i+1}^{(n)}]})\\
+ & =\sum_{i=0}^{n-1}f(x_{i}^{(n)})\widetilde{\ell}(1_{(x_{i}^{(n)},x_{i+1}^{(n)}]})\\
+ & =\int_{0}^{1}\varphi_{n}\mathrm{d}\mu
+\end{align*}
+for all $n\in\mathbb{N}$. 
+
+\begin{theorem}\label{theorem} (Hausdorff) A sequence $(a_{n})$
+is a moment sequence of some finite Borel measure $\mu$ on $[0,1]$,
+that is,
+\[
+a_{n}=\int_{0}^{1}x^{n}\mathrm{d}\mu
+\]
+if and only if $(-1)^{k}(\Delta^{k}a)_{n}\geq0$ for all $k,n\geq0$
+where $(\Delta a)_{n}=a_{n+1}-a_{n}$. \end{theorem}
+
+We have
+\begin{align*}
+\Delta^{2}a & =\Delta(\Delta a)\\
+ & =(a_{n+2}-2a_{n+1}+a_{n})_{n}
+\end{align*}
+More generally
+\[
+\Delta^{k}a=(\sum_{i=n}^{n+k}(-1)^{i}{n \choose i}a_{n+i}).
+\]
+Sequences satisfying this condition
+\[
+((-1)^{k}\Delta^{k}a)_{n}\geq0
+\]
+are called monotone sequences. Observe that 
+\[
+(-1)^{k}(\Delta^{k}a)_{n}=\int_{0}^{1}x^{n}(1-x)^{k}\mathrm{d}\mu\geq0.
+\]
+
+
+\subsection{Hahn-Banach Theorem}
+
+\begin{defn}\label{defn} Let $V$ be an $\mathbb{R}$-vector space.
+A \textbf{partial-seminorm }is a function $p\colon V\to\mathbb{R}$
+which satisfies
+\begin{enumerate}
+\item (nonnegativity) $p\geq0$, that is, $p(x)\geq0$ for all $x\in V$.
+\item (nonnegative homogeneity) $p(\lambda x)=\lambda p(x)$ for all $\lambda\geq0$
+and $x\in V$.
+\item (subadditivity) $p(x+y)\leq p(x)+p(y)$ for all $x,y\in V$.
+\end{enumerate}
+\end{defn}
+
+\begin{rem}\label{rem} The terminology ``partial-seminorm'' is
+made up by me. Recall that a \textbf{seminorm }is a function $p\colon V\to\mathbb{R}$
+which satisfies
+\begin{enumerate}
+\item (absolute homogeneity) $p(\lambda x)=|\lambda|p(x)$ for all $\lambda\in\mathbb{R}$
+and $x\in V$.
+\item (subadditivity) $p(x+y)\leq p(x)+p(y)$ for all $x,y\in V$.
+\end{enumerate}
+It is easy to check that a seminorm is necessarily nonnegative. Thus
+every seminorm is a partial-seminorm. On the other hand, there are
+partial-seminorms which are not seminorms. Indeed, consider the function
+$p\colon\mathbb{R}\to\mathbb{R}$ defined by
+\[
+p(x)=\begin{cases}
+x & \text{if }x\geq0\\
+-x/2 & \text{if }x<0
+\end{cases}
+\]
+for all $x\in\mathbb{R}$. It is easy to check that $p$ is a partial-seminorm
+which is not a seminorm. \end{rem}
+
+\begin{theorem}\label{theorem} Let $V$ be an $\mathbb{R}$-vector
+space equipped with a partial-seminorm $p\colon V\to\mathbb{R}$ and
+let $U$ be a subspace of $V$. Then every linear functional $\varphi\colon U\to\mathbb{R}$
+such that $|\varphi|\leq p|_{U}$ can be extended to a linear functional
+$\widetilde{\varphi}\colon V\to\mathbb{R}$ such that $\widetilde{\varphi}|_{U}=\varphi$
+and $|\widetilde{\varphi}|\leq p$. \end{theorem}
+
+\begin{rem}\label{rem} Note that by $|\varphi|\leq p|_{U}$, we mean
+$|\varphi(u)|\leq p(u)$ for all $u\in U$. \end{rem}
+
+\begin{proof} Let $\varphi\colon U\to\mathbb{R}$ be a linear functional
+such that $|\varphi|\leq p|_{U}$. We will construct an extension
+of $\varphi$ using Marcel Riesz's Extension Theorem. Let
+\[
+P=\{(\lambda,v)\in\mathbb{R}\times V\mid p(v)\leq\lambda\}.
+\]
+Then observe that $P$ is a convex cone contained in the space $\mathbb{R}\times V$.
+Indeed, if $\alpha>0$ and $(\lambda,v)\in P$, then $(\alpha\lambda,\alpha v)\in P$
+since
+\begin{align*}
+p(\alpha v) & =\alpha p(v)\\
+ & \leq\alpha\lambda
+\end{align*}
+Also if $(\lambda_{1},v_{1}),(\lambda_{2},v_{2})\in P$, then $(\lambda_{1}+\lambda_{2},v_{1}+v_{2})\in P$
+since
+\begin{align*}
+p(v_{1}+v_{2}) & \leq p(v_{1})+p(v_{2})\\
+ & =\lambda_{1}+\lambda_{2}.
+\end{align*}
+Furthermore, we have $\mathbb{R}\times V=(\mathbb{R}\times U)+P$
+, since if $(\lambda,v)\in\mathbb{R}\times V$, then
+\[
+(\lambda,v)=(\lambda-p(v),0)+(p(v),v)
+\]
+with $(\lambda-p(v),0)\in\mathbb{R}\times U$ and $(p(v),v)\in P$.
+Finally define $\psi\colon\mathbb{R}\times U\to\mathbb{R}$ by
+\[
+\psi(\lambda,u)=\lambda-\varphi(u)
+\]
+for all $(\lambda,u)\in\mathbb{R}\times U$. Observe that $\psi|_{(\mathbb{R}\times U)\cap P}\geq0$.
+Indeed, if $(\lambda,v)\in(\mathbb{R}\times U)\cap P$, then
+\begin{align*}
+\psi(\lambda,v) & =\lambda-\varphi(v)\\
+ & \geq\lambda-p(v)\\
+ & \geq0
+\end{align*}
+Thus we have all of the ingredients to apply the Marcel Riesz Extension
+Theorem: choose $\widetilde{\psi}\colon\mathbb{R}\times V\to\mathbb{R}$
+such that $\widetilde{\psi}|_{\mathbb{R}\times U}=\psi$ and $\widetilde{\psi}|_{P}\geq0$.
+Define $\widetilde{\varphi}\colon V\to\mathbb{R}$ by
+\[
+\widetilde{\varphi}(v)=-\widetilde{\psi}(0,v)
+\]
+for all $v\in V$. Note that if $u\in U$, then
+\begin{align*}
+\widetilde{\varphi}(u) & =-\widetilde{\psi}(0,u)\\
+ & =-\psi(0,u)\\
+ & =\varphi(u).
+\end{align*}
+Thus $\widetilde{\varphi}|_{U}=\varphi$. We claim $|\widetilde{\varphi}|\leq p$.
+To see this, assume for a contradiction that $v_{0}\in V$ such that
+\[
+\widetilde{\varphi}(v_{0})>p(v_{0}).
+\]
+Then using that $(p(x_{0}),x_{0})\in P$, we have
+\begin{align*}
+0 & \leq\widetilde{\psi}(p(x_{0}),x_{0})\\
+ & =\widetilde{\psi}(0,x_{0})+\widetilde{\psi}(p(x_{0}),0)\\
+ & =-\widetilde{\varphi}(x_{0})+\psi(p(x_{0}),0)\\
+ & =-\widetilde{\varphi}(x_{0})+p(x_{0})\\
+ & <-p(x_{0})+p(x_{0})\\
+ & =0,
+\end{align*}
+which is a contradiction. This establishes our claim and we are done.
+\end{proof}
+
+~~~In the setting of normed linear spaces, the Hahn-Banach Theorem
+says that any linear functional $\ell$ defined on a subspace $\mathcal{Y}\subseteq\mathcal{X}$
+which is bounded on $\mathcal{Y}$ can be extended to a bounded linear
+functional $\widetilde{\ell}$ on $\mathcal{X}$ such that $\widetilde{\ell}|_{\mathcal{Y}}=\ell$
+and $\|\widetilde{\ell}\|_{\mathcal{X}}=\|\ell\|_{\mathcal{Y}}$.
+This is an immediate consequence of our more general version that
+we have just proved. 
+
+\begin{prop}\label{prop} Let $\mathcal{X}$ be a normed linear space
+and let $x_{0}$ be a nonzero vector in $\mathcal{X}$. Then there
+exists a bounded linear functional $\ell\colon\mathcal{X}\to\mathbb{R}$
+with $\|\ell\|=1$ such that $\ell(x_{0})=\|x_{0}\|$. \end{prop}
+
+~~~So if you have two points $a\neq b$ in $\mathcal{X}$, then
+there exists a bounded linear functional $\ell\in\mathcal{X}^{*}$
+such that $\ell(a)\neq\ell(b)$. 
+
+\begin{theorem}\label{theorem} Let $\mathcal{X}$ be a reflexive
+Banach space and let $\mathcal{Y}$ be a closed subspace of $\mathcal{X}$.
+Then for every $x\in\mathcal{X}$ there exists $y_{0}\in\mathcal{Y}$
+such that $\mathrm{d}(x,\mathcal{Y})=\|x-y_{0}\|$. \end{theorem}
+
+\begin{rem}\label{rem} We can replace $\mathcal{Y}$ with a convex
+set. \end{rem}
+
+\begin{proof} Define a function $\varphi\colon\mathcal{Y}\to\mathbb{R}$
+by
+\[
+\varphi(y)=\|y-x\|
+\]
+for all $y\in\mathcal{Y}$. \end{proof}
+
+\section{Geometric Form of the Hahn-Banach Theorem }
+
+\subsection{Gauge Functional}
+
+\begin{defn}\label{defninteriorpoint} Let $V$ be an $\mathbb{R}$-vector
+space and let $S$ be a subset of $V$. A point $x\in S$ is said
+to be an \textbf{internal point }of $S$ if for any $y\in V$, there
+exists $\varepsilon_{x,y}>0$ such that $|t|<\varepsilon_{x,y}$ implies
+$x+ty\in S$. The set of all points internal points of $S$ is called
+the \textbf{core }of $S$ and is denoted by $\mathrm{core}\,S$. \end{defn}
+
+\begin{rem}\label{rem} Let us make several remarks about this definition.
+\begin{enumerate}
+\item We write $\varepsilon_{x,y}$ to emphasize that $\varepsilon_{x,y}$
+\emph{depends }on $x$ and $y$. Usually we will just write $\varepsilon$
+instead of $\varepsilon_{x,y}$.
+\item Note that if $0\in\mathrm{core}\,S$, then $0\in S$. Indeed, assuming
+$0\in\mathrm{core}\,S$, then there exists $\varepsilon_{0,0}>0$
+such that $|t|<\varepsilon_{0,0}$ implies $0=0+t\cdot0\in S$. The
+converse of course isn't true (take $S=\{0\}$).
+\item Suppose $V$ is equipped with a metric. Recall that a point $x\in S$
+is said to be an \textbf{interior point} of $S$ if there exists an
+$\varepsilon>0$ such that $\mathrm{B}_{\varepsilon}(x)\subseteq S$.
+The set of all interior points of $S$ is denoted $\mathrm{int}\,S$.
+It is easy to see that every interior point of $S$ is an internal
+point of $S$. Thus $\mathrm{int}\,S\subseteq\mathrm{core}\,S$. If
+$S$ happens to be open, then $S=\mathrm{int}\,S\subseteq\mathrm{core}\,S=S$
+which forces $\mathrm{int}\,S=\mathrm{core}\,S$. 
+\end{enumerate}
+\end{rem}
+
+\begin{defn}\label{defn} Let $V$ be an $\mathbb{R}$-vector space
+and let $C\subseteq V$ be a convex set with $0$ as an internal point.
+We define the \textbf{gauge functional }of $C$ to be the function
+$\mathrm{p}_{C}\colon V\to\mathbb{R}$ given by
+\[
+\mathrm{p}_{C}(x)=\inf\{\alpha>0\mid(1/\alpha)x\in C\}
+\]
+for all $x\in V$. \end{defn}
+
+~~~Note that $0$ be an internal point of $C$ guarantees that
+$\mathrm{p}_{C}(x)<\infty$. Indeed, since $0$ is an internal point,
+there exists an $\varepsilon>0$ such that $tx\in C$ for all $|t|<\varepsilon$.
+In particular, if $\alpha>1/\varepsilon$, then $1/\alpha<\varepsilon$,
+and hence $(1/\alpha)x\in C$. Thus we see that $\mathrm{p}_{C}(x)\leq1/\varepsilon$.
+Thus having $0$ be an internal point of $C$ guarantees that $\mathrm{p}_{C}(x)<\infty$. 
+
+\begin{example}\label{example} Let $\mathcal{X}$ be a normed linear
+space. Then $\mathrm{p}_{\mathrm{B}_{1}[0]}(x)=\|x\|$ for all $x\in\mathcal{X}$.
+\end{example}
+
+\subsubsection{Gauge Functional is a Partial-Seminorm}
+
+\begin{prop}\label{propgaugefunctionalisquasiseminorm} Let $V$ be
+an $\mathbb{R}$-vector space and let $C\subseteq V$ be a convex
+set with $0$ as an internal point. Then the gauge functional $\mathrm{p}_{C}$
+is a partial-seminorm. \end{prop}
+
+\begin{proof} We first show $\mathrm{p}_{C}$ is subadditive. Let
+$\varepsilon>0$ and let $x,y\in V$. Set $a=\mathrm{p}_{C}(x)+\varepsilon/2$
+and set $b=\mathrm{p}_{C}(y)+\varepsilon/2$. Then $a,b>0$ and $(1/a)x,(1/b)x\in C$.
+Since $C$ is convex, we see that
+\[
+\frac{1}{a+b}(x+y)=\frac{a}{a+b}\left(\frac{1}{a}x\right)+\frac{b}{a+b}\left(\frac{1}{b}y\right)\in C.
+\]
+It follows that
+\begin{align*}
+\mathrm{p}_{C}(x)+\mathrm{p}_{C}(y)+\varepsilon & =a+b\\
+ & \geq\mathrm{p}_{C}(x+y).
+\end{align*}
+Taking $\varepsilon\to0$ shows that $\mathrm{p}_{C}$ is subadditive.
+
+~~~Next we show that $\mathrm{p}_{C}$ satisfies nonnegative homogeneity.
+Let $\lambda\geq0$ and let $x\in V$. First note that if $\lambda=0$,
+then since
+\begin{align*}
+\mathrm{p}_{C}(0) & =\inf\{\alpha>0\mid(1/\alpha)\cdot0\in C\}=0,
+\end{align*}
+we have $0=0\cdot\mathrm{p}_{C}(x)=\mathrm{p}_{C}(0\cdot x)$. Thus
+we may assume $\lambda>0$. Then
+\begin{align*}
+\mathrm{p}_{C}(\lambda x) & =\inf\{\alpha>0\mid(1/\alpha)\lambda x\in C\}\\
+ & =\lambda\inf\{\alpha>0\mid(1/\alpha)x\in C\}\\
+ & =\lambda\mathrm{p}_{C}(x).
+\end{align*}
+Finally note that $\mathrm{p}_{C}$ is nonnegative by definition.
+Thus $\mathrm{p}_{C}$ is a partial-seminorm. \end{proof}
+
+\subsubsection{Properties of Gauge Functional}
+
+\begin{prop}\label{prop} Let $V$ be an $\mathbb{R}$-vector space
+and let $C\subseteq V$ be a convex set with $0$ as an internal point.
+We have
+\begin{enumerate}
+\item $C\subseteq\{\mathrm{p}_{C}\leq1\}$.
+\item $\mathrm{core}\,C=\{\mathrm{p}_{C}<1\}.$
+\end{enumerate}
+\end{prop}
+
+\begin{proof} 1. Let $x\in C$. Then $(1/1)x\in C$ and hence $\mathrm{p}_{C}(x)\leq1$. 
+
+\hfill
+
+2. Let $x\in\mathrm{core}\,C$. Then there exists $\varepsilon>0$
+such that $x+\varepsilon x\in C$. So
+\begin{align*}
+x+\varepsilon x & =(1+\varepsilon)x\\
+ & =\frac{1}{1/(1+\varepsilon)}x
+\end{align*}
+shows $\mathrm{p}_{C}(x)\leq1/(1+\varepsilon)<1$. Conversely, let
+$x\in V$ such that $\mathrm{p}_{C}(x)<1$. Then there exists $0<\alpha<1$
+such that $(1/\alpha)x\in C$. Now let $y\in V$. Since $0\in\mathrm{core}(C)$,
+there exists $\varepsilon>0$ such that $|t|<\varepsilon$ implies
+$ty\in C$. Then $|t|<\varepsilon$ implies
+\begin{align*}
+x+(1-\alpha)ty & =\alpha(1/\alpha)x+(1-\alpha)ty\in C
+\end{align*}
+since $C$ is convex. In particular, setting $\delta=(1-\alpha)\varepsilon$,
+we see that $|t|<\delta$ implies $x+ty\in C$. \end{proof}
+
+\subsubsection{Gauge Functional Induced from Partial-Seminorm}
+
+Recall from Proposition~(\ref{propgaugefunctionalisquasiseminorm})
+that is $C$ is a convex subset of a real vector space $V$ such that
+$0\in\mathrm{core}\,C$, then the gauge functional $\mathrm{p}_{C}\colon V\to\mathbb{R}$
+is a partial-seminorm. We will now show a converse to this. 
+
+\begin{prop}\label{prop} Let $V$ be an $\mathbb{R}$-vector space,
+let $p\colon V\to\mathbb{R}$ be a partial-seminorm, and set $C=\{p\leq1\}$.
+Then $C$ is a convex set, and moreover, we have $\mathrm{p}_{C}=p$.
+\end{prop}
+
+\begin{proof} Let $x,y\in C$ and $\alpha\in[0,1]$. Then
+\begin{align*}
+p((1-\alpha)x+\alpha y) & \leq p((1-\alpha)x)+p(\alpha y)\\
+ & =(1-\alpha)p(x)+\alpha p(y)\\
+ & \leq(1-\alpha)+\alpha\\
+ & =1
+\end{align*}
+implies $(1-\alpha)x+\alpha y\in C$. Thus $C$ is a convex set. 
+
+~~~Now assume there exists $x_{0}\in V$ such that $\mathrm{p}_{C}(x_{0})<p(x_{0})$.
+Then there exists $\alpha\in\mathbb{R}$ such that
+\[
+\mathrm{p}_{C}(x_{0})\leq\alpha<p(x_{0})
+\]
+and such that $(1/\alpha)x_{0}\in C$. Then $p((1/\alpha)x_{0})\leq1$
+which is equivalent to $(1/\alpha)p(x_{0})\leq1$ which implies $p(x_{0})\leq\alpha$.
+This is a contradiction. So $\mathrm{p}_{C}(x)\geq p(x)$ for all
+$x\in V$. Now assume there exists $x_{0}\in V$ such that $p(x_{0})<\mathrm{p}_{C}(x_{0})$.
+Then there exists $\alpha\in\mathbb{R}$ such that
+\[
+p(x_{0})\leq\alpha<\mathrm{p}_{C}(x_{0}).
+\]
+Then $(1/\alpha)p(x_{0})\leq1$. In other words, $p((1/\alpha)x_{0})\leq1$
+which is equivalent to $(1/\alpha)x_{0}\in C$. This contradicts the
+fact that $\mathrm{p}_{C}(x_{0})$ is the infimum of all such $\alpha>0$.
+Therefore $p(x)\geq\mathrm{p}_{C}(x)$ for all $x\in V$. It follows
+that $p=\mathrm{p}_{C}$. \end{proof}
+
+\begin{theorem}\label{theorem} Let $V$ be an $\mathbb{R}$-vector
+space and let $C$ be a nonempty convex subset of $V$ such that $C=\mathrm{core}\,C$.
+Then for any $y\notin C$, there exists a hyperplane $\{\ell=\alpha\}$
+where $\ell\colon V\to\mathbb{R}$ is some linear functional and $\alpha\in\mathbb{R}$
+such that $y\in\{\ell=\alpha\}$ and $C\subseteq\{\ell<\alpha\}$.
+\end{theorem}
+
+\begin{proof} By translating if necessary, we may assume that $0\in\mathrm{int}\,C$.
+This means it is possible to define the gauge potential $\mathrm{p}_{C}$
+of $C$. Define $\ell\colon\mathbb{R}y\to\mathbb{R}$ by $\ell(ay)=a$
+for all $ay\in\mathbb{R}y$. Notice if $a<0$, then 
+\begin{align*}
+\ell(ay) & =a\\
+ & <0\\
+ & \leq\mathrm{p}_{C}(ay),
+\end{align*}
+and if $a>0$, then
+\begin{align*}
+\ell(ay) & =a\\
+ & \leq a\mathrm{p}_{C}(y)\\
+ & =\mathrm{p}_{C}(ay),
+\end{align*}
+where we used the fact that $\mathrm{p}_{C}(y)\geq1$ since $y\notin\mathrm{core}\,C=C$.
+So we see that $\ell\leq\mathrm{p}_{C}|_{\mathbb{R}y}$. Therefore
+by the Hahn-Banach Theorem, we can extend $\ell$ to $\widetilde{\ell}\colon V\to\mathbb{R}$
+such that $\widetilde{\ell}|_{\mathbb{R}y}=\ell$ and $\widetilde{\ell}\leq\mathrm{p}_{C}$.
+In particular, if $x\in C$, then
+\[
+\widetilde{\ell}(x)\leq\mathrm{p}_{C}(x)<1.
+\]
+Thus $C\subseteq\{\widetilde{\ell}<\alpha\}$ where $\alpha=1$. Also
+clearly $\widetilde{\ell}(y)=1$, and so we are done. \end{proof}
+
+\subsubsection{First Geometric Form of Hahn-Banach}
+
+\begin{theorem}\label{theorem} (first geometric form of Hahn-Banach)
+Let $V$ be an $\mathbb{R}$-vector space and let $A,B\subseteq V$
+be nonempty convex sets such that $A\cap B=\emptyset$. Suppose $A$
+satisfies $A=\mathrm{core}\,A$. Then there exists a hyperplane that
+separates $A$ and $B$. More precisely, there exists a linear functional
+$\ell\colon V\to\mathbb{R}$ and $\alpha\in\mathbb{R}$ such that
+$A\subseteq\{\ell\leq\alpha\}$ and $B\subseteq\{\ell\geq\alpha\}$.
+\end{theorem}
+
+\begin{proof} Set $C=A-B=\{a-b\mid a\in A,b\in B\}$. Then $C$ is
+a nonempty convex set. Furthermore we have $\mathrm{int}\,C=C$. Indeed,
+let $a-b\in C$ and let $y\in V$. Choose $\varepsilon>0$ such that
+$|t|<\varepsilon$ implies $a+ty\in A$. Then $|t|<\varepsilon$ implies
+$a-b+ty=(a+ty)-b\in C$. Finally note that $0\notin C$ since $A$
+and $B$ are disjoint from one another. By the previous result, there
+exists a linear functional $\ell\colon V\to\mathbb{R}$ and an $\beta\in\mathbb{R}$
+such that $0\in\{\ell=\beta\}$ and $C\subseteq\{\ell<\beta\}$. Note
+that since $\ell(0)=\beta$, we must necessarily have $\beta=0$.
+
+~~~Now let $a\in A$ and $b\in B$. Since $a-b\in C$, we have
+$0>\ell(a-b)=\ell(a)-\ell(b)$, that is, $\ell(a)<\ell(b)$. Therefore
+\[
+\sup\{\ell(a)\mid a\in A\}\leq\inf\{\ell(b)\mid b\in B\}.
+\]
+So choose $\alpha$ between $\sup\{\ell(a)\mid a\in A\}$ and $\inf\{\ell(b)\mid b\in B\}$.
+Then $A\subseteq\{\ell\leq\alpha\}$ and $B\subseteq\{\ell\geq\alpha\}$.
+\end{proof}
+
+\subsubsection{Second Geometric Form of Hahn-Banach}
+
+\begin{lemma}\label{lemmaclosed+compact=closed} Let $\mathcal{X}$
+be a normed linear space, let $A$ be a closed subset of $\mathcal{X}$,
+and let $B$ be a compact subset of $\mathcal{X}$. Then $A+B$ is
+closed. \end{lemma}
+
+\begin{proof} Let $x\in\overline{A+B}$ and choose a sequence $(a_{n}+b_{n})$
+in $A+B$ such that $a_{n}+b_{n}\to x$. Since $B$ is compact, there
+exist a convergent subsequence of $(b_{n})$, say $(b_{\pi(n)})$.
+In fact, by relabeling indices if necessary, we may assume that $(b_{n})$
+is convergent, say $b_{n}\to b$ where $b\in B$. Now since $a_{n}+b_{n}\to x$
+and $b_{n}\to b$, it follows easily that $a_{n}\to x-b$. Since $A$
+is closed, we must have $x-b\in A$. Thus $x=(x-b)+b$ shows $x\in A+B$,
+which implies $A+B=\overline{A+B}$, hence $A+B$ is closed.  \end{proof}
+
+\begin{theorem}\label{theorem} (second geometric form of Hahn-Banach)
+Let $\mathcal{X}$ be a normed linear space and let $A,B\subseteq\mathcal{X}$
+be two nonempty convex sets such that $A\cap B=\emptyset$. Suppose
+$A$ is closed and $B$ is compact. Then there exists a closed hyperplane
+that strictly separates $A$ and $B$. More precisely, there exists
+a bounded linear functional $\ell\colon V\to\mathbb{R}$ and $\alpha\in\mathbb{R}$
+such that $A\subseteq\{\ell<\alpha\}$ and $B\subseteq\{\ell>\alpha\}$.
+\end{theorem}
+
+\begin{proof} Set $C=A-B=\{a-b\mid a\in A,b\in B\}$. Then $C$ is
+a nonempty convex set. Furthermore, $C$ is closed by Lemma~(\ref{lemmaclosed+compact=closed})
+since $-B$ is compact and $A-B=A+(-B)$. Also $0\notin C$ since
+$A$ and $B$ are disjoint from one another. Thus $C^{c}$ is open
+and contains $0$, which means there exists $r>0$ such that $\mathrm{B}_{r}(0)\subseteq C^{c}$.
+In other words, $\mathrm{B}_{r}(0)\cap C=\emptyset$. By the previous
+first geometric form of Hahn-Banach, we can separate $\mathrm{B}_{r}(0)$
+and $C$ by a hyperplane, say $\{\ell=\alpha\}$. Then $\ell(a-b)\leq\ell(rx)$
+for all $a\in A$, $b\in B$ and $x\in\mathrm{B}_{1}(0)$. It can
+be shown that $\ell\colon\mathcal{X}\to\mathbb{R}$ is bounded. Therefore
+\[
+\ell(a-b)\leq\inf\{\ell(rx)\mid x\in\mathrm{B}_{1}(0)\}=-r\|\ell\|.
+\]
+Now take $\varepsilon=(1/2)r\|\ell\|>0$. Then 
+\[
+\ell(a)+\varepsilon\leq\ell(b)-\varepsilon
+\]
+for all $a\in A$ and $b\in B$. This implies
+\[
+\sup\{\ell(a)\mid a\in A\}<\inf\{\ell(b)\mid b\in B\}.
+\]
+So choose $\alpha$ strictly between $\sup\{\ell(a)\mid a\in A\}$
+and $\inf\{\ell(b)\mid b\in B\}$. Then $A\subseteq\{\ell<\alpha\}$
+and $B\subseteq\{\ell>\alpha\}$. \end{proof}
+
+\subsection{Lower Semicontinuity}
+
+\begin{defn}\label{defn} Let $\mathcal{X}$ be a normed linear space.
+A function $\varphi\colon\mathcal{X}\to(-\infty,\infty]$ is said
+to be \textbf{lower semicontinuous }if for every $c\in\mathbb{R}$
+the set $\{\varphi\leq c\}$ is closed. \end{defn}
+
+Here are some basic facts:
+\begin{enumerate}
+\item $\varphi$ is lower semicontinuous if and only if $\{(x,\lambda)\mid\varphi(x)\leq\lambda\}$
+is a closed set in $\mathcal{X}\times\mathbb{R}$ for every $\lambda\in\mathbb{R}$. 
+\item $\varphi_{1}$ and $\varphi_{2}$ are lower semicontinuous implies
+$\varphi_{1}+\varphi_{2}$ is lower semicontinuous.
+\item $\{\varphi_{i}\}_{i\in I}$ is a collection of lower semicontinuous
+functions, then $\sup_{i\in I}\varphi_{i}$ is also lower semicontinuous.
+\item if $K\subseteq\mathcal{X}$ is compact, then $\inf_{x\in\mathcal{K}}\varphi(x)$
+is acheived. 
+\end{enumerate}
+
+\subsection{Convexity}
+
+\begin{defn}\label{defn} Let $\mathcal{X}$ be a normed linear space.
+A function $\varphi\colon\mathcal{X}\to(-\infty,\infty]$ is said
+to be \textbf{convex }if 
+\[
+\varphi(tx+(1-t)y)\leq t\varphi(x)+(1-t)\varphi(y)
+\]
+for all $x,y\in\mathcal{X}$ and $t\in[0,1]$. \end{defn}
+
+Here are some basic facts:
+\begin{enumerate}
+\item $\varphi$ is convex if and only if $\mathrm{epi}(\varphi)=\{(x,\lambda)\mid\varphi(x)\leq\lambda\}$
+is a convex set in $\mathcal{X}\times\mathbb{R}$. 
+\item If $\varphi_{1}$ and $\varphi_{2}$ are convex, then $\varphi_{1}+\varphi_{2}$
+is convex.
+\item If $\{\varphi_{i}\}_{i\in I}$ are all convex, then $\sup_{i\in I}\varphi_{i}$
+is convex.
+\item If $\varphi$ is convex, then $\{\varphi\leq c\}$ is a convex set
+for all $c\in\mathbb{R}$. The converse is not true in general. 
+\end{enumerate}
+We usually assume both convexity and lower semicontinuity in optimization
+problems. 
+
+\subsubsection{Conjugate Function}
+
+\begin{defn}\label{defn} Let $\mathcal{X}$ be a normed linear space
+and let $\varphi\colon\mathcal{X}\to(-\infty,\infty]$ be a function
+such that $\varphi\neq\infty$.
+\begin{enumerate}
+\item We define the \textbf{conjugate function }of\textbf{ $\varphi$ }to
+be the function\textbf{ }$\varphi^{*}\colon\mathcal{X}^{*}\to(-\infty,\infty]$
+defined by
+\[
+\varphi^{*}(\ell)=\sup_{x\in\mathcal{X}}(\ell(x)-\varphi(x))
+\]
+for all $\ell\in\mathcal{X}^{*}$. The conjugate function $\varphi^{*}$
+is sometimes called a \textbf{Fenchel transform }of $\varphi$ or
+a \textbf{Legendre transform }of $\varphi$.
+\item We define the \textbf{double conjugate function }of $\varphi$ to
+be the function $\varphi^{**}\colon\mathcal{X}\to(-\infty,\infty]$
+defined by
+\[
+\varphi^{**}(x)=\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\varphi^{*}(\ell))
+\]
+for all $x\in\mathcal{X}$. 
+\end{enumerate}
+\end{defn}
+
+\begin{example}\label{example} Suppose $\mathcal{X}=\mathbb{R}$
+and $\varphi\colon\mathcal{X}\to(-\infty,\infty]$ is given by
+\[
+\varphi(x)=\frac{1}{p}|x|^{p}
+\]
+for all $x\in\mathcal{X}$ where $1<p<\infty$. Recall from the Riesz
+representation theorem for Hilbert, each $\ell\in\mathcal{X}^{*}$
+has the form $\ell=\ell_{y}$ for a unique $y\in\mathbb{R}$ where
+$\ell_{y}(x)=yx$ for all $x\in\mathcal{X}$. Using this fact, suppose
+$\ell=\ell_{y}$ is in $\mathcal{X}^{*}$. Then we have
+\begin{align*}
+\varphi^{*}(y) & :=\varphi^{*}(\ell_{y})\\
+ & =\sup_{x\in\mathbb{R}}(\ell_{y}(x)-\varphi(x))\\
+ & =\sup_{x\in\mathbb{R}}\left(yx-\frac{1}{p}|x|^{p}\right)\\
+ & =\sup_{x\in\mathbb{R}}\left(|y||x|-\frac{1}{p}|x|^{p}\right)\\
+ & =\frac{1}{q}|y|^{q}+\frac{1}{p}|y^{p/q}|^{p}-\frac{1}{p}|y^{p/q}|^{p}\\
+ & =\frac{1}{q}|y|^{q},
+\end{align*}
+where $1<q<\infty$ such that $1/p+1/q=1$. Here, we used Young's
+inequality, which says
+\[
+\frac{a^{p}}{p}+\frac{b^{q}}{q}\geq ab
+\]
+for all $a,b\geq0$, with equality acheived if and only if $a^{p}=b^{q}$.
+\end{example}
+
+~~~The example above suggests that we have the following generalization
+of Young's inequality: 
+\[
+\varphi^{*}(\ell)+\varphi(x)\geq\ell(x)
+\]
+for all $\ell\in\mathcal{X}^{*}$ and $x\in\mathcal{X}$. Indeed,
+this is a simple consequence of the definition of $\varphi^{*}$:
+for all $\ell\in\mathcal{X}^{*}$, we have
+\begin{align*}
+\varphi^{*}(\ell) & =\sup_{x\in\mathcal{X}}(\ell(x)-\varphi(x))\\
+ & \geq\varphi(x)-\ell(x)
+\end{align*}
+for all $x\in\mathcal{X}$. 
+
+\subsubsection{Fenchel-Moreau}
+
+\begin{lemma}\label{lemmaconjugatenotinfty} Let $\mathcal{X}$ be
+a normed linear space and let $\varphi\colon\mathcal{X}\to(-\infty,\infty]$
+be a lower semicontinuous convex function such that $\varphi\neq\infty$.
+Then $\varphi^{*}\neq\infty$. \end{lemma}
+
+\begin{proof} Choose $x_{0}\in\mathcal{X}$ such that $\varphi(x_{0})<\infty$
+and choose $\lambda_{0}\in\mathbb{R}$ such that $\lambda_{0}<\varphi(x_{0})$.
+Consider the normed linear space $\mathcal{X}\times\mathbb{R}$ and
+the subsets $A=\{(x,\lambda)\mid\varphi(x)\leq\lambda\}$ and $B=\{(x_{0},\lambda_{0})\}$.
+Then $A$ is a nonempty closed convex set and $B$ is a nonempty compact
+convex set. Furthermore $A$ and $B$ are disjoint from one another.
+Thus by the second geometric form of Hahn-Banach, there exists a bounded
+linear functional $\ell\colon\mathcal{X}\times\mathbb{R}\to\mathbb{R}$
+and an $\alpha\in\mathbb{R}$ such that
+\begin{equation}
+A\subseteq\{\ell>\alpha\}\quad\text{and}\quad B\subseteq\{\ell<\alpha\}.\label{eq:strictsepnotinfty}
+\end{equation}
+Define $\psi\colon\mathcal{X}\to\mathbb{R}$ by $\psi(x)=\ell(x,0)$
+for all $x\in\mathcal{X}$. Then $\psi$ is a bounded linear functional
+because $\ell$ is a bounded linear functional and $\psi=\ell|_{\mathbb{R}\times\{0\}}$.
+Set $k=\ell(0,1)$ and note that
+\begin{align*}
+\ell(x,\lambda) & =\ell(x,0)+\ell(0,\lambda)\\
+ & =\psi(x)+\lambda k
+\end{align*}
+for all $(x,\lambda)\in\mathcal{X}\times\mathbb{R}$. 
+
+~~~Now by (\ref{eq:strictsepnotinfty}), we have 
+\[
+\begin{cases}
+\psi(x)+\lambda k>\alpha & \text{if }(x,\lambda)\in A\\
+\psi(x_{0})+\lambda_{0}k<\alpha
+\end{cases}
+\]
+In particular, since $(x_{0},\varphi(x_{0}))\in A$, we have
+\begin{align*}
+0 & <\psi(x_{0})+\varphi(x_{0})k-\alpha\\
+ & <\psi(x_{0})+\varphi(x_{0})k-\psi(x_{0})-\lambda_{0}k\\
+ & =\varphi(x_{0})k-\lambda_{0}k\\
+ & =(\varphi(x_{0})-\lambda_{0})k.
+\end{align*}
+Thus $k>0$ since $\varphi(x_{0})>\lambda_{0}$. Now using the fact
+that $(x,\varphi(x))\in A$ for all $x\in\mathcal{X}$, we can divide
+$\psi(x)+\lambda k>\alpha$ by $-1/k$ to obtain
+\[
+-\frac{1}{k}\psi(x)-\varphi(x)<-\frac{\alpha}{k}.
+\]
+In particular, we see that
+\begin{align*}
+\varphi^{*}(-\psi/k) & =\sup_{x\in\mathcal{X}}(-\psi(x)/k-\varphi(x))\\
+ & \leq-\frac{\alpha}{k}\\
+ & <\infty.
+\end{align*}
+ So $\varphi^{*}\neq\infty$. \end{proof}
+
+\begin{theorem}\label{theorem} (Fenchel-Moreau) If $\varphi\colon X\to(-\infty,\infty]$
+is lower semicontinuous, convex, and $\varphi\neq\infty$, then $\varphi^{**}=\varphi$.
+\end{theorem}
+
+\begin{proof} Note that for every $\ell\in\mathcal{X}^{*}$ and $x\in\mathcal{X}$,
+we have
+\begin{align*}
+\ell(x)-\varphi^{*}(\ell) & =\ell(x)-\sup_{y\in\mathcal{X}}(\ell(y)-\varphi(y))\\
+ & \leq\ell(x)-(\ell(x)-\varphi(x))\\
+ & =\varphi(x).
+\end{align*}
+ Therefore
+\begin{align*}
+\varphi^{**}(x) & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\varphi^{*}(\ell))\\
+ & \leq\varphi(x).
+\end{align*}
+It remains to show $\varphi^{**}(x)\geq\varphi(x)$. 
+
+\hfill
+
+\textbf{Step 1: }Suppose $\varphi\geq0$ and assume for a contradiction
+that $\varphi^{**}(x_{0})<\varphi(x_{0})$. We apply the second geometric
+form of Hahn-Banach again in the space $\mathcal{X}\times\mathbb{R}$
+with sets $A=\{(x,\lambda)\mid\varphi(x)\le\lambda\}$ and $B=\{(x_{0},\varphi^{**}(x_{0}))\}$.
+By the same argument as in the proof of Lemma~(\ref{lemmaconjugatenotinfty}),
+there exists a bounded linear functional $\ell\in\mathcal{X}^{*}$,
+an $\alpha\in\mathbb{R}$, and a $k\in\mathbb{R}$ such that
+\begin{equation}
+\ell(x)+\lambda k>\alpha\label{eq:firstineqfen}
+\end{equation}
+for all $(x,\lambda)\in A$ and such that
+\begin{equation}
+\ell(x_{0})+k\varphi^{**}(x_{0})<\alpha\label{eq:secondineqfen}
+\end{equation}
+Note that we could have $\varphi(x_{0})=\infty$, so we can't plug
+in $(x_{0},\varphi(x_{0}))$ into (\ref{eq:firstineqfen}) to conclude
+that $k>0$ as in the proof of Lemma~(\ref{lemmaconjugatenotinfty}).
+However we can still show that $k\geq0$. Indeed, assume for a contradiction
+that $k<0$. Choose $y_{0}\in\mathcal{X}$ such that $\varphi(y_{0})<\infty$.
+Since $(y_{0},\varphi(y_{0}))\in A$, we have
+\[
+\ell(y_{0})+k\lambda\geq\ell(y_{0})+k\varphi(y_{0})>\alpha
+\]
+for all $\lambda\geq\varphi(y_{0})$. In particular, taking $\lambda\to\infty$
+gives us $-\infty\geq\alpha$, which is a contradiction. So we must
+have $k\geq0$. In order to proceed with the proof, we need to make
+$k$ a little bigger, so choose $\varepsilon>0$ so that $k+\varepsilon>0$.
+Then just as in the proof of Lemma~(\ref{lemmaconjugatenotinfty}),
+we have
+\[
+\varphi^{*}\left(-\frac{1}{k+\varepsilon}\ell\right)=\sup_{x\in\mathcal{X}}\left(-\frac{1}{k+\varepsilon}\ell(x)-\varphi(x)\right)\leq-\frac{\alpha}{k+\varepsilon}
+\]
+and hence
+\begin{align*}
+\ell(x_{0})+(k+\varepsilon)\varphi^{**}(x_{0}) & =\ell(x_{0})+(k+\varepsilon)\sup_{\ell\in\mathcal{X}^{*}}(\ell(x_{0})-\varphi^{*}(\ell))\\
+ & \geq\ell(x_{0})+(k+\varepsilon)\left(-\frac{1}{k+\varepsilon}\ell(x_{0})-\varphi^{*}\left(-\frac{1}{k+\varepsilon}\ell\right)\right)\\
+ & \geq\ell(x_{0})+(k+\varepsilon)\left(-\frac{1}{k+\varepsilon}\ell(x_{0})+\frac{\alpha}{k+\varepsilon}\right)\\
+ & =\ell(x_{0})-\ell(x_{0})+\alpha\\
+ & =\alpha.
+\end{align*}
+By taking $\varepsilon\to0$, we obtain
+\[
+\ell(x_{0})+k\varphi^{**}(x_{0})\geq\alpha,
+\]
+which contradicts (\ref{eq:secondineqfen}). This contradiction proves
+that $\varphi^{**}\geq\varphi$, and hence $\varphi^{**}=\varphi$. 
+
+\hfill 
+
+\textbf{Step 2: }Now consider the general case where we may not have
+$\varphi\geq0$. Choose $\ell_{0}\in\mathcal{X}^{*}$ such that $\varphi^{*}(\ell_{0})<\infty$
+(such $\ell_{0}$ exists by Lemma~(\ref{lemmaconjugatenotinfty})).
+Define $\varphi_{1}\colon\mathcal{X}\to(-\infty,\infty]$ by
+\[
+\varphi_{1}(x)=\varphi(x)-\ell_{0}(x)+\varphi^{*}(\ell_{0}).
+\]
+Then $\varphi_{1}$ is convex, lower semicontinuous, and $\varphi_{1}\neq\infty$.
+In addition, we have $\varphi_{1}\geq0$. So by step 1, we obtain
+$\varphi_{1}^{**}=\varphi_{1}$. Now observe that
+\begin{align*}
+\varphi_{1}^{*}(\ell) & =\sup_{x\in\mathcal{X}}(\ell(x)-\varphi_{1}(x))\\
+ & =\sup_{x\in\mathcal{X}}(\ell(x)-\varphi(x)+\ell_{0}(x)-\varphi^{*}(\ell_{0}))\\
+ & =\sup_{x\in\mathcal{X}}((\ell+\ell_{0})(x)-\varphi(x))-\varphi^{*}(\ell_{0})\\
+ & =\varphi^{*}(\ell+\ell_{0})-\varphi^{*}(\ell_{0}).
+\end{align*}
+Therefore
+\begin{align*}
+\varphi_{1}^{**}(x) & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\varphi_{1}^{*}(\ell))\\
+ & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\varphi^{*}(\ell+\ell_{0})+\varphi^{*}(\ell_{0}))\\
+ & =\sup_{\ell+\ell_{0}\in\mathcal{X}^{*}}((\ell+\ell_{0})(x)-\varphi^{*}(\ell+\ell_{0})-\ell_{0}(x)+\varphi^{*}(\ell_{0}))\\
+ & =\varphi^{**}(x)-\ell_{0}(x)+\varphi^{*}(\ell_{0}).
+\end{align*}
+So 
+\begin{align*}
+\varphi^{**}(x)-\ell_{0}(x)+\varphi^{*}(\ell_{0}) & =\varphi_{1}^{**}(x)\\
+ & =\varphi_{1}(x)\\
+ & =\varphi(x)-\ell_{0}(x)+\varphi^{*}(\ell_{0}).
+\end{align*}
+Hence $\varphi^{**}=\varphi$. 
+
+\end{proof}
+
+\subsubsection{Example}
+
+\begin{example}\label{example} Let $\mathcal{X}$ be a normed linear
+space and consider let $\varphi=\|\cdot\|$ be the norm function.
+Then $\varphi$ is lower semicontinuous and convex. Let's compute
+the conjugate function
+\begin{align*}
+\varphi^{*}(\ell) & =\sup_{x\in\mathcal{X}}(\ell(x)-\|x\|)\\
+ & =\sup_{x\in\mathcal{X}}\|x\|\left(\ell\left(\frac{x}{\|x\|}\right)-1\right).
+\end{align*}
+Now if $\|\ell\|>1$, then there exists $x_{0}\in\mathcal{X}$ such
+that $\|x_{0}\|=1$ and $\ell(x_{0})>1$. Then for any $\lambda\in\mathbb{R}$,
+we have
+\begin{align*}
+\varphi^{*}(\ell) & =\sup_{x\in\mathcal{X}}\|x\|\left(\ell\left(\frac{x}{\|x\|}\right)-1\right)\\
+ & \geq\|\lambda x_{0}\|\left(\ell\left(\frac{\lambda x_{0}}{\|\lambda x_{0}\|}\right)-1\right)\\
+ & =|\lambda|\left(\ell(x_{0})-1\right),
+\end{align*}
+so by taking $\lambda\to\infty$, we see that $\varphi^{*}(\ell)=\infty$.
+On the other hand, if $\|\ell\|\leq1$, then it is easy to check that
+$\varphi^{*}(\ell)=0$. Thus
+\[
+\varphi^{*}(\ell)=\begin{cases}
+0 & \text{if }\|\ell\|\leq1\\
+\infty & \text{if }\|\ell\|>1
+\end{cases}
+\]
+For a set $E\subseteq\mathcal{X}$ nonempty we define
+\[
+\mathrm{I}_{E}(x)=\begin{cases}
+0 & \text{if }x\in E\\
+\infty & \text{if }x\notin E
+\end{cases}=\log\left(\frac{1}{1_{E}(x)}\right)
+\]
+So $\varphi^{*}=1_{\mathrm{B}_{1}[0]}$ where 
+\[
+\mathrm{B}_{1}[0]=\{\ell\in\mathcal{X}^{*}\mid\|\ell\|\leq1\}.
+\]
+Now we have
+\begin{align*}
+\|x\| & =\varphi(x)\\
+ & =\varphi^{**}(x)\\
+ & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\varphi^{*}(x))\\
+ & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\mathrm{I}_{\mathrm{B}_{1}[0]}(x))\\
+ & =\sup_{\substack{\ell\in\mathcal{X}^{*}\\
+\|\ell\|\leq1
+}
+}\ell(x).
+\end{align*}
+This identity can be proved in a more elementary way by applying Hahn-Banach.
+\end{example}
+
+\subsection{Support Functional}
+
+\begin{defn}\label{defn} Let $\mathcal{X}$ be a normed linear space
+and let $S$ be a subset of $\mathcal{X}$. We define $\mathrm{q}_{S}\colon\mathcal{X}^{*}\to(-\infty,\infty]$
+by
+\[
+\mathrm{q}_{S}(\ell)=\sup_{x\in S}\ell(x).
+\]
+We call $\mathrm{q}_{S}$ the \textbf{support functional }of $C$.
+\end{defn}
+
+\subsubsection{Basic Properties of Support Functional}
+
+\begin{prop}\label{prop} Let $\mathcal{X}$ be a normed linear space
+and let $S$ be a subset of $\mathcal{X}$. Then
+\begin{enumerate}
+\item $\mathrm{q}_{S}$ is a partial-seminorm.
+\item $\mathrm{q}_{S}=\mathrm{q}_{\mathrm{conv}(S)}=\mathrm{q}_{\overline{\mathrm{conv}}(S)}$,
+\item Let $S_{1}$ and $S_{2}$ be subsets of $\mathcal{X}$. Then $\mathrm{q}_{S_{1}+S_{2}}=\mathrm{q}_{S_{1}}+\mathrm{q}_{S_{2}}$.
+\item Let $\mathcal{K}$ be a closed subspace of $\mathcal{X}$. Then 
+\[
+\mathrm{q}_{\mathcal{K}}(\ell)=\begin{cases}
+0 & \text{if }\ell\in\mathcal{K}^{\perp}\\
+\infty & \text{else}
+\end{cases}
+\]
+where $\mathcal{K}^{\perp}=\{\ell\in\mathcal{X}^{*}\mid\ell|_{\mathcal{K}}=0\}$. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof} 1. Clearly $\mathrm{q}_{S}$ is nonnegative since $\ell(0)=0$
+for all linear functionals $\ell\in\mathcal{X}^{*}$. Next, suppose
+$\lambda\geq0$ and $\ell\in\mathcal{X}^{*}$. Then
+\begin{align*}
+\mathrm{q}_{S}(\lambda\ell) & =\sup_{x\in S}\ell(\lambda x)\\
+ & =\sup_{x\in S}\lambda\ell(x)\\
+ & =\lambda\sup_{x\in S}\ell(x)\\
+ & =\lambda\mathrm{q}_{S}(\ell).
+\end{align*}
+Similarly, suppose $\ell_{1},\ell_{2}\in\mathcal{X}^{\times}$. Then
+\begin{align*}
+\mathrm{q}_{S}(\ell_{1}+\ell_{2}) & =\sup_{x\in S}\{(\ell_{1}+\ell_{2})(x)\}\\
+ & =\sup_{x\in S}\{\ell_{1}(x)+\ell_{2}(x)\}\\
+ & \leq\sup_{x\in S}\{\ell_{1}(x)\}+\sup_{x\in S}\{\ell_{2}(x)\}\\
+ & =\mathrm{q}_{S}(\ell_{1})+\mathrm{q}_{S}(\ell_{2}).
+\end{align*}
+Thus $\mathrm{q}_{S}$ is a partial-seminorm.
+
+\hfill
+
+2. Since $S\subseteq\mathrm{conv}(S)\subseteq\overline{\mathrm{conv}}(S)$,
+we clearly have $\mathrm{q}_{S}\leq\mathrm{q}_{\mathrm{conv}(S)}\leq\mathrm{q}_{\overline{\mathrm{conv}}(S)}$.
+Conversely, let $\ell\in\mathcal{X}^{*}$ and let $tx+(1-t)y\in\mathrm{conv}(S)$
+where $t\in(0,1)$ and $x,y\in S$. Then observe that
+\begin{align*}
+\ell(tx+(1-t)y) & =t\ell(x)+(1-t)\ell(y)\\
+ & \leq t\sup_{z\in S}\ell(z)+(1-t)\sup_{z\in S}\ell(z)\\
+ & =t\mathrm{q}_{S}(\ell)+(1-t)\mathrm{q}_{S}(\ell)\\
+ & =\mathrm{q}_{S}(\ell).
+\end{align*}
+It follows that $\mathrm{q}_{\mathrm{conv}(S)}(\ell)\leq\mathrm{q}_{S}(\ell)$,
+and since $\ell$ was arbitrary, we have $\mathrm{q}_{\mathrm{conv}(S)}\leq\mathrm{q}_{S}$.
+To show $\mathrm{q}_{\overline{\mathrm{conv}}(S)}\leq\mathrm{q}_{\mathrm{conv}(S)}$,
+we will prove something more general: if $E$ is a subset of $\mathcal{X}$,
+then $\mathrm{q}_{\overline{E}}\leq\mathrm{q}_{E}$. Indeed, let $\ell\in\mathcal{X}^{*}$,
+let $x\in\overline{E}$, and choose a sequence $(x_{n})$ of elements
+in $E$ such that $x_{n}\to x$. Then observe that
+\begin{align*}
+\ell(x) & =\lim_{n\to\infty}\ell(x_{n})\\
+ & \leq\sup_{y\in E}\ell(y)\\
+ & =\mathrm{q}_{E}(\ell).
+\end{align*}
+It follows that $\mathrm{q}_{\overline{E}}(\ell)\leq\mathrm{q}_{E}(\ell)$,
+and since $\ell$ was arbitrary, we have $\mathrm{q}_{\overline{E}}\leq\mathrm{q}_{E}$. 
+
+\hfill
+
+3. Let $x_{1}+x_{2}\in S_{1}+S_{2}$ and let $\ell\in\mathcal{X}^{*}$.
+Then observe that
+\begin{align*}
+\ell(x_{1}+x_{2}) & =\ell(x_{1})+\ell(x_{2})\\
+ & \leq\sup_{y_{1}\in S_{1}}\ell(y_{1})+\sup_{y_{2}\in S_{2}}\ell(y_{2})\\
+ & =\mathrm{q}_{S_{1}}(\ell)+\mathrm{q}_{S_{2}}(\ell)\\
+ & =(\mathrm{q}_{S_{1}}+\mathrm{q}_{S_{2}})(\ell)
+\end{align*}
+It follows that $\mathrm{q}_{S_{1}+S_{2}}(\ell)\leq(\mathrm{q}_{S_{1}}+\mathrm{q}_{S_{2}})(\ell)$,
+and since $\ell$ was arbitrary, we have $\mathrm{q}_{S_{1}+S_{2}}\leq\mathrm{q}_{S_{1}}+\mathrm{q}_{S_{2}}$.
+Conversely, let $\ell\in\mathcal{X}^{*}$, let $\varepsilon>0$, and
+choose $x_{1}\in S_{1}$ and $x_{2}\in S_{2}$ such that $\ell(x_{1})+\varepsilon/2>\mathrm{q}_{S_{1}}(\ell)$
+and $\ell(x_{2})+\varepsilon/2>\mathrm{q}_{S_{2}}(\ell)$. Then observe
+that
+\begin{align*}
+(\mathrm{q}_{S_{1}}+\mathrm{q}_{S_{2}})(\ell) & =\mathrm{q}_{S_{1}}(\ell)+\mathrm{q}_{S_{2}}(\ell)\\
+ & <\ell(x_{1})+\frac{\varepsilon}{2}+\ell(x_{2})+\frac{\varepsilon}{2}\\
+ & =\ell(x_{1})+\ell(x_{2})+\varepsilon\\
+ & =\ell(x_{1}+x_{2})+\varepsilon\\
+ & \leq\mathrm{q}_{S_{1}+S_{2}}(\ell)+\varepsilon.
+\end{align*}
+By taking $\varepsilon\to0$, we see that $(\mathrm{q}_{S_{1}}+\mathrm{q}_{S_{2}})(\ell)\leq\mathrm{q}_{S_{1}+S_{2}}(\ell)$,
+and since $\ell$ was arbitrary, we have $\mathrm{q}_{S_{1}}+\mathrm{q}_{S_{2}}\leq\mathrm{q}_{S_{1}+S_{2}}$.
+
+\hfill
+
+4. Let $\ell\in\mathcal{X}^{*}$. First suppose that $\ell\in\mathcal{K}^{\perp}$.
+Then $\ell(x)=0$ for all $x\in\mathcal{K}$. Thus
+\begin{align*}
+\mathrm{q}_{\mathcal{K}}(\ell) & =\sup_{x\in\mathcal{K}}\ell(x)\\
+ & =\sup_{x\in\mathcal{K}}0\\
+ & =0.
+\end{align*}
+Now suppose that $\ell\notin\mathcal{K}^{\perp}$. Choose $x\in\mathcal{K}$
+such that $\ell(x)\neq0$ and let $\lambda\geq0$. Then observe that
+\begin{align*}
+\lambda\ell(x) & =\ell(\lambda x)\\
+ & \leq\sup_{y\in\mathcal{K}}\ell(y)\\
+ & =\mathrm{q}_{\mathcal{K}}(\ell).
+\end{align*}
+Taking $\lambda\to\infty$ gives us $\mathrm{q}_{\mathcal{K}}(\ell)=\infty$.
+\end{proof}
+
+\subsubsection{Examples of Support Functionals}
+
+\begin{example}\label{example} Suppose $C=\{x_{0}\}$. Then $\mathrm{q}_{\{x_{0}\}}(\ell)=\ell(x_{0})$.
+\end{example}
+
+\begin{example}\label{example} Suppose $C=\mathrm{B}_{1}[0]$, then
+$\mathrm{q}_{\mathrm{B}_{1}[0]}=\|\ell\|$. \end{example}
+
+\begin{example}\label{example} Suppose $C=\mathrm{B}_{R}[0]$, then
+$\mathrm{q}_{\mathrm{B}_{R}[0]}=R\|\ell\|$. Recall that the gauge
+functional in this case is $\mathrm{p}_{\mathrm{B}_{R}[0]}(x)=\|x\|/R$.
+More generally, we have
+\begin{align*}
+\mathrm{q}_{\mathrm{B}_{R}[x_{0}]}(x) & =\mathrm{q}_{\{x_{0}\}+\mathrm{B}_{R}[0]}(x)\\
+ & =\mathrm{q}_{\{x_{0}\}}(x)+\mathrm{q}_{\mathrm{B}_{R}[0]}(x)\\
+ & =\ell(x_{0})+R\|\ell\|.
+\end{align*}
+\end{example}
+
+If $\mathcal{M}$ is a closed subspace of $\mathcal{X}$, then
+\[
+\mathrm{q}_{\mathcal{M}}(\ell)=\begin{cases}
+0 & \text{if }\ell\in\mathcal{M}^{\perp}\\
+\infty & \text{else}
+\end{cases}
+\]
+
+Let $\varphi(x)=\mathrm{I}_{E}(x)$ for some set $E\subseteq\mathcal{X}$.
+Then
+\begin{align*}
+\varphi^{*}(\ell) & =\sup_{x\in\mathcal{X}}(\ell(x)-\mathrm{I}_{E}(x))\\
+ & =\sup_{x\in E}\ell(x)\\
+ & =\mathrm{q}_{E}(\ell).
+\end{align*}
+Notice $\varphi^{*}(\ell)=\mathrm{q}_{\overline{\mathrm{conv}}(E)}(\ell)$.
+Then
+\begin{align*}
+\varphi^{**}(x) & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\varphi^{*}(\ell))\\
+ & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\mathrm{q}_{E}(\ell))\\
+ & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\mathrm{q}_{\overline{\mathrm{conv}}(E)}(\ell))
+\end{align*}
+It can be shown that $\mathrm{I}_{E}$ is convex if and only if $E$
+is convex. It can also be shown that $\mathrm{I}_{E}$ is lower semicontinuous
+if and only if $E$ is closed. So if $E$ is clsoed and convex, then
+Fenchel-Moreau applies and we get
+\[
+\mathrm{I}_{E}(x)=\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\mathrm{q}_{E}(\ell)).
+\]
+
+In some sense, the gauge (Minkowski) functional $\mathrm{p}_{C}$
+plays the role of a norm if we want $C$ convex to play the role of
+the unit ball. In that sense, the support functional $\mathrm{q}_{C}$
+plays the role of the norm in the dual space $\mathcal{X}^{*}$. In
+this direct, the Cauchy-Schwarz inequality $|\ell(x)|\leq\|\ell\|\|x\|$
+is replaced by
+\begin{equation}
+|\ell(x)|\leq\mathrm{q}_{C}(\ell)\mathrm{p}_{C}(x)\label{eq:cauchyschwarzgen}
+\end{equation}
+for all $\ell\in\mathcal{X}^{*}$ and $x\in\mathcal{X}$. Indeed,
+for any $x\in\mathcal{X}$ and $\varepsilon>0$ we have $x/(\mathrm{p}_{C}(x)+\varepsilon)\in C$
+by definition of $\mathrm{p}_{C}(x)$, and thus
+\[
+\ell\left(\frac{1}{\mathrm{p}_{C}(x)+\varepsilon}x\right)\leq\sup_{y\in C}\ell(y)=\mathrm{q}_{C}(\ell)
+\]
+which implies (\ref{eq:cauchyschwarzgen}). 
+
+\begin{prop}\label{prop} $x\in\overline{\mathrm{conv}}(E)$ if and
+only if $\ell(x)\leq\mathrm{q}_{E}(\ell)$ for all $\ell\in\mathcal{X}^{*}$.
+\end{prop} 
+
+\begin{proof} Recall that $\mathrm{I}_{E}^{*}(\ell)=\mathrm{q}_{E}(\ell)=\mathrm{q}_{\overline{\mathrm{conv}}(E)}(\ell)=\mathrm{I}_{\overline{\mathrm{conv}}(E)}^{*}$.
+We have
+\begin{align*}
+\mathrm{I}_{E}^{**}(x) & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\mathrm{I}_{E}^{*}(\ell))\\
+ & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\mathrm{q}_{E}(\ell)).
+\end{align*}
+On the other hand, we have
+\begin{align*}
+\mathrm{I}_{E}^{**}(x) & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\mathrm{I}_{\overline{\mathrm{conv}}(E)}^{*}(\ell))\\
+ & =\mathrm{I}_{\overline{\mathrm{conv}}(E)}^{**}(x)
+\end{align*}
+We can apply Fenchel-Moreau to $\mathrm{I}_{\overline{\mathrm{conv}}(E)}$
+which is convex and lowersemicontinuous and obtain
+\begin{align*}
+\mathrm{I}_{\overline{\mathrm{conv}}(E)}(x) & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\mathrm{q}_{E}(\ell))
+\end{align*}
+
+So
+\begin{align*}
+x\in\overline{\mathrm{conv}}(E) & \iff\mathrm{I}_{\overline{\mathrm{conv}}(E)}(x)=0\\
+ & \iff\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\mathrm{q}_{E}(\ell))=0\\
+ & \iff\ell(x)\leq\mathrm{q}_{E}(\ell)\text{ for all }\ell\in\mathcal{X}^{*}.
+\end{align*}
+
+\end{proof}
+
+\subsection{Another Application}
+
+For a subspace $\mathcal{M}\subseteq\mathcal{X}$, we define its \textbf{annihilator}
+by
+\[
+\mathcal{M}^{\perp}=\{\ell\in\mathcal{X}^{*}\mid\ell|_{\mathcal{M}}=0\}.
+\]
+For a closed subspace $\mathcal{N}\subseteq\mathcal{X}^{*}$, we define
+\[
+\mathcal{N}_{\perp}=\{x\in\mathcal{X}\mid\ell(x)=0\text{ for all }\ell\in\mathcal{N}\}.
+\]
+\begin{prop}\label{prop} If $\mathcal{M}\subseteq\mathcal{X}$ is
+a closed subspace, then $(\mathcal{M}^{\perp})_{\perp}=\mathcal{M}$.
+\end{prop}
+
+\begin{proof} We have $\mathrm{I}_{\mathcal{M}}^{*}(\ell)=\mathrm{q}_{\mathcal{M}}(\ell)=\mathrm{I}_{\mathcal{M}^{\perp}}(\ell)$.
+So
+\begin{align*}
+\mathrm{I}_{\mathcal{M}}(x) & =\mathrm{I}_{\mathcal{M}}^{**}(x)\\
+ & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\mathrm{I}_{\mathcal{M}}^{*}(\ell))\\
+ & =\sup_{\ell\in\mathcal{X}^{*}}(\ell(x)-\mathrm{I}_{\mathcal{M}^{\perp}}(\ell))\\
+ & =\sup_{\ell\in\mathcal{M}^{\perp}}(\ell(x))\\
+ & =\mathrm{I}_{(\mathcal{M}^{\perp})_{\perp}}(x)
+\end{align*}
+ \end{proof}
+
+\subsection{Fenchel-Rockafeller}
+
+\begin{theorem}\label{theorem} (Fenchel-Rockafellar) Let $\varphi,\psi\colon\mathcal{X}\to(-\infty,\infty]$
+be two convex functions. Suppose there exists $x_{0}\in\mathcal{X}$
+such that $\varphi(x_{0}),\psi(x_{0})<\infty$ and $\varphi$ is continuous
+at $x_{0}$. Then
+\[
+\inf_{x\in\mathcal{X}}(\varphi(x)+\psi(x))=\sup_{\ell\in\mathcal{X}^{*}}(-\varphi^{*}(-\ell)-\psi^{*}(\ell))=\max_{\ell\in\mathcal{X}^{*}}(-\varphi^{*}(-\ell)-\psi^{*}(\ell)).
+\]
+
+\end{theorem}
+
+\begin{proof} (Sketch) Let $a=\inf_{x\in\mathcal{X}}(\varphi(x)+\psi(x))$
+and let $b=\sup_{\ell\in\mathcal{X}^{*}}(-\varphi^{*}(-\ell)-\psi^{*}(\ell))$.
+It's easy to see that $b\leq a$. Indeed,
+\begin{align*}
+-\varphi^{*}(\ell)-\psi^{*}(\ell) & =-\varphi^{*}(-\ell)-(-\ell(x))-\psi^{*}(\ell)-\ell(x)\\
+ & \leq\varphi(x)+\psi(x)
+\end{align*}
+for all $x\in\mathcal{X}$ and $\ell\in\mathcal{X}^{*}$. For the
+reverse direction, let $C=\mathrm{epi}\,\varphi$, let $B=\{(x,\lambda)\mid\lambda\leq a-\psi(x)\}$,
+and let $A=\mathrm{int}\,C$. Then $A$ and $B$ are both nonempty
+convex sets. Furthemore we have $A\cap B=\emptyset$ (otherwise we'll
+have $(x,\lambda)\in\mathcal{X}\times\mathbb{R}$ such that $\varphi(x)<\lambda\leq a-\psi(x)$
+which implies $\varphi(x)+\psi(x)<a$, giving a contradiction). Applying
+Hahn-Banach, we obtain a linear functional $\Phi\colon\mathcal{X}\times\mathbb{R}\to\mathbb{R}$
+such that $\overline{C}=\overline{A}\subseteq\{\Phi\geq\alpha\}$
+and $B\subseteq\{\Phi\leq\alpha\}$. Let $\ell(x)=\Phi(x,0)$ and
+$k=\Phi(0,1)\in\mathbb{R}$. Then
+\begin{align*}
+\ell(x)+k\lambda\geq\alpha & \text{ for }(x,\lambda)\in\overline{A}=\overline{C}\\
+\ell(x)+k\lambda\leq\alpha & \text{ for }(x,\lambda)\in B.
+\end{align*}
+Similarly as before, one can show that $k>0$. \end{proof}
+
+\subsubsection{Application}
+
+Let $C\subseteq\mathcal{X}$ be non-empty and convex. Then
+\[
+\mathrm{d}(x_{0},C)=\inf_{x\in C}\|x_{0}-x\|=\sup_{\substack{\ell\in\mathcal{X}^{*}\\
+\|\ell\|\leq1
+}
+}(\ell(x_{0})-\mathrm{q}_{C}(\ell)).
+\]
+Then $\varphi(x)=\|x-x_{0}\|$ is convex and $\psi(x)=\mathrm{I}_{C}(x)$
+is convex if $C$ is convex. Then
+\begin{align*}
+\varphi^{*}(\ell) & =\sup_{x\in\mathcal{X}}(\ell(x)-\|x-x_{0}\|))\\
+ & =\sup_{x\in\mathcal{X}}(\ell(x-x_{0})-\|x-x_{0}\|+\ell(x_{0}))\\
+ & =\varphi^{*}(\ell)\\
+ & =\mathrm{I}_{\mathrm{B}_{1}[0]}(\ell)+\ell(x_{0}).
+\end{align*}
+So by Fenchel-Rockafellar, we have
+\[
+\inf_{x\in\mathcal{X}}(\|x-x_{0}\|+\mathrm{I}_{C}(x))=\sup_{\ell\in\mathcal{X}^{*}}(\ell(x_{0})-\mathrm{I}_{\mathrm{B}_{1}[0]}(-\ell)-\mathrm{q}_{C}(\ell))
+\]
+
+Before starting the proof, recall that we proved last time using Fenchel-Rockafellar
+that if $C\neq\emptyset$ is convex, then
+\[
+\mathrm{d}(x_{0},C)=\sup_{\substack{\ell\in\mathcal{X}^{*}\\
+\|\ell\|\leq1
+}
+}(\ell(x_{0})-\mathrm{q}_{C}(\ell)).
+\]
+Note that when $C=\mathcal{M}$ is a subspace, we have
+\[
+\mathrm{d}(x_{0},C)=\sup_{\substack{\ell\in\mathcal{X}^{*}\\
+\|\ell\|\leq1
+}
+}(\ell(x_{0})-\mathrm{I}_{\mathcal{M}^{\perp}}(\ell))=\sup_{\substack{\ell\in\mathcal{M}^{\perp}\\
+\|\ell\|\leq1
+}
+}\ell(x).
+\]
+
+
+\section{Baire Category Theorem}
+
+\begin{theorem}\label{theorem} Let $\mathcal{X}$ be a Banach space.
+Then $\mathcal{X}$ cannot be represented as a countable union of
+nowhere dense sets. \end{theorem}
+
+Recall that a set $E\subseteq\mathcal{X}$ is said to be nowhere dense
+if $(\overline{E})^{\circ}=\emptyset$. In other words, $\overline{E}$
+doesn't contain any open balls. 
+
+\begin{proof} Assume for a contradiction that $\mathcal{X}=\bigcup_{n=1}^{\infty}E_{n}$
+with every $E_{n}$ being nowhere dense. In particular, we have $\mathcal{X}=\bigcup_{n=1}^{\infty}\overline{E}_{n}$.
+Let $\mathrm{B}_{r_{1}}(x_{1})\subseteq\mathcal{X}$ be any open ball.
+Since $E_{1}$ is nowhere dense, it follows that $\mathrm{B}_{r_{1}}(x_{1})\cap\overline{E}_{1}^{c}$
+is a nonempty open set. Thus there exists an open ball, say $\mathrm{B}_{r_{2}}(x_{2})$,
+such that $\mathrm{B}_{r_{2}}[x_{2}]\subseteq\mathrm{B}_{r_{1}}(x_{1})\cap\overline{E}_{1}^{c}$
+and $r_{2}<2^{-2}$. Since $E_{2}$ is nowhere dense, it follows that
+$\mathrm{B}_{r_{2}}(x_{2})\cap\overline{E}_{2}^{c}$ is a nonempty
+open set. So by the same reason as before, there exists an open ball,
+say $\mathrm{B}_{r_{3}}(x_{3})$, such that $\mathrm{B}_{r_{3}}[x_{3}]\subseteq\mathrm{B}_{r_{2}}(x_{2})\cap\overline{E}_{2}^{c}$
+and $r_{3}<2^{-3}$. Continuing this process, we obtain a descending
+sequence of open balls $(\mathrm{B}_{r_{n}}(x_{n}))$ such that 
+\[
+\mathrm{B}_{r_{n}}[x_{n}]\subseteq\mathrm{B}_{r_{n-1}}(x_{n-1})\cap\overline{E}_{n-1}^{c}\quad\text{and}\quad r_{n}<2^{-n}
+\]
+for all $n\in\mathbb{N}$. 
+
+~~~Now let $\varepsilon>0$ and choose $N\in\mathbb{N}$ such that
+$2^{-N}<\varepsilon$. Then $n>m\geq N$ implies
+\begin{align*}
+\|x_{m}-x_{n}\| & \leq r_{m}\\
+ & <2^{-m}\\
+ & \leq2^{-N}\\
+ & <\varepsilon.
+\end{align*}
+Thus $(x_{n})$ is a Cauchy sequence. Being a Cauchy sequence in a
+Banach space, we see that $(x_{n})$ is convergent, say $x_{n}\to x$.
+Since $x_{n}\in\mathrm{B}_{r_{k}}(x_{k})$ for any $n\geq k$, we
+have $x\in\mathrm{B}_{r_{k}}[x_{k}]$. In particular, this implies
+\begin{align*}
+x & \in\bigcap_{n=1}^{\infty}\mathrm{B}_{r_{n}}[x_{n}]\\
+ & \subseteq\bigcap_{n=1}^{\infty}\overline{E}_{n}^{c}\\
+ & =\left(\bigcup_{n=1}^{\infty}\overline{E}_{n}\right)^{c}\\
+ & =\mathcal{X}^{c}\\
+ & =\emptyset,
+\end{align*}
+which is a contradiction. \end{proof}
+
+\subsection{Uniform Boundedness Principle}
+
+\begin{theorem}\label{theorem} (Uniform Boundedness Principle) Let
+$\mathcal{X}$ and $\mathcal{Y}$ be two Banach spaces. Denote by
+$\mathcal{L}(\mathcal{X},\mathcal{Y})$ the set of all bounded linear
+operators from $\mathcal{X}$ to $\mathcal{Y}$. Suppose $\mathcal{A}\subseteq\mathcal{L}(X,\mathcal{Y})$
+such that for any $x\in\mathcal{X}$ the set $\{\|Tx\|\mid T\in\mathcal{A}\}$
+is bounded above. Then the set $\{\|T\|\mid T\in\mathcal{A}\}$ is
+bounded above. \end{theorem}
+
+\begin{proof} For each $n\in\mathbb{N}$, let
+\[
+E_{n}=\{x\in\mathcal{X}\mid\|Tx\|\leq n\text{ for all }T\in\mathcal{A}\}.
+\]
+Observe that $(E_{n})$ is an ascending sequence of closed sets. Indeed,
+it is clearly ascending. To see that each $E_{n}$ is closed, view
+it as an infinite intersection of closed sets, namely
+\[
+E_{n}=\bigcap_{T\in\mathcal{A}}\{x\in\mathcal{X}\mid\|Tx\|\leq n\}.
+\]
+Moreover, for any $x\in\mathcal{X}$ the set $\{\|Tx\|\mid T\in\mathcal{A}\}$
+is bounded above, say $\{\|Tx\|\mid T\in\mathcal{A}\}\leq N$ for
+some $N\in\mathbb{N}$. It follows that $x\in E_{N}$ and since $x\in\mathcal{X}$
+was arbitrary, we see that 
+\[
+\mathcal{X}=\bigcup_{n=1}^{\infty}E_{n}.
+\]
+By the Baire Category Theorem, there must exist some $M\in\mathbb{N}$
+such that $E_{M}$ is not nowhere dense. In other words, $E_{M}$
+contains a nonempty contains a nonempty open ball, say $\mathrm{B}_{r}(x_{0})$.
+By choosing $r$ small enough, we can assume $\mathrm{B}_{r}[x_{0}]\subseteq E_{M}$.
+Then for any $x\in\mathrm{B}_{1}[0]$, we have
+\begin{align*}
+\|T(rx)\| & \leq\|T(rx+x_{0})-Tx_{0}\|\\
+ & \leq\|T(rx+x_{0})\|+\|Tx_{0}\|\\
+ & \leq M+M\\
+ & =2M
+\end{align*}
+for all $T\in\mathcal{A}$. It follows that $\|T\|\leq2M/r$ for all
+$T\in\mathcal{A}$. Thus the set $\{\|T\|\mid T\in\mathcal{A}\}$
+is bounded above. \end{proof}
+
+Here is a simple application of the uniform boundedness principle.
+
+\begin{prop}\label{prop} Let $(T_{n})$ be a sequence of bounded
+linear operators $T_{n}\colon\mathcal{X}\to\mathcal{Y}$ between Banach
+spaces $\mathcal{X}$ and $\mathcal{Y}$. Assume for each $x\in\mathcal{X}$
+the sequence $(T_{n}x)$ converges in $\mathcal{Y}$. Then the map
+$T\colon\mathcal{X}\to\mathcal{Y}$ defined by
+\[
+Tx:=\lim_{n\to\infty}T_{n}x
+\]
+for all $x\in\mathcal{X}$ is a bounded linear operator. \end{prop}
+
+\begin{proof} Since for each $x\in\mathcal{X}$ the sequence $(T_{n}x)$
+is convergent we see that it must be bounded. Let $M_{x}=\sup_{n\in\mathbb{N}}\|T_{n}x\|<\infty$.
+By the uniform boundedness principle, there exists $M>0$ such that
+$\sup_{n\in\mathbb{N}}\|T_{n}\|\leq M<\infty$. Therefore
+\begin{align*}
+\|Tx\| & =\|\lim_{n\to\infty}T_{n}x\|\\
+ & =\lim_{n\to\infty}\|T_{n}x\|\\
+ & \leq\sup_{n\in\mathbb{N}}\|T_{n}x\|\\
+ & \leq\sup_{n\in\mathbb{N}}\|T_{n}\|\|x\|\\
+ & \leq M\|x\|.
+\end{align*}
+It follows that $T$ is bounded. \end{proof}
+
+\section{Open Mapping Theorem and Closed Graph Theorem}
+
+\subsection{Main Theorem}
+
+Let $\mathcal{X}$ and $\mathcal{Y}$ be Banach spaces. Consider the
+space $\mathcal{X}\times\mathcal{Y}$ with addition and scalar-multiplication
+defined pointwise. We endow $\mathcal{X}\times\mathcal{Y}$ with a
+norm defined by
+\begin{equation}
+\|(x,y)\|_{\mathcal{X}\times\mathcal{Y}}=\|x\|_{\mathcal{X}}+\|y\|_{\mathcal{Y}}.\label{eq:normbandjklfsd}
+\end{equation}
+for all $(x,y)\in\mathcal{X}$. It's easy to prove that $(\mathcal{X}\times\mathcal{Y},\|\cdot\|_{\mathcal{X}\times\mathcal{Y}})$
+is a Banach space. If context is clear, then we drop $\mathcal{X}\times\mathcal{Y}$
+from the subscript in $\|\cdot\|_{\mathcal{X}\times\mathcal{Y}}$
+in order to clean notation. We'll use the usual projection maps $\pi_{1}\colon\mathcal{X}\times\mathcal{Y}\to\mathcal{X}$
+and $\pi_{2}\colon\mathcal{X}\times\mathcal{Y}\to\mathcal{Y}$ defined
+by $\pi_{1}(x,y)=x$ and $\pi_{2}(x,y)=y$. Clearly both $\pi_{1}$
+and $\pi_{2}$ are bounded linear operators.
+
+\begin{theorem}\label{theoremmain} (Main result) Let $\mathcal{Z}\subseteq\mathcal{X}\times\mathcal{Y}$
+be a closed subspace such that $\pi_{2}(\mathcal{Z})=\mathcal{Y}$.
+If $U\subseteq\mathcal{X}$ is open, then $\pi_{2}(\pi_{1}^{-1}(U)\cap\mathcal{Z}))$
+is an open subset of $\mathcal{Y}$. \end{theorem}
+
+\begin{rem}\label{rem} Note that by symmetry if instead of assuming
+$\pi_{2}(\mathcal{Z})=\mathcal{Y}$ we assume $\pi_{1}(\mathcal{Z})=\mathcal{X}$,
+then we have for any open set $V\subseteq\mathcal{Y}$ we have $\pi_{1}(\pi_{2}^{-1}(V)\cap\mathcal{Z}))$
+is an open subset of $\mathcal{X}$. \end{rem}
+
+\subsection{Applications of the Main Theorem}
+
+Before we prove Theorem~(\ref{theoremmain}), let us show how to use
+it to prove both the open mapping theorem and the closed graph theorem. 
+
+\subsubsection{Open Mapping Theorem}
+
+\begin{theorem}\label{theorem} (Open mapping theorem) Let $T\colon\mathcal{X}\to\mathcal{Y}$
+be a surjective bounded linear operator. Then $T$ is an open map,
+meaning that for any open subset $U$ of $X$, the set $T(U)$ is
+an open subset of $\mathcal{Y}$. \end{theorem}
+
+\begin{proof} Let $\mathcal{Z}=\{(x,Tx)\mid x\in\mathcal{X}\}\subseteq\mathcal{X}\times\mathcal{Y}$
+and let $U$ be an open subset of $\mathcal{X}$. Observe that $\mathcal{Z}$
+is a closed subspace precisely because $T$ is a bounded linear operator.
+Furthemore we have $\pi_{2}(\mathcal{Z})=\mathcal{Y}$ since $T$
+is surjective. Finally, note that $T(U)=\pi_{2}(\pi_{1}^{-1}(U)\cap\mathcal{Z}))$.
+It follows from Theorem~(\ref{theoremmain}) that $T(U)$ is an open
+subset of $\mathcal{Y}$. \end{proof}
+
+\subsubsection{Inverse Mapping Theorem}
+
+\begin{theorem}\label{theorem} Let $\mathcal{X}$ and $\mathcal{Y}$
+be Banach spaces and let $T\colon\mathcal{X}\to\mathcal{Y}$ be a
+bounded linear map which is bijective. Then $T^{-1}\colon\mathcal{Y}\to\mathcal{X}$
+is also a bounded linear map. \end{theorem}
+
+\begin{proof} That $T^{-1}$ is linear follows from basic linear
+algebra. The nontrivial part is that $T^{-1}$ is also bounded. To
+see why, it suffices to show that $T^{-1}$ is continuous. Let $U\subseteq\mathcal{X}$
+be open. Then its preimage under $T^{-1}$ is $T(U)$ since $T$ is
+bijective. Since $T$ is onto, it follows from the open mapping theorem,
+that $T(U)$ is open. Thus $T^{-1}$ is continuous. \end{proof}
+
+\subsubsection{Closed Graph Theorem}
+
+\begin{theorem}\label{theorem} Let $T\colon\mathcal{X}\to\mathcal{Y}$
+be a linear map such that $x_{n}\to x$ and $Tx_{n}\to y$ implies
+$y=Tx$, or in other words, if the graph of $T$ given by $\{(x,Tx)\mid x\in\mathcal{X}\}\subseteq\mathcal{X}\times\mathcal{Y}$
+is a closed set, then $T$ is bounded. \end{theorem}
+
+\begin{proof} Again take $\mathcal{Z}=\{(x,Tx)\mid x\in\mathcal{X}\}\subseteq\mathcal{X}\times\mathcal{Y}$
+and let $V$ be an open subset of $\mathcal{Y}$. Since $T$ is linear,
+$\mathcal{Z}$ is a subspace of $\mathcal{X}\times\mathcal{Y}$. Furthermore,
+$\mathcal{Z}$ is closed by assumption. Also we clearly have $\pi_{1}(\mathcal{Z})=\mathcal{X}$.
+Finally, note that $T^{-1}(V)=\pi_{1}(\pi_{2}^{-1}(V)\cap\mathcal{Z}))$.
+It follows from Theorem~(\ref{theoremmain}) that $T^{-1}(V)$ is
+an open subset of $\mathcal{X}$. Thus $T$ is continuous, and hence
+bounded.  \end{proof}
+
+\subsection{Zabreiko's Lemma}
+
+The proof of Theorem~(\ref{theoremmain}) will depend on the following
+lemma:
+
+\begin{lemma}\label{lemma} (Zabreiko) Let $\mathcal{X}$ be a Banach
+space and let $p\colon\mathcal{X}\to[0,\infty)$ be a seminorm on
+$\mathcal{X}$. Suppose $p$ is \textbf{countably subadditive}, that
+is,\textbf{ }suppose for every absolutely convergent series $\sum_{n=1}^{\infty}x_{n}$
+in $\mathcal{X}$, we have
+\[
+p\left(\sum_{n=1}^{\infty}x_{n}\right)\leq\sum_{n=1}^{\infty}p(x_{n}).
+\]
+Then there exists $C>0$ such that $p(x)\leq C\|x\|$ for every $x\in\mathcal{X}$.
+\end{lemma}
+
+\begin{proof} For each $n\in\mathbb{N}$, let $E_{n}=\{p\leq n\}$. 
+
+\hfill
+
+\textbf{Step 1: }We will find an $N\in\mathbb{N}$ and $r>0$ such
+that $\mathrm{B}_{r}(0)\subseteq\overline{E}_{N}$. Observe that $E_{n}$
+is convex and symmetric (here symmetric means $x\in E_{n}$ implies
+$-x\in E_{n}$). From here it is easy to show that $\overline{E}_{n}$
+is convex, symmetric, and closed. Clearly
+\[
+\mathcal{X}=\bigcup_{n=1}^{\infty}\overline{E}_{n}.
+\]
+So by the Baire category theorem, there exists an $N\in\mathbb{N}$
+and an open ball $\mathrm{B}_{r}(x_{0})$ such that $\mathrm{B}_{r}(x_{0})\subseteq\overline{E}_{N}$.
+Since $\overline{E}_{N}$ is symmetric, we have $\mathrm{B}_{r}(-x_{0})\subseteq\overline{E}_{N}$.
+Then for each $x\in\mathrm{B}_{r}(0)$, we have 
+\[
+x=\frac{1}{2}(x-x_{0})+\frac{1}{2}(x+x_{0})
+\]
+where $x-x_{0}\in\mathrm{B}_{r}(-x_{0})\subseteq\overline{E}_{N}$
+and $x+x_{0}\in\mathrm{B}_{r}(x_{0})\subseteq\overline{E}_{N}$. Since
+$\overline{E}_{N}$ is convex, it follows that $x\in\overline{E}_{N}$.
+Therefore $\mathrm{B}_{r}(0)\subseteq\overline{E}_{N}$. 
+
+\hfill
+
+\textbf{Step 2: }We will show $\mathrm{B}_{r}(0)\subseteq E_{N}$.
+Let $x\in\mathrm{B}_{r}(0)$, let $\rho>0$ such that $\|x\|<\rho<r$,
+let $q>0$ such that $q<1-\rho/r$, and let $y=(r/\rho)x$. Then observe
+that $y\in\mathrm{B}_{r}(0)\subseteq\overline{E}_{N}$. In particular,
+this implies $\mathrm{B}_{qr}(y)\cap E_{N}\neq\emptyset$, so we can
+choose $y_{0}\in\mathrm{B}_{qr}(y)\cap E_{N}$. Since $y_{0}\in\mathrm{B}_{qr}(y)$,
+we have
+\[
+\|y_{0}-y\|<qr
+\]
+In other words, dividing both sides by $q$ give us $(y-y_{0})/q\in\mathrm{B}_{r}(0)\subseteq\overline{E}_{N}$.
+In particular, this implies $\mathrm{B}_{qr}((y-y_{0})/q)\cap E_{N}\neq\emptyset$,
+so we can choose $y_{1}\in\mathrm{B}_{qr}((y-y_{0})/q)\cap E_{N}$.
+Again since $y_{1}\in\mathrm{B}_{qr}((y-y_{0})/q)$, we have 
+\[
+\left\Vert \frac{y-y_{0}-qy_{1}}{q}\right\Vert <qr
+\]
+In other words, dividing both sides by $q$ gives us $(y-y_{0}-qy_{1})/q^{2}\in\mathrm{B}_{r}(0)\subseteq\overline{E}_{N}$.
+In particular, this implies $\mathrm{B}_{qr}((y-y_{0}-qy_{1})/q^{2})\cap E_{N}\neq\emptyset$,
+so we can choose $y_{2}\in\mathrm{B}_{qr}((y-y_{0}-qy_{1})/q^{2})\cap E_{N}$.
+More generally, for each $n\geq2$, we choose 
+\[
+y_{n}\in\mathrm{B}_{qr}\left(\frac{y-y_{0}-qy_{1}-\cdots-q^{n-1}y_{n-1}}{q^{n}}\right).
+\]
+In this case, we obtain a sequence $(y_{n})\subseteq E_{N}$ such
+that
+\begin{equation}
+\|y-y_{0}-qy_{1}-q^{2}y_{2}-\cdots-q^{n}y_{n}\|<q^{n}r\label{eq:starstarmainleb}
+\end{equation}
+for all $n\in\mathbb{N}$. Since $\|y_{n}\|\leq r+qr$ for all $n\in\mathbb{N}$
+and $0<q<1$, we have $\sum_{n=0}^{\infty}q^{n}y_{n}$ is absolutely
+convergent. Therefore by (\ref{eq:starstarmainleb}) we have $y=\sum_{n=1}^{\infty}q^{n}y_{n}$.
+Thus\textbackslash
+\begin{align*}
+p(x) & =p\left(\frac{\rho}{r}y\right)\\
+ & =\frac{\rho}{r}p(y)\\
+ & =\frac{\rho}{r}p\left(\sum_{n=1}^{\infty}q^{n}y_{n}\right)\\
+ & \leq\frac{\rho}{r}q^{n}\sum_{n=1}^{\infty}p(y_{n})\\
+ & \leq\frac{\rho}{r}q^{n}N\\
+ & =\frac{\rho}{r}\frac{N}{1-q}\\
+ & \leq N.
+\end{align*}
+ It follows that $\mathrm{B}_{r}(0)\subseteq E_{N}$. 
+
+\hfill
+
+\textbf{Step 3: }Let $x\in\mathcal{X}$ be arbitrary nonzero. Then
+$(r/2)x/\|x\|\in\mathrm{B}_{r}(0)$ and hence $p((r/2)x/\|x\|)\leq N$.
+This implies $p(x)\leq(2N/r)\|x\|$. \end{proof}
+
+\begin{rem}\label{rem} We make two remarks.
+\begin{enumerate}
+\item Zabreiko's lemma implies $p$ is continuous. Indeed, suppose $x_{n}\to x$.
+Then
+\begin{align*}
+|p(x_{n})-p(x)| & \leq p(x_{n}-x)\\
+ & \leq C\|x_{n}-x\|\\
+ & \to0.
+\end{align*}
+\item Zabreiko's lemma can be used to prove the uniform boundedness principle.
+Indeed, take $p(x)=\sup_{T\in\mathcal{A}}\|Tx\|$. Then it can be
+shown that $p$ satisfies the properties from Zabreiko's lemma. Therefore
+there exist $C>0$ such that
+\[
+\sup_{T\in\mathcal{A}}\|Tx\|\leq C\|x\|.
+\]
+Thus for any $T\in\mathcal{A}$ we have $\|Tx\|\leq C\|x\|$ which
+implies $\|T\|\leq C$ for all $T\in\mathcal{A}$. 
+\end{enumerate}
+\end{rem}
+
+\subsection{Proof of Main Theorem}
+
+We now wish to prove Theorem~(\ref{theoremmain}).
+
+\begin{proof} Let $p\colon\mathcal{Y}\to[0,\infty)$ be defined by
+\[
+p(y):=\inf\{\|x\|\mid(x,y)\in\mathcal{Z}\}.
+\]
+It's easy to show that $p$ is a seminorm. We claim that it is also
+countably subadditive. Indeed, let $\sum_{n=1}^{\infty}y_{n}$ be
+an absolutely convergent series such that $\sum_{n=1}^{\infty}p(y_{n})<\infty$.
+Let $\varepsilon>0$ and for each $n\in\mathbb{N}$ choose $x_{n}\in\mathcal{X}$
+such that $\|x_{n}\|<p(y_{n})+\varepsilon/2^{n}$ and $(x_{n},y_{n})\in\mathcal{Z}$.
+Then
+\[
+\sum_{n=1}^{\infty}\|x_{n}\|\leq\sum_{n=1}^{\infty}p(y_{n})+\varepsilon<\infty.
+\]
+Hence $\sum_{n=1}^{\infty}x_{n}$ is absolutely convergent. Since
+$\mathcal{Z}$ is a subspace, we have $(\sum_{n=1}^{N}x_{n},\sum_{n=1}^{N}y_{n})\in\mathcal{Z}$
+for all $N\in\mathbb{N}$. Since $\mathcal{Z}$ is closed, we have
+$(\sum_{n=1}^{\infty}x_{n},\sum_{n=1}^{\infty}y_{n})\in\mathcal{Z}$.
+Then
+\begin{align*}
+p\left(\sum_{n=1}^{\infty}y_{n}\right) & =\inf\left\{ \|x\|\mid\left(x,\sum_{n=1}^{\infty}y_{n}\right)\in\mathcal{Z}\right\} \\
+ & \leq\left\Vert \sum_{n=1}^{\infty}x_{n}\right\Vert \\
+ & \leq\sum_{n=1}^{\infty}\|x_{n}||\\
+ & \leq\sum_{n=1}^{\infty}p(y_{n})+\varepsilon.
+\end{align*}
+Since $\varepsilon>0$ was arbitrary, it follows that $p$ is countably
+subadditive. So we can apply Zabreiko's lemma to obtain that $p$
+is continuous. 
+
+~~~Now let $U=\mathrm{B}_{1}(0)$ be the open unit ball in $\mathcal{Y}$.
+Then
+\begin{align*}
+\pi_{2}(\pi^{-1}(\mathrm{B}_{1}(0)\cap\mathcal{Z})) & =\pi_{2}\{(x,y)\mid x\in\mathrm{B}_{1}(0)\text{ and }(x,y)\in\mathcal{Z})\\
+ & =\{y\in\mathcal{Y}\mid p(y)<1\}\\
+ & =\{p<1\}.
+\end{align*}
+Implies $\pi_{2}(\pi^{-1}(\mathrm{B}_{1}(0)\cap\mathcal{Z}))$ is
+open since $p$ is continuous. The general case open sets $U$ can
+be easily be obtained using linearity and homogeneity. \end{proof}
+
+\section{Hilbert Space Applications}
+
+Let $\mathcal{H}$ be a Hilbert space and let $\mathcal{K}$ and $\mathcal{L}$
+be closed subspaces of $\mathcal{H}$. We ask, is $\mathcal{K}+\mathcal{L}$
+a closed subspace? 
+
+\begin{prop}\label{prop} The following are equivalent:
+\begin{enumerate}
+\item $\mathcal{K}\cap\mathcal{L}=(\mathcal{K}^{\perp}+\mathcal{L}^{\perp})^{\perp}$
+\item $\mathcal{K}^{\perp}\cap\mathcal{L}^{\perp}=(\mathcal{K}+\mathcal{L})^{\perp}$
+\item $(\mathcal{K}\cap\mathcal{L})^{\perp}=\overline{\mathcal{K}^{\perp}+\mathcal{L}^{\perp}}$
+\item $(\mathcal{K}^{\perp}\cap\mathcal{L}^{\perp})^{\perp}=\overline{\mathcal{K}+\mathcal{L}}$
+\end{enumerate}
+\end{prop}
+
+\begin{proof} 1 implies 2, 1 implies 3, and 2 implies 4 are easy.
+It suffices to show 1. Let $x\in\mathcal{K}\cap\mathcal{L}$ and let
+$y\in\mathcal{K}^{\perp}+\mathcal{L}^{\perp}$. Then $y=z+w$ where
+$z\in\mathcal{K}^{\perp}$ and $w\in\mathcal{L}^{\perp}$. So $\langle x,y\rangle=\langle x,z+w\rangle=\langle x,z\rangle+\langle x,w\rangle$.
+Therefore $x\perp\mathcal{K}^{\perp}+\mathcal{L}^{\perp}$ and hence
+$x\in(\mathcal{K}^{\perp}+\mathcal{L}^{\perp})^{\perp}$. Thus $\mathcal{K}\cap\mathcal{L}\subseteq(\mathcal{K}^{\perp}+\mathcal{L}^{\perp})^{\perp}$.
+Conversely, we have $(\mathcal{K}^{\perp}+\mathcal{L}^{\perp})^{\perp}\subseteq(\mathcal{K}^{\perp})^{\perp}=\mathcal{K}$
+and $(\mathcal{K}^{\perp}+\mathcal{L}^{\perp})^{\perp}\subseteq(\mathcal{L}^{\perp})^{\perp}=\mathcal{L}$.
+Thus $\mathcal{K}\cap\mathcal{L}\supseteq(\mathcal{K}^{\perp}+\mathcal{L}^{\perp})^{\perp}$.
+\end{proof}
+
+\begin{lemma}\label{lemma} Assume $\mathcal{K}$ and $\mathcal{L}$
+are closed subspaces of a Hilbert space $\mathcal{H}$ and assume
+$\mathcal{K}+\mathcal{L}$ is closed. Then there exists a constant
+$C>0$ such that every $z\in\mathcal{K}+\mathcal{L}$ there exists
+$x\in\mathcal{K}$ and $y\in\mathcal{L}$ such that $z=x+y$ and $\|x\|\leq C\|z\|$
+and $\|y\|\leq C\|z\|$. \end{lemma}
+
+\begin{proof} Consider $\mathcal{K}\times\mathcal{L}\subseteq\mathcal{H}\times\mathcal{H}$.
+Then $\mathcal{K}\times\mathcal{L}$ is a closed subspace of the Banach
+space $\mathcal{H}\times\mathcal{H}$. Hence it is a Banach space
+itself. Consider the map $T\colon\mathcal{K}\times\mathcal{L}\to\mathcal{K}+\mathcal{L}$
+given by 
+\[
+T((x,y))=x+y.
+\]
+Then $T$ is a bounded linear operator. Furthermore, it is easy to
+see that $T$ is surjective. By the open mapping theorem the image
+$T(\mathrm{B}_{1}(0))$ must be open. Since $0\in T(\mathrm{B}_{1}(0))$
+there exists $c>0$ such that $\mathrm{B}_{c}(0)\subseteq T(\mathrm{B}_{1}(0))$.
+This means for all $z\in\mathcal{K}+\mathcal{L}$ with $\|z\|<c$
+we have $z\in T(\mathrm{B}_{1}(0))$, that is, there exists $x\in\mathcal{K}$
+and $y\in\mathcal{L}$ such that $z=x+y$ and $\|(x,y)\|=\|x\|+\|y\|<1$.
+Now by scaling, for any $z\in\mathcal{K}+\mathcal{L}$ we have $\|(c/2)z/\|z\|\|<c$.
+Therefore there exists $x'\in\mathcal{K}$ and $y'\in\mathcal{L}$
+such that $(c/2)z/\|z\|=x'+y'$ with $\|x'\|+\|y'\|<1$. Then set
+$x=(2/c)\|z\|x'$ and $y=(2/x)\|z\|y'$. We have
+\begin{align*}
+\|x\|+\|y\| & <\frac{2}{c}\|z\|.
+\end{align*}
+\end{proof}
+
+\begin{prop}\label{prop} $\mathcal{K}+\mathcal{L}$ is closed if
+and only if $\mathcal{K}^{\perp}+\mathcal{L}^{\perp}$ is closed.
+\end{prop}
+
+\begin{proof} It's enough to show $(\implies)$ with the other being
+a simple consequence of this one. Assume $\mathcal{K}+\mathcal{L}$
+is closed. Using the previous proposition, we have $\overline{\mathcal{K}^{\perp}+\mathcal{L}^{\perp}}=(\mathcal{K}\cap\mathcal{L})^{\perp}$
+so it is enough to show that $(\mathcal{K}\cap\mathcal{L})^{\perp}\subseteq\mathcal{K}^{\perp}+\mathcal{L}^{\perp}$.
+Let $y\in(\mathcal{K}\cap\mathcal{L})^{\perp}$. Consider $\ell\colon\mathcal{K}+\mathcal{L}\to\mathbb{R}$
+defined by $\ell(x)=\langle a,y\rangle$ where $a\in\mathcal{K}$
+is such that $x=a+b$ and $b\in\mathcal{L}$. To see that $\ell$
+is well-defined, suppose $x=a'+b'$ where $a'\in\mathcal{K}$ and
+$b'\in\mathcal{L}$. Then $a-a'=b-b'$. It follows that $b-b'\in\mathcal{K}\cap\mathcal{L}$.
+Hence
+\begin{align*}
+\langle a,y\rangle & =\langle b-b'+a',y\rangle\\
+ & =\langle a',y\rangle+\langle b-b',y\rangle\\
+ & =\langle a',y\rangle.
+\end{align*}
+Thus $\ell$ is well-defined. It is easy to see that $\ell$ is linear.
+Furthermore, we claim $\ell$ is bounded. By the previous lemma, there
+exists $C>0$ such that for any $x\in\mathcal{K}+\mathcal{L}$ there
+exists a decomposition $x=a+b$ where $a\in\mathcal{K}$ and $b\in\mathcal{L}$
+such that $\|a\|\leq C\|x\|$ and $\|b\|\leq C\|x\|$. Then
+\begin{align*}
+|\ell(x)| & =|\langle a,y\rangle|\\
+ & \leq\|a\|\|y\|\\
+ & \leq C\|y\|\|x\|.
+\end{align*}
+Thus $\ell$ is a bounded linear functional.
+
+~~~We extend $\ell$ to the whole $\mathcal{H}$ by setting
+\[
+\widetilde{\ell}(x)=\begin{cases}
+\ell(x) & \text{ if }x\in\mathcal{K}+\mathcal{L}\\
+0 & \text{if }x\in(\mathcal{K}+\mathcal{L})^{\perp}.
+\end{cases}
+\]
+This is still a bounded linear functional. So by the Riesz representation
+theorem for Hilbert spaces, there exists some $z\in\mathcal{H}$ such
+that $\widetilde{\ell}(x)=\langle x,z\rangle$ for all $x\in\mathcal{H}$.
+Then $y=(y-z)+z$. For any $k\in\mathcal{K}$ we have $\ell(k)=\widetilde{\ell}(k)$.
+In particular, $y-z\in\mathcal{K}^{\perp}$. Furthermore, note that
+$\ell|_{\mathcal{L}}=0$. Indeed, if $x\in\mathcal{L}$ then we use
+the decomposition $0+x=x$ to get $\ell(x)=\langle0,y\rangle=0$.
+Thus $\widetilde{\ell}|_{\mathcal{L}}=\widetilde{\ell}|_{\mathcal{L}}=0$
+and hence $z\in\mathcal{L}^{\perp}$. Therefore we see that $(\mathcal{K}\cap\mathcal{L})^{\perp}\subseteq\mathcal{K}^{\perp}+\mathcal{L}^{\perp}$. 
+
+\end{proof}
+
+\begin{rem}\label{rem} The same results holds for all reflexive Banach
+spaces. \end{rem}
+
+\subsubsection{Ker $T$ Star Equals Im $T$ Perp}
+
+\begin{prop}\label{propkertstarimtperp} Let $T\colon\mathcal{H}\to\mathcal{H}$
+be a bounded operator. Then the following are true. 
+\begin{enumerate}
+\item $\ker T=(\mathrm{im}\,T^{*})^{\perp}$.
+\item $\ker T^{*}=(\mathrm{im}\,T)^{\perp}$.
+\item $(\ker T)^{\perp}=\overline{\mathrm{im}\,T^{*}}$.
+\item $(\ker T^{*})^{\perp}=\overline{\mathrm{im}\,T}$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof} Since identities 2-4 are simple consequences of 1,
+we will just prove 1 and leave the rest as an exercise. Consider the
+Hilbert space $\mathcal{H}\times\mathcal{H}$ with an inner products
+defined by
+\[
+\langle(x_{1},y_{1}),(x_{2},y_{2})\rangle=\langle x_{1},x_{2}\rangle+\langle y_{1},y_{2}\rangle.
+\]
+Let $\mathcal{K}=\{(x,Tx)\mid x\in\mathcal{H}\}$ and $\mathcal{L}=\mathcal{H}\times0$.
+Then $\mathcal{K}$ and $\mathcal{L}$ are both closed subspaces of
+$\mathcal{H}\times\mathcal{H}$. Observe that $\mathcal{K}\cap\mathcal{L}=\ker T\times0$
+and $\mathcal{K}+\mathcal{L}=\mathcal{H}\times\mathrm{im}\,T$. Also
+note that $\mathcal{L}^{\perp}=0\times\mathcal{H}$ and 
+\begin{align*}
+\mathcal{K}^{\perp} & =\{(x_{1},y_{1})\mid\langle x_{1},x\rangle+\langle y_{1},Tx\rangle=0\text{ for all }x\in\mathcal{H}\}\\
+ & =\{(x_{1},y_{1})\mid\langle x_{1}+T^{*}y_{1},x\rangle=0\text{ for all }x\in\mathcal{H}\}\\
+ & =\{(x_{1},y_{1})\mid x_{1}+T^{*}y_{1}=0\}\\
+ & =\{(-T^{*}y_{1},y_{1})\mid y_{1}\in\mathcal{H}\}.
+\end{align*}
+Thus $\mathcal{K}^{\perp}\cap\mathcal{L}^{\perp}=0\times\ker T^{*}$
+and $\mathcal{K}^{\perp}+\mathcal{L}^{\perp}=\mathrm{im}\,T^{*}\times\mathcal{H}$.
+Thus
+\begin{align*}
+\ker T\times0 & =\mathcal{K}\cap\mathcal{L}\\
+ & =(\mathcal{K}^{\perp}+\mathcal{L}^{\perp})^{\perp}\\
+ & =(\mathrm{im}\,T^{*}\times\mathcal{H})^{\perp}\\
+ & =(\mathrm{im}\,T^{*})^{\perp}\times0.
+\end{align*}
+It follows that $\ker T=(\mathrm{im}\,T^{*})^{\perp}$. \end{proof}
+
+\begin{prop}\label{prop} Let $T\colon\mathcal{H}\to\mathcal{H}$
+be a bounded linear operator. Then $\mathrm{im}\,T$ is a closed subspace
+if and only if $\mathrm{im}\,T^{*}$ is a closed subspace. \end{prop}
+
+\begin{proof} Uses open mapping theorem. \end{proof}
+
+\subsection{Characterizing Surjectivity of a Bounded Operator}
+
+From Proposition~(\ref{propkertstarimtperp}), we see that $T$ is
+injective if and only if $T^{*}$ has dense image. Also $T$ is surjective
+if and only if $T^{*}$ is injective and $\mathrm{im}\,T^{*}$ is
+closed. Let's state this as a theorem.
+
+\begin{theorem}\label{theorem} Let $T\colon\mathcal{H}\to\mathcal{H}$
+be a bounded operator. Then the following are equivalent.
+\begin{enumerate}
+\item $T$ is surjective.
+\item There exists $c>0$ such that $\|T^{*}x\|\geq c\|x\|$ for all $x\in\mathcal{H}$. 
+\item $T^{*}$ is injective and $\mathrm{im}\,T^{*}$ is closed.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} (1 implies 2) Suppose $T$ is surjective. Let $E=\{x\in\mathcal{H}\mid\|T^{*}x\|\leq1\}$.
+For any $x\in E$ and $z\in\mathcal{H}$ such that $Tz=y$, we have
+\begin{align*}
+|\langle x,y\rangle| & =|\langle x,Tz\rangle|\\
+ & =|\langle T^{*}x,z\rangle|\\
+ & \leq\|T^{*}x\|\|z\|\\
+ & \leq\|z\|.
+\end{align*}
+So the set $E$ is weakly bounded. In fact, by uniform boundedness
+principle, $E$ is bounded. Therefore there exists $C>0$ such that
+$\|z\|\leq C$ for all $x\in E$. In other words, if $\|T^{*}x\|\leq1$,
+then $\|x\|\leq C$. 
+
+~~~Now let $x\in\mathcal{H}$ be any arbitrary nonzero vector.
+Since $T^{*}$ is injective, we have $T^{*}x\neq0$. Consider $y=x/\|T^{*}x\|$.
+Then
+\begin{align*}
+\|T^{*}y\| & =\left\Vert T^{*}\left(\frac{x}{\|T^{*}x\|}\right)\right\Vert \\
+ & =\frac{1}{\|T^{*}x\|}\|T^{*}x\|\\
+ & =1,
+\end{align*}
+and hence $y\in E$. In particular, $\|y\|\leq C$. It follows that
+$\|x\|\leq C\|T^{*}x\|$. In other words
+\[
+c\|x\|\leq\|T^{*}x\|
+\]
+for all $x\neq0$ where $c=1/C>0$. 
+
+\hfill
+
+(2 implies 3) Suppose there exists $c>0$ such that $\|T^{*}x\|\geq c\|x\|$
+for all $x\in\mathcal{H}$. Now let $x\in\ker T^{*}$. Then $\|T^{*}x\|=0$
+which implies $\|x\|=0$ which implies $x=0$. Thus $T^{*}$ is injective.
+Now let $(y_{n})$ be a convergent sequence in $\mathrm{im}\,T^{*}$
+which converges to $y\in\mathcal{H}$. For each $n\in\mathbb{N}$
+choose $x_{n}\in\mathcal{H}$ such that $y_{n}=T^{*}x_{n}$. Then
+observe for all $n\in\mathbb{N}$ we have
+\begin{align*}
+\|x_{m}-x_{n}\| & \leq\frac{1}{c}\|T^{*}(x_{m}-x_{n})\|\\
+ & =\frac{1}{c}\|y_{m}-y_{n}\|.
+\end{align*}
+Thus since $(y_{n})$ is a Cauchy sequence, it follows that $(x_{n})$
+is a Cauchy sequence. Since $\mathcal{H}$ is a Hilbert space, we
+see that $(x_{n})$ is convergent, say $x_{n}\to x$. Then since $T^{*}$
+is bounded/continuous, we see that $T^{*}x=y$. Thus $\mathrm{im}\,T^{*}$
+is closed. 
+
+\hfill
+
+(3 implies 1) Suppose $T^{*}$ is injective and $\mathrm{im}\,T^{*}$
+is closed. Since $T^{*}$ is injective, we see that $\mathrm{im}\,T$
+is dense in $\mathcal{H}$. Since $\mathrm{im}\,T^{*}$ is closed,
+it follows that $\mathrm{im}\,T$ is closed (this depends on the open
+mapping theorem). Therefore $\mathrm{im}\,T=\mathcal{H}$, and so
+$T$ is surjective. \end{proof}
+
+\subsubsection{Quasi Inner-Product}
+
+Let $\mathcal{H}$ be a Hilbert space. Suppose $B\colon\mathcal{H}\times\mathcal{H}\to\mathbb{C}$
+satisfies
+\begin{enumerate}
+\item $B$ is linear in the first coordinate and conjugate linear in the
+second coordinate.
+\item There exists $C>0$ such that $|B(x,y)|\leq C\|x\|\|y\|$. 
+\item There exists $c>0$ such that $|B(x,x)|\geq c\|x\|^{2}$. 
+\end{enumerate}
+Then there exists $T\colon\mathcal{H}\to\mathcal{H}$ invertible such
+that $B(x,y)=\langle Tx,y\rangle$ for all $x,y\in\mathcal{H}$. Equivalently
+for any bounded linear functional $\ell\colon\mathcal{H}\to\mathbb{C}$
+there exists a unique $z\in\mathcal{H}$ such that $\ell(x)=B(x,z)$
+for all $x\in\mathcal{H}$. 
+\end{document}

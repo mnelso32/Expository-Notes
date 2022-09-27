@@ -1,0 +1,1208 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Contractibility
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\varphi\colon(A,\mathfrak{m})\to(B,\mathfrak{n})$
+\end_inset
+
+ be a local ring homomorphism and assume that 
+\begin_inset Formula $\mathfrak{m}\neq0$
+\end_inset
+
+ (so 
+\begin_inset Formula $A$
+\end_inset
+
+ is not a field hence 
+\begin_inset Formula $B$
+\end_inset
+
+ is not a field hence 
+\begin_inset Formula $\mathfrak{n}\neq0$
+\end_inset
+
+).
+ Being a local ring homomorphism means 
+\begin_inset Formula $\varphi(\mathfrak{m})\subseteq\mathfrak{n}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\varphi^{-1}(\mathfrak{n})$
+\end_inset
+
+ is necessarily a prime ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+, the condition 
+\begin_inset Formula $\varphi(\mathfrak{m})\subseteq\mathfrak{n}$
+\end_inset
+
+ is equivalent to the condition 
+\begin_inset Formula $\varphi^{-1}(\mathfrak{n})=\mathfrak{m}$
+\end_inset
+
+.
+ Now equip 
+\begin_inset Formula $A$
+\end_inset
+
+ with the 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+-adic filtration, so 
+\begin_inset Formula $A=(A_{n})$
+\end_inset
+
+ where 
+\begin_inset Formula $A_{n}=\mathfrak{m}^{n}$
+\end_inset
+
+ and let 
+\begin_inset Formula $A'=(A_{n}')$
+\end_inset
+
+ be the filtered 
+\begin_inset Formula $A$
+\end_inset
+
+-module where 
+\begin_inset Formula $A_{n}'=\varphi^{-1}(\mathfrak{n}^{n})$
+\end_inset
+
+ (so in particular we have 
+\begin_inset Formula $A_{0}=A=A_{0}'$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{1}=\mathfrak{m}=A_{1}'$
+\end_inset
+
+).
+ Note that 
+\begin_inset Formula $(A_{n}')$
+\end_inset
+
+ really is an 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+-filtration since if 
+\begin_inset Formula $x\in A_{m}=\mathfrak{m}^{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $y\in A_{n}'=\varphi^{-1}(\mathfrak{n}^{n})$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+\varphi(xy)=\varphi(x)\varphi(y)\in\varphi(\mathfrak{m}^{m})\mathfrak{n}^{n}\subseteq\mathfrak{n}^{m+n},
+\]
+
+\end_inset
+
+implies 
+\begin_inset Formula $xy\in A_{m+n}'$
+\end_inset
+
+.
+ Now, let 
+\begin_inset Formula $S=\mathrm{S}_{B,A}$
+\end_inset
+
+ denote the standard stabilizing function of 
+\begin_inset Formula $(A_{n}')$
+\end_inset
+
+ with respect to to 
+\begin_inset Formula $(A_{n})$
+\end_inset
+
+, that is, 
+\begin_inset Formula $S\colon\mathbb{N}\to\mathbb{N}\cup\{\infty\}$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+S(k)=\inf\{m\mid A_{m}'\subseteq A_{k}\}=\inf\{m\mid\varphi^{-1}(\mathfrak{n}^{m})\subseteq\mathfrak{m}^{k}\}.
+\]
+
+\end_inset
+
+Thus 
+\begin_inset Formula $n\geq S(k)$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\[
+A_{n}'\subseteq A_{S(k)}'\subseteq A_{k},
+\]
+
+\end_inset
+
+and if 
+\begin_inset Formula $S(k)\neq1$
+\end_inset
+
+, then 
+\begin_inset Formula $A_{S(k)-1}'\not\subseteq A_{k}$
+\end_inset
+
+.
+ Note that if 
+\begin_inset Formula $k_{2}\geq k_{1}$
+\end_inset
+
+, then
+\begin_inset Formula 
+\[
+A_{S(k_{2})}'\subseteq A_{k_{2}}\subseteq A_{k_{1}}
+\]
+
+\end_inset
+
+implies 
+\begin_inset Formula $S(k_{2})\geq S(k_{1})$
+\end_inset
+
+.
+ Thus the sequence 
+\begin_inset Formula $(S(k)/k)_{k\in\mathbb{N}}$
+\end_inset
+
+ is monotone increasing, so it makes sense to define the limit
+\begin_inset Formula 
+\[
+c=\mathrm{c}_{B,A}=\lim_{k\to\infty}\frac{S(k)}{k}\in[0,\infty].
+\]
+
+\end_inset
+
+We call 
+\begin_inset Formula $c$
+\end_inset
+
+ the 
+\series bold
+contractibility 
+\series default
+of 
+\begin_inset Formula $B$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Note that since 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is a local ring homomorphism, we have 
+\begin_inset Formula $A_{k}'\supseteq A_{k}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ In particular, if 
+\begin_inset Formula $A$
+\end_inset
+
+ is not Artinian (so 
+\begin_inset Formula $(A_{n})$
+\end_inset
+
+ is strictly descending), then we must have 
+\begin_inset Formula $S\geq\boldsymbol{1}_{k}$
+\end_inset
+
+ (we write 
+\begin_inset Formula $\boldsymbol{1}_{k}$
+\end_inset
+
+ for the function 
+\begin_inset Formula $\mathbb{N}\to\mathbb{N}$
+\end_inset
+
+ defined by 
+\begin_inset Formula $\boldsymbol{1}_{k}(k)=k$
+\end_inset
+
+).
+ In this case we have 
+\begin_inset Formula $\mathrm{c}_{B,A}\in[1,\infty]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Consider the case where 
+\begin_inset Formula $A=K[y]_{\langle y\rangle}$
+\end_inset
+
+, 
+\begin_inset Formula $B=K[x,y]_{\langle x,y\rangle}\slash\langle y^{2}-x^{3}\rangle$
+\end_inset
+
+, and 
+\begin_inset Formula $\varphi\colon A\to B$
+\end_inset
+
+ is the inclusion map.
+ We calculate 
+\begin_inset Formula $A_{n}':=\varphi^{-1}(\mathfrak{n}^{n})$
+\end_inset
+
+ for various 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ We have
+\begin_inset Formula 
+\begin{align}
+A_{1}'=\varphi^{-1}(\mathfrak{n}) & =\mathfrak{m}\nonumber \\
+A_{2}'=\varphi^{-1}(\mathfrak{n}^{2}) & =\mathfrak{m}^{2}\nonumber \\
+A_{3}'=\varphi^{-1}(\mathfrak{n}^{3}) & =\mathfrak{m}^{2} & \text{since }y^{2}=x^{3}\text{ in }B\nonumber \\
+A_{4}'=\varphi^{-1}(\mathfrak{n}^{4}) & =\mathfrak{m}^{3} & \text{since }y^{3}=x^{3}y\text{ in }B\label{eq:contractibilityexample1}\\
+A_{5}'=\varphi^{-1}(\mathfrak{n}^{5}) & =\mathfrak{m}^{4} & \text{since }y^{4}=x^{6}\text{ in }B\nonumber \\
+A_{6}'=\varphi^{-1}(\mathfrak{n}^{6}) & =\mathfrak{m}^{4} & \text{since }y^{4}=x^{6}\text{ in }B\nonumber \\
+ & \vdots\nonumber 
+\end{align}
+
+\end_inset
+
+If 
+\begin_inset Formula $S$
+\end_inset
+
+ denotes the standard stabilizing function of 
+\begin_inset Formula $(A_{n}')$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $(\mathfrak{m}^{n})$
+\end_inset
+
+, then the calculations 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:contractibilityexample1})
+\end_layout
+
+\end_inset
+
+ tells us that the sequence 
+\begin_inset Formula $(S(k))_{k\geq1}$
+\end_inset
+
+ starts out as
+\begin_inset Formula 
+\[
+(S(k))_{k\geq1}=(1,2,4,5,7,8,\dots)
+\]
+
+\end_inset
+
+More generally, we have
+\begin_inset Formula 
+\[
+S(n)=\begin{cases}
+3m-2 & \text{if }n=2m-1\text{ where }m\geq1\\
+3m-1 & \text{if }n=2m\text{ where }m\geq1
+\end{cases}
+\]
+
+\end_inset
+
+It follows that the contractibility of 
+\begin_inset Formula $B$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $A$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\[
+c=\mathrm{c}_{B,A}=\lim_{k\to\infty}\frac{S(k)}{k}=\frac{3}{2}.
+\]
+
+\end_inset
+
+To see what's going on geometrically, consider the image below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}[scale=1]
+\backslash
+begin{axis}[axis lines=none,
+\end_layout
+
+\begin_layout Plain Layout
+
+xmax=3, xmin=-3, ymax=3, ymin=-3, ]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// red squares
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-0.75:0.75,samples=100,color=red,thick,dashed] ({1.75}, {x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=0.25:1.75,samples=100,color=red,thick,dashed] ({x}, {0.75});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-0.75:0.75,samples=100,color=red,thick,dashed] ({0.25}, {x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=0.25:1.75,samples=100,color=red,thick,dashed] ({x}, {-0.75});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// blue square
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-0.5:0.5,samples=100,color=blue,thick,dashed] ({-1.5}, {x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-0.5:0.5,samples=100,color=blue,thick,dashed] ({-2.5}, {x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-2.5:-1.5,samples=100,color=blue,thick,dashed] ({x}, {0.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-2.5:-1.5,samples=100,color=blue,thick,dashed] ({x}, {-0.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// cubic
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-3:3,samples=100,color=black,thick] ({x^2 +1}, {x^5 });
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=0:0.85,samples=100,color=red,thick] ({x^2 +1}, {x^5 });
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-0.85:0,samples=100,color=red,thick] ({x^2 +1 }, {x^5 });
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// line
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-6:6,samples=100,color=black,thick] ({-2}, {x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=0:0.5,samples=100,color=blue,thick] ({-2}, {x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-0.5:0,samples=100,color=blue,thick] ({-2}, {x});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// points on cubic
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label={[font= 
+\backslash
+scriptsize ]right:$(t^{2/3} , t)$}] (x) at (axis cs:1.75,0.5) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (x) at (axis cs:1,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (x) at (axis cs:1.75,-0.5) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// points on line
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label={[font= 
+\backslash
+scriptsize ]above right:$t$}] (x) at (axis cs:-2,0.5) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (x) at (axis cs:-2,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (x) at (axis cs:-2,-0.5) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The red square represents the open box neighborhood of 
+\begin_inset Formula $\mathfrak{n}$
+\end_inset
+
+ given by 
+\begin_inset Formula $\{\boldsymbol{x}\in\mathbb{R}^{2}\mid\|\boldsymbol{x}\|_{\infty}<t^{2/3}\}$
+\end_inset
+
+ (where 
+\begin_inset Formula $t<1$
+\end_inset
+
+) and the blue square represents the open box neighborhood of 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ given by 
+\begin_inset Formula $\{\boldsymbol{x}\in\mathbb{R}^{2}\mid\|\boldsymbol{x}\|_{\infty}<t\}$
+\end_inset
+
+.
+ Intuitively, we think of the ring homomorphism 
+\begin_inset Formula $\varphi\colon A\to B$
+\end_inset
+
+ as inducing a map 
+\begin_inset Formula $f\colon Y\to X$
+\end_inset
+
+ given by 
+\begin_inset Formula $f(\mathfrak{n})=\mathfrak{m}$
+\end_inset
+
+ where we set 
+\begin_inset Formula $Y=\mathrm{Spec}\,B=\{0,\mathfrak{n}\}$
+\end_inset
+
+ and 
+\begin_inset Formula $X=\mathrm{Spec}\,A=\{0,\mathfrak{m}\}$
+\end_inset
+
+.
+ The map 
+\begin_inset Formula $f\colon Y\to X$
+\end_inset
+
+ is thought of as a contraction map with contractibility factor being 
+\begin_inset Formula $3/2$
+\end_inset
+
+ (the red box whose side length is 
+\begin_inset Formula $2t^{2/3}$
+\end_inset
+
+ is contracted to the blue box whose side length is 
+\begin_inset Formula $2t$
+\end_inset
+
+).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Consider the case where 
+\begin_inset Formula $A=K[y]_{\langle y\rangle}$
+\end_inset
+
+ and 
+\begin_inset Formula $B=K[y,\boldsymbol{x}]_{\langle y,\boldsymbol{x}\rangle}$
+\end_inset
+
+ where 
+\begin_inset Formula $\boldsymbol{x}=(x_{1},x_{2},\dots,x_{n},\dots)$
+\end_inset
+
+.
+ Since
+\begin_inset Formula 
+\[
+A_{k}'=\varphi^{-1}(\mathfrak{n}^{k})=\mathfrak{m}^{k}=A_{k}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $\mathrm{S}_{B,A}=\boldsymbol{1}_{k}$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\mathrm{c}_{B,A}=1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Consider the case where 
+\begin_inset Formula $A=K[y]_{\langle y\rangle}$
+\end_inset
+
+ and 
+\begin_inset Formula $B=K[y,\boldsymbol{x}]_{\langle y,\boldsymbol{x}\rangle}\slash\langle y^{2}-x_{1}^{3},y^{2}-x_{2}^{4},\dots,y^{2}-x_{n}^{n+2},\dots\rangle$
+\end_inset
+
+.
+ Then observe that for each 
+\begin_inset Formula $n>2$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+A_{n}'=\varphi^{-1}(\mathfrak{n}^{n})=\mathfrak{m}^{2}=A_{2}
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $y^{2}=x_{n-2}^{n}$
+\end_inset
+
+ in 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ In particular, there does not exist an 
+\begin_inset Formula $m$
+\end_inset
+
+ such that 
+\begin_inset Formula $A_{m}'\subseteq\mathfrak{m}^{3}$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\mathrm{S}_{B,A}(k)=\infty$
+\end_inset
+
+ for 
+\begin_inset Formula $k\geq2$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\mathrm{c}_{B,A}=\infty$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Consider the case where 
+\begin_inset Formula $A=K[y]_{\langle y\rangle}$
+\end_inset
+
+ and 
+\begin_inset Formula $B=K[y,\boldsymbol{x}]_{\langle y,\boldsymbol{x}\rangle}\slash\langle y^{3}-x_{1}^{2},y^{4}-x_{2}^{2},\dots,y^{n+2}-x_{n}^{2},\dots\rangle$
+\end_inset
+
+.
+ Then observe that for each 
+\begin_inset Formula $n>2$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+A_{2}'=\varphi^{-1}(\mathfrak{n}^{2})\subseteq\mathfrak{m}^{n}=A_{n}
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $y^{n}=x_{n-2}^{2}$
+\end_inset
+
+ in 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ In particular, we have 
+\begin_inset Formula $\mathrm{S}_{B,A}(k)=2$
+\end_inset
+
+ for 
+\begin_inset Formula $k\geq2$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\mathrm{c}_{B,A}=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Questions
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Quotes eld
+\end_inset
+
+nice
+\begin_inset Quotes erd
+\end_inset
+
+ local ring homorphisms 
+\begin_inset Formula $A\to B$
+\end_inset
+
+, the following properties should hold:
+\end_layout
+
+\begin_layout Enumerate
+we have 
+\begin_inset Formula $\mathrm{c}_{B,A}\in\mathbb{Q}\cap[0,\infty]$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+if 
+\begin_inset Formula $B\to C$
+\end_inset
+
+ is another local ring homomorphism, then 
+\begin_inset Formula $\mathrm{c}_{C,B}\mathrm{c}_{B,A}\geq\mathrm{c}_{C,A}$
+\end_inset
+
+ (where equality holds when something nice happens).
+\end_layout
+
+\begin_layout Standard
+The question we ask now is, what are the 
+\begin_inset Quotes eld
+\end_inset
+
+nice
+\begin_inset Quotes erd
+\end_inset
+
+ local ring homomorphisms which give rise to those properties? For instance,
+ here's how property (1) could be proved: suppose there exists 
+\begin_inset Formula $k_{0}\in\mathbb{N}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\mathrm{c}_{B,A}:=\lim_{k\to\infty}\mathrm{S}_{B,A}(k)/k=\mathrm{S}_{B,A}(k_{0})/k_{0}.
+\]
+
+\end_inset
+
+Then clearly 
+\begin_inset Formula $\mathrm{c}_{B,A}\in\mathbb{Q}\cap[0,\infty]$
+\end_inset
+
+.
+ Next, suppose that
+\begin_inset Formula 
+\[
+\mathrm{c}_{C,A}=\frac{\mathrm{S}_{C,A}(k_{0})}{k_{0}}\quad\text{and}\quad\mathrm{c}_{B,A}=\frac{\mathrm{S}_{B,A}(k_{0})}{k_{0}}
+\]
+
+\end_inset
+
+Then if 
+\begin_inset Formula $A$
+\end_inset
+
+ is not Artinian, we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{c}_{C,B} & \geq\frac{\mathrm{S}_{C,A}(\mathrm{S}_{B,A}(k_{0}))}{\mathrm{S}_{B,A}(k_{0})}\\
+ & \geq\frac{\mathrm{S}_{C,A}(k_{0})}{\mathrm{S}_{B,A}(k_{0})}\\
+ & =\frac{\mathrm{c}_{C,A}}{\mathrm{c}_{B,A}},
+\end{align*}
+
+\end_inset
+
+so this gives us the inequality 
+\begin_inset Formula $\mathrm{c}_{C,B}\mathrm{c}_{B,A}\geq\mathrm{c}_{C,A}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_body
+\end_document

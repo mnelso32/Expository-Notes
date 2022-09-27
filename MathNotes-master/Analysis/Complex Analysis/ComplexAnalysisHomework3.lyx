@@ -1,0 +1,418 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Cohen-Macaulay Rings
+\end_layout
+
+\begin_layout Title
+Complex Analysis Homework 3
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $(2.6.7):$
+\end_inset
+
+ Let 
+\begin_inset Formula $0<r<1$
+\end_inset
+
+ and 
+\begin_inset Formula $C_{r}$
+\end_inset
+
+ be the circle of radius 
+\begin_inset Formula $r$
+\end_inset
+
+ around the origin.
+ By Cauchy's integral formula, we have 
+\begin_inset Formula 
+\begin{equation}
+f'(0)=\frac{1}{2\pi i}\int_{C_{r}}\frac{f(\zeta)}{\zeta^{2}}d\zeta.\label{eq:1}
+\end{equation}
+
+\end_inset
+
+Using a change of variables 
+\begin_inset Formula $\zeta\to-\zeta$
+\end_inset
+
+, we also have
+\begin_inset Formula 
+\begin{equation}
+f'(0)=\frac{-1}{2\pi i}\int_{C_{r}}\frac{f(-\zeta)}{\zeta^{2}}d\zeta.\label{eq:2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Adding 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:1})
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:2})
+\end_layout
+
+\end_inset
+
+ together and taking absolute values, we obtain
+\begin_inset Formula 
+\begin{align*}
+2|f'(0)| & =\left|\frac{1}{2\pi i}\int_{C_{r}}\frac{f(\zeta)-f(-\zeta)}{\zeta^{2}}d\zeta\right|\\
+ & =\frac{1}{2\pi}\left|\int_{C_{r}}\frac{f(\zeta)-f(-\zeta)}{\zeta^{2}}d\zeta\right|\\
+ & \leq\frac{1}{2\pi}\left(\sup_{\zeta\in C_{r}}\left|\frac{f(\zeta)-f(-\zeta)}{\zeta^{2}}\right|2\pi r\right).\\
+ & =r\sup_{\zeta\in C_{r}}\left|\frac{f(\zeta)-f(-\zeta)}{\zeta^{2}}\right|\\
+ & \leq\frac{1}{r}\sup_{\zeta\in C_{r}}\left(\left|f(\zeta)-f(-\zeta)\right|\right)\\
+ & \leq\frac{1}{r}\sup_{z,w\in\mathbb{D}}\left(\left|f(z)-f(w)\right|\right)\\
+ & =\frac{d}{r}.
+\end{align*}
+
+\end_inset
+
+Now we take the limit 
+\begin_inset Formula $r\to1$
+\end_inset
+
+ to obtain 
+\begin_inset Formula $2\left|f'(0)\right|\leq d.$
+\end_inset
+
+ If 
+\begin_inset Formula $f(z)=a_{0}+a_{1}z$
+\end_inset
+
+, then 
+\begin_inset Formula $f'(0)=a_{1}$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{align*}
+d & =\sup_{z,w\in\mathbb{D}}\left|f(z)-f(w)\right|\\
+ & =\sup_{z,w\in\mathbb{D}}\left|\left(a_{0}+a_{1}z\right)-\left(a_{0}+a_{1}w\right)\right|\\
+ & =a_{1}\sup_{z,w\in\mathbb{D}}\left|z-w\right|\\
+ & =2f'(0)
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $(2.6.8):$
+\end_inset
+
+ We break this problem into two cases.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 1
+\series default
+: 
+\begin_inset Formula $\eta>0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $0<r<1$
+\end_inset
+
+ and 
+\begin_inset Formula $C_{r}$
+\end_inset
+
+ be the circle of radius 
+\begin_inset Formula $r$
+\end_inset
+
+ centered at 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\left|f^{(n)}(x)\right| & \leq\frac{n!}{r^{n}}\sup_{z\in C_{r}}\left|f(z)\right|\\
+ & \leq\frac{n!}{r^{n}}A\sup_{z\in C_{r}}\left(1+\left|z\right|\right)^{\eta}\\
+ & =\frac{n!}{r^{n}}\sup_{t\in[0,1]}\left(1+\left|x+re^{2\pi it}\right|\right)^{\eta}\\
+ & \leq\frac{n!}{r^{n}}\sup_{t\in[0,1]}\left(1+\left|x\right|+\left|re^{2\pi it}\right|\right)^{\eta}\\
+ & =\frac{n!}{r^{n}}\left(1+\left|x\right|+r\right)^{\eta}\\
+ & \leq\frac{n!}{r^{n}}\left(\left(1+r\right)+\left(1+r\right)\left|x\right|\right)^{\eta}\\
+ & =\frac{n!}{r^{n}}A(1+r)^{\eta}\left(1+\left|x\right|\right)^{\eta}.
+\end{align*}
+
+\end_inset
+
+In this case, we set
+\begin_inset Formula 
+\[
+A_{n}=\frac{n!}{r^{n}}A(1+r)^{\eta}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 2
+\series default
+: 
+\begin_inset Formula $\eta<0$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $0<r<1$
+\end_inset
+
+ and let 
+\begin_inset Formula $C_{r}$
+\end_inset
+
+ be the circle of radius 
+\begin_inset Formula $r$
+\end_inset
+
+ centered at 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\left|f^{(n)}(x)\right| & \leq\frac{n!}{r^{n}}\sup_{z\in C_{r}}\left|f(z)\right|\\
+ & \leq\frac{n!}{r^{n}}A\sup_{z\in C_{r}}\left(1+\left|z\right|\right)^{\eta}\\
+ & \leq\frac{n!}{r^{n}}A\left(1+\left|x\right|-r\right)^{\eta}\\
+ & \leq\frac{n!}{r^{n}}A\left(\left(1-r\right)+\left(1-r\right)\left|x\right|\right)^{\eta}\\
+ & =\frac{n!}{r^{n}}\left(1-r\right)^{\eta}\left(1+\left|x\right|\right)^{\eta}.
+\end{align*}
+
+\end_inset
+
+In this case, we set
+\begin_inset Formula 
+\[
+A_{n}=\frac{n!}{r^{n}}A(1-r)^{\eta}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

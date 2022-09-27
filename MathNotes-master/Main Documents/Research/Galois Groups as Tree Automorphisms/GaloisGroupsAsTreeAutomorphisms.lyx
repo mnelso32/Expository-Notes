@@ -1,0 +1,1930 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Galois Groups as Tree Automorphisms
+\end_layout
+
+\begin_layout Section
+Definitions
+\end_layout
+
+\begin_layout Subsection
+Trees in a Ring
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring.
+ An 
+\begin_inset Formula $R$
+\end_inset
+
+-tree 
+\begin_inset Formula $\mathcal{R}=(\mathcal{R},f)$
+\end_inset
+
+ consists of a sequence 
+\begin_inset Formula $(\mathcal{R}_{n})_{n\geq0}$
+\end_inset
+
+ of subsets of 
+\begin_inset Formula $R$
+\end_inset
+
+ together with a sequence 
+\begin_inset Formula $(f_{n})_{n\geq1}$
+\end_inset
+
+ of polynomials in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ such that 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ restricts to a surjective map from 
+\begin_inset Formula $\mathcal{R}_{n}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathcal{R}_{n-1}$
+\end_inset
+
+ for each 
+\begin_inset Formula $n\geq1$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $\mathcal{R}$
+\end_inset
+
+ is 
+\series bold
+rooted 
+\series default
+if 
+\begin_inset Formula $\mathcal{R}_{0}=\{r\}$
+\end_inset
+
+ is a singleton set.
+ We say 
+\begin_inset Formula $\mathcal{R}$
+\end_inset
+
+ is 
+\series bold
+finite 
+\series default
+if each 
+\begin_inset Formula $\mathcal{R}_{n}$
+\end_inset
+
+ is a finite set.
+ We can picture a finite rooted 
+\begin_inset Formula $\mathcal{R}$
+\end_inset
+
+-tree as below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below:$r $] (r) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$r_1 $] (r1) at (-4,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$r_i $] (r2) at (0,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$r_k $] (r3) at (4,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (r1) edge[out=-90, in=160] node[below] {} (r);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (r2) edge[out=-90, in=90] node[below] {} (r);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (r3) edge[out=-90, in=20] node[below] {} (r);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$r_{11} $] (r11) at
+ (-5,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$r_{l1} $] (rl1) at
+ (-3,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$r_{1i} $] (r1i) at
+ (-1,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$r_{mi} $] (rmi) at
+ (1,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$r_{1k} $] (r1k) at
+ (3,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$r_{nk} $] (rnk) at
+ (5,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (r11) edge[out=-90, in=150] node[below] {} (r1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (rl1) edge[out=-90, in=30] node[below] {} (r1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (r1i) edge[out=-90, in=150] node[below] {} (r2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (rmi) edge[out=-90, in=30] node[below] {} (r2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (r1k) edge[out=-90, in=150] node[below] {} (r3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (rnk) edge[out=-90, in=30] node[below] {} (r3);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (R2) at (-8,6.3) {$
+\backslash
+mathcal{R}_2  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (R1) at (-8,3.3) {$
+\backslash
+mathcal{R}_1  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (R0) at (-8,0.3) {$
+\backslash
+mathcal{R}_0  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[-{Straight Barb[length=3pt,width=3pt]}] (R2) edge[out=-90, in=90] node[left
+] {$f_2 $} (R1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[-{Straight Barb[length=3pt,width=3pt]}] (R1) edge[out=-90, in=90] node[left
+] {$f_1 $} (R0);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a1) at (-2,3.3) {$
+\backslash
+cdots  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (2,3.3) {$
+\backslash
+cdots  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (-4,6.3) {$
+\backslash
+cdots  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (0,6.3) {$
+\backslash
+cdots  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (4,6.3) {$
+\backslash
+cdots  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (-8,7.5) {$
+\backslash
+vdots  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (-4,7.5) {$
+\backslash
+vdots  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (0,7.5) {$
+\backslash
+vdots  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (4,7.5) {$
+\backslash
+vdots  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Unless otherwise specified, we assume all 
+\begin_inset Formula $R$
+\end_inset
+
+-trees are finite and rooted.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{R}$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-tree and let 
+\begin_inset Formula $G$
+\end_inset
+
+ be a subgroup of 
+\begin_inset Formula $\mathrm{Aut}(R)$
+\end_inset
+
+, the group of all automorphisms of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $\mathcal{R}$
+\end_inset
+
+ is an 
+\begin_inset Formula $G$
+\end_inset
+
+
+\series bold
+-tree 
+\series default
+in 
+\begin_inset Formula $R$
+\end_inset
+
+ if
+\begin_inset Formula 
+\[
+\sigma f_{n}=f_{n}\sigma
+\]
+
+\end_inset
+
+for each 
+\begin_inset Formula $\sigma\in G$
+\end_inset
+
+ and for each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $(\mathcal{R}_{n},f_{n})$
+\end_inset
+
+ is a 
+\series bold
+transitive 
+\begin_inset Formula $G$
+\end_inset
+
+
+\series default
+-tree if the natural action of 
+\begin_inset Formula $G$
+\end_inset
+
+ on 
+\begin_inset Formula $R$
+\end_inset
+
+ restricts to a transitive action of 
+\begin_inset Formula $G$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathcal{R}_{n}$
+\end_inset
+
+ for each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Galois Trees
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremgaloistreeconstruction}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field, let 
+\begin_inset Formula $\overline{K}$
+\end_inset
+
+ be an algebraic closure of 
+\begin_inset Formula $K$
+\end_inset
+
+, and let 
+\begin_inset Formula $G=\mathrm{Gal}(\overline{K}\slash K)$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ be a sequence of polynomials in 
+\begin_inset Formula $K[X]$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+f_{[n]}:=f_{1}\circ f_{2}\circ\cdots\circ f_{n}
+\]
+
+\end_inset
+
+is separable and irreducible over 
+\begin_inset Formula $K$
+\end_inset
+
+ for each 
+\begin_inset Formula $n\geq1$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathcal{R}_{n}$
+\end_inset
+
+ be the set of roots of 
+\begin_inset Formula $f_{[n]}$
+\end_inset
+
+ in 
+\begin_inset Formula $\overline{K}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(\mathcal{R}_{n},f_{n})$
+\end_inset
+
+ is a transitive 
+\begin_inset Formula $G$
+\end_inset
+
+-tree in 
+\begin_inset Formula $\overline{K}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ denote the degree of 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+.
+ We need to show that 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ restricts to a 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+-to-
+\begin_inset Formula $1$
+\end_inset
+
+ map from 
+\begin_inset Formula $\mathcal{R}_{n}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathcal{R}_{n-1}$
+\end_inset
+
+.
+ To see that it does, let 
+\begin_inset Formula $\alpha\in\mathcal{R}_{n-1}$
+\end_inset
+
+ and note that 
+\begin_inset Formula $f_{n}-\alpha$
+\end_inset
+
+ is separable since 
+\begin_inset Formula $f_{n}-\alpha\mid f_{[n]}$
+\end_inset
+
+ and since 
+\begin_inset Formula $f_{[n]}$
+\end_inset
+
+ is separable.
+ In particular, there are 
+\begin_inset Formula $d_{n}$
+\end_inset
+
+ distinct 
+\begin_inset Formula $\beta$
+\end_inset
+
+'s in 
+\begin_inset Formula $\overline{K}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f_{n}(\beta)=\alpha$
+\end_inset
+
+; moreover each such 
+\begin_inset Formula $\beta$
+\end_inset
+
+ belongs to 
+\begin_inset Formula $\mathcal{R}_{n}$
+\end_inset
+
+ since
+\begin_inset Formula 
+\begin{align*}
+f_{[n]}(\beta) & =(f_{[n-1]}\circ f_{n})(\beta)\\
+ & =f_{[n-1]}(f_{n}(\beta))\\
+ & =f_{[n-1]}(\alpha)\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $(\mathcal{R}_{n},f_{n})$
+\end_inset
+
+ is a tree in 
+\begin_inset Formula $\overline{K}$
+\end_inset
+
+.
+ To see that it is a 
+\begin_inset Formula $G$
+\end_inset
+
+-tree, note that if 
+\begin_inset Formula $\sigma\in G$
+\end_inset
+
+, then 
+\begin_inset Formula $\sigma f_{n}=f_{n}\sigma$
+\end_inset
+
+ since 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ fixes the coefficients of 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+.
+ Also note that the action of 
+\begin_inset Formula $G$
+\end_inset
+
+ on 
+\begin_inset Formula $\overline{K}$
+\end_inset
+
+ restricts to a transitive action on 
+\begin_inset Formula $\mathcal{R}_{n}$
+\end_inset
+
+ since 
+\begin_inset Formula $f_{[n]}$
+\end_inset
+
+ is irreducible.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $p$
+\end_inset
+
+ be a prime and let 
+\begin_inset Formula $G$
+\end_inset
+
+ be the absolute Galois group of 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ be the 
+\begin_inset Formula $p$
+\end_inset
+
+th cyclotomic polynomial and let 
+\begin_inset Formula $f_{n}=X^{p}$
+\end_inset
+
+ for each 
+\begin_inset Formula $n\geq2$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $f_{[n]}$
+\end_inset
+
+ is the 
+\begin_inset Formula $p^{n}$
+\end_inset
+
+th cyclotomic polynomial.
+ In particular, each 
+\begin_inset Formula $f_{[n]}$
+\end_inset
+
+ is separable and irreducible over 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+.
+ Thus if we set 
+\begin_inset Formula $\mathcal{R}_{n}$
+\end_inset
+
+ to be the set of primitive 
+\begin_inset Formula $p^{n}$
+\end_inset
+
+th roots of unity in 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+, then 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremgaloistreeconstruction})
+\end_layout
+
+\end_inset
+
+ implies 
+\begin_inset Formula $(\mathcal{R}_{n},f_{n})$
+\end_inset
+
+ is a transitive 
+\begin_inset Formula $G$
+\end_inset
+
+-tree in 
+\begin_inset Formula $\overline{\mathbb{Q}}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Galois Trees coming from 
+\begin_inset Formula $p$
+\end_inset
+
+-Eisenstein Polynomials
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemmaeisentseinatq}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring and let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be a prime ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Suppose that 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ be monic 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+-Eistenstein polynomials in 
+\begin_inset Formula $R[X]$
+\end_inset
+
+ of degrees 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+ respectively.
+ If 
+\begin_inset Formula $m\geq2$
+\end_inset
+
+, then the composite 
+\begin_inset Formula $f\circ g$
+\end_inset
+
+ is a monic 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+-Eisenstein polynomial.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Write 
+\begin_inset Formula 
+\[
+f(X)=X^{m}+a_{m-1}X^{m-1}\cdots+a_{0}\quad\text{and}\quad g(X)=X^{n}+b_{n-1}X^{n-1}\cdots+b_{0}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $a_{i},b_{j}\in R$
+\end_inset
+
+ for each 
+\begin_inset Formula $0\leq i\leq m-1$
+\end_inset
+
+ and 
+\begin_inset Formula $0\leq j\leq n-1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ being 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+-Eisteinstein means 
+\begin_inset Formula $a_{i},b_{j}\in\mathfrak{p}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i,j$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{0},b_{0}\notin\mathfrak{p}^{2}$
+\end_inset
+
+.
+ The composite 
+\begin_inset Formula $f\circ g$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\begin{align*}
+(f\circ g)(X) & =f(g(X))\\
+ & =g(X)^{m}+\sum_{i=1}^{m-1}a_{i}g(X)^{i}\\
+ & =(X^{n}+b_{n-1}X^{n-1}\cdots+b_{0})^{m}+\sum_{i=1}^{m-1}a_{i}(X^{n}+b_{n-1}X^{n-1}\cdots+b_{0})^{i}+a_{0}\\
+ & \equiv X^{mn}+b_{0}^{m}+a_{m-1}b_{0}^{m-1}+\cdots+a_{0}\,\,\mathrm{mod}\,\mathfrak{p}^{2}\\
+ & \equiv X^{mn}+a_{0}\,\,\mathrm{mod}\,\mathfrak{p}^{2}
+\end{align*}
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $m\geq2$
+\end_inset
+
+ to obtain the last line.
+ Clearly we also have 
+\begin_inset Formula $f\circ g\equiv X^{mn}\,\,\mathrm{mod}\,\mathfrak{p}$
+\end_inset
+
+, and thus it follows that 
+\begin_inset Formula $f\circ g$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+-Eisenstein.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a number field, let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be a prime ideal of 
+\begin_inset Formula $\mathcal{O}_{K}$
+\end_inset
+
+, and let 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ be a sequence of monic 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+-Eistenstein polynomials in 
+\begin_inset Formula $\mathcal{O}_{K}[X]$
+\end_inset
+
+ such that 
+\begin_inset Formula $d_{n}\geq2$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ where 
+\begin_inset Formula $d_{n}=\deg f_{n}$
+\end_inset
+
+.
+ Then by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{lemmaeisentseinatq})
+\end_layout
+
+\end_inset
+
+, each 
+\begin_inset Formula $f_{[n]}$
+\end_inset
+
+ is a monic 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+-Eisenstein polynomial in 
+\begin_inset Formula $\mathcal{O}_{K}[X]$
+\end_inset
+
+.
+ In particular, each 
+\begin_inset Formula $f_{[n]}$
+\end_inset
+
+ is irreducible over 
+\begin_inset Formula $K$
+\end_inset
+
+; hence separable as well since 
+\begin_inset Formula $K$
+\end_inset
+
+ is perfect.
+ Setting 
+\begin_inset Formula $\mathcal{R}_{n}$
+\end_inset
+
+ to be the set of roots of 
+\begin_inset Formula $f_{[n]}$
+\end_inset
+
+ for each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, we see that 
+\begin_inset Formula $(\mathcal{R}_{n},f_{n})$
+\end_inset
+
+ is a 
+\begin_inset Formula $G$
+\end_inset
+
+-tree in 
+\begin_inset Formula $\overline{\mathbb{Q}}$
+\end_inset
+
+ by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremgaloistreeconstruction})
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Trees in a Variety
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $E$
+\end_inset
+
+ be the elliptic curve given by the Weierstrass equation
+\begin_inset Formula 
+\[
+E:y^{2}=x^{3}+x.
+\]
+
+\end_inset
+
+We set 
+\begin_inset Formula $T_{0}=\{\mathcal{O}\}$
+\end_inset
+
+ and for each 
+\begin_inset Formula $n\geq1$
+\end_inset
+
+ we set 
+\begin_inset Formula $T_{n}=E[2^{n}]\backslash T_{n-1}$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $f_{1}\colon E\to E$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+f_{1}[x:y:z]=[x(x^{2}+1):1:0]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{1}(\boldsymbol{x})=f_{1}(x,y)=
+\]
+
+\end_inset
+
+ We also 
+\begin_inset Formula $f_{0}=$
+\end_inset
+
+Define 
+\begin_inset Formula $f\colon E\to E$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\boldsymbol{f}(\boldsymbol{x})=\boldsymbol{f}(x,y)=\left(\frac{x^{4}-2x^{2}+1}{4y^{2}},\frac{x^{6}+5x^{4}-5x^{2}-1}{8y^{3}}\right)=2\boldsymbol{x}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f([x:y:1])=\left[\frac{x^{4}-2x^{2}+1}{4y^{2}}:\frac{x^{6}+5x^{4}-5x^{2}-1}{8y^{3}}:1\right]=\left[2y(x^{4}-2x^{2}+1):x^{6}+5x^{4}-5x^{2}-1:1\right]
+\]
+
+\end_inset
+
+Therefore
+\begin_inset Formula 
+\begin{align*}
+f([x:y:z]) & =f([x/z:y/z:1])\\
+ & =\left[2(y/z)((x/z)^{4}-2(x/z)^{2}+1):(x/z)^{6}+5(x/z)^{4}-5(x/z)^{2}-1:1\right]\\
+ & =\left[2yz(x^{4}z^{2}-2x^{2}z^{4}+z^{6}):x^{6}+5x^{4}z^{2}-5x^{2}z^{4}-z^{6}:z^{6}\right]\\
+ & =\left[2yz^{3}(x^{4}-2x^{2}z^{2}+z^{4}):x^{6}+5x^{4}z^{2}-5x^{2}z^{4}-z^{6}:z^{6}\right]
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $\boldsymbol{x}\in E$
+\end_inset
+
+.
+ We set 
+\begin_inset Formula $T_{0}=\{\mathcal{O}\}$
+\end_inset
+
+ and for each 
+\begin_inset Formula $n\geq1$
+\end_inset
+
+ we set 
+\begin_inset Formula $T_{n}=E[2^{n}]\backslash T_{n-1}$
+\end_inset
+
+.
+ Observe that 
+\begin_inset Formula 
+\[
+E[2]=\{\mathcal{O},(0,0),(-i,0),(i,0)\}
+\]
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Some Identities Involving Composition
+\end_layout
+
+\begin_layout Subsection
+Chain Rule
+\end_layout
+
+\begin_layout Standard
+Recall the chain rule says 
+\begin_inset Formula $(f\circ g)'=(f'\circ g)g'$
+\end_inset
+
+.
+ More generally, suppose 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ be a sequence of polynomials in 
+\begin_inset Formula $K[X]$
+\end_inset
+
+, and write
+\begin_inset Formula 
+\[
+f_{[n]}:=f_{n}\circ f_{n-1}\circ\cdots\circ f_{1}
+\]
+
+\end_inset
+
+for each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+f_{[n]}' & =(f_{n}\circ f_{[n-1]})'\\
+ & =(f_{n}'\circ f_{[n-1]})f_{[n-1]}'\\
+ & =(f_{n}'\circ f_{[n-1]})(f_{n-1}'\circ f_{[n-2]})f_{[n-2]}'\\
+ & \vdots\\
+ & =(f_{n}'\circ f_{[n-1]})(f_{n-1}'\circ f_{[n-2]})\cdots(f_{2}'\circ f_{1})f_{1}'
+\end{align*}
+
+\end_inset
+
+In particular, if 
+\begin_inset Formula $\deg f_{i}=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+, then 
+\begin_inset Formula $f_{[n]}'=\prod_{i=1}^{n}f_{i}'$
+\end_inset
+
+.
+ For instance, suppose 
+\begin_inset Formula $f_{1}=X+1$
+\end_inset
+
+, 
+\begin_inset Formula $f_{2}=2X+2$
+\end_inset
+
+, and 
+\begin_inset Formula $f_{3}=3X-1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+f_{[3]} & =f_{3}\circ f_{2}\circ f_{1}\\
+ & =3((2X+1)+2)-1\\
+ & =6X+6,
+\end{align*}
+
+\end_inset
+
+On the other hand, if at least two of the 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ have degree 
+\begin_inset Formula $>2$
+\end_inset
+
+, then this factorization tells us that 
+\begin_inset Formula $f_{[n]}'$
+\end_inset
+
+ is reducible.
+ Thus for example, suppose 
+\begin_inset Formula $f_{1}=X^{2}+2$
+\end_inset
+
+, 
+\begin_inset Formula $f_{2}=X^{3}-X+1$
+\end_inset
+
+, and 
+\begin_inset Formula $f_{3}=X-1$
+\end_inset
+
+.
+ Then we have 
+\begin_inset Formula 
+\begin{align*}
+f_{[3]} & =f_{3}\circ f_{2}\circ f_{1}\\
+ & =((X^{2}+2)^{3}-(X^{2}+2)+1)-1\\
+ & =X^{6}+6X^{4}+11X^{2}+6\\
+ & =(X-i)(X+i)(X-i\sqrt{2})(X+i\sqrt{2})(X-i\sqrt{3})(X+i\sqrt{3})
+\end{align*}
+
+\end_inset
+
+If one calculates this derivative in the usual way, one will find that it
+ equals
+\begin_inset Formula 
+\begin{align*}
+f_{[3]}' & =(f_{3}'\circ f_{[2]})(f_{2}'\circ f_{[1]})f_{1}'\\
+ & =((3X^{2}-1)\circ f_{1})2X\\
+ & =(3(X^{2}+2)^{2}-1)2X.
+\end{align*}
+
+\end_inset
+
+Thus if we ever need to cook up an example of a polynomial whose derivative
+ has many factors, then 
+\begin_inset Formula $f_{[n]}$
+\end_inset
+
+ is a good candidate to consider.
+ The factors of 
+\begin_inset Formula $f_{[n]}'$
+\end_inset
+
+ tell us where the critical points of 
+\begin_inset Formula $f_{[n]}$
+\end_inset
+
+ are; namely 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is a critical point of 
+\begin_inset Formula $f_{[n]}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $f_{i}'(f_{[i-1]}(\alpha))=0$
+\end_inset
+
+ for some 
+\begin_inset Formula $i$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $f_{[i-1]}(\alpha)$
+\end_inset
+
+ is a critical point of 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ for some 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Degree
+\end_layout
+
+\begin_layout Standard
+Another obvious identity:
+\begin_inset Formula 
+\begin{align*}
+\deg f_{[n]} & =\prod_{i=1}^{n}\deg f_{n}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Substitution
+\end_layout
+
+\begin_layout Standard
+Recall that the Fundamental Theorem of Calculus tells us that 
+\begin_inset Formula 
+\[
+\int_{0}^{1}f'\mathrm{d}t=f(1)-f(0).
+\]
+
+\end_inset
+
+In particular, we have 
+\begin_inset Formula $\int_{0}^{g}f\mathrm{d}t=f\circ g-f(0)$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $(\int_{0}^{g}f)'=(f\circ g)'=(f'\circ g)g'$
+\end_inset
+
+ and 
+\begin_inset Formula $ $
+\end_inset
+
+we can solve 
+\begin_inset Formula $\int(f\circ g)\mathrm{d}x$
+\end_inset
+
+ via 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution.
+ Namely, we set 
+\begin_inset Formula $u=g$
+\end_inset
+
+ (so 
+\begin_inset Formula $\mathrm{d}u=g'\mathrm{d}x=u'\mathrm{d}x$
+\end_inset
+
+), then this integral becomes 
+\begin_inset Formula $\int f(u)u'\mathrm{d}u=$
+\end_inset
+
+ 
+\end_layout
+
+\end_body
+\end_document

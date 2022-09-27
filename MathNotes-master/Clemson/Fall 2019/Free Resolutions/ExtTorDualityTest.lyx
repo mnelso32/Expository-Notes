@@ -1,0 +1,1455 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\tikzset{->-/.style={decoration={
+  markings,
+  mark=at position #1 with {\arrow{>}}},postaction={decorate}}}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Ext-Tor Duality
+\end_layout
+
+\begin_layout Section*
+Notation
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $n\in\mathbb{Z}_{>0}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\underline{r}=r_{1},\dots,r_{n}\in R$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Ordered Sets
+\end_layout
+
+\begin_layout Standard
+An 
+\series bold
+ordered set 
+\series default
+is a set with a total linear ordering on it.
+ The 
+\series bold
+ordered set 
+\series default
+
+\begin_inset Formula $[n]$
+\end_inset
+
+ is the set 
+\begin_inset Formula $\{1,\dots,n\}$
+\end_inset
+
+ equipped with the natural ordering 
+\begin_inset Formula $1<\cdots<n$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ be a subset of 
+\begin_inset Formula $\{1,\dots,n\}$
+\end_inset
+
+.
+ Then the natural ordering on 
+\begin_inset Formula $\{1,\dots,n\}$
+\end_inset
+
+ induces a natural ordering on 
+\begin_inset Formula $\sigma$
+\end_inset
+
+.
+ If we want to think of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ as a set equipped with this natural ordering, then we will write 
+\begin_inset Formula $[\sigma]$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\sigma=\{\lambda_{1},\dots,\lambda_{k}\}$
+\end_inset
+
+, where 
+\begin_inset Formula $1\leq\lambda_{1}<\cdots<\lambda_{k}\leq n$
+\end_inset
+
+, then we will also write 
+\begin_inset Formula $[\sigma]=[\lambda_{1},\dots,\lambda_{k}]$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+ such that 
+\begin_inset Formula $0\leq i\leq n$
+\end_inset
+
+, we denote
+\begin_inset Formula 
+\[
+S_{i}(n):=\{\sigma\subseteq\{1,\dots,n\}\mid\#\sigma=i\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Compliments
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ be a subset of 
+\begin_inset Formula $\{1,\dots,n\}$
+\end_inset
+
+.
+ We denote by 
+\begin_inset Formula $\sigma^{\star}$
+\end_inset
+
+ is compliment in 
+\begin_inset Formula $\{1,\dots,n\}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\sigma^{\star}:=\{1,\dots,n\}\backslash\sigma.
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $[\sigma]=[\lambda_{1},\dots,\lambda_{k}]$
+\end_inset
+
+, then we write 
+\begin_inset Formula $\sigma^{\star}=[\lambda_{1}^{\star},\dots,\lambda_{n-k}^{\star}]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Signature
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma'$
+\end_inset
+
+ be subsets of 
+\begin_inset Formula $\{1,\dots,n\}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sigma\cap\sigma'=\emptyset$
+\end_inset
+
+, and suppose that 
+\begin_inset Formula 
+\[
+[\sigma]=[\lambda_{1},\cdots,\lambda_{k}]\quad\text{and}\quad[\sigma']=[\lambda_{k+1},\cdots,\lambda_{k+m}].
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $1\leq\lambda_{1}<\cdots<\lambda_{k}\leq n$
+\end_inset
+
+ and 
+\begin_inset Formula $1\leq\lambda_{k+1}<\cdots<\lambda_{k+m}\leq n$
+\end_inset
+
+.
+ Then we'd have
+\begin_inset Formula 
+\[
+[\sigma\cup\sigma']=[\lambda_{\pi(1)},\dots,\lambda_{\pi(k+m)}],
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\pi\colon S_{k+m}\to S_{k+m}$
+\end_inset
+
+ is the permutation which puts everything in the correct order.
+ We denote
+\begin_inset Formula 
+\[
+\langle\sigma,\sigma'\rangle_{n}:=\text{sign}(\pi).
+\]
+
+\end_inset
+
+We write 
+\begin_inset Formula $n$
+\end_inset
+
+ in the subscript to remind ourselves that 
+\begin_inset Formula $\langle\sigma,\sigma'\rangle_{n}$
+\end_inset
+
+ depends on 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ However, to clean notation, we often drop the 
+\begin_inset Formula $n$
+\end_inset
+
+ from the subscript as long as the context is clear.
+ Here are some basic identities satisfied by the signature: Let 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ and 
+\begin_inset Formula $\tau$
+\end_inset
+
+ be distinct subsets of 
+\begin_inset Formula $\{1,\dots,n\}$
+\end_inset
+
+ with 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ nonempty.
+\end_layout
+
+\begin_layout Subsubsection*
+Properties of Signature
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ and 
+\begin_inset Formula $\tau$
+\end_inset
+
+ be distinct subsets of 
+\begin_inset Formula $\{1,\dots,n\}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sigma\cap\tau=\emptyset$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma\cup\tau\subset\{1,\dots,n\}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\lambda\in\{1,\dots,n\}\backslash\sigma\cup\tau$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\langle\lambda,\sigma\cup\tau\rangle & =\langle\lambda,\sigma\rangle\langle\lambda,\tau\rangle
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ and 
+\begin_inset Formula $\tau$
+\end_inset
+
+ be nonempty subsets of 
+\begin_inset Formula $[n]$
+\end_inset
+
+ and let 
+\begin_inset Formula $\lambda\in\sigma$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu\in\tau$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\langle\sigma,\tau\rangle=\langle\sigma\backslash\lambda,\tau\rangle\langle\lambda,\tau\rangle\quad\text{and}\quad\langle\sigma,\tau\rangle=\langle\sigma,\mu\rangle\langle\sigma,\tau\backslash\mu\rangle
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then for all 
+\begin_inset Formula $\lambda\in\sigma$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\langle\sigma,\tau\rangle & =\langle\lambda,\sigma\backslash\lambda\rangle\langle\sigma\backslash\lambda,\tau\rangle\langle\lambda,(\sigma\backslash\lambda)\cup\tau)\rangle\\
+ & =\langle\lambda,\sigma\backslash\lambda\rangle\langle\sigma\backslash\lambda,\tau\rangle\langle\lambda,\sigma\backslash\lambda\rangle\langle\lambda,\tau\rangle\\
+ & =\langle\sigma\backslash\lambda,\tau\rangle\langle\lambda,\tau\rangle
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Consider 
+\begin_inset Formula $n=4$
+\end_inset
+
+.
+ We perform some computations:
+\begin_inset Formula 
+\begin{align*}
+\langle\{2\},\{1,4\}\rangle & =-1\\
+\langle\{2\},\{3\}\rangle & =1\\
+\langle\{1,4\},\{2\}\rangle & =-1\\
+\langle\{2\},\{1,3,4\}\rangle & =-1\\
+\langle\{1,3,4\},\{2\}\rangle & =1\\
+\langle\{1,3\},\{2,4\}\rangle & =-1\\
+\langle\{2,4\},\{1,3\}\rangle & =-1
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\langle\sigma\cup\lambda^{\star},\sigma^{\star}\backslash\lambda^{\star}\rangle=\langle\sigma,\lambda^{\star}\rangle\langle\sigma,\sigma^{\star}\rangle
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\langle\lambda^{\star},\sigma\rangle\langle\sigma,\lambda^{\star}\rangle=\langle\lambda^{\star},\sigma^{\star}\backslash\lambda^{\star}\rangle
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Koszul Complex
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ The 
+\series bold
+Koszul complex 
+\series default
+of 
+\begin_inset Formula $\underline{r}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $(\mathcal{K}(\underline{r}),d^{\mathcal{K}(\underline{r})})$
+\end_inset
+
+ is the 
+\begin_inset Formula $R$
+\end_inset
+
+-complex whose graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $\mathcal{K}(\underline{r})$
+\end_inset
+
+ has
+\begin_inset Formula 
+\begin{align*}
+\mathcal{K}_{i}(\underline{r}) & :=\begin{cases}
+\bigoplus_{\sigma\in S_{i}(n)}Re_{\sigma} & \text{if }0\leq i\leq n\\
+0 & \text{if }i>n\text{ or if }i<0.
+\end{cases}
+\end{align*}
+
+\end_inset
+
+as its 
+\begin_inset Formula $i$
+\end_inset
+
+th homogeneous component, and whose differential 
+\begin_inset Formula $d^{\mathcal{K}(\underline{r})}$
+\end_inset
+
+ is uniquely determined by
+\begin_inset Formula 
+\[
+d^{\mathcal{K}(\underline{r})}(e_{\sigma})=\sum_{\lambda\in\sigma}\langle\lambda,\sigma\backslash\lambda\rangle r_{\lambda}e_{\sigma\backslash\lambda}
+\]
+
+\end_inset
+
+for all nonempty 
+\begin_inset Formula $\sigma\subseteq\{1,\dots,n\}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ We need to justify that 
+\begin_inset Formula $d^{\mathcal{K}(\underline{r})}d^{\mathcal{K}(\underline{r})}=0$
+\end_inset
+
+ (so that 
+\begin_inset Formula $(\mathcal{K}(\underline{r}),d^{\mathcal{K}(\underline{r})})$
+\end_inset
+
+ really is an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex).
+ It suffices to show that 
+\begin_inset Formula $d^{\mathcal{K}(\underline{r})}d^{\mathcal{K}(\underline{r})}$
+\end_inset
+
+ maps all of the basis elements to 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Clearly 
+\begin_inset Formula $d^{\mathcal{K}(\underline{r})}(e_{\emptyset})=0$
+\end_inset
+
+.
+ For all nonempty 
+\begin_inset Formula $\sigma\subseteq\{1,\dots,n\}$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\begin{align*}
+d^{\mathcal{K}(\underline{r})}d^{\mathcal{K}(\underline{r})}(e_{\sigma}) & =d^{\mathcal{K}(\underline{r})}\sum_{\lambda\in\sigma}\langle\lambda,\sigma\backslash\lambda\rangle r_{\lambda}e_{\sigma\backslash\lambda}\\
+ & =\sum_{\lambda\in\sigma}\langle\lambda,\sigma\backslash\lambda\rangle r_{\lambda}d^{\mathcal{K}(\underline{r})}(e_{\sigma\backslash\lambda})\\
+ & =\sum_{\substack{\lambda,\mu\in\sigma\\
+\lambda\neq\mu
+}
+}\langle\lambda,\sigma\backslash\lambda\rangle\langle\mu,\sigma\backslash\{\lambda,\mu\}\rangle r_{\lambda}r_{\mu}e_{\sigma\backslash\{\lambda,\mu\}}\\
+ & =0,
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the last equality follows since 
+\begin_inset Formula 
+\[
+\langle\lambda,\sigma\backslash\lambda\rangle\langle\mu,\sigma\backslash\{\lambda,\mu\}\rangle=-\langle\mu,\sigma\backslash\mu\rangle\langle\lambda,\sigma\backslash\{\mu,\lambda\}\rangle
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for all 
+\begin_inset Formula $\lambda,\mu\in\sigma$
+\end_inset
+
+ such that 
+\begin_inset Formula $\lambda\neq\mu$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Dual Coszul Complex
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ The 
+\series bold
+dual Koszul complex 
+\series default
+on 
+\begin_inset Formula $\underline{r}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $(\mathcal{K}^{\star}(\underline{r}),d^{\mathcal{K}^{\star}(\underline{r})})$
+\end_inset
+
+, is the 
+\begin_inset Formula $R$
+\end_inset
+
+-complex whose graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $\mathcal{K}^{\star}(\underline{r})$
+\end_inset
+
+ has
+\begin_inset Formula 
+\begin{align*}
+\mathcal{K}_{i}^{\star}(\underline{r}) & :=\begin{cases}
+\bigoplus_{\sigma\in S_{-i}(n)}Re_{\sigma}^{\star} & \text{if }-n\leq i\leq0\\
+0 & \text{if }i<n\text{ or if }i>0.
+\end{cases}
+\end{align*}
+
+\end_inset
+
+as its 
+\begin_inset Formula $i$
+\end_inset
+
+th homogeneous component, where 
+\begin_inset Formula $e_{\sigma}^{\star}\colon\mathcal{K}(\underline{r})\to R$
+\end_inset
+
+ is uniquely determined by 
+\begin_inset Formula 
+\[
+e_{\sigma}^{\star}(e_{\sigma'})=\begin{cases}
+1 & \sigma=\sigma'\\
+0 & \text{else}.
+\end{cases}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\sigma,\sigma'\subseteq\{1,\dots,n\}$
+\end_inset
+
+.
+ The differential 
+\begin_inset Formula $d^{\mathcal{K}^{\star}(\underline{r})}$
+\end_inset
+
+ is uniquely determined by
+\begin_inset Formula 
+\[
+d^{\mathcal{K}^{\star}(\underline{r})}(e_{\sigma}^{\star})=(-1)^{\#\sigma-1}\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle r_{\lambda}e_{\sigma\cup\lambda^{\star}}^{\star}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\sigma\subset\{1,\dots,n\}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Shifting an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex and let 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset
+
+.
+ We define the 
+\begin_inset Formula $k$
+\end_inset
+
+th 
+\series bold
+unsigned shift 
+\series default
+of 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ to be the 
+\begin_inset Formula $R$
+\end_inset
+
+-complex
+\begin_inset Formula 
+\[
+S^{k}(A,d)=(S^{k}A,d^{S^{k}A}).
+\]
+
+\end_inset
+
+whose graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $S^{k}A$
+\end_inset
+
+ has
+\begin_inset Formula 
+\[
+(S^{k}A)_{i}=A_{i-k}
+\]
+
+\end_inset
+
+as its 
+\begin_inset Formula $i$
+\end_inset
+
+th homogeneous component and whose differential 
+\begin_inset Formula $d^{S^{k}A}$
+\end_inset
+
+ is simply 
+\begin_inset Formula $d^{S^{k}A}=d$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Duality
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremduality}
+\end_layout
+
+\end_inset
+
+ There exists an isomorphism of 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes
+\begin_inset Formula 
+\[
+S^{n}(\mathcal{K}^{\star}(\underline{r}),d^{\mathcal{K}^{\star}(\underline{r})})\cong(\mathcal{K}(\underline{r}),d^{\mathcal{K}(\underline{r})}).
+\]
+
+\end_inset
+
+In particular, we have an isomorphism of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules
+\begin_inset Formula 
+\[
+H_{i}(\mathcal{K}(\underline{r}))\cong H_{i-n}(\mathcal{K}^{\star}(\underline{r}))
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $i>n$
+\end_inset
+
+ or 
+\begin_inset Formula $i<0$
+\end_inset
+
+, then theorem is obvious, so we may assume that 
+\begin_inset Formula $0\leq i\leq n$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\varphi\colon S^{n}(\mathcal{K}^{\star}(\underline{r}),d^{\mathcal{K}^{\star}(\underline{r})})\to(\mathcal{K}(\underline{r}),d^{\mathcal{K}(\underline{r})})$
+\end_inset
+
+ be the unique 
+\begin_inset Formula $R$
+\end_inset
+
+-module graded homomorphism such that
+\begin_inset Formula 
+\[
+\varphi(e_{\sigma}^{\star})=\langle\sigma^{\star},\sigma\rangle e_{\sigma^{\star}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for all 
+\begin_inset Formula $1\leq\lambda_{1}<\cdots<\lambda_{i}\leq n$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is an isomorphism of graded 
+\begin_inset Formula $R$
+\end_inset
+
+-modules since it restricts to a bijection of basis sets.
+ To see that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is an isomorphism of 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes, we need to show that it commutes with the differentials.
+ To do this, we first simplify notation by denoting 
+\begin_inset Formula $d^{\star}:=(d^{\mathcal{K}^{\star}(\underline{r})})^{\Sigma^{n}}$
+\end_inset
+
+ and 
+\begin_inset Formula $d:=d^{\mathcal{K}(\underline{r})}$
+\end_inset
+
+.
+ Now we have
+\begin_inset Formula 
+\begin{align*}
+d\varphi(e_{\sigma}^{\star}) & =d(\langle\sigma^{\star},\sigma\rangle e_{\sigma^{\star}})\\
+ & =\langle\sigma^{\star},\sigma\rangle d(e_{\sigma^{\star}})\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\sigma^{\star},\sigma\rangle\langle\lambda^{\star},\sigma^{\star}\backslash\lambda^{\star}\rangle r_{\lambda^{\star}}e_{\sigma^{\star}\backslash\lambda^{\star}}\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma^{\star}\backslash\lambda^{\star}\rangle\langle\sigma^{\star},\sigma\rangle r_{\lambda^{\star}}e_{\sigma^{\star}\backslash\lambda^{\star}}\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma^{\star}\backslash\lambda^{\star}\rangle\langle\sigma^{\star}\backslash\lambda^{\star},\sigma\rangle\langle\lambda^{\star},\sigma\rangle r_{\lambda^{\star}}e_{\sigma^{\star}\backslash\lambda^{\star}}\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\sigma^{\star}\backslash\lambda^{\star},\sigma\cup\lambda^{\star}\rangle\langle\lambda^{\star},\sigma\rangle r_{\lambda^{\star}}e_{\sigma^{\star}\backslash\lambda^{\star}}\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle\langle\sigma^{\star}\backslash\lambda^{\star},\sigma\cup\lambda^{\star}\rangle r_{\lambda^{\star}}e_{\sigma^{\star}\backslash\lambda^{\star}}\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle\langle(\sigma\cup\lambda^{\star})^{\star},\sigma\cup\lambda^{\star}\rangle r_{\lambda^{\star}}e_{(\sigma\cup\lambda^{\star})^{\star}}\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle r_{\lambda^{\star}}\varphi(e_{\sigma\cup\lambda^{\star}}^{\star})\\
+ & =\varphi\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle r_{\lambda^{\star}}e_{\sigma\cup\lambda^{\star}}^{\star}\\
+ & =\varphi d^{\star}(e_{\sigma}^{\star})
+\end{align*}
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $\sigma^{\star}\backslash\lambda^{\star}=(\sigma\cup\lambda^{\star})^{\star}$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle\sigma^{\star},\sigma\rangle=\langle\lambda^{\star},\sigma^{\star}\backslash\lambda^{\star}\rangle\langle\lambda^{\star},\sigma\rangle\langle\sigma^{\star}\backslash\lambda^{\star},\sigma\cup\lambda^{\star}\rangle$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\langle\sigma^{\star},\sigma\rangle=\langle\lambda^{\star},\sigma^{\star}\backslash\lambda^{\star}\rangle\langle\sigma^{\star}\backslash\lambda^{\star},\sigma\rangle
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\langle\sigma^{\star}\backslash\lambda^{\star},\sigma\rangle=\langle\lambda^{\star},\sigma\rangle\langle\sigma^{\star}\backslash\lambda^{\star},\sigma\cup\lambda\rangle
+\]
+
+\end_inset
+
+We have 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ and 
+\begin_inset Formula $\tau$
+\end_inset
+
+ be distinct subsets of 
+\begin_inset Formula $\{1,\dots,n\}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sigma\cap\tau=\emptyset$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma\cup\tau\subset\{1,\dots,n\}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\lambda\in\{1,\dots,n\}\backslash\sigma\cup\tau$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\langle\lambda,\sigma\cup\tau\rangle & =\langle\lambda,\sigma\rangle\langle\lambda,\tau\rangle
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then for all 
+\begin_inset Formula $\lambda\in\sigma$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu\in\tau$
+\end_inset
+
+, we have 
+\begin_inset Formula $\langle\sigma,\tau\rangle=\langle\sigma\backslash\lambda,\tau\rangle\langle\lambda,\tau\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle\sigma,\tau\rangle=\langle\sigma,\mu\rangle\langle\sigma,\tau\backslash\mu\rangle$
+\end_inset
+
+.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\langle\sigma^{\star},\sigma\rangle & =\langle\sigma^{\star}\backslash\lambda^{\star},\sigma\rangle\langle\lambda^{\star},\sigma\rangle
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\langle\sigma^{\star},\sigma\rangle=\langle\lambda^{\star},\sigma^{\star}\backslash\lambda^{\star}\rangle\langle\lambda^{\star},\sigma\rangle\langle\sigma^{\star}\backslash\lambda^{\star},\sigma\cup\lambda^{\star}\rangle
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Attempt 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+d\varphi(e_{\sigma}^{\star}) & =\langle\sigma^{\star},\sigma\rangle d(e_{\sigma^{\star}})\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\sigma^{\star},\sigma\rangle\langle\lambda^{\star},\sigma^{\star}\backslash\lambda^{\star}\rangle r_{\lambda^{\star}}e_{\sigma^{\star}\backslash\lambda^{\star}}\\
+ & =\\
+ & =\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\sigma^{\star},\sigma\rangle\langle\sigma^{\star}\backslash\lambda^{\star},\lambda^{\star}\rangle r_{\lambda^{\star}}e_{\sigma^{\star}\backslash\lambda^{\star}}\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\sigma^{\star}\backslash\lambda^{\star},\sigma\rangle\langle\lambda^{\star},\sigma\rangle\langle\sigma^{\star}\backslash\lambda^{\star},\lambda^{\star}\rangle r_{\lambda^{\star}}e_{\sigma^{\star}\backslash\lambda^{\star}}\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle\langle\sigma^{\star}\backslash\lambda^{\star},\sigma\rangle\langle\sigma^{\star}\backslash\lambda^{\star},\lambda^{\star}\rangle r_{\lambda^{\star}}e_{\sigma^{\star}\backslash\lambda^{\star}}\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle\langle\sigma^{\star}\backslash\lambda^{\star},\sigma\cup\lambda^{\star}\rangle r_{\lambda^{\star}}e_{\sigma^{\star}\backslash\lambda^{\star}}\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle\langle(\sigma\cup\lambda^{\star})^{\star},\sigma\cup\lambda^{\star}\rangle r_{\lambda^{\star}}e_{(\sigma\cup\lambda^{\star})^{\star}}\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle r_{\lambda^{\star}}\varphi(e_{\sigma\cup\lambda^{\star}}^{\star})\\
+ & =\varphi d^{\star}(e_{\sigma}^{\star})
+\end{align*}
+
+\end_inset
+
+Is 
+\begin_inset Formula 
+\[
+\langle\lambda,\sigma\backslash\lambda\rangle=\langle\sigma\backslash\lambda,\lambda\rangle
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\{\langle3,\{1,4,5\}\rangle\neq
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+e_{24}\mapsto r_{2}e_{4}-r_{4}e_{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\lambda\in[n]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+d
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Define 
+\begin_inset Formula $h\colon\mathcal{K}(\mathbf{x})\to\mathcal{K}(\mathbf{x})$
+\end_inset
+
+ by 
+\begin_inset Formula 
+\[
+h(e_{\sigma})=\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle x_{\lambda^{\star}}e_{\sigma\cup\lambda^{\star}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+d(e_{\sigma})=\sum_{\lambda\in\sigma}\langle\lambda,\sigma\backslash\lambda\rangle x_{\lambda}e_{\sigma\backslash\lambda}
+\]
+
+\end_inset
+
+Then on the one hand, we have
+\begin_inset Formula 
+\begin{align*}
+hd(e_{\sigma}) & =\sum_{\lambda\in\sigma}\langle\lambda,\sigma\backslash\lambda\rangle x_{\lambda}h(e_{\sigma\backslash\lambda})\\
+ & =\sum_{\lambda\in\sigma}\langle\lambda,\sigma\backslash\lambda\rangle x_{\lambda}\left(\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\backslash\lambda\rangle x_{\lambda^{\star}}e_{(\sigma\backslash\lambda)\cup\lambda^{\star}}+\langle\lambda,\sigma\backslash\lambda\rangle x_{\lambda}e_{\sigma}\right)\\
+ & =\sum_{\substack{\lambda\in\sigma\\
+\lambda^{\star}\in\sigma^{\star}
+}
+}\langle\lambda,\sigma\backslash\lambda\rangle\langle\lambda^{\star},\sigma\backslash\lambda\rangle x_{\lambda}x_{\lambda^{\star}}e_{(\sigma\backslash\lambda)\cup\lambda^{\star}}+x_{\lambda}^{2}e_{\sigma}
+\end{align*}
+
+\end_inset
+
+On the other hand, we have
+\begin_inset Formula 
+\begin{align*}
+dh(e_{\sigma}) & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle x_{\lambda^{\star}}d(e_{\sigma\cup\lambda^{\star}})\\
+ & =\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle x_{\lambda^{\star}}\left(\sum_{\lambda\in\sigma}\langle\lambda,(\sigma\backslash\lambda)\cup\lambda^{\star}\rangle x_{\lambda}e_{(\sigma\backslash\lambda)\cup\lambda^{\star}}+\langle\lambda^{\star},\sigma\rangle x_{\lambda^{\star}}e_{\sigma}\right)\\
+ & =\sum_{\substack{\lambda\in\sigma\\
+\lambda^{\star}\in\sigma^{\star}
+}
+}\langle\lambda^{\star},\sigma\rangle\langle\lambda,\sigma\backslash\lambda\rangle\langle\lambda,\lambda^{\star}\rangle x_{\lambda^{\star}}x_{\lambda}e_{(\sigma\backslash\lambda)\cup\lambda^{\star}}+x_{\lambda^{\star}}^{2}e_{\sigma}.\\
+ & =\sum_{\substack{\lambda\in\sigma\\
+\lambda^{\star}\in\sigma^{\star}
+}
+}-\langle\lambda,\sigma\backslash\lambda\rangle\langle\lambda^{\star},\sigma\backslash\lambda\rangle x_{\lambda^{\star}}x_{\lambda}e_{(\sigma\backslash\lambda)\cup\lambda^{\star}}+x_{\lambda^{\star}}^{2}e_{\sigma}.
+\end{align*}
+
+\end_inset
+
+Thus we see that 
+\begin_inset Formula 
+\[
+(hd+dh)(e_{\sigma})=\sum_{\lambda\in[n]}x_{\lambda}^{2}e_{\sigma}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We havex
+\begin_inset Formula 
+\[
+d^{\mathcal{K}(\underline{r})}(e_{\sigma})=\sum_{\lambda\in\sigma}\langle\lambda,\sigma\backslash\lambda\rangle r_{\lambda}e_{\sigma\backslash\lambda}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and 
+\begin_inset Formula $d^{\mathcal{K}^{\star}(\underline{r})}(e_{\sigma}^{\star})$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sum_{\lambda^{\star}\in\sigma^{\star}}\langle\lambda^{\star},\sigma\rangle r_{\lambda}e_{\sigma\cup\lambda^{\star}}^{\star}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,2443 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Scientific Computing Homework 7
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ You are given the quadrature formula
+\begin_inset Formula 
+\[
+Q_{*}(f,a,b)=\left(\frac{b-a}{2}\right)f\left(\frac{3}{4}a+\frac{1}{4}b\right)+\left(\frac{b-a}{2}\right)f\left(\frac{1}{4}a+\frac{3}{4}b\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $a\neq b$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Determine to what degree 
+\begin_inset Formula $m$
+\end_inset
+
+ this formula integrates polynomials exactly.
+\end_layout
+
+\begin_layout Enumerate
+Compute the approximation of
+\begin_inset Formula 
+\[
+\int_{0}^{1}\frac{1}{\sqrt{x}}\mathrm{d}x
+\]
+
+\end_inset
+
+using 
+\begin_inset Formula $Q_{*}$
+\end_inset
+
+ as given above (simplify your result, it may contain expressions like 
+\begin_inset Formula $\sqrt{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sqrt{3}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Enumerate
+How does the quadrature 
+\begin_inset Formula $Q_{*}$
+\end_inset
+
+ compare to Newton-Cotes and Gauss rules? Which one of the three would you
+ use in practice?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ We claim that 
+\begin_inset Formula $Q_{*}$
+\end_inset
+
+ is of degree 
+\begin_inset Formula $2$
+\end_inset
+
+, meaning it integrates polynomials of degree 
+\begin_inset Formula $\leq1$
+\end_inset
+
+ exactly but that there exists a polynomial of degree 
+\begin_inset Formula $2$
+\end_inset
+
+ for which it does not integrate exactly.
+ Indeed, first note that 
+\begin_inset Formula $Q_{*}$
+\end_inset
+
+ integrates the constant function 
+\begin_inset Formula $1$
+\end_inset
+
+ exactly:
+\begin_inset Formula 
+\begin{align*}
+Q_{*}(1,a,b) & =\left(\frac{b-a}{2}\right)\cdot1+\left(\frac{b-a}{2}\right)\cdot1\\
+ & =b-a\\
+ & =\int_{a}^{b}\mathrm{d}x.
+\end{align*}
+
+\end_inset
+
+Next note that 
+\begin_inset Formula $Q_{*}$
+\end_inset
+
+ integrates the function 
+\begin_inset Formula $x$
+\end_inset
+
+ exactly:
+\begin_inset Formula 
+\begin{align*}
+Q_{*}(x,a,b) & =\left(\frac{b-a}{2}\right)\left(\frac{3}{4}a+\frac{1}{4}b\right)+\left(\frac{b-a}{2}\right)\left(\frac{1}{4}a+\frac{3}{4}b\right)\\
+ & =\left(\frac{b-a}{2}\right)\left(\frac{3}{4}a+\frac{1}{4}b+\frac{1}{4}a+\frac{3}{4}b\right)\\
+ & =\left(\frac{b-a}{2}\right)(b+a)\\
+ & =\frac{b^{2}-a^{2}}{2}\\
+ & =\int_{a}^{b}x\mathrm{d}x.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $Q_{*}$
+\end_inset
+
+ integrates all polynomials of degree 
+\begin_inset Formula $\leq1$
+\end_inset
+
+ exactly since 
+\begin_inset Formula $Q_{*}$
+\end_inset
+
+ is linear in the first argument:
+\begin_inset Formula 
+\begin{align*}
+Q_{*}(c_{0}+c_{1}x,a,b) & =c_{0}Q_{*}(1,a,b)+c_{1}Q_{*}(x,a,b)\\
+ & =c_{0}\int_{a}^{b}\mathrm{d}x+\int_{a}^{b}x\mathrm{d}x\\
+ & =\int_{a}^{b}(c_{0}+c_{1}x)\mathrm{d}x.
+\end{align*}
+
+\end_inset
+
+Now let us see that there exists a polynomial of degree 
+\begin_inset Formula $2$
+\end_inset
+
+ for which it does not integrate exactly.
+ Set 
+\begin_inset Formula $x_{1}=(3/4)a+(1/4)b$
+\end_inset
+
+, set 
+\begin_inset Formula $x_{2}=(1/4)a+(3/4)b$
+\end_inset
+
+, set 
+\begin_inset Formula $w=(b-a)/2$
+\end_inset
+
+, and consider the polynomial 
+\begin_inset Formula $p(x)=3(x-x_{1})^{2}$
+\end_inset
+
+.
+ Then observe that on the one hand, we have
+\begin_inset Formula 
+\begin{align*}
+Q_{*}(p,a,b) & =wp(x_{1})+wp(x_{2})\\
+ & =wp(x_{2})\\
+ & =3w(x_{2}-x_{1})^{2}\\
+ & =3w\left(\frac{b-a}{2}\right)^{2}\\
+ & =3\left(\frac{b-a}{2}\right)^{3}\\
+ & =\frac{3}{8}(b-a)^{3}.
+\end{align*}
+
+\end_inset
+
+On the other hand, observe that
+\begin_inset Formula 
+\begin{align*}
+\int_{a}^{b}p(x)\mathrm{d}x & =\int_{a}^{b}3(x-x_{1})^{2}\mathrm{d}x\\
+ & =\int_{a-x_{1}}^{b-x_{1}}3u^{2}\mathrm{d}u\\
+ & =u^{3}\Big|_{a-x_{1}}^{b-x_{1}}\\
+ & =(b-x_{1})^{3}-(a-x_{1})^{3}\\
+ & =\left(\frac{3(b-a)}{4}\right)^{3}-\left(\frac{a-b}{4}\right)^{3}\\
+ & =\left(\frac{3^{3}+1}{4^{3}}\right)(b-a)^{3}\\
+ & =\frac{7}{16}(b-a)^{3}.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $3/8\neq7/16$
+\end_inset
+
+, we see that 
+\begin_inset Formula $Q_{*}(p,a,b)\neq\int_{a}^{b}p(x)\mathrm{d}x$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $Q_{*}$
+\end_inset
+
+ does not integrate the degree 
+\begin_inset Formula $2$
+\end_inset
+
+ polynomial 
+\begin_inset Formula $p$
+\end_inset
+
+ exactly; hence 
+\begin_inset Formula $Q_{*}$
+\end_inset
+
+ has degree 
+\begin_inset Formula $1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ We calculate
+\begin_inset Formula 
+\begin{align*}
+Q_{*}(x^{-1/2},0,1) & =\frac{1}{2}\left(\frac{1}{4}\right)^{-1/2}+\frac{1}{2}\left(\frac{3}{4}\right)^{-1/2}\\
+ & =\frac{1}{2}\cdot2+\frac{1}{2}\cdot\frac{2}{\sqrt{3}}\\
+ & =1+\frac{1}{\sqrt{3}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+3.
+ The 
+\begin_inset Formula $2$
+\end_inset
+
+-point Newton Cotes quadrature rule is also known at the 
+\series bold
+trapezoid rule
+\series default
+.
+ It is given by
+\begin_inset Formula 
+\[
+T(f,a,b)=\frac{b-a}{2}(f(a)+f(b))
+\]
+
+\end_inset
+
+and it is of degree 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ This rule cannot be used to approximate the integral of 
+\begin_inset Formula $x^{-1/2}$
+\end_inset
+
+ from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $1$
+\end_inset
+
+ however.
+ The 
+\begin_inset Formula $1$
+\end_inset
+
+-point Newton Cotes quadrature rule is also known as the 
+\series bold
+midpoint rule
+\series default
+.
+ It is given by
+\begin_inset Formula 
+\[
+M(f,a,b)=(b-a)f\left(\frac{a+b}{2}\right)
+\]
+
+\end_inset
+
+and it is also of degree 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ We can use this rule to approximate the integral of 
+\begin_inset Formula $x^{-1/2}$
+\end_inset
+
+ from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $1$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+M(x^{-1/2},0,1) & =(1-0)\left(\frac{0+1}{2}\right)^{-1/2}\\
+ & =1\cdot\left(\frac{1}{2}\right)^{-1/2}\\
+ & =\sqrt{2}.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\int_{0}^{1}x^{-1/2}\mathrm{d}x=2$
+\end_inset
+
+, we see that 
+\begin_inset Formula $Q_{*}$
+\end_inset
+
+ gives a better approximation of this integral than 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Finally, in Gaussian quadrature, both nodes and weights are optimally chosen
+ to maximize the degree of the quadrature rule.
+ In particular, there is a unique 
+\begin_inset Formula $2$
+\end_inset
+
+-point Gaussian rule of degree 
+\begin_inset Formula $3$
+\end_inset
+
+.
+ In practice, we would want to use this rule since it gives the best approximati
+on.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ We consider the following time stepping methods for an initial value problem
+ 
+\begin_inset Formula $y'=f(t,y)$
+\end_inset
+
+ with time step size 
+\begin_inset Formula $h=t_{k+1}-t_{k}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+Method A:
+\begin_inset Formula 
+\[
+y_{k+1}=y_{k}+hf\left(t_{k}+\frac{h}{2},\frac{y_{k}+y_{k+1}}{2}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Method B: 
+\begin_inset Formula 
+\[
+y_{k+1}=y_{k}+hf\left(t_{k}+\frac{h}{2},y_{k}+\frac{h}{2}f(t_{k},y_{k})\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Determine the stability regions for the methods above using the test equation
+ 
+\begin_inset Formula $y'=\lambda y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Implement both methods with the signature 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+function y=methodA(func,t,y1)
+\end_layout
+
+\end_inset
+
+ (like forward/backward Euler in class).
+\end_layout
+
+\begin_layout Enumerate
+Using the problem
+\begin_inset Formula 
+\[
+y'(t)=10\cos t-2y(t)
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $y(0)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $0\leq t\leq1$
+\end_inset
+
+ solve the ODE using forward Euler, method A, and method B for different
+ number of time steps 
+\begin_inset Formula $n=2^{4},2^{5},\dots,2^{9}$
+\end_inset
+
+ and compute the error to the reference solution.
+ The error is defined as
+\begin_inset Formula 
+\[
+\max_{1\leq k\leq n}|y_{\mathrm{ref}}(t_{k})-y_{k}|
+\]
+
+\end_inset
+
+if 
+\begin_inset Formula $y_{\mathrm{ref}}(t_{k})$
+\end_inset
+
+ is the exact solution at time 
+\begin_inset Formula $t_{k}$
+\end_inset
+
+.
+ Output a table for each of the three methods with three columns each: time
+ step size, corresponding error, and error rate.
+ Note that the exact solution to this ODE is given by 
+\begin_inset Formula 
+\[
+y(t)=-3e^{-2t}+2\sin t+4\cos t.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ First we apply method A to the test ODE 
+\begin_inset Formula $y'=\lambda y$
+\end_inset
+
+.
+ We obtain
+\begin_inset Formula 
+\begin{align*}
+y_{k+1} & =y_{k}+h\lambda\left(\frac{y_{k}+y_{k+1}}{2}\right)\\
+ & =\left(1+\frac{h\lambda}{2}\right)y_{k}+\frac{h\lambda}{2}y_{k+1}\\
+ & =\left(\frac{2+h\lambda}{2}\right)y_{k}+\frac{h\lambda}{2}y_{k+1}.
+\end{align*}
+
+\end_inset
+
+We can re-express this as
+\begin_inset Formula 
+\begin{align*}
+y_{k+1} & =\left(\frac{2+h\lambda}{2-h\lambda}\right)y_{k}\\
+ & =\left(\frac{2+h\lambda}{2-h\lambda}\right)^{k}y_{0}.
+\end{align*}
+
+\end_inset
+
+Thus, writing 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ in terms of its real an imaginary parts as 
+\begin_inset Formula $\lambda=\lambda_{1}+i\lambda_{2}$
+\end_inset
+
+, we see that
+\begin_inset Formula 
+\begin{align*}
+\text{method A is stable} & \iff\left|\frac{2+h\lambda}{2-h\lambda}\right|\leq1\\
+ & \iff|2+h\lambda|\leq|2-h\lambda|\\
+ & \iff|2+h\lambda|^{2}\leq|2-h\lambda|^{2}\\
+ & \iff(2+h\lambda_{1})^{2}+(h\lambda_{2})^{2}\leq(2-h\lambda_{1})^{2}+(-h\lambda_{2})^{2}\\
+ & \iff(2+h\lambda_{1})^{2}\leq(2-h\lambda_{1})^{2}\\
+ & \iff|2+h\lambda_{1}|\leq|2-h\lambda_{1}|.
+\end{align*}
+
+\end_inset
+
+In particular, methodA is stable for all 
+\begin_inset Formula $h>0$
+\end_inset
+
+ whenever 
+\begin_inset Formula $\lambda_{1}<0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we apply method B to the test function 
+\begin_inset Formula $y'=\lambda y$
+\end_inset
+
+.
+ We obtain
+\begin_inset Formula 
+\begin{align*}
+y_{k+1} & =y_{k}+h\lambda\left(y_{k}+\frac{h}{2}\lambda y_{k}\right)\\
+ & =\left(1+h\lambda+\frac{1}{2}(h\lambda)^{2}\right)y_{k}\\
+ & =\left(1+h\lambda+\frac{1}{2}(h\lambda)^{2}\right)^{k}y_{0}
+\end{align*}
+
+\end_inset
+
+Thus, writing 
+\begin_inset Formula $\alpha=h\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha=\alpha_{1}+i\alpha_{2}$
+\end_inset
+
+ (so 
+\begin_inset Formula $\alpha_{1}=h\lambda_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha_{2}=h\lambda_{2}$
+\end_inset
+
+) we see that
+\begin_inset Formula 
+\begin{align*}
+\text{method B is stable} & \iff\left|1+\alpha+\frac{1}{2}\alpha^{2}\right|\leq1\\
+ & \iff\left|1+\alpha+\frac{1}{2}\alpha^{2}\right|^{2}\leq1\\
+ & \iff\left|(1+\alpha_{1}+\frac{1}{2}(\alpha_{1}-\alpha_{2})(\alpha_{1}+\alpha_{2})+i(\alpha_{1}+1)\alpha_{2}\right|^{2}\leq1\\
+ & \iff((1+\alpha_{1}+\frac{1}{2}(\alpha_{1}-\alpha_{2})(\alpha_{1}+\alpha_{2}))^{2}+((\alpha_{1}+1)\alpha_{2})^{2}\leq1.
+\end{align*}
+
+\end_inset
+
+In particular, method B is stable if and only if the point 
+\begin_inset Formula $(\alpha_{1},\alpha_{2})=h(\lambda_{1},\lambda_{2})$
+\end_inset
+
+ lands inside the region bounded by the curve below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename C:/Users/Cohom/Videos/stabilityregion.jpg
+	lyxscale 30
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ First we give the code for method A:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function y=methodA(func,t,y1)
+\end_layout
+
+\begin_layout Plain Layout
+
+% t = [t1,t2,...,tn] has n points and n-1 steps
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+n = length(t);
+\end_layout
+
+\begin_layout Plain Layout
+
+y = 0 * t;
+\end_layout
+
+\begin_layout Plain Layout
+
+y(1)=y1;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for k=1:n-1     
+\end_layout
+
+\begin_layout Plain Layout
+
+   h = t(k+1) - t(k); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   ode_eqn = @(ynext) ynext - y(k) - h * func(t(k)+h/2,(ynext + y(k))/2);
+\end_layout
+
+\begin_layout Plain Layout
+
+   y(k+1) = fzero(ode_eqn,y(k)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Next we give the code for method B:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function y=methodB(func,t,y1)
+\end_layout
+
+\begin_layout Plain Layout
+
+% t = [t1,t2,...,tn] has n points and n-1 steps
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+n = length(t);
+\end_layout
+
+\begin_layout Plain Layout
+
+y = 0 * t;
+\end_layout
+
+\begin_layout Plain Layout
+
+y(1)=y1;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for k=1:length(y)-1              
+\end_layout
+
+\begin_layout Plain Layout
+
+   h = t(k+1) - t(k);         
+\end_layout
+
+\begin_layout Plain Layout
+
+   fk = func(t(k),y(k)); 	
+\end_layout
+
+\begin_layout Plain Layout
+
+   y(k+1) = y(k) + h * func(t(k)+ (h/2),y(k)+(h/2)*fk); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Working in matlab, we write:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+% define functions for this problem
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+func = @(t,y) 10*cos(t)-2*y;
+\end_layout
+
+\begin_layout Plain Layout
+
+funcref = @(t) -3*exp(-2*t)+2*sin(t)+4*cos(t);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% define n time steps as vector t=t(n) where t=[t1,t2,...,tn,tn+1] where t1=0
+ and tn+1=1 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+t = @(n) 0:2^(-n):1;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% define initial value y1=y(0)=1
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+y1 = 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% create vectors of length n+1 for each method containing approximate solutions
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+yA = @(n) methodA(func,t(n),y1);
+\end_layout
+
+\begin_layout Plain Layout
+
+yB = @(n) methodB(func,t(n),y1);
+\end_layout
+
+\begin_layout Plain Layout
+
+yFE = @(n) forwardEuler(func,t(n),y1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% create vector of length n+1 containing exact solutions
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+yref = @(n) funcref(t(n));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% calculate errors for each method using norm(-,Inf)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+errorA = @(n) norm(yA(n)-yref(n),Inf);
+\end_layout
+
+\begin_layout Plain Layout
+
+errorB = @(n) norm(yB(n)-yref(n),Inf);
+\end_layout
+
+\begin_layout Plain Layout
+
+errorFE = @(n) norm(yFE(n)-yref(n),Inf);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% calculate errorrates for each method from n=4 to n=12
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+errorratesA=[];
+\end_layout
+
+\begin_layout Plain Layout
+
+errorratesB=[];
+\end_layout
+
+\begin_layout Plain Layout
+
+errorratesFE=[];
+\end_layout
+
+\begin_layout Plain Layout
+
+for n=4:12
+\end_layout
+
+\begin_layout Plain Layout
+
+	errorrateA = errorA(n+1)/errorA(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+	errorrateB = errorB(n+1)/errorB(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+	errorrateFE = errorFE(n+1)/errorFE(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+	errorratesA = [errorratesA errorrateA];
+\end_layout
+
+\begin_layout Plain Layout
+
+	errorratesB = [errorratesB errorrateB];
+\end_layout
+
+\begin_layout Plain Layout
+
+	errorratesFE = [errorratesFE errorrateFE];
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we plot the table for method A:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+format longg
+\end_layout
+
+\begin_layout Plain Layout
+
+for n=4:9
+\end_layout
+
+\begin_layout Plain Layout
+
+	disp([2^(-n) errorA(n) errorratesA(n)]);
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0.0625       0.00297363505250337         0.249996916651961
+\end_layout
+
+\begin_layout Plain Layout
+
+0.03125      0.000743128606277121          0.24999922925091
+\end_layout
+
+\begin_layout Plain Layout
+
+0.015625      0.000185748409893716         0.249999806743112
+\end_layout
+
+\begin_layout Plain Layout
+
+0.0078125      4.64371189869972e-05         0.250000008262771
+\end_layout
+
+\begin_layout Plain Layout
+
+0.00390625      1.16091365649496e-05          0.2499999957156
+\end_layout
+
+\begin_layout Plain Layout
+
+0.001953125      2.90227519350594e-06         0.249999958380116
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Next we plot the table for method B:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+for n=4:9
+\end_layout
+
+\begin_layout Plain Layout
+
+   disp([2^(-n) errorB(n) errorratesB(n)]);
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0.0625        0.0046803647542335         0.248717212806086
+\end_layout
+
+\begin_layout Plain Layout
+
+0.03125       0.00112281854007401         0.249359372054863
+\end_layout
+
+\begin_layout Plain Layout
+
+0.015625       0.00027492791863537          0.24967956766904
+\end_layout
+
+\begin_layout Plain Layout
+
+0.0078125      6.80259768404134e-05         0.249839852495094
+\end_layout
+
+\begin_layout Plain Layout
+
+0.00390625       1.6919231358159e-05         0.249919911990386
+\end_layout
+
+\begin_layout Plain Layout
+
+0.001953125      4.21896890712148e-06           0.2499599771328
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Next we plot the table for the forward Euler method:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+for n=4:9
+\end_layout
+
+\begin_layout Plain Layout
+
+   disp([2^(-n) errorFE(n) errorratesFE(n)]);
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0.0625         0.120794793141668         0.498877300734096
+\end_layout
+
+\begin_layout Plain Layout
+
+0.03125         0.059282752942563         0.499439812045252
+\end_layout
+
+\begin_layout Plain Layout
+
+0.015625           0.0293702988322         0.499720236721317
+\end_layout
+
+\begin_layout Plain Layout
+
+0.0078125        0.0146182565026653         0.499860143574655
+\end_layout
+
+\begin_layout Plain Layout
+
+0.00390625       0.00729271634548834          0.49993007806035
+\end_layout
+
+\begin_layout Plain Layout
+
+0.001953125       0.00364227288089003         0.499965041753024
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Consider the boundary value problem
+\begin_inset Formula 
+\begin{equation}
+u''(x)+u'(x)=f(x)\label{eq:bvp}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $0\leq x\leq1$
+\end_inset
+
+ with 
+\begin_inset Formula $u(0)=u_{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $u(1)=u_{b}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Derive the linear system for a finite difference approximation of 
+\begin_inset Formula $u(x)$
+\end_inset
+
+ at points 
+\begin_inset Formula $x_{0}=0$
+\end_inset
+
+, 
+\begin_inset Formula $\dots$
+\end_inset
+
+, 
+\begin_inset Formula $x_{n+1}=1$
+\end_inset
+
+.
+ Hint: be very careful when deriving the correct terms for 
+\begin_inset Formula $u_{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{b}$
+\end_inset
+
+ in the right-hand side.
+\end_layout
+
+\begin_layout Enumerate
+Write a function to compute the finite difference solution 
+\begin_inset Formula $y_{0},\dots,y_{n+1}$
+\end_inset
+
+ at points 
+\begin_inset Formula $x_{0},\dots,x_{n+1}$
+\end_inset
+
+ to the problem above.
+ The function should be defined as 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+function [X,Y] = finite_difference_solution(n,func,ua,ub)
+\end_layout
+
+\end_inset
+
+ where 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+func
+\end_layout
+
+\end_inset
+
+ is a function handle representing 
+\begin_inset Formula $f(x)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Compute the finite difference solution for 
+\begin_inset Formula $n=10$
+\end_inset
+
+, 
+\begin_inset Formula $u_{a}=1$
+\end_inset
+
+, 
+\begin_inset Formula $u_{b}=-1$
+\end_inset
+
+, and
+\begin_inset Formula 
+\[
+f(x)=-2-4\pi(x+1)\sin(2\pi x^{2})-16\pi^{2}x^{2}\cos(2\pi x^{2})
+\]
+
+\end_inset
+
+and plot the result.
+ Also include the exact solution 
+\begin_inset Formula $u(x)=\cos(2\pi x^{2})-2x$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ For each 
+\begin_inset Formula $0\leq k\leq n+1$
+\end_inset
+
+, we set 
+\begin_inset Formula $y_{k}=u(x_{k})$
+\end_inset
+
+ and we set 
+\begin_inset Formula $f_{k}=f(x_{k})$
+\end_inset
+
+.
+ We assume the points 
+\begin_inset Formula $x_{0},x_{1},\dots,x_{n},x_{n+1}$
+\end_inset
+
+ For each 
+\begin_inset Formula $1\leq k\leq n$
+\end_inset
+
+ we obtain from Taylor's theorem a real-valued function 
+\begin_inset Formula $\psi_{k}$
+\end_inset
+
+ defined on a neighborhood of 
+\begin_inset Formula $0$
+\end_inset
+
+ such that 
+\begin_inset Formula $\lim_{h\to0}\psi_{k}(h)=0$
+\end_inset
+
+ and such that
+\begin_inset Formula 
+\begin{equation}
+y_{k+1}=y_{k}+u'(x_{k})h+\frac{u''(x_{k})}{2}h^{2}+\frac{u'''(x_{k})}{6}h^{3}+\psi_{k}(h)h^{3}\label{eq:taylor1}
+\end{equation}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{equation}
+y_{k-1}=y_{k}-u'(x_{k})h+\frac{u''(x_{k})}{2}h^{2}-\frac{u'''(x_{k})}{6}h^{3}-\psi_{k}(-h)h^{3}\label{eq:taylor2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Adding 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:taylor2})
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:taylor1})
+\end_layout
+
+\end_inset
+
+ together and rearranging terms gives us
+\begin_inset Formula 
+\begin{equation}
+u''(x_{k})=\frac{y_{k+1}-2y_{k}+y_{k-1}}{h^{2}}+R_{k}(h)\label{eq:rewritefindif}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $R_{k}(h)=(\psi_{k}(h)-\psi_{k}(-h))h$
+\end_inset
+
+.
+ In particular we have 
+\begin_inset Formula $R_{k}(h)\in O(h^{2})$
+\end_inset
+
+, thus we may rewrite 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:rewritefindif})
+\end_layout
+
+\end_inset
+
+ as
+\begin_inset Formula 
+\[
+u''(x_{k})=\frac{y_{k+1}-2y_{k}+y_{k-1}}{h^{2}}+O(h^{2})
+\]
+
+\end_inset
+
+In homework 1, it was shown that
+\begin_inset Formula 
+\[
+u'(x_{k})=\frac{y_{k+1}-y_{k-1}}{2h}+O(h^{2}).
+\]
+
+\end_inset
+
+Thus the discrete version of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:bvp})
+\end_layout
+
+\end_inset
+
+ is given by the equations
+\begin_inset Formula 
+\begin{equation}
+\frac{y_{k+1}-2y_{k}+y_{k-1}}{h^{2}}+\frac{y_{k+1}-y_{k-1}}{2h}=f_{k}.\label{eq:nbynmatrixequation}
+\end{equation}
+
+\end_inset
+
+or each 
+\begin_inset Formula $1\leq k\leq n$
+\end_inset
+
+ with 
+\begin_inset Formula $y_{0}=u_{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{n+1}=u_{b}$
+\end_inset
+
+.
+ We wish to view 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:nbynmatrixequation})
+\end_layout
+
+\end_inset
+
+ as an 
+\begin_inset Formula $n\times n$
+\end_inset
+
+-matrix equation.
+ To do this, first we set 
+\begin_inset Formula $\alpha=\frac{1}{h^{2}}-\frac{1}{2h}$
+\end_inset
+
+, 
+\begin_inset Formula $\beta=-\frac{2}{h^{2}}$
+\end_inset
+
+, and 
+\begin_inset Formula $\gamma=\frac{1}{h^{2}}+\frac{1}{2h}$
+\end_inset
+
+.
+ Then note that we can list the equations 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:nbynmatrixequation})
+\end_layout
+
+\end_inset
+
+ starting from 
+\begin_inset Formula $k=1$
+\end_inset
+
+ up to 
+\begin_inset Formula $k=n$
+\end_inset
+
+ as
+\begin_inset Formula 
+\begin{align*}
+\beta y_{1}+\gamma y_{2} & =f_{1}-\alpha u_{a}\\
+\alpha y_{1}+\beta y_{2}+\gamma y_{3} & =f_{2}\\
+ & \vdots\\
+\alpha y_{k-1}+\beta y_{k}+\gamma y_{k+1} & =f_{k}\\
+ & \vdots\\
+\alpha y_{n-2}+\beta y_{n-1}+\gamma y_{n} & =f_{n-1}\\
+\alpha y_{n-1}+\beta y_{n} & =f_{n}-\gamma u_{b}
+\end{align*}
+
+\end_inset
+
+In matrix form, this looks like
+\begin_inset Formula 
+\[
+\begin{pmatrix}\beta & \gamma & 0 & 0 & 0 & \cdots & \cdots & 0 & 0\\
+\alpha & \beta & \gamma & 0 & 0 & \cdots & \cdots & 0 & 0\\
+0 & \alpha & \beta & \gamma & 0 & \cdots & \cdots & 0 & 0\\
+0 & 0 & \ddots & \ddots & \ddots & \ddots &  & \vdots & \vdots\\
+\vdots & \vdots & \ddots & \alpha & \beta & \gamma & \ddots & \vdots & \vdots\\
+\vdots & \vdots &  & \ddots & \ddots & \ddots & \ddots & 0 & 0\\
+0 & 0 & \cdots & \cdots & 0 & \alpha & \beta & \gamma & 0\\
+0 & 0 & \cdots & \cdots & 0 & 0 & \alpha & \beta & \gamma\\
+0 & 0 & \cdots & \cdots & 0 & 0 & 0 & \alpha & \beta
+\end{pmatrix}\begin{pmatrix}y_{1}\\
+y_{2}\\
+y_{3}\\
+\vdots\\
+y_{k}\\
+\vdots\\
+y_{n-2}\\
+y_{n-1}\\
+y_{n}
+\end{pmatrix}=\begin{pmatrix}f_{1}-\alpha u_{a}\\
+f_{2}\\
+f_{3}\\
+\vdots\\
+f_{k}\\
+\vdots\\
+f_{n-2}\\
+f_{n-1}\\
+f_{n}-\gamma u_{b}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ We give the code below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Y,X] = finite_difference_solution(n,func,ua,ub)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% set step size and create vector X = [x0,x1,...,x{n+1}] where x0=0 and x{n+1}=1
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+h = 1/(n+1);
+\end_layout
+
+\begin_layout Plain Layout
+
+X = 0:h:1;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% define alpha, beta, and gamma
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+alpha = (1/h^2) - (1/2*h); 
+\end_layout
+
+\begin_layout Plain Layout
+
+beta = -2/(h^2); 
+\end_layout
+
+\begin_layout Plain Layout
+
+gamma = (1/h^2) + (1/2*h); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% define vector f = [f1,f2,...,fn]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+f = zeros(n,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+f(1) = func(1/(n+1))-alpha*ua; 
+\end_layout
+
+\begin_layout Plain Layout
+
+f(n) = func(n/(n+1))-gamma*ub; 
+\end_layout
+
+\begin_layout Plain Layout
+
+for k=2:n-1    
+\end_layout
+
+\begin_layout Plain Layout
+
+   f(k)=func(k/(n+1)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% define vector Y = [y1,y2,...,yn]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+A = diag(alpha*ones(1,n-1),-1) + diag(beta*ones(1,n)) + diag(gamma*ones(1,n-1),1
+); 
+\end_layout
+
+\begin_layout Plain Layout
+
+Y = A
+\backslash
+f;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% adjoin ua and ub to Y so that Y = [ua,y1,y2,...,yn,ub]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Y = [ua; Y; ub];
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ We do this in the code below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+func = @(x) -2 - 4*pi*(x+1)*sin(2*pi*x^2) - 16*pi^2*x^2*cos(2*pi*x^2);
+\end_layout
+
+\begin_layout Plain Layout
+
+funcref = @(x) cos(2*pi.*x.*x)-2.*x;
+\end_layout
+
+\begin_layout Plain Layout
+
+n=10;
+\end_layout
+
+\begin_layout Plain Layout
+
+ua=1;
+\end_layout
+
+\begin_layout Plain Layout
+
+ub=-1;
+\end_layout
+
+\begin_layout Plain Layout
+
+[Y,X] = finite_difference_solution(n,func,ua,ub);
+\end_layout
+
+\begin_layout Plain Layout
+
+x = linspace(0,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(X,Y,x,funcref(x));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+x=linspace(0,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+t=(1/11):(1/11):(10/11);
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(x,funcref(x),t,u);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The plot matlab generates is given below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename C:/Users/Cohom/Videos/finalfinalplot.jpg
+	lyxscale 30
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_body
+\end_document

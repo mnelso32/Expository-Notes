@@ -1,0 +1,1343 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Riemann Zeta Function
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+Riemann zeta function 
+\series default
+is the complex function defined by the series 
+\begin_inset Formula 
+\begin{equation}
+\zeta(s):=\sum_{n\geq1}n^{-s}\label{eq:riemannzeta}
+\end{equation}
+
+\end_inset
+
+for 
+\begin_inset Formula $\text{Re}(s)>1$
+\end_inset
+
+, where 
+\begin_inset Formula $n$
+\end_inset
+
+ varies over positive integers.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propzetaconverge}
+\end_layout
+
+\end_inset
+
+ The series 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:riemannzeta})
+\end_layout
+
+\end_inset
+
+ converges absolutely and locally uniformly on 
+\begin_inset Formula $\text{Re}(s)>1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $B_{r}(z_{0})$
+\end_inset
+
+ be an open ball centered at 
+\begin_inset Formula $z_{0}$
+\end_inset
+
+ and of radius 
+\begin_inset Formula $r$
+\end_inset
+
+ such that 
+\begin_inset Formula $\text{\text{Re}}(z_{0}-r)>1$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $s\in B_{r}(z_{0})$
+\end_inset
+
+ and express 
+\begin_inset Formula $s$
+\end_inset
+
+ in terms of its real and imaginary parts as 
+\begin_inset Formula $s=\sigma+it$
+\end_inset
+
+.
+ Then by the integral test, we have 
+\begin_inset Formula 
+\begin{align*}
+\sum_{n\ge1}|n^{-s}| & =\sum_{n\geq1}n^{-\sigma}\\
+ & \sim\int_{1}^{\infty}x^{-\sigma}dx\\
+ & =\left(\frac{x^{-\sigma+1}}{-\sigma+1}\right)|_{1}^{\infty}\\
+ & =\frac{1}{-\sigma+1}.
+\end{align*}
+
+\end_inset
+
+Therefore, the series 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:riemannzeta})
+\end_layout
+
+\end_inset
+
+ converges absolutely for all 
+\begin_inset Formula $s\in\overline{B}_{r}(z_{0})$
+\end_inset
+
+.
+ Furthermore, it converges uniformly in 
+\begin_inset Formula $\overline{B}_{r}(z_{0})$
+\end_inset
+
+ by the Weierstrass 
+\begin_inset Formula $M$
+\end_inset
+
+-test (with 
+\begin_inset Formula $M_{n}=|n^{\sigma_{0}-r}|$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Riemann Zeta Function is Holomorphic
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremsequenceholomorphic}
+\end_layout
+
+\end_inset
+
+ A sequence or series of holomorphic functions 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ that converges locally uniformly on an open set 
+\begin_inset Formula $U$
+\end_inset
+
+ converges to a holomorphic function 
+\begin_inset Formula $f$
+\end_inset
+
+ on 
+\begin_inset Formula $U$
+\end_inset
+
+, and the sequence or series of derivative 
+\begin_inset Formula $f_{n}'$
+\end_inset
+
+ then converges locally uniformly to 
+\begin_inset Formula $f'$
+\end_inset
+
+ (and if none of the 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ has a zero in 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $f\neq0$
+\end_inset
+
+, then 
+\begin_inset Formula $f$
+\end_inset
+
+ has no zeros in 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Each term 
+\begin_inset Formula $n^{-s}=e^{-s\log n}$
+\end_inset
+
+ in the series 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:riemannzeta})
+\end_layout
+
+\end_inset
+
+ is holomorphic.
+ Thus, combining 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremsequenceholomorphic})
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propzetaconverge})
+\end_layout
+
+\end_inset
+
+, we see that 
+\begin_inset Formula $\zeta(s)$
+\end_inset
+
+ defines a holomorphic function on 
+\begin_inset Formula $\text{Re}(s)>1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Euler Product
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremeulerproduct}
+\end_layout
+
+\end_inset
+
+ For 
+\begin_inset Formula $\text{Re}(s)>1$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+\zeta(s)=\sum_{n\geq1}n^{-s}=\prod_{p}(1-p^{-s})^{-1},
+\]
+
+\end_inset
+
+where the product converges absolutely.
+ In particular, 
+\begin_inset Formula $\zeta(s)\neq0$
+\end_inset
+
+ for 
+\begin_inset Formula $\text{Re}(s)>1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The product in the theorem above ranges over primes 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ This is a standard practice in analytic number theory that we will follow:
+ the symbol 
+\begin_inset Formula $p$
+\end_inset
+
+ always denotes a prime, and any sum or product over 
+\begin_inset Formula $p$
+\end_inset
+
+ is understood to be over primes, even if this is not explicitly stated.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ We have 
+\begin_inset Formula 
+\begin{align*}
+\sum_{n\ge1}n^{-s} & =\sum_{n\geq1}\prod_{p}p^{-v_{p}(n)s}\\
+ & =\prod_{p}\sum_{e\geq0}p^{-es}\\
+ & =\prod_{p}(1-p^{-s})^{-1}.
+\end{align*}
+
+\end_inset
+
+To justify the second equality, consider the 
+\series bold
+partial zeta function 
+\begin_inset Formula $\zeta_{m}(s)$
+\end_inset
+
+
+\series default
+, which restricts the summation in 
+\begin_inset Formula $\zeta(s)$
+\end_inset
+
+ to the set 
+\begin_inset Formula $S_{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $m$
+\end_inset
+
+-smooth integers (those with no prime factors 
+\begin_inset Formula $p>m$
+\end_inset
+
+).
+ If 
+\begin_inset Formula $p_{1},\dots,p_{k}$
+\end_inset
+
+ are the primes up to 
+\begin_inset Formula $m$
+\end_inset
+
+, then absolute convergence implies 
+\begin_inset Formula 
+\begin{align*}
+\zeta_{m}(s) & :=\sum_{n\in S_{m}}n^{-s}\\
+ & =\sum_{e_{1},\dots,e_{k}\geq0}(p_{1}^{e_{1}}\cdots p_{k}^{e_{k}})^{-s}\\
+ & =\prod_{1\leq i\leq k}\sum_{e_{i}\geq0}(p_{i}^{-s})^{e_{i}}\\
+ & =\prod_{p\leq m}(1-p^{-s})^{-1}.
+\end{align*}
+
+\end_inset
+
+For any 
+\begin_inset Formula $\delta>0$
+\end_inset
+
+, the sequence of functions 
+\begin_inset Formula $\zeta_{m}(s)$
+\end_inset
+
+ converges uniformly on 
+\begin_inset Formula $\text{Re}(s)>1+\delta$
+\end_inset
+
+ to 
+\begin_inset Formula $\zeta(s)$
+\end_inset
+
+; indeed, for any 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ and any such 
+\begin_inset Formula $s$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+|\zeta_{m}(s)-\zeta(s)| & \leq\left|\sum_{n\geq m}n^{-s}\right|\\
+ & \leq\sum_{n\geq m}\left|n^{-s}\right|\\
+ & =\sum_{n\geq m}n^{-\text{Re}(s)}\\
+ & \leq\int_{m}^{\infty}x^{-1-\delta}dx\\
+ & \leq\frac{1}{\delta}m^{-\delta}\\
+ & <\varepsilon,
+\end{align*}
+
+\end_inset
+
+for all sufficiently large 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ It follows that the sequence 
+\begin_inset Formula $\zeta_{m}(s)$
+\end_inset
+
+ converges locally uniformly to 
+\begin_inset Formula $\zeta(s)$
+\end_inset
+
+ on 
+\begin_inset Formula $\text{Re}(s)>1$
+\end_inset
+
+.
+ The sequence of functions 
+\begin_inset Formula $P_{m}(s):=\prod_{p\leq m}(1-p^{-s})^{-1}$
+\end_inset
+
+ clearly converges locally uniformly to 
+\begin_inset Formula $\prod_{p}(1-p^{-s})^{-1}$
+\end_inset
+
+ on any region in which the latter function is absolutely convergent (or
+ even just convergent).
+ For any 
+\begin_inset Formula $s$
+\end_inset
+
+ in 
+\begin_inset Formula $\text{Re}(s)>1$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\sum_{p}\left|\log(1-p^{-s})^{-1}\right| & =\sum_{p}\left|\sum_{e\geq1}\frac{1}{e}p^{-es}\right|\\
+ & \leq\sum_{p}\sum_{e\geq1}\left|p^{-s}\right|^{e}\\
+ & =\sum_{p}(\left|p^{s}\right|-1)^{-1}\\
+ & \leq\sum_{n}(n^{\text{Re}(s)}-1)^{-1}\\
+ & <\infty,
+\end{align*}
+
+\end_inset
+
+where we have used the identity 
+\begin_inset Formula $\log(1-z)=-\sum_{n\geq1}\frac{1}{n}z^{n}$
+\end_inset
+
+, valid for 
+\begin_inset Formula $|z|<1$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\prod_{p}(1-p^{-s})^{-1}$
+\end_inset
+
+ is absolutely convergent (and in particular, nonzero) on 
+\begin_inset Formula $\text{Re}(s)>1$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $D$
+\end_inset
+
+ is a disk contained in 
+\begin_inset Formula $\text{Re}(s)>1$
+\end_inset
+
+, then there exists 
+\begin_inset Formula $M\geq0$
+\end_inset
+
+ such that 
+\begin_inset Formula $\left|\prod_{p}(1-p^{-s})^{-1}\right|\leq M$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in D$
+\end_inset
+
+.
+ Thus, given 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{align*}
+\left|\prod_{p\leq m}(1-p^{-s})^{-1}-\prod_{p}(1-p^{-s})^{-1}\right| & =\left|\prod_{p\leq m}(1-p^{-s})^{-1}\left(1-\prod_{p>m}(1-p^{-s})^{-1}\right)\right|\\
+ & \leq M\left(1-\prod_{p>m}(1-p^{-s})^{-1}\right)\\
+ & <\varepsilon
+\end{align*}
+
+\end_inset
+
+for all sufficiently large 
+\begin_inset Formula $m$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Analytic Continuation
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremanalyticcontinuation}
+\end_layout
+
+\end_inset
+
+ (Analytic Continuation I) For 
+\begin_inset Formula $\text{Re}(s)>1$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\[
+\zeta(s)=\frac{1}{1-s}+\phi(s),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\phi(s)$
+\end_inset
+
+ is a holomorphic function on 
+\begin_inset Formula $\text{Re}(s)>0$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\zeta(s)$
+\end_inset
+
+ extends to a meromorphic function on 
+\begin_inset Formula $\text{Re}(s)>0$
+\end_inset
+
+ that has a simple pole at 
+\begin_inset Formula $s=1$
+\end_inset
+
+ with residue 
+\begin_inset Formula $1$
+\end_inset
+
+ and no other poles.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ For 
+\begin_inset Formula $\mathrm{Re}(s)>1$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+\zeta(s)-\frac{1}{1-s} & =\sum_{n\geq1}n^{-s}-\int_{1}^{\infty}x^{-s}\mathrm{d}x\\
+ & =\sum_{n\geq1}\left(n^{-s}-\int_{n}^{n+1}x^{-s}\mathrm{d}x\right)\\
+ & =\sum_{n\geq1}\int_{n}^{n+1}(n^{-s}-x^{-s})\mathrm{d}x.
+\end{align*}
+
+\end_inset
+
+For each 
+\begin_inset Formula $n\geq1$
+\end_inset
+
+ the function 
+\begin_inset Formula $\phi_{n}(s):=\int_{n}^{n+1}(n^{-s}-x^{-s})\mathrm{d}x$
+\end_inset
+
+ is holomorphic on 
+\begin_inset Formula $\mathrm{Re}(s)>0$
+\end_inset
+
+.
+ For each fixed 
+\begin_inset Formula $s$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathrm{Re}(s)>0$
+\end_inset
+
+ and 
+\begin_inset Formula $x\in[n,n+1]$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+|n^{-s}-x^{-s}| & =\left|\int_{n}^{x}st^{-s-1}\mathrm{d}t\right|\\
+ & \leq\int_{n}^{x}\frac{|s|}{|t^{s+1}|}\mathrm{d}t\\
+ & =\int_{n}^{x}\frac{|s|}{t^{1+\mathrm{Re}(s)}}\mathrm{d}t\\
+ & \leq\frac{|s|}{n^{1+\mathrm{Re}(s)}},
+\end{align*}
+
+\end_inset
+
+and therefore 
+\begin_inset Formula 
+\begin{align*}
+|\phi_{n}(s)| & \leq\int_{n}^{n+1}|n^{-s}-x^{-s}|\mathrm{d}x\\
+ & \leq\frac{|s|}{n^{1+\mathrm{Re}(s)}}.
+\end{align*}
+
+\end_inset
+
+For any 
+\begin_inset Formula $s_{0}$
+\end_inset
+
+ with 
+\begin_inset Formula $\mathrm{Re}(s_{0})>0$
+\end_inset
+
+, if we put 
+\begin_inset Formula $\varepsilon:\mathrm{Re}(s_{0})/2$
+\end_inset
+
+ and 
+\begin_inset Formula $U:=\mathrm{B}_{\varepsilon}(s_{0})$
+\end_inset
+
+, then for each 
+\begin_inset Formula $n\geq1$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+\sup_{s\in U}|\phi_{n}(s)|\leq\frac{|s_{0}|+\varepsilon}{n^{1+\varepsilon}}:=M_{n},
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\sum_{n}M_{n}=(|s_{0}|+\varepsilon)\zeta(1+\varepsilon)$
+\end_inset
+
+ converges.
+ The series 
+\begin_inset Formula $\sum_{n}\phi_{n}$
+\end_inset
+
+ thus converges locally normally on 
+\begin_inset Formula $\text{Re}(s)>0$
+\end_inset
+
+.
+ By the Weierstarss 
+\begin_inset Formula $M$
+\end_inset
+
+-test, 
+\begin_inset Formula $\sum_{n}\phi_{n}$
+\end_inset
+
+ converges locally uniformly to a function 
+\begin_inset Formula $\phi(s)=\zeta(s)-\frac{1}{s-1}$
+\end_inset
+
+ that is holomorphic on 
+\begin_inset Formula $\text{Re}(s)>0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Location of Zeros
+\end_layout
+
+\begin_layout Standard
+We now show that 
+\begin_inset Formula $\zeta(s)$
+\end_inset
+
+ has no zeros on 
+\begin_inset Formula $\text{Re}(s)=1$
+\end_inset
+
+; this fact is crucial to the prime number theorem.
+ For this we use the following ingenious lemma, attributed to Mertens.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemmamertens}
+\end_layout
+
+\end_inset
+
+ (Mertens) For 
+\begin_inset Formula $x,y\in\mathbb{R}$
+\end_inset
+
+ with 
+\begin_inset Formula $x>1$
+\end_inset
+
+ we have 
+\begin_inset Formula $|\zeta(x)^{3}\zeta(x+iy)^{4}\zeta(x+2iy)|\geq1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ From the Euler product 
+\begin_inset Formula $\zeta(s)=\prod_{p}(1-p^{-s})^{-1}$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\text{Re}(s)>1$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+\log|\zeta(s)| & =-\sum_{p}\log|1-p^{-s}|\\
+ & =-\sum_{p}\text{Re}\log(1-p^{-s})\\
+ & =\sum_{p}\sum_{n\geq1}\frac{\text{Re}(p^{-ns})}{n},
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $\log|z|=\text{Re}\log z$
+\end_inset
+
+ and 
+\begin_inset Formula $\log(1-z)=-\sum_{n\geq1}\frac{z^{n}}{n}$
+\end_inset
+
+ for 
+\begin_inset Formula $|z|<1$
+\end_inset
+
+.
+ Plugging in 
+\begin_inset Formula $s=x+iy$
+\end_inset
+
+ yields 
+\begin_inset Formula 
+\[
+\log|\zeta(x+iy)|=\sum_{p}\sum_{n\geq1}\frac{\cos(ny\log p)}{np^{nx}},
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula 
+\begin{align*}
+\text{Re}(p^{-ns}) & =p^{-ns}\text{Re}(e^{-iny\log p})\\
+ & =p^{-nx}\cos(-ny\log p)\\
+ & =p^{-nx}\cos(ny\log p).
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula 
+\[
+\log|\zeta(x)^{3}\zeta(x+iy)^{4}\zeta(x+2iy)|=\sum_{p}\sum_{n\geq1}\frac{3+4\cos(ny\log p)+\cos(2ny\log p)}{np^{nx}}.
+\]
+
+\end_inset
+
+We now note that the trigonometric identity 
+\begin_inset Formula $\cos(2\theta)=2\cos^{2}\theta-1$
+\end_inset
+
+ implies 
+\begin_inset Formula 
+\[
+3+4\cos\theta+\cos(2\theta)=2(1+\cos\theta)^{2}\geq0.
+\]
+
+\end_inset
+
+Taking 
+\begin_inset Formula $\theta=ny\log p$
+\end_inset
+
+ yields 
+\begin_inset Formula $\log|\zeta(x)^{3}\zeta(x+iy)^{4}\zeta(x+2iy)|\geq$
+\end_inset
+
+, which proves the lemma.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\zeta(s)$
+\end_inset
+
+ has no zeros on 
+\begin_inset Formula $\text{Re}(s)\geq1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ We know from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremeulerproduct})
+\end_layout
+
+\end_inset
+
+ that 
+\begin_inset Formula $\zeta(s)$
+\end_inset
+
+ has no zeros on 
+\begin_inset Formula $\text{Re}(s)>1$
+\end_inset
+
+, so suppose 
+\begin_inset Formula $\zeta(1+iy)=0$
+\end_inset
+
+ for some 
+\begin_inset Formula $y\in\mathbb{R}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $y\neq0$
+\end_inset
+
+, since 
+\begin_inset Formula $\zeta(s)$
+\end_inset
+
+ has a pole at 
+\begin_inset Formula $s=1$
+\end_inset
+
+, and we know that 
+\begin_inset Formula $\zeta(s)$
+\end_inset
+
+ does not have a pole at 
+\begin_inset Formula $1+2iy\neq1$
+\end_inset
+
+ by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremanalyticcontinuation})
+\end_layout
+
+\end_inset
+
+.
+ We therefore must have 
+\begin_inset Formula 
+\[
+\lim_{x\to1}|\zeta(x)^{3}\zeta(x+iy)^{4}\zeta(x+2iy)|=0,
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $\zeta(s)$
+\end_inset
+
+ has a simple pole at 
+\begin_inset Formula $s=1$
+\end_inset
+
+, a zero at 
+\begin_inset Formula $1+iy$
+\end_inset
+
+, and no pole at 
+\begin_inset Formula $1+2iy$
+\end_inset
+
+.
+ But this contradicts 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{lemmamertens})
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

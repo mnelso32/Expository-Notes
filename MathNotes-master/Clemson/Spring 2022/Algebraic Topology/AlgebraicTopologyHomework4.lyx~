@@ -1,0 +1,1197 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Algebraic Topology Homework 4
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Show that composition of paths satisfies the following cancellation property:
+ if 
+\begin_inset Formula $f_{0}\cdot g_{0}\sim f_{1}\cdot g_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{0}\sim g_{1}$
+\end_inset
+
+, then 
+\begin_inset Formula $f_{0}\sim f_{1}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\widetilde{g}_{0}$
+\end_inset
+
+ be the inverse path of 
+\begin_inset Formula $g_{0}$
+\end_inset
+
+, so 
+\begin_inset Formula $\widetilde{g}_{0}(t)=g_{0}(1-t)$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+f_{0} & \sim f_{0}\cdot(g_{0}\cdot\widetilde{g}_{0})\\
+ & \sim(f_{0}\cdot g_{0})\cdot\widetilde{g}_{0}\\
+ & \sim(f_{1}\cdot g_{1})\cdot\widetilde{g}_{0}\\
+ & \sim f_{1}\cdot(g_{1}\cdot\widetilde{g}_{0})\\
+ & \sim f_{1}\cdot(g_{0}\cdot\widetilde{g}_{0})\\
+ & \sim f_{1}
+\end{align*}
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Show that for a space 
+\begin_inset Formula $X$
+\end_inset
+
+, the following three conditions are equivalent:
+\end_layout
+
+\begin_layout Enumerate
+Every map 
+\begin_inset Formula $S^{1}\to X$
+\end_inset
+
+ is homotopic to a constant map, with image a point.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Every map 
+\begin_inset Formula $S^{`1}\to X$
+\end_inset
+
+ extends to a map 
+\begin_inset Formula $D^{2}\to X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\pi_{1}(X,x_{0})=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x_{0}\in X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Deduce that a space 
+\begin_inset Formula $X$
+\end_inset
+
+ is simply-connected iff all maps 
+\begin_inset Formula $S^{1}\to X$
+\end_inset
+
+ are homotopic.
+ [In this problem, ‘homotopic’ means ‘homotopic without regard to basepoints’.]
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ In this problem, we identify 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ with the unit circle in the complex plane.
+ Similarly, we identify 
+\begin_inset Formula $D^{2}$
+\end_inset
+
+ with the unit disc in the complex plane.
+ We first show 1 implies 2.
+ Let 
+\begin_inset Formula $f\colon S^{1}\to X$
+\end_inset
+
+ be a continuous map.
+ Denote 
+\begin_inset Formula $x=f(1)$
+\end_inset
+
+ and let 
+\begin_inset Formula $F\colon S^{1}\times I\to X$
+\end_inset
+
+ be a homotopy from 
+\begin_inset Formula $\mathrm{c}_{x}$
+\end_inset
+
+ to 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $G\colon S^{1}\times I\to D^{2}$
+\end_inset
+
+ be defined by 
+\begin_inset Formula $G(z,t)=tz$
+\end_inset
+
+.
+ Finally let 
+\begin_inset Formula $H\colon D^{2}\backslash\{0\}\to S^{1}\times I$
+\end_inset
+
+ be defined by 
+\begin_inset Formula $H(w)=(w/|w|,|w|)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Then inverse of 
+\begin_inset Formula $G$
+\end_inset
+
+ is given by 
+\begin_inset Formula $G^{-1}(w)=(w/|w|,|w|)$
+\end_inset
+
+ Note that 
+\begin_inset Formula $G$
+\end_inset
+
+ is continuous and we have 
+\begin_inset Formula $\mathrm{im}\,G(-,1)=S^{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{im}\,G(-,0)=0$
+\end_inset
+
+.
+ Furthermore note that 
+\begin_inset Formula $ $
+\end_inset
+
+ Observe that 
+\begin_inset Formula $ $
+\end_inset
+
+Notice that 
+\begin_inset Formula $G(z,0)$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find the explicit reparametrization that shows for paths 
+\begin_inset Formula $\gamma_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\gamma_{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $\gamma_{3}$
+\end_inset
+
+ with 
+\begin_inset Formula $\gamma_{1}(1)=\gamma_{2}(0)$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{2}(1)=\gamma_{3}(0)$
+\end_inset
+
+ such that 
+\begin_inset Formula $[(\gamma_{1}\cdot\gamma_{2})\cdot\gamma_{3}]=[\gamma_{1}\cdot(\gamma_{2}\cdot\gamma_{3})]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Define 
+\begin_inset Formula $H\colon I\times I\to X$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+H(s,t)=\begin{cases}
+\gamma_{1}\left(\frac{4s}{t+1}\right) & 0\le s\le\frac{t+1}{4}\\
+\gamma_{2}\left(4\left(s-\left(\frac{t+1}{4}\right)\right)\right) & \frac{t+1}{4}<s\le\frac{t+2}{4}\\
+\gamma_{3}\left(\frac{4}{2-t}\left(s-\left(\frac{t+2}{4}\right)\right)\right) & \frac{t+2}{4}<s\le1
+\end{cases}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $(s,t)\in I\times I$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $H$
+\end_inset
+
+ is easily seen to be a homotopy from 
+\begin_inset Formula $(\gamma_{1}\cdot\gamma_{2})\cdot\gamma_{3}$
+\end_inset
+
+ to 
+\begin_inset Formula $\gamma_{1}\cdot(\gamma_{2}\cdot\gamma_{3})$
+\end_inset
+
+.
+ Let's explain what's happening in 
+\begin_inset Formula 
+\[
+\gamma_{3}\left(\frac{4}{2-t}\left(s-\left(\frac{t+2}{4}\right)\right)\right)
+\]
+
+\end_inset
+
+in order to get a better idea of how 
+\begin_inset Formula $H$
+\end_inset
+
+ is defined.
+ Here, the 
+\begin_inset Formula $(t+2)/4$
+\end_inset
+
+ part is telling us to delay 
+\begin_inset Formula $\gamma_{3}$
+\end_inset
+
+ by 
+\begin_inset Formula $(t+2)/4$
+\end_inset
+
+ seconds.
+ Thus when 
+\begin_inset Formula $t=0$
+\end_inset
+
+, we wait half a second before follow the 
+\begin_inset Formula $\gamma_{3}$
+\end_inset
+
+ path.
+ The 
+\begin_inset Formula $4/(2-t)$
+\end_inset
+
+ part is telling us to speed up the 
+\begin_inset Formula $\gamma_{3}$
+\end_inset
+
+ path by 
+\begin_inset Formula $4/(2-t)$
+\end_inset
+
+ seconds.
+ Thus when 
+\begin_inset Formula $t=0$
+\end_inset
+
+, we follow the 
+\begin_inset Formula $\gamma_{3}$
+\end_inset
+
+ twice as fast.
+ All of the other parts of 
+\begin_inset Formula $H$
+\end_inset
+
+ can be understood in an analagous way.
+ One may visualize this homotopy as below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (a) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (b) at (1.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (c) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (d) at (6,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (e) at (6,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (f) at (4.5,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (g) at (3,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (h) at (0,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a) -- (b) node [midway, fill=white,] {$ 
+\backslash
+gamma _1 $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b) -- (c) node [midway, fill=white,] {$ 
+\backslash
+gamma _2 $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c) -- (d) node [midway, fill=white,] {$ 
+\backslash
+gamma _3 $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d) -- (e);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e) -- (f) node [midway, fill=white,] {$ 
+\backslash
+gamma _3 $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f) -- (g) node [midway, fill=white,] {$ 
+\backslash
+gamma _2 $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (g) -- (h) node [midway, fill=white,] {$ 
+\backslash
+gamma _1 $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (h) -- (a);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b) -- (g);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c) -- (f);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+with horizontal axis being the 
+\begin_inset Formula $s$
+\end_inset
+
+-axis (
+\begin_inset Formula $s$
+\end_inset
+
+ is the path variable) and with vertical axis being the 
+\begin_inset Formula $t$
+\end_inset
+
+-axis (
+\begin_inset Formula $t$
+\end_inset
+
+ is the homotopy variable).
+ The diagonal lines partition the square into three regions.
+ Note that the left-most diagonal line above is given by the equation 
+\begin_inset Formula $t=4s-1$
+\end_inset
+
+.
+ Thus when 
+\begin_inset Formula $t\geq4s-1$
+\end_inset
+
+ (or equivalently when 
+\begin_inset Formula $0\leq s\leq(t+1)/4$
+\end_inset
+
+), we are in the left-most region of the square above.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Usually one uses the horizontal axis as the homotopy axis (so the 
+\begin_inset Formula $t$
+\end_inset
+
+-axis), however I drew these diagrams in the past and didn't think it was
+ necessary to re-draw them for this problem.
+ The same applies to problem 4 as well.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find the explicit homotopy that shows that for a loops 
+\begin_inset Formula $\gamma_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{2}$
+\end_inset
+
+ where 
+\begin_inset Formula $\gamma_{2}(t)=\gamma_{1}(1-t)$
+\end_inset
+
+ the composite 
+\begin_inset Formula $\gamma_{1}\cdot\gamma_{2}$
+\end_inset
+
+ is homotopic to a constant loop.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $x$
+\end_inset
+
+ be the point at which both 
+\begin_inset Formula $\gamma_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma_{2}$
+\end_inset
+
+ are based at.
+ Define 
+\begin_inset Formula $H\colon I\times I\to X$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+H(s,t)=\begin{cases}
+\gamma_{1}\left(\frac{2s}{t}\right) & 0\le s<\frac{t}{2}\\
+\mathrm{c}_{x}\left(\frac{1}{1-t}\left(s-\frac{t}{2}\right)\right) & \frac{t}{2}\le s\le\frac{2-t}{2}\\
+\gamma_{2}\left(\frac{2}{t}\left(s-\frac{2-t}{2}\right)\right) & \frac{2-t}{2}<s\le1
+\end{cases}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $(s,t)\in I\times I$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $H$
+\end_inset
+
+ is easily seen to be a homotopy from 
+\begin_inset Formula $\mathrm{c}_{x}$
+\end_inset
+
+ to 
+\begin_inset Formula $\gamma_{1}\cdot\gamma_{2}$
+\end_inset
+
+.
+ One may visualize this homotopy as below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (a) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (b) at (6,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (c) at (6,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (d) at (3,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt] (e) at (0,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a) -- (b) node [midway, fill=white,] {$ 
+\backslash
+mathrm{c} _x $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b) -- (c);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c) -- (d) node [midway, fill=white,] {$ 
+\backslash
+gamma _1  $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d) -- (e) node [midway, fill=white,] {$ 
+\backslash
+gamma _2 $};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e) -- (a);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d) -- (a);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d) -- (b);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

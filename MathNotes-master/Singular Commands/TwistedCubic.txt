@@ -1,0 +1,69 @@
+ring A=0,(x,y,z,w),dp;
+ideal I=xz-y2,xw-yz,yw-z2;
+I=std(I);
+resolution rs=mres(I,8);
+print(rs);
+print(betti(rs),"betti");
+hilb(I); 
+intvec a=hilb(I,2); 
+ring s=0,t,ls; 
+poly h; int j; 
+for (j=1; j<=size(a); j=j+1){h=h+a[j]*(t-j+2);} h;
+
+
+> ring A=0,(x,y,z,w),dp;
+> ideal I=xz-y2,xw-yz,yw-z2;
+> I=std(I);
+> resolution rs=mres(I,8);
+> print(rs);
+[1]:
+   _[1]=z2-yw
+   _[2]=yz-xw
+   _[3]=y2-xz
+[2]:
+   _[1]=y*gen(1)-z*gen(2)+w*gen(3)
+   _[2]=x*gen(1)-y*gen(2)+z*gen(3)
+[3]:
+   _[1]=0
+[4]:
+   _[1]=gen(1)
+[5]:
+   _[1]=0
+[6]:
+   _[1]=gen(1)
+[7]:
+   _[1]=0
+[8]:
+   _[1]=gen(1)
+> print(betti(rs),"betti");
+           0     1     2
+------------------------
+    0:     1     -     -
+    1:     -     3     2
+------------------------
+total:     1     3     2
+
+> hilb(I);
+//         1 t^0
+//        -3 t^2
+//         2 t^3
+
+//         1 t^0
+//         2 t^1
+// dimension (proj.)  = 1
+// degree (proj.)   = 3
+> intvec a=hilb(I,2);
+// ** redefining a **
+> ring s=0,t,ls;
+// ** redefining s **
+> poly h; int j;
+// ** redefining j **
+> for (j=1; j<=size(a); j=j+1){h=h+a[j]*(t-j+2);} h;
+1+3t
+>
+
+HP_(A/I) (t) = (1 - 3t2 + 2t3)/(1-t)4 = (1+2t)/(1-t)^2
+
+
+
+

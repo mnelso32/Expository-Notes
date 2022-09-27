@@ -1,0 +1,3306 @@
+%% LyX 2.2.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,english]{article}
+\usepackage[osf]{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[paperwidth=30cm,paperheight=35cm]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=3cm}
+\setlength{\parindent}{0bp}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\title{Complex Analysis}
+
+\maketitle
+\newpage{}
+
+\tableofcontents{}
+
+\newpage{}
+
+\section{Preliminaries to Complex Analysis}
+
+We denote $\mathbb{C}$ to be the field of complex numbers. Every
+complex number $z\in\mathbb{C}$ can be written as $z=x+iy$ for unique
+$x,y\in\mathbb{R}$. Given $z=x+iy\in\mathbb{C}$, we denote $\bar{z}$
+to be $\bar{z}=x-iy$. 
+\begin{enumerate}
+\item $\bar{z}=z$
+\item $|z|=\sqrt{z\bar{z}}$
+\item $|z_{1}z_{2}|=|z_{1}||z_{2}|$
+\item $|z_{1}+z_{2}|\leq|z_{1}|+|z_{2}|$
+\item $||z_{1}|-|z_{2}||\leq|z_{1}-z_{2}|$
+\item $|\text{Re}(z_{1})-\text{Re}(z_{2})|\leq|z_{1}-z_{2}|$
+\item $|\text{Im}(z_{1})-\text{Im}(z_{2})|\leq|z_{1}-z_{2}|$
+\end{enumerate}
+Every complex number $z\neq0$ can be written as $z=re^{i\theta}$,
+where $r=|z|$ and $\theta=\text{Arg}(z)\in[0,2\pi)$. 
+\begin{enumerate}
+\item $\text{Arg}(z_{1}z_{2})=\text{Arg}(z_{1})+\text{Arg}(z_{2})$
+\item $\text{Arg}(z^{n})=n\text{Arg}(z)$
+\item Each $z\neq0$ has precisely $n$ distinct $n$th roots. 
+\end{enumerate}
+\begin{defn}\label{defnopendisc} The \textbf{open disc} centered
+at $z_{0}$ is $D_{r}(z_{0})=\{z\in\mathbb{C}\mid|z-z_{0}|<r\}$.
+\end{defn}
+
+\begin{defn}\label{defnlimit} Let $\{z_{n}\}:=\{z_{n}\}_{n\in\mathbb{N}}$
+be a sequence in $\mathbb{C}$. We say $\{z_{n}\}$ \textbf{converges
+}to limit $\ell$ if for all $\varepsilon>0$, there exists $N\in\mathbb{N}$
+such that $|z_{n}-\ell|<\varepsilon$ for all $n\geq N$. \end{defn}
+
+\begin{rem} $z_{n}\to\ell$ if and only if $\text{Re}(z_{n})\to\text{Re}(\ell)$
+and $\text{Im}(z_{n})\to\text{Im}(\ell)$.\end{rem}
+
+\begin{prop} Suppose $z_{n}\to\ell$ and $w_{n}\to\ell'$. Then 
+\begin{enumerate}
+\item $az_{n}+bw_{n}\to a\ell+b\ell'$
+\item $z_{n}w_{n}\to\ell\ell'$ 
+\item $|z_{n}|\to|\ell|$ 
+\end{enumerate}
+\end{prop}
+
+\begin{defn}\label{defn1.2} A complex sequence $\{z_{n}\}$ is \textbf{Cauchy
+}if for all $\varepsilon>0$, there exists $N\in\mathbb{N}$ such
+that $|z_{n}-z_{m}|<\varepsilon$ for all $n,m\geq N$.\end{defn}
+
+\begin{theorem}\label{theoremcauchyconvergence} The following hold\hfill
+\begin{enumerate}
+\item In a complete metric space, a sequence is convergent if and only if
+it is cauchy.
+\item If $\{z_{n}\}$ is a bounded sequence, then there exists a convergent
+subsequence of $\{z_{n}\}$.
+\end{enumerate}
+\end{theorem}
+
+\begin{defn} An \textbf{open cover }of a subset $\Omega\subset\mathbb{C}$
+is a family of open sets $\{U_{\alpha}\}$ such that 
+\[
+\Omega\subset\bigcup_{\alpha}U_{\alpha}.
+\]
+
+A set $\Omega\subset\mathbb{C}$ is said to be \textbf{compact }if
+every open cover of $\Omega$ has a finite subcover. \end{defn}
+
+\begin{theorem}\label{theorem1.3}\hfill
+\begin{enumerate}
+\item A set $\Omega\subset\mathbb{C}$ is compact if and only it is closed
+and bounded.
+\item A set $\Omega\subset\mathbb{C}$ is compact if and only if every sequence
+$\{z_{n}\}\subset\Omega$ has a convergent subsequence.
+\end{enumerate}
+\end{theorem}
+
+\begin{defn}\label{defndiameter} The \textbf{diameter }of a set $\Omega$
+is $\text{diam}(\Omega)=\text{sup}\{|x-y|\mid x,y\in\Omega\}$. \end{defn}
+
+\begin{prop}\label{propsequenceofcompactsets} If $\Omega_{1}\supset\Omega_{2}\supset\cdots$
+is a sequence of nonempty compact sets in $\mathbb{C}$ with the property
+that $\text{diam}(\Omega_{i})\to0$ as $i\to\infty$, then there is
+a unique point $\omega\in\mathbb{C}$ such that $\omega\in\Omega_{i}$
+for all $i$. \end{prop}
+
+\begin{proof} If $\bigcap_{i}\Omega_{i}$ is empty, then $\bigcap_{i}(\mathbb{C}\backslash\Omega_{i})\cap\Omega_{1}$
+gives an open cover of $\Omega_{1}$ with no finite subcover. Therefore
+$\bigcap_{i}\Omega_{i}$ is nonempty. Now suppose $\omega,\omega'\in\bigcap_{i}\Omega_{i}$.
+Then $|\omega-\omega'|=0$ since $\text{diam}(\Omega_{i})\to0$. Therefore
+$\omega=\omega'$. \end{proof}
+
+\section{Holomorphic Functions and Power Series}
+
+\begin{defn} Given a sequence $\{z_{1},z_{2},\dots\}$ in $\mathbb{C}$,
+the \textbf{series} $\sum z_{n}$ is defined to be the limit of the
+partial sums $s_{N}:=\sum_{n=1}^{N}z_{n}$ as $N\to\infty$. \end{defn}
+
+~~~In any metric space, if a sequence is convergent, then it is
+cauchy. In a complete metric space, a sequence is convergent if and
+only if it is cauchy. Since $\mathbb{C}$ is complete under $|\cdot|$,
+we will use the cauchy condition quite a lot to determine whether
+a sequence is convergent or not. In terms of the partial sums $s_{n}$,
+the cauchy condition says this: The sequence $\{s_{1},s_{2},\dots\}$
+converges to a limit if and only if for every $\varepsilon>0$, there
+is an $N$, such that 
+\[
+|s_{n}-s_{m}|=\left|\sum_{k=m+1}^{n}z_{k}\right|<\varepsilon
+\]
+
+for all $n\ge m\geq N$. To summarize this in a more compact form,
+the series $\sum z_{n}$ converges if and only if the sum
+\[
+\left|\sum_{n=M}^{N}z_{n}\right|
+\]
+
+tends to $0$ as $M,N\to\infty$.
+
+\begin{defn} We say that the series $\sum z_{n}$ is \textbf{absolutely
+convergent }if the series $\sum|z_{n}|$ is converges. \end{defn}
+
+Using the triangle inequality together with the cauchy condition,
+it's easy to show that absolute convergence implies convergence:
+\[
+\left|\sum_{n=M}^{N}z_{n}\right|\le\sum_{n=M}^{N}|z_{n}|,
+\]
+
+and the right side tends to $0$ as $M,N\to\infty$. 
+
+\begin{defn}A \textbf{power series }in $z$ is a series of the form
+$\sum_{k=0}^{\infty}a_{k}z^{k}$. \end{defn}
+
+\begin{lemma} A power series $\sum c_{n}z^{n}$ centered at the origin
+that converges at $z_{0}\neq0$ is absolutely convergent at every
+$z$ with $|z|<|z_{0}|$. \end{lemma}
+
+\begin{proof} Let $r=|z/z_{0}|<1$ and $|c_{n}z_{0}^{n}|\leq B$
+for some bound $B$. Then 
+\begin{align*}
+\sum|c_{n}z^{n}| & =\sum|c_{n}z_{0}^{n}||z/z_{0}|^{n}\\
+ & \leq\sum Br^{n}\\
+ & =B/(1-r)\\
+ & <\infty.
+\end{align*}
+
+\end{proof}
+
+\begin{lemma} Let $a_{n}\geq0$ and assume the series $\sum a_{n}$
+converges, say to $S$. For every permutaiton $\pi$ of the index
+set, the series $\sum a_{\pi(n)}$ also converges to $S$. \end{lemma}
+
+\begin{proof} Choose $\varepsilon>0$. For all large $N$, say $N\geq M$
+(where $M$ depends on $\varepsilon$), 
+\[
+S-\varepsilon\leq\sum_{n=1}^{N}a_{n}\leq S+\varepsilon.
+\]
+
+The permutation $\pi$ takes on all values $1,2,\dots,M$ among some
+initial segment of the positive integers, say 
+\[
+\{1,2,\dots,M\}\subset\{\pi(1),\pi(2),\dots,\pi(K)\}
+\]
+
+for some $K$. For $N\geq K$, the set $\{a_{\pi(1)},\dots,a_{\pi(N)}\}$
+contains $\{a_{1},\dots,a_{M}\}$. Let $J$ be the maximal value of
+$\pi(n)$ for $n\le N$. So for $N\geq K$, 
+\begin{equation}
+S-\varepsilon\le\sum_{n=1}^{M}a_{n}\le\sum_{n=1}^{N}a_{\pi(n)}\le\sum_{n=1}^{J}a_{n}\le S+\varepsilon.\label{eq:sumsquash}
+\end{equation}
+
+So for every $\varepsilon$, $\sum_{n=1}^{N}a_{\pi(n)}$ is within
+$\varepsilon$ of $S$ for all large $N$. Therefore $\sum a_{\pi(n)}=S$.
+
+\end{proof}
+
+~~~To get a feel for how the proof above works, let's take the
+case where our permutation of the sum $\sum z_{n}$ starts out as
+\[
+z_{12}+z_{2}+z_{4}+z_{3}+z_{6}+z_{8}+z_{5}+z_{10}+z_{1}+z_{7}+z_{14}+z_{16}+\cdots
+\]
+
+and let's assume that we chose $\varepsilon>0$ in such a way that
+we can take $M=5$. In this case, $K=9$ since the first nine terms
+in our rearranged sum contain the first five terms in our original
+sum. Then taking $N=12$, (\ref{eq:sumsquash}) tells us 
+\[
+S-\varepsilon\le\sum_{n=1}^{5}z_{n}\le z_{12}+z_{2}+z_{4}+z_{3}+z_{6}+z_{8}+z_{5}+z_{10}+z_{1}+z_{7}+z_{14}+z_{16}\le\sum_{n=1}^{16}z_{n}\le S+\varepsilon.
+\]
+
+Note that the reason we have 
+\[
+\sum_{n=1}^{5}z_{n}\le z_{12}+z_{2}+z_{4}+z_{3}+z_{6}+z_{8}+z_{5}+z_{10}+z_{1}+z_{7}+z_{14}+z_{16}\le\sum_{i=1}^{16}z_{i}
+\]
+
+is because all of the $z_{i}$ are positive. 
+
+\begin{theorem} If $f(z)=\sum c_{n}z^{n}$ converges at the point
+$z_{0}$, then $f(z_{0})$ is the limit of $f(z)$ as $z\to z_{0}$
+along a radial path from the origin. In particular, if $\sum c_{n}$
+converges, then 
+\[
+\lim_{x\to1^{-}}\sum c_{n}x^{n}=\sum c_{n}
+\]
+
+\end{theorem}
+
+\begin{proof} The case of a series at $z_{0}$ is easily reduced
+to the case $z_{0}=1$ by a scaling and a rotation. So we assume $z_{0}=1$.
+Since $\sum c_{n}z^{n}$ converges at $z=1$, the series converges
+on the open unit disc. Let $b_{n}=c_{0}+\cdots+c_{n}$, $b=\lim_{n\to\infty}b_{n}$,
+$0<x<1$. Then 
+\[
+\sum_{n=0}^{N}c_{n}x^{n}=\sum_{n=0}^{N}b_{n}x^{n}-x\sum_{n=0}^{N-1}b_{n}x^{n}=(1-x)\sum_{n=0}^{N-1}b_{n}x^{n}+b_{N}x^{N}.
+\]
+
+Let $N\to\infty$. Since $b_{N}\to b$ and $x^{N}\to0$, we get 
+\[
+\sum_{n\geq0}c_{n}x^{n}=(1-x)\sum_{n\geq0}b_{n}x^{n}.
+\]
+
+Since $\sum c_{n}x^{n}-b=(1-x)\sum(b_{n}-b)x^{n}$, we choose $\varepsilon>0$
+and then $M$ so that $|b_{n}-b|\leq\varepsilon$ for $n>M$. Then
+\[
+\left|\sum_{n\geq0}c_{n}x^{n}-b\right|\leq(1-x)\sum_{n=0}^{M}\left|b_{n}-b\right|x^{n}+\varepsilon\leqq(1-x)\sum_{n=0}^{M}|b_{n}-b|+\varepsilon.
+\]
+
+For $|x-1|$ small enough, the first term on the right side can be
+made $\leq\varepsilon$. \end{proof}
+
+\begin{defn}\label{defnuniformconvergence} Let $f_{n}:D\to\mathbb{C}$
+where $D\subseteq\mathbb{C}$. Then
+\begin{enumerate}
+\item The sequence $\{f_{n}\}$ converges \textbf{pointwise }on\textbf{
+}$D$ to a function $f$ if $f_{n}(z)\to f(z)$ for all $z\in D$.
+\item The sequence $\{f_{n}\}$ converges \textbf{uniformly }on $D$ to
+a function $f$ if for all $\varepsilon>0$, there exists $N\in\mathbb{N}$
+such that for all $n\geq N$ and for all $z\in D$, we have $|f_{n}(z)-f(z)|<\varepsilon$. 
+\item The sequence $\{f_{n}\}$ is \textbf{uniformly cauchy }on $D$ if
+given any $\varepsilon>0$, there exists $N\in\mathbb{N}$ such that
+for all $m,n\geq N$ and for all $z\in D$, we have $|f_{n}(z)-f_{m}(z)|<\varepsilon$.
+\item The series $\sum_{n=1}^{\infty}f_{n}$ converges \textbf{uniformly
+}on $D$ to a function $f$ if the sequence of partial sums $\left\{ \sum_{n=1}^{N}f_{n}\right\} $
+converges uniformly on $D$ to $f$.
+\item The series $\sum_{n=1}^{\infty}f_{n}$ converges \textbf{uniformly
+cauchy }on $D$ to a function $f$ if the sequence of partial sums
+$\left\{ \sum_{n=1}^{N}f_{n}\right\} $ converges uniformly cauchy
+on $D$ to $f$.
+\end{enumerate}
+\end{defn}
+
+\begin{theorem}\label{theorem1.5} Let $f_{n}:D\to\mathbb{C}$ where
+$D\subseteq\mathbb{C}$. Then 
+\begin{enumerate}
+\item $\{f_{n}\}$ is uniformly convergence on $D$ if and only if $\{f_{n}\}$
+is uniformly cauchy on $D$.
+\item (Weierstrass $M$-test) If $|f_{n}(z)|\leq M_{n}$ for all $n\in\mathbb{N}$,
+$z\in D$, and if $\sum_{n=1}^{\infty}M_{n}<\infty$, then $\sum_{n=1}^{\infty}f_{n}$
+converges uniformly on $D$. 
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}\hfill
+\begin{enumerate}
+\item $(\implies)$ is an easy exercise. $(\impliedby)$ Assume $\{f_{n}\}$
+is uniformly Cauchy on $D$. Then given $\varepsilon>0$, there exists
+$N\in\mathbb{N}$ such that for all $m,n\geq N$ and for all $z\in D$,
+we have $|f_{n}(z)-f_{m}(z)|<\varepsilon$. Fix $z\in D$. Then $\{f_{n}(z)\}$
+is a Cauchy sequence in $\mathbb{C}$, and hence converges to some
+limit $f(z)$. Now keep $n$ fixed and let $m\to\infty$. Then $|f_{n}(z)-f(z)|\leq\varepsilon$
+for all $n\geq N$, $z\in D$. 
+\item It suffices to show that $\left\{ \sum_{n=1}^{N}f_{n}\right\} $ converges
+uniformly Cauchy on $D$. Note that for all $z\in D$, we have
+\begin{align*}
+\left|\sum_{k=1}^{n}f_{k}(z)-\sum_{k=1}^{m}f_{k}(z)\right| & =\left|\sum_{k=m+1}^{n}f_{k}(z)\right|\\
+ & \leq\sum_{k=m+1}^{n}\left|f_{k}(z)\right|\\
+ & \leq\sum_{k=m+1}^{n}M_{k}\\
+ & =\sum_{k=1}^{n}M_{k}-\sum_{k=1}^{m}M_{k}
+\end{align*}
+ But $\left\{ \sum_{k=1}^{n}M_{k}\right\} $ is a Cauchy sequence.
+Hence $\left\{ \sum_{k=1}^{n}f_{k}(z)\right\} $ is uniformly Cauchy. 
+\end{enumerate}
+\end{proof}
+
+\subsection{Limit Supremum}
+
+~~~To study the convergence of a power series, we recall the notion
+of $\text{limsup}$ of a positive real-valued sequence. That is, if
+$\{a_{k}\}_{k=1}^{\infty}$ is a sequence of positive real-valued
+numbers, then 
+\[
+\text{limsup}\left(a_{k}\right)=\lim_{n\to\infty}\left(\sup_{k\ge n}\left(a_{k}\right)\right).
+\]
+
+Since $\sup_{k\geq n}\left(a_{k}\right)$ is a non-increasing function
+of $n$, the limit always exists or equals $+\infty$. The properties
+of the $\text{limsup}$ which will be of interest to us are the following:
+
+\begin{prop}\label{proplimsup} Suppose $\{a_{k}\}_{k=1}^{\infty}$
+is a sequence of positive real-valued numbers such that $\text{limsup}\left(a_{k}\right)=L$.
+Then 
+\begin{enumerate}
+\item for each $\varepsilon>0$ and $N\in\mathbb{N}$, there exists some
+$k\geq N$ such that $a_{k}\geq L-\varepsilon$.
+\item for each $\varepsilon>0$, there exists $N\in N$ such that $a_{k}\leq L+\varepsilon$
+for all $k>N$. 
+\item $\text{limsup}\left(ca_{k}\right)=cL$ for any nonnegative constant
+$c$. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\begin{enumerate}
+\item Choose $N$ and $\varepsilon>0$ and suppose that there does not exist
+a $k>N$ such that $a_{k}\geq L-\varepsilon$. Then $L-\varepsilon>a_{k}$
+for all $k>N$. This implies $\sup_{k\geq N}\left(a_{k}\right)<L$.
+This is a contradiction since $\sup_{k\ge n}\left(a_{k}\right)$ is
+a non-increasing function of $n$. 
+\item Choose $\varepsilon>0$ and suppose that there does not exist an $N\in\mathbb{N}$
+such that $a_{k}\leq L+\varepsilon$ for all $k>N$. Then $\sup_{k\geq N}\left(a_{k}\right)\geq L+\varepsilon$
+for all $N\in\mathbb{N}$. This implies $\text{limsup}\left(a_{k}\right)\geq L+\varepsilon$,
+which is a contradiction.
+\item This follows since 
+\[
+\lim_{n\to\infty}\left(\sup_{k\ge n}\left(ca_{k}\right)\right)=\lim_{n\to\infty}\left(c\sup_{k\ge n}\left(a_{k}\right)\right)=c\lim_{n\to\infty}\left(\sup_{k\ge n}\left(a_{k}\right)\right).
+\]
+\end{enumerate}
+\end{proof}
+
+\begin{rem}Here are some additional properties of limsup, which are
+easy to verify:
+\begin{enumerate}
+\item If $\{a_{n}\}$ and $\{b_{n}\}$ are two bounded real sequences, then
+$\text{limsup}(a_{n}+b_{n})\leq\text{limsup}(a_{n})+\text{limsup}(b_{n})$
+\item If $\{a_{n}\}$ and $\{b_{n}\}$ are two bounded real sequences such
+that $\{b_{n}\}$ converges to $b$, then $\text{limsup}(a_{n}+b_{n})=\text{limsup}(a_{n})+b$.
+\item If $\{a_{n}\}$ and $\{b_{n}\}$ are two bounded real sequences such
+that $\{b_{n}\}$ converges to $b$, then $\text{limsup}(a_{n}b_{n})=b\text{limsup}(a_{n})$.
+\end{enumerate}
+\end{rem}
+
+\begin{theorem} Suppose $\text{limsup}\left(\left|a_{k}\right|^{1/k}\right)=L$.
+\begin{enumerate}
+\item If $L=0$, $\sum a_{k}z^{k}$ converges for all $z$.
+\item If $L=\infty$, $\sum a_{k}z^{k}$ converges for $z=0$ only.
+\item If $0<L<\infty$, set $R=1/L$. Then $\sum a_{k}z^{k}$ converges
+for $|z|<R$ and diverges for $|z|>R$. ($R$ is called the radius
+of convergence of the power series.) 
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} We prove (3). Assume first that $|z|<R$ and set $|z|=R(1-2\delta)$.
+Then since
+\[
+\text{limsup}\left(|z|\left|a_{k}\right|^{1/k}\right)=|z|\text{limsup}\left(\left|a_{k}\right|^{1/k}\right)=1-2\delta,
+\]
+$|z||a_{k}|^{1/k}<1-\delta$ for sufficiently large $k$. This implies
+$|a_{k}z^{k}|<(1-\delta)^{k}$ for sufficiently large $k$. Hence
+$\sum a_{k}z^{k}$ is absolutely convergent. On the other hand, if
+$|z|>R$, then
+\[
+\text{limsup}\left(|z|\left|a_{k}\right|^{1/k}\right)>1,
+\]
+so that for infinitely many values of $k$, $a_{k}z^{k}$ has absolute
+value greater than $1$ and $\sum a_{k}z^{k}$ diverges. \end{proof}
+
+\begin{example} Since $n^{1/n}\to1$, $\sum_{n=1}^{\infty}nz^{n}$
+converges for $|z|<1$ and diverges for $|z|>1$. The series also
+diverges for $|z|=1$ for then $|nz^{n}|=n\to\infty$. \end{example}
+
+\begin{example} $\sum_{n=0}^{\infty}z^{n^{2}}=1+z+z^{4}+z^{9}+z^{16}+\cdots$
+has radius of convergence $1$. In this case $\overline{\lim}|a_{n}|^{1/n}=\lim1=1$.
+\end{example}
+
+\begin{example} Any series of the form $\sum a_{n}z^{n}$ with $|a_{n}|=1$
+has radius of convergence equal to $1$. \end{example}
+
+\begin{example} The generating function for the Catalan numbers $C_{n}$
+is 
+\[
+f(z)=(z^{2}+z)^{2}+z)^{2}+z)^{2}+\cdots)=z+2z^{2}+5z^{3}+14z^{4}+\cdots.
+\]
+
+Since $|C_{n}|^{1/n}=4$, we see that this power series converges
+for all $z$ such that $|z|<1/4$. \end{example}
+
+\begin{example} Consider the series 
+\begin{enumerate}
+\item $\sum_{n=1}^{\infty}z^{n}$
+\item $\sum_{n=1}^{\infty}\frac{z^{n}}{n}$
+\item $\sum_{n=1}^{\infty}\frac{z^{n}}{n^{2}}$
+\end{enumerate}
+Then 
+\begin{enumerate}
+\item $\text{limsup}\left(1^{1/n}\right)=1$
+\item $\text{limsup}\left(\frac{1}{n^{1/n}}\right)=1$
+\item $\text{limsup}\left(\frac{1}{n^{2/n}}\right)=1$
+\end{enumerate}
+Therefore the radius of convergence for all three series are $R=1$.
+What happens when $|z|=1?$ 
+\begin{enumerate}
+\item This series diverges on $|z|=1$ because $|z^{n}|=1\not\to0$ as $n\to\infty$. 
+\item This series diverges at $z=1$ since this is the harmonic series.
+On the other hand, this series converges everywhere else by the Dirichlet
+test, which says if $a_{n}\in\mathbb{C}$ with $\left|\sum_{i=1}^{n}a_{i}\right|\leq M$,
+where $M$ is a constant, and $b_{n}\in\mathbb{R}$ such that $b_{n}\to0$
+and $\{b_{n}\}$ is decreasing, then $\sum_{n=1}^{\infty}a_{n}b_{n}$
+converges. Take $b_{n}=\frac{1}{n}$ and $a_{n}=e^{in\theta}$. Then
+\[
+\left|\sum_{i=1}^{n}a_{i}\right|=\left|\frac{e^{i\theta}\left(e^{in\theta}-1\right)}{e^{i\theta}-1}\right|\leq\frac{2}{\left|e^{i\theta}-1\right|}\leq M
+\]
+ when $\theta\neq0$.
+\item This converges at every point $|z|=1$ since $\left|\frac{z^{n}}{n^{2}}\right|\leq\frac{1}{n^{2}}$,
+and $\sum_{n=1}^{\infty}\frac{1}{n^{2}}$ converges.
+\end{enumerate}
+\end{example}
+
+\begin{rem} The ratio test can also be applied to series of complex
+numbers. Given a power series 
+\[
+\sum_{n=0}^{\infty}a_{n}z^{n},
+\]
+we set $b_{n}:=a_{n}|z|^{n}$ and study the limit 
+\[
+\frac{b_{n+1}}{b_{n}}=\frac{a_{n+1}}{a_{n}}|z|
+\]
+as $n\to\infty$. If for some $\varepsilon>0$ and $N\in\mathbb{N}$,
+we have 
+\[
+\left|\frac{b_{n+1}}{b_{n}}\right|\geq|z|-\varepsilon>1
+\]
+for all $n\geq N$, then 
+\[
+b_{n+1}\geq(|z|-\varepsilon)b_{n}\geq(|z|-\varepsilon)^{2}b_{n-1}\geq\cdots\geq(|z|-\varepsilon)^{n-N+1}|b_{N}|.
+\]
+
+\end{rem}
+
+\begin{example} We find the radius of convergence of 
+\[
+\sum_{n=0}^{\infty}\left(\frac{n+2}{2n^{2}+1}\right)z^{n}
+\]
+using the ratio test. Let 
+\[
+b_{n}:=\left(\frac{n+2}{2n^{2}+1}\right)|z|^{n}.
+\]
+Then 
+\[
+\frac{b_{n+1}}{b_{n}}=\frac{(n+3)(2n^{2}+1)}{(2(n+1)^{2}+1)(n+2)}|z|=\frac{2n^{3}+6n^{2}+n+3}{2n^{3}+8n^{2}+11n+6}|z|\to|z|,
+\]
+so the series converges absolutely for $|z|<1$, and diverges for
+$|z|>1$. \end{example}
+
+\begin{rem} The power series $\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}$
+and $\sum_{n=1}^{\infty}na_{n}(z-z_{0})^{n-1}$ have the same radius
+of convergence since 
+\[
+R=\frac{1}{\text{limsup}\left(\left|a_{n}\right|^{\frac{1}{n}}\right)}=\frac{1}{\text{limsup}\left(\left|na_{n}\right|^{\frac{1}{n}}\right)}
+\]
+\end{rem}
+
+\subsection{Limits and Continuity}
+
+\begin{defn} Let $D$ be a nonempty subset of $\mathbb{C}$. A point
+$z_{0}\in\mathbb{C}$ is an \textbf{accumulation point }of $D$ if
+there exists a sequence of points $z_{n}\in D\backslash\{z_{0}\}$
+such that $z_{n}\to z_{0}$. Equivalently, this means that for each
+$r>0$, we have $D\cap D_{r}(z_{0})\neq\emptyset$. A point $z_{0}\in\mathbb{C}$
+is an \textbf{isolated point }of $D$ if there exists $r>0$ such
+that $D\cap D_{r}(z_{0})=\emptyset$. \end{defn}
+
+\begin{defn} Let $f:D\to\mathbb{C}$ be a function and let $z_{0}$
+be an accumulation point of $D$. We say that $\text{lim}_{z\to z_{0}}f(z)=\ell$
+(or $f(z)\to\ell$ as $z\to z_{0}$) if given any $\varepsilon>0$,
+there exists $\delta>0$ such that $|f(z)-\ell|<\varepsilon$ for
+all $z\in D\cap D_{\delta}(z_{0})$. \end{defn}
+
+\begin{rem}\label{rem} Let $f,g:D\to\mathbb{C}$ be two functions
+such that $f(z)\to\ell$ and $g(z)\to\ell'$ as $z\to z_{0}$. Then
+$\alpha f(z)+\beta g(z)\to\alpha\ell+\beta\ell'$ and $f(z)g(z)\to\ell\ell'$
+as $z\to z_{0}$.\end{rem}
+
+\begin{defn}\label{defn} Let $f:D\to\mathbb{C}$ be a function. We
+say that $f$ is \textbf{continuous }at $z_{0}\in D$ if given any
+$\varepsilon>0$, there exists $\delta>0$ such that $f(z)\in D_{\varepsilon}(f(z_{0}))$
+whenever $z\in D_{\delta}(z_{0})\cap D$. \end{defn}
+
+\begin{prop}\label{prop} Let $f_{n}:D\to\mathbb{C}$ be a sequence
+of continuous functions. If $f_{n}$ converges to $f$ uniformly on
+$D$, then $f$ is continuous on $D$. \end{prop}
+
+\begin{proof} Take $z_{0}\in D$. Given $\varepsilon>0$, choose
+$N\in\mathbb{N}$ such that 
+\[
+|f_{n}(z)-f(z)|<\frac{\varepsilon}{3},
+\]
+for all $n\geq N$ and $z\in D$. Since $f_{N}$ is continuous at
+$z_{0}$, there exists $\delta>0$ such that 
+\[
+|f_{N}(z)-f_{N}(z_{0})|<\frac{\varepsilon}{3}
+\]
+
+whenever $|z-z_{0}|<\delta$. Now if $|z-z_{0}|<\delta$, $z\in D$,
+then 
+\begin{align*}
+|f(z)-f(z_{0})| & \leq|f(z)-f_{N}(z))|+|f_{N}(z)-f_{N}(z_{0})|+|f_{N}(z_{0})-f(z_{0})|\\
+ & <\frac{\varepsilon}{3}+\frac{\varepsilon}{3}+\frac{\varepsilon}{3}\\
+ & =\varepsilon.
+\end{align*}
+\end{proof}
+
+\subsection{Holomorphic Functions}
+
+\begin{defn}\label{defn} Let $\Omega$ be an open set in $\mathbb{C}$
+and $f$ a complex-valued function on $\Omega$. The function $f$
+is \textbf{holomorphic at the point }$z_{0}\in\Omega$ if the quotient
+\[
+\frac{f(z_{0}+h)-f(z_{0})}{h}
+\]
+converges to a limit when $h\to0$. Here $h\in\mathbb{C}$ and $h\neq0$
+with $z_{0}+h\in\Omega$, so that the quotient is well defined. The
+limit of the quotient, when it exists, is denoted by $f'(z_{0})$,
+and is called the \textbf{derivative of $f$ at $z_{0}$}:
+\[
+f'(z_{0}):=\lim_{h\to0}\frac{f(z_{0}+h)-f(z_{0})}{h}
+\]
+
+The function $f$ is said to be \textbf{holomorphic on $\Omega$ }if
+$f$ is holomorphic at every point of $\Omega$. If $C$ is a closed
+subset of $\mathbb{C}$, we say that $f$ is \textbf{holomorphic on
+$C$ }if $f$ is holomorphic in some open set containing $C$. We
+also say $f$ is \textbf{holomorphic }at $z_{0}$ if $f$ is differentiable
+on some open neighborhood $D_{r}(z_{0})$ of $z_{0}$. Finally, if
+$f$ is holomorphic in all of $\mathbb{C}$ we say that $f$ is \textbf{entire}.
+\end{defn}
+
+\begin{example}\label{example} \hfill
+\begin{enumerate}
+\item Polynomials and rational functions are entire functions.
+\item Let $f:\mathbb{C}\to\mathbb{C}$ be given by $f(z)=\overline{z}$.
+Then $f$ is continuous everywhere in $\mathbb{C}$ but is not differentiable
+anywhere in $\mathbb{C}$. To see this, let $z_{0}\in\mathbb{C}$.
+Then
+\[
+\lim_{h\to0}\frac{f(z_{0}+h)-f(z_{0})}{h}=\lim_{h\to0}\frac{\overline{h}}{h}.
+\]
+Letting $h=\varepsilon$ where $\varepsilon\in\mathbb{R}$, we get
+\[
+\lim_{h\to0}\frac{\overline{h}}{h}=1.
+\]
+On the other hand, letting $h=i\varepsilon$ where $\varepsilon\in\mathbb{R}$,
+we get
+\[
+\lim_{h\to0}\frac{\overline{h}}{h}=-1\neq1.
+\]
+Therefore the limit does not exist. 
+\item Let $f:\mathbb{C}\to\mathbb{C}$ be given by $f(z)=|z|^{2}$. Then
+$f$ is differentiable at $z_{0}=0$, but it not differentiable whenever
+$z_{0}\neq0$. In particular, $f$ is not holomorphic at $0$. To
+see this, let $z_{0}=0$. Then
+\begin{align*}
+\lim_{h\to0}\frac{f(z_{0}+h)-f(h)}{h} & =\lim_{h\to0}\frac{|h|^{2}}{h}\\
+ & =\lim_{h\to0}\frac{h\overline{h}}{h}\\
+ & =\lim_{h\to0}\overline{h}\\
+ & =0.
+\end{align*}
+So $f$ is differentiable at $0$. Now assume $f$ were differentiable
+at some $z_{0}\neq0$. Let $g:\mathbb{C}\to\mathbb{C}$ be given by
+$g(z)=z$. Then since $g$ is differentiable at $z_{0}$ and $g(z_{0})=z_{0}\neq0$,
+the quotient $f/g$ must be differentiable at $z_{0}$. But $f(z)/g(z)=\overline{z}$,
+which we know is not differentiable anywhere. Therefore we have a
+contradiction, and so $f$ is not differentiable at $z_{0}\neq0$. 
+\end{enumerate}
+\end{example}
+
+\begin{prop}\label{prop} Let $\Omega$ be an open set in $\mathbb{C}$
+and $f$ a complex-valued function on $\Omega$. Then $f$ is holomorphic
+at $z_{0}\in\Omega$ if and only if there exists a complex number
+$a$ such that 
+\begin{equation}
+f(z_{0}+h)=f(z_{0})+ah+\psi(h)h,\label{eq:holomorphic}
+\end{equation}
+where $\psi$ is a function defined for all small $h$ and $\lim_{h\to0}\psi(h)=0$.
+\end{prop}
+
+\begin{proof} Assume (\ref{eq:holomorphic}) holds. Then 
+\[
+\lim_{h\to0}\frac{f(z_{0}+h)-f(z_{0})}{h}=\lim_{h\to0}\frac{ah+\psi(h)h}{h}=a,
+\]
+so $f'(z_{0})$ exists and $f'(z_{0})=a$. Conversely, assume $f'(z_{0})$
+exists. Define $\psi$ as 
+\[
+\psi(h)=\frac{f(z_{0}+h)-f(z_{0})-f'(z_{0})h}{h}.
+\]
+
+Then $\psi$ satisfies the desired properties. \end{proof}
+
+\begin{prop}\label{prop} Let $f:\Omega\to U$ and $g:U\to\mathbb{C}$
+be holomorphic functions on the open sets $\Omega$ and $U$ respectively.
+Then the chain rule holds
+\[
+(g\circ f)'(z)=g'(f(z))f'(z)
+\]
+for all $z\in\Omega$. \end{prop}
+
+\begin{proof} Suppose $z\in\Omega$. Since $f$ is holomorphic at
+$z$, we have 
+\[
+f(z+h)=f(z)+f'(z)h+\psi_{1}(h)h
+\]
+
+where $\psi_{1}$ is a function defined for all small $h$ and $\lim_{h\to0}\psi_{1}(h)=0$.
+Since $g$ is holomorphic at $f(z)\in U$, we have 
+\[
+g(f(z)+h)=g(f(z))+g'(f(z))h+\psi_{2}(h)h
+\]
+where $\psi_{2}$ is a function defined for all small $h$ and $\lim_{h\to0}\psi_{1}(h)=0$.
+\begin{align*}
+(g\circ f)(z+h) & =g(f(z+h))\\
+ & =g(f(z)+f'(z)h+\psi_{1}(h)h)\\
+ & =g(f(z))+g'(f(z))(f'(z)h+\psi_{1}(h)h)+\psi_{2}(h)(f'(z)h+\psi_{1}(h)h)\\
+ & =g(f(z))+g'(f(z))f'(z)h+\psi_{3}(h)h
+\end{align*}
+
+where $\psi_{3}(h)=g'(f(z))\psi_{1}(h)h+\psi_{2}(h)f'(z)h+\psi_{1}(h)\psi_{2}(h)h$.
+Since $\psi_{3}$ is a function defined for all small $h$ and $\lim_{h\to0}\psi_{3}(h)=0$,
+it follows that 
+\[
+(g\circ f)'(z)=g'(f(z))f'(z)
+\]
+for all $z\in\Omega$. \end{proof}
+
+\begin{prop}\label{prop} Let $\Omega$ be an open subset of $\mathbb{C}$
+and let $f,g:\Omega\to\mathbb{C}$ be holomorphic functions. Then
+the product rule holds
+\[
+(fg)'(z)=f'(z)g(z)+f(z)g'(z)
+\]
+for all $z\in\Omega$. \end{prop}
+
+\begin{proof} Suppose $z\in\Omega$. Since $f$ is holomorphic at
+$z$, we have 
+\[
+f(z+h)=f(z)+f'(z)h+\psi_{1}(h)h
+\]
+
+where $\psi_{1}$ is a function defined for all small $h$ and $\lim_{h\to0}\psi_{1}(h)=0$.
+Since $g$ is holomorphic at $f(z)\in U$, we have 
+\[
+g(f(z)+h)=g(f(z))+g'(f(z))h+\psi_{2}(h)h
+\]
+where $\psi_{2}$ is a function defined for all small $h$ and $\lim_{h\to0}\psi_{1}(h)=0$.
+Then 
+
+\begin{align*}
+f(z+h)g(z+h) & =(f(z)+f'(z)h+\psi_{1}(h)h)(g(z)+g'(z)h+\psi_{2}(h)h)\\
+ & =f(z)g(z)+(f(z)g'(z)+f'(z)g(z))h+\psi_{3}(h)h,
+\end{align*}
+where $\psi_{3}(h)=f(z)\psi_{2}(h)+f'(z)g'(z)h+g(z)\psi_{1}(h)$.
+Since $\psi_{3}$ is a function defined for all small $h$ and $\lim_{h\to0}\psi_{3}(h)=0$,
+it follows that 
+\[
+(fg)'(z)=f'(z)g(z)+f(z)g'(z)
+\]
+ for all $z\in\Omega$. \end{proof}
+
+~~~Let $f(z)=u(z)+iv(z)$ and $z=x+iy$. We may treat $u$ and
+$v$ as real-valued functions in the variable $x$ and $y$. 
+
+\begin{theorem}\label{theorem1.7} Let $f$ be holomorphic at $z_{0}=x_{0}+iy_{0}$.
+Then the partial derivatives $\partial_{x}u$ , $\partial_{y}u$,
+$\partial_{x}v$, and $\partial_{y}v$ exist at $z_{0}$ and 
+\[
+f'(z_{0})=(\partial_{x}u)(x_{0},y_{0})+i(\partial_{x}v)(x_{0},y_{0})=(\partial_{y}u)(x_{0},y_{0})-i(\partial_{y}v)(x_{0},y_{0}).
+\]
+Consequently, we have the \textbf{Cauchy-Riemann Equations}:
+\begin{align*}
+\partial_{x}u & =\partial_{y}v\\
+-\partial_{y}u & =\partial_{x}v
+\end{align*}
+\end{theorem}
+
+\begin{proof} We have
+\[
+f'(z_{0})=\lim_{h\to0}\frac{f(z_{0}+h)-f(z_{0})}{h}.
+\]
+First let $h\to0$ where $h\in\mathbb{R}$. Then 
+\begin{align*}
+f'(z_{0}) & =\lim_{h\to0}\frac{u(x_{0}+h,y_{0})+iv(x_{0}+h,y_{0})-u(x_{0},y_{0})-iv(x_{0},y_{0})}{h}\\
+ & =\lim_{h\to0}\frac{u(x_{0}+h,y_{0})-u(x_{0},y_{0})}{h}+i\lim_{h\to0}\frac{v(x_{0}+h,y_{0})-v(x_{0},y_{0})}{h}\\
+ & =(\partial_{x}u)(x_{0},y_{0})+i(\partial_{x}v)(x_{0},y_{0}).
+\end{align*}
+Similarly, let $h\to0$ where $h$ is purely imaginary. Then we obtain
+\[
+f'(z_{0})=-i(\partial_{y}u)(x_{0},y_{0})+(\partial_{y}v)(x_{0},y_{0}).
+\]
+
+Equating the two formulas for $f'(z_{0})$ above yields the Cauchy-Riemann
+equations. \end{proof}
+
+~~~Recall that a function $F(x,y)=(u(x,y),v(x,y))$ is said to
+be differentiable at a point $P_{0}=(x_{0},y_{0})$ if there exists
+a linear transformation $J:\mathbb{R}^{2}\to\mathbb{R}^{2}$ such
+that 
+\[
+\frac{|F(P_{0}+H)-F(P_{0})-J(H)|}{|H|}\to0
+\]
+as $|H|\to0$ where $H\in\mathbb{R}^{2}$. Equivalently, we can write
+\[
+F(P_{0}+H)-F(P_{0})=J(H)+|H|\Psi(H),
+\]
+with $|\Psi(H)|\to0$ as $|H|\to0$. The linear transformation $J$
+is unique and is called the derivative of $F$ at $P_{0}$. If $F$
+is differentiable, the partial derivatives exist, and the linear transformation
+$J$ is described in the standard basis of $\mathbb{R}^{2}$ by the
+Jacobian matrix of $F$ 
+\[
+J=J_{F}(x,y)=\begin{pmatrix}\partial_{x}u & \partial_{y}u\\
+\partial_{x}v & \partial_{y}v
+\end{pmatrix}.
+\]
+In the case of complex differentiation the derivative is a complex
+number $f'(z_{0})$, while in the case of real derivatives, it is
+a matrix. 
+
+~~~We can clarify the situation further by defining two differential
+operators
+\[
+\partial_{z}:=\frac{1}{2}\left(\partial_{x}-i\partial_{y}\right)\quad\text{and}\quad\partial_{\overline{z}}:=\frac{1}{2}\left(\partial_{x}+i\partial_{y}\right)
+\]
+
+\begin{example}\label{example} Let $f(z)=\overline{z}=x-iy$. Then
+\[
+\partial_{x}u=1\neq-1=\partial_{y}v,
+\]
+so $f$ is not differentiable. \end{example}
+
+\begin{cor}\label{cor} \hfill
+\begin{enumerate}
+\item If $f$ is holomorphic on $D_{r}(z_{0})$ with $f'(z)=0$ for all
+$z\in D_{r}(z_{0})$, then $f$ is constant on $D_{r}(z_{0})$.
+\item If $f$ is holomorphic on $D_{r}(z_{0})$ and real-valued on $D_{r}(z_{0})$,
+then $f$ is constant.
+\end{enumerate}
+\end{cor}
+
+\begin{proof}\hfill
+\begin{enumerate}
+\item Since $f'(z)=0$, we have $\partial_{x}u+i\partial_{x}v=0=\partial_{y}v-i\partial_{y}u$.
+This implies $\partial_{x}u=\partial_{y}u=\partial_{x}v=\partial_{y}v=0$.
+Therefore $u$ and $v$ are constant functions, and hence, $f$ is
+constant. 
+\item Let $f=u+iv$. Then $v=0$ on $D_{r}(z_{0})$. So $\partial_{x}v=\partial_{y}v=0$
+implies $\partial_{x}u=\partial_{y}u=0$. Therefore $u$ and $v$
+are constant, and so $f$ is constant. 
+\end{enumerate}
+\end{proof}
+
+\begin{example}\label{example} The function $f(z)=|z|^{2}$ is not
+analytic anywhere because it is real-valued and non-constant. \end{example}
+
+\begin{theorem}\label{theorem1.9} Let $f(z)=\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}$
+have radius of convergence $R>0$. Then $f$ is analytic on $D_{R}(z_{0})$
+with 
+\[
+f'(z)=\sum_{n=1}^{\infty}na_{n}(z-z_{0})^{n-1}
+\]
+for $|z-z_{0}|<R$. \end{theorem}
+
+\section{Integration along curves}
+
+~~~A \textbf{parametrized curve }is a function $\gamma:[a,b]\to\mathbb{C}$.
+We say the parametrized curve is \textbf{smooth }if $\dot{\gamma}(t)$
+exists and is continuous on $[a,b]$, and $\dot{\gamma}(t)\neq0$
+for $t\in[a,b]$. At the points $t=a$ and $t=b$, the quantities
+$\dot{\gamma}(a)$ and $\dot{\gamma}(b)$ are interpreted as one-sided
+limits
+\[
+\dot{\gamma}(a)=\lim_{\substack{h\to0\\
+h>0
+}
+}\frac{\gamma(a+h)-\gamma(a)}{h}\quad\text{and}\quad\dot{\gamma}(b)=\lim_{\substack{h\to0\\
+h<0
+}
+}\frac{\gamma(b+h)-\gamma(b)}{h}.
+\]
+
+In general, these quantities are called the right-hand derivative
+of $\gamma(t)$ at $a$, and the left-hand derivative of $\gamma(t)$
+at $b$, respectively.
+
+~~~Similarly, we say that the parametrized curve is \textbf{piecewise-smooth
+}if $\gamma$ is continuous on $[a,b]$ and if there exist points
+\[
+a=a_{0}<a_{1}<\cdots<a_{n}=b,
+\]
+where $\gamma(t)$ is smooth in the intervals $[a_{k},a_{k+1}]$.
+In particular, the right-hand derivative at $a_{k}$ may differ from
+the left-hand derivative at $a_{k}$, for $k=1,\dots,n-1$. 
+
+~~~Two parametrizations 
+\[
+\gamma_{1}:[a,b]\to\mathbb{C}\quad\text{and}\quad\gamma_{2}:[c,d]\to\mathbb{C}
+\]
+are \textbf{equivalent }if there exists a continuously differentiable
+bijection $s\mapsto\varphi(s)$ from $[c,d]$ to $[a,b]$ so that
+$\dot{\varphi}(s)>0$ and 
+\[
+\gamma_{2}(s)=\gamma_{1}(\varphi(s)).
+\]
+The condition $\dot{\varphi}(s)>0$ says precisely that the orientation
+is preserved: as $s$ travels from $c$ to $d$, then $\varphi(s)$
+travels from $a$ to $b$. The family of all parametrizations that
+are equivalent to $\gamma(t)$ determines a \textbf{smooth curve $\Gamma\subset\mathbb{C}$},
+namely the image of $[a,b]$ under $\gamma$ with the orientation
+given by $\gamma$ as $t$ travels from $a$ to $b$. We can define
+a curve $\Gamma^{-}$ obtained from the curve $\Gamma$ by reversing
+the orientation. As a particular parametrization for $\Gamma^{-}$,
+we can take $\gamma^{-}:[a,b]\to\mathbb{C}$ defined by 
+\[
+\gamma^{-}(t)=\gamma(b+a-t).
+\]
+
+~~~It is also clear how to define a \textbf{piecewise-smooth curve}.
+The point $\gamma(a)$ and $\gamma(b)$ are called the \textbf{end-points
+}of the curve and are independent on the parametrization. Since $\gamma$
+carries an orientation, it is natural to say that $\gamma$ begins
+at $\gamma(a)$ and ends at $\gamma(b)$. 
+
+~~~A smooth or piecewise-smooth curve is \textbf{closed }if $\gamma(a)=\gamma(b)$
+for any of its parametrizations. Finally, a smooth or piecewise-smooth
+curve is \textbf{simple }if it is not self-intersecting, that is,
+$\gamma(t)\neq\gamma(s)$ unless $s=t$. 
+
+~~~For brevity, we shall call any piecewise-smooth curve a \textbf{curve},
+since these will be the objects we shall be primarily concerned with. 
+
+\begin{example}\label{example} Let $C_{r}(z_{0})=\{z\in\mathbb{C}\mid|z-z_{0}|=r\}$.
+Then $C_{r}(z_{0})$ is the circle centered at $z_{0}$ and of radius
+$r$. The \textbf{positive orientation }(counterclockwise) is the
+one that is given by the standard parametrization
+\[
+\gamma(t)=z_{0}+re^{2\pi it},\quad\text{where }t\in[0,1],
+\]
+
+while the \textbf{negative orientation }(clockwise)
+\[
+\gamma(t)=z_{0}+re^{-2\pi it},\quad\text{where }t\in[0,1].
+\]
+
+We usually denote by $C$ a general \emph{positively }oriented circle.
+\end{example}
+
+~~~Given a smooth curve $\Gamma$ in $\mathbb{C}$ parametrized
+by $\gamma:[a,b]\to\mathbb{C}$, and $f$ a continuous function on
+$\gamma$, we define the \textbf{integral of $f$ along $\gamma$
+}by 
+\[
+\int_{\Gamma}f(z)dz=\int_{a}^{b}f(\gamma(t))\dot{\gamma}(t)dt.
+\]
+In order for this definition to be meaningful, we must show that the
+right-hand integral is independent of the parametrization chosen for
+$\Gamma$. Say that $\gamma_{1}$ and $\gamma_{2}$ are two equivalent
+parametrizations for $\Gamma$. Then the change of variables formula
+and the chain rule imply that 
+\[
+\int_{a}^{b}f(\gamma_{1}(t))\dot{\gamma}_{1}(t)dt=\int_{c}^{d}f(\gamma_{1}(\varphi(s)))\dot{\gamma}_{1}(\varphi(s))\dot{\varphi}(s)ds=\int_{a}^{b}f(\gamma_{2}(s))\dot{\gamma}_{2}(s)ds.
+\]
+This proves that the integral of $f$ over $\gamma$ is well defined. 
+
+~~~If $\Gamma$ is piecewise smooth, then the integral of $f$
+over $\Gamma$ is simply the sum of the integrals of $f$ over the
+smooth parts of $\Gamma$, so if $\gamma(t)$ is a piecewise-smooth
+parametrization as before, then 
+\[
+\int_{\Gamma}f(z)dz=\sum_{k=0}^{n-1}\int_{a_{k}}^{a_{k+1}}f(\gamma(t))\dot{\gamma}(t)dt.
+\]
+By definition, the \textbf{length }of the smooth curve $\Gamma$ is
+\[
+\text{length}(\Gamma)=\int_{a}^{b}|\dot{\gamma}(t)|dt.
+\]
+Arguing as we just did, it is clear that this definition is also independent
+of the parametrization. Also, if $\gamma$ is only piecewise-smooth,
+then its length is the sum of the lengths of its smooth parts. 
+
+\begin{prop}\label{prop} Integration of continuous functions over
+curves satisfies the following properties: 
+\begin{enumerate}
+\item It is linear, that is, if $\alpha,\beta\in\mathbb{C}$, then 
+\[
+\int_{\Gamma}(\alpha f(z)+\beta g(z))dz=\alpha\int_{\Gamma}f(z)dz+\beta\int_{\Gamma}g(z)dz.
+\]
+\item If $\Gamma^{-}$ is $\Gamma$ with reverse orientation, then 
+\[
+\int_{\Gamma}f(z)dz=-\int_{\Gamma^{-}}f(z)dz.
+\]
+\item One has the inequality 
+\[
+\left|\int_{\Gamma}f(z)dz\right|\leq\sup_{z\in\Gamma}\left|f(z)\right|\cdot\text{length}\left(\Gamma\right).
+\]
+\end{enumerate}
+\end{prop}
+
+\begin{proof}\hfill
+\begin{enumerate}
+\item Follows from the definition and the linearity of the Riemann integral.
+\item Left as an exercise.
+\item Let $\gamma$ be a parametrization of $\Gamma$. Then
+\begin{align*}
+\left|\int_{\Gamma}f(z)dz\right| & =\left|\int_{a}^{b}f(\gamma(t))\dot{\gamma}(t)dt\right|\\
+ & \leq\int_{a}^{b}\left|f(\gamma(t))\dot{\gamma}(t)\right|dt\\
+ & =\int_{a}^{b}\left|f(\gamma(t))\right|\left|\dot{\gamma}(t)\right|dt\\
+ & \leq\sup_{t\in[a,b]}\left|f(\gamma(t))\right|\int_{a}^{b}\left|\dot{\gamma}(t)\right|dt\\
+ & =\sup_{z\in\Gamma}\left|f(z)\right|\cdot\text{length}\left(\Gamma\right)
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{defn}\label{defn} Suppose $f$ is a function on the open set
+$\Omega$. A \textbf{primitive }for $f$ on $\Omega$ is a function
+$F$ that is holomorphic on $\Omega$ and such that $F'(z)=f(z)$
+for all $z\in\Omega$. \end{defn}
+
+\begin{theorem}\label{theorem} If a continuous function $f$ has
+a primitive $F$ in $\Omega$, and $\Gamma$ is a curve in $\Omega$
+that begins at $w_{1}$ and ends at $w_{2}$, then
+\[
+\int_{\Gamma}f(z)dz=F(w_{2})-F(w_{1}).
+\]
+
+\end{theorem}
+
+\begin{proof} If $\Gamma$ is smooth, the proof is a simple application
+of the chain rule and the fundamental theorem of calculus. Indeed,
+if $\gamma(t):[a,b]\to\mathbb{C}$ is a parametrization for $\Gamma$,
+then $\gamma(a)=w_{1}$ and $\gamma(b)=w_{2}$, and we have 
+\begin{align*}
+\int_{\Gamma}f(z)dz & =\int_{a}^{b}f(\gamma(t))\dot{\gamma}(t)dt\\
+ & =\int_{a}^{b}F'(\gamma(t))\dot{\gamma}(t)dt\\
+ & =\int_{a}^{b}\frac{d}{dt}\left(F(\gamma(t))\right)dt\\
+ & =F(\gamma(b))-F(\gamma(a)).
+\end{align*}
+
+If $\Gamma$ is only piecewise-smooth, then arguing as we just did,
+we obtain a telescopic sum, and we have 
+\begin{align*}
+\int_{\Gamma}f(z)dz & =\sum_{k=0}^{n-1}F(\gamma(a_{k+1}))-F(\gamma(a_{k}))\\
+ & =F(\gamma(a_{n}))-F(\gamma(a_{0}))\\
+ & =F(\gamma(b))-F(\gamma(a)).
+\end{align*}
+
+\end{proof}
+
+\begin{cor}\label{corintegralclosedcurve} If $\Gamma$ is a closed
+curve in an open set $\Omega$, and $f$ is continuous and has a primitive
+in $\Omega$, then 
+\[
+\int_{\Gamma}f(z)dz=0.
+\]
+\end{cor}
+
+\begin{proof} This is immediate since the end-points of a closed
+curve coincide. \end{proof}
+
+\begin{defn}\label{defn} A connected open subset in $\mathbb{C}$
+is called a \textbf{region}. \end{defn}
+
+\begin{rem}\label{rem} In $\mathbb{C}$, a connected open subset
+is path-connected. \end{rem}
+
+\begin{cor}\label{cor} If $f$ is holomorphic in a region $\Omega$
+and $f'=0$, then $f$ is constant. \end{cor}
+
+\begin{proof} Fix a point $w_{0}\in\Omega$. It suffices to show
+that $f(w)=f(w_{0})$ for all $w\in\Omega$. Since $\Omega$ is connected,
+for any $w\in\Omega$, there exists a curve $\Gamma$ which joins
+$w_{0}$ to $w$. Since $f$ is clearly a primitive for $f'$, we
+have 
+\[
+\int_{\Gamma}f'(z)dz=f(w)-f(w_{0}).
+\]
+By assumption, $f'=0$, so the integral on the left is $0$, and we
+conclude that $f(w)=f(w_{0})$ as desired. \end{proof}
+
+\subsection{Cauchy's Theorem and its Applications}
+
+~~~Roughly speaking, Cauchy's Theorem states that if $f$ is holomorphic
+in an open set $\Omega$ and $\Gamma\subset\Omega$ is a closed curve
+whose interior is also contained in $\Omega$, then 
+\[
+\int_{\Gamma}f(z)dz=0.
+\]
+
+Many results that follow, and in particular the calculus of residues,
+are related in one way or another to this fact. We first prove this
+in the special case that our curve $\Gamma$ is a triangle:
+
+\begin{theorem}\label{theorem} (Goursat's Theorem) If $\Omega$ is
+an open set in $\mathbb{C}$, and $T\subset\Omega$ is a triangle
+whose interior is also contained in $\Omega$, then 
+\[
+\int_{T}f(z)dz=0,
+\]
+whenever $f$ is holomorphic in $\Omega$. \end{theorem}
+
+\begin{proof} We call $T^{(0)}$ our original triangle (with a fixed
+orientation which we choose to be positive), and let $d^{(0)}$ and
+$p^{(0)}$ denote the diameter and perimeter of $T^{(0)}$, respectively.
+The first step in our construction consists of bisecting each side
+of the triangle and connected the midpoints. This creates four new
+smaller triangles, denote $T_{1}^{(1)}$, $T_{2}^{(1)}$, $T_{3}^{(1)}$,
+and $T_{4}^{(1)}$ that are similar to the original triangle. The
+orientation is chosen to be consistent with that of the original triangle,
+and so after cancellations arising from integration over the same
+side in two opposite directions, we have 
+\[
+\int_{T^{(0)}}f(z)dz=\int_{T_{1}^{(1)}}f(z)dz+\int_{T_{2}^{(1)}}f(z)dz+\int_{T_{3}^{(1)}}f(z)dz+\int_{T_{4}^{(1)}}f(z)dz.
+\]
+By triangle inequality, we must have 
+\[
+\left|\int_{T^{(0)}}f(z)dz\right|\leq4\left|\int_{T_{j}^{(1)}}f(z)dz\right|
+\]
+
+for some $j\in\{1,2,3,4\}$. Without loss of generality, assume $j=1$.
+Observe that if $d^{(1)}$ and $p^{(1)}$ denote the diameter and
+perimeter of $T^{(1)}$, respectively, then $d^{(1)}=(1/2)d^{(0)}$
+and $p^{(1)}=(1/2)p^{(0)}$. We now repeat this process for the triangle
+$T^{(1)}$, bisecting into four smaller triangles. Continuing this
+process, we obtain a sequence of triangles
+\[
+T^{(0)},T^{(1)},\dots,T^{(n)},\dots
+\]
+with the properties that 
+\[
+\left|\int_{T^{(0)}}f(z)dz\right|\leq4^{n}\left|\int_{T^{(n)}}f(z)dz\right|
+\]
+and 
+\[
+d^{(n)}=2^{-n}d^{(0)},\quad p^{(n)}=2^{-n}p^{(0)},
+\]
+where $d^{(n)}$ and $p^{(n)}$ denote the diameter and perimeter
+of $T^{(n)}$, respectively. We also denote $\mathcal{T}^{(n)}$ the
+\emph{solid }closed triangle with boundary $T^{(n)}$, and observe
+that our construction yields a sequence of nested compact sets
+\[
+\mathcal{T}^{(0)}\supset\mathcal{T}^{(1)}\supset\cdots\supset\mathcal{T}^{(n)}\supset\cdots
+\]
+whose diameter goes to $0$. Thus, by Proposition~(\ref{propsequenceofcompactsets}),
+there exists a unique point $z_{0}$ that belongs to all the solid
+triangles $\mathcal{T}^{(n)}$. Since $f$ is holomorphic at $z_{0}$,
+we can write 
+\[
+f(z)=f(z_{0})+f'(z_{0})(z-z_{0})+\psi(z)(z-z_{0}),
+\]
+where $\psi(z)\to0$ as $z\to z_{0}$. Since the constant $f(z_{0})$
+and the linear function $f'(z_{0})(z-z_{0})$ have primitives, we
+can integrate the above equality and, using Corollary~(\ref{corintegralclosedcurve}),
+we obtain 
+\[
+\int_{T^{(n)}}f(z)dz=\int_{T^{(n)}}\psi(z)(z-z_{0})dz.
+\]
+
+Now $z_{0}$ belongs to the closure of the triangle $\mathcal{T}^{(n)}$
+and $z$ to its boundary, so we must have $|z-z_{0}|\leq d^{(n)}$,
+and so we estimate 
+\[
+\left|\int_{T^{(n)}}f(z)dz\right|\leq\varepsilon_{n}d^{(n)}p^{(n)},
+\]
+where $\varepsilon_{n}=\sup_{z\in T^{(n)}}|\psi(z)|\to0$ as $n\to\infty$.
+Therefore
+\[
+\left|\int_{T^{(n)}}f(z)dz\right|\le\varepsilon_{n}4^{-n}d^{(0)}p^{(0)},
+\]
+which yields our final estimate 
+\[
+\left|\int_{T^{(0)}}f(z)dz\right|\leq4^{n}\left|\int_{T^{(n)}}f(z)dz\right|\le\varepsilon_{n}d^{(0)}p^{(0)}.
+\]
+Letting $n\to\infty$ concludes the proof since $\varepsilon_{n}\to0$.
+\end{proof}
+
+\begin{cor}\label{cor} If $f$ is holomorphic in an open set $\Omega$
+that contains a rectangle $R$ and its interior, then 
+\[
+\int_{R}f(z)dz=0.
+\]
+\end{cor}
+
+\begin{proof} We simply decompose the rectangle into two triangles,
+and integrate over the two triangles. \end{proof}
+
+\subsection{Local existence of primitives and Cauchy's theorem in a disc}
+
+\begin{defn}\label{defn} A set $E\subset\mathbb{C}$ is said to be
+\textbf{convex }if whenever $x,y\in E$ and $0<t<1$, the point $(1-t)x+ty$
+also lies in $E$. \end{defn}
+
+\subsubsection{Existence of primitives for holomorphic functions}
+
+\begin{theorem}\label{theorem2.1} A holomorphic function in an open
+disc has a primitive in that disc. \end{theorem}
+
+\begin{proof} After a translation, we may assume without loss of
+generality that the disc, say $D$, is centered at the origin. Given
+a point $z\in D$, consider the piecewise-smooth curve that joins
+$0$ to $z$ first by moving in the horizontal direction form $0$
+to $\text{Re}(z)$, and then in the vertical direction from $\text{Re}(z)$
+to $z$. We choose the orientation from $0$ to $z$, and denote this
+polygonal line by $\Gamma_{z}$. Define 
+\[
+F(z)=\int_{\Gamma_{z}}f(w)dw.
+\]
+The choice of $\Gamma_{z}$ gives an unambigious definition of the
+function $F(z0$. We contend that $F$ is holomorpic in $D$ and $F'(z)=f(z)$.
+To prove this, fix $z\in D$ and let $h\in\mathbb{C}$ be so small
+that $z+h$ also belongs to the disc. Now consider the difference
+\[
+F(z+h)-F(z)=\int_{\Gamma_{z+h}}f(w)dw-\int_{\Gamma_{z}}f(w)dw.
+\]
+
+The function $f$ is first integrated along $\Gamma_{z+h}$ with the
+original orientation, and then along $\Gamma_{z}$ with the reverse
+orientation. Since we integrate $f$ over the line segment starting
+at the origin in two opposite directions, it cancels. Then we complete
+the square and triangle, so that after an application of Goursat's
+theorem for triangles and rectangles, we are left with the line segment
+from $z$ to $z+h$. Hence, we have 
+\[
+F(z+h)-F(z)=\int_{\eta}f(w)dw,
+\]
+where $\eta$ is the straight line segment from $z$ to $z+h$. Since
+$f$ is continuous at $z$ we can write 
+\[
+f(w)=f(z)+\psi(w)
+\]
+where $\psi(w)\to0$ as $w\to z$. Therefore
+\[
+F(z+h)-F(z)=\int_{\eta}f(z)dw+\int_{\eta}\psi(w)dw=f(z)\int_{\eta}dw+\int_{\eta}\psi(w)dw.
+\]
+On the one hand, the constant $1$ has $w$ as a primitive, so the
+first integral is simply $h$. On the other hand, we have
+\[
+\left|\int_{\eta}\psi(w)dw\right|\leq\sup_{w\in\eta}|\psi(w)|\cdot|h|.
+\]
+Since the supremum above goes to $0$ as $h$ tends to $0$, we conclude
+that 
+\[
+\lim_{h\to0}\frac{F(z+h)-F(z)}{h}=f(z),
+\]
+thereby proving that $F$ is a primitive for $f$ on the disc. 
+
+\end{proof}
+
+\begin{theorem}\label{theorem} If $f$ is holomorphic in a disc,
+then 
+\[
+\int_{\Gamma}f(z)dz=0
+\]
+for any closed curve $\Gamma$ in that disc. \end{theorem}
+
+\begin{proof} Since $f$ has a primitive, we can apply Corollary~(\ref{corintegralclosedcurve}).
+\end{proof}
+
+\begin{example}\label{example} We show that if $y\in\mathbb{R}$,
+then 
+\[
+e^{-\pi y^{2}}=\int_{\mathbb{R}}e^{-\pi x^{2}}e^{-2\pi ixy}dx.
+\]
+This gives a new proof of the fact that $e^{-\pi x^{2}}$ is its own
+Fourier transform. If $y=0$, then the equality becomes 
+\[
+1=\int_{\mathbb{R}}e^{-\pi x^{2}}dx.
+\]
+Now suppose that $y>0$ and consider the function $f(z)=e^{-\pi z^{2}}$,
+which is entire, and in particular holomorphic in the interior of
+the toy contour $\Gamma_{R}$, where $\Gamma_{r}$ consists of a rectangle
+with vertices $R$, $R+iy$, $-R+iy$, $-R$ and the positive counterclockwise
+orientation. By Cauchy's theorem, 
+\[
+\int_{\Gamma_{R}}f(z)dz=0.
+\]
+The integral over the real segment is simply 
+\[
+\int_{-R}^{R}e^{-\pi x^{2}}dx,
+\]
+which converges to $1$ as $R\to\infty$. The integral on the vertical
+side on the right is 
+\[
+I(R)=\int_{0}^{y}f(R+it)idt=\int_{0}^{y}e^{-\pi(R^{2}+2iRt-t^{2})}idt.
+\]
+This integral goes to $0$ as $R\to\infty$ since $y$ is fixed and
+we may estimate it by 
+\[
+\left|I(R)\right|\leq Ce^{-\pi R^{2}}.
+\]
+Similarly, the integral over the vertical segment on the left also
+goes to $0$ as $R\to\infty$ for the same reasons. Finally, the integral
+over the horizontal segment on top is 
+\[
+\int_{R}^{-R}e^{-\pi(x+iy)^{2}}dx=e^{-\pi x^{2}}\int_{-R}^{R}e^{-\pi x^{2}}e^{-2\pi ixy}dx.
+\]
+Therefore we find in the limit as $R\to\infty$ that 
+\[
+0=1-e^{-\pi x^{2}}\int_{-R}^{R}e^{-\pi x^{2}}e^{-2\pi ixy}dx,
+\]
+and our desired formula is established. In the case $y<0$, we then
+consider the symmetric rectangle in the lower half-plane. \end{example}
+
+\subsubsection{Cauchy's Integral Formula}
+
+\begin{theorem}\label{theorem} (Cauchy's Integral Formula) Suppose
+$f$ is holomorphic in an open set that contains the closure of a
+disc $D$. If $C$ denotes the boundary circle of this disc with positive
+orientation, then 
+\[
+f(z)=\frac{1}{2\pi i}\int_{C}\frac{f(\zeta)}{\zeta-z}d\zeta
+\]
+for any point $z\in D$. \end{theorem}
+
+\begin{proof} Fix $z\in D$ and consider the ``keyhole'' $\Gamma_{\delta,\varepsilon}$
+which omits the point $z$. Here $\delta$ is the width of the corridor,
+and $\varepsilon$ is the radius of the small circle centered at $z$.
+Since the function $F(\zeta)=f(\zeta)/(\zeta-z)$ is holomorphic away
+from the point $\zeta=z$, we have 
+\[
+\int_{\Gamma_{\delta,\varepsilon}}F(\zeta)d\zeta=0
+\]
+by Cauchy's theorem for the chosen toy contour. Now we make the corridor
+narrower by letting $\delta$ tend to $0$, and use the continuity
+of $F$ to see that in the limit, the integrals over the two sides
+of the corridor cancel out. The remaining part consists of two curves,
+the large boundary circle $C$ with the positive orientation, and
+a small circle $C_{\varepsilon}$ centered at $z$ of radius $\varepsilon$
+and oriented negatively, that is, clockwise. To see what happens to
+the integral over the small circle, we write
+\[
+F(\zeta)=\frac{f(\zeta)-f(z)}{\zeta-z}+\frac{f(z)}{\zeta-z}
+\]
+and note that since $f$ is holomorphic, the first term on the right-hand
+is bounded so that its integral over $C_{\varepsilon}\to0$ as $\varepsilon\to0$.
+To conclude the proof, it suffices to observe that 
+\begin{align*}
+\int_{C_{\varepsilon}}\frac{f(z)}{\zeta-z}d\zeta & =f(z)\int_{C_{\varepsilon}}\frac{d\zeta}{\zeta-z}\\
+ & =-f(z)\int_{0}^{2\pi}\frac{\varepsilon ie^{-it}}{\varepsilon e^{-it}}dt\\
+ & =-f(z)2\pi i
+\end{align*}
+so that in the limit we find 
+\[
+0=\int_{C}\frac{f(\zeta)}{\zeta-z}d\zeta-2\pi if(z),
+\]
+as was to be shown. \end{proof}
+
+\begin{rem}\label{rem} The integral over the keyhole contour looks
+like this:
+
+\[
+\int_{\Gamma_{\delta,\varepsilon}}F(z)dz=2\pi i\int_{\delta}^{1}F(e^{2\pi it})e^{2\pi it}dt+\int_{1}^{\varepsilon}F(t)dt-2\pi i\int_{\delta}^{1}F(\varepsilon e^{2\pi it})\varepsilon e^{2\pi it}dt-\int_{1}^{\varepsilon}F(t+i\delta)dt
+\]
+
+By continuity of $F$, the terms $\int_{1}^{\varepsilon}F(t)dt$ and
+$\int_{1}^{\varepsilon}F(t+i\delta)dt$ cancel as $\delta\to0$. \end{rem}
+
+\begin{cor}\label{cor} If $f$ is holomorphic in an open set $\Omega$,
+then $f$ has infinitely many complex derivatives in $\Omega$. Moreover,
+if $C\subset\Omega$ is a circle whose interior is also contained
+in $\Omega$, then 
+\[
+f^{(n)}(z)=\frac{n!}{2\pi i}\int_{C}\frac{f(\zeta)}{(\zeta-z)^{n+1}}d\zeta
+\]
+for all $z$ in the interior of $C$. \end{cor}
+
+\begin{proof} The proof is by induction on $n$, the case $n=0$
+being simply the Cauchy integral formula. Suppose that $f$ has up
+to $n-1$ complex derivatives and that 
+\[
+f^{(n-1)}(z)=\frac{(n-1)!}{2\pi i}\int_{C}\frac{f(\zeta)}{(\zeta-z)^{n}}d\zeta.
+\]
+Now for small $h$, the difference quotient for $f^{(n-1)}$ takes
+the form 
+\[
+\frac{f^{(n-1)}(z+h)-f^{(n-1)}(z)}{h}=\frac{(n-1)!}{2\pi i}\int_{C}f(\zeta)\frac{1}{h}\left(\frac{1}{(\zeta-z-h)^{n}}-\frac{1}{(\zeta-z)^{n}}\right)d\zeta.
+\]
+We now recall that 
+\[
+A^{n}-B^{n}=(A-B)(A^{n-1}+A^{n-2}B+\cdots+AB^{n-2}+B^{n-1})
+\]
+with $A=1/(\zeta-z-h)$ and $B=1/(\zeta-z)$, we see that the term
+in brackets is equal to 
+\[
+\frac{h}{(\zeta-z-h)(\zeta-z)}(A^{n-1}+A^{n-2}B+\cdots+AB^{n-2}+B^{n-1}).
+\]
+But observe that if $h$ is small, then $z+h$ and $z$ stay at a
+finite distance from the boundary circle $C$, so in the limit as
+$h$ tends to $0$, we find that the quotient converges to 
+\[
+\frac{(n-1)!}{2\pi i}\int_{C}f(\zeta)\left(\frac{1}{(\zeta-z)^{2}}\right)\left(\frac{n}{(\zeta-z)^{n-1}}\right)d\zeta=\frac{n!}{2\pi i}\int_{C}\frac{f(\zeta)}{(\zeta-z)^{n+1}}d\zeta,
+\]
+which completes the induction argument and proves the theorem.\end{proof}
+
+\subsubsection{Taylor's Theorem}
+
+\begin{theorem}\label{theorem} (Taylor's Theorem) Suppose $f$ is
+holomorphic in an open set $\Omega$. If $D$ is a disc centered at
+$z_{0}$ and whose closure is contained in $\Omega$, then $f$ has
+a power series expansion at $z_{0}$ 
+\[
+f(z)=\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}
+\]
+for all $z\in D$, and the coefficients are given by 
+\[
+a_{n}=\frac{f^{(n)}(z_{0})}{n!}
+\]
+for all $n\geq0$. \end{theorem}
+
+\begin{proof} Fix $z\in D$. By the Cauchy integral formula, we have
+\[
+f(z)=\frac{1}{2\pi i}\int_{C}\frac{f(\zeta)}{\zeta-z}d\zeta,
+\]
+where $C$ denotes the boundary of the disc and $z\in D$. The idea
+is to write 
+\[
+\frac{1}{\zeta-z}=\frac{1}{\zeta-z_{0}-(z-z_{0})}=\left(\frac{1}{\zeta-z_{0}}\right)\left(\frac{1}{1-\left(\frac{z-z_{0}}{\zeta-z_{0}}\right)}\right),
+\]
+and use the geometric series expansion. Since $\zeta\in C$ and $z\in D$
+is fixed, there exists $0<r<1$ such that 
+\[
+\left|\frac{z-z_{0}}{\zeta-z_{0}}\right|<r,
+\]
+therefore
+\[
+\frac{1}{1-\left(\frac{z-z_{0}}{\zeta-z_{0}}\right)}=\sum_{n=0}^{\infty}\left(\frac{z-z_{0}}{\zeta-z_{0}}\right)^{n}
+\]
+where the series converges uniformly for $\zeta\in C$. This allows
+us to interchange the infinite sum with the integral, thereby obtaining
+\begin{align*}
+f(z) & =\frac{1}{2\pi i}\int_{C}\frac{f(\zeta)}{\zeta-z}d\zeta\\
+ & =\frac{1}{2\pi i}\int_{C}f(\zeta)\left(\frac{1}{\zeta-z_{0}}\right)\left(\frac{1}{1-\left(\frac{z-z_{0}}{\zeta-z_{0}}\right)}\right)d\zeta\\
+ & =\frac{1}{2\pi i}\int_{C}f(\zeta)\left(\frac{1}{\zeta-z_{0}}\right)\sum_{n=0}^{\infty}\left(\frac{z-z_{0}}{\zeta-z_{0}}\right)^{n}d\zeta\\
+ & =\sum_{n=0}^{\infty}\left(\frac{1}{2\pi i}\int_{C}\frac{f(\zeta)}{(\zeta-z_{0})^{n+1}}d\zeta\right)(z-z_{0})^{n}.\\
+ & =\sum_{n=0}^{\infty}\left(\frac{f^{(n)}(z_{0})}{n!}\right)(z-z_{0})^{n}.\\
+ & =\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}.
+\end{align*}
+
+\end{proof}
+
+\subsubsection{Cauchy's Inequalities}
+
+\begin{cor}\label{cor} (Cauchy's inequality) If $f$ is holomorphic
+in a given set that contains the closure of a disc $D$ centered at
+$z_{0}$ and of radius $R$, then 
+\[
+\left|f^{(n)}(z_{0})\right|\leq\frac{n!}{R^{n}}\sup_{z\in C}\left|f(z)\right|.
+\]
+\end{cor}
+
+\begin{proof} Applying Cauchy's Integral Formula for $f^{(n)}(z_{0})$,
+we have 
+\begin{align*}
+\left|f^{(n)}(z_{0})\right| & =\left|\frac{n!}{2\pi i}\int_{C}\frac{f(\zeta)}{(\zeta-z)^{n+1}}d\zeta\right|\\
+ & =\frac{n!}{2\pi}\left|\int_{0}^{2\pi}\frac{f(z_{0}+Re^{it})}{R^{n}e^{int}}d\zeta\right|\\
+ & \leq\frac{n!}{R^{n}}\sup_{z\in C}\left|f(z)\right|.
+\end{align*}
+
+\end{proof}
+
+\subsubsection{Louiville's Theorem}
+
+\begin{theorem}\label{theoremlouiville} (Louiville's Theorem) Every
+bounded entire function must be constant. \end{theorem}
+
+\begin{proof} The theorem follows from the fact that holomorphic
+functions are analytic. If $f$ is an entire function, it can be represented
+by its Taylor series about $0:$ 
+\[
+f(z)=\sum_{k=0}^{\infty}a_{k}z^{k}
+\]
+where 
+\begin{align*}
+a_{k} & =\frac{f^{(k)}(0)}{k!}\\
+ & =\frac{1}{2\pi i}\int_{\Gamma_{r}}\frac{f(z)}{z^{k+1}}dz\\
+ & =\int_{0}^{1}\frac{f(re^{2\pi it})}{r^{k}e^{2\pi ikt}}dt.
+\end{align*}
+and $\Gamma_{r}$ is the circle about $0$ of radius $r>0$. Suppose
+$f$ is bounded, i.e. there exists a constant $M$ such that $|f(z)|\leq M$
+for all $z$. Then 
+\begin{align*}
+|a_{k}| & =\left|\int_{0}^{1}\frac{f(re^{2\pi it})}{r^{k}e^{2\pi ikt}}dt\right|\\
+ & \leq\int_{0}^{1}\left|\frac{f(re^{2\pi it})}{r^{k}e^{2\pi ikt}}\right|dt\\
+ & \leq\frac{M}{r^{k}}.
+\end{align*}
+
+Letting $r$ tend to $\infty$ gives us $a_{k}=0$ for all $k\geq1$.
+Thus $f(z)=a_{0}$, which proves the theorem. \end{proof}
+
+\subsubsection{Fundamental Theorem of Algebra}
+
+\begin{cor}\label{cor} Every non-constant polynomial $P(z)=a_{n}z^{n}+\cdots+a_{1}z+a_{0}$
+with complex coefficients has a root in $\mathbb{C}$. \end{cor}
+
+\begin{proof} If $P(z)$ has no roots, then $Q(z):=1/P(z)$ is a
+bounded holomorphic function. To see this, we can of course assume
+that $a_{n}\neq0$ and write 
+\[
+Q(z)=\frac{1}{a_{n}z^{n}+\cdots+a_{1}z+a_{0}}=\left(\frac{1}{z^{n}}\right)\left(\frac{1}{\frac{a_{0}}{z^{n}}+\frac{a_{1}}{z^{n-1}}+\cdots+a_{n}}\right).
+\]
+
+As $z\to\infty$, the denominator of the second term in the round
+brackets converges to $a_{n}\neq0$, hence the second term itself
+goes to $1/a_{n}$. But the first term tends to zero, hence 
+\[
+\lim_{z\to\infty}Q(z)=0.
+\]
+In particular, $|Q(z)|$ is bounded by $1$ outside of some circle
+$|z|=r$. Inside this circle, $|Q(z)|$ is continuous, hence bounded.
+Thus $|Q(z)|$, and therefore $Q(z)$ itself is bounded on the whole
+complex plane. By Liousville's theorem, we then conclude that $Q(z)$
+is constant. This contradicts our assumption that $P(z)$ is nonconstant
+and proves the corollary. \end{proof}
+
+\begin{theorem}\label{theoremidentitytheorem} (Identity Theorem)
+Let $f,g$ be holomorphic functions on a connected open set $D$ of
+$\mathbb{C}$. If $f=g$ on a nonempty open subset of $D$, then $f=g$
+on $D$. \end{theorem}
+
+\begin{rem}\label{remidentitytheorem} This says that a holomorphic
+function is completely determined by its values on a (possibly quite
+small) neighborhood in $D$. This is not true for real-differentiable
+functions. In comparison, holomorphy is a much more rigid notion.
+\end{rem}
+
+\begin{proof} Let $S$ be the set of all $z\in D$ such that $f(z)=g(z)$.
+We show that $S$ is open and closed, and hence must be $D$. Since
+$f-g$ is continuous, and $S=(f-g)^{-1}\{0\}$, we see that $S$ is
+closed. To show, that $S$ is open, suppose $w$ lies in $S$. Then,
+because the Taylor series of $f$ and $g$ at $w$ have non-zero radius
+of convergence, the open disk $B_{r}(w)$ also lies in $S$ for some
+$r$. \end{proof}
+
+\subsection{Further Applications}
+
+\subsubsection{Morera's Theorem}
+
+\begin{theorem}\label{morerastheorem} Suppose $f$ is a continuous
+function in the open disc $D$ such that for any triangle $T$ cotained
+in $D$, 
+\[
+\int_{T}f(z)dz=0,
+\]
+then $f$ is holomorphic. \end{theorem}
+
+\begin{proof} By the proof of Theorem~(\ref{theorem2.1}), the function
+$f$ has a primitive $F$ in $D$ that satisfies $F'=f.$ By the regularity
+theorem, we know that $F$ is indefinitely (and hence twice) complex
+differentiable, and therefore $f$ is holomorphic. \end{proof}
+
+\begin{theorem}\label{theorem5.2} If $\{f_{n}\}_{n=1}^{\infty}$
+is a sequence of holomorphic functions that converges uniformly to
+a function $f$ in every compact subset of $\Omega$, then $f$ is
+holomorphic in $\Omega$. \end{theorem}
+
+\begin{proof} Let $D$ be any disc whose closure is contained in
+$\Omega$ and $T$ any triangle in that disc. Then, since each $f_{n}$
+is holomorphic, Goursat's theorem implies 
+\[
+\int_{T}f_{n}(z)dz=0
+\]
+for all $n$. By assumption, $f_{n}\to f$ uniformly in the closure
+of $D$, so $f$ is continuous and 
+\[
+\int_{T}f_{n}(z)dz\to\int_{T}f(z)dz.
+\]
+As a result, we find $\int_{T}f(z)dz=0$ and by Morera's theorem,
+we conclude that $f$ is holomorphic in $D$. Since this conclusion
+is true for every $D$ whose closure is contained in $\Omega$, we
+find that $f$ is holomorphic in all of $\Omega$. \end{proof}
+
+\subsubsection{Sequence of Holomorphic Functions}
+
+\begin{theorem}\label{theorem5.4} Let $F(z,s)$ be defined for $(z,s)\in\Omega\times[0,1]$
+where $\Omega$ is an open set in $\mathbb{C}$. Suppose $F$ satisfies
+the following properties:
+\begin{enumerate}
+\item $F(z,s)$ is holomorphic in $z$ for each $s$.
+\item $F$ is continuous on $\Omega\times[0,1]$.
+\end{enumerate}
+Then the function $f$ defined on $\Omega$ by 
+\[
+f(z)=\int_{0}^{1}F(z,s)ds
+\]
+is holomorphic. \end{theorem}
+
+\begin{rem}\label{rem} The second condition says that $F$ is jointly
+continuous in both arguments. To prove this result, it suffices to
+prove that $f$ is holomorphic in any disc $D$ contained in $\Omega$,
+and by Morera's theorem this could be achieved by showing that for
+any triangle $T$ contained in $D$ we have 
+\[
+\int_{T}\int_{0}^{1}F(z,s)dsdz=0.
+\]
+Interchanging the order of integration, and using property (1) would
+then yield the desired result. We can, however, get around the issue
+of justifying the change in the order of integration by arguing differently.
+The idea is to interpret the integral as a ``uniform'' limit of
+Riemann sums, and then apply the results of the previous section.
+\end{rem}
+
+\begin{proof} For each $n\geq1,$ we consider the Riemann sum
+\[
+f_{n}(z)=(1/n)\sum_{k=1}^{n}F(z,k/n).
+\]
+Then $f_{n}$ is holomorphic in all of $\Omega$ by property (1),
+and we claim that on any disc $D$ whose closure is contained in $\Omega,$
+the sequence $\{f_{n}\}_{n=1}^{\infty}$ converges uniformly to $f$.
+To see this, we recall that a continuous function on a compact set
+is uniformly continuous, so if $\varepsilon>0$ there exists $\delta>0$
+such that 
+\[
+\sup_{z\in D}\left|F(z,s_{1})-F(z,s_{2})\right|<\varepsilon\quad\text{whenever }\left|s_{1}-s_{2}\right|<\delta.
+\]
+Then if $n>1/\delta,$ and $z\in D$ we have 
+\begin{align*}
+\left|f_{n}(z)-f(z)\right| & =\left|\sum_{k=1}^{n}\int_{(k-1)/n}^{k/n}F(z,k/n)-F(z,s)ds\right|\\
+ & \leq\sum_{k=1}^{n}\int_{(k-1)/n}^{k/n}\left|F(z,k/n)-F(z,s)\right|ds\\
+ & <\sum_{k=1}^{n}\frac{\varepsilon}{n}\\
+ & <\varepsilon.
+\end{align*}
+This proves the claim, and by Theorem~(\ref{theorem5.2}), we conclude
+that $f$ is holomorphic in $D$. As a consequence, $f$ is holomorphic
+in $\Omega$, as was to be shown. \end{proof}
+
+\subsubsection{Scwarz reflection principle}
+
+~~~Let $\Omega$ be an open subset of $\mathbb{C}$ that is symmetric
+with respect to the real line, that is $z\in\Omega$ if and only if
+$\overline{z}\in\Omega$. Let $\Omega^{+}$ denote the part of $\Omega$
+that lies in the upper half-plane and $\Omega^{-}$ that part that
+lies in the lower half-plane. Also, let $I=\Omega\cap\mathbb{R}$
+so that $I$ denotes the interior of that part of the boundary of
+$\Omega^{+}$ and $\Omega^{-}$ that lies on the real axis. Then we
+have 
+\[
+\Omega^{+}\cup I\cup\Omega^{-}=\Omega
+\]
+and the only interesting case of the next theorem occurs, of course,
+when $I$ is nonempty. 
+
+\begin{theorem}\label{theoremsymmetryprinciple} If $f^{+}$ and $f^{-}$
+are holomorphic functions in $\Omega^{+}$ and $\Omega^{-}$ respectively,
+that extend continuously to $I$ and $f^{+}(x)=f^{-}(x)$ for all
+$x\in I$, then the function $f$ defined on $\Omega$ by 
+\[
+f(z)=\begin{cases}
+f^{+}(z) & \text{if }z\in\Omega^{+},\\
+f^{+}(z)=f^{-}(z) & \text{if }z\in I,\\
+f^{-}(z) & \text{if }z\in\Omega^{-}
+\end{cases}
+\]
+is holomorphic on all of $\Omega$. \end{theorem}
+
+\begin{proof} One first notes that $f$ is continuous on $\Omega$.
+The only difficulty is to prove that $f$ is holomorphic at points
+of $I$. Suppose $D$ is a disc centered at a point on $I$ and entirely
+contained in $\Omega$. We prove that $f$ is holomorphic in $D$
+by Morera's theorem. Suppose $T$ is a triangle in $D$. If $T$ does
+not intersect $I$, then 
+\[
+\int_{T}f(z)dz=0
+\]
+since $f$ is holomorphic in the upper and lower half-discs. Suppose
+now that one side or vertex of $T$ is contained in $I$, and the
+rest of$T$ is in, say the upper half-disc. If $T_{\varepsilon}$
+is the triangle obained from $T$ by slightly raising the edge or
+vertex which lies on $I$, we have 
+\[
+\int_{T_{\varepsilon}}f(z)dz=0
+\]
+since $T_{\varepsilon}$ is entirely contained in the upper half-disc.
+We then let $\varepsilon\to0$, and by continuity we conclude that
+\[
+\int_{T}f(z)dz=0.
+\]
+If the interior of $T$ intersects $I$, we can reduce the siutation
+to the previous one by writing $T$ as the union of triangles each
+of which has an edge or vertex on $I$. By Morera's theorem, we conclude
+that $f$ is holomorphic in $D$, as was to be shown. \end{proof}
+
+\begin{theorem}\label{theorem} (Schwarz reflection principle) Suppose
+that $f$ is a holomorphic function in $\Omega^{+}$ that extends
+continuously to $I$ and such that $f$ is real-valued on $I$. Then
+there exists a function $F$ holomorphic in all of $\Omega$ such
+that $F=f$ on $\Omega^{+}$. \end{theorem}
+
+\begin{proof} The idea is simply to define $F(z)$ for $z\in\Omega^{-}$
+by $F(z)=\overline{f(\overline{z})}.$ To prove that $F$ is holomorphic
+in $\Omega^{-}$ we note that if $z,z_{0}\in\Omega^{-}$, then $\overline{z},\overline{z}_{0}\in\Omega^{+}$
+and hence, the power series expansion of $f$ near $\overline{z}_{0}$
+gives 
+\[
+f(\overline{z})=\sum_{n=0}^{\infty}a_{n}\left(\overline{z}-\overline{z}_{0}\right)^{n}.
+\]
+As a consequence we see that 
+\[
+F(z)=\sum_{n=0}^{\infty}\overline{a}_{n}\left(z-z_{0}\right)^{n}
+\]
+and $F$ is holomorphic in $\Omega^{-}$. Since $f$ is real valued
+on $I$, we have $\overline{f(x)}=f(x)$ whenever $x\in I$ and hence
+$F$ extends continuously up to $I$. The proof is complete once we
+invoke the symmetry principle. \end{proof}
+
+\begin{theorem}\label{theorem4.8} Suppose $f$ is a holomorphic function
+in a region $\Omega$ that vanishes on a sequence of distinct points
+with a limit point in $\Omega$. Then $f$ is identically $0$. \end{theorem}
+
+\begin{proof} Suppose that $z_{0}\in\Omega$ is a limit point for
+the sequence $\{w_{k}\}_{k=1}^{\infty}$ and that $f(\omega_{k})=0$.
+First, we show that $f$ is idenitcally zero in a small disc containing
+$z_{0}$. For that, we choose a disc $D$ centered at $z_{0}$ and
+contained in $\Omega$, and consider the power series expansion of
+$f$ in that disc
+\[
+\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}.
+\]
+If $f$ is not identically zero, there exists a smallest integer $m$
+such that $a_{m}\neq0$. But then we can write 
+\[
+f(z)=a_{m}(z-z_{0})^{m}(1+g(z-z_{0})),
+\]
+where $g(z-z_{0})$ converges to $0$ as $z\to z_{0}$. Taking $z=w_{k}\neq z_{0}$
+for a sequence of points converging to $z_{0}$, we get a contradiction
+since $a_{m}(w_{k}-z_{0})^{m}\neq0$ and $1+g(w_{k}-z_{0})\neq0$,
+but $f(w_{k})=0$.
+
+~~~We conclude the proof using the fact that $\Omega$ is connected.
+Let $U$ denote the interior of the set of points where $f(z)=0$.
+Then $U$ is open by definition and nonempty by the argument just
+given. The set $U$ is also closed since if $z_{n}\in U$ and $z_{n}\to z$,
+then $f(z)=0$ by continuity, and $f$ vanishes in a neighborhood
+of $z$ by the argument above. Hence, $z\in U$. Now if we let $V$
+denote the complement of $U$ in $\Omega$, we conclude that $U$
+and $V$ are both open, disjoint, and 
+\[
+\Omega=U\cup V.
+\]
+Since $\Omega$ is connected we conclude that either $U$ or $V$
+is empty. Since $z_{0}\in U$, we find that $U=\Omega$ and the proof
+is complete. 
+
+\end{proof}
+
+\begin{cor}\label{cor} Suppose $f$ and $g$ are holomorphic in a
+region $\Omega$ and $f(z)=g(z)$ for all $z$ in some nonempty open
+subset of $\Omega$ (or more generally for $z$ in some sequence of
+distinct points with limit point in $\Omega$). Then $f(z)=g(z)$
+througout $\Omega$. \end{cor}
+
+~~~Suppose we are given a pair of functions $f$ and $F$ analytic
+in regions $\Omega$ and $\Omega'$, respectively, with $\Omega\subset\Omega'$.
+If the two functions agree on the smaller set $\Omega$, we say that
+$F$ is an \textbf{analytic continuiation }of $f$ into the region
+$\Omega'$ The corollary then guarantees that there can be only one
+such analytic continuation, since $F$ is uniquely determined by $f$. 
+
+\section{Meromorphic Functions and the Logarithm}
+
+\subsection{Zeros and poles}
+
+~~~A \textbf{point singularity }of a function $f$ is a complex
+number $z_{0}$ such that $f$ is defined in a neighborhood of $z_{0}$
+but not a the point $z_{0}$ itself. We shall also call such points
+\textbf{isolated singularities}. 
+
+\begin{theorem}\label{theorem} (Weierstrass Identity Theorem) Let
+$f$ be an analytic function in a region $\Omega$ such that $f$
+is not identically zero in $\Omega$. Then each zero of $f$ is isolated.
+In particular if $g,h$ are analytic on $\Omega$ and if the set 
+\[
+E=\{z\in\Omega\mid g(z)=h(z)\}
+\]
+has an accumulation point in $\Omega$. Then $g(z)=h(z)$ for all
+$z\in\Omega$. \end{theorem}
+
+\begin{proof} Define 
+\[
+\Omega_{1}:=\left\{ z\in\Omega\mid f^{(n)}(z)=0\text{ for all }n\in\mathbb{Z}_{\geq0}\right\} \quad\text{and}\quad\Omega_{2}:=\left\{ z\in\Omega\mid f^{(n)}(z)\neq0\text{ for some }n\in\mathbb{Z}_{\geq0}\right\} .
+\]
+If $w\in\Omega_{1}$, then $f=0$ on $D_{r}(w)$ for some $r>0$.
+Hence, $D_{r}(w)\subset\Omega_{1}$, so $\Omega_{1}$ is open. Similarly,
+$\Omega_{2}$ is open since it is the union of the open sets $\Omega_{2,n}:=\left\{ z\in\Omega\mid f^{(n)}(z)\neq0\right\} $
+for all $n\in\mathbb{Z}_{n\geq0}$. Since $\Omega=\Omega_{1}\cup\Omega_{2}$
+and $\Omega$ is connected, either $\Omega_{1}$ or $\Omega_{2}$
+is empty. But $\Omega_{2}\neq\emptyset$ since $f$ is not identically
+zero in $\Omega$. Hence $\Omega_{1}=\emptyset$, i.e. $\Omega=\Omega_{2}$.
+Therefore all zeros of $f$ in $\Omega$ are isolated. 
+
+~~~To prove the second part of the theorem, simply apply the first
+part of the proof to the difference $g-h$. 
+
+\end{proof}
+
+\begin{theorem}\label{theorem} Suppose that $f$ is holomorphic in
+a connected open set $\Omega$, has a zero at $z_{0}\in\Omega$, and
+does not vanish identically in $\Omega$. Then there exists a neighborhood
+$U\subset\Omega$ of $z_{0}$, a nonvanishing holomorphic function
+$g$ on $U$, and a unique positive integer $n$ such that $f(z)=(z-z_{0})^{n}g(z)$
+for all $z\in U$. \end{theorem}
+
+\begin{proof} Since $\Omega$ is connected and $f$ is not identically
+zero, we conclude that $f$ is not identically zero in a neighborhood
+of $z_{0}$. In a small disc centered at $z_{0}$ the function $f$
+has a power series expansion
+\[
+f(z)=\sum_{k=0}^{\infty}a_{k}(z-z_{0})^{k}.
+\]
+Since $f$ is not identically zero near $z_{0}$, there exists a smallest
+integer $n$ such that $a_{n}\neq0$. Then, we can write 
+\[
+f(z)=(z-z_{0})^{n}\left[a_{n}+a_{n+1}(z-z_{0})+\cdots\right]=(z-z_{0})^{n}g(z),
+\]
+where $g$ is defined by the series in the brackets, and hence is
+holomorphic, and is nowhere vanishing for all $z$ close to $z_{0}$.
+To prove uniqueness of the integer $n$, suppose that we can also
+write 
+\[
+f(z)=(z-z_{0})^{n}g(z)=(z-z_{0})^{m}h(z)
+\]
+where $h(z_{0})\ne0$. If $m>n$, then we may divide by $(z-z_{0})^{n}$
+to see that 
+\[
+g(z)=(z-z_{0})^{m-n}h(z)
+\]
+and letting $z\to z_{0}$ yields $g(z_{0})=0$, a contradiction. We
+obtain a similar contradiction if $m<n$. We conclude that $m=n$,
+thus $h=g$, and the theorem is proved. 
+
+\end{proof}
+
+\begin{example}\label{example} We want to prove 
+\[
+\sin(z+w)=\sin(z)\cos(w)+\cos(z)\sin(w),
+\]
+for all complex numbers $z,x\in\mathbb{C}$. First, fix $w\in\mathbb{R}$
+and define 
+\[
+g(z):=\sin(z+w)\quad\text{and}\quad h(z):=\sin(z)\cos(w)+\cos(z)\sin(w).
+\]
+These are two holomorphic functions in $z$ and they agree on the
+real line, which has an accumulation point. Therefore they must agree
+everywhere by the identity theorem. Now, fix $z\in\mathbb{C}$ and
+use $w\in\mathbb{C}$ as a variable and use the same argument to get
+the formula for all $z,w\in\mathbb{C}$. \end{example}
+
+\begin{rem}\label{rem} \hfill
+\begin{enumerate}
+\item If $f\neq0$ is analytic on $\Omega$ and $E\subseteq\Omega$ is compact,
+then $f$ can have at most finitely many zeros in $E$. This follows
+from Bolzano-Weirestrass theorem and Weirestrass identity theorem.
+\item Let $f(z)=\sin\left(\frac{1}{z}\right)$ for all $z\in\mathbb{C}\backslash\{0\}$.
+Then $f(z)=0$ if $z=\frac{1}{n\pi}$ where $n\in\mathbb{Z}$, however
+$f\neq0$ since the accumulation point of the set $\left\{ \frac{1}{n\pi}\mid n\in\mathbb{Z}\right\} $
+is $0$, which is not in the region $\mathbb{C}\backslash\{0\}$. 
+\end{enumerate}
+\end{rem}
+
+\begin{defn}\label{defn} We say $z_{0}$ is an \textbf{isolated singularity
+}for $f$ if $f$ is not analytic at $z_{0}$ but there exists $r>0$
+such that $f$ is analytic on $D_{r}(z_{0})\backslash\{z_{0}\}$.
+\end{defn}
+
+\subsection{Review of Laurent Series Expansion}
+
+~~~Consider the series of the form 
+\[
+\sum_{n=1}^{\infty}b_{n}(z-z_{0})^{-n}=\sum_{n=1}^{\infty}b_{n}w^{n},
+\]
+where $w=\frac{1}{z-z_{0}}$. The series converges for $|w|<R$ and
+diverges for $|w|>R$ where $R\in[0,\infty]$ is the radius of convergence.
+Note that $|w|<R$ if and only if $|z-z_{0}|>\frac{1}{R}$. Hence,
+the series converges whenever $|z-z_{0}|>\frac{1}{R}$ and diverges
+whenever $|z-z_{0}|<\frac{1}{R}$. 
+
+~~~The series $\sum_{n=-\infty}^{\infty}a_{n}(z-z_{0})^{n}$ is
+formally
+\[
+\sum_{n=-\infty}^{\infty}a_{n}(z-z_{0})^{n}=\sum_{n=1}^{\infty}a_{-n}(z-z_{0})^{-n}+\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}.
+\]
+We call $\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}$ the \textbf{regular
+part }of $\sum_{n=-\infty}^{\infty}a_{n}(z-z_{0})^{n}$, and we call
+$\sum_{n=1}^{\infty}a_{-n}(z-z_{0})^{-n}$ the \textbf{principal part
+}of $\sum_{n=-\infty}^{\infty}a_{n}(z-z_{0})^{n}$. There exists $R_{1},R_{2}\in[0,\infty]$
+such that the regular part converges for $|z-z_{0}|<R_{1}$, diverges
+for $|z-z_{0}|>R_{1}$, and the principal part converges for $|z-z_{0}|>R_{2}$,
+and diverges for $|z-z_{0}|<R_{2}$. If $R_{1}>R_{2}$, we get an
+\textbf{annulus of convergence }which is
+\[
+\left\{ z\in\mathbb{C}\mid R_{2}<|z-z_{0}|<R_{1}\right\} .
+\]
+If $R_{2}>R_{1}$, then the series $\sum_{n=-\infty}^{\infty}a_{n}(z-z_{0})^{n}$
+diverges everywhere. If $R_{1}=R_{2}$, then the only possible place
+for convergence of the series $\sum_{n=-\infty}^{\infty}a_{n}(z-z_{0})^{n}$
+is the circle $|z-z_{0}|=R_{1}=R_{2}$. In this case, we obtain no
+information.
+
+\begin{example}\label{example} Let $f(z)=(2z-1)^{-1}(1-z)^{-1}$.
+We want to express this as a doubly infinite power series for $\left\{ z\in\mathbb{C}\mid|z|<\frac{1}{2}\right\} $,
+$\left\{ z\in\mathbb{C}\mid\frac{1}{2}<|z|<1\right\} $, and $\left\{ z\in\mathbb{C}\mid|z|>1\right\} $. 
+
+\hfill
+
+\textbf{Case 1: }Write
+\begin{align*}
+f(z) & =\frac{-2}{1-2z}+\frac{1}{1-z}\\
+ & =-2\sum_{n=0}^{\infty}\left(2z\right)^{n}+\sum_{n=0}^{\infty}z^{n}.
+\end{align*}
+The first series converges if $|z|<\frac{1}{2}$ and the second converges
+if $|z|<1$. Therefore the sum of the two series converges in the
+set $\left\{ z\in\mathbb{C}\mid|z|<\frac{1}{2}\right\} $.
+
+\hfill
+
+\textbf{Case 2: }Write 
+\begin{align*}
+f(z) & =\frac{z^{-1}}{1-(2z)^{-1}}+\frac{1}{1-z}\\
+ & =z^{-1}\sum_{n=0}^{\infty}\left(2z\right)^{-n}+\sum_{n=0}^{\infty}z^{n}.
+\end{align*}
+
+The first series converges if $|z|>\frac{1}{2}$ and the second series
+converges if $|z|<1$. Therefore the sum of the two series converges
+in the set $\left\{ z\in\mathbb{C}\mid\frac{1}{2}<|z|<1\right\} $.
+
+\hfill
+
+\textbf{Case 3: }Write 
+\begin{align*}
+f(z) & =\frac{z^{-1}}{1-(2z)^{-1}}+\frac{-z^{-1}}{1-z^{-1}}\\
+ & =z^{-1}\sum_{n=0}^{\infty}\left(2z\right)^{-n}-z^{-1}\sum_{n=0}^{\infty}z^{-n}.
+\end{align*}
+
+The first series converges if $|z|>\frac{1}{2}$ and the second series
+converges if $|z|>1$.Therefore the sum of the two series converges
+in the set $\left\{ z\in\mathbb{C}\mid|z|>1\right\} $.
+
+\end{example}
+
+\begin{rem}\label{rem} Observe that the function $f$ in the previous
+example has a pole at $z=\frac{1}{2}$ and $z=1$. \end{rem}
+
+~~~Let $a,b,r,r_{1},r_{2}\in[0,\infty]$ such that $a<r_{2}<r<r_{1}<b$.
+Suppose $\sum_{n=-\infty}^{\infty}a_{n}(z-z_{0})^{n}$ converges for
+$a<|z-z_{0}|<b$. Let $\Gamma=\left\{ z_{0}+re^{it}\mid0\leq t\leq2\pi\right\} $,
+where $a<r<b$. The regular part of the series converges uniformly
+in the disc $\overline{D}_{r_{1}}(z_{0})$. The principal part of
+the series converges uniformly for $|z-z_{0}|\geq r_{2}$. Hence the
+series converges uniformly on the annulus $\left\{ z\in\mathbb{C}\mid r_{2}\leq|z-z_{0}|\leq r_{1}\right\} $,
+and hence also on $\Gamma$. Therefore 
+\begin{align*}
+\int_{\Gamma}\left(\sum_{n=-\infty}^{\infty}a_{n}(z-z_{0})^{n}\right)dz & =\sum_{n=-\infty}^{\infty}a_{n}\int_{\Gamma}(z-z_{0})^{n}dz\\
+ & =a_{-1}\int_{\Gamma}(z-z_{0})^{-1}dz\\
+ & =2\pi ia_{-1}.
+\end{align*}
+
+~~~Next, let $m\in\mathbb{Z}$ and let $g$ be given by
+\begin{align*}
+g(z) & =(z-z_{0})^{-m-1}f(z)\\
+ & =\sum_{n=-\infty}^{\infty}a_{n}(z-z_{0})^{n-m-1}\\
+ & =\sum_{n=-\infty}^{\infty}a_{n+m+1}(z-z_{0})^{n}.
+\end{align*}
+Then by the previous argument, we have $\int_{\Gamma}g(z)dz=2\pi ia_{m}$.
+Therefore
+\[
+a_{m}=\frac{1}{2\pi i}\int_{\Gamma}\frac{f(z)}{(z-z_{0})^{m+1}}dz,.
+\]
+where the $a_{m}$ are uniformly determined. 
+\[
+|a_{m}|\leq\frac{1}{r^{m}}\left\Vert f\right\Vert _{\Gamma}.
+\]
+
+\begin{theorem}\label{theorem} (Laurent's Theorem) Let $\Omega=\{z\in\mathbb{C}\mid a<|z-z_{0}|<b\}$,
+where $0\leq a<b\leq\infty$. If $f$ is analytic on $\Omega$, then
+$f$ can be expanded as a power series of the form 
+\[
+f(z)=\sum_{n=-\infty}^{\infty}a_{n}(z-z_{0})^{n},
+\]
+where $z\in\Omega$. The series converges uniformly on any closed
+annulus
+\[
+\left\{ z\in\mathbb{C}\mid a_{1}\leq|z-z_{0}|\leq b_{1}\right\} ,
+\]
+where $a<a_{1}\leq b_{1}<b$. If $a<r<b$ and $\Gamma=\{z_{0}+re^{it}\mid0\leq t\leq2\pi\},$
+then for all $m\in\mathbb{Z}$, we have 
+\[
+a_{m}=\frac{1}{2\pi i}\int_{\Gamma}\frac{f(z)}{(z-z_{0})^{m+1}}dz.
+\]
+
+\end{theorem}
+
+\begin{example}\label{example} By considering the Laurent series
+of $\left(z+\frac{1}{z}\right)^{m}$ where $m\in\mathbb{N}$, we evaluate
+\[
+\int_{-\pi}^{\pi}\cos(n\theta)\cos^{m}(\theta)d\theta,
+\]
+where $n\in\mathbb{N}$. The function $f(z)=\left(z+\frac{1}{z}\right)^{m}$
+is analytic except at $z=0$. Using binomial theorem, write
+\begin{align*}
+f(z) & =\sum_{k=0}^{m}{m \choose k}z^{m-k}z^{-k}\\
+ & =\sum_{k=0}^{m}{m \choose k}z^{m-2k}.
+\end{align*}
+By Laurent's Theorem, $f(z)=\sum_{n=-\infty}^{\infty}a_{n}z^{n}$,
+where 
+\[
+a_{n}=\frac{1}{2\pi i}\int_{\Gamma}\frac{\left(z+\frac{1}{z}\right)^{m}}{z^{n+1}}dz\quad\text{and}\quad\Gamma=\left\{ e^{i\theta}\mid-\pi\leq\theta\leq\pi\right\} .
+\]
+ So 
+\begin{align*}
+a_{n} & =\frac{1}{2\pi i}\int_{-\pi}^{\pi}\frac{(e^{i\theta}+e^{-i\theta})^{m}}{e^{i(n+1)\theta}}ie^{i\theta}d\theta\\
+ & =\frac{1}{2\pi}\int_{-\pi}^{\pi}\frac{2^{m}\cos^{m}(\theta)}{e^{in\theta}}d\theta\\
+ & =\frac{2^{m-1}}{\pi}\left(\int_{-\pi}^{\pi}\cos^{m}(\theta)\cos(n\theta)d\theta-\int_{-\pi}^{\pi}\cos^{m}(\theta)\sin(n\theta)d\theta\right)\\
+ & =\frac{2^{m-1}}{\pi}\int_{-\pi}^{\pi}\cos^{m}(\theta)\cos(n\theta)d\theta\\
+ & =0
+\end{align*}
+where $\int_{-\pi}^{\pi}\cos^{m}(\theta)\sin(n\theta)d\theta=0$ since
+$\sin(n\theta)\cos^{m}(\theta)$ is odd. 
+
+\end{example}
+
+~~~Suppose $f$ is analytic on $\Omega=\{0<|z-z_{0}|<r\}$. Recall
+that the \textbf{Laurent series }for $f$ at $z_{0}$ is given by
+\[
+f(z)=\sum_{n=-\infty}^{\infty}a_{n}(z-z_{0})^{n}=\sum_{n=-\infty}^{-1}a_{n}(z-z_{0})^{n}+\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n},
+\]
+where $\sum_{n=-\infty}^{-1}a_{n}(z-z_{0})^{n}$ is the \textbf{principal
+part} of $f$ and $\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}$ is the
+\textbf{regular part }of $f$. 
+
+\begin{defn}\label{defn} Let $f$ be analytic on $\Omega=\{0<|z-z_{0}|<r\}$
+and assume that $f$ has an isolated singularity at $z_{0}$. We have
+the following trichotomy of isolated singularities: 
+\begin{enumerate}
+\item \textbf{Removable Singularity}: The principal part of the Laurent
+series of $f$ is identically zero. 
+\item \textbf{Pole of Order $n\geq1$}: The principal part of the Laurent
+series of $f$ is a polynomial in $(z-z_{0})^{-1}$ of order $n$,
+i.e. $a_{k}=0$ for all $k<-n$ but $a_{-n}\neq0$. 
+\item \textbf{Essential Singularity}: The principal part of the Laurent
+series of $f$ is is an infinite series, i.e. $a_{n}\neq0$ for infinitely
+many negatives values of $n$. 
+\end{enumerate}
+\end{defn}
+
+\begin{rem}\label{rem} \hfill
+\begin{enumerate}
+\item Suppose $f$ has a removable singularity at $z_{0}$. Then 
+\[
+f(z)=\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}\quad\text{for }0<|z-z_{0}|<r.
+\]
+If we redefine $f(z_{0})$ to be $a_{0}$, then we remove the singularity,
+i.e. $f$ is then analytic at $z_{0}$.
+\item Suppose $f$ has a pole of order $n$ at $z_{0}$. Then 
+\begin{align*}
+f(z) & =a_{-n}(z-z_{0})^{-n}+a_{-n+1}(z-z_{0})^{-n+1}+\cdots\\
+ & =(z-z_{0})^{-n}(a_{-n}+a_{-n+1}(z-z_{0})+\cdots)\\
+ & =(z-z_{0})^{-n}g(z),
+\end{align*}
+where $g(z)=a_{-n}+a_{-n+1}(z-z_{0})+\cdots$ is analytic at $z_{0}$
+and $g(z_{0})=a_{-n}\neq0$. So we can choose $\delta>0$ such that
+$g(z)\neq0$ for all $D_{\delta}(z_{0})$. Taking reciprocals, we
+have 
+\begin{equation}
+\frac{1}{f(z)}=(z-z_{0})^{n}\frac{1}{g(z)}\quad\text{for all }z\in D_{\delta}(z_{0})\backslash\{z_{0}\}.\label{eq:recip}
+\end{equation}
+If we define the left-hand side of (\ref{eq:recip}) to be zero at
+$z_{0}$, then we see that $\frac{1}{f}$ has a zero of order $n$
+at $z_{0}$. 
+\item Suppose $f$ has a zero of order $n$ at $z_{0}$. Then 
+\[
+f(z)=(z-z_{0})^{n}h(z),
+\]
+where $h(z_{0})\neq0$ and $h$ is analytic at $z_{0}$. Then
+\[
+\frac{1}{f(z)}=(z-z_{0})^{-n}\frac{1}{h(z)}\quad\text{for all }0<|z-z_{0}|<r
+\]
+for some $r>0$. Then 
+\begin{align*}
+\frac{1}{f(z)} & =(z-z_{0})^{-n}\sum_{n=0}^{\infty}b_{n}(z-z_{0})^{n}\\
+ & =(z-z_{0})^{-n}b_{0}+\cdots,
+\end{align*}
+has a pole of order $n$ at $z_{0}$.
+\end{enumerate}
+\end{rem}
+
+\begin{defn}\label{defn} \hfill
+\begin{enumerate}
+\item A zero of order $1$ is called a \textbf{simple zero}. 
+\item A pole of order $1$ is called a \textbf{simple pole}. 
+\end{enumerate}
+\end{defn}
+
+\begin{theorem}\label{theorem} Let $z_{0}$ be an isolated singularity
+for $f$. Then
+\begin{enumerate}
+\item $z_{0}$ is removable if and only if $f$ is bounded on $D_{r}(z_{0})\backslash\{z_{0}\}$
+for some $r>0$.
+\item $z_{0}$ is a pole if and only if $|f(z)|\to\infty$ as $z\to z_{0}$. 
+\item (Casorati-Weierstrass) $z_{0}$ is an essential singularity if and
+only if for each $w\in\mathbb{C}$ and any $\rho,\varepsilon>0$,
+there exists $z\in D_{\rho}(z_{0})\backslash\{z_{0}\}$ such that
+$f(z)\in D_{\varepsilon}(w)$. 
+\end{enumerate}
+\end{theorem}
+
+\begin{rem}\label{rem} The result in (3) means that $f$ takes values
+arbitrarily close to every complex number in every deleted disc with
+center $z_{0}$. In other words, the image of $D_{\rho}(z_{0})\backslash\{z_{0}\}$
+under $f$ is dense in $\mathbb{C}$. \end{rem}
+
+\begin{proof} \hfill
+\begin{enumerate}
+\item If $z_{0}$ is a removable singularity, then $f$ becomes analytic
+at $z_{0}$ if we define $f$ at $z_{0}$ properly. Hence, for $r>0$
+sufficiently small, $f$ is bounded on $D_{r}(z_{0})$. Conversely,
+let $f$ be bounded, say, $|f(z)|\leq M$ for $z\in D_{r}(z_{0})\backslash\{z_{0}\}$.
+Let $\Gamma$ be the circle of radius $r/2$ centered at $z_{0}$.
+Then by Cauchy's inequality for Laurent coefficients
+\begin{align*}
+|a_{n}| & \leq\frac{2^{n}}{r^{n}}\sup_{z\in\Gamma}f(z) & |a_{-n}| & \leq\frac{r^{n}}{2^{n}}\sup_{z\in\Gamma}f(z)\\
+ & \leq\left(\frac{2}{r}\right)^{n}M &  & \leq\left(\frac{r}{2}\right)^{n}M
+\end{align*}
+ for all $n\in\mathbb{Z}$. Letting $r\to0^{+}$, we get $a_{-n}=0$
+for all $n\geq1$. 
+\item Assume $z_{0}$ is a pole of $f$. Then $z_{0}$ is a zero for $g:=1/f$.
+So $|g(z)|\to0$ as $z\to z_{0}$. Hence $|f(z)|\to\infty$ as $z\to z_{0}$.
+Conversely, if $|f(z)|\to\infty$ as $z\to z_{0}$, then there exists
+$r>0$ such that $|f(z)|\geq1$ for all $z\in D_{r}(z_{0})$. Hence,
+$g$ is analytic in $D_{r}(z_{0})\backslash\{z_{0}\}$ and $|g(z)|\leq1$
+for all $z\in D_{r}(z_{0})$. By (1), $g$ has a removable singularity
+at $z_{0}$ and $g(z)\to0$ as $z\to z_{0}$. Define $g(z_{0}):=0$.
+Then $g$ is analytic at $z_{0}$ with a zero of some order $n$.
+Hence, $f$ has a pole of order $n$ at $z_{0}$. 
+\item If $f$ has the given property, then $f$ is not bounded near $z_{0}$
+and $|f(z)|\not\to\infty$ as $z\to z_{0}$. Hence, $z_{0}$ must
+be an essential singuarility by (1) and (2). Converseley, let $z_{0}$
+be an essential singularity for $f$. Suppose that for some $w,\rho,\varepsilon$,
+we cannot find a suitiable $z$. Hence, for all $z\in D_{\rho}(z_{0})\backslash\{z_{0}\}$,
+we have $|f(z)-w|\geq\varepsilon$. Define
+\begin{align*}
+F(z) & :=\frac{1}{f(z)-w}.
+\end{align*}
+Then $f(z)=w+\frac{1}{F(z)}$ for all $z\in D_{\rho}(z_{0})\backslash\{z_{0}\}$
+and $F$ is analytic in $D_{\rho}(z_{0})\backslash\{z_{0}\}$ and
+$|F(z)|\leq\frac{1}{\varepsilon}$. Hence, $F$ has a removable singularity
+at $z_{0}$, by (1). Now redefine $F$ at $z_{0}$ so that it becomes
+analytic in $D_{\rho}(z_{0})$. 
+\begin{enumerate}
+\item \textbf{Case 1}: Suppose $F(z_{0})\neq0$. Then $f(z)\to w+\frac{1}{F(z_{0})}$
+as $z\to z_{0}$. Hence $f$ has a removable singularity at $z_{0}$,
+which is impossible.
+\item \textbf{Case 2}: Suppose $F(z_{0})=0$. Then $|f(z)|\to\infty$ as
+$z\to z_{0}$. Therefore $f$ as a pole at $z_{0}$, which is impossible. 
+\end{enumerate}
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}\label{theorem} (Picard's Great Theorem) If $z_{0}$
+is an essential (isolated) singularity of $f$ with at most one exception,
+$f$ takes every complex value in every deleted disc $D_{r}(z_{0})\backslash\{z_{0}\}$.
+\end{theorem}
+
+\begin{proof} Omitted. \end{proof}
+
+\begin{example}\label{example} \hfill
+\begin{enumerate}
+\item Let $f(z)=e^{1/z}$. Then $0$ is an essential singularity for $f$.
+Moreover, in any $D_{r}(0)\backslash\{0\}$, $f$ takes every complex
+value except $0$.
+\item Let $g(z)=\sin(1/z)$. Then $0$ is an essential singularity for $g$.
+Moreover, in any $D_{r}(0)\backslash\{0\}$, $g$ takes every complex
+value. 
+\end{enumerate}
+\end{example}
+
+\subsection{The Riemann Sphere}
+
+~~~The extended complex plane, which consists of $\mathbb{C}$
+and the point at infinity, has a convenient geometric interpetation,
+which we briefly discuss here. 
+
+~~~Consider the Euclidean space $\mathbb{R}^{3}$ with coordinates
+$(X,Y,Z)$ where the $XY$-plane is identified with $\mathbb{C}$.
+We denote by $\mathbb{S}$ the sphere centered at $(0,0,1/2)$ and
+of radius $1/2$; this sphere is of unit diameter and lies on top
+of the origin of the complex plane. Also, we let $\mathcal{N}=(0,0,1)$
+denote the north pole of the sphere. Note that $(X,Y,Z)\in\mathbb{S}$
+if and only if $X^{2}+Y^{2}+\left(Z-\frac{1}{2}\right)^{2}=\frac{1}{4}$. 
+
+~~~Given any point $W=(X,Y,Z)$ on $\mathbb{S}$ different from
+the north pole, the line joining $\mathcal{N}$ and $W$ intersects
+the $XY$-plane in a single point which we denote by $w=x+iy$; $w$
+is called the \textbf{stereographic projection }of $W$. Conversely,
+given any point $w$ in $\mathbb{C}$, the line joining $\mathcal{N}$
+and $w=(x,y,0)$ intersects the sphere at $\mathcal{N}$ and another
+point, which we call $W$. This geometric construction gives a bijective
+correspondence between points on the punctured sphere $\mathbb{S}\backslash\{\mathcal{N}\}$
+and the complex plane; it is described analytically by the formulas
+\[
+x=\frac{X}{1-Z}\quad\text{and}\quad y=\frac{Y}{1-Z},
+\]
+giving $w$ in terms of $W$, and 
+\[
+X=\frac{x}{x^{2}+y^{2}+1},\quad Y=\frac{y}{x^{2}+y^{2}+1},\quad\text{and}\quad Z=\frac{x^{2}+y^{2}}{x^{2}+y^{2}+1},
+\]
+giving $W$ in terms of $w$. Intuitively, we have wrapped the complex
+plane onto the punctured sphere $\mathbb{S}\backslash\{\mathcal{N}\}$.
+For instance, the complex number $it\in\mathbb{C}$ maps to the point
+$\left(0,\frac{t}{t^{2}+1},\frac{t^{2}}{t^{2}+1}\right)\in\mathbb{S}$.
+
+~~~As the point $w$ goes to infinity in $\mathbb{C}$ (in the
+sense that $|w|\to\infty$), the corresponding point $W$ on $\mathbb{S}$
+comes arbitrarily close to $\mathcal{N}$. This simple observation
+makes $\mathcal{N}$ a natural candidate for the so-called ``point
+at infinity''. Identifying infinity with the point $\mathcal{N}$
+on $\mathbb{S}$, we see that the extended complex plane can be visualized
+as the full two-dimensional sphere $\mathbb{S}$; this is the \textbf{Riemann
+sphere}. Since this construction takes the unbounded set $\mathbb{C}$
+onto the compact set $\mathbb{S}$ by adding one point, the Riemann
+sphere is sometimes called the \textbf{one-point compactification}
+of $\mathbb{C}$. 
+
+\subsubsection{Singularities}
+
+\begin{defn}\label{defn} $\infty$ is called an \textbf{isolated
+singularity }for $f$ if $f$ is analytic on some neighborhood of
+$\infty$. \end{defn}
+
+\begin{example}\label{example} Let $f(z)=\frac{1}{z^{2}-1}$ and
+$g(z)=\frac{1}{\sin z}$. Then $f$ is not analytic at $z=\pm1$,
+but outside $\pm1$, it is analytic. On the other hand, $g$ is not
+analytic in any neighborhood of $\infty$. \end{example}
+
+\begin{defn}\label{defn} Assume $f$ has an isolated singularity
+at $\infty$. Define $g(z):=f(1/z)$ for $0<|z|<1/r$, where $f$
+is analytic on $D_{r}(\infty)$. $f$ is said to have a
+\begin{enumerate}
+\item \textbf{removable singularity at} $\infty$ if $g$ has a removable
+singularity at $0$.
+\item \textbf{pole of order $n$ at} $\infty$ if $g$ has a pole of order
+$n$ at $0$.
+\item \textbf{essential singularity at} $\infty$ if $g$ has an essential
+singularity at $0$.
+\end{enumerate}
+If the Laurent Series for $g$ is 
+\[
+g(z)=\sum_{n=-\infty}^{\infty}a_{n}z^{n},
+\]
+where $0<|z|<1/r$. Then principal part of $g$ is 
+\[
+\sum_{n=-\infty}^{-1}a_{n}z^{n}=\sum_{n=1}^{\infty}a_{-n}z^{-n}.
+\]
+We define the \textbf{Laurent series }for $f$ at $\infty$ to be
+\[
+f(z)=g\left(\frac{1}{z}\right)=\sum_{n=-\infty}^{\infty}a_{n}z^{-n},
+\]
+where $|z|>r$. And we define the \textbf{principal part }of the Laurent
+series for $f$ at $\infty$ to be 
+\[
+\sum_{n=1}^{\infty}a_{-n}z^{n}.
+\]
+
+\end{defn}
+
+\begin{rem}\label{rem} \hfill
+\begin{enumerate}
+\item $f$ has a removable singularity at $\infty$ if and only if the principal
+part of the Laurent series for $f$ at $\infty$ vanishes, i.e. $a_{-n}=0$
+for all $n\geq1$.
+\item $f$ has a pole at $\infty$ of order $n$ if and only if the principal
+part of the Laurent series for $f$ at $\infty$ is a polynomial in
+$z$ of order $n$. 
+\item $f$ has an essential singularity at $\infty$ if and only if the
+principal part of the Laurent series for $f$ at $\infty$ is an infinite
+power series in $z$, i.e. $a_{-n}\neq0$ for infinitely many $n$. 
+\end{enumerate}
+\end{rem}
+
+\begin{example}\label{example} Let $f$ be given by $f(z)=e^{z}$.
+Then 
+\[
+f\left(\frac{1}{z}\right)=\sum_{n=0}^{\infty}\frac{z^{-n}}{n!}
+\]
+is the Laurent Series for $f$ at $\infty$. Since the principal part
+of the Laurent Series for $f$ at $\infty$ has infinitely many terms,
+we see that $f$ has an essential singularity at $\infty$. \end{example}
+
+\begin{example}\label{example} Let $f$ be given by $f(z)=\frac{1}{z}+1+2z+z^{3}$.
+Then $f$ has a pole at $\infty$ of order $3$. \end{example}
+
+\begin{example}\label{example} Let $f$ be given by $f(z)=\frac{1}{\sin z}$.
+Then $f$ does not have an isolated singularity at $\infty$. \end{example}
+
+\begin{defn}\label{defn} Let $f:D\to\mathbb{C}$, where $D$ is an
+open set in $\mathbb{C}_{\infty}$. We say that $f$ is \textbf{meromorphic
+}on $D$ if it is analytic on $D$, except possibly for a discrete
+set of poles. \end{defn}
+
+\begin{theorem}\label{theorem}\hfill
+\begin{enumerate}
+\item $f$ is analytic on $C_{\infty}$ if and only $f$ is constant. 
+\item $f$ is entire with a pole at $\infty$ if and only if $f$ is a polynomial.
+\item $f$ is meromorphic on $C_{\infty}$ if and only if $f$ is a rational
+function. 
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}\hfill
+\begin{enumerate}
+\item First assume $f$ is analytic on $C_{\infty}$. Since $f$ is analytic
+at $\infty$, it must be bounded on some $\{z\mid|z|>r\}$. Since
+$f$ is analytic on $\mathbb{C}$, it must be bounded everywhere.
+Now apply Liouville's theorem. The converse direction is trivial.
+\item First assume $f$ is entire. Write
+\[
+f(z)=a_{0}+\sum_{m=1}^{\infty}a_{m}z^{m}.
+\]
+Since $f$ has a pole at $\infty$ of order $n$, we must have $a_{m}=0$
+for all $m>n$. Therefore $f$ is a polynomial. The converse direction
+is trivial.
+\item First assume $f(z)=\frac{p(z)}{q(z)}$, where $p,q$ are polynomials
+with no common factors. Then $f$ is analytic in $\mathbb{C}$ except
+possibly at finitely many points $z$ where $g(z)=0$. Suppose $p(z)=a_{n}z^{n}+a_{n-1}z^{n-1}\cdots+a_{0}$
+and $g(z)=b_{m}z^{m}+b_{m-1}z^{m-1}\cdots+b_{0}.$ Then
+\[
+f(z)=z^{n-m}\left(\frac{a_{n}+\frac{a_{n-1}}{z}\cdots+\frac{a_{0}}{z^{n}}}{b_{m}+\frac{b_{m-1}}{z}\cdots+\frac{b_{0}}{z^{m}}}\right)=z^{n-m}h(z),
+\]
+where $h$ is analytic at $\infty$. If $n>m$, then $f$ has a pole
+at $\infty$. If $n\leq m$, then $f$ is analytic at $\infty$. Hence,
+$f$ is meromorphic on $\mathbb{C}_{\infty}$. Conversely, assume
+$f$ is meromorphic on $\mathbb{C}_{\infty}$. First we claim that
+$f$ can have at most finitely many poles $z_{1},\dots,z_{n}\in\mathbb{C}_{\infty}$.
+To see this, note that $f$ is analytic on $\{|z|>r\}$ for some $r>0$.
+In $\overline{B_{r}(0)}$, there exists a limit point $\xi$. If $\xi$
+is not a pole, then $f$ cannot be analytic at $\xi$, which is a
+contradiction. (If $\xi$ is a pole, it is not an isolated singularity).
+Now, take $P_{r}(z)$ to be the principal part of the Laurent series
+of $f$ at $z_{r}$. If $z_{r}=\infty$, then $P_{r}(z)$ is a polynomial.
+If $z_{r}\neq\infty$, then 
+\[
+P_{r}(z)=\sum_{j=1}^{m_{r}}b_{j}(z-z_{r})^{-j}.
+\]
+Define $g:=f-\sum_{r=1}^{n}P_{r}$. Then $g$ is a function which
+has removable singularities at the points $z_{r}$, and $g$ is analytic
+elsewhere. Now remove the singularities so that $g$ is analytic on
+$\mathbb{C}_{\infty}$. Therefore $g$ must be constant by part 1.
+Therefore 
+\[
+f=\text{constant}+\sum_{r=1}^{n}P_{r},
+\]
+which is a rational function. 
+\end{enumerate}
+\end{proof}
+
+\begin{example}\label{example} Let $f$ be entire and assume $f(z)\leq K+L|z|^{m}$
+for some constants $K,L$ and $m\in\mathbb{N}$. We will show that
+$f$ is a polynomial of degree $\leq m$. Let $g$ be given by 
+\[
+g(z):=\frac{f(z)}{|z|^{m}}\leq\frac{K}{|z|^{m}}+L.
+\]
+
+Then $g$ is meromorphic on $\mathbb{C}$ and $g$ is bounded near
+$\infty$. Hence, $g$ is meromorphic in $\mathbb{C}_{\infty}$. Therefore
+$g$ is a rational function and hence, so is $f$. Since $f$ remains
+bounded as $z$ tends to any finite limit, $f$ has no poles in $\mathbb{C}$,
+so $f$ must be a polynomial. Finally, since $\frac{f(z)}{|z|^{m}}$
+is bounded as $z\to\infty$, $\text{deg}(f)\leq m$. \end{example}
+
+\section{Residues}
+
+\begin{theorem}\label{theorem} (General form of Cauchy's Theorem)
+Let $f$ be analytic on a region $\Omega$ and let $\Gamma$ be a
+contour with $\Gamma\cup\text{Int}(\Gamma)\subseteq\Omega$. Then
+\[
+\int_{\Gamma}f(z)dz=0.
+\]
+\end{theorem}
+
+\begin{proof} Omitted.\end{proof}
+
+\begin{defn}\label{defn} Let $\sum_{n=-\infty}^{\infty}a_{n}(z-z_{0})^{n}$
+be the Laurent series for $f$ at $z_{0}$. The coefficient $a_{-1}$
+is called the \textbf{residue }of $f$ at $z_{0}$. We denote this
+as $\text{res}_{z_{0}}(f)$ or $\text{res}(f,z_{0})$. \end{defn}
+
+\begin{rem}\label{rem} Recall that 
+\[
+a_{-1}=\frac{1}{2\pi i}\int_{\Gamma}f(z)dz.
+\]
+\end{rem}
+
+\subsubsection{Cauchy's Residue Theorem}
+
+\begin{theorem}\label{theoremcauchyresiduetheorem} (Cauchy's residue
+theorem) Let $\Gamma$ be a positively oriented simple contour in
+$\mathbb{C}$ and let $f$ be analytic on $\Gamma$ and meromorphic
+on $\text{Int}(\Gamma)$ with poles at $z_{1},\dots,z_{n}\in\text{Int}(\Gamma)$.
+Then 
+\[
+\frac{1}{2\pi i}\int_{\Gamma}f(z)dz=\sum_{i=1}^{n}\text{res}_{z_{i}}(f).
+\]
+
+\end{theorem}
+
+\begin{proof} Let $P_{r}(z)$ to be the principal part of the Laurent
+series for $f$ at $z_{r}$. Then define $g$ by 
+\[
+g(z):=f(z)-\sum_{r=1}^{n}P_{r}(z).
+\]
+ Then $g$ is analytic on $\Gamma\cup\text{Int}(\Gamma)$ except for
+removable singularity. Now we apply Cauchy's Theorem to get 
+\[
+\int_{\Gamma}g(z)dz=0,
+\]
+so 
+\begin{align*}
+\frac{1}{2\pi i}\int_{\Gamma}f(z)dz & =\frac{1}{2\pi i}\sum_{r=1}^{n}\int_{\Gamma}P_{r}(z)dz\\
+ & =\sum_{r=1}^{n}\text{res}(f,z_{r}).
+\end{align*}
+\end{proof}
+
+\subsubsection{Argument Principle}
+
+\begin{theorem}\label{theoremargumentprinciple} (Argument Principal)
+Let $\Omega\subseteq\mathbb{C}$ be a region, $\Gamma$ be a positive
+contour with $\Gamma\cup\text{Int}(\Gamma)\subseteq\Omega$, and let
+$f$ be meromorphic on $\Omega$ with no zeros or poles on $\Gamma$.
+Suppose $f$ has zeros at $a_{j}$ of order $\omega_{j}$ in $\text{Int}(\Gamma)$
+and poles at $b_{k}$ of order $\rho_{k}$ in $\text{Int}(\Gamma)$.
+Then
+\[
+\frac{1}{2\pi i}\int_{\Gamma}\frac{f'(z)}{f(z)}dz=\sum_{j=1}^{m}\omega_{j}-\sum_{k=1}^{n}\rho_{k}.=N-P,
+\]
+where $N$ is the sum of orders of zeros in $\text{Int}(\Gamma)$
+and $P$ is the sum of orders of poles of $f$ in $\text{Int}(\Gamma)$.
+\end{theorem}
+
+\begin{rem}\label{rem} If $\gamma$ paramatrizes $\Gamma$, then
+$\frac{1}{2\pi i}\int_{\Gamma}f'(z)$ counts the number of winds $\gamma$
+makes about $0$. \end{rem}
+
+\begin{proof} The function $\frac{f'}{f}$ is analytic except at
+points the points $a_{j}$ and $b_{k}$. Near each $a_{j}$, we can
+factor $f$ as 
+\begin{equation}
+f(z)=(z-a_{j})^{\omega_{j}}g(z),\label{eq:f23}
+\end{equation}
+where $g$ is analytic at $a_{j}$ and $g(a_{j})\neq0$. Taking derivatives
+on both sides of (\ref{eq:f23}), we obtain 
+\begin{equation}
+f'(z)=\ell_{j}(z-a_{j})^{\omega_{j}-1}g(z)+(z-a_{j})^{\omega_{j}}g'(z).\label{eq:f24}
+\end{equation}
+Combining (\ref{eq:f23}) and (\ref{eq:f24}), we obtain
+\[
+\frac{f'(z)}{f(z)}=\frac{\omega_{j}}{z-a_{j}}+\frac{g'(z)}{g(z)}.
+\]
+
+So $\frac{f'}{f}$ has a simple pole at $a_{j}$ with residue $\omega_{j}$. 
+
+~~~Near each $b_{k}$ we can factor $f$ as 
+\begin{equation}
+f(z)=(z-b_{k})^{-\rho_{k}}h(z),\label{eq:f23-1}
+\end{equation}
+where $h$ is analytic at $b_{k}$ and $h(b_{k})\neq0$. Taking derivatives
+on both sides of (\ref{eq:f23-1}), we obtain 
+\begin{equation}
+f'(z)=\rho_{k}(z-b_{k})^{\rho_{k}-1}h(z)+(z-b_{k})^{\rho_{k}}h'(z).\label{eq:f24-1}
+\end{equation}
+Combining (\ref{eq:f23-1}) and (\ref{eq:f24-1}), we obtain
+\[
+\frac{f'(z)}{f(z)}=\frac{-\rho_{k}}{z-b_{k}}+\frac{h'(z)}{h(z)}.
+\]
+So $\frac{f'}{f}$ has a simple pole at $b_{k}$ with residue $-\rho_{k}$. 
+
+~~~Now we apply Theorem~(\ref{theoremcauchyresiduetheorem}) and
+obtain 
+\[
+\frac{1}{2\pi i}\int_{\Gamma}\frac{f'(z)}{f(z)}dz=\sum_{j=1}^{m}\omega_{j}-\sum_{k=1}^{n}\rho_{k}.
+\]
+
+\end{proof}
+
+\subsubsection{Rouche's Theorem}
+
+\begin{theorem}\label{theoremrouchestheorem} (Rouche's Theorem) Suppose
+that $f$ and $g$ are holomorphic in an open set containing a circle
+$C$ and its interior. If 
+\[
+|f(z)|>|g(z)|\quad\text{for all }z\in C,
+\]
+then $f$ and $f+g$ have the same number of zeros inside the circle
+$C$. \end{theorem}
+
+\begin{rem}\label{rem} The Theorem says that an analytic function
+can be perturbed slightly without changing the number of zeros. \end{rem}
+
+\begin{proof} For each $t\in[0,1]$, define a function $f_{t}$ by
+$f_{t}(z)=f(z)+tg(z)$. Let $n_{t}$ denote the number of zeros of
+$f_{t}$ inside the circle counted with multiplicities, so that in
+particular, $n_{t}$ is an integer. The condition $|f(z)|>|g(z)|$
+for all $z\in C$ clearly implies that $f_{t}$ has no zeros on the
+circle, and the argument principle implies
+\[
+n_{t}:=\frac{1}{2\pi i}\int_{C}\frac{f'_{t}(z)}{f_{t}(z)}dz.
+\]
+
+To prove that $n_{t}$ is constant, it suffices to show that it is
+a continuous function of $t$. Then we could argue that if $n_{t}$
+were not constant, the intermediate value theorem would guarantee
+existence of some $t_{0}\in[0,1]$ with $n_{t_{0}}$ not integral,
+contradicting the fact that $n_{t}\in\mathbb{Z}$ for all $t$. 
+
+~~~To prove continuity of $n_{t}$, observe that $f'_{t}(z)/f_{t}(z)$
+is jointly continuous for $t\in[0,1]$ and $z\in C$. This joint continuity
+follows from the fact that it holds for both the numerator and denominator,
+and our assumptions guarantee that $f_{t}(z)$ does not vanish on
+$C$. Hence, $n_{t}$ is integer-valued and continuous, and it must
+be constant. We conclude that $n_{0}=n_{1}$, which is Rouche's theorem.
+\end{proof}
+
+\subsubsection{Local Mapping Theorem}
+
+\begin{theorem}\label{theoremlocalmappingtheorem} (Local Mapping
+Theorem) Suppose $f$ is analytic at $z_{0}$ and that $f(z)-f(z_{0})$
+has a zero of order $n$ at $z_{0}$. Then if $\varepsilon>0$ is
+sufficiently small, there exists $\delta>0$ such that whenever $0<|w-f(z_{0})|<\delta$,
+then there exists exactly $n$ distinct points $z\in D_{\varepsilon}(z_{0})\backslash\{z_{0}\}$
+such that $f(z)=w$. \end{theorem}
+
+\begin{proof} Choose $\varepsilon>0$ small enough so that $f(z)-f(z_{0})\neq0$
+in $D_{2\varepsilon}(z_{0})\backslash\{z_{0}\}$ and $f'(z)\neq0$
+for $z\in D_{2\varepsilon}(z_{0})\backslash\{z_{0}\}$. Let $\Gamma:=\{z_{0}+\varepsilon e^{it}\mid0\leq t\leq2\pi\}$
+and $\delta:=\text{inf}\{|f(z)-f(z_{0})|\mid z\in\Gamma\}$. Then
+if $|f(z_{0})-w|<\delta$, then $|f(z_{0})-w|<|f(z)-f(z_{0})|$ for
+all $z\in\Gamma$. Apply Theorem~(\ref{theoremrouchestheorem}) to
+get
+\[
+f(z)-w=f(z)-f(z_{0})+f(z_{0})-w
+\]
+has the same number of zeros as $f(z)-f(z_{0})$, i.e. $n$ (counted
+with multiplicity). Finally, $(f(z)-w)'=f'(z)\ne0$ for $0<|z-z_{0}|<\varepsilon$.
+Hence, since $f(z_{0})\neq w$ and the zeros of $f(z)-w$ inside $\Gamma$
+have order $1$, there exists $n$ distinct zeros of $f(z)-w$ inside
+$\Gamma$. \end{proof}
+
+\begin{cor}\label{cor} Let $f$ be analytic and nonconstant on a
+region $\Omega$. 
+\begin{enumerate}
+\item (Open Mapping Theorem) If $G\subseteq\Omega$ is open, then $f(G)$
+is open. 
+\item Let $z_{0}\in\Omega$. Then $f'(z_{0})\neq0$ if and only if there
+exists $r>0$ such that $f$ is 1-1 on $D_{r}(z_{0})$.
+\item (Inverse Function Theorem) If $f$ is 1-1 on $\Omega$, then $f^{-1}$
+is analytic on $f(\Omega)$ and
+\[
+(f^{-1})'(f(z))=\frac{1}{f'(z)}
+\]
+for all $z\in\Omega$. 
+\end{enumerate}
+\end{cor}
+
+\begin{proof} \hfill
+\begin{enumerate}
+\item Let $z_{0}\in G$ so that $f(z_{0})\in f(G)$. By Theorem~(\ref{theoremlocalmappingtheorem}),
+there exists $\varepsilon>0$ such that $D_{\varepsilon}(z_{0})\subset G$
+and there exists $\delta>0$ such that $D(f(z_{0}),\delta)\subseteq f(D_{\varepsilon}(z_{0}))\subseteq f(G)$.
+Therefore $f(G)$ is open. 
+\item Use notation in the Local Mapping Theorem. Note that $f(z)-f(z_{0})=(z-z_{0})^{n}h(z)$
+and $f'(z)=n(z-z_{0})^{n-1}h(z)+(z-z_{0})^{n}h'(z)$ where $h(z_{0})\neq0$.
+Therefore $f'(z_{0})\neq0$ if and only if $n=1$. Converseley, $f'(z_{0})\neq0$
+implies $n=1$. Then $f^{-1}(D(f(z_{0})),\delta)$ is an open set
+containing $z_{0}$ and hence containing $D_{r}(z_{0})$ for some
+$r>0$. By the Theorem~(\ref{theoremlocalmappingtheorem}), $f$ is
+1-1 on $D_{r}(z_{0})$. 
+\item Write $w=f(z)$. Since $f$ is 1-1, $f'(z)\neq0$ by part (2). Then
+\begin{align*}
+\lim_{w\to f(z_{0})}\frac{f^{-1}(w)-f^{-1}(f(z_{0}))}{w-f(z_{0})} & =\lim_{f(z)\to f(z_{0})}\frac{z-z_{0}}{f(z)-f(z_{0})}\\
+ & =\lim_{z\to z_{0}}\frac{1}{\frac{f(z)-f(z_{0})}{z-z_{0}}}\\
+ & =\frac{1}{f'(z_{0})}.
+\end{align*}
+ 
+\end{enumerate}
+\end{proof}
+
+\textbf{Warning:} $f'(z)\neq0$ for all $z\in\Omega$ does not imply
+$f$ is 1-1 on $\Omega$. For example, $e^{z}$ has nonvanishing derivative
+everywhere on $\mathbb{C}$, but $e^{z}$ is not 1-1 on $\mathbb{C}$.
+
+\subsubsection{Maximum Modulus Theorem}
+
+\begin{theorem}\label{theoremmaximummodulustheorem} (Maximum Modulus
+Theorem) Let $f$ be analytic and nonconstant on a region $\Omega$.
+Then $|f(z)|$ does not obtain its maximum value on $\Omega$. In
+particular, if $\Omega=\text{Int}(\Gamma)$, where $\Gamma$ is a
+simple contour, and $f$ is continuous on $\Gamma\cup\text{Int}(\Gamma)$,
+then if $|f(z)|\leq M$ for all $z\in\Gamma$, then $|f(z)|<M$ for
+all $z\in\text{Int}(\Gamma)$. 
+
+\end{theorem}
+
+\begin{proof} Suppose that $f$ did attain a maximum at $z_{0}$.
+Since $f$ is holomorphic it is an open mapping, and therefore, if
+$D\subset\Omega$ is a small disc centered at $z_{0}$, its image
+$f(D)$ is open and contains $f(z_{0})$. This proves that there are
+points in $z\in D$ such that $|f(z)|>|f(z_{0})|$, a contradiction.
+\end{proof}
+
+\begin{cor}\label{cor} Suppose that $\Omega$ is a region with compact
+closure $\overline{\Omega}$. If $f$ is holomorphic on $\Omega$
+and continuous on $\overline{\Omega}$, then 
+\[
+\sup_{z\in\Omega}|f(z)|\leq\sup_{z\in\overline{\Omega}\backslash\Omega}|f(z)|.
+\]
+\end{cor}
+
+\begin{proof} In fact, since $f(z)$ is continuous on the compact
+set $\overline{\Omega}$, then $|f(z)|$ attains a maximum in $\overline{\Omega}$;
+but this cannot be in $\Omega$ if $f$ is nonconstant. If $f$ is
+constant, the conclusion is trivial. \end{proof}
+
+\begin{example}\label{example} \hfill
+\begin{enumerate}
+\item If $f$ is analytic on $\Omega$ and $f(z)\neq0$ for all $z\in\Omega$,
+then $|f(z)|$ does attain its minimum value in $\Omega$. The idea
+is simply to apply Theorem~(\ref{theoremmaximummodulustheorem}) to
+$1/f$. 
+\item If $f$ is analytic and nonconstant on $\Omega$. Then $\text{Re}(f)$
+and $\text{Im}(f)$ do not attain maximum values on $\Omega$. The
+idea is to consider 
+\begin{align*}
+|e^{f}| & =e^{\text{Re}(f)}\\
+|e^{-f}| & =e^{-\text{Re}(f)}\\
+|e^{if}| & =e^{-\text{Im}(f)}\\
+|e^{-if}| & =e^{-\text{Im}(f)}.
+\end{align*}
+\end{enumerate}
+\end{example}
+
+\subsubsection{Schwarz's Lemma}
+
+\begin{theorem}\label{theoremschwarzslemma} (Schwarz Lemma) Assume
+$f$ is analytic on $D_{1}(0)$ with $|f(z)|\leq1$ for all $|z|<1$
+and $f(0)=0$. Then $|f(z)|\leq|z|$ for all $|z|<1$. Moreover, if
+$|f(z_{0})|=|z_{0}|$ for some $z_{0}\in D_{1}(0)$, then $f(z)=cz$
+for some $c$ with $|c|=1$. \end{theorem}
+
+\begin{proof} Define $g$ by 
+\[
+g(z)=\begin{cases}
+\frac{f(z)}{z} & \text{if }0<|z|<1\\
+f'(0) & \text{if }z=0.
+\end{cases}
+\]
+
+Then $g$ is analytic on $D_{1}(0)$. Let 
+\[
+f(z)=\sum_{n=1}^{\infty}\frac{f^{(n)}(0)}{n!}z^{n}
+\]
+Then
+\[
+g(z)=\sum_{n=0}^{\infty}\frac{f^{(n+1)}(0)}{(n+1)!}z^{n}.
+\]
+which is valid for $|z|<1$. Take any $r\in(0,1)$. Apply the Maximum
+Modulus Theorem to $g$ on $\Gamma_{r}:=\{re^{i\theta}\mid0\leq\theta\leq2\pi\}.$
+Then on $\Gamma$, $|g(z)|\leq\frac{1}{r}$, hence $|f(z)|\leq\frac{1}{r}|z|$
+for all $z\in\Gamma\cup\text{Int}(\Gamma)$. Letting $r\to1^{-}$,
+we get |
+\[
+|g(z)|\leq1\quad\text{and}\quad|f(z)|\leq|z|
+\]
+for all $z\in D_{1}(0)$. Finally, if $|f(z_{0})|=|z_{0}|$, then
+$|g(z_{0})|=1$. By the Maximum Modulus Theorem, $g$ is a constant,
+i.e. $g(t)=c$ with $|c|=1$. Hence, $f(z)=cz$. 
+
+\end{proof}
+
+\subsection{Residue Calculus (Theory)}
+
+~~~If $f$ is analytic on $\Gamma\cup\text{Int}(\Gamma)$ except
+for some poles possibly in $\text{Int}(\Gamma)$. Then by Cauchy's
+Residue Theorem, 
+\[
+\frac{1}{2\pi i}\int_{\Gamma}f(z)dz=\sum\text{residues of }f\text{ at each pole in }\text{Int}(\Gamma).
+\]
+
+Let $f$ have a pole of order $k$ at $z_{0}$. Then 
+\[
+f(z)=\sum_{n=-k}^{\infty}a_{n}(z-z_{0})^{n}
+\]
+for all $0<|z-z_{0}|<r$, with $a_{-k}\neq0$ and $a_{-1}=\text{res}(f,z_{0})$.
+Let $g$ be defined as 
+\[
+g(z):=(z-z_{0})^{k}f(z)=\sum_{n=0}^{\infty}a_{n-k}(z-z_{0})^{n},
+\]
+for all $0<|z-z_{0}|<r$. Then $g(z_{0})=a_{-k}$ and $g$ is analytic
+at $z_{0}$. Now $a_{-1}$ is the coefficient of $(z-z_{0})^{k-1}$
+in the Taylor series expansion of $g$ at $z_{0}$. Thus, 
+\[
+a_{-1}=\frac{1}{(k-1)!}g^{(k-1)}(z_{0})=\frac{1}{(k-1)!}\lim_{z\to z_{0}}g^{(k-1)}(z).
+\]
+Therefore 
+\[
+\text{res}(f,z_{0})=a_{-1}=\frac{1}{(k-1)!}\lim_{z\to z_{0}}\frac{d^{k-1}}{dz^{k-1}}\left((z-z_{0})^{k}f(z)\right).
+\]
+In the special case that $k=1$, we have 
+\[
+\text{res}(f,z_{0})=\lim_{z\to z_{0}}(z-z_{0})f(z).
+\]
+We will call this result, combined with Cauchy's Residue Theorem,
+the \textbf{Residue Theorem}. 
+
+\subsubsection{Integrating using residues method 1}
+
+~~~Suppose we want to integrate something of the form
+\[
+I=\int_{0}^{2\pi}R(\cos\theta,\sin\theta)d\theta,
+\]
+where $R$ is a rational function in $\cos\theta$ and $\sin\theta$.
+To evaluate $I$, we put $z=e^{i\theta}$, so that 
+\[
+\cos\theta=\frac{1}{2}\left(z+\frac{1}{z}\right)\quad\text{and}\quad\sin\theta=\frac{1}{2i}\left(z-\frac{1}{z}\right).
+\]
+Let $\Gamma=\{e^{i\theta}\mid0\leq\theta\leq2\pi\}.$ Then 
+\[
+I=\int_{\Gamma}R\left(\frac{1}{2}\left(z+\frac{1}{z}\right),\frac{1}{2i}\left(z-\frac{1}{z}\right)\right)\left(\frac{-i}{z}\right)dz.
+\]
+\begin{example}\label{example} Let 
+\[
+I=\int_{0}^{\pi}\frac{d\theta}{a+\cos\theta}.
+\]
+Since $\cos\theta$ is symmetric about the line $\theta=\pi$, it's
+easy to see that $\frac{1}{a+\cos\theta}$ is also symmetric about
+this line. So 
+\begin{align*}
+I & =\frac{1}{2}\int_{0}^{2\pi}\frac{d\theta}{a+\cos\theta}\\
+ & =\frac{1}{2}\int_{\Gamma}\frac{1}{a+\frac{1}{2}\left(z+\frac{1}{z}\right)}\cdot\frac{-i}{z}dz\\
+ & =-i\int_{\Gamma}\frac{1}{z^{2}+2az+1}dz.
+\end{align*}
+Now we solve $z^{2}+2az+1=0$ to get $z=-a\pm\sqrt{a^{2}-1}$. The
+only pole inside $\Gamma$ is $-a+\sqrt{a^{2}-1}$. It is also a simple
+pole, thus its residue is 
+\[
+\lim_{z\to-a+\sqrt{a^{2}-1}}\left(\frac{z+a-\sqrt{a^{2}-1}}{z^{2}+2az+1}\right)=\lim_{z\to-a+\sqrt{a^{2}-1}}\left(\frac{1}{z+a+\sqrt{a^{2}-1}}\right)=\frac{1}{2\sqrt{a^{2}-1}}.
+\]
+So, by the Residue Theorem, 
+\[
+I=-i\cdot2\pi i\cdot\text{res}(f,-a+\sqrt{a^{2}-1})=\frac{\pi}{\sqrt{a^{2}-1}}.
+\]
+\end{example}
+
+\subsubsection{Integrating using residues method 2}
+
+\begin{theorem}\label{theoremresidueintegral2} Let $p,q\in\mathbb{R}[x]$
+such that $p$ and $q$ share no common factor, $\text{deg}(q)\geq\text{deg}(p)+2$,
+and $q(x)\ne0$ for all $x\in\mathbb{R}$. Then the integral
+\[
+\int_{-\infty}^{\infty}\frac{p(x)}{q(x)}dx=2\pi i\sum_{r=1}^{k}\text{res}\left(\frac{p}{q},z_{r}\right)
+\]
+where $z_{r}$ denotes the zeros of $q$ in the upper half-plane.
+\end{theorem}
+
+\begin{proof} Omitted. \end{proof}
+
+\begin{ex} Evaluate $I=\int_{-\infty}^{\infty}\frac{1}{\left(1+x^{2}\right)^{2}}dx$.
+\end{ex}
+
+\textbf{Solution: }For this problem, $p(z)=1$ and $q(z)=\left(1+z^{2}\right)^{2}=(1+iz)^{2}(1-iz)^{2}$.
+The conitions in Theorem~(\ref{theoremresidueintegral2}) are satisfied.
+The only zero of $q$ in the upper-half plane is $z=i$ with order
+$2$. Then
+\begin{align*}
+\text{res}\left(\frac{p}{q},i\right) & =\lim_{z\to i}\frac{d}{dz}\left(\frac{\left(z-i\right)^{2}}{\left(1+z^{2}\right)^{2}}\right)\\
+ & =\lim_{z\to i}\frac{d}{dz}\left(\frac{1}{(z+i)^{2}}\right)\\
+ & =\lim_{z\to i}\left(\frac{-2}{(z+i)^{3}}\right)\\
+ & =\frac{1}{4i},
+\end{align*}
+and therefore 
+\begin{align*}
+\int_{-\infty}^{\infty}\frac{1}{\left(1+x^{2}\right)^{2}}dx & =2\pi i\cdot\text{res}\left(\frac{p}{q},i\right)\\
+ & =2\pi i\cdot\frac{1}{4i}\\
+ & =\frac{\pi}{2}.
+\end{align*}
+
+\subsubsection{Integrating using residues method 3}
+
+~~~~~~Suppose we want to integrate 
+\[
+I=\int_{-\infty}^{\infty}\frac{p(x)}{q(x)}\cos(x)dx\quad\text{or}\quad J=\int_{-\infty}^{\infty}\frac{p(x)}{q(x)}\cos(x)dx
+\]
+
+where $p,q$ are real polynomials and relatively prime real polynomials,
+$\text{deg}(q)\geq\text{deg}(p)+1$, and $q(x)\neq0$ for all $x\in\mathbb{R}$.
+
+\begin{theorem}\label{theoremtheoremresidueintegral3} Under the above
+conditions, the integral $I=\int_{-\infty}^{\infty}\frac{p(x)}{q(x)}e^{ix}dx$
+exists and equals $2\pi i\sum_{r=1}^{k}\text{res}\left(\frac{p(z)}{q(z)}e^{iz},z_{r}\right)$,
+where $z_{r}$ denotes the zeros of $q$ in the upper half-plane. 
+
+\end{theorem}
+
+\begin{proof} Omitted. \end{proof}
+
+\begin{ex} Evaluate $I=\int_{0}^{\infty}\frac{x\sin(x)}{1+x^{2}}dx$.
+\end{ex}
+
+\textbf{Solution: }The function $\frac{x\sin(x)}{1+x^{2}}$ is even.
+Therefore
+\begin{align*}
+I & =\frac{1}{2}\int_{-\infty}^{\infty}\frac{x\sin(x)}{1+x^{2}}dx\\
+ & =\frac{1}{2}\text{Im}\left(\int_{-\infty}^{\infty}\frac{xe^{ix}}{1+x^{2}}dx\right).
+\end{align*}
+The conitions in Theorem~(\ref{theoremresidueintegral3}) are satisfied,
+with $p(z)=z$ and $q(z)=1+z^{2}$. The only zero of $q$ in the upper-half
+plane is $z=i$ with order $1$. Then
+\begin{align*}
+\text{res}\left(\frac{ze^{iz}}{1+z^{2}},i\right) & =\lim_{z\to i}\left(\frac{(z-i)ze^{iz}}{1+z^{2}}\right)\\
+ & =\lim_{z\to i}\left(\frac{ze^{iz}}{z+i}\right)\\
+ & =\frac{ie^{-1}}{2i}\\
+ & =\frac{1}{2e},
+\end{align*}
+and therefore 
+\begin{align*}
+\int_{-\infty}^{\infty}\frac{xe^{ix}}{1+x^{2}}dx & =2\pi i\cdot\text{res}\left(\frac{ze^{iz}}{1+z^{2}},i\right)\\
+ & =2\pi i\cdot\frac{1}{2e}\\
+ & =\frac{\pi i}{e}.
+\end{align*}
+
+\section{The Complex Logarithm}
+
+~~~Recall that each complex number $z\neq0$ can be written as
+$z=re^{i\theta}$ where $r=|z|$ and $\theta=\text{arg}(z)$. The
+value $r$ is unique, but the value $\theta$ is only unique modulo
+$2\pi\mathbb{Z}$. In the real case, $e^{x}=y$ with $y>0$, then
+$x=\log(y)$. In the complex case, $e^{z}=w$ with $w\in\mathbb{C}\backslash\{0\}$.
+Setting $z=x+iy$, we have $e^{x}e^{iy}=e^{x+iy}=|w|e^{i\text{arg}(w)}$.
+The solutions are $x=\log|w|$ and $y=\text{arg}(w)+2n\pi$. There
+are infinitely choices of what $\log(w)$ could be, but we only choose
+one of them. We define $\log(w)=\log|w|+i\text{arg}(w)$, where $\text{arg}(w)\in(-\pi,\pi]$.
+Notice that $\log(w)$ is continuous except on the half line $(-\infty,0]$. 
+
+\begin{defn}\label{defn} Let $w\in\mathbb{C}\backslash\{0\}$. Then
+we define $w^{z}:=e^{z\log(w)}$, which makes sense as a function
+as long as we restrict to the principal branch. \end{defn}
+
+\begin{ex} \hfill
+\begin{enumerate}
+\item $\log(z_{1})+\log(z_{2})=\log(z_{1}z_{2})$ modulo $2\pi i\mathbb{Z}$. 
+\item $w^{z_{1}+z_{2}}=w^{z_{1}}w^{z_{2}}$ if we take the principal value
+of $\log$. 
+\end{enumerate}
+\end{ex}
+
+\begin{theorem}\label{theorem3.16} Let $\Omega$ be a simply connected
+region with $1\in\Omega$ and $0\notin\Omega$. Then in $\Omega$
+there is a branch of the logarithm $F(z)=\log_{\Omega}(z)$ so that 
+\begin{enumerate}
+\item $F$ is holomorphic in $\Omega$,
+\item $e^{F(z)}=z$ for all $z\in\Omega$,
+\item $F(r)=\log(r)$ whenever $r$ is a real number and near $1$. 
+\end{enumerate}
+\end{theorem}
+
+\begin{rem}\label{rem} In other words, each branch $\log_{\Omega}(z)$
+is an extension of the standard logarithm defined for positive numbers.
+\end{rem}
+
+\begin{proof} We shall construct $F$ as a primitive of the function
+$1/z$. Since $0\notin\Omega$, the function $f(z)=1/z$ is holomorphic
+in $\Omega$. We define
+\[
+\log_{\Omega}(z)=F(z)=\int_{\gamma}f(w)dw,
+\]
+where $\gamma$ is any curve in $\Omega$ connecting $1$ to $z$.
+Since $\Omega$ is simply connected, this definition does not depend
+on the path chosen. Arguing as in the proof of Theorem 5.2, we find
+that $F$ is holomorphic and $F'(z)=1/z$ for all $z\in\Omega$. This
+proves (1). To prove (2), it suffices to show that $ze^{-F(z)}=1$.
+For that, we differentiate the left-hand side, obtaining
+\[
+\frac{d}{dz}\left(ze^{-F(z)}\right)=e^{-F(z)}-zF'(z)e^{-F(z)}=\left(1-zF'(z)\right)e^{-F(z)}=0.
+\]
+Since $\Omega$ is connected, we conclude that $ze^{-F(z)}$ is constant.
+Evaluating this expression at $z=1$, and noting that $F(1)=0$, we
+find that this constant must be $1$. 
+
+~~~Finally, if $r$ is real and close to $1$ we can choose as
+a path from $1$ to $r$ a line segment on the real axis so that
+\[
+F(r)=\int_{1}^{r}\frac{dx}{x}=\log r,
+\]
+by the usual formula for the standard logarithm. This completes the
+proof of the theorem.\end{proof}
+
+\section{Conformal Mappings}
+
+~~~We fix some terminology that we shall use in the rest of this
+chapter. A bijective holomorphic function $f:U\to V$ is called a
+\textbf{conformal map }or \textbf{biholomorphism}. Given such a mapping
+$f$, we say that $U$ and $V$ are \textbf{conformally equivalent
+}or simply \textbf{biholomorphic}. An important fact is that the inverse
+of $f$ is then automatically holomorphic.
+
+~~~Let $\gamma_{1}$ and $\gamma_{2}$ be paths in $\mathbb{C}$
+with $z_{0}=\gamma_{1}(0)=\gamma_{2}(0)$. The \textbf{angle }between
+$\gamma_{1}$ and $\gamma_{2}$ at $z_{0}$ is written
+\[
+\langle\gamma_{1},\gamma_{2}\rangle_{z_{0}}=\lim_{t\to0^{+}}\left(\arg(\gamma_{2}(t)-z_{0})\right)-\lim_{s\to0^{+}}\left(\arg(\gamma_{1}(s)-z_{0})\right),
+\]
+assuming that these limits exist. Let $f$ be analytic on $\gamma_{1}\cup\gamma_{2}$
+and write $\widetilde{\gamma}_{j}=f\circ\gamma_{j}$. 
+
+\begin{rem}\label{rem} \hfill 
+\begin{enumerate}
+\item If $\gamma_{1}'(0)\ne0$ and $\gamma_{2}'(0)\neq0$, then $\langle\gamma_{1},\gamma_{2}\rangle_{z_{0}}=\text{arg}\left(\gamma_{1}'(0)\right)-\text{arg}\left(\gamma_{2}'(0)\right)$.
+To see this, note that 
+\begin{align*}
+\lim_{t\to0^{+}}\left(\arg\left(\gamma_{1}(t)-\gamma_{1}(0)\right)\right) & =\lim_{t\to0^{+}}\left(\arg\left(\frac{\gamma_{1}(t)-\gamma_{1}(0)}{t}\right)\right)\\
+ & =\arg\left(\lim_{t\to0^{+}}\left(\frac{\gamma_{1}(t)-\gamma_{1}(0)}{t}\right)\right)\\
+ & =\arg\left(\gamma_{1}'(0)\right).
+\end{align*}
+\end{enumerate}
+\end{rem}
+
+\begin{defn}\label{defn} We say $f$ is \textbf{conformal }on a region
+$\Omega\subseteq\mathbb{C}$ if $f$ is analytic on $\Omega$ and
+$f'(z)\neq0$ for all $z\in\Omega$. \end{defn}
+
+\begin{rem}\label{rem} The book's definition is equivalent to our
+definition + 1-1. Thus is it stronger. \end{rem}
+
+\begin{theorem}\label{theorem4.1} Let $f$ be analytic at $z_{0}$
+with $f(z)-f(z_{0})$ having a zero of order $n$ at $z_{0}$. Then
+if $\langle\gamma_{1},\gamma_{2}\rangle_{z_{0}}$ and $\langle\widetilde{\gamma}_{1},\widetilde{\gamma}_{2}\rangle_{f(z_{0})}$
+exist, then 
+\[
+\langle\gamma_{1},\gamma_{2}\rangle_{z_{0}}=\langle\widetilde{\gamma}_{1},\widetilde{\gamma}_{2}\rangle_{f(z_{0})}.
+\]
+\end{theorem}
+
+\begin{proof} Write $f(z)-f(z_{0})=(z-z_{0})^{n}h(z)$, for $|z-z_{0}|<\delta$
+where $\delta>0$ is sufficiently small, and $h$ is analytic and
+nonzero in $\{|z|<\delta\}$. Then 
+\begin{equation}
+\text{arg}\left(f(\gamma_{2}(t))-f(z_{0})\right)=n\text{arg}\left(\gamma_{2}(t)-z_{0}\right)+\text{arg}\left(h(\gamma_{2}(t))\right).\label{eq:arg1}
+\end{equation}
+\begin{equation}
+\text{arg}\left(f(\gamma_{1}(t))-f(z_{0})\right)=n\text{arg}\left(\gamma_{1}(t)-z_{0}\right)+\text{arg}\left(h(\gamma_{1}(t))\right).\label{eq:arg2}
+\end{equation}
+
+Subtracting (\ref{eq:arg1}) from (\ref{eq:arg2}), then letting $t\to0^{+}$,
+we obtain
+\[
+\langle\widetilde{\gamma}_{1},\widetilde{\gamma}_{2}\rangle_{f(z_{0})}=n\langle\gamma_{1},\gamma_{2}\rangle_{z_{0}}+\lim_{t\to0^{+}}\text{arg}\left(h(\gamma_{2}(t)\right)-\lim_{t\to0^{+}}\text{arg}\left(h(\gamma_{1}(t)\right)
+\]
+
+\end{proof}
+
+\begin{rem}\label{rem} If $f'(z_{0})\neq0$, then $n=1$ in Theorem~(\ref{theorem4.1}),
+hence $f$ preserves angles. \end{rem}
+
+\subsection{Mobius Transformations}
+
+~~~Let $a,b,c,d\in\mathbb{C}$ such that $ad-bc\neq0$. A function
+of the form 
+\[
+f(z)=\frac{az+b}{cz+d}
+\]
+is called a \textbf{Möbius transformation }(or \textbf{bilinear transformation
+}or \textbf{linear fractional transformation}). It is easy to check
+that 
+\[
+f'(z)=\frac{ad-bc}{\left(cz+d\right)^{2}}\neq0,
+\]
+hence $f$ is conformal on $\mathbb{C}\backslash\{-d/c\}$. We define
+$f$ on $\mathbb{C}_{\infty}=\mathbb{C}\cup\{\infty\}$ by $f(-d/c)=\infty$
+and $f(\infty)=a/c$. We can check that the equation 
+\[
+f(z)=w
+\]
+can be solved uniquely for each $w\in\mathbb{C}_{\infty}$ as 
+\[
+z=\frac{dw-b}{-cw+a}=f^{-1}(w).
+\]
+This implies $f^{-1}$ is also a möbius transformation. 
+
+\begin{rem}\label{rem} The set of Möbius transformations forms a
+group under composition as multiplication. \end{rem}
+
+~~~Here are some special types of Mobius transformations. 
+\begin{enumerate}
+\item $f(z)=z+b$ (translation) $\left(\begin{smallmatrix}1 & b\\
+0 & 1
+\end{smallmatrix}\right)$
+\item $f(z)=e^{i\alpha}z$, $\alpha\in\mathbb{R}$ (rotation) $\left(\begin{smallmatrix}e^{i\alpha} & 0\\
+0 & 1
+\end{smallmatrix}\right)$
+\item $f(z)=az$, $a>0$ (homothety) $\left(\begin{smallmatrix}a & 0\\
+0 & 1
+\end{smallmatrix}\right)$
+\item $f(z)=\frac{1}{z}$ (inversion) $\left(\begin{smallmatrix}0 & 1\\
+1 & 0
+\end{smallmatrix}\right)$
+\end{enumerate}
+In fact, any Mobius transformation is the composition of these special
+transformations. The proof of this is as follows: assume $c\neq0$,
+otherwise it is easy. Then
+\begin{align*}
+z & \mapsto z+\frac{d}{c}\\
+ & \mapsto\frac{1}{z+\frac{d}{c}}\\
+ & \mapsto\frac{bc-ad}{c^{2}\left(z+\frac{d}{c}\right)}\\
+ & \mapsto\frac{a}{c}+\frac{bc-ad}{c^{2}\left(z+\frac{d}{c}\right)}\\
+ & =\frac{az+b}{cz+d}
+\end{align*}
+
+where the transformations are given by translation, inversion, rotation/homothety,
+and translation respectively. 
+
+~~~Mobius transformations maps $\{\text{circles}\cup\text{lines}\}$
+to $\{\text{circles}\cup\text{lines}\}$. In particular, the special
+types (1), (2), and (3) takes lines into lines and circles into circle.
+Whereas the special type (4) takes circles to lines and lines to circles.
+We summarize everything we've discussed in the form of a theorem.
+
+\begin{theorem}\label{theorem4.2} Let $f$ be a Möbius transformation.
+Then
+\begin{enumerate}
+\item $f$ is a composition of the $4$ special types (translation, rotation,
+homothety, and inversion).
+\item $f:\mathbb{C}_{\infty}\to\mathbb{C}_{\infty}$ is one-to-one and onto,
+and $f^{-1}$ is also a Möbius transformation.
+\item $f$ maps $\{\text{circles}\cup\text{lines}\}$ to $\{\text{circles}\cup\text{lines}\}.$
+\item $f$ is conformal at every point except its pole. 
+\end{enumerate}
+\end{theorem}
+
+\begin{prop}\label{prop} Let $z_{1},z_{2},z_{3}\in\mathbb{C}_{\infty}$
+be distinct and let $w_{1},w_{2},w_{3}\in\mathbb{C}_{\infty}$ be
+distinct. Then there exists a unique Möbius transformation $f$ such
+that $f(z_{i})=w_{i}$ for $i=1,2,3$. \end{prop}
+
+\begin{proof} Let 
+\[
+g(z)=\frac{(z-z_{1})(z_{2}-z_{3})}{(z-z_{3})(z_{2}-z_{1})}\quad\text{and}\quad h(z)=\frac{(w-w_{1})(w_{2}-w_{3})}{(w-w_{3})(w_{2}-w_{1})}.
+\]
+Then $g(z_{1})=0$, $g(z_{2})=1$, and $g(z_{3})=\infty$ and $g$
+is the unique Möbius transformation with these values. We can represent
+as matrix as
+\[
+\left(\begin{smallmatrix}z_{2}-z_{3} & -(z_{2}-z_{3})z_{1}\\
+z_{2}-z_{1} & -(z_{2}-z_{1})z_{3}
+\end{smallmatrix}\right)
+\]
+The determinant of this matrix is given by $(z_{2}-z_{1})(z_{3}-z_{2})(z_{3}-z_{1})\ne0$.
+Now let $f:=h^{-1}\circ g$. Then $f(z_{i})=w_{i}$ for $i=1,2,3$.
+This proves existence. ~~~For uniqueness, suppose $\widetilde{f}$
+is another Möbius transformation such that $\widetilde{f}(z_{i})=w_{i}$
+for $i=1,2,3$. Then $(h\circ\widetilde{f})(z_{1})=0$, $(h\circ\widetilde{f})(z_{2})=1$,
+and $(h\circ\widetilde{f})(z_{3})=\infty$. By uniqueness of $g$,
+we have $h\circ\widetilde{f}=g$. So $\widetilde{f}=h^{-1}\circ g=f$.
+\end{proof}
+
+\begin{ex} There exists a Möbius transformation $f$ mapping $D_{1}(0)$
+onto $\{x+iy\mid ax+by+c>0\}$, where $a,b,c\in\mathbb{R}$ and $a^{2}+b^{2}>0$.
+\end{ex}
+
+\begin{ex} Find all Möbius transformations mapping $D_{1}(0)$ onto
+$\{z\mid\text{Re}(z)>0\}$ and such that it maps $0$ to $1$. \end{ex}
+
+\begin{prop} If $f$ is a one-one analytic function from $D_{1}(0)$
+onto $D_{1}(0)$, then $f$ is a Möbius transformation. If $f(0)=0$,
+then $f(z)=e^{i\theta}z$. \end{prop}
+
+\begin{proof} Let $g$ be given by 
+\[
+g(z):=\frac{z-f(0)}{1-\overline{f(0)}z}.
+\]
+Then $g$ maps $D_{1}(0)$ onto $D_{1}(0)$, $g$ is injective, and
+$g(f(0))=0$. Let $h:=g\circ f$. Then $h$ is one-one analytic from
+$D_{1}(0)$ to $D_{1}(0)$ with $h(0)=0$. The same holds for $h^{-1}$.
+Hence by Schwarz lemma, we get $|h(z)|\leq|z|$ and similarly $|h^{-1}(w)|\leq|w|$
+for all $|z|,|w|<1$. Hence $|h^{-1}(h(z))|\leq|h(z)|$ if and only
+if $|z|\leq|h(z)|$. Therefore $|z|=|h(z)|$. By Schwarz lemma again,
+$h(z)=e^{i\alpha}z$. Now, $f=g^{-1}\circ f$ is a Möbius transformation.
+\end{proof}
+
+\begin{ex} The general Möbius transformation from $D_{1}(0)$ onto
+$D_{1}(0)$ has the form 
+\[
+f(z)=e^{i\alpha}\frac{z-\beta}{1-\overline{\beta}z}
+\]
+\end{ex}
+
+\begin{ex} Find all Möbius transformations mapping $D_{r_{1}}(z_{1})$
+onto $D_{r_{2}}(z_{2})$. \end{ex}
+
+\subsubsection{Riemann Mapping Theorem}
+
+~~~Our goal in this section is to prove the Riemann Mapping Theorem.
+We first need some defintions.
+
+\begin{defn}\label{defn} Let $\Omega\subseteq\mathbb{C}$ be open
+and $\mathcal{F}$ be a family of holomorphic functions on $\Omega$.
+Then 
+\begin{enumerate}
+\item $\mathcal{F}$ is said to be \textbf{uniformly bounded on compact
+subsets of $\Omega$} if for all compact sets $K\subset\Omega$, there
+exists a constant $B=B(K)>0$ such that 
+\[
+|f(z)|\leq B\qquad\text{for all }z\in K\text{ and }f\in\mathcal{F}.
+\]
+\item $\mathcal{F}$ is said to be \textbf{equicontinuous on a compact set}
+$K\subset\Omega$ if for all $\varepsilon>0$, there exists $\delta>0$
+such that for all $z,w\in K$ and $f\in\mathcal{F}$, 
+\[
+|z-w|<\delta\text{ implies }|f(z)-f(w)|<\varepsilon.
+\]
+\item $\mathcal{F}$ is said to be \textbf{normal }if every sequence in
+$\mathcal{F}$ has a subsequence that converges uniformly on every
+compact subset of $\Omega$. The limit need not be in $\mathcal{F}$.
+\end{enumerate}
+\end{defn}
+
+\begin{rem}\label{rem} Remark about (3). The limit is holomorphic
+by Morera. \end{rem}
+
+\begin{defn}\label{defn} Let $\Omega\subseteq\mathbb{C}$ be open.
+A sequence $\{K_{\ell}\}_{\ell=1}^{\infty}$ of compact subsets is
+called an \textbf{exhaustion }if 
+\begin{enumerate}
+\item $K_{\ell}\subseteq\text{Int}(K_{\ell+1})$ for all $\ell\geq1$. 
+\item Any compact set $K\subseteq\Omega$ is contained in $K_{\ell}$ for
+some $\ell$. In particular, $\Omega=\bigcup_{\ell=1}^{\infty}K_{\ell}$. 
+\end{enumerate}
+\end{defn}
+
+\begin{example}\label{example} $\overline{D_{1-\frac{1}{\ell}}(0)}_{\ell=1}^{\infty}$
+is an exhaustion of $D=D_{1}(0)$. \end{example}
+
+\begin{lemma}\label{lemma} Any open set $\Omega$ in $\mathbb{C}$
+has an exhaustion. \end{lemma}
+
+\begin{proof}\hfill
+
+\textbf{Case 1}: Assume $\Omega$ is bounded. Let $K_{\ell}:=\{z\in\Omega\mid|z-w|\geq1/\ell\text{ for all }w\in\partial\Omega\}$.
+Then clearly $\{K_{\ell}\}_{\ell=1}^{\infty}$ is an exhaustion of
+$\Omega$.
+
+\hfill
+
+\textbf{Case 2}: Assume $\Omega$ is not bounded. Let $K_{\ell}:=\{z\in\Omega\mid|z-w|\geq1/\ell\text{ for all }w\in\partial\Omega\}\cap\overline{D_{\ell}(0)}$.
+It is straightforward to verify that $\{K_{\ell}\}_{\ell=1}^{\infty}$
+is an exhaustion of $\Omega$. 
+
+\end{proof}
+
+\begin{theorem}\label{theorem} (Montel's Theorem) Assume that $\mathcal{F}$
+is a family of holomorphic functions on $\Omega$ that is uniformly
+bounded on compact subsets of $\Omega$. Then 
+\begin{enumerate}
+\item $\mathcal{F}$ is equicontinuous on every compact subset of $\Omega$.
+\item $\mathcal{F}$ is a normal family. 
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} \hfill
+\begin{enumerate}
+\item Let $K\subseteq\Omega$ be compact and choose $r>0$ sufficiently
+smallet such that $D_{3r}(z)\subseteq\Omega$ for all $z\in K$. Let
+$z,w\in K$ such that $|z-w|<r$ and let $\Gamma$ be the boundary
+of the disc $D_{2r}(w)$. By Cauchy's Integral Formula, we have 
+\[
+f(z)-f(w)=\frac{1}{2\pi i}\int_{\Gamma}f(\zeta)\left(\frac{1}{\zeta-z}-\frac{1}{\zeta-w}\right)d\zeta.
+\]
+Note that 
+\[
+\left|\frac{1}{\zeta-z}-\frac{1}{\zeta-w}\right|=\frac{|z-w|}{|\zeta-z||\zeta-w|}\leq\frac{|z-w|}{r^{2}}.
+\]
+Therefore 
+\begin{align*}
+|f(z)-f(w)| & \leq\frac{1}{2\pi}\int_{\Gamma}|f(\zeta)|\frac{|z-w|}{r^{2}}d\zeta\\
+ & \leq\frac{1}{2\pi}\cdot\frac{2\pi r}{r^{2}}\cdot B\cdot|z-w|,
+\end{align*}
+where $B=\sup_{f\in\mathcal{F}}\left\{ |f(\zeta)|\mid\text{dist}(\zeta,K)\leq2r\right\} <\infty$
+and$\text{dist}(\zeta,K)_{z\in K}=\inf\left\{ |\zeta-z|\right\} $.
+Hence, $|f(z)-f(w)|<C|z-w|$ for all $z,w\in K$ with $|z-w|<r$ and
+for all $f\in\mathcal{F}$. 
+\item Let $\{f_{n}\}_{n=1}^{\infty}$ be a sequence in $\mathcal{F}$. \textbf{Step
+1: }For any compact set $K\subseteq\Omega$, we extract a subsequence
+that converges uniformly on $K$. Let $\{w_{i}\}_{i=1}^{\infty}$
+be a sequence of points that is dense in $\Omega$. Since $\{f_{n}\}$
+is uniformly bounded, there exists a subsequence $\{f_{n,1}\}$ of
+$\{f_{n}\}$ such that $\{f_{n,1}(w_{1})\}$ converges as a sequence
+of complex numbers. From $\{f_{n,1}\}$, we can extract a subsequence
+$\{f_{n,2}\}$ such that $\{f_{n,2}(w_{2})\}$ converges. Continuing
+this pro\{cess by extracting a subsequence $\{f_{n,j}\}_{n\in\mathbb{N}}$
+from $\{f_{n,j-1}\}_{n\in\mathbb{N}}$ such that $\{f_{n,j}(w_{j})\}_{n\in\mathbb{N}}$
+converges. Now let $g_{n}:=f_{n,n}$. By construction, $\{g_{n}(w_{j})\}_{n=1}^{\infty}$
+converges for each $j$. In fact, for $n\geq j$, $g_{n}(w_{j})=f_{n,n}(w_{j})$
+is a subsequence of $\{f_{n,j}(w_{j})\}$. We claim $\{g_{n}\}$ converges
+uniformly on $K$ by showing $\{g_{n}\}$ is uniformly Cauchy on $K$.
+Given $\varepsilon>0$, by equicontinuity, there exists $\delta>0$
+such that 
+\begin{equation}
+|g_{n}(z)-g_{n}(w)|<\frac{\varepsilon}{3}\quad\text{whenever }|z-w|<\delta\quad\text{ for all }z,w\in\Omega\text{ and }n\in\mathbb{N}.\label{eq:gnz}
+\end{equation}
+Since $K$ is compact and 
+\[
+\bigcup_{i=1}^{\infty}D_{\delta}(w_{i})\supseteq K,
+\]
+there exists $L\in\mathbb{N}$ such that 
+\[
+L\subseteq\bigcup_{i=1}^{L}D_{\delta}(w_{i}).
+\]
+Let $N\in\mathbb{N}$ be sufficiently large so that for all $m,n\geq N$,
+we have 
+\begin{equation}
+|g_{n}(w_{j})-g_{n}(w_{j})|<\frac{\varepsilon}{3}\quad\text{for all }j=1,\dots,L.\label{eq:gnz2}
+\end{equation}
+Now let $z\in K$. Then there exists $1\leq j\leq L$ such that $z\in D_{\delta}(w_{j})$.
+By (ref{eq:gnz}) and (ref{eq:gnz2}), we have 
+\begin{align*}
+|g_{n}(z)-g_{m}(z)| & \leq|g_{n}(z)-g_{n}(w_{j})|+|g_{n}(w_{j})-g_{m}(w_{j})|+|g_{m}(w_{j})-g_{m}(z)|\\
+ & <\frac{\varepsilon}{3}+\frac{\varepsilon}{3}+\frac{\varepsilon}{3}\\
+ & =\varepsilon.
+\end{align*}
+Therefore $\{g_{n}\}$ is uniformly Cauchy on $K$ and proves the
+claim. \textbf{Step 2: }We extract a subsequence that converges uniformly
+in every compact subset of $\Omega$. Let 
+\[
+K_{1}\subseteq K_{2}\subseteq\cdots
+\]
+be an exhaustion of $\Omega$. Let $\{g_{n,1}\}$ be a sequence of
+$\{f_{n}\}$ that converges uniformly on $K_{1}$ from Step 1. Extract
+from $\{g_{n,1}\}$ a subsequence $\{g_{n,2}\}$ that converges uniformly
+on $K_{2}$. Continuing this process, then $\{g_{n,n}\}$ is a subsequence
+of $\{f_{n}\}$ that converges uniformly on every $K_{\ell}$. In
+fact, for all $n\geq\ell$, $\{g_{n,n}\}_{n\geq\ell}$ is a subsequence
+of $\{g_{n,\ell}\}$. Finally, since every compact set $K\subseteq\Omega$
+is contained in some $K_{\ell}$, $\{g_{n,n}\}$ converges uniformly
+on every compact subset of $\Omega$. 
+\end{enumerate}
+\end{proof}
+
+\begin{prop}\label{prop} Let $\Omega$ be a region in $\mathbb{C}$
+and $\{f_{n}\}$ be a sequence of injective holomorphic functions
+in $\Omega$ that converges uniformly on every compact subset of $\Omega$.
+Then $\lim_{n}(f_{n})=f$ is either injective or constant.\end{prop}
+
+\begin{proof} Omitted, in text.\end{proof}
+
+\begin{defn}\label{defn} \hfill
+\begin{enumerate}
+\item Two open sets $U,V\in\mathbb{C}$ are said to be \textbf{conformally
+equivalent }if there exists a bijective holomorphic map $f$ from
+$U$ to $V$. 
+\item We call a subset $\Omega\subseteq\mathbb{C}$ \textbf{proper }if $\Omega\neq\emptyset$
+and $\Omega\neq\mathbb{C}$. 
+\end{enumerate}
+\end{defn}
+
+\begin{rem}\label{rem} Conformal equivalence is an equialence relation.
+\end{rem}
+
+\begin{theorem}\label{theorem} (Riemann Mapping Theorem). Assume
+$\Omega\subseteq\mathbb{C}$ is proper simply connected region. Then
+for any $z_{0}\in\mathbb{C}$, there exists a unique conformal bijection
+$F:\Omega\to\mathbb{D}$ such that $F(z_{0})=0$ and $F'(z_{0})>0$.
+\end{theorem}
+
+\begin{proof}\hfill
+
+\textbf{Step 1: }We show that $\Omega$ is conformally equivalent
+to some open subset of $\mathbb{D}$ that contains the origin. Choose
+$\alpha\in\mathbb{C}\backslash\Omega$ so that $z-\alpha\neq0$ for
+all $z\in\Omega$. By Theorem~(\ref{theorem3.16}), we can define
+a holomorphic branch of the logarithm $f:\Omega\to\mathbb{C}$ as
+\[
+f(z):=\log(z-\alpha),
+\]
+so that $e^{f(z)}=z-\alpha$ and thus in particular, $f$ is injective
+($f(z_{1})=f(z_{2})$ implies $e^{f(z_{1})}=e^{f(z_{2})}$ implies
+$z_{1}-\alpha=z_{2}-\alpha$ implies $z_{1}=z_{2}$). Take $w\in\Omega$
+and observe that $f(z)\neq f(w)+2\pi i$ for all $z\in\Omega$, for
+otherwise, we would get $e^{f(z)}=e^{f(w)+2\pi i}=e^{f(w)}$ implies
+$z=w$, which is impossible. We claim there exists $D:=D_{r}(f(w)+2\pi i)$
+such that $D\cap f(\Omega)=\emptyset$. Otherwise, there exists a
+sequence $\{z_{n}\}\subseteq\Omega$ such that $f(z_{n})\to f(w)+2\pi i$.
+But this implies $e^{f(z_{n})}\to e^{f(w)+2\pi i}=e^{f(w)}$ which
+implies $f(z_{n})\to f(w)$, contradicting $f(z_{n})\to f(w)+2\pi i$. 
+
+~~~Now define 
+\[
+F(z)=\frac{1}{f(z)-(f(w)+2\pi i)}.
+\]
+Since $f$ is injective, so is $F$. Hence, $F:\Omega\to F(\Omega)$
+is a conformal bijection. Moreover, $F(\Omega)$ is bounded. Therefore,
+upon translating and scaling $F$ if necessary, we obtain a conformal
+bijection mapping $\Omega$ onto an open subset of $\mathbb{D}$ containing
+the origin. 
+
+\textbf{Step 2: }We show that the family of all injective holomorphic
+functions from $\Omega$ to $\mathbb{D}$ that fix the origin contains
+an element that maximizes $|f'(0)|$. Let 
+\[
+\mathcal{F}:=\{f:\Omega\to\mathbb{D}\mid f\text{ is holomorphic, injective, and }f(0)=0\}.
+\]
+Then $\mathcal{F}\neq\emptyset$ since it contains the identity. Obviously,
+$\mathcal{F}$ is uniformly bounded on $\Omega$. By Cauchy's inequality,
+if $\Gamma=\partial D_{r}(0)$ where $0<r<1$, then for all $f\in\mathcal{F}$,
+\[
+|f'(0)|=\left|\frac{1}{2\pi i}\int_{\Gamma}\frac{f'(\zeta)}{\zeta}d\zeta\right|\leq1.
+\]
+Let $s:=\sup_{f\in\mathcal{F}}|f'(0)|$ and let $\{f_{n}\}\in\mathcal{F}$
+be a sequence such that $|f_{n}'(0)|\to s$ as $n\to\infty$. By Montel's
+Theorem, there exists a subsequence that converges uniformly to a
+holomorphic funciton $f$ on $\Omega$. By Theorem~(\ref{theorem2.14}),
+$f_{n}'\to f'$ on every compact subset of $\Omega$. Thus, 
+\[
+|f'(0)|=\lim_{n\to\infty}|f_{n}'(0)|=s.
+\]
+Since the identity belongs to $\mathcal{F}$, $s\geq1$. Thus, $f$
+is nonconstant. Hence, it is injective by Proposition~(\ref{prop4.5}).
+Also, by continuity, 
+\[
+|f(z)|\leq1\qquad\text{for all }z\in\Omega.
+\]
+It follows from the Maximum Modulus Principle that $|f(z)|<1$ for
+all $z\in\Omega$. Clearly, 
+\[
+f(0)=\lim_{n\to\infty}f_{n}(0)=0.
+\]
+Therefore $f\in\mathcal{F}$. 
+
+\textbf{Step 3:}
+
+\end{proof}
+\end{document}

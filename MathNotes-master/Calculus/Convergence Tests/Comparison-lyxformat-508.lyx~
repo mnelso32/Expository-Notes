@@ -1,0 +1,923 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Comparison Tests
+\end_layout
+
+\begin_layout Section
+Integral Test
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ (Integral Test) Let 
+\begin_inset Formula $(a_{n})$
+\end_inset
+
+ be a sequence of positive terms.
+ Suppose that 
+\begin_inset Formula $a_{n}=f(n)$
+\end_inset
+
+ where 
+\begin_inset Formula $f$
+\end_inset
+
+ is a continuous, positive, decreasing function of 
+\begin_inset Formula $x$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\geq N$
+\end_inset
+
+ where 
+\begin_inset Formula $N$
+\end_inset
+
+ is a positive integer.
+ Then the series 
+\begin_inset Formula $\sum_{n=N}^{\infty}a_{n}$
+\end_inset
+
+ and the integral 
+\begin_inset Formula $\int_{N}^{\infty}f(x)dx$
+\end_inset
+
+ both converge or diverge.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We establish the test for the case 
+\begin_inset Formula $N=1$
+\end_inset
+
+.
+ The proof for general 
+\begin_inset Formula $N$
+\end_inset
+
+ is similar.
+ For all 
+\begin_inset Formula $m\in\mathbb{N}$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+\int_{1}^{m+1}f(x)dx\leq\sum_{n=1}^{m}a_{n}\leq a_{1}+\int_{1}^{m}f(x)dx
+\]
+
+\end_inset
+
+Taking the limit as 
+\begin_inset Formula $m\to\infty$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+\int_{1}^{\infty}f(x)dx\leq\sum_{n=1}^{\infty}a_{n}\leq a_{1}+\int_{1}^{\infty}f(x)dx
+\]
+
+\end_inset
+
+Hence the series and the integral either both converge or diverge.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Absolute Convergence
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A series 
+\begin_inset Formula $\sum a_{n}$
+\end_inset
+
+ 
+\series bold
+converges absolutely 
+\series default
+(or is 
+\series bold
+absolutely convergent
+\series default
+) if 
+\begin_inset Formula $\sum|a_{n}|$
+\end_inset
+
+ converges.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremabsoluteconvergenceimpliesconvergence}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $\sum|a_{n}|$
+\end_inset
+
+ converges, then 
+\begin_inset Formula $\sum a_{n}$
+\end_inset
+
+ converges.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ For each 
+\begin_inset Formula $n$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+0\leq a_{n}+|a_{n}|\leq2|a_{n}|.
+\]
+
+\end_inset
+
+Therefore since 
+\begin_inset Formula $a_{n}+|a_{n}|$
+\end_inset
+
+ is positive and 
+\begin_inset Formula $\sum|a_{n}|$
+\end_inset
+
+ converges, 
+\begin_inset Formula $\sum a_{n}+|a_{n}|$
+\end_inset
+
+ converges.
+ The equality 
+\begin_inset Formula $a_{n}=(a_{n}+|a_{n}|)-|a_{n}|$
+\end_inset
+
+ lets us express 
+\begin_inset Formula $\sum a_{n}$
+\end_inset
+
+ as the difference of two convergent series:
+\begin_inset Formula 
+\[
+\sum a_{n}=\sum(a_{n}+|a_{n}|)-\sum|a_{n}|.
+\]
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\sum a_{n}$
+\end_inset
+
+ converges.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Ratio Test
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremratiotest}
+\end_layout
+
+\end_inset
+
+ (Ratio Test) Let 
+\begin_inset Formula $\sum a_{n}$
+\end_inset
+
+ be any series and suppose that 
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}\left|\frac{a_{n+1}}{a_{n}}\right|=\rho.
+\]
+
+\end_inset
+
+Then
+\end_layout
+
+\begin_layout Enumerate
+The series converges absolutely if 
+\begin_inset Formula $\rho<1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The series diverges if 
+\begin_inset Formula $\rho>1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The test is inconclusive if 
+\begin_inset Formula $\rho=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $r$
+\end_inset
+
+ be a number between 
+\begin_inset Formula $\rho$
+\end_inset
+
+ and 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Then the number 
+\begin_inset Formula $\varepsilon:=r-\rho$
+\end_inset
+
+ is positive.
+ Since 
+\begin_inset Formula 
+\[
+\left|\frac{a_{n+1}}{a_{n}}\right|\to\rho,
+\]
+
+\end_inset
+
+
+\begin_inset Formula $|a_{n+1}/a_{n}|$
+\end_inset
+
+ must lie within 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ of 
+\begin_inset Formula $\rho$
+\end_inset
+
+ when 
+\begin_inset Formula $n$
+\end_inset
+
+ is large enough, say for all 
+\begin_inset Formula $n\geq N$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula 
+\[
+\left|\frac{a_{n+1}}{a_{n}}\right|<\rho+\varepsilon=r,
+\]
+
+\end_inset
+
+when 
+\begin_inset Formula $n\geq N$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula 
+\begin{align*}
+|a_{N+1}| & <r|a_{N}|\\
+|a_{N+2}| & <r|a_{N+1}|<r^{2}|a_{N}|\\
+ & \vdots\\
+|a_{N+m}| & <r|a_{N+m-1}|<r^{m}|a_{N}|.
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula 
+\begin{align*}
+\sum_{m=N}^{\infty}|a_{m}| & =\sum_{m=0}^{\infty}|a_{N+m}|\\
+ & \le\sum_{m=0}^{\infty}|a_{N}|r^{m}\\
+ & =|a_{N}|\sum_{m=0}^{\infty}r^{m}.
+\end{align*}
+
+\end_inset
+
+The geometric series on the right-hand side converges because 
+\begin_inset Formula $0<r<1$
+\end_inset
+
+, so the absolute values 
+\begin_inset Formula $\sum_{m=N}^{\infty}|a_{m}|$
+\end_inset
+
+ converges by the Direct Comparison Test.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Limit Ratio Test
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremlimitratiotest}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(a_{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $(b_{n})$
+\end_inset
+
+ be sequences in 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ which are eventually positive.
+ Then
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\lim\limits _{n\to\infty}\left(\frac{a_{n}}{b_{n}}\right)=c$
+\end_inset
+
+ and 
+\begin_inset Formula $c>0$
+\end_inset
+
+, then 
+\begin_inset Formula $\sum\limits _{n=1}^{\infty}a_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum\limits _{n=1}^{\infty}b_{n}$
+\end_inset
+
+ both converge or both diverge.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\lim\limits _{n\to\infty}\left(\frac{a_{n}}{b_{n}}\right)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum\limits _{n=1}^{\infty}b_{n}$
+\end_inset
+
+ converges, then 
+\begin_inset Formula $\sum\limits _{n=1}^{\infty}a_{n}$
+\end_inset
+
+ converges.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\lim\limits _{n\to\infty}\left(\frac{a_{n}}{b_{n}}\right)=\infty$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum\limits _{n=1}^{\infty}b_{n}$
+\end_inset
+
+ diverges, then 
+\begin_inset Formula $\sum\limits _{n=1}^{\infty}a_{n}$
+\end_inset
+
+ diverges.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $c/2>0$
+\end_inset
+
+ and since the sequences 
+\begin_inset Formula $(a_{n}),(b_{n})$
+\end_inset
+
+ are eventually positive, there exists an integer 
+\begin_inset Formula $N$
+\end_inset
+
+ such that 
+\begin_inset Formula $n>N$
+\end_inset
+
+ implies 
+\begin_inset Formula $a_{n},b_{n}>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\left|\frac{a_{n}}{b_{n}}-c\right|<\frac{c}{2}$
+\end_inset
+
+.
+ Thus, for 
+\begin_inset Formula $n>N$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\frac{-c}{2}<\frac{a_{n}}{b_{n}}-c<\frac{c}{2} & \implies\frac{c}{2}<\frac{a_{n}}{b_{n}}<\frac{3c}{2}\\
+ & \implies\left(\frac{c}{2}\right)b_{n}<a_{n}<\left(\frac{3c}{2}\right)b_{n}.
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\sum_{n=1}^{\infty}b_{n}$
+\end_inset
+
+ converges, then 
+\begin_inset Formula $\sum_{n=1}^{\infty}(c/2)b_{n}$
+\end_inset
+
+ converges and 
+\begin_inset Formula $\sum_{n=1}^{\infty}a_{n}$
+\end_inset
+
+ converges by the Direct Comparison Test.
+ If 
+\begin_inset Formula $\sum_{n=1}^{\infty}b_{n}$
+\end_inset
+
+ diverges, then 
+\begin_inset Formula $\sum_{n=1}^{\infty}(c/2)b_{n}$
+\end_inset
+
+ diverges and 
+\begin_inset Formula $\sum_{n=1}^{\infty}a_{n}$
+\end_inset
+
+ converges by the Direct Comparison Test.
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $\lim_{n\to\infty}(a_{n}/b_{n})=0$
+\end_inset
+
+ and since sequences 
+\begin_inset Formula $(a_{n}),(b_{n})$
+\end_inset
+
+ are eventually positive, there exists an integer 
+\begin_inset Formula $N$
+\end_inset
+
+ such that 
+\begin_inset Formula $n>N$
+\end_inset
+
+ implies 
+\begin_inset Formula $a_{n},b_{n}>0$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{n}<b_{n}$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}a_{n}=\sum_{n=1}^{N}a_{n}+\sum_{n=N+1}^{\infty}a_{n}\leq\sum_{n=1}^{N}a_{n}+\sum_{n=N+1}^{\infty}b_{n}.
+\]
+
+\end_inset
+
+Since the righthand side converges, the lefthand side must also converge
+ by the Direct Comparison Test.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $\lim_{n\to\infty}(a_{n}/b_{n})=\infty$
+\end_inset
+
+ and since sequences 
+\begin_inset Formula $(a_{n}),(b_{n})$
+\end_inset
+
+ are eventually positive, there exists an integer 
+\begin_inset Formula $N$
+\end_inset
+
+ such that 
+\begin_inset Formula $n>N$
+\end_inset
+
+ implies 
+\begin_inset Formula $a_{n},b_{n}>0$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{n}>b_{n}$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}a_{n}=\sum_{n=1}^{N}a_{n}+\sum_{n=N+1}^{\infty}a_{n}\geq\sum_{n=1}^{N}a_{n}+\sum_{n=N+1}^{\infty}b_{n}.
+\]
+
+\end_inset
+
+Since the righthand side diverges, the lefthand side must also diverge by
+ the Direct Comparison Test.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

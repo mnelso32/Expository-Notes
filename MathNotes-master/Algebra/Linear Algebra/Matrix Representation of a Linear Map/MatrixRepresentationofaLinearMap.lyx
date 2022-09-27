@@ -1,0 +1,4066 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Matrix Representation of a Linear Map
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this note, let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field, let 
+\begin_inset Formula $V$
+\end_inset
+
+ be a 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space with basis 
+\begin_inset Formula $\boldsymbol{\beta}=\{\beta_{1},\dots,\beta_{m}\}$
+\end_inset
+
+, and let 
+\begin_inset Formula $W$
+\end_inset
+
+ be a 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space with basis 
+\begin_inset Formula $\boldsymbol{\gamma}=\{\gamma_{1},\dots,\gamma_{n}\}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+On a first encounter in linear algebra, one typically studies 
+\emph on
+concrete
+\emph default
+ vector spaces like 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+ and 
+\emph on
+concrete
+\emph default
+ matrices like 
+\begin_inset Formula $\left(\begin{smallmatrix}a & b\\
+c & d
+\end{smallmatrix}\right)\colon\mathbb{R}^{2}\to\mathbb{R}^{2}$
+\end_inset
+
+.
+ In a more abstract setting, one studies 
+\emph on
+abstract
+\emph default
+ vectors spaces like 
+\begin_inset Formula $V,W$
+\end_inset
+
+ and 
+\emph on
+abstract
+\emph default
+ linear maps between them like 
+\begin_inset Formula $T\colon V\to W$
+\end_inset
+
+.
+ However, this abstract setting is not as abstract as it may first seem.
+ Indeed, it turns out that we can translate everything in the abstract setting
+ to the more concrete setting.
+ We will describe this translation in this note.
+\end_layout
+
+\begin_layout Section
+From the Abstract Setting to the Concrete Setting
+\end_layout
+
+\begin_layout Subsection
+Column Representation of a Vector
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $v\in V$
+\end_inset
+
+.
+ Then for each 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+, there exists unique 
+\begin_inset Formula $a_{i}\in K$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+v=\sum_{i=1}^{m}a_{i}\beta_{i}.
+\]
+
+\end_inset
+
+Since the 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ are uniquely determined, we are justified in making the following definition:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ The 
+\series bold
+column representation of 
+\series default
+
+\begin_inset Formula $v$
+\end_inset
+
+ 
+\series bold
+with respect to the basis
+\series default
+ 
+\begin_inset Formula $\boldsymbol{\beta}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $[v]_{\boldsymbol{\beta}}$
+\end_inset
+
+, is defined by
+\begin_inset Formula 
+\[
+[v]_{\boldsymbol{\beta}}:=\begin{pmatrix}a_{1}\\
+\vdots\\
+a_{m}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propcolumnislinear}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $[\cdot]_{\boldsymbol{\beta}}\colon V\to K^{m}$
+\end_inset
+
+ be given by 
+\begin_inset Formula 
+\[
+[\cdot]_{\boldsymbol{\beta}}(v)=[v]_{\boldsymbol{\beta}}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $v\in V$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $[\cdot]_{\boldsymbol{\beta}}$
+\end_inset
+
+ is an isomorphism.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ We first show that 
+\begin_inset Formula $[\cdot]_{\boldsymbol{\beta}}$
+\end_inset
+
+ is linear.
+ Let 
+\begin_inset Formula $v_{1},v_{2}\in V$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{1},c_{2}\in K$
+\end_inset
+
+.
+ Then for each 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+, there exists unique 
+\begin_inset Formula $a_{i1},a_{i2}\in K$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+v_{1}=\sum_{i=1}^{m}a_{i1}\beta_{i}\quad\text{and}\quad v_{2}=\sum_{i=1}^{m}a_{i2}\beta_{i}.
+\]
+
+\end_inset
+
+ Therefore we have 
+\begin_inset Formula 
+\begin{align*}
+a_{1}v_{1}+a_{2}v_{2} & =a_{1}\sum_{i=1}^{m}a_{i1}\beta_{i}+a_{2}\sum_{i=1}^{m}a_{i2}\beta_{i}\\
+ & =\sum_{i=1}^{m}(a_{1}a_{i1}+a_{2}a_{i2})\beta_{i}.
+\end{align*}
+
+\end_inset
+
+This implies 
+\begin_inset Formula 
+\begin{align*}
+[a_{1}v_{1}+a_{2}v_{2}]_{\boldsymbol{\beta}} & =\begin{pmatrix}a_{1}a_{11}+a_{2}a_{12}\\
+\vdots\\
+a_{1}a_{m1}+a_{2}a_{m2}
+\end{pmatrix}\\
+ & =a_{1}\begin{pmatrix}a_{11}\\
+\vdots\\
+a_{m1}
+\end{pmatrix}+a_{2}\begin{pmatrix}a_{12}\\
+\vdots\\
+a_{m2}
+\end{pmatrix}\\
+ & =a_{1}[v_{1}]_{\boldsymbol{\beta}}+a_{2}[v_{2}]_{\boldsymbol{\beta}}.
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $[\cdot]_{\boldsymbol{\beta}}$
+\end_inset
+
+ is linear.
+ To see that 
+\begin_inset Formula $[\cdot]_{\boldsymbol{\beta}}$
+\end_inset
+
+ is an isomorphism, note that 
+\begin_inset Formula $[\beta_{i}]=e_{i}$
+\end_inset
+
+, where 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ is the column vector in 
+\begin_inset Formula $K^{n}$
+\end_inset
+
+ whose 
+\begin_inset Formula $i$
+\end_inset
+
+-th entry is 
+\begin_inset Formula $1$
+\end_inset
+
+ and whose entry everywhere else is 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $[\cdot]_{\boldsymbol{\beta}}$
+\end_inset
+
+ restricts to a bijection on basis sets
+\begin_inset Formula 
+\[
+[\cdot]_{\boldsymbol{\beta}}\colon\{\beta_{1},\dots,\beta_{m}\}\to\{e_{1},\dots,e_{n}\},
+\]
+
+\end_inset
+
+and so it must be an isomorphism.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Matrix Representation of a Linear Map
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a linear map from 
+\begin_inset Formula $V$
+\end_inset
+
+ to 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ Then for each 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+ and 
+\begin_inset Formula $1\leq j\leq n$
+\end_inset
+
+, there exists unique elements 
+\begin_inset Formula $a_{ji}\in K$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\begin{equation}
+T(\beta_{i})=\sum_{j=1}^{n}a_{ji}\gamma_{j}\label{eq:matrixrepeq}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ Since the 
+\begin_inset Formula $a_{ji}$
+\end_inset
+
+ are uniquely determined, we are justified in making the following definition:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ The 
+\series bold
+matrix representation of
+\series default
+ 
+\begin_inset Formula $T$
+\end_inset
+
+ 
+\series bold
+with respect to the bases
+\series default
+ 
+\begin_inset Formula $\boldsymbol{\beta}$
+\end_inset
+
+ 
+\series bold
+and
+\series default
+ 
+\begin_inset Formula $\boldsymbol{\gamma}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $[T]_{\boldsymbol{\beta}}^{\boldsymbol{\gamma}}$
+\end_inset
+
+, is defined to be the 
+\begin_inset Formula $n\times m$
+\end_inset
+
+ matrix
+\begin_inset Formula 
+\[
+[T]_{\boldsymbol{\beta}}^{\boldsymbol{\gamma}}:=\begin{pmatrix}a_{11} & \cdots & a_{1m}\\
+\vdots & \ddots & \vdots\\
+a_{n1} & \cdots & a_{nm}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propcommutative}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a linear map from 
+\begin_inset Formula $V$
+\end_inset
+
+ to 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+[T]_{\boldsymbol{\beta}}^{\boldsymbol{\gamma}}[v]_{\boldsymbol{\beta}}=[T(v)]_{\boldsymbol{\gamma}}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $v\in V$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ In terms of diagrams, this proposition says that the following diagram
+ is commutative
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} K^m 
+\backslash
+arrow[r, 
+\begin_inset Quotes eld
+\end_inset
+
+
+\backslash
+text{[}T 
+\backslash
+text{]}^{
+\backslash
+gamma }_{
+\backslash
+beta } 
+\begin_inset Quotes eld
+\end_inset
+
+] & K^n  
+\backslash
+
+\backslash
+ V 
+\backslash
+arrow[u, 
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\backslash
+text{[} 
+\backslash
+cdot  
+\backslash
+text{]} _{
+\backslash
+beta } 
+\begin_inset Quotes eld
+\end_inset
+
+] 
+\backslash
+arrow[r, 
+\begin_inset Quotes eld
+\end_inset
+
+T
+\begin_inset Quotes erd
+\end_inset
+
+, swap]  & W  
+\backslash
+arrow[u, 
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\backslash
+text{[} 
+\backslash
+cdot 
+\backslash
+text{]} _{
+\backslash
+gamma } 
+\begin_inset Quotes eld
+\end_inset
+
+, swap]    
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $v\in V$
+\end_inset
+
+ and let 
+\begin_inset Formula $a_{i},a_{ji}\in K$
+\end_inset
+
+ be the unique elements such that 
+\begin_inset Formula 
+\[
+v=\sum_{i=1}^{m}a_{i}\beta_{i}\quad\text{and}\quad T(\beta_{i})=\sum_{j=1}^{n}a_{ji}\gamma_{j}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+[T]_{\boldsymbol{\beta}}^{\boldsymbol{\gamma}}[v]_{\boldsymbol{\beta}} & =\begin{pmatrix}a_{11} & \cdots & a_{1m}\\
+\vdots & \ddots & \vdots\\
+a_{n1} & \cdots & a_{nm}
+\end{pmatrix}\begin{pmatrix}a_{1}\\
+\vdots\\
+a_{m}
+\end{pmatrix}\\
+ & =\begin{pmatrix}\sum_{i=1}^{m}a_{1i}a_{i}\\
+\vdots\\
+\sum_{i=1}^{m}a_{ni}a_{i}
+\end{pmatrix}\\
+ & =[T(v)]_{\boldsymbol{\gamma}}.
+\end{align*}
+
+\end_inset
+
+Where the last equality follows from 
+\begin_inset Formula 
+\begin{align*}
+T(v) & =T\left(\sum_{i=1}^{m}a_{i}\beta_{i}\right)\\
+ & =\sum_{i=1}^{m}a_{i}T(\beta_{i})\\
+ & =\sum_{i=1}^{m}a_{i}\sum_{j=1}^{n}a_{ji}\gamma_{j}\\
+ & =\sum_{j=1}^{n}\left(\sum_{i=1}^{m}a_{ji}a_{i}\right)\gamma_{j}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremcomptomatrixmult}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $V$
+\end_inset
+
+, 
+\begin_inset Formula $V'$
+\end_inset
+
+, and 
+\begin_inset Formula $V''$
+\end_inset
+
+ be 
+\begin_inset Formula $K$
+\end_inset
+
+-vector spaces with bases 
+\begin_inset Formula $\boldsymbol{\beta}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{\beta}'$
+\end_inset
+
+, and 
+\begin_inset Formula $\boldsymbol{\beta}''$
+\end_inset
+
+ respectively and let 
+\begin_inset Formula $T\colon V\to V'$
+\end_inset
+
+ and 
+\begin_inset Formula $T'\colon V'\to V''$
+\end_inset
+
+ be two 
+\begin_inset Formula $K$
+\end_inset
+
+-linear maps.
+ Then
+\begin_inset Formula 
+\[
+[T'\circ T]_{\boldsymbol{\beta}}^{\boldsymbol{\beta}''}=[T']_{\boldsymbol{\beta}'}^{\boldsymbol{\beta}''}[T]_{\boldsymbol{\beta}}^{\boldsymbol{\beta}'}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $[v]_{\boldsymbol{\beta}}\in K^{n}$
+\end_inset
+
+.
+ Then we have 
+\begin_inset Formula 
+\begin{align*}
+[T'\circ T]_{\boldsymbol{\beta}}^{\boldsymbol{\beta}''}[v]_{\boldsymbol{\beta}} & =[(T'\circ T)(v)]_{\boldsymbol{\beta}''}\\
+ & =[T'(T(v))]_{\boldsymbol{\beta}''}\\
+ & =[T']_{\boldsymbol{\beta}'}^{\boldsymbol{\beta}''}[T(v)]_{\boldsymbol{\beta}'}\\
+ & =[T']_{\boldsymbol{\beta}'}^{\boldsymbol{\beta}''}[T]_{\boldsymbol{\beta}}^{\boldsymbol{\beta}'}[v]_{\boldsymbol{\beta}}.
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $[T'\circ T]_{\boldsymbol{\beta}}^{\boldsymbol{\beta}''}=[T']_{\boldsymbol{\beta}'}^{\boldsymbol{\beta}''}[T]_{\boldsymbol{\beta}}^{\boldsymbol{\beta}'}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Change of Basis Matrix
+\end_layout
+
+\begin_layout Standard
+In this subsection, let 
+\begin_inset Formula $\boldsymbol{\alpha}$
+\end_inset
+
+ be another basis for 
+\begin_inset Formula $V$
+\end_inset
+
+ and let 
+\begin_inset Formula $\boldsymbol{\delta}$
+\end_inset
+
+ be another basis for 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $1_{V}\colon V\to V$
+\end_inset
+
+ denote the identity map.
+ The 
+\series bold
+change of basis matrix from 
+\begin_inset Formula $\boldsymbol{\beta}$
+\end_inset
+
+ to 
+\begin_inset Formula $\boldsymbol{\alpha}$
+\end_inset
+
+ 
+\series default
+is defined to be the matrix 
+\begin_inset Formula $[1_{V}]_{\boldsymbol{\alpha}}^{\boldsymbol{\beta}}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+The reason why we say from 
+\begin_inset Formula $\boldsymbol{\beta}$
+\end_inset
+
+ to 
+\begin_inset Formula $\boldsymbol{\alpha}$
+\end_inset
+
+ and not from 
+\begin_inset Formula $\boldsymbol{\alpha}$
+\end_inset
+
+ to 
+\series bold
+
+\begin_inset Formula $\boldsymbol{\beta}$
+\end_inset
+
+
+\series default
+ is because we want to express the new basis 
+\begin_inset Formula $\boldsymbol{\alpha}$
+\end_inset
+
+ in terms of the old basis 
+\begin_inset Formula $\boldsymbol{\beta}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Observe that the change of basis matrix from 
+\begin_inset Formula $\boldsymbol{\beta}$
+\end_inset
+
+ to 
+\begin_inset Formula $\boldsymbol{\alpha}$
+\end_inset
+
+ is invertible, with inverse being 
+\begin_inset Formula $[1_{V}]_{\boldsymbol{\beta}}^{\boldsymbol{\alpha}}$
+\end_inset
+
+.
+ Indeed, we have
+\begin_inset Formula 
+\begin{align*}
+[1_{V}]_{\boldsymbol{\alpha}}^{\boldsymbol{\beta}}[1_{V}]_{\boldsymbol{\beta}}^{\boldsymbol{\alpha}} & =[1_{V}\circ1_{V}]_{\boldsymbol{\beta}}^{\boldsymbol{\beta}}\\
+ & =[1_{V}]_{\boldsymbol{\beta}}^{\boldsymbol{\beta}}\\
+ & =\mathrm{I}_{m},
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\text{I}_{m}$
+\end_inset
+
+ is the 
+\begin_inset Formula $m\times m$
+\end_inset
+
+ identity matrix.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In applications, we often describe a change of basis from 
+\begin_inset Formula $\boldsymbol{\beta}$
+\end_inset
+
+ to 
+\begin_inset Formula $\boldsymbol{\alpha}$
+\end_inset
+
+ as a concrete matrix like
+\begin_inset Formula 
+\[
+C=\begin{pmatrix}c_{11} & \cdots & c_{1m}\\
+\vdots & \ddots & \vdots\\
+c_{m1} & \cdots & c_{mm}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Let us show how to work with 
+\begin_inset Formula $C$
+\end_inset
+
+ in terms of our notation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $C$
+\end_inset
+
+ be the change of basis matrix from 
+\begin_inset Formula $\boldsymbol{\beta}$
+\end_inset
+
+ to 
+\begin_inset Formula $\boldsymbol{\alpha}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+C[v]_{\boldsymbol{\alpha}}=[v]_{\boldsymbol{\beta}}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $v\in V$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $v\in V$
+\end_inset
+
+ .
+ Then
+\begin_inset Formula 
+\begin{align*}
+C[v]_{\boldsymbol{\alpha}} & =[1_{V}]_{\boldsymbol{\alpha}}^{\boldsymbol{\beta}}[v]_{\boldsymbol{\alpha}}\\
+ & =[1_{V}(v)]_{\boldsymbol{\beta}}\\
+ & =[v]_{\boldsymbol{\beta}}.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propchangeofbasismatrix}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T\colon V\to W$
+\end_inset
+
+ be a linear map, let 
+\begin_inset Formula $C$
+\end_inset
+
+ be the change of basis matrix from 
+\begin_inset Formula $\boldsymbol{\beta}$
+\end_inset
+
+ to 
+\begin_inset Formula $\boldsymbol{\alpha}$
+\end_inset
+
+, and let 
+\begin_inset Formula $D$
+\end_inset
+
+ be the change of basis matrix from 
+\begin_inset Formula $\boldsymbol{\gamma}$
+\end_inset
+
+ to 
+\begin_inset Formula $\boldsymbol{\delta}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+[T]_{\boldsymbol{\alpha}}^{\boldsymbol{\delta}}=D^{-1}[T]_{\boldsymbol{\beta}}^{\boldsymbol{\gamma}}C.
+\]
+
+\end_inset
+
+ In particular, if 
+\begin_inset Formula $U\colon V\to V$
+\end_inset
+
+ is an endomorphism, then 
+\begin_inset Formula 
+\[
+[U]_{\boldsymbol{\alpha}}^{\boldsymbol{\alpha}}=C^{-1}[U]_{\boldsymbol{\beta}}^{\boldsymbol{\beta}}C.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+[T]_{\boldsymbol{\alpha}}^{\boldsymbol{\delta}} & =[1_{W}\circ T\circ1_{V}]_{\boldsymbol{\alpha}}^{\boldsymbol{\delta}}\\
+ & =[1_{W}]_{\boldsymbol{\gamma}}^{\boldsymbol{\delta}}[T]_{\boldsymbol{\beta}}^{\boldsymbol{\gamma}}[1_{V}]_{\boldsymbol{\alpha}}^{\boldsymbol{\beta}}\\
+ & =D^{-1}[T]_{\boldsymbol{\beta}}^{\boldsymbol{\gamma}}C.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Matrix Notation
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $T\colon V\to W$
+\end_inset
+
+ be a linear.
+ A useful way to keep track of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:matrixrepeq})
+\end_layout
+
+\end_inset
+
+ for each 
+\begin_inset Formula $i$
+\end_inset
+
+ is to write it using matrix notation:
+\begin_inset Formula 
+\[
+(T(\beta_{1}),\dots,T(\beta_{m}))=(\gamma_{1},\cdots,\gamma_{n})[T]_{\boldsymbol{\beta}}^{\boldsymbol{\gamma}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using matrix notation, we obtain another proof of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propchangeofbasismatrix})
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ As matrix equations, we have 
+\begin_inset Formula 
+\[
+(\beta_{1},\cdots,\beta_{m})C=(\alpha_{1},\dots,\alpha_{m})\quad\text{and}\quad(\gamma_{1},\cdots,\gamma_{n})D=(\delta_{1},\dots,\delta_{n}).
+\]
+
+\end_inset
+
+Thus, we have
+\begin_inset Formula 
+\begin{align*}
+(T(\beta_{1}),\dots,T(\beta_{m})) & =(\gamma_{1},\cdots,\gamma_{n})[T]_{\boldsymbol{\beta}}^{\boldsymbol{\gamma}}\\
+(T(\beta_{1}),\dots,T(\beta_{m}))C\cdot C^{-1} & =(\gamma_{1},\cdots,\gamma_{n})D\cdot D^{-1}[T]_{\boldsymbol{\beta}}^{\boldsymbol{\gamma}}\\
+(T(\alpha_{1}),\dots,T(\alpha_{m})) & =(\delta_{1},\dots,\delta_{n})D^{-1}[T]_{\boldsymbol{\beta}}^{\boldsymbol{\gamma}}C,
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $(T(\beta_{1}),\dots,T(\beta_{m}))C=(T(\alpha_{1}),\dots,T(\alpha_{m}))$
+\end_inset
+
+ follows from linearity of 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula 
+\[
+[T]_{\boldsymbol{\alpha}}^{\boldsymbol{\delta}}=D^{-1}[T]_{\boldsymbol{\beta}}^{\gamma}C.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $V$
+\end_inset
+
+ and 
+\begin_inset Formula $W$
+\end_inset
+
+ are 
+\begin_inset Formula $3$
+\end_inset
+
+-dimensional 
+\begin_inset Formula $K$
+\end_inset
+
+-vector spaces with basis 
+\begin_inset Formula $\boldsymbol{\beta}=(\beta_{1},\beta_{2},\beta_{3})$
+\end_inset
+
+ for 
+\begin_inset Formula $V$
+\end_inset
+
+ and basis 
+\begin_inset Formula $\boldsymbol{\gamma}=(\gamma_{1},\gamma_{2},\gamma_{3})$
+\end_inset
+
+ for 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $T\colon V\to W$
+\end_inset
+
+ is a linear transformation such that the matrix representation of 
+\begin_inset Formula $T$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\boldsymbol{\beta}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{\gamma}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+[T]_{\boldsymbol{\beta}}^{\boldsymbol{\gamma}}=\begin{pmatrix}1 & 1 & 0\\
+0 & 0 & 1\\
+0 & 1 & 0
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So 
+\begin_inset Formula $T(\beta_{1})=\gamma_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $T(\beta_{2})=\gamma_{1}+\gamma_{3}$
+\end_inset
+
+, and 
+\begin_inset Formula $T(\beta_{3})=\gamma_{2}$
+\end_inset
+
+.
+ We summarize in the table below how to convert this matrix into a diagonal
+ matrix using elementary row and column operations.
+ We also show what effect each operation has on the basis elements.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Basis for 
+\begin_inset Formula $V$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Basis for 
+\begin_inset Formula $W$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Matrix Representation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(\beta_{1},\beta_{2},\beta_{3})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(\gamma_{1},\gamma_{2},\gamma_{3})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\begin{pmatrix}1 & 1 & 0\\
+0 & 0 & 1\\
+0 & 1 & 0
+\end{pmatrix}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(\beta_{1},\beta_{2}-\beta_{1},\beta_{3})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(\gamma_{1},\gamma_{2},\gamma_{3})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\begin{pmatrix}1 & 1 & 0\\
+0 & 0 & 1\\
+0 & 1 & 0
+\end{pmatrix}e_{12}(-1)=\begin{pmatrix}1 & 0 & 0\\
+0 & 0 & 1\\
+0 & 1 & 0
+\end{pmatrix}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(\beta_{1},\beta_{2}-\beta_{1}+\beta_{3},\beta_{3})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(\gamma_{1},\gamma_{2},\gamma_{3})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\begin{pmatrix}1 & 0 & 0\\
+0 & 0 & 1\\
+0 & 1 & 0
+\end{pmatrix}e_{32}(1)=\begin{pmatrix}1 & 0 & 0\\
+0 & 1 & 1\\
+0 & 1 & 0
+\end{pmatrix}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(\beta_{1},\beta_{2}-\beta_{1}+\beta_{3},\beta_{1}-\beta_{2})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(\gamma_{1},\gamma_{2},\gamma_{3})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\begin{pmatrix}1 & 0 & 0\\
+0 & 1 & 1\\
+0 & 1 & 0
+\end{pmatrix}e_{23}(-1)=\begin{pmatrix}1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 1 & -1
+\end{pmatrix}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(\beta_{1},\beta_{2}-\beta_{1}+\beta_{3},\beta_{1}-\beta_{2})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $(\gamma_{1},\gamma_{2}+\gamma_{3},\gamma_{3})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{32}(-1)\begin{pmatrix}1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 1 & -1
+\end{pmatrix}=\begin{pmatrix}1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & -1
+\end{pmatrix}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Linear Isomorphism from 
+\begin_inset Formula $\text{Hom}_{K}(V,W)$
+\end_inset
+
+ to 
+\begin_inset Formula $\text{M}_{n\times m}(K)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+So far, we have shown how to obtain a column vector 
+\begin_inset Formula $[v]_{\beta}$
+\end_inset
+
+ from an abstract vector 
+\begin_inset Formula $v$
+\end_inset
+
+, and we have shown how to obtain a matrix 
+\begin_inset Formula $[T]_{\beta}^{\gamma}$
+\end_inset
+
+ from an abstract linear map 
+\begin_inset Formula $T\colon V\to W$
+\end_inset
+
+.
+ We've also shown that the column represenation map 
+\begin_inset Formula $[\cdot]_{\beta}\colon V\to K^{m}$
+\end_inset
+
+ is a 
+\emph on
+linear 
+\emph default
+map.
+ This means, for example, that 
+\begin_inset Formula $[v_{1}+v_{2}]_{\beta}=[v_{1}]_{\beta}+[v_{2}]_{\beta}$
+\end_inset
+
+ for any two vectors 
+\begin_inset Formula $v_{1},v_{2}\in V$
+\end_inset
+
+.
+ Can we view the matrix representation map 
+\begin_inset Formula $[\cdot]_{\beta}^{\gamma}$
+\end_inset
+
+ as a linear map? Indeed we can.
+ To see how this works, we first need to describe the domain of 
+\begin_inset Formula $[\cdot]_{\beta}^{\gamma}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We denote by 
+\begin_inset Formula $\text{Hom}_{K}(V,W)$
+\end_inset
+
+ to be the set of all 
+\begin_inset Formula $K$
+\end_inset
+
+-linear maps from 
+\begin_inset Formula $V$
+\end_inset
+
+ to 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ We give 
+\begin_inset Formula $\text{Hom}_{K}(V,W)$
+\end_inset
+
+ the structure of a 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space as follows: If 
+\begin_inset Formula $T,U\in\text{Hom}_{K}(V,W)$
+\end_inset
+
+ and 
+\begin_inset Formula $a\in K$
+\end_inset
+
+, then we define addition of 
+\begin_inset Formula $T$
+\end_inset
+
+ and 
+\begin_inset Formula $U$
+\end_inset
+
+, denoted 
+\begin_inset Formula $T+U$
+\end_inset
+
+, and scalar multiplication of 
+\begin_inset Formula $a$
+\end_inset
+
+ with 
+\begin_inset Formula $T$
+\end_inset
+
+, denoted 
+\begin_inset Formula $aT$
+\end_inset
+
+, by 
+\begin_inset Formula 
+\[
+(T+U)(v)=T(v)+U(v)\quad\text{and}\quad(aT)(v)=T(av)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $v\in V$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\end_layout
+
+\end_inset
+
+ Check that the addition and scalar multiplication as defined above gives
+ 
+\begin_inset Formula $\text{Hom}_{K}(V,W)$
+\end_inset
+
+ the structure of a 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\end_layout
+
+\end_inset
+
+ For each 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+ and 
+\begin_inset Formula $1\leq j\leq n$
+\end_inset
+
+, let 
+\begin_inset Formula $T_{ji}\colon V\to W$
+\end_inset
+
+ be unique the linear map such that
+\begin_inset Formula 
+\[
+T_{ji}(\beta_{k})=\begin{cases}
+\gamma_{j} & \text{if }k=i\\
+0 & \text{if }k\neq i
+\end{cases}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq k\leq m$
+\end_inset
+
+.
+ Check that the set 
+\begin_inset Formula $\{T_{ji}\mid1\leq i\leq m\text{ and }1\leq j\leq n\}$
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $\mathscr{L}(V,W)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremiso}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $V$
+\end_inset
+
+ and 
+\begin_inset Formula $W$
+\end_inset
+
+ be 
+\begin_inset Formula $K$
+\end_inset
+
+-vector spaces with basis 
+\begin_inset Formula $\beta=\{\beta_{1},\dots,\beta_{m}\}$
+\end_inset
+
+ for 
+\begin_inset Formula $V$
+\end_inset
+
+ and basis 
+\begin_inset Formula $\gamma=\{\gamma_{1},\dots\gamma_{n}\}$
+\end_inset
+
+ for 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ Then we have an isomorphism of 
+\begin_inset Formula $K$
+\end_inset
+
+-vector spaces
+\begin_inset Formula 
+\[
+[\cdot]_{\beta}^{\gamma}\colon\text{Hom}_{K}(V,W)\cong\text{M}_{n\times m}(K)
+\]
+
+\end_inset
+
+where the map 
+\begin_inset Formula $[\cdot]_{\beta}^{\gamma}$
+\end_inset
+
+ is defined by
+\begin_inset Formula 
+\[
+[\cdot]_{\beta}^{\gamma}(T)=[T]_{\beta}^{\gamma}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $T\in\text{Hom}_{K}(V,W)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ We first show that the map 
+\begin_inset Formula $[\cdot]_{\beta}^{\gamma}$
+\end_inset
+
+ is linear.
+ Let 
+\begin_inset Formula $T,U\in\text{Hom}_{K}(V,W)$
+\end_inset
+
+ and let 
+\begin_inset Formula $a,b\in K$
+\end_inset
+
+.
+ Then it follows from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propcommutative})
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propcolumnislinear})
+\end_layout
+
+\end_inset
+
+ that
+\begin_inset Formula 
+\begin{align*}
+[aT+bU]_{\beta}^{\gamma}[v]_{\beta} & =[(aT+bU)(v)]_{\gamma}\\
+ & =[aT(v)+bU(v)]_{\gamma}\\
+ & =a[T(v)]_{\gamma}+b[U(v)]_{\gamma}\\
+ & =a[T]_{\gamma}[v]_{\beta}+b[U]_{\gamma}[v]_{\beta}.
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $[\cdot]_{\beta}^{\gamma}$
+\end_inset
+
+ is a linear map.
+ To see that 
+\begin_inset Formula $[\cdot]_{\beta}^{\gamma}$
+\end_inset
+
+ is an isomorphism, note that 
+\begin_inset Formula $[T_{ji}]_{\beta}^{\gamma}=E_{ji}$
+\end_inset
+
+, where 
+\begin_inset Formula $E_{ji}$
+\end_inset
+
+ is the matrix in 
+\begin_inset Formula $K^{n}$
+\end_inset
+
+ whose 
+\begin_inset Formula $(j,i)$
+\end_inset
+
+-th entry is 
+\begin_inset Formula $1$
+\end_inset
+
+ and whose entry everywhere else is 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $[\cdot]_{\beta}^{\gamma}$
+\end_inset
+
+ restricts to a bijection on basis sets
+\begin_inset Formula 
+\[
+[\cdot]_{\beta}^{\gamma}\colon\{T_{ji}\mid1\leq i\leq m\text{ and }1\leq j\leq n\}\to\{E_{ji}\mid1\leq i\leq m\text{ and }1\leq j\leq n\},
+\]
+
+\end_inset
+
+and so it must be an isomorphism.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\begin_inset Formula $K$
+\end_inset
+
+-Algebra Isomorphism from 
+\begin_inset Formula $\text{End}(V)$
+\end_inset
+
+ to 
+\begin_inset Formula $\text{M}_{n}(K)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+We write 
+\begin_inset Formula $\text{End}_{K}(V)$
+\end_inset
+
+ instead of 
+\begin_inset Formula $\text{Hom}_{K}(V,V)$
+\end_inset
+
+ to denote the set of all 
+\begin_inset Formula $K$
+\end_inset
+
+-linear maps from 
+\begin_inset Formula $V$
+\end_inset
+
+ to itself.
+ Simmilarly we write 
+\begin_inset Formula $\text{M}_{n}(K)$
+\end_inset
+
+ instead of 
+\begin_inset Formula $\text{M}_{n\times n}(K)$
+\end_inset
+
+ to denote the set of all 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrices.
+ There is extra structure present in 
+\begin_inset Formula $\text{End}_{K}(V)$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{M}_{n}(K)$
+\end_inset
+
+ that is not necessarily present in 
+\begin_inset Formula $\text{Hom}_{K}(V,W)$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{M}_{n\times m}(K)$
+\end_inset
+
+; namely, 
+\begin_inset Formula $\text{End}_{K}(V)$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{M}_{n}(K)$
+\end_inset
+
+ have 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra structures.
+ Composition gives 
+\begin_inset Formula $\text{End}_{K}(V)$
+\end_inset
+
+ a 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra structure and matrix multiplication gives 
+\begin_inset Formula $\text{M}_{n}(K)$
+\end_inset
+
+ a 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra structure.
+ It's reasonable to suspect that the matrix representation map 
+\begin_inset Formula $[\cdot]_{\beta}^{\beta}$
+\end_inset
+
+ is a 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra isomorphism.
+ In fact, this is indeed the case: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremiso})
+\end_layout
+
+\end_inset
+
+ tells us that the matrix representation map 
+\begin_inset Formula $[\cdot]_{\beta}^{\beta}$
+\end_inset
+
+ can be viewed as an isomorphism from 
+\begin_inset Formula $\text{End}_{K}(V)$
+\end_inset
+
+ to 
+\begin_inset Formula $\text{M}_{n}(K)$
+\end_inset
+
+ as 
+\begin_inset Formula $K$
+\end_inset
+
+-vector spaces, and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremcomptomatrixmult})
+\end_layout
+
+\end_inset
+
+ tells us that the matrix representation map preserves the 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra structures (it takes composition to matrix multiplication).
+ Combining these two theorems together tells us that the matrix representation
+ map 
+\begin_inset Formula $[\cdot]_{\beta}^{\beta}$
+\end_inset
+
+ can be viewed as an isomorphism from 
+\begin_inset Formula $\text{End}_{K}(V)$
+\end_inset
+
+ to 
+\begin_inset Formula $\text{M}_{n}(K)$
+\end_inset
+
+ as 
+\begin_inset Formula $K$
+\end_inset
+
+-algebras.
+\end_layout
+
+\begin_layout Subsection
+Duality
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ The 
+\series bold
+dual
+\series default
+ of 
+\begin_inset Formula $V$
+\end_inset
+
+ is defined to be the 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space
+\begin_inset Formula 
+\[
+V^{\star}:=\{\varphi\colon V\to K\mid\varphi\text{ is linear}\}.
+\]
+
+\end_inset
+
+where addition and scalar multiplication are defined by
+\begin_inset Formula 
+\[
+(\varphi+\psi)(v)=\varphi(v)+\psi(v)\quad\text{and}\quad(\lambda\varphi)(v)=\varphi(\lambda v)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\varphi,\psi\in V^{\star}$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda\in\mathbb{C}$
+\end_inset
+
+, and 
+\begin_inset Formula $v\in V$
+\end_inset
+
+.
+ The 
+\series bold
+dual 
+\series default
+of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is defined to be the basis of 
+\begin_inset Formula $V^{\star}$
+\end_inset
+
+ given by 
+\begin_inset Formula $\beta^{\star}:=\{\beta_{1}^{\star},\dots,\beta_{m}^{\star}\}$
+\end_inset
+
+, where each 
+\begin_inset Formula $\beta_{i}^{\star}$
+\end_inset
+
+ is uniquely determined by
+\begin_inset Formula 
+\[
+\beta_{i}^{\star}(\beta_{j})=\begin{cases}
+1 & \text{if }i=j\\
+0 & \text{else}
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\end_layout
+
+\end_inset
+
+ Check that 
+\begin_inset Formula $V^{\star}$
+\end_inset
+
+ is indeed a 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space and that 
+\begin_inset Formula $\beta^{\star}$
+\end_inset
+
+ is indeed a basis for 
+\begin_inset Formula $V^{\star}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T\colon V\to W$
+\end_inset
+
+ be a linear map.
+ The 
+\series bold
+dual 
+\series default
+of 
+\begin_inset Formula $T$
+\end_inset
+
+ is defined to be the map 
+\begin_inset Formula $T^{\star}\colon W^{\star}\to V^{\star}$
+\end_inset
+
+ given by 
+\begin_inset Formula 
+\[
+T^{\star}(\varphi)=\varphi\circ T
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\varphi\in W^{\star}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ The map 
+\begin_inset Formula $T^{\star}$
+\end_inset
+
+ defined above is linear.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\varphi,\psi\in W^{\star}$
+\end_inset
+
+ and let 
+\begin_inset Formula $a,b\in K$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+T^{\star}(a\varphi+b\psi)(v) & =(a\varphi+b\psi)(T(v))\\
+ & =a\varphi(T(v))+b\psi(T(v))\\
+ & =aT^{\star}(\varphi)(v)+bT^{\star}(\psi)(v)
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $v\in V$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $T^{\star}(a\varphi+b\psi)$
+\end_inset
+
+ and 
+\begin_inset Formula $aT^{\star}(\varphi)+bT^{\star}(\psi)$
+\end_inset
+
+ agree on all of 
+\begin_inset Formula $V$
+\end_inset
+
+, and so they must be equal.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ An important remark here is that to determine whether two linear maps out
+ of 
+\begin_inset Formula $V$
+\end_inset
+
+ are equal, we do 
+\emph on
+not 
+\emph default
+need to check that they agree on all of 
+\begin_inset Formula $V$
+\end_inset
+
+ as we did in the proof above.
+ In fact, we just need to show that they agree on the basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Matrix Representation of the Dual of a Linear Map
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T\colon V\to W$
+\end_inset
+
+ be a linear map.
+ Then
+\begin_inset Formula 
+\[
+[T^{\star}]_{\gamma^{\star}}^{\beta^{\star}}=([T]_{\beta}^{\gamma})^{\top},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $([T]_{\beta}^{\gamma})^{\top}$
+\end_inset
+
+ is the transpose of 
+\begin_inset Formula $[T]_{\beta}^{\gamma}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Suppose that
+\begin_inset Formula 
+\begin{equation}
+T(\beta_{i})=\sum_{j=1}^{n}a_{ji}\gamma_{j}\label{eq:land}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $a_{ji}$
+\end_inset
+
+ lands in the 
+\begin_inset Formula $j$
+\end_inset
+
+th row and 
+\begin_inset Formula $i$
+\end_inset
+
+th column in 
+\begin_inset Formula $[T]_{\beta}^{\gamma}$
+\end_inset
+
+ since we are summing over 
+\begin_inset Formula $j$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:land})
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $1\leq j\leq n$
+\end_inset
+
+.
+ We compute
+\begin_inset Formula 
+\begin{align*}
+T^{\star}(\gamma_{j}^{\star})(\beta_{i}) & =\gamma_{j}^{\star}(T(\beta_{i}))\\
+ & =\gamma_{k}^{\star}\left(\sum_{k=1}^{n}a_{ki}\gamma_{k}\right)\\
+ & =\sum_{j=1}^{n}a_{ki}\gamma_{j}^{\star}(\gamma_{k})\\
+ & =a_{ki}
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ In particular, this implies
+\begin_inset Formula 
+\begin{equation}
+T^{\star}(\gamma_{j}^{\star})=\sum_{i=1}^{m}a_{ji}\beta_{i}^{\star}\label{agree}
+\end{equation}
+
+\end_inset
+
+since both sides of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{agree})
+\end_layout
+
+\end_inset
+
+ agree on 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $a_{ji}$
+\end_inset
+
+ lands in the 
+\begin_inset Formula $i$
+\end_inset
+
+th row and 
+\begin_inset Formula $j$
+\end_inset
+
+th column in 
+\begin_inset Formula $[T^{\star}]_{\gamma^{\star}}^{\beta^{\star}}$
+\end_inset
+
+ since we are summing over 
+\begin_inset Formula $i$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{agree})
+\end_layout
+
+\end_inset
+
+.
+ Therefore the transpose of 
+\begin_inset Formula $[T]_{\beta}^{\gamma}$
+\end_inset
+
+ is 
+\begin_inset Formula $[T^{\star}]_{\gamma^{\star}}^{\beta^{\star}}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Bilinear Forms
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\series bold
+bilinear form 
+\series default
+on 
+\begin_inset Formula $V$
+\end_inset
+
+ is a function 
+\begin_inset Formula $B:V\times V\to K$
+\end_inset
+
+ which satisfies the following properties
+\end_layout
+
+\begin_layout Enumerate
+It is linear in the first variable when the second variable is fixed: for
+ fixed 
+\begin_inset Formula $w\in V$
+\end_inset
+
+, we have 
+\begin_inset Formula $B(av+a'v',w)=aB(v,w)+a'B(v',w)$
+\end_inset
+
+ for all 
+\begin_inset Formula $a,a'\in K$
+\end_inset
+
+ and 
+\begin_inset Formula $v,v'\in V$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+It is linear in the second variable when the first variable is fixed: for
+ fixed 
+\begin_inset Formula $v\in V$
+\end_inset
+
+, we have 
+\begin_inset Formula $B(v,bw+b'w')=bB(v,w)+b'B(v,w')$
+\end_inset
+
+ for all 
+\begin_inset Formula $b,b'\in K$
+\end_inset
+
+ and 
+\begin_inset Formula $w,w'\in V.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Moreover, we say
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $B$
+\end_inset
+
+ is
+\series bold
+ symmetric 
+\series default
+if 
+\begin_inset Formula $B(v,w)=B(w,v)$
+\end_inset
+
+ for all 
+\begin_inset Formula $v,w\in V$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $B$
+\end_inset
+
+ is 
+\series bold
+skew-symmetric 
+\series default
+if 
+\begin_inset Formula $B(v,w)=-B(w,v)$
+\end_inset
+
+ for all 
+\begin_inset Formula $v,w\in V$
+\end_inset
+
+, 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $B$
+\end_inset
+
+ is 
+\series bold
+alternating 
+\series default
+if 
+\begin_inset Formula $B(v,v)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $v\in V$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $B$
+\end_inset
+
+ be a bilinear form on 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Pick 
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $w$
+\end_inset
+
+ in 
+\begin_inset Formula $V$
+\end_inset
+
+ and express them in the basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+v=\sum_{i=1}^{m}a_{i}\beta_{i}\quad\text{and}\quad w=\sum_{j=1}^{m}b_{j}\beta_{j}.
+\]
+
+\end_inset
+
+Then bilinearity of 
+\begin_inset Formula $B$
+\end_inset
+
+ gives us 
+\begin_inset Formula 
+\begin{align*}
+B(v,w) & =B\left(\sum_{i=1}^{m}a_{i}\beta_{i},\sum_{j=1}^{m}b_{j}\beta_{j}\right)\\
+ & =\sum_{1\le i,j\leq m}a_{i}b_{j}B(\beta_{i},\beta_{j})\\
+ & =\begin{pmatrix}a_{1} & \cdots & a_{m}\end{pmatrix}\begin{pmatrix}B(\beta_{1},\beta_{1}) & \cdots & B(\beta_{1},\beta_{m})\\
+\vdots & \ddots & \vdots\\
+B(\beta_{m},\beta_{1}) & \cdots & B(\beta_{m},\beta_{m})
+\end{pmatrix}\begin{pmatrix}b_{1}\\
+\vdots\\
+b_{m}
+\end{pmatrix}\\
+ & =[v]_{\beta}^{\top}[B]_{\beta}[w]_{\beta}.
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\cdot$
+\end_inset
+
+ denoted the dot product and 
+\begin_inset Formula $[B]_{\beta}=(B(\beta_{i},\beta_{j}))$
+\end_inset
+
+.
+ We call 
+\begin_inset Formula $[B]_{\beta}$
+\end_inset
+
+ the 
+\series bold
+matrix representation of
+\series default
+ 
+\begin_inset Formula $B$
+\end_inset
+
+ 
+\series bold
+with respect to the basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Bilinear forms are not linear maps, but each bilinear form 
+\begin_inset Formula $B$
+\end_inset
+
+ on 
+\begin_inset Formula $V$
+\end_inset
+
+ can be interpreted as a linear map 
+\begin_inset Formula $V\to V^{*}$
+\end_inset
+
+ in two ways, as 
+\begin_inset Formula $L_{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{B}$
+\end_inset
+
+, where 
+\begin_inset Formula $L_{B}(v)=B(v,\cdot)$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{B}(v)=B(\cdot,v)$
+\end_inset
+
+ for all 
+\begin_inset Formula $v\in V$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $B$
+\end_inset
+
+ be a bilinear form on 
+\begin_inset Formula $V$
+\end_inset
+
+ and let 
+\begin_inset Formula $[B]_{\beta}=(a_{ij})$
+\end_inset
+
+ be the matrix representation of 
+\begin_inset Formula $B$
+\end_inset
+
+ with respect to the basis 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+M=[R_{B}]_{\beta}^{\beta^{*}}.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ For each 
+\begin_inset Formula $1\leq i,j\leq m$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+B(\beta_{j},\beta_{i})=a_{ji}.
+\]
+
+\end_inset
+
+Therefore
+\begin_inset Formula 
+\[
+R_{B}(\beta_{i})=B(\cdot,\beta_{i})=\sum_{j=1}^{m}a_{ji}\beta_{j}^{*}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ It follows that
+\begin_inset Formula 
+\[
+[R_{B}]_{\beta}^{\beta^{*}}=\begin{pmatrix}a_{11} & \cdots & a_{1m}\\
+\vdots & \ddots & \vdots\\
+a_{m1} & \cdots & a_{mm}
+\end{pmatrix}=[B]_{\beta}.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ That the matrix associated to 
+\begin_inset Formula $B$
+\end_inset
+
+ is the matrix of 
+\begin_inset Formula $R_{B}$
+\end_inset
+
+ rather than 
+\begin_inset Formula $L_{B}$
+\end_inset
+
+ is related to our 
+\emph on
+convention 
+\emph default
+that we view bilinear forms concretely using 
+\begin_inset Formula $[v]_{\beta}^{\top}M[w]_{\beta}$
+\end_inset
+
+ instead of 
+\begin_inset Formula $(M[v]_{\beta})^{\top}[w]_{\beta}$
+\end_inset
+
+.
+ If we adopted the latter convention, then the matrix associated to 
+\begin_inset Formula $B$
+\end_inset
+
+ would equal the matrix for 
+\begin_inset Formula $L_{B}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ be another basis of 
+\begin_inset Formula $V$
+\end_inset
+
+, let 
+\begin_inset Formula $C$
+\end_inset
+
+ be a change of basis matrix from 
+\begin_inset Formula $\beta$
+\end_inset
+
+ to 
+\begin_inset Formula $\alpha$
+\end_inset
+
+, and let 
+\begin_inset Formula $B$
+\end_inset
+
+ be a bilinear form on 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+[B]_{\alpha}=C^{\top}[B]_{\beta}C.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+[B]_{\alpha} & =[R_{B}]_{\alpha}^{\alpha^{*}}\\
+ & =[1_{V^{*}}\circ R_{B}\circ1_{V}]_{\alpha}^{\alpha^{*}}\\
+ & =[1_{V^{*}}]_{\beta^{*}}^{\alpha^{*}}[R_{B}]_{\beta}^{\beta^{*}}[1_{V}]_{\alpha}^{\beta}\\
+ & =C^{\top}[B]_{\beta}C.
+\end{align*}
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Two bilinear forms 
+\begin_inset Formula $B_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{2}$
+\end_inset
+
+ on the respective vector spaces 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{2}$
+\end_inset
+
+ are called 
+\series bold
+equivalent 
+\series default
+if there is a vector space isomorphism 
+\begin_inset Formula $A:V_{1}\to V_{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+B_{2}(Av,Aw)=B_{1}(v,w)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $w$
+\end_inset
+
+ in 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Although all matrix representations of a linear transformation 
+\begin_inset Formula $T\colon V\to V$
+\end_inset
+
+ have the same determinant, the matrix representations of a bilinear form
+ 
+\begin_inset Formula $B$
+\end_inset
+
+ on 
+\begin_inset Formula $V$
+\end_inset
+
+ have the same determinant only up to a nonzero square factor since 
+\begin_inset Formula $\text{det}(C^{\top}MC)=\text{det}(C)^{2}\text{det}(M)$
+\end_inset
+
+.
+ This provides a sufficient (although far from necessary) condition to show
+ two bilinear forms are inequivalent.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $d$
+\end_inset
+
+ be a squarefree positive integer.
+ On 
+\begin_inset Formula $\mathbb{Q}^{2}$
+\end_inset
+
+, the bilinear form 
+\begin_inset Formula $B_{d}(v,w)=v^{\top}\left(\begin{smallmatrix}1 & 0\\
+0 & d
+\end{smallmatrix}\right)w$
+\end_inset
+
+ has a matrix with determinant 
+\begin_inset Formula $d$
+\end_inset
+
+, so different (squarefree) 
+\begin_inset Formula $d$
+\end_inset
+
+'s give inequivalent bilinear forms on 
+\begin_inset Formula $\mathbb{Q}^{2}$
+\end_inset
+
+.
+ As bilinear forms on 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+, however, these 
+\begin_inset Formula $B_{d}$
+\end_inset
+
+'s are equivalent.
+ Indeed, we have 
+\begin_inset Formula $\left(\begin{smallmatrix}1 & 0\\
+0 & d
+\end{smallmatrix}\right)=C^{\top}I_{2}C$
+\end_inset
+
+ for 
+\begin_inset Formula $C=\left(\begin{smallmatrix}1 & 0\\
+0 & \sqrt{d}
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Another way of framing that is that, relative to coordinates in the basis
+ 
+\begin_inset Formula $\{(1,0),(0,1/\sqrt{d})\}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+, 
+\begin_inset Formula $B_{d}$
+\end_inset
+
+ looks like the dot product 
+\begin_inset Formula $B_{1}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

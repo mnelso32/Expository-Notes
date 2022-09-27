@@ -1,0 +1,2123 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Measure Theory Homework 7
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M},\mathcal{N})$
+\end_inset
+
+ and 
+\begin_inset Formula $(Y,\mathcal{N},\nu)$
+\end_inset
+
+ be two finite measure spaces, and let 
+\begin_inset Formula $A\subseteq X$
+\end_inset
+
+ and 
+\begin_inset Formula $B\subseteq Y$
+\end_inset
+
+ be nonempty subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ respectively.
+ Then 
+\begin_inset Formula $A\times B\in\mathcal{M}\otimes\mathcal{N}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $A\in\mathcal{M}$
+\end_inset
+
+ and 
+\begin_inset Formula $B\in\mathcal{N}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ One direction is clear since 
+\begin_inset Formula $\mathcal{M}\otimes\mathcal{N}$
+\end_inset
+
+ contains all measurable rectangles.
+ For the reverse direction, suppose 
+\begin_inset Formula $A\times B\in\mathcal{M}\otimes\mathcal{N}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $x\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $y\in B$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $B=(A\times B)_{x}$
+\end_inset
+
+.
+ Moreover, since
+\begin_inset Formula 
+\[
+(A\times B)_{x}=\begin{cases}
+B & \text{if }x\in A\\
+\emptyset & \text{if }x\in A^{c}
+\end{cases}
+\]
+
+\end_inset
+
+we see that 
+\begin_inset Formula $B=(A\times B)_{x}\in\mathcal{N}$
+\end_inset
+
+.
+ By a similar argument, we have 
+\begin_inset Formula $A=(A\times B)^{y}\in\mathcal{M}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M},\mu)$
+\end_inset
+
+ and 
+\begin_inset Formula $(Y,\mathcal{N},\nu)$
+\end_inset
+
+ be two finite measure spaces.
+ Let 
+\begin_inset Formula $f\colon X\times Y\to\mathbb{R}$
+\end_inset
+
+ be a 
+\begin_inset Formula $\mu$
+\end_inset
+
+-integrable functions and let 
+\begin_inset Formula $g\colon X\times Y\to\mathbb{R}$
+\end_inset
+
+ be a 
+\begin_inset Formula $\nu$
+\end_inset
+
+-integrable function.
+ Define 
+\begin_inset Formula $h\colon X\times Y\to\mathbb{R}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+h(x,y)=f(x)g(y)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $(x,y)\in X\times Y$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $h$
+\end_inset
+
+ is a 
+\begin_inset Formula $(\mu\otimes\nu)$
+\end_inset
+
+-integrable function.
+ Moreover we have
+\begin_inset Formula 
+\[
+\int_{X\times Y}h\mathrm{d}(\mu\otimes\nu)=\left(\int_{X}f\mathrm{d}\mu\right)\left(\int_{Y}g\mathrm{d}\nu\right).
+\]
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Define 
+\begin_inset Formula $\widetilde{f}\colon X\times Y\to\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{g}\colon X\times Y\to\mathbb{R}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\widetilde{f}(x,y)=f(x)\quad\text{and}\quad\widetilde{g}(x,y)=g(y)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $(x,y)\in X\times Y$
+\end_inset
+
+.
+ Observe that both 
+\begin_inset Formula $\widetilde{f}$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{g}$
+\end_inset
+
+ are 
+\begin_inset Formula $(\mathcal{M}\otimes\mathcal{N})$
+\end_inset
+
+-measurable.
+ Indeed, if 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\[
+\{\widetilde{f}<c\}=\{f<c\}\times Y\quad\text{and}\quad\{\widetilde{g}<c\}=X\times\{g<c\}.
+\]
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $h=\widetilde{f}\widetilde{g}$
+\end_inset
+
+ is 
+\begin_inset Formula $(\mathcal{M}\otimes\mathcal{N})$
+\end_inset
+
+-measurable since it is the product of two 
+\begin_inset Formula $(\mathcal{M}\otimes\mathcal{N})$
+\end_inset
+
+-measurable functions.
+ Now observe that for each 
+\begin_inset Formula $x\in X$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\int_{Y}h_{x}\mathrm{d}\nu & =\int_{Y}f(x)g\mathrm{d}\nu\\
+ & =f(x)\int_{Y}g\mathrm{d}\nu,
+\end{align*}
+
+\end_inset
+
+where we were allowed to pull the constant 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ out of the integral from the fact that 
+\begin_inset Formula $g$
+\end_inset
+
+ is 
+\begin_inset Formula $\nu$
+\end_inset
+
+-integrable.
+ Therefore as functions on 
+\begin_inset Formula $X$
+\end_inset
+
+, we have 
+\begin_inset Formula $\int_{Y}h_{(-)}\mathrm{d}\nu=f\int_{Y}g\mathrm{d}\nu$
+\end_inset
+
+.
+ By a similar calculation, we also have 
+\begin_inset Formula $\int_{Y}|h_{(-)}|\mathrm{d}\nu=|f|\int_{Y}|g|\mathrm{d}\nu$
+\end_inset
+
+.
+ It follows from Tonelli's theorem that
+\begin_inset Formula 
+\begin{align*}
+\int_{X\times Y}|h|\mathrm{d}(\mu\otimes\nu) & =\int_{X}\left(\int_{Y}|h|_{(-)}\mathrm{d}\nu\right)\mathrm{d}\mu\\
+ & =\int_{X}\left(|f|\int_{Y}|g|\mathrm{d}\nu\right)\mathrm{d}\mu\\
+ & =\left(\int_{X}|f|\mathrm{d}\mu\right)\left(\int_{Y}|g|\mathrm{d}\nu\right)\\
+ & <\infty.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $h$
+\end_inset
+
+ is 
+\begin_inset Formula $(\mu\otimes\nu)$
+\end_inset
+
+-integrable.
+ Therefore by Fubini's theorem, we have
+\begin_inset Formula 
+\begin{align*}
+\int_{X\times Y}h\mathrm{d}(\mu\otimes\nu) & =\int_{X}\left(\int_{Y}h_{(-)}\mathrm{d}\nu\right)\mathrm{d}\mu\\
+ & =\int_{X}\left(f\int_{Y}g\mathrm{d}\nu\right)\mathrm{d}\mu\\
+ & =\left(\int_{X}f\mathrm{d}\mu\right)\left(\int_{Y}g\mathrm{d}\nu\right),
+\end{align*}
+
+\end_inset
+
+where we were allowed to pull the constant 
+\begin_inset Formula $\int_{Y}g\mathrm{d}\nu$
+\end_inset
+
+ out of the integral from the fact that 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula $\mu$
+\end_inset
+
+-integrable.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ be the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra of all Borel measurable subset of 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathrm{m}$
+\end_inset
+
+ be the Lebesgue measure.
+ Define the function 
+\begin_inset Formula $f\colon[0,1]\times[0,1]\to\mathbb{R}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+f(x,y)=\frac{x^{2}-y^{2}}{(x^{2}+y^{2})^{2}}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $(x,y)\in[0,1]\times[0,1]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is not 
+\begin_inset Formula $(\mathrm{m}\otimes\mathrm{m})$
+\end_inset
+
+-integrable.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Assume for a contradiction that 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula $(\mathrm{m}\otimes\mathrm{m})$
+\end_inset
+
+-integrable.
+ Then by Fubini's theorem, we must have
+\begin_inset Formula 
+\[
+\int_{0}^{1}\left(\int_{0}^{1}\frac{x^{2}-y^{2}}{(x^{2}+y^{2})^{2}}\mathrm{d}y\right)\mathrm{d}x=\int_{0}^{1}\left(\int_{0}^{1}\frac{x^{2}-y^{2}}{(x^{2}+y^{2})^{2}}\mathrm{d}x\right)\mathrm{d}y.
+\]
+
+\end_inset
+
+However, note that
+\begin_inset Formula 
+\[
+\frac{x^{2}-y^{2}}{(x^{2}+y^{2})^{2}}=-\partial_{x}\partial_{y}\arctan\left(\frac{y}{x}\right).
+\]
+
+\end_inset
+
+Thus, on the one hand, we have
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{1}\left(\int_{0}^{1}\frac{x^{2}-y^{2}}{(x^{2}+y^{2})^{2}}\mathrm{d}y\right)\mathrm{d}x & =\int_{0}^{1}\left(-\partial_{x}\arctan\left(\frac{y}{x}\right)\rvert_{0}^{1}\right)\mathrm{d}x\\
+ & =-\int_{0}^{1}\partial_{x}\arctan\left(\frac{1}{x}\right)\mathrm{d}x\\
+ & =-\arctan\left(\frac{1}{x}\right)\rvert_{0}^{1}\\
+ & =-\frac{\pi}{4}+\frac{\pi}{2}\\
+ & =\frac{\pi}{4}.
+\end{align*}
+
+\end_inset
+
+On the other hand, we have
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{1}\left(\int_{0}^{1}\frac{x^{2}-y^{2}}{(x^{2}+y^{2})^{2}}\mathrm{d}x\right)\mathrm{d}y & =\int_{0}^{1}\left(-\partial_{y}\arctan\left(\frac{y}{x}\right)\rvert_{0}^{1}\right)\mathrm{d}y\\
+ & =-\int_{0}^{1}\partial_{y}\arctan y\mathrm{d}y\\
+ & =-\arctan y\rvert_{0}^{1}\\
+ & =-\frac{\pi}{4}.
+\end{align*}
+
+\end_inset
+
+This is a contradiction.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 6
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ be the Borel 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra of all Borel measurable subsets of 
+\begin_inset Formula $I=[0,1]$
+\end_inset
+
+ equipped with the Lebesgue measure, and let 
+\begin_inset Formula $\mathcal{P}(\mathbb{N})$
+\end_inset
+
+ denote the power set of 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+ equipped with the counting measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ Then we have the following:
+\end_layout
+
+\begin_layout Enumerate
+(Tonelli) Suppose 
+\begin_inset Formula $(f_{n}\colon I\to[0,\infty])$
+\end_inset
+
+ is a sequence of nonnegative Borel-measurable functions.
+ Then the function 
+\begin_inset Formula $f\colon I\to[0,\infty]$
+\end_inset
+
+, defined by 
+\begin_inset Formula 
+\[
+f(t)=\sum_{n=1}^{\infty}f_{n}(t)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $t\in I$
+\end_inset
+
+, is Borel-measurable.
+ Furthermore, we have
+\begin_inset Formula 
+\[
+\int_{0}^{1}f\mathrm{d}t=\sum_{n=1}^{\infty}\int_{0}^{1}f_{n}\mathrm{d}t.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+(Fubini) Suppose 
+\begin_inset Formula $(f_{n}\colon I\to\mathbb{R})$
+\end_inset
+
+ is a sequence of Borel-integrable functions.
+ Then for 
+\begin_inset Formula $\mathrm{m}$
+\end_inset
+
+ almost all 
+\begin_inset Formula $t\in[0,1]$
+\end_inset
+
+, the series 
+\begin_inset Formula $\sum_{n=1}^{\infty}f_{n}(t)$
+\end_inset
+
+ is absolutely convergent.
+ Also, the series 
+\begin_inset Formula $\sum_{n=1}^{\infty}\int_{0}^{1}f_{n}\mathrm{d}t$
+\end_inset
+
+ is absolutely convergent.
+ Furthermore, we have
+\begin_inset Formula 
+\begin{equation}
+\int_{0}^{1}\sum_{n=1}^{\infty}f_{n}\mathrm{d}t=\sum_{n=1}^{\infty}\int_{0}^{1}f_{n}\mathrm{d}t,\label{eq:choiceoff}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ We want to explain in a little more detail how to interpret the integral
+ on the left-hand side in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:choiceoff})
+\end_layout
+
+\end_inset
+
+.
+ The integrand 
+\begin_inset Formula $\sum_{n=1}^{\infty}f_{n}$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:choiceoff})
+\end_layout
+
+\end_inset
+
+ is only a partially defined function.
+ However, it is defined almost everywhere.
+ Indeed, let
+\begin_inset Formula 
+\[
+E=\left\{ t\in[0,1]\mid\sum_{n=1}^{\infty}|f_{n}(t)|<\infty\right\} .
+\]
+
+\end_inset
+
+Then the function 
+\begin_inset Formula $\sum_{n=1}^{\infty}f_{n}$
+\end_inset
+
+ is defined on all of 
+\begin_inset Formula $E$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{m}(E^{c})=0$
+\end_inset
+
+.
+ In order to compute integral on the left-hand side in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:choiceoff})
+\end_layout
+
+\end_inset
+
+, we choose any function 
+\begin_inset Formula $f\colon I\to\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\rvert_{E}=\sum_{n=1}^{\infty}f_{n}$
+\end_inset
+
+, for instance, say
+\begin_inset Formula 
+\[
+f(t)=\begin{cases}
+\sum_{n=1}^{\infty}f_{n}(t) & \text{if }\sum_{n=1}^{\infty}|f_{n}(t)|<\infty\\
+0 & \text{else}
+\end{cases}
+\]
+
+\end_inset
+
+Then we define
+\begin_inset Formula 
+\begin{equation}
+\int_{0}^{1}\sum_{n=1}^{\infty}f_{n}\mathrm{d}t=\int_{0}^{1}f\mathrm{d}t.\label{eq:labelwelldefineddd}
+\end{equation}
+
+\end_inset
+
+where the integral on the right-hand side in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:labelwelldefineddd})
+\end_layout
+
+\end_inset
+
+ is computed via Lebesgue integration.
+ Note that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:labelwelldefineddd})
+\end_layout
+
+\end_inset
+
+ is well-defined for two reasons.
+ First, the Lebesgue measure 
+\begin_inset Formula $\mathrm{m}$
+\end_inset
+
+ on the collection of all Borel-measurable subsets of 
+\begin_inset Formula $I$
+\end_inset
+
+ extends uniquely to a measure on the collection of all Lebesgue-measurable
+ subsets of 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ Second, if 
+\begin_inset Formula $g\colon I\to\mathbb{R}$
+\end_inset
+
+ is another choice of a function such that 
+\begin_inset Formula $g\vert_{E}=\sum_{n=1}^{\infty}f_{n}$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathrm{m}\{g-f\neq0\}\subseteq\mathrm{m}(E^{c})=0$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\int_{0}^{1}f\mathrm{d}t=\int_{0}^{1}g\mathrm{d}t$
+\end_inset
+
+, and hence 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:labelwelldefineddd})
+\end_layout
+
+\end_inset
+
+ is well-defined.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 7
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M},\mu)$
+\end_inset
+
+ be a measure space and let 
+\begin_inset Formula $f$
+\end_inset
+
+ be a 
+\begin_inset Formula $\mu$
+\end_inset
+
+-integrable function.
+ Define 
+\begin_inset Formula $\nu\colon\mathcal{M}\to\mathbb{R}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\nu(E)=\int_{X}f1_{E}\mathrm{d}\mu
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $E\in\mathcal{M}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is a finite signed measure.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Write 
+\begin_inset Formula $f=f^{+}-f^{-}$
+\end_inset
+
+ in terms of of its positive and negative parts.
+ We define 
+\begin_inset Formula $\nu^{+}\colon\mathcal{M}\to\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu^{-}\colon\mathcal{M}\to\mathbb{R}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\nu^{+}(E)=\int_{X}f^{+}1_{E}\mathrm{d}\mu\quad\text{and}\quad\nu^{-}(E)=\int_{X}f^{-}1_{E}\mathrm{d}\mu
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $E\in\mathcal{M}$
+\end_inset
+
+.
+ By a previous HW, it was shown that 
+\begin_inset Formula $\nu^{+}$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu^{-}$
+\end_inset
+
+ are measures on 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+.
+ In fact, they are finite measures on 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ since 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula $\mu$
+\end_inset
+
+-integrable.
+ Now observe that
+\begin_inset Formula 
+\begin{align*}
+\nu(E) & =\int_{X}f1_{E}\mathrm{d}\mu\\
+ & =\int_{X}(f1_{E})^{+}\mathrm{d}\mu-\int_{X}(f1_{E})^{-}\mathrm{d}\mu\\
+ & =\int_{X}f^{+}1_{E}\mathrm{d}\mu-\int_{X}f^{-}1_{E}\mathrm{d}\mu\\
+ & =\nu^{+}(E)-\nu^{-}(E)
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $E\in\mathcal{M}$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is a signed measure since it is a difference of two finite measures: clearly
+ 
+\begin_inset Formula $\nu(\emptyset)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu(X)=\nu^{+}(X)-\nu^{-}(X)<\infty$
+\end_inset
+
+, also if 
+\begin_inset Formula $(E_{n})$
+\end_inset
+
+ is a pairwise disjoint sequence of members in 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{align*}
+\nu\left(\bigcup_{n=1}^{\infty}E_{n}\right) & =\nu^{+}\left(\bigcup_{n=1}^{\infty}E_{n}\right)-\nu^{-}\left(\bigcup_{n=1}^{\infty}E_{n}\right)\\
+ & =\sum_{n=1}^{\infty}\nu^{+}(E_{n})-\sum_{n=1}^{\infty}\nu^{-}(E_{n})\\
+ & =\sum_{n=1}^{\infty}\nu^{+}(E_{n})-\nu^{-}(E_{n})\\
+ & =\sum_{n=1}^{\infty}\nu(E_{n}).
+\end{align*}
+
+\end_inset
+
+Finally, note that 
+\begin_inset Formula $(\nu^{+},\nu^{-})$
+\end_inset
+
+ is a Jordan decomposition of 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ Indeed, let 
+\begin_inset Formula $A=\{f\geq0\}$
+\end_inset
+
+ and 
+\begin_inset Formula $B=\{f<0\}$
+\end_inset
+
+.
+ Then clearly 
+\begin_inset Formula $A\cup B=X$
+\end_inset
+
+ and 
+\begin_inset Formula $A\cap B=\emptyset$
+\end_inset
+
+.
+ Furthermore, if 
+\begin_inset Formula $E\subseteq A$
+\end_inset
+
+, then we have 
+\begin_inset Formula 
+\begin{align*}
+\nu^{-}(E) & =\int_{X}f^{-}1_{E}\mathrm{d}\mu\\
+ & \leq\int_{X}f^{-}1_{A}\mathrm{d}\mu\\
+ & =\int_{X}0\mathrm{d}\mu\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+Similarly, if 
+\begin_inset Formula $E\subseteq B$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\begin{align*}
+\nu^{+}(E) & =\int_{X}f^{+}1_{E}\mathrm{d}\mu\\
+ & \leq\int_{X}f^{+}1_{B}\mathrm{d}\mu\\
+ & =\int_{X}0\mathrm{d}\mu\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\nu^{+}\perp\nu^{-}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $(\nu^{+},\nu^{-})$
+\end_inset
+
+ gives the Jordan decomposition of 
+\begin_inset Formula $\nu$
+\end_inset
+
+ with 
+\begin_inset Formula $(A,B)$
+\end_inset
+
+ being a Hahn decomposition 
+\begin_inset Formula $\nu$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 9 
+\end_layout
+
+\begin_layout Standard
+For problems 9 and 13.i, we use the following notation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M})$
+\end_inset
+
+ be a measurable space, let 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu$
+\end_inset
+
+ be two (possibly signed) measures on 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+, and let 
+\begin_inset Formula $A,B\subseteq X$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $(A,B)$
+\end_inset
+
+ is a 
+\series bold
+singular pair 
+\series default
+for 
+\begin_inset Formula $\mu,\nu$
+\end_inset
+
+ if 
+\begin_inset Formula $A\cup B=X$
+\end_inset
+
+, 
+\begin_inset Formula $A\cap B=\emptyset$
+\end_inset
+
+, 
+\begin_inset Formula $A$
+\end_inset
+
+ is a 
+\begin_inset Formula $\nu$
+\end_inset
+
+-null set, and 
+\begin_inset Formula $B$
+\end_inset
+
+ is a 
+\begin_inset Formula $\mu$
+\end_inset
+
+-null set.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M},\mu)$
+\end_inset
+
+ be a measure space and let 
+\begin_inset Formula $\nu$
+\end_inset
+
+ be a (finite) signed measure on 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\nu\perp\mu$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\nu^{+}\perp\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu^{-}\perp\mu$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $\nu^{+}\perp\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu^{-}\perp\mu$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $(A,B)$
+\end_inset
+
+ be a singular pair for 
+\begin_inset Formula $(\nu^{+},\mu)$
+\end_inset
+
+ and let 
+\begin_inset Formula $(C,D)$
+\end_inset
+
+ be a singular pair for 
+\begin_inset Formula $(\nu^{-},\mu)$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $(A\cup C,B\cap D)$
+\end_inset
+
+ is a singular pair for 
+\begin_inset Formula $(\nu,\mu)$
+\end_inset
+
+.
+ Indeed, clearly we have 
+\begin_inset Formula $(A\cup C)\cup(B\cap D)=X$
+\end_inset
+
+ and 
+\begin_inset Formula $(A\cup C)\cap(B\cap D)=\emptyset$
+\end_inset
+
+.
+ Also, if 
+\begin_inset Formula $E\subseteq B\cap D$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\begin{align*}
+\nu(E) & =\nu^{+}(E)-\nu^{-}(E)\\
+ & =0-0\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+Similarly, if 
+\begin_inset Formula $E\subseteq A\cup C$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\begin{align*}
+\mu(E) & =\mu((A\cup C)\cap E))\\
+ & =\mu((A\cap E)\cup(C\cap E))\\
+ & =\mu(A\cap E)+\mu(C\cap E)\\
+ & =0+0\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+This proves our claim, and thus 
+\begin_inset Formula $\nu\perp\mu$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now suppose 
+\begin_inset Formula $\nu\perp\mu$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $(A,B)$
+\end_inset
+
+ be a singular pair for 
+\begin_inset Formula $(\nu,\mu)$
+\end_inset
+
+ and let 
+\begin_inset Formula $(C,D)$
+\end_inset
+
+ be a singular pair for 
+\begin_inset Formula $(\nu^{+},\nu^{-})$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $(A\cap C,B\cup D)$
+\end_inset
+
+ is a singular pair for 
+\begin_inset Formula $(\nu^{+},\mu)$
+\end_inset
+
+.
+ Indeed, clearly we have 
+\begin_inset Formula $(A\cap C)\cup(B\cup D)=X$
+\end_inset
+
+ and 
+\begin_inset Formula $(A\cap C)\cap(B\cup D)=\emptyset$
+\end_inset
+
+.
+ Also, if 
+\begin_inset Formula $E\subseteq A\cap C$
+\end_inset
+
+, then we have 
+\begin_inset Formula $\mu(E)=0$
+\end_inset
+
+.
+ Similarly, if 
+\begin_inset Formula $E\subseteq B\cup D$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\begin{align*}
+\nu^{-}(E) & =\nu^{-}((E\cap B)\cup(E\cap D))\\
+ & =\nu^{-}(E\cap B)+\nu^{-}(E\cap D)\\
+ & =\nu^{+}(E\cap B)+\nu^{-}(E\cap D)\\
+ & =\nu^{+}(E\cap B)+\nu^{-}(E\cap D)+\nu^{-}(E\cap C)\\
+ & =\nu^{+}(E\cap B)+\nu^{-}((E\cap D)\cup(E\cap C))\\
+ & =\nu^{+}(E\cap B)+\nu^{-}(E)\\
+ & =\nu^{+}(E\cap B)+\nu^{+}(E\cap D)+\nu^{-}(E).\\
+ & =\nu^{+}((E\cap B)\cup(E\cap D))+\nu^{-}(E)\\
+ & =\nu^{+}(E)+\nu^{-}(E)
+\end{align*}
+
+\end_inset
+
+Canceling 
+\begin_inset Formula $\nu^{-}(E)$
+\end_inset
+
+ from both sides gives us 
+\begin_inset Formula $\nu^{+}(E)=0$
+\end_inset
+
+.
+ This proves our claim, and thus 
+\begin_inset Formula $\nu^{+}\perp\mu$
+\end_inset
+
+.
+ A similar computation shows that 
+\begin_inset Formula $(A\cap D,B\cup C)$
+\end_inset
+
+ is a singular pair for 
+\begin_inset Formula $(\nu^{-},\mu)$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\nu^{-}\perp\mu$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 10
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $(X,\mathcal{M})$
+\end_inset
+
+ be a measurable space and let 
+\begin_inset Formula $\nu$
+\end_inset
+
+ be a signed measure on 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f$
+\end_inset
+
+ be a 
+\begin_inset Formula $|\nu|$
+\end_inset
+
+-integrable function.
+ Then we have
+\begin_inset Formula 
+\[
+\left|\int_{X}f\mathrm{d}\nu\right|\leq\int_{X}|f|\mathrm{d}|\nu|
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+\left|\int_{X}f\mathrm{d}\nu\right| & =\left|\int_{X}f\mathrm{d}\nu^{+}-\int_{X}f\mathrm{d}\nu^{-}\right|\\
+ & \leq\left|\int_{X}f\mathrm{d}\nu^{+}\right|+\left|\int_{X}f\mathrm{d}\nu^{-}\right|\\
+ & \leq\int_{X}|f|\mathrm{d}\nu^{+}+\int_{X}|f|\mathrm{d}\nu^{-}\\
+ & =\int_{X}|f|\mathrm{d}|\nu|.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 13(i)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M})$
+\end_inset
+
+ be a measure space and let 
+\begin_inset Formula $\nu$
+\end_inset
+
+ be a signed measure no 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{equation}
+\nu^{+}(E)=\sup\{\nu(F)\mid F\in\mathcal{M}\text{ and }F\subseteq E\}\label{eq:firstineq}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $E\in\mathcal{M}$
+\end_inset
+
+.
+ Similarly,
+\begin_inset Formula 
+\begin{equation}
+-\nu^{-}(E)=\inf\{\nu(F)\mid F\in\mathcal{M}\text{ and }F\subseteq E\}\label{eq:secondineq}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $E\in\mathcal{M}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(A,B)$
+\end_inset
+
+ be a singular pair with respect to 
+\begin_inset Formula $\nu^{+}\perp\nu^{-}$
+\end_inset
+
+ and let 
+\begin_inset Formula $E\in\mathcal{M}$
+\end_inset
+
+.
+ We will first show 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:firstineq})
+\end_layout
+
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $F\in\mathcal{M}$
+\end_inset
+
+ such that 
+\begin_inset Formula $F\subseteq E$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\nu(F) & =\nu^{+}(F)-\nu^{-}(F)\\
+ & \leq\nu^{+}(F)\\
+ & \leq\nu^{+}(E).
+\end{align*}
+
+\end_inset
+
+This implies 
+\begin_inset Formula $\geq$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:firstineq})
+\end_layout
+
+\end_inset
+
+.
+ Conversely, we have
+\begin_inset Formula 
+\begin{align*}
+\nu(A\cap E) & =\nu^{+}(A\cap E)-\nu^{-}(A\cap E)\\
+ & =\nu^{+}(A\cap E)\\
+ & =\nu^{+}(A\cap E)+\nu^{+}(B\cap E)\\
+ & =\nu^{+}((A\cap E)\cup(B\cap E))\\
+ & =\nu^{+}(E).
+\end{align*}
+
+\end_inset
+
+This implies 
+\begin_inset Formula $\leq$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:firstineq})
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we will show 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:firstineq2})
+\end_layout
+
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $F\in\mathcal{M}$
+\end_inset
+
+ such that 
+\begin_inset Formula $F\subseteq E$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\nu(F) & =\nu^{+}(F)-\nu^{-}(F)\\
+ & \geq-\nu^{-}(F)\\
+ & \geq-\nu^{-}(E).
+\end{align*}
+
+\end_inset
+
+This implies 
+\begin_inset Formula $\leq$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:firstineq2})
+\end_layout
+
+\end_inset
+
+.
+ Conversely, we have
+\begin_inset Formula 
+\begin{align*}
+\nu(B\cap E) & =\nu^{+}(B\cap E)-\nu^{-}(B\cap E)\\
+ & =-\nu^{-}(B\cap E)\\
+ & =-\nu^{-}(A\cap E)-\nu^{-}(B\cap E)\\
+ & =-\nu^{-}((A\cap E)\cup(B\cap E))\\
+ & =-\nu^{-}(E).
+\end{align*}
+
+\end_inset
+
+This implies 
+\begin_inset Formula $\geq$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:firstineq2})
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

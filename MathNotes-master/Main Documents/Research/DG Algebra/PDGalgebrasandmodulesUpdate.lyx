@@ -1,0 +1,6797 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+PDG Algebras and Modules
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Subsection
+Notation and Conventions
+\end_layout
+
+\begin_layout Standard
+Unless otherwise specified, let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field and let 
+\begin_inset Formula $(R,\mathfrak{m})$
+\end_inset
+
+ be a local Noetherian ring.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Category Theory
+\end_layout
+
+\begin_layout Standard
+In this document, we consider the following categories:
+\end_layout
+
+\begin_layout Itemize
+The category of all sets and functions, denoted 
+\begin_inset Formula $\mathbf{Set}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+The category of all rings and ring homomorphisms, denoted 
+\begin_inset Formula $\mathbf{Ring}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+The category of all 
+\begin_inset Formula $R$
+\end_inset
+
+-modules and 
+\begin_inset Formula $R$
+\end_inset
+
+-linear maps, denoted 
+\begin_inset Formula $\mathbf{Mod}_{R}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+The category of all graded 
+\begin_inset Formula $R$
+\end_inset
+
+-modules and graded 
+\begin_inset Formula $R$
+\end_inset
+
+-linear maps, denoted 
+\begin_inset Formula $\mathbf{Grad}_{R}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+The category of all 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homorphisms, denoted 
+\begin_inset Formula $\mathbf{Alg}_{R}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+The category of all 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes and chain maps, denoted 
+\begin_inset Formula $\mathbf{Comp}_{R}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Itemize
+The category of all 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes and homotopy classes of chain maps, denoted 
+\begin_inset Formula $\mathbf{HComp}_{R}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The category of all DG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras DG algebra homomorphisms, denoted 
+\begin_inset Formula $\mathbf{DG}_{R}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Basic Definitions
+\end_layout
+
+\begin_layout Subsection
+PDG 
+\begin_inset Formula $R$
+\end_inset
+
+-Algebras
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $(A,\mathrm{d})$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex and let 
+\begin_inset Formula $\mu\colon A\otimes_{R}A\to A$
+\end_inset
+
+ be a chain map.
+ If 
+\begin_inset Formula $\sum_{i=1}^{n}a_{i}\otimes b_{i}$
+\end_inset
+
+ is a tensor in 
+\begin_inset Formula $A\otimes_{R}A$
+\end_inset
+
+, then we often denote its image under 
+\begin_inset Formula $\mu$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\mu\left(\sum_{i=1}^{n}a_{i}\otimes b_{i}\right)=\sum_{i=1}^{n}a_{i}\star_{\mu}b_{i}.
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is understood from context, then we also tend to drop 
+\begin_inset Formula $\mu$
+\end_inset
+
+ from the subscript in 
+\begin_inset Formula $\star_{\mu}$
+\end_inset
+
+, or even drop 
+\begin_inset Formula $\star$
+\end_inset
+
+ altogether and simply write
+\begin_inset Formula 
+\[
+\mu\left(\sum_{i=1}^{n}a_{i}\otimes b_{i}\right)=\sum_{i=1}^{n}a_{i}b_{i}.
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $\mu$
+\end_inset
+
+ being a chain map implies it is a 
+\series bold
+graded-multiplication
+\series default
+ which satisfies 
+\series bold
+Leibniz law
+\series default
+.
+ Being a graded-multiplication means 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-bilinear map which respects the grading.
+ In particular, if 
+\begin_inset Formula $a\in A_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $b\in A_{j}$
+\end_inset
+
+, then 
+\begin_inset Formula $ab\in A_{i+j}$
+\end_inset
+
+.
+ Satisfying Leibniz law here means 
+\begin_inset Formula 
+\[
+\mathrm{d}(ab)=\mathrm{d}(a)b+(-1)^{|a|}a\mathrm{d}(b)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a,b\in A$
+\end_inset
+
+ with 
+\begin_inset Formula $a$
+\end_inset
+
+ homogeneous We can also impose other conditions on 
+\begin_inset Formula $\mu$
+\end_inset
+
+ as follows:
+\end_layout
+
+\begin_layout Enumerate
+We say 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is 
+\series bold
+associative 
+\series default
+if
+\begin_inset Formula 
+\[
+a(bc)=(ab)c
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a,b,c\in A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+We say 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is 
+\series bold
+graded-commutative 
+\series default
+if
+\begin_inset Formula 
+\[
+ab=(-1)^{|a||b|}ba
+\]
+
+\end_inset
+
+for all homogeneous 
+\begin_inset Formula $a,b\in A$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+We say 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is 
+\series bold
+strictly graded-commutative 
+\series default
+if it is graded-commutative and satisfies the following extra property:
+\begin_inset Formula 
+\[
+a^{2}=0
+\]
+
+\end_inset
+
+for all homogeneous 
+\begin_inset Formula $a\in A$
+\end_inset
+
+ where 
+\begin_inset Formula $|a|$
+\end_inset
+
+ is odd.
+\end_layout
+
+\begin_layout Enumerate
+We say 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is 
+\series bold
+unital 
+\series default
+if there exists 
+\begin_inset Formula $1\in A$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+a1=a=1a
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a\in A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The triple 
+\begin_inset Formula $(A,\mathrm{d},\mu)$
+\end_inset
+
+ is called a 
+\series bold
+differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra 
+\series default
+(or 
+\series bold
+DG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra
+\series default
+) if 
+\begin_inset Formula $\mu$
+\end_inset
+
+ satisfies conditions 1-4.
+ If 
+\begin_inset Formula $(A,\mathrm{d},\mu)$
+\end_inset
+
+ only satisfies conditions 2-4, then it is called a 
+\series bold
+partial differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra 
+\series default
+(or 
+\series bold
+PDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra
+\series default
+).
+ To clean notation in what follows, we will often refer to a PDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra 
+\begin_inset Formula $(A,\mathrm{d},\mu)$
+\end_inset
+
+ via its underlying graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ In particular, if we write 
+\begin_inset Quotes eld
+\end_inset
+
+let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a PDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra
+\begin_inset Quotes erd
+\end_inset
+
+ without specifying its differential or multiplication operations, then
+ it will be understood that it's differential is denoted 
+\begin_inset Formula $\mathrm{d}_{A}$
+\end_inset
+
+ and its multiplication is denoted 
+\begin_inset Formula $\mu_{A}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Morphisms of PDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ be two PDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra and let 
+\begin_inset Formula $f\colon A\to B$
+\end_inset
+
+ be a function.
+ We say 
+\begin_inset Formula $f$
+\end_inset
+
+ is a 
+\series bold
+morphism 
+\series default
+of PDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras (or simply morphism if context is clear) if 
+\begin_inset Formula $f$
+\end_inset
+
+ is a chain map which satisfies the following two properties
+\end_layout
+
+\begin_layout Enumerate
+it respects the identity element, that is, 
+\begin_inset Formula $f(1)=1$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+it respects multiplication, that is, 
+\begin_inset Formula $f(a_{1}a_{2})=f(a_{1})f(a_{2})$
+\end_inset
+
+ for all 
+\begin_inset Formula $a_{1},a_{2}\in A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that property 2 is equivalent to the following diagram being commutative
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} A 
+\backslash
+otimes _R A 
+\backslash
+arrow[r,
+\begin_inset Quotes erd
+\end_inset
+
+f 
+\backslash
+otimes f 
+\begin_inset Quotes eld
+\end_inset
+
+] 
+\backslash
+arrow[d,
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\backslash
+mu _A 
+\begin_inset Quotes eld
+\end_inset
+
+, swap ] & B 
+\backslash
+otimes _R B 
+\backslash
+arrow[d, 
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\backslash
+mu _B 
+\begin_inset Quotes eld
+\end_inset
+
+] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+A 
+\backslash
+arrow[r,
+\begin_inset Quotes erd
+\end_inset
+
+f
+\begin_inset Quotes erd
+\end_inset
+
+] & B
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+Property 1 can be interpretted in terms of a diagram as well.
+ The collection of all PDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras algebras together with their morphisms forms a category, which
+ we denote by 
+\begin_inset Formula $\mathbf{PDG}_{R}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-Modules
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a PDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+\end_layout
+
+\begin_layout Enumerate
+A 
+\series bold
+left
+\series default
+ 
+\series bold
+partial differential graded
+\series default
+ 
+\begin_inset Formula $A$
+\end_inset
+
+
+\series bold
+-module 
+\series default
+(or 
+\series bold
+left
+\series default
+ 
+\series bold
+PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module
+\series default
+) is a triple 
+\begin_inset Formula $(X,\mathrm{d}_{X},\mu_{A,X})$
+\end_inset
+
+ where 
+\begin_inset Formula $(X,\mathrm{d}_{X})$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex and where 
+\begin_inset Formula $\mu_{A,X}\colon A\otimes_{R}X\to X$
+\end_inset
+
+ is a chain map, called the 
+\series bold
+left scalar-multiplication 
+\series default
+map, which satisfies 
+\begin_inset Formula $1x=x$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+A 
+\series bold
+right partial differential graded
+\series default
+ 
+\begin_inset Formula $A$
+\end_inset
+
+
+\series bold
+-module 
+\series default
+(or 
+\series bold
+right
+\series default
+ 
+\series bold
+PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module
+\series default
+) is a triple 
+\begin_inset Formula $(X,\mathrm{d}_{X},\mu_{X,A})$
+\end_inset
+
+ where 
+\begin_inset Formula $(X,\mathrm{d}_{X})$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex and where 
+\begin_inset Formula $\mu_{X,A}\colon X\otimes_{R}A\to X$
+\end_inset
+
+ is a chain map called the 
+\series bold
+right scalar-multiplication 
+\series default
+map which satisfies 
+\begin_inset Formula $x1=x$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+A 
+\series bold
+two-sided partial differential graded
+\series default
+ 
+\begin_inset Formula $A$
+\end_inset
+
+
+\series bold
+-module 
+\series default
+(or 
+\series bold
+two-sided
+\series default
+ 
+\series bold
+PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module
+\series default
+) is a quadruple 
+\begin_inset Formula $(X,\mathrm{d}_{X},\mu_{A,X},\mu_{X,A})$
+\end_inset
+
+ where 
+\begin_inset Formula $(X,\mathrm{d}_{X},\mu_{A,X})$
+\end_inset
+
+ is a left partial differential graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module and where 
+\begin_inset Formula $(X,\mathrm{d}_{X},\mu_{X,A})$
+\end_inset
+
+ is a right partial differential graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ In other words, it is an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex 
+\begin_inset Formula $(X,\mathrm{d}_{X})$
+\end_inset
+
+ which is equppied with both a left and right scalar-multiplication map.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Here again we are using the convention that the image of a tensor 
+\begin_inset Formula $\sum_{i=1}^{n}a_{i}\otimes x_{i}$
+\end_inset
+
+ in 
+\begin_inset Formula $A\otimes_{R}X$
+\end_inset
+
+ under the scalar-multiplication map 
+\begin_inset Formula $\mu_{A,X}$
+\end_inset
+
+ is denoted by
+\begin_inset Formula 
+\[
+\mu_{A,X}\left(\sum_{i=1}^{n}a_{i}\otimes x_{i}\right)=\sum_{i=1}^{n}a_{i}\star_{\mu_{A,X}}x_{i}=\sum_{i=1}^{n}a_{i}x_{i}.
+\]
+
+\end_inset
+
+Unless otherwise specificed, we fix 
+\begin_inset Formula $A$
+\end_inset
+
+ to be a PDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ The theory of left/right PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules and the theory of two-sided PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules are completely analagous for the most part, though there are some
+ notable differences.
+ When these differences arise, we will explicitly mention them, but for
+ now we will mostly focus on the theory of left PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules.
+ Thus, if we write 
+\begin_inset Quotes eld
+\end_inset
+
+let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module
+\begin_inset Quotes erd
+\end_inset
+
+, then it will be understood that 
+\begin_inset Formula $A$
+\end_inset
+
+ is a PDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra, that 
+\begin_inset Formula $X$
+\end_inset
+
+ is a 
+\emph on
+left
+\emph default
+ PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module, that it's differential is denoted 
+\begin_inset Formula $\mathrm{d}_{X}$
+\end_inset
+
+, and its scalar-multiplication is denoted 
+\begin_inset Formula $\mu_{A,X}$
+\end_inset
+
+.
+ In fact, if 
+\begin_inset Formula $A$
+\end_inset
+
+ is understood from context, then we simplify this notation even further
+ by writing 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ rather than 
+\begin_inset Formula $\mu_{A,X}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Note that 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ being a chain map implies it is satisfies 
+\series bold
+Leibniz law
+\series default
+, which in this context says 
+\begin_inset Formula 
+\[
+\mathrm{d}_{X}(ax)=\mathrm{d}_{A}(a)x+(-1)^{|a|}a\mathrm{d}_{X}(x)
+\]
+
+\end_inset
+
+for all homogeneous 
+\begin_inset Formula $a\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+ Note also that we do not require 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ to be associative in order for 
+\begin_inset Formula $X$
+\end_inset
+
+ to be a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module, that is, we do not require here the identity
+\begin_inset Formula 
+\[
+(ab)x=a(bx)
+\]
+
+\end_inset
+
+to hold for all 
+\begin_inset Formula $a,b\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset Formula $A$
+\end_inset
+
+-linear maps of PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ be two PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules and let 
+\begin_inset Formula $\varphi\colon X\to Y$
+\end_inset
+
+ be a function.
+ We say 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is an 
+\begin_inset Formula $A$
+\end_inset
+
+
+\series bold
+-linear map 
+\series default
+between them if it is a chain map which satisfies
+\begin_inset Formula 
+\[
+\varphi(ax)=a\varphi(x)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+ The collection of all PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules together with their 
+\begin_inset Formula $A$
+\end_inset
+
+-linear maps forms a category, which we denote by 
+\begin_inset Formula $\mathbf{PMod}_{A}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Submodules
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ be two PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules.
+ We say 
+\begin_inset Formula $X$
+\end_inset
+
+ is a 
+\series bold
+PDG
+\series default
+ 
+\series bold
+
+\begin_inset Formula $A$
+\end_inset
+
+-submodule 
+\series default
+of 
+\begin_inset Formula $Y$
+\end_inset
+
+ if 
+\begin_inset Formula $X\subseteq Y$
+\end_inset
+
+.
+ A PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $A$
+\end_inset
+
+ is called a 
+\series bold
+PDG ideal 
+\series default
+of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Given any collection 
+\begin_inset Formula $\{x_{\lambda}\}_{\lambda\in\Lambda}$
+\end_inset
+
+ of elements of 
+\begin_inset Formula $X$
+\end_inset
+
+, we denote by 
+\begin_inset Formula $\langle\langle x_{\lambda}\rangle\rangle_{\lambda\in\Lambda}$
+\end_inset
+
+ to be the smallest PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $M$
+\end_inset
+
+ which contains 
+\begin_inset Formula $\{x_{\lambda}\}_{\lambda\in\Lambda}$
+\end_inset
+
+.
+ We denote by 
+\begin_inset Formula $\langle x_{\lambda}\rangle_{\lambda\in\Lambda}$
+\end_inset
+
+ to be the set of all 
+\begin_inset Formula $A$
+\end_inset
+
+-linear combinations of 
+\begin_inset Formula $\{x_{\lambda}\}_{\lambda\in\Lambda}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module and let 
+\begin_inset Formula $\{x_{\lambda}\}_{\lambda\in\Lambda}$
+\end_inset
+
+ be a collection of elements of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\langle\langle x_{\lambda}\rangle\rangle_{\lambda\in\Lambda}=\langle x_{\lambda},\mathrm{d}_{X}(x_{\lambda})\rangle_{\lambda\in\Lambda}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ To clean notation in what follows, we drop the 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $\lambda\in\Lambda$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ from the subscript of our bracket notation.
+ Since 
+\begin_inset Formula $\langle\langle x_{\lambda}\rangle\rangle$
+\end_inset
+
+ is the smallest PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $X$
+\end_inset
+
+ which contains 
+\begin_inset Formula $\{x_{\lambda}\}$
+\end_inset
+
+, we must have 
+\begin_inset Formula $\mathrm{d}_{X}(x_{\lambda})\in\langle\langle x_{\lambda}\rangle\rangle$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda\in\Lambda$
+\end_inset
+
+.
+ Furthermore, we must have all 
+\begin_inset Formula $A$
+\end_inset
+
+-linear combinations of 
+\begin_inset Formula $\{x_{\lambda},\mathrm{d}_{X}(x_{\lambda})\}$
+\end_inset
+
+ belong to 
+\begin_inset Formula $\langle\langle x_{\lambda}\rangle\rangle$
+\end_inset
+
+ as well.
+ Thus
+\begin_inset Formula 
+\[
+\langle x_{\lambda},\mathrm{d}_{X}(x_{\lambda})\rangle\subseteq\langle\langle x_{\lambda}\rangle\rangle.
+\]
+
+\end_inset
+
+For the reverse direction, notice that Leibniz law ensures that 
+\begin_inset Formula $\langle x_{\lambda},\mathrm{d}_{X}(x_{\lambda})\rangle$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathrm{d}_{X}$
+\end_inset
+
+-stable.
+ Indeed, if 
+\begin_inset Formula 
+\[
+\sum_{i=1}^{m}a_{i}x_{\lambda_{i}}+\sum_{j=1}^{n}b_{j}\mathrm{d}_{X}(x_{\lambda_{j}}),
+\]
+
+\end_inset
+
+is a finite 
+\begin_inset Formula $A$
+\end_inset
+
+-linear combination of elements in 
+\begin_inset Formula $\{x_{\lambda},\mathrm{d}_{X}(x_{\lambda})\}$
+\end_inset
+
+ where each 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ are homogeneous, then note that
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}_{X}\left(\sum_{i=1}^{m}a_{i}x_{\lambda_{i}}+\sum_{j=1}^{n}b_{j}\mathrm{d}_{X}(x_{\lambda_{j}})\right) & =\sum_{i=1}^{m}\mathrm{d}_{X}(a_{i}x_{\lambda_{i}})+\sum_{j=1}^{n}\mathrm{d}_{X}(b_{j}\mathrm{d}(x_{\lambda_{j}}))\\
+ & =\sum_{i=1}^{m}\left(\mathrm{d}_{A}(a_{i})x_{\lambda_{i}}+(-1)^{|a_{i}|}a_{i}\mathrm{d}_{X}(x_{\lambda_{i}})\right)+\sum_{j=1}^{n}\left(\mathrm{d}_{A}(b_{j})x_{\lambda_{j}}+(-1)^{|b_{j}|}b_{j}\mathrm{d}_{X}^{2}(x_{\lambda_{j}})\right)\\
+ & =\sum_{i=1}^{m}\mathrm{d}_{A}(a_{i})x_{\lambda_{i}}+\sum_{i=1}^{m}(-1)^{|a_{i}|}a_{i}\mathrm{d}_{X}(x_{\lambda_{i}})+\sum_{j=1}^{n}\mathrm{d}_{A}(b_{j})x_{\lambda_{j}}\\
+ & \in\langle x_{\lambda},\mathrm{d}_{X}(x_{\lambda})\rangle.
+\end{align*}
+
+\end_inset
+
+In particular, we see that 
+\begin_inset Formula $\langle x_{\lambda},\mathrm{d}_{X}(x_{\lambda})\rangle$
+\end_inset
+
+ is a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $X$
+\end_inset
+
+ which contains 
+\begin_inset Formula $\{x_{\lambda}\}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\langle\langle x_{\lambda}\rangle\rangle$
+\end_inset
+
+ is the 
+\emph on
+smallest
+\emph default
+ PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $X$
+\end_inset
+
+ which contains 
+\begin_inset Formula $\{x_{\lambda}\}$
+\end_inset
+
+, it follows that
+\begin_inset Formula 
+\[
+\langle x_{\lambda},\mathrm{d}_{X}(x_{\lambda})\rangle\supseteq\langle\langle x_{\lambda}\rangle\rangle.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Warning: 
+\series medium
+In the category of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules, we have the concept of annihilators.
+ In particular, suppose 
+\begin_inset Formula $M$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-module and let 
+\begin_inset Formula $u\in M$
+\end_inset
+
+.
+ We define the 
+\series default
+annihilator 
+\series medium
+with respect to 
+\begin_inset Formula $u$
+\end_inset
+
+ to be the subset of 
+\begin_inset Formula $R$
+\end_inset
+
+ given by
+\begin_inset Formula 
+\[
+0:u=\{r\in R\mid ru=0\}.
+\]
+
+\end_inset
+
+In fact, 
+\begin_inset Formula $0:u$
+\end_inset
+
+ is in an ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+, but we need the associative law to get this: if 
+\begin_inset Formula $r\in R$
+\end_inset
+
+ and 
+\begin_inset Formula $x\in0:u$
+\end_inset
+
+, then 
+\begin_inset Formula $(rx)u=r(xu)=0$
+\end_inset
+
+ implies 
+\begin_inset Formula $rx\in0:u$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now let us consider the case where 
+\begin_inset Formula $X$
+\end_inset
+
+ is a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module and let 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+ We can define the annihilator 
+\begin_inset Formula $0:x$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $x$
+\end_inset
+
+ as a subset of 
+\begin_inset Formula $A$
+\end_inset
+
+ as before:
+\begin_inset Formula 
+\[
+0:x=\{a\in A\mid ax=0\},
+\]
+
+\end_inset
+
+however this time the set 
+\begin_inset Formula $0:x$
+\end_inset
+
+ need not be a PDG ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ 
+\series medium
+On the other hand, if 
+\begin_inset Formula $u\in\mathrm{Assoc}\,M$
+\end_inset
+
+, where
+\begin_inset Formula 
+\[
+\mathrm{Assoc}\,M=\{u\in M\mid[a,b,u]=0\text{ for all }a,b\in A\},
+\]
+
+\end_inset
+
+then there are no issues with the proof above, so 
+\begin_inset Formula $0:u$
+\end_inset
+
+ is an ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+ in this case.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Hom
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $M$
+\end_inset
+
+ and 
+\begin_inset Formula $N$
+\end_inset
+
+ be two PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules.
+ We denote by 
+\begin_inset Formula $\mathrm{Hom}_{A}(M,N)$
+\end_inset
+
+ to be the set of all 
+\begin_inset Formula $A$
+\end_inset
+
+-linear maps from 
+\begin_inset Formula $M$
+\end_inset
+
+ to 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ The set 
+\begin_inset Formula $\mathrm{Hom}_{A}(M,N)$
+\end_inset
+
+ as the structure of an abelian group via pointwise addition of 
+\begin_inset Formula $A$
+\end_inset
+
+-linear maps from 
+\begin_inset Formula $M$
+\end_inset
+
+ to 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ On the other hand, suppose we define a scalar 
+\begin_inset Quotes eld
+\end_inset
+
+action
+\begin_inset Quotes erd
+\end_inset
+
+ on 
+\begin_inset Formula $\mathrm{Hom}_{A}(M,N)$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+(a\cdot\varphi)(u)=\varphi(au)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a\in A$
+\end_inset
+
+, 
+\begin_inset Formula $\varphi\in\mathrm{Hom}_{A}(M,N)$
+\end_inset
+
+, and 
+\begin_inset Formula $u\in M$
+\end_inset
+
+.
+ Then this 
+\begin_inset Quotes eld
+\end_inset
+
+action
+\begin_inset Quotes erd
+\end_inset
+
+ does not necessarily give 
+\begin_inset Formula $\mathrm{Hom}_{A}(M,N)$
+\end_inset
+
+ the structure of an 
+\begin_inset Formula $R$
+\end_inset
+
+-module, since if 
+\begin_inset Formula $a\in A_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $b\in A_{j}$
+\end_inset
+
+, and 
+\begin_inset Formula $\varphi\in\mathrm{Hom}_{A}(M,N)$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{align*}
+((ab)\cdot\varphi)(u) & =\varphi((ab)u)\\
+ & =\varphi((-1)^{i+j}(ba)u)\\
+ & =(-1)^{i+j}\varphi((ba)u)\\
+ & =(-1)^{i+j}\varphi(b(au)+(-1)^{i+j}[b,a,u])\\
+ & =(-1)^{i+j}(b\cdot\varphi)(au)+(-1)^{i+j}[b,a,\varphi(u)]\\
+ & =(-1)^{i+j}(a\cdot(b\cdot\varphi))(u)+(-1)^{i+j}[b,a,\varphi(u)]
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $u\in M$
+\end_inset
+
+.
+ Thus one needs commutativity and associativity in order to conclude that
+ 
+\begin_inset Formula $(ab)\cdot\varphi=a\cdot(b\cdot\varphi)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+\begin_inset Formula $\mathbf{PMod}_{A}$
+\end_inset
+
+ is an Abelian Category
+\end_layout
+
+\begin_layout Standard
+Throughout the rest of this subsection, we fix a PDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ We would like to talk about the concept of an exact sequence in 
+\begin_inset Formula $\mathbf{PMod}_{A}$
+\end_inset
+
+.
+ For this, we just need to check that 
+\begin_inset Formula $\mathbf{PMod}_{A}$
+\end_inset
+
+ is abelian category.
+ First let us check that it is a pre-additive category.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Kernels
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\varphi\colon X\to Y$
+\end_inset
+
+ be a morphism of PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules and let 
+\begin_inset Formula $K=\ker\varphi$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $K$
+\end_inset
+
+ has the structure of a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $X$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathrm{d}_{K}=\mathrm{d}|_{K}$
+\end_inset
+
+ and where 
+\begin_inset Formula $\mu_{K}=\mu_{X}|_{A\otimes_{R}K}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Since both 
+\begin_inset Formula $\mathrm{d}_{K}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu_{K}$
+\end_inset
+
+ are restrictions, we just need to check that 
+\begin_inset Formula $\mathrm{d}_{K}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu_{K}$
+\end_inset
+
+ land in 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Indeed, then all of the properties needed in order for 
+\begin_inset Formula $K$
+\end_inset
+
+ to be a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $X$
+\end_inset
+
+ will be inherited from 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ First we show 
+\begin_inset Formula $\mathrm{d}_{K}$
+\end_inset
+
+ lands in 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $x\in K$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\varphi\mathrm{d}_{K}(x) & =\mathrm{d}_{K}\varphi(x)\\
+ & =\mathrm{d}_{K}(0)\\
+ & =0
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $\mathrm{d}_{K}(x)\in K$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\mathrm{d}_{K}$
+\end_inset
+
+ lands in 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Now we show 
+\begin_inset Formula $\mu_{K}$
+\end_inset
+
+ lands in 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $a\otimes x$
+\end_inset
+
+ be an elementary tensor in 
+\begin_inset Formula $A\otimes_{R}K$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\varphi\mu_{K}(a\otimes x) & =\varphi(ax)\\
+ & =a\varphi(x)\\
+ & =a\cdot0\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $\mu_{K}$
+\end_inset
+
+ lands in 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Images
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\varphi\colon(A,\mathrm{d},\mu)\to(A',\mathrm{d}',\mu')$
+\end_inset
+
+ be a morphism of 
+\begin_inset Formula $R$
+\end_inset
+
+-complex algebras.
+ Then 
+\begin_inset Formula $(\mathrm{im}\,\varphi,\widetilde{\mathrm{d}'},\widetilde{\mu'})$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex algebra, where 
+\begin_inset Formula $\widetilde{\mathrm{d}'}=\mathrm{d}'|_{\ker\varphi}$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{\mu'}=\mu'|_{\mathrm{im}\,\varphi\otimes_{R}\mathrm{im}\,\varphi}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We just need to check that 
+\begin_inset Formula $\widetilde{\mathrm{\mathrm{d}'}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{\mu'}$
+\end_inset
+
+ land in 
+\begin_inset Formula $\ker\varphi$
+\end_inset
+
+.
+ Then it will follow that 
+\begin_inset Formula $(\ker\varphi,\widetilde{\mathrm{d}},\widetilde{\mu})$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex algebra since it will inherit the properties needed to be an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex algebra from 
+\begin_inset Formula $(A,\mathrm{d},\mu)$
+\end_inset
+
+.
+ First we show 
+\begin_inset Formula $\widetilde{\mathrm{d}}'$
+\end_inset
+
+ lands in 
+\begin_inset Formula $\mathrm{im}\,\varphi$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\varphi(a)\in\mathrm{im}\,\varphi$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}'(\varphi(a)) & =\mathrm{d}'\varphi(a)\\
+ & =\varphi\mathrm{d}(a)\\
+ & =\varphi(\mathrm{d}(a)).
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $\widetilde{\mathrm{d}}'$
+\end_inset
+
+ lands in 
+\begin_inset Formula $\mathrm{im}\,\varphi$
+\end_inset
+
+.
+ Now we show 
+\begin_inset Formula $\widetilde{\mu'}$
+\end_inset
+
+ lands in 
+\begin_inset Formula $\mathrm{im}\,\varphi$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\varphi(a)\otimes\varphi(b)$
+\end_inset
+
+ be an elementary tensor in 
+\begin_inset Formula $\mathrm{im}\,\varphi\otimes_{R}\mathrm{im}\,\varphi$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\mu((\varphi(a)\otimes\varphi(b)) & =\varphi(a)\star\varphi(b)\\
+ & =\varphi(a\star b)\\
+ & =\varphi(\mu(a\otimes b)).
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $\widetilde{\mu'}$
+\end_inset
+
+ lands in 
+\begin_inset Formula $\mathrm{im}\,\varphi$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Cokernels
+\end_layout
+
+\begin_layout Standard
+As we've seen, both kernels and images exist in 
+\begin_inset Formula $\mathbf{CompAlg}_{R}$
+\end_inset
+
+.
+ The problem however is that cokernels do not necessarily exist in 
+\begin_inset Formula $\mathbf{CompAlg}_{R}$
+\end_inset
+
+.
+ To see what goes wrong, suppose 
+\begin_inset Formula $\varphi\colon(A,\mathrm{d},\mu)\to(A',\mathrm{d}',\mu')$
+\end_inset
+
+ be a morphism of 
+\begin_inset Formula $R$
+\end_inset
+
+-complex algebras.
+ A naive attempt at defining the cokernel of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ would go as follows: first we take the cokernel of the underlying 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes, namely 
+\begin_inset Formula $(\overline{A'},\overline{\mathrm{d}'})$
+\end_inset
+
+ where 
+\begin_inset Formula $\overline{A'}=A'\slash\mathrm{im}\,\varphi$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{\mathrm{d}'}$
+\end_inset
+
+ is defined by 
+\begin_inset Formula $\overline{\mathrm{d}'}(\overline{a'})=\overline{\mathrm{d}'(a')}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\overline{a'}\in\overline{A'}$
+\end_inset
+
+.
+ It is straightforward to check that 
+\begin_inset Formula $\overline{\mathrm{d}'}$
+\end_inset
+
+ is well-defined and gives 
+\begin_inset Formula $\overline{A'}$
+\end_inset
+
+ the structure of an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex.
+ Next we define multiplication 
+\begin_inset Formula $\overline{\mu'}\colon\overline{A'}\otimes_{R}\overline{A'}\to\overline{A'}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\begin{equation}
+\overline{\mu'}(\overline{a'}\otimes\overline{b'})=\overline{a'\star_{\mu'}b'}\label{eq:notwelldefinedmult-1}
+\end{equation}
+
+\end_inset
+
+for all elementary tensors 
+\begin_inset Formula $\overline{a'}\otimes\overline{b'}$
+\end_inset
+
+ in 
+\begin_inset Formula $\overline{A'}\otimes_{R}\overline{A'}$
+\end_inset
+
+ and extending 
+\begin_inset Formula $\overline{\mu'}$
+\end_inset
+
+ everywhere else 
+\begin_inset Formula $R$
+\end_inset
+
+-linearly.
+ Unfortunately, upon further inspection, we see that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:notwelldefinedmult})
+\end_layout
+
+\end_inset
+
+ is note well-defined.
+ Indeed, if 
+\begin_inset Formula $a'+\varphi(a)$
+\end_inset
+
+ is another representative of the coset 
+\begin_inset Formula $\overline{a'}$
+\end_inset
+
+ and 
+\begin_inset Formula $b'+\varphi(b)$
+\end_inset
+
+ is another representative of the coset 
+\begin_inset Formula $\overline{b'}$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\begin{align*}
+\overline{\mu'}(\overline{a'+\varphi(a)}\otimes\overline{b'+\varphi(b)}) & =\overline{(a'+\varphi(a))\star(b'+\varphi(b))}\\
+ & =\overline{a'\star b'}+\overline{a'\star\varphi(b)}+\overline{\varphi(a)\star b'}+\overline{\varphi(a)\star\varphi(b)}\\
+ & =\overline{a'\star b'}+\overline{a'\star\varphi(b)}+\overline{\varphi(a)\star b'}+\overline{\varphi(a\star b)}\\
+ & =\overline{a'\star b'}+\overline{a'\star\varphi(b)}+\overline{\varphi(a)\star b'}.
+\end{align*}
+
+\end_inset
+
+In particular, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:notwelldefinedmult})
+\end_layout
+
+\end_inset
+
+ is well-defined if and only if 
+\begin_inset Formula $\mathrm{im}\,\varphi$
+\end_inset
+
+ is an ideal of 
+\begin_inset Formula $A'$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Associator Functor
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ Given 
+\begin_inset Formula $a,b\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $x\in X$
+\end_inset
+
+, we define the 
+\series bold
+associator 
+\series default
+of the triple 
+\begin_inset Formula $(a,b,x)$
+\end_inset
+
+, denoted 
+\begin_inset Formula $[a,b,x]$
+\end_inset
+
+, by the formula
+\begin_inset Formula 
+\begin{equation}
+[a,b,x]=(ab)x-a(bx).\label{eq:associatordefjklfsd}
+\end{equation}
+
+\end_inset
+
+More generally, let 
+\begin_inset Formula $\alpha_{A,A,X}\colon(A\otimes_{R}A)\otimes_{R}X\to A\otimes_{R}(A\otimes_{R}X)$
+\end_inset
+
+ denote the unique chain map defined on elementary tensors by 
+\begin_inset Formula 
+\[
+(a\otimes b)\otimes x\mapsto a\otimes(b\otimes x).
+\]
+
+\end_inset
+
+We define the 
+\series bold
+associator chain map 
+\series default
+with respect to 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ to be chain map 
+\begin_inset Formula $[\cdot,\cdot,\cdot]_{\mu_{X}}\colon(A\otimes_{R}A)\otimes_{R}X\to X$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\[
+[\cdot,\cdot,\cdot]_{\mu_{X}}:=\mu_{X}(1\otimes\mu_{X})\alpha_{A,A,X}-\mu_{X}(\mu_{A}\otimes1).
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is understood from context, then we will simplify our notation by dropping
+ 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ from the subscript in 
+\begin_inset Formula $[\cdot,\cdot,\cdot]$
+\end_inset
+
+.
+ Thus, if 
+\begin_inset Formula $(a\otimes b)\otimes x$
+\end_inset
+
+ is an elementary tensor in 
+\begin_inset Formula $(A\otimes_{R}A)\otimes_{R}X$
+\end_inset
+
+ then the associatior chain map with respect to 
+\begin_inset Formula $X$
+\end_inset
+
+ maps the elementary tensor 
+\begin_inset Formula $(a\otimes b)\otimes x$
+\end_inset
+
+ to the associator of the triple 
+\begin_inset Formula $(a,b,x)$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+[\cdot,\cdot,\cdot]((a\otimes b)\otimes x)=[a,b,x],
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $[a,b,x]$
+\end_inset
+
+ is as defined above in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:associatordefjklfsd})
+\end_layout
+
+\end_inset
+
+.
+ We define the 
+\series bold
+associator complex 
+\series default
+with respect to 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $[X]_{\mu_{X}}$
+\end_inset
+
+, to be the image of 
+\begin_inset Formula $[\cdot,\cdot,\cdot]$
+\end_inset
+
+, where again we simplify notation by writing 
+\begin_inset Formula $[X]$
+\end_inset
+
+ instead of 
+\begin_inset Formula $[X]_{\mu_{X}}$
+\end_inset
+
+ if 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is understood from context.
+ Thus
+\begin_inset Formula 
+\[
+[X]=\mathrm{Span}_{R}\{[a,b,x]\mid a,b\in A\text{ and }x\in X\}.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $[\cdot,\cdot,\cdot]$
+\end_inset
+
+ is a chain map, we see that 
+\begin_inset Formula $[X]$
+\end_inset
+
+, being the image of 
+\begin_inset Formula $[\cdot,\cdot,\cdot]$
+\end_inset
+
+, is an 
+\begin_inset Formula $R$
+\end_inset
+
+-subcomplex of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ We also see that 
+\begin_inset Formula $[\cdot,\cdot,\cdot]$
+\end_inset
+
+ is a graded-trilinear map which satisfies Leibniz law, where Leibniz law
+ in this context says 
+\begin_inset Formula 
+\begin{equation}
+\mathrm{d}_{X}[a,b,x]=[\mathrm{d}_{A}(a),b,x]+(-1)^{|a|}[a,\mathrm{d}_{A}(b),x]+(-1)^{|a|+|b|}[a,b,\mathrm{d}_{X}(x)].\label{eq:associatiorleibniz-1}
+\end{equation}
+
+\end_inset
+
+for all homogeneous 
+\begin_inset Formula $a,b\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now suppose 
+\begin_inset Formula $Y$
+\end_inset
+
+ is another PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module and 
+\begin_inset Formula $\varphi\colon X\to Y$
+\end_inset
+
+ is an 
+\begin_inset Formula $A$
+\end_inset
+
+-linear map.
+ We obtain an induced chain map of 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes 
+\begin_inset Formula $[\varphi]\colon[X]\to[Y]$
+\end_inset
+
+, where 
+\begin_inset Formula $[\varphi]$
+\end_inset
+
+ is the unique chain map which satisfies
+\begin_inset Formula 
+\begin{align*}
+[\varphi][a,b,x] & =\varphi((ab)x-a(bx))\\
+ & =\varphi((ab)x)-\varphi(a(bx))\\
+ & =(ab)\varphi(x)-a\varphi(bx)\\
+ & =(ab)\varphi(x)-a(b\varphi(x))\\
+ & =[a,b,\varphi(x)].
+\end{align*}
+
+\end_inset
+
+In particular, the map 
+\begin_inset Formula $[\varphi]$
+\end_inset
+
+ is just the restriction of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ to 
+\begin_inset Formula $[M]$
+\end_inset
+
+.
+ It is straightforward to check that the assignment 
+\begin_inset Formula $M\mapsto[M]$
+\end_inset
+
+ and 
+\begin_inset Formula $\varphi\mapsto[\varphi]$
+\end_inset
+
+ gives rise to a functor from the category of PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules to the category of 
+\begin_inset Formula $R$
+\end_inset
+
+-complex.
+ We call this functor the 
+\series bold
+associator functor 
+\series default
+with respect to 
+\begin_inset Formula $A$
+\end_inset
+
+, and we denote this functor by 
+\begin_inset Formula $[\cdot]_{\mu_{A}}\colon\mathbf{PMod}_{A}\to\mathbf{Comp}_{R}$
+\end_inset
+
+.
+ As usual, we simplify our notation by droping 
+\begin_inset Formula $\mu_{A}$
+\end_inset
+
+ from 
+\begin_inset Formula $[\cdot]$
+\end_inset
+
+ when context is clear.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Homology of 
+\begin_inset Formula $[X]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ It is easy to see that 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is associative if and only if 
+\begin_inset Formula $[X]=0$
+\end_inset
+
+.
+ Given that 
+\begin_inset Formula $[X]$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex, we also have a weaker form of associativity:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ We say 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is 
+\series bold
+homologically associative 
+\series default
+if 
+\begin_inset Formula $\mathrm{H}([X])=0$
+\end_inset
+
+.
+ We also say 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is 
+\series bold
+homologically associative 
+\series default
+in degree 
+\begin_inset Formula $i$
+\end_inset
+
+ if 
+\begin_inset Formula $\mathrm{H}_{i}([X])=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Clearly if 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is associative, then 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is homologically associative.
+ It turns out that the converse is also true if 
+\begin_inset Formula $[X]$
+\end_inset
+
+ is bounded below and 
+\series bold
+minimal
+\series default
+ in the sense that 
+\begin_inset Formula $\mathrm{d}_{X}([X])\subseteq\mathfrak{m}[X]$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ is the maximal ideal in the local ring 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prophomologyassociator}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ Assume that 
+\begin_inset Formula $X$
+\end_inset
+
+ is minimal and that 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is associative in degree 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is associative in degree 
+\begin_inset Formula $i+1$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is homologically associative in degree 
+\begin_inset Formula $i+1$
+\end_inset
+
+.
+ In particular, if 
+\begin_inset Formula $[X]$
+\end_inset
+
+ is bounded below and minimal.
+ Then 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is associative if and only if 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is homologically associative.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Clearly if 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is associative in degree 
+\begin_inset Formula $i$
+\end_inset
+
+, then it is homologically associative in degree 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ To show the converse, assume for a contradiction that 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is homologically associative in degree 
+\begin_inset Formula $i+1$
+\end_inset
+
+ but that it is not associative in degree 
+\begin_inset Formula $i+1$
+\end_inset
+
+.
+ In other words, assume 
+\begin_inset Formula $\mathrm{H}_{i+1}([X])=0$
+\end_inset
+
+ and 
+\begin_inset Formula $[X]_{i+1}\neq0$
+\end_inset
+
+.
+ By Nakayama's Lemma, we can find a triple 
+\begin_inset Formula $(a,b,x)$
+\end_inset
+
+ such that 
+\begin_inset Formula $|a|+|b|+|x|=i+1$
+\end_inset
+
+ and such that 
+\begin_inset Formula $[a,b,x]\notin\mathfrak{m}[X]_{i+1}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $[X]_{i}=0$
+\end_inset
+
+ by assumption, we have 
+\begin_inset Formula $\mathrm{d}_{X}[a,b,x]=0$
+\end_inset
+
+.
+ Also, since 
+\begin_inset Formula $X$
+\end_inset
+
+ is minimal, we have 
+\begin_inset Formula $\mathrm{d}_{X}[X]\subseteq\mathfrak{m}[X]$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $[a,b,x]$
+\end_inset
+
+ represents a nontrivial element in homology in degree 
+\begin_inset Formula $i+1$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is not homologically associative in degree 
+\begin_inset Formula $i+1$
+\end_inset
+
+, which is a contradiction.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Note that if 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $X$
+\end_inset
+
+ are both minimal, then the Leibniz law 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:associatiorleibniz-1})
+\end_layout
+
+\end_inset
+
+ implies 
+\begin_inset Formula $[X]$
+\end_inset
+
+ is minimal too.
+ Also our assumption in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prophomologyassociator})
+\end_layout
+
+\end_inset
+
+ that 
+\begin_inset Formula $[X]$
+\end_inset
+
+ is bounded below can clearly be weakened since in the proof we just needed
+ to find an 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+ such that 
+\begin_inset Formula $[X]_{i}\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $[X]_{i-1}=0$
+\end_inset
+
+.
+ At the same time, the proof of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prophomologyassociator})
+\end_layout
+
+\end_inset
+
+ tells us something a bit more than what was stated in the proposition.
+ To see this, we first need a definition
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module and assume that 
+\begin_inset Formula $[X]$
+\end_inset
+
+ is bounded below.
+ We define the 
+\series bold
+associative index 
+\series default
+of 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\mathrm{\mathrm{index}}\,\mu_{X}$
+\end_inset
+
+, is defined to be the smallest 
+\begin_inset Formula $i\in\mathbb{Z}\cup\{\infty\}$
+\end_inset
+
+ such that 
+\begin_inset Formula $[X]_{i}\neq0$
+\end_inset
+
+ where we set 
+\begin_inset Formula $\mathrm{index}\,\mu_{X}=\infty$
+\end_inset
+
+ if 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is associative.
+ We extend this definition to case where 
+\begin_inset Formula $[X]$
+\end_inset
+
+ is not bounded below by setting 
+\begin_inset Formula $\mathrm{index}\,\mu_{X}=-\infty$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+With the associative index of 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ defined, we see, after analyzing the proof of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prophomologyassociator})
+\end_layout
+
+\end_inset
+
+, that if we assume 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ is not associative then
+\begin_inset Formula 
+\[
+\mathrm{index}\,\mu_{X}=\inf\{i\in\mathbb{Z}\mid\mathrm{H}_{i}([X])\neq0\}
+\]
+
+\end_inset
+
+In other words, the associative index of 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ can be measured homologically.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We can also define an associative index of 
+\begin_inset Formula $R$
+\end_inset
+
+-complex.
+ Let us record this definition now:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ We define the 
+\series bold
+associative index 
+\series default
+of 
+\begin_inset Formula $X$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\mathrm{index}\,X$
+\end_inset
+
+, to be
+\begin_inset Formula 
+\[
+\mathrm{index}\,X=\sup\{\mathrm{index}\,\mu\mid\mu\text{ is a multplication on }X\}.
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+ and let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the minimal free resolution of 
+\begin_inset Formula $R\slash I$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ We define the 
+\series bold
+associative index 
+\series default
+of 
+\begin_inset Formula $R\slash I$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\mathrm{index}(R\slash I)$
+\end_inset
+
+, to be the associative index of 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Stable PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-Submodules
+\end_layout
+
+\begin_layout Standard
+The associator functor 
+\begin_inset Formula $[\cdot]\colon\mathbf{PMod}_{A}\to\mathbf{Mod}_{R}$
+\end_inset
+
+ need not be exact.
+ To see what goes wrong, let
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{diagram23423}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & X 
+\backslash
+arrow[r,"
+\backslash
+varphi "]  & Y 
+\backslash
+arrow[r," 
+\backslash
+psi "] & Z  
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+be a short exact sequence of PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules.
+ We obtain an induced sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{diagramfjklsdfmklsd}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & 
+\backslash
+text{[} X 
+\backslash
+text{]} 
+\backslash
+arrow[r,"
+\backslash
+text{[} 
+\backslash
+varphi 
+\backslash
+text{]} "]  & 
+\backslash
+text{[} Y 
+\backslash
+text{]} 
+\backslash
+arrow[r,"
+\backslash
+text{[} 
+\backslash
+psi 
+\backslash
+text{]} "] & 
+\backslash
+text{[} Z 
+\backslash
+text{]} 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+We claim that we have exactness at 
+\begin_inset Formula $[X]$
+\end_inset
+
+ and 
+\begin_inset Formula $[Z]$
+\end_inset
+
+.
+ Indeed, this is equivalent to showing 
+\begin_inset Formula $[\varphi]$
+\end_inset
+
+ is injective and 
+\begin_inset Formula $[\psi]$
+\end_inset
+
+ is surjective, which follows from the fact that 
+\begin_inset Formula $[\varphi]$
+\end_inset
+
+ (respectively 
+\begin_inset Formula $[\psi]$
+\end_inset
+
+) is the restriction of the injective map 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ (respectively the surjective map 
+\begin_inset Formula $\psi$
+\end_inset
+
+).
+ Let us see what goes wrong when trying to prove exactness at 
+\begin_inset Formula $[Y]$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\[
+\sum_{i=1}^{n}[a_{i},b_{i},y_{i}]\in\ker[\psi]=\ker\psi.
+\]
+
+\end_inset
+
+Then by exactness of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{diagram23423})
+\end_layout
+
+\end_inset
+
+, there exists 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi(x)=\sum_{i=1}^{n}[a_{i},b_{i},y_{i}]$
+\end_inset
+
+.
+ It is not at all clear however that 
+\begin_inset Formula $x\in[X]$
+\end_inset
+
+.
+ Indeed, we will see a counterexample to this later on.
+ This leads us to consider the following definition:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $X$
+\end_inset
+
+ is a 
+\series bold
+stable 
+\series default
+PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $Y$
+\end_inset
+
+ if it satisfies 
+\begin_inset Formula $[X]=X\cap[Y]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now it is easy to check that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{diagramfjklsdfmklsd})
+\end_layout
+
+\end_inset
+
+ is a short exact sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes if and only if 
+\begin_inset Formula $\varphi(X)$
+\end_inset
+
+ is a stable PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ Thus if 
+\begin_inset Formula $\varphi(X)$
+\end_inset
+
+ is a stable PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $Y$
+\end_inset
+
+, then the short exact sequence 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{diagramfjklsdfmklsd})
+\end_layout
+
+\end_inset
+
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes induces a long exact sequence in homology
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{diagram3}
+\backslash
+begin{tikzcd}[row sep=40]  && 
+\backslash
+cdots 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & 
+\backslash
+mathrm{H}_{i+1} (
+\backslash
+text{[} Z   
+\backslash
+text{]}) 
+\backslash
+arrow[dll,  swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\backslash
+
+\backslash
+  & 
+\backslash
+mathrm{H}_{i} (
+\backslash
+text{[} X 
+\backslash
+text{]}) 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{H}_{i} (
+\backslash
+text{[} Y   
+\backslash
+text{]}) 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z}] & 
+\backslash
+mathrm{H}_{i} (
+\backslash
+text{[} Z 
+\backslash
+text{]}) 
+\backslash
+arrow[dll,  swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z) [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\backslash
+
+\backslash
+ & 
+\backslash
+mathrm{H}_{i-1} (
+\backslash
+text{[} X 
+\backslash
+text{]}) 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+From this, one concludes immediately the following theorem:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $X$
+\end_inset
+
+ is a PDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mu_{Y}$
+\end_inset
+
+ is homologically associative if and only if 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu_{Y\slash X}$
+\end_inset
+
+ are homologically associative.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Invariant
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+ and let 
+\begin_inset Formula $F$
+\end_inset
+
+ be a free resolution of 
+\begin_inset Formula $R\slash I$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Choose a multiplication 
+\begin_inset Formula $\mu_{F}$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ which lifts the multiplication map 
+\begin_inset Formula $R\slash I\otimes_{R}R\slash I\to R$
+\end_inset
+
+ and let 
+\begin_inset Formula $r\in\mathfrak{m}$
+\end_inset
+
+ be an 
+\begin_inset Formula $(R\slash I)$
+\end_inset
+
+-regular element.
+ Then the mapping cone 
+\begin_inset Formula $\mathrm{C}(r)$
+\end_inset
+
+ is a free resolution of 
+\begin_inset Formula $R\slash\langle I,x\rangle$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ The multiplication 
+\begin_inset Formula $\mu_{F}$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ induces a multiplication 
+\begin_inset Formula $\mu_{\mathrm{C}(r)}$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathrm{C}(r)$
+\end_inset
+
+ as follows: first note that 
+\begin_inset Formula $F\oplus F(-1)$
+\end_inset
+
+ is the underlying graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module of 
+\begin_inset Formula $\mathrm{C}(r)$
+\end_inset
+
+.
+ Express this graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module in the form 
+\begin_inset Formula $F+eF$
+\end_inset
+
+ where 
+\begin_inset Formula $e$
+\end_inset
+
+ is an exterior variable of degree 
+\begin_inset Formula $-1$
+\end_inset
+
+ so that 
+\begin_inset Formula $\{1,e\}$
+\end_inset
+
+ is an 
+\begin_inset Formula $F$
+\end_inset
+
+-linearly independent set.
+ Thus an element in 
+\begin_inset Formula $F+eF$
+\end_inset
+
+ can be expressed in the form 
+\begin_inset Formula $\alpha+e\beta$
+\end_inset
+
+ for unique 
+\begin_inset Formula $\alpha,\beta\in F$
+\end_inset
+
+.
+ If this element is homogeneous of degree 
+\begin_inset Formula $i$
+\end_inset
+
+, then 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ are homogeneous of degrees 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $i-1$
+\end_inset
+
+ respectively.
+ With this understood, the multilpication 
+\begin_inset Formula $\mu_{\mathrm{C}(r)}$
+\end_inset
+
+ is defined on homogeneous elements 
+\begin_inset Formula $\alpha,\beta,\gamma,\delta\in F$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+(\alpha+e\beta)(\gamma+e\delta)=\alpha\gamma+e(\beta\gamma+(-1)^{|\alpha|}\alpha\delta)
+\]
+
+\end_inset
+
+and extended 
+\begin_inset Formula $R$
+\end_inset
+
+-linearly everywhere else.
+ The mapping cone 
+\begin_inset Formula $\mathrm{C}(r)$
+\end_inset
+
+ inherits a natural 
+\emph on
+right 
+\emph default
+PDG 
+\begin_inset Formula $F$
+\end_inset
+
+-module structure via restriction of scalars.
+ The reason why it is more naturally viewed as a right PDG 
+\begin_inset Formula $F$
+\end_inset
+
+-module rather than a left PDG 
+\begin_inset Formula $F$
+\end_inset
+
+-module can be seen in the way the mapping cone differential acts on elements:
+ given 
+\begin_inset Formula $\alpha,\beta\in F$
+\end_inset
+
+ where 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is homogeneous, we have
+\begin_inset Formula 
+\[
+\mathrm{d}_{\mathrm{C}(r)}(\alpha+e\beta)=\mathrm{d}_{F}(\alpha)+r\beta-e\mathrm{d}_{F}(\beta).
+\]
+
+\end_inset
+
+Thus the mapping cone differential behaves as if 
+\begin_inset Formula $e$
+\end_inset
+
+ is an exterior variable of degree 
+\begin_inset Formula $-1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Associator Complex Corresponding to Mapping Cone
+\end_layout
+
+\begin_layout Standard
+There are two associator complexes to consider.
+ The first one is the associator complex with respect to 
+\begin_inset Formula $\mu_{\mathrm{C}(r),F}$
+\end_inset
+
+, given by
+\begin_inset Formula 
+\[
+[\mathrm{C}(r)]_{\mu_{\mathrm{C}(r),F}}=\mathrm{Span}_{R}\{[\alpha+e\beta,\gamma,\delta]\mid\alpha,\beta,\gamma,\delta\in F\}.
+\]
+
+\end_inset
+
+The second is the associator complex with respect to 
+\begin_inset Formula $\mu_{\mathrm{C}(r)}$
+\end_inset
+
+, given by
+\begin_inset Formula 
+\[
+[\mathrm{C}(r)]_{\mu_{\mathrm{C}(r)}}=\mathrm{Span}_{R}\{[\alpha+e\beta,\gamma+e\delta,\varepsilon+e\zeta]\mid\alpha,\beta,\gamma,\delta,\varepsilon,\zeta\in F\}.
+\]
+
+\end_inset
+
+It turns out that these two associator complexes are the same.
+ Indeed, clearly we have 
+\begin_inset Formula 
+\[
+[\mathrm{C}(r)]_{\mu_{\mathrm{C}(r),F}}\subseteq[\mathrm{C}(r)]_{\mu_{\mathrm{C}(r)}}.
+\]
+
+\end_inset
+
+Conversely, first note that a quick calculation gives us
+\begin_inset Formula 
+\begin{align*}
+[\alpha,\beta,\gamma+e\delta] & =[\alpha,\beta,\gamma]+(-1)^{|\alpha|+|\beta|}e[\alpha,\beta,\delta]\\{}
+[\alpha,\beta+e\gamma,\delta] & =[\alpha,\beta,\gamma]+(-1)^{|\alpha|}e[\alpha,\gamma,\delta]\\{}
+[\alpha+e\beta,\gamma,\delta] & =[\alpha,\gamma,\delta]+e[\beta,\gamma,\delta]
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha,\beta,\gamma,\delta\in F$
+\end_inset
+
+.
+ Using these identities together with the fact that 
+\begin_inset Formula $e^{2}=0$
+\end_inset
+
+ and the fact that identity 
+\begin_inset Formula $1$
+\end_inset
+
+ associates with everything, we obtain
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+[\alpha+e\beta,\gamma+e\delta,\varepsilon+e\zeta] & =[\alpha,\gamma,\varepsilon]+e[\beta,\gamma,\varepsilon]+(-1)^{|\alpha||}e[\alpha,\delta,\varepsilon]+(-1)^{|\alpha|+|\gamma|}e[\alpha,\gamma,\zeta]\\
+ & =[\alpha+e\beta,\gamma,\varepsilon]+(-1)^{|\alpha||}e[\alpha,\delta,\varepsilon]+(-1)^{|\alpha|+|\gamma|}e[\alpha,\gamma,\zeta]\\
+ & =[\alpha+e\beta,\gamma,\varepsilon]+(-1)^{|\alpha||}[1+e\alpha,\delta,\varepsilon]+(-1)^{|\alpha|+|\gamma|}[1+e\alpha,\gamma,\zeta]
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha,\beta,\gamma,\delta,\varepsilon,\zeta\in F$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula 
+\[
+[\mathrm{C}(r)]_{\mu_{\mathrm{C}(r),F}}\supseteq[\mathrm{C}(r)]_{\mu_{\mathrm{C}(r)}}.
+\]
+
+\end_inset
+
+Thus we are justified in simplifying our notation by dropping either 
+\begin_inset Formula $\mu_{\mathrm{C}(r),F}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu_{\mathrm{C}(r)}$
+\end_inset
+
+ from the subscript and just writing 
+\begin_inset Formula $[\mathrm{C}(r)]$
+\end_inset
+
+ to denote the common 
+\begin_inset Formula $R$
+\end_inset
+
+-complex.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Homethety Map
+\end_layout
+
+\begin_layout Standard
+The homothety map 
+\begin_inset Formula $F\xrightarrow{r}F$
+\end_inset
+
+ gives rise to a short exact sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{mappingconejflksd}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & F 
+\backslash
+arrow[r, 
+\begin_inset Quotes eld
+\end_inset
+
+
+\backslash
+iota 
+\begin_inset Quotes eld
+\end_inset
+
+]  & 
+\backslash
+mathrm{C} (r) 
+\backslash
+arrow[r, 
+\begin_inset Quotes eld
+\end_inset
+
+
+\backslash
+pi 
+\begin_inset Quotes eld
+\end_inset
+
+]  & 
+\backslash
+Sigma F 
+\backslash
+arrow[r]  & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\iota\colon F\to\mathrm{C}(r)$
+\end_inset
+
+ is the inclusion map and where 
+\begin_inset Formula $\pi\colon\mathrm{C}(r)\to\Sigma F$
+\end_inset
+
+ is the projection map given by
+\begin_inset Formula 
+\[
+\pi(\alpha+e\beta)=\alpha
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\alpha,\beta\in F$
+\end_inset
+
+.
+ In fact, both 
+\begin_inset Formula $\iota$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi$
+\end_inset
+
+ are 
+\begin_inset Formula $A$
+\end_inset
+
+-linear maps, and so 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{mappingconejflksd})
+\end_layout
+
+\end_inset
+
+ is a short exact sequence of right PDG 
+\begin_inset Formula $F$
+\end_inset
+
+-modules.
+ In fact, it is a stable short exact sequence of right PDG 
+\begin_inset Formula $F$
+\end_inset
+
+-modules, as the next proposition shows
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ With the notation above, 
+\begin_inset Formula $F$
+\end_inset
+
+ is a stable PDG 
+\begin_inset Formula $F$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $\mathrm{C}(r)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We must check that 
+\begin_inset Formula $[\mathrm{C}(r)]\cap F\subseteq[F]$
+\end_inset
+
+ since the reverse inclusion is trivial.
+ Suppose 
+\begin_inset Formula $\sum_{i=1}^{m}r_{i}[\alpha_{i}+e\beta_{i},\gamma_{i},\delta_{i}]\in[\mathrm{C}(r)]\cap F$
+\end_inset
+
+ where 
+\begin_inset Formula $r_{i}\in R$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha_{i},\beta_{i},\gamma_{i},\delta_{i}\in F$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ Observe that
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=1}^{m}r_{i}[\alpha_{i}+e\beta_{i},\gamma_{i},\delta_{i}] & =\sum_{i=1}^{m}r_{i}([\alpha_{i},\gamma_{i},\delta_{i}]+e[\beta_{i},\gamma_{i},\delta_{i}])\\
+ & =\sum_{i=1}^{m}r_{i}[\alpha_{i},\gamma_{i},\delta_{i}]+e\sum_{i=1}^{m}r_{i}[\beta_{i},\gamma_{i},\delta_{i}].
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\sum_{i=1}^{m}r_{i}[\alpha_{i}+e\beta_{i},\gamma_{i},\delta_{i}]\in F$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $\sum_{i=1}^{m}r_{i}[\beta_{i},\gamma_{i},\delta_{i}]=0$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=1}^{m}r_{i}[\alpha_{i}+e\beta_{i},\gamma_{i},\delta_{i}] & =\sum_{i=1}^{m}r_{i}[\alpha_{i},\gamma_{i},\delta_{i}]\in[F].
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $[\mathrm{C}(r)]\cap F\subseteq[F]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Long Exact Sequence in Homology
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{mappingconejflksd})
+\end_layout
+
+\end_inset
+
+ is a stable short exact sequence of PDG 
+\begin_inset Formula $F$
+\end_inset
+
+-modules, we obtain a long exact sequence in homology
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{diagram3}
+\backslash
+begin{tikzcd}[row sep=30]  && 
+\backslash
+cdots 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & 
+\backslash
+mathrm{H}_{i} (
+\backslash
+text{[} F 
+\backslash
+text{]} ) 
+\backslash
+arrow[dll, 
+\begin_inset Quotes eld
+\end_inset
+
+r
+\begin_inset Quotes erd
+\end_inset
+
+, swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\backslash
+
+\backslash
+  & 
+\backslash
+mathrm{H}_{i} (
+\backslash
+text{[} F 
+\backslash
+text{]}) 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{H}_{i} (
+\backslash
+text{[} 
+\backslash
+mathrm{C} (r)   
+\backslash
+text{]}) 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z}] & 
+\backslash
+mathrm{H}_{i-1} (
+\backslash
+text{[}  F   
+\backslash
+text{]}) 
+\backslash
+arrow[dll, 
+\begin_inset Quotes eld
+\end_inset
+
+r
+\begin_inset Quotes erd
+\end_inset
+
+, swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z) [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\backslash
+
+\backslash
+ & 
+\backslash
+mathrm{H}_{i-1} (
+\backslash
+text{[} F 
+\backslash
+text{]}) 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In particular, if 
+\begin_inset Formula $\mathrm{H}_{i}([\mathrm{C}(r)])=0$
+\end_inset
+
+, then Nakayama's lemma implies 
+\begin_inset Formula $\mathrm{H}_{i}([F])=0$
+\end_inset
+
+.
+ Thus, we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ With the notation above, if 
+\begin_inset Formula $\mu_{\mathrm{C}(r)}$
+\end_inset
+
+ is homologically associative in degree 
+\begin_inset Formula $i$
+\end_inset
+
+, then 
+\begin_inset Formula $\mu_{F}$
+\end_inset
+
+ is homologically associative in degree 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Moreover, we have 
+\begin_inset Formula 
+\[
+\mathrm{index}(\mu_{F})=\mathrm{index}(\mu_{\mathrm{C}(r)}).
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ With the notation above, we have
+\begin_inset Formula 
+\[
+\mathrm{index}(R\slash\langle I,r\rangle)\geq\mathrm{index}(R\slash I).
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Example
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $R=\mathbb{F}_{2}[x,y,z,w]$
+\end_inset
+
+, let 
+\begin_inset Formula $I=\langle x^{2},w^{2},zw,xy,y^{2}z^{2}\rangle$
+\end_inset
+
+, and let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the free minimal resolution of 
+\begin_inset Formula $R\slash I$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ The complex 
+\begin_inset Formula $F$
+\end_inset
+
+ is supported on the simplicial complex drawn below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Define a multiplication 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ as follows: in degree 
+\begin_inset Formula $2$
+\end_inset
+
+ we have the multiplication table
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="6">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mu(e_{i},e_{j})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{12}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{13}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $xe_{14}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $yz^{2}e_{14}+xe_{45}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{12}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $we_{23}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{24}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{2}ze_{23}+we_{35}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{13}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $we_{23}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{34}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $ze_{35}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $xe_{14}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{24}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{34}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $ye_{45}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $yz^{2}e_{14}+xe_{45}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{2}ze_{23}+we_{35}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $ze_{35}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $ye_{45}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In degree 
+\begin_inset Formula $3$
+\end_inset
+
+ we have the multiplication table
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="9">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mu(e_{i},e_{jk})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{12}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{13}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{14}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{23}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{24}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{34}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{35}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{45}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{123}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $xe_{124}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $xe_{134}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $yze_{134}+xe_{345}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $we_{123}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{124}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $we_{234}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $yze_{234}+we_{345}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $we_{123}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{134}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $we_{234}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $ze_{345}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $xe_{124}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $xe_{134}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{234}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $ye_{345}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{2}ze_{123}+yzwe_{134}+xwe_{345}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $yz^{2}e_{134}+xze_{345}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{2}ze_{234}+ywe_{345}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $ze_{345}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is already not associative since
+\begin_inset Formula 
+\begin{align*}
+[e_{1},e_{5},e_{2}] & =(e_{1}e_{5})e_{2}+e_{1}(e_{5}e_{2})\\
+ & =(yz^{2}e_{14}+xe_{45})e_{2}+e_{1}(y^{2}ze_{23}+we_{35})\\
+ & =yz^{2}e_{124}+xyze_{234}+xwe_{345}+y^{2}ze_{123}+yzwe_{134}+xwe_{345}\\
+ & =yz^{2}e_{124}+xyze_{234}+y^{2}ze_{123}+yzwe_{134}\\
+ & =yz\mathrm{d}(e_{1234}).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In degree 
+\begin_inset Formula $4$
+\end_inset
+
+ we have the multiplication table
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="6">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mu(e_{i},e_{jkl})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{123}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{124}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{134}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{234}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{345}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $xe_{1234}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $we_{1234}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $we_{1234}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $xe_{1234}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{2}ze_{1234}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now observe that
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}[e_{1},e_{35},e_{2}] & =[x^{2},e_{35},e_{2}]+[e_{1},y^{2}ze_{3}+we_{5},e_{2}]+[e_{1},e_{35},w^{2}]\\
+ & =[e_{1},y^{2}ze_{3}+we_{5},e_{2}]\\
+ & =[e_{1},y^{2}ze_{3},e_{2}]+[e_{1},we_{5},e_{2}]\\
+ & =w[e_{1},e_{5},e_{2}],
+\end{align*}
+
+\end_inset
+
+and hence 
+\begin_inset Formula $[e_{1},e_{35},e_{2}]=yzwe_{1234}$
+\end_inset
+
+.
+ A similar calculation give us 
+\begin_inset Formula $[e_{1},e_{45},e_{2}]=x[e_{1},e_{5},e_{2}]$
+\end_inset
+
+, and hence 
+\begin_inset Formula $[e_{1},e_{35},e_{2}]=xyze_{1234}$
+\end_inset
+
+.
+ One can show that
+\begin_inset Formula 
+\begin{align*}
+[F]_{3} & =R[e_{1},e_{5},e_{2}]\\
+ & =\langle yz\rangle\mathrm{d}(e_{1234})
+\end{align*}
+
+\end_inset
+
+Similarly
+\begin_inset Formula 
+\begin{align*}
+[F]_{4} & =R[e_{1},e_{35},e_{2}]+R[e_{1},e_{45},e_{2}]\\
+ & =\langle yzw,xyz\rangle e_{1234}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $T_{1}$
+\end_inset
+
+ be the Taylor subalgebra of 
+\begin_inset Formula $F$
+\end_inset
+
+ generated by 
+\begin_inset Formula $x^{2},w^{2},zw,xy$
+\end_inset
+
+, and let 
+\begin_inset Formula $T_{2}$
+\end_inset
+
+ be the Taylor subalgebra of 
+\begin_inset Formula $F$
+\end_inset
+
+ generated by 
+\begin_inset Formula $zw,xy,y^{2}z^{2}$
+\end_inset
+
+.
+ If we view 
+\begin_inset Formula $F$
+\end_inset
+
+ as a left PDG 
+\begin_inset Formula $T_{1}$
+\end_inset
+
+-module in the natural way, then 
+\begin_inset Formula $T_{1}$
+\end_inset
+
+ is not a stable PDG 
+\begin_inset Formula $T_{1}$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $F$
+\end_inset
+
+ since 
+\begin_inset Formula $[e_{1},e_{5},e_{2}]\in T_{1}\cap[F]$
+\end_inset
+
+ and 
+\begin_inset Formula $[e_{1},e_{5},e_{2}]\notin[T_{1}]$
+\end_inset
+
+.
+ On the other hand, if we view 
+\begin_inset Formula $F$
+\end_inset
+
+ as a left PDG 
+\begin_inset Formula $T_{2}$
+\end_inset
+
+-module in the natural way, then 
+\begin_inset Formula $T_{2}$
+\end_inset
+
+ is a stable PDG 
+\begin_inset Formula $T_{2}$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $F$
+\end_inset
+
+ since
+\begin_inset Formula 
+\[
+T_{2}\cap[F]=0=[T_{2}].
+\]
+
+\end_inset
+
+We also have
+\begin_inset Formula 
+\begin{align*}
+[e_{1},e_{5},e_{2}] & =(e_{1}e_{5})e_{2}+e_{1}(e_{5}e_{2})\\
+ & =(yz^{2}e_{14}+xe_{45})e_{2}+e_{1}(y^{2}ze_{23}+we_{35})\\
+ & =yz^{2}e_{124}+xyze_{234}+xwe_{345}+y^{2}ze_{123}+yzwe_{134}+xwe_{345}\\
+ & =yz^{2}e_{124}+xyze_{234}+y^{2}ze_{123}+yzwe_{134}\\
+ & =yz\mathrm{d}(e_{1234}).
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Grobner Basis Computations
+\end_layout
+
+\end_body
+\end_document

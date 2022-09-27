@@ -1,0 +1,2289 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Final Project
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+In this note, we wish to discuss a proof of a Riesz representation theorem
+ due to Garling.
+ Throughout this note, let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a compact Hausdorff space and let 
+\begin_inset Formula $C(X)$
+\end_inset
+
+ be the Banach of space of continuous real-valued functions defined on 
+\begin_inset Formula $X$
+\end_inset
+
+ equipped with the supremum norm.
+ 
+\end_layout
+
+\begin_layout Subsection*
+The Baire 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ be the collection of all subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ of the form
+\begin_inset Formula 
+\[
+\{a\leq f\leq b\}:=\{x\in X\mid a\leq f(x)\leq b\},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $a,b\in\mathbb{R}$
+\end_inset
+
+.
+ The 
+\series bold
+Baire 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra
+\series default
+ 
+\series bold
+of 
+\begin_inset Formula $X$
+\end_inset
+
+
+\series default
+, denoted by 
+\begin_inset Formula $\mathcal{M}_{X}$
+\end_inset
+
+, or just 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ if 
+\begin_inset Formula $X$
+\end_inset
+
+ is understood from context, is the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra generated 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+, written 
+\begin_inset Formula $\mathcal{M}=\sigma(\mathcal{C})$
+\end_inset
+
+.
+ The members of 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ are called 
+\series bold
+Baire sets
+\series default
+.
+ A measure defined on 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ whose value on every compact Baire set is called a 
+\series bold
+Baire measure
+\series default
+.
+ Note that in our case, we are already assuming that 
+\begin_inset Formula $X$
+\end_inset
+
+ is compact, and thus Baire measures correspond to finite measures defined
+ on 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The are more general definitions of Baire measures in the case where 
+\begin_inset Formula $X$
+\end_inset
+
+ is not compact, but we will not pursue this direction since we are always
+ assuming 
+\begin_inset Formula $X$
+\end_inset
+
+ is compact throughout this document.
+ Note that the Baire 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra of 
+\begin_inset Formula $X$
+\end_inset
+
+ is the 
+\emph on
+smallest 
+\emph default
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra which makes every continuous function 
+\begin_inset Formula $f\colon X\to\mathbb{R}$
+\end_inset
+
+ Baire measurable.
+ Recall that every continuous function 
+\begin_inset Formula $f\colon X\to\mathbb{R}$
+\end_inset
+
+ is Borel measurable.
+ Thus we certainly have 
+\begin_inset Formula $\mathcal{M}\subseteq\mathcal{B}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is the Borel 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+The Baire 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra of 
+\begin_inset Formula $X$
+\end_inset
+
+ is generated by all 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+-sets
+\end_layout
+
+\begin_layout Standard
+The Baire 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra of 
+\begin_inset Formula $X$
+\end_inset
+
+ can be generated by another useful collection of special subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+, namely the 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+
+\series bold
+-sets
+\series default
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a subset of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $A$
+\end_inset
+
+ is a 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+
+\series bold
+-subset
+\series default
+ 
+\series bold
+of
+\series default
+ 
+\begin_inset Formula $X$
+\end_inset
+
+, or just a 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+
+\series bold
+-set 
+\series default
+if 
+\begin_inset Formula $X$
+\end_inset
+
+ is understood from context, if it can be expressed as a countable intersection
+ of open subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{D}$
+\end_inset
+
+ be the collection of all compact 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+-subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathcal{M}=\sigma(\mathcal{D})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a compact 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+-set and it express it as a countable intersection of open sets, say
+\begin_inset Formula 
+\[
+K=\bigcap_{n=1}^{\infty}U_{n}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, there exists a continuous function 
+\begin_inset Formula $f_{n}\colon X\to[0,1]$
+\end_inset
+
+ such that 
+\begin_inset Formula $f_{n}|_{K}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{n}|_{X\backslash U_{n}}=0$
+\end_inset
+
+ by Urysohn's lemma.
+ Clearly the sequence of functions 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ converges pointwise to the characteristic function 
+\begin_inset Formula $1_{K}$
+\end_inset
+
+, and since each 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is Baire measurable, it follows that 
+\begin_inset Formula $1_{K}$
+\end_inset
+
+ is Baire measurable.
+ In particular, 
+\begin_inset Formula $K$
+\end_inset
+
+ is a Baire measure since 
+\begin_inset Formula $K=\{1_{K}=1\}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $K\in\mathcal{D}$
+\end_inset
+
+ was arbitrary, it follows that 
+\begin_inset Formula $\sigma(\mathcal{D})\subseteq\mathcal{M}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Conversely, let 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+, let 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+, and let 
+\begin_inset Formula $A=\{a\leq f\leq b\}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A$
+\end_inset
+
+ is a closed subset of 
+\begin_inset Formula $X$
+\end_inset
+
+ since 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous.
+ Note that closed subsets of compact spaces are themselves compact.
+ Indeed, suppose 
+\begin_inset Formula $(U_{i})_{i\in I}$
+\end_inset
+
+ is an open covering of 
+\begin_inset Formula $A$
+\end_inset
+
+, that is 
+\begin_inset Formula $A=\bigcup_{i\in I}U_{i}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(X\backslash A,U_{i})_{i\in I}$
+\end_inset
+
+ is an open covering of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $X$
+\end_inset
+
+ is a compact, it can be covered by some finite subcovering, say
+\begin_inset Formula 
+\[
+X=(X\backslash A)\cup U_{i_{1}}\cup\cdots\cup U_{i_{k}}.
+\]
+
+\end_inset
+
+In particular this implies 
+\begin_inset Formula $A$
+\end_inset
+
+ can be covered by some finite subcovering of 
+\begin_inset Formula $(U_{i})$
+\end_inset
+
+, namely 
+\begin_inset Formula 
+\[
+A=U_{i_{1}}\cup\cdots\cup U_{i_{k}}.
+\]
+
+\end_inset
+
+Thus 
+\begin_inset Formula $A$
+\end_inset
+
+ is a compact subset of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Moreover, observe that 
+\begin_inset Formula $A$
+\end_inset
+
+ is a 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+-set since
+\begin_inset Formula 
+\begin{align*}
+A & =\{a\leq f\leq b\}\\
+ & =\bigcap_{n=1}^{\infty}\{a+1/n<f<b+1/n\}.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+ and 
+\begin_inset Formula $A\in\mathcal{C}$
+\end_inset
+
+ were arbitrary, it follows that 
+\begin_inset Formula $\mathcal{M}\subseteq\sigma(\mathcal{D})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The key takeaway from this proposition is that much of this proof involved
+ purely topological arguments.
+ For instance, Urysohn's lemma has nothing to do with measure theory or
+ linear analysis; it's content is only concerned with topological concepts
+ like continuous functions.
+ Essentially it tells us that we have many continous functions 
+\begin_inset Formula $f\colon X\to\mathbb{R}$
+\end_inset
+
+ to work with.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Riesz representation theorem
+\end_layout
+
+\begin_layout Standard
+Before we state the form of Riesz representation theorem which we will be
+ interested in proving, we consider the following proposition/definition.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propBaireplf}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mu$
+\end_inset
+
+ be a Baire measure.
+ Define 
+\begin_inset Formula $\ell_{\mu}\colon C(X)\to\mathbb{R}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\ell_{\mu}(f)=\int_{X}f\mathrm{d}\mu
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+.
+ The map 
+\begin_inset Formula $\ell_{\mu}$
+\end_inset
+
+ is a positive linear functional.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Positivity of 
+\begin_inset Formula $\ell_{\mu}$
+\end_inset
+
+ follows from positivity of integration, and linearity of 
+\begin_inset Formula $\ell_{\mu}$
+\end_inset
+
+ follows from linearity of integration.
+ To see that 
+\begin_inset Formula $\ell_{\mu}$
+\end_inset
+
+ is bounded, note that
+\begin_inset Formula 
+\begin{align*}
+\ell_{\mu}(f) & =\int_{X}f\mathrm{d}\mu\\
+ & \leq\|f\|_{\infty}\mu(X)
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+.
+ Taking 
+\begin_inset Formula $f$
+\end_inset
+
+ to be the constant function 
+\begin_inset Formula $1$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\|\ell_{\mu}\|=\mu(X)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The equality 
+\begin_inset Formula $\|\ell_{\mu}\|=\mu(X)$
+\end_inset
+
+ obtained in the proof above seems to suggest that something more is going
+ on than what was stated in the proposition.
+ In fact, there is! Let us denote by 
+\begin_inset Formula $M(X)$
+\end_inset
+
+ to be the space of signed Baire measures defined on the Baire 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ The sum of two finite signed Baire measures is a finite signed Baire measure,
+ as is the product of a finite signed measure by a real number.
+ Furthermore, the total variation defines a norm, and it turns out that
+ this gives 
+\begin_inset Formula $M(X)$
+\end_inset
+
+ the structure of a Banach space.
+ The association 
+\begin_inset Formula $\mu\mapsto\ell_{\mu}$
+\end_inset
+
+ can be extended to an isomorphism of Banach spaces from 
+\begin_inset Formula $M(X)$
+\end_inset
+
+ to 
+\begin_inset Formula $C(X)^{*}$
+\end_inset
+
+ which is natural in 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ For sake of time, we will not pursue this direction too much in this document;
+ however we still wanted to mention it.
+ We are now ready to state the form of the Reisz representation theorem
+ which we will be interested in.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremrieszrep}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\ell$
+\end_inset
+
+ be a positive linear functional defined on 
+\begin_inset Formula $C(X)$
+\end_inset
+
+.
+ Then there exists a unique Baire measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ such that 
+\begin_inset Formula $\ell=\ell_{\mu}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Extremally disconnected spaces 
+\end_layout
+
+\begin_layout Standard
+There way that we will prove 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremrieszrep})
+\end_layout
+
+\end_inset
+
+ is by first proving it in the case where 
+\begin_inset Formula $X$
+\end_inset
+
+ is extremally disconnected.
+ After we do this, we then proceed to the general case.
+ First, let us recall what extremally disconnected means.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ We say 
+\begin_inset Formula $X$
+\end_inset
+
+ is 
+\series bold
+extremally disconnected 
+\series default
+if each open subset of 
+\begin_inset Formula $X$
+\end_inset
+
+ has open closure.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The condition that 
+\begin_inset Formula $X$
+\end_inset
+
+ be extremally disconnected turns out to be equivalent to the condition
+ that every pair of disjoint open subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ has disjoint closures.
+ Indeed, suppose that 
+\begin_inset Formula $X$
+\end_inset
+
+ is extremally disconnected and let 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $U'$
+\end_inset
+
+ be two disjoint open subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Since both 
+\begin_inset Formula $\overline{U}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{U}'$
+\end_inset
+
+ are open, their intersection 
+\begin_inset Formula $\overline{U}\cap\overline{U}'$
+\end_inset
+
+ is also open.
+ If 
+\begin_inset Formula $\overline{U}\cap\overline{U}'\neq\emptyset$
+\end_inset
+
+, then would have 
+\begin_inset Formula $U\cap U'\neq\emptyset$
+\end_inset
+
+, which is a contradiction.
+ Thus we must have 
+\begin_inset Formula $\overline{U}\cap\overline{U}'\neq\emptyset$
+\end_inset
+
+.
+ The converse direction is proved in a similar manner.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Proof of the Riesz representation theorem when 
+\begin_inset Formula $X$
+\end_inset
+
+ is extremally disconnected
+\end_layout
+
+\begin_layout Standard
+Before we prove 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremrieszrep})
+\end_layout
+
+\end_inset
+
+ in the special case where 
+\begin_inset Formula $X$
+\end_inset
+
+ is extremally disconnected, we consider the following lemma.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemmauniformdense}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $X$
+\end_inset
+
+ is extremally disconnected compact Hausdorff space.
+ Let 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ be the collection of all clopen subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ forms an algebra.
+ Furthermore, let 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ be the space of 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-simple functions.
+ Then 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ is a uniformly dense subspace of 
+\begin_inset Formula $C(X)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ It is straightforward to check that 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ is an algebra, so we will only focus on showing 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ is a uniformly dense subspace 
+\begin_inset Formula $C(X)$
+\end_inset
+
+.
+ First note if 
+\begin_inset Formula $A\in\mathcal{O}$
+\end_inset
+
+, then the characteristic function 
+\begin_inset Formula $1_{A}\colon X\to\mathbb{R}$
+\end_inset
+
+ is continuous since 
+\begin_inset Formula $A$
+\end_inset
+
+ is clopen.
+ Indeed, suppose 
+\begin_inset Formula $U$
+\end_inset
+
+ is an open subset of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\{1_{A}\in U\} & =\begin{cases}
+A & \text{if }1\in U\text{ and }0\notin U\\
+X\backslash A & \text{if }1\notin U\text{ and }0\in U\\
+X & \text{if }1\in U\text{ and }0\in U\\
+\emptyset & \text{if }1\notin U\text{ and }0\notin U
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ really is a subset of 
+\begin_inset Formula $C(X)$
+\end_inset
+
+.
+ It is straightforward to check that 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ is in fact a subspace of 
+\begin_inset Formula $C(X)$
+\end_inset
+
+.
+ Let us now show that it is uniformly dense in 
+\begin_inset Formula $C(X)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+ and let 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset
+
+, let
+\begin_inset Formula 
+\[
+A_{k}=\left\{ \frac{k}{n}<f<\frac{k+1}{n}\right\} .
+\]
+
+\end_inset
+
+Each 
+\begin_inset Formula $A_{k}$
+\end_inset
+
+ is open and are pairwise disjoint from each other.
+ Since 
+\begin_inset Formula $X$
+\end_inset
+
+ is extremally disconnected, each 
+\begin_inset Formula $\overline{A}_{k}$
+\end_inset
+
+ is clopen and pairwise disjoint from each other.
+ Furthermore, since 
+\begin_inset Formula $X$
+\end_inset
+
+ is compact, only finitely many of the 
+\begin_inset Formula $\overline{A}_{k}$
+\end_inset
+
+ are nonempty.
+ Thus the sets 
+\begin_inset Formula $A=\bigcup_{k\in\mathbb{Z}}\overline{A}_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $X\backslash A$
+\end_inset
+
+ are clopen.
+ Note that 
+\begin_inset Formula $X\backslash A$
+\end_inset
+
+ is the set of all 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ such that there exists 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset
+
+ and an open neighborhood 
+\begin_inset Formula $U$
+\end_inset
+
+ of 
+\begin_inset Formula $x$
+\end_inset
+
+ such that 
+\begin_inset Formula $U\subseteq\{f=k/n\}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset
+
+, let
+\begin_inset Formula 
+\[
+B_{k}=(X\backslash A)\cap\{f=k/n\}.
+\]
+
+\end_inset
+
+Then each 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+ is clopen and pairwise disjoint from each other, and since 
+\begin_inset Formula $(B_{k})$
+\end_inset
+
+ covers the compact space 
+\begin_inset Formula $X\backslash A$
+\end_inset
+
+, it follows that only finitely many of the 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+ are nonempty.
+ Thus we can define the following 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-simple function
+\begin_inset Formula 
+\[
+\varphi_{n}=\sum_{k\in\mathbb{Z}}\frac{k}{n}(1_{\overline{A}_{k}}+1_{B_{k}})
+\]
+
+\end_inset
+
+which is easily seen to satisfy 
+\begin_inset Formula $|\varphi_{n}-f|<1/n$
+\end_inset
+
+.
+ In other words, the sequence 
+\begin_inset Formula $(\varphi_{n})$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-simple functions converges uniformly to 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we prove 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremrieszrep})
+\end_layout
+
+\end_inset
+
+ in the special case where 
+\begin_inset Formula $X$
+\end_inset
+
+ is extremally disconnected.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{proprieszrep}
+\end_layout
+
+\end_inset
+
+ With the notation as in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremrieszrep})
+\end_layout
+
+\end_inset
+
+, assume further that 
+\begin_inset Formula $X$
+\end_inset
+
+ is extremally disconnected.
+ Then 
+\begin_inset Formula $\ell=\ell_{\mu}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We first show existence.
+ Define 
+\begin_inset Formula $\mu\colon\mathcal{O}\to[0,\infty)$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\mu(A)=\ell(1_{A})
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $A\in\mathcal{O}$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $(X,\mathcal{O},\mu)$
+\end_inset
+
+ is a finite premeasure space.
+ Indeed, we have
+\begin_inset Formula 
+\begin{align*}
+\mu(\emptyset) & =\ell(1_{\emptyset})\\
+ & =\ell(0)\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+Furthermore, suppose that 
+\begin_inset Formula $(A_{n})$
+\end_inset
+
+ is a disjoint sequence of sets in 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ whose union
+\begin_inset Formula 
+\[
+A=\bigcup_{n=1}^{\infty}A_{n}
+\]
+
+\end_inset
+
+is also in 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A$
+\end_inset
+
+ is compact since it is a closed subset of a compact space 
+\begin_inset Formula $X$
+\end_inset
+
+, and so it follows that only finitely many of the 
+\begin_inset Formula $A_{n}$
+\end_inset
+
+ can be nonempty, say 
+\begin_inset Formula $A_{n_{1}},\dots,A_{n_{k}}$
+\end_inset
+
+.
+ Thus we have
+\begin_inset Formula 
+\begin{align*}
+\nu\left(\bigcup_{n=1}^{\infty}A_{n}\right) & =\nu\left(\bigcup_{i=1}^{k}A_{n_{i}}\right)\\
+ & =\ell\left(1_{\bigcup_{i=1}^{k}A_{n_{i}}}\right)\\
+ & =\ell\left(\sum_{i=1}^{k}1_{A_{n_{i}}}\right)\\
+ & =\sum_{i=1}^{k}\ell(1_{A_{n_{i}}})\\
+ & =\sum_{i=1}^{k}\nu(A_{n_{i}})\\
+ & =\sum_{n=1}^{\infty}\nu(A_{n}).
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $(X,\mathcal{O},\mu)$
+\end_inset
+
+ is a finite premeasure space.
+ Therefore by the Caratheodory Extension Theorem, the premeasure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ extends to a unique measure, which we again denote 
+\begin_inset Formula $\mu$
+\end_inset
+
+, defined on 
+\begin_inset Formula $\sigma(\mathcal{O})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We claim that 
+\begin_inset Formula $\sigma(\mathcal{O})=\mathcal{M}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is in fact a Baire measure.
+ Indeed, we have 
+\begin_inset Formula $\sigma(\mathcal{O})\subseteq\mathcal{M}$
+\end_inset
+
+ since each clopen subset of 
+\begin_inset Formula $X$
+\end_inset
+
+ is a compact 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+-set.
+ To show 
+\begin_inset Formula $\mathcal{M}\subseteq\sigma(\mathcal{O})$
+\end_inset
+
+, it suffices to show that each 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+ is a 
+\begin_inset Formula $\sigma(\mathcal{O})$
+\end_inset
+
+-measurable function.
+ Let 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+ and let 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ set 
+\begin_inset Formula $A_{n}=\{f<c+1/n\}$
+\end_inset
+
+ and set 
+\begin_inset Formula $A=\{f\leq c\}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $A_{n}$
+\end_inset
+
+ is open, its closure 
+\begin_inset Formula $\overline{A}_{n}$
+\end_inset
+
+ is clopen, and since
+\begin_inset Formula 
+\[
+A_{n}\subseteq\overline{A}_{n}\subseteq\{f\leq c+1/n\},
+\]
+
+\end_inset
+
+we have 
+\begin_inset Formula $A=\bigcap_{n=1}^{\infty}\overline{A}_{n}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $A\in\sigma(\mathcal{O})$
+\end_inset
+
+, which implies 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula $\sigma(\mathcal{O})$
+\end_inset
+
+-measurable.
+ Therefore 
+\begin_inset Formula $\sigma(\mathcal{O})=\mathcal{M}$
+\end_inset
+
+ and hence 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is a Baire measure.
+ From 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propBaireplf})
+\end_layout
+
+\end_inset
+
+, we obtain a corresponding positive linear functional 
+\begin_inset Formula $\ell_{\mu}\in C(X)^{*}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we want to show that 
+\begin_inset Formula $\ell=\ell_{\mu}$
+\end_inset
+
+ which will establish existence.
+ First observe that 
+\begin_inset Formula $\ell|_{\mathcal{V}}=\ell_{\mu}|_{\mathcal{V}}$
+\end_inset
+
+.
+ Indeed, let 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ be an 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-simple function and express it in canonical form as 
+\begin_inset Formula $\varphi=\sum_{i=1}^{n}a_{i}1_{A_{i}}$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+\ell(\varphi) & =\ell\left(\sum_{i=1}^{n}a_{i}1_{A_{i}}\right)\\
+ & =\sum_{i=1}^{n}a_{i}\ell(1_{A_{i}})\\
+ & =\sum_{i=1}^{n}a_{i}\mu(A_{i})\\
+ & =\int_{X}\varphi\mathrm{d}\mu.\\
+ & =\ell_{\mu}(\varphi).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nexxt, observe that since 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ is uniformly dense in 
+\begin_inset Formula $X$
+\end_inset
+
+, we in fact have 
+\begin_inset Formula $\ell=\ell_{\mu}$
+\end_inset
+
+ everywhere.
+ Indeed, given 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+, we choose a sequence 
+\begin_inset Formula $(\varphi_{n})$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-simple functions which converges uniformly to 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $\mu(X)<\infty$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\ell(f) & =\lim_{n\to\infty}\ell(\varphi_{n})\\
+ & =\lim_{n\to\infty}\ell_{\mu}(\varphi_{n})\\
+ & =\lim_{n\to\infty}\int_{X}\varphi_{n}\mathrm{d}\mu\\
+ & =\int_{X}f\mathrm{d}\mu\\
+ & =\ell_{\mu}(f).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This establishes existence.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we prove uniqueness.
+ Let 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu$
+\end_inset
+
+ be two Baire measures such that 
+\begin_inset Formula $\ell_{\mu}=\mathcal{\ell}_{\nu}$
+\end_inset
+
+, that is, such that
+\begin_inset Formula 
+\[
+\int_{X}f\mathrm{d}\mu=\int_{X}f\mathrm{d}\nu
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+.
+ We need to show that 
+\begin_inset Formula $\mu=\nu$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a compact 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+-set.
+ Express 
+\begin_inset Formula $K$
+\end_inset
+
+ as an countable intersection of open sets, say
+\begin_inset Formula 
+\[
+K=\bigcap_{n=1}^{\infty}U_{n}.
+\]
+
+\end_inset
+
+For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, there exists a continuous function 
+\begin_inset Formula $f_{n}\colon X\to[0,1]$
+\end_inset
+
+ such that 
+\begin_inset Formula $f_{n}|_{K}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{n}|_{X\backslash U_{n}}=0$
+\end_inset
+
+ by Urysohn's lemma.
+ Since both 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\nu$
+\end_inset
+
+ are finite measures, the characteristic function 
+\begin_inset Formula $1_{K}$
+\end_inset
+
+ is a nonnegative 
+\begin_inset Formula $\mu$
+\end_inset
+
+-integrable and 
+\begin_inset Formula $\nu$
+\end_inset
+
+-integrable function which dominates each 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+.
+ Moreover the sequence 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ converges pointwise to 
+\begin_inset Formula $1_{K}$
+\end_inset
+
+.
+ Thus by the Lebesgue dominated convergence theorem, we have
+\begin_inset Formula 
+\begin{align*}
+\mu(K) & =\int_{X}1_{K}\mathrm{d}\mu\\
+ & =\lim_{n\to\infty}\int_{X}f_{n}\mathrm{d}\mu\\
+ & =\lim_{n\to\infty}\int_{X}f_{n}\mathrm{d}\nu\\
+ & =\int_{X}1_{K}\mathrm{d}\nu\\
+ & =\nu(K).
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $K$
+\end_inset
+
+ is an arbitrary compact 
+\begin_inset Formula $G_{\delta}$
+\end_inset
+
+-set and 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ is generated by the collection of all of these types of sets, we have 
+\begin_inset Formula $\mu=\nu$
+\end_inset
+
+.
+ This establishes uniqueness.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Proof of the Riesz representation theorem in general
+\end_layout
+
+\begin_layout Standard
+In this last section, we will sketch the proof of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremrieszrep})
+\end_layout
+
+\end_inset
+
+ in the general case where 
+\begin_inset Formula $X$
+\end_inset
+
+ is not necessarily extremally disconnected.
+ The idea is at follows: let 
+\begin_inset Formula $X_{0}$
+\end_inset
+
+ be the set 
+\begin_inset Formula $X$
+\end_inset
+
+ equipped with the discrete topology and let 
+\begin_inset Formula $Y=\beta X_{0}$
+\end_inset
+
+ be the Stone–Čech compactification with 
+\begin_inset Formula $\iota\colon X_{0}\to Y$
+\end_inset
+
+ denoting the canonical map.
+ Any function out of a discrete space is continuous and so in particular
+ the identity function 
+\begin_inset Formula $1\colon X_{0}\to X$
+\end_inset
+
+ is continuous.
+ By the universal properties of the Stone–Čech compactification, there exists
+ a unique continuous map 
+\begin_inset Formula $\pi\colon Y\to X$
+\end_inset
+
+ such that 
+\begin_inset Formula $\pi\circ\iota=1$
+\end_inset
+
+.
+ Now the continuous map 
+\begin_inset Formula $\pi$
+\end_inset
+
+ induces an isomorphism 
+\begin_inset Formula $\pi_{*}\colon C(X)\to C(Y)$
+\end_inset
+
+ of Banach spaces given by 
+\begin_inset Formula 
+\[
+\pi_{*}(f)=\pi\circ f
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C(X)$
+\end_inset
+
+.
+ One check that this is in fact an isomorphism using the universal properties
+ of the Stone–Čech compactification.
+ The isomorphism 
+\begin_inset Formula $\pi_{*}$
+\end_inset
+
+ induces another isomorphism 
+\begin_inset Formula $(\pi_{*})^{*}\colon C(Y)^{*}\to C(X)^{*}$
+\end_inset
+
+ of Banach spaces, given by
+\begin_inset Formula 
+\[
+(\pi_{*})^{*}(\psi)=\psi\circ\pi_{*}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\psi\in C(Y)^{*}$
+\end_inset
+
+.
+ In particular, there is a uniuqe 
+\begin_inset Formula $\psi\in C(Y)^{*}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\psi\circ\pi_{*}=\ell$
+\end_inset
+
+.
+ It turns out that the Stone–Čech compactification of a discrete space is
+ an extremally disconnected space, and so one can apply 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{proprieszrep})
+\end_layout
+
+\end_inset
+
+ to get a unique Baire measure 
+\begin_inset Formula $\nu$
+\end_inset
+
+ which represents 
+\begin_inset Formula $\psi$
+\end_inset
+
+.
+ Finally one shows that 
+\begin_inset Formula $\nu\circ\pi^{-1}$
+\end_inset
+
+ is the unique Baire measure which represents 
+\begin_inset Formula $\ell$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_body
+\end_document

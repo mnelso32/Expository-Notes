@@ -1,0 +1,1439 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Probability Theory Homework 1
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $x\in\limsup(A_{n}\cup B_{n})$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $x$
+\end_inset
+
+ belongs to infinitely many of the 
+\begin_inset Formula $A_{n}\cup B_{n}$
+\end_inset
+
+'s.
+ In particular, this implies 
+\begin_inset Formula $x$
+\end_inset
+
+ belongs to infinitely many of the 
+\begin_inset Formula $A_{n}$
+\end_inset
+
+'s or it belongs to infinitely many of the 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+'s.
+ Without loss of generality, say 
+\begin_inset Formula $x$
+\end_inset
+
+ belongs to infinitely many of the 
+\begin_inset Formula $A_{n}$
+\end_inset
+
+'s.
+ In other words, 
+\begin_inset Formula $x\in\limsup A_{n}$
+\end_inset
+
+.
+ It follows that
+\begin_inset Formula 
+\[
+\limsup(A_{n}\cup B_{n})\subseteq\limsup A_{n}\cup\limsup B_{n}.
+\]
+
+\end_inset
+
+Conversely, suppose 
+\begin_inset Formula $x\in\limsup A_{n}\cup\limsup B_{n}$
+\end_inset
+
+.
+ Then either 
+\begin_inset Formula $x\in\limsup A_{n}$
+\end_inset
+
+ or 
+\begin_inset Formula $x\in\limsup B_{n}$
+\end_inset
+
+.
+ Without loss of generality, say 
+\begin_inset Formula $x\in\limsup A_{n}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $x$
+\end_inset
+
+ belongs to infinitely many of the 
+\begin_inset Formula $A_{n}$
+\end_inset
+
+'s.
+ This implies 
+\begin_inset Formula $x$
+\end_inset
+
+ belongs to infinitely many of the 
+\begin_inset Formula $A_{n}\cup B_{n}$
+\end_inset
+
+'s.
+ In other words, 
+\begin_inset Formula $x\in\limsup(A_{n}\cup B_{n})$
+\end_inset
+
+.
+ It follows that
+\begin_inset Formula 
+\[
+\limsup(A_{n}\cup B_{n})\supseteq\limsup A_{n}\cup\limsup B_{n}.
+\]
+
+\end_inset
+
+Now we answer the second part of the question.
+ Suppose 
+\begin_inset Formula $A_{n}\to A$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{n}\to B$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+\liminf A_{n}=A=\limsup A_{n}\quad\text{and}\quad\liminf B_{n}=B=\limsup B_{n}.
+\]
+
+\end_inset
+
+Then observe that
+\begin_inset Formula 
+\begin{align*}
+A\cup B & =\liminf A_{n}\cup\liminf B_{n}\\
+ & \subseteq\liminf(A_{n}\cup B_{n})\\
+ & \subseteq\limsup(A_{n}\cup B_{n})\\
+ & =\limsup A_{n}\cup\limsup B_{n}\\
+ & =A\cup B.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $A_{n}\cup B_{n}\to A\cup B$
+\end_inset
+
+.
+ Similarly, we have
+\begin_inset Formula 
+\begin{align*}
+A_{n}\cap B_{n} & =(A_{n}^{c}\cup B_{n}^{c})^{c}\\
+ & \to A^{c}\cup B^{c}\\
+ & =(A\cap B)^{c}.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ For each 
+\begin_inset Formula $k,n\in\mathbb{N}$
+\end_inset
+
+, set 
+\begin_inset Formula $A_{k,n}=\{\omega\mid f_{n}(\omega)-f(\omega)\geq1/k\}$
+\end_inset
+
+.
+ We want to show that
+\begin_inset Formula 
+\[
+\{\omega\mid f_{n}(\omega)\not\to f(\omega)\}=\bigcup_{k=1}^{\infty}\limsup_{n\to\infty}(A_{k,n}).
+\]
+
+\end_inset
+
+To see this, observe that
+\begin_inset Formula 
+\begin{align*}
+\omega\in\{\omega\mid f_{n}(\omega)\not\to f(\omega)\} & \iff\exists k\in\mathbb{N}\text{ such that \ensuremath{|f_{n}(\omega)-f(\omega)|\geq1/k} for infinitely many}\text{ }n\in\mathbb{N}\\
+ & \iff\exists k\in\mathbb{N}\text{ such that \ensuremath{\omega\in A_{k,n}} for infinitely many}\text{ }n\in\mathbb{N}\\
+ & \iff\exists k\in\mathbb{N}\text{ such that }\omega\in\limsup_{n\to\infty}(A_{k,n})\\
+ & \iff\omega\in\bigcup_{k=1}^{\infty}\limsup_{n\to\infty}(A_{k,n}).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 10
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+1_{A_{n}}\to1_{A} & \iff\liminf1_{A_{n}}=\limsup1_{A_{n}}\\
+ & \iff1_{\liminf A_{n}}=1_{\limsup A_{n}}\\
+ & \iff\liminf A_{n}=\limsup A_{n}\\
+ & \iff A_{n}\to A
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 24
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ First we show 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is a field.
+ We have 
+\begin_inset Formula $\emptyset\in\mathcal{A}$
+\end_inset
+
+ since 
+\begin_inset Formula $\emptyset$
+\end_inset
+
+ is finite.
+ Clearly 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is closed under compliments since 
+\begin_inset Formula $A\in\mathcal{A}$
+\end_inset
+
+ implies either 
+\begin_inset Formula $A$
+\end_inset
+
+ or 
+\begin_inset Formula $A^{c}$
+\end_inset
+
+ is finite which implies 
+\begin_inset Formula $A^{c}\in\mathcal{A}$
+\end_inset
+
+.
+ It remains to show that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is closed under finite intersections.
+ Let 
+\begin_inset Formula $A,B\in\mathcal{A}$
+\end_inset
+
+ and suppose that 
+\begin_inset Formula $A\cap B$
+\end_inset
+
+ is infinite.
+ We must show that 
+\begin_inset Formula $(A\cap B)^{c}=A^{c}\cup B^{c}$
+\end_inset
+
+ is finite.
+ In other words, we need to show that both 
+\begin_inset Formula $A^{c}$
+\end_inset
+
+ and 
+\begin_inset Formula $B^{c}$
+\end_inset
+
+ are finite.
+ Assume for a contradiction that 
+\begin_inset Formula $A^{c}$
+\end_inset
+
+ is infinite.
+ Then 
+\begin_inset Formula $A$
+\end_inset
+
+ must be finite since 
+\begin_inset Formula $A\in\mathcal{A}$
+\end_inset
+
+.
+ But this implies 
+\begin_inset Formula $A\cap B$
+\end_inset
+
+ is finite, which is a contradiction.
+ Thus 
+\begin_inset Formula $A^{c}$
+\end_inset
+
+ must be finite.
+ Similarly, we can prove by contradiction that 
+\begin_inset Formula $B^{c}$
+\end_inset
+
+ is finite too.
+ This shows that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is a field.
+ To see that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is not a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-field, consider the set of all positive even numbers 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ were a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-field, then we must have 
+\begin_inset Formula $A\in\mathcal{A}$
+\end_inset
+
+ since it can be expressed as a countable union of singleton sets (with
+ each singleton set clearly belonging to 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+):
+\begin_inset Formula 
+\[
+A=\bigcup_{n\in\mathbb{N}}\{2n\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However 
+\begin_inset Formula $A\notin\mathcal{A}$
+\end_inset
+
+ since both 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $A^{c}$
+\end_inset
+
+ are infinite:
+\begin_inset Formula $A^{c}$
+\end_inset
+
+ is the set of all positive odd integers).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 26
+\end_layout
+
+\begin_layout Subsection*
+Problem 26.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{B}=\{\bigcup_{i\in I}A_{i}\mid I\subseteq[k]\}$
+\end_inset
+
+ where 
+\begin_inset Formula $[k]=\{1,\dots,k\}$
+\end_inset
+
+.
+ First note that 
+\begin_inset Formula $\mathcal{B}\subseteq\mathcal{A}(\mathcal{C})$
+\end_inset
+
+ since 
+\begin_inset Formula $\mathcal{A}(\mathcal{C})$
+\end_inset
+
+ contains all finite unions of members of 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ To show 
+\begin_inset Formula $\mathcal{A}(\mathcal{C})\subseteq\mathcal{B}$
+\end_inset
+
+, it suffices to show that 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is an algebra.
+ We have 
+\begin_inset Formula $\emptyset\in\mathcal{B}$
+\end_inset
+
+.
+ Given 
+\begin_inset Formula $\bigcup_{i\in I}A_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bigcup_{j\in J}A_{j}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\left(\bigcup_{i\in I}A_{i}\right)\cap\left(\bigcup_{j\in J}A_{j}\right) & =\bigcup_{i\in I,j\in J}A_{i}\cap A_{j}\\
+ & =\bigcup_{i\in I\cap J}A_{i},
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $A_{i}\cap A_{j}=\emptyset$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is closed under finite intersections.
+ Also, denoting 
+\begin_inset Formula $I^{*}=[k]\backslash I$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\left(\bigcup_{i\in I}A_{i}\right)^{c} & =\bigcup_{i^{*}\in I^{*}}A_{i^{*}}
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ forms a partition of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is closed under complements.
+ Therefore 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is algebra, and since 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\mathcal{A}(\mathcal{C})\subseteq\mathcal{B}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 26.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ This 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra generated by 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ is precisely 
+\begin_inset Formula $\mathcal{A}(\mathcal{C})$
+\end_inset
+
+.
+ This is because 
+\begin_inset Formula $\mathcal{A}(\mathcal{C})$
+\end_inset
+
+ contains only finitely many members.
+ In particular, a countable union of members of 
+\begin_inset Formula $\mathcal{A}(\mathcal{C})$
+\end_inset
+
+ can be reexpressed as a finite union of members of 
+\begin_inset Formula $\mathcal{A}(\mathcal{C})$
+\end_inset
+
+.
+ For instance,
+\begin_inset Formula 
+\begin{align*}
+\bigcup_{n\in\mathbb{N}}\bigcup_{i\in I_{n}}A_{i} & =\bigcup_{i\in I}A_{i}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $I=\bigcup_{n\in\mathbb{N}}I_{n}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 26.c
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ The induced 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra is given by 
+\begin_inset Formula $\mathcal{D}=\{\bigcup_{i\in I}A_{i}\mid I\subseteq\mathbb{N}\}$
+\end_inset
+
+.
+ Indeed, we have 
+\begin_inset Formula $\emptyset\in\mathcal{D}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\{\bigcup_{i\in I_{n}}A_{i}\}_{n\in\mathbb{N}}$
+\end_inset
+
+ be a countable collection of members of 
+\begin_inset Formula $\mathcal{D}$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+\bigcup_{n\in\mathbb{N}}\bigcup_{i\in I_{n}}A_{i} & =\bigcup_{i\in I}A_{i}
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $I=\bigcup_{n\in\mathbb{N}}I_{n}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathcal{D}$
+\end_inset
+
+ is closed under countable unions.
+ Finally, given 
+\begin_inset Formula $\bigcup_{i\in I}A_{i}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathcal{D}$
+\end_inset
+
+, set 
+\begin_inset Formula $I^{*}=\mathbb{N}\backslash I$
+\end_inset
+
+ and observe that
+\begin_inset Formula 
+\begin{align*}
+\left(\bigcup_{i\in I}A_{i}\right)^{c} & =\bigcup_{i^{*}\in I^{*}}A_{i^{*}}
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $\{\mathcal{A}_{1},\mathcal{A}_{2}\dots\}$
+\end_inset
+
+ forms a countable partition of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 26.d
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ The atoms of the collection of half intervals are of the form 
+\begin_inset Formula $(n,n+1]$
+\end_inset
+
+ where 
+\begin_inset Formula $n\in\mathbb{Z}$
+\end_inset
+
+.
+ For the converse of part a of this problem, note that the atoms of 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ are disjoint from one another: if 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ are distinct atoms of 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+, then 
+\begin_inset Formula $A\cap B\in\mathcal{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $A\cap B\subseteq A$
+\end_inset
+
+ implies 
+\begin_inset Formula $A\cap B=\emptyset$
+\end_inset
+
+.
+ Moreover, since 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is finite, it has finitely many atoms, say 
+\begin_inset Formula $A_{1},\dots,A_{n}$
+\end_inset
+
+, and we must have 
+\begin_inset Formula $\Omega=A_{1}\cup\cdots\cup A_{n}$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $\{A_{1},\dots,A_{n}\}$
+\end_inset
+
+ forms a finite partition of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 31
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ Assume for a contradiction that 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is countably generated, say by 
+\begin_inset Formula $\mathcal{C}=\{A_{n}\mid n\in\mathbb{N}\}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, either 
+\begin_inset Formula $A_{n}$
+\end_inset
+
+ is countable or 
+\begin_inset Formula $A_{n}^{c}$
+\end_inset
+
+ is countable.
+ By replacing 
+\begin_inset Formula $A_{n}$
+\end_inset
+
+ with its complement if necessary, we may assume that each 
+\begin_inset Formula $A_{n}$
+\end_inset
+
+ is countable.
+ Let 
+\begin_inset Formula $X=\bigcup_{n=1}^{\infty}A_{n}$
+\end_inset
+
+ and define 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ to be the collection of sets 
+\begin_inset Formula $B$
+\end_inset
+
+ such that either 
+\begin_inset Formula $B\subseteq X$
+\end_inset
+
+ or 
+\begin_inset Formula $B^{c}\subseteq X$
+\end_inset
+
+.
+ By construction, we have 
+\begin_inset Formula 
+\[
+\mathcal{C}\subseteq\mathcal{H}\subset\mathcal{G},
+\]
+
+\end_inset
+
+where the inclusion 
+\begin_inset Formula $\mathcal{H}\subset\mathcal{G}$
+\end_inset
+
+ is strict since for any 
+\begin_inset Formula $\omega\in\Omega\backslash X$
+\end_inset
+
+ we have 
+\begin_inset Formula $\{\omega\}\in\mathcal{G}\backslash\mathcal{H}$
+\end_inset
+
+ (such an 
+\begin_inset Formula $\omega$
+\end_inset
+
+ exists since 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is uncountable).
+ We claim that 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra (which will contradict our assumption that 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is the smallest 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra which contains 
+\begin_inset Formula $\mathcal{C})$
+\end_inset
+
+ .
+ Indeed, we clearly have 
+\begin_inset Formula $\emptyset\in\mathcal{H}$
+\end_inset
+
+.
+ Also 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ is clearly closed under complements.
+ To show 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ is closed under countable unions, let 
+\begin_inset Formula $\{B_{n}\}$
+\end_inset
+
+ be a countable collection of members of 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+.
+ If each 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+ is contained in 
+\begin_inset Formula $X$
+\end_inset
+
+, then their union is contained in 
+\begin_inset Formula $X$
+\end_inset
+
+; hence in this case their union belongs to 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+.
+ On the other hand, if one of the 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+'s is not contained in 
+\begin_inset Formula $X$
+\end_inset
+
+, say 
+\begin_inset Formula $B_{1}$
+\end_inset
+
+, then 
+\begin_inset Formula $B_{1}^{c}$
+\end_inset
+
+ is contained in 
+\begin_inset Formula $X$
+\end_inset
+
+, and in this case we have
+\begin_inset Formula 
+\[
+\left(\bigcup_{n=1}^{\infty}B_{n}\right)^{c}=\bigcap_{n=1}^{\infty}B_{n}^{c}\subseteq X.
+\]
+
+\end_inset
+
+This also implies that their union belongs to 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ is closed under countable unions.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 32
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ The Borel 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})$
+\end_inset
+
+ contains all countable subsets of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ In particular, if we define 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ to be the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra consisting of subsets 
+\begin_inset Formula $A\subseteq\mathbb{R}$
+\end_inset
+
+ such that either 
+\begin_inset Formula $A$
+\end_inset
+
+ or 
+\begin_inset Formula $A^{c}$
+\end_inset
+
+ is countable, then 
+\begin_inset Formula $\mathcal{G}\subseteq\mathcal{B}(\mathbb{R})$
+\end_inset
+
+.
+ However, 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})$
+\end_inset
+
+ is countably generated but 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is not countable generated (by problem 31).
+ To see why 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})$
+\end_inset
+
+ is countable generated, for each 
+\begin_inset Formula $q,r\in\mathbb{Q}$
+\end_inset
+
+ and 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, let 
+\begin_inset Formula 
+\[
+\mathrm{B}_{1/n}(q)=\{x\in\mathbb{R}\mid|x-q|<1/n\}
+\]
+
+\end_inset
+
+Then the collection 
+\begin_inset Formula 
+\[
+\mathcal{C}=\{\mathrm{B}_{1/n}(q)\mid n\in\mathbb{N}\text{ and }q\in\mathbb{Q}\}
+\]
+
+\end_inset
+
+forms a countable basis for the usual topology on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ In particular, if 
+\begin_inset Formula $U$
+\end_inset
+
+ be an open subset of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+, then we can express 
+\begin_inset Formula $U$
+\end_inset
+
+ as a union of the form
+\begin_inset Formula 
+\[
+U=\bigcup_{\lambda\in\Lambda}B_{\lambda}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $B_{\lambda}\in\mathcal{C}$
+\end_inset
+
+ and where the index set 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ is 
+\emph on
+countable.
+
+\emph default
+ In particular, since 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})$
+\end_inset
+
+ is the smallest 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra which contains all open sets, we see that 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})=\sigma(\mathcal{C})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

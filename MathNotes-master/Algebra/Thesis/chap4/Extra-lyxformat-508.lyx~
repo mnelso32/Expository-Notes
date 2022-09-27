@@ -1,0 +1,1247 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Subsection
+Classifying 
+\begin_inset Formula $d$
+\end_inset
+
+-Stable Ideals
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $(R[x_{1},\dots,x_{n}]/I,r_{1},\dots,r_{n})$
+\end_inset
+
+ be a differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ Suppose that there are 
+\series bold
+
+\begin_inset Formula $t_{1},\dots,t_{m}\in R$
+\end_inset
+
+ 
+\series default
+such that 
+\begin_inset Formula $\langle r_{1},\dots,r_{n}\rangle=\langle t_{1},\dots,t_{m}\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $(R[y_{1},\dots,y_{m}]/I,t_{1},\dots,t_{m})$
+\end_inset
+
+ is also a differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ Then for all 
+\begin_inset Formula $1\leq\lambda\leq n$
+\end_inset
+
+ and 
+\begin_inset Formula $1\leq\mu\leq n$
+\end_inset
+
+, there are 
+\begin_inset Formula $a_{\lambda\mu}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{\lambda\mu}$
+\end_inset
+
+ in 
+\begin_inset Formula $R$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+r_{\lambda}=\sum_{\mu=1}^{m}a_{\lambda\mu}t_{\mu}\text{ and }t_{\mu}=\sum_{\lambda=1}^{n}b_{\lambda\mu}r_{\lambda}.
+\]
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $\varphi:R[x_{1},\dots,x_{n}]\to R[y_{1},\dots,y_{m}]$
+\end_inset
+
+ be the unique graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism such that 
+\begin_inset Formula $\varphi(x_{\lambda})=\sum_{\mu=1}^{m}a_{\lambda\mu}y_{\mu}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda=1,\dots,n$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ induces a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $\overline{\varphi}:R[x_{1},\dots,x_{n}]/I\to R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle$
+\end_inset
+
+ which in turn induces a homomorphism of differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras 
+\begin_inset Formula $\overline{\varphi}:(R[x_{1},\dots,x_{n}]/I,r_{1},\dots,r_{n})\to(R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle,t_{1},\dots,t_{m})$
+\end_inset
+
+.
+ Indeed, let us denote the differentials as
+\begin_inset Formula 
+\[
+d_{r}:=\sum_{\lambda=1}^{n}r_{\lambda}\partial_{x_{\lambda}}\text{ and }d_{t}:=\sum_{\mu=1}^{m}t_{\mu}\partial_{y_{\mu}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We first show that 
+\begin_inset Formula $\varphi d_{r}=d_{t}\varphi$
+\end_inset
+
+.
+ It is enough to show that 
+\begin_inset Formula $\varphi d_{r}(x_{\lambda})=d_{t}\varphi(x_{\lambda})$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda=1,\dots,n$
+\end_inset
+
+.
+ We have 
+\begin_inset Formula 
+\begin{align*}
+d_{t}\varphi(x_{\lambda}) & =d_{t}\left(\sum_{\mu=1}^{m}a_{\lambda\mu}y_{\mu}\right)\\
+ & =\sum_{\mu=1}^{m}a_{\lambda\mu}t_{\mu}\\
+ & =r_{\lambda}\\
+ & =d_{r}(x_{\lambda})\\
+ & =\varphi(d_{r}(x_{\lambda})).
+\end{align*}
+
+\end_inset
+
+Now we show that 
+\begin_inset Formula $(R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle,t_{1},\dots,t_{m})$
+\end_inset
+
+ is a differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ We do this by showing that 
+\begin_inset Formula $\langle\varphi(I)\rangle$
+\end_inset
+
+ is 
+\begin_inset Formula $d_{t}$
+\end_inset
+
+-stable.
+ Let 
+\begin_inset Formula $\sum_{\kappa=1}^{r}g_{\kappa}\varphi(f_{\kappa})\in\varphi(I)$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+d_{t}\left(\sum_{\kappa=1}^{r}g_{\kappa}\varphi(f_{\kappa})\right) & =\sum_{\kappa=1}^{r}d_{t}(g_{\kappa})\varphi(f_{\kappa})+\sum_{\kappa=1}^{r}g_{\kappa}d_{t}(\varphi(f_{\kappa}))\\
+ & =\sum_{\kappa=1}^{r}d_{t}(g_{\kappa})\varphi(f_{\kappa})+\sum_{\kappa=1}^{r}g_{\kappa}\varphi(d_{r}(f_{\kappa}))\in\langle\varphi(I)\rangle.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly, let 
+\begin_inset Formula $\psi:R[y_{1},\dots,y_{m}]\to R[x_{1},\dots,x_{n}]$
+\end_inset
+
+ be the unique graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism such that 
+\begin_inset Formula $\psi(y_{\mu})=\sum_{\lambda=1}^{n}b_{\lambda\mu}x_{\lambda}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\mu=1,\dots,m$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ induces a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $\overline{\psi}:R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle\to R[x_{1},\dots,x_{n}]/\langle\psi(\varphi(I))\rangle$
+\end_inset
+
+ which in turn induces a homomorphism of differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras 
+\begin_inset Formula $\overline{\psi}(R[y_{1},\dots,y_{m}]/\langle\varphi(I)\rangle,t_{1},\dots,t_{m})\to(R[x_{1},\dots,x_{n}]/\langle\psi(\varphi(I))\rangle,r_{1},\dots,r_{n})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Evalutation Map
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $(S/I,r_{1},\dots,r_{n})$
+\end_inset
+
+ be a differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra such that 
+\begin_inset Formula $I$
+\end_inset
+
+ is contained in 
+\begin_inset Formula $\langle x_{1},\dots,x_{n}\rangle$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $Q=\langle r_{1},\dots,r_{n}\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Ev}_{r}:S\to R$
+\end_inset
+
+ be the unique 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism such that 
+\begin_inset Formula $\text{Ev}_{r}(x_{\lambda})=r_{\lambda}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda=1,\dots,n$
+\end_inset
+
+.
+ We are interested in the ideal 
+\begin_inset Formula $\text{Ev}_{r}(I)$
+\end_inset
+
+ in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Clearly we have 
+\begin_inset Formula $\text{Ev}_{r}(I)\subset Q$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $a\in Q\backslash\text{Ev}_{r}(I)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $a=\sum_{\lambda=1}^{n}a_{\lambda}r_{\lambda}$
+\end_inset
+
+ for some 
+\begin_inset Formula $a_{\lambda}\in R$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $x:=\sum_{\lambda=1}^{n}a_{\lambda}x_{\lambda}\notin I$
+\end_inset
+
+.
+ Now 
+\begin_inset Formula $J=I+\langle x,a\rangle$
+\end_inset
+
+ is an ideal strictly larger than 
+\begin_inset Formula $I$
+\end_inset
+
+ such that 
+\begin_inset Formula $J$
+\end_inset
+
+ is 
+\begin_inset Formula $d$
+\end_inset
+
+-stable 
+\begin_inset Formula $\text{Ev}_{r}(J)$
+\end_inset
+
+ is strictly larger than 
+\begin_inset Formula $\text{Ev}_{r}(I)$
+\end_inset
+
+.
+ This implies that we can find an ideal 
+\begin_inset Formula $I$
+\end_inset
+
+ such that 
+\begin_inset Formula $\text{Ev}_{r}(I)=Q$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ We say 
+\begin_inset Formula $I$
+\end_inset
+
+ is 
+\begin_inset Formula $(Q,d)$
+\end_inset
+
+-maximal if 
+\begin_inset Formula $I$
+\end_inset
+
+ is 
+\begin_inset Formula $d$
+\end_inset
+
+-stable and 
+\begin_inset Formula $\text{Ev}_{r}(I)=Q$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Assume that 
+\begin_inset Formula $I$
+\end_inset
+
+ is 
+\begin_inset Formula $(Q,d)$
+\end_inset
+
+-maximal.
+ By the paragraph above, a change of basis of the ideal 
+\begin_inset Formula $Q$
+\end_inset
+
+ induces an 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra map 
+\begin_inset Formula $\phi:(S/I,r_{1},\dots,r_{n})\to(S/J,r_{1},\dots,r_{n}),$
+\end_inset
+
+ where 
+\begin_inset Formula $\text{Ev}_{r}(I)=\text{Ev}_{r}(J)$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $J$
+\end_inset
+
+ is 
+\begin_inset Formula $(Q,d)$
+\end_inset
+
+-maximal too.
+ 
+\end_layout
+
+\begin_layout Section
+The Case of a Local Ring
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Assume that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a local ring with maximal ideal 
+\begin_inset Formula $\mathfrak{m}=\langle r_{1},\dots,r_{n}\rangle$
+\end_inset
+
+ and residue field 
+\begin_inset Formula $K:=R/\mathfrak{m}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $(S/I,r_{1},\dots,r_{n})$
+\end_inset
+
+ be a differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra such that 
+\begin_inset Formula $I$
+\end_inset
+
+ is contained in 
+\begin_inset Formula $\langle x_{1},\dots,x_{n}\rangle$
+\end_inset
+
+ and let 
+\begin_inset Formula $\text{Ev}_{r}:S\to R$
+\end_inset
+
+ be the unique 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism such that 
+\begin_inset Formula $\text{Ev}_{r}(x_{\lambda})=r_{\lambda}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda=1,\dots,n$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\text{Ev}_{r}$
+\end_inset
+
+ induces an 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $\text{Ev}_{r}:S/I\to K$
+\end_inset
+
+, since 
+\begin_inset Formula $\text{Ev}_{r}(I)\subset\mathfrak{m}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Long Exact Sequence
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+It is straightforward to check that 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{sesdga}
+\backslash
+begin{tikzcd}[row sep=5] 0 
+\backslash
+arrow[r] & (S_w (-j) /(I:g) 
+\backslash
+text{,}
+\backslash
+overline{d} ) 
+\backslash
+arrow[r, "
+\backslash
+cdot g"] & (S/I 
+\backslash
+text{,} 
+\backslash
+overline{d}) 
+\backslash
+arrow[r] & (S/
+\backslash
+langle I 
+\backslash
+text{,} g 
+\backslash
+rangle 
+\backslash
+text{,} 
+\backslash
+overline{d}) 
+\backslash
+arrow[r] & 0 
+\backslash
+
+\backslash
+ & 
+\backslash
+overline{f} 
+\backslash
+arrow[r,mapsto,shorten >=0.5cm,shorten <=0.5cm] & 
+\backslash
+overline{fg} 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+is short exact sequence of chain complexes.
+ The short exact sequence 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{sesdga})
+\end_layout
+
+\end_inset
+
+ gives rise to a long exact sequence in homology:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[row sep=40]  && 
+\backslash
+cdots 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & H_{i+1} (S_w  / 
+\backslash
+langle I 
+\backslash
+text{,} g 
+\backslash
+rangle  ) 
+\backslash
+arrow[dll, " 
+\backslash
+lambda  ", swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+  & H_{i-j} (S_w /( I:g )) 
+\backslash
+arrow[r, "
+\backslash
+cdot g"] & H_{i} (S_w / I) 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z}] & H_{i} (S_w / 
+\backslash
+langle I 
+\backslash
+text{,} g 
+\backslash
+rangle  ) 
+\backslash
+arrow[dll, " 
+\backslash
+lambda ", swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z) [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ & H_{i-j-1} (S_w /( I:g ) ) 
+\backslash
+arrow[r, "
+\backslash
+cdot g "] & H_{i-1} (S_w / I ) 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let us work out the details of the connecting map: Let 
+\begin_inset Formula $\overline{f}$
+\end_inset
+
+ be a homogeneous element in 
+\begin_inset Formula $S_{w}/\langle I,g\rangle$
+\end_inset
+
+ which represents a class in 
+\begin_inset Formula $H_{i}(S_{w}/\langle I,g\rangle)$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $f\in S$
+\end_inset
+
+ and 
+\begin_inset Formula $d(f)\in\langle I,g\rangle$
+\end_inset
+
+.
+ We lift 
+\begin_inset Formula $\overline{f}\in S_{w}/\langle I,g\rangle$
+\end_inset
+
+ to 
+\begin_inset Formula $S_{w}/I$
+\end_inset
+
+ and then apply 
+\begin_inset Formula $d$
+\end_inset
+
+ to get 
+\begin_inset Formula $\overline{d(f)}\in S_{w}/I$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $d(f)\in\langle I,g\rangle$
+\end_inset
+
+, we can write 
+\begin_inset Formula $d(f)=p+gq$
+\end_inset
+
+ where 
+\begin_inset Formula $p\in I$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $\overline{d(f)}=\overline{gq}$
+\end_inset
+
+, and this pulls back to 
+\begin_inset Formula $\overline{q}$
+\end_inset
+
+ in 
+\begin_inset Formula $S_{w}/(I:g)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $(A,d_{A})$
+\end_inset
+
+ be a differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ If we start with a chain complex over 
+\begin_inset Formula $R$
+\end_inset
+
+, then we can construct a differential graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ Indeed, suppose that 
+\begin_inset Formula $(B,d_{B})$
+\end_inset
+
+ is a chain complex over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A\otimes_{R}B$
+\end_inset
+
+ is an 
+\begin_inset Formula $A$
+\end_inset
+
+-module and a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module whose homogeneous component in degree 
+\begin_inset Formula $k$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+(A\otimes_{R}B)_{k}:=\bigoplus_{i+j=k}A_{i}\otimes_{R}B_{j}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We define a differential 
+\begin_inset Formula $d$
+\end_inset
+
+ on 
+\begin_inset Formula $A\otimes_{R}B$
+\end_inset
+
+ by first definining it on the elementary tensors as
+\begin_inset Formula 
+\[
+d(a\otimes b):=d_{A}(a)\otimes b+(-1)^{\text{deg}(a)}a\otimes d_{B}(b),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Tensor product of differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $(R[x_{1},\dots,x_{n}]/I,d_{r})$
+\end_inset
+
+ and 
+\begin_inset Formula $(R[y_{1},\dots,y_{m}]/J,d_{t})$
+\end_inset
+
+ be two differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras, where 
+\begin_inset Formula 
+\[
+d_{r}:=\sum_{\lambda=1}^{n}r_{\lambda}\partial_{x_{\lambda}}\text{ and }d_{t}:=\sum_{\mu=1}^{m}t_{\mu}\partial_{y_{\mu}}.
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $r_{\lambda},t_{\mu}\in R$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda=1,\dots,n$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu=1,\dots,m$
+\end_inset
+
+.
+ Then their tensor product over 
+\begin_inset Formula $R$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+(R[x_{1},\dots,x_{n}]/I,d_{r})\otimes_{R}(R[y_{1},\dots,y_{m}]/J,d_{t})\cong(R[x_{1},\dots,x_{n},y_{1},\dots,y_{m}]/(I+J),d_{r}+d_{t}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ The Koszul complex 
+\begin_inset Formula $\mathcal{K}(r_{1},\dots,r_{n})$
+\end_inset
+
+ can be realized as a tensor product:
+\begin_inset Formula 
+\[
+\mathcal{K}(r_{1},\dots,r_{n})\cong\mathcal{K}(r_{1})\otimes\cdots\otimes\mathcal{K}(r_{n}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-module, and let 
+\begin_inset Formula $(S/I,r_{1},\dots,r_{n})$
+\end_inset
+
+ be a differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ Recall that 
+\begin_inset Formula $(M\otimes_{R}S/I,d)$
+\end_inset
+
+ is an 
+\begin_inset Formula $(S/I)$
+\end_inset
+
+-module.
+ 
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,1755 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Probability Theory Homework 2
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ Define 
+\begin_inset Formula 
+\[
+\mathcal{G}=\{B\in\mathcal{B}(\mathbb{R})\mid\text{for all }\varepsilon>0\text{ there exists a finite union of intervals }A_{\varepsilon}\text{ such that }P(A\Delta B)<\varepsilon\}.
+\]
+
+\end_inset
+
+We show that 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra which contains all intervals.
+ It will then follows that 
+\begin_inset Formula $\mathcal{G}=\mathcal{B}(\mathbb{R})$
+\end_inset
+
+ since 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})$
+\end_inset
+
+ is the smallest 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra which contains all intervals.
+ First note that if 
+\begin_inset Formula $I$
+\end_inset
+
+ is an interval and 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, then 
+\begin_inset Formula $P(I\Delta I)=0<\varepsilon$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ contains all intervals.
+ Now we show 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is closed under complements.
+ Suppose 
+\begin_inset Formula $B\in\mathcal{G}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+.
+ Choose a finite union of intervals 
+\begin_inset Formula $A$
+\end_inset
+
+ such that 
+\begin_inset Formula $P(A\Delta B)<\varepsilon$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $A^{c}$
+\end_inset
+
+ is a finite union of intervals and
+\begin_inset Formula 
+\begin{align*}
+P(A^{c}\Delta B^{c}) & =P(A\Delta B)<\varepsilon
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $B^{c}\in\mathcal{G}$
+\end_inset
+
+, hence 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is closed under complements.
+ Finally we show that 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is closed under countable unions.
+ Let 
+\begin_inset Formula $(B_{n})$
+\end_inset
+
+ be a sequence of sets in 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+.
+ By disjointifying 
+\begin_inset Formula $(B_{n})$
+\end_inset
+
+ if necessary, we may assume that 
+\begin_inset Formula $(B_{n})$
+\end_inset
+
+ is pairwise disjoint.
+ Since 
+\begin_inset Formula 
+\[
+\sum_{n=1}^{\infty}P(B_{n})=P\left(\sum_{n=1}^{\infty}B_{n}\right)\leq1,
+\]
+
+\end_inset
+
+we know that there exists 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\sum_{n=N+1}^{\infty}P(B_{n})<\frac{\varepsilon}{2}.
+\]
+
+\end_inset
+
+Choose a sequence of finite unions of intervals 
+\begin_inset Formula $(A_{n})$
+\end_inset
+
+ such that 
+\begin_inset Formula $P(A_{n}\Delta B_{n})<\varepsilon/2N$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq n\leq N$
+\end_inset
+
+ and such that 
+\begin_inset Formula $A_{n}=\emptyset$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\geq N+1$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $\bigcup_{n=1}^{N}A_{n}$
+\end_inset
+
+ is a finite union of intervals, and
+\begin_inset Formula 
+\begin{align*}
+P\left(\left(\bigcup_{n=1}^{N}A_{n}\right)\Delta\left(\bigcup_{n=1}^{\infty}B_{n}\right)\right) & \leq P\left(\bigcup_{n=1}^{\infty}(A_{n}\Delta B_{n})\right)\\
+ & \leq P\left(\bigcup_{n=1}^{N}(A_{n}\Delta B_{n})\right)+P\left(\sum_{n=N+1}^{\infty}B_{n}\right)\\
+ & \leq\sum_{n=1}^{N}P(A_{n}\Delta B_{n})+\sum_{n=N+1}^{\infty}P(B_{n})\\
+ & <\frac{\varepsilon}{2N}+\frac{\varepsilon}{2}\\
+ & <\varepsilon,
+\end{align*}
+
+\end_inset
+
+where we used 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma(
+\backslash
+ref{lemmasymdifid})
+\end_layout
+
+\end_inset
+
+ together with monotonicity of 
+\begin_inset Formula $P$
+\end_inset
+
+ to obtain the first inequality.
+ It follows that 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra, and thus we are done.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(A_{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $(B_{n})$
+\end_inset
+
+ be two sequences of sets.
+ Then
+\begin_inset Formula 
+\[
+\left(\bigcup_{m=1}^{\infty}A_{m}\right)\Delta\left(\bigcup_{n=1}^{\infty}B_{n}\right)\subseteq\bigcup_{n=1}^{\infty}(A_{n}\Delta B_{n})
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+\left(\bigcup_{m=1}^{\infty}A_{m}\right)\Delta\left(\bigcup_{n=1}^{\infty}B_{n}\right) & =\left(\left(\bigcup_{m=1}^{\infty}A_{m}\right)\cup\left(\bigcup_{n=1}^{\infty}B_{n}\right)\right)\backslash\left(\left(\bigcup_{m=1}^{\infty}A_{m}\right)\cap\left(\bigcup_{n=1}^{\infty}B_{n}\right)\right)\\
+ & =\left(\bigcup_{n=1}^{\infty}(A_{n}\cup B_{n})\right)\backslash\left(\bigcup_{n=1}^{\infty}\bigcup_{m=1}^{\infty}(A_{m}\cap B_{n})\right)\\
+ & \subseteq\left(\bigcup_{n=1}^{\infty}(A_{n}\cup B_{n})\right)\backslash\left(\bigcup_{n=1}^{\infty}(A_{n}\cap B_{n})\right)\\
+ & \subseteq\bigcup_{n=1}^{\infty}(A_{n}\cup B_{n})\backslash(A_{n}\cap B_{n})\\
+ & =\bigcup_{n=1}^{\infty}(A_{n}\Delta B_{n}).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 8
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ Clearly 
+\begin_inset Formula $P_{1}\neq P_{2}$
+\end_inset
+
+ since 
+\begin_inset Formula $P_{1}(\{a\})=1/6\neq1/3=P_{2}(\{a\})$
+\end_inset
+
+.
+ However a calculation shows 
+\begin_inset Formula $P_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{2}$
+\end_inset
+
+ agree on 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ Indeed, 
+\begin_inset Formula 
+\begin{align*}
+P_{1}(\{a,b\}) & =P_{1}(\{a\})+P_{1}(\{b\})\\
+ & =\frac{1}{6}+\frac{1}{3}\\
+ & =\frac{1}{3}+\frac{1}{6}\\
+ & =P_{2}(\{a\})+P_{2}(\{b\})\\
+ & =P_{2}(\{a,b\})
+\end{align*}
+
+\end_inset
+
+Similarly
+\begin_inset Formula 
+\begin{align*}
+P_{1}(\{d,c\}) & =P_{1}(\{d\})+P_{1}(\{c\})\\
+ & =\frac{1}{6}+\frac{1}{3}\\
+ & =\frac{1}{3}+\frac{1}{6}\\
+ & =P_{2}(\{d\})+P_{2}(\{c\})\\
+ & =P_{2}(\{d,c\})
+\end{align*}
+
+\end_inset
+
+Similarly, 
+\begin_inset Formula 
+\begin{align*}
+P_{1}(\{a,c\}) & =P_{1}(\{a\})+P_{1}(\{c\})\\
+ & =\frac{1}{6}+\frac{1}{3}\\
+ & =\frac{1}{3}+\frac{1}{6}\\
+ & =P_{2}(\{a\})+P_{2}(\{c\})\\
+ & =P_{2}(\{a,c\})
+\end{align*}
+
+\end_inset
+
+Similarly, 
+\begin_inset Formula 
+\begin{align*}
+P_{1}(\{b,d\}) & =P_{1}(\{b\})+P_{1}(\{d\})\\
+ & =\frac{1}{3}+\frac{1}{6}\\
+ & =\frac{1}{6}+\frac{1}{3}\\
+ & =P_{2}(\{b\})+P_{2}(\{d\})\\
+ & =P_{2}(\{b,d\})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Also note that 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ generates 
+\begin_inset Formula $\mathcal{P}(\Omega)$
+\end_inset
+
+ since 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ contains all singletons: 
+\begin_inset Formula 
+\begin{align*}
+\{a\} & =\{a,b\}\cap\{a,c\}\\
+\{b\} & =\{a,b\}\cap\{b,d\}\\
+\{c\} & =\{a,c\}\cap\{d,c\}\\
+\{d\} & =\{d,c\}\cap\{b,d\}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We have 
+\begin_inset Formula $F_{r}^{\leftarrow}(F(s))\geq s$
+\end_inset
+
+ and 
+\begin_inset Formula $F$
+\end_inset
+
+ is constant on the interval 
+\begin_inset Formula $[s,F_{r}^{\leftarrow}(F(s))]$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $t\in[s,F_{r}^{\leftarrow}F(s))]$
+\end_inset
+
+, then 
+\begin_inset Formula $F(t)\geq F(s)$
+\end_inset
+
+ since 
+\begin_inset Formula $F$
+\end_inset
+
+ is nondecreasing.
+ Also note that
+\begin_inset Formula 
+\[
+F_{r}^{\leftarrow}(F(s))=\inf\{t\mid F(t)>F(s)\},
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $F$
+\end_inset
+
+ is right continuous at 
+\begin_inset Formula $s$
+\end_inset
+
+, we must have 
+\begin_inset Formula $F(F_{r}^{\leftarrow}(F(s)))=s$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section*
+Problem 17
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ We first show 
+\begin_inset Formula $F_{r}^{\leftarrow}$
+\end_inset
+
+ is right continuous.
+ First we observe that for each 
+\begin_inset Formula $s\in\mathbb{R}$
+\end_inset
+
+, we have 
+\begin_inset Formula $F_{r}^{\leftarrow}(F(s))\geq s$
+\end_inset
+
+ and 
+\begin_inset Formula $F$
+\end_inset
+
+ is constant on the interval 
+\begin_inset Formula $[s,F_{r}^{\leftarrow}(F(s))]$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $t\in[s,F_{r}^{\leftarrow}F(s))]$
+\end_inset
+
+, then 
+\begin_inset Formula $F(t)\geq F(s)$
+\end_inset
+
+ since 
+\begin_inset Formula $F$
+\end_inset
+
+ is nondecreasing.
+ Also note that
+\begin_inset Formula 
+\[
+F_{r}^{\leftarrow}(F(s))=\inf\{t\mid F(t)>F(s)\},
+\]
+
+\end_inset
+
+and since 
+\begin_inset Formula $F$
+\end_inset
+
+ is right continuous at 
+\begin_inset Formula $s$
+\end_inset
+
+, we must have 
+\begin_inset Formula $F(F_{r}^{\leftarrow}(F(s)))=F(s)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now let 
+\begin_inset Formula $y\in(0,1)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 1: 
+\series default
+Suppose that 
+\begin_inset Formula $y\neq F(s)$
+\end_inset
+
+ for any 
+\begin_inset Formula $s\in\mathbb{R}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $F$
+\end_inset
+
+ is a distribution function, the output value 
+\begin_inset Formula $y$
+\end_inset
+
+ occurs at a jump discontinuity of 
+\begin_inset Formula $F$
+\end_inset
+
+, say at 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $y<F(s)$
+\end_inset
+
+, and for any 
+\begin_inset Formula $z\in(y,F(s))$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+F_{r}^{\leftarrow}(z)=s=F_{r}^{\leftarrow}(y).
+\]
+
+\end_inset
+
+Thus as 
+\begin_inset Formula $z\to y$
+\end_inset
+
+ from the right, we see that 
+\begin_inset Formula $F_{r}^{\leftarrow}(z)\to F_{r}^{\leftarrow}(y)$
+\end_inset
+
+ from the right.
+ It follows that 
+\begin_inset Formula $F_{r}^{\leftarrow}$
+\end_inset
+
+ is right continuous at 
+\begin_inset Formula $y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 2: 
+\series default
+Suppose that 
+\begin_inset Formula $y=F(s)$
+\end_inset
+
+ for some 
+\begin_inset Formula $s\in\mathbb{R}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $F$
+\end_inset
+
+ is right continuous and non-decreasing, we can choose 
+\begin_inset Formula $s$
+\end_inset
+
+ to be 
+\begin_inset Formula $F_{r}^{\leftarrow}(y)$
+\end_inset
+
+, so set 
+\begin_inset Formula $s=F_{r}^{\leftarrow}(y)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $F$
+\end_inset
+
+ is non-decreasing and right continuous at 
+\begin_inset Formula $s$
+\end_inset
+
+, there exists an interval 
+\begin_inset Formula $[s,s+\varepsilon)$
+\end_inset
+
+ such that 
+\begin_inset Formula $F$
+\end_inset
+
+ is continuous on 
+\begin_inset Formula $[s,s+\varepsilon)$
+\end_inset
+
+ and, by construction, we have 
+\begin_inset Formula $F(t)>F(s)$
+\end_inset
+
+ for all 
+\begin_inset Formula $t\in(s,s+\varepsilon)$
+\end_inset
+
+ (if there was a 
+\begin_inset Formula $t\in[s,s+\varepsilon)$
+\end_inset
+
+ such that 
+\begin_inset Formula $F(t)=F(s)=y$
+\end_inset
+
+, then 
+\begin_inset Formula $t=\inf\{u\mid F(u)>y\}=s$
+\end_inset
+
+.
+ In particular, for 
+\begin_inset Formula $z\in[y,F(s+\varepsilon))$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\begin{align*}
+z\to y\text{ from the right} & \implies F(F_{r}^{\leftarrow}(z))\to F(F_{r}^{\leftarrow}(y))\text{ from the right}\\
+ & \implies F_{r}^{\leftarrow}(z)\to F_{r}^{\leftarrow}(y)\text{ from the right}\\
+ & \implies F_{r}^{\leftarrow}\text{ is right continuous at }y.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For the second part of the problem, note that 
+\begin_inset Formula $F_{r}^{\leftarrow}(y)\neq F_{l}^{\leftarrow}(y)$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $F$
+\end_inset
+
+ takes the value 
+\begin_inset Formula $y$
+\end_inset
+
+ on an interval 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ There are only countably many such 
+\begin_inset Formula $y$
+\end_inset
+
+ since 
+\begin_inset Formula $F$
+\end_inset
+
+ is non-decreasing and right continuous.
+ Thus 
+\begin_inset Formula $\lambda\{y\mid F_{r}^{\leftarrow}(y)\neq F_{l}^{\leftarrow}(y)\}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 19
+\end_layout
+
+\begin_layout Subsection*
+Problem 19.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ Note that 
+\begin_inset Formula $\mathcal{\emptyset\in B}^{*}$
+\end_inset
+
+ since the emptyset is clearly neglible.
+ In particular, 
+\begin_inset Formula $\mathcal{B}^{*}\supseteq\mathcal{B}$
+\end_inset
+
+ since we can write 
+\begin_inset Formula $A=A\cup\emptyset$
+\end_inset
+
+ for every 
+\begin_inset Formula $A\in\mathcal{B}$
+\end_inset
+
+.
+ Next we show 
+\begin_inset Formula $\mathcal{B}^{*}$
+\end_inset
+
+ is closed under complements.
+ Let 
+\begin_inset Formula $A\cup M\in\mathcal{B}^{*}$
+\end_inset
+
+ where 
+\begin_inset Formula $A\in\mathcal{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $M\in\mathcal{N}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $N\in\mathcal{B}$
+\end_inset
+
+ such that 
+\begin_inset Formula $M\subseteq N$
+\end_inset
+
+ and 
+\begin_inset Formula $P(N)=0$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+(A\cup M)^{c} & =A^{c}\cap M^{c}\\
+ & =(A^{c}\cap N^{c})\cup(A^{c}\cap M^{c}\backslash N^{c})\\
+ & =(A^{c}\cap N^{c})\cup(A^{c}\cap N\slash M)
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $A^{c}\cap N^{c}\in\mathcal{A}$
+\end_inset
+
+ and where 
+\begin_inset Formula $A^{c}\cap(N\slash M)\in\mathcal{M}$
+\end_inset
+
+ since 
+\begin_inset Formula $A^{c}\cap(N\slash M)\subseteq N$
+\end_inset
+
+ and 
+\begin_inset Formula $P(N)=0$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathcal{B}^{*}$
+\end_inset
+
+ is closed under complements.
+ Finally we show 
+\begin_inset Formula $\mathcal{B}^{*}$
+\end_inset
+
+ is closed under countable unions.
+ Let 
+\begin_inset Formula $(A_{n}\cup M_{n})$
+\end_inset
+
+ be a sequence of sets in 
+\begin_inset Formula $\mathcal{B}^{*}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ choose 
+\begin_inset Formula $N_{n}\in\mathcal{B}$
+\end_inset
+
+ such that 
+\begin_inset Formula $M_{n}\subseteq N_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $P(N_{n})=0$
+\end_inset
+
+.
+ Then observe that
+\begin_inset Formula 
+\begin{align*}
+\bigcup_{n=1}^{\infty}(A_{n}\cup M_{n}) & =A\cup M
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $A=\bigcup_{n=1}^{\infty}A_{n}\in\mathcal{B}$
+\end_inset
+
+ and where 
+\begin_inset Formula $M=\bigcup_{n=1}^{\infty}M_{n}\in\mathcal{N}$
+\end_inset
+
+ since 
+\begin_inset Formula $\bigcup_{n=1}^{\infty}M_{n}\subseteq\bigcup_{n=1}^{\infty}N_{n}\in\mathcal{B}$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{align*}
+P\left(\bigcup_{n=1}^{\infty}N_{n}\right) & \leq\sum_{n=1}^{\infty}P(N_{n})\\
+ & =\sum_{n=1}^{\infty}0\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\mathcal{B}^{*}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 19.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ Choose 
+\begin_inset Formula $N_{1},N_{2}\in\mathcal{B}$
+\end_inset
+
+ such that 
+\begin_inset Formula $M_{1}\subseteq N_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $M_{2}\subseteq N_{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $P(N_{1})=0=P(N_{2})$
+\end_inset
+
+.
+ Then observe that
+\begin_inset Formula 
+\begin{align*}
+P(A_{1}) & =P(A_{1})+P(N_{1})\\
+ & \geq P(A_{1}\cup N_{1})\\
+ & \geq P(A_{2}),
+\end{align*}
+
+\end_inset
+
+where we used the face that 
+\begin_inset Formula $A_{1}\cup N_{1}\supseteq A_{2}$
+\end_inset
+
+.
+ A similar calculation shows 
+\begin_inset Formula $P(A_{2})\geq P(A_{1})$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $P(A_{1})=P(A_{2})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 19.c
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ The previous exercise shows us that 
+\begin_inset Formula $P^{*}$
+\end_inset
+
+ is well-defined.
+ Furthermore, 
+\begin_inset Formula $P^{*}|_{\mathcal{B}}=P$
+\end_inset
+
+ since if 
+\begin_inset Formula $A\in\mathcal{B}$
+\end_inset
+
+, then 
+\begin_inset Formula $P^{*}(A)=P^{*}(A\cup\emptyset)=P(A)$
+\end_inset
+
+.
+ Finally, suppose 
+\begin_inset Formula $(A_{n}\cup M_{n})$
+\end_inset
+
+ is a sequence of pairwise disjoint sets in 
+\begin_inset Formula $\mathcal{B}^{*}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+P^{*}\left(\bigcup_{n=1}^{\infty}(A_{n}\cup M_{n})\right) & =P^{*}(A\cup M)\\
+ & =P(A)\\
+ & =P\left(\bigcup_{n=1}^{\infty}A_{n}\right)\\
+ & =\sum_{n=1}^{\infty}P(A_{n})\\
+ & =\sum_{n=1}^{\infty}P^{*}(A_{n}\cup M_{n}).
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $P^{*}$
+\end_inset
+
+ is a measure which extends 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 19.d
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ Observe that 
+\begin_inset Formula $B=A_{1}\cup(B\backslash A_{1})$
+\end_inset
+
+ where 
+\begin_inset Formula $A_{1}\in\mathcal{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $B\backslash A_{1}\in\mathcal{N}$
+\end_inset
+
+ since 
+\begin_inset Formula $B\backslash A_{1}\subseteq A_{2}\backslash A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $P(A_{1}\backslash A_{1})=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 19.e
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $B$
+\end_inset
+
+ be a neglible set.
+ Choose 
+\begin_inset Formula $N\in\mathcal{B}$
+\end_inset
+
+ such that 
+\begin_inset Formula $P(N)=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\emptyset\subseteq B\subseteq N$
+\end_inset
+
+ implies 
+\begin_inset Formula $B\in\mathcal{B}^{*}$
+\end_inset
+
+ by the previous exercise.
+ Furthermore we have 
+\begin_inset Formula $P^{*}(B)\leq P(N)=0$
+\end_inset
+
+ by monotonicity.
+ Therefore every neglible set is a null set, that is, 
+\begin_inset Formula $\mathcal{B}^{*}$
+\end_inset
+
+ is complete.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 19.f
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ By removing the 
+\begin_inset Formula $p_{k}$
+\end_inset
+
+'s such that 
+\begin_inset Formula $p_{k}=0$
+\end_inset
+
+ if necessary, we may assume that 
+\begin_inset Formula $p_{k}>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $D=\{a_{k}\mid k\in\mathbb{N}\}$
+\end_inset
+
+.
+ Then the null sets are the sets 
+\begin_inset Formula $A\in\mathcal{B}$
+\end_inset
+
+ which are disjoint from 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ In fact, there is a 
+\emph on
+largest 
+\emph default
+null set, namely 
+\begin_inset Formula $D^{c}$
+\end_inset
+
+, and subset of 
+\begin_inset Formula $D^{c}$
+\end_inset
+
+ is neglible.
+ Conversely, every neglible set is a subset of 
+\begin_inset Formula $D^{c}$
+\end_inset
+
+.
+ Now every subset of 
+\begin_inset Formula $D$
+\end_inset
+
+ is already in 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+, and thus since every subset of 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ can be expressed as 
+\begin_inset Formula $A\cup M$
+\end_inset
+
+ where 
+\begin_inset Formula $A\subseteq D$
+\end_inset
+
+ and 
+\begin_inset Formula $M\subseteq D^{c}$
+\end_inset
+
+, we see that the completion of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathcal{P}(\Omega)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 19.g
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 19.h
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ Yes, 
+\begin_inset Formula $(\Omega,\mathcal{B}^{*},P^{*})$
+\end_inset
+
+ must be the minimal extension.
+ To see this, suppose 
+\begin_inset Formula $(\Omega,\mathcal{B}',P')$
+\end_inset
+
+ is another complete extention of 
+\begin_inset Formula $(\Omega,\mathcal{B},P)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $A\cup M\in\mathcal{B}^{*}$
+\end_inset
+
+ where 
+\begin_inset Formula $A\in\mathcal{B}$
+\end_inset
+
+ and 
+\begin_inset Formula $M\in\mathcal{N}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $N\in\mathcal{B}$
+\end_inset
+
+ such that 
+\begin_inset Formula $P(N)=0$
+\end_inset
+
+.
+ Then note that 
+\begin_inset Formula $P^{*}(N)=0=P'(N)$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $M$
+\end_inset
+
+ is neglible when considered as a set in 
+\begin_inset Formula $\mathcal{B}'$
+\end_inset
+
+ or in 
+\begin_inset Formula $\mathcal{B}^{*}$
+\end_inset
+
+.
+ Since both 
+\begin_inset Formula $\mathcal{B}'$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{B}^{*}$
+\end_inset
+
+ are complete, this implies 
+\begin_inset Formula $M\in\mathcal{B}'\cap\mathcal{B}^{*}$
+\end_inset
+
+ and 
+\begin_inset Formula $P^{*}(M)=0=P'(M)$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $A\cup M\in B'$
+\end_inset
+
+ and 
+\begin_inset Formula $P'(A\cup M)=P(A)=P^{*}(A\cup M)$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $(\Omega,\mathcal{B}',P')$
+\end_inset
+
+ is a complete extension of 
+\begin_inset Formula $(\Omega,\mathcal{B}^{*},P^{*})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

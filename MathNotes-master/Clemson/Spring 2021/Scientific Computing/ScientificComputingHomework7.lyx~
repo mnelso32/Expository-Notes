@@ -1,0 +1,1586 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Scientific Computing Homework 7
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Solve the following nonlinear system using Newton's method in Matlab (use
+ newton.m):
+\begin_inset Formula 
+\begin{align*}
+0 & =x^{2}-y-\sin z+1\\
+0 & =x+1+\sin(10y)-y\\
+0 & =(1-x)z-2.
+\end{align*}
+
+\end_inset
+
+Print the norm of the residual to check that your solution is in fact a
+ root.
+ Hint: you need to find a suitable value for 
+\begin_inset Formula $x,y$
+\end_inset
+
+ and 
+\begin_inset Formula $z$
+\end_inset
+
+ so that the method converges.
+ Submit hw07q1.m and make sure the definitions of your functions 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $\nabla f$
+\end_inset
+
+ are also included (if you create them in separate files).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We create 
+\begin_inset Formula $f$
+\end_inset
+
+ in a file called hw7fun.m.
+ Its code is given below
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function y = hw7fun(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+y(1,1) = x(1)^2 - x(2) - sin(x(3)) + 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+y(2,1) = x(1) + 1 + sin(10*x(2)) - x(2);
+\end_layout
+
+\begin_layout Plain Layout
+
+y(3,1) = z - x*z - 2;
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Next we create 
+\begin_inset Formula $\nabla f$
+\end_inset
+
+ in a file called hw7gradfun.m.
+ Its code is given below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function y = hw7gradfun(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+y(1,1) = 2*x(1);
+\end_layout
+
+\begin_layout Plain Layout
+
+y(1,2) = -1;
+\end_layout
+
+\begin_layout Plain Layout
+
+y(1,3) = -cos(x(3));
+\end_layout
+
+\begin_layout Plain Layout
+
+y(2,1) = 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+y(2,2) = 10*cos(x(2))-1;
+\end_layout
+
+\begin_layout Plain Layout
+
+y(2,3) = 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+y(3,1) = -x(3);
+\end_layout
+
+\begin_layout Plain Layout
+
+y(3,2) = 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+y(3,3) = 1 - x(1);
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we apply newton.m with an initial guess of 
+\begin_inset Formula $(0,0,1)$
+\end_inset
+
+: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+[root,numits] = newton(@hw7fun,@hw7gradfun,[0;0;1],1e-8)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+root =
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+         1.20653487050551           2.19978940708985          -9.68359480946174
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+numits =
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+		61
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+norm(hw7fun(root)) %checking solution is a root by computing norm of residual
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ans =
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+	 1.88008173473976e-08 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Compute the interpolating polynomial in a) monomial, b) Lagrange, and c)
+ Newton basis form for the points 
+\begin_inset Formula $(-1,2)$
+\end_inset
+
+, 
+\begin_inset Formula $(0,0)$
+\end_inset
+
+, 
+\begin_inset Formula $(2,1)$
+\end_inset
+
+.
+ Also show that they produce the same polynomial.
+ Note: This question is done on paper.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ First we compute the interpolating polynomial in monomial form, which has
+ the form
+\begin_inset Formula 
+\[
+p(t)=c_{1}+c_{2}t+c_{3}t^{2}
+\]
+
+\end_inset
+
+To do this, we solve the linear equation
+\begin_inset Formula 
+\[
+\begin{pmatrix}1 & -1 & 1\\
+1 & 0 & 0\\
+1 & 2 & 4
+\end{pmatrix}\begin{pmatrix}c_{1}\\
+c_{2}\\
+c_{3}
+\end{pmatrix}=\begin{pmatrix}2\\
+0\\
+1
+\end{pmatrix}.
+\]
+
+\end_inset
+
+In other words, we have the system of equations
+\begin_inset Formula 
+\begin{align*}
+c_{1}-c_{2}+c_{3} & =2\\
+c_{1} & =0\\
+c_{1}+2c_{2}+4c_{3} & =1
+\end{align*}
+
+\end_inset
+
+From 
+\begin_inset Formula $c_{1}=0$
+\end_inset
+
+, we see that we can reduce this system of equations to 
+\begin_inset Formula 
+\begin{align*}
+-c_{2}+c_{3} & =2\\
+2c_{2}+4c_{3} & =1
+\end{align*}
+
+\end_inset
+
+Setting 
+\begin_inset Formula $c_{3}=2+c_{2}$
+\end_inset
+
+ into the second equation, we are reduced to the single equation
+\begin_inset Formula 
+\[
+6c_{2}+8=1
+\]
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $c_{2}=-7/6$
+\end_inset
+
+, and hence 
+\begin_inset Formula $c_{3}=5/6$
+\end_inset
+
+.
+ Thus the interpolating polynomial in monomial form is
+\begin_inset Formula 
+\[
+p(t)=-(7/6)t+(5/6)t^{2}.
+\]
+
+\end_inset
+
+Next we compute the Lagrange form, it is given by
+\begin_inset Formula 
+\begin{align*}
+p(t) & =2\ell_{1}(t)+0\ell_{2}(t)+1\ell_{3}(t)\\
+ & =2\ell_{1}(t)+\ell_{3}(t)\\
+ & =2\frac{t(t-2)}{(-1-0)(-1-2)}+\frac{(t+1)t}{(2+1)(2-0)}\\
+ & =2\left(\frac{t^{2}-2t}{3}\right)+\left(\frac{(t^{2}+t)}{6}\right)\\
+ & =(2/3)t^{2}-(4/3)t+(1/6)t^{2}+(1/6)t\\
+ & =-(7/6)t+(5/6)t^{2},
+\end{align*}
+
+\end_inset
+
+where the last part shows that it has the same form as the monomial form.
+ Finally we compute the Newton basis which has the form
+\begin_inset Formula 
+\[
+p(t)=a_{1}+a_{2}(t+1)+a_{3}(t+1)t.
+\]
+
+\end_inset
+
+form.
+ To do this, we solve the linear equation
+\begin_inset Formula 
+\[
+\begin{pmatrix}1 & 0 & 0\\
+1 & 1 & 0\\
+1 & 3 & 6
+\end{pmatrix}\begin{pmatrix}a_{1}\\
+a_{2}\\
+a_{3}
+\end{pmatrix}=\begin{pmatrix}2\\
+0\\
+1
+\end{pmatrix}.
+\]
+
+\end_inset
+
+In other words, we have the system of equations
+\begin_inset Formula 
+\begin{align*}
+a_{1} & =2\\
+a_{1}+a_{2} & =0\\
+a_{1}+3a_{2}+6a_{3} & =1
+\end{align*}
+
+\end_inset
+
+From the first equation, we have 
+\begin_inset Formula $a_{1}=2$
+\end_inset
+
+.
+ Plugging this into the second equation, we obtain 
+\begin_inset Formula $a_{2}=-2$
+\end_inset
+
+.
+ Then plugging all of this into the third equation, we obtain 
+\begin_inset Formula $a_{3}=5/6$
+\end_inset
+
+.
+ Thus the Newton basis form is
+\begin_inset Formula 
+\begin{align*}
+p(t) & =2-2(t+1)+(5/6)(t+1)t\\
+ & =2-2t-2+(5/6)t^{2}+(5/6)t\\
+ & -(7/6)t+(5/6)t^{2}
+\end{align*}
+
+\end_inset
+
+where the last part shows that it has the same form as the monomial form.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Interpolate the function 
+\begin_inset Formula $f(x)=1/(1+25x^{2})$
+\end_inset
+
+ with a polynomial of degree 
+\begin_inset Formula $n-1$
+\end_inset
+
+ for 
+\begin_inset Formula $n=3,5,7,9,11$
+\end_inset
+
+ equally spaced points 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ between 
+\begin_inset Formula $-1$
+\end_inset
+
+ and 
+\begin_inset Formula $1$
+\end_inset
+
+ (so, for 
+\begin_inset Formula $n=3$
+\end_inset
+
+ the points are 
+\begin_inset Formula $x_{1}=-1$
+\end_inset
+
+, 
+\begin_inset Formula $x_{2}=0$
+\end_inset
+
+, and 
+\begin_inset Formula $x_{3}=1$
+\end_inset
+
+) using monomial representation.
+\end_layout
+
+\begin_layout Enumerate
+For each 
+\begin_inset Formula $n$
+\end_inset
+
+, compute the error 
+\begin_inset Formula $\|f-p_{n}\|_{\infty}=\max_{x}|f(x)-p_{n}(x)|$
+\end_inset
+
+ (you can approximate the maximum by evaluating it for a large number of
+ 
+\begin_inset Formula $x$
+\end_inset
+
+ values, for example using linspace(-1,1).
+\end_layout
+
+\begin_layout Enumerate
+Notice that the error is increasing with 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Confirm this visually by generating a plot of 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ for 
+\begin_inset Formula $n=5$
+\end_inset
+
+ and 
+\begin_inset Formula $n=9$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Reconcile your result with the error estimate for polynomial interpolation
+ as discussed in class.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+1.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+format longg
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+f = @(t)  1/(1+25*t^2)  
+\end_layout
+
+\begin_layout Plain Layout
+
+v = @(n) -1:(2/(n-1)):1
+\end_layout
+
+\begin_layout Plain Layout
+
+apply_func_2_cols = @(f,M) cell2mat(cellfun(f,num2cell(M,1), 'UniformOutput',0))
+  % need to apply f element-wise to v
+\end_layout
+
+\begin_layout Plain Layout
+
+fv = @(n) apply_func_2_cols(f,v(n)) % this is f applied to v element-wise
+\end_layout
+
+\begin_layout Plain Layout
+
+A = @(n) fliplr(vander(v(n)))
+\end_layout
+
+\begin_layout Plain Layout
+
+c = @(n) A(n)/fv(n)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+p = @(n) poly2sym(c(n)) % the interpollating polynomial 
+\end_layout
+
+\begin_layout Plain Layout
+
+pv = @(n) subs(p(n),v(n)) 
+\end_layout
+
+\begin_layout Plain Layout
+
+fv = @(n) subs(f,v(n))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Now we approximate error for each n
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+error = @(m,n) norm(A(m)*c(n)-w(n),Inf)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 3:2:30
+\end_layout
+
+\begin_layout Plain Layout
+
+	disp([i error(i)]);
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+                         3         0.924778761061947   
+\end_layout
+
+\begin_layout Plain Layout
+
+                         5           2.6631631290481
+\end_layout
+
+\begin_layout Plain Layout
+
+                         7          1.57004476655414
+\end_layout
+
+\begin_layout Plain Layout
+
+                         9          2.98479148181631
+\end_layout
+
+\begin_layout Plain Layout
+
+                        11          2.52478974854239
+\end_layout
+
+\begin_layout Plain Layout
+
+                        13          2.99481543417221
+\end_layout
+
+\begin_layout Plain Layout
+
+                        15          2.85974881174446
+\end_layout
+
+\begin_layout Plain Layout
+
+                        17          3.01425757727694
+\end_layout
+
+\begin_layout Plain Layout
+
+                        19          2.99196755268232
+\end_layout
+
+\begin_layout Plain Layout
+
+                        21          3.05333522384768
+\end_layout
+
+\begin_layout Plain Layout
+
+                        23          3.06231108109317
+\end_layout
+
+\begin_layout Plain Layout
+
+                        25          3.09397797606839
+\end_layout
+
+\begin_layout Plain Layout
+
+                        27          3.10930889061311
+\end_layout
+
+\begin_layout Plain Layout
+
+                        29          3.13002149714503 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+format longg
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+f = @(x)  1/(1+25*x^2)  
+\end_layout
+
+\begin_layout Plain Layout
+
+v = @(n) -1:(2/(n-1)):1
+\end_layout
+
+\begin_layout Plain Layout
+
+fv = @(n) subs(f,v(n))
+\end_layout
+
+\begin_layout Plain Layout
+
+A = @(n) fliplr(vander(v(n)))
+\end_layout
+
+\begin_layout Plain Layout
+
+c = @(n) A(n)/fv(n)
+\end_layout
+
+\begin_layout Plain Layout
+
+p = @(n) poly2sym(c(n)) % the interpollating polynomial 
+\end_layout
+
+\begin_layout Plain Layout
+
+pv = @(n) subs(p(n),v(n)) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+apply_func_2_cols = @(f,M) cell2mat(cellfun(f,num2cell(M,1), 'UniformOutput',0))
+  % need to apply f element-wise to v
+\end_layout
+
+\begin_layout Plain Layout
+
+w = @(n) apply_func_2_cols(f,v(n)) % this is f applied to v element-wise
+\end_layout
+
+\begin_layout Plain Layout
+
+A = @(n) fliplr(vander(v(n)))
+\end_layout
+
+\begin_layout Plain Layout
+
+c = @(n) A(n)/w(n)
+\end_layout
+
+\begin_layout Plain Layout
+
+p = @(n) poly2sym(c(n)) % the interpollating polynomial 
+\end_layout
+
+\begin_layout Plain Layout
+
+pv = @(n) subs(p(n),v(n)) 
+\end_layout
+
+\begin_layout Plain Layout
+
+fv = @(n) subs(f,v(n))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Now we approximate error for each n
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+error = @(m,n) norm(A(m)*c(n)-w(n),Inf)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 3:2:30
+\end_layout
+
+\begin_layout Plain Layout
+
+	disp([i error(i)]);
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+                         3         0.924778761061947   
+\end_layout
+
+\begin_layout Plain Layout
+
+                         5           2.6631631290481
+\end_layout
+
+\begin_layout Plain Layout
+
+                         7          1.57004476655414
+\end_layout
+
+\begin_layout Plain Layout
+
+                         9          2.98479148181631
+\end_layout
+
+\begin_layout Plain Layout
+
+                        11          2.52478974854239
+\end_layout
+
+\begin_layout Plain Layout
+
+                        13          2.99481543417221
+\end_layout
+
+\begin_layout Plain Layout
+
+                        15          2.85974881174446
+\end_layout
+
+\begin_layout Plain Layout
+
+                        17          3.01425757727694
+\end_layout
+
+\begin_layout Plain Layout
+
+                        19          2.99196755268232
+\end_layout
+
+\begin_layout Plain Layout
+
+                        21          3.05333522384768
+\end_layout
+
+\begin_layout Plain Layout
+
+                        23          3.06231108109317
+\end_layout
+
+\begin_layout Plain Layout
+
+                        25          3.09397797606839
+\end_layout
+
+\begin_layout Plain Layout
+
+                        27          3.10930889061311
+\end_layout
+
+\begin_layout Plain Layout
+
+                        29          3.13002149714503 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With this code in hand, we can look at the convergence tables for each 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+g1 = @(x) (x^2 +2)/3
+\end_layout
+
+\begin_layout Plain Layout
+
+g2 = @(x) (3*x - 2)^(1/2)
+\end_layout
+
+\begin_layout Plain Layout
+
+g3 = @(x) 3 - 2/x
+\end_layout
+
+\begin_layout Plain Layout
+
+g4 = @(x) (x^2 - 2)/(2*x - 3)
+\end_layout
+
+\begin_layout Plain Layout
+
+a = 1.9
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+iterationserrors(g1,a); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ 1.000000000000000   1.870000000000000  -0.130000000000000
+\end_layout
+
+\begin_layout Plain Layout
+
+   2.000000000000000   1.832300000000000  -0.167700000000000
+\end_layout
+
+\begin_layout Plain Layout
+
+   3.000000000000000   1.785774430000000  -0.214225570000000
+\end_layout
+
+\begin_layout Plain Layout
+
+   4.000000000000000   1.729663438280608  -0.270336561719392
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% diverges
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+iterationserrors(g2,a); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  1.000000000000000   1.923538406167134  -0.076461593832866
+\end_layout
+
+\begin_layout Plain Layout
+
+   2.000000000000000   1.941807204256232  -0.058192795743768
+\end_layout
+
+\begin_layout Plain Layout
+
+   3.000000000000000   1.955868506001540  -0.044131493998460
+\end_layout
+
+\begin_layout Plain Layout
+
+   4.000000000000000   1.966622871321449  -0.033377128678551
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% converges linearly
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+iterationserrors(g3,a); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  1.000000000000000   1.947368421052632  -0.052631578947368
+\end_layout
+
+\begin_layout Plain Layout
+
+   2.000000000000000   1.972972972972973  -0.027027027027027
+\end_layout
+
+\begin_layout Plain Layout
+
+   3.000000000000000   1.986301369863014  -0.013698630136986
+\end_layout
+
+\begin_layout Plain Layout
+
+   4.000000000000000   1.993103448275862  -0.006896551724138
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% converges linearly
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+iterationserrors(g4,a); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  1.000000000000000   2.012500000000000   0.012500000000000
+\end_layout
+
+\begin_layout Plain Layout
+
+   2.000000000000000   2.000152439024390   0.000152439024390
+\end_layout
+
+\begin_layout Plain Layout
+
+   3.000000000000000   2.000000023230574   0.000000023230574
+\end_layout
+
+\begin_layout Plain Layout
+
+   4.000000000000000   2.000000000000001   0.000000000000001
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% converges quadratically
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

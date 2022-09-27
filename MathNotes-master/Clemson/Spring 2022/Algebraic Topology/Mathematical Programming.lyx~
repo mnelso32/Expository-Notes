@@ -1,0 +1,515 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Mathematical Programming
+\end_layout
+
+\begin_layout Subsubsection
+Facility Location
+\end_layout
+
+\begin_layout Standard
+The goal of this optimization problem is to locate facilities in at most
+ 
+\begin_inset Formula $m$
+\end_inset
+
+ locations to serve 
+\begin_inset Formula $n$
+\end_inset
+
+ customers.
+ Let
+\begin_inset Formula 
+\begin{align*}
+F_{i} & =\text{ fixed cost of placing facility at locating }i & 1\leq i\leq m\\
+c_{ij} & =\text{ cost of sending one unit of a product }j\text{ from facility at locatio }i & 1\leq i\leq m\text{ and }1\leq j\leq n\\
+d_{j} & =\text{ units of product }j\text{ demanded by customer }j & 1\leq j\leq n
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Decision variables: let 
+\begin_inset Formula 
+\begin{align*}
+y_{i} & =\begin{cases}
+1 & \text{if a facility is placed at location }i,\text{ }1\leq i\leq m\\
+0 & \text{otherwise}
+\end{cases}\\
+x_{ij} & =\text{amount shipped from location }i\text{ to customer }j
+\end{align*}
+
+\end_inset
+
+Constraints: if 
+\begin_inset Formula $y_{i}=0$
+\end_inset
+
+, then 
+\begin_inset Formula $\sum_{j=1}^{n}x_{ij}=0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $y_{1}=1$
+\end_inset
+
+, then 
+\begin_inset Formula $\sum_{j=1}^{n}x_{ij}\leq\sum_{j=1}^{n}d_{j}$
+\end_inset
+
+.
+ Serving customers is 
+\begin_inset Formula $\sum_{i=1}^{m}x_{ij}\geq d_{j}$
+\end_inset
+
+ where 
+\begin_inset Formula $j=1\leq j\leq n$
+\end_inset
+
+.
+ Equivalently,
+\begin_inset Formula 
+\begin{align*}
+\sum_{j=1}^{n}x_{ij} & \leq y_{i}\sum_{j=1}^{n}d_{j}\text{ for }1\leq i\leq m\\
+y_{i} & =0\text{ or 1}\text{ for }1\leq i\leq m\\
+x_{ij} & \geq0\text{ for }1\leq i\leq m\text{ and }1\leq j\leq n
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The objective function is
+\begin_inset Formula 
+\[
+z(x,y)=\sum_{i,j}c_{ij}x_{ij}+\sum_{i}F_{i}y_{i}.
+\]
+
+\end_inset
+
+The term 
+\begin_inset Formula $\sum c_{ij}x_{ij}$
+\end_inset
+
+ is called the cost for serving and the term 
+\begin_inset Formula $\sum F_{i}y_{i}$
+\end_inset
+
+ is the fixed cost.
+ This is called a Mixed-Binary-LP or Mixed Binary Problem.
+\end_layout
+
+\begin_layout Subsubsection
+The Traveling Salesman Problem
+\end_layout
+
+\begin_layout Standard
+The goal of this problem is to visit 
+\begin_inset Formula $n$
+\end_inset
+
+ cities exactly once.
+ Let 
+\begin_inset Formula 
+\begin{align*}
+c_{ij} & =\text{ cost to travel from city }i\text{ to city }j
+\end{align*}
+
+\end_inset
+
+In what order should the cities by visited to 
+\end_layout
+
+\begin_layout Enumerate
+minimize the total travel cost;
+\end_layout
+
+\begin_layout Enumerate
+return to the city from which the travel started.
+\end_layout
+
+\begin_layout Standard
+First we consider (1).
+ This LP model is an assignment problem.
+ We have
+\begin_inset Formula 
+\begin{align*}
+x_{ij} & =\begin{cases}
+1 & \text{if item }i\text{ is assigned to item }j\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+We wish to minimize
+\begin_inset Formula 
+\begin{align*}
+\text{minimize } & z=\sum_{1\leq i,j\leq n}c_{ij}x_{ij}\\
+\text{subject to } & x_{11}+x_{12}+x_{13}=1\\
+ & x_{21}+x_{22}+x_{23}=1\\
+ & x_{31}+x_{32}+x_{33}=1\\
+ & x_{11}+x_{21}+x_{31}=1\\
+ & x_{12}+x_{22}+x_{32}=1\\
+ & x_{13}+x_{23}+x_{33}=1
+\end{align*}
+
+\end_inset
+
+Equivalently, we can write this as
+\begin_inset Formula 
+\begin{align*}
+\text{minimize } & z=\sum_{1\leq i,j\leq n}c_{ij}x_{ij}\\
+\text{subject to } & \sum_{j=1}^{n}x_{ij}=1 & 1\leq i\leq n\\
+ & \sum_{i=1}^{n}x_{ij}=1 & 1\leq j\leq n
+\end{align*}
+
+\end_inset
+
+When you solve this problem and take 
+\begin_inset Formula $x_{ij}\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i,j\leq n$
+\end_inset
+
+, you drop the binary requirement and solve it as if it was a standard linear
+ programming problem.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we wish to model (2).
+ Our decision variables are
+\begin_inset Formula 
+\begin{align*}
+x_{ij} & =\begin{cases}
+1 & \text{the tour uses the link }(i,j)\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Now we list our constraints: we want to visit each city exactly once! Write
+\begin_inset Formula 
+\begin{align*}
+\sum_{j=1}^{n}x_{ij} & =1 & 1\leq i\leq n,\text{ }i\neq j
+\end{align*}
+
+\end_inset
+
+This tells us we can leave city 
+\begin_inset Formula $i$
+\end_inset
+
+ only once! Similarly we have
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=1}^{n}x_{ij} & =1 & 1\leq j\leq n,\text{ }i\neq j
+\end{align*}
+
+\end_inset
+
+This tells us we can enter city 
+\begin_inset Formula $j$
+\end_inset
+
+ only once! More constraints are needed to guarantee that the tour will
+ be connected through all cities.
+ Note that TSP = AP + subhour elimination.
+ 
+\end_layout
+
+\begin_layout Standard
+Subhour eliminitation
+\end_layout
+
+\begin_layout Standard
+Method 1: use auxiliary variables 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ We set
+\begin_inset Formula 
+\begin{align*}
+u_{1} & =1\\
+2\leq u_{i}\leq n & \text{ for all }i\neq1\\
+u_{i}+u_{j}+1 & \leq(n-1)(1-x_{ij})\text{ for all }i,j\text{ }i\neq1\neq j\\
+x_{ij} & =\begin{cases}
+1 & (i,j)\in\text{tour}\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $x_{ij}=1$
+\end_inset
+
+ then 
+\begin_inset Formula $(i,j)\in\text{tour}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $u_{i}-u_{j}+1\leq0$
+\end_inset
+
+ and thus we can write this as 
+\begin_inset Formula $u_{j}\geq u_{i}+1$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ is the label of city 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $u_{j}$
+\end_inset
+
+ is the label of city 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ So the label of the destination has to be the label of the beginning plus
+ 1.
+ If 
+\begin_inset Formula $x_{ij}=0$
+\end_inset
+
+, then 
+\begin_inset Formula $u_{i}+u_{j}+1\leq n-1$
+\end_inset
+
+ and thus we can write this as 
+\begin_inset Formula $u_{j}\geq u_{i}-n+2$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of cities.
+ The inequality tells us that none of the labels is greater than 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ For example if 
+\begin_inset Formula $n=4$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{align*}
+(i,j)\in\text{tour} & u_{j}\geq u_{i}+1\\
+(i,j)\notin\text{tour} & u_{j}\geq u_{i}-2\\
+2\leq u_{i}\leq4 & \text{ for }i=2,3,4
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

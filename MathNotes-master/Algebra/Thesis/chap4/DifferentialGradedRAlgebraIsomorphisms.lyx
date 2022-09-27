@@ -1,0 +1,597 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Differential Graded 
+\begin_inset Formula $R$
+\end_inset
+
+-Algebra Example
+\end_layout
+
+\begin_layout Standard
+Throughout these notes, let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field of characteristic 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $S_{(1,2)}=K[x,y]_{(1,2)}$
+\end_inset
+
+, let 
+\begin_inset Formula $S=K[x,y]$
+\end_inset
+
+, and let 
+\begin_inset Formula $d=\partial_{x}+\partial_{y}$
+\end_inset
+
+ and 
+\begin_inset Formula $d'=x\partial_{y}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(S_{(1,2)},d')$
+\end_inset
+
+ and 
+\begin_inset Formula $(S,d)$
+\end_inset
+
+ are differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ Let 
+\begin_inset Formula $\varphi\colon S_{(1,2)}\to S$
+\end_inset
+
+ be the graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra morphism such that 
+\begin_inset Formula $\varphi(x)=x+y$
+\end_inset
+
+ and 
+\begin_inset Formula $\varphi(y)=x^{2}+xy$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is a 
+\emph on
+differential
+\emph default
+ graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra morphism.
+ Indeed, the Jacobian of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is given by the matrix 
+\begin_inset Formula $\left(\begin{smallmatrix}1 & y\\
+1 & x
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula 
+\begin{align*}
+d(\varphi(x)) & =\begin{pmatrix}1 & 1\end{pmatrix}\begin{pmatrix}1 & y\\
+1 & x
+\end{pmatrix}\begin{pmatrix}1\\
+0
+\end{pmatrix}=0\\
+d(\varphi(y)) & =\begin{pmatrix}1 & 1\end{pmatrix}\begin{pmatrix}1 & y\\
+1 & x
+\end{pmatrix}\begin{pmatrix}0\\
+1
+\end{pmatrix}=x+y\\
+\varphi(d'(x)) & =\varphi\left(\begin{pmatrix}0 & x\end{pmatrix}\begin{pmatrix}1\\
+0
+\end{pmatrix}\right)=0\\
+\varphi(d'(y)) & =\varphi\left(\begin{pmatrix}0 & x\end{pmatrix}\begin{pmatrix}1\\
+0
+\end{pmatrix}\right)=x+y.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now let 
+\begin_inset Formula $\psi\colon S_{(1,2)}\to S$
+\end_inset
+
+ be the graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra morphism such that 
+\begin_inset Formula $\psi(x)=x$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi(y)=x^{2}+xy$
+\end_inset
+
+.
+ Does there exist a differential 
+\begin_inset Formula $d''$
+\end_inset
+
+ on 
+\begin_inset Formula $S_{(1,2)}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\psi$
+\end_inset
+
+ becomes a morphism of differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras 
+\begin_inset Formula $\psi\colon(S_{(1,2)},d'')\to(S,d)$
+\end_inset
+
+? The answer is no.
+ Indeed, assume (to obtain a contradiction) that such a 
+\begin_inset Formula $d''$
+\end_inset
+
+ exists.
+ Then 
+\begin_inset Formula $d''$
+\end_inset
+
+ has the form 
+\begin_inset Formula $d''=a\partial_{x}+bx\partial_{y}$
+\end_inset
+
+, where 
+\begin_inset Formula $a,b\in K$
+\end_inset
+
+.
+ The Jacobian of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is given by the matrix 
+\begin_inset Formula $\left(\begin{smallmatrix}1 & y\\
+0 & x
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula 
+\begin{align*}
+d(\psi(x)) & =\begin{pmatrix}1 & 1\end{pmatrix}\begin{pmatrix}1 & y\\
+0 & x
+\end{pmatrix}\begin{pmatrix}1\\
+0
+\end{pmatrix}=1\\
+d(\psi(y)) & =\begin{pmatrix}1 & 1\end{pmatrix}\begin{pmatrix}1 & y\\
+0 & x
+\end{pmatrix}\begin{pmatrix}0\\
+1
+\end{pmatrix}=x+y\\
+\psi(d'(x)) & =\psi\left(\begin{pmatrix}a & bx\end{pmatrix}\begin{pmatrix}1\\
+0
+\end{pmatrix}\right)=a\\
+\psi(d'(y)) & =\psi\left(\begin{pmatrix}a & bx\end{pmatrix}\begin{pmatrix}0\\
+1
+\end{pmatrix}\right)=bx.
+\end{align*}
+
+\end_inset
+
+But there is no 
+\begin_inset Formula $b\in K$
+\end_inset
+
+ such that 
+\begin_inset Formula $bx=x+y$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $S=K[x_{1},\dots,x_{n}]$
+\end_inset
+
+, let 
+\begin_inset Formula $S_{w}=K[x_{1},\dots,x_{n}]_{(w_{1},\dots,w_{n})}$
+\end_inset
+
+, let 
+\begin_inset Formula $d=\sum_{\lambda=1}^{n}\partial_{x_{\lambda}}$
+\end_inset
+
+ and let 
+\begin_inset Formula $d'=\sum_{\lambda=1}^{n}f_{\lambda}\partial_{x_{\lambda}}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(S_{w},d')$
+\end_inset
+
+ and 
+\begin_inset Formula $(S,d)$
+\end_inset
+
+ are differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras.
+ Suppose that 
+\begin_inset Formula $\varphi\colon S_{w}\to S$
+\end_inset
+
+ is the graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra morphism.
+ In order for 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ to be a 
+\emph on
+differential 
+\emph default
+graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra morphism, we need 
+\begin_inset Formula $\varphi(f_{\lambda})=d(\varphi(x_{\lambda}))$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda=1,\dots,n$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $S_{(1,2)}=K[x,y]_{(1,2)}$
+\end_inset
+
+, let 
+\begin_inset Formula $S=K[x,y]$
+\end_inset
+
+, let 
+\begin_inset Formula $d=\partial_{x}+\partial_{y}$
+\end_inset
+
+ and 
+\begin_inset Formula $d'=\partial_{x}+x\partial_{y}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\varphi\colon S_{(1,2)}\to S$
+\end_inset
+
+ be the graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra morphism such that 
+\begin_inset Formula $\varphi(x)=a_{1}x+a_{2}y$
+\end_inset
+
+ and 
+\begin_inset Formula $\varphi(y)=a_{3}x^{2}+a_{4}xy+a_{5}y^{2}$
+\end_inset
+
+, where 
+\begin_inset Formula $a_{1},a_{2},a_{3},a_{4},a_{5}\in K$
+\end_inset
+
+.
+ Then in order for 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ to be a differential
+\emph on
+ 
+\emph default
+graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra morphism, we need 
+\begin_inset Formula 
+\begin{align*}
+a_{1}x+a_{2}y & =\varphi(x)\\
+ & =d(a_{3}x^{2}+a_{4}xy+a_{5}y^{2})\\
+ & =a_{4}(x+y),
+\end{align*}
+
+\end_inset
+
+which implies 
+\begin_inset Formula $a_{2}=a_{4}=a_{1}$
+\end_inset
+
+.
+ We also need 
+\begin_inset Formula 
+\begin{align*}
+1 & =\varphi(1)\\
+ & =d(a_{1}x+a_{2}y)\\
+ & =a_{1}+a_{2}\\
+ & =0,
+\end{align*}
+
+\end_inset
+
+which is a contradiction.
+ Thus there can be no differential graded algebra morphism from 
+\begin_inset Formula $(S_{(1,2)},d')$
+\end_inset
+
+ to 
+\begin_inset Formula $(S,d)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

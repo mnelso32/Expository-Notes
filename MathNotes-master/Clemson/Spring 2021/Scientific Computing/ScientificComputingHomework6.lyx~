@@ -1,0 +1,1248 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Scientific Computing Homework 6
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Consider the Householder transformation
+\begin_inset Formula 
+\[
+P=\mathrm{I}-2vv^{\top}
+\]
+
+\end_inset
+
+for a vector 
+\begin_inset Formula $v$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{R}^{m}$
+\end_inset
+
+ with 
+\begin_inset Formula $\|v\|_{2}=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Show that 
+\begin_inset Formula $P$
+\end_inset
+
+ is orthogonal and symmetric.
+\end_layout
+
+\begin_layout Enumerate
+Argue why this is also true for the transformation extended by the identity
+ from an 
+\begin_inset Formula $m\times m$
+\end_inset
+
+ to and 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrix as
+\begin_inset Formula 
+\[
+\widehat{P}=\begin{pmatrix}\mathrm{I}_{m-n} & 0\\
+0 & P
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Suppose 
+\begin_inset Formula $v=(a_{1},\dots,a_{n})^{\top}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $1\leq i<j\leq n$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+th entry of 
+\begin_inset Formula $P$
+\end_inset
+
+ is 
+\begin_inset Formula $-2a_{i}a_{j}$
+\end_inset
+
+ and the 
+\begin_inset Formula $(j,i)$
+\end_inset
+
+th entry of 
+\begin_inset Formula $P$
+\end_inset
+
+ is 
+\begin_inset Formula $-2a_{j}a_{i}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $-2a_{i}a_{j}=-2a_{j}a_{i}$
+\end_inset
+
+, we see that 
+\begin_inset Formula $P$
+\end_inset
+
+ is symmetric.
+ To see that it is orthogonal, let 
+\begin_inset Formula $w_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $w_{2}$
+\end_inset
+
+ be vectors in 
+\begin_inset Formula $\mathbb{R}^{m}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\langle Pw_{1},Pw_{2}\rangle & =(Pw_{1})^{\top}Pw_{2}\\
+ & =(w_{1}-2vv^{\top}w_{1})^{\top}(w_{2}-2vv^{\top}w_{2})\\
+ & =(w_{1}^{\top}-2w_{1}^{\top}vv^{\top})(w_{2}-2vv^{\top}w_{2})\\
+ & =w_{1}^{\top}w_{2}-2w_{1}^{\top}vv^{\top}w_{2}-2w_{1}^{\top}vv^{\top}w_{2}+4w_{1}^{\top}vv^{\top}vv^{\top}w_{2}\\
+ & =w_{1}^{\top}w_{2}-2w_{1}^{\top}vv^{\top}w_{2}-2w_{1}^{\top}vv^{\top}w_{2}+4w_{1}^{\top}vv^{\top}w_{2}\\
+ & =w_{1}^{\top}w_{2}\\
+ & =\langle w_{1},w_{2}\rangle.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $P$
+\end_inset
+
+ is orthogonal.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Clearly 
+\begin_inset Formula $\widehat{P}$
+\end_inset
+
+ is symmetric since the identity matrix is symmetric and since 
+\begin_inset Formula $P$
+\end_inset
+
+ is symmetric.
+ To see why 
+\begin_inset Formula $\widehat{P}$
+\end_inset
+
+ is orthogonal, note that
+\begin_inset Formula 
+\begin{align*}
+\widehat{P}\widehat{P}^{\top} & =\widehat{P}\widehat{P}\\
+ & =\begin{pmatrix}\mathrm{I}_{m-n} & 0\\
+0 & P
+\end{pmatrix}\begin{pmatrix}\mathrm{I}_{m-n} & 0\\
+0 & P
+\end{pmatrix}\\
+ & =\begin{pmatrix}\mathrm{I}_{m-n}\mathrm{I}_{m-n} & 0\\
+0 & PP
+\end{pmatrix}\\
+ & =\begin{pmatrix}\mathrm{I}_{m-n} & 0\\
+0 & \mathrm{I}_{m}
+\end{pmatrix}\\
+ & =\mathrm{I}_{n}.
+\end{align*}
+
+\end_inset
+
+A similar computation shows 
+\begin_inset Formula $\widehat{P}^{\top}\widehat{P}=\mathrm{I}_{n}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\widehat{P}$
+\end_inset
+
+ is also orthogonal.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Consider the function
+\begin_inset Formula 
+\[
+f(x)=\sin(10x)-2x.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+How many roots does the function 
+\begin_inset Formula $f$
+\end_inset
+
+ have? Consider generating a plot in MATLAB to help.
+\end_layout
+
+\begin_layout Enumerate
+With this knowledge, find bounds for the bisection method with a sign change
+ and determine all roots with 
+\begin_inset Formula $8$
+\end_inset
+
+ digits of accuracy this way.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Using MATLAB, we plot 
+\begin_inset Formula $f(x)=\sin(10x)-2x$
+\end_inset
+
+ together with the zero function below.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename C:/Users/Cohom/Documents/MATLAB/rootsfunction.jpg
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It appears that 
+\begin_inset Formula $f$
+\end_inset
+
+ has three roots.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ It is easy to see that one of the roots is 
+\begin_inset Formula $x=0$
+\end_inset
+
+, so we just need to find the other roots.
+ Furthermore, since
+\begin_inset Formula 
+\begin{align*}
+f(-x) & =\sin(10\cdot(-x))-2\cdot(-x)\\
+ & =\sin(-10x)+2x\\
+ & =-\sin(10x)+2x\\
+ & =-f(x),
+\end{align*}
+
+\end_inset
+
+it suffices to find the positive root of 
+\begin_inset Formula $f$
+\end_inset
+
+ since the negative root is just negative of the postive root.
+ To find the positive root, we use the bound 
+\begin_inset Formula $[0.2,0.5]$
+\end_inset
+
+ in the bisect.m function:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+format long
+\end_layout
+
+\begin_layout Plain Layout
+
+a = 0.2;
+\end_layout
+
+\begin_layout Plain Layout
+
+b = 0.5;
+\end_layout
+
+\begin_layout Plain Layout
+
+f = @(x) sin(10*x)-2*x;
+\end_layout
+
+\begin_layout Plain Layout
+
+t = 0.0000000001;
+\end_layout
+
+\begin_layout Plain Layout
+
+bisect(a,b,f,t)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ans =
+\end_layout
+
+\begin_layout Plain Layout
+
+   
+\end_layout
+
+\begin_layout Plain Layout
+
+	0.259573907998856
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus the roots are (within 
+\begin_inset Formula $8$
+\end_inset
+
+ digits of accuracy) given in the set below:
+\begin_inset Formula 
+\[
+\{-0.259573908,0,0.259573908\}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ For the equation 
+\begin_inset Formula 
+\[
+f(x)=x^{2}-3x+2=0
+\]
+
+\end_inset
+
+consider the fixed point problems
+\begin_inset Formula 
+\begin{align*}
+g_{1}(x) & =(x^{2}+2)/3\\
+g_{2}(x) & =\sqrt{3x-2}\\
+g_{3}(x) & =3-\frac{2}{x}\\
+g_{4}(x) & =(x^{2}-2)/(2x-3).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Analyze the convergence properties for each 
+\begin_inset Formula $g_{i}(x)$
+\end_inset
+
+ iteration for the root 
+\begin_inset Formula $x=2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Confirm this by implementing the fixed-point iteration for each 
+\begin_inset Formula $g_{i}(x)$
+\end_inset
+
+ and check the convergence and approximate convergence rate.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ First we consider 
+\begin_inset Formula $g_{1}$
+\end_inset
+
+.
+ We calculate
+\begin_inset Formula 
+\begin{align*}
+\left|g'_{1}(2)\right| & =\left|\frac{2\cdot2}{3}\right|\\
+ & =\left|\frac{4}{3}\right|\\
+ & >1.
+\end{align*}
+
+\end_inset
+
+Thus the iterative scheme with respect to 
+\begin_inset Formula $g_{1}$
+\end_inset
+
+ is divergent.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we consider 
+\begin_inset Formula $g_{2}$
+\end_inset
+
+.
+ We calculate
+\begin_inset Formula 
+\begin{align*}
+\left|g'_{2}(2)\right| & =\left|\frac{3}{2\sqrt{3\cdot2-2}}\right|\\
+ & =\left|\frac{3}{4}\right|\\
+ & <1.
+\end{align*}
+
+\end_inset
+
+Thus the iterative scheme with respect to 
+\begin_inset Formula $g_{2}$
+\end_inset
+
+ is locally convergent.
+ It converges linearly with constant 
+\begin_inset Formula $C=3/4$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we consider 
+\begin_inset Formula $g_{3}$
+\end_inset
+
+.
+ We calculate
+\begin_inset Formula 
+\begin{align*}
+\left|g'_{3}(2)\right| & =\left|\frac{2}{2^{2}}\right|\\
+ & =\left|\frac{1}{2}\right|\\
+ & <1.
+\end{align*}
+
+\end_inset
+
+Thus the iterative scheme with respect to 
+\begin_inset Formula $g_{3}$
+\end_inset
+
+ is locally convergent.
+ It converges linearly with constant 
+\begin_inset Formula $C=1/2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Finally we consider 
+\begin_inset Formula $g_{4}$
+\end_inset
+
+.
+ We calculate
+\begin_inset Formula 
+\begin{align*}
+\left|g'_{4}(2)\right| & =\left|\frac{2(2^{2}-3\cdot2+2)}{(2\cdot2-3)^{2}}\right|\\
+ & =\left|0\right|\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+Thus the iterative scheme with respect to 
+\begin_inset Formula $g_{3}$
+\end_inset
+
+ is locally convergent.
+ It converges quadratically with constant 
+\begin_inset Formula $C=g''(2)/2=2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ To do this, we first write the following function in MATLAB and save it
+ as iterationserrors.m:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [iterations, errors] = iterationserrors(g,a); 
+\end_layout
+
+\begin_layout Plain Layout
+
+format long; 
+\end_layout
+
+\begin_layout Plain Layout
+
+x = g(a);  
+\end_layout
+
+\begin_layout Plain Layout
+
+e = x - 2;  
+\end_layout
+
+\begin_layout Plain Layout
+
+iterations = [x];  
+\end_layout
+
+\begin_layout Plain Layout
+
+errors = [e];  
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:4 	 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	x = g(x); 	 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	e = x-2; 	 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	iterations = [iterations x]; 	 
+\end_layout
+
+\begin_layout Plain Layout
+
+	errors = [errors e];  
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:5 	 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	disp([i iterations(i) errors(i)]); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With this code in hand, we can look at the convergence tables for each 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+g1 = @(x) (x^2 +2)/3
+\end_layout
+
+\begin_layout Plain Layout
+
+g2 = @(x) (3*x - 2)^(1/2)
+\end_layout
+
+\begin_layout Plain Layout
+
+g3 = @(x) 3 - 2/x
+\end_layout
+
+\begin_layout Plain Layout
+
+g4 = @(x) (x^2 - 2)/(2*x - 3)
+\end_layout
+
+\begin_layout Plain Layout
+
+a = 1.9
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+iterationserrors(g1,a); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ 1.000000000000000   1.870000000000000  -0.130000000000000
+\end_layout
+
+\begin_layout Plain Layout
+
+   2.000000000000000   1.832300000000000  -0.167700000000000
+\end_layout
+
+\begin_layout Plain Layout
+
+   3.000000000000000   1.785774430000000  -0.214225570000000
+\end_layout
+
+\begin_layout Plain Layout
+
+   4.000000000000000   1.729663438280608  -0.270336561719392
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% diverges
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+iterationserrors(g2,a); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  1.000000000000000   1.923538406167134  -0.076461593832866
+\end_layout
+
+\begin_layout Plain Layout
+
+   2.000000000000000   1.941807204256232  -0.058192795743768
+\end_layout
+
+\begin_layout Plain Layout
+
+   3.000000000000000   1.955868506001540  -0.044131493998460
+\end_layout
+
+\begin_layout Plain Layout
+
+   4.000000000000000   1.966622871321449  -0.033377128678551
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% converges linearly
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+iterationserrors(g3,a); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  1.000000000000000   1.947368421052632  -0.052631578947368
+\end_layout
+
+\begin_layout Plain Layout
+
+   2.000000000000000   1.972972972972973  -0.027027027027027
+\end_layout
+
+\begin_layout Plain Layout
+
+   3.000000000000000   1.986301369863014  -0.013698630136986
+\end_layout
+
+\begin_layout Plain Layout
+
+   4.000000000000000   1.993103448275862  -0.006896551724138
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% converges linearly
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+iterationserrors(g4,a); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  1.000000000000000   2.012500000000000   0.012500000000000
+\end_layout
+
+\begin_layout Plain Layout
+
+   2.000000000000000   2.000152439024390   0.000152439024390
+\end_layout
+
+\begin_layout Plain Layout
+
+   3.000000000000000   2.000000023230574   0.000000023230574
+\end_layout
+
+\begin_layout Plain Layout
+
+   4.000000000000000   2.000000000000001   0.000000000000001
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% converges quadratically
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

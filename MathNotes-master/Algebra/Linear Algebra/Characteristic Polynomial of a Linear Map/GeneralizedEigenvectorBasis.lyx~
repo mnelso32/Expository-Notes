@@ -1,0 +1,915 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Constructing a Basis for 
+\begin_inset Formula $\text{ker}(\varphi^{m})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\series bold
+Construction
+\end_layout
+
+\begin_layout Standard
+Assume 
+\begin_inset Formula $K$
+\end_inset
+
+ is algebraically closed.
+ Let 
+\begin_inset Formula $T\colon V\to V$
+\end_inset
+
+ be a linear map.
+ Suppose the characteristic polynomial of 
+\begin_inset Formula $T$
+\end_inset
+
+ factors as 
+\begin_inset Formula 
+\[
+\chi_{T}(X)=(X-\lambda)^{n}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Denote 
+\begin_inset Formula $\varphi:=T-\lambda$
+\end_inset
+
+.
+ We want to construct a basis for 
+\begin_inset Formula $\text{ker}(\varphi^{n})=V$
+\end_inset
+
+.
+ Before doing so, we first make the following observation.
+ For each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+, we have the short exact sequence
+\begin_inset Formula 
+\begin{equation}
+0\to\text{ker}(\varphi^{i-1})\hookrightarrow\text{ker}(\varphi^{i})\to\text{ker}(\varphi^{i})\slash\text{ker}(\varphi^{i-1})\to0.\label{eq:sesker-1}
+\end{equation}
+
+\end_inset
+
+It follows from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:sesker-1})
+\end_layout
+
+\end_inset
+
+ that
+\begin_inset Formula 
+\begin{align}
+\sum_{i=1}^{n}\dim(\text{ker}(\varphi^{i})\slash\text{ker}(\varphi^{i-1})) & =\sum_{i=1}^{n}\dim(\text{ker}(\varphi^{i}))-\dim(\text{ker}(\varphi^{i-1}))\nonumber \\
+ & =\dim(\text{ker}(\varphi^{n}))-\dim(\text{ker}(\varphi^{0}))\label{eq:dimformula}\\
+ & =n.\nonumber 
+\end{align}
+
+\end_inset
+
+Now we proceed to construct a basis for 
+\begin_inset Formula $\text{ker}(\varphi^{n})$
+\end_inset
+
+ as follows.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula 
+\[
+m_{1}:=\max\{i\mid\dim(\text{ker}(\varphi^{i})\slash\text{ker}(\varphi^{i-1}))>0\}.
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $1\leq m_{1}\leq n$
+\end_inset
+
+.
+ Indeed, we have 
+\begin_inset Formula $1\leq m_{1}$
+\end_inset
+
+ since the dimension of the eigenspace 
+\begin_inset Formula $E_{1}$
+\end_inset
+
+ is nonzero and we have 
+\begin_inset Formula $m_{1}\leq n$
+\end_inset
+
+ since the characteristic polynomial kills 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $m_{1}=1$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\begin{align*}
+\dim(E_{1}) & =\dim(\text{ker}(\varphi))\\
+ & =\sum_{i=1}^{n}\dim(\text{ker}(\varphi^{i})\slash\text{ker}(\varphi^{i-1}))\\
+ & =n,
+\end{align*}
+
+\end_inset
+
+by the dimension formula 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:dimformula})
+\end_layout
+
+\end_inset
+
+ above.
+ In this case, 
+\begin_inset Formula $T$
+\end_inset
+
+ is diagonalizable, and we can find a basis of 
+\begin_inset Formula $V$
+\end_inset
+
+ consisting of eigenvectors.
+ Thus assume 
+\begin_inset Formula $1<m_{1}\leq n$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\{\overline{v}_{1}^{m_{1}},\dots,\overline{v}_{k_{1}}^{m_{1}}\}$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+When we write 
+\begin_inset Formula $\overline{v}_{j}^{m}$
+\end_inset
+
+, it is understood that 
+\begin_inset Formula $v_{j}^{m_{n}}\in\text{ker}(\varphi^{m})$
+\end_inset
+
+ is a representative of the coset 
+\begin_inset Formula $\overline{v}_{j}^{m}\in\text{\text{ker}(\varphi^{m})\slash\text{ker}(\varphi^{m-1})}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\{\overline{v}_{1}^{m},\dots,\overline{v}_{k}^{m}\}$
+\end_inset
+
+ is a linearly independent set 
+\begin_inset Formula $\text{ker}(\varphi^{m})\slash\text{ker}(\varphi^{m-1})$
+\end_inset
+
+, then 
+\begin_inset Formula $\{v_{1}^{m},\dots,v_{k}^{m}\}$
+\end_inset
+
+ is a linearly independent set in 
+\begin_inset Formula $\text{ker}(\varphi^{m})$
+\end_inset
+
+ since it is in the preimage of a linear map.
+ We will use this fact without explaining it again.
+ 
+\end_layout
+
+\end_inset
+
+ be a basis of 
+\begin_inset Formula $\text{ker}(\varphi^{m_{1}})\slash\text{ker}(\varphi^{m_{1}-1})$
+\end_inset
+
+.
+ It follows from linear independence of 
+\begin_inset Formula $\{\overline{v}_{1}^{m_{1}},\dots,\overline{v}_{k_{1}}^{m_{1}}\}$
+\end_inset
+
+ that if
+\begin_inset Formula 
+\begin{equation}
+a_{1}\overline{v}_{1}^{m_{1}}+\cdots+a_{k_{1}}\overline{v}_{k_{1}}^{m_{1}}=0\label{cosetlin}
+\end{equation}
+
+\end_inset
+
+for some 
+\begin_inset Formula $a_{1},\dots,a_{k_{1}}\in K$
+\end_inset
+
+, then we must have 
+\begin_inset Formula $a_{1}=\cdots=a_{k_{1}}=0$
+\end_inset
+
+.
+ In other words, if
+\begin_inset Formula 
+\begin{align*}
+a_{1}v_{1}^{m_{1}}+\cdots+a_{k_{1}}v_{k_{1}}^{m_{1}} & \in\text{ker}(\varphi^{m_{1}-1})
+\end{align*}
+
+\end_inset
+
+for some 
+\begin_inset Formula $a_{1},\dots,a_{k_{1}}\in K$
+\end_inset
+
+, then we must have 
+\begin_inset Formula $a_{1}=\cdots=a_{k_{1}}=0$
+\end_inset
+
+.
+ In other words, if 
+\begin_inset Formula 
+\[
+a_{1}\varphi^{m_{1}-1}(v_{1}^{m_{1}})+\cdots+a_{k_{1}}\varphi^{m_{1}-1}(v_{k_{1}}^{m_{1}})=0
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $a_{1},\dots,a_{k_{1}}\in K$
+\end_inset
+
+, then we must have 
+\begin_inset Formula $a_{1}=\cdots=a_{k_{1}}=0$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $\{\varphi^{m_{1}-1}(v_{1}^{m_{1}}),\dots,\varphi^{m_{1}-1}(v_{k_{1}}^{m_{1}})\}$
+\end_inset
+
+ is a linearly independent set in 
+\begin_inset Formula $\text{ker}(\varphi)$
+\end_inset
+
+.
+ In fact, 
+\begin_inset Formula $\{\varphi^{m_{1}-i}(v_{1}^{m_{1}}),\dots,\varphi^{m_{1}-i}(v_{k_{1}}^{m_{1}})\}$
+\end_inset
+
+ is a linearly independent set in 
+\begin_inset Formula $\text{ker}(\varphi^{i})$
+\end_inset
+
+ for all 
+\begin_inset Formula $0\leq i<m_{1}$
+\end_inset
+
+ since 
+\begin_inset Formula $\{\varphi^{m_{1}-i}(v_{1}^{m_{1}}),\dots,\varphi^{m_{1}-i}(v_{k_{1}}^{m_{1}})\}$
+\end_inset
+
+ is in the preimage of 
+\begin_inset Formula $\{\varphi^{m_{1}-1}(v_{1}^{m_{1}}),\dots,\varphi^{m_{1}-1}(v_{k_{1}}^{m_{1}})\}$
+\end_inset
+
+ under the map 
+\begin_inset Formula $\varphi^{i-1}\colon\text{ker}(\varphi^{i})\to\text{ker}(\varphi)$
+\end_inset
+
+.
+ Moreover, 
+\begin_inset Formula $\{\varphi^{m_{1}-i}(\overline{v}_{1}^{m_{1}}),\dots,\varphi^{m_{1}-i}(\overline{v}_{k_{1}}^{m_{1}})\}$
+\end_inset
+
+ is a linearly independent set in 
+\begin_inset Formula $\text{ker}(\varphi^{i})\slash\text{ker}(\varphi^{i-1})$
+\end_inset
+
+ all 
+\begin_inset Formula $1\leq i<m_{1}$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula 
+\[
+a_{1}\varphi^{m_{1}-i}(v_{1}^{m_{1}})+\cdots+a_{k_{1}}\varphi^{m_{1}-i}(v_{k_{1}}^{m_{1}})\in\text{ker}(\varphi^{i-1})
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $a_{1},\dots,a_{k_{1}}$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{align*}
+a_{1}\varphi^{m_{1}-1}(v_{1}^{m_{1}})+\cdots+a_{k_{1}}\varphi^{m_{1}-1}(v_{k_{1}}^{m_{1}}) & =a_{1}\varphi^{i-1}(\varphi^{m_{1}-i}(v_{1}^{m_{1}}))+\cdots+a_{k_{1}}\varphi^{i-1}(\varphi^{m_{1}-i}(v_{k_{1}}^{m_{1}}))\\
+ & =\varphi^{i-1}(a_{1}\varphi^{m_{1}-i}(v_{1}^{m_{1}})+\cdots+a_{k_{1}}\varphi^{m_{1}-i}(v_{k_{1}}^{m_{1}}))\\
+ & =0
+\end{align*}
+
+\end_inset
+
+which implies 
+\begin_inset Formula $a_{1}=\cdots=a_{k_{1}}=0$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\{\varphi^{m_{1}-i}(\overline{v}_{1}^{m_{1}}),\dots,\varphi^{m_{1}-i}(\overline{v}_{k_{1}}^{m_{1}})\}$
+\end_inset
+
+ is a linearly independent set in 
+\begin_inset Formula $\text{ker}(\varphi^{i})\slash\text{ker}(\varphi^{i-1})$
+\end_inset
+
+ we have the following inequality
+\begin_inset Formula 
+\begin{equation}
+\text{dim}(\text{ker}(\varphi^{i})\slash\text{ker}(\varphi^{i-1}))\geq\text{dim}(\text{ker}(\varphi^{m_{1}})\slash\text{ker}(\varphi^{m_{1}-1})).\label{ineqker}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq i\leq m_{1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now assume that 
+\begin_inset Formula $m_{1}=n$
+\end_inset
+
+.
+ Then it follows from the dimension formula 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:dimformula})
+\end_layout
+
+\end_inset
+
+ and the inequality 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{ineqker})
+\end_layout
+
+\end_inset
+
+ that 
+\begin_inset Formula 
+\[
+\text{dim}(\text{ker}(\varphi^{i})\slash\text{ker}(\varphi^{i-1}))=1
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ In this case, 
+\begin_inset Formula $\{v_{1}^{n},\varphi(v_{1}^{n}),\dots,\varphi^{n}(v_{1}^{n})\}$
+\end_inset
+
+ gives us a basis for 
+\begin_inset Formula $V$
+\end_inset
+
+ and we are done.
+ So assume 
+\begin_inset Formula $1<m_{1}<n$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\[
+m_{2}:=\max\{i\mid\dim(\text{ker}(\varphi^{i})\slash\text{ker}(\varphi^{i-1}))>\text{dim}(\text{ker}(\varphi^{m_{1}})\slash\text{ker}(\varphi^{m_{1}-1}))\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $1\leq m_{2}<m_{1}$
+\end_inset
+
+.
+ Indeed, that 
+\begin_inset Formula $m_{2}<m_{1}$
+\end_inset
+
+ is clear and that 
+\begin_inset Formula $1\leq m_{2}$
+\end_inset
+
+ follows from 
+\begin_inset Formula $m_{1}<n$
+\end_inset
+
+ together with the dimension formula 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:dimformula})
+\end_layout
+
+\end_inset
+
+ and the inequality 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{ineqker})
+\end_layout
+
+\end_inset
+
+.
+ Extend 
+\begin_inset Formula $\{\varphi^{m_{1}-m_{2}}(\overline{v}_{1}^{m_{1}}),\dots,\varphi^{m_{1}-m_{2}}(\overline{v}_{k_{1}}^{m_{1}})\}$
+\end_inset
+
+ to a basis of 
+\begin_inset Formula $\text{ker}(\varphi^{m_{1}})\slash\text{ker}(\varphi^{m_{1}-1})$
+\end_inset
+
+, say
+\begin_inset Formula 
+\[
+\{\varphi^{m_{1}-m_{2}}(\overline{v}_{1}^{m_{1}}),\dots,\varphi^{m_{1}-m_{2}}(\overline{v}_{k_{1}}^{m_{1}}),\overline{v}_{1}^{m_{2}},\dots,\overline{v}_{k_{2}}^{m_{2}}\}.
+\]
+
+\end_inset
+
+ By the same arguments as above, the set 
+\begin_inset Formula 
+\[
+\{\varphi^{i}(\overline{v}_{1}^{m}),\dots,\varphi^{i}(\overline{v}_{k_{1}}^{m}),\varphi^{i-1}(\overline{v}_{1}^{m-1}),\dots,\varphi^{i-1}(\overline{v}_{k_{2}}^{m-1})\}\{\varphi^{m_{1}-m_{2}}(\overline{v}_{1}^{m_{1}}),\dots,\varphi^{m_{1}-m_{2}}(\overline{v}_{k_{1}}^{m_{1}}),\overline{v}_{1}^{m_{2}},\dots,\overline{v}_{k_{2}}^{m_{2}}\}
+\]
+
+\end_inset
+
+ forms a linearly independent set in 
+\begin_inset Formula $\text{ker}(\varphi^{m-i})\slash\text{ker}(\varphi^{m-i-1})$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i<m$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Proceeding inductively, Let
+\begin_inset Formula 
+\[
+m_{2}:=\max\{i\mid\dim(\text{ker}(\varphi^{i})\slash\text{ker}(\varphi^{i-1}))>\text{dim}(\text{ker}(\varphi^{m_{1}})\slash\text{ker}(\varphi^{m_{1}-1}))\}.
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $1\leq m_{2}<m_{1}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+First note that for each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+, we have the short exact sequence
+\begin_inset Formula 
+\begin{equation}
+0\to\text{ker}(\varphi^{i-1})\hookrightarrow\text{ker}(\varphi^{i})\to\text{ker}(\varphi^{i})\slash\text{ker}(\varphi^{i-1})\to0\label{eq:sesker}
+\end{equation}
+
+\end_inset
+
+It follows from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:sesker})
+\end_layout
+
+\end_inset
+
+ that
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=1}^{n}\dim(\text{ker}(\varphi^{i})\slash\text{ker}(\varphi^{i-1})) & =\sum_{i=1}^{n}\dim(\text{ker}(\varphi^{i}))-\dim(\text{ker}(\varphi^{i-1}))\\
+ & =\dim(\text{ker}(\varphi^{n}))-\dim(\text{ker}(\varphi^{0}))\\
+ & =n.
+\end{align*}
+
+\end_inset
+
+For each 
+\begin_inset Formula $0\leq i<m$
+\end_inset
+
+, we will lift a basis of 
+\begin_inset Formula $\text{ker}(\varphi^{i+1})\slash\text{ker}(\varphi^{i})$
+\end_inset
+
+ to a linearly independent set in 
+\begin_inset Formula $\text{ker}(\varphi^{i+1})$
+\end_inset
+
+.
+ Then we will show that the union of all of these linearly independent subsets
+ forms a basis of 
+\begin_inset Formula $\text{ker}(\varphi^{m})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A\colon K^{10}\to K^{10}$
+\end_inset
+
+ be given by the matrix 
+\begin_inset Formula 
+\[
+A:=\begin{pmatrix}1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case, we have 
+\begin_inset Formula $m_{1}=4$
+\end_inset
+
+, 
+\begin_inset Formula $m_{2}=2$
+\end_inset
+
+, 
+\begin_inset Formula $m_{3}=1$
+\end_inset
+
+, and 
+\begin_inset Formula $k_{1}=1$
+\end_inset
+
+, 
+\begin_inset Formula $k_{2}=2$
+\end_inset
+
+, 
+\begin_inset Formula $k_{3}=2$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\[
+m_{1}k_{1}+m_{2}k_{2}+m_{3}k_{3}=\mu(1),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mu(1)=10$
+\end_inset
+
+ is the algebraic multiplicity of the eigenvalue 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ We also note that
+\begin_inset Formula 
+\[
+k_{1}+k_{2}+k_{3}=\gamma(1),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\gamma(1)=5$
+\end_inset
+
+ is the geometric multiplicity of the eigenvalue 
+\begin_inset Formula $1$
+\end_inset
+
+, i.e.
+ the dimension of the eigenspace 
+\begin_inset Formula $E_{1}$
+\end_inset
+
+.
+ The generalized eigenvectors are given by
+\begin_inset Formula 
+\begin{align*}
+v_{1}^{4} & =e_{4}\\
+\varphi(v_{1}^{4}) & =e_{3}\\
+\varphi^{2}(v_{1}^{4}) & =e_{2}\\
+\varphi^{3}(v_{1}^{4}) & =e_{1}\\
+v_{1}^{2} & =e_{6}\\
+\varphi(v_{1}^{2}) & =e_{5}\\
+v_{2}^{2} & =e_{8}\\
+\varphi(v_{2}^{2}) & =e_{7}\\
+v_{1}^{1} & =e_{9}\\
+v_{2}^{1} & =e_{10}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using our notation as above, we can line up the generalized eigenvectors
+ like so:
+\begin_inset Formula 
+\[
+\begin{array}{ccccccc}
+\text{ker}(\varphi^{4})\slash\text{ker}(\varphi^{3}): &  & v_{1}^{4}\\
+ &  & \mid\\
+\text{ker}(\varphi^{3})\slash\text{ker}(\varphi^{2}): &  & \varphi(v_{1}^{4})\\
+ &  & \mid\\
+\text{ker}(\varphi^{2})\slash\text{ker}(\varphi): &  & \varphi^{2}(v_{1}^{4}) & v_{1}^{2} & v_{2}^{2}\\
+ &  & \mid & \mid & \mid\\
+\text{ker}(\varphi): &  & \varphi^{3}(v_{1}^{4}) & \varphi(v_{1}^{2}) & \varphi(v_{2}^{2}) & v_{1}^{1} & v_{2}^{1}
+\end{array}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

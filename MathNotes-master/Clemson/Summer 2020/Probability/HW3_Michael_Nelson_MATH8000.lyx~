@@ -1,0 +1,1810 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Probability Homework 3
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Problem 3.14
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.14.a
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $0<p<1$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $n\in\mathbb{Z}_{\geq1}$
+\end_inset
+
+, let 
+\begin_inset Formula $f_{X}(n)=-(1-p)^{n}/(n\log p)$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $f_{X}(n)>0$
+\end_inset
+
+ since 
+\begin_inset Formula $\log p<0$
+\end_inset
+
+.
+ Also, note that 
+\begin_inset Formula 
+\begin{align*}
+\sum_{n=-\infty}^{\infty}f_{X}(n) & =\sum_{n=1}^{\infty}f_{X}(n)\\
+ & =\sum_{n=1}^{\infty}\frac{-(1-p)^{n}}{n\log p}\\
+ & =\frac{1}{\log p}\sum_{n=1}^{\infty}\frac{-(1-p)^{n}}{n}\\
+ & =\frac{1}{\log p}\log p\\
+ & =1,
+\end{align*}
+
+\end_inset
+
+where we used the fact that the Taylor series for 
+\begin_inset Formula $\log x$
+\end_inset
+
+ centered at 
+\begin_inset Formula $x=1$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\log x=\sum_{n=1}^{\infty}\frac{-(1-x)^{n}}{n},
+\]
+
+\end_inset
+
+which has radius of convergence 
+\begin_inset Formula $|x|<1$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $f_{X}$
+\end_inset
+
+ is a legitimate probability function.
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.14.b
+\end_layout
+
+\begin_layout Standard
+We now wish to find the mean and variance of 
+\begin_inset Formula $f_{X}$
+\end_inset
+
+.
+ First we find the mean.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}X & =\sum_{n=-\infty}^{\infty}nf_{X}(n)\\
+ & =\sum_{n=1}^{\infty}nf_{X}(n)\\
+ & =\sum_{n=1}^{\infty}\frac{-(1-p)^{n}}{\log p}\\
+ & =\frac{-1}{\log p}\sum_{n=1}^{\infty}(1-p)^{n}\\
+ & =\frac{-1}{\log p}\left(\frac{1-p}{1-(1-p)}\right)\\
+ & =\frac{p-1}{p\log p},
+\end{align*}
+
+\end_inset
+
+where we used the fact that the Taylor series for 
+\begin_inset Formula $x/(1-x)$
+\end_inset
+
+ centered at 
+\begin_inset Formula $x=0$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\frac{x}{1-x}=\sum_{n=1}^{\infty}x^{n},
+\]
+
+\end_inset
+
+which has radius of convergence 
+\begin_inset Formula $|x|<1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we find the variance.
+ First we calculate
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(X^{2}) & =\sum_{n=-\infty}^{\infty}n^{2}f_{X}(n)\\
+ & =\sum_{n=1}^{\infty}n^{2}f_{X}(n)\\
+ & =\sum_{n=1}^{\infty}\frac{-n(1-p)^{n}}{\log p}\\
+ & =\frac{-1}{\log p}\sum_{n=1}^{\infty}n(1-p)^{n}\\
+ & =\frac{-1}{\log p}\left(\frac{1-p}{(1-(1-p))^{2}}\right)\\
+ & =\frac{p-1}{p^{2}\log p},
+\end{align*}
+
+\end_inset
+
+where we used the fact that the Taylor series for 
+\begin_inset Formula $x/(1-x)^{2}$
+\end_inset
+
+ centered at 
+\begin_inset Formula $x=0$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\frac{x}{(1-x)^{2}}=\sum_{n=1}^{\infty}nx^{n},
+\]
+
+\end_inset
+
+which has radius of convergence 
+\begin_inset Formula $|x|<1$
+\end_inset
+
+.
+ Now we calculate
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Var}(X) & =\mathrm{E}(X^{2})-(\mathrm{E}X)^{2}\\
+ & =\frac{p-1}{p^{2}\log p}-\left(\frac{p-1}{p\log p}\right)^{2}\\
+ & =\frac{(p-1)\log p-(p-1)^{2}}{p^{2}\log^{2}p}\\
+ & =-\frac{(1-p)\log p+(1-p)^{2}}{p^{2}\log^{2}p}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 3.24
+\end_layout
+
+\begin_layout Subsubsection*
+Exponential Distribution
+\end_layout
+
+\begin_layout Standard
+We recall that the pdf of an exponential distribution is given by
+\begin_inset Formula 
+\[
+f(x;\beta)=\begin{cases}
+\beta e^{-\beta x} & x\geq0\\
+0 & x<0
+\end{cases}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\beta>0$
+\end_inset
+
+ is the paramater of the distribution.
+ The cdf of an exponential distribution is given by
+\begin_inset Formula 
+\[
+F(x;\beta)=\begin{cases}
+1-e^{-\beta x} & x\geq0\\
+0 & x<0
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Gamma Distribution
+\end_layout
+
+\begin_layout Standard
+We recall that the pdf of a gamma distribution is given by
+\begin_inset Formula 
+\[
+f(x;\alpha,\beta)=\begin{cases}
+\frac{1}{\Gamma(\alpha)\beta^{\alpha}}x^{\alpha-1}e^{-x/\beta} & x>0\\
+0 & x\leq0
+\end{cases}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+ is the shape paramater of the distribution and 
+\begin_inset Formula $\beta>0$
+\end_inset
+
+ is the scale parameter of the distribution, and where the gamma function
+ is defined as
+\begin_inset Formula 
+\[
+\Gamma(\alpha)=\int_{0}^{\infty}x^{\alpha-1}e^{-x}\mathrm{d}x.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.24.a
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\gamma,\beta>0$
+\end_inset
+
+, let 
+\begin_inset Formula $X\sim\mathrm{exponential}(\beta)$
+\end_inset
+
+, and let 
+\begin_inset Formula $Y=g(X)=X^{1/\gamma}$
+\end_inset
+
+.
+ Clearly 
+\begin_inset Formula $\mathcal{Y}=\mathbb{R}_{\geq0}$
+\end_inset
+
+ and 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ is monotone increasing on 
+\begin_inset Formula $\mathcal{X}=\mathbb{R}_{\geq0}$
+\end_inset
+
+.
+ Indeed, we have 
+\begin_inset Formula $g(0)=0$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{align*}
+g'(x) & =\frac{\mathrm{d}}{\mathrm{d}x}(x^{1/\gamma})\\
+ & =\frac{1}{\gamma}x^{(1-\gamma)/\gamma}\\
+ & >0
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\geq0$
+\end_inset
+
+.
+ The inverse function is given by 
+\begin_inset Formula $g^{-1}(y)=y^{\gamma}$
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in\mathcal{Y}=\mathbb{R}_{\geq0}$
+\end_inset
+
+.
+ Thus if 
+\begin_inset Formula $y\in\mathcal{Y}$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{align*}
+f_{Y}(y) & =f_{X}(g^{-1}(y))\cdot\left|\frac{\mathrm{d}}{\mathrm{d}y}g^{-1}(y)\right|\\
+ & =\beta e^{-\beta y^{\gamma}}\cdot\gamma y^{\gamma-1}\\
+ & =\beta\gamma y^{\gamma-1}e^{-\beta y^{\gamma}}.
+\end{align*}
+
+\end_inset
+
+Otherwise, if 
+\begin_inset Formula $y\notin\mathcal{Y}$
+\end_inset
+
+, then 
+\begin_inset Formula $f_{Y}(y)=0$
+\end_inset
+
+.
+ Let us verify that this is in fact a pdf.
+ First note that 
+\begin_inset Formula $f_{Y}(y)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ Next, we have 
+\begin_inset Formula 
+\begin{align*}
+\int_{-\infty}^{\infty}f_{Y}(y)\mathrm{d}y & =\int_{0}^{\infty}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}\beta\gamma y^{\gamma-1}e^{-\beta y^{\gamma}}\mathrm{d}y\\
+ & =-e^{-\beta y^{\gamma}}\Big|_{0}^{\infty}\\
+ & =0-(-1)\\
+ & =1.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $f_{Y}$
+\end_inset
+
+ is in fact a pdf.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we calculate the mean and variance.
+ First we calculate the mean.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}Y & =\int_{-\infty}^{\infty}yf_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}yf_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}\beta\gamma y^{\gamma}e^{-\beta y^{\gamma}}\mathrm{d}y\\
+ & =\beta^{-1/\gamma}\int_{0}^{\infty}u^{1/\gamma}e^{-u}\mathrm{d}u\\
+ & =\beta^{-1/\gamma}\Gamma(1/\gamma+1).
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=\beta y^{\gamma}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we calculate the variance.
+ First we calculate
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(Y^{2}) & =\int_{-\infty}^{\infty}y^{2}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}y^{2}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}\beta\gamma y^{\gamma+1}e^{-\beta y^{\gamma}}\mathrm{d}y\\
+ & =\beta^{-2/\gamma}\int_{0}^{\infty}u^{2/\gamma}e^{-u}\mathrm{d}u\\
+ & =\beta^{-2/\gamma}\Gamma(2/\gamma+1).
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=\beta y^{\gamma}$
+\end_inset
+
+.
+ Thus the variance is given by
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Var}(Y) & =\mathrm{E}(Y^{2})-(\mathrm{E}Y)^{2}\\
+ & =\beta^{-2/\gamma}\left(\Gamma(2/\gamma+1)-\Gamma(1/\gamma+1)^{2}\right).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.24.b
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\beta>0$
+\end_inset
+
+, let 
+\begin_inset Formula $X\sim\mathrm{exponential}(\beta)$
+\end_inset
+
+, and let 
+\begin_inset Formula $Y=g(X)=(2X/\beta)^{1/2}$
+\end_inset
+
+.
+ Clearly 
+\begin_inset Formula $\mathcal{Y}=\mathbb{R}_{\geq0}$
+\end_inset
+
+ and 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ is monotone increasing on 
+\begin_inset Formula $\mathcal{X}=\mathbb{R}_{\geq0}$
+\end_inset
+
+.
+ The inverse function is given by 
+\begin_inset Formula $g^{-1}(y)=(\beta/2)y^{2}$
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in\mathcal{Y}$
+\end_inset
+
+.
+ Thus if 
+\begin_inset Formula $y\in\mathcal{Y}$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{align*}
+f_{Y}(y) & =f_{X}(g^{-1}(y))\cdot\left|\frac{\mathrm{d}}{\mathrm{d}y}g^{-1}(y)\right|\\
+ & =\beta e^{-\beta(\beta/2)y^{2}}\cdot\beta y\\
+ & =\beta^{2}ye^{-\beta^{2}y^{2}/2}.
+\end{align*}
+
+\end_inset
+
+Otherwise, if 
+\begin_inset Formula $y\notin\mathcal{Y}$
+\end_inset
+
+, then 
+\begin_inset Formula $f_{Y}(y)=0$
+\end_inset
+
+.
+ Let us verify that this is in fact a pdf.
+ First note that 
+\begin_inset Formula $f_{Y}(y)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ Next, we have 
+\begin_inset Formula 
+\begin{align*}
+\int_{-\infty}^{\infty}f_{Y}(y)\mathrm{d}y & =\int_{0}^{\infty}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}\beta^{2}ye^{-\beta^{2}y^{2}/2}\mathrm{d}y\\
+ & =-e^{-\beta^{2}y^{2}/2}\Big|_{0}^{\infty}\\
+ & =0-(-1)\\
+ & =1.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $f_{Y}$
+\end_inset
+
+ is in fact a pdf.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we calculate the mean and variance.
+ First we calculate the mean.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}Y & =\int_{-\infty}^{\infty}yf_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}yf_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}\beta^{2}y^{2}e^{-\beta^{2}y^{2}/2}y\\
+ & =\frac{2}{\beta\sqrt{2}}\int_{0}^{\infty}u^{1/2}e^{-u}\mathrm{d}u\\
+ & =\frac{2}{\beta\sqrt{2}}\Gamma(3/2)\\
+ & =\frac{1}{\beta}\sqrt{\frac{\pi}{2}}.
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=\beta^{2}y^{2}/2$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we calculate the variance.
+ First we calculate
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(Y^{2}) & =\int_{-\infty}^{\infty}y^{2}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}y^{2}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}\beta^{2}y^{3}e^{-\beta^{2}y^{2}/2}y\\
+ & =\frac{2}{\beta^{2}}\int_{0}^{\infty}ue^{-u}\mathrm{d}u\\
+ & =\frac{2}{\beta^{2}}
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=\beta^{2}y^{2}/2.$
+\end_inset
+
+ Thus the variance is given by
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Var}(Y) & =\mathrm{E}(Y^{2})-(\mathrm{E}Y)^{2}\\
+ & =\frac{2}{\beta^{2}}-\left(\frac{1}{\beta}\sqrt{\frac{\pi}{2}}\right)^{2}.\\
+ & =\frac{2}{\beta^{2}}-\frac{\pi}{2\beta^{2}}\\
+ & =\frac{4-\pi}{2\beta^{2}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.24.c
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $a,b>0$
+\end_inset
+
+, let 
+\begin_inset Formula $X\sim\mathrm{gamma}(a,b)$
+\end_inset
+
+, and let 
+\begin_inset Formula $Y=g(X)=1/X$
+\end_inset
+
+.
+ Clearly 
+\begin_inset Formula $\mathcal{Y}=\mathbb{R}_{>0}$
+\end_inset
+
+ and 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ is monotone decreasing on 
+\begin_inset Formula $\mathcal{X}=\mathbb{R}_{>0}$
+\end_inset
+
+.
+ The inverse function is given by 
+\begin_inset Formula $g^{-1}(y)=1/y$
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in\mathcal{Y}$
+\end_inset
+
+.
+ Thus if 
+\begin_inset Formula $y\in\mathcal{Y}$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{align*}
+f_{Y}(y) & =f_{X}(g^{-1}(y))\cdot\left|\frac{\mathrm{d}}{\mathrm{d}y}g^{-1}(y)\right|\\
+ & =\frac{1}{\Gamma(a)b^{a}}y^{1-a}e^{-1/by}\cdot1/y^{2}\\
+ & =\frac{1}{\Gamma(a)b^{a}}y^{-1-a}e^{-1/by}
+\end{align*}
+
+\end_inset
+
+Otherwise, if 
+\begin_inset Formula $y\notin\mathcal{Y}$
+\end_inset
+
+, then 
+\begin_inset Formula $f_{Y}(y)=0$
+\end_inset
+
+.
+ Let us verify that this is in fact a pdf.
+ First note that 
+\begin_inset Formula $f_{Y}(y)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ Next, we have 
+\begin_inset Formula 
+\begin{align*}
+\int_{-\infty}^{\infty}f_{Y}(y)\mathrm{d}y & =\int_{0}^{\infty}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}\frac{1}{\Gamma(a)b^{a}}y^{-1-a}e^{-1/by}\mathrm{d}y\\
+ & =\frac{1}{\Gamma(a)b^{a}}\int_{0}^{\infty}y^{-1-a}e^{-1/by}\mathrm{d}y\\
+ & =\frac{1}{\Gamma(a)b^{a}}b^{a}\int_{0}^{\infty}u^{a-1}e^{-u}\mathrm{d}u\\
+ & =\frac{1}{\Gamma(a)b^{a}}b^{a}\Gamma(a)\\
+ & =1.
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=1/by$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $f_{Y}$
+\end_inset
+
+ is in fact a pdf.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we calculate the mean and variance.
+ First we calculate the mean.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}Y & =\int_{-\infty}^{\infty}yf_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}yf_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}\frac{1}{\Gamma(a)b^{a}}y^{-a}e^{-1/by}\mathrm{d}y\\
+ & =\frac{1}{\Gamma(a)b^{a}}\int_{0}^{\infty}y^{-a}e^{-1/by}\mathrm{d}y\\
+ & =\frac{1}{\Gamma(a)b^{a}}\int_{0}^{\infty}b^{a-1}u^{a-2}e^{-u}\mathrm{d}u\\
+ & =\frac{b^{a-1}}{\Gamma(a)b^{a}}\int_{0}^{\infty}u^{a-2}e^{-u}\mathrm{d}u\\
+ & =\frac{\Gamma(a-1)}{b\Gamma(a)}\\
+ & =\frac{1}{(a-1)b}
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=1/by$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we calculate the variance.
+ First we calculate
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(Y^{2}) & =\int_{-\infty}^{\infty}y^{2}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}y^{2}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}\frac{1}{\Gamma(a)b^{a}}y^{1-a}e^{-1/by}\mathrm{d}y\\
+ & =\frac{1}{\Gamma(a)b^{a}}\int_{0}^{\infty}y^{1-a}e^{-1/by}\mathrm{d}y\\
+ & =\frac{1}{\Gamma(a)b^{a}}\int_{0}^{\infty}b^{a-2}u^{a-3}e^{-u}\mathrm{d}u\\
+ & =\frac{b^{a-2}}{\Gamma(a)b^{a}}\int_{0}^{\infty}u^{a-3}e^{-u}\mathrm{d}u\\
+ & =\frac{\Gamma(a-2)}{\Gamma(a)b^{2}}\\
+ & =\frac{1}{(a-1)(a-2)b^{2}}
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=1/by.$
+\end_inset
+
+ Thus the variance is given by
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Var}(Y) & =\mathrm{E}(Y^{2})-(\mathrm{E}Y)^{2}\\
+ & =\frac{1}{(a-1)(a-2)b^{2}}-\left(\frac{1}{(a-1)b}\right)^{2}\\
+ & =\frac{1}{(a-1)(a-2)b^{2}}-\frac{1}{(a-1)^{2}b^{2}}\\
+ & =\frac{1}{(a-1)(a-2)b^{2}}-\frac{1}{(a-1)^{2}b^{2}}\\
+ & =\frac{a-1}{(a-1)^{2}(a-2)b^{2}}-\frac{a-2}{(a-1)^{2}(a-2)b^{2}}\\
+ & =\frac{1}{(a-1)^{2}(a-2)b^{2}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.24.d
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\beta>0$
+\end_inset
+
+, let 
+\begin_inset Formula $X\sim\mathrm{gamma}(3/2,\beta)$
+\end_inset
+
+, and let 
+\begin_inset Formula $Y=g(X)=(X/\beta)^{1/2}$
+\end_inset
+
+.
+ Clearly 
+\begin_inset Formula $\mathcal{Y}=\mathbb{R}_{>0}$
+\end_inset
+
+ and 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ is monotone increasing on 
+\begin_inset Formula $\mathcal{X}=\mathbb{R}_{>0}$
+\end_inset
+
+.
+ The inverse function is given by 
+\begin_inset Formula $g^{-1}(y)=\beta y^{2}$
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in\mathcal{Y}$
+\end_inset
+
+.
+ Thus if 
+\begin_inset Formula $y\in\mathcal{Y}$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{align*}
+f_{Y}(y) & =f_{X}(g^{-1}(y))\cdot\left|\frac{\mathrm{d}}{\mathrm{d}y}g^{-1}(y)\right|\\
+ & =\frac{1}{\Gamma(2/3)\beta^{3/2}}\beta^{3/2-1}y^{2(3/2)-2}e^{-\beta y^{2}/\beta}\cdot2\beta y\\
+ & =\frac{2}{\Gamma(3/2)}y^{2}e^{-y^{2}}
+\end{align*}
+
+\end_inset
+
+Otherwise, if 
+\begin_inset Formula $y\notin\mathcal{Y}$
+\end_inset
+
+, then 
+\begin_inset Formula $f_{Y}(y)=0$
+\end_inset
+
+.
+ Let us verify that this is in fact a pdf.
+ First note that 
+\begin_inset Formula $f_{Y}(y)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ Next, we have 
+\begin_inset Formula 
+\begin{align*}
+\int_{-\infty}^{\infty}f_{Y}(y)\mathrm{d}y & =\int_{0}^{\infty}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}\frac{2}{\Gamma(3/2)}y^{2}e^{-y^{2}}\mathrm{d}y\\
+ & =\frac{1}{\Gamma(3/2)}\int_{0}^{\infty}2y^{2}e^{-y^{2}}\mathrm{d}y\\
+ & =\frac{1}{\Gamma(3/2)}\int_{0}^{\infty}u^{1/2}e^{-u}\mathrm{d}u\\
+ & =\frac{1}{\Gamma(3/2)}\Gamma(3/2)\\
+ & =1
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=y^{2}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $f_{Y}$
+\end_inset
+
+ is in fact a pdf.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we calculate the mean and variance.
+ First we calculate the mean.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}Y & =\int_{-\infty}^{\infty}yf_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}yf_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}\frac{2}{\Gamma(3/2)}y^{3}e^{-y^{2}}\mathrm{d}y\\
+ & =\frac{1}{\Gamma(3/2)}\int_{0}^{\infty}2y^{3}e^{-y^{2}}\mathrm{d}y\\
+ & =\frac{1}{\Gamma(3/2)}\int_{0}^{\infty}ue^{-u}\mathrm{d}u\\
+ & =\frac{1}{\Gamma(3/2)}\Gamma(2)\\
+ & =\frac{2}{\sqrt{\pi}}
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=y^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we calculate the variance.
+ First we calculate
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(Y^{2}) & =\int_{-\infty}^{\infty}y^{2}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}y^{2}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{0}^{\infty}\frac{2}{\Gamma(3/2)}y^{4}e^{-y^{2}}\mathrm{d}y\\
+ & =\frac{1}{\Gamma(3/2)}\int_{0}^{\infty}2y^{4}e^{-y^{2}}\mathrm{d}y\\
+ & =\frac{1}{\Gamma(3/2)}\int_{0}^{\infty}u^{3/2}e^{-u}\mathrm{d}u\\
+ & =\frac{1}{\Gamma(3/2)}\Gamma(5/2)\\
+ & =\frac{3}{2}
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=y^{2}.$
+\end_inset
+
+ Thus the variance is given by
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Var}(Y) & =\mathrm{E}(Y^{2})-(\mathrm{E}Y)^{2}\\
+ & =\frac{3}{2}-\frac{4}{\pi}\\
+ & =\frac{3\pi-8}{2\pi}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.24.e
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\alpha\in\mathbb{R}$
+\end_inset
+
+, let 
+\begin_inset Formula $\beta\in\mathbb{R}_{>0}$
+\end_inset
+
+ (we are reserving 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ to denote the Euler-Mascheroni constant), let 
+\begin_inset Formula $X\sim\mathrm{exponential}(1)$
+\end_inset
+
+, and let 
+\begin_inset Formula $Y=g(X)=\alpha-\beta\log X$
+\end_inset
+
+.
+ Clearly 
+\begin_inset Formula $\mathcal{Y}=\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ is monotone decreasing on 
+\begin_inset Formula $\mathcal{X}=\mathbb{R}_{\geq0}$
+\end_inset
+
+.
+ The inverse function is given by 
+\begin_inset Formula $g^{-1}(y)=e^{\frac{\alpha-y}{\beta}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in\mathcal{Y}$
+\end_inset
+
+.
+ Thus if 
+\begin_inset Formula $y\in\mathcal{Y}$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{align*}
+f_{Y}(y) & =f_{X}(g^{-1}(y))\cdot\left|\frac{\mathrm{d}}{\mathrm{d}y}g^{-1}(y)\right|\\
+ & =e^{-\left(e^{\frac{\alpha-y}{\beta}}\right)}\frac{1}{\beta}e^{\frac{\alpha-y}{\beta}}\\
+ & =\frac{1}{\beta}e^{\frac{\alpha-y}{\beta}}e^{-\left(e^{\frac{\alpha-y}{\beta}}\right)}
+\end{align*}
+
+\end_inset
+
+Let us verify that this is in fact a pdf.
+ First note that 
+\begin_inset Formula $f_{Y}(y)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ Next, we have 
+\begin_inset Formula 
+\begin{align*}
+\int_{-\infty}^{\infty}f_{Y}(y)\mathrm{d}y & =\int_{-\infty}^{\infty}\frac{1}{\beta}e^{\frac{\alpha-y}{\beta}}e^{-\left(e^{\frac{\alpha-y}{\beta}}\right)}\mathrm{d}y\\
+ & =\left(e^{-\left(e^{\frac{\alpha-y}{\beta}}\right)}\Big|_{-\infty}^{\infty}\right)\\
+ & =e^{-0}-0\\
+ & =1.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $f_{Y}$
+\end_inset
+
+ is in fact a pdf.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we calculate the mean and variance.
+ First we calculate the mean.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}Y & =\int_{-\infty}^{\infty}yf_{Y}(y)\mathrm{d}y\\
+ & =\int_{-\infty}^{\infty}\frac{1}{\beta}ye^{\frac{\alpha-y}{\beta}}e^{-\left(e^{\frac{\alpha-y}{\beta}}\right)}\mathrm{d}y\\
+ & =\int_{0}^{\infty}(\alpha-\beta\log u)e^{-u}\mathrm{d}u\\
+ & =\alpha\int_{0}^{\infty}e^{-u}\mathrm{d}u-\beta\int_{0}^{\infty}\log(u)e^{-u}\mathrm{d}u\\
+ & =\alpha-\beta\Gamma'(1)\\
+ & =\alpha+\beta\gamma,
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=e^{\frac{\alpha-y}{\beta}}$
+\end_inset
+
+ and where 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ denotes the Euler-Mascheroni constant.
+ Here we used the fact that
+\begin_inset Formula 
+\begin{align*}
+\frac{\mathrm{d}}{\mathrm{d}z}\Gamma(z) & =\frac{\mathrm{d}}{\mathrm{d}z}\int_{0}^{\infty}x^{z-1}e^{-x}\mathrm{d}x\\
+ & =\int_{0}^{\infty}\partial_{z}x^{z-1}e^{-x}\mathrm{d}x\\
+ & =\int_{0}^{\infty}\log(x)x^{z-1}e^{-x}\mathrm{d}x.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we calculate the variance.
+ First we calculate
+\begin_inset Formula 
+\begin{align*}
+\mathrm{E}(Y^{2}) & =\int_{-\infty}^{\infty}y^{2}f_{Y}(y)\mathrm{d}y\\
+ & =\int_{-\infty}^{\infty}\frac{1}{\beta}y^{2}e^{\frac{\alpha-y}{\beta}}e^{-\left(e^{\frac{\alpha-y}{\beta}}\right)}\mathrm{d}y\\
+ & =\int_{0}^{\infty}(\alpha-\beta\log u)^{2}e^{-u}\mathrm{d}u\\
+ & =\int_{0}^{\infty}(\alpha^{2}-2\alpha\beta\log u+\beta^{2}\log^{2}u)e^{-u}\mathrm{d}u\\
+ & =\alpha^{2}\int_{0}^{\infty}e^{-u}\mathrm{d}u-2\alpha\beta\int_{0}^{\infty}\log(u)e^{-u}\mathrm{d}u+\beta^{2}\int_{0}^{\infty}\log^{2}(u)e^{-u}\mathrm{d}u\\
+ & =\alpha^{2}-2\alpha\beta\Gamma'(1)+\beta^{2}\Gamma''(1)\\
+ & =\alpha^{2}+2\alpha\beta\gamma+\beta^{2}\left(\gamma^{2}+\frac{\pi^{2}}{6}\right).
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=e^{\frac{\alpha-y}{\beta}}$
+\end_inset
+
+.
+ Here we used the fact that
+\begin_inset Formula 
+\begin{align*}
+\frac{\mathrm{d}^{2}}{\mathrm{d}z^{2}}\Gamma(z) & =\frac{\mathrm{d}}{\mathrm{d}z}\int_{0}^{\infty}\log(x)x^{z-1}e^{-x}\mathrm{d}x\\
+ & =\int_{0}^{\infty}\partial_{z}\log(x)x^{z-1}e^{-x}\mathrm{d}x\\
+ & =\int_{0}^{\infty}\log^{2}(x)x^{z-1}e^{-x}\mathrm{d}x.
+\end{align*}
+
+\end_inset
+
+Thus the variance is given by
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Var}(Y) & =\mathrm{E}(Y^{2})-(\mathrm{E}Y)^{2}\\
+ & =\alpha^{2}+2\alpha\beta\gamma+\beta^{2}\left(\gamma^{2}+\frac{\pi^{2}}{6}\right)-\left(\alpha+\beta\gamma\right)^{2}\\
+ & =\alpha^{2}+2\alpha\beta\gamma+\beta^{2}\gamma^{2}+\beta^{2}\frac{\pi^{2}}{6}-\alpha^{2}-2\alpha\beta\gamma-\beta^{2}\gamma^{2}\\
+ & =\frac{\beta^{2}\pi^{2}}{6}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 3.38
+\end_layout
+
+\begin_layout Standard
+We have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{P}(X>x_{\alpha}) & =\int_{x_{\alpha}}^{\infty}f_{X}(x)\mathrm{d}x\\
+ & =\int_{\sigma z_{\alpha}+\mu}^{\infty}\frac{1}{\sigma}f_{Z}\left(\frac{x-\mu}{\sigma}\right)\mathrm{d}x\\
+ & =\int_{z_{\alpha}}^{\infty}f_{Z}(z)\mathrm{d}z\\
+ & =\alpha,
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=(x-\mu)/\sigma$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section*
+Problem 3.41
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.41.a
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mu_{1},\mu_{2}\in\mathbb{R}$
+\end_inset
+
+ with 
+\begin_inset Formula $\mu_{1}>\mu_{2}$
+\end_inset
+
+, let 
+\begin_inset Formula $\sigma^{2}\in\mathbb{R}_{\geq0}$
+\end_inset
+
+, let 
+\begin_inset Formula $X_{1}\sim\mathrm{n}(\mu_{1},\sigma^{2})$
+\end_inset
+
+, and let 
+\begin_inset Formula $X_{2}\sim\mathrm{n}(\mu_{2},\sigma^{2})$
+\end_inset
+
+.
+ Then for all 
+\begin_inset Formula $t\in\mathbb{R}$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+F_{X_{2}}(t) & =\int_{-\infty}^{t}\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu_{2})^{2}/(2\sigma^{2})}\mathrm{d}x\\
+ & =\int_{-\infty}^{t+\mu_{1}-\mu_{2}}\frac{1}{\sqrt{2\pi}\sigma}e^{-(u-\mu_{1})^{2}/(2\sigma^{2})}\mathrm{d}u\\
+ & =F_{X_{1}}(t+\mu_{1}-\mu_{2})\\
+ & >F_{X_{1}}(t),
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=x+\mu_{1}-\mu_{2}$
+\end_inset
+
+, and where the last inequality follows from the fact that 
+\begin_inset Formula $F_{X_{1}}$
+\end_inset
+
+ is strictly increasing and 
+\begin_inset Formula $\mu_{1}-\mu_{2}>0$
+\end_inset
+
+.
+ It follows that the 
+\begin_inset Formula $\mathrm{n}(\mu,\sigma^{2})$
+\end_inset
+
+ family is stochastically increasing in 
+\begin_inset Formula $\mu$
+\end_inset
+
+ for fixed 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.41.b
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\alpha,\beta_{1},\beta_{2}>0$
+\end_inset
+
+ with 
+\begin_inset Formula $\beta_{1}>\beta_{2}$
+\end_inset
+
+, let 
+\begin_inset Formula $X_{1}\sim\mathrm{gamma}(\alpha,\beta_{1})$
+\end_inset
+
+, and let 
+\begin_inset Formula $X_{2}\sim\mathrm{gamma}(\alpha,\beta_{2})$
+\end_inset
+
+.
+ Then for all 
+\begin_inset Formula $t\in\mathbb{R}_{>0}$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+F_{X_{2}}(t) & =\int_{0}^{t}\frac{1}{\Gamma(\alpha)\beta_{2}^{\alpha}}x^{\alpha-1}e^{-x/\beta_{2}}\mathrm{d}x\\
+ & =\int_{0}^{(\beta_{1}/\beta_{2})t}\frac{1}{\Gamma(\alpha)\beta_{2}^{\alpha}}(\beta_{2}u/\beta_{1})^{\alpha-1}e^{-(\beta_{2}u/\beta_{1})/\beta_{2}}\frac{\beta_{2}}{\beta_{1}}\mathrm{d}u\\
+ & =\int_{0}^{(\beta_{1}/\beta_{2})t}\frac{1}{\Gamma(\alpha)\beta_{1}^{\alpha}}u^{\alpha-1}e^{-u/\beta_{1}}\mathrm{d}u\\
+ & =F_{X_{1}}((\beta_{1}/\beta_{2})t)\\
+ & >F_{X_{1}}(t)
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=(\beta_{1}/\beta_{2})x$
+\end_inset
+
+, and where the last inequality follows from the fact that 
+\begin_inset Formula $F_{X_{1}}$
+\end_inset
+
+ is strictly increasing (on 
+\begin_inset Formula $t>0)$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta_{1}/\beta_{2}>1$
+\end_inset
+
+.
+ It follows that the 
+\begin_inset Formula $\mathrm{gamma}(\alpha,\beta)$
+\end_inset
+
+ family is stochastically increasing in 
+\begin_inset Formula $\beta$
+\end_inset
+
+ for fixed 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section*
+Problem 3.42
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.42.a
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ be a pdf and let 
+\begin_inset Formula $\mu_{1},\mu_{2}\in\mathbb{R}$
+\end_inset
+
+ with 
+\begin_inset Formula $\mu_{1}>\mu_{2}$
+\end_inset
+
+.
+ Then for all 
+\begin_inset Formula $t\in\mathbb{R}$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{align*}
+F_{\mu_{2}}(t) & =\int_{-\infty}^{t}f(x-\mu_{2})\mathrm{d}x\\
+ & =\int_{-\infty}^{t}f(x-\mu_{2})\mathrm{d}x\\
+ & =\int_{-\infty}^{t+\mu_{1}-\mu_{2}}f(u-\mu_{1})\mathrm{d}u\\
+ & =F_{\mu_{1}}(t+\mu_{1}-\mu_{2})\\
+ & \geq F_{\mu_{1}}(t)
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=x+\mu_{1}-\mu_{2}$
+\end_inset
+
+, and where the last inequality follows from the fact that 
+\begin_inset Formula $F_{\mu_{1}}$
+\end_inset
+
+ is an increasing function and 
+\begin_inset Formula $\mu_{1}-\mu_{2}>0$
+\end_inset
+
+.
+ Note that since 
+\begin_inset Formula $\lim_{t\to\infty}F_{\mu_{1}}(t)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\lim_{t\to-\infty}F_{\mu_{1}}(t)=0$
+\end_inset
+
+, there must exist some 
+\begin_inset Formula $t_{0}\in\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $F_{\mu_{1}}(t_{0})<F_{\mu_{1}}(t_{0}+\mu_{1}-\mu_{2})$
+\end_inset
+
+.
+ This shows that a location family is stochastically increasing in its location
+ parameter.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.42.b
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ be a pdf and let 
+\begin_inset Formula $\sigma_{1},\sigma_{2}\in\mathbb{R}_{>0}$
+\end_inset
+
+ with 
+\begin_inset Formula $\sigma_{1}>\sigma_{2}$
+\end_inset
+
+.
+ Then for all 
+\begin_inset Formula $t\in\mathbb{R}_{>0}$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{align*}
+F_{\sigma_{2}}(t) & =\int_{-\infty}^{t}\frac{1}{\sigma_{2}}f\left(\frac{x}{\sigma_{2}}\right)\mathrm{d}x\\
+ & =\int_{-\infty}^{t(\sigma_{1}/\sigma_{2})}\frac{1}{\sigma_{1}}f\left(\frac{u}{\sigma_{1}}\right)\mathrm{d}u\\
+ & =F_{\sigma_{1}}(t(\sigma_{1}/\sigma_{2}))\\
+ & \geq F_{\sigma_{1}}(t)
+\end{align*}
+
+\end_inset
+
+where we did a 
+\begin_inset Formula $u$
+\end_inset
+
+-substitution with 
+\begin_inset Formula $u=(\sigma_{1}/\sigma_{2})t$
+\end_inset
+
+, and where the last inequality follows from the fact that 
+\begin_inset Formula $F_{\sigma_{1}}$
+\end_inset
+
+ is an increasing function and 
+\begin_inset Formula $\sigma_{1}/\sigma_{2}>1$
+\end_inset
+
+.
+ Note that since 
+\begin_inset Formula $\lim_{t\to\infty}F_{\sigma_{1}}(t)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\lim_{t\to0}F_{\sigma_{2}}(t)=0$
+\end_inset
+
+, there must exist some 
+\begin_inset Formula $t_{0}\in\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $F_{\sigma_{1}}(t_{0})<F_{\sigma_{1}}((\sigma_{1}/\sigma_{2})t_{0})$
+\end_inset
+
+.
+ This shows that a location family is stochastically increasing in its scale
+ parameter.
+ 
+\end_layout
+
+\begin_layout Section*
+Problem 3.47
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $t>0$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{P}(|Z|\geq t) & =\int_{-\infty}^{t}\frac{1}{\sqrt{2\pi}}e^{-z^{2}/2}\mathrm{d}z+\int_{t}^{\infty}\frac{1}{\sqrt{2\pi}}e^{-z^{2}/2}\mathrm{d}z\\
+ & =2\int_{t}^{\infty}\frac{1}{\sqrt{2\pi}}e^{-z^{2}/2}\mathrm{d}z\\
+ & =\sqrt{\frac{2}{\pi}}\int_{t}^{\infty}e^{-z^{2}/2}\mathrm{d}z
+\end{align*}
+
+\end_inset
+
+To finish the proof, set
+\begin_inset Formula 
+\[
+p(t)=\int_{t}^{\infty}e^{-z^{2}/2}\mathrm{d}z-\frac{t}{t^{2}+1}e^{-t^{2}/2}.
+\]
+
+\end_inset
+
+We shall show 
+\begin_inset Formula $p(t)>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $t\geq0$
+\end_inset
+
+.
+ First note that 
+\begin_inset Formula $p(0)>0$
+\end_inset
+
+.
+ Next, note that 
+\begin_inset Formula 
+\begin{align*}
+p'(t) & =\frac{\mathrm{d}}{\mathrm{d}t}\int_{t}^{\infty}e^{-z^{2}/2}\mathrm{d}z-\frac{\mathrm{d}}{\mathrm{d}t}\frac{t}{t^{2}+1}e^{-t^{2}/2}\\
+ & =-e^{-t^{2}/2}+\frac{e^{-t^{2}/2}(t^{4}+2t^{2}-1)}{(t^{2}+1)^{2}}\\
+ & =\frac{-e^{-t^{2}/2}(t^{4}+2t^{2}+1)}{(t^{2}+1)^{2}}+\frac{e^{-t^{2}/2}(t^{4}+2t^{2}-1)}{(t^{2}+1)^{2}}\\
+ & =\frac{-2e^{-t^{2}/2}}{(t^{2}+1)^{2}}.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $p$
+\end_inset
+
+ is strictly decreasing.
+ Finally, since
+\begin_inset Formula 
+\begin{align*}
+\lim_{t\to\infty}p(t) & =\lim_{t\to\infty}\left(\int_{t}^{\infty}e^{-z^{2}/2}\mathrm{d}z-\frac{t}{t^{2}+1}e^{-t^{2}/2}\right)\\
+ & =\lim_{t\to\infty}\left(\int_{t}^{\infty}e^{-z^{2}/2}\mathrm{d}z\right)-\lim_{t\to\infty}\left(\frac{t}{t^{2}+1}e^{-t^{2}/2}\right)\\
+ & =0-0\\
+ & =0,
+\end{align*}
+
+\end_inset
+
+we see that 
+\begin_inset Formula $p(t)$
+\end_inset
+
+ must always be positive.
+ Thus we continue with our proof:
+\begin_inset Formula 
+\begin{align*}
+\mathrm{P}(|Z|\geq t) & =\sqrt{\frac{2}{\pi}}\int_{t}^{\infty}e^{-z^{2}/2}\mathrm{d}z\\
+ & >\sqrt{\frac{2}{\pi}}\frac{t}{t^{2}+1}e^{-t^{2}/2}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

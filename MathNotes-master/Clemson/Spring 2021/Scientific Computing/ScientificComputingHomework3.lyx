@@ -1,0 +1,1242 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Scientific Computing Homework 3
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Implement a banded version of Gauss Elimination (without pivoting) that
+ takes an additional argument 
+\begin_inset Formula $k$
+\end_inset
+
+ denoting the number of off-diagonal entries in each direction that are
+ possibly non-zero (
+\begin_inset Formula $a_{ij}=0$
+\end_inset
+
+ if 
+\begin_inset Formula $i>j+k$
+\end_inset
+
+ or 
+\begin_inset Formula $j>i+k$
+\end_inset
+
+) and takes advantage of this fact.
+ Create BandedGaussElimination.m with the function 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+function x = BandedGaussElimination(A,b,k)
+\end_layout
+
+\end_inset
+
+.
+ Test your algorithm with the matrix A=diag(2*ones(1,n))+diag(-1*ones(1,n-1),1)+
+diag(-1*ones(1,n-1),-1); and RHS b=ones(n,1); by comparing against MATLAB’s
+ backslash for example for 
+\begin_inset Formula $n=10$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ The code is given below
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [x] = BandedGaussElimination(A,b,k)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+n = length(b);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for j=1:n-1          
+\end_layout
+
+\begin_layout Plain Layout
+
+	% Check to see if the pivot is zero         
+\end_layout
+
+\begin_layout Plain Layout
+
+	if abs(A(j,j)) < 1e-15                 
+\end_layout
+
+\begin_layout Plain Layout
+
+		error('A has diagonal entries of zero')         
+\end_layout
+
+\begin_layout Plain Layout
+
+	end              
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	% Apply transformation to remaining submatrix and RHS vector     
+\end_layout
+
+\begin_layout Plain Layout
+
+	for i=j+1:j+k         
+\end_layout
+
+\begin_layout Plain Layout
+
+		m = A(i,j)/A(j,j); % multipliyer for current row i         
+\end_layout
+
+\begin_layout Plain Layout
+
+		for j1=j:j+k % loop to update row i             
+\end_layout
+
+\begin_layout Plain Layout
+
+			A(i,j1) = A(i,j1) - m*A(j,j1);         
+\end_layout
+
+\begin_layout Plain Layout
+
+		end         
+\end_layout
+
+\begin_layout Plain Layout
+
+		b(i) = b(i) - m*b(j); % update RHS     
+\end_layout
+
+\begin_layout Plain Layout
+
+	end 
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% A is now upper triangular.
+ Use backsubstitution to solve the transformed problem.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+x = BackSubstitution(A,b);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we test this algorithm on the matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ defined above.
+ We write this in matlab as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+A = @(n)diag(2*ones(1,n))+diag(-1*ones(1,n-1),1)+diag(-1*ones(1,n-1),-1);
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+b = @(n)ones(n,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+k = 1; 
+\end_layout
+
+\begin_layout Plain Layout
+
+% first we check backslash 
+\end_layout
+
+\begin_layout Plain Layout
+
+A(10)
+\backslash
+b(10)
+\end_layout
+
+\begin_layout Plain Layout
+
+ans =
+\end_layout
+
+\begin_layout Plain Layout
+
+    5.0000     
+\end_layout
+
+\begin_layout Plain Layout
+
+	9.0000    
+\end_layout
+
+\begin_layout Plain Layout
+
+	12.0000    
+\end_layout
+
+\begin_layout Plain Layout
+
+	14.0000    
+\end_layout
+
+\begin_layout Plain Layout
+
+	15.0000    
+\end_layout
+
+\begin_layout Plain Layout
+
+	15.0000    
+\end_layout
+
+\begin_layout Plain Layout
+
+	14.0000    
+\end_layout
+
+\begin_layout Plain Layout
+
+	12.0000     
+\end_layout
+
+\begin_layout Plain Layout
+
+	9.0000     
+\end_layout
+
+\begin_layout Plain Layout
+
+	5.0000
+\end_layout
+
+\begin_layout Plain Layout
+
+% now we check our algorithm 
+\end_layout
+
+\begin_layout Plain Layout
+
+BandedGaussElimination(A(10),b(10),k)
+\end_layout
+
+\begin_layout Plain Layout
+
+ans =
+\end_layout
+
+\begin_layout Plain Layout
+
+    5.0000     
+\end_layout
+
+\begin_layout Plain Layout
+
+	9.0000    
+\end_layout
+
+\begin_layout Plain Layout
+
+	12.0000    
+\end_layout
+
+\begin_layout Plain Layout
+
+	14.0000    
+\end_layout
+
+\begin_layout Plain Layout
+
+	15.0000    
+\end_layout
+
+\begin_layout Plain Layout
+
+	15.0000    
+\end_layout
+
+\begin_layout Plain Layout
+
+	14.0000    
+\end_layout
+
+\begin_layout Plain Layout
+
+	12.0000     
+\end_layout
+
+\begin_layout Plain Layout
+
+	9.0000     
+\end_layout
+
+\begin_layout Plain Layout
+
+	5.0000
+\end_layout
+
+\begin_layout Plain Layout
+
+% our algorithm works!
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We consider 
+\begin_inset Formula $n=2^{7},\dots,2^{12}$
+\end_inset
+
+ since 
+\begin_inset Formula $n=2^{13}$
+\end_inset
+
+ was taking too long for partial pivoting.
+ The code is given below
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+A = @(n) diag(2*ones(1,n))+diag(-1*ones(1,n-1),1)+diag(-1*ones(1,n-1),-1);
+\end_layout
+
+\begin_layout Plain Layout
+
+B = @(n) sparse(A(n))
+\end_layout
+
+\begin_layout Plain Layout
+
+b = @(n) ones(n,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+k = 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ns = 2.^(7:12);
+\end_layout
+
+\begin_layout Plain Layout
+
+backslashes = [];
+\end_layout
+
+\begin_layout Plain Layout
+
+partialpivots = [];
+\end_layout
+
+\begin_layout Plain Layout
+
+bandedgausses = [];
+\end_layout
+
+\begin_layout Plain Layout
+
+backslashsparses = [];
+\end_layout
+
+\begin_layout Plain Layout
+
+for n = ns
+\end_layout
+
+\begin_layout Plain Layout
+
+	tic;
+\end_layout
+
+\begin_layout Plain Layout
+
+	A(n)
+\backslash
+b(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+	toc;
+\end_layout
+
+\begin_layout Plain Layout
+
+	backslashes = [backslashes toc];
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+for n = ns
+\end_layout
+
+\begin_layout Plain Layout
+
+	tic;
+\end_layout
+
+\begin_layout Plain Layout
+
+	GaussPartialPivoting(A(n),b(n));
+\end_layout
+
+\begin_layout Plain Layout
+
+	toc;
+\end_layout
+
+\begin_layout Plain Layout
+
+	partialpivots = [partialpivots toc];
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+for n = ns
+\end_layout
+
+\begin_layout Plain Layout
+
+	tic;
+\end_layout
+
+\begin_layout Plain Layout
+
+	BandedGaussElimination(A(n),b(n),k);
+\end_layout
+
+\begin_layout Plain Layout
+
+	toc;
+\end_layout
+
+\begin_layout Plain Layout
+
+	bandedgausses = [bandedgausses toc];
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+for n = ns
+\end_layout
+
+\begin_layout Plain Layout
+
+	tic;
+\end_layout
+
+\begin_layout Plain Layout
+
+	B(n)
+\backslash
+b(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+	toc;
+\end_layout
+
+\begin_layout Plain Layout
+
+	backslashsparses = [backslashsparses toc];
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:6
+\end_layout
+
+\begin_layout Plain Layout
+
+	disp([backslashes(i) partialpivots(i) bandedgausses(i) backslashsparses(i)]);
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+   0.0856    0.0462    0.0070    0.0013
+\end_layout
+
+\begin_layout Plain Layout
+
+   0.0042    0.0699    0.0021    0.0008
+\end_layout
+
+\begin_layout Plain Layout
+
+   0.0083    0.2538    0.0032    0.0026
+\end_layout
+
+\begin_layout Plain Layout
+
+   0.0436    2.1627    0.0173    0.0138
+\end_layout
+
+\begin_layout Plain Layout
+
+   0.1734   31.8712    0.0422    0.0530
+\end_layout
+
+\begin_layout Plain Layout
+
+   0.5277  363.6051    0.1268    0.1472
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ns2 = 2.^(14:2:24);
+\end_layout
+
+\begin_layout Plain Layout
+
+ns3 = 2.^(21:3:36);
+\end_layout
+
+\begin_layout Plain Layout
+
+loglog(ns,ns,ns,ns2,ns,ns3,ns,backslashes,ns,partialpivots,ns,bandedgausses,ns,b
+ackslashsparses )
+\end_layout
+
+\begin_layout Plain Layout
+
+legend('O(n)','O(n^2)','O(n^3)','Backslash','Partialpivot','BandedGauss','Backsl
+ashsparse'
+\end_layout
+
+\begin_layout Plain Layout
+
+,'Location','northwest')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The plot is given below
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename C:/Users/Cohom/Documents/MATLAB/hw2p2.jpg
+	lyxscale 50
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The results match our expectations.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ What is the LU factorization of the matrix
+\begin_inset Formula 
+\[
+A=\begin{pmatrix}1 & a\\
+c & b
+\end{pmatrix}
+\]
+
+\end_inset
+
+and under what condition is the matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ singular?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\widetilde{L}=\left(\begin{smallmatrix}1 & 0\\
+-c & 1
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\begin{align*}
+\widetilde{L}A & =\begin{pmatrix}1 & 0\\
+-c & b
+\end{pmatrix}\begin{pmatrix}1 & a\\
+c & b
+\end{pmatrix}\\
+ & =\begin{pmatrix}1 & a\\
+0 & b-ac
+\end{pmatrix},
+\end{align*}
+
+\end_inset
+
+so setting 
+\begin_inset Formula $U=\left(\begin{smallmatrix}1 & a\\
+0 & b-ac
+\end{smallmatrix}\right)$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\widetilde{L}A=U$
+\end_inset
+
+.
+ In particular, setting 
+\begin_inset Formula $L=\widetilde{L}^{-1}=\left(\begin{smallmatrix}1 & 0\\
+c & 1
+\end{smallmatrix}\right)$
+\end_inset
+
+, we see that 
+\begin_inset Formula $A=LU$
+\end_inset
+
+ is the LU factorization of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\begin{align*}
+A\text{ is singular} & \iff\det A=0\\
+ & \iff\det(LU)=0\\
+ & \iff\det L\det U=0\\
+ & \iff\det U=0\\
+ & \iff b=ac.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Compute the LU factorization of the matrix
+\begin_inset Formula 
+\[
+A=\begin{pmatrix}1 & -1 & 0\\
+-1 & 2 & -1\\
+0 & -1 & 1
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\widetilde{L}=\left(\begin{smallmatrix}1 & 0 & 0\\
+1 & 1 & 0\\
+0 & 0 & 1
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\begin{align*}
+\widetilde{L}A & =\begin{pmatrix}1 & 0 & 0\\
+1 & 1 & 0\\
+0 & 0 & 1
+\end{pmatrix}\begin{pmatrix}1 & -1 & 0\\
+-1 & 2 & -1\\
+0 & -1 & 1
+\end{pmatrix}\\
+ & =\begin{pmatrix}1 & -1 & 0\\
+0 & 1 & -1\\
+0 & 0 & 1
+\end{pmatrix},
+\end{align*}
+
+\end_inset
+
+so setting 
+\begin_inset Formula $U=\left(\begin{smallmatrix}1 & -1 & 0\\
+0 & 1 & -1\\
+0 & 0 & 1
+\end{smallmatrix}\right)$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\widetilde{L}A=U$
+\end_inset
+
+.
+ In particular, setting 
+\begin_inset Formula $L=\widetilde{L}^{-1}=\left(\begin{smallmatrix}1 & 0 & 0\\
+-1 & 1 & 0\\
+0 & 0 & 1
+\end{smallmatrix}\right)$
+\end_inset
+
+, we see that 
+\begin_inset Formula $A=LU$
+\end_inset
+
+ is the LU factorization of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

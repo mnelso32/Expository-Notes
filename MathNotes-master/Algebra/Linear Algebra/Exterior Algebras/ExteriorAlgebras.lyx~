@@ -1,0 +1,929 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Exterior Algebras
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring and 
+\begin_inset Formula $M$
+\end_inset
+
+ an 
+\begin_inset Formula $R$
+\end_inset
+
+-module.
+ For 
+\begin_inset Formula $k\geq2$
+\end_inset
+
+, the 
+\begin_inset Formula $k$
+\end_inset
+
+th 
+\series bold
+exteror power 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\Lambda^{k}(M)$
+\end_inset
+
+, is the 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $M^{\otimes k}/J_{k}$
+\end_inset
+
+ where 
+\begin_inset Formula $J_{k}$
+\end_inset
+
+ is the submodule of 
+\begin_inset Formula $M^{\otimes k}$
+\end_inset
+
+ spanned by all 
+\begin_inset Formula $m_{1}\otimes\cdots\otimes m_{k}$
+\end_inset
+
+ with 
+\begin_inset Formula $m_{i}=m_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+.
+ For any 
+\begin_inset Formula $m_{1},\dots,m_{k}\in M$
+\end_inset
+
+, the coset of 
+\begin_inset Formula $m_{1}\otimes\cdots\otimes m_{k}$
+\end_inset
+
+ in 
+\begin_inset Formula $\Lambda^{k}(M)$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $m_{1}\wedge\cdots\wedge m_{k}$
+\end_inset
+
+.
+ For completeness, we set 
+\begin_inset Formula $\Lambda^{0}(M)=R$
+\end_inset
+
+ and 
+\begin_inset Formula $\Lambda^{1}(M)=M$
+\end_inset
+
+.
+ A general element in 
+\begin_inset Formula $\Lambda^{k}(M)$
+\end_inset
+
+ will be denoted as 
+\begin_inset Formula $\omega$
+\end_inset
+
+ or 
+\begin_inset Formula $\eta$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $M^{\otimes k}$
+\end_inset
+
+ is spanned by tensors 
+\begin_inset Formula $m_{1}\otimes\cdots\otimes m_{k}$
+\end_inset
+
+, the quotient module 
+\begin_inset Formula $M^{\otimes k}/J_{k}=\Lambda^{k}(M)$
+\end_inset
+
+ is spanned by their images 
+\begin_inset Formula $m_{1}\wedge\cdots\wedge m_{k}$
+\end_inset
+
+.
+ That is, any 
+\begin_inset Formula $\omega\in\Lambda^{k}(M)$
+\end_inset
+
+ is a finite 
+\begin_inset Formula $R$
+\end_inset
+
+-linear combination
+\begin_inset Formula 
+\[
+\omega=\sum r_{i_{1},\dots,i_{k}}m_{i_{1}}\wedge\cdots\wedge m_{i_{k}},
+\]
+
+\end_inset
+
+where there coefficients 
+\begin_inset Formula $r_{i_{1},\dots,i_{k}}$
+\end_inset
+
+ are in 
+\begin_inset Formula $R$
+\end_inset
+
+ and the 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+'s are in 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ We call 
+\begin_inset Formula $m_{1}\wedge\cdots\wedge m_{k}$
+\end_inset
+
+ an 
+\series bold
+elementary wedge product
+\series default
+.
+ Since 
+\begin_inset Formula $r(m_{1}\wedge\cdots\wedge m_{k})=(rm_{1})\wedge\cdots\wedge m_{k}$
+\end_inset
+
+, every element of 
+\begin_inset Formula $\Lambda^{k}(M)$
+\end_inset
+
+ is a sum (not just a linear combination) of elementary wedge products.
+ We define the 
+\series bold
+exterior algebra 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+ to
+\series bold
+ 
+\series default
+be 
+\begin_inset Formula 
+\[
+\Lambda(M):=\bigoplus_{k\geq0}\Lambda^{k}(M),
+\]
+
+\end_inset
+
+where the multiplication rule given by the wedge product.
+ The exterior algebra of 
+\begin_inset Formula $M$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra, where the degree 
+\begin_inset Formula $k$
+\end_inset
+
+ homogeneous component is 
+\begin_inset Formula $\Lambda^{k}(M)$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $R$
+\end_inset
+
+ does not have characteristic 
+\begin_inset Formula $2$
+\end_inset
+
+, then the exterior algebra of 
+\begin_inset Formula $M$
+\end_inset
+
+ is 
+\series bold
+skew commutative
+\series default
+.
+ This means that if 
+\begin_inset Formula $\omega_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\omega_{2}$
+\end_inset
+
+ are homogeneous elements, then 
+\begin_inset Formula 
+\[
+\omega_{1}\wedge\omega_{2}=(-1)^{\text{deg}(\omega_{1})\deg(\omega_{2})}\omega_{2}\wedge\omega_{1}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The construction of 
+\begin_inset Formula $\Lambda(M)$
+\end_inset
+
+ is functioral in 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ This means that if 
+\begin_inset Formula $N$
+\end_inset
+
+ is another 
+\begin_inset Formula $R$
+\end_inset
+
+-module and 
+\begin_inset Formula $\varphi:M\to N$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism.
+ Then 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ induces a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $\wedge\varphi:\Lambda(M)\to\Lambda(N)$
+\end_inset
+
+, where 
+\begin_inset Formula $\wedge\varphi$
+\end_inset
+
+ takes the elementary wedge product 
+\begin_inset Formula $m_{1}\wedge\cdots\wedge m_{k}$
+\end_inset
+
+ in 
+\begin_inset Formula $\Lambda(M)$
+\end_inset
+
+ and maps it to the wedge product 
+\begin_inset Formula $\varphi(m_{1})\wedge\cdots\wedge\varphi(m_{k})$
+\end_inset
+
+ in 
+\begin_inset Formula $\Lambda(N)$
+\end_inset
+
+.
+ We will write 
+\begin_inset Formula $\wedge^{k}\varphi$
+\end_inset
+
+ to be the induced 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism from 
+\begin_inset Formula $\Lambda^{k}(M)$
+\end_inset
+
+ to 
+\begin_inset Formula $\Lambda^{k}(N)$
+\end_inset
+
+.
+ In particular, if 
+\begin_inset Formula $N$
+\end_inset
+
+ is free of rank 
+\begin_inset Formula $n$
+\end_inset
+
+, then 
+\begin_inset Formula $\Lambda^{n}(N)\cong R$
+\end_inset
+
+, and if 
+\begin_inset Formula $\varphi:N\to N$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism, then 
+\begin_inset Formula $\wedge^{n}\varphi$
+\end_inset
+
+ is multiplication by the determinant of any matrix representing 
+\begin_inset Formula $\varphi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $F$
+\end_inset
+
+ be a free 
+\begin_inset Formula $R$
+\end_inset
+
+-module with basis 
+\begin_inset Formula $\beta=\{\beta_{1},\dots,\beta_{m}\}$
+\end_inset
+
+ and let 
+\begin_inset Formula $G$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $\gamma=\{\gamma_{1},\dots,\gamma_{n}\}$
+\end_inset
+
+.
+ Then for each 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+ and 
+\begin_inset Formula $1\leq j\leq n$
+\end_inset
+
+ there exists unique 
+\begin_inset Formula $a_{ji}\in R$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\varphi(\beta_{i})=\sum_{j=1}^{n}a_{ji}\gamma_{j}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus the matrix representation of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+A=\begin{pmatrix}a_{11} & \cdots & a_{1m}\\
+\vdots & \ddots & \vdots\\
+a_{n1} & \cdots & a_{nm}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then we have
+\begin_inset Formula 
+\begin{align*}
+\wedge^{k}\varphi(\beta_{i_{1}}\wedge\cdots\wedge\beta_{i_{k}}) & =\varphi(\beta_{i_{1}})\wedge\cdots\wedge\varphi(\beta_{i_{k}})\\
+ & =\left(\sum_{j=1}^{n}a_{ji_{1}}\gamma_{j}\right)\wedge\cdots\wedge\left(\sum_{j=1}^{n}a_{ji_{k}}\gamma_{j}\right)\\
+ & =\sum_{1\leq j_{1}<\cdots<j_{k}\leq n}\left(\sum_{\sigma\in S_{k}}\text{sgn}(\sigma)a_{j_{1}i_{\sigma(1)}}\cdots a_{j_{k}i_{\sigma(k)}}\right)\gamma_{j_{1}}\wedge\cdots\wedge\gamma_{j_{k}}\\
+ & =\sum_{1\leq j_{1}<\cdots<j_{k}\leq n}\det(A_{\{j_{1},\dots,j_{k}\},\{i_{1},\dots,i_{k}\}})\gamma_{j_{1}}\wedge\cdots\wedge\gamma_{j_{k}}
+\end{align*}
+
+\end_inset
+
+Therefore the matrix representation of 
+\begin_inset Formula $\wedge^{k}\varphi$
+\end_inset
+
+ with respect to the bases 
+\begin_inset Formula $\wedge^{k}\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $\wedge^{k}\gamma$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+[\wedge^{k}\varphi]_{\wedge^{k}\beta}^{\wedge^{k}\gamma}=\begin{pmatrix}\det(A_{\{1,\dots,k\},\{1,\dots,k\}}) & \cdots & \det(A_{\{1,\dots,k\},\{n-k+1,\dots,n\}})\\
+\vdots & \ddots & \vdots\\
+\det(A_{\{m-k+1,\dots,m\},\{1,\dots,k\}}) & \cdots & \det(A_{\{m-k+1,\dots,m\},\{n-k+1,\dots,n\}})
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $F$
+\end_inset
+
+ be a free 
+\begin_inset Formula $R$
+\end_inset
+
+-module with basis 
+\begin_inset Formula $\beta=\{\beta_{1},\beta_{2},\beta_{3}\}$
+\end_inset
+
+ and suppose 
+\begin_inset Formula $\varphi\colon F\to F$
+\end_inset
+
+ has matrix representation with respec to 
+\begin_inset Formula $\beta$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+[\varphi]_{\beta_{1}}^{\beta_{1}}:=\begin{pmatrix}a_{11} & a_{12} & a_{13}\\
+a_{21} & a_{22} & a_{23}\\
+a_{31} & a_{32} & a_{33}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then
+\begin_inset Formula 
+\begin{align*}
+[\wedge^{2}\varphi]_{\wedge^{2}\beta_{2}}^{\wedge^{2}\beta_{2}} & =\begin{pmatrix}\det A_{\{1,2\},\{1,2\}} & \det A_{\{1,2\},\{1,3\}} & \det A_{\{1,2\},\{2,3\}}\\
+\det A_{\{1,3\},\{1,2\}} & \det A_{\{1,3\},\{1,3\}} & \det A_{\{1,3\},\{2,3\}}\\
+\det A_{\{2,3\},\{1,2\}} & \det A_{\{2,3\},\{1,3\}} & \det A_{\{2,3\},\{2,3\}}
+\end{pmatrix}\\
+ & =\begin{pmatrix}a_{11}a_{22}-a_{21}a_{12} & a_{11}a_{23}-a_{21}a_{13} & a_{12}a_{23}-a_{22}a_{13}\\
+a_{11}a_{32}-a_{31}a_{12} & a_{11}a_{33}-a_{31}a_{13} & a_{12}a_{33}-a_{32}a_{13}\\
+a_{21}a_{32}-a_{31}a_{22} & a_{21}a_{33}-a_{31}a_{23} & a_{22}a_{33}-a_{32}a_{23}
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $F$
+\end_inset
+
+ be a free 
+\begin_inset Formula $R$
+\end_inset
+
+-module and suppose 
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring, 
+\begin_inset Formula $M=Rx_{1}\oplus Rx_{2}\oplus Rx_{3}\cong R^{3}$
+\end_inset
+
+, and let 
+\begin_inset Formula $\varphi:M\to M$
+\end_inset
+
+ be the 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism induced by setting 
+\begin_inset Formula $\varphi(x_{\mu})=\sum_{\lambda=1}^{n}a_{\lambda\mu}x_{\lambda}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq\lambda,\mu\leq3$
+\end_inset
+
+.
+ The matrix representation of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ with respect to the ordered basis 
+\begin_inset Formula $\beta_{1}=\{x_{1},x_{2},x_{3}\}$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+[\varphi]_{\beta_{1}}^{\beta_{1}}:=\begin{pmatrix}a_{11} & a_{12} & a_{13}\\
+a_{21} & a_{22} & a_{23}\\
+a_{31} & a_{32} & a_{33}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To calculate 
+\begin_inset Formula $\wedge^{2}\varphi$
+\end_inset
+
+, we need to see how it acts on the basis vectors 
+\begin_inset Formula $x_{\lambda}\wedge x_{\mu}$
+\end_inset
+
+ where 
+\begin_inset Formula $1\leq\lambda<\mu\leq3$
+\end_inset
+
+: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\varphi(x_{1})\wedge\varphi(x_{2}) & =(a_{11}x_{1}+a_{21}x_{2}+a_{31}x_{3})\wedge(a_{12}x_{1}+a_{22}x_{2}+a_{32}x_{3})\\
+ & =(a_{11}a_{22}-a_{21}a_{12})x_{1}\wedge x_{2}+(a_{11}a_{32}-a_{31}a_{12})x_{1}\wedge x_{3}+(a_{21}a_{32}-a_{31}a_{22})x_{2}\wedge x_{3}\\
+\\
+\varphi(x_{1})\wedge\varphi(x_{3}) & =(a_{11}x_{1}+a_{21}x_{2}+a_{31}x_{3})\wedge(a_{13}x_{1}+a_{23}x_{2}+a_{33}x_{3})\\
+ & =(a_{11}a_{23}-a_{21}a_{13})x_{1}\wedge x_{2}+(a_{11}a_{33}-a_{31}a_{13})x_{1}\wedge x_{3}+(a_{21}a_{33}-a_{31}a_{23})x_{2}\wedge x_{3}\\
+\\
+\varphi(x_{2})\wedge\varphi(x_{3}) & =(a_{12}x_{1}+a_{22}x_{2}+a_{32}x_{3})\wedge(a_{13}x_{1}+a_{23}x_{2}+a_{33}x_{3})\\
+ & =(a_{12}a_{23}-a_{22}a_{13})x_{1}\wedge x_{2}+(a_{12}a_{33}-a_{32}a_{13})x_{1}\wedge x_{3}+(a_{22}a_{33}-a_{32}a_{23})x_{2}\wedge x_{3}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So the matrix representation of 
+\begin_inset Formula $\wedge^{2}\varphi$
+\end_inset
+
+ with respect to the ordered basis 
+\begin_inset Formula $\beta_{2}=\{x_{1}\wedge x_{2},x_{1}\wedge x_{3},x_{2}\wedge x_{3}\}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+[\varphi]_{\beta_{2}}^{\beta_{2}}=\begin{pmatrix}a_{11}a_{22}-a_{21}a_{12} & a_{11}a_{23}-a_{21}a_{13} & a_{12}a_{23}-a_{22}a_{13}\\
+a_{11}a_{32}-a_{31}a_{12} & a_{11}a_{33}-a_{31}a_{13} & a_{12}a_{33}-a_{32}a_{13}\\
+a_{21}a_{32}-a_{31}a_{22} & a_{21}a_{33}-a_{31}a_{23} & a_{22}a_{33}-a_{32}a_{23}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To calculate 
+\begin_inset Formula $\wedge^{3}\varphi$
+\end_inset
+
+, we need to see how it acts on the basis vector 
+\begin_inset Formula $x_{1}\wedge x_{2}\wedge x_{3}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\varphi(x_{1})\wedge\varphi(x_{2})\wedge\varphi(x_{3}) & =(a_{11}x_{1}+a_{21}x_{2}+a_{31}x_{3})\wedge(a_{12}x_{1}+a_{22}x_{2}+a_{32}x_{3})\wedge(a_{13}x_{1}+a_{23}x_{2}+a_{33}x_{3})\\
+ & =(a_{11}a_{22}a_{33}-a_{11}a_{32}a_{23}+a_{21}a_{32}a_{13}-a_{21}a_{12}a_{33}+a_{31}a_{12}a_{23}-a_{31}a_{22}a_{13})x_{1}\wedge x_{2}\wedge x_{3}\\
+ & =\det\left([\varphi]_{\beta_{1}}^{\beta_{1}}\right)e_{1}\wedge e_{2}\wedge e_{3}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,1733 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Algebra of Sets
+\end_layout
+
+\begin_layout Section
+Set Theory Identities
+\end_layout
+
+\begin_layout Standard
+We begin with some basic set theoretic identities which will be useful later
+ on.
+ We shall only state them and leave it as a useful exercise for the reader
+ to prove.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ be sets, 
+\begin_inset Formula $A,A_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $B,B_{j}$
+\end_inset
+
+ be subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ (resp.
+ 
+\begin_inset Formula $Y$
+\end_inset
+
+) for all 
+\begin_inset Formula $i\in I$
+\end_inset
+
+ (resp.
+ 
+\begin_inset Formula $j\in J$
+\end_inset
+
+), and let 
+\begin_inset Formula $f\colon X\to Y$
+\end_inset
+
+ be a function.
+ Then we have
+\end_layout
+
+\begin_layout Enumerate
+Distributivity for unions and intersections: 
+\begin_inset Formula 
+\[
+A\cup\left(\bigcap_{i\in I}A_{i}\right)=\bigcap_{i\in I}\left(A\cup A_{i}\right)\quad\text{and}\quad A\cap\left(\bigcup_{i\in I}A_{i}\right)=\bigcup_{i\in I}\left(A\cap A_{i}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Antidistributivity for complements: 
+\begin_inset Formula 
+\[
+X\backslash\left(\bigcup_{i\in I}A_{i}\right)=\bigcap_{i\in I}\left(X\backslash A_{i}\right)\quad\text{and}\quad X\backslash\left(\bigcap_{i\in I}A_{i}\right)=\bigcup_{i\in I}\left(X\backslash A_{i}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Distributivity for inverse images: 
+\begin_inset Formula 
+\[
+f^{-1}\left(\bigcap_{j\in J}B_{j}\right)=\bigcap_{j\in J}f^{-1}\left(B_{j}\right)\quad\text{and}\quad f^{-1}\left(\bigcup_{j\in J}B_{j}\right)=\bigcup_{j\in J}f^{-1}\left(B_{j}\right)\quad\text{and}\quad f^{-1}\left(Y\backslash B\right)=f^{-1}(Y)\backslash f^{-1}(B).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Partial distributivity for images: 
+\begin_inset Formula 
+\[
+f\left(\bigcup_{i\in I}A_{i}\right)=\bigcup_{i\in I}f\left(A_{i}\right)\quad\text{and}\quad f(X\backslash A)=f(X)\backslash f(A).
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $f$
+\end_inset
+
+ is injective, then 
+\begin_inset Formula 
+\[
+f\left(\bigcap_{i\in I}A_{i}\right)=\bigcap_{i\in I}f\left(A_{i}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Measurable Spaces
+\end_layout
+
+\begin_layout Subsection
+\begin_inset Formula $\sigma$
+\end_inset
+
+-Algebras
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a set.
+ A nonempty collection 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ of subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ is called a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-
+\series bold
+algebra 
+\series default
+if
+\end_layout
+
+\begin_layout Enumerate
+it is closed under complements: if 
+\begin_inset Formula $A$
+\end_inset
+
+ is a member of 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+, then 
+\begin_inset Formula $X\backslash A$
+\end_inset
+
+ is a member of 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+it is closed under 
+\emph on
+countable
+\emph default
+ unions: if 
+\begin_inset Formula $\{A_{n}\}_{n\in\mathbb{N}}$
+\end_inset
+
+ is a countable collection of members in 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+, then 
+\begin_inset Formula $\bigcup_{n\in\mathbb{N}}A_{n}$
+\end_inset
+
+ is a member of 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Given a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ on a set 
+\begin_inset Formula $X$
+\end_inset
+
+, the pair 
+\begin_inset Formula $(X,\Sigma$
+\end_inset
+
+) is called a 
+\series bold
+measurable space
+\series default
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\Sigma)$
+\end_inset
+
+ be a measurable space.
+ Then
+\end_layout
+
+\begin_layout Enumerate
+The entire set 
+\begin_inset Formula $X$
+\end_inset
+
+ and the empty set 
+\begin_inset Formula $\emptyset$
+\end_inset
+
+ belong to 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ is closed under countable intersections: if 
+\begin_inset Formula $\{A_{n}\}_{n\in\mathbb{N}}$
+\end_inset
+
+ is a countable collection of members in 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+, then 
+\begin_inset Formula $\bigcap_{n\in\mathbb{N}}A_{n}$
+\end_inset
+
+ is a member of 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Since 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ is nonempty, there exists 
+\begin_inset Formula $A\in\Sigma$
+\end_inset
+
+, and so 
+\begin_inset Formula $X=A\cup\left(X\backslash A\right)\in\Sigma$
+\end_inset
+
+ and 
+\begin_inset Formula $\emptyset=X\backslash X\in\Sigma$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\{A_{n}\}_{n\in\mathbb{N}}$
+\end_inset
+
+ is a countable collection of members in 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\bigcap_{n=1}^{\infty}A_{n} & =X\backslash\left(X\backslash\left(\bigcap_{n=1}^{\infty}A_{n}\right)\right)\\
+ & =X\backslash\left(\bigcup_{n=1}^{\infty}\left(X\backslash A_{n}\right)\right)\in\Sigma.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+A 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra is not necessarily closed under 
+\emph on
+arbitrary 
+\emph default
+unions.
+\end_layout
+
+\begin_layout Enumerate
+A 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra is closed under countable intersections.
+ This can be shown by slightly modifying the proof in the algebra case.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ of subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Then there exists a smallest 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ which contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ It is called the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+
+\series bold
+-algebra generated by 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+
+\series default
+.
+ Again, this can be shown by slightly modifying the proof in the algebra
+ case.
+\end_layout
+
+\begin_layout Section
+Algebra of Sets
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a set.
+ A nonempty collection 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ of subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ is called an 
+\series bold
+algebra 
+\series default
+(or 
+\series bold
+Boolean algebra
+\series default
+)
+\series bold
+ 
+\series default
+if
+\end_layout
+
+\begin_layout Enumerate
+it is closed under finite unions: 
+\begin_inset Formula $A\cup B\in\mathcal{A}$
+\end_inset
+
+ for all 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+it is closed under complements: 
+\begin_inset Formula $X\backslash A\in\mathcal{A}$
+\end_inset
+
+ for all 
+\begin_inset Formula $A$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is an algebra, then it is automatically closed under finite intersections:
+ 
+\begin_inset Formula $A\cap B\in\mathcal{A}$
+\end_inset
+
+ for all 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+.
+ This follows because 
+\begin_inset Formula 
+\begin{align*}
+A\cap B & =X\backslash\left(X\backslash\left(A\cap B\right)\right)\\
+ & =X\backslash\left(\left(X\backslash A)\right)\cup\left(X\backslash B\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The entire set 
+\begin_inset Formula $X$
+\end_inset
+
+ and the empty set 
+\begin_inset Formula $\emptyset$
+\end_inset
+
+ must also belong to 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+.
+ Indeed, since 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is nonempty, there exists 
+\begin_inset Formula $A\in\mathcal{A}$
+\end_inset
+
+, and so 
+\begin_inset Formula $A\cup\left(X\backslash A\right)=X$
+\end_inset
+
+ and 
+\begin_inset Formula $X\backslash X=\emptyset$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Generating Algebras from a Collection of Subsets
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\end_layout
+
+\end_inset
+
+ For any nonempty collection 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ of subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+, there exists a smallest algebra 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ which contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ It is called the 
+\series bold
+algebra generated by 
+\series default
+
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathscr{F}$
+\end_inset
+
+ be the family of all algebras 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\mathscr{F}$
+\end_inset
+
+ is nonempty since the power set of 
+\begin_inset Formula $X$
+\end_inset
+
+ is an algebra which contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ Define
+\begin_inset Formula 
+\[
+\mathcal{A}:=\bigcap_{\mathcal{F}\in\mathscr{F}}\mathcal{F}.
+\]
+
+\end_inset
+
+We claim that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is the smallest algebra 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ which contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ Let us first show that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is an algebra.
+ Let 
+\begin_inset Formula $A,B\in\mathcal{A}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A,B\in\mathcal{F}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\mathcal{F}\in\mathscr{F}$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $A\cup B\in\mathcal{F}$
+\end_inset
+
+ and 
+\begin_inset Formula $X\backslash A\in\mathcal{F}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\mathcal{F}\in\mathscr{F}$
+\end_inset
+
+ (as each 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is an algebra).
+ Hence 
+\begin_inset Formula $A\cup B\in\mathcal{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $X\backslash A\in\mathcal{A}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we will show that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is the smallest algebra which contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $B$
+\end_inset
+
+ is an algebra which contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ such that 
+\begin_inset Formula $B\subseteq A$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $B\in\mathscr{F}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula 
+\[
+A=\bigcap_{\mathcal{F}\in\mathscr{F}}\mathcal{F}\subseteq B.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Hence 
+\begin_inset Formula $A=B$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Disjointification
+\end_layout
+
+\begin_layout Standard
+A useful tool when working in algebras is an process called 
+\series bold
+disjointification
+\series default
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{disjointify}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ be an algebra of subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ and let 
+\begin_inset Formula $(A_{n})_{n\in\mathbb{N}}$
+\end_inset
+
+ be a sequence of sets in 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+.
+ Then there exists a sequence 
+\begin_inset Formula $(B_{n})_{n\in\mathbb{N}}$
+\end_inset
+
+ of sets in 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ such that
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $B_{n}\subseteq A_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $B_{m}\cap B_{n}=\emptyset$
+\end_inset
+
+ for all 
+\begin_inset Formula $m,n\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $m\neq n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\bigcup_{n\in\mathbb{N}}B_{n}=\bigcup_{n\in\mathbb{N}}A_{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We say the sequence 
+\begin_inset Formula $(A_{n})_{n\in\mathbb{N}}$
+\end_inset
+
+ is 
+\series bold
+disjointified 
+\series default
+to the sequence 
+\begin_inset Formula $(B_{n})_{n\in\mathbb{N}}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We set 
+\begin_inset Formula $B_{1}=A_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{n}=A_{n}\setminus(A_{1}\cup\cdots\cup A_{n-1})$
+\end_inset
+
+ for all 
+\begin_inset Formula $n>1$
+\end_inset
+
+.
+ It is clear that 
+\begin_inset Formula $B_{n}\in\mathcal{A}$
+\end_inset
+
+ and that 
+\begin_inset Formula $B_{n}\subseteq A_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ Let us show that 
+\begin_inset Formula $B_{m}\cap B_{n}=\emptyset$
+\end_inset
+
+ whenever 
+\begin_inset Formula $m\neq n$
+\end_inset
+
+.
+ Without loss of generality, we may assume that 
+\begin_inset Formula $m<n$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $B_{m}\cap B_{n}=\emptyset$
+\end_inset
+
+ since 
+\begin_inset Formula $B_{m}\subseteq A_{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{n}\cap A_{m}=\emptyset$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+It remains to show 
+\begin_inset Formula $\bigcup_{n\in\mathbb{N}}B_{n}=\bigcup_{n\in\mathbb{N}}A_{n}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $B_{n}\subseteq A_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, we have 
+\begin_inset Formula $\bigcup_{n\in\mathbb{N}}B_{n}\subseteq\bigcup_{n\in\mathbb{N}}A_{n}$
+\end_inset
+
+.
+ To show the reverse inclusion, let 
+\begin_inset Formula $x\in\bigcup_{n\in\mathbb{N}}A_{n}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $m$
+\end_inset
+
+ to be the smallest natural number such that 
+\begin_inset Formula $x\in A_{m}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $x$
+\end_inset
+
+ belongs to 
+\begin_inset Formula $A_{m}$
+\end_inset
+
+ but does not belong to 
+\begin_inset Formula $A_{1},\dots,A_{m-1}$
+\end_inset
+
+.
+ In other words, 
+\begin_inset Formula $x\in B_{m}\subseteq\bigcup_{n\in\mathbb{N}}B_{n}$
+\end_inset
+
+.
+ Therefore we have the reverse inclusion 
+\begin_inset Formula $\bigcup_{n\in\mathbb{N}}B_{n}\supseteq\bigcup_{n\in\mathbb{N}}A_{n}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Measurable Spaces
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ An algebra 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ of subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ is called a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-
+\series bold
+algebra 
+\series default
+if it is closed under 
+\emph on
+countable
+\emph default
+ unions: if 
+\begin_inset Formula $\{A_{n}\}_{n\in\mathbb{N}}$
+\end_inset
+
+ is a countable collection of members in 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+, then 
+\begin_inset Formula $\bigcup_{n\in\mathbb{N}}A_{n}$
+\end_inset
+
+ is a member of 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+.
+ The pair 
+\begin_inset Formula $(X,\Sigma)$
+\end_inset
+
+ is called a 
+\series bold
+measurable space
+\series default
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+A 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra is not necessarily closed under 
+\emph on
+arbitrary 
+\emph default
+unions.
+\end_layout
+
+\begin_layout Enumerate
+A 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra is closed under countable intersections.
+ This can be shown by slightly modifying the proof in the algebra case.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ of subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Then there exists a smallest 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ which contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ It is called the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+
+\series bold
+-algebra generated by 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+
+\series default
+.
+ Again, this can be shown by slightly modifying the proof in the algebra
+ case.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Borel 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-Algebra
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a topological space and let 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+ be the collection of open subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra generated by 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\mathcal{B}_{X}$
+\end_inset
+
+, is called the 
+\series bold
+Borel 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra
+\series default
+ of subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Elements in 
+\begin_inset Formula $\mathcal{B}_{X}$
+\end_inset
+
+ are called 
+\series bold
+Borel subsets
+\series default
+ 
+\series bold
+of
+\series default
+ 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ In the case where 
+\begin_inset Formula $X=\mathbb{R}$
+\end_inset
+
+ with its usual topology, we drop the subscript in 
+\begin_inset Formula $\mathcal{B}_{\mathbb{R}}$
+\end_inset
+
+ and simply write 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ The Borel 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra of subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ is also the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra generated by the set of all closed subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ This is because a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra which contains all open subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ necessarily contains all closed subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ (and vice versa).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

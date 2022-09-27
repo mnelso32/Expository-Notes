@@ -1,0 +1,791 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Functional Analysis
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Part
+Class Notes
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Given a measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+, the 
+\begin_inset Formula $n$
+\end_inset
+
+th 
+\series bold
+moment 
+\series default
+is by definition 
+\begin_inset Formula $\int_{I}t^{n}\mathrm{d}\mu(t)$
+\end_inset
+
+ where 
+\begin_inset Formula $Ij$
+\end_inset
+
+ is a subinterval of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ The moment problem says that if we are given a sequence 
+\begin_inset Formula $(a_{n})$
+\end_inset
+
+ of real numbers, can we find a measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+a_{n}=\int_{I}t^{n}\mathrm{d}\mu(t).
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $I=[0,1]$
+\end_inset
+
+, then this is called the Hausdorff moment problem.
+ If 
+\begin_inset Formula $I=[0,\infty)$
+\end_inset
+
+, then this is called the Stieltjes moment problem.
+ If 
+\begin_inset Formula $I=(-\infty,\infty)$
+\end_inset
+
+, then this is called the Hamburger moment problem.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let us start with some intuition on how we can solve this problem.
+ For a function 
+\begin_inset Formula $f$
+\end_inset
+
+ and a measure 
+\begin_inset Formula $\mu$
+\end_inset
+
+, let us denote
+\begin_inset Formula 
+\begin{equation}
+\langle f,\mu\rangle=\int_{I}f\mathrm{d}\mu\label{eq:innerproductfunctionmeasure}
+\end{equation}
+
+\end_inset
+
+In some sense, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerproductfunctionmeasure})
+\end_layout
+
+\end_inset
+
+ behaves like an inner-product.
+ Of course, 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+ are different types of mathematical objects; one is a function and the
+ other is a measure.
+ So for all functions 
+\begin_inset Formula $f$
+\end_inset
+
+ and measures 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $V$
+\end_inset
+
+ be an 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-vector space.
+ A set 
+\begin_inset Formula $K\subseteq V$
+\end_inset
+
+ is said to be a 
+\series bold
+convex cone 
+\series default
+if
+\end_layout
+
+\begin_layout Enumerate
+if 
+\begin_inset Formula $x,y\in K$
+\end_inset
+
+ then 
+\begin_inset Formula $x+y\in K$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+if 
+\begin_inset Formula $x\in K$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha\geq0$
+\end_inset
+
+, then 
+\begin_inset Formula $\alpha x\in K$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $V$
+\end_inset
+
+ be an 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-vector space, let 
+\begin_inset Formula $W\subseteq V$
+\end_inset
+
+ be a subspace of 
+\begin_inset Formula $V$
+\end_inset
+
+, and let 
+\begin_inset Formula $K\subseteq V$
+\end_inset
+
+ be a convex cone.
+ Suppose 
+\begin_inset Formula $V=W+K$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi\colon W\to\mathbb{R}$
+\end_inset
+
+ is a linear functional such that 
+\begin_inset Formula $\psi(x)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in K\cap W$
+\end_inset
+
+.
+ Then there exists 
+\begin_inset Formula $\widetilde{\psi}\colon V\to\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widetilde{\psi}$
+\end_inset
+
+ is a linear functional such that 
+\begin_inset Formula $\widetilde{\psi}|_{W}=\psi$
+\end_inset
+
+ and such that 
+\begin_inset Formula $\widetilde{\psi}(x)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in K$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We first show that we can extend 
+\begin_inset Formula $\psi$
+\end_inset
+
+ to 
+\begin_inset Formula 
+\[
+W+\mathbb{R}u=\{w+\lambda u\mid w\in W\text{ and }\lambda\in\mathbb{R}\}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $u\in V\backslash W$
+\end_inset
+
+.
+ We need to define 
+\begin_inset Formula $\widetilde{\psi}(u)$
+\end_inset
+
+.
+ Define two sets
+\begin_inset Formula 
+\[
+A=\{x\in W\mid x+u\in K\}\quad\text{and}\quad B=\{y\in W\mid y-u\in K\}.
+\]
+
+\end_inset
+
+We need 
+\begin_inset Formula $\widetilde{\psi}(x+u)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{\psi}(y-u)\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in B$
+\end_inset
+
+.
+ In other words, we need 
+\begin_inset Formula $-\widetilde{\psi}(x)\leq\widetilde{\psi}(u)$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{\psi}(y)\geq\widetilde{\psi}(u)$
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in B$
+\end_inset
+
+.
+ For this we need
+\begin_inset Formula 
+\[
+\sup\{-\psi(x)\mid x\in A\}\leq\inf\{\psi(y)\mid y\in B\}.
+\]
+
+\end_inset
+
+Let's prove this.
+ Let 
+\begin_inset Formula $x\in A$
+\end_inset
+
+ and let 
+\begin_inset Formula $y\in B$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\psi(x)+\psi(y) & =\psi(x+y)\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $x+y\in K$
+\end_inset
+
+.
+ This implies
+\begin_inset Formula 
+\[
+\sup\{-\psi(x)\mid x\in A\}\leq\inf\{\psi(y)\mid y\in B\}.
+\]
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\widetilde{\psi}(u)$
+\end_inset
+
+ to be any number between 
+\begin_inset Formula $\sup\{-\psi(x)\mid x\in A\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\inf\{\psi(y)\mid y\in B\}$
+\end_inset
+
+.
+ This defines 
+\begin_inset Formula $\widetilde{\psi}$
+\end_inset
+
+ on all of 
+\begin_inset Formula $W+\mathbb{R}u$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $x\in K\cap(W+\mathbb{R}u)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+x=y+\alpha u
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $y\in W$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha\in\mathbb{R}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 1: 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+
+\series default
+.
+ Then 
+\begin_inset Formula $x=\alpha((1/\alpha)y+u)$
+\end_inset
+
+ which implies 
+\begin_inset Formula $(1/\alpha)x=(1/\alpha)y+u$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $(1/\alpha)y\in A$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\psi((1/\alpha)y)\leq\widetilde{\psi}(u)$
+\end_inset
+
+ which implies 
+\begin_inset Formula $\widetilde{\psi}(u+(1/\alpha)y)\geq0$
+\end_inset
+
+ which is equivalent to saying 
+\begin_inset Formula $\widetilde{\psi}((1/\alpha)x)\geq0$
+\end_inset
+
+ which implies 
+\begin_inset Formula $\widetilde{\psi}(x)\geq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Given a convex cone 
+\begin_inset Formula $K\subseteq V$
+\end_inset
+
+, if we have the additional axiom 
+\begin_inset Formula $-K\cap K=\{0\}$
+\end_inset
+
+, then we can define a partial order on 
+\begin_inset Formula $V$
+\end_inset
+
+ as follows: if 
+\begin_inset Formula $x,y\in V$
+\end_inset
+
+, then we say 
+\begin_inset Formula $x\leq_{K}y$
+\end_inset
+
+ if 
+\begin_inset Formula $y-x\in K$
+\end_inset
+
+.
+ In this case, we will have 
+\begin_inset Formula $0\leq_{K}x$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in K$
+\end_inset
+
+.
+ Thus it makes sense to call the elements of 
+\begin_inset Formula $K$
+\end_inset
+
+ the 
+\series bold
+positive 
+\series default
+elements with respect to 
+\begin_inset Formula $\leq_{K}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Part
+Homework
+\end_layout
+
+\begin_layout Part
+Appendix
+\end_layout
+
+\end_body
+\end_document

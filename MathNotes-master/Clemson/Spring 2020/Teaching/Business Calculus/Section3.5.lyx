@@ -1,0 +1,928 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Section 3.5
+\end_layout
+
+\begin_layout Standard
+So far we know how to compute the derivative of simple functions like 
+\begin_inset Formula $x^{5}$
+\end_inset
+
+ or 
+\begin_inset Formula $e^{x}$
+\end_inset
+
+.
+ We also know how to compute the derivative of composite functions, like
+ 
+\begin_inset Formula $e^{x^{5}}$
+\end_inset
+
+: indeed we learned the chain rule last section: 
+\begin_inset Formula 
+\begin{align*}
+\frac{\mathrm{d}}{\mathrm{d}x}\left(e^{x^{5}}\right) & =e^{x^{5}}\cdot\frac{\mathrm{d}}{\mathrm{d}x}(x^{5})\\
+ & =e^{x^{5}}\cdot5x^{4}.
+\end{align*}
+
+\end_inset
+
+Now we want to know how to calculate the derivative of a product of two
+ functions like 
+\begin_inset Formula $x^{5}e^{x}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The way that we will do it is via the product rule: The product rule says
+ that if you have two functions 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $g(x)$
+\end_inset
+
+, then the derivative of their product is given by
+\begin_inset Formula 
+\[
+\frac{\mathrm{d}}{\mathrm{d}x}(f(x)\cdot g(x))=\frac{\mathrm{d}}{\mathrm{d}x}(f(x))\cdot g(x)+f(x)\cdot\frac{\mathrm{d}}{\mathrm{d}x}(g(x)).
+\]
+
+\end_inset
+
+So for example
+\begin_inset Formula 
+\begin{align*}
+\frac{\mathrm{d}}{\mathrm{d}x}(x^{5}e^{x}) & =\frac{\mathrm{d}}{\mathrm{d}x}(x^{5})e^{x}+x^{5}\frac{\mathrm{d}}{\mathrm{d}x}(e^{x})\\
+ & =5x^{4}e^{x}+x^{5}e^{x}.
+\end{align*}
+
+\end_inset
+
+If we use the prime notation for the derative, then the product rule looks
+ like this:
+\begin_inset Formula 
+\[
+(f\cdot g)'(x)=f'(x)\cdot g(x)+f(x)\cdot g'(x).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let's looks at some examples.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $g(x)=5x^{6}$
+\end_inset
+
+ and 
+\begin_inset Formula $h(x)=\ln(x)$
+\end_inset
+
+.
+ Then their product is given by
+\begin_inset Formula 
+\[
+(g\cdot h)(x)=g(x)h(x)=5x^{6}\ln(x).
+\]
+
+\end_inset
+
+The derivative of their product is given by
+\begin_inset Formula 
+\begin{align*}
+(g\cdot h)'(x) & =\frac{\mathrm{d}}{\mathrm{d}x}((g\cdot h)(x))\\
+ & =\frac{\mathrm{d}}{\mathrm{d}x}(5x^{6}\ln(x))\\
+ & =\frac{\mathrm{d}}{\mathrm{d}x}(5x^{6})\ln(x)+5x^{6}\frac{\mathrm{d}}{\mathrm{d}x}(\ln(x))\\
+ & =30x^{5}\ln(x)+5x^{6}\cdot\frac{1}{x}\\
+ & =30x^{5}\ln(x)+5x^{5}\\
+ & =5x^{5}(6\ln(x)+1).
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $g(x)=2(3^{x})$
+\end_inset
+
+ and 
+\begin_inset Formula $h(x)=3x^{2}-2x+1$
+\end_inset
+
+.
+ Then their product is given by
+\begin_inset Formula 
+\[
+(g\cdot h)(x)=g(x)h(x)=2(3^{x})(3x^{2}-2x+1).
+\]
+
+\end_inset
+
+The derivative of their product is given by
+\begin_inset Formula 
+\begin{align*}
+(g\cdot h)'(x) & =\frac{\mathrm{d}}{\mathrm{d}x}((g\cdot h)(x))\\
+ & =\frac{\mathrm{d}}{\mathrm{d}x}(2(3^{x})(3x^{2}-2x+1))\\
+ & =\frac{\mathrm{d}}{\mathrm{d}x}(2(3^{x}))(3x^{2}-2x+1)+2(3^{x})\frac{\mathrm{d}}{\mathrm{d}x}(3x^{2}-2x+1)\\
+ & =2\frac{\mathrm{d}}{\mathrm{d}x}(3^{x})(3x^{2}-2x+1)+2(3^{x})\frac{\mathrm{d}}{\mathrm{d}x}(3x^{2}-2x+1)\\
+ & =2\ln(3)3^{x}(3x^{2}-2x+1)+2(3^{x})(6x-2).
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $s(x)$
+\end_inset
+
+ million students gives the number of full time students enrolled in American
+ public colleges and universities, where 
+\begin_inset Formula $x$
+\end_inset
+
+ is the number of years since the fall semester, 1999.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $t(x)$
+\end_inset
+
+ thousand dollars per student gives the average tuition paid by a full-time
+ student in an American public colleges and universities, where 
+\begin_inset Formula $x$
+\end_inset
+
+ is the number of years since the fall semester, 1999.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We denote their product by
+\begin_inset Formula 
+\begin{align*}
+E(x) & =s(x)\text{ million students}\cdot t(x)\text{ }\frac{\text{thousand dollars}}{\text{student}}\\
+ & =1000000s(x)\text{ students}\cdot1000t(x)\text{ }\frac{\text{dollars}}{\text{student}}\\
+ & =1000000000s(x)\cdot t(x)\text{ }\text{dollars}\\
+ & =s(x)\cdot t(x)\text{ billion dollars}
+\end{align*}
+
+\end_inset
+
+So billion dollars is the output unit of 
+\begin_inset Formula $E(x)$
+\end_inset
+
+ and years (since the fall semester, 1999) is the input unit of 
+\begin_inset Formula $E(x)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The total amount spent on tuition by students enrolled full time in American
+ public colleges and universities in the fall semester of 2009 is given
+ by
+\begin_inset Formula 
+\begin{align*}
+E(10) & =s(10)\cdot t(10)\text{ billion dollars}\\
+ & =8.3\cdot4\text{ billion dollars}\\
+ & =33.2\text{ billion dollars}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The amount spent on tuition by sutdents enrolled full time in American public
+ colleges and universities was changing by 
+\begin_inset Formula 
+\begin{align*}
+E'(10) & =s'(10)\text{ \ensuremath{\frac{\text{million students}}{\text{years}}\cdot t(10)\text{ \ensuremath{\frac{\text{thousdand dollars}}{\text{student}}+s(10)\text{ million students}\cdot t'(10)\text{ }\frac{\frac{\text{thousand dollars}}{\text{student}}}{\text{year}}}}}}\\
+ & =s'(10)\text{\ensuremath{\cdot}\ensuremath{t(10)\text{ \ensuremath{\frac{\text{billion dollars}}{\text{years}}+s(10)\text{ million students}\cdot t'(10)\text{ }\frac{\text{thousand dollars}}{\text{student}\cdot\text{year}}}}}}\\
+ & =s'(10)\text{\ensuremath{\cdot}\ensuremath{t(10)\text{ \ensuremath{\frac{\text{billion dollars}}{\text{year}}+s(10)\cdot t'(10)\text{ }\frac{\text{billion dollars}}{\text{year}}}}}}\\
+ & =(s'(10)\text{\ensuremath{\cdot}\ensuremath{t(10)+s(10)\cdot t'(10))\text{ \frac{\text{billion dollars}}{\text{year}}}}}\\
+ & =(0.1\text{\ensuremath{\cdot}\ensuremath{4+8.3\cdot0.2)\text{ \frac{\text{billion dollars}}{\text{year}}}}}\\
+ & =(0.1\text{\ensuremath{\cdot}\ensuremath{4+8.3\cdot0.2)\text{ \frac{\text{billion dollars}}{\text{year}}}}}\\
+ & =2.06\text{\text{ \frac{\text{billion dollars}}{\text{year}}}.}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let's answer part a.
+ The input units for 
+\begin_inset Formula $(f\cdot g)(m)$
+\end_inset
+
+ are months and the output units for 
+\begin_inset Formula $(f\cdot g)(m)$
+\end_inset
+
+ is given by eggs since 
+\begin_inset Formula 
+\begin{align*}
+(f\cdot g)(m) & =f(m)\text{ layers}\cdot g(m)\text{ }\frac{\text{eggs}}{\text{layer}}\\
+ & =f(m)\cdot g(m)\text{ eggs}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $f(3)=30000$
+\end_inset
+
+ and 
+\begin_inset Formula $g(3)=21$
+\end_inset
+
+, egg production in March 2010 was 
+\begin_inset Formula $30000\cdot21=630000$
+\end_inset
+
+ eggs.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Egg product was changing in March by
+\begin_inset Formula 
+\begin{align*}
+\frac{\mathrm{d}}{\mathrm{d}m}(f(m)g(m))\mid_{m=3} & =f'(3)\text{ }\frac{\text{layers}}{\text{month}}\cdot g(3)\text{ }\frac{\text{eggs}}{\text{layer}}+f(3)\text{ }\text{layers}\cdot g'(3)\text{ }\frac{\frac{\text{eggs}}{\text{layer}}}{\text{month}}\\
+ & =f'(3)\cdot g(3)\text{ }\frac{\text{eggs}}{\text{month}}+f(3)\text{ }\text{layers}\cdot g'(3)\text{ }\frac{\text{eggs}}{\text{\text{layer}\ensuremath{\cdot\text{month}}}}\\
+ & =f'(3)\cdot g(3)\text{ }\frac{\text{eggs}}{\text{month}}+f(3)\cdot g'(3)\text{ }\frac{\text{eggs}}{\text{\text{month}}}\\
+ & =(f'(3)\cdot g(3)+f(3)\cdot g'(3))\frac{\text{eggs}}{\text{\text{month}}}\\
+ & =(500\cdot21+30000\cdot0.2)\frac{\text{eggs}}{\text{\text{month}}}\\
+ & =16500\frac{\text{eggs}}{\text{\text{month}}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Sentence of Interpretation: 
+\series default
+The egg production was increasing by 
+\begin_inset Formula $16500$
+\end_inset
+
+ eggs per month in March.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ To write a model, we first calculate
+\begin_inset Formula 
+\begin{align*}
+(f\cdot s)(x) & =f(x)\text{ percent}\cdot s(x)\text{ million students}\\
+ & =\frac{f(x)}{100}\cdot s(x)\text{ million students}\\
+ & =\left(\frac{3.09x+54.18}{100}\right)\left(0.76\ln(x)+6.5\right)\text{ million students}\\
+ & =\left(0.0309x+0.5418\right)\left(0.76\ln(x)+6.5\right)\text{ million students}\\
+ & =0.0309x\cdot0.076\ln(x)+0.0309x\cdot6.5+0.5418\cdot0.76\ln(x)+0.5418\cdot6.5\text{ million students}\\
+ & =0.0023484x\ln(x)+0.20085x+0.411768\ln(x)+3.5217\text{ million students}\\
+ & =(0.0023484\ln(x)+0.20085)x+0.411768\ln(x)+3.5217\text{ million students}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Model: 
+\begin_inset Formula $(f\cdot s)(x)=(0.0023484\ln(x)+0.20085)x+0.411768\ln(x)+3.5217\text{ million students}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Completely Defined Model: 
+\begin_inset Formula $(f\cdot s)(x)=(0.0023484\ln(x)+0.20085)x+0.411768\ln(x)+3.5217\text{ million students}$
+\end_inset
+
+ 
+\series default
+gives the number of full-time students with some form of financial aid in
+ the fall of 
+\begin_inset Formula $1999+x$
+\end_inset
+
+, where 
+\begin_inset Formula $x$
+\end_inset
+
+ is the number of years after 
+\begin_inset Formula $1999$
+\end_inset
+
+, 
+\begin_inset Formula $1\leq x$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Sentence of Interpretation for 
+\begin_inset Formula $(f\cdot s)(11)\approx7.338$
+\end_inset
+
+
+\series default
+: The number of students that had fincancial aid in fall 2010 is given by
+ 
+\begin_inset Formula $(f\cdot s)(11)\approx7.338\text{ million students}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Sentence of Interpretation for 
+\begin_inset Formula $(f\cdot s)'(11)\approx0.318$
+\end_inset
+
+: 
+\series default
+The number of students that had fincancial aid was increasing by 
+\begin_inset Formula $(f\cdot s)'(11)\approx0.318\text{ million students per year}$
+\end_inset
+
+ in fall 2010.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ The value of the inverstor's stock 10 weeks after the stock was first offered
+ is 
+\begin_inset Formula $1904.545$
+\end_inset
+
+ dollars.
+ The value of the investor's stock was increasing by 
+\begin_inset Formula $73.496$
+\end_inset
+
+ dollars per week, 
+\begin_inset Formula $10$
+\end_inset
+
+ weeks after the stock was first offered.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $f(x)=g(x)\cdot h(x)$
+\end_inset
+
+ and that
+\begin_inset Formula 
+\begin{align*}
+g(-1) & =5\\
+g'(-1) & =0.02\\
+h(-1) & =-8\\
+h'(-1) & =-0.025.
+\end{align*}
+
+\end_inset
+
+Then we have
+\begin_inset Formula 
+\begin{align*}
+f(-1) & =g(-1)\cdot h(-1)\\
+ & =5\cdot-8\\
+ & =-40,
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+f'(x) & =\frac{\mathrm{d}}{\mathrm{d}x}(f(x))\\
+ & =\frac{\mathrm{d}}{\mathrm{d}x}(g(x)\cdot h(x))\\
+ & =\frac{\mathrm{d}}{\mathrm{d}x}(g(x))\cdot h(x)+g(x)\cdot\frac{\mathrm{d}}{\mathrm{d}x}(h(x))
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+f'(-1) & =g'(-1)\cdot h(-1)+g(-1)\cdot h'(-1)\\
+ & =0.02\cdot-8+5\cdot-0.025\\
+ & =-0.16-0.125\\
+ & =-0.141.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

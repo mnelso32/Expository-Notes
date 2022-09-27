@@ -1,0 +1,1379 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Constructing Algebraic Closures
+\end_layout
+
+\begin_layout Section*
+Constructing Algebraic Closures
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field.
+ The purpose of this note is to construct an algebraic closure of 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Let us first introduce some notation.
+ For each 
+\begin_inset Formula $k,n\in\mathbb{N}$
+\end_inset
+
+ the 
+\series bold
+
+\begin_inset Formula $k$
+\end_inset
+
+th elementary symmetric polynomial in 
+\begin_inset Formula $n$
+\end_inset
+
+ variables 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+
+\series default
+, denoted 
+\series bold
+
+\begin_inset Formula $e_{k}(X_{1},\dots,X_{n})$
+\end_inset
+
+
+\series default
+, is defined by
+\begin_inset Formula 
+\[
+e_{k}(X_{1},\dots,X_{n})=\begin{cases}
+1 & \text{if }k=0\\
+\sum_{1\leq i_{1}<\cdots<i_{k}\leq n}X_{i_{1}}\cdots X_{i_{k}} & \text{if }k\leq n\\
+0 & \text{if }k>n
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For each nonconstant monic polynomial 
+\begin_inset Formula $f(X)$
+\end_inset
+
+ in 
+\begin_inset Formula $K[X]$
+\end_inset
+
+, write
+\begin_inset Formula 
+\[
+f(X)=X^{n_{f}}+c_{f,1}X^{n_{f}-1}+\cdots+c_{f,k}X^{n_{f}-k}+\cdots+c_{f,n_{f}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $n_{f}$
+\end_inset
+
+ is the degree of 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{f,k}\in K$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq k\leq n_{f}$
+\end_inset
+
+, and let 
+\begin_inset Formula $t_{f,1},\dots,t_{f,n_{f}}$
+\end_inset
+
+ be independent variables.
+ Throughout this section, whenever we write 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $t_{f,k}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+, it is understood that 
+\begin_inset Formula $f$
+\end_inset
+
+ is a nonconstant monic polynomial in 
+\begin_inset Formula $K[X]$
+\end_inset
+
+ and that 
+\begin_inset Formula $1\leq k\leq n_{f}$
+\end_inset
+
+.
+ For each nonconstant monic polynomial 
+\begin_inset Formula $f$
+\end_inset
+
+ in 
+\begin_inset Formula $K[X]$
+\end_inset
+
+, choose a splitting field of 
+\begin_inset Formula $f$
+\end_inset
+
+ over 
+\begin_inset Formula $K$
+\end_inset
+
+ and let 
+\begin_inset Formula $\alpha_{f,1},\dots,\alpha_{f,n_{f}}$
+\end_inset
+
+ be the roots of 
+\begin_inset Formula $f$
+\end_inset
+
+ in this splitting field.
+ Let 
+\begin_inset Formula $A=K[\{t_{f,k}\}]$
+\end_inset
+
+ be the polynomial ring generated over 
+\begin_inset Formula $K$
+\end_inset
+
+ by indepedent variables doubly indexed by every nonconstant monic 
+\begin_inset Formula $f\in K[X]$
+\end_inset
+
+ and 
+\begin_inset Formula $1\leq k\leq n_{f}$
+\end_inset
+
+, and let 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ be the ideal in 
+\begin_inset Formula $A$
+\end_inset
+
+ generated by the coefficients of all the difference polynomials
+\begin_inset Formula 
+\[
+f(X)-\prod_{i=1}^{n_{f}}(X-t_{f,k})\in A[X].
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In other words, 
+\begin_inset Formula $\mathfrak{a}=\langle\{u_{f,k}\}\rangle$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+u_{f,k}:=c_{f,k}-(-1)^{k}e_{k}(t_{f,1},\dots,t_{f,n_{f}})
+\]
+
+\end_inset
+
+for each nonconstant monic polynomial 
+\begin_inset Formula $f$
+\end_inset
+
+ and for each 
+\begin_inset Formula $1\leq k\leq n_{f}$
+\end_inset
+
+.
+ Observe that
+\begin_inset Formula 
+\[
+u_{f,k}(\alpha_{f,1},\dots,\alpha_{f,n_{f}})=0
+\]
+
+\end_inset
+
+for all nonconstant monic polynomials 
+\begin_inset Formula $f$
+\end_inset
+
+ in 
+\begin_inset Formula $K[X]$
+\end_inset
+
+.
+ Indeed, we can factor 
+\begin_inset Formula $f$
+\end_inset
+
+ over 
+\begin_inset Formula $K(\alpha_{f,1}\dots,\alpha_{f,n_{f}})$
+\end_inset
+
+ as
+\begin_inset Formula 
+\begin{equation}
+(X-\alpha_{f,1})\cdots(X-\alpha_{f,n_{f}})=f(X)=X^{n_{f}}+c_{f,1}X^{n_{f}-1}+\cdots+c_{f,n_{f}}.\label{eq:factoraldjklfsd}
+\end{equation}
+
+\end_inset
+
+Expanding the left-hand side of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:factoraldjklfsd})
+\end_layout
+
+\end_inset
+
+ and comparing coefficients gives us the desired result.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ The ideal 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ is proper.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Assume for a contradiction that 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ is not proper, so 
+\begin_inset Formula $1\in\mathfrak{a}$
+\end_inset
+
+.
+ Then we can write 
+\begin_inset Formula $1$
+\end_inset
+
+ as a finite sum
+\begin_inset Formula 
+\begin{equation}
+1=\sum_{i=1}^{m}v_{i}u_{f_{i},k_{i}}\label{eq:bothsidesofalgejklsdfs}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $v_{i}\in A$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ Evaluating 
+\begin_inset Formula $t_{f_{i},k_{i}}=\alpha_{f_{i},k_{i}}$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+ to both sides of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:bothsidesofalgejklsdfs})
+\end_layout
+
+\end_inset
+
+ gives us 
+\begin_inset Formula $1=0$
+\end_inset
+
+.
+ This is a contradiction.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Since 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ is a proper ideal, Zorn's Lemma guarantees that 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ is contained in some maximal ideal 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The quotient ring 
+\begin_inset Formula $A\slash\mathfrak{m}$
+\end_inset
+
+ is a field and the natural composite homomorphism 
+\begin_inset Formula $K\to A\to A\slash\mathfrak{m}$
+\end_inset
+
+ of rings lets us view the field 
+\begin_inset Formula $A\slash\mathfrak{m}$
+\end_inset
+
+ as an extension of 
+\begin_inset Formula $K$
+\end_inset
+
+ since ring homomorphisms out of fields are always injective.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ The field 
+\begin_inset Formula $A\slash\mathfrak{m}$
+\end_inset
+
+ is an algebraic closure of 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ For each indeterminate 
+\begin_inset Formula $t_{f,k}$
+\end_inset
+
+, let 
+\begin_inset Formula $\overline{t}_{f,k}$
+\end_inset
+
+ denote its coset in 
+\begin_inset Formula $A\slash\mathfrak{m}$
+\end_inset
+
+.
+ Observe that for each nonconstant monic polynomial 
+\begin_inset Formula $f$
+\end_inset
+
+ in 
+\begin_inset Formula $K[X]$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+f(X) & =X^{n_{f}}+\sum_{k=1}^{n_{f}}c_{f,k}X^{n_{f}-k}\\
+ & \equiv X^{n_{f}}+\sum_{k=1}^{n_{f}}(-1)^{k}e_{k}(t_{f_{,},1},\dots,t_{f,n_{f}})X^{n_{f}-k}\,\,\mod\mathfrak{m}\\
+ & =\prod_{k=1}^{n_{f}}(X-\overline{t}_{f,k}).
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $u_{f,1},\dots,u_{f,n_{f}}\in\mathfrak{m}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $f(X)$
+\end_inset
+
+ splits completely in 
+\begin_inset Formula $(A\slash\mathfrak{m})[X]$
+\end_inset
+
+, and since 
+\begin_inset Formula $\overline{t}_{f,k}$
+\end_inset
+
+ is a root of 
+\begin_inset Formula $f$
+\end_inset
+
+, we see that each 
+\begin_inset Formula $\overline{t}_{f,k}$
+\end_inset
+
+ is algebraic over 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $A\slash\mathfrak{m}$
+\end_inset
+
+ is an algebraic extension field of 
+\begin_inset Formula $K$
+\end_inset
+
+ since 
+\begin_inset Formula $A\slash\mathfrak{m}$
+\end_inset
+
+ is generated by the 
+\begin_inset Formula $\overline{t}_{f,k}$
+\end_inset
+
+'s (as 
+\begin_inset Formula $A$
+\end_inset
+
+ is generated by the 
+\begin_inset Formula $t_{f,k}$
+\end_inset
+
+'s) and that every nonconstant monic in 
+\begin_inset Formula $K[X]$
+\end_inset
+
+ splits completely in 
+\begin_inset Formula $A\slash\mathfrak{m}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We will now show 
+\begin_inset Formula $A\slash\mathfrak{m}$
+\end_inset
+
+ is algebraically closed, and thus it is an algebraic closure of 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Set 
+\begin_inset Formula $L=A\slash\mathfrak{m}$
+\end_inset
+
+.
+ It suffices to show every monic irreducible 
+\begin_inset Formula $\pi$
+\end_inset
+
+ in 
+\begin_inset Formula $L[X]$
+\end_inset
+
+ has a root in 
+\begin_inset Formula $L$
+\end_inset
+
+.
+ We have already seen that any nonconstant monic polynomial in 
+\begin_inset Formula $L[X]$
+\end_inset
+
+ splits completely in 
+\begin_inset Formula $L[X]$
+\end_inset
+
+, so let's show 
+\begin_inset Formula $\pi$
+\end_inset
+
+ is a factor of some monic polynomial in 
+\begin_inset Formula $L[X]$
+\end_inset
+
+.
+ There is a root 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ of 
+\begin_inset Formula $\pi$
+\end_inset
+
+ in some extension of 
+\begin_inset Formula $L$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is algebraic over 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $L$
+\end_inset
+
+ is algebraic over 
+\begin_inset Formula $K$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is algebraic over 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ This implies some monic 
+\begin_inset Formula $f$
+\end_inset
+
+ in 
+\begin_inset Formula $K[X]$
+\end_inset
+
+ has 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ as a root.
+ The polynomial 
+\begin_inset Formula $\pi$
+\end_inset
+
+ is the minimal polynomial of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ in 
+\begin_inset Formula $L[X]$
+\end_inset
+
+, so 
+\begin_inset Formula $\pi\mid f$
+\end_inset
+
+ in 
+\begin_inset Formula $L[X]$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ splits completely in 
+\begin_inset Formula $L[X]$
+\end_inset
+
+, we have 
+\begin_inset Formula $\alpha\in L$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Counting the Number of Maximal Ideals
+\end_layout
+
+\begin_layout Standard
+In this section, let 
+\begin_inset Formula $f(X)$
+\end_inset
+
+ to be a monic separable irreducible polynomial over a field 
+\begin_inset Formula $K$
+\end_inset
+
+ of degree 
+\begin_inset Formula $n$
+\end_inset
+
+ and express it as
+\begin_inset Formula 
+\[
+f=X^{n}+\sum_{i=1}^{n}c_{i}X^{n-i}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{i}\in K$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $L$
+\end_inset
+
+ be a splitting field of 
+\begin_inset Formula $f$
+\end_inset
+
+ over 
+\begin_inset Formula $K$
+\end_inset
+
+ and let 
+\begin_inset Formula $\alpha_{1},\dots,\alpha_{n}$
+\end_inset
+
+ be the roots of 
+\begin_inset Formula $f$
+\end_inset
+
+ in 
+\begin_inset Formula $L$
+\end_inset
+
+, so 
+\begin_inset Formula $L=K(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $T_{1},\dots,T_{n}$
+\end_inset
+
+ be indeterminates, and let 
+\begin_inset Formula $R=K[T_{1},\dots,T_{n}]\slash\langle u_{1},\dots,u_{n}\rangle$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+u_{i}=c_{i}-(-1)^{i}e_{i}(T_{1},\dots,T_{n})
+\]
+
+\end_inset
+
+for each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ We denote by 
+\begin_inset Formula $t_{i}$
+\end_inset
+
+ to be the image of 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+ under the quotient map 
+\begin_inset Formula $K[T_{1},\dots,T_{n}]\to R$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ The number of maximal ideals of 
+\begin_inset Formula $R$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\frac{n!}{|\mathrm{Gal}(L\slash K)|}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ We first note that the maximal ideals of 
+\begin_inset Formula $R$
+\end_inset
+
+ are all of the form 
+\begin_inset Formula $\ker\psi$
+\end_inset
+
+ where 
+\begin_inset Formula $\psi\colon R\to L$
+\end_inset
+
+ is a nonzero 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra homomorphism.
+ Indeed, let 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ be a maximal ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+ and let 
+\begin_inset Formula $\overline{t}_{i}$
+\end_inset
+
+ be the image of 
+\begin_inset Formula $t_{i}$
+\end_inset
+
+ under the quotient map 
+\begin_inset Formula $\rho\colon R\to R\slash\mathfrak{m}$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $f$
+\end_inset
+
+ splits over 
+\begin_inset Formula $R$
+\end_inset
+
+ as
+\begin_inset Formula 
+\begin{align*}
+f(X) & =X^{n}+\sum_{i=1}^{n}c_{i}X^{n-i}\\
+ & =X^{n}+\sum_{i=1}^{n_{i}}(-1)^{i}e_{i}(t_{1},\dots,t_{n})X^{n-i}\\
+ & =\prod_{i=1}^{n}(X-t_{i}).
+\end{align*}
+
+\end_inset
+
+In particular 
+\begin_inset Formula $f(t_{i})=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $f(\overline{t}_{i})=0$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $R\slash\mathfrak{m}=K(\overline{t}_{1},\dots,\overline{t}_{n})$
+\end_inset
+
+ is a splitting field of 
+\begin_inset Formula $f$
+\end_inset
+
+ over 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ It follows that there exists a 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra isomorphism 
+\begin_inset Formula $\iota\colon R\slash\mathfrak{m}\to L$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ is the kernel of the 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $\iota\rho\colon R\to L$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Thus in order to describe the maximal ideals of 
+\begin_inset Formula $R$
+\end_inset
+
+, it suffices to describe the nonzero 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra homomorphisms 
+\begin_inset Formula $R\to L$
+\end_inset
+
+.
+ There is an obvious nonzero 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $\varphi\colon R\to L$
+\end_inset
+
+ given by 
+\begin_inset Formula $\varphi(t_{i})=\alpha_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ Furthermore, if 
+\begin_inset Formula $\pi\in S_{n}$
+\end_inset
+
+, then we obtain another nonzero 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $\varphi\pi\colon R\to L$
+\end_inset
+
+ given by 
+\begin_inset Formula $\varphi\pi(t_{i})=\alpha_{\pi(i)}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ We claim that this is all of them.
+ Indeed, since 
+\begin_inset Formula $f(t_{i})=0$
+\end_inset
+
+, we see that any 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $R\to L$
+\end_inset
+
+ must send 
+\begin_inset Formula $t_{i}$
+\end_inset
+
+ to some root of 
+\begin_inset Formula $f$
+\end_inset
+
+ in 
+\begin_inset Formula $L$
+\end_inset
+
+, say 
+\begin_inset Formula $\alpha_{\pi(i)}$
+\end_inset
+
+, for each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ Moreover, the 
+\begin_inset Formula $\alpha_{\pi(i)}'s$
+\end_inset
+
+ must satisfy
+\begin_inset Formula 
+\[
+f(X)=\prod_{i=1}^{n}(X-\alpha_{\pi(i)}).
+\]
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\pi$
+\end_inset
+
+ must be a permutation of 
+\begin_inset Formula $\{1,\dots,n\}$
+\end_inset
+
+.
+ It follows that every 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra has the form 
+\begin_inset Formula $\varphi\pi$
+\end_inset
+
+ for some 
+\begin_inset Formula $\pi\in S_{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Finally, suppose 
+\begin_inset Formula $\psi_{1}\colon R\to L$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{2}\colon R\to L$
+\end_inset
+
+ are two 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra homomorphisms.
+ We claim that 
+\begin_inset Formula $\ker\psi_{1}=\ker\psi_{2}$
+\end_inset
+
+ if and only if there exists a 
+\begin_inset Formula $\sigma\in\mathrm{Gal}(L\slash K)$
+\end_inset
+
+ such that 
+\begin_inset Formula $\psi_{1}\sigma=\psi_{2}$
+\end_inset
+
+ (where we view 
+\begin_inset Formula $\mathrm{Gal}(L\slash K)$
+\end_inset
+
+ as a subgroup of 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ in the natural way).
+ Indeed, one direction is clear.
+ For the other direction, let 
+\begin_inset Formula $\rho\colon R\to R\slash\ker\psi_{1}$
+\end_inset
+
+ be the quotient map and let 
+\begin_inset Formula $\overline{\psi}_{1}\colon R\slash\ker\psi_{1}\to L$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{\psi}_{2}=R\slash\ker\psi_{1}\to L$
+\end_inset
+
+ be the 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra isomorhpisms induced by 
+\begin_inset Formula $\psi_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{2}$
+\end_inset
+
+ respectively (so 
+\begin_inset Formula $\overline{\psi}_{1}\varrho=\psi_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{\psi}_{2}\pi=\psi_{2}$
+\end_inset
+
+).
+ If we define 
+\begin_inset Formula $\sigma=\overline{\psi}_{2}\overline{\psi}_{1}^{-1}$
+\end_inset
+
+, then it is easy to check that 
+\begin_inset Formula $\psi_{1}\sigma=\psi_{2}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

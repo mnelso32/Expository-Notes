@@ -1,0 +1,1839 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Commutative Algebra Homework 6
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+I got too caught up in the elections and unfortunately did not finish problem
+ 1 or 3.
+ I apologize for this.
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain.
+ Show that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a Prüfer domain if and only if every overring of 
+\begin_inset Formula $R$
+\end_inset
+
+ is integrally closed.
+ (Hint: consider 
+\begin_inset Formula $R_{\mathfrak{m}}$
+\end_inset
+
+ for some maximal ideal and if 
+\begin_inset Formula $x,y\in R_{\mathfrak{m}}$
+\end_inset
+
+, consider 
+\begin_inset Formula $R_{\mathfrak{m}}[y^{2}/x^{2}]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Suppose that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a Prüfer domain and let 
+\begin_inset Formula $A$
+\end_inset
+
+ be an overring of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ By homework 4, problem 4, we know that 
+\begin_inset Formula $A$
+\end_inset
+
+ is itself a Prüfer domain.
+ Every Prüfer domain is integrally closed (see Appendix), so 
+\begin_inset Formula $A$
+\end_inset
+
+ is integrally closed.
+ Since 
+\begin_inset Formula $A$
+\end_inset
+
+ was arbitrary, it follows that every overring of 
+\begin_inset Formula $R$
+\end_inset
+
+ is integrally closed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Conversely, suppose every overring of 
+\begin_inset Formula $R$
+\end_inset
+
+ is integrally closed and let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be a prime ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ We need to show that 
+\begin_inset Formula $R_{\mathfrak{p}}$
+\end_inset
+
+ is a valuation domain.
+ First note that 
+\begin_inset Formula $R_{\mathfrak{p}}$
+\end_inset
+
+ is integrally closed since integral closures commute with localization.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Show that if 
+\begin_inset Formula $K$
+\end_inset
+
+ is a field then any maximal ideal of 
+\begin_inset Formula $K[T_{1},\dots,T_{n}]$
+\end_inset
+
+ can be generated by 
+\begin_inset Formula $n$
+\end_inset
+
+ elements.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ By Hilbert's Nullstellensatz, the maximal 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ is in the kernel of a 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra homomorphism from 
+\begin_inset Formula $K[T_{1},\dots,T_{n}]$
+\end_inset
+
+ to 
+\begin_inset Formula $L$
+\end_inset
+
+ where 
+\begin_inset Formula $L\slash K.$
+\end_inset
+
+ is a finite field extension.
+ For each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+ let 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ be the images of 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+ under this homomorphism.
+ We will build a sequence of polynomials 
+\begin_inset Formula $f_{1},\dots,f_{n}$
+\end_inset
+
+ in 
+\begin_inset Formula $K[T_{1},\dots,T_{n}]$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathfrak{m}=\langle f_{1},\dots,f_{n}\rangle$
+\end_inset
+
+ and such that 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ is a polynomial in 
+\begin_inset Formula $K[T_{1},\dots,T_{k}]$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq k\leq n$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+First we set 
+\begin_inset Formula $f_{1}(T_{1})$
+\end_inset
+
+ to be the minimal polynomial of 
+\begin_inset Formula $\alpha_{1}$
+\end_inset
+
+ over 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Next let 
+\begin_inset Formula $\pi_{2}(X)$
+\end_inset
+
+ be the minimal polynomial of 
+\begin_inset Formula $\alpha_{2}$
+\end_inset
+
+ over 
+\begin_inset Formula $K(\alpha_{1})$
+\end_inset
+
+.
+ The coefficients of 
+\begin_inset Formula $\pi_{2}(X)$
+\end_inset
+
+ can be expressed as polynomials in 
+\begin_inset Formula $\alpha_{1}$
+\end_inset
+
+, and so in particular we can find a polynomial 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ in 
+\begin_inset Formula $K[T_{1},T_{2}]$
+\end_inset
+
+ such that 
+\begin_inset Formula $f_{2}(\alpha_{1},X)=\pi_{2}(X)$
+\end_inset
+
+.
+ Proceeding inductively, at the 
+\begin_inset Formula $k$
+\end_inset
+
+th step, where 
+\begin_inset Formula $1\leq k\leq n$
+\end_inset
+
+, we let 
+\begin_inset Formula $\pi_{k}(X)$
+\end_inset
+
+ be the minimal polynomial of 
+\begin_inset Formula $\alpha_{k}$
+\end_inset
+
+ over 
+\begin_inset Formula $K(\alpha_{1},\dots,\alpha_{k-1})$
+\end_inset
+
+ and we choose a polynomial a polynomials 
+\begin_inset Formula $f_{k}$
+\end_inset
+
+ in 
+\begin_inset Formula $K[T_{1},\dots,T_{k}]$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f_{k}(\alpha_{1},\dots,\alpha_{k-1},X)=\pi_{k}(X).
+\]
+
+\end_inset
+
+We claim that 
+\begin_inset Formula $\mathfrak{m}=\langle f_{1},\dots,f_{n}\rangle$
+\end_inset
+
+.
+ Indeed, we have 
+\begin_inset Formula $\mathfrak{m}\supseteq\langle f_{1},\dots,f_{n}\rangle$
+\end_inset
+
+ since 
+\begin_inset Formula $\langle f_{1},\dots,f_{n}\rangle$
+\end_inset
+
+ is in the kernel of the 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra homomorphism from 
+\begin_inset Formula $K[T_{1},\dots,T_{n}]$
+\end_inset
+
+ to 
+\begin_inset Formula $L$
+\end_inset
+
+.
+ To see this, note that for each 
+\begin_inset Formula $1\leq k\leq n$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{align*}
+f_{k}(\alpha_{1},\dots,\alpha_{k-1},\alpha_{k}) & =\pi_{k}(\alpha_{k})=0.
+\end{align*}
+
+\end_inset
+
+We also have 
+\begin_inset Formula $\mathfrak{m}\subseteq\langle f_{1},\dots,f_{n}\rangle$
+\end_inset
+
+ since 
+\begin_inset Formula $\langle f_{1},\dots,f_{n}\rangle$
+\end_inset
+
+ is a maximal ideal.
+ Indeed, we prove by induction on 
+\begin_inset Formula $n$
+\end_inset
+
+ that 
+\begin_inset Formula $K[T_{1},\dots,T_{n}]\slash\langle f_{1},\dots,f_{n}\rangle\cong K(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $n=1$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+K[T_{1}]\slash\langle f_{1}\rangle\cong K[X]\slash\pi_{1}(X)\cong K(\alpha_{1}).
+\]
+
+\end_inset
+
+Now suppose 
+\begin_inset Formula $n>1$
+\end_inset
+
+ and we have shown this to be true for all 
+\begin_inset Formula $1\leq k<n$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+K[T_{1},\dots,T_{n-1},T_{n}]\slash\langle f_{1},\dots,f_{n-1},f_{n}\rangle & \cong\left(K[T_{1},\dots,T_{n-1}]\slash\langle f_{1},\dots,f_{n-1}\rangle\right)[T_{n}]\slash\langle f_{n}(\overline{T_{1}},\dots,\overline{T_{n-1}},T_{n})\\
+ & \cong K(\alpha_{1},\dots,\alpha_{n-1})[T_{n}]\slash\langle f_{n}(\alpha_{1},\dots,\alpha_{n-1},T_{n})\rangle\\
+ & \cong K(\alpha_{1},\dots,\alpha_{n-1})[X]\slash\langle\pi_{n}(X)\rangle\\
+ & \cong K(\alpha_{1},\dots,\alpha_{n-1},\alpha_{n}),
+\end{align*}
+
+\end_inset
+
+where we used the induction step to get from the first line to the second
+ line.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain and let 
+\begin_inset Formula $S\subseteq R$
+\end_inset
+
+ be a multiplicatively closed subset not containing 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Show that 
+\begin_inset Formula $R[x]_{S}=R_{S}[x]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Show that 
+\begin_inset Formula $R[[x]]_{S}\subseteq R_{S}[[x]]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Show that equality in 2 holds if and only if for every countable collection
+ 
+\begin_inset Formula $(s_{n})$
+\end_inset
+
+ of elements of 
+\begin_inset Formula $S$
+\end_inset
+
+ we have 
+\begin_inset Formula $\bigcap_{n\in\mathbb{N}}\langle s_{n}\rangle\neq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Show that if 
+\begin_inset Formula $R$
+\end_inset
+
+ is a PID then every 
+\begin_inset Formula $S\subseteq R$
+\end_inset
+
+ satisfies the above property if and only if 
+\begin_inset Formula $R$
+\end_inset
+
+ is a field.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Define 
+\begin_inset Formula $\varphi\colon R[x]_{S}\to R_{S}[x]$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\varphi\left(\left(\sum_{i=0}^{n}a_{i}x^{i}\right)/s\right)=\sum_{i=0}^{n}(a_{i}/s)x^{i}.
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $a_{i}\in R$
+\end_inset
+
+ and 
+\begin_inset Formula $s\in S$
+\end_inset
+
+.
+ The map 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is clearly a well-defined injective ring homomorphism.
+ Furthermore, it is surjective.
+ Indeed, if 
+\begin_inset Formula $\sum_{i=0}^{n}(a_{i}/s_{i})x^{i}\in R_{S}[x]$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=0}^{n}(a_{i}/s_{i})x^{i} & =\frac{a_{0}}{s_{0}}+\frac{a_{1}}{s_{1}}x+\cdots+\frac{a_{n}}{s_{n}}x^{n}\\
+ & =\frac{a_{0}s_{1}\cdots s_{n}}{s_{0}s_{1}\cdots s_{n}}+\frac{s_{0}a_{1}s_{2}\cdots s_{n}}{s_{0}s_{1}\cdots s_{n}}x+\cdots+\frac{s_{0}\cdots s_{n-1}a_{n}}{s_{0}s_{1}\cdots s_{n}}x^{n}\\
+ & =\varphi\left(\frac{a_{0}s_{1}\cdots s_{n}+s_{0}a_{1}s_{2}\cdots s_{n}x+\cdots+s_{0}\cdots s_{n-1}a_{n}x^{n}}{s_{0}s_{1}\cdots s_{n}}\right)
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $R[x]_{S}\cong R_{S}[x]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Define 
+\begin_inset Formula $\varphi\colon R[[x]]_{S}\to R_{S}[[x]]$
+\end_inset
+
+ by
+\begin_inset Formula 
+\begin{equation}
+\varphi\left(\left(\sum_{n=0}^{\infty}a_{n}x^{n}\right)/s\right)=\sum_{n=0}^{\infty}(a_{n}/s)x^{n}\label{eq:well-defined2}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $\left(\sum_{n=0}^{\infty}a_{n}x^{n}\right)/s\in R[[x]]_{S}$
+\end_inset
+
+.
+ Let's check that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:well-defined2})
+\end_layout
+
+\end_inset
+
+ is well-defined.
+ Suppose 
+\begin_inset Formula $\left(\sum_{n=0}^{\infty}a_{n}x^{n}\right)/s=\left(\sum_{n=0}^{\infty}a_{n}'x^{n}\right)/s'$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\left(\sum_{n=0}^{\infty}a_{n}x^{n}\right)/s=\left(\sum_{n=0}^{\infty}a_{n}'x^{n}\right)/s' & \iff s'\left(\sum_{n=0}^{\infty}a_{n}x^{n}\right)=s\left(\sum_{n=0}^{\infty}a_{n}'x^{n}\right)\\
+ & \iff\sum_{n=0}^{\infty}s'a_{n}x^{n}=\sum_{n=0}^{\infty}sa_{n}'x^{n}\\
+ & \iff s'a_{n}=sa_{n}'\text{ for each }n\in\mathbb{N}\\
+ & \iff a_{n}/s=a_{n}'/s'\text{ for each }n\in\mathbb{N}\\
+ & \iff\sum_{n=0}^{\infty}(a_{n}/s)x^{n}=\sum_{n=0}^{\infty}(a_{n}'/s')x^{n}.
+\end{align*}
+
+\end_inset
+
+This implies 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:well-defined2})
+\end_layout
+
+\end_inset
+
+ is well-defined.
+ Now we check that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is injective.
+ Note that
+\begin_inset Formula 
+\begin{align*}
+\left(\sum_{n=0}^{\infty}a_{n}x^{n}\right)/s\in\ker\varphi & \iff\sum_{n=0}^{\infty}(a_{n}/s)x^{n}=0\\
+ & \iff a_{n}/s=0\text{ for all }n\in\mathbb{N}\\
+ & \iff a_{n}=0\text{ for all }n\in\mathbb{N}\\
+ & \iff\sum_{n=0}^{\infty}a_{n}x^{n}=0\\
+ & \iff\left(\sum_{n=0}^{\infty}a_{n}x^{n}\right)/s=0.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is injective.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Keeping the same notation as before, we show 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is surjective if and only if 
+\begin_inset Formula $S$
+\end_inset
+
+ has the property that for every sequence 
+\begin_inset Formula $(s_{n})$
+\end_inset
+
+ in 
+\begin_inset Formula $S$
+\end_inset
+
+ we have 
+\begin_inset Formula $\bigcap_{n\in\mathbb{N}}\langle s_{n}\rangle\neq0$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $S$
+\end_inset
+
+ has the stated property.
+ Let 
+\begin_inset Formula $\sum_{n=0}^{\infty}(a_{n}/s_{n})x^{n}$
+\end_inset
+
+ be an element of 
+\begin_inset Formula $R_{S}[[x]]$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\bigcap_{n\in\mathbb{N}}\langle s_{n}\rangle\neq0$
+\end_inset
+
+, there exists a nonzero 
+\begin_inset Formula $t\in\bigcap_{n\in\mathbb{N}}\langle s_{n}\rangle$
+\end_inset
+
+.
+ Write 
+\begin_inset Formula $t=b_{n}s_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ where 
+\begin_inset Formula $b_{n}\in R$
+\end_inset
+
+.
+ Note that this implies 
+\begin_inset Formula $b_{1}s_{1}=b_{n}s_{n}$
+\end_inset
+
+ or 
+\begin_inset Formula $b_{1}/s_{n}=b_{n}/s_{1}$
+\end_inset
+
+.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\sum_{n=0}^{\infty}\frac{b_{1}a_{n}}{s_{n}}x^{n} & =\sum_{n=0}^{\infty}\frac{b_{n}a_{n}}{s_{1}}x^{n}\\
+ & =\left(\sum_{n=0}^{\infty}b_{n}a_{n}x^{n}\right)/s_{1}
+\end{align*}
+
+\end_inset
+
+In particular, it follows that 
+\begin_inset Formula 
+\[
+\varphi\left(\left(\sum_{n=0}^{\infty}b_{n}a_{n}x^{n}\right)/b_{1}s_{1}\right)=\sum_{n=0}^{\infty}\frac{b_{1}a_{n}}{s_{n}}x^{n},
+\]
+
+\end_inset
+
+thus 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is surjective.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring with identity and let 
+\begin_inset Formula $M$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-module.
+ A prime 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+ is 
+\series bold
+weakly associated 
+\series default
+to 
+\begin_inset Formula $M$
+\end_inset
+
+ if there exists an element 
+\begin_inset Formula $u\in M$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is minimal among the prime ideals containing the annihilator 
+\begin_inset Formula $0:u=\{a\in R\mid au=0\}$
+\end_inset
+
+.
+ The set of all such primes is denoted 
+\begin_inset Formula $\mathrm{WeakAss}\,M$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propzerodivisorsweaksa}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring with identity.
+ Then the set of all zerodivisors of 
+\begin_inset Formula $R$
+\end_inset
+
+ is given by the set
+\begin_inset Formula 
+\[
+\bigcup_{\mathfrak{p}\in\mathrm{WeakAss}\,R}\mathfrak{p}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $x\in R$
+\end_inset
+
+ is a zerodivisor.
+ Then 
+\begin_inset Formula $0:x$
+\end_inset
+
+ is a proper ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Choose a minimal prime 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ over 
+\begin_inset Formula $0:x$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is a weakly associated prime to 
+\begin_inset Formula $R$
+\end_inset
+
+ and 
+\begin_inset Formula $x\in\mathfrak{p}$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\[
+\{\text{set of zerodivisors of }R\}\subseteq\bigcup_{\mathfrak{p}\in\mathrm{WeakAss}\,R}\mathfrak{p}.
+\]
+
+\end_inset
+
+Conversely, suppose 
+\begin_inset Formula $x\in\bigcup_{\mathfrak{p}\in\mathrm{WeakAss}\,R}\mathfrak{p}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $x\in\mathfrak{p}$
+\end_inset
+
+ for some prime 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ which is weakly associated to 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is weakly associated to 
+\begin_inset Formula $R$
+\end_inset
+
+, there exists a 
+\begin_inset Formula $y\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is a minimal prime over 
+\begin_inset Formula $0:y$
+\end_inset
+
+.
+ Since localization is exact, we see that 
+\begin_inset Formula $\mathfrak{p}_{\mathfrak{p}}$
+\end_inset
+
+ is a weakly associated prime to 
+\begin_inset Formula $R_{\mathfrak{p}}$
+\end_inset
+
+, with 
+\begin_inset Formula $\mathfrak{p}_{\mathfrak{p}}$
+\end_inset
+
+ being minimal over the annihiliator of 
+\begin_inset Formula $y/1$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R_{\mathfrak{p}}$
+\end_inset
+
+ is local and 
+\begin_inset Formula $\mathfrak{p}_{\mathfrak{p}}$
+\end_inset
+
+ is minimal over the annihilator 
+\begin_inset Formula $0:(y/1)$
+\end_inset
+
+, we have 
+\begin_inset Formula $\mathrm{rad}(0:(y/1))=\mathfrak{p}_{\mathfrak{p}}$
+\end_inset
+
+.
+ In particular, there exists 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ and a 
+\begin_inset Formula $z\in R\backslash\mathfrak{p}$
+\end_inset
+
+ such that 
+\begin_inset Formula $x^{n}z\in0:y$
+\end_inset
+
+, or in other words, such that 
+\begin_inset Formula $x^{n}zy=0$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $zy\neq0$
+\end_inset
+
+ as 
+\begin_inset Formula $z\notin\mathfrak{p}$
+\end_inset
+
+, so if 
+\begin_inset Formula $n=1$
+\end_inset
+
+, then 
+\begin_inset Formula $xzy=0$
+\end_inset
+
+ implies 
+\begin_inset Formula $x$
+\end_inset
+
+ is a zerodivisor.
+ Assume 
+\begin_inset Formula $n>1$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $m\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $m\leq n$
+\end_inset
+
+ and 
+\begin_inset Formula $x^{m}zy=0$
+\end_inset
+
+ and 
+\begin_inset Formula $x^{m-1}zy\neq0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $x(x^{m-1}zy)=x^{m}zy=0$
+\end_inset
+
+ implies 
+\begin_inset Formula $x$
+\end_inset
+
+ is a zerodivisor.
+ Thus 
+\begin_inset Formula 
+\[
+\{\text{set of zerodivisors of }R\}\supseteq\bigcup_{\mathfrak{p}\in\mathrm{WeakAss}\,R}\mathfrak{p}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a 
+\begin_inset Formula $0$
+\end_inset
+
+-dimensional ring.
+ Then any nonunit of 
+\begin_inset Formula $R$
+\end_inset
+
+ is a zerodivisor.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+\{\text{set of zerodivisors of }R\} & =\bigcup_{\mathfrak{p}\in\mathrm{WeakAss}\,R}\mathfrak{p}\\
+ & =\bigcup_{\mathfrak{p}\in\mathrm{Spec}\,R}\mathfrak{p}\\
+ & =\{\text{nonunits of }R\},
+\end{align*}
+
+\end_inset
+
+where we obtained the second line from the first line from the fact that
+ 
+\begin_inset Formula $R$
+\end_inset
+
+ is 
+\begin_inset Formula $0$
+\end_inset
+
+-dimensional.
+ Indeed, clearly we have
+\begin_inset Formula 
+\[
+\bigcup_{\mathfrak{p}\in\mathrm{WeakAss}\,R}\mathfrak{p}\subseteq\bigcup_{\mathfrak{p}\in\mathrm{Spec}\,R}\mathfrak{p}.
+\]
+
+\end_inset
+
+Conversely, suppose 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is a prime ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+ and choose 
+\begin_inset Formula $x\in\mathfrak{p}$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $x\in\mathfrak{p}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is prime we have 
+\begin_inset Formula $\mathfrak{p}\supseteq0:x$
+\end_inset
+
+ and since 
+\begin_inset Formula $R$
+\end_inset
+
+ is 
+\begin_inset Formula $0$
+\end_inset
+
+-dimensional we see that 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is minimal over 
+\begin_inset Formula $0:x$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is a weakly associated prime to 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ It follows that
+\begin_inset Formula 
+\[
+\bigcup_{\mathfrak{p}\in\mathrm{WeakAss}\,R}\mathfrak{p}\supseteq\bigcup_{\mathfrak{p}\in\mathrm{Spec}\,R}\mathfrak{p}.
+\]
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Subsubsection*
+Prüfer domains are integrally closed
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemmaintegralclosureint}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain, let 
+\begin_inset Formula $K$
+\end_inset
+
+ be its quotient field, and let 
+\begin_inset Formula $\overline{R}$
+\end_inset
+
+ be the integral closure of 
+\begin_inset Formula $R$
+\end_inset
+
+ in 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\overline{R}\subseteq\bigcap_{R\subseteq A\subseteq K}A
+\]
+
+\end_inset
+
+ where the intersection runs over all valuation overrings 
+\begin_inset Formula $A$
+\end_inset
+
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ This follows from the fact the every valuation ring is integrally closed.
+ Indeed, let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a valuation overring of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $A$
+\end_inset
+
+ is integrally closed and 
+\begin_inset Formula $R\subseteq A$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $\overline{R}\subseteq A$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $A$
+\end_inset
+
+ was arbitrary, we see that 
+\begin_inset Formula $\overline{R}=\bigcap_{R\subseteq A\subseteq K}A$
+\end_inset
+
+ where the intersection runs over all valuation overrings 
+\begin_inset Formula $A$
+\end_inset
+
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a Prüfer domain.
+ Then 
+\begin_inset Formula $R$
+\end_inset
+
+ is integrally closed.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\overline{R}$
+\end_inset
+
+ be the integral closure of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Observe that
+\begin_inset Formula 
+\begin{align*}
+R & =\bigcap_{\mathfrak{p}\in\mathrm{Spec}\,R}R_{\mathfrak{p}} &  & \text{(Homework 1, Problem 4})\\
+ & \supseteq\bigcap_{A\text{ valuation overring of }R}A &  & \text{(Because }R\text{ is Prüfer)}\\
+ & \supseteq\overline{R} &  & \text{(Lemma above)}\\
+ & \supseteq R.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $R=\overline{R}$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $R$
+\end_inset
+
+ is integrally closed.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

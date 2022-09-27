@@ -1,0 +1,2477 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Commutative Algebra Homework 2
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain.
+ Then 
+\begin_inset Formula $R$
+\end_inset
+
+ is a PID if and only if every prime ideal is principal.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $R$
+\end_inset
+
+ is a PID, then every ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ is principal, so every prime ideal is principal.
+ Conversely, suppose every prime ideal is principal.
+ Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ and assume for a contradiction that 
+\begin_inset Formula $I$
+\end_inset
+
+ is not principal.
+ Consider the partially order set 
+\begin_inset Formula $(\Gamma,\subseteq)$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+\Gamma=\{\text{ideals }\mathfrak{a}\mid I\subseteq\mathfrak{a}\subseteq R\text{ and }\mathfrak{a}\text{ not principal}\}
+\]
+
+\end_inset
+
+and where 
+\begin_inset Formula $\subseteq$
+\end_inset
+
+ is set inclusion.
+ Note that 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is nonempty since 
+\begin_inset Formula $I\in\Gamma$
+\end_inset
+
+.
+ Also note that every totally ordered subset in 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ has an upper bound.
+ Indeed, if 
+\begin_inset Formula $(\mathfrak{a}_{\lambda})_{\lambda\in\Lambda}$
+\end_inset
+
+ is a totally ordered subset, then 
+\begin_inset Formula $\bigcup_{\lambda\in\Lambda}\mathfrak{a}_{\lambda}$
+\end_inset
+
+ is an upper bound of 
+\begin_inset Formula $(\mathfrak{a}_{\lambda})$
+\end_inset
+
+: the set 
+\begin_inset Formula $\bigcup_{\lambda\in\Lambda}\mathfrak{a}_{\lambda}$
+\end_inset
+
+ is an ideal which contains 
+\begin_inset Formula $I$
+\end_inset
+
+ since 
+\begin_inset Formula $(\mathfrak{a}_{\lambda})$
+\end_inset
+
+ is totally ordered and each 
+\begin_inset Formula $\mathfrak{a}_{\lambda}$
+\end_inset
+
+ contains 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ Also, if 
+\begin_inset Formula $\bigcup_{\lambda\in\Lambda}\mathfrak{a}_{\lambda}$
+\end_inset
+
+ is principal, then there must exist some 
+\begin_inset Formula $\mathfrak{a}_{\lambda}$
+\end_inset
+
+ which is principal (again since 
+\begin_inset Formula $(\mathfrak{a}_{\lambda})$
+\end_inset
+
+ is totally ordered), thus 
+\begin_inset Formula $\bigcup_{\lambda\in\Lambda}\mathfrak{a}_{\lambda}$
+\end_inset
+
+ is 
+\emph on
+not 
+\emph default
+principal.
+ Hence 
+\begin_inset Formula 
+\[
+\bigcup_{\lambda\in\Lambda}\mathfrak{a}_{\lambda}\in\Gamma.
+\]
+
+\end_inset
+
+Thus using Zorn's Lemma, we see that 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ has a maximal element, say 
+\begin_inset Formula $\mathfrak{p}\in\Gamma$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is a prime ideal.
+ To see this, assume for a contradiction that 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is not a prime ideal.
+ Choose 
+\begin_inset Formula $a,b\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula $ab\in\mathfrak{p}$
+\end_inset
+
+ and 
+\begin_inset Formula $a,b\notin\mathfrak{p}$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $\langle\mathfrak{p},a\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle\mathfrak{p},b\rangle$
+\end_inset
+
+ both properly contain 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+.
+ By maximality of 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+, they must both be principal ideals, say 
+\begin_inset Formula $\langle\mathfrak{p},a\rangle=\langle x\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle\mathfrak{p},b\rangle=\langle y\rangle$
+\end_inset
+
+.
+ Then observe that
+\begin_inset Formula 
+\begin{align*}
+\mathfrak{p} & \subseteq\langle\mathfrak{p},a\rangle\langle\mathfrak{p},b\rangle\\
+ & =(\mathfrak{p}+\langle a\rangle)(\mathfrak{p}+\langle b\rangle)\\
+ & =\mathfrak{p}+\langle a\rangle\mathfrak{p}+\mathfrak{p}\langle b\rangle+\langle ab\rangle\\
+ & \subseteq\mathfrak{p}.
+\end{align*}
+
+\end_inset
+
+It follows that
+\begin_inset Formula 
+\begin{align*}
+\mathfrak{p} & =\langle\mathfrak{p},a\rangle\langle\mathfrak{p},b\rangle\\
+ & =\langle x\rangle\langle y\rangle\\
+ & =\langle xy\rangle.
+\end{align*}
+
+\end_inset
+
+This is a contradiction since 
+\begin_inset Formula $\mathfrak{p}\in\Gamma$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is a prime ideal.
+ However by assumption 
+\emph on
+all 
+\emph default
+prime ideals are principal, so 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ being prime implies 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is principal.
+ But this again contradicts the fact that 
+\begin_inset Formula $\mathfrak{p}\in\Gamma$
+\end_inset
+
+.
+ Thus every ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ must be principal.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring with identity.
+ Show that the following conditions are equivalent:
+\end_layout
+
+\begin_layout Enumerate
+Every ascending chain of ideals in 
+\begin_inset Formula $R$
+\end_inset
+
+ stabilizes: if 
+\begin_inset Formula $(I_{n})$
+\end_inset
+
+ is ascending chain of ideals in 
+\begin_inset Formula $R$
+\end_inset
+
+, meaning 
+\begin_inset Formula $I_{n}\subseteq I_{n+1}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, then there exists 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $I_{N}=I_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\geq N$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Every ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+ is finitely generated.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Suppose every chain of ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ stabilizes and let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Assume for a contradiction that 
+\begin_inset Formula $I$
+\end_inset
+
+ is not finitely generated.
+ Choose any 
+\begin_inset Formula $x_{1}\in I$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $I$
+\end_inset
+
+ is not finitely generated, we have 
+\begin_inset Formula 
+\[
+\langle x_{1}\rangle\subset I
+\]
+
+\end_inset
+
+where the inclusion is proper.
+ Next we choose 
+\begin_inset Formula $x_{2}\in I\backslash\langle x_{1}\rangle$
+\end_inset
+
+.
+ Again, since 
+\begin_inset Formula $I$
+\end_inset
+
+ is not finitely generated, we have
+\begin_inset Formula 
+\[
+\langle x_{1}\rangle\subset\langle x_{1},x_{2}\rangle\subset I
+\]
+
+\end_inset
+
+where each inclusion is proper.
+ Proceeding inductively on 
+\begin_inset Formula $n\geq3$
+\end_inset
+
+, we choose 
+\begin_inset Formula $x_{n}\in I\backslash\langle x_{1},\dots,x_{n-1}\rangle$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $I$
+\end_inset
+
+ is not finitely generated, we have
+\begin_inset Formula 
+\[
+\langle x_{1}\rangle\subset\langle x_{1},x_{2}\rangle\subset\cdots\subset\langle x_{1},x_{2},\dots,x_{n}\rangle\subset I
+\]
+
+\end_inset
+
+where each inclusion is proper.
+ Continuing in this manner, we construct an ascending chain of ideals 
+\begin_inset Formula 
+\[
+(\langle x_{1},x_{2}\dots,x_{n}\rangle)_{n\in\mathbb{N}}
+\]
+
+\end_inset
+
+which never stabilizes since 
+\begin_inset Formula $\langle x_{1},x_{2},\dots,x_{n}\rangle$
+\end_inset
+
+ is properly contained in 
+\begin_inset Formula $\langle x_{1},x_{2},\dots,x_{n},x_{n+1}\rangle$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ This contradicts the hypothesis that every chain of ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ stabilizes.
+ Thus every ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ is finitely generated.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now let us show the converse.
+ Suppose every ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ is finitely generated.
+ Let 
+\begin_inset Formula $(I_{n})$
+\end_inset
+
+ be an ascending chain of ideals.
+ Then 
+\begin_inset Formula $\bigcup_{n=1}^{\infty}I_{n}$
+\end_inset
+
+ is an ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ since 
+\begin_inset Formula $(I_{n})$
+\end_inset
+
+ is totally ordered, thus it must be finitely generated, say
+\begin_inset Formula 
+\[
+\bigcup_{n=1}^{\infty}I_{n}=\langle x_{1},\dots,x_{m}\rangle.
+\]
+
+\end_inset
+
+Observe that 
+\begin_inset Formula $x_{i}\in I_{n_{i}}$
+\end_inset
+
+ for some 
+\begin_inset Formula $n_{i}\in\mathbb{N}$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ Set 
+\begin_inset Formula $N=\max_{1\leq i\leq m}\{n_{i}\}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $x_{i}\in I_{N}$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+ since 
+\begin_inset Formula $(I_{n})$
+\end_inset
+
+ is totally ordered.
+ It follows that for any 
+\begin_inset Formula $n\geq N$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+I_{N} & \subseteq I_{n}\\
+ & \subseteq\bigcup_{n=1}^{\infty}I_{n}\\
+ & =\langle x_{1},\dots,x_{m}\rangle\\
+ & \subseteq I_{N}.
+\end{align*}
+
+\end_inset
+
+In particular we have 
+\begin_inset Formula $I_{N}=I_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\geq N$
+\end_inset
+
+.
+ Thus every chain of ideals in 
+\begin_inset Formula $R$
+\end_inset
+
+ stabilizes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain and let 
+\begin_inset Formula $A$
+\end_inset
+
+ be an overring of 
+\begin_inset Formula $R$
+\end_inset
+
+: that is, 
+\begin_inset Formula $R\subseteq A\subseteq K$
+\end_inset
+
+ where 
+\begin_inset Formula $K$
+\end_inset
+
+ is the field of fractions of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Show that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a PID if and only if 
+\begin_inset Formula $R$
+\end_inset
+
+ is a UFD and 
+\begin_inset Formula $\dim R\leq1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Show that if 
+\begin_inset Formula $R$
+\end_inset
+
+ is a UFD then any localization of 
+\begin_inset Formula $R$
+\end_inset
+
+ is a UFD.
+\end_layout
+
+\begin_layout Enumerate
+Show that if 
+\begin_inset Formula $R$
+\end_inset
+
+ is a PID, then 
+\begin_inset Formula $A$
+\end_inset
+
+ is a localization of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Is 3 true for UFDs? Prove or give a counterexample.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Suppose 
+\begin_inset Formula $R$
+\end_inset
+
+ is a UFD and 
+\begin_inset Formula $\dim R\leq1$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\dim R=0$
+\end_inset
+
+, then 
+\begin_inset Formula $R$
+\end_inset
+
+ must a field: the zero ideal is prime since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain and if 
+\begin_inset Formula $\dim R=0$
+\end_inset
+
+, then no prime ideal can contain the zero ideal, so the zero ideal must
+ be maximal, hence 
+\begin_inset Formula $R\slash\langle0\rangle\cong R$
+\end_inset
+
+ shows that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a field.
+ So we may assume 
+\begin_inset Formula $\dim R=1$
+\end_inset
+
+.
+ To show that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a PID, it suffices to show that every nonzero prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ is principal, by problem 1.
+ But this is easy! Indeed, let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be a nonzero prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a UFD, 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ contains a nonzero prime element, say 
+\begin_inset Formula $p\in\mathfrak{p}$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\[
+0\subset\langle p\rangle\subseteq\mathfrak{p},
+\]
+
+\end_inset
+
+where the first inclusion is proper since 
+\begin_inset Formula $p$
+\end_inset
+
+ is nonzero.
+ Thus 
+\begin_inset Formula $R$
+\end_inset
+
+ having dimension 
+\begin_inset Formula $1$
+\end_inset
+
+ forces 
+\begin_inset Formula $\langle p\rangle=\mathfrak{p}$
+\end_inset
+
+.
+ Thus every prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ is principal, and we are done.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Conversely, suppose 
+\begin_inset Formula $R$
+\end_inset
+
+ is a PID.
+ To show that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a UFD, we just need to show that all prime ideals in 
+\begin_inset Formula $R$
+\end_inset
+
+ contains a nonzero prime element.
+ However this is clear as every prime ideal is principal and hence generated
+ by a prime element.
+ See the Appendix for an alternative proof of the fact that all PIDs are
+ UFDs.
+ It remains to show that 
+\begin_inset Formula $\dim R\leq1$
+\end_inset
+
+.
+ Assume for a contradiction that 
+\begin_inset Formula $\langle p\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle q\rangle$
+\end_inset
+
+ are prime ideals in 
+\begin_inset Formula $R$
+\end_inset
+
+ with 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $q$
+\end_inset
+
+ being nonzero prime elements in 
+\begin_inset Formula $R$
+\end_inset
+
+ such that 
+\begin_inset Formula $\langle q\rangle$
+\end_inset
+
+ properly contains 
+\begin_inset Formula $\langle p\rangle$
+\end_inset
+
+, so 
+\begin_inset Formula $p=aq$
+\end_inset
+
+ for some 
+\begin_inset Formula $a\in R$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $q\notin\langle p\rangle$
+\end_inset
+
+ we see that 
+\begin_inset Formula $a\in\langle p\rangle$
+\end_inset
+
+ which implies 
+\begin_inset Formula $a=bp$
+\end_inset
+
+ for some 
+\begin_inset Formula $b\in R$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\begin{align*}
+p & =aq\\
+ & =bpq\\
+ & =pbq
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $1=bq$
+\end_inset
+
+ since 
+\begin_inset Formula $R$
+\end_inset
+
+ is an integral domain.
+ However this means 
+\begin_inset Formula $q$
+\end_inset
+
+ is a unit, which is a contradiction since 
+\begin_inset Formula $q$
+\end_inset
+
+ is prime.
+ Thus we cannot have a proper inclusion of nonzero prime ideals in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $\dim R\leq1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a UFD and let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a multipicatively closed subset of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ We want to show that 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ is a UFD also.
+ To do this, we will show that every prime ideal in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ contains a nonzero prime element.
+ Let 
+\begin_inset Formula $\mathfrak{p}_{S}$
+\end_inset
+
+ be a prime ideal in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is a prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathfrak{p}\cap S=\emptyset$
+\end_inset
+
+ (every prime ideal in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ has this form by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremspecrs})
+\end_layout
+
+\end_inset
+
+).
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a UFD, the prime 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ contains a nonzero prime element, say 
+\begin_inset Formula $p\in\mathfrak{p}$
+\end_inset
+
+.
+ Then the ideal generated by 
+\begin_inset Formula $p$
+\end_inset
+
+ is a prime ideal, and furthermore, it intersects 
+\begin_inset Formula $S$
+\end_inset
+
+ trivially since it is contained in 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+; that is 
+\begin_inset Formula 
+\[
+\langle p\rangle\cap S=\emptyset.
+\]
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $\langle p\rangle_{S}$
+\end_inset
+
+ is a prime ideal in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ (again by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremspecrs})
+\end_layout
+
+\end_inset
+
+).
+ Note 
+\begin_inset Formula $\langle p\rangle_{S}=\langle p/1\rangle$
+\end_inset
+
+ where 
+\begin_inset Formula $\langle p/1\rangle$
+\end_inset
+
+ denotes the ideal in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ generated by 
+\begin_inset Formula $p/1$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $p/1$
+\end_inset
+
+ is a prime element in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ which is clearly contained in 
+\begin_inset Formula $\mathfrak{p}_{S}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ is a UFD.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Let 
+\begin_inset Formula $S=\{y\in R\mid1/y\in A\}$
+\end_inset
+
+.
+ Observe that 
+\begin_inset Formula $S$
+\end_inset
+
+ is a multiplicatively closed subset of 
+\begin_inset Formula $R$
+\end_inset
+
+ since if 
+\begin_inset Formula $y_{1},y_{2}\in S$
+\end_inset
+
+, then 
+\begin_inset Formula $y_{1}y_{2}\in S$
+\end_inset
+
+ since 
+\begin_inset Formula 
+\[
+1/(y_{1}y_{2})=(1/y_{1})(1/y_{2})\in A.
+\]
+
+\end_inset
+
+Every element in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ has the form 
+\begin_inset Formula $x/y$
+\end_inset
+
+ where 
+\begin_inset Formula $x\in R$
+\end_inset
+
+, 
+\begin_inset Formula $1/y\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{gcd}(x,y)=1$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R\subseteq A$
+\end_inset
+
+, we see that any 
+\begin_inset Formula $x/y\in R_{S}$
+\end_inset
+
+ is an element of 
+\begin_inset Formula $A$
+\end_inset
+
+, thus 
+\begin_inset Formula $R_{S}\subseteq A$
+\end_inset
+
+.
+ To show the reverse inclusion, let 
+\begin_inset Formula $x/y\in A$
+\end_inset
+
+, where 
+\begin_inset Formula $x,y\in R$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{gcd}(x,y)=1$
+\end_inset
+
+.
+ We need to show that 
+\begin_inset Formula $1/y\in A$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a PID and 
+\begin_inset Formula $\mathrm{gcd}(x,y)=1$
+\end_inset
+
+, we have 
+\begin_inset Formula $\langle x,y\rangle=1$
+\end_inset
+
+.
+ Thus there exists 
+\begin_inset Formula $a,b\in R$
+\end_inset
+
+ such that 
+\begin_inset Formula $ax+by=1$
+\end_inset
+
+.
+ Then observe that
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{y} & =\frac{ax+by}{y}\\
+ & =a\left(\frac{x}{y}\right)+b\\
+ & \in A.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $x/y\in R_{S}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $A\subseteq R_{S}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ No.
+ Let 
+\begin_inset Formula $k$
+\end_inset
+
+ be a field, let 
+\begin_inset Formula $R=k[X,Y]$
+\end_inset
+
+, let 
+\begin_inset Formula $A=k[X,Y,X/Y]$
+\end_inset
+
+, and let 
+\begin_inset Formula $K=k(X,Y)$
+\end_inset
+
+ be the field of fractions of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A$
+\end_inset
+
+ is an overring of 
+\begin_inset Formula $R$
+\end_inset
+
+ which is contained in 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ However 
+\begin_inset Formula $A$
+\end_inset
+
+ is not the localization of 
+\begin_inset Formula $R$
+\end_inset
+
+ at any multiplicative set 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Indeed, assume for a contradiction that 
+\begin_inset Formula $S$
+\end_inset
+
+ is a multiplicative subset of 
+\begin_inset Formula $R$
+\end_inset
+
+ such that 
+\begin_inset Formula $R_{S}=A$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $X/Y\in A$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+X/Y=f/g
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $f\in R$
+\end_inset
+
+ and 
+\begin_inset Formula $g\in S$
+\end_inset
+
+, where we may assume (by canceling common factors if necessary) that 
+\begin_inset Formula $\mathrm{gcd}(f,g)=1$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\[
+gX=Yf.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $K[X,Y]$
+\end_inset
+
+ is a UFD and 
+\begin_inset Formula $\mathrm{gcd}(X,Y)=\mathrm{gcd}(f,g)=1$
+\end_inset
+
+, we see that 
+\begin_inset Formula $g=\alpha Y$
+\end_inset
+
+ where 
+\begin_inset Formula $\alpha\in K^{\times}$
+\end_inset
+
+.
+ However 
+\begin_inset Formula $1/\alpha Y\notin A$
+\end_inset
+
+, so this is a contradiction.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Subsubsection*
+PIDs are UFDs
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a principal ideal domain.
+ Then 
+\begin_inset Formula $R$
+\end_inset
+
+ is a unique factorization domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $a$
+\end_inset
+
+ be nonzero nonunit in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a Noetherian, an irreducible factorization of 
+\begin_inset Formula $a$
+\end_inset
+
+ exists, so it suffices to check that such an irreducible factorization
+ is unique.
+ Let
+\begin_inset Formula 
+\begin{equation}
+p_{1}\cdots p_{m}=a=q_{1}\cdots q_{n}\label{eq:irrfact}
+\end{equation}
+
+\end_inset
+
+be two irreducible factorizations of 
+\begin_inset Formula $a$
+\end_inset
+
+.
+ By relabeling if necessary, we may assume that 
+\begin_inset Formula $m\leq n$
+\end_inset
+
+.
+ We will prove by induction on 
+\begin_inset Formula $m\geq1$
+\end_inset
+
+ that 
+\begin_inset Formula $m=n$
+\end_inset
+
+ and (perhaps after relabeling) we have 
+\begin_inset Formula $p_{i}\sim q_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ For base case 
+\begin_inset Formula $m=1$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+p_{1}=a=q_{1}\cdots q_{n}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The first step will be to show that 
+\begin_inset Formula $n=1$
+\end_inset
+
+.
+ To prove this, we assume for a contradiction that 
+\begin_inset Formula $n>1$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a principal ideal domain, every irreducible is a prime.
+ In particular, 
+\begin_inset Formula $p_{1}$
+\end_inset
+
+ is prime.
+ Thus 
+\begin_inset Formula $p_{1}\mid q_{i}$
+\end_inset
+
+ for some 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ By relabeling necessary, we may assume that 
+\begin_inset Formula $p_{1}\mid q_{1}$
+\end_inset
+
+.
+ In terms of ideals, this means 
+\begin_inset Formula $\langle q_{1}\rangle\subseteq\langle p_{1}\rangle$
+\end_inset
+
+.
+ Since both 
+\begin_inset Formula $\langle q_{1}\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle p_{1}\rangle$
+\end_inset
+
+ are maximal ideals, this implies 
+\begin_inset Formula $\langle q_{1}\rangle=\langle p_{1}\rangle$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $q_{1}=xp_{1}$
+\end_inset
+
+ for some 
+\begin_inset Formula $x\in R^{\times}$
+\end_inset
+
+.
+ This implies
+\begin_inset Formula 
+\begin{align*}
+0 & =p_{1}-q_{1}q_{2}\cdots q_{n}\\
+ & =p_{1}-xp_{1}q_{2}\cdots q_{n}\\
+ & =p_{1}(1-xq_{2}\cdots q_{n}).
+\end{align*}
+
+\end_inset
+
+Again 
+\begin_inset Formula $p_{1}\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+ an integral domain implies 
+\begin_inset Formula $xq_{2}\cdots q_{n}=1$
+\end_inset
+
+, thus 
+\begin_inset Formula $q_{2}\cdots q_{n}\in R^{\times}$
+\end_inset
+
+.
+ This is a contradiction as each 
+\begin_inset Formula $q_{2},\dots,q_{n}$
+\end_inset
+
+ are irreducible! Thus 
+\begin_inset Formula $n=1$
+\end_inset
+
+, and clearly in this case, we have 
+\begin_inset Formula $p_{1}\sim q_{1}$
+\end_inset
+
+ (as 
+\begin_inset Formula $p_{1}=q_{1}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now suppose 
+\begin_inset Formula $m>1$
+\end_inset
+
+ and we have shown that if 
+\begin_inset Formula $a$
+\end_inset
+
+ has an irreducible factorization of length 
+\begin_inset Formula $k$
+\end_inset
+
+ where 
+\begin_inset Formula $1\leq k<$
+\end_inset
+
+
+\begin_inset Formula $m$
+\end_inset
+
+, then it has a unique irreducible factorization.
+ Again, let 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:irrfact})
+\end_layout
+
+\end_inset
+
+ be two irreducible factorizations of 
+\begin_inset Formula $a$
+\end_inset
+
+ where we may assume that 
+\begin_inset Formula $m\leq n$
+\end_inset
+
+.
+ Arguing as above, 
+\begin_inset Formula $p_{1}$
+\end_inset
+
+ is prime, and since 
+\begin_inset Formula $q_{1}\cdots q_{n}\in\langle p_{1}\rangle$
+\end_inset
+
+, we must have 
+\begin_inset Formula $q_{i}\in\langle p\rangle$
+\end_inset
+
+ for some 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ By rebaling if necessary, we may assume that 
+\begin_inset Formula $q_{1}\in\langle p_{1}\rangle$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\langle q_{1}\rangle\subseteq\langle p_{1}\rangle$
+\end_inset
+
+, and since both 
+\begin_inset Formula $\langle q_{1}\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle p_{1}\rangle$
+\end_inset
+
+ are maximal ideals, we must in fact have 
+\begin_inset Formula $\langle q_{1}\rangle=\langle p_{1}\rangle$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $q_{1}=p_{1}x$
+\end_inset
+
+ for some 
+\begin_inset Formula $x\in R^{\times}$
+\end_inset
+
+.
+ This implies
+\begin_inset Formula 
+\begin{align*}
+0 & =p_{1}p_{2}\cdots p_{m}-q_{1}q_{2}\cdots q_{n}\\
+ & =p_{1}p_{2}\cdots p_{m}-p_{1}xq_{2}\cdots q_{n}\\
+ & =p_{1}(p_{2}\cdots p_{m}-xq_{2}\cdots q_{n}).
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $p_{1}\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $R$
+\end_inset
+
+ is an integral domain, this implies
+\begin_inset Formula 
+\[
+p_{2}\cdots p_{m}=xq_{2}\cdots q_{n}.
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $xq_{2}$
+\end_inset
+
+ is an irreducible element, and thus we may apply induction step to get
+ 
+\begin_inset Formula $m=n$
+\end_inset
+
+ and (perhaps after relabeling) 
+\begin_inset Formula $p_{i}\sim q_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $2\leq i\leq m$
+\end_inset
+
+.
+ Since already we have 
+\begin_inset Formula $p_{1}\sim q_{1}$
+\end_inset
+
+, we are done.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Prime Ideals in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremspecrs}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a multiplicatively closed subset of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then we have a bijection
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Psi\colon\{\mathfrak{p}\in\mathrm{Spec}\,R\mid\mathfrak{p}\cap S=\emptyset\}\to\mathrm{Spec}\,R_{S}
+\]
+
+\end_inset
+
+given by 
+\begin_inset Formula $\Psi(\mathfrak{p})=\mathfrak{p}_{S}$
+\end_inset
+
+ for all prime ideals 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ in 
+\begin_inset Formula $R$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathfrak{p}\cap S=\emptyset$
+\end_inset
+
+.
+ Then inverse to 
+\begin_inset Formula $\Psi$
+\end_inset
+
+, which we denote by 
+\begin_inset Formula 
+\[
+\Phi\colon\mathrm{Spec}\,R_{S}\to\{\mathfrak{p}\in\mathrm{Spec}\,R\mid\mathfrak{p}\cap S=\emptyset\}
+\]
+
+\end_inset
+
+is given by 
+\begin_inset Formula $\Phi(\mathfrak{q})=\rho^{-1}(\mathfrak{q})$
+\end_inset
+
+ for all prime ideals 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+ in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ where 
+\begin_inset Formula $\rho\colon R\to R_{S}$
+\end_inset
+
+ is the canonical localization map.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ First note that both 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ and 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ land in their designated target spaces.
+ Indeed, for any prime ideal 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathrm{Spec}\,R_{S}$
+\end_inset
+
+, the ideal 
+\begin_inset Formula $\rho^{-1}(\mathfrak{q})$
+\end_inset
+
+ is easily seen to be prime in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Also if 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is a prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathfrak{p}\cap S=\emptyset$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathfrak{p}_{S}$
+\end_inset
+
+ is a prime ideal in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+.
+ Indeed, let 
+\begin_inset Formula $x/s,y/t\in\mathfrak{p}_{S}$
+\end_inset
+
+, where 
+\begin_inset Formula $x,y\in\mathfrak{p}$
+\end_inset
+
+ and 
+\begin_inset Formula $s,t\in S$
+\end_inset
+
+, and suppose 
+\begin_inset Formula $(x/s)(y/t)\in\mathfrak{p}_{S}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $xy/st\in\mathfrak{p}_{S}$
+\end_inset
+
+, which implies 
+\begin_inset Formula $xy\in\mathfrak{p}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is prime, we have either 
+\begin_inset Formula $x\in\mathfrak{p}$
+\end_inset
+
+ or 
+\begin_inset Formula $y\in\mathfrak{p}$
+\end_inset
+
+.
+ Without loss of generality, say 
+\begin_inset Formula $x\in\mathfrak{p}$
+\end_inset
+
+.
+ Then clearly 
+\begin_inset Formula $x/s\in\mathfrak{p}_{S}$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $\mathfrak{p}_{S}$
+\end_inset
+
+ is prime.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We now want to show that these two maps are inverse to each other.
+ First let us show that 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is injective.
+ Let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{p}'$
+\end_inset
+
+ be two distinct primes in 
+\begin_inset Formula $R$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathfrak{p}\cap S=\mathfrak{p}'\cap S=\emptyset$
+\end_inset
+
+.
+ Without loss of generality, say 
+\begin_inset Formula $\mathfrak{p}\not\subseteq\mathfrak{p}'$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $x\in\mathfrak{p}\backslash\mathfrak{p}'$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $x/1\in\mathfrak{p}_{S}$
+\end_inset
+
+.
+ Furthermore, we also have 
+\begin_inset Formula $x/1\notin\mathfrak{p}'_{S}$
+\end_inset
+
+.
+ Indeed, assume for a contradiction 
+\begin_inset Formula $x/1\in\mathfrak{p}'_{S}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $x/1=y/s$
+\end_inset
+
+ with 
+\begin_inset Formula $y\in\mathfrak{p}'_{S}$
+\end_inset
+
+ and 
+\begin_inset Formula $s\in S$
+\end_inset
+
+.
+ Then there exists 
+\begin_inset Formula $t\in S$
+\end_inset
+
+ such that 
+\begin_inset Formula $tsx=ty\in\mathfrak{p}'$
+\end_inset
+
+.
+ As 
+\begin_inset Formula $\mathfrak{p}'$
+\end_inset
+
+ is prime and 
+\begin_inset Formula $s,t\notin\mathfrak{p}'$
+\end_inset
+
+, we must have 
+\begin_inset Formula $x\in\mathfrak{p}'$
+\end_inset
+
+, which is a contradiction.
+ This shows that 
+\begin_inset Formula $\mathfrak{p}_{S}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{p}'_{S}$
+\end_inset
+
+ are distinct, and hence 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is injective.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we will show 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is surjective.
+ Let 
+\begin_inset Formula $\mathfrak{q}\in\mathrm{Spec}\,R_{S}$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $\mathfrak{q}=\rho^{-1}(\mathfrak{q})_{S}$
+\end_inset
+
+.
+ Indeed, we have
+\begin_inset Formula 
+\begin{align*}
+\rho^{-1}(\mathfrak{q})_{S} & =\{x/s\mid x\in\rho^{-1}(\mathfrak{q})\text{ and }s\in S\}\\
+ & =\{x/s\mid x/1\in\mathfrak{q}\text{ and }s\in S\}\\
+ & =\mathfrak{q},
+\end{align*}
+
+\end_inset
+
+where equality in the last line follows from the fact that 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+ is prime: if 
+\begin_inset Formula $x/s\in\mathfrak{q}$
+\end_inset
+
+, then 
+\begin_inset Formula $x/1\in\mathfrak{q}$
+\end_inset
+
+ since 
+\begin_inset Formula $1/s\notin\mathfrak{q}$
+\end_inset
+
+ and 
+\begin_inset Formula $x/s=(x/1)(1/s)$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is surjective and hence a bijection.
+ In proving that 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is surjective, we also see that the inverse of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is 
+\begin_inset Formula $\Phi$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

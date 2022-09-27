@@ -1,0 +1,945 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Computing Resolutions and The Syzygy Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\series bold
+syzygy 
+\series default
+between 
+\begin_inset Formula $k$
+\end_inset
+
+ elements 
+\begin_inset Formula $f_{1},\dots,f_{k}$
+\end_inset
+
+ of an 
+\begin_inset Formula $A$
+\end_inset
+
+-module 
+\begin_inset Formula $M$
+\end_inset
+
+ is a 
+\begin_inset Formula $k$
+\end_inset
+
+-tuple 
+\begin_inset Formula $(g_{1},\dots,g_{k})\in A^{k}$
+\end_inset
+
+ satisfying 
+\begin_inset Formula 
+\[
+\sum_{i=1}^{k}g_{i}f_{i}=0.
+\]
+
+\end_inset
+
+The set of syzygies between 
+\begin_inset Formula $f_{1},\dots,f_{k}$
+\end_inset
+
+ is a submodule of 
+\begin_inset Formula $A^{k}$
+\end_inset
+
+.
+ Indeed, it is the kernel of the ring homomorphism
+\begin_inset Formula 
+\[
+\varphi:F_{1}:=\bigoplus_{i=1}^{k}Ae_{i}\to M,\quad e_{i}\mapsto f_{i},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\{e_{1},\dots,e_{k}\}$
+\end_inset
+
+ denotes the canonical basis of 
+\begin_inset Formula $A^{k}$
+\end_inset
+
+.
+ The map 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ surjects onto the 
+\begin_inset Formula $A$
+\end_inset
+
+-module 
+\begin_inset Formula $I:=\langle f_{1},\dots,f_{k}\rangle_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\mbox{syz}(I):=\mbox{syz}(f_{1},\dots,f_{k}):=\mbox{Ker}(\varphi)
+\]
+
+\end_inset
+
+is called the 
+\series bold
+module of syzygies 
+\series default
+of 
+\begin_inset Formula $I$
+\end_inset
+
+ with respect to the generators 
+\begin_inset Formula $f_{1},\dots,f_{k}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example1}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y,z,w]$
+\end_inset
+
+ and let 
+\begin_inset Formula 
+\begin{align*}
+f_{1} & =xz-y^{2}\\
+f_{2} & =yw-z^{2}\\
+f_{3} & =xw-yz.
+\end{align*}
+
+\end_inset
+
+There are three 
+\begin_inset Quotes eld
+\end_inset
+
+trivial
+\begin_inset Quotes erd
+\end_inset
+
+ syzygies of 
+\begin_inset Formula $f_{1},f_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{3}$
+\end_inset
+
+, which are given by the 
+\begin_inset Formula $3$
+\end_inset
+
+-tuples
+\begin_inset Formula 
+\begin{align*}
+m_{1} & =(f_{2},-f_{1},0),\\
+m_{2} & =(f_{3},0,-f_{1}),\\
+m_{3} & =(0,f_{3},-f_{2}),
+\end{align*}
+
+\end_inset
+
+but 
+\begin_inset Formula $\mbox{syz}(f_{1},f_{2},f_{3})$
+\end_inset
+
+ is not generated by them.
+ A generating set for 
+\begin_inset Formula $\mbox{syz}(f_{1},f_{2},f_{3})$
+\end_inset
+
+ is given by the 
+\begin_inset Formula $3$
+\end_inset
+
+-tuples
+\begin_inset Formula 
+\begin{align*}
+n_{1} & =(w,y,-z)\\
+n_{2} & =(z,x,-y),
+\end{align*}
+
+\end_inset
+
+ Note that
+\begin_inset Formula 
+\begin{align*}
+f_{1} & =yn_{1}-zn_{2},\\
+f_{2} & =xn_{1}-yn_{2},\\
+f_{3} & =-zn_{1}+wn_{2}.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma1}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I=\langle f_{1},\dots,f_{k}\rangle_{A}\subset A^{r}=\bigoplus_{i=1}^{r}Ae_{i}$
+\end_inset
+
+, with 
+\begin_inset Formula $e_{1},\dots,e_{r}$
+\end_inset
+
+ the canonical basis of 
+\begin_inset Formula $A^{r}$
+\end_inset
+
+.
+ Consider the canonical embedding
+\begin_inset Formula 
+\[
+A^{r}\subset A^{r+k}\subset\bigoplus_{i=1}^{r+k}Ae_{i}
+\]
+
+\end_inset
+
+and the canonical projection 
+\begin_inset Formula $\pi:A^{r+k}\to A^{k}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $G=\{g_{1},\dots,g_{s}\}$
+\end_inset
+
+ be a standard basis of 
+\begin_inset Formula $F=\langle f_{1}+e_{r+1},\cdots,f_{k}+e_{r+k}\rangle$
+\end_inset
+
+ with respect to an elimination ordering for 
+\begin_inset Formula $e_{1},\dots,e_{r}$
+\end_inset
+
+ (for example, the ordering 
+\begin_inset Formula $(c,<)$
+\end_inset
+
+).
+ Suppose that 
+\begin_inset Formula $\{g_{1},\dots,g_{\ell}\}=G\cap\bigoplus_{i=r+1}^{r+k}Ae_{i}$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+\mbox{syz}(I)=\langle\pi(g_{1}),\cdots,\pi(g_{\ell})\rangle.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ First we will show 
+\begin_inset Formula $\pi\left(F\cap\bigoplus_{i=r+1}^{r+k}Ae_{i}\right)=\mbox{syz}(I)$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $h\in F\cap\bigoplus_{i=r+1}^{r+k}Ae_{i}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $h\in F$
+\end_inset
+
+, we have 
+\begin_inset Formula $h=\sum_{j=1}^{k}b_{j}(f_{j}+e_{r+j})$
+\end_inset
+
+ for suitable 
+\begin_inset Formula $b_{j}\in A$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $h\in\bigoplus_{i=r+1}^{r+k}Ae_{i}$
+\end_inset
+
+, we must have 
+\begin_inset Formula $\sum_{j=1}^{k}b_{j}f_{j}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{j}=h_{r+j}$
+\end_inset
+
+.
+ This implies that 
+\begin_inset Formula 
+\[
+\pi(h)=\pi\left(\sum_{j=1}^{k}b_{j}e_{r+j}\right)=\sum_{j=1}^{k}b_{j}e_{r}\in\text{syz}(I).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Conversely, suppose 
+\begin_inset Formula $h=\sum_{\nu=1}^{k}h_{\nu}e_{\nu}\in\mbox{syz}(I)$
+\end_inset
+
+, that is, 
+\begin_inset Formula $\sum_{\nu=1}^{k}h_{\nu}f_{\nu}=0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\widetilde{h}=\sum_{\nu=1}^{k}h_{\nu}(f_{\nu}+e_{r+\nu}).$
+\end_inset
+
+ Then clearly we have 
+\begin_inset Formula $\widetilde{h}\in F\cap\bigoplus_{i=r+1}^{r+k}Ae_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi\left(\widetilde{h}\right)=h$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $h\in\pi\left(F\cap\bigoplus_{i=r+1}^{r+k}Ae_{i}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Finally, since 
+\begin_inset Formula $G$
+\end_inset
+
+ is a standard basis of 
+\begin_inset Formula $F$
+\end_inset
+
+ with respect to an elimination ordering, 
+\begin_inset Formula $G\cap\bigoplus_{i=r+1}^{r+k}Ae_{i}$
+\end_inset
+
+ is a standard basis of 
+\begin_inset Formula $F\cap\bigoplus_{i=r+1}^{r+k}Ae_{i}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y,z]$
+\end_inset
+
+ and 
+\begin_inset Formula $I=\langle z^{3},x^{2},xy-z^{2},y^{2},xz,yz\rangle$
+\end_inset
+
+.
+ We calculate 
+\begin_inset Formula $\text{Syz}(I)$
+\end_inset
+
+ with respect to the ordering 
+\begin_inset Formula $(c,dp)$
+\end_inset
+
+ using Singular:
+\begin_inset Formula 
+\[
+\text{Syz}(I)=\langle g_{1},g_{2},g_{3},g_{4},g_{5},g_{6},g_{7}\rangle\subset A^{6},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\begin{align*}
+g_{1} & =e_{1}+ze_{3}-xe_{6}\\
+g_{2} & =ye_{2}-xe_{3}-ze_{5}\\
+g_{3} & =ze_{2}-xe_{5}\\
+g_{4} & =xze_{3}+z^{2}e_{5}-x^{2}e_{6}\\
+g_{5} & =ye_{3}-xe_{4}+ze_{6}\\
+g_{6} & =ze_{4}-ye_{6}\\
+g_{7} & =ye_{5}-xe_{6}.
+\end{align*}
+
+\end_inset
+
+In other words, 
+\begin_inset Formula $\text{Syz}(I)$
+\end_inset
+
+ is generated by the image of the matrix 
+\begin_inset Formula $\varphi:A^{7}\to A^{6}$
+\end_inset
+
+ given by
+\begin_inset Formula 
+\[
+\varphi:=\begin{pmatrix}0 & 0 & 0 & 0 & 0 & 0 & 1\\
+0 & 0 & 0 & 0 & z & y & 0\\
+0 & 0 & y & xz & 0 & -x & z\\
+0 & z & -x & 0 & 0 & 0 & 0\\
+y & 0 & 0 & z^{2} & -x & -z & 0\\
+-x & -y & z & -x^{2} & 0 & 0 & -x
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To see where these terms come from, let's try to check some of this by hand.
+ First, we replace 
+\begin_inset Formula $I$
+\end_inset
+
+ with 
+\begin_inset Formula $F=\langle f_{1},f_{2},f_{3},f_{4},f_{5},f_{6}\rangle$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\begin{align*}
+f_{1} & =z^{3}e_{1}+e_{2}\\
+f_{2} & =x^{2}e_{1}+e_{3}\\
+f_{3} & =xye_{1}-z^{2}e_{1}+e_{4}\\
+f_{4} & =y^{2}e_{1}+e_{5}\\
+f_{5} & =xze_{1}+e_{6}\\
+f_{6} & =yze_{1}+e_{7}
+\end{align*}
+
+\end_inset
+
+Now let's calculate some 
+\begin_inset Formula $S$
+\end_inset
+
+-polynomials:
+\begin_inset Formula 
+\begin{align*}
+f_{7}:=\overline{S(f_{1},f_{5})}^{F} & =xe_{2}-z^{2}e_{6}\\
+f_{8}:=\overline{S(f_{1},f_{6})}^{F} & =ye_{2}-z^{2}e_{7}\\
+f_{9}:=\overline{S(f_{2},f_{3})}^{F} & =xz^{2}e_{1}+ye_{3}-xe_{4}\equiv ye_{3}-xe_{4}-ze_{6}\\
+f_{10}:=\overline{S(f_{2},f_{5})}^{F} & =ze_{3}-xe_{6}\\
+f_{11}:=\overline{S(f_{3},f_{4})}^{F} & =-z^{2}ye_{1}+ye_{4}-xe_{5}\equiv ye_{4}-xe_{5}+ze_{7}\\
+f_{12}:=\overline{S(f_{3},f_{5})}^{F} & =-z^{3}e_{1}+ze_{4}-ye_{6}\equiv-e_{2}+ze_{4}-ye_{6}\\
+f_{13}:=\overline{S(f_{3},f_{6})}^{F} & =-z^{3}e_{1}+ze_{4}-xe_{7}\equiv-e_{2}-xe_{4}-ze_{6}\\
+f_{14}:=\overline{S(f_{4},f_{6})}^{F} & =ze_{5}-ye_{7}\\
+f_{15}:=\overline{S(f_{5},f_{6})}^{F} & =ye_{6}-xe_{7}.\\
+f_{16}:=\overline{S(f_{9},f_{10})}^{F} & =-xze_{4}-z^{2}e_{6}+xye_{6}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From this, we can see that, for example
+\begin_inset Formula 
+\begin{align*}
+g_{1} & =f_{15}-f_{12}\\
+g_{2} & =f_{9}\\
+g_{3} & =f_{10}\\
+g_{4} & =-f_{16}+xf_{15}\\
+g_{5} & =f_{11}\\
+g_{6} & =f_{14}\\
+g_{7} & =f_{15.}
+\end{align*}
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a ring, 
+\begin_inset Formula $I=\langle f_{1},\dots,f_{s}\rangle\subset A$
+\end_inset
+
+ an ideal, and 
+\begin_inset Formula 
+\[
+\overline{M}=\langle\overline{m}_{1},\dots,\overline{m}_{k}\rangle\subset(A/I)^{r}
+\]
+
+\end_inset
+
+a submodule.
+ Then 
+\begin_inset Formula $\overline{M}$
+\end_inset
+
+ is an 
+\begin_inset Formula $A$
+\end_inset
+
+-module as well as an 
+\begin_inset Formula $(A/I)$
+\end_inset
+
+-module, and we denote by 
+\begin_inset Formula $\text{Syz}\left(\overline{M}\right):=\text{Syz}^{A}(\overline{m}_{1},\dots,\overline{m}_{k})$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Syz}^{A/I}\left(\overline{M}\right):=\text{Syz}^{A/I}\left(\overline{m}_{1},\dots,\overline{m}_{k}\right)$
+\end_inset
+
+ the respective module of syzygies.
+ They can be computed as follows: let 
+\begin_inset Formula $e_{1},\dots,e_{r}$
+\end_inset
+
+ be the canonical basis of 
+\begin_inset Formula $A^{r}$
+\end_inset
+
+, and let 
+\begin_inset Formula $m_{1},\dots,m_{k}\in A^{r}$
+\end_inset
+
+ be representatives of 
+\begin_inset Formula $\overline{m}_{1},\dots,\overline{m}_{k}$
+\end_inset
+
+.
+ Moreover, let 
+\begin_inset Formula 
+\[
+M=\langle m_{1},\dots,m_{k},f_{1}e_{1},\dots,f_{1}e_{r},\dots,f_{s}e_{1},\dots,f_{s}e_{r}\rangle\subset A^{r}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\text{Syz}\left(M\right)=\langle s_{1},\dots,s_{\ell}\rangle$
+\end_inset
+
+, where 
+\begin_inset Formula $s_{i}=(s_{i1},\dots,s_{iN})$
+\end_inset
+
+ and 
+\begin_inset Formula $N=k+rs$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\text{Syz}\left(\overline{M}\right)=\langle\overline{s}_{1},\dots,\overline{s}_{\ell}\rangle\subset A^{r},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\overline{s}_{i}=(s_{i1},\dots,s_{ik})$
+\end_inset
+
+ and 
+\begin_inset Formula $i=1,\dots,\ell$
+\end_inset
+
+.
+ Now 
+\begin_inset Formula $\text{Syz}^{A/I}\left(\overline{M}\right)$
+\end_inset
+
+ is the image of 
+\begin_inset Formula $\text{Syz}\left(\overline{M}\right)$
+\end_inset
+
+ when projecting modulo 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y,z]$
+\end_inset
+
+, 
+\begin_inset Formula $I=\langle xz,yz\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{M}=\langle\overline{x},\overline{y},\overline{z}\rangle\subset A/I$
+\end_inset
+
+.
+ We compute 
+\begin_inset Formula $\text{Syz}^{A/I}\left(\overline{M}\right)$
+\end_inset
+
+ using the monomial order 
+\begin_inset Formula $(c,dp)$
+\end_inset
+
+.
+ Write
+\begin_inset Formula 
+\begin{align*}
+M & =\langle xe_{1},ye_{1},ze_{1},xze_{1},yze_{1}\rangle\\
+F & =\langle xe_{1}+e_{2},ye_{1}+e_{3},ze_{1}+e_{4},xze_{1}+e_{5},yze_{1}+e_{6}\rangle\\
+\text{std}(F)\cap\bigoplus_{i=2}^{6}Ae_{i} & =\langle ye_{2}-xe_{3},ze_{2}-xe_{4},ze_{3}-ye_{4},xe_{4}-e_{5},ye_{4}-e_{6},ye_{5}-xe_{6}\rangle\\
+\pi\left(\text{std}(F)\cap\bigoplus_{i=2}^{6}Ae_{i}\right) & =\langle ye_{1}-xe_{2},ze_{1}-xe_{3},ze_{2}-ye_{3},xe_{3}-e_{4},ye_{3}-e_{5},ye_{4}-xe_{5}\rangle\\
+\text{Ev}_{e_{4}=e_{5}=0}\left(\pi\left(\text{std}(F)\cap\bigoplus_{i=2}^{6}Ae_{i}\right)\right) & =\langle ye_{1}-xe_{2},ze_{1}-xe_{3},ze_{2}-ye_{3},xe_{3},ye_{3}\rangle\\
+\text{Syz}^{A}\left(\overline{M}\right) & =\langle ye_{1}-xe_{2},ze_{1}-xe_{3},ze_{2}-ye_{3},xe_{3},ye_{3}\rangle\\
+\text{Syz}^{A/I}\left(\overline{M}\right) & =\langle\overline{y}e_{1}-\overline{x}e_{2},\overline{z}e_{1}-\overline{x}e_{3},\overline{z}e_{2}-\overline{y}e_{3},\overline{x}e_{3},\overline{y}e_{3}\rangle
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

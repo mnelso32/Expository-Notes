@@ -1,0 +1,3863 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Linear Programming Homework 6
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ I did two different versions of problem 5 because I thought the book may
+ have made a typo.
+ I labeled these problem 5 and problem 5'.
+ Problem 5 is straight from the book, whereas problem 5' is a slight variation.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+ZZ
+\end_layout
+
+\begin_layout Section*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=(x_{2}^{2}-x_{1})^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Problem 1.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all stationary points of this function.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{x}\text{ is a stationary point of }f & \iff\nabla f(\boldsymbol{x})=0\\
+ & \iff2\begin{pmatrix}x_{1}-x_{2}^{2}\\
+2x_{2}(x_{2}^{2}-x_{1})
+\end{pmatrix}=\begin{pmatrix}0\\
+0
+\end{pmatrix}\\
+ & \iff x_{1}=x_{2}^{2}
+\end{align*}
+
+\end_inset
+
+Thus the set of all stationary points of 
+\begin_inset Formula $f$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\mathcal{S}_{f}=\{\boldsymbol{x}\in\mathbb{R}^{2}\mid x_{1}-x_{2}^{2}=0\}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 1.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ From among the stationary points your found in part (a), identify those
+ that are minima.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{Z}_{f}$
+\end_inset
+
+ be the zero-set of 
+\begin_inset Formula $f$
+\end_inset
+
+, that is 
+\begin_inset Formula $\mathcal{Z}_{f}=\{\boldsymbol{x}\in\mathbb{R}^{2}\mid f(\boldsymbol{x})=0\}$
+\end_inset
+
+.
+ Then it's easy to see that 
+\begin_inset Formula $\mathcal{Z}_{f}=\mathcal{S}_{f}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f(\boldsymbol{x})\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\boldsymbol{x}\in\mathbb{R}^{2}$
+\end_inset
+
+, it follows that every stationary point of 
+\begin_inset Formula $f$
+\end_inset
+
+ is a global minimizer with optimal objective value being 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ The set of all stationary points forms a curve in the plane drawn below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $x_1 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $x_2 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-4,xmax=4,ymin=-4,ymax=4,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick={-4,-2, 2, 4},ytick={-4,-2, 2, 4},
+\end_layout
+
+\begin_layout Plain Layout
+
+axis equal,
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100] ({x^2 },{x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=above right:$ 
+\backslash
+boldsymbol{x}^{0}$] (x) at (axis cs:3,5.6) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In particular, none of the stationary points are no 
+\emph on
+strict
+\emph default
+ local minimizers.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=(x_{2}-x_{1}^{2})^{2}+(1-x_{1})^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Problem 2.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all stationary points of this function.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{x}\text{ is a stationary point of }f & \iff\nabla f(\boldsymbol{x})=0\\
+ & \iff2\begin{pmatrix}-2(x_{2}-x_{1}^{2})x_{1}-(1-x_{1})\\
+x_{2}-x_{1}^{2}
+\end{pmatrix}=0\\
+ & \iff-2(x_{2}-x_{1}^{2})x_{1}-(1-x_{1})=0\text{ and }x_{2}-x_{1}^{2}=0\\
+ & \iff-(1-x_{1})=0\text{ and }x_{2}-x_{1}^{2}=0\\
+ & \iff x_{1}=1=x_{2}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus there is only one stationary point of 
+\begin_inset Formula $f$
+\end_inset
+
+, namely 
+\begin_inset Formula $\mathcal{S}_{f}=\{\boldsymbol{a}\}$
+\end_inset
+
+ where we set 
+\begin_inset Formula $\boldsymbol{a}=(1,1)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection*
+Problem 2.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Classify the points found in part (a) according to whether they are strict
+ minimizing points, minimizing points, maximizing points, or points that
+ are neither minimizing or maximizing points.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is a sum of squares, we have 
+\begin_inset Formula $f(\boldsymbol{x})\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\boldsymbol{x}\in\mathbb{R}^{2}$
+\end_inset
+
+.
+ Furthermore, we have 
+\begin_inset Formula $f(\boldsymbol{a})=0$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ is a global minimizer of 
+\begin_inset Formula $f$
+\end_inset
+
+ with optimal objective value being 
+\begin_inset Formula $f(\boldsymbol{a})=0$
+\end_inset
+
+.
+ Furthermore, observe that
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{x}\in\mathcal{Z}_{f} & \iff f(\boldsymbol{x})=0\\
+ & \iff(x_{2}-x_{1}^{2})^{2}+(1-x_{1})^{2}=0\\
+ & \iff x_{2}-x_{1}^{2}=0\text{ and }1-x_{1}=0\\
+ & \iff x_{1}=1=x_{2}.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $\mathcal{Z}_{f}=\{\boldsymbol{a}\}=\mathcal{S}_{f}$
+\end_inset
+
+.
+ In particular, if 
+\begin_inset Formula $\boldsymbol{x}\neq\boldsymbol{a}$
+\end_inset
+
+, then 
+\begin_inset Formula $f(\boldsymbol{x})>0$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ is a 
+\emph on
+strict 
+\emph default
+global minimizer (and the only one at that).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=ax_{1}^{2}e^{x_{2}}+x_{2}^{2}e^{x_{3}}+x_{3}^{2}e^{x_{1}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ For what values of 
+\begin_inset Formula $a$
+\end_inset
+
+ is the point 
+\begin_inset Formula $\boldsymbol{x}_{0}=[0,0,0]^{\top}$
+\end_inset
+
+ a stationary point? 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{x}_{0}\text{ is a stationary point of }f & \iff\nabla f(\boldsymbol{x}_{0})=0\\
+ & \iff\begin{pmatrix}2ax_{1}e^{x_{2}}+x_{3}^{2}e^{x_{1}}\\
+ax_{1}^{2}e^{x_{2}}+2x_{2}e^{x_{3}}\\
+x_{2}^{2}e^{x_{3}}+2x_{3}e^{x_{1}}
+\end{pmatrix}\Bigg|_{\boldsymbol{x}=\boldsymbol{x}_{0}}=0\\
+ & \iff0=0.
+\end{align*}
+
+\end_inset
+
+In particular, for all 
+\begin_inset Formula $a\in\mathbb{R}$
+\end_inset
+
+, the point 
+\begin_inset Formula $\boldsymbol{x}_{0}$
+\end_inset
+
+ is a stationary point.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Classify the points as a strict minimum, minimum, maximum, or strict maximum
+ for the values of 
+\begin_inset Formula $a$
+\end_inset
+
+ found in part (a).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We break this into three cases:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 1: 
+\series default
+Suppose 
+\begin_inset Formula $a>0$
+\end_inset
+
+.
+ Observe that 
+\begin_inset Formula 
+\begin{align*}
+\mathrm{H}_{f}(\boldsymbol{x}_{0}) & =\begin{pmatrix}2ae^{x_{2}}+x_{3}^{2}e^{x_{1}} & 2ax_{1}e^{x_{2}} & 2x_{3}e^{x_{1}}\\
+2ax_{1}e^{x_{2}} & ax_{1}^{2}e^{x_{2}}+2e^{x_{3}} & 2x_{2}e^{x_{3}}\\
+2x_{3}e^{x_{1}} & 2x_{2}e^{x_{3}} & 2e^{x_{1}}+x_{2}^{2}e^{x_{3}}
+\end{pmatrix}\Bigg|_{\boldsymbol{x}=\boldsymbol{x}_{0}}\\
+ & =\begin{pmatrix}2a & 0 & 0\\
+0 & 2 & 0\\
+0 & 0 & 2
+\end{pmatrix}.
+\end{align*}
+
+\end_inset
+
+In particular, the Hessian of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $\boldsymbol{x}_{0}$
+\end_inset
+
+ is positive definite.
+ This implies 
+\begin_inset Formula $\boldsymbol{x}_{0}$
+\end_inset
+
+ is a strict minimizing point (with objective value being 
+\begin_inset Formula $f(\boldsymbol{x}_{0})=0$
+\end_inset
+
+).
+ Next, observe that
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{x}\in\mathcal{Z}_{f} & \iff f(\boldsymbol{x})=0\\
+ & \iff ax_{1}^{2}e^{x_{2}}+x_{2}^{2}e^{x_{3}}+x_{3}^{2}e^{x_{1}}=0\\
+ & \iff(\sqrt{a}x_{1}e^{x_{2}/2})^{2}+(x_{2}e^{x_{3}/2})^{2}+(x_{3}e^{x_{1}/2})^{2}=0\\
+ & \iff\sqrt{a}x_{1}e^{x_{2}/2}=0\text{ and }x_{2}e^{x_{3}/2}=0\text{ and }x_{3}e^{x_{1}/2}=0\\
+ & \iff x_{1}=x_{2}=x_{3}=0,
+\end{align*}
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $\sqrt{a}>0$
+\end_inset
+
+ and where we used the fact that the exponential function is strictly positive
+ on all of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $f(\boldsymbol{x})>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\boldsymbol{x}\in\mathbb{R}^{3}\backslash\{0\}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\boldsymbol{x}_{0}$
+\end_inset
+
+ is a strict global minimizer of 
+\begin_inset Formula $f$
+\end_inset
+
+ (and in fact the only one).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 2: 
+\series default
+Suppose 
+\begin_inset Formula $a=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f(\boldsymbol{x})=x_{2}^{2}e^{x_{3}}+x_{3}^{2}e^{x_{1}}$
+\end_inset
+
+.
+ Clearly we have 
+\begin_inset Formula $f(\boldsymbol{x})\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\boldsymbol{x}\in\mathbb{R}^{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $f(\boldsymbol{x}_{0})=0$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\boldsymbol{x}_{0}$
+\end_inset
+
+ is a global minimizer with optimal objective value being 
+\begin_inset Formula $f(\boldsymbol{x}_{0})=0$
+\end_inset
+
+.
+ Next, observe that
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{x}\in\mathcal{Z}_{f} & \iff f(\boldsymbol{x})=0\\
+ & \iff x_{2}^{2}e^{x_{3}}+x_{3}^{2}e^{x_{1}}=0\\
+ & \iff(x_{2}e^{x_{3}/2})^{2}+(x_{3}e^{x_{1}/2})^{2}=0\\
+ & \iff x_{2}e^{x_{3}/2}=0\text{ and }x_{3}e^{x_{1}/2}=0\\
+ & \iff x_{2}=0=x_{3},
+\end{align*}
+
+\end_inset
+
+where we used the fact that the exponential function is strictly positive
+ on all of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\[
+\mathcal{Z}_{f}=\{(t,0,0)\mid t\in\mathbb{R}\}.
+\]
+
+\end_inset
+
+In particular, the value of the objective function neither 
+\emph on
+increases 
+\emph default
+or 
+\emph on
+decreases
+\series bold
+ 
+\series default
+\emph default
+if we move along the 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+-axis (in either direction) away from 
+\begin_inset Formula $\boldsymbol{x}_{0}$
+\end_inset
+
+ (we could have also determined this by looking at the Hessian and seeing
+ that one of its eigenvalues is zero with 
+\begin_inset Formula $(1,0,0)^{\top}$
+\end_inset
+
+ being a corresponding eigenvector).
+ It follows that 
+\begin_inset Formula $\boldsymbol{x}_{0}$
+\end_inset
+
+ is 
+\emph on
+not 
+\emph default
+a strict global minimizer.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 3: 
+\series default
+Suppose 
+\begin_inset Formula $a<0$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $t\in\mathbb{R}$
+\end_inset
+
+, let 
+\begin_inset Formula $\boldsymbol{x}_{t}=(t,0,0)$
+\end_inset
+
+ and let 
+\begin_inset Formula $\widehat{\boldsymbol{x}}_{t}=(0,t,0)$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $t\neq0$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\[
+f(\boldsymbol{x}_{t})=at^{2}<0\quad\text{and}\quad f(\widehat{\boldsymbol{x}}_{t})=t^{2}>0.
+\]
+
+\end_inset
+
+In particular, the value of the objective function 
+\emph on
+decreases
+\series bold
+ 
+\series default
+\emph default
+if we move along the 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+-axis (in either direction) away from 
+\begin_inset Formula $\boldsymbol{x}_{0}$
+\end_inset
+
+, and the value of the objective function 
+\emph on
+increases
+\series bold
+ 
+\series default
+\emph default
+if we move along the 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+-axis (in either direction) away from 
+\begin_inset Formula $\boldsymbol{x}_{t}$
+\end_inset
+
+ (we could have also determined this by looking at the Hessian and seeing
+ that it has mixed positive and negative eigenvalues).
+ It follow that 
+\begin_inset Formula $\boldsymbol{x}_{0}$
+\end_inset
+
+ is a saddle point.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=x_{1}-x_{2}+x_{3}$
+\end_inset
+
+ and let 
+\begin_inset Formula $g(\boldsymbol{x})=x_{1}^{2}+x_{2}^{2}+x_{3}^{2}-1$
+\end_inset
+
+.
+ We consider the following NLP
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad f(\boldsymbol{x})\\
+\text{subject to} & \quad g(\boldsymbol{x})\leq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 4.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Write the KKT FONC to this NLP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ A KKT point for this NLP is a pair 
+\begin_inset Formula $(\boldsymbol{x},\mu)=(x_{1},x_{2},x_{3},\mu)\in\mathbb{R}^{4}$
+\end_inset
+
+ which satisfies the following:
+\begin_inset Formula 
+\begin{align}
+\nabla f(\boldsymbol{x})+\mu\nabla g(\boldsymbol{x}) & =0 &  & \text{Stationary}\nonumber \\
+g(\boldsymbol{x}) & \leq0 &  & \text{Primal Feasibility}\label{eq:KKT1}\\
+\mu & \geq0 &  & \text{Dual Feasibility}\nonumber \\
+\mu g(\boldsymbol{x}) & =0 &  & \text{Complementary Slackness}\nonumber 
+\end{align}
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathcal{K}\subseteq\mathbb{R}^{4}$
+\end_inset
+
+ denote the set of all KKT points for this NLP.
+ The KKT FONC says that if 
+\begin_inset Formula $\boldsymbol{a}=(a_{1},a_{2},a_{3})\in\mathbb{R}^{3}$
+\end_inset
+
+ is a local minimizer and the NLP satisfies some regularity conditions,
+ then there exists 
+\begin_inset Formula $\alpha\geq0$
+\end_inset
+
+ such that 
+\begin_inset Formula $(\boldsymbol{a},\alpha)\in\mathcal{K}$
+\end_inset
+
+.
+ The regularity condition that we will use is the LICQ condition, which
+ says the gradients of the active inequality constraints and the gradients
+ of the equality constraints are linearly independent at 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+.
+ What this means in this case is that if 
+\begin_inset Formula $g(\boldsymbol{a})=0$
+\end_inset
+
+, then 
+\begin_inset Formula $\nabla g(\boldsymbol{a})\neq0$
+\end_inset
+
+.
+ Now observe that
+\begin_inset Formula 
+\[
+\nabla f(\boldsymbol{x})=\begin{pmatrix}1\\
+-1\\
+1
+\end{pmatrix}\quad\text{and}\quad\nabla g(\boldsymbol{x})=\begin{pmatrix}2x_{1}\\
+2x_{2}\\
+2x_{3}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Thus 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:KKT1})
+\end_layout
+
+\end_inset
+
+ can be rewritten as:
+\begin_inset Formula 
+\begin{align*}
+1+2\mu x_{1} & =0\\
+-1+2\mu x_{2} & =0\\
+1+2\mu x_{3} & =0\\
+x_{1}^{2}+x_{2}^{2}+x_{3}^{2}-1 & \leq0\\
+\mu & \geq0\\
+\mu(x_{1}^{2}+x_{2}^{2}+x_{3}^{2}-1) & =0
+\end{align*}
+
+\end_inset
+
+We also note that the regulartiy condition is always satisfied since 
+\begin_inset Formula $\nabla g(\boldsymbol{x})=0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\boldsymbol{x}=0$
+\end_inset
+
+, and 
+\begin_inset Formula $g(0)=-1\neq0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 4.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all solutions 
+\begin_inset Formula $(\boldsymbol{x},\mu)$
+\end_inset
+
+ to the KKT FONC for this NLP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $(\boldsymbol{x},\mu)=(x_{1},x_{2},x_{3},\mu)\in\mathcal{K}$
+\end_inset
+
+.
+ From the Stationary equations, we have
+\begin_inset Formula 
+\begin{align*}
+\nabla f(\boldsymbol{x})+\mu\nabla g(\boldsymbol{x})=0 & \iff\begin{pmatrix}1+2\mu x_{1}\\
+-1+2\mu x_{2}\\
+1+2\mu x_{3}
+\end{pmatrix}=0\\
+ & \iff\boldsymbol{x}=\frac{1}{2\mu}\begin{pmatrix}-1\\
+1\\
+-1
+\end{pmatrix}.
+\end{align*}
+
+\end_inset
+
+Note in particular 
+\begin_inset Formula $\mu\neq0$
+\end_inset
+
+.
+ Thus by the Complementary Slackness equation, we have
+\begin_inset Formula 
+\begin{align*}
+0 & =g(\boldsymbol{x})\\
+ & =x_{1}^{2}+x_{2}^{2}+x_{3}^{2}-1\\
+ & =\frac{1}{4\mu^{2}}+\frac{1}{4\mu^{2}}+\frac{1}{4\mu^{2}}-1\\
+ & =\frac{3}{4\mu^{2}}-1.
+\end{align*}
+
+\end_inset
+
+Equivalently, this says 
+\begin_inset Formula $\mu=\sqrt{3}/2$
+\end_inset
+
+ (where this is the positive square root since 
+\begin_inset Formula $\mu\geq0$
+\end_inset
+
+ by the Dual Feasibility property).
+ From this it follows that 
+\begin_inset Formula $x_{1}=x_{3}=-\sqrt{3}/3$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}=\sqrt{3}/3$
+\end_inset
+
+.
+ Therefore we see that 
+\begin_inset Formula $\mathcal{K}$
+\end_inset
+
+ consists of one point, namely 
+\begin_inset Formula $\mathcal{K}=\{(\boldsymbol{a},\alpha)\}$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+(\boldsymbol{a},\alpha)=(a_{1},a_{2},a_{3},\alpha)=\left(\frac{-\sqrt{3}}{3},\frac{\sqrt{3}}{3},\frac{-\sqrt{3}}{3},\frac{\sqrt{3}}{2}\right).
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 4.c
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all optimal solutions to this NLP.
+ Give their properties (choose from local, global, strict local, unique
+ global).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ From parts a and b, we see that the only possible local minimizer is the
+ point 
+\begin_inset Formula $\boldsymbol{a}=\frac{\sqrt{3}}{3}(-1,1,-1)^{\top}$
+\end_inset
+
+.
+ In fact, since 
+\begin_inset Formula $f$
+\end_inset
+
+ is affine and 
+\begin_inset Formula $g$
+\end_inset
+
+ is convex (as 
+\begin_inset Formula $\mathrm{H}_{g}(\boldsymbol{x})=2\cdot\mathrm{I}_{3}$
+\end_inset
+
+), the KKT SOSC are satisfied, which tells us that 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ is indeed a local minimizer for this NLP.
+ Furthermore, note that the feasible region 
+\begin_inset Formula $\{g\leq1\}:=\{\boldsymbol{x}\in\mathbb{R}^{3}\mid\|\boldsymbol{x}\|\leq1\}$
+\end_inset
+
+ is compact, and combining this with the fact that 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous implies that 
+\begin_inset Formula $f$
+\end_inset
+
+ has a global minimizer in the feasible region (which must be 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ since it's the only possible one).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=x_{1}^{2}-x_{2}^{2}$
+\end_inset
+
+ and let 
+\begin_inset Formula $g(\boldsymbol{x})=-(x_{1}-2)^{2}-x_{2}^{2}+4$
+\end_inset
+
+.
+ We consider the following NLP:
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad f(\boldsymbol{x})\\
+\text{subject to} & \quad g(\boldsymbol{x})\leq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 5.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Write the KKT FONC to this NLP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ A KKT point for this NLP is a pair 
+\begin_inset Formula $(\boldsymbol{x},\mu)=(x_{1},x_{2},x_{3},\mu)\in\mathbb{R}^{3}$
+\end_inset
+
+ which satisfies the following:
+\begin_inset Formula 
+\begin{align}
+\nabla f(\boldsymbol{x})+\mu\nabla g(\boldsymbol{x}) & =0 &  & \text{Stationary}\nonumber \\
+g(\boldsymbol{x}) & \leq0 &  & \text{Primal Feasibility}\label{eq:KKT1-1}\\
+\mu & \geq0 &  & \text{Dual Feasibility}\nonumber \\
+\mu g(\boldsymbol{x}) & =0 &  & \text{Complementary Slackness}\nonumber 
+\end{align}
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathcal{K}\subseteq\mathbb{R}^{3}$
+\end_inset
+
+ denote the set of all KKT points for this NLP.
+ The KKT FONC says that if 
+\begin_inset Formula $\boldsymbol{a}=(a_{1},a_{2})\in\mathbb{R}^{3}$
+\end_inset
+
+ is a local minimizer and the NLP satisfies some regularity conditions,
+ then there exists 
+\begin_inset Formula $\alpha\geq0$
+\end_inset
+
+ such that 
+\begin_inset Formula $(\boldsymbol{a},\alpha)\in\mathcal{K}$
+\end_inset
+
+.
+ The regularity condition that we will use is the LICQ condition, which
+ says the gradients of the active inequality constraints and the gradients
+ of the equality constraints are linearly independent at 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+.
+ What this means in this case is that if 
+\begin_inset Formula $g(\boldsymbol{a})=0$
+\end_inset
+
+, then 
+\begin_inset Formula $\nabla g(\boldsymbol{a})\neq0$
+\end_inset
+
+.
+ Now observe that
+\begin_inset Formula 
+\[
+\nabla f(\boldsymbol{x})=2\begin{pmatrix}x_{1}\\
+-x_{2}
+\end{pmatrix}\quad\text{and}\quad\nabla g(\boldsymbol{x})=2\begin{pmatrix}-(x_{1}-2)\\
+-x_{2}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Thus 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:KKT1-1})
+\end_layout
+
+\end_inset
+
+ can be rewritten as:
+\begin_inset Formula 
+\begin{align*}
+x_{1}-\mu(x_{1}-2) & =0\\
+-x_{2}-\mu x_{2} & =0\\
+4-(x_{1}-2)^{2}-x_{2}^{2} & \leq0\\
+\mu & \geq0\\
+\mu(4-(x_{1}-2)^{2}-x_{2}^{2}) & =0
+\end{align*}
+
+\end_inset
+
+We also note that the regulartiy condition is always satisfied since 
+\begin_inset Formula $\nabla g(\boldsymbol{x})=0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\boldsymbol{x}=(2,0)$
+\end_inset
+
+ and 
+\begin_inset Formula $g(2,0)=4$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 5.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all solutions 
+\begin_inset Formula $(\boldsymbol{x},\mu)$
+\end_inset
+
+ to the KKT FONC for this NLP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $(\boldsymbol{x},\mu)=(x_{1},x_{2},\mu)\in\mathcal{K}$
+\end_inset
+
+.
+ From the Stationary property, we have
+\begin_inset Formula 
+\begin{align*}
+\nabla f(\boldsymbol{x})+\mu\nabla g(\boldsymbol{x})=0 & \iff\begin{pmatrix}x_{1}-\mu(x_{1}-2)\\
+-x_{2}-\mu x_{2}
+\end{pmatrix}=0\\
+ & \iff\begin{pmatrix}(1-\mu)x_{1}+2\mu\\
+(-1-\mu)x_{2}
+\end{pmatrix}=0\\
+ & \iff x_{1}=\frac{2\mu}{\mu-1}\text{ and }x_{2}(\mu+1)=0\\
+ & \iff x_{1}=\frac{2\mu}{\mu-1}\text{ and }x_{2}=0 & \text{since }\mu\geq0.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By the Complementary Slackness property, we either have 
+\begin_inset Formula $\mu=0$
+\end_inset
+
+ or 
+\begin_inset Formula $g(\boldsymbol{x})=0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mu=0$
+\end_inset
+
+, then 
+\begin_inset Formula $x_{1}=0=x_{2}$
+\end_inset
+
+.
+ Now assume that 
+\begin_inset Formula $\mu\neq0$
+\end_inset
+
+, so that 
+\begin_inset Formula $g(\boldsymbol{x})=0$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+g(\boldsymbol{x})=0 & \implies\left(\frac{2\mu}{\mu-1}-2\right)^{2}=4\\
+ & \iff\frac{2\mu}{\mu-1}-2=2\text{ or }\frac{2\mu}{\mu-1}-2=-2\\
+ & \iff\frac{2\mu}{\mu-1}=4\text{ or }\frac{2\mu}{\mu-1}=0\\
+ & \iff\frac{\mu}{\mu-1}=2 & \text{since }\mu\neq0\\
+ & \iff\mu=2.\\
+ & \implies x_{1}=4.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We have found all KKT points, they are given by 
+\begin_inset Formula $\mathcal{K}=\{(\boldsymbol{a},\alpha),(\boldsymbol{b},\beta)\}$
+\end_inset
+
+, where we set
+\begin_inset Formula 
+\begin{align*}
+(\boldsymbol{a},\alpha) & =(a_{1},a_{2},\alpha)=(0,0,0)\\
+(\boldsymbol{b},\beta) & =(b_{1},b_{2},\beta)=(4,0,2).
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 5.c
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all optimal solutions to this NLP.
+ Give their properties (choose from local, global, strict local, unique
+ global).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We solve this problem geometrically:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $x_1 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $x_2 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-1,xmax=5,ymin=-3,ymax=3,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick={-1,1,2,3,4,5},ytick={-3,-2,-1,1,2,3},
+\end_layout
+
+\begin_layout Plain Layout
+
+axis equal,
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100,fill=red,opacity=0.2] ({2*cos(deg(x))+2},{2*
+sin(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100] ({2*cos(deg(x))+2},{2*sin(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=100,domain=-1.3:1.3 ] ({4*sec(deg(x))},{4
+*tan(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=100,domain=-1.3:1.3 ] ({3*sec(deg(x))},{3
+*tan(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=100,domain=-1.3:1.3 ] ({2*sec(deg(x))},{2
+*tan(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=100,domain=-1.3:1.3 ] ({sec(deg(x))},{tan
+(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=100,domain=-1:3 ] ({x},{x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=100,domain=-1:3 ] ({x},{-x});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-1:5] {sqrt(x^2 + 1)};
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-1:5] {-sqrt(x^2 +
+ 1)}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-1:5] {sqrt(x^2 + 2)};
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-1:5] {-sqrt(x^2 +
+ 2)};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=left:$ 
+\backslash
+boldsymbol{a}$] (x) at (axis cs:0,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=right:$ 
+\backslash
+boldsymbol{b}$] (x) at (axis cs:4,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+The feasible region (that is 
+\begin_inset Formula $\{g\leq0\}:=\{\boldsymbol{x}\in\mathbb{R}^{2}\mid g(\boldsymbol{x})\leq0\}$
+\end_inset
+
+) is everywhere 
+\emph on
+outside 
+\emph default
+the region in shaded in red (not including the thick red circle).
+ The blue dashed lines above are level sets 
+\begin_inset Formula $\{f=c\}:=\{\boldsymbol{x}\in\mathbb{R}^{2}\mid f(\boldsymbol{x})=c\}$
+\end_inset
+
+ for various values of 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+ (namely for 
+\begin_inset Formula $c=-2,-1,0,1,4,9,16$
+\end_inset
+
+).
+ We also plotted the points 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+ because we know that these are the only possible points that can be local
+ minimizers.
+ Note that the vector 
+\begin_inset Formula $\nabla f(\boldsymbol{b})=(8,0)^{\top}$
+\end_inset
+
+ is normal to the circle 
+\begin_inset Formula $\{g=0\}$
+\end_inset
+
+ at the point 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+.
+ This implies that the level set 
+\begin_inset Formula $\{f=16\}$
+\end_inset
+
+ is tangent to the circle 
+\begin_inset Formula $\{g=0\}$
+\end_inset
+
+, which implies 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+ is a strict local minimizer with optimal objective value 
+\begin_inset Formula $f(\boldsymbol{b})=16$
+\end_inset
+
+ (though 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+ is not a global minimizer since 
+\begin_inset Formula $f(\boldsymbol{a})=0<16$
+\end_inset
+
+ for example).
+ On the other hand, suppose 
+\begin_inset Formula $\boldsymbol{a}_{t}=(0,t)$
+\end_inset
+
+ and 
+\begin_inset Formula $\widehat{\boldsymbol{a}}_{t}=(t,0)$
+\end_inset
+
+ where 
+\begin_inset Formula $t\in\mathbb{R}\backslash\{0\}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+f(\boldsymbol{a}_{t})=-t^{2}<0,\quad f(\boldsymbol{a})=0,\quad\text{and}\quad f(\widehat{\boldsymbol{a}}_{t})=t^{2}>0.
+\]
+
+\end_inset
+
+Thus if we move away from
+\series bold
+ 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+
+\series default
+ in the 
+\begin_inset Formula $(-1,0)^{\top}$
+\end_inset
+
+ direction, then we stay in the feasible region while 
+\emph on
+decreasing 
+\emph default
+the objective value, and if we move away from 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ in the 
+\begin_inset Formula $(0,1)^{\top}$
+\end_inset
+
+ direction, then we stay in the feasible region while 
+\emph on
+increasing 
+\emph default
+the objective value (we could have also determined this by looking at the
+ Hessian and seeing that it has mixed positive and negative eigenvalues).
+ It follows that 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ is a saddle point and hence not an optimal solution.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 5'
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=x_{1}^{2}-x_{2}^{2}$
+\end_inset
+
+ and let 
+\begin_inset Formula $g(\boldsymbol{x})=(x_{1}-2)^{2}+x_{2}^{2}-4$
+\end_inset
+
+.
+ We consider the following NLP:
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad f(\boldsymbol{x})\\
+\text{subject to} & \quad g(\boldsymbol{x})\leq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 5'.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Write the KKT FONC to this NLP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ A KKT point for this NLP is a pair 
+\begin_inset Formula $(\boldsymbol{x},\mu)=(x_{1},x_{2},x_{3},\mu)\in\mathbb{R}^{3}$
+\end_inset
+
+ which satisfies the following:
+\begin_inset Formula 
+\begin{align}
+\nabla f(\boldsymbol{x})+\mu\nabla g(\boldsymbol{x}) & =0 &  & \text{Stationary}\nonumber \\
+g(\boldsymbol{x}) & \leq0 &  & \text{Primal Feasibility}\label{eq:KKT1-1-1}\\
+\mu & \geq0 &  & \text{Dual Feasibility}\nonumber \\
+\mu g(\boldsymbol{x}) & =0 &  & \text{Complementary Slackness}\nonumber 
+\end{align}
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathcal{K}\subseteq\mathbb{R}^{3}$
+\end_inset
+
+ denote the set of all KKT points for this NLP.
+ The KKT FONC says that if 
+\begin_inset Formula $\boldsymbol{a}=(a_{1},a_{2})\in\mathbb{R}^{3}$
+\end_inset
+
+ is a local minimizer and the NLP satisfies some regularity conditions,
+ then there exists 
+\begin_inset Formula $\alpha\geq0$
+\end_inset
+
+ such that 
+\begin_inset Formula $(\boldsymbol{a},\alpha)\in\mathcal{K}$
+\end_inset
+
+.
+ The regularity condition that we will use is the LICQ condition, which
+ says the gradients of the active inequality constraints and the gradients
+ of the equality constraints are linearly independent at 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+.
+ What this means in this case is that if 
+\begin_inset Formula $g(\boldsymbol{a})=0$
+\end_inset
+
+, then 
+\begin_inset Formula $\nabla g(\boldsymbol{a})\neq0$
+\end_inset
+
+ Now observe that
+\begin_inset Formula 
+\[
+\nabla f(\boldsymbol{x})=2\begin{pmatrix}x_{1}\\
+-x_{2}
+\end{pmatrix}\quad\text{and}\quad\nabla g(\boldsymbol{x})=2\begin{pmatrix}x_{1}-2\\
+x_{2}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Thus 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:KKT1-1-1})
+\end_layout
+
+\end_inset
+
+ can be rewritten as:
+\begin_inset Formula 
+\begin{align*}
+x_{1}+\mu(x_{1}-2) & =0\\
+-x_{2}+\mu x_{2} & =0\\
+(x_{1}-2)^{2}+x_{2}^{2}-4 & \leq0\\
+\mu & \geq0\\
+\mu(4-(x_{1}-2)^{2}-x_{2}^{2}) & =0
+\end{align*}
+
+\end_inset
+
+We also note that the regulartiy condition is always satisfied since 
+\begin_inset Formula $\nabla g(\boldsymbol{x})=0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\boldsymbol{x}=(2,0)$
+\end_inset
+
+ and 
+\begin_inset Formula $g(2,0)=-4$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 5'.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all solutions 
+\begin_inset Formula $(\boldsymbol{x},\mu)$
+\end_inset
+
+ to the KKT FONC for this NLP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $(\boldsymbol{x},\mu)=(x_{1},x_{2},\mu)\in\mathcal{K}$
+\end_inset
+
+.
+ From the Stationary equations, we have
+\begin_inset Formula 
+\begin{align*}
+\nabla f(\boldsymbol{x})+\mu\nabla g(\boldsymbol{x})=0 & \iff\begin{pmatrix}x_{1}+\mu(x_{1}-2)\\
+-x_{2}+\mu x_{2}
+\end{pmatrix}=0\\
+ & \iff\begin{pmatrix}(\mu+1)x_{1}-2\mu\\
+(\mu-1)x_{2}
+\end{pmatrix}=0\\
+ & \iff x_{1}=\frac{2\mu}{\mu+1}\text{ and }(\mu-1)x_{2}=0\\
+ & \iff x_{1}=\frac{2\mu}{\mu+1}\text{ and }(\mu=1\text{ or }x_{2}=0)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\mu=0$
+\end_inset
+
+, then we must have 
+\begin_inset Formula $x_{1}=x_{2}=0$
+\end_inset
+
+, thus we may assume that 
+\begin_inset Formula $\mu\neq0$
+\end_inset
+
+.
+ Then the Complementary Slackness equation implies 
+\begin_inset Formula $g(\boldsymbol{x})=0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $x_{2}=0$
+\end_inset
+
+, then this says
+\begin_inset Formula 
+\begin{align*}
+g(\boldsymbol{x})=0 & \iff(x_{1}-2)^{2}+x_{2}^{2}=4\\
+ & \iff\left(\frac{2\mu}{\mu+1}-2\right)^{2}=4\\
+ & \iff\frac{2\mu}{\mu+1}-2=2\text{ or }\frac{2\mu}{\mu+1}-2=-2\\
+ & \iff\frac{2\mu}{\mu+1}=4\text{ or }\frac{2\mu}{\mu+1}=0\\
+ & \iff\frac{\mu}{\mu+1}=2 & \text{since }\mu\neq0\\
+ & \iff\mu=-2,
+\end{align*}
+
+\end_inset
+
+however this contradicts the Dual Feasibility property.
+ Thus we may assume that 
+\begin_inset Formula $x_{2}\neq0$
+\end_inset
+
+, which implies 
+\begin_inset Formula $\mu=1$
+\end_inset
+
+ and hence 
+\begin_inset Formula $x_{1}=1$
+\end_inset
+
+.
+ Then again by the Complementary Slackness equation, we have
+\begin_inset Formula 
+\begin{align*}
+g(\boldsymbol{x})=0 & \iff(x_{1}-2)^{2}+x_{2}^{2}=4\\
+ & \iff1+x_{2}^{2}=4\\
+ & \iff x_{2}=\pm\sqrt{3}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We have found all KKT points, they are given by 
+\begin_inset Formula $\mathcal{K}=\{(\boldsymbol{a},\alpha),(\boldsymbol{c},\gamma),(\boldsymbol{d},\delta)\}$
+\end_inset
+
+, where we set
+\begin_inset Formula 
+\begin{align*}
+(\boldsymbol{a},\alpha) & =(a_{1},a_{2},0)=(0,0,0)\\
+(\boldsymbol{c},\gamma) & =(c_{1},c_{2},\gamma)=(1,\sqrt{3},1)\\
+(\boldsymbol{d},\delta) & =(d_{1},d_{2},\delta)=(1,-\sqrt{3},1).
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 5'.c
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all optimal solutions to this NLP.
+ Give their properties (choose from local, global, strict local, unique
+ global).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We solve this problem geometrically:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $x$, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $y$, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-1,xmax=5,ymin=-3,ymax=3,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick={-1,1,2,3,4,5},ytick={-3,-2,-1,1,2,3},
+\end_layout
+
+\begin_layout Plain Layout
+
+axis equal,
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100,fill=red,opacity=0.2] ({2*cos(deg(x))+2},{2*
+sin(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100] ({2*cos(deg(x))+2},{2*sin(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=100,domain=-1.3:1.3 ] ({4*sec(deg(x))},{4
+*tan(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=100,domain=-1.3:1.3 ] ({3*sec(deg(x))},{3
+*tan(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=100,domain=-1.3:1.3 ] ({2*sec(deg(x))},{2
+*tan(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=100,domain=-1.3:1.3 ] ({sec(deg(x))},{tan
+(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=100,domain=-1:3 ] ({x},{x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=100,domain=-1:3 ] ({x},{-x});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-1:5] {sqrt(x^2 + 1)};
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-1:5] {-sqrt(x^2 +
+ 1)}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-1:5] {sqrt(x^2 + 2)};
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-1:5] {-sqrt(x^2 +
+ 2)};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=left:$ 
+\backslash
+boldsymbol{a}$] (x) at (axis cs:0,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=above:$ 
+\backslash
+boldsymbol{c}$] (x) at (axis cs:0.8,1.6) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below:$ 
+\backslash
+boldsymbol{d}$] (x) at (axis cs:0.8,-1.6) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The feasible region (that is 
+\begin_inset Formula $\{g\leq0\}:=\{\boldsymbol{x}\in\mathbb{R}^{2}\mid g(\boldsymbol{x})\leq0$
+\end_inset
+
+) is everywhere 
+\emph on
+inside 
+\emph default
+the region shaded in red (including the thick red circle).
+ The blue dashed lines above are level sets 
+\begin_inset Formula $\{f=c\}:=\{\boldsymbol{x}\in\mathbb{R}^{2}\mid f(\boldsymbol{x})=c\}$
+\end_inset
+
+ for various values of 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+ (namely for 
+\begin_inset Formula $c=-2,-1,0,1,4,9,16$
+\end_inset
+
+).
+ We also plotted the points 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{c}$
+\end_inset
+
+, and 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+ b ecause we know that these are the only possible points that can be local
+ minimizers.
+ Note that the vector 
+\begin_inset Formula $\nabla f(\boldsymbol{c})=2(1,-\sqrt{3})^{\top}$
+\end_inset
+
+ is normal to the circle 
+\begin_inset Formula $\{g=0\}$
+\end_inset
+
+ at the point 
+\begin_inset Formula $\boldsymbol{c}$
+\end_inset
+
+.
+ This implies that the level set 
+\begin_inset Formula $\{f=16\}$
+\end_inset
+
+ is tangent to the circle 
+\begin_inset Formula $\{g=0\}$
+\end_inset
+
+, which implies 
+\begin_inset Formula $\boldsymbol{c}$
+\end_inset
+
+ is a strict local minimizer with optimal value 
+\begin_inset Formula $f(\boldsymbol{d})=16$
+\end_inset
+
+.
+ A similar argument implies 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+ is a strict local minimizer with optimal value 
+\begin_inset Formula $f(\boldsymbol{c})=16$
+\end_inset
+
+.
+ In fact, both 
+\begin_inset Formula $\boldsymbol{c}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+ are global minimizers since the feasible region is compact and since 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous (so 
+\begin_inset Formula $f$
+\end_inset
+
+ must have a global minimizer somewhere in the feasible region).
+ Finally, by the same argument as above, 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ is a saddle point hence not an optimal solution.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section*
+Problem 6
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=x_{1}^{2}+x_{2}^{2}$
+\end_inset
+
+ and let 
+\begin_inset Formula $g(\boldsymbol{x})=-(x_{1}-1)^{3}+x_{2}^{2}$
+\end_inset
+
+ consider the following NLP
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad f(\boldsymbol{x})\\
+\text{subject to} & \quad g(\boldsymbol{x})\leq0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 6.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Solve the problem graphically.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We solve this graphically as below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $x_1 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $x_2 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-3,xmax=3,ymin=-3,ymax=3,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick={-3,-2,-1,1,2,3},ytick={-3,-2,-1,1,2,3},
+\end_layout
+
+\begin_layout Plain Layout
+
+axis equal,
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=1000,domain=1.01:3] {sqrt((x-1)^3)}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=1000,domain=1.01:3] {-sqrt((x-1)^3)}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-1.01:3] {sqrt(1 - x^2
+ )}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-1.01:3] {-sqrt(1 -
+ x^2 )};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-1.999:1.999] {sqrt(4
+ - x^2 )}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-1.999:1.999] {-sqrt(4
+ - x^2 )};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-2.9999:2.9999] {sqrt(9
+ - x^2 )}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-2.9999:2.9999] {-sqrt(9
+ - x^2 )};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=left:$ 
+\backslash
+boldsymbol{a}$] (x) at (axis cs:1,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The feasible region 
+\begin_inset Formula $\{g\leq0\}$
+\end_inset
+
+ is everything to the 
+\emph on
+right 
+\emph default
+of the red curve drawn above.
+ The blue dashed lines above are level sets 
+\begin_inset Formula $\{f=c\}$
+\end_inset
+
+ for various values of 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+ (namely for 
+\begin_inset Formula $c=1,4,9$
+\end_inset
+
+).
+ We also plotted the point 
+\begin_inset Formula $\boldsymbol{a}:=(1,0)$
+\end_inset
+
+ which is clearly the unique global minimizer with the objective optimal
+ value being 
+\begin_inset Formula $f(\boldsymbol{a})=1$
+\end_inset
+
+.
+ To verify that this is the global minimizer, suppose 
+\begin_inset Formula $\boldsymbol{x}=(x_{1},x_{2})$
+\end_inset
+
+ is in the feasible region.
+ If 
+\begin_inset Formula $x_{1}=1$
+\end_inset
+
+, then 
+\begin_inset Formula $x_{2}^{2}\leq0$
+\end_inset
+
+ which implies 
+\begin_inset Formula $x_{2}=0$
+\end_inset
+
+, and hence 
+\begin_inset Formula $\boldsymbol{x}=\boldsymbol{a}$
+\end_inset
+
+.
+ Now assume that 
+\begin_inset Formula $\boldsymbol{x}\neq\boldsymbol{a}$
+\end_inset
+
+ so that 
+\begin_inset Formula $x_{1}>1$
+\end_inset
+
+.
+ Then this implies
+\begin_inset Formula 
+\begin{align*}
+f(\boldsymbol{x}) & =x_{1}^{2}+x_{2}^{2}\\
+ & >1+x_{2}^{2}\\
+ & \geq1\\
+ & =f(\boldsymbol{a}).
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ is the unique global minimizer for this NLP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 6.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Write down the KKT conditions for this problem.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ A KKT point for this NLP is a pair 
+\begin_inset Formula $(\boldsymbol{x},\mu)=(x_{1},x_{2},\mu)\in\mathbb{R}^{3}$
+\end_inset
+
+ which satisfies the following:
+\begin_inset Formula 
+\begin{align}
+\nabla f(\boldsymbol{x})+\mu\nabla g(\boldsymbol{x}) & =0 &  & \text{Stationary}\nonumber \\
+g(\boldsymbol{x}) & \leq0 &  & \text{Primal Feasibility}\label{eq:KKT1-1-1-1}\\
+\mu & \geq0 &  & \text{Dual Feasibility}\nonumber \\
+\mu g(\boldsymbol{x}) & =0 &  & \text{Complementary Slackness}\nonumber 
+\end{align}
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathcal{K}\subseteq\mathbb{R}^{2}$
+\end_inset
+
+ denote the set of all KKT points for this NLP.
+ The KKT FONC says that if 
+\begin_inset Formula $\boldsymbol{x}^{*}\in\mathbb{R}^{3}$
+\end_inset
+
+ is a local minimizer and the NLP satisfies some regularity conditions,
+ then there exists 
+\begin_inset Formula $\mu^{*}\geq0$
+\end_inset
+
+ such that 
+\begin_inset Formula $(\boldsymbol{x}^{*},\mu^{*})\in\mathcal{K}$
+\end_inset
+
+.
+ The regularity condition that we will use is the LICQ condition, which
+ says the gradients of the active inequality constraints and the gradients
+ of the equality constraints are linearly independent at 
+\series bold
+
+\begin_inset Formula $\boldsymbol{x}^{*}$
+\end_inset
+
+
+\series default
+.
+ What this means in this case is that if 
+\begin_inset Formula $g(\boldsymbol{x}^{*})=0$
+\end_inset
+
+, then 
+\begin_inset Formula $\nabla g(\boldsymbol{x}^{*})\neq0$
+\end_inset
+
+.
+ Now observe that
+\begin_inset Formula 
+\[
+\nabla f(\boldsymbol{x})=2\begin{pmatrix}x_{1}\\
+x_{2}
+\end{pmatrix}\quad\text{and}\quad\nabla g(\boldsymbol{x})=\begin{pmatrix}-3(x_{1}-1)^{2}\\
+2x_{2}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Thus 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:KKT1-1-1-1})
+\end_layout
+
+\end_inset
+
+ can be rewritten as:
+\begin_inset Formula 
+\begin{align*}
+2x_{1}-3\mu(x_{1}-1)^{2} & =0\\
+x_{2}+\mu x_{2} & =0\\
+x_{2}^{2}-(x_{1}-1)^{3} & \leq0\\
+\mu & \geq0\\
+\mu(x_{2}^{2}-(x_{1}-1)^{3}) & =0
+\end{align*}
+
+\end_inset
+
+Note that we've already found the optimal solution, namely 
+\begin_inset Formula $\boldsymbol{a}=(1,0)$
+\end_inset
+
+, however 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ does not satisfy the regularity condition since 
+\begin_inset Formula $\nabla g(\boldsymbol{a})=0=g(\boldsymbol{a})$
+\end_inset
+
+, so it need not be the case that there exists an 
+\begin_inset Formula $\alpha\geq0$
+\end_inset
+
+ such that 
+\begin_inset Formula $(\boldsymbol{a},\alpha)\in\mathcal{K}$
+\end_inset
+
+ (in fact, the next problem will show that it's not the case).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 6.c
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Do the KKT conditions yield the optimal solution? Explain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ No.
+ Indeed, suppose 
+\begin_inset Formula $(\boldsymbol{x},\mu)=(x_{1},x_{2},\mu)\in\mathcal{K}$
+\end_inset
+
+.
+ From the Stationary equations, we have
+\begin_inset Formula 
+\begin{align*}
+\nabla f(\boldsymbol{x})+\mu\nabla g(\boldsymbol{x})=0 & \iff\begin{pmatrix}2x_{1}-3\mu(x_{1}-1)^{2}\\
+(\mu+1)x_{2}
+\end{pmatrix}=0\\
+ & \iff2x_{1}-3\mu(x_{1}-1)^{2}=0\text{ and }(\mu+1)x_{2}=0\\
+ & \iff2x_{1}-3\mu(x_{1}-1)^{2}=0\text{ and }x_{2}=0 & \text{since }\mu\geq0\\
+ & \iff2x_{1}-3\mu(x_{1}-1)^{2}=0\text{ and }x_{2}=0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\mu=0$
+\end_inset
+
+, then we must have 
+\begin_inset Formula $x_{1}=x_{2}=0$
+\end_inset
+
+.
+ Now assume for contradiction that 
+\begin_inset Formula $\mu\neq0$
+\end_inset
+
+.
+ Then the Complementary Slackness equation implies 
+\begin_inset Formula $g(\boldsymbol{x})=0$
+\end_inset
+
+, thus
+\begin_inset Formula 
+\begin{align*}
+g(\boldsymbol{x})=0 & \implies(x_{1}-1)^{3}=x_{2}^{2}\\
+ & \implies(x_{1}-1)^{3}=0\\
+ & \implies x_{1}=1.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However if 
+\begin_inset Formula $x_{1}=1$
+\end_inset
+
+, then plugging this into the equation
+\begin_inset Formula 
+\[
+2x_{1}-3\mu(x_{1}-1)^{2}=0
+\]
+
+\end_inset
+
+ yields 
+\begin_inset Formula $2=0$
+\end_inset
+
+, an obvious contradiction.
+ Thus 
+\begin_inset Formula $\mu=0$
+\end_inset
+
+, and hence 
+\begin_inset Formula $x_{1}=x_{2}=0$
+\end_inset
+
+, so the only KKT point is 
+\begin_inset Formula $(0,0,0)$
+\end_inset
+
+, which is not the optimal solution.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

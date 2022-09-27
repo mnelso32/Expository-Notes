@@ -1,0 +1,1016 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Models and Applications Project
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Subsection*
+Introduction
+\end_layout
+
+\begin_layout Standard
+Suppose an investor wishes to select a set of assets wants to maximize (as
+ high as possible) their return on investment and simultaneously minimize
+ (as low as possible) the risk of investment as well as their losses.
+ In order to achieve this, the investor may want to consider this problem
+ from an MCDM/MCDA problem where there are many techniques/tools the investor
+ can use to solve this in the best way possible (according to their preference).
+ In this project, we will focus on the paper 
+\begin_inset Quotes eld
+\end_inset
+
+Fuzzy Numbers and MCDM Methods for Portfolio Optimization
+\begin_inset Quotes erd
+\end_inset
+
+ by Thi T.
+ Nguyen and Lee N.
+ Gordon-Brown, and will try to discuss how they converted this into an MCDA
+ problem.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Notation
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $U(\omega)$
+\end_inset
+
+ denote the utility of terminal wealth 
+\begin_inset Formula $\omega$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $U(\omega)$
+\end_inset
+
+ is an analytic function defined on 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+ which is increasing (for instance, one can use 
+\begin_inset Formula $U(\omega)=\ln\omega$
+\end_inset
+
+).
+ Let 
+\begin_inset Formula $\boldsymbol{R}=(R_{1},\dots,R_{n})^{\top}$
+\end_inset
+
+ be the rates of return of 
+\begin_inset Formula $n$
+\end_inset
+
+ risky assets (which one may regard as being fixed) and let 
+\begin_inset Formula $\boldsymbol{\mu}=\mathrm{E}(\boldsymbol{R})=(\mu_{1},\dots,\mu_{n})^{\top}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\boldsymbol{w}=(w_{1},\dots,w_{n})^{\top}$
+\end_inset
+
+ be a weight vector representing the proportiond of wealth allocated to
+ various assets (we do not regard 
+\begin_inset Formula $\boldsymbol{w}$
+\end_inset
+
+ as being fixed at the moment: the 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ will be our decision variables for the upcoming optimization problem we
+ will set up).
+ In particular, 
+\begin_inset Formula $\boldsymbol{w}$
+\end_inset
+
+ should satisfy the following constraints: 
+\begin_inset Formula 
+\begin{equation}
+\sum_{i}w_{i}=1\text{ and }\boldsymbol{w}\geq0.\label{eq:constraintslo}
+\end{equation}
+
+\end_inset
+
+ We shall assume that 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is normalized in the sense that 
+\begin_inset Formula $\omega=1+r_{\mathrm{p}}$
+\end_inset
+
+ where 
+\begin_inset Formula $r_{\mathrm{p}}$
+\end_inset
+
+ is the rate of return on our entire portfolio (with respect to 
+\begin_inset Formula $\boldsymbol{w}$
+\end_inset
+
+):
+\begin_inset Formula 
+\[
+r_{\mathrm{p}}=\boldsymbol{w}^{\top}\boldsymbol{R}=\sum_{i}w_{i}R_{i}.
+\]
+
+\end_inset
+
+Thus if 
+\begin_inset Formula $r_{\mathrm{p}}$
+\end_inset
+
+ increases, then the utility function 
+\begin_inset Formula $U(\omega)$
+\end_inset
+
+ increase as well.
+ Since 
+\begin_inset Formula $U(\omega)$
+\end_inset
+
+ is analytic at 
+\begin_inset Formula $\mathrm{E}(\omega)$
+\end_inset
+
+, we can express it locally at 
+\begin_inset Formula $\mathrm{E}(\omega)$
+\end_inset
+
+ in terms of the infinite Taylor series as:
+\begin_inset Formula 
+\begin{equation}
+U(\omega)=\sum_{k=0}^{\infty}\frac{U^{(k)}(\mathrm{E}(\omega))}{k!}(\omega-\mathrm{E}(\omega))^{k}\label{eq:expectations}
+\end{equation}
+
+\end_inset
+
+Applying the expectation operator to both sides of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:expectations})
+\end_layout
+
+\end_inset
+
+ gives us
+\begin_inset Formula 
+\begin{align}
+\mathrm{E}(U(\omega)) & =\sum_{k=0}^{\infty}\frac{U^{(k)}(\mathrm{E}(\omega))}{k!}\mathrm{E}((\omega-\mathrm{E}(\omega))^{k}).\label{eq:taylorseries}
+\end{align}
+
+\end_inset
+
+The expected utility from an investment in risky assets depends on all central
+ moments, however for numerical purposes, we only consider the first four
+ moments.
+ Thus we approximate 
+\begin_inset Formula $\mathrm{E}(U(\omega))$
+\end_inset
+
+ using the fourth-order Taylor expansion:
+\begin_inset Formula 
+\[
+\mathrm{E}(U(\omega))\approx U(\mathrm{E}(\omega))+\frac{1}{2!}U''(\mathrm{E}(\omega))\sigma_{\mathrm{p}}^{2}+\frac{1}{3!}U'''(\mathrm{E}(\omega))s_{\mathrm{p}}^{3}+\frac{1}{4!}U''''(\mathrm{E}(\omega))\kappa_{\mathrm{p}}^{4}.
+\]
+
+\end_inset
+
+where we set
+\begin_inset Formula 
+\begin{align*}
+\mu_{\mathrm{p}} & =\mathrm{E}(r_{\mathrm{p}})=\boldsymbol{w}^{\top}\boldsymbol{\mu}\\
+\sigma_{\mathrm{p}}^{2} & =\mathrm{E}((r_{\mathrm{p}}-\mu_{\mathrm{p}})^{2})=\mathrm{E}((\omega-\mathrm{E}(\omega))^{2})\\
+s_{\mathrm{p}}^{3} & =\mathrm{E}((r_{\mathrm{p}}-\mu_{\mathrm{p}})^{3})=\mathrm{E}((\omega-\mathrm{E}(\omega))^{3})\\
+\kappa_{\mathrm{p}}^{4} & =\mathrm{E}((r_{\mathrm{p}}-\mu_{\mathrm{p}})^{4})=\mathrm{E}((\omega-\mathrm{E}(\omega))^{4})
+\end{align*}
+
+\end_inset
+
+These are called the 
+\series bold
+expected return
+\series default
+, 
+\series bold
+variance
+\series default
+, 
+\series bold
+skewness
+\series default
+, and the 
+\series bold
+kurtosis 
+\series default
+of our portfolio respectively.
+ We define the 
+\begin_inset Formula $(n,n)$
+\end_inset
+
+ covariance matrix 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+, the 
+\begin_inset Formula $(n,n^{2})$
+\end_inset
+
+ coskewness matrix 
+\begin_inset Formula $M_{3}$
+\end_inset
+
+, and the 
+\begin_inset Formula $(n,n^{3})$
+\end_inset
+
+ cokurtosis matrix by
+\begin_inset Formula 
+\begin{align*}
+M_{2} & =\mathrm{E}((\boldsymbol{R}-\boldsymbol{\mu})(\boldsymbol{R}-\boldsymbol{\mu})^{\top})=(\sigma_{ij})\\
+M_{3} & =\mathrm{E}((\boldsymbol{R}-\boldsymbol{\mu})(\boldsymbol{R}-\boldsymbol{\mu})^{\top}\otimes(\boldsymbol{R}-\boldsymbol{\mu})^{\top})=(s_{ijk})\\
+M_{4} & =\mathrm{E}((\boldsymbol{R}-\boldsymbol{\mu})(\boldsymbol{R}-\boldsymbol{\mu})^{\top}\otimes(\boldsymbol{R}-\boldsymbol{\mu})^{\top}\otimes(\boldsymbol{R}-\boldsymbol{\mu})^{\top})=(\kappa_{ijkl}),
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\otimes$
+\end_inset
+
+ dentoes the Kronecker product and where
+\begin_inset Formula 
+\begin{align*}
+\sigma_{ij} & =\mathrm{E}((R_{i}-\mu_{i})(R_{j}-\mu_{j}))\\
+s_{ijk} & =\mathrm{E}((R_{i}-\mu_{i})(R_{j}-\mu_{j})(R_{k}-\mu_{k}))\\
+\kappa_{ijkl} & =\mathrm{E}((R_{i}-\mu_{i})(R_{j}-\mu_{j})(R_{k}-\mu_{k})(R_{l}-\mu_{l}))
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq i,j,k,l\leq n$
+\end_inset
+
+.
+ Given a portfolio weight 
+\begin_inset Formula $\boldsymbol{w}$
+\end_inset
+
+, we calculate the higher momenta of our portfolio using the matrices 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $M_{3}$
+\end_inset
+
+ defined above as:
+\begin_inset Formula 
+\begin{align*}
+\mu_{\mathrm{p}} & =\boldsymbol{w}^{\top}\boldsymbol{\mu}=\sum_{i}w_{i}\mu_{i}\\
+\sigma_{\mathrm{p}}^{2} & =\boldsymbol{w}^{\top}M_{2}\boldsymbol{w}=\sum_{i,j}w_{i}w_{j}\sigma_{ij}\\
+s_{\mathrm{p}}^{3} & =\boldsymbol{w}^{\top}M_{3}(\boldsymbol{w}^{\otimes2})=\sum_{i,j,k}w_{i}w_{j}w_{k}s_{ijk}\\
+\kappa_{\mathrm{p}}^{4} & =\boldsymbol{w}^{\top}M_{4}(\boldsymbol{w}^{\otimes3})=\sum_{i,j,k,l}w_{i}w_{j}w_{k}w_{l}\kappa_{ijkl}.
+\end{align*}
+
+\end_inset
+
+The higher momenta of our portfolio gives us a lot of information in regards
+ to how our portfolio is strucutred.
+ For instance, a high value of 
+\begin_inset Formula $\sigma_{ii}$
+\end_inset
+
+ indicates asset 
+\begin_inset Formula $i$
+\end_inset
+
+ has high volatility or has high risk, wheras a low value of 
+\begin_inset Formula $\sigma_{ii}$
+\end_inset
+
+ indicates asset 
+\begin_inset Formula $i$
+\end_inset
+
+ has low volatility or has low risk.
+ A negative value of 
+\begin_inset Formula $\sigma_{ij}$
+\end_inset
+
+ where 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+ indicates that the values of the assets 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+ move in opposite directions (which is a desirable feature in a diversified
+ portfolio), and a positive value of 
+\begin_inset Formula $\sigma_{ij}$
+\end_inset
+
+ where 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+ indicates that the values of the assets 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+ move in the same direction (which often occurs with stocks in companies
+ in the same industry).
+ The skewness and kurtosis have their own interpretations as well.
+ Typically, an investor would prefer to have high portfolio skewness and
+ low variance/kurtosis, however this may vary depending on the investors
+ preferences.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Marginal Impact
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+marginal impact 
+\series default
+of the asset 
+\begin_inset Formula $i$
+\end_inset
+
+ to the porfolio's return, variance, skewness, and kurtosis is defined to
+ be the 
+\begin_inset Formula $i$
+\end_inset
+
+th component of the vectors below:
+\begin_inset Formula 
+\begin{align*}
+\nabla_{\boldsymbol{w}}\mu_{\mathrm{p}} & =\boldsymbol{\mu}\\
+\nabla_{\boldsymbol{w}}\sigma_{\mathrm{p}}^{2} & =2M_{2}\boldsymbol{w}\\
+\nabla_{\boldsymbol{w}}s_{\mathrm{p}}^{3} & =3M_{3}\boldsymbol{w}^{\otimes2}\\
+\nabla_{\boldsymbol{w}}\kappa_{\mathrm{p}}^{4} & =4M_{4}\boldsymbol{w}^{\otimes3}.
+\end{align*}
+
+\end_inset
+
+Assets with higher marginal impact will make relatively large changes to
+ the moments of our portfolio with respect to small changes of the weight
+ of that asset; thus they will have 
+\emph on
+more 
+\emph default
+influence to our overall portfolio compared to other assets.
+ Note that the marginal impact of asset 
+\begin_inset Formula $i$
+\end_inset
+
+ to the whole portfolio return is given by the expected return 
+\begin_inset Formula $\mu_{i}$
+\end_inset
+
+ which does not depend on the other assets 
+\begin_inset Formula $j$
+\end_inset
+
+ where 
+\begin_inset Formula $j\neq i$
+\end_inset
+
+, however the marginal impact of the asset 
+\begin_inset Formula $i$
+\end_inset
+
+ to the higher moments will typically take into account the other assets
+ 
+\begin_inset Formula $j$
+\end_inset
+
+ where 
+\begin_inset Formula $j\neq i$
+\end_inset
+
+.
+ For instance, since the 
+\begin_inset Formula $\sigma_{ij}$
+\end_inset
+
+ are symmetric in 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+, the portfolio's variance can be expressed as
+\begin_inset Formula 
+\[
+\sigma_{\mathrm{p}}^{2}=\sum_{1\leq i\leq n}w_{i}^{2}\sigma_{i}^{2}+2\sum_{1\leq i<j\leq n}w_{i}w_{j}\sigma_{ij}.
+\]
+
+\end_inset
+
+The second term on the right represents the diversification effect of the
+ overall portfolio's variance.
+ The variance marginal impact of asset 
+\begin_inset Formula $i$
+\end_inset
+
+ to the whole portfolio's variance is given by
+\begin_inset Formula 
+\[
+\partial_{w_{i}}\sigma_{\mathrm{p}}^{2}=2\sum_{1\leq j\leq n}w_{j}\sigma_{ij},
+\]
+
+\end_inset
+
+which clearly depends on all assets in the portfolio.
+ Note that the 
+\begin_inset Formula $\sigma_{ij}$
+\end_inset
+
+ can be obtained from historical/simulation data, however the 
+\begin_inset Formula $w_{j}$
+\end_inset
+
+ are still unknown at this stage.
+ Thus estimates of the marginal impacts are required in order to evaluate
+ the performance of different assets.
+ We proceed with the following strategy: for each criteria (variance, skewness,
+ and kurtosis) we calculate two weight vector relateds to minimum and maximum
+ circumstances.
+ We then use them to calculate the 
+\emph on
+exact 
+\emph default
+marginal imapcts of the assets to the portfolio momenta using the partial
+ derivative formulas above.
+ Thus we can calculate the marginal impacts of each asset in the extreme
+ cases, however the exact contribution of an asset on the portfolio's higher
+ moments is uncertain before choosing a weight vector 
+\begin_inset Formula $\boldsymbol{w}$
+\end_inset
+
+.
+ We handle this problem using fuzzy numbers.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Fuzzy Numbers
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+fuzzy set 
+\series default
+
+\begin_inset Formula $A$
+\end_inset
+
+ is a pair 
+\begin_inset Formula $(X,f)$
+\end_inset
+
+ where 
+\begin_inset Formula $X$
+\end_inset
+
+ is a subset of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $f$
+\end_inset
+
+ is a function from 
+\begin_inset Formula $X$
+\end_inset
+
+ to 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
+ We denote 
+\begin_inset Formula $f=f_{A}$
+\end_inset
+
+ and call it the 
+\series bold
+membership function 
+\series default
+of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $x\in X$
+\end_inset
+
+, the value 
+\begin_inset Formula $f_{A}(x)$
+\end_inset
+
+ is called the 
+\series bold
+grade 
+\series default
+of membership of 
+\begin_inset Formula $x$
+\end_inset
+
+ in 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Intuitively, if 
+\begin_inset Formula $f_{A}(x)=1$
+\end_inset
+
+, then we think of 
+\begin_inset Formula $x$
+\end_inset
+
+ as 
+\emph on
+fully 
+\emph default
+belonging to the fuzzy set 
+\begin_inset Formula $A$
+\end_inset
+
+, and if 
+\begin_inset Formula $f_{A}(x)=\varepsilon$
+\end_inset
+
+ where 
+\begin_inset Formula $0<\varepsilon<1$
+\end_inset
+
+ then we think of 
+\begin_inset Formula $x$
+\end_inset
+
+ as 
+\emph on
+partially 
+\emph default
+belonging to 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ We set
+\begin_inset Formula 
+\begin{align*}
+A^{\geq\alpha} & :=\{f_{A}\geq\alpha\}\\
+A^{>\alpha} & :=\{f_{A}>\alpha\}\\
+\mathrm{Supp}(A) & :=\{f_{A}>0\}\\
+\mathrm{Core}(A) & :=\{f_{A}=1\}
+\end{align*}
+
+\end_inset
+
+We call these the 
+\begin_inset Formula $\alpha$
+\end_inset
+
+
+\series bold
+-cut 
+\series default
+of 
+\begin_inset Formula $A$
+\end_inset
+
+, the 
+\series bold
+strict 
+\begin_inset Formula $\alpha$
+\end_inset
+
+-cut 
+\series default
+of 
+\begin_inset Formula $A$
+\end_inset
+
+, the 
+\series bold
+support 
+\series default
+of 
+\begin_inset Formula $A$
+\end_inset
+
+, and the 
+\series bold
+core 
+\series default
+of 
+\begin_inset Formula $A$
+\end_inset
+
+ respectively.
+ For this project, we only consider fuzzy sets of the form 
+\begin_inset Formula $A=(\mathbb{R},f)$
+\end_inset
+
+ where the membership function is given by
+\begin_inset Formula 
+\begin{equation}
+f_{A}(x)=\begin{cases}
+(x-a)/(b-a) & a\leq x\leq b\\
+1 & b\leq x\leq c\\
+(d-x)/(d-c) & c\leq x\leq d\\
+0 & \text{otherwise}
+\end{cases}\label{eq:fuzzynumber}
+\end{equation}
+
+\end_inset
+
+These are called trapezoidal fuzzy numbers since the graph of 
+\begin_inset Formula $f_{A}$
+\end_inset
+
+ takes the shape of a trapezoid.
+\end_layout
+
+\begin_layout Subsection*
+Weighting Schemes
+\end_layout
+
+\begin_layout Standard
+As we mentioned before, rational investor would typically prefer high portfolio
+ skewness and low variance/kurtosis.
+ Thus they would like to maximize (as high as possible) skewness and minimize
+ (as low as possible) variance and kurtosis.
+ Obviously there are many ways we can do this, depending on the investors
+ preference or utility.
+ To this end, we consider a weighting scheme 
+\begin_inset Formula $\mathrm{s}=(\mathrm{s}_{r}:\mathrm{s}_{v}:\mathrm{s}_{s}:s_{\kappa})$
+\end_inset
+
+ which measures the investors preference.
+ For instance, the scheme 
+\begin_inset Formula $(4:3:2:1)$
+\end_inset
+
+ indicates that the investor favors return the most, then favors variance
+ the second-most, then favors skewness the third-most, and favors kurtosis
+ the least.
+ In the paper, the authors consider various weighting schemes like this,
+ and to each weighting scheme, they attach a trapezoidal fuzzy number expressed
+ in vector notation.
+ For example, the fuzzy number corresponding to the weighting scheme 
+\begin_inset Formula $(4:3:2:1)$
+\end_inset
+
+ is given by 
+\begin_inset Formula $(1,3/4,1/2,1)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section*
+MCDM Approaches to Portfolio Selection
+\end_layout
+
+\begin_layout Standard
+In the paper, the authors discuss two possible MCDM approaches to portfolio
+ selection: the SAW method and the TOPSIS method.
+ We focus on the SAW method.
+\end_layout
+
+\begin_layout Subsection*
+The Decision Variables
+\end_layout
+
+\begin_layout Standard
+The decision matrix is the 
+\begin_inset Formula $n\times4$
+\end_inset
+
+ matrix 
+\begin_inset Formula $D=(x_{ij})$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $i$
+\end_inset
+
+th row of 
+\begin_inset Formula $D$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ and the 
+\begin_inset Formula $i$
+\end_inset
+
+th column of 
+\begin_inset Formula $D$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $C_{j}$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ correspond to possible assets among which an investor chooses to allocate
+ their initial wealth, the 
+\begin_inset Formula $C_{j}$
+\end_inset
+
+ correspond return, variance, skewness, and kurtosis criteria with which
+ asset performance is measured, and the 
+\begin_inset Formula $x_{ij}$
+\end_inset
+
+ is the centroid of a trapezoidal fuzzy number which represents the maginal
+ impact of asset 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ with respect to criterion 
+\begin_inset Formula $C_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Benefit Criteria
+\end_layout
+
+\begin_layout Standard
+The SAW method requires a comparable scale for all elements in the decision
+ matrix.
+ This will be a normalized matrix 
+\begin_inset Formula $R=(r_{ij})$
+\end_inset
+
+ which we define as follows: let 
+\begin_inset Formula $\varepsilon_{j}$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta_{j}$
+\end_inset
+
+ denote the minimum and maximum values in 
+\begin_inset Formula $C_{j}$
+\end_inset
+
+.
+ We set
+\begin_inset Formula 
+\[
+r_{ij}=\frac{x_{ij}-\varepsilon_{j}}{\delta_{j}-\varepsilon_{j}}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $i,j$
+\end_inset
+
+.
+ We refer to this as benefit criteria (the larger the rating, the greater
+ the preference).
+ WE weight of each criterion is obtained from the investor's normalized
+ preference vector 
+\begin_inset Formula $\overline{\mathrm{s}}=\mathrm{s}/\|\mathrm{s}\|$
+\end_inset
+
+.
+ The performance score 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ of the 
+\begin_inset Formula $i$
+\end_inset
+
+th asset is given by
+\begin_inset Formula 
+\[
+p_{i}=\sum_{j}\overline{s}_{j}r_{ij}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

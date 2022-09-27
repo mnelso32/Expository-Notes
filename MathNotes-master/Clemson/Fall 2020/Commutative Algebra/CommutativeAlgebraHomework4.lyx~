@@ -1,0 +1,4249 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Commutative Algebra Homework 4
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be an integral domain.
+ Show that the following conditions are equivalent.
+\end_layout
+
+\begin_layout Enumerate
+Every 
+\begin_inset Formula $R$
+\end_inset
+
+-module is free.
+\end_layout
+
+\begin_layout Enumerate
+Every 
+\begin_inset Formula $R$
+\end_inset
+
+-module is projective.
+\end_layout
+
+\begin_layout Enumerate
+Every 
+\begin_inset Formula $R$
+\end_inset
+
+-module is injective.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $R$
+\end_inset
+
+ is a field.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ (1 implies 2) Suppose every 
+\begin_inset Formula $R$
+\end_inset
+
+-module is free and let 
+\begin_inset Formula $P$
+\end_inset
+
+ be any 
+\begin_inset Formula $R$
+\end_inset
+
+-module.
+ We want to show that 
+\begin_inset Formula $P$
+\end_inset
+
+ is projective.
+ Let 
+\begin_inset Formula $\varphi\colon M\to N$
+\end_inset
+
+ be a surjective 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism and let 
+\begin_inset Formula $\psi\colon P\to N$
+\end_inset
+
+ be any 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism.
+ Let 
+\begin_inset Formula $\{e_{\lambda}\}_{\lambda\in\Lambda}$
+\end_inset
+
+ be a basis for 
+\begin_inset Formula $P$
+\end_inset
+
+ as a free 
+\begin_inset Formula $R$
+\end_inset
+
+-module.
+ For each 
+\begin_inset Formula $\lambda\in\Lambda$
+\end_inset
+
+, choose 
+\begin_inset Formula $u_{\lambda}\in M$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi(u_{\lambda})=\psi(e_{\lambda})$
+\end_inset
+
+ (such a choice is possible as 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is surjective).
+ Define 
+\begin_inset Formula $\widetilde{\psi}\colon P\to M$
+\end_inset
+
+ to be the unique 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism such that 
+\begin_inset Formula $\widetilde{\psi}(e_{\lambda})=u_{\lambda}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda\in\Lambda$
+\end_inset
+
+.
+ Then for all 
+\begin_inset Formula $\lambda\in\Lambda$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\begin{align*}
+(\varphi\circ\widetilde{\psi})(e_{\lambda}) & =\varphi(\widetilde{\psi}(e_{\lambda}))\\
+ & =\varphi(u_{\lambda})\\
+ & =\psi(e_{\lambda}).
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $\varphi\circ\widetilde{\psi}=\psi$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $P$
+\end_inset
+
+ is projective.
+ Since 
+\begin_inset Formula $P$
+\end_inset
+
+ was arbitrary, it follows that every 
+\begin_inset Formula $R$
+\end_inset
+
+-module is projective.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(2 implies 3) Suppose every 
+\begin_inset Formula $R$
+\end_inset
+
+-module is projective.
+ Let 
+\begin_inset Formula $E$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-module and let
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{injectivesplits}
+\backslash
+begin{tikzcd} 0  
+\backslash
+arrow[r] & E   
+\backslash
+arrow[r] & M 
+\backslash
+arrow[r] & N 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+be a short exact sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules.
+ Then since 
+\begin_inset Formula $N$
+\end_inset
+
+ is a projective 
+\begin_inset Formula $R$
+\end_inset
+
+-module, the short exact sequence 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{injectivesplits})
+\end_layout
+
+\end_inset
+
+ splits.
+ It follows that 
+\begin_inset Formula $E$
+\end_inset
+
+ is an injective 
+\begin_inset Formula $R$
+\end_inset
+
+-module (see Appendix for equivalent criteria for an 
+\begin_inset Formula $R$
+\end_inset
+
+-module to be injective).
+ Since 
+\begin_inset Formula $E$
+\end_inset
+
+ was arbitrary, it follows that every 
+\begin_inset Formula $R$
+\end_inset
+
+-module is injective.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(3 implies 4) Suppose every 
+\begin_inset Formula $R$
+\end_inset
+
+-module is injective.
+ We want to show 
+\begin_inset Formula $R$
+\end_inset
+
+ is a field.
+ Assume for a contradiction that 
+\begin_inset Formula $R$
+\end_inset
+
+ is not a field.
+ Choose a nonzero nonunit element in 
+\begin_inset Formula $R$
+\end_inset
+
+, say 
+\begin_inset Formula $x\in R$
+\end_inset
+
+.
+ Then the multiplication map 
+\begin_inset Formula $\mathrm{m}_{x}\colon R\to R$
+\end_inset
+
+, given by 
+\begin_inset Formula 
+\[
+\mathrm{m}_{x}(a)=ax
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a\in R$
+\end_inset
+
+, splits since it is an injective map (as 
+\begin_inset Formula $R$
+\end_inset
+
+ is a domain) and since 
+\begin_inset Formula $R$
+\end_inset
+
+ is injective as an 
+\begin_inset Formula $R$
+\end_inset
+
+-module over itself.
+ Thus there exists an 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map 
+\begin_inset Formula $\varphi\colon R\to R$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi\mathrm{m}_{x}=1_{R}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is completely determined by where it maps 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $\varphi(1)=y$
+\end_inset
+
+, then 
+\begin_inset Formula $R$
+\end_inset
+
+-linearity of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ implies 
+\begin_inset Formula $\varphi=\mathrm{m}_{y}$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula $\mathrm{m}_{y}\mathrm{m}_{x}=1_{R}$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $yx=1$
+\end_inset
+
+, which implies 
+\begin_inset Formula $x$
+\end_inset
+
+ is a unit.
+ This is a contradiction.
+ Thus 
+\begin_inset Formula $R$
+\end_inset
+
+ must be a field.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(4 implies 1) Suppose 
+\begin_inset Formula $R$
+\end_inset
+
+ is a field.
+ Then an 
+\begin_inset Formula $R$
+\end_inset
+
+-module is just an 
+\begin_inset Formula $R$
+\end_inset
+
+-vector space.
+ A standard argument using Zorn's Lemma tells us that every vector space
+ has a basis (see Appendix for proof), and hence every vector space is free.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $Q$
+\end_inset
+
+ be projective 
+\begin_inset Formula $R$
+\end_inset
+
+-modules.
+ Show that 
+\begin_inset Formula $P\otimes_{R}Q$
+\end_inset
+
+ is projective also.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ It suffices to show that 
+\begin_inset Formula $\mathrm{Hom}_{R}(P\otimes_{R}Q,-)$
+\end_inset
+
+ is exact.
+ Let 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} M_1 
+\backslash
+arrow[r] & M_2  
+\backslash
+arrow[r] & M_3  
+\backslash
+arrow[r] & 0     
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+be a short exact sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules.
+ Then since 
+\begin_inset Formula $Q$
+\end_inset
+
+ is projective, the induced sequence 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Hom} _R ( Q , M_1  ) 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Hom} _R ( Q , M_2 ) 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Hom} _R ( Q , M_3 ) 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+is exact.
+ Then since 
+\begin_inset Formula $P$
+\end_inset
+
+ is projective, the induced sequence
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep = small] 0 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Hom} _R (P , 
+\backslash
+mathrm{Hom} _R ( Q , M_1  ) ) 
+\backslash
+arrow[r] &
+\backslash
+mathrm{Hom} _R (P, 
+\backslash
+mathrm{Hom} _R ( Q , M_2 )) 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Hom} _R (P, 
+\backslash
+mathrm{Hom} _R ( Q , M_3 )) 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+is exact.
+ By tensor-hom adjointness, we have a commutative diagram
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Note how we need naturality in the third argument to get a commutative diagram.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep =small] 0 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Hom} _R (P , 
+\backslash
+mathrm{Hom} _R ( Q , M_1  ) ) 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, 
+\begin_inset Quotes eld
+\end_inset
+
+
+\backslash
+cong 
+\begin_inset Quotes eld
+\end_inset
+
+] &
+\backslash
+mathrm{Hom} _R (P, 
+\backslash
+mathrm{Hom} _R ( Q , M_2 )) 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, 
+\begin_inset Quotes eld
+\end_inset
+
+
+\backslash
+cong 
+\begin_inset Quotes eld
+\end_inset
+
+] & 
+\backslash
+mathrm{Hom} _R (P, 
+\backslash
+mathrm{Hom} _R ( Q , M_3 )) 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, 
+\begin_inset Quotes eld
+\end_inset
+
+
+\backslash
+cong 
+\begin_inset Quotes eld
+\end_inset
+
+] & 0 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Hom} _R ( P 
+\backslash
+otimes _R  Q  , M_1  )  
+\backslash
+arrow[r] &
+\backslash
+mathrm{Hom} _R ( P 
+\backslash
+otimes _R  Q  , M_2  ) 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Hom} _R ( P 
+\backslash
+otimes _R  Q  , M_3  ) 
+\backslash
+arrow[r] & 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+where the columns are isomorphisms and where the top row is exact.
+ It follows from the 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ lemma that the bottom row is exact too.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Prove that every overring of a valuation domain is a localization.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a valuation domain and let 
+\begin_inset Formula $A$
+\end_inset
+
+ be an overring of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ We will show 
+\begin_inset Formula $A$
+\end_inset
+
+ is a localization of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $S=\{y\in R\mid1/y\in A\}$
+\end_inset
+
+.
+ Observe that 
+\begin_inset Formula $S$
+\end_inset
+
+ is a multiplicatively closed subset of 
+\begin_inset Formula $R$
+\end_inset
+
+ since 
+\begin_inset Formula $1\in S$
+\end_inset
+
+ and if 
+\begin_inset Formula $y_{1},y_{2}\in S$
+\end_inset
+
+, then 
+\begin_inset Formula $y_{1}y_{2}\in S$
+\end_inset
+
+ since 
+\begin_inset Formula 
+\[
+1/(y_{1}y_{2})=(1/y_{1})(1/y_{2})\in A.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $R\subseteq A$
+\end_inset
+
+, we see that any 
+\begin_inset Formula $x/y\in R_{S}$
+\end_inset
+
+ is an element of 
+\begin_inset Formula $A$
+\end_inset
+
+, thus 
+\begin_inset Formula $R_{S}\subseteq A$
+\end_inset
+
+.
+ To show the reverse inclusion, let 
+\begin_inset Formula $x/y\in A$
+\end_inset
+
+ where 
+\begin_inset Formula $x,y\in R\backslash\{0\}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a valuation domain, we have either 
+\begin_inset Formula $x\mid y$
+\end_inset
+
+ or 
+\begin_inset Formula $y\mid x$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $x\mid y$
+\end_inset
+
+, then 
+\begin_inset Formula $ax=y$
+\end_inset
+
+ for some 
+\begin_inset Formula $a\in R$
+\end_inset
+
+.
+ In this case, 
+\begin_inset Formula 
+\[
+\frac{x}{y}=\frac{x}{ax}=\frac{1}{a}.
+\]
+
+\end_inset
+
+In particular, we see that 
+\begin_inset Formula $a\in S$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $x/y=1/a\in R_{S}$
+\end_inset
+
+.
+ On the other hand, if 
+\begin_inset Formula $y\mid x$
+\end_inset
+
+, then 
+\begin_inset Formula $x=by$
+\end_inset
+
+ for some 
+\begin_inset Formula $b\in R$
+\end_inset
+
+.
+ In this case, 
+\begin_inset Formula 
+\[
+\frac{x}{y}=\frac{by}{y}=\frac{b}{1}.
+\]
+
+\end_inset
+
+Clearly 
+\begin_inset Formula $b/1\in R_{S}$
+\end_inset
+
+, thus 
+\begin_inset Formula $x/y=b/1\in R_{S}$
+\end_inset
+
+.
+ In either case, we see that 
+\begin_inset Formula $x/y\in R_{S}$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $A\subseteq R_{S}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ We say that the integral domain 
+\begin_inset Formula $R$
+\end_inset
+
+ is a 
+\series bold
+Prüfer
+\series default
+ domain if 
+\begin_inset Formula $R_{\mathfrak{p}}$
+\end_inset
+
+ is a valuation domain for all prime ideals 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ They are the 
+\begin_inset Quotes eld
+\end_inset
+
+global
+\begin_inset Quotes erd
+\end_inset
+
+ analog of valuation domains.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Show that any overring of a Prüfer domain is a Prüfer domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a Prüfer domain and let 
+\begin_inset Formula $A$
+\end_inset
+
+ be an overring of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ We will show 
+\begin_inset Formula $A$
+\end_inset
+
+ is a Prüfer domain.
+ Let 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+ be any prime ideal in 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathfrak{p}=R\cap\mathfrak{q}$
+\end_inset
+
+ is a prime ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a Prüfer domain, we see that 
+\begin_inset Formula $R_{\mathfrak{p}}$
+\end_inset
+
+ is a valuation domain.
+ Furthermore, note that 
+\begin_inset Formula $A_{\mathfrak{q}}$
+\end_inset
+
+ is an overring of 
+\begin_inset Formula $R_{\mathfrak{p}}$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $x/y\in R_{\mathfrak{p}}$
+\end_inset
+
+, then 
+\begin_inset Formula $x\in R$
+\end_inset
+
+ implies 
+\begin_inset Formula $x\in A$
+\end_inset
+
+, and 
+\begin_inset Formula $y\notin\mathfrak{p}$
+\end_inset
+
+ implies 
+\begin_inset Formula $y\notin\mathfrak{q}$
+\end_inset
+
+, thus 
+\begin_inset Formula $x/y\in A_{\mathfrak{q}}$
+\end_inset
+
+.
+ Thus by problem 3, we see that 
+\begin_inset Formula $A_{\mathfrak{q}}$
+\end_inset
+
+ is a localization of 
+\begin_inset Formula $R_{\mathfrak{p}}$
+\end_inset
+
+.
+ A localization of a valuation domain is a valuation domain (see Appendix
+ for proof of this), thus 
+\begin_inset Formula $A_{\mathfrak{q}}$
+\end_inset
+
+ is a valuation domain.
+ Since 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+ was arbitrary, it follows that 
+\begin_inset Formula $A$
+\end_inset
+
+ is a Prüfer domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Show that if 
+\begin_inset Formula $v$
+\end_inset
+
+ is a valuation on 
+\begin_inset Formula $K$
+\end_inset
+
+ then the set of elements with nonnegative value (and 
+\begin_inset Formula $0$
+\end_inset
+
+) form a valuation domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(\Gamma,\geq)$
+\end_inset
+
+ be a totally ordered abelian group and let 
+\begin_inset Formula $v\colon K^{\times}\to\Gamma$
+\end_inset
+
+ be a valuation on 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Set 
+\begin_inset Formula $A=\{x\in K\mid v(x)\geq0\}\cup\{0\}$
+\end_inset
+
+.
+ We will show 
+\begin_inset Formula $A$
+\end_inset
+
+ is a valuation domain.
+ Suppose 
+\begin_inset Formula $a,b\in A\backslash\{0\}$
+\end_inset
+
+, and without loss of generality, assume that 
+\begin_inset Formula $v(b)\geq v(a)$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+v(ba^{-1}) & =v(b)-v(a)\\
+ & \geq0
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $ba^{-1}\in A$
+\end_inset
+
+.
+ In particular, this implies 
+\begin_inset Formula $a\mid b$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $A$
+\end_inset
+
+ is a valuation domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 6
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(A_{1},\leq_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $(A_{2},\leq_{2})$
+\end_inset
+
+ be totally ordered abelian groups.
+ We order the group 
+\begin_inset Formula $A_{1}\oplus A_{2}$
+\end_inset
+
+ by declaring 
+\begin_inset Formula $(a_{1},a_{2})\leq(a_{1}',a_{2}')$
+\end_inset
+
+ if 
+\begin_inset Formula $a_{1}\leq_{1}a_{1}'$
+\end_inset
+
+ or 
+\begin_inset Formula $a_{1}=a_{1}'$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{2}\leq_{2}a_{2}'$
+\end_inset
+
+.
+ This ordering is called the 
+\series bold
+lexicographical ordering
+\series default
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Construct valuation domains with value groups 
+\begin_inset Formula $\mathbb{Z}\oplus\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbb{R}\oplus\mathbb{Z}$
+\end_inset
+
+ ordered lexicographically.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We will prove something more general: let 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ be any totally ordered abelian group.
+ We will show that 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ is a valuation group.
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field and define
+\begin_inset Formula 
+\[
+\mathcal{F}(\Gamma,K)=\{f\colon\Gamma\to K\mid\mathrm{supp}\,f\text{ is well-ordered}\}.
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathrm{supp}\,f=\{\gamma\in\Gamma\mid f(\gamma)\neq0\}$
+\end_inset
+
+ and being well-ordered means 
+\begin_inset Formula $\mathrm{supp}\,f$
+\end_inset
+
+ is a totally ordered set with the property that every nonempty subset of
+ 
+\begin_inset Formula $\mathrm{supp}\,f$
+\end_inset
+
+ has a least member.
+ In particular, we can write 
+\begin_inset Formula $\mathrm{supp}\,f$
+\end_inset
+
+ We give 
+\begin_inset Formula $\mathcal{F}(\Gamma,K)$
+\end_inset
+
+ the structure of a ring by defining addition pointwise and defining multiplicat
+ion as follows: if 
+\begin_inset Formula $f,g\in\mathcal{F}(\Gamma,K)$
+\end_inset
+
+, then we set
+\begin_inset Formula 
+\begin{equation}
+(f\cdot g)(\gamma)=\sum_{\gamma'+\gamma''=\gamma}f(\gamma')g(\gamma'')\label{eq:finitesum}
+\end{equation}
+
+\end_inset
+
+Observe that the sum 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:finitesum})
+\end_layout
+
+\end_inset
+
+ is finite since both 
+\begin_inset Formula $\mathrm{supp}\,f$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{supp}\,g$
+\end_inset
+
+ are well-ordered.
+ The identity for this ring is the function 
+\begin_inset Formula $\delta_{0}\colon\Gamma\to K$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\[
+\delta_{0}(\gamma)=\begin{cases}
+1 & \text{if }\gamma=0\\
+0 & \text{else}
+\end{cases}
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $\mathcal{F}(\Gamma,K)$
+\end_inset
+
+ is a field.
+ Indeed, suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is a nonzero element in 
+\begin_inset Formula $\mathcal{F}(\Gamma,K)$
+\end_inset
+
+.
+ Write 
+\begin_inset Formula $\mathrm{supp}\,f=\{r_{0},r_{1},$
+\end_inset
+
+ Let 
+\begin_inset Formula $r_{0}=\min\mathrm{supp}\,f$
+\end_inset
+
+ and 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We first construct a valuation domain with value group 
+\begin_inset Formula $\mathbb{Z}\oplus\mathbb{R}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be any field and define 
+\begin_inset Formula $K[\mathbb{R}\oplus\mathbb{Z}]$
+\end_inset
+
+ to be the set of elements of the form
+\begin_inset Formula 
+\begin{equation}
+\sum_{\substack{\beta\in\mathbb{R}_{\geq\alpha}\\
+n\in\mathbb{Z}_{\geq m}
+}
+}a_{\beta,n}X^{\beta}Y^{n}\label{eq:polynomialsrealz}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha\in\mathbb{R}$
+\end_inset
+
+, 
+\begin_inset Formula $m\in\mathbb{Z}$
+\end_inset
+
+, and 
+\begin_inset Formula $a_{\beta,n}\in K$
+\end_inset
+
+.
+ To simplify our notation, we usually omit the subscripts in the sum 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:polynomialsrealz})
+\end_layout
+
+\end_inset
+
+ and simply write 
+\begin_inset Formula $\sum a_{\beta,n}X^{\beta}Y^{n}$
+\end_inset
+
+ with the understanding that 
+\begin_inset Formula $a_{\beta,n}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+ sufficiently small.
+ Note the sum in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:polynomialsrealz})
+\end_layout
+
+\end_inset
+
+ possibly consists of uncountably many terms 
+\begin_inset Formula $a_{\beta,n}X^{\beta}Y^{n}$
+\end_inset
+
+, so one should not interpret 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:polynomialsrealz})
+\end_layout
+
+\end_inset
+
+ as a finite sum of things (or even a countable sum of things).
+ Instead, one should interpret 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:polynomialsrealz})
+\end_layout
+
+\end_inset
+
+ as a set 
+\begin_inset Formula $\{a_{\beta,n}\}$
+\end_inset
+
+ of elements in 
+\begin_inset Formula $K$
+\end_inset
+
+ which is indexed over the totally ordered group 
+\begin_inset Formula $\mathbb{Z}\oplus\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $a_{\beta,n}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+ sufficiently small.
+ With that said, the reason we use the polynomial notation and note 
+\begin_inset Formula $\{a_{\beta,n}\}$
+\end_inset
+
+ is because addition and multiplication in 
+\begin_inset Formula $K[\mathbb{R}\oplus\mathbb{Z}]$
+\end_inset
+
+ is reminiscant to addition and multiplication of polynomials.
+ In particular, addition in 
+\begin_inset Formula $K[\mathbb{R}\oplus\mathbb{Z}]$
+\end_inset
+
+ is defined pointwise
+\begin_inset Formula 
+\[
+\sum a_{\beta,n}X^{\beta}Y^{n}+\sum b_{\beta,n}X^{\beta}Y^{n}=\sum(a_{\beta,n}+b_{\beta,n})X^{\beta}Y^{n},
+\]
+
+\end_inset
+
+and multiplication in 
+\begin_inset Formula $K[\mathbb{R}\oplus\mathbb{Z}]$
+\end_inset
+
+ is defined by
+\begin_inset Formula 
+\begin{equation}
+\left(\sum a_{\beta,n}X^{\beta}Y^{n}\right)\left(\sum b_{\beta,n}X^{\beta}Y^{n}\right)=\sum_{\beta,n}\left(\sum_{\substack{\beta'+\beta''=\beta\\
+n'+n''=n
+}
+}a_{\beta',n'}b_{\beta'',n''}\right)X^{\beta}Y^{n}.\label{eq:multsimplnot}
+\end{equation}
+
+\end_inset
+
+We simplify our notation again by omitting the subscpricts in the coefficient
+ on the right hand side of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:multsimplnot})
+\end_layout
+
+\end_inset
+
+ and simply write 
+\begin_inset Formula $\sum a_{\beta',n'}b_{\beta'',n''}=0$
+\end_inset
+
+ with the understanding that the sum is over all 
+\begin_inset Formula $\beta'+\beta''=\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $n'+n''=n$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\sum a_{\beta',n'}b_{\beta'',n''}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+ sufficiently small, thus multiplication really does land in 
+\begin_inset Formula $K[\mathbb{R}\oplus\mathbb{Z}]$
+\end_inset
+
+.
+ It is straightforward to check that addition and multiplication defined
+ in this way give 
+\begin_inset Formula $K[\mathbb{R}\oplus\mathbb{Z}]$
+\end_inset
+
+ the structure of a ring.
+ The proof is nearly identical the case of polynomials.
+ For instance, we have left distributivity of addition with respect to multiplic
+ation:
+\begin_inset Formula 
+\begin{align*}
+\left(\sum a_{\beta,n}X^{\beta}Y^{n}\right)\left(\sum b_{\beta,n}X^{\beta}Y^{n}+\sum c_{\beta,n}X^{\beta}Y^{n}\right) & =\left(\sum a_{\beta,n}X^{\beta}Y^{n}\right)\left(\sum(b_{\beta,n}+c_{\beta,n})X^{\beta}Y^{n}\right)\\
+ & =\sum_{\beta,n}\left(\sum a_{\beta',n'}(b_{\beta'',n''}+c_{\beta'',n''})\right)X^{\beta}Y^{n}\\
+ & =\sum_{\beta,n}\left(\sum(a_{\beta',n'}b_{\beta'',n''}+a_{\beta',n'}c_{\beta'',n''})\right)X^{\beta}Y^{n}\\
+ & =\sum_{\beta,n}\left(\sum(a_{\beta',n'}b_{\beta'',n''}+a_{\beta',n'}c_{\beta'',n''})\right)X^{\beta}Y^{n}\\
+ & =\sum_{\beta,n}\left(\sum a_{\beta',n'}b_{\beta'',n''}+\sum a_{\beta',n'}c_{\beta'',n''}\right)X^{\beta}Y^{n}\\
+ & =\sum_{\beta,n}\left(\sum a_{\beta',n'}b_{\beta'',n''}\right)X^{\beta}Y^{n}+\sum_{\beta,n}\left(\sum a_{\beta',n'}c_{\beta'',n''}\right)X^{\beta}Y^{n}\\
+ & =\left(\sum a_{\beta,n}X^{\beta}Y^{n}\right)\left(\sum b_{\beta,n}X^{\beta}Y^{n}\right)+\left(\sum a_{\beta,n}X^{\beta}Y^{n}\right)\left(\sum c_{\beta,n}X^{\beta}Y^{n}\right).
+\end{align*}
+
+\end_inset
+
+That 
+\begin_inset Formula $K[\mathbb{R}\oplus\mathbb{Z}]$
+\end_inset
+
+ is in fact a domain is a little more subtle and hence needs to be shown.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In order to do this, we first translate the lexicographical ordering on
+ 
+\begin_inset Formula $\mathbb{R}\oplus\mathbb{Z}$
+\end_inset
+
+ to a lexicographical ordering on the set of monomials 
+\begin_inset Formula $\{X^{\beta}Y^{n}\}$
+\end_inset
+
+ as follows: given monomials 
+\begin_inset Formula $X^{\beta}Y^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $X^{\beta'}Y^{n'}$
+\end_inset
+
+, we say 
+\begin_inset Formula $X^{\beta}Y^{n}\leq X^{\beta'}Y^{n'}$
+\end_inset
+
+ if
+\end_layout
+
+\begin_layout Enumerate
+either 
+\begin_inset Formula $\beta<\beta'$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+or 
+\begin_inset Formula $\beta=\beta'$
+\end_inset
+
+ and 
+\begin_inset Formula $n\leq n'$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Now let 
+\begin_inset Formula $f=\sum a_{\beta,n}X^{\beta}Y^{n}$
+\end_inset
+
+ be a nonzero element in 
+\begin_inset Formula $K[\mathbb{R}\oplus\mathbb{Z}]$
+\end_inset
+
+.
+ Set 
+\begin_inset Formula $\alpha_{0}=\inf\{\beta\mid a_{\beta,n}\neq0\text{ for all }n\in\mathbb{Z}\}$
+\end_inset
+
+ and set 
+\begin_inset Formula $m_{0}=\inf\{n\mid a_{\alpha_{0},n}\neq0\}$
+\end_inset
+
+.
+ We define the 
+\series bold
+multidegree 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\mathrm{mdeg}\,f$
+\end_inset
+
+, to be 
+\begin_inset Formula 
+\[
+\mathrm{mdeg}\,f=(\alpha_{0},m_{0})\in\mathbb{R}\oplus\mathbb{Z}.
+\]
+
+\end_inset
+
+We will see in a moment that 
+\begin_inset Formula $\mathrm{mdeg}$
+\end_inset
+
+ will serve as a valuation for us, but first we need to use 
+\begin_inset Formula $\mathrm{mdeg}$
+\end_inset
+
+ to show that 
+\begin_inset Formula $K[\mathbb{R}\oplus\mathbb{Z}]$
+\end_inset
+
+ is a domain! We also define the 
+\series bold
+lead coefficient 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\mathrm{LC}\,f$
+\end_inset
+
+, to be
+\begin_inset Formula 
+\[
+\mathrm{LC}\,f=a_{\mathrm{mdeg}\,f}.
+\]
+
+\end_inset
+
+Suppose 
+\begin_inset Formula $g=\sum b_{\beta,n}X^{\beta}Y^{n}$
+\end_inset
+
+ is another nonzero element 
+\begin_inset Formula $K[\mathbb{R}\oplus\mathbb{Z}]$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathrm{mdeg}\,g=(\alpha_{0}',m_{0}')$
+\end_inset
+
+.
+ Then clearly 
+\begin_inset Formula $a_{\alpha_{0},m_{0}}b_{\alpha_{0}',m_{0}'}\neq0$
+\end_inset
+
+.
+ Furthermore, observe that if 
+\begin_inset Formula $(\beta'+\beta'',n'+n'')\leq(\alpha_{0}+\alpha_{0}',m_{0}+m_{0}')$
+\end_inset
+
+, then 
+\begin_inset Formula $a_{\beta',n'}b_{\beta'',n''}=0$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $\beta'+\beta''<\alpha_{0}+\alpha_{0}'$
+\end_inset
+
+, then either 
+\begin_inset Formula $\beta'<\alpha_{0}$
+\end_inset
+
+ or 
+\begin_inset Formula $\beta''<\alpha_{0}'$
+\end_inset
+
+.
+ Without loss of generality, say 
+\begin_inset Formula $\beta'<\alpha_{0}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $a_{\beta',n'}=0$
+\end_inset
+
+ and hence 
+\begin_inset Formula $a_{\beta',n'}b_{\beta'',n''}=0$
+\end_inset
+
+.
+ Similarly, if If 
+\begin_inset Formula $n'+n''<m_{0}+m_{0}'$
+\end_inset
+
+, then either 
+\begin_inset Formula $n'<m_{0}$
+\end_inset
+
+ or 
+\begin_inset Formula $n''<m_{0}'$
+\end_inset
+
+.
+ Without loss of generality, say 
+\begin_inset Formula $n'<m_{0}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $a_{\alpha_{0},n'}b_{\alpha_{0}',n''}=0$
+\end_inset
+
+.
+ In either case, we see that 
+\begin_inset Formula $a_{\beta',n'}b_{\beta'',n''}=0$
+\end_inset
+
+.
+ Thus we see that the multidegree and lead coefficient satisfy
+\begin_inset Formula 
+\[
+\mathrm{mdeg}(fg)=\mathrm{mdeg}\,f+\mathrm{mdeg}\,g\qquad\text{and}\qquad\mathrm{LC}(fg)=(\mathrm{LC}\,f)(\mathrm{LC}\,g)
+\]
+
+\end_inset
+
+In particular, we see that 
+\begin_inset Formula $fg\neq0$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $K[\mathbb{R}\oplus\mathbb{Z}]$
+\end_inset
+
+ is a domain! 
+\end_layout
+
+\begin_layout Standard
+ordering on 
+\begin_inset Formula $\{$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we define 
+\begin_inset Formula $v\colon K[\mathbb{R}\oplus\mathbb{Z}]^{\times}\to\mathbb{R}\oplus\mathbb{Z}$
+\end_inset
+
+ as follows: suppose 
+\begin_inset Formula $f(X,Y)\in K[\mathbb{R}\oplus\mathbb{Z}]^{\times}$
+\end_inset
+
+ and express it as
+\begin_inset Formula 
+\[
+f(X,Y)=\sum_{\substack{\alpha\in\mathbb{R}_{\geq\alpha_{0}}\\
+n\in\mathbb{Z}_{\geq n_{0}}
+}
+}a_{\alpha,n}X^{\alpha}Y^{n}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $a_{\alpha_{0},n}\neq0$
+\end_inset
+
+ for some 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ Set 
+\begin_inset Formula $n'=\inf\{n\in\mathbb{Z}\mid a_{\alpha_{0},n}\neq0\}$
+\end_inset
+
+ and set 
+\begin_inset Formula $v(f)=(\alpha_{0},n')$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $v$
+\end_inset
+
+ is a valuation.
+ Indeed, suppose 
+\begin_inset Formula $f(X,Y)$
+\end_inset
+
+ and 
+\begin_inset Formula $g(X,Y)$
+\end_inset
+
+ are two polynomials and express them as
+\begin_inset Formula 
+\[
+f(X,Y)=\sum_{\substack{\alpha\in\mathbb{R}_{\geq\alpha_{0}}\\
+k\in\mathbb{Z}_{\geq k_{0}}
+}
+}a_{\alpha,k}X^{\alpha}Y^{k}\qquad\text{and}\qquad g(X,Y)\sum_{\substack{\beta\in\mathbb{R}_{\geq\alpha_{0}}\\
+m\in\mathbb{Z}_{\geq m_{0}}
+}
+}b_{\beta,m}X^{\beta}Y^{m}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $a_{\alpha_{0},k}\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{\beta_{0},m}\neq0$
+\end_inset
+
+ for some 
+\begin_inset Formula $k,m\in\mathbb{N}$
+\end_inset
+
+.
+ Set 
+\begin_inset Formula $k'=\inf\{k\in\mathbb{Z}\mid a_{\alpha_{0},k}\neq0\}$
+\end_inset
+
+ and set 
+\begin_inset Formula $m'=\inf\{m\in\mathbb{Z}\mid b_{\beta_{0},m}\neq0\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so that 
+\begin_inset Formula $v(f)=(\alpha_{0},k')$
+\end_inset
+
+ and 
+\begin_inset Formula $v(g)=(\beta_{0},m')$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Subsubsection*
+Equivalent Criteria for an 
+\begin_inset Formula $R$
+\end_inset
+
+-module to be Injective
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $E$
+\end_inset
+
+ an 
+\begin_inset Formula $R$
+\end_inset
+
+-module.
+ The following statements are equivalent; 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E$
+\end_inset
+
+ is an injective 
+\begin_inset Formula $R$
+\end_inset
+
+-module;
+\end_layout
+
+\begin_layout Enumerate
+Every short exact sequence of the form
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{injectivesplits}
+\backslash
+begin{tikzcd} 0  
+\backslash
+arrow[r] & E   
+\backslash
+arrow[r] & M 
+\backslash
+arrow[r] & N 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+splits.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $E$
+\end_inset
+
+ is a submodule of an 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $M$
+\end_inset
+
+, then 
+\begin_inset Formula $E$
+\end_inset
+
+ is a direct summand of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ (2 
+\begin_inset Formula $\implies$
+\end_inset
+
+ 1) Assume that any short exact sequence of the form 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{injectivesplits})
+\end_layout
+
+\end_inset
+
+ splits.
+ This means, equivalently, that any injective 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map out of 
+\begin_inset Formula $E$
+\end_inset
+
+ splits.
+ Let 
+\begin_inset Formula $\varphi\colon M\to N$
+\end_inset
+
+ be an injective 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map and let 
+\begin_inset Formula $\psi\colon M\to E$
+\end_inset
+
+ be any 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map.
+ We need to construct a map 
+\begin_inset Formula $\widetilde{\psi}\colon N\to E$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widetilde{\psi}\varphi=\psi$
+\end_inset
+
+.
+ To do this, consider the pushout module
+\begin_inset Formula 
+\[
+E+_{M}N=(E\times N)\slash\{(\psi(u),-\varphi(u))\mid u\in M\}
+\]
+
+\end_inset
+
+together its natural maps 
+\begin_inset Formula $\iota_{1}\colon E\to E+_{M}N$
+\end_inset
+
+ and 
+\begin_inset Formula $\iota_{2}\colon N\to E+_{M}N$
+\end_inset
+
+, given by
+\begin_inset Formula 
+\[
+\iota_{1}(v)=[v,0]\qquad\text{and}\qquad\iota_{2}(w)=[0,w]
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $v\in E$
+\end_inset
+
+ and 
+\begin_inset Formula $w\in N$
+\end_inset
+
+ where 
+\begin_inset Formula $[v,w]$
+\end_inset
+
+ denotes the equivalence class in 
+\begin_inset Formula $E+_{M}N$
+\end_inset
+
+ with 
+\begin_inset Formula $(v,w)$
+\end_inset
+
+ as one of its representatives.
+ Observe that
+\begin_inset Formula 
+\begin{align*}
+\iota_{1}(\psi(u)) & =[\psi(u),0]\\
+ & =[0,\varphi(u)]\\
+ & =\iota_{2}(\varphi(u))
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $u\in M$
+\end_inset
+
+.
+ Therefore, we have a commutative diagram
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}  M 
+\backslash
+arrow[r, "
+\backslash
+varphi "] 
+\backslash
+arrow[d, "
+\backslash
+psi ", swap] & N 
+\backslash
+arrow[d, "
+\backslash
+iota _2 "]  
+\backslash
+
+\backslash
+ E 
+\backslash
+arrow[r, "
+\backslash
+iota _1 ", swap] & E + _M N 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+ We claim that 
+\begin_inset Formula $\iota_{1}$
+\end_inset
+
+ is injective.
+ Indeed, suppose 
+\begin_inset Formula $v\in\ker\iota_{1}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $[v,0]=[0,0]$
+\end_inset
+
+ implies if 
+\begin_inset Formula $(v,0)=(\psi(u),-\varphi(u))$
+\end_inset
+
+ for some 
+\begin_inset Formula $u\in M$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi(u)=0$
+\end_inset
+
+ implies 
+\begin_inset Formula $u=0$
+\end_inset
+
+ since 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is injective, and therefore
+\begin_inset Formula 
+\begin{align*}
+v & =\psi(u)\\
+ & =\psi(0)\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\iota_{1}$
+\end_inset
+
+ is injective.
+ Therefore by hypothesis the map 
+\begin_inset Formula $\iota_{1}\colon E\to E+_{M}N$
+\end_inset
+
+ splits, say by 
+\begin_inset Formula $\lambda\colon E+_{M}N\to E$
+\end_inset
+
+, where 
+\begin_inset Formula $\lambda\iota_{1}=1_{E}$
+\end_inset
+
+.
+ Finally, we obtain a map 
+\begin_inset Formula $\widetilde{\psi}\colon N\to E$
+\end_inset
+
+ by setting 
+\begin_inset Formula $\widetilde{\psi}:=\lambda\iota_{2}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\widetilde{\psi}\varphi & =\lambda\iota_{2}\varphi\\
+ & =\lambda\iota_{1}\psi\\
+ & =\psi,
+\end{align*}
+
+\end_inset
+
+shows that 
+\begin_inset Formula $\widetilde{\psi}$
+\end_inset
+
+ has the desired property.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(1 
+\begin_inset Formula $\implies$
+\end_inset
+
+ 2) Assume that 
+\begin_inset Formula $E$
+\end_inset
+
+ is an injective 
+\begin_inset Formula $R$
+\end_inset
+
+-module.
+ Let 
+\begin_inset Formula $\varphi\colon E\to M$
+\end_inset
+
+ be an injective homomorphism.
+ Since 
+\begin_inset Formula $E$
+\end_inset
+
+ is an injective 
+\begin_inset Formula $R$
+\end_inset
+
+-module and since 
+\begin_inset Formula $1_{E}\colon E\to E$
+\end_inset
+
+ is an injective 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism, there exists an 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map 
+\begin_inset Formula $\widetilde{\varphi}\colon M\to E$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widetilde{\varphi}\circ\varphi=1_{E}$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $\widetilde{\varphi}$
+\end_inset
+
+ splits 
+\begin_inset Formula $\varphi\colon E\to M$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(2 
+\begin_inset Formula $\implies$
+\end_inset
+
+ 3) Assume that any short exact sequence of the form 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{injectivesplits})
+\end_layout
+
+\end_inset
+
+ splits.
+ Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-module such that 
+\begin_inset Formula $E\subseteq M$
+\end_inset
+
+.
+ Then the short exact sequence
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  E 
+\backslash
+arrow[r, 
+\begin_inset Quotes eld
+\end_inset
+
+
+\backslash
+iota 
+\begin_inset Quotes eld
+\end_inset
+
+]   & M   
+\backslash
+arrow[r, 
+\begin_inset Quotes eld
+\end_inset
+
+
+\backslash
+pi 
+\begin_inset Quotes eld
+\end_inset
+
+] & M
+\backslash
+slash E 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+splits, where 
+\begin_inset Formula $\iota\colon E\to M$
+\end_inset
+
+ denotes the inclusion map and 
+\begin_inset Formula $\pi\colon M\to M\slash E$
+\end_inset
+
+ denotes the quotient map.
+ Therefore we may choose a 
+\begin_inset Formula $\widetilde{\pi}\colon M\slash E\to M$
+\end_inset
+
+ such that 
+\begin_inset Formula $\pi\widetilde{\pi}=1_{M\slash E}$
+\end_inset
+
+.
+ We claim that
+\begin_inset Formula 
+\[
+M=E\oplus\widetilde{\pi}(M\slash E).
+\]
+
+\end_inset
+
+Indeed, they are both submodules of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Furthermore, observe that we have 
+\begin_inset Formula $E\cap\widetilde{\pi}(M\slash E)=\{0\}$
+\end_inset
+
+.
+ Indeed, suppose 
+\begin_inset Formula $u\in E\cap\widetilde{\pi}(M\slash E)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $u\in E$
+\end_inset
+
+ implies 
+\begin_inset Formula $\pi(u)=0$
+\end_inset
+
+.
+ Also 
+\begin_inset Formula $u\in\widetilde{\pi}(M\slash E)$
+\end_inset
+
+ implies 
+\begin_inset Formula $u=\widetilde{\pi}(\overline{v})$
+\end_inset
+
+ for some 
+\begin_inset Formula $\overline{v}\in M\slash E$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\begin{align*}
+0 & =\widetilde{\pi}(0)\\
+ & =\widetilde{\pi}\pi(u)\\
+ & =\widetilde{\pi}\pi\widetilde{\pi}(\overline{v})\\
+ & =\widetilde{\pi}(\overline{v})\\
+ & =u.
+\end{align*}
+
+\end_inset
+
+Finally, note that if 
+\begin_inset Formula $u\in M$
+\end_inset
+
+, then we can write
+\begin_inset Formula 
+\[
+u=u-\widetilde{\pi}\pi(u)+\widetilde{\pi}\pi(u),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\widetilde{\pi}\pi(u)\in\widetilde{\pi}(M\slash E)$
+\end_inset
+
+ and where 
+\begin_inset Formula $u-\widetilde{\pi}\pi(u)\in E$
+\end_inset
+
+ since
+\begin_inset Formula 
+\begin{align*}
+\pi(u-\widetilde{\pi}\pi(u)) & =\pi(u)-\pi\widetilde{\pi}\pi(u)\\
+ & =\pi(u)-\pi(u)\\
+ & =0
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $u-\widetilde{\pi}\pi(u)\in\ker\pi=E$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $M=E+\widetilde{\pi}(M\slash E)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(3 
+\begin_inset Formula $\implies$
+\end_inset
+
+ 2) Assume that 
+\begin_inset Formula $E$
+\end_inset
+
+ satisfies the property that if 
+\begin_inset Formula $E$
+\end_inset
+
+ is a submodule of an 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $M$
+\end_inset
+
+, then it must be a direct summand of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ We show that any short exact sequence of the form 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{injectivesplits})
+\end_layout
+
+\end_inset
+
+ splits by showing that any injective 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map out of 
+\begin_inset Formula $E$
+\end_inset
+
+ splits.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 1: 
+\series default
+Before we show that any injective 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map out of 
+\begin_inset Formula $E$
+\end_inset
+
+ splits, we need to show that if 
+\begin_inset Formula $\varphi\colon E\to F$
+\end_inset
+
+ is an isomorphism of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules, then 
+\begin_inset Formula $F$
+\end_inset
+
+ satisfies the same property as 
+\begin_inset Formula $E$
+\end_inset
+
+; namely if 
+\begin_inset Formula $N$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-module such that 
+\begin_inset Formula $F\subseteq N$
+\end_inset
+
+, then 
+\begin_inset Formula $F$
+\end_inset
+
+ is a direct summand of 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\varphi\colon E\to F$
+\end_inset
+
+ be an isomorphism, let 
+\begin_inset Formula $\psi\colon F\to E$
+\end_inset
+
+ denote its inverse, and let 
+\begin_inset Formula $N$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-module such that 
+\begin_inset Formula $F\subseteq N$
+\end_inset
+
+.
+ We define an 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $\psi(N)$
+\end_inset
+
+, where as a set we have
+\begin_inset Formula 
+\[
+\psi(N)=E\cup\{\psi(v)\mid v\in N\backslash F\},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\psi(v)$
+\end_inset
+
+ is understood to be a formal symbol if 
+\begin_inset Formula $v\in N\backslash F$
+\end_inset
+
+ and is understood to be an element in 
+\begin_inset Formula $E$
+\end_inset
+
+ if 
+\begin_inset Formula $v\in F$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $E$
+\end_inset
+
+ is 
+\emph on
+literally 
+\emph default
+a subset of 
+\begin_inset Formula $\psi(N)$
+\end_inset
+
+.
+ We extend the 
+\begin_inset Formula $R$
+\end_inset
+
+-linear structure on 
+\begin_inset Formula $E$
+\end_inset
+
+ to an 
+\begin_inset Formula $R$
+\end_inset
+
+-linear structure on 
+\begin_inset Formula $\psi(N)$
+\end_inset
+
+ by defining addition and scalar multiplication by
+\begin_inset Formula 
+\[
+\psi(v_{1})+\psi(v_{2})=\psi(v_{1}+v_{2})\quad\text{and}\quad a\psi(v)=\psi(av).
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $v,v_{1},v_{2}\in N\backslash F$
+\end_inset
+
+ and 
+\begin_inset Formula $a\in R$
+\end_inset
+
+.
+ Defining the 
+\begin_inset Formula $R$
+\end_inset
+
+-linear structure on 
+\begin_inset Formula $\psi(N)$
+\end_inset
+
+ in this way makes it so that 
+\begin_inset Formula $\psi\colon F\to E$
+\end_inset
+
+ and 
+\begin_inset Formula $\varphi\colon E\to F$
+\end_inset
+
+ extends to an isomorphism 
+\begin_inset Formula $\psi\colon N\to\psi(N)$
+\end_inset
+
+ with corresponding inverse 
+\begin_inset Formula $\varphi\colon\psi(N)\to N$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+With this construction in place, we see that 
+\begin_inset Formula $E$
+\end_inset
+
+ is 
+\emph on
+literally 
+\emph default
+a
+\emph on
+ 
+\emph default
+submodule of 
+\begin_inset Formula $\psi(N)$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\psi(N)$
+\end_inset
+
+ is an internal direct sum, say
+\begin_inset Formula 
+\[
+\psi(N)=E\oplus K,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $K$
+\end_inset
+
+ is another submodule of 
+\begin_inset Formula $\psi(N)$
+\end_inset
+
+ such that 
+\begin_inset Formula $E\cap K=\{0\}$
+\end_inset
+
+ and 
+\begin_inset Formula $E+K=\psi(N)$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $\varphi\colon\psi(N)\to N$
+\end_inset
+
+ is an isomorphism, we see that
+\begin_inset Formula 
+\begin{align*}
+N & =\varphi(E)\oplus\varphi(K)\\
+ & =F\oplus\varphi(K).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 2: 
+\series default
+Now we will show that any injective 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map out of 
+\begin_inset Formula $E$
+\end_inset
+
+ splits.
+ Let 
+\begin_inset Formula $\varphi\colon E\to M$
+\end_inset
+
+ be any injective 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map.
+ We claim that 
+\begin_inset Formula $\varphi\colon E\to M$
+\end_inset
+
+ splits if and only if 
+\begin_inset Formula $\iota\colon\varphi(E)\to M$
+\end_inset
+
+ splits, where 
+\begin_inset Formula $\iota$
+\end_inset
+
+ denotes the inclusion map.
+ Indeed, denote 
+\begin_inset Formula $\varphi^{-1}\colon E\to\varphi(E)$
+\end_inset
+
+ to be the inverse of 
+\begin_inset Formula $\varphi\colon E\to\varphi(E)$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\varphi\colon E\to M$
+\end_inset
+
+ splits, then there exists an 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map 
+\begin_inset Formula $\widetilde{\varphi}\colon M\to E$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widetilde{\varphi}\varphi=1_{E}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi\widetilde{\varphi}\colon M\to\varphi(E)$
+\end_inset
+
+ splits 
+\begin_inset Formula $\iota\colon\varphi(E)\to M$
+\end_inset
+
+ since 
+\begin_inset Formula 
+\begin{align*}
+(\varphi\widetilde{\varphi}\iota)(\varphi(u)) & =\varphi\widetilde{\varphi}(\varphi(u))\\
+ & =\varphi(\widetilde{\varphi}\varphi(u))\\
+ & =\varphi(u)
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $\varphi(u)\in\varphi(E)$
+\end_inset
+
+.
+ Similarly, if 
+\begin_inset Formula $\iota\colon\varphi(E)\to M$
+\end_inset
+
+ splits, then there exists an 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map 
+\begin_inset Formula $\widetilde{\iota}\colon M\to\varphi(E)$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widetilde{\iota}\iota=1_{\varphi(E)}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi^{-1}\widetilde{\iota}\colon M\to E$
+\end_inset
+
+ splits 
+\begin_inset Formula $\varphi\colon E\to M$
+\end_inset
+
+ since 
+\begin_inset Formula 
+\begin{align*}
+(\varphi^{-1}\widetilde{\iota}\varphi)(u) & =(\varphi^{-1}\widetilde{\iota})(\varphi(u))\\
+ & =(\varphi^{-1}\widetilde{\iota})(\iota\varphi(u))\\
+ & =(\varphi^{-1}\widetilde{\iota}\iota)(\varphi(u))\\
+ & =(\varphi^{-1})(\varphi(u))\\
+ & =u
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $u\in E$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Thus, to show that 
+\begin_inset Formula $\varphi\colon E\to M$
+\end_inset
+
+ splits, it suffices to show that 
+\begin_inset Formula $\iota\colon\varphi(E)\to M$
+\end_inset
+
+ splits.
+ In this case, 
+\begin_inset Formula $\varphi(E)$
+\end_inset
+
+ is a submodule of 
+\begin_inset Formula $M$
+\end_inset
+
+, and by step 1, we see that 
+\begin_inset Formula $M$
+\end_inset
+
+ is an internal direct sum, say
+\begin_inset Formula 
+\[
+M=\varphi(E)\oplus K
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $K\subseteq M$
+\end_inset
+
+.
+ The projection map 
+\begin_inset Formula $\pi_{1}\colon M\to\varphi(E)$
+\end_inset
+
+ is easily seen to split the inclusion map 
+\begin_inset Formula $\iota\colon\varphi(E)\to M$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Every Vector Space has a Basis
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Every vector space has a basis.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field and let 
+\begin_inset Formula $V$
+\end_inset
+
+ be a 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space.
+ We will show 
+\begin_inset Formula $V$
+\end_inset
+
+ has a basis over 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be the set of all linearly independent sets in 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Note that for any nonzero 
+\begin_inset Formula $v\in V$
+\end_inset
+
+, the singleton 
+\begin_inset Formula $\{v\}$
+\end_inset
+
+ is a linearly independent set.
+ Thus 
+\begin_inset Formula $S\neq\emptyset$
+\end_inset
+
+.
+ For two linearly independent sets 
+\begin_inset Formula $L$
+\end_inset
+
+ and 
+\begin_inset Formula $L'$
+\end_inset
+
+ in 
+\begin_inset Formula $V$
+\end_inset
+
+, we say 
+\begin_inset Formula $L\leq L'$
+\end_inset
+
+ if 
+\begin_inset Formula $L\subseteq L'$
+\end_inset
+
+.
+ This is the partial ordering on 
+\begin_inset Formula $S$
+\end_inset
+
+ by inclusion.
+ Let us show that every totally ordered subset of 
+\begin_inset Formula $S$
+\end_inset
+
+ is bounded.
+ Let 
+\begin_inset Formula $(L_{\alpha})_{\alpha\in A}$
+\end_inset
+
+ be a totally ordered subset of 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $L=\bigcup_{\alpha\in A}L_{\alpha}$
+\end_inset
+
+ is an upper bound of 
+\begin_inset Formula $(L_{\alpha})$
+\end_inset
+
+.
+ Indeed, clearly we have 
+\begin_inset Formula $L_{\alpha}\subseteq L$
+\end_inset
+
+ for all 
+\begin_inset Formula $\alpha\in A$
+\end_inset
+
+.
+ It remains to check that 
+\begin_inset Formula $L$
+\end_inset
+
+ is a linearly independent set.
+ Let 
+\begin_inset Formula $v_{1},\dots,v_{n}\in L$
+\end_inset
+
+.
+ Then for each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+ there exists 
+\begin_inset Formula $\alpha_{i}\in A$
+\end_inset
+
+ such that 
+\begin_inset Formula $v_{i}\in L_{\alpha_{i}}$
+\end_inset
+
+.
+ Since the 
+\begin_inset Formula $L_{\alpha}$
+\end_inset
+
+'s are totally ordered, one of the sets 
+\begin_inset Formula $L_{\alpha_{1}},\dots,L_{\alpha_{n}}$
+\end_inset
+
+ contains the others.
+ Thus 
+\begin_inset Formula $v_{1},\dots,v_{n}$
+\end_inset
+
+ all belong to a common 
+\begin_inset Formula $L_{\alpha}$
+\end_inset
+
+.
+ In particular, they are linearly independent.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Thus by Zorn's Lemma, 
+\begin_inset Formula $S$
+\end_inset
+
+ contains a maximal element, say 
+\begin_inset Formula $\mathcal{B}\in S$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Indeed, since 
+\begin_inset Formula $\mathcal{B}\in S$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is linearly independent.
+ Thus it suffices to show that 
+\begin_inset Formula $\mathrm{span}\,\mathcal{B}=V$
+\end_inset
+
+.
+ To see this, assume for a contradiction that 
+\begin_inset Formula $\mathrm{span}\,\mathcal{B}\neq V$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $v\in V\backslash\mathrm{span}\,\mathcal{B}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathcal{B}\cup\{v\}$
+\end_inset
+
+ is a linearly independent set.
+ By maximality of 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+, we must have 
+\begin_inset Formula $\mathcal{B}=\mathcal{B}\cup\{v\}$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $v\in\mathcal{B}$
+\end_inset
+
+, a contradiction.
+ Thus 
+\begin_inset Formula $\mathrm{span}\,\mathcal{B}=V$
+\end_inset
+
+, and hence 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 4
+\end_layout
+
+\begin_layout Subsubsection*
+Localization of Valuation Domain is a Valuation Domain
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a valuation domain and let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a multiplicatively closed subset of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ is a valuation domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $a/s$
+\end_inset
+
+ and 
+\begin_inset Formula $b/t$
+\end_inset
+
+ be two nonzero elements in 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+, so 
+\begin_inset Formula $a,b\in R\backslash\{0\}$
+\end_inset
+
+ and 
+\begin_inset Formula $s,t\in S$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R$
+\end_inset
+
+ is a valuation domain, either 
+\begin_inset Formula $a\mid b$
+\end_inset
+
+ or 
+\begin_inset Formula $b\mid a$
+\end_inset
+
+.
+ Without loss of generality, say 
+\begin_inset Formula $a\mid b$
+\end_inset
+
+, so 
+\begin_inset Formula $b=ax$
+\end_inset
+
+ for some 
+\begin_inset Formula $x\in R$
+\end_inset
+
+.
+ Then observe that
+\begin_inset Formula 
+\[
+\frac{b}{t}=\frac{ax}{t}=\frac{a}{s}\frac{sx}{t}
+\]
+
+\end_inset
+
+implies 
+\begin_inset Formula $a/s\mid b/t$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $R_{S}$
+\end_inset
+
+ is a valuation domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

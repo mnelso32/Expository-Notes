@@ -1,0 +1,4184 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Linear Analysis Homework 10
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\|\cdot\|_{\infty}\colon C[a,b]\times C[a,b]\to\mathbb{R}$
+\end_inset
+
+ be given by
+\begin_inset Formula 
+\begin{equation}
+\|f\|_{\infty}=\sup\{|f(x)|\mid x\in[a,b]\}\label{eq:supnorm}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C[a,b]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\|\cdot\|_{\infty}$
+\end_inset
+
+ is a norm.
+ Moreover, the pair 
+\begin_inset Formula $(C[a,b],\|\cdot\|_{\infty})$
+\end_inset
+
+ forms a Banach space.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let us first show 
+\begin_inset Formula $\|\cdot\|_{\infty}$
+\end_inset
+
+ is a norm.
+ First note that the set 
+\begin_inset Formula $\{|f(x)|\mid x\in[a,b]\}$
+\end_inset
+
+ is non-empty and bounded above (since 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous on a compact interval and hence attains a maximum).
+ Therefore the supremum 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:supnorm})
+\end_layout
+
+\end_inset
+
+ exists.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For positive-definiteness, let 
+\begin_inset Formula $f\in C[a,b]$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\|f\|_{\infty} & =\sup\{|f(x)|\mid x\in[a,b]\}\\
+ & \geq\sup\{0\mid x\in[a,b]\}\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+We have equality if and only if 
+\begin_inset Formula $|f(x)|=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in[a,b]$
+\end_inset
+
+, and since 
+\begin_inset Formula $|\cdot|$
+\end_inset
+
+ is positive-definite, this is equivalent to 
+\begin_inset Formula $f$
+\end_inset
+
+ being the zero function.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For absolute-homogeneity, let 
+\begin_inset Formula $f\in C[a,b]$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha\in\mathbb{C}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\|\alpha f\|_{\infty} & =\sup\{|\alpha f(x)|\mid x\in[a,b]\}\\
+ & =\sup\{|\alpha||f(x)|\mid x\in[a,b]\}\\
+ & =|\alpha|\sup\{|f(x)|\mid x\in[a,b]\}\\
+ & =|\alpha|\|f\|_{\infty},
+\end{align*}
+
+\end_inset
+
+where the equality at the third line is justified by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propsuplinearpositive})
+\end_layout
+
+\end_inset
+
+ (stated and proved in the Appendix).
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For subadditivity, let 
+\begin_inset Formula $f,g\in C[a,b]$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\|f+g\|_{\infty} & =\sup\{|f(x)+g(x)|\mid x\in[a,b]\}\\
+ & \leq\sup\{|f(x)|+|g(x)|\mid x\in[a,b]\}\\
+ & =\sup\{|f(x)|\mid x\in[a,b]\}+\sup\{|g(x)|\mid x\in[a,b]\}\\
+ & =\|f\|_{\infty}+\|g\|_{\infty},
+\end{align*}
+
+\end_inset
+
+where the equality at the third line is justified by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propsuplinearpositive2})
+\end_layout
+
+\end_inset
+
+ (stated and proved in the Appendix).
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Finally, to show that 
+\begin_inset Formula $(C[a,b],\|\cdot\|_{\infty})$
+\end_inset
+
+ forms a Banach space, we need to show that every Cauchy sequence in 
+\begin_inset Formula $(C[a,b],\|\cdot\|_{\infty})$
+\end_inset
+
+ is convegent.
+ Throughout the rest of the proof, we drop the notation 
+\begin_inset Formula $(C[a,b],\|\cdot\|_{\infty})$
+\end_inset
+
+ and simply write 
+\begin_inset Formula $C[a,b]$
+\end_inset
+
+ instead.
+ Let 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ be a Cauchy sequence in 
+\begin_inset Formula $C[a,b]$
+\end_inset
+
+.
+ We first make the observation that for each 
+\begin_inset Formula $x\in[a,b]$
+\end_inset
+
+, the sequence 
+\begin_inset Formula $(f_{n}(x))$
+\end_inset
+
+ forms a Cauchy sequence of complex numbers.
+ Indeed, let 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $m,n\geq N$
+\end_inset
+
+ implies 
+\begin_inset Formula $\|f_{n}-f_{m}\|_{\infty}<\varepsilon$
+\end_inset
+
+.
+ In other words, 
+\begin_inset Formula $m,n\geq N$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\[
+\sup\{|f_{n}(x)-f_{m}(x)|\mid x\in[a,b]\}<\varepsilon.
+\]
+
+\end_inset
+
+In particular 
+\begin_inset Formula $m,n\geq N$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\begin{equation}
+|f_{n}(x)-f_{m}(x)|<\varepsilon\label{eq:mtoinf}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in[a,b]$
+\end_inset
+
+.
+ This proves our claim.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Since 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ is complete, we are justified in defining 
+\begin_inset Formula $f\colon[a,b]\to\mathbb{C}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+f(x):=\lim_{n\to\infty}f_{n}(x)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in[a,b]$
+\end_inset
+
+.
+ By taking 
+\begin_inset Formula $m\to\infty$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:mtoinf})
+\end_layout
+
+\end_inset
+
+, we see that 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ converges 
+\emph on
+uniformly 
+\emph default
+to 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ In particular, this implies 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous (by the usual 
+\begin_inset Formula $\varepsilon/3$
+\end_inset
+
+ trick).
+ Thus 
+\begin_inset Formula $f\in C[a,b]$
+\end_inset
+
+.
+ Finally, we note that convergence in 
+\begin_inset Formula $\|\cdot\|_{\infty}$
+\end_inset
+
+ is equivalent to uniform convergence.
+ Thus the Cauchy sequence 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ converges in the 
+\begin_inset Formula $\|\cdot\|_{\infty}$
+\end_inset
+
+ norm to 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(V,\|\cdot\|)$
+\end_inset
+
+ be a normed linear space over 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ which satisfies the parallelogram law.
+ Then the map 
+\begin_inset Formula $\langle\cdot,\cdot\rangle\colon V\times V\to\mathbb{C}$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\begin{equation}
+\langle x,y\rangle=\frac{1}{4}\left(\|x+y\|^{2}+i\|x+iy\|^{2}-\|x-y\|^{2}-i\|x-iy\|^{2}\right)\label{eq:innerfromnorm}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $x,y\in V$
+\end_inset
+
+ is an inner-product.
+ Moreover, the norm induced by this inner-product is precisely 
+\begin_inset Formula $\|\cdot\|$
+\end_inset
+
+.
+ In other words, we have
+\begin_inset Formula 
+\[
+\langle x,x\rangle=\|x\|^{2}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in V$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The most difficult part of this proof is showing that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ is linear in the first argument.
+ Before we do this, let us show that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ is positive-definite and conjugate-symmetric.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For positive-definiteness, let 
+\begin_inset Formula $x\in V$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\langle x,x\rangle & =\frac{1}{4}\left(\|2x\|^{2}+i\|x+ix\|^{2}-i\|x-ix\|^{2}\right)\\
+ & =\frac{1}{4}\left(\|2x\|^{2}+i((|1+i|^{2}-|1-i|^{2})\|x\|^{2})\right)\\
+ & =\|x\|^{2}\\
+ & \geq0,
+\end{align*}
+
+\end_inset
+
+with equality if and only if 
+\begin_inset Formula $x=0$
+\end_inset
+
+.
+ Note that this also gives us 
+\begin_inset Formula $\langle x,x\rangle=\|x\|^{2}$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in V$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For conjugate-symmetry, let 
+\begin_inset Formula $x,y\in V$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\overline{\langle y,x\rangle} & =\frac{1}{4}\overline{\left(\|y+x\|^{2}+i\|y+ix\|^{2}-\|y-x\|^{2}-i\|y-ix\|^{2}\right)}\\
+ & =\frac{1}{4}\left(\|y+x\|^{2}-i\|y+ix\|^{2}-\|y-x\|^{2}+i\|y-ix\|^{2}\right)\\
+ & =\frac{1}{4}\left(\|x+y\|^{2}-i\|i(x-iy)\|^{2}-\|x-y\|^{2}+i\|i(x+iy)\|^{2}\right)\\
+ & =\frac{1}{4}\left(\|x+y\|^{2}-i\|x-iy\|^{2}-\|x-y\|^{2}+i\|x+iy\|^{2}\right)\\
+ & =\frac{1}{4}\left(\|x+y\|^{2}+i\|x+iy\|^{2}-\|x-y\|^{2}-i\|x-iy\|^{2}\right)\\
+ & =\langle x,y\rangle
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we come to the difficult part, namely showing that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ is linear in the first argument.
+ We do this in several steps:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 1: 
+\series default
+We show that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ is additive in the first argument (i.e.
+ 
+\begin_inset Formula $\langle x+z,y\rangle=\langle x,y\rangle+\langle z,y\rangle$
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y,z\in V$
+\end_inset
+
+).
+ Let 
+\begin_inset Formula $x,y,z\in V$
+\end_inset
+
+.
+ First note that by the parallelogram law, we have
+\begin_inset Formula 
+\begin{align*}
+\|x+z+y\|^{2}-\|x+z-y\|^{2} & =2\|x+y\|^{2}+2\|z\|^{2}-\|x+y-z\|^{2}-2\|x-y\|^{2}-2\|z\|^{2}+\|x-y-z\|^{2}\\
+ & =2\|x+y\|^{2}-2\|x-y\|^{2}-\|z-y-x\|^{2}+\|z+y-x\|^{2}\\
+ & =2\|x+y\|^{2}-2\|x-y\|^{2}-2\|z-y\|^{2}-2\|x\|^{2}+\|z-y+x\|^{2}+2\|z+y\|^{2}+2\|x\|^{2}-\|z+y+x\|^{2}\\
+ & =2\|x+y\|^{2}-2\|x-y\|^{2}+2\|z+y\|^{2}-2\|z-y\|^{2}+\|x+z-y\|^{2}-\|x+z+y\|^{2}.
+\end{align*}
+
+\end_inset
+
+Adding 
+\begin_inset Formula $\|x+z-y\|^{2}-\|x+z+y\|^{2}$
+\end_inset
+
+ to both sides gives us
+\begin_inset Formula 
+\begin{align*}
+2(\|x+z+y\|^{2}-\|x+z-y\|^{2}) & =2(\|x+y\|^{2}-\|x-y\|^{2}+\|z+y\|^{2}-\|z-y\|^{2}),
+\end{align*}
+
+\end_inset
+
+and after cancelling 
+\begin_inset Formula $2$
+\end_inset
+
+ from both sides, we obtain
+\begin_inset Formula 
+\begin{align*}
+\|x+z+y\|^{2}-\|x+z-y\|^{2} & =\|x+y\|^{2}-\|x-y\|^{2}+\|z+y\|^{2}-\|z-y\|^{2}.
+\end{align*}
+
+\end_inset
+
+Therefore
+\begin_inset Formula 
+\begin{align*}
+\langle x+z,y\rangle & =\frac{1}{4}\left(\|x+z+y\|^{2}+i\|x+z+iy\|^{2}-\|x+z-y\|^{2}-i\|x+z-iy\|^{2}\right)\\
+ & =\frac{1}{4}\left(\|x+z+y\|^{2}-\|x+z-y\|^{2}+i(\|x+z+iy\|^{2}-\|x+z-iy\|^{2})\right)\\
+ & =\frac{1}{4}\left(\|x+y\|^{2}-\|x-y\|^{2}+\|z+y\|^{2}-\|z-y\|^{2}+i(\|x+iy\|^{2}-\|x-iy\|^{2}+\|z+iy\|^{2}-\|z-iy\|^{2})\right)\\
+ & =\frac{1}{4}\left(\|x+y\|^{2}-\|x-y\|^{2}+\|z+y\|^{2}-\|z-y\|^{2}+i(\|x+iy\|^{2}-\|x-iy\|^{2}+\|z+iy\|^{2}-\|z-iy\|^{2})\right)\\
+ & =\frac{1}{4}\left(\|x+y\|^{2}+i\|x+iy\|^{2}-\|x-y\|^{2}-i\|x-iy\|^{2}+\|z+y\|^{2}+i\|z+iy\|^{2}-\|z-y\|^{2}-i\|z-iy\|^{2}\right)\\
+ & =\langle x,y\rangle+\langle z,y\rangle.
+\end{align*}
+
+\end_inset
+
+Thus we have additivity in the first argument.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 2: 
+\series default
+We show that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ respects 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-scaling in the first argument (i.e.
+ 
+\begin_inset Formula $m\langle x,y\rangle=\langle mx,y\rangle$
+\end_inset
+
+ for all integers 
+\begin_inset Formula $m\in\mathbb{Z}$
+\end_inset
+
+ and for all 
+\begin_inset Formula $x,y\in V$
+\end_inset
+
+).
+ It suffices to show that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ respects 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+-scaling in the first argument since additivity implies 
+\begin_inset Formula 
+\begin{align*}
+0 & =\langle0,y\rangle\\
+ & =\langle x-x,y\rangle\\
+ & =\langle x,y\rangle+\langle-x,y\rangle,
+\end{align*}
+
+\end_inset
+
+which implies 
+\begin_inset Formula $\langle-x,y\rangle=-\langle x,y\rangle$
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y\in V$
+\end_inset
+
+.
+ We prove 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ respects 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+-scaling in the first argument using induction on 
+\begin_inset Formula $m\geq2$
+\end_inset
+
+.
+ The base case 
+\begin_inset Formula $m=2$
+\end_inset
+
+ follows from Step 1.
+ Now assume that for some 
+\begin_inset Formula $m\geq2$
+\end_inset
+
+ and for all 
+\begin_inset Formula $x,y\in V$
+\end_inset
+
+, we have 
+\begin_inset Formula $\langle mx,y\rangle=m\langle x,y\rangle.$
+\end_inset
+
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+\langle(m+1)x,y\rangle & =\langle mx+x,y\rangle\\
+ & =\langle mx,y\rangle+\langle x,y\rangle\\
+ & =m\langle x,y\rangle+\langle x,y\rangle\\
+ & =(m+1)\langle x,y\rangle,
+\end{align*}
+
+\end_inset
+
+where we applied the induction step at the third line.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 3: 
+\series default
+We show that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ respects 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-scaling in the first argument.
+ Let 
+\begin_inset Formula $\frac{m}{n}\in\mathbb{Q}$
+\end_inset
+
+ and let 
+\begin_inset Formula $x,y\in V$
+\end_inset
+
+.
+ Then since 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ is additive in the first argument and since 
+\begin_inset Formula $V$
+\end_inset
+
+ is a 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+-vector space, we have
+\begin_inset Formula 
+\begin{align*}
+\frac{m}{n}\langle x,y\rangle & =\frac{m}{n}\left\langle \frac{n}{n}x,y\right\rangle \\
+ & =\frac{mn}{n}\left\langle \frac{1}{n}x,y\right\rangle \\
+ & =m\left\langle \frac{1}{n}x,y\right\rangle \\
+ & =\left\langle \frac{m}{n}x,y\right\rangle .
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ respects 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-scaling in the first argument.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 4: 
+\series default
+We show that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ respects 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-scaling in the first argument.
+ First note that for each 
+\begin_inset Formula $y\in V$
+\end_inset
+
+, the map 
+\begin_inset Formula $\langle\cdot,y\rangle\colon V\to\mathbb{C}$
+\end_inset
+
+ is continuous since the norm is continuous.
+ Let 
+\begin_inset Formula $x,y\in V$
+\end_inset
+
+ and let 
+\begin_inset Formula $r\in\mathbb{R}$
+\end_inset
+
+.
+ Choose a sequence 
+\begin_inset Formula $(r_{n})$
+\end_inset
+
+ of rational numbers such that 
+\begin_inset Formula $r_{n}\to r$
+\end_inset
+
+ (we can do this since 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+ is dense in 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+).
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+\langle rx,y\rangle & =\lim_{n\to\infty}\langle r_{n}x,y\rangle\\
+ & =\lim_{n\to\infty}r_{n}\langle x,y\rangle\\
+ & =r\langle x,y\rangle.
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ respects 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-scaling in the first component.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 5: 
+\series default
+We show that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ respects 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+-scaling in the first component.
+ We first show that 
+\begin_inset Formula $\langle ix,y\rangle=i\langle x,y\rangle$
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y\in V$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $x,y\in V$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+\langle ix,y\rangle & =\frac{1}{4}\left(\|ix+y\|^{2}+i\|ix+iy\|^{2}-\|ix-y\|^{2}-i\|ix-iy\|^{2}\right)\\
+ & =\frac{1}{4}\left(\|x-iy\|^{2}+i\|x+y\|^{2}-\|x+iy\|^{2}-i\|x-y\|^{2}\right)\\
+ & =\frac{1}{4}\left(i\|x+y\|^{2}-\|x+iy\|^{2}-i\|x-y\|^{2}+\|x-iy\|^{2}\right)\\
+ & =\frac{i}{4}\left(\|x+y\|^{2}+i\|x+iy\|^{2}-\|x-y\|^{2}-i\|x-iy\|^{2}\right)\\
+ & =i\langle x,y\rangle.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now let 
+\begin_inset Formula $\lambda=r+is\in\mathbb{C}$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+\langle\lambda x,y\rangle & =\langle(r+is)x,y\rangle\\
+ & =\langle rx+isx,y\rangle\\
+ & =\langle rx,y\rangle+\langle isx,y\rangle\\
+ & =r\langle x,y\rangle+s\langle ix,y\rangle\\
+ & =r\langle x,y\rangle+is\langle x,y\rangle\\
+ & =(r+is)\langle x,y\rangle\\
+ & =\lambda\langle x,y\rangle
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $x,y\in V$
+\end_inset
+
+.
+ Therefore 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:innerfromnorm})
+\end_layout
+
+\end_inset
+
+ respects 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+-scaling in the first component.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Consider 
+\begin_inset Formula $C[0,1]$
+\end_inset
+
+ equipped with the supremum norm.
+ Let 
+\begin_inset Formula $T\colon C[0,1]\to C[0,1]$
+\end_inset
+
+ be the linear operator defined by
+\begin_inset Formula 
+\[
+(Tf)(x)=\int_{0}^{x}f(y)\mathrm{d}y
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in[0,1]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $T$
+\end_inset
+
+ is bounded with 
+\begin_inset Formula $\|T\|=1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f\in C[0,1]$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|f\|_{\infty}\leq1$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\|Tf\|_{\infty} & =\sup\{|(Tf)(x)|\mid x\in[0,1]\}\\
+ & =\sup\left\{ \left|\int_{0}^{x}f(y)\mathrm{d}y\right|\mid x\in[0,1]\right\} \\
+ & \leq\sup\left\{ \int_{0}^{x}|f(y)|\mathrm{d}y\mid x\in[0,1]\right\} \\
+ & \leq\sup\left\{ \int_{0}^{x}\mathrm{d}y\mid x\in[0,1]\right\} \\
+ & =\sup\left\{ x\mid x\in[0,1]\right\} \\
+ & =1.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\|T\|\leq1$
+\end_inset
+
+.
+ To see that 
+\begin_inset Formula $\|T\|=1$
+\end_inset
+
+, let 
+\begin_inset Formula $f\colon[0,1]\to\mathbb{C}$
+\end_inset
+
+ be the constant function 
+\begin_inset Formula $f=1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\|f\|_{\infty}=1$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{align*}
+\|Tf\|_{\infty} & =\sup\{|(Tf)(x)|\mid x\in[0,1]\}\\
+ & =\sup\left\{ \left|\int_{0}^{x}\mathrm{d}y\right|\mid x\in[0,1]\right\} \\
+ & =\sup\left\{ \left|x\right|\mid x\in[0,1]\right\} \\
+ & =\sup\left\{ x\mid x\in[0,1]\right\} \\
+ & =1.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Consider 
+\begin_inset Formula $C[a,b]$
+\end_inset
+
+ equipped with the supremum norm.
+ Define a linear functional 
+\begin_inset Formula $\ell\colon C[a,b]\to\mathbb{R}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\ell(f):=f(a)-f(b).
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C[a,b]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\ell$
+\end_inset
+
+ is bounded.
+ Moreover the set 
+\begin_inset Formula 
+\[
+\{f\in C[a,b]\mid f(a)=f(b)\}
+\]
+
+\end_inset
+
+is a closed subspace of 
+\begin_inset Formula $C[a,b]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f\in C[a,b]$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|f\|_{\infty}\leq1$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+|\ell(f)| & =|f(a)-f(b)|\\
+ & \leq|f(a)|+|f(b)|\\
+ & \leq1+1\\
+ & =2.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\|\ell\|\leq2$
+\end_inset
+
+.
+ To see that 
+\begin_inset Formula $\|\ell\|=2$
+\end_inset
+
+, let 
+\begin_inset Formula $f\colon[a,b]\to\mathbb{C}$
+\end_inset
+
+ be given by
+\begin_inset Formula 
+\[
+f(x)=\frac{2}{b-a}(x-a)-1
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in[a,b].$
+\end_inset
+
+ So the graph of 
+\begin_inset Formula $f$
+\end_inset
+
+ is just the line segment from 
+\begin_inset Formula $(a,-1)$
+\end_inset
+
+ to 
+\begin_inset Formula $(b,1)$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $\|f\|_{\infty}=1$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{align*}
+|\ell(f)| & =|f(a)-f(b)|\\
+ & =|-1-1|\\
+ & =2.
+\end{align*}
+
+\end_inset
+
+The last part of the proposition follows from
+\begin_inset Formula 
+\[
+\text{ker}\ell=\{f\in C[a,b]\mid f(a)=f(b)\},
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\ker\ell$
+\end_inset
+
+ is a closed subspace since 
+\begin_inset Formula $\ell$
+\end_inset
+
+ is a bounded linear operator.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemmaintegrationfunctional}
+\end_layout
+
+\end_inset
+
+ Consider 
+\begin_inset Formula $C[a,b]$
+\end_inset
+
+ equipped with the supremum norm.
+ Let 
+\begin_inset Formula $[c,d]\subseteq[a,b]$
+\end_inset
+
+ and define 
+\begin_inset Formula $\ell_{c,d}\colon C[a,b]\to\mathbb{C}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\ell_{c,d}(f)=\int_{c}^{d}f(t)\mathrm{d}t
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C[a,b]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\ell_{c,d}$
+\end_inset
+
+ is a bounded linear functional with 
+\begin_inset Formula $\|\ell_{c,d}\|=d-c$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Linearity of 
+\begin_inset Formula $\ell_{c,d}$
+\end_inset
+
+ follows from linearity of integration.
+ So it suffices to check that 
+\begin_inset Formula $\ell_{c,d}$
+\end_inset
+
+ is bounded.
+ Let 
+\begin_inset Formula $f\in C[a,b]$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|f\|_{\infty}\leq1$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+|\ell_{c,d}(f)| & =\left|\int_{c}^{d}f(t)\mathrm{d}t\right|\\
+ & \leq\int_{c}^{d}|f(t)|\mathrm{d}t\\
+ & \leq\int_{c}^{d}\mathrm{d}t\\
+ & =d-c.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\|\ell\|\leq d-c$
+\end_inset
+
+.
+ To see that 
+\begin_inset Formula $\|\ell\|=d-c$
+\end_inset
+
+, let 
+\begin_inset Formula $f\colon[a,b]\to\mathbb{C}$
+\end_inset
+
+ be the constant function 
+\begin_inset Formula $f=1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\|f\|_{\infty}=1$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{align*}
+|\ell_{c,d}(f)| & =\left|\int_{c}^{d}f(t)\mathrm{d}t\right|\\
+ & =\left|\int_{c}^{d}\mathrm{d}t\right|\\
+ & =|d-c|\\
+ & =d-c.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propclosedsubspaceyofc-11}
+\end_layout
+
+\end_inset
+
+ Consider 
+\begin_inset Formula $C[-1,1]$
+\end_inset
+
+ equipped with the supremum norm.
+ Let 
+\begin_inset Formula $\mathcal{Y}$
+\end_inset
+
+ be the subset of 
+\begin_inset Formula $C[-1,1]$
+\end_inset
+
+ consisting of all functions 
+\begin_inset Formula $g\in C[-1,1]$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\int_{-1}^{0}g(x)\mathrm{d}x=\int_{0}^{1}g(x)\mathrm{d}x=0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then 
+\begin_inset Formula $\mathcal{Y}$
+\end_inset
+
+ is a closed subspace.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Note that 
+\begin_inset Formula $\mathcal{Y}=\text{ker}\ell_{-1,0}\cap\text{ker}\ell_{0,1}$
+\end_inset
+
+ is an intersection of two closed subspaces (since 
+\begin_inset Formula $\ell_{-1,0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\ell_{0,1}$
+\end_inset
+
+ are bounded linear functionals by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{lemmaintegrationfunctional})
+\end_layout
+
+\end_inset
+
+).
+ Thus 
+\begin_inset Formula $\mathcal{Y}$
+\end_inset
+
+ is a closed subspace.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ With the notation as in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propclosedsubspaceyofc-11})
+\end_layout
+
+\end_inset
+
+ above, let 
+\begin_inset Formula $h\in C[-1,1]$
+\end_inset
+
+ be given by
+\begin_inset Formula 
+\[
+h(x)=2x
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in[-1,1]$
+\end_inset
+
+.
+ Then there does not exist a 
+\begin_inset Formula $g\in\mathcal{Y}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|g-h\|_{\infty}=d(h,\mathcal{Y})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 1: 
+\series default
+We will first show that 
+\begin_inset Formula $d(h,\mathcal{Y})=1$
+\end_inset
+
+.
+ To prove 
+\begin_inset Formula $d(h,\mathcal{Y})\geq1$
+\end_inset
+
+, assume for a contradiction that 
+\begin_inset Formula $d(h,\mathcal{Y})<1$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ and 
+\begin_inset Formula $g\in\mathcal{Y}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\|g-h\|_{\infty}<1-\varepsilon.
+\]
+
+\end_inset
+
+Write 
+\begin_inset Formula $g$
+\end_inset
+
+ in terms of its real and imaginary parts, say 
+\begin_inset Formula $g=u+iv$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+0 & =\int_{-1}^{0}g(x)\mathrm{d}x\\
+ & =\int_{-1}^{0}u(x)\mathrm{d}x+i\int_{-1}^{0}v(x)\mathrm{d}x
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $\int_{-1}^{0}u(x)\mathrm{d}x=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\int_{-1}^{0}v(x)\mathrm{d}x=0$
+\end_inset
+
+.
+ Similarly, 
+\begin_inset Formula 
+\begin{align*}
+0 & =\int_{0}^{1}g(x)\mathrm{d}x\\
+ & =\int_{0}^{1}u(x)\mathrm{d}x+i\int_{0}^{1}v(x)\mathrm{d}x
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $\int_{0}^{1}u(x)\mathrm{d}x=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\int_{0}^{1}v(x)\mathrm{d}x=0$
+\end_inset
+
+.
+ Moreover, we have
+\begin_inset Formula 
+\begin{align*}
+1-\varepsilon & >\|g-h\|_{\infty}\\
+ & =\sup_{x\in[-1,1]}\sqrt{(u(x)-h(x))^{2}+v(x)^{2}}\\
+ & \geq\sup_{x\in[-1,1]}\sqrt{(u(x)-h(x))^{2}}\\
+ & =\|u-h\|_{\infty}.
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $u\in\mathcal{Y}$
+\end_inset
+
+, 
+\begin_inset Formula $\|u-h\|_{\infty}<1-\varepsilon$
+\end_inset
+
+, and 
+\begin_inset Formula $u$
+\end_inset
+
+ is a real-valued function.
+ Since 
+\begin_inset Formula $\|u-h\|_{\infty}<1-\varepsilon$
+\end_inset
+
+, 
+\begin_inset Formula $h(x)=2x$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in[-1,0]$
+\end_inset
+
+, and both 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $h$
+\end_inset
+
+ are real-valued functions, we have 
+\begin_inset Formula 
+\[
+u(x)\leq2x+1-\varepsilon
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in[-1,0]$
+\end_inset
+
+.
+ This implies
+\begin_inset Formula 
+\begin{align*}
+0 & =\int_{-1}^{0}u(x)\mathrm{d}x\\
+ & \leq\int_{-1}^{0}(2x+1-\varepsilon)\mathrm{d}x\\
+ & =(x^{2}+x-\varepsilon x)|_{-1}^{0}\\
+ & =\varepsilon\\
+ & >0,
+\end{align*}
+
+\end_inset
+
+which gives us our desired contradiction.
+ Therefore 
+\begin_inset Formula $d(h,\mathcal{Y})\geq1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we will show that 
+\begin_inset Formula $d(h,\mathcal{Y})\leq1$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $t\in(0,1]$
+\end_inset
+
+ and define 
+\begin_inset Formula $g_{t}\colon[-1,0]\to\mathbb{R}$
+\end_inset
+
+ by the formula
+\begin_inset Formula 
+\[
+g_{t}(x)=\begin{cases}
+2x+1+t & \text{if }-1\leq x\leq\frac{-2t}{1+t}\\
+-\frac{(t-1)^{2}}{2t}x & \text{if }\frac{-2t}{1+t}\leq x\leq0.
+\end{cases}
+\]
+
+\end_inset
+
+Extend 
+\begin_inset Formula $g_{t}$
+\end_inset
+
+ to all of 
+\begin_inset Formula $[-1,1]$
+\end_inset
+
+ by the formula
+\begin_inset Formula 
+\[
+g_{t}(x)=g_{t}(-x)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in[0,1]$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $g_{t}$
+\end_inset
+
+ is an odd function.
+ Moreover 
+\begin_inset Formula $g_{t}$
+\end_inset
+
+ is continous since each segment of 
+\begin_inset Formula $g_{t}$
+\end_inset
+
+ is linear and since they agree on their boundaries:
+\begin_inset Formula 
+\begin{align*}
+2\left(\frac{-2t}{1+t}\right)+1+t & =\frac{-4t}{1+t}+\frac{(1+t)^{2}}{1+t}\\
+ & =\frac{t^{2}-2t+1}{1+t}\\
+ & =\frac{(t-1)^{2}}{1+t}\\
+ & =-\frac{(t-1)^{2}}{2t}\left(\frac{-2t}{1+t}\right)
+\end{align*}
+
+\end_inset
+
+and
+\begin_inset Formula 
+\begin{align*}
+-\frac{(t-1)^{2}}{2t}\cdot0 & =0\\
+ & =\frac{(t-1)^{2}}{2t}\cdot0.
+\end{align*}
+
+\end_inset
+
+The image below gives the graphs for 
+\begin_inset Formula $h$
+\end_inset
+
+, 
+\begin_inset Formula $g_{1/2}$
+\end_inset
+
+, and 
+\begin_inset Formula $g_{1/10}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-1,xmax=1,
+\end_layout
+
+\begin_layout Plain Layout
+
+ymin=-2,ymax=3,     
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick={-1,0,1},     
+\end_layout
+
+\begin_layout Plain Layout
+
+ytick={-2,-1,1,2,3},
+\end_layout
+
+\begin_layout Plain Layout
+
+legend pos= north west,]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-1:1,samples=100,color=black,thick] ({x}, {2*x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-1:-0.666,samples=100,color=red,thick] ({x}, {2*x+1+0.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-1:-0.1818,samples=100,color=blue,thick] ({x}, {2*x+1+0.1});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-1:-0.095,samples=100,color=green,thick] ({x}, {2*x+1+0.05});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-0.666:0.666,samples=100,color=red,thick] ({x}, {-0.25*x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=0.666:1,samples=100,color=red,thick] ({x}, {2*x+1-2.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-0.1818:0.1818,samples=100,color=blue,thick] ({x}, {-4.05*x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=0.1818:1,samples=100,color=blue,thick] ({x}, {2*x+1-2.1});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-1:-0.095,samples=100,color=green,thick] ({x}, {2*x+1+0.05});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-0.095:0.095,samples=100,color=green,thick] ({x}, {-9.025*x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=0.095:1,samples=100,color=green,thick] ({x}, {2*x+1-2.05});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$ h $} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$ g_{1/2}$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$ g_{1/10}$} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$ g_{1/20}$}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now observe that
+\begin_inset Formula 
+\begin{align*}
+\int_{-1}^{0}g_{t}(x)\mathrm{d}x & =\int_{-1}^{\frac{-2t}{1+t}}(2x+1+t)\mathrm{d}x+\int_{\frac{-2t}{1+t}}^{0}-\frac{(t-1)^{2}}{2t}x\mathrm{d}x\\
+ & =(x^{2}+x+tx)|_{-1}^{\frac{-2t}{1+t}}+\left(\frac{-(t-1)^{2}}{4t}x^{2}\right)|_{\frac{-2t}{1+t}}^{0}\\
+ & =\left(\frac{2t}{1+t}\right)^{2}+\left(\frac{-2t}{1+t}\right)+t\left(\frac{-2t}{1+t}\right)-\left(1-1-t\right)+\frac{(t-1)^{2}}{4t}\left(\frac{2t}{1+t}\right)^{2}\\
+ & =\left(\frac{(t-1)^{2}}{4t}+1\right)\left(\frac{2t}{1+t}\right)^{2}+(1+t)\left(\frac{-2t}{1+t}\right)+t\\
+ & =\frac{(t+1)^{2}}{4t}\frac{4t^{2}}{(1+t)^{2}}-t\\
+ & =t-t\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $g_{t}\in\mathcal{Y}$
+\end_inset
+
+ for all 
+\begin_inset Formula $t\in(0,1]$
+\end_inset
+
+.
+ Moreover, by construction we have 
+\begin_inset Formula 
+\[
+\|g_{t}-h\|_{\infty}=1+t
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $t\in(0,1]$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $d(h,\mathcal{Y})\leq1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 2: 
+\series default
+We claim that there does not exist a 
+\begin_inset Formula $g\in\mathcal{Y}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|g-h\|_{\infty}=1$
+\end_inset
+
+.
+ Indeed, assume for a contradiction there does exist a 
+\begin_inset Formula $g\in\mathcal{Y}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|g-h\|_{\infty}=1$
+\end_inset
+
+.
+ Choose such a 
+\begin_inset Formula $g\in\mathcal{Y}$
+\end_inset
+
+.
+ We may assume that 
+\begin_inset Formula $g$
+\end_inset
+
+ is real-valued: if 
+\begin_inset Formula $g$
+\end_inset
+
+ is not real-valued, then we pass to its real-valued part 
+\begin_inset Formula $u$
+\end_inset
+
+ and as argued above we obtain 
+\begin_inset Formula $u\in\mathcal{Y}$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\begin{align*}
+1 & =\|g-h\|_{\infty}\\
+ & =\|u-h\|_{\infty}\\
+ & \geq1.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $g$
+\end_inset
+
+ is real-valued and 
+\begin_inset Formula $\|g-h\|_{\infty}=1$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+2x-1\leq g(x)\leq2x+1
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in[-1,1]$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $g$
+\end_inset
+
+ is continous, we cannot have 
+\begin_inset Formula 
+\[
+g(x)=\begin{cases}
+2x+1 & \text{for all }x\in(-1,0)\\
+2x-1 & \text{for all }x\in(0,1).
+\end{cases}
+\]
+
+\end_inset
+
+Assume 
+\begin_inset Formula $g(x)\neq2x-1$
+\end_inset
+
+ on the interval 
+\begin_inset Formula $(0,1)$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $c\in(0,1)$
+\end_inset
+
+ such that 
+\begin_inset Formula $g(c)\neq2c-1$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $g$
+\end_inset
+
+ is continuous and since 
+\begin_inset Formula $g(c)>2c-1$
+\end_inset
+
+, there exists 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta>0$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+g(x)>2x-1+\varepsilon
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in(c-\delta,c+\delta)$
+\end_inset
+
+.
+ Choose such 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta$
+\end_inset
+
+ so that 
+\begin_inset Formula $(c-\delta,c+\delta)\subset(0,1)$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+0 & =\int_{0}^{1}g(x)\mathrm{d}x\\
+ & =\int_{0}^{1}g(x)\mathrm{d}x+\int_{c-\delta}^{c+\delta}g(x)\mathrm{d}x+\int_{c+\delta}^{1}g(x)\mathrm{d}x\\
+ & >\int_{0}^{c-\delta}(2x-1)\mathrm{d}x+\int_{c-\delta}^{c+\delta}(2x-1+\varepsilon)\mathrm{d}x+\int_{c+\delta}^{1}(2x-1)\mathrm{d}x\\
+ & =\int_{0}^{1}(2x-1)\mathrm{d}x+\int_{c-\delta}^{c+\delta}\varepsilon\mathrm{d}x\\
+ & =(x^{2}-x)|_{0}^{1}+\varepsilon x|_{c-\delta}^{c+\delta}\\
+ & =2\varepsilon\delta\\
+ & >0
+\end{align*}
+
+\end_inset
+
+gives us a contradiction.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Thus 
+\begin_inset Formula $g(x)\neq2x+1$
+\end_inset
+
+ on the interval 
+\begin_inset Formula $(-1,0)$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $c\in(-1,0)$
+\end_inset
+
+ such that 
+\begin_inset Formula $g(c)\neq2c+1$
+\end_inset
+
+.
+ Then by a similar argument as above, we have
+\begin_inset Formula 
+\begin{align*}
+0 & =\int_{-1}^{0}g(x)\mathrm{d}x\\
+ & <\int_{-1}^{0}(2x+1)\mathrm{d}x-\int_{c-\delta}^{c+\delta}\varepsilon\mathrm{d}x\\
+ & =-2\varepsilon\delta\\
+ & <0,
+\end{align*}
+
+\end_inset
+
+which also gives us a contradiction.
+ Therefore there does not exist a 
+\begin_inset Formula $g\in\mathcal{Y}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|g-h\|_{\infty}=1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 6
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ be a normed linear space.
+ For a set 
+\begin_inset Formula $A\subseteq\mathcal{X}$
+\end_inset
+
+ we define 
+\begin_inset Formula $A^{\perp}$
+\end_inset
+
+ to be the subset of 
+\begin_inset Formula $\mathcal{X}^{*}$
+\end_inset
+
+ consisting of all 
+\begin_inset Formula $\ell\in\mathcal{X}^{*}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\ell(a)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $a\in A$
+\end_inset
+
+.
+ Similarly, for a set 
+\begin_inset Formula $M\subseteq\mathcal{X}^{*}$
+\end_inset
+
+ we define 
+\begin_inset Formula $M_{\perp}$
+\end_inset
+
+ to be the subset of 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ consisting of all vectors 
+\begin_inset Formula $x\in\mathcal{X}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\ell(x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\ell\in M$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propclosedsubspacesperpantiperp}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ be a normed linear space, let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a subset of 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+, and let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a subset of 
+\begin_inset Formula $\mathcal{X}^{*}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A^{\perp}$
+\end_inset
+
+ and 
+\begin_inset Formula $M_{\perp}$
+\end_inset
+
+ are closed subspaces of 
+\begin_inset Formula $\mathcal{X}^{*}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ respectively.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $x\in\mathcal{X}$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $\widehat{x}\colon\mathcal{X}^{*}\to\mathbb{C}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\widehat{x}(\ell)=\ell(x)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\ell\in\mathcal{X}^{*}$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $\widehat{x}$
+\end_inset
+
+ is a bounded linear functional.
+ To see that 
+\begin_inset Formula $\widehat{x}$
+\end_inset
+
+ is linear, let 
+\begin_inset Formula $\ell,\ell'\in\mathcal{X}^{*}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\lambda,\lambda'\in\mathbb{C}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\widehat{x}(\lambda\ell+\lambda'\ell') & =(\lambda\ell+\lambda'\ell')(x)\\
+ & =\lambda\ell(x)+\lambda'\ell'(x)\\
+ & =\lambda\widehat{x}(\ell)+\lambda'\widehat{x}(\ell').
+\end{align*}
+
+\end_inset
+
+To see that 
+\begin_inset Formula $\widehat{x}$
+\end_inset
+
+ is bounded, let 
+\begin_inset Formula $\ell\in\mathcal{X}^{*}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+|\widehat{x}(\ell)| & =|\ell(x)|\\
+ & \leq\|x\|\|\ell\|.
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\widehat{x}$
+\end_inset
+
+ is a bounded linear functional.
+ In particular 
+\begin_inset Formula $\text{ker}\widehat{x}$
+\end_inset
+
+ is a closed subspace.
+ Thus
+\begin_inset Formula 
+\[
+A^{\perp}=\bigcap_{a\in A}\text{ker}\widehat{a}\quad\text{and}\quad M_{\perp}=\bigcap_{\ell\in M}\text{ker}\ell
+\]
+
+\end_inset
+
+are closed subspaces since an arbitrary intersection of closed subspaces
+ is a closed subspace.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+ be a normed linear space, let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a subset of 
+\begin_inset Formula $\mathcal{X}$
+\end_inset
+
+, and let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a subset of 
+\begin_inset Formula $\mathcal{X}^{*}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\overline{\text{span}}(A)\subseteq(A^{\perp})_{\perp}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{\text{span}}(M)\subseteq(M_{\perp})^{\perp}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propclosedsubspacesperpantiperp})
+\end_layout
+
+\end_inset
+
+ implies 
+\begin_inset Formula $(A^{\perp})_{\perp}$
+\end_inset
+
+ and 
+\begin_inset Formula $(M_{\perp})^{\perp}$
+\end_inset
+
+ are closed subspace.
+ Thus, it suffices to show
+\begin_inset Formula 
+\[
+\text{span}(A)\subseteq(A^{\perp})_{\perp}\quad\text{and}\quad\text{span}(M)\subseteq(M_{\perp})^{\perp}.
+\]
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+First we show the former.
+ Let 
+\begin_inset Formula $\lambda_{1}a_{1}+\cdots+\lambda_{n}a_{n}\in\text{span}(A)$
+\end_inset
+
+ and let 
+\begin_inset Formula $\ell\in A^{\perp}$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $\ell(a)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $a\in A$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\ell(\lambda_{1}a_{1}+\cdots+\lambda_{n}a_{n}) & =\lambda_{1}\ell(a_{1})+\cdots+\lambda_{n}\ell(a_{n})\\
+ & =\lambda_{1}\cdot0+\cdots+\lambda_{n}\cdot0\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\ell$
+\end_inset
+
+ was arbitrary, this implies 
+\begin_inset Formula $\lambda_{1}a_{1}+\cdots+\lambda_{n}a_{n}\in(A^{\perp})_{\perp}$
+\end_inset
+
+, and hence 
+\begin_inset Formula $\text{span}(A)\subseteq(A^{\perp})_{\perp}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we show the latter.
+ Let 
+\begin_inset Formula $\lambda_{1}\ell_{1}+\cdots+\lambda_{n}\ell_{n}\in\text{span}(M)$
+\end_inset
+
+ and let 
+\begin_inset Formula $x\in M_{\perp}$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $\ell(x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $\ell\in M$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+(\lambda_{1}\ell_{1}+\cdots+\lambda_{n}\ell_{n})(x) & =\lambda_{1}\ell_{1}(x)+\cdots+\lambda_{n}\ell_{n}(x)\\
+ & =\lambda_{1}\cdot0+\cdots+\lambda_{n}\cdot0\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $x$
+\end_inset
+
+ was arbitrary, this implies 
+\begin_inset Formula $\lambda_{1}\ell_{1}+\cdots+\lambda_{n}\ell_{n}\in(M_{\perp})^{\perp}$
+\end_inset
+
+, and hence 
+\begin_inset Formula $\text{span}(M)\subseteq(M_{\perp})^{\perp}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 7
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $(\ell^{1})^{*}$
+\end_inset
+
+ is isometrically isomorphic to 
+\begin_inset Formula $\ell^{\infty}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, let 
+\begin_inset Formula $e^{n}$
+\end_inset
+
+ denote the sequence with entry 
+\begin_inset Formula $1$
+\end_inset
+
+ in the 
+\begin_inset Formula $n$
+\end_inset
+
+th component and entry 
+\begin_inset Formula $0$
+\end_inset
+
+ everywhere else.
+ Define 
+\begin_inset Formula $\Phi\colon(\ell^{1})^{*}\to\ell^{\infty}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\Phi(\psi)=(\psi(e^{n}))
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\psi\in(\ell^{1})^{*}$
+\end_inset
+
+.
+ Note that for any 
+\begin_inset Formula $\psi\in(\ell^{1})^{*}$
+\end_inset
+
+, we have 
+\begin_inset Formula $|(\psi(e^{n}))|\leq\|\psi\|$
+\end_inset
+
+, and therefore 
+\begin_inset Formula $(\psi(e^{n}))\in\ell^{\infty}$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $\|\psi\|=\|\Phi(\psi)\|_{\infty}$
+\end_inset
+
+.
+ Indeed,
+\begin_inset Formula 
+\begin{align*}
+\|\Phi(\psi)\|_{\infty} & =\sup\{|\psi(e^{n})|\mid n\in\mathbb{N}\}\\
+ & \leq\sup\left\{ \left|\psi\left(\sum_{n=1}^{\infty}a_{n}e^{n}\right)\right|\mid\sum_{n=1}^{\infty}|a_{n}|\leq1\right\} \\
+ & =\|\psi\|.
+\end{align*}
+
+\end_inset
+
+To prove the reverse inequality assume for a contradiction that 
+\begin_inset Formula $\|\psi\|>\|\Phi(\psi)\|_{\infty}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{n=1}^{\infty}a_{n}e^{n}\in\ell^{1}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sum_{n=1}^{\infty}|a_{n}|\leq1$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{equation}
+\left|\psi\left(\sum_{n=1}^{\infty}a_{n}e^{n}\right)\right|>\|\Phi(\psi)\|_{\infty}+\varepsilon.\label{eq:strictineq1}
+\end{equation}
+
+\end_inset
+
+Choose 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sum_{n=N}^{\infty}|a_{n}|<\varepsilon/\|\psi\|$
+\end_inset
+
+ (we can find such an 
+\begin_inset Formula $N$
+\end_inset
+
+ since 
+\begin_inset Formula $\sum_{n=1}^{\infty}|a_{n}|<\infty$
+\end_inset
+
+).
+ Then
+\begin_inset Formula 
+\begin{align*}
+\left|\psi\left(\sum_{n=1}^{\infty}a_{n}e^{n}\right)\right| & =\left|\psi\left(\sum_{n=1}^{N}a_{n}e^{n}+\sum_{n=N+1}^{\infty}a_{n}e^{n}\right)\right|\\
+ & =\left|\psi\left(\sum_{n=1}^{N}a_{n}e^{n}\right)+\psi\left(\sum_{n=N+1}^{\infty}a_{n}e^{n}\right)\right|\\
+ & =\left|\sum_{n=1}^{N}a_{n}\psi(e^{n})+\psi\left(\sum_{n=N+1}^{\infty}a_{n}e^{n}\right)\right|\\
+ & \leq\left|\sum_{n=1}^{N}a_{n}\psi(e^{n})\right|+\left|\psi\left(\sum_{n=N+1}^{\infty}a_{n}e^{n}\right)\right|\\
+ & \leq\sum_{n=1}^{N}|a_{n}||\psi(e^{n})|+\|\psi\|\sum_{n=N+1}^{\infty}|a_{n}|\\
+ & <\|\Phi(\psi)\|_{\infty}\sum_{n=1}^{N}|a_{n}|+\|\psi\|\cdot\frac{\varepsilon}{\|\psi\|}\\
+ & \leq\|\Phi(\psi)\|_{\infty}+\varepsilon.
+\end{align*}
+
+\end_inset
+
+This contradicts 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:strictneq1})
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we show 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ is linear.
+ Let 
+\begin_inset Formula $\varphi,\psi\in(\ell^{1})^{*}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\lambda,\mu\in\mathbb{C}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\Phi(\lambda\varphi+\mu\psi) & =((\lambda\varphi+\mu\psi)(e^{n}))\\
+ & =\lambda(\varphi(e^{n}))+\mu(\psi(e^{n}))\\
+ & =\lambda\Phi(\varphi)+\mu\Phi(\psi).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ is an isometric embedding.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now show that 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ is surjective, and hence an isometric isomorphism.
+ Let 
+\begin_inset Formula $(a_{n})\in\ell^{\infty}$
+\end_inset
+
+, let 
+\begin_inset Formula $M=\sup\{|a_{n}|\}$
+\end_inset
+
+, and let 
+\begin_inset Formula $E=\text{span}\{e^{n}\mid n\in\mathbb{N}\}$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $\varphi\colon E\to\mathbb{C}$
+\end_inset
+
+ to be the unique linear map such that
+\begin_inset Formula 
+\[
+\varphi(e^{n})=a_{n}
+\]
+
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $x=x_{n_{1}}e^{n_{1}}+\cdots+x_{n_{k}}e^{n_{k}}\in E$
+\end_inset
+
+ such that 
+\begin_inset Formula $|x_{n_{1}}|+\cdots+|x_{n_{k}}|\leq1$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+|\varphi(x_{n_{1}}e^{n_{1}}+\cdots+x_{n_{k}}e^{n_{k}})| & =|x_{n_{1}}\varphi(e^{n_{1}})+\cdots+x_{n_{k}}\varphi(e^{n_{k}})|\\
+ & =|x_{n_{1}}a_{n_{1}}+\cdots+x_{n_{k}}a_{n_{k}}|\\
+ & \leq|x_{n_{1}}||a_{n_{1}}|+\cdots+|x_{n_{k}}||a_{n_{k}}|\\
+ & \leq|x_{n_{1}}|M+\cdots+|x_{n_{k}}||M\\
+ & =(|x_{n_{1}}|+\cdots+|x_{n_{k}}||)M\\
+ & \leq M
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is bounded.
+ By the Hahn-Banach Theorem, there exists a bounded linear functional 
+\begin_inset Formula $\widetilde{\varphi}$
+\end_inset
+
+ defined on all of 
+\begin_inset Formula $\ell^{1}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widetilde{\varphi}|_{E}=\varphi$
+\end_inset
+
+ and 
+\begin_inset Formula $\|\widetilde{\varphi}\|=\|\varphi\|$
+\end_inset
+
+.
+ Choose such a 
+\begin_inset Formula $\widetilde{\varphi}\in(\ell^{1})^{*}$
+\end_inset
+
+.
+ Then clearly 
+\begin_inset Formula $\Phi(\widetilde{\varphi})=(a_{n})$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ is surjective, and hence an isometric isomorphism.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propsuplinearpositive}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a non-emtpy set of real numbers which is bounded above and let 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ be any non-negative real number.
+ Then
+\begin_inset Formula 
+\begin{equation}
+\sup(\lambda A)=\lambda\sup(A).\label{eq:sup}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+, then 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:sup})
+\end_layout
+
+\end_inset
+
+ is obvious, so assume 
+\begin_inset Formula $\lambda>0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ denote 
+\begin_inset Formula $\sup(A)$
+\end_inset
+
+.
+ Choose any element in 
+\begin_inset Formula $\lambda A$
+\end_inset
+
+, say 
+\begin_inset Formula $\lambda a$
+\end_inset
+
+ where 
+\begin_inset Formula $a\in A$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $a\leq\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is non-negative, we have 
+\begin_inset Formula $\lambda a\leq\lambda\alpha$
+\end_inset
+
+.
+ This implies
+\begin_inset Formula 
+\[
+\sup(\lambda A)\leq\lambda\sup(A).
+\]
+
+\end_inset
+
+For the reverse direction, observe that
+\begin_inset Formula 
+\begin{align*}
+\sup(A) & =\sup(\lambda^{-1}\lambda A)\\
+ & \leq\lambda^{-1}\sup(\lambda A),
+\end{align*}
+
+\end_inset
+
+and this implies 
+\begin_inset Formula 
+\[
+\sup(\lambda A)\geq\lambda\sup(A).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propsuplinearpositive2}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ be non-empty sets of non-negative real numbers both of which are bounded
+ above.
+ Then
+\begin_inset Formula 
+\begin{equation}
+\sup(A+B)=\sup(A)+\sup(B).\label{eq:sup-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ denote 
+\begin_inset Formula $\sup(A)$
+\end_inset
+
+, let 
+\begin_inset Formula $\beta$
+\end_inset
+
+ denote 
+\begin_inset Formula $\sup(B)$
+\end_inset
+
+, and let 
+\begin_inset Formula $a+b$
+\end_inset
+
+ be an arbitrary element in 
+\begin_inset Formula $A+B$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $a\leq\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $b\leq\beta$
+\end_inset
+
+ implies 
+\begin_inset Formula $a+b\leq\alpha+\beta$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\begin{equation}
+\sup(A+B)\leq\sup(A)+\sup(B).\label{eq:ineqsupadd}
+\end{equation}
+
+\end_inset
+
+To show the reverse inequality, we assume (for a contradiction) that the
+ inequality 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:ineqsupadd})
+\end_layout
+
+\end_inset
+
+ is strict
+\begin_inset Formula 
+\[
+\sup(A+B)<\sup(A)+\sup(B).
+\]
+
+\end_inset
+
+Choose 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\begin{equation}
+\sup(A+B)<\sup(A)+\sup(B)-\varepsilon.\label{supstrictin}
+\end{equation}
+
+\end_inset
+
+Choose 
+\begin_inset Formula $a\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $b\in B$
+\end_inset
+
+ such that 
+\begin_inset Formula $a>\alpha-\varepsilon/2$
+\end_inset
+
+ and 
+\begin_inset Formula $b>\beta-\varepsilon/2$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+a+b & >\alpha-\frac{\varepsilon}{2}+\beta-\frac{\varepsilon}{2}\\
+ & =\alpha+\beta-\varepsilon.
+\end{align*}
+
+\end_inset
+
+But this contradicts 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{supstrictin})
+\end_layout
+
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula 
+\[
+\sup(A+B)\geq\sup(A)+\sup(B).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

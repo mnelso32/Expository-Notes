@@ -1,0 +1,640 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Algorithm
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrix 
+\begin_inset Formula 
+\[
+A=\begin{pmatrix}a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be an 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrix.
+ We will show how to convert 
+\begin_inset Formula $A$
+\end_inset
+
+ into a diagonal matrix using elementary row and column operations by using
+ an algorithm which terminates after 
+\begin_inset Formula $n$
+\end_inset
+
+ steps.
+ There are four cases in each step.
+ We write the first two steps in the algorithm so that we can see what the
+ 
+\begin_inset Formula $k$
+\end_inset
+
+'th step should be.
+ Then we write the 
+\begin_inset Formula $k$
+\end_inset
+
+'th step.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Step 1: Write the matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+\begin{pmatrix}a_{11}^{1} & a_{12}^{1} & a_{13}^{1} & \cdots & a_{1n}^{1}\\
+a_{21}^{1} & a_{22}^{1} & a_{23}^{1} & \cdots & a_{2n}^{1}\\
+a_{31}^{1} & a_{32}^{1} & a_{33}^{1} & \cdots & a_{3n}^{1}\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+a_{n1}^{1} & a_{n2}^{1} & a_{n3}^{1} & \cdots & a_{nn}^{1}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+(Case 1) If 
+\begin_inset Formula $a_{1j}^{1}=a_{i1}^{1}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i,j\leq n$
+\end_inset
+
+, then proceed to step 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+(Case 2) If 
+\begin_inset Formula $a_{11}^{1}\neq0$
+\end_inset
+
+, then using elementary row and column operations, make 
+\begin_inset Formula $a_{1j}^{1}=a_{i1}^{1}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $1<i,j\leq n$
+\end_inset
+
+, then proceed to step 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+(Case 3) If 
+\begin_inset Formula $a_{11}^{1}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{i1}^{1}\neq0$
+\end_inset
+
+ for some 
+\begin_inset Formula $1<i\leq n$
+\end_inset
+
+, then add the 
+\begin_inset Formula $i$
+\end_inset
+
+'th row to the first row and proceed to case 
+\begin_inset Formula $2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+(Case 4) If 
+\begin_inset Formula $a_{11}^{1}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{1j}^{1}\neq0$
+\end_inset
+
+ for some 
+\begin_inset Formula $1<j\leq n$
+\end_inset
+
+, then add the 
+\begin_inset Formula $j$
+\end_inset
+
+'th column to the first column and proceed to case 
+\begin_inset Formula $2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Step 
+\begin_inset Formula $2$
+\end_inset
+
+: Write the matrix you obtained from step 
+\begin_inset Formula $2$
+\end_inset
+
+ as
+\begin_inset Formula 
+\[
+\begin{pmatrix}a_{11}^{2} & 0 & 0 & \cdots & 0\\
+0 & a_{22}^{2} & a_{23}^{2} & \cdots & a_{2n}^{2}\\
+0 & a_{32}^{2} & a_{33}^{2} & \cdots & a_{3n}^{2}\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+0 & a_{n2}^{2} & a_{n3}^{2} & \cdots & a_{nn}^{2}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+(Case 1) If 
+\begin_inset Formula $a_{2j}^{2}=a_{i2}^{2}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $2\leq i,j\leq n$
+\end_inset
+
+, then proceed to Step 3.
+\end_layout
+
+\begin_layout Enumerate
+(Case 2) If 
+\begin_inset Formula $a_{22}^{2}\neq0$
+\end_inset
+
+, then using elementary row and column operations, make 
+\begin_inset Formula $a_{2j}^{2}=a_{i2}^{2}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $2<i,j\leq n$
+\end_inset
+
+, then proceed to step 
+\begin_inset Formula $3$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+(Case 3) If 
+\begin_inset Formula $a_{22}^{2}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{i2}^{2}\neq0$
+\end_inset
+
+ for some 
+\begin_inset Formula $2<i\leq n$
+\end_inset
+
+, then add the 
+\begin_inset Formula $i$
+\end_inset
+
+'th row to the second row and proceed to case 
+\begin_inset Formula $2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+(Case 4) If 
+\begin_inset Formula $a_{22}^{2}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{2j}^{2}\neq0$
+\end_inset
+
+ for some 
+\begin_inset Formula $2<j\leq n$
+\end_inset
+
+, then add the 
+\begin_inset Formula $j$
+\end_inset
+
+'th column to the second column and proceed to case 
+\begin_inset Formula $2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Since in step 
+\begin_inset Formula $2$
+\end_inset
+
+ we did perform any row or column operations on either the first row or
+ the first column, the matrix we obtain from step 
+\begin_inset Formula $2$
+\end_inset
+
+ has the form
+\begin_inset Formula 
+\[
+\begin{pmatrix}a_{11}^{2} & 0 & 0 & \cdots & 0\\
+0 & a_{22}^{3} & 0 & \cdots & 0\\
+0 & 0 & a_{33}^{3} & \cdots & a_{3n}^{3}\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+0 & 0 & a_{n3}^{3} & \cdots & a_{nn}^{3}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we can see what step 
+\begin_inset Formula $k$
+\end_inset
+
+ should be.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Step 
+\begin_inset Formula $k:$
+\end_inset
+
+ Write the matrix we obtained from step 
+\begin_inset Formula $k-1$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+\begin{pmatrix}a_{11}^{2} & 0 & 0 & \cdots & 0\\
+0 & \ddots & \vdots & \cdots & \vdots\\
+0 & \cdots & a_{kk}^{k} & \cdots & a_{kn}^{k}\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+0 & \cdots & a_{nk}^{k} & \cdots & a_{nn}^{k}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+(Case 1) If 
+\begin_inset Formula $a_{kj}^{k}=a_{ik}^{k}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\leq i,j\leq n$
+\end_inset
+
+, then proceed to step 
+\begin_inset Formula $k+1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+(Case 2) If 
+\begin_inset Formula $a_{kk}^{k}\neq0$
+\end_inset
+
+, then using elementary row and column operations, make 
+\begin_inset Formula $a_{kj}^{k}=a_{ik}^{k}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $k<i,j\leq n$
+\end_inset
+
+, then proceed to step 
+\begin_inset Formula $k+1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+(Case 3) If 
+\begin_inset Formula $a_{kk}^{k}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{ik}^{k}\neq0$
+\end_inset
+
+ for some 
+\begin_inset Formula $k<i\leq n$
+\end_inset
+
+, then add the 
+\begin_inset Formula $i$
+\end_inset
+
+'th row to the 
+\begin_inset Formula $k$
+\end_inset
+
+'th and proceed to case 
+\begin_inset Formula $k+1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+(Case 4) If 
+\begin_inset Formula $a_{kk}^{k}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{kj}^{k}\neq0$
+\end_inset
+
+ for some 
+\begin_inset Formula $k<j\leq n$
+\end_inset
+
+, then add the 
+\begin_inset Formula $j$
+\end_inset
+
+'th row to the 
+\begin_inset Formula $k$
+\end_inset
+
+'th column and proceed to case 
+\begin_inset Formula $k+1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This algorithm terminates after 
+\begin_inset Formula $n$
+\end_inset
+
+ steps and as a result we get the diagonal matrix
+\begin_inset Formula 
+\[
+\begin{pmatrix}a_{11}^{2} & 0 & 0 & \cdots & 0\\
+0 & a_{22}^{3} & 0 & \cdots & 0\\
+0 & 0 & a_{33}^{4} & \cdots & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+0 & 0 & 0 & \cdots & a_{nn}^{n+1}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

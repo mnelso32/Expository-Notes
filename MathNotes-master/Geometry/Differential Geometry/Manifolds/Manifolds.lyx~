@@ -1,0 +1,9466 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Manifolds
+\end_layout
+
+\begin_layout Standard
+We first recall a few definitions from point-set topology.
+ A topological space is 
+\series bold
+second countable
+\series default
+ if it has a countable basis.
+ A 
+\series bold
+neighborhood
+\series default
+ of a point 
+\begin_inset Formula $p$
+\end_inset
+
+ in a topological space 
+\begin_inset Formula $M$
+\end_inset
+
+ is any open set containing 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ A topological space 
+\begin_inset Formula $M$
+\end_inset
+
+ is 
+\series bold
+Hausdorff
+\series default
+ if for every pair of points 
+\begin_inset Formula $x,y\in M$
+\end_inset
+
+, there exists a neighborhood 
+\begin_inset Formula $U$
+\end_inset
+
+ of 
+\begin_inset Formula $x$
+\end_inset
+
+ and a neighborhood 
+\begin_inset Formula $V$
+\end_inset
+
+ of 
+\begin_inset Formula $y$
+\end_inset
+
+ such that 
+\begin_inset Formula $U\cap V=\emptyset$
+\end_inset
+
+.
+ An 
+\series bold
+open cover
+\series default
+ of 
+\begin_inset Formula $M$
+\end_inset
+
+ is a collection 
+\begin_inset Formula $\{U_{i}\}_{i\in I}$
+\end_inset
+
+ of open sets in 
+\begin_inset Formula $M$
+\end_inset
+
+ whose union 
+\begin_inset Formula $\bigcup_{i\in I}U_{i}$
+\end_inset
+
+ is 
+\begin_inset Formula $M$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The Hausdorff condition and second countability are 
+\begin_inset Quotes eld
+\end_inset
+
+hereditary properties
+\begin_inset Quotes erd
+\end_inset
+
+; they are inherited by subspaces: a subspace of a Hausdorff space is Hausdorff.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $M'$
+\end_inset
+
+ be a subspace of a topological space 
+\begin_inset Formula $M$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $M$
+\end_inset
+
+ is Hausdorff, then 
+\begin_inset Formula $M'$
+\end_inset
+
+ is Hausdorff.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $M$
+\end_inset
+
+ is second countable, then 
+\begin_inset Formula $M'$
+\end_inset
+
+ is second countable.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $(1):$
+\end_inset
+
+ Suppose 
+\begin_inset Formula $x,y\in M'$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $x,y\in M$
+\end_inset
+
+ and 
+\begin_inset Formula $M$
+\end_inset
+
+ is Hausdorff, choose a neighborhood 
+\begin_inset Formula $U$
+\end_inset
+
+ of 
+\begin_inset Formula $x$
+\end_inset
+
+ and a neighborhood 
+\begin_inset Formula $V$
+\end_inset
+
+ of 
+\begin_inset Formula $y$
+\end_inset
+
+ such that 
+\begin_inset Formula $U\cap V=\emptyset$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $U'=U\cap M'$
+\end_inset
+
+ is a neighboorhood of 
+\begin_inset Formula $x$
+\end_inset
+
+ in the subspace topology and 
+\begin_inset Formula $V'=V\cap M'$
+\end_inset
+
+ is a neighborhood of 
+\begin_inset Formula $y$
+\end_inset
+
+ in the subspace topology and 
+\begin_inset Formula $U'\cap V'=\emptyset$
+\end_inset
+
+.
+ 
+\begin_inset Formula $(2):$
+\end_inset
+
+ If 
+\begin_inset Formula $\{B_{i}\}_{i\in\mathbb{N}}$
+\end_inset
+
+ is a countable basis for 
+\begin_inset Formula $M$
+\end_inset
+
+, then 
+\begin_inset Formula $\{B_{i}'\}_{i\in\mathbb{N}}$
+\end_inset
+
+ is a countable basis for 
+\begin_inset Formula $M'$
+\end_inset
+
+, where 
+\begin_inset Formula $B_{i}'=B_{i}\cap M'$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ A topological space 
+\begin_inset Formula $M$
+\end_inset
+
+ is 
+\series bold
+locally Euclidean of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+ 
+\series default
+if every point 
+\begin_inset Formula $p$
+\end_inset
+
+ in 
+\begin_inset Formula $M$
+\end_inset
+
+ has a neighborhood 
+\begin_inset Formula $U$
+\end_inset
+
+ such that there is a homeomorphism 
+\begin_inset Formula $\phi$
+\end_inset
+
+ from 
+\begin_inset Formula $U$
+\end_inset
+
+ onto an open subset of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ We call the pair 
+\begin_inset Formula $(U,\phi:U\to\mathbb{R}^{n})$
+\end_inset
+
+ a 
+\series bold
+chart
+\series default
+, 
+\begin_inset Formula $U$
+\end_inset
+
+ a 
+\series bold
+coordinate neighborhood
+\series default
+ or a 
+\series bold
+coordinate open set
+\series default
+, and 
+\begin_inset Formula $\phi$
+\end_inset
+
+ a 
+\series bold
+coordinate map
+\series default
+ or a 
+\series bold
+coordinate system on 
+\series default
+
+\begin_inset Formula $U$
+\end_inset
+
+.
+ We say that a chart 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ is 
+\series bold
+centered
+\series default
+ at 
+\begin_inset Formula $p\in U$
+\end_inset
+
+ if 
+\begin_inset Formula $\phi(p)=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ be a chart on the topological space 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $V$
+\end_inset
+
+ is an open subset 
+\begin_inset Formula $U$
+\end_inset
+
+, then 
+\begin_inset Formula $(V,\phi|_{V})$
+\end_inset
+
+ is a chart on 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ This follows from the fact that if 
+\begin_inset Formula $\phi:U\to\phi(U)$
+\end_inset
+
+ is a homeomorphism, then 
+\begin_inset Formula $\phi|_{V}:V\to\phi(V)$
+\end_inset
+
+ is a homeomorphism.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\series bold
+topological manifold
+\series default
+ is a Hausdorff, second countable, locally Euclidean space.
+ It is said to be of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+ if it is locally Euclidean of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ The Euclidean space 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ is covered by a single chart 
+\begin_inset Formula $(\mathbb{R}^{n},1_{\mathbb{R}^{n}})$
+\end_inset
+
+, where 
+\begin_inset Formula $1_{\mathbb{R}^{n}}:\mathbb{R}^{n}\to\mathbb{R}^{n}$
+\end_inset
+
+ is the identity map.
+ It is the prime example of a topological manifold.
+ Every open subset of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ is also a topological manifold, with chart 
+\begin_inset Formula $(U,1_{U})$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ (A cusp).
+ The graph of 
+\begin_inset Formula $y=x^{2/3}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+ is a topological manifold.
+ By virtue of being a subspace of 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+, it is Hausdorff and second countable.
+ It is locally Euclidean because it is homeomorphic to 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ via the projection 
+\begin_inset Formula $(x,x^{2/3})\mapsto x$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines=none, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmax=5, xmin=-5, ymax=5, ymin=-5, ]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red, samples=60] ({x^3},{4*x^2});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ (A cross).
+ The cross can be described as 
+\begin_inset Formula $\{(r,0)\mid r\in\mathbb{R}\}\cup\{(0,r)\mid r\in\mathbb{R}\}$
+\end_inset
+
+.
+ We show that the cross in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+ with the subspace topology is not locally Euclidean at the intersection
+ 
+\begin_inset Formula $p=(0,0)$
+\end_inset
+
+, and so cannot be a manifold.
+ Suppose the cross is locally Euclidean of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+ at the point 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $p$
+\end_inset
+
+ has a neighborhood 
+\begin_inset Formula $U$
+\end_inset
+
+ homeomorphic to an open ball 
+\begin_inset Formula $B:=B_{\varepsilon}(0)\subset\mathbb{R}^{n}$
+\end_inset
+
+ with 
+\begin_inset Formula $p$
+\end_inset
+
+ mapping to 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ The homeomorphism 
+\begin_inset Formula $U\to B$
+\end_inset
+
+ restricts to a homemorphism 
+\begin_inset Formula $U\setminus\{p\}\to B\setminus\{0\}$
+\end_inset
+
+.
+ Now 
+\begin_inset Formula $B\setminus\{0\}$
+\end_inset
+
+ is either connected if 
+\begin_inset Formula $n\geq2$
+\end_inset
+
+ or has two connected components of 
+\begin_inset Formula $n=1$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $U\setminus\{p\}$
+\end_inset
+
+ has four connected components, there can be no homeomorphism from 
+\begin_inset Formula $U\setminus\{p\}$
+\end_inset
+
+ to 
+\begin_inset Formula $B\setminus\{p\}$
+\end_inset
+
+.
+ This contradiction proves that the cross is not locally Euclidean at 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}[scale=1/2]
+\backslash
+begin{axis}[axis lines=none, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmax=1, xmin=-1, ymax=1, ymin=-1, ]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red, samples=60] ({0},{x});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red, samples=60] ({x},{0});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Compatible Charts
+\end_layout
+
+\begin_layout Standard
+Two charts 
+\begin_inset Formula $(U,\phi:U\to\mathbb{R}^{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $(V,\psi:V\to\mathbb{R}^{n})$
+\end_inset
+
+ of a topological manifold are 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+
+\series bold
+ compatible
+\series default
+ if the two maps 
+\begin_inset Formula 
+\[
+\phi\circ\psi^{-1}:\psi(U\cap V)\to\phi(U\cap V)\qquad\psi\circ\phi^{-1}:\phi(U\cap V)\to\psi(U\cap V)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+are 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+.
+ These two maps are called the 
+\series bold
+transition functions
+\series default
+ between the charts.
+ If 
+\begin_inset Formula $U\cap V$
+\end_inset
+
+ is empty, then the two charts are automatically 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ compatible.
+ To simplify this notation, we will sometimes write 
+\begin_inset Formula $U_{ij}$
+\end_inset
+
+ for 
+\begin_inset Formula $U_{i}\cap U_{j}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{ijk}$
+\end_inset
+
+ for 
+\begin_inset Formula $U_{i}\cap U_{j}\cap U_{k}$
+\end_inset
+
+.
+ We will also sometimes write 
+\begin_inset Formula $\phi_{ij}$
+\end_inset
+
+ for 
+\begin_inset Formula $\phi_{i}\circ\phi_{j}^{-1}$
+\end_inset
+
+.
+ Since we are interested only in 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+-compatible charts, we often omit mention of 
+\begin_inset Formula $"C^{\infty}"$
+\end_inset
+
+ and speak simply of compatible charts.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ compatibility is clearly reflexive and symmetric, but not necessarily transitiv
+e.
+ Indeed, suppose 
+\begin_inset Formula $(U_{1},\phi_{1})$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ compatible with 
+\begin_inset Formula $(U_{2},\phi_{2})$
+\end_inset
+
+, and 
+\begin_inset Formula $(U_{2},\phi_{2})$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ compatible with 
+\begin_inset Formula $(U_{3},\phi_{3})$
+\end_inset
+
+.
+ Note that the three coordinate functions are simultaneously defined only
+ on the triple intersection 
+\begin_inset Formula $U_{123}$
+\end_inset
+
+.
+ Thus, the composite
+\begin_inset Formula 
+\[
+\phi_{3}\circ\phi_{1}^{-1}=(\phi_{3}\circ\phi_{2})^{-1}\circ(\phi_{2}\circ\phi_{1}^{-1})
+\]
+
+\end_inset
+
+is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+, but only on 
+\begin_inset Formula $\phi_{1}(U_{123})$
+\end_inset
+
+, not necessarily on 
+\begin_inset Formula $\phi_{1}(U_{13})$
+\end_inset
+
+.
+ A priori we know nothing about 
+\begin_inset Formula $\phi_{3}\circ\phi_{1}^{-1}$
+\end_inset
+
+ on 
+\begin_inset Formula $\phi_{1}(U_{13}\setminus U_{123})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Atlas
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ 
+\series bold
+atlas
+\series default
+ or simply an 
+\series bold
+atlas 
+\series default
+on a locally Euclidean space 
+\begin_inset Formula $M$
+\end_inset
+
+ is a collection 
+\begin_inset Formula $\mathcal{A}=\{(U_{i},\phi_{i})\}_{i\in I}$
+\end_inset
+
+ of pairwise 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ compatible charts such that 
+\begin_inset Formula $\{U_{i}\}_{i\in I}$
+\end_inset
+
+ covers 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ (A 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ atlas on a circle).
+ The unit circle 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ in the complex plane 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ may be described as the set of points 
+\begin_inset Formula $\{e^{2\pi it}\in\mathbb{C}\mid0\leq t\leq1\}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $U_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{2}$
+\end_inset
+
+ be the two open subsets of 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+U_{1}=\{e^{2\pi it}\in\mathbb{C}\mid-\frac{1}{2}<t<\frac{1}{2}\}\qquad U_{2}=\{e^{2\pi it}\in\mathbb{C}\mid0<t<1\}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=red] (2,0) circle (1cm);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=red] (-2,0) circle (1cm);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=white, inner sep=0.5pt, label=below left:$$] (x) at (-3,0)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=white, inner sep=0.5pt, label=below left:$$] (x) at (3,0)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label=below:$ U_1 $] (x) at (-2,2) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label=below:$ U_2 $] (x) at (2,2) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and define 
+\begin_inset Formula $\phi_{i}:U_{i}\to\mathbb{R}$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,2$
+\end_inset
+
+ by 
+\begin_inset Formula 
+\[
+\phi_{1}(e^{2\pi it})=t\qquad\phi_{2}(e^{2\pi it})=t
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Both 
+\begin_inset Formula $\phi_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{2}$
+\end_inset
+
+ are branches of the complex log funciton 
+\begin_inset Formula $(1/i)\log z$
+\end_inset
+
+ and are homeomorphisms onto their respective images.
+ Thus 
+\begin_inset Formula $(U_{1},\phi_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $(U_{2},\phi_{2})$
+\end_inset
+
+ are charts on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+.
+ The intersection 
+\begin_inset Formula $U_{12}$
+\end_inset
+
+ consists of two connected components, the lower half 
+\begin_inset Formula $A$
+\end_inset
+
+ and the upper half 
+\begin_inset Formula $B$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+A=\{e^{2\pi it}\mid-\frac{1}{2}<t<0\}\qquad B=\{e^{2\pi it}\mid0<t<\frac{1}{2}\}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+with 
+\begin_inset Formula 
+\[
+\phi_{1}(U_{12})=\phi_{1}(A\cup B)=\phi_{1}(A)\cup\phi_{1}(B)=\left(-\frac{1}{2},0\right)\cup\left(0,\frac{1}{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\phi_{2}(U_{12})=\phi_{2}(A\cup B)=\phi_{2}(A)\cup\phi_{2}(B)=\left(\frac{1}{2},1\right)\cup\left(0,\frac{1}{2}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The transisition function 
+\begin_inset Formula $\phi_{2}\circ\phi_{1}^{-1}:\phi_{1}(U_{12})\to\phi_{2}(U_{12})$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\[
+(\phi_{2}\circ\phi_{1}^{-1})(t)=\begin{cases}
+t+1 & \mbox{for }t\in\left(-\frac{1}{2},0\right)\\
+t & \mbox{for }t\in\left(0,\frac{1}{2}\right)
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly, 
+\begin_inset Formula 
+\[
+(\phi_{1}\circ\phi_{2}^{-1})(t)=\begin{cases}
+t-1 & \mbox{for }t\in\left(\frac{1}{2},1\right)\\
+t & \mbox{for }t\in\left(0,\frac{1}{2}\right)
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, 
+\begin_inset Formula $(U_{1},\phi_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $(U_{2},\phi_{2})$
+\end_inset
+
+ are 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+-compatible charts and form a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ atlas on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Compatibility With Atlas
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathcal{A}=\{(U_{i},\phi_{i})\}_{i\in I}$
+\end_inset
+
+ be an atlas a locally Euclidean space.
+ We say that a chart 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ is 
+\series bold
+compatible with
+\series default
+ 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ if it is compatible with all the charts 
+\begin_inset Formula $(U_{i},\phi_{i})$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{compatible}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{A}=\{(U_{i},\phi_{i})\}_{i\in I}$
+\end_inset
+
+ be an atlas on a locally Euclidean space.
+ If two charts 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ and 
+\begin_inset Formula $(W,\sigma)$
+\end_inset
+
+ are both compatible with the atlas 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+, then they are compatible with each other.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We will show that 
+\begin_inset Formula $\sigma\circ\psi^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ on 
+\begin_inset Formula $\psi(V\cap W)$
+\end_inset
+
+.
+ That 
+\begin_inset Formula $\psi\circ\sigma^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ on 
+\begin_inset Formula $\sigma(V\cap W)$
+\end_inset
+
+ will follow by a similar argument.
+ For all 
+\begin_inset Formula $i\in I$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+\sigma\circ\psi^{-1}|_{\psi(V\cap W\cap U_{i})}=(\sigma\circ\phi_{i}^{-1})\circ(\phi_{i}\circ\psi^{-1})|_{\psi(V\cap W\cap U_{i})}
+\]
+
+\end_inset
+
+is 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ on 
+\begin_inset Formula $\psi(V\cap W\cap U_{i})$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $\sigma\circ\psi^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ on 
+\begin_inset Formula 
+\[
+\bigcup_{i\in I}\psi(V\cap W\cap U_{i})=\psi(V\cap W).
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Standardized and Maximal Atlas
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+We say that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is 
+\series bold
+standardized 
+\series default
+if it has no repetitions in the sense that whenever 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+ we have that either 
+\begin_inset Formula $U_{i}\neq U_{j}$
+\end_inset
+
+ or, when 
+\begin_inset Formula $U_{i}=U_{j}$
+\end_inset
+
+, the maps 
+\begin_inset Formula $\phi_{i},\phi_{j}:U_{i}\to\mathbb{R}^{n_{i}}$
+\end_inset
+
+ do not coincide.
+ If 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{A}'$
+\end_inset
+
+ are standarized 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ atlases on a locally Euclidean space, then it makes sense to ask if 
+\begin_inset Formula $\mathcal{A}\subseteq\mathcal{A}'$
+\end_inset
+
+.
+ This means that each 
+\begin_inset Formula $(\phi,U)\in\mathcal{A}$
+\end_inset
+
+ is equal to some 
+\begin_inset Formula $(\phi',U')\in\mathcal{A}'$
+\end_inset
+
+, where 
+\begin_inset Quotes eld
+\end_inset
+
+equality
+\begin_inset Quotes erd
+\end_inset
+
+ means 
+\begin_inset Formula $U=U'$
+\end_inset
+
+ and the maps 
+\begin_inset Formula $\phi,\phi':U\rightrightarrows\mathbb{R}^{n}$
+\end_inset
+
+ coincide.
+ We say that a standardized atlas 
+\begin_inset Formula $\mathcal{A}'$
+\end_inset
+
+ 
+\series bold
+dominates 
+\series default
+a standardized atlas 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ if 
+\begin_inset Formula $\mathcal{A}\subseteq\mathcal{A}'$
+\end_inset
+
+ in the senese just defined.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Unless otherwise specified, we shall always assume that a 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ atlas is standardized.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+An atlas 
+\begin_inset Formula $\mathfrak{M}$
+\end_inset
+
+ on a locally Euclidean space is said to be 
+\series bold
+maximal
+\series default
+ if it is not strictly contained in a larger atlas.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ Manifolds
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ manifold is a topological manifold 
+\begin_inset Formula $M$
+\end_inset
+
+ together with a maximal atlas.
+ If 
+\begin_inset Formula $k=\infty$
+\end_inset
+
+, then we say 
+\begin_inset Formula $M$
+\end_inset
+
+ is 
+\series bold
+smooth 
+\series default
+and the maximal atlas is called a 
+\series bold
+differentiable structure
+\series default
+ on 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ A manifold is said to have dimension 
+\begin_inset Formula $n$
+\end_inset
+
+ if all of its connected components have dimension 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ A 
+\begin_inset Formula $1$
+\end_inset
+
+-dimensional manifold is also called a 
+\series bold
+curve
+\series default
+.
+ A 
+\begin_inset Formula $2$
+\end_inset
+
+-dimensional manifold is a 
+\series bold
+surface
+\series default
+, and an 
+\begin_inset Formula $n$
+\end_inset
+
+-dimensional manifold an 
+\begin_inset Formula $n$
+\end_inset
+
+-manifold.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In practice, to check that a topological manifold 
+\begin_inset Formula $M$
+\end_inset
+
+ is a 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ manifold, it is not necessary to exhibit a maximal atlas.
+ The existence of any atlas on 
+\begin_inset Formula $M$
+\end_inset
+
+ will do, because of the following proposition.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\end_layout
+
+\end_inset
+
+ Any atlas 
+\begin_inset Formula $\mathcal{A}=\{(U_{i},\phi_{i})\}_{i\in I}$
+\end_inset
+
+ on a locally Euclidean space is contained in a unique maximal atlas.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Adjoin to the atlas 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ all charts 
+\begin_inset Formula $(V_{i},\psi_{i})$
+\end_inset
+
+ that are compatible with 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+.
+ By 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{compatible})
+\end_layout
+
+\end_inset
+
+, the charts 
+\begin_inset Formula $(V_{i},\psi_{i})$
+\end_inset
+
+ are compatible with one another.
+ So the enlarged collection of charts is an atlas.
+ Any chart compatible with the new atlas must be compatible with the original
+ atlas 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ and so by construction belongs to the new atlas.
+ This proves existence.
+ If 
+\begin_inset Formula $\mathfrak{M}'$
+\end_inset
+
+ is another maximal atlas containing 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+, then all the charts in 
+\begin_inset Formula $\mathfrak{M}'$
+\end_inset
+
+ are compatible with 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ and so by construction must belong to 
+\begin_inset Formula $\mathfrak{M}$
+\end_inset
+
+.
+ This proves 
+\begin_inset Formula $\mathfrak{M}'\subset\mathfrak{M}$
+\end_inset
+
+.
+ Since both are maximal, 
+\begin_inset Formula $\mathfrak{M}'=\mathfrak{M}$
+\end_inset
+
+.
+ This proves uniqueness.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In summary, to show that a topological space 
+\begin_inset Formula $M$
+\end_inset
+
+ is a 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ manifold, it suffices to check that 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $M$
+\end_inset
+
+ is Hausdorff and second countable
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $M$
+\end_inset
+
+ has a 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ atlas.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ A topological manifold can be endowed with different (non-compatible) different
+iable structures.
+ For instance, consider 
+\begin_inset Formula $X=\mathbb{R}$
+\end_inset
+
+.
+ We can give the space the structure of a 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ manifold using the single chart 
+\begin_inset Formula $(\mathbb{R},\varphi_{1})$
+\end_inset
+
+, where 
+\begin_inset Formula $\varphi_{1}:\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+ is given by 
+\begin_inset Formula $x\to x$
+\end_inset
+
+.
+ We can also give the space the structure of a 
+\begin_inset Formula $C^{k}$
+\end_inset
+
+ manifold using the single chart 
+\begin_inset Formula $(\mathbb{R},\varphi_{2})$
+\end_inset
+
+, where 
+\begin_inset Formula $\varphi_{2}:\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+ is given by 
+\begin_inset Formula $x\mapsto x^{3}$
+\end_inset
+
+.
+ These two charts are not 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ compatible since 
+\begin_inset Formula $\varphi_{1}\circ\varphi_{2}^{-1}:\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+ is given by 
+\begin_inset Formula $x\mapsto x^{\frac{1}{3}}$
+\end_inset
+
+, and this is 
+\emph on
+not 
+\emph default
+
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ Indeed, 
+\begin_inset Formula $\frac{d}{dx}\left(x^{\frac{1}{3}}\right)=\frac{1}{3}x^{-\frac{2}{3}}$
+\end_inset
+
+ is not continuous at 
+\begin_inset Formula $x=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+An Atlas For a Product
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propproductofmanifolds}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $\mathfrak{U}=\{(U_{i},\phi_{i})\mid i\in I\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{V}=\{(V_{j},\psi_{j})\mid j\in J\}$
+\end_inset
+
+ are 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ atlases for the manifolds 
+\begin_inset Formula $M$
+\end_inset
+
+ and 
+\begin_inset Formula $N$
+\end_inset
+
+ of dimensions 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $n$
+\end_inset
+
+, respectively, then the collection 
+\begin_inset Formula 
+\[
+\mathfrak{U}\times\mathfrak{V}=\{(U_{i}\times V_{j},\phi_{i}\times\psi_{j}:U_{i}\times V_{j}\to\mathbb{R}^{m}\times\mathbb{R}^{n})\mid(i,j)\in I\times J\}
+\]
+
+\end_inset
+
+of charts is a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ atlas on 
+\begin_inset Formula $M\times N$
+\end_inset
+
+.
+ Therefore, 
+\begin_inset Formula $M\times N$
+\end_inset
+
+ is a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ manifold of dimension 
+\begin_inset Formula $m+n$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Clearly the set 
+\begin_inset Formula $\left\{ U_{i}\times V_{j}\mid(i,j)\in I\times J\right\} $
+\end_inset
+
+ covers 
+\begin_inset Formula $M\times N$
+\end_inset
+
+, so we just need to show that any two charts in 
+\begin_inset Formula $\mathfrak{U}\times\mathfrak{V}$
+\end_inset
+
+ are pairwise compatible.
+ Let 
+\begin_inset Formula $(U_{1}\times V_{1},\phi_{1}\times\psi_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $(U_{2}\times V_{2},\phi_{2}\times\psi_{2})$
+\end_inset
+
+ be two charts in 
+\begin_inset Formula $\mathfrak{U}\times\mathfrak{V}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\left(\phi_{1}\times\psi_{1}\right)\circ\left(\phi_{2}\times\psi_{2}\right)^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+, since 
+\begin_inset Formula 
+\[
+\left(\phi_{1}\times\psi_{1}\right)\circ\left(\phi_{2}\times\psi_{2}\right)^{-1}=\left(\phi_{1}\circ\phi_{2}^{-1}\right)\times\left(\psi_{2}\times\psi_{2}^{-1}\right),
+\]
+
+\end_inset
+
+and both 
+\begin_inset Formula $\phi_{1}\circ\phi_{2}^{-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{2}\times\psi_{2}^{-1}$
+\end_inset
+
+ are 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on their respective domains.
+ The same proof shows that 
+\begin_inset Formula $\left(\phi_{2}\times\psi_{2}\right)\circ\left(\phi_{1}\times\psi_{1}\right)^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathfrak{U}\times\mathfrak{V}$
+\end_inset
+
+ is a collection of pairwise 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ compatible charts that cover 
+\begin_inset Formula $M\times N$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ It follows from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propproductofmanifolds})
+\end_layout
+
+\end_inset
+
+ that the infinite cylinder 
+\begin_inset Formula $S^{1}\times\mathbb{R}$
+\end_inset
+
+ and the torus 
+\begin_inset Formula $S^{1}\times S^{1}$
+\end_inset
+
+ are manifolds.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Examples of Smooth Manifolds
+\end_layout
+
+\begin_layout Subsubsection
+Euclidean Space
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ (Euclidean space).
+ The Euclidean space 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ is a smooth manifold with a single chart 
+\begin_inset Formula $(\mathbb{R}^{n},\text{id})$
+\end_inset
+
+.
+ We use 
+\begin_inset Formula $x_{1},\dots,x_{n}$
+\end_inset
+
+ to denote coordinates functions and 
+\begin_inset Formula $a_{1},\dots,a_{n}$
+\end_inset
+
+ to denote real numbers.
+ Thus, if 
+\begin_inset Formula $p=(a_{1},\dots,a_{n})$
+\end_inset
+
+ is a point in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+, we have 
+\begin_inset Formula $x_{1}(p)=a_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $x_{2}(p)=a_{2}$
+\end_inset
+
+, and etc...
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ The real half line 
+\begin_inset Formula $\mathbb{R}_{>0}:\{a\in\mathbb{R}\mid a>0\}$
+\end_inset
+
+ is also a smooth manifold, with a single chart 
+\begin_inset Formula $(\mathbb{R}_{>0},\text{id})$
+\end_inset
+
+.
+ In fact, 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+ is homeomorphic to 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ A homeomorphism from 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\text{log}:\mathbb{R}_{>0}\to\mathbb{R}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now consider the half-open interval 
+\begin_inset Formula $(0,2\pi)$
+\end_inset
+
+.
+ Open sets of the form 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+ where and 
+\begin_inset Formula $0\leq a<b<2\pi$
+\end_inset
+
+ form a basis for this topological space.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Right-Half Infinite Strip and the Right-Half Plane
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $M=\mathbb{R}_{>0}\times$
+\end_inset
+
+
+\begin_inset Formula $\left(\frac{-\pi}{2},\frac{\pi}{2}\right)$
+\end_inset
+
+.
+ We illustrate this space below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw [dashed, fill=gray!20] (-10,-2) rectangle (10,2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white] (10,2) -- (10,-2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=red] (-10,0.5) -- (10,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=blue] (-10,0) -- (10,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below:$ (1 
+\backslash
+text{,} 0 ) $] (a) at (-9,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=above:$ (r 
+\backslash
+text{,} 
+\backslash
+theta ) $] (a) at (0,0.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now let 
+\begin_inset Formula $N=\mathbb{R}_{>0}\times\mathbb{R}$
+\end_inset
+
+ be the right-half plane.
+ We illustrate this space below: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw [dashed, fill=gray!20] (-10,-5) rectangle (10,5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white] (-10,5) -- (10,5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white] (10,5) -- (10,-5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white] (10,-5) -- (-10,-5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=red] (-10,0) -- (10,5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=blue] (-10,0) -- (10,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below:$ (1 
+\backslash
+text{,} 0 ) $] (a) at (-9,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=above:$ (a 
+\backslash
+text{,} b ) $] (a) at (0,2.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can give both 
+\begin_inset Formula $M$
+\end_inset
+
+ and 
+\begin_inset Formula $N$
+\end_inset
+
+ the structure of a smooth manifold by simply using the identity charts.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $\varphi:M\to N$
+\end_inset
+
+ be given by 
+\begin_inset Formula $\varphi(r,\theta)=(\varphi_{1}(r,\theta),\varphi_{2}(r,\theta))$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\begin{align*}
+\varphi_{1}(r,\theta) & =r\sin\theta\\
+\varphi_{2}(r,\theta) & =r\cos\theta
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is a diffeomorphism from 
+\begin_inset Formula $M$
+\end_inset
+
+ to 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ The Jacobian of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ at a point 
+\begin_inset Formula $(r,\theta)\in M$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+J_{(r,\theta)}(\varphi)=\begin{pmatrix}\sin\theta & r\cos\theta\\
+\cos\theta & -r\sin\theta
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The inverse to 
+\begin_inset Formula $\varphi:M\to N$
+\end_inset
+
+ is 
+\begin_inset Formula $\psi:N\to M$
+\end_inset
+
+, given by 
+\begin_inset Formula $\psi(a,b)=(\psi_{1}(a,b),\psi_{2}(a,b))$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\begin{align*}
+\psi_{1}(a,b) & =\sqrt{a^{2}+b^{2}}\\
+\psi_{2}(a,b) & =\arctan\left(\frac{a}{b}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Jacobian of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ at a point 
+\begin_inset Formula $(a,b)\in N$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+J_{(a,b)}(\psi)=\frac{1}{\sqrt{a^{2}+b^{2}}}\begin{pmatrix}a & b\\
+-b & a
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Manifolds of Dimension Zero
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ (Manifolds of dimension zero).
+ In a manifold of dimension zero, every singleton subset is homeomorphic
+ to 
+\begin_inset Formula $\mathbb{R}^{0}$
+\end_inset
+
+ and so is open.
+ Thus, a zero-dimensional manifold is a discrete set.
+ By second countability, this discrete set must be countable.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Graph of a Smooth Function
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ (Graph of a smooth function).
+ For a subset 
+\begin_inset Formula $A\subset\mathbb{R}^{n}$
+\end_inset
+
+ and a function 
+\begin_inset Formula $f:A\to\mathbb{R}^{n}$
+\end_inset
+
+, the 
+\series bold
+graph
+\series default
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+ is defined to be the subset
+\begin_inset Formula 
+\[
+\Gamma(f)=\{(p,f(p))\in A\times\mathbb{R}^{n}\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $U$
+\end_inset
+
+ is an open subset of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $f:U\to\mathbb{R}^{n}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+, then the two maps 
+\begin_inset Formula 
+\[
+\phi:\Gamma(f)\to U\qquad(p,f(p))\mapsto p
+\]
+
+\end_inset
+
+and
+\begin_inset Formula 
+\[
+(1,f):U\to\Gamma(f)\qquad p\mapsto(p,f(p))
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+are continuous and inverse to each other, and so are homeomorphisms.
+ The graph 
+\begin_inset Formula $\Gamma(f)$
+\end_inset
+
+ of a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ function 
+\begin_inset Formula $f:U\to\mathbb{R}^{n}$
+\end_inset
+
+ has an atlas with a single chart 
+\begin_inset Formula $(\Gamma(f),\phi)$
+\end_inset
+
+, and is therefore a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ manifold.
+ This shows that many familiar surfaces of calculus, for example an elliptic
+ paraboloid or a hyperbolic paraboloid, are manifolds.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Circle 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{examplecirclestereographic}
+\end_layout
+
+\end_inset
+
+ (Circle) Let 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ be the unit circle centered at the origin in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+S^{1}=\{(x,y)\in\mathbb{R}^{2}\mid x^{2}+y^{2}=1\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We shall describe an atlas on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ using stereographic projection.
+ Let 
+\begin_inset Formula $U_{1}=S^{1}\backslash\{(-1,0)\}$
+\end_inset
+
+.
+ Consider the line 
+\begin_inset Formula $L$
+\end_inset
+
+ which passes through the points 
+\begin_inset Formula $(-1,0)$
+\end_inset
+
+ and 
+\begin_inset Formula $(0,t)$
+\end_inset
+
+ where 
+\begin_inset Formula $t\in\mathbb{R}$
+\end_inset
+
+.
+ The equation of this line is given by 
+\begin_inset Formula 
+\[
+Y=t(X+1).
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $L$
+\end_inset
+
+ passes through 
+\begin_inset Formula $(-1,0)$
+\end_inset
+
+ and is not tangent to 
+\begin_inset Formula $(-1,0)$
+\end_inset
+
+, it must pass through a unique point 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+ in 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+.
+ This is illustrated in the image below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = none, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-3,xmax=3,ymin=-3,ymax=3,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick=
+\backslash
+empty ,ytick=
+\backslash
+empty ,
+\end_layout
+
+\begin_layout Plain Layout
+
+axis equal,
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,samples=80] ({cos(deg(x))},{sin(deg(x))}); 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,samples=80] ({0},{x}); 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,samples=80] ({x},{2*x + 2}); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.3pt, label=left:$ (-1
+\backslash
+text{,}0) $] (a) at (axis cs:-1,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.3pt, label=left:$(x
+\backslash
+text{,}y)$] (c) at (axis cs:-0.6,0.8) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.3pt, label=left:$(0
+\backslash
+text{,}t)$] (b) at (axis cs:0,2) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $(x,y)$
+\end_inset
+
+ lies on the line 
+\begin_inset Formula $L$
+\end_inset
+
+ and the unit circle, we get the relations
+\begin_inset Formula 
+\begin{align*}
+x^{2}+y^{2}-1 & =0,\\
+y-t(x+1) & =0.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the second relation, we have 
+\begin_inset Formula $y=t(x+1)$
+\end_inset
+
+.
+ Plugging in 
+\begin_inset Formula $t(x+1)$
+\end_inset
+
+ for 
+\begin_inset Formula $y$
+\end_inset
+
+ in the first relation, we get
+\begin_inset Formula 
+\[
+t^{2}=\frac{(1-x)^{2}}{(1+x)^{2}}=\frac{1-x}{1+x}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we solve for 
+\begin_inset Formula $x$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $t$
+\end_inset
+
+, to get:
+\begin_inset Formula 
+\begin{align*}
+x & =\frac{1-t^{2}}{1+t^{2}},\\
+y & =\frac{2t}{1+t^{2}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now, let 
+\begin_inset Formula $\phi_{1}:U_{1}\to\mathbb{R}$
+\end_inset
+
+ be given by 
+\begin_inset Formula 
+\[
+(x,y)\mapsto\frac{y}{1+x}.
+\]
+
+\end_inset
+
+This map is clearly 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ in its domain 
+\begin_inset Formula $U_{1}$
+\end_inset
+
+, since 
+\begin_inset Formula $x\neq-1$
+\end_inset
+
+, and the inverse 
+\begin_inset Formula $\phi_{1}^{-1}:\mathbb{R}\to U_{1}$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\[
+t\mapsto\left(\frac{1-t^{2}}{1+t^{2}},\frac{2t}{1+t^{2}}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next, let 
+\begin_inset Formula $U_{2}=S^{1}\backslash\{(1,0)\}$
+\end_inset
+
+.
+ Following the same line of reasoning as the paragraph above, let 
+\begin_inset Formula $\phi_{2}:U_{2}\to\mathbb{R}$
+\end_inset
+
+ be given by 
+\begin_inset Formula 
+\[
+(x,y)\mapsto\frac{y}{1-x}.
+\]
+
+\end_inset
+
+Again, this map is clearly 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ in its domain 
+\begin_inset Formula $U_{2}$
+\end_inset
+
+, since 
+\begin_inset Formula $x\neq1$
+\end_inset
+
+, and the inverse 
+\begin_inset Formula $\phi_{2}^{-1}:\mathbb{R}\to U_{2}$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\[
+t\mapsto\left(\frac{t^{2}-1}{1+t^{2}},\frac{2t}{1+t^{2}}\right).
+\]
+
+\end_inset
+
+ 
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let us calculate the transition map 
+\begin_inset Formula $\phi_{12}:=\phi_{1}\circ\phi_{2}^{-1}$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{align*}
+\phi_{12}(t) & =(\phi_{1}\circ\phi_{2}^{-1})(t)\\
+ & =\phi_{1}\left(\frac{t^{2}-1}{1+t^{2}},\frac{2t}{1+t^{2}}\right)\\
+ & =\frac{1}{t}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ We think of 
+\begin_inset Formula $t$
+\end_inset
+
+ as a local coordinate of 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x,y$
+\end_inset
+
+ as global coordinates of 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Projective Line
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathbb{P}^{1}(\mathbb{R})$
+\end_inset
+
+ be the projective line over 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ Define in 
+\begin_inset Formula $\mathbb{P}^{1}(\mathbb{R})$
+\end_inset
+
+ the two charts given by
+\begin_inset Formula 
+\[
+U_{0}=D(X_{0})=\{(x_{0}:x_{1})\in\mathbb{P}^{1}(\mathbb{C})\mid x_{0}\neq0\}\qquad\phi_{0}(x_{0}:x_{1})=\frac{x_{1}}{x_{0}}\in\mathbb{R},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+U_{1}=D(X_{1})=\{(x_{0}:x_{1})\in\mathbb{P}^{1}(\mathbb{C})\mid x_{1}\neq0\}\qquad\phi_{1}(x_{0}:x_{1})=\frac{x_{0}}{x_{1}}\in\mathbb{R}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These maps are clearly 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ in their domains.
+ The inverse maps are given by 
+\begin_inset Formula 
+\[
+\phi_{0}^{-1}(t)=(1:t)\in U_{0}\qquad\phi_{1}^{-1}(t)=(t:1)\in U_{1}.
+\]
+
+\end_inset
+
+Now let's calculate the transition map 
+\begin_inset Formula $\phi_{01}:=\phi_{0}\circ\phi_{1}^{-1}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\phi_{0}\circ\phi_{1}^{-1}(t) & =\phi_{0}\circ\phi_{1}^{-1}\left(t\right)\\
+ & =\phi_{0}\left(t:1\right)\\
+ & =\frac{1}{t}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Recall that this is the same transition map we calculated in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Example~(
+\backslash
+ref{examplecirclestereographic})
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sphere 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{examplesphere}
+\end_layout
+
+\end_inset
+
+ (Sphere) Let 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ be the unit sphere 
+\begin_inset Formula 
+\[
+S^{2}=\{(a,b,c)\in\mathbb{R}^{3}\mid a^{2}+b^{2}+c^{2}=1\}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+in 
+\begin_inset Formula $\mathbb{R}^{3}$
+\end_inset
+
+.
+ Define in 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ the six charts corresponding to the six hemispheres - the front, rear,
+ right , left, upper, and lower hemispheres
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+U_{1}=\{(a,b,c)\in S^{2}\mid a>0\}\qquad\phi_{1}(a,b,c)=(b,c)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+U_{2}=\{(a,b,c)\in S^{2}\mid a<0\}\qquad\phi_{2}(a,b,c)=(b,c)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+U_{3}=\{(a,b,c)\in S^{2}\mid b>0\}\qquad\phi_{3}(a,b,c)=(a,c)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+U_{4}=\{(a,b,c)\in S^{2}\mid b<0\}\qquad\phi_{4}(a,b,c)=(a,c)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+U_{5}=\{(a,b,c)\in S^{2}\mid c>0\}\qquad\phi_{5}(a,b,c)=(a,b)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+U_{6}=\{(a,b,c)\in S^{2}\mid c<0\}\qquad\phi_{6}(a,b,c)=(a,b)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The open set 
+\begin_inset Formula $U_{14}$
+\end_inset
+
+ is 
+\begin_inset Formula $\{(a,b,c)\in S^{2}\mid b<0<a\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{4}(U_{14})=\{(a,c)\in\mathbb{R}^{2}\mid a^{2}+c^{2}<1\text{ and }a>0\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let us do some computations.
+ First, let's compute the transition map 
+\begin_inset Formula $\phi_{14}$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{align*}
+\phi_{14}(a,c) & =\phi_{1}\circ\phi_{4}^{-1}(a,c)\\
+ & =\phi_{1}\left(a,\sqrt{1-c^{2}-a^{2}},c\right)\\
+ & =\left(\sqrt{1-c^{2}-a^{2}},c\right).
+\end{align*}
+
+\end_inset
+
+It is easy to see that this is indeed a smooth map in its domain (since
+ 
+\begin_inset Formula $1-c^{2}-a^{2}\neq0$
+\end_inset
+
+).
+ The Jacobian of 
+\begin_inset Formula $\phi_{14}$
+\end_inset
+
+ at the point 
+\begin_inset Formula $(a,c)$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+J_{(a,c)}(\phi_{14})=\begin{pmatrix}\frac{a}{\sqrt{1-c^{2}-a^{2}}} & \frac{c}{\sqrt{1-c^{2}-a^{2}}}\\
+0 & 1
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now let's compute the transition map 
+\begin_inset Formula $\phi_{45}$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{align*}
+\phi_{45}(a,b) & =\phi_{4}\circ\phi_{5}^{-1}(a,b)\\
+ & =\phi_{4}\left(a,b,\sqrt{1-a^{2}-b^{2}}\right)\\
+ & =\left(a,\sqrt{1-a^{2}-b^{2}}\right).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+The Sphere 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{nsphere}
+\end_layout
+
+\end_inset
+
+Using stereographic projections (from the north pole and the south pole),
+ we can define two charts on 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ and show that 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ is a smooth manifold.
+ Let 
+\begin_inset Formula $p_{N}=(0,\dots,0,1)\in\mathbb{R}^{n+1}$
+\end_inset
+
+ be the north pole and 
+\begin_inset Formula $p_{S}=(0,\dots,0,-1)\in\mathbb{R}^{n+1}$
+\end_inset
+
+ be the south pole.
+ Define the maps 
+\begin_inset Formula $\phi_{N}:S^{n}\backslash\{p_{N}\}\to\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{S}:S^{n}\backslash\{p_{S}\}$
+\end_inset
+
+, called 
+\series bold
+stereographic projection 
+\series default
+from the north pole (resp.
+ south pole), by 
+\begin_inset Formula 
+\[
+\phi_{N}(x_{1},\dots,x_{n+1})=\frac{1}{1-x_{n+1}}(x_{1},\dots,x_{n})\quad\text{and}\quad\phi_{S}(x_{1},\dots,x_{n+1})=\frac{1}{1+x_{n+1}}(x_{1},\dots,x_{n}).
+\]
+
+\end_inset
+
+The inverse stereographic projections are given by 
+\begin_inset Formula 
+\[
+\phi_{N}^{-1}(x_{1},\dots,x_{n})=\frac{1}{1+\sum_{i=1}^{n}x_{i}^{2}}\left(2x_{1},\dots,2x_{n},-1+\sum_{i=1}^{n}x_{i}^{2}\right)
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\phi_{S}^{-1}(x_{1},\dots,x_{n})=\frac{1}{1+\sum_{i=1}^{n}x_{i}^{2}}\left(2x_{1},\dots,2x_{n},1-\sum_{i=1}^{n}x_{i}^{2}\right).
+\]
+
+\end_inset
+
+Thus, if we let 
+\begin_inset Formula $U_{N}=S^{n}\backslash\{p_{N}\}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{S}=S^{n}\backslash\{p_{S}\}$
+\end_inset
+
+, we see that 
+\begin_inset Formula $U_{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{S}$
+\end_inset
+
+ are two open subsets convering 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+, both homeomorphic to 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ Furthermore, it is easily checked that on the overlap, 
+\begin_inset Formula $U_{N}\cap U_{S}$
+\end_inset
+
+, the transition maps 
+\begin_inset Formula 
+\[
+\phi_{S}\circ\phi_{N}^{-1}=\phi_{N}\circ\phi_{S}^{-1}
+\]
+
+\end_inset
+
+are given by 
+\begin_inset Formula 
+\[
+(x_{1},\dots,x_{n})\mapsto\frac{1}{\sum_{i=1}^{n}x_{i}^{2}}(x_{1},\dots,x_{n}),
+\]
+
+\end_inset
+
+that is, the inversion of center 
+\begin_inset Formula $p_{O}=(0,\dots,0)$
+\end_inset
+
+ and power 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Clearly, this map is smooth on 
+\begin_inset Formula $\mathbb{R}^{n}\backslash\{O\}$
+\end_inset
+
+, so we conclude that 
+\begin_inset Formula $(U_{N},\phi_{N})$
+\end_inset
+
+ and 
+\begin_inset Formula $(U_{S},\phi_{S})$
+\end_inset
+
+ form a smooth atlas for 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Real Projective Plane
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{exampleprojectiveplane}
+\end_layout
+
+\end_inset
+
+ (Projective Plane) Let 
+\begin_inset Formula $\mathbb{P}^{2}(\mathbb{R})$
+\end_inset
+
+ be the projective plane over 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ Define in 
+\begin_inset Formula $\mathbb{P}^{2}(\mathbb{R})$
+\end_inset
+
+ the three charts given by
+\begin_inset Formula 
+\[
+U_{0}=D(X_{0})=\{(x_{0}:x_{1}:x_{2})\in\mathbb{P}^{2}(\mathbb{R})\mid x_{0}\neq0\}\qquad\phi_{0}(x_{0}:x_{1}:x_{2})=\left(\frac{x_{1}}{x_{0}},\frac{x_{2}}{x_{0}}\right)=:(a,b)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+U_{1}=D(X_{1})=\{(x_{0}:x_{1}:x_{2})\in\mathbb{P}^{2}(\mathbb{R})\mid x_{1}\neq0\}\qquad\phi_{1}(x_{0}:x_{1}:x_{2})=\left(\frac{x_{0}}{x_{1}},\frac{x_{2}}{x_{1}}\right)=:(c,d)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+U_{2}=D(X_{2})=\{(x_{0}:x_{1}:x_{2})\in\mathbb{P}^{2}(\mathbb{R})\mid x_{2}\neq0\}\qquad\phi_{2}(x_{0}:x_{1}:x_{2})=\left(\frac{x_{0}}{x_{2}},\frac{x_{1}}{x_{2}}\right)=:(e,f)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The reason the map 
+\begin_inset Formula $\phi_{1}$
+\end_inset
+
+ is a homeomorphism is because given that 
+\begin_inset Formula $x_{1}\neq0$
+\end_inset
+
+, we use the equivalence relation to write the point 
+\begin_inset Formula $p=(x_{0}:x_{1}:x_{2})$
+\end_inset
+
+ as 
+\begin_inset Formula $p=\left(\frac{x_{0}}{x_{1}}:1:\frac{x_{2}}{x_{1}}\right)$
+\end_inset
+
+.
+ Now 
+\begin_inset Formula $\frac{x_{0}}{x_{1}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{x_{2}}{x_{1}}$
+\end_inset
+
+ are two real rumbers which uniquely determine the point 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+.
+ We think of 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ as the local coordinates in the 
+\begin_inset Formula $(U_{0},\phi_{0})$
+\end_inset
+
+ chart.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $U_{01}$
+\end_inset
+
+ be the intersection of 
+\begin_inset Formula $U_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{1}$
+\end_inset
+
+, that is, 
+\begin_inset Formula $U_{01}:=\{(x_{0}:x_{1}:x_{2})\in\mathbb{P}^{2}(\mathbb{R})\mid x_{0}\neq0\text{ and }x_{1}\neq0\}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\phi_{0}(U_{01})=\left\{ \left(\frac{x_{1}}{x_{0}},\frac{x_{2}}{x_{0}}\right)\in\mathbb{R}^{2}\mid x_{0}\neq0\text{ and }x_{1}\neq0\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{1}(U_{01})=\left\{ \left(\frac{x_{0}}{x_{1}},\frac{x_{2}}{x_{1}}\right)\in\mathbb{R}^{2}\mid x_{0}\neq0\text{ and }x_{1}\neq0\right\} $
+\end_inset
+
+.
+ We can also write this in terms of local coordinates as 
+\begin_inset Formula $\phi_{0}(U_{01})=\{(a,b)\in\mathbb{R}^{2}\mid a\neq0\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{1}(U_{01})=\{(c,d)\in\mathbb{R}^{2}\mid c\neq0\}$
+\end_inset
+
+.
+ Now let's calculate the transition map 
+\begin_inset Formula $\phi_{01}:=\phi_{0}\circ\phi_{1}^{-1}:\phi_{1}(U_{01})\to\phi_{0}(U_{01})$
+\end_inset
+
+ using the local coordinates.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\phi_{01}\left(c,d\right) & =\phi_{0}\circ\phi_{1}^{-1}\left(c,d\right)\\
+ & =\phi_{0}\circ\phi_{1}^{-1}\left(\frac{x_{0}}{x_{1}},\frac{x_{2}}{x_{1}}\right)\\
+ & =\phi_{0}\left(\frac{x_{0}}{x_{1}}:1:\frac{x_{2}}{x_{1}}\right)\\
+ & =\phi_{0}\left(1:\frac{x_{1}}{x_{0}}:\frac{x_{2}}{x_{0}}\right)\\
+ & =\left(\frac{x_{1}}{x_{0}},\frac{x_{2}}{x_{0}}\right)\\
+ & =\left(\frac{1}{c},\frac{d}{c}\right).
+\end{align*}
+
+\end_inset
+
+It's easy to see that 
+\begin_inset Formula $\phi_{01}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ Indeed, writing 
+\begin_inset Formula $\phi_{01}^{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{01}^{2}$
+\end_inset
+
+ for the components of 
+\begin_inset Formula $\phi_{01}$
+\end_inset
+
+ (so 
+\begin_inset Formula $\phi_{01}^{1}(c,d)=\frac{1}{c}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{01}^{2}(c,d)=\frac{d}{c}$
+\end_inset
+
+), the partial derivatives 
+\begin_inset Formula $\partial_{c}^{m}\partial_{d}^{n}\phi_{01}^{i}$
+\end_inset
+
+ exist and are continuous everywhere in 
+\begin_inset Formula $\phi_{1}(U_{01})$
+\end_inset
+
+ for all 
+\begin_inset Formula $m,n\in\mathbb{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $i=1,2$
+\end_inset
+
+.
+ This is because 
+\begin_inset Formula $\phi_{01}^{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{01}^{2}$
+\end_inset
+
+ are rational functions (i.e.
+ ratio of two polynomials) and are they are defined everywhere since 
+\begin_inset Formula $c\neq0$
+\end_inset
+
+ in
+\begin_inset Formula $\phi_{1}(U_{01})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Similarly, one can easily show that
+\begin_inset Formula 
+\begin{alignat*}{1}
+\phi_{10}\left(a,b\right) & =\left(\frac{1}{a},\frac{b}{a}\right)\\
+\phi_{20}\left(a,b\right) & =\left(\frac{1}{b},\frac{a}{b}\right)\\
+\phi_{02}\left(e,f\right) & =\left(\frac{f}{e},\frac{1}{e}\right)\\
+\phi_{12}\left(e,f\right) & =\left(\frac{e}{f},\frac{1}{f}\right)\\
+\phi_{21}(c,d) & =\left(\frac{c}{d},\frac{1}{d}\right)
+\end{alignat*}
+
+\end_inset
+
+It is instructive to check that 
+\begin_inset Formula $\phi_{ij}\circ\phi_{ji}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{ij}\circ\phi_{jk}=\phi_{ik}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Riemann Sphere
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ (Riemann sphere) In this example we describe a 
+\series bold
+complex manifold
+\series default
+.
+ A complex manifold is the complex analogue of a manifold, however in the
+ complex manifold case, we require the transition maps to be holomorphic,
+ and not just 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathbb{P}^{1}(\mathbb{C})$
+\end_inset
+
+ be the projective line over 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ (also known as the Riemann sphere).
+ Define in 
+\begin_inset Formula $\mathbb{P}^{1}(\mathbb{C})$
+\end_inset
+
+ the two charts given by
+\begin_inset Formula 
+\[
+U_{0}=D(X_{0})=\{(x_{0}:x_{1})\in\mathbb{P}^{1}(\mathbb{C})\mid x_{0}\neq0\}\qquad\phi_{0}(x_{0}:x_{1})=\frac{x_{1}}{x_{0}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+U_{1}=D(X_{1})=\{(x_{0}:x_{1})\in\mathbb{P}^{1}(\mathbb{C})\mid x_{1}\neq0\}\qquad\phi_{1}(x_{0}:x_{1})=\frac{x_{0}}{x_{1}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This time, let 
+\begin_inset Formula $z=\frac{x_{0}}{x_{1}}$
+\end_inset
+
+.
+ The open set 
+\begin_inset Formula $U_{01}$
+\end_inset
+
+ is 
+\begin_inset Formula $\{(x_{0}:x_{1})\in\mathbb{P}^{1}(\mathbb{C})\mid x_{0}\neq0\text{ and }x_{1}\neq0\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{1}(U_{01})=\mathbb{C}^{\times}$
+\end_inset
+
+.
+ Now
+\begin_inset Formula 
+\begin{align*}
+\phi_{0}\circ\phi_{1}^{-1}(z) & =\phi_{0}\circ\phi_{1}^{-1}\left(\frac{x_{0}}{x_{1}}\right)\\
+ & =\phi_{0}\left(\frac{x_{0}}{x_{1}}:1\right)\\
+ & =\phi_{0}\left(1:\frac{x_{1}}{x_{0}}\right)\\
+ & =\frac{x_{1}}{x_{0}}\\
+ & =\frac{1}{z}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One can show that the map 
+\begin_inset Formula $z\mapsto\frac{1}{z}$
+\end_inset
+
+ is holomorphic in the domain 
+\begin_inset Formula $\mathbb{C}^{\times}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Mobius Strip
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ be the set of all lines in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+.
+ We want to give this set the structure of a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+-manifold.
+ First we consider the set of all nonvertical lines in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+, which we denote by 
+\begin_inset Formula $U_{v}$
+\end_inset
+
+.
+ A nonvertial is of the form 
+\begin_inset Formula $\ell_{a,b}^{v}=\{(x,y)\in\mathbb{R}^{2}\mid y=ax+b\}$
+\end_inset
+
+.
+ Each such line is uniquely determined by a point 
+\begin_inset Formula $(a,b)\in\mathbb{R}^{2}$
+\end_inset
+
+.
+ So we have bijection 
+\begin_inset Formula $\varphi_{v}:U_{v}\to\mathbb{R}^{2}$
+\end_inset
+
+, given by 
+\begin_inset Formula $\ell_{a,b}^{v}\mapsto(a,b)$
+\end_inset
+
+.
+ We give 
+\begin_inset Formula $U_{v}$
+\end_inset
+
+ a topology using the bijection 
+\begin_inset Formula $\varphi_{v}$
+\end_inset
+
+: a set 
+\begin_inset Formula $U\subset U_{v}$
+\end_inset
+
+ is open if and only if 
+\begin_inset Formula $\varphi_{v}(U)$
+\end_inset
+
+ is open in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+.
+ This makes 
+\begin_inset Formula $\varphi_{v}$
+\end_inset
+
+ into a homeomorphism.
+ Next we consider the set of all nonhorizontal lines in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+, which we denote by 
+\begin_inset Formula $U_{h}$
+\end_inset
+
+.
+ A nonhorizontal is of the form 
+\begin_inset Formula $\ell_{c,d}^{h}=\{(x,y)\in\mathbb{R}^{2}\mid x=cy+d\}$
+\end_inset
+
+.
+ Each such line is uniquely determined by a point 
+\begin_inset Formula $(c,d)\in\mathbb{R}^{2}$
+\end_inset
+
+.
+ So we have bijection 
+\begin_inset Formula $\varphi_{h}:U_{h}\to\mathbb{R}^{2}$
+\end_inset
+
+, given by 
+\begin_inset Formula $\ell_{c,d}^{h}\mapsto(c,d)$
+\end_inset
+
+.
+ We give 
+\begin_inset Formula $U_{h}$
+\end_inset
+
+ a topology using the bijection 
+\begin_inset Formula $\varphi_{v}$
+\end_inset
+
+: a set 
+\begin_inset Formula $U\subset U_{v}$
+\end_inset
+
+ is open if and only if 
+\begin_inset Formula $\varphi_{h}(U)$
+\end_inset
+
+ is open in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+.
+ This makes 
+\begin_inset Formula $\varphi_{h}$
+\end_inset
+
+ into a homeomorphism.
+ Now we have 
+\begin_inset Formula $U_{v}\cup U_{h}=\mathcal{L}$
+\end_inset
+
+.
+ To get a topology on 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+, we glue the topologies from 
+\begin_inset Formula $U_{v}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{h}$
+\end_inset
+
+: a set 
+\begin_inset Formula $U\subset\mathcal{L}$
+\end_inset
+
+ is open if and only if 
+\begin_inset Formula $U\cap U_{h}$
+\end_inset
+
+ is open in 
+\begin_inset Formula $U_{h}$
+\end_inset
+
+ and 
+\begin_inset Formula $U\cap U_{v}$
+\end_inset
+
+ is open in 
+\begin_inset Formula $U_{v}$
+\end_inset
+
+.
+ Let's calculate the transition maps 
+\begin_inset Formula $\varphi_{vh}$
+\end_inset
+
+ and 
+\begin_inset Formula $\varphi_{hv}$
+\end_inset
+
+.
+ We have 
+\begin_inset Formula 
+\begin{align*}
+\varphi_{vh}(c,d) & =\varphi_{v}\circ\varphi_{h}^{-1}(c,d)\\
+ & =\varphi_{v}\left(\ell_{c,d}^{h}\right)\\
+ & =\varphi_{v}\left(\ell_{\frac{1}{c},-\frac{d}{c}}^{v}\right)\\
+ & =\left(\frac{1}{c},-\frac{d}{c}\right),
+\end{align*}
+
+\end_inset
+
+and similarly, 
+\begin_inset Formula 
+\begin{align*}
+\varphi_{hv}(a,b) & =\varphi_{h}\circ\varphi_{v}^{-1}(a,b)\\
+ & =\varphi_{h}\left(\ell_{a,b}^{v}\right)\\
+ & =\varphi_{h}\left(\ell_{\frac{1}{a},-\frac{b}{a}}^{h}\right)\\
+ & =\left(\frac{1}{a},-\frac{b}{a}\right).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These maps are clearly 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ In fact, they look very similar to the transition maps for the projective
+ plane, except they are twisted by a negative sign.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ We can also describe 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ as 
+\begin_inset Formula $\mathbb{R}\mathbb{P}^{2}\backslash\{[0:0:1]\}$
+\end_inset
+
+: Any line in the euclidean plane is of the form 
+\begin_inset Formula $ax+by+c=0$
+\end_inset
+
+, for some 
+\begin_inset Formula $a,b,c\in\mathbb{R}$
+\end_inset
+
+.
+ First note that these coefficients uniquely determine the line and they
+ are homogeneous.
+ Hence there is a well defined map 
+\begin_inset Formula $\phi:\mathcal{L}\to\mathbb{R}\mathbb{P}^{2}$
+\end_inset
+
+, given by mapping the line 
+\begin_inset Formula $\mathbf{V}(ax+by+c)$
+\end_inset
+
+ to the point 
+\begin_inset Formula $[a:b:c]$
+\end_inset
+
+.
+ Now 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is injective, but not surjective.
+ However if we remove the point 
+\begin_inset Formula $[0:0:1]$
+\end_inset
+
+, then the induced map 
+\begin_inset Formula $\phi:\mathcal{L}\to\mathbb{R}\mathbb{P}^{2}\backslash\{[0:0:1]\}$
+\end_inset
+
+ is a bijection.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Grassmannians
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The 
+\series bold
+Grassmannian 
+\begin_inset Formula $G(k,n)$
+\end_inset
+
+ 
+\series default
+is the set of all 
+\begin_inset Formula $k$
+\end_inset
+
+-planes through the origin in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ Such a 
+\begin_inset Formula $k$
+\end_inset
+
+-plane is a linear subspace of dimension 
+\begin_inset Formula $k$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ and has a basis consisting of 
+\begin_inset Formula $k$
+\end_inset
+
+ linearly independent vectors 
+\begin_inset Formula $v_{1},\dots,v_{k}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ It is therefore completely specified by an 
+\begin_inset Formula $n\times k$
+\end_inset
+
+ matrix 
+\begin_inset Formula $A=[a_{1}\cdots a_{k}]$
+\end_inset
+
+ of rank 
+\begin_inset Formula $k$
+\end_inset
+
+, where the 
+\series bold
+rank 
+\series default
+of a matrix 
+\begin_inset Formula $A$
+\end_inset
+
+, denoted by 
+\begin_inset Formula $\text{rk}A$
+\end_inset
+
+, is defined to be the number of linearly independent columns of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ This matrix is called a 
+\series bold
+matrix representative 
+\series default
+of the 
+\begin_inset Formula $k$
+\end_inset
+
+-plane.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Two bases 
+\begin_inset Formula $a_{1},\dots,a_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $b_{1},\dots,b_{k}$
+\end_inset
+
+ determine the same 
+\begin_inset Formula $k$
+\end_inset
+
+-plane if there is a change-of-basis matrix 
+\begin_inset Formula $g=[g_{ij}]\in\text{GL}(k,\mathbb{R})$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+b_{j}=\sum_{i=1}^{k}a_{i}g_{ij}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq k\leq n$
+\end_inset
+
+.
+ In matrix notation, this says 
+\begin_inset Formula $B=Ag$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $F(k,n)$
+\end_inset
+
+ be the set of all 
+\begin_inset Formula $n\times k$
+\end_inset
+
+ matrices of rank 
+\begin_inset Formula $k$
+\end_inset
+
+, topologized as a subspace of 
+\begin_inset Formula $\mathbb{R}^{n\times k}$
+\end_inset
+
+, and 
+\begin_inset Formula $\sim$
+\end_inset
+
+ the equivalence relation
+\begin_inset Formula 
+\[
+A\sim B\text{ if and only if there is a matrix }g\in\text{GL}(k,\mathbb{R})\text{ such that }B=Ag.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There is a bijection between 
+\begin_inset Formula $G(k,n)$
+\end_inset
+
+ and the quotient space 
+\begin_inset Formula $F(k,n)/\sim$
+\end_inset
+
+.
+ We give the Grassmannian 
+\begin_inset Formula $G(k,n)$
+\end_inset
+
+ the quotient topology on 
+\begin_inset Formula $F(k,n)/\sim$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A 
+\series bold
+real Grassmann manifold 
+\begin_inset Formula $G(n,k)$
+\end_inset
+
+ 
+\series default
+is defined as the space of all 
+\begin_inset Formula $k$
+\end_inset
+
+-dimensional subspaces of the space 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ The topology in 
+\begin_inset Formula $G(n,k)$
+\end_inset
+
+ may be described as induced by the embedding 
+\begin_inset Formula $G(n,k)\to\text{End}(\mathbb{R}^{n})$
+\end_inset
+
+ which assigns to a 
+\begin_inset Formula $P\in G(n,k)$
+\end_inset
+
+, the orthogonal projection 
+\begin_inset Formula $\mathbb{R}^{n}\to P$
+\end_inset
+
+ combined with the inclusion map 
+\begin_inset Formula $P\to\mathbb{R}^{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In 
+\begin_inset Formula $G(4,2)$
+\end_inset
+
+, we have 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\begin{pmatrix}a_{11} & a_{12} & a_{13} & a_{14}\\
+a_{21} & a_{22} & a_{23} & a_{24}
+\end{pmatrix}\sim\begin{pmatrix}c_{11} & c_{12}\\
+c_{21} & c_{22}
+\end{pmatrix}\begin{pmatrix}a_{11} & a_{12} & a_{13} & a_{14}\\
+a_{21} & a_{22} & a_{23} & a_{24}
+\end{pmatrix}=\begin{pmatrix}c_{11}a_{11}+c_{12}a_{21} & c_{11}a_{12}+c_{12}a_{22} & c_{11}a_{13}+c_{12}a_{23} & c_{11}a_{14}+c_{12}a_{24}\\
+c_{21}a_{11}+c_{22}a_{21} & c_{11}a_{12}+c_{12}a_{22} & c_{11}a_{13}+c_{12}a_{23} & c_{11}a_{14}+c_{12}a_{24}
+\end{pmatrix}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{11}c_{22}-c_{21}c_{12}\neq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Smooth Maps on a Manifold
+\end_layout
+
+\begin_layout Standard
+Now that we've defined smooth manifolds, it is time to consider maps between
+ them.
+ Using coordinate charts, one can transfer the notion of smooth maps from
+ Euclidean spaces to manifolds.
+ By the 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ compatibility of charts in an atlas, the smoothness of a map turns out
+ to be independent of the choice of charts and is therefore well defined.
+ 
+\end_layout
+
+\begin_layout Subsection
+Smooth Functions
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a smooth manifold of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ A function 
+\begin_inset Formula $f:M\to\mathbb{R}$
+\end_inset
+
+ is said to be 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ or 
+\series bold
+smooth at a point 
+\series default
+
+\begin_inset Formula $p$
+\end_inset
+
+ in 
+\begin_inset Formula $M$
+\end_inset
+
+ if there is a chart 
+\begin_inset Formula $(U_{i},\phi_{i})$
+\end_inset
+
+ about 
+\begin_inset Formula $p$
+\end_inset
+
+ in 
+\begin_inset Formula $M$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\circ\phi_{i}^{-1}$
+\end_inset
+
+, a function defined on the open subset 
+\begin_inset Formula $\phi(U_{i})$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+, is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\phi_{i}(p)$
+\end_inset
+
+.
+ The function 
+\begin_inset Formula $f$
+\end_inset
+
+ is said to be 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on 
+\begin_inset Formula $M$
+\end_inset
+
+ if it is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at every point of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ For each open subset 
+\begin_inset Formula $U$
+\end_inset
+
+ of 
+\begin_inset Formula $M$
+\end_inset
+
+, we denote by 
+\begin_inset Formula $\mathcal{C}_{M}^{\infty}(U)$
+\end_inset
+
+ to be the 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-algebra of smooth functions on 
+\begin_inset Formula $U$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{align*}
+\mathcal{C}_{M}^{\infty}(U): & =\{f:U\to\mathbb{R}\mid f\text{ is }C^{\infty}\text{ on }U\}.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a smooth manifold of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+, 
+\begin_inset Formula $U$
+\end_inset
+
+ and open subset of 
+\begin_inset Formula $M$
+\end_inset
+
+, and let 
+\begin_inset Formula $\{(\phi_{i},U_{i})\}_{i\in I}$
+\end_inset
+
+ be an atlas on 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\mathcal{C}_{M}^{\infty}(U)\simeq\left\{ (g_{i})_{i}\in\prod_{i\in I}\mathcal{C}_{\mathbb{R}^{n}}^{\infty}(U_{i})\mid\phi_{ji}^{*}(g_{i}|_{U_{ij}})=g_{j}|_{U_{ij}}\text{ for all }i,j\in I\right\} .
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f\in\mathcal{C}_{M}^{\infty}(U)$
+\end_inset
+
+.
+ Then for each 
+\begin_inset Formula $i$
+\end_inset
+
+, the function 
+\begin_inset Formula $f\circ\phi_{i}^{-1}\in\mathcal{C}_{\mathbb{R}^{n}}^{\infty}(U_{i})$
+\end_inset
+
+.
+ Thus, we get a map 
+\begin_inset Formula 
+\[
+\varphi:f\mapsto(f\circ\phi_{i}^{-1})_{i}\in\prod_{i\in I}\mathcal{C}_{\mathbb{R}^{n}}^{\infty}(U_{i}),
+\]
+
+\end_inset
+
+and it is easy to check that 
+\begin_inset Formula $(f\circ\phi_{i}^{-1})_{i}$
+\end_inset
+
+ satisfies the compatibility condition, i.e.
+ 
+\begin_inset Formula 
+\[
+\phi_{ji}^{*}(f\circ\phi_{i}^{-1}|_{U_{ij}})=f\circ\phi_{j}^{-1}|_{U_{ij}}.
+\]
+
+\end_inset
+
+ Conversely, if 
+\begin_inset Formula $(g_{i})_{i}\in\prod_{i\in I}\mathcal{C}_{\mathbb{R}^{n}}^{\infty}(U_{i})$
+\end_inset
+
+ such that 
+\begin_inset Formula $\phi_{ji}^{*}(g_{i}|_{U_{ij}})=g_{j}|_{U_{ij}}\text{ for all }i,j\in I$
+\end_inset
+
+, then writing 
+\begin_inset Formula $f_{i}:=g_{i}\circ\phi_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f_{i}|_{U_{ij}}=f_{j}|_{U_{ij}}$
+\end_inset
+
+.
+ These glue to a unique 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The definition of the smoothness of a function 
+\begin_inset Formula $f$
+\end_inset
+
+ at a point is independent of the chart 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+, for if 
+\begin_inset Formula $f\circ\phi^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\phi(p)$
+\end_inset
+
+ and 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ is any other chart about 
+\begin_inset Formula $p$
+\end_inset
+
+ in 
+\begin_inset Formula $M$
+\end_inset
+
+, then
+\begin_inset Formula 
+\[
+f\circ\psi^{-1}\mid_{\psi(U\cap V)}=(f\circ\phi^{-1})\circ(\phi\circ\psi^{-1})
+\]
+
+\end_inset
+
+is a composition of 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ functions and hence must be 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\psi(p)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+In the definition above, 
+\begin_inset Formula $f:M\to\mathbb{R}$
+\end_inset
+
+ is not assumed to be continuous.
+ However, if 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $p\in M$
+\end_inset
+
+, then 
+\begin_inset Formula $f\circ\phi^{-1}:\phi(U)\to\mathbb{R}$
+\end_inset
+
+, being a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ function at the point 
+\begin_inset Formula $\phi(p)$
+\end_inset
+
+ in an open subset of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+, is continuous at 
+\begin_inset Formula $\phi(p)$
+\end_inset
+
+.
+ As a composite of continuous functions, 
+\begin_inset Formula $f|_{U}=(f\circ\phi^{-1})\circ\phi$
+\end_inset
+
+ is continuous at 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ Since we are only interested in functions that are smooth on an open set,
+ there is no loss of generality in assuming at the onset that 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a smooth manifold of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+ and let 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ be a chart of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop6.3}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a manifold of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+, and 
+\begin_inset Formula $f:M\to\mathbb{R}$
+\end_inset
+
+ a real-valued function on 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ The following are equivalent: 
+\end_layout
+
+\begin_layout Enumerate
+The function 
+\begin_inset Formula $f:M\to\mathbb{R}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The manifold 
+\begin_inset Formula $M$
+\end_inset
+
+ has an atlas such that for every chart 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ in the atlas, 
+\begin_inset Formula $f\circ\phi^{-1}:\mathbb{R}^{n}\supset\phi(U)\to\mathbb{R}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+For every chart 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ on 
+\begin_inset Formula $M$
+\end_inset
+
+, the function 
+\begin_inset Formula $f\circ\psi^{-1}:\mathbb{R}^{n}\supset\psi(V)\to\mathbb{R}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We will prove the proposition as a cyclic chain of implications.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(2
+\begin_inset Formula $\implies$
+\end_inset
+
+1): This follows directly from the definition of a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ function, since by (2) every point 
+\begin_inset Formula $p\in M$
+\end_inset
+
+ has a coordinate neighborhood 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ such that 
+\begin_inset Formula $f\circ\phi^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\phi(p)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(1
+\begin_inset Formula $\implies$
+\end_inset
+
+3): Let 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ be an arbitrary chart on 
+\begin_inset Formula $M$
+\end_inset
+
+ and let 
+\begin_inset Formula $p\in V$
+\end_inset
+
+.
+ By the remark above, 
+\begin_inset Formula $f\circ\psi^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\psi(p)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $p$
+\end_inset
+
+ was an arbitrary point of 
+\begin_inset Formula $V$
+\end_inset
+
+, 
+\begin_inset Formula $f\circ\psi^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on 
+\begin_inset Formula $\psi(V)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(3
+\begin_inset Formula $\implies$
+\end_inset
+
+2): Obvious.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The smoothness conditions of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop6.3})
+\end_layout
+
+\end_inset
+
+ will be a recurrent motif: to prove the smoothness of an object, it is
+ sufficient that a smoothness criterion hold on the charts of some atlas.
+ Once the object is shown to be smooth, it then follows that the same smoothness
+ criterion holds on 
+\emph on
+every 
+\emph default
+chart.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $F:N\to M$
+\end_inset
+
+ be a map and 
+\begin_inset Formula $h$
+\end_inset
+
+ a function on 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ The 
+\series bold
+pullback 
+\series default
+of 
+\begin_inset Formula $h$
+\end_inset
+
+ by 
+\begin_inset Formula $F$
+\end_inset
+
+, denoted by 
+\begin_inset Formula $F^{*}h$
+\end_inset
+
+, is the composite function 
+\begin_inset Formula $h\circ F$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ In this terminology, a function 
+\begin_inset Formula $f$
+\end_inset
+
+ on 
+\begin_inset Formula $M$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on a chart 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ if and only if its pullback 
+\begin_inset Formula $(\phi^{-1})^{*}f$
+\end_inset
+
+ by 
+\begin_inset Formula $\phi^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on the subset 
+\begin_inset Formula $\phi(U)$
+\end_inset
+
+ of Euclidean space.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\phi:\mathbb{R}^{2}\to\mathbb{R}^{2}$
+\end_inset
+
+ be rotation counterclockwise by an angle 
+\begin_inset Formula $\theta$
+\end_inset
+
+ and let 
+\begin_inset Formula $x,y$
+\end_inset
+
+ denote the standard coordinate functions on 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\phi^{*}x & =(\cos\theta)x-(\sin\theta)y\\
+\phi^{*}y & =(\sin\theta)x+(\cos\theta)y.
+\end{align*}
+
+\end_inset
+
+Indeed, let 
+\begin_inset Formula $e_{1},e_{2}$
+\end_inset
+
+ denote the standard coordinates on 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+; so 
+\begin_inset Formula $x(e_{1})=$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+(\phi^{*}x)(a,b) & =x\left(\phi(a,b)\right)\\
+ & =x\left(\cos\theta a-\sin\theta b,\sin\theta a+\cos\theta b\right)\\
+ & =\cos\theta a-\sin\theta b\\
+ & =((\cos\theta)x-(\sin\theta)y)(a,b).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Smooth Maps Between Manifolds
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We emphasize again that unless otherwise specified, by a manifold we always
+ mean a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ manifold.
+ We use the terms 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+smooth
+\begin_inset Quotes erd
+\end_inset
+
+ interchangeably.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $N$
+\end_inset
+
+ and 
+\begin_inset Formula $M$
+\end_inset
+
+ be manifolds of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+ and 
+\begin_inset Formula $m$
+\end_inset
+
+, respectively.
+ A continuous map 
+\begin_inset Formula $F:N\to M$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ 
+\series bold
+at a point 
+\series default
+
+\begin_inset Formula $p$
+\end_inset
+
+ in 
+\begin_inset Formula $N$
+\end_inset
+
+ if there are charts 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ about 
+\begin_inset Formula $F(p)$
+\end_inset
+
+ in 
+\begin_inset Formula $M$
+\end_inset
+
+ and 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ about 
+\begin_inset Formula $p$
+\end_inset
+
+ in 
+\begin_inset Formula $N$
+\end_inset
+
+ such that the composition 
+\begin_inset Formula $\psi\circ F\circ\phi^{-1}$
+\end_inset
+
+, a map from the open subset 
+\begin_inset Formula $\phi(F^{-1}(V)\cap U)$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbb{R}^{m}$
+\end_inset
+
+, is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\phi(p)$
+\end_inset
+
+.
+ The continuous map 
+\begin_inset Formula $F:N\to M$
+\end_inset
+
+ is said to be 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ if it is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at every point of 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+In the definition, we needed 
+\begin_inset Formula $F^{-1}(V)$
+\end_inset
+
+ to be open so that 
+\begin_inset Formula $\phi(F^{-1}(V)\cap U)$
+\end_inset
+
+ is open.
+ Thus, 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ maps between manifolds are by definition continuous.
+\end_layout
+
+\begin_layout Enumerate
+In case 
+\begin_inset Formula $M=\mathbb{R}^{m}$
+\end_inset
+
+, we can take 
+\begin_inset Formula $(\mathbb{R}^{m},1_{\mathbb{R}^{m}})$
+\end_inset
+
+ as a chart about 
+\begin_inset Formula $F(p)$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{R}^{m}$
+\end_inset
+
+.
+ According to the definition above, 
+\begin_inset Formula $F:N\to\mathbb{R}^{m}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $p\in N$
+\end_inset
+
+ if and only if there is a chart 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ about 
+\begin_inset Formula $p$
+\end_inset
+
+ in 
+\begin_inset Formula $N$
+\end_inset
+
+ such that 
+\begin_inset Formula $F\circ\phi^{-1}:\phi(U)\to\mathbb{R}^{m}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\phi(p)$
+\end_inset
+
+.
+ Letting 
+\begin_inset Formula $m=1$
+\end_inset
+
+, we recover the definition of a function being 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at a point.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We show now that the definition of the smoothness of a map 
+\begin_inset Formula $F:N\to M$
+\end_inset
+
+ at a point is independent of the choice of charts.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop6.7}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $F:N\to M$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $p\in N$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ is any chart about 
+\begin_inset Formula $p$
+\end_inset
+
+ in 
+\begin_inset Formula $N$
+\end_inset
+
+ and 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ is any chart about 
+\begin_inset Formula $F(p)$
+\end_inset
+
+ in 
+\begin_inset Formula $M$
+\end_inset
+
+, then 
+\begin_inset Formula $\psi\circ F\circ\phi^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\phi(p)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Since 
+\begin_inset Formula $F$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $p\in N$
+\end_inset
+
+, there are charts 
+\begin_inset Formula $(U_{\alpha},\phi_{\alpha})$
+\end_inset
+
+ about 
+\begin_inset Formula $p$
+\end_inset
+
+ in 
+\begin_inset Formula $N$
+\end_inset
+
+ and 
+\begin_inset Formula $(V_{\beta},\psi_{\beta})$
+\end_inset
+
+ about 
+\begin_inset Formula $F(p)$
+\end_inset
+
+ in 
+\begin_inset Formula $M$
+\end_inset
+
+ such that 
+\begin_inset Formula $\psi_{\beta}\circ F\circ\phi_{\alpha}^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\phi_{\alpha}(p)$
+\end_inset
+
+.
+ By the 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ compatibility of charts in a differentiable structure, both 
+\begin_inset Formula $\phi_{\alpha}\circ\phi^{-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi\circ\psi_{\beta}^{-1}$
+\end_inset
+
+ are 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on open subsets of Euclidean spaces.
+ Hence, the composite
+\begin_inset Formula 
+\[
+\psi\circ F\circ\phi^{-1}|_{\phi\left(F^{-1}(V\cap V_{\beta})\cap U\cap U_{\alpha}\right)}=(\psi\circ\psi_{\beta}^{-1})\circ(\psi_{\beta}\circ F\circ\phi_{\alpha}^{-1})\circ(\phi_{\alpha}\circ\phi^{-1}),
+\]
+
+\end_inset
+
+is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\phi(p)$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\psi\circ F\circ\phi^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\phi(p)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename ../Notes_190117_135420_7a4_1.jpg
+	lyxscale 20
+	scale 20
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop6.8}
+\end_layout
+
+\end_inset
+
+ (Smoothness of a map in terms of charts).
+ Let 
+\begin_inset Formula $N$
+\end_inset
+
+ and 
+\begin_inset Formula $M$
+\end_inset
+
+ be smooth manifolds, and 
+\begin_inset Formula $F:N\to M$
+\end_inset
+
+ a continuous map.
+ The following are equivalent: 
+\end_layout
+
+\begin_layout Enumerate
+The map 
+\begin_inset Formula $F:N\to M$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+There are atlases 
+\begin_inset Formula $\mathfrak{U}$
+\end_inset
+
+ for 
+\begin_inset Formula $N$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{V}$
+\end_inset
+
+ for 
+\begin_inset Formula $M$
+\end_inset
+
+ such that for every chart 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathfrak{U}$
+\end_inset
+
+ and 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathfrak{V}$
+\end_inset
+
+, the map 
+\begin_inset Formula 
+\[
+\psi\circ F\circ\phi^{-1}:\phi(U\cap F^{-1}(V))\to\mathbb{R}^{m}
+\]
+
+\end_inset
+
+is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For every chart 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ on 
+\begin_inset Formula $N$
+\end_inset
+
+ and 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ on 
+\begin_inset Formula $M$
+\end_inset
+
+, the map 
+\begin_inset Formula 
+\[
+\psi\circ F\circ\phi^{-1}:\phi(U\cap F^{-1}(V))\to\mathbb{R}^{m}
+\]
+
+\end_inset
+
+is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(2
+\begin_inset Formula $\implies$
+\end_inset
+
+1): Let 
+\begin_inset Formula $p\in N$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ is a chart about 
+\begin_inset Formula $p$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathfrak{U}$
+\end_inset
+
+ and 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ is a chart about 
+\begin_inset Formula $F(p)$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathfrak{V}$
+\end_inset
+
+.
+ By (2), 
+\begin_inset Formula $\psi\circ F\circ\phi^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\phi(p)$
+\end_inset
+
+.
+ By the definition of a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ map, 
+\begin_inset Formula $F:N\to M$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $p$
+\end_inset
+
+ was an arbitrary point of 
+\begin_inset Formula $N$
+\end_inset
+
+, the map 
+\begin_inset Formula $F:N\to M$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(1
+\begin_inset Formula $\implies$
+\end_inset
+
+3): Suppose 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ and 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ are charts on 
+\begin_inset Formula $N$
+\end_inset
+
+ and 
+\begin_inset Formula $M$
+\end_inset
+
+ respectively such that 
+\begin_inset Formula $U\cap F^{-1}(V)\neq\emptyset$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $p\in U\cap F^{-1}(V)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ is a chart about 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ is a chart about 
+\begin_inset Formula $F(p)$
+\end_inset
+
+.
+ By 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop6.7})
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Formula $\psi\circ F\circ\phi^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at 
+\begin_inset Formula $\phi(p)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\phi(p)$
+\end_inset
+
+ was an arbitary point of 
+\begin_inset Formula $\phi(U\cap F^{-1}(V))$
+\end_inset
+
+, the map 
+\begin_inset Formula $\psi\circ F\circ\phi^{-1}:\phi(U\cap F^{-1}(V))\to\mathbb{R}^{m}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(3
+\begin_inset Formula $\implies$
+\end_inset
+
+2): Obvious.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ (Composition of 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ maps).
+ If 
+\begin_inset Formula $F:N\to M$
+\end_inset
+
+ and 
+\begin_inset Formula $G:M\to P$
+\end_inset
+
+ are 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ maps of manifolds, then the composite 
+\begin_inset Formula $G\circ F:N\to P$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+, 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+, and 
+\begin_inset Formula $(W,\sigma)$
+\end_inset
+
+ be charts on 
+\begin_inset Formula $N$
+\end_inset
+
+, 
+\begin_inset Formula $M$
+\end_inset
+
+, and 
+\begin_inset Formula $P$
+\end_inset
+
+ respectively.
+ Then 
+\begin_inset Formula 
+\[
+\sigma\circ(G\circ F)\circ\phi^{-1}=(\sigma\circ G\circ\psi^{-1})\circ(\psi\circ F\circ\phi^{-1}).
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $F$
+\end_inset
+
+ and 
+\begin_inset Formula $G$
+\end_inset
+
+ are 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+, the maps 
+\begin_inset Formula $\sigma\circ G\circ\psi^{-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi\circ F\circ\phi^{-1}$
+\end_inset
+
+ are also 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ As a composite of 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ maps of open subsets of Euclidean spaces, 
+\begin_inset Formula $\sigma\circ(G\circ F)\circ\phi^{-1}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+, and thus 
+\begin_inset Formula $G\circ F$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Diffeomorphisms
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A 
+\series bold
+diffeomorpism 
+\series default
+of manifolds is a bijective 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ map 
+\begin_inset Formula $F:N\to M$
+\end_inset
+
+ whose inverse 
+\begin_inset Formula $F^{-1}$
+\end_inset
+
+ is also 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ According to the next two propositions, coordinate maps are diffeomorphisms,
+ and conversely, every diffeomorphism of an open subset of a manifold with
+ an open subset of a Euclidean space can serve as a coordinate map.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop6.10}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ is a chart on a manifold 
+\begin_inset Formula $M$
+\end_inset
+
+ of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+, then the coordinate map 
+\begin_inset Formula $\phi:U\to\phi(U)\subset\mathbb{R}^{n}$
+\end_inset
+
+ is a diffeomorphism.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ By definition, 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is a homeomorphism, so it suffices to check that both 
+\begin_inset Formula $\phi$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi^{-1}$
+\end_inset
+
+ are smooth.
+ To test the smoothness of 
+\begin_inset Formula $\phi:U\to\phi(U)$
+\end_inset
+
+, we use the atlas 
+\begin_inset Formula $\left\{ (U,\phi)\right\} $
+\end_inset
+
+ with a single chart on 
+\begin_inset Formula $U$
+\end_inset
+
+ and the atlas 
+\begin_inset Formula $\left\{ (\phi(U),\text{id}_{\phi(U)})\right\} $
+\end_inset
+
+ with a single chart on 
+\begin_inset Formula $\phi(U)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula 
+\[
+\text{id}_{\phi(U)}\circ\phi\circ\phi^{-1}:\phi(U)\to\phi(U)
+\]
+
+\end_inset
+
+is the identity map, it is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ By 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop6.8})
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To test smoothness of 
+\begin_inset Formula $\phi^{-1}:\phi(U)\to U$
+\end_inset
+
+, we use the same atlases as above.
+ Since 
+\begin_inset Formula 
+\[
+\phi\circ\phi^{-1}\circ\text{id}_{\phi(U)}:\phi(U)\to\phi(U)
+\]
+
+\end_inset
+
+is the identity map, the map 
+\begin_inset Formula $\phi^{-1}$
+\end_inset
+
+ is also 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $U$
+\end_inset
+
+ be an open subset of a manifold 
+\begin_inset Formula $M$
+\end_inset
+
+ of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $F:U\to F(U)\subset\mathbb{R}^{n}$
+\end_inset
+
+ is a diffeomorphism onto an open subset of 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+, then 
+\begin_inset Formula $(U,F)$
+\end_inset
+
+ is a chart in the differentiable structure of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ For any chart 
+\begin_inset Formula $(U_{\alpha},\phi_{\alpha})$
+\end_inset
+
+ in the maximal atlas of 
+\begin_inset Formula $M$
+\end_inset
+
+, both 
+\begin_inset Formula $\phi_{\alpha}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{\alpha}^{-1}$
+\end_inset
+
+ are 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop6.10})
+\end_layout
+
+\end_inset
+
+.
+ As composites of 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ maps, both 
+\begin_inset Formula $F\circ\phi_{\alpha}^{-1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{\alpha}\circ F^{-1}$
+\end_inset
+
+ are 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ Hence, 
+\begin_inset Formula $(U,F)$
+\end_inset
+
+ is compatible with the maximal atlas.
+ By the maximality of the atlas, the chart 
+\begin_inset Formula $(U,F)$
+\end_inset
+
+ is in the atlas.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Smoothness in Terms of Components
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In this subsection, we derive a criterion that reduces the smoothness of
+ a map to the smoothness of real-valued functions on open sets.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ (Smoothness of a vector-valued function) Let 
+\begin_inset Formula $N$
+\end_inset
+
+ be a manifold and let 
+\begin_inset Formula $F:N\to\mathbb{R}^{m}$
+\end_inset
+
+ be a continuous map.
+ The following are equivalent:
+\end_layout
+
+\begin_layout Enumerate
+The map 
+\begin_inset Formula $F:N\to\mathbb{R}^{m}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The manifold 
+\begin_inset Formula $N$
+\end_inset
+
+ has an atlas such that for every chart 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ in the atlas, the map 
+\begin_inset Formula $F\circ\phi^{-1}:\phi(U)\to\mathbb{R}^{m}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For every chart 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ on 
+\begin_inset Formula $N$
+\end_inset
+
+, the map 
+\begin_inset Formula $F\circ\phi^{-1}:\phi(U)\to\mathbb{R}^{m}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ (Smoothness in terms of components).
+ Let 
+\begin_inset Formula $N$
+\end_inset
+
+ be a manifold.
+ A vector-valued function 
+\begin_inset Formula $F:N\to\mathbb{R}^{m}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ if and only if its component functions 
+\begin_inset Formula $F_{1},\dots,F_{m}:N\to\mathbb{R}$
+\end_inset
+
+ are all 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The 
+\begin_inset Formula $F:N\to\mathbb{R}^{m}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ if and only if for every chart 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ on 
+\begin_inset Formula $N$
+\end_inset
+
+, the map 
+\begin_inset Formula $F\circ\phi^{-1}:\phi(U)\to\mathbb{R}^{m}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ if and only if for every chart 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ on 
+\begin_inset Formula $N$
+\end_inset
+
+, the functions 
+\begin_inset Formula $F_{i}\circ\phi^{-1}:\phi(U)\to\mathbb{R}$
+\end_inset
+
+ are all 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ if and only if the functions 
+\begin_inset Formula $F_{i}:N\to\mathbb{R}$
+\end_inset
+
+ are all 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Germs of 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ functions
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be an 
+\begin_inset Formula $n$
+\end_inset
+
+-dimensional manifold and let 
+\begin_inset Formula $p$
+\end_inset
+
+ be a point in 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Consider the set of all pairs 
+\begin_inset Formula $(f,U)$
+\end_inset
+
+, where 
+\begin_inset Formula $U$
+\end_inset
+
+ is an open neighborhood of 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $f:U\to\mathbb{R}$
+\end_inset
+
+ is a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ function.
+ Just as in the 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ case, we introduce an equivalence relation 
+\begin_inset Formula $\sim$
+\end_inset
+
+ and say that 
+\begin_inset Formula $(f,U)\sim(g,V)$
+\end_inset
+
+ if there is an open set 
+\begin_inset Formula $W\subset U\cap V$
+\end_inset
+
+ containing 
+\begin_inset Formula $p$
+\end_inset
+
+ such that 
+\begin_inset Formula $f=g$
+\end_inset
+
+ when restricted to 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ The equivalence class of 
+\begin_inset Formula $(f,U)$
+\end_inset
+
+ is called the 
+\series bold
+germ 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ at 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ We write 
+\begin_inset Formula $C_{p}^{\infty}(M)$
+\end_inset
+
+ for the set of all germs of 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ functions on 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ at 
+\begin_inset Formula $p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $(f,U)$
+\end_inset
+
+ be represent a germ in 
+\begin_inset Formula $C_{p}^{\infty}(M)$
+\end_inset
+
+ and suppose 
+\begin_inset Formula $(U_{0},\phi)$
+\end_inset
+
+ is a chart centered at 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(U_{0}\cap U,\phi_{\mid U})$
+\end_inset
+
+ is a chart centered at 
+\begin_inset Formula $p$
+\end_inset
+
+ and clearly we have 
+\begin_inset Formula $(f,U)\sim(f\mid_{U_{0}\cap U},U_{0}\cap U)$
+\end_inset
+
+.
+ Thus we may always assume that a germ can be represented by 
+\begin_inset Formula $(f,U)$
+\end_inset
+
+ where 
+\begin_inset Formula $(U,\phi)$
+\end_inset
+
+ is a chart centered at 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ In particular, we obtain an isomorphism
+\begin_inset Formula 
+\[
+\widehat{\phi}:C_{p}^{\infty}(M)\to C_{p}^{\infty}(\mathbb{R}^{n}),
+\]
+
+\end_inset
+
+given by 
+\begin_inset Formula $(f,U)\mapsto(f\circ\phi^{-1},\phi(U))$
+\end_inset
+
+.
+ Of course this map depends on our choice of chart.
+ If 
+\begin_inset Formula $(V,\varphi)$
+\end_inset
+
+ was another chart, then we'd obtain another isomorphism
+\begin_inset Formula 
+\[
+\widehat{\varphi}:C_{p}^{\infty}(M)\to C_{p}^{\infty}(\mathbb{R}^{n}),
+\]
+
+\end_inset
+
+given by 
+\begin_inset Formula $(f,U)\mapsto(f\circ\varphi^{-1},\varphi(U))$
+\end_inset
+
+.
+ We can relate these two isomorphisms via the transition function 
+\begin_inset Formula $\phi\circ\varphi^{-1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a manifold and let 
+\begin_inset Formula $\{(U_{i},\phi_{i})\}_{i\in I}$
+\end_inset
+
+ be an atlas on 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ We describe the structure of a premanifold as follows: if 
+\begin_inset Formula $U$
+\end_inset
+
+ is an open subset of 
+\begin_inset Formula $M$
+\end_inset
+
+, then we set 
+\begin_inset Formula 
+\[
+\mathcal{O}_{M}(U):=\{f:U\to\mathbb{R}\mid f|_{U\cap U_{i}}\circ\phi_{i}^{-1}:\phi_{i}(U\cap U_{i})\to\mathbb{R}\text{ is }C^{\infty}\}=\{f:U\to\mathbb{R}\mid f\text{ is }C^{\infty}\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To see that this is a premanifold, fix 
+\begin_inset Formula $i_{0}\in I$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $U\subseteq U_{i_{0}}$
+\end_inset
+
+ open let 
+\begin_inset Formula $f:U\to\mathbb{R}$
+\end_inset
+
+ be a map such that 
+\begin_inset Formula $f\circ\phi_{i_{0}}^{-1}:\phi_{i_{0}}(U_{i_{0}}\cap U)\to\mathbb{R}$
+\end_inset
+
+ is a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ function.
+ Then 
+\begin_inset Formula $f\in\mathcal{O}_{M}(U)$
+\end_inset
+
+ because the change of charts between 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $i_{0}$
+\end_inset
+
+ are 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+-diffeomorphisms.
+ Indeed, we have 
+\begin_inset Formula 
+\[
+f|_{U\cap U_{i}}\circ\phi_{i}^{-1}=(f\circ\phi_{i_{0}}^{-1})\circ(\phi_{i_{0}}\circ\phi_{i}^{-1}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore 
+\begin_inset Formula $\phi_{i_{0}}$
+\end_inset
+
+ yields an isomorphism 
+\begin_inset Formula $(U_{i_{0}},\mathcal{O}_{M|U_{i_{0}}})\cong(Y_{i_{0}},\mathcal{O}_{i_{0}})$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathcal{O}_{Y_{0}}$
+\end_inset
+
+ is the sheaf of 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ functions on 
+\begin_inset Formula $Y_{i_{0}}$
+\end_inset
+
+.
+ Hence, 
+\begin_inset Formula $(M,\mathcal{O}_{M})$
+\end_inset
+
+ is a ringed space that is locally isomorphic to a manifold.
+ Hence it is a premanifold.
+ 
+\end_layout
+
+\begin_layout Subsection
+Examples of Smooth Maps
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ We show that the map 
+\begin_inset Formula $F:\mathbb{R}\to S^{1}$
+\end_inset
+
+ given by 
+\begin_inset Formula $F(t)=(\cos t,\sin t)$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}.$
+\end_inset
+
+ For 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+, we use the atlas which consists of a single chart 
+\begin_inset Formula $(\mathbb{R},\text{id})$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ we use the atlas which consists of the charts 
+\begin_inset Formula $(U_{1},\phi_{1})$
+\end_inset
+
+, 
+\begin_inset Formula $(U_{2},\phi_{2})$
+\end_inset
+
+, 
+\begin_inset Formula $(U_{3},\phi_{3})$
+\end_inset
+
+ and 
+\begin_inset Formula $(U_{4},\phi_{4})$
+\end_inset
+
+ where 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+U_{1}=\{(a,b)\in S^{1}\mid a>0\}\qquad\phi_{1}(a,b)=b
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+U_{2}=\{(a,b)\in S^{2}\mid a<0\}\qquad\phi_{2}(a,b)=b
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+U_{3}=\{(a,b)\in S^{2}\mid b>0\}\qquad\phi_{3}(a,b)=a
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+U_{4}=\{(a,b)\in S^{2}\mid b<0\}\qquad\phi_{4}(a,b)=a
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let us do some computations.
+ First, let's compute the transition map 
+\begin_inset Formula $\phi_{14}$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{align*}
+\phi_{14}(a) & =\phi_{1}\circ\phi_{4}^{-1}(a)\\
+ & =\phi_{1}\left(a,\sqrt{1-a^{2}}\right)\\
+ & =\sqrt{1-a^{2}}.
+\end{align*}
+
+\end_inset
+
+Similar computations shows that 
+\begin_inset Formula 
+\begin{align*}
+\phi_{13}(a) & =\sqrt{1-a^{2}}\\
+\phi_{24}(a) & =\sqrt{1-a^{2}}\\
+\phi_{23}(a) & =\sqrt{1-a^{2}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now, we need to show that 
+\begin_inset Formula $\phi_{i}\circ F\circ\text{id}$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,2,3,4$
+\end_inset
+
+.
+ Let's compute 
+\begin_inset Formula $\phi_{1}\circ F\circ\text{id}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+(\phi_{1}\circ F\circ\text{id})(t) & =\phi_{1}(F(t))\\
+ & =(\phi_{1}((\cos t,\sin t))\\
+ & =\sin t.
+\end{align*}
+
+\end_inset
+
+Similar computations shows that 
+\begin_inset Formula 
+\begin{align*}
+(\phi_{2}\circ F\circ\text{id})(t) & =\sin t\\
+(\phi_{3}\circ F\circ\text{id})(t) & =\cos t\\
+(\phi_{4}\circ F\circ\text{id})(t) & =\cos t.
+\end{align*}
+
+\end_inset
+
+These maps are all 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Consider 
+\begin_inset Formula $N=\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $M=\mathbb{R}^{2}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f:N\to M$
+\end_inset
+
+ be given by 
+\begin_inset Formula $f(t)=(t^{2},t^{3})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ be the unit sphere with its smooth structure given in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Example~(
+\backslash
+ref{examplesphere})
+\end_layout
+
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $f:S^{2}\to\mathbb{R}$
+\end_inset
+
+ be given by 
+\begin_inset Formula 
+\[
+f(a,b,c)=c^{2}.
+\]
+
+\end_inset
+
+We claim that 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ To see this, we need to show that 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ at every point 
+\begin_inset Formula $p=(a,b,c)$
+\end_inset
+
+ in 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+.
+ First assume that 
+\begin_inset Formula $p\in U_{6}$
+\end_inset
+
+.
+ Using the chart 
+\begin_inset Formula $(U_{6},\phi_{6})$
+\end_inset
+
+, we find that 
+\begin_inset Formula 
+\begin{align*}
+(f\circ\phi_{6}^{-1})(a,b) & =f\left(\phi_{6}^{-1}(a,b)\right)\\
+ & =f\left(a,b,\sqrt{1-a^{2}-b^{2}}\right)\\
+ & =1-a^{2}-b^{2},
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+which is clearly 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let us show that a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ function 
+\begin_inset Formula $f(x,y)$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+ restricts to a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+-function on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+.
+ To avoid confusing functions with points, we will denote a point on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ as 
+\begin_inset Formula $p=(a,b)$
+\end_inset
+
+ and use 
+\begin_inset Formula $x,y$
+\end_inset
+
+ to mean the standard coordinate functions on 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula $x(a,b)=a$
+\end_inset
+
+ and 
+\begin_inset Formula $y(a,b)=b$
+\end_inset
+
+.
+ Suppose that we can show that 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ restrict to 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+-functions on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+.
+ Then the inclusion map 
+\begin_inset Formula $i:S^{1}\to\mathbb{R}^{2}$
+\end_inset
+
+, given by 
+\begin_inset Formula $i(p)=(x(p),y(p))$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+, and so the composition 
+\begin_inset Formula $f\mid_{S^{1}}=f\circ i$
+\end_inset
+
+ with be 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ too.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Consider first the function 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ We use the following atlas 
+\begin_inset Formula $(U_{i},\phi_{i})$
+\end_inset
+
+ for 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\[
+U_{1}=\{(a,b)\in S^{1}\mid b>0\}\qquad\phi_{1}(a,b)=a
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+U_{2}=\{(a,b)\in S^{1}\mid b<0\}\qquad\phi_{2}(a,b)=a
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+U_{3}=\{(a,b)\in S^{1}\mid a>0\}\qquad\phi_{3}(a,b)=b
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+U_{4}=\{(a,b)\in S^{2}\mid a<0\}\qquad\phi_{4}(a,b)=b
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $x$
+\end_inset
+
+ is a coordinate function on 
+\begin_inset Formula $U_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{2}$
+\end_inset
+
+, it is a coordinate function on 
+\begin_inset Formula $U_{1}\cup U_{2}$
+\end_inset
+
+.
+ To show that 
+\begin_inset Formula $x$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on 
+\begin_inset Formula $U_{3}$
+\end_inset
+
+, it suffices to check the smoothness of 
+\begin_inset Formula $x\circ\phi_{3}^{-1}:\phi_{3}(U_{3})\to\mathbb{R}$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\[
+(x\circ\phi_{3}^{-1})(b)=x\left(\sqrt{1-b^{2}},b\right)=\sqrt{1-b^{2}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On 
+\begin_inset Formula $U_{3}$
+\end_inset
+
+, we have 
+\begin_inset Formula $b\neq\pm1$
+\end_inset
+
+, so that 
+\begin_inset Formula $\sqrt{1-b^{2}}$
+\end_inset
+
+ is a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ function of 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ Hence, 
+\begin_inset Formula $x$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on 
+\begin_inset Formula $U_{3}$
+\end_inset
+
+.
+ On 
+\begin_inset Formula $U_{4}$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+(x\circ\phi_{4}^{-1})(b)=x\left(-\sqrt{1-b^{2}},b\right)=-\sqrt{1-b^{2}}.
+\]
+
+\end_inset
+
+which is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ because 
+\begin_inset Formula $b$
+\end_inset
+
+ is not equal to 
+\begin_inset Formula $\pm1$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $x$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on the four open sets 
+\begin_inset Formula $U_{1},U_{2},U_{3},$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{4}$
+\end_inset
+
+, which cover 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+, 
+\begin_inset Formula $x$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+.
+ The proof that 
+\begin_inset Formula $y$
+\end_inset
+
+ is 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ is similar.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ be the unit sphere with its smooth structure given in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Example~(
+\backslash
+ref{examplesphere})
+\end_layout
+
+\end_inset
+
+.
+ Let's construct a smooth function on 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+.
+ First note that
+\begin_inset Formula 
+\[
+\phi_{1}(U_{16})=\{(b,c)\in\mathbb{R}^{2}\mid b^{2}+c^{2}<1\text{ and }c<0\}\qquad\text{and}\qquad\phi_{6}(U_{16})=\{(a,b)\in\mathbb{R}^{2}\mid a^{2}+b^{2}<1\text{ and }0<a\}.
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $f:\phi_{1}(U_{16})\to\mathbb{R}^{2}$
+\end_inset
+
+ be given by
+\begin_inset Formula 
+\[
+f(b,c)=b^{2}+c^{2}.
+\]
+
+\end_inset
+
+Let's pullback 
+\begin_inset Formula $f:\phi_{1}(U_{16})\to\mathbb{R}^{2}$
+\end_inset
+
+ to 
+\begin_inset Formula $\phi_{16}^{*}(f):\phi_{6}(U_{16})\to\mathbb{R}^{2}$
+\end_inset
+
+ using the transition function 
+\begin_inset Formula $\phi_{16}$
+\end_inset
+
+, where
+\begin_inset Formula 
+\begin{align*}
+\phi_{16}(a,b) & =\phi_{1}\circ\phi_{6}^{-1}(a,b)\\
+ & =\phi_{1}\left(a,b,\sqrt{1-b^{2}-a^{2}}\right)\\
+ & =\left(b,\sqrt{1-b^{2}-a^{2}}\right).
+\end{align*}
+
+\end_inset
+
+We have, 
+\begin_inset Formula 
+\begin{align*}
+\phi_{16}^{*}(f)(a,b) & =(f\circ\phi_{16})(a,b)\\
+ & =f\left(b,\sqrt{1-b^{2}-a^{2}}\right)\\
+ & =1-a^{2}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Diffeomorphism from 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ to the open unit ball 
+\begin_inset Formula $B_{1}(0)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\beta:\mathbb{R}^{n}\to B_{1}(0)$
+\end_inset
+
+ be given by 
+\begin_inset Formula 
+\[
+x:=(x_{1},\dots,x_{n})\mapsto\left(\frac{x_{1}}{\sqrt{1+\sum_{i=1}^{n}x_{i}^{2}}},\dots,\frac{x_{n}}{\sqrt{1+\sum_{i=1}^{n}x_{i}^{2}}}\right):=\beta(x)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in\mathbb{R}^{n}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is a diffeomorphism from 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ to 
+\begin_inset Formula $B_{1}(0)$
+\end_inset
+
+ with inverse given by 
+\begin_inset Formula 
+\[
+x:=(x_{1},\dots,x_{n})\mapsto\left(\frac{x_{1}}{\sqrt{1-\sum_{i=1}^{n}x_{i}^{2}}},\dots,\frac{x_{n}}{\sqrt{1-\sum_{i=1}^{n}x_{i}^{2}}}\right):=\beta^{-1}(x)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in B_{1}(0)$
+\end_inset
+
+.
+ Indeed, let us first check that 
+\begin_inset Formula $\beta(x)\in B_{1}(0)$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\|\beta(x)\| & =\sqrt{\left(\frac{x_{1}}{\sqrt{1+\sum_{i=1}^{n}x_{i}^{2}}}\right)^{2}+\cdots+\left(\frac{x_{n}}{\sqrt{1+\sum_{i=1}^{n}x_{i}^{2}}}\right)^{2}}\\
+ & =\sqrt{\frac{\sum_{i=1}^{n}x_{i}^{2}}{1+\sum_{i=1}^{n}x_{i}^{2}}}\\
+ & <\sqrt{\frac{\sum_{i=1}^{n}x_{i}^{2}}{\sum_{i=1}^{n}x_{i}^{2}}}\\
+ & =1.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\beta(x)\in B_{1}(0)$
+\end_inset
+
+.
+ Next we check that 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is smooth.
+ This comes down to checking the component functions 
+\begin_inset Formula $\beta_{i}$
+\end_inset
+
+ are smooth:
+\begin_inset Formula 
+\[
+x:=(x_{1},\dots,x_{n})\mapsto\frac{x_{i}}{\sqrt{1+\sum_{i=1}^{n}x_{i}^{2}}}:=\beta_{i}(x).
+\]
+
+\end_inset
+
+This follows from the fact that 
+\begin_inset Formula $1+\sum_{i=1}^{n}x_{i}^{2}>0$
+\end_inset
+
+.
+ That 
+\begin_inset Formula $\beta^{-1}$
+\end_inset
+
+ is smooth follows by the same reasoning.
+ Finally, checking that 
+\begin_inset Formula $\beta(\beta^{-1}(x))=x$
+\end_inset
+
+ is tedious but trivial: 
+\begin_inset Formula 
+\begin{align*}
+\beta(\beta^{-1}(x)) & =\frac{1}{\sqrt{1+\sum_{i=1}^{n}\left(\frac{x_{i}}{\sqrt{1-\sum_{i=1}^{n}x_{i}^{2}}}\right)^{2}}}\left(\frac{x_{1}}{\sqrt{1-\sum_{i=1}^{n}x_{i}^{2}}},\cdots,\frac{x_{n}}{\sqrt{1-\sum_{i=1}^{n}x_{i}^{2}}}\right)\\
+ & =\frac{1}{\sqrt{1-\sum_{i=1}^{n}x_{i}^{2}+\sum_{i=1}^{n}x_{i}^{2}}}\left(x_{1},\dots,x_{n}\right)\\
+ & =\left(x_{1},\dots,x_{n}\right).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+A map smooth map from 
+\begin_inset Formula $D^{1}$
+\end_inset
+
+ to 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We want to describe a smooth map from the unit ball 
+\begin_inset Formula $D^{1}$
+\end_inset
+
+ to the unit sphere 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+.
+ The idea will be to work in local charts and find a smooth map there.
+ Then pull this back to a partial map from 
+\begin_inset Formula $D^{1}$
+\end_inset
+
+ to 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+.
+ Finally, we will need to extend it by a continuity argument.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $(U,\varphi)$
+\end_inset
+
+ be the chart in 
+\begin_inset Formula $D^{1}$
+\end_inset
+
+ given by 
+\begin_inset Formula 
+\[
+U:=\{x\in D^{1}\mid\|x\|\neq1\text{ and }x\notin[0,1]\times\{0\}\}\qquad\text{and}\qquad\varphi(x):=\varphi(x_{1},x_{2})=(\arctan(x_{2}/x_{1}),\|x\|):=(\theta,r)
+\]
+
+\end_inset
+
+Here, 
+\begin_inset Formula $U$
+\end_inset
+
+ is the unit disk minus its boundary and the line segment from 
+\begin_inset Formula $(0,0)$
+\end_inset
+
+ to 
+\begin_inset Formula $(1,0)$
+\end_inset
+
+ and 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ corresonds to polar coordinates.
+ Let 
+\begin_inset Formula $(V,\psi)$
+\end_inset
+
+ be the chart in 
+\begin_inset Formula $S^{2}$
+\end_inset
+
+ given by
+\begin_inset Formula 
+\[
+V:=\{x\in S^{2}\mid x\notin[0,1]\times\{0\}\times\mathbb{R}^{2}\}\qquad\text{and}\qquad\psi(x):=\psi(x_{1},x_{2},x_{3})=(\arctan(x_{2}/x_{1}),\arcsin(x_{3})):=(\theta,\psi)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $V$
+\end_inset
+
+ is the unit sphere minus the arc segment from 
+\begin_inset Formula $(0,1,0)$
+\end_inset
+
+ to 
+\begin_inset Formula $(0,-1,0)$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+ corresponds to spherical coordaintes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now with respect to these coordinates, let 
+\begin_inset Formula $\Phi\colon\varphi(U)\to\varphi(V)$
+\end_inset
+
+ be given by 
+\begin_inset Formula 
+\[
+\Phi(\theta,r)=(\theta,\pi(r-1/2)).
+\]
+
+\end_inset
+
+Clearly this is a smooth map.
+ 
+\end_layout
+
+\end_body
+\end_document

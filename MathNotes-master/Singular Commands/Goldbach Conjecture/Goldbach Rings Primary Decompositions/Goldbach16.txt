@@ -1,0 +1,120 @@
+LIB "primdec.lib";
+intvec w=(3,5,6,7,8,10,11,12,13,14,16);
+ring A=0,(x3,x5,x6,x7,x8,x10,x11,x12,x13,x14,x16),(C,wp(w));
+ideal I= 
+
+x3*x3-x6,x3*x5-x8,x3*x7-x10,x3*x11-x14,x3*x13-x16,
+
+x5*x5-x10,x5*x7-x12,x5*x11-x16,
+
+x7*x7-x14;
+
+I=std(I);
+
+dim(I); // dim(I)=2
+homog(I); // ideal is homogeneous w.r.t. weights
+option(prot);
+int t=timer;
+system("--ticks-per-sec", 100); // give time in 1/100 sec
+minAssGTZ(I); // 2 minimal associated primes
+
+
+[1]:
+   _[1]=-x11^3+x7*x13^2       x3x5
+   _[2]=-x7*x11+x5*x13        x5,x3x7   (3,7,11)~(3,5,13)
+   _[3]=x5*x11^2-x7^2*x13     (5,11,11)~(7,7,13)
+   _[4]=-x7^3+x5^2*x11        x3
+   _[5]=-x5*x11+x3*x13
+   _[6]=-x7^2+x3*x11
+   _[7]=-x5^2+x3*x7
+   _[8]=-x3*x13+x16
+   _[9]=-x3*x11+x14
+   _[10]=-x5*x7+x12
+   _[11]=-x3*x7+x10
+   _[12]=-x3*x5+x8
+   _[13]=-x3^2+x6
+[2]:
+   _[1]=-x3*x13+x16
+   _[2]=-x3*x11+x14
+   _[3]=-x5*x7+x12
+   _[4]=-x3*x7+x10
+   _[5]=-x3*x5+x8
+   _[6]=x7
+   _[7]=-x3^2+x6
+   _[8]=x5
+   _[9]=x3
+
+
+
+
+
+
+ideal P = minAssGTZ(I)[1];
+P=std(P);
+P;
+
+P[1]=x3^2-x6
+P[2]=x3*x5-x8
+P[3]=x3*x7-x10
+P[4]=x5^2-x10
+P[5]=x5*x6-x3*x8
+P[6]=x5*x7-x12
+P[7]=x5*x8-x3*x10
+P[8]=x6*x7-x3*x10
+P[9]=x3*x11-x14
+P[10]=x7^2-x14
+P[11]=x5*x10-x3*x12
+P[12]=x7*x8-x3*x12
+P[13]=x3*x13-x16
+P[14]=x5*x11-x16
+P[15]=x8^2-x6*x10
+P[16]=x5*x12-x3*x14
+P[17]=x6*x11-x3*x14
+P[18]=x7*x10-x3*x14
+P[19]=x7*x11-x5*x13
+P[20]=x8*x10-x6*x12
+P[21]=x5*x14-x3*x16
+P[22]=x6*x13-x3*x16
+P[23]=x7*x12-x3*x16
+P[24]=x8*x11-x3*x16
+P[25]=x8*x12-x6*x14
+P[26]=x10^2-x6*x14
+P[27]=x7*x14-x5*x16
+P[28]=x8*x13-x5*x16
+P[29]=x10*x11-x5*x16
+P[30]=x8*x14-x6*x16
+P[31]=x10*x12-x6*x16
+P[32]=x10*x13-x7*x16
+P[33]=x11*x12-x7*x16
+P[34]=x10*x14-x8*x16
+P[35]=x12^2-x8*x16
+P[36]=x12*x13-x11*x14
+P[37]=x12*x14-x10*x16
+P[38]=x13*x14-x11*x16
+P[39]=x14^2-x12*x16
+P[40]=x11^3-x7*x13^2
+P[41]=x11^2*x14-x7*x13*x16
+
+
+dim(P); //dim(P)=2
+
+ideal Q = minAssGTZ(I)[2];
+Q=std(Q);
+Q; 
+
+Q[1]=x3
+Q[2]=x5
+Q[3]=x6
+Q[4]=x7
+Q[5]=x8
+Q[6]=x10
+Q[7]=x12
+Q[8]=x14
+Q[9]=x16
+
+// missing x11,x13
+
+dim(Q); //dim(Q)=2
+
+primdecGTZ(I); // two associated primes (precisely the minimal primes). 
+

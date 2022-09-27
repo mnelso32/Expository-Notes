@@ -1,0 +1,175 @@
+%% LyX 2.2.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,english]{article}
+\usepackage[osf]{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[paperwidth=30cm,paperheight=35cm]{geometry}
+\setlength{\parindent}{0bp}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\title{Homework Assignment 5}
+
+\author{Michael Nelson}
+
+\maketitle
+$(1):$ Let $E\subseteq\mathbb{R}$ be measurable and $g$ be a nonnegative
+function that is integrable over $E$. Suppose $\{f_{n}\}$ is a sequence
+of measurable functions on $E$ such that for each $n$, $|f_{n}|\leq g$
+almost everywhere on $E$. Show that 
+\begin{equation}
+\int_{E}\mbox{liminf}(f_{n})\leq\mbox{liminf}\left(\int_{E}f_{n}\right)\leq\mbox{limsup}\left(\int_{E}f_{n}\right)\leq\int_{E}\mbox{limsup}(f_{n}).\label{eq:inequality}
+\end{equation}
+
+\begin{proof} By possibly excising from $E$ a set of measure zero,
+we may assume $|f_{n}|\leq g$ everywhere on $E$. Let $h_{n}$ be
+the function given by $h_{n}(x)=\mbox{inf}\{f_{k}(x)\mid k\geq n\}$.
+Then $\{h_{n}\}$ is a sequence of measurable functions on $E$ which
+is dominated by the integral function $g$. Also $\{h_{n}\}\to\mbox{liminf}(f_{n})$
+pointwise on $E$, so by the Lebesgue Dominated Convergence Theorem,
+we have 
+\[
+\lim_{n\to\infty}\int_{E}h_{n}=\int_{E}\mbox{liminf}(f_{n})
+\]
+
+Since $h_{n}\leq f_{n}$, we have $\int_{E}h_{n}\leq\int_{E}f_{n}$
+by monotonicity. Therefore 
+\begin{align*}
+\mbox{liminf}\left(\int_{E}f_{n}\right) & \geq\mbox{liminf}\left(\int_{E}h_{n}\right)\\
+ & =\lim_{n\to\infty}\left(\int_{E}h_{n}\right)\\
+ & =\int_{E}\mbox{liminf}(f_{n}).
+\end{align*}
+ Where $\mbox{liminf}\left(\int_{E}h_{n}\right)=\lim_{n\to\infty}\left(\int_{E}h_{n}\right)$
+since $\left\{ \int_{E}h_{n}\right\} $ is a monotone increasing sequence. 
+
+~~~Similarly, let $p_{n}$ be the function given by $p_{n}(x)=\mbox{sup}\{f_{k}(x)\mid k\geq n\}$.
+Then $\{p_{n}\}$ is a sequence of measurable functions on $E$ which
+is dominated by the integral function $g$. Also $\{p_{n}\}\to\mbox{limsup}(f_{n})$
+pointwise on $E$, so by the Lebesgue Dominated Convergence Theorem,
+we have 
+\[
+\lim_{n\to\infty}\int_{E}p_{n}=\int_{E}\mbox{limsup}(f_{n})
+\]
+
+Since $p_{n}\geq f_{n}$, we have $\int_{E}p_{n}\geq\int_{E}f_{n}$
+by monotonicity. Therefore 
+\begin{align*}
+\mbox{limsup}\left(\int_{E}f_{n}\right) & \leq\mbox{limsup}\left(\int_{E}p_{n}\right)\\
+ & =\lim_{n\to\infty}\left(\int_{E}p_{n}\right)\\
+ & =\int_{E}\mbox{limsup}(f_{n}).
+\end{align*}
+ Where $\mbox{liminf}\left(\int_{E}p_{n}\right)=\lim_{n\to\infty}\left(\int_{E}p_{n}\right)$
+since $\left\{ \int_{E}p_{n}\right\} $ is a monotone decreasing sequence. 
+
+~~~The middle inequality in (\ref{eq:inequality}) follows from
+the properties of $\mbox{liminf}$ and $\mbox{limsup}$. 
+
+\end{proof}
+
+\hfill
+
+$(2):$ Prove the following Proposition in the lecture notes: If $f$
+is continuous on $[a,b)$ and one of its derivates (say $D^{+}$)
+is everywhere nonnegative on $(a,b)$, then $f$ is nondecreasing
+on $[a,b]$; i.e., $f(x)\le f(y)$ for all $x,y\in[a,b]$ with $x\le y$.
+(You only need to consider the derivate $D^{+}$.) Hint: First show
+this for a function $g$ for which $D^{+}g\ge\epsilon>0$. Apply this
+to the function $g(x)=f(x)+\epsilon x$.
+
+\begin{proof} Let $g:[a,b]\to\mathbb{R}$ denote the function $g(x)=f(x)+\varepsilon x$.
+For all $x\in[a,b]$, 
+\begin{align*}
+(D^{+}g)(x) & =\mbox{limsup}\limits _{h\to0^{+}}\left(\frac{g(x+h)-b(x)}{h}\right)\\
+ & =\mbox{limsup}\limits _{h\to0^{+}}\left(\frac{f(x+h)-f(x)}{h}+\frac{\varepsilon(x+h)-\varepsilon x}{h}\right)\\
+ & =\mbox{limsup}\limits _{h\to0^{+}}\left(\frac{f(x+h)-f(x)}{h}+\varepsilon\right)\\
+ & =\mbox{limsup}\limits _{h\to0^{+}}\left(\frac{f(x+h)-f(x)}{h}\right)+\varepsilon\\
+ & =(D^{+}f)(x)+\varepsilon\\
+ & \geq\varepsilon,
+\end{align*}
+
+implies $D^{+}g\geq\varepsilon$. 
+
+~~~Now we show $g$ is nondecreasing. To do this, we show for all
+$c\in(a,b)$ that $g(x)\geq g(c)$ for all $x\in(c,b)$. To obtain
+a contradiction, suppose there exists a $d\in(c,b)$ such that $g(d)<g(c)$.
+Since $g$ is continuous, there exists a neighborhood $(d-\delta,d+\delta)\subset(c,b)$
+such that $g(x)<g(c)$ for all $x\in(d-\delta,d+\delta)$. Define
+$e:=\inf\{y\mid y\in(c,d),\mbox{ }g(x)<g(c),\mbox{ for all }x\in(y,d]\}$.
+Continuity of $g$ implies $g(e)>g(c)$. Also, if $g(e)<g(c)$, then
+there exists a neighborhood $(e-\delta,e+\delta)\subset(c,b)$ such
+that $g(x)<g(c)$ for all $x\in(e-\delta,e+\delta)$, but this contradicts
+the choice of $e$ as the infinum. Therefore $g(e)=g(c)$. Since $g(x)<g(c)=g(e)$
+for all $x\in(e,d)$, we have
+\[
+\frac{g(x)-g(e)}{x-e}<0\mbox{ for all }x\in[e,d].
+\]
+
+Letting $x\to e^{+}$ gives 
+\[
+(D^{+}g)(e)=\mbox{limsup}\limits _{x\to e^{+}}\left(\frac{g(x)-g(e)}{x-e}\right)\leq0.
+\]
+
+This contradicts the fact that $D^{+}g\geq\varepsilon>0.$ Therefore
+$g(x)\geq g(c)$ for all $x\in(c,b)$, which implies $g$ is nondecreasing. 
+
+~~~Let $c,d\in[a,b]$ such that $c<d$. Then
+\begin{align*}
+f(c)+\varepsilon c & =g(c)\\
+ & \leq g(d)\\
+ & =f(d)+\varepsilon d.
+\end{align*}
+
+Letting $\varepsilon\to0^{+}$ gives $f(c)\leq f(d)$. Therefore $f$
+is nondecreasing on $[a,b]$. \end{proof}
+\end{document}

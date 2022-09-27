@@ -1,0 +1,2934 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Measure Theory Homework 5
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f\colon X\to\mathbb{R}$
+\end_inset
+
+ be a function.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is measurable if and only if for every 
+\begin_inset Formula $q\in\mathbb{Q}$
+\end_inset
+
+ the set 
+\begin_inset Formula $f^{-1}(-\infty,q)$
+\end_inset
+
+ is measurable.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $f$
+\end_inset
+
+ is measurable, then certainly 
+\begin_inset Formula $f^{-1}(-\infty,c)\in\mathcal{M}$
+\end_inset
+
+ for any 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+ (and hence for any 
+\begin_inset Formula $c\in\mathbb{Q}$
+\end_inset
+
+).
+ Conversely, suppose 
+\begin_inset Formula $f^{-1}(-\infty,q)\in\mathcal{M}$
+\end_inset
+
+ for any 
+\begin_inset Formula $q\in\mathbb{Q}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ choose 
+\begin_inset Formula $q_{n}\in\mathbb{Q}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+c<q_{n}<c+\frac{1}{n}.
+\]
+
+\end_inset
+
+Such a choice for each 
+\begin_inset Formula $n$
+\end_inset
+
+ can be made since 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+ is dense in 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula 
+\[
+f^{-1}(-\infty,c]=\bigcap_{n=1}^{\infty}f^{-1}(-\infty,q_{n})
+\]
+
+\end_inset
+
+To see this, first note that the inclusion 
+\begin_inset Formula 
+\[
+f^{-1}(-\infty,c]\subseteq\bigcap_{n=1}^{\infty}f^{-1}(-\infty,q_{n})
+\]
+
+\end_inset
+
+is clear since each 
+\begin_inset Formula $f^{-1}(-\infty,q_{n})$
+\end_inset
+
+ contains 
+\begin_inset Formula $f^{-1}(-\infty,c)$
+\end_inset
+
+ (as 
+\begin_inset Formula $c<q_{n}$
+\end_inset
+
+).
+ For the reverse inclusion, suppose 
+\begin_inset Formula $x\in\bigcap_{n=1}^{\infty}f^{-1}(-\infty,q_{n})$
+\end_inset
+
+, so 
+\begin_inset Formula $f(x)<q_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $q_{n}\to c$
+\end_inset
+
+, this implies 
+\begin_inset Formula $f(x)\leq c$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $x\in f^{-1}(-\infty,c]$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $f$
+\end_inset
+
+ is measurable.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Note that we needed to use the fact that 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+ is dense in 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ in order to prove this.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+Before we answer this problem, we give a more general definition of what
+ it means for a function to be measurable with respect to 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebras 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+.
+ Then we show that this more general definition is equivalent to the definition
+ we've been using when 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ is the Borel 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defnmeasurabled}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M})$
+\end_inset
+
+ and 
+\begin_inset Formula $(Y,\mathcal{N})$
+\end_inset
+
+ be measurable spaces and let 
+\begin_inset Formula $f\colon X\to Y$
+\end_inset
+
+ be a function.
+ We say 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\series bold
+measurable with respect to 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ 
+\series default
+if 
+\begin_inset Formula $f^{-1}(\mathcal{N})\subseteq\mathcal{M}$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\[
+f^{-1}(\mathcal{N})=\{f^{-1}(B)\mid B\in\mathcal{N}\}.
+\]
+
+\end_inset
+
+In other words, 
+\begin_inset Formula $f$
+\end_inset
+
+ is measurable with respect to 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ if for all 
+\begin_inset Formula $B\in\mathcal{N}$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\[
+f^{-1}(B)=\{x\in X\mid f(x)\in B\}\in\mathcal{M}.
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $\mathcal{M}=\mathcal{N}$
+\end_inset
+
+, then we will just say 
+\begin_inset Formula $f$
+\end_inset
+
+ is measurable with respect to 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+.
+ If the 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebras 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ are clear from context, then we will just say 
+\begin_inset Formula $f$
+\end_inset
+
+ is measurable.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let us now show that when 
+\begin_inset Formula $Y=\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{N}=\mathcal{B}(\mathbb{R})$
+\end_inset
+
+, that this definition is equivalent to the definition we gave in class.
+ We first prove the following two propositions:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{equivalentdefofmeasurable}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M})$
+\end_inset
+
+ and 
+\begin_inset Formula $(Y,\mathcal{N})$
+\end_inset
+
+ be measurable spaces and let 
+\begin_inset Formula $f\colon X\to Y$
+\end_inset
+
+ be a function.
+ Suppose that 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ is generated as a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra by the collection 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ of subsets of 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f^{-1}(\mathcal{N})\subseteq\mathcal{M}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $f^{-1}(\mathcal{C})\subseteq\mathcal{M}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ One direction is clear, so we just prove the other direction.
+ Suppose 
+\begin_inset Formula $f^{-1}(\mathcal{C})\subseteq\mathcal{M}$
+\end_inset
+
+.
+ Observe that
+\begin_inset Formula 
+\[
+\{B\in\mathcal{P}(Y)\mid f^{-1}(B)\in\mathcal{M}\}
+\]
+
+\end_inset
+
+is a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra which contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ Indeed, it is a 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra since 
+\begin_inset Formula $f^{-1}$
+\end_inset
+
+ maps the emptyset set to the emptyset and maps the whole space 
+\begin_inset Formula $Y$
+\end_inset
+
+ to the whole space 
+\begin_inset Formula $X$
+\end_inset
+
+, and since 
+\begin_inset Formula $f^{-1}$
+\end_inset
+
+ commutes with unions and complements.
+ Furthemore, this 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ since 
+\begin_inset Formula $f^{-1}(\mathcal{C})\subseteq\mathcal{M}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ is the 
+\emph on
+smallest 
+\emph default
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra which contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+, it follows that
+\begin_inset Formula 
+\[
+\mathcal{N}\subseteq\{B\in\mathcal{P}(Y)\mid f^{-1}(B)\in\mathcal{M}\}.
+\]
+
+\end_inset
+
+In particular, if 
+\begin_inset Formula $B\in\mathcal{N}$
+\end_inset
+
+, then 
+\begin_inset Formula $f^{-1}(B)\in\mathcal{M}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $f$
+\end_inset
+
+ is measurable.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propborelsigmaalgebragen}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{C}=\{(-\infty,c)\mid c\in\mathbb{R}\}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})=\sigma(\mathcal{C})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{I}_{n}$
+\end_inset
+
+ be the collection of all subintervals of 
+\begin_inset Formula $[n,n+1)$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathcal{B}_{n}=\sigma(\mathcal{I}_{n})$
+\end_inset
+
+.
+ So 
+\begin_inset Formula 
+\[
+\mathcal{B}(\mathbb{R})=\{E\subseteq\mathbb{R}\mid E\cap[n,n+1)\in\mathcal{B}_{n}\text{ for all }n\in\mathbb{Z}\}.
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $(-\infty,c)\cap[n,n+1]$
+\end_inset
+
+ is a subinterval of 
+\begin_inset Formula $[n,n+1]$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{Z}$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $(-\infty,c)\in\mathcal{B}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{Z}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathcal{C}\subseteq\mathcal{B}$
+\end_inset
+
+ which implies 
+\begin_inset Formula $\sigma(\mathcal{C})\subseteq\mathcal{B}$
+\end_inset
+
+ (as 
+\begin_inset Formula $\sigma(\mathcal{C})$
+\end_inset
+
+ is the 
+\emph on
+smallest 
+\emph default
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra which contains 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+).
+ Conversely, note that 
+\begin_inset Formula $\sigma(\mathcal{C})$
+\end_inset
+
+ contains all subintervals of 
+\begin_inset Formula $[n,n+1)$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{Z}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\sigma(\mathcal{C})\supseteq\mathcal{B}_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{Z}$
+\end_inset
+
+ (as 
+\begin_inset Formula $\mathcal{B}_{n}$
+\end_inset
+
+ is the 
+\emph on
+smallest 
+\emph default
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra which contains all subintervals of 
+\begin_inset Formula $[n,n+1)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})=\sigma\left(\bigcup_{n\in\mathbb{Z}}\mathcal{B}_{n}\right)$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})\subseteq\sigma(\mathcal{C})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{corequivdefofmeas}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M})$
+\end_inset
+
+ be a measurable space and let 
+\begin_inset Formula $f\colon X\to\mathbb{R}$
+\end_inset
+
+ be a function.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is measurable with respect to 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $f^{-1}(-\infty,c)\in\mathcal{M}$
+\end_inset
+
+ for all 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Follows from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propborelsigmaalgebragen})
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{equivalentdefofmeasurable})
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M})$
+\end_inset
+
+ be a measurable space and let 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})$
+\end_inset
+
+ be the Borel 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-algebra on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ Suppose that 
+\begin_inset Formula $\mathcal{C}\subseteq\mathcal{B}(\mathbb{R})$
+\end_inset
+
+ is a collection of sets in 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})\subseteq\sigma(\mathcal{C})$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f\colon X\to\mathbb{R}$
+\end_inset
+
+ is measurable with respect to 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $f^{-1}(C)\in\mathcal{M}$
+\end_inset
+
+ for all 
+\begin_inset Formula $C\in\mathcal{C}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Follows from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{equivalentdefofmeasurable})
+\end_layout
+
+\end_inset
+
+ and from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Corollary~(
+\backslash
+ref{corequivdefofmeas})
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 3
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.i
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f\colon\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+ be a continuous function.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is measurable with respect to 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ For each 
+\begin_inset Formula $q,r\in\mathbb{Q}$
+\end_inset
+
+ and 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, let 
+\begin_inset Formula 
+\[
+\mathrm{B}_{1/n}(q)=\{x\in\mathbb{R}\mid|x-q|<1/n\}
+\]
+
+\end_inset
+
+Then the collection 
+\begin_inset Formula 
+\[
+\mathscr{B}=\{\mathrm{B}_{1/n}(q)\mid n\in\mathbb{N}\text{ and }q\in\mathbb{Q}\}
+\]
+
+\end_inset
+
+forms a countable basis for the usual topology on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ In particular, if 
+\begin_inset Formula $U$
+\end_inset
+
+ be an open subset of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+, then we can express 
+\begin_inset Formula $U$
+\end_inset
+
+ as a union of the form
+\begin_inset Formula 
+\[
+U=\bigcup_{\lambda\in\Lambda}B_{\lambda}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $B_{\lambda}\in\mathscr{B}$
+\end_inset
+
+ and where the index set 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ is 
+\emph on
+countable.
+
+\emph default
+ In particular, it follows that 
+\begin_inset Formula $\tau(\mathscr{B})\subseteq\mathcal{B}(\mathbb{R})$
+\end_inset
+
+, where 
+\begin_inset Formula $\tau(\mathscr{B})$
+\end_inset
+
+ is the usual Euclidean topology on 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+.
+ Thus since 
+\begin_inset Formula $(-\infty,c)$
+\end_inset
+
+ is an open subset of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ for any 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $f^{-1}(-\infty,c)$
+\end_inset
+
+ can be expressed a countable union of open subsets of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ (by definition of what it means to be continuous, the inverse image of
+ an open set under 
+\begin_inset Formula $f$
+\end_inset
+
+ is open).
+ Since every open subset of 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ is Borel measurable, it follows that 
+\begin_inset Formula $f^{-1}(-\infty,c)\in\mathcal{B}(\mathbb{R})$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $f$
+\end_inset
+
+ is measurable with respect to 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3.ii
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f\colon\mathbb{R}\to\mathbb{R}$
+\end_inset
+
+ be a monotone increasing function.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathcal{B}(\mathbb{R})$
+\end_inset
+
+-measurable.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+.
+ We want to show that 
+\begin_inset Formula $f^{-1}(-\infty,c)\in\mathcal{B}(\mathbb{R})$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $f^{-1}(-\infty,c)=\emptyset$
+\end_inset
+
+ or 
+\begin_inset Formula $f^{-1}(-\infty,c)=\mathbb{R}$
+\end_inset
+
+, then we are done, so assume 
+\begin_inset Formula $f^{-1}(-\infty,c)\neq\emptyset$
+\end_inset
+
+ and 
+\begin_inset Formula $f^{-1}(-\infty,c)\neq\mathbb{R}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $y\in\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $c\leq f(y)$
+\end_inset
+
+.
+ Observe that if 
+\begin_inset Formula $x\in f^{-1}(-\infty,c)$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+f(x)<c\leq f(y),
+\]
+
+\end_inset
+
+which implies 
+\begin_inset Formula $x\leq y$
+\end_inset
+
+ since 
+\begin_inset Formula $f$
+\end_inset
+
+ is monotone increasing.
+ Thus 
+\begin_inset Formula $y$
+\end_inset
+
+ is an upper bound of the set 
+\begin_inset Formula $f^{-1}(-\infty,c)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f^{-1}(-\infty,c)$
+\end_inset
+
+ is nonempty and bounded above, it follows that its supremum exists.
+ Denote its supremum by 
+\begin_inset Formula $y_{0}$
+\end_inset
+
+.
+ So
+\begin_inset Formula 
+\[
+y_{0}=\sup\{x\in\mathbb{R}\mid f(x)<c\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We claim that 
+\begin_inset Formula 
+\[
+f^{-1}(-\infty,c)=\begin{cases}
+(-\infty,y_{0}) & \text{if }f(y_{0})\geq c\\
+(-\infty,y_{0}] & \text{if }f(y_{0})<c.
+\end{cases}
+\]
+
+\end_inset
+
+Indeed, since 
+\begin_inset Formula $y_{0}$
+\end_inset
+
+ is an upper bound 
+\begin_inset Formula $f^{-1}(-\infty,c)$
+\end_inset
+
+, it must be greater than or equal to all elements in 
+\begin_inset Formula $f^{-1}(-\infty,c)$
+\end_inset
+
+.
+ In other words, if 
+\begin_inset Formula $x\in f^{-1}(-\infty,c)$
+\end_inset
+
+, then 
+\begin_inset Formula $x\leq y_{0}$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\[
+f^{-1}(-\infty,c)\subseteq\begin{cases}
+(-\infty,y_{0}) & \text{if }f(y_{0})\geq c\\
+(-\infty,y_{0}] & \text{if }f(y_{0})<c.
+\end{cases}
+\]
+
+\end_inset
+
+Conversely, suppose 
+\begin_inset Formula $x\in(-\infty,y_{0})$
+\end_inset
+
+, so 
+\begin_inset Formula $x<y_{0}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $x$
+\end_inset
+
+ is not an upper bound of the set 
+\begin_inset Formula $f^{-1}(-\infty,c)$
+\end_inset
+
+ (since 
+\begin_inset Formula $y_{0}$
+\end_inset
+
+ is the 
+\emph on
+least 
+\emph default
+upper bound), which means that there exists an 
+\begin_inset Formula $x'\in\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $x\leq x'$
+\end_inset
+
+ and 
+\begin_inset Formula $f(x')<c$
+\end_inset
+
+.
+ But since 
+\begin_inset Formula $f(x)\leq f(x')$
+\end_inset
+
+, this implies 
+\begin_inset Formula $f(x)<c$
+\end_inset
+
+, and hence 
+\begin_inset Formula $x\in f^{-1}(-\infty,c)$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\[
+f^{-1}(-\infty,c)\supseteq\begin{cases}
+(-\infty,y_{0}) & \text{if }f(y_{0})\geq c\\
+(-\infty,y_{0}] & \text{if }f(y_{0})<c.
+\end{cases}
+\]
+
+\end_inset
+
+In any case, we see that 
+\begin_inset Formula $f^{-1}(-\infty,c)\in\mathcal{B}(\mathbb{R})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M},\mu)$
+\end_inset
+
+ be a measure space.
+ Suppose 
+\begin_inset Formula $(f_{n}\colon X\to[0,\infty])$
+\end_inset
+
+ is a sequence of non-negative measurable functions.
+ Define 
+\begin_inset Formula $f\colon X\to[0,\infty]$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+f(x)=\sum_{n=1}^{\infty}f_{n}(x)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is a non-negative measurable function and
+\begin_inset Formula 
+\[
+\int_{X}f\mathrm{d}\mu=\sum_{n=1}^{\infty}\int_{X}f_{n}\mathrm{d}\mu.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ For each 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+, let 
+\begin_inset Formula $s_{N}=\sum_{n=1}^{N}f_{n}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $s_{N}$
+\end_inset
+
+ converges pointwise to 
+\begin_inset Formula $f$
+\end_inset
+
+ since
+\begin_inset Formula 
+\begin{align*}
+f(x) & =\sum_{n=1}^{\infty}f_{n}(x)\\
+ & =\lim_{N\to\infty}\sum_{n=1}^{N}f_{n}(x)\\
+ & =\lim_{N\to\infty}s_{N}(x)
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+ Each 
+\begin_inset Formula $s_{N}$
+\end_inset
+
+ is a nonnegative measurable function since it is a finite sum of nonnegative
+ measurable functions, and so 
+\begin_inset Formula $(s_{N})$
+\end_inset
+
+ is a sequence of nonnegative functions which converges pointwise to 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $f$
+\end_inset
+
+ is a nonnegative measurable function.
+ Furthermore, 
+\begin_inset Formula $s_{N}$
+\end_inset
+
+ is an increasing sequence since if 
+\begin_inset Formula $M\leq N$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{align*}
+s_{M}(x) & =\sum_{n=1}^{M}f_{n}(x)\\
+ & \leq\sum_{n=1}^{N}f_{n}(x)\\
+ & =s_{N}(x)
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in X$
+\end_inset
+
+, where the inequality follows from the fact that each 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is nonnegative.
+ Therefore we may apply the Monotone Convergence Theorem to obtain
+\begin_inset Formula 
+\begin{align*}
+\int_{X}f\mathrm{d}\mu & =\lim_{N\to\infty}\int_{X}s_{N}\mathrm{d}\mu\\
+ & =\lim_{N\to\infty}\int_{X}\sum_{n=1}^{N}f_{n}\mathrm{d}\mu\\
+ & =\lim_{N\to\infty}\sum_{n=1}^{N}\int_{X}f_{n}\mathrm{d}\mu\\
+ & =\sum_{n=1}^{\infty}\int_{X}f_{n}\mathrm{d}\mu,
+\end{align*}
+
+\end_inset
+
+where we obtained the third line from the fourth line from the fact that
+ this is a finite sum.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M},\mu)$
+\end_inset
+
+ be measure space and let 
+\begin_inset Formula $g\colon X\to[0,\infty)$
+\end_inset
+
+ be a nonnegative measurable function.
+ Define 
+\begin_inset Formula $\nu_{g}\colon\mathcal{M}\to[0,\infty]$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\nu_{g}(E)=\int_{X}g1_{E}\mathrm{d}\mu
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $E\in\mathcal{M}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is a measure on 
+\begin_inset Formula $(X,\mathcal{M})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ First note that 
+\begin_inset Formula 
+\begin{align*}
+\nu_{g}(\emptyset) & =\int_{X}g1_{\emptyset}\mathrm{d}\mu\\
+ & =\int_{X}g\cdot0\cdot\mathrm{d}\mu\\
+ & =\int_{X}0\cdot\mathrm{d}\mu\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+Next we show that 
+\begin_inset Formula $\nu_{g}$
+\end_inset
+
+ is finitely additive.
+ Let 
+\begin_inset Formula $(E_{n})_{n=1}^{N}$
+\end_inset
+
+ be a finite sequence of pairwise disjoint sets in 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\nu_{g}\left(\bigcup_{n=1}^{N}E_{n}\right) & =\int_{X}g1_{\bigcup_{n=1}^{N}E_{n}}\mathrm{d}\mu\\
+ & =\int_{X}g\sum_{n=1}^{N}1_{E_{n}}\mathrm{d}\mu\\
+ & =\int_{X}\sum_{n=1}^{N}g1_{E_{n}}\mathrm{d}\mu\\
+ & =\sum_{n=1}^{N}\int_{X}g1_{E_{n}}\mathrm{d}\mu\\
+ & =\sum_{n=1}^{N}\nu_{g}(E_{n}),
+\end{align*}
+
+\end_inset
+
+where we used the fact that each 
+\begin_inset Formula $g1_{E_{n}}$
+\end_inset
+
+ is a nonnegative measurable function in order to commute the finite sum
+ with the integral.
+ Thus it follows that 
+\begin_inset Formula $\nu_{g}$
+\end_inset
+
+ is finitely additive.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+It remains to show that 
+\begin_inset Formula $\nu_{g}$
+\end_inset
+
+ is countably subadditive.
+ In problem 3 in HW4, we showed that for any nonnegative simple function
+ 
+\begin_inset Formula $\varphi\colon X\to[0,\infty)$
+\end_inset
+
+, the function 
+\begin_inset Formula $\nu_{\varphi}\colon\mathcal{M}\to[0,\infty]$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\[
+\nu_{\varphi}(E)=\int_{X}\varphi1_{E}\mathrm{d}\mu
+\]
+
+\end_inset
+
+is a measure.
+ We will use this fact in what follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Choose an increasing sequence 
+\begin_inset Formula $(\varphi_{n}\colon X\to[0,\infty])$
+\end_inset
+
+ of nonnegative simple functions which converges pointwise to 
+\begin_inset Formula $g$
+\end_inset
+
+ (we can do this since 
+\begin_inset Formula $g$
+\end_inset
+
+ is a nonnegative measurable function).
+ Then 
+\begin_inset Formula $(\varphi_{n}1_{E})$
+\end_inset
+
+ is an increasing sequence of nonnegative simple functions which converges
+ pointwise to 
+\begin_inset Formula $g1_{E}$
+\end_inset
+
+ for all 
+\begin_inset Formula $E\in\mathcal{M}$
+\end_inset
+
+.
+ It follows from the Monotone Convergence Theorem that
+\begin_inset Formula 
+\begin{align*}
+\nu_{\varphi_{n}}(E) & =\int_{X}\varphi_{n}1_{E}\mathrm{d}\mu\\
+ & \to\int_{X}g1_{E}\mathrm{d}\mu\\
+ & =\nu_{g}(E)
+\end{align*}
+
+\end_inset
+
+for any 
+\begin_inset Formula $E\in\mathcal{M}$
+\end_inset
+
+.
+ In particular, for any 
+\begin_inset Formula $E\in\mathcal{M}$
+\end_inset
+
+ and 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, we can find a 
+\begin_inset Formula $N_{E,\varepsilon}\in\mathbb{N}$
+\end_inset
+
+ (which depends on 
+\begin_inset Formula $E$
+\end_inset
+
+ and 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+) such that 
+\begin_inset Formula 
+\begin{equation}
+\nu_{g}(E)<\nu_{\varphi_{n}}(E)+\varepsilon\label{eq:ineqfdskl}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\geq N_{E,\varepsilon}$
+\end_inset
+
+.
+ However we will don't need estimate 
+\begin_inset Formula $\nu_{g}(E)$
+\end_inset
+
+ to this level of precision.
+ We just need to know thta for any 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, we can find an 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:ineqfdskl})
+\end_layout
+
+\end_inset
+
+ holds.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now let 
+\begin_inset Formula $(E_{k})$
+\end_inset
+
+ be a sequence of measurable sets and let 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\nu_{g}\left(\bigcup_{k=1}^{\infty}E_{k}\right)<\nu_{\varphi_{n}}\left(\bigcup_{k=1}^{\infty}E_{k}\right)+\varepsilon
+\]
+
+\end_inset
+
+Then we have
+\begin_inset Formula 
+\begin{align*}
+\nu_{g}\left(\bigcup_{k=1}^{\infty}E_{k}\right) & \leq\nu_{\varphi_{n}}\left(\bigcup_{k=1}^{\infty}E_{k}\right)+\varepsilon\\
+ & \leq\sum_{k=1}^{\infty}\nu_{\varphi_{n}}(E_{k})+\varepsilon\\
+ & \leq\sum_{k=1}^{\infty}\nu_{g}(E_{k})+\varepsilon
+\end{align*}
+
+\end_inset
+
+where we obtained the second line from the first line using countable subadditiv
+ity of 
+\begin_inset Formula $\nu_{\varphi_{n}}$
+\end_inset
+
+, and where we obtained the third line from the second line from the fact
+ that 
+\begin_inset Formula $\varphi_{n}1_{E_{k}}\leq g1_{E_{k}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k$
+\end_inset
+
+ and from monotonicity of integration.
+ Taking 
+\begin_inset Formula $\varepsilon\to0$
+\end_inset
+
+ gives us countable subadditivity of 
+\begin_inset Formula $\nu_{g}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 6
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(X,\mathcal{M},\mu)$
+\end_inset
+
+ be a measure space.
+ Suppose 
+\begin_inset Formula $(f_{n}\colon X\to[0,\infty])$
+\end_inset
+
+ is a decreasing sequence of nonnegative measurable functions which converges
+ pointwise to 
+\begin_inset Formula $f\colon X\to[0,\infty]$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\int_{X}f_{1}\mathrm{d}\mu<\infty$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{equation}
+\lim_{n\to\infty}\int_{X}f_{n}\mathrm{d}\mu=\int_{X}f\mathrm{d}\mu.\label{eq:decseqcon}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, set 
+\begin_inset Formula $g_{n}=f_{n+1}-f_{n}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ is a decreasing sequence, each 
+\begin_inset Formula $g_{n}$
+\end_inset
+
+ is nonnegative.
+ Furthermore each 
+\begin_inset Formula $g_{n}$
+\end_inset
+
+ is measurable since it is a difference of two measurable functions.
+ Set 
+\begin_inset Formula $g=\sum_{n=1}^{\infty}g_{n}$
+\end_inset
+
+ and observe that
+\begin_inset Formula 
+\begin{align*}
+g & =\sum_{n=1}^{\infty}g_{n}\\
+ & =\lim_{N\to\infty}\sum_{n=1}^{N}g_{n}\\
+ & =\lim_{N\to\infty}\sum_{n=1}^{N}(f_{n+1}-f_{n})\\
+ & =\lim_{N\to\infty}(f_{N}-f_{1})\\
+ & =f-f_{1}.
+\end{align*}
+
+\end_inset
+
+It follows from problem 4 that
+\begin_inset Formula 
+\begin{align*}
+\int_{X}f\mathrm{d}\mu-\int_{X}f_{1}\mathrm{d}\mu & =\int_{X}(f-f_{1})\mathrm{d}\mu\\
+ & =\int_{X}g\mathrm{d}\mu\\
+ & =\sum_{n=1}^{\infty}\int_{X}g_{n}\mathrm{d}\mu\\
+ & =\lim_{N\to\infty}\sum_{n=1}^{N}\int_{X}g_{n}\mathrm{d}\mu\\
+ & =\lim_{N\to\infty}\sum_{n=1}^{N}\int_{X}(f_{n+1}-f_{n})\mathrm{d}\mu\\
+ & =\lim_{N\to\infty}\int_{X}\sum_{n=1}^{N}(f_{n+1}-f_{n})\mathrm{d}\mu\\
+ & =\lim_{N\to\infty}\int_{X}(f_{N}-f_{1})\mathrm{d}\mu\\
+ & =\lim_{N\to\infty}\int_{X}f_{N}\mathrm{d}\mu-\int_{X}f_{1}\mathrm{d}\mu.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\int_{X}f_{1}\mathrm{d}\mu<0$
+\end_inset
+
+, we can cancel it from both sides to get 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:decseqcon})
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 7
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Fatou's Lemma remains valid if the hypothesis that all 
+\begin_inset Formula $f_{n}\colon X\to[0,\infty]$
+\end_inset
+
+ are nonnegative measurable functions is replaced by the hypothesis that
+ 
+\begin_inset Formula $f_{n}\colon X\to\mathbb{R}$
+\end_inset
+
+ are measurable and there exists a nonnegative integrable function 
+\begin_inset Formula $g\colon X\to[0,\infty]$
+\end_inset
+
+ such that 
+\begin_inset Formula $-g\leq f_{n}$
+\end_inset
+
+ pointwise for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Observe that 
+\begin_inset Formula $(g+f_{n})$
+\end_inset
+
+ is a sequence of nonnegative measurable functions which converges pointwise
+ to the nonnegative measurable function 
+\begin_inset Formula $g+f$
+\end_inset
+
+.
+ Then it follows from Fatou's Lemma that
+\begin_inset Formula 
+\begin{align*}
+\int_{X}g\mathrm{d}\mu+\int_{X}f\mathrm{d}\mu & =\int_{X}g\mathrm{d}\mu+\int_{X}((g+f)-g)\mathrm{d}\mu\\
+ & =\int_{X}g\mathrm{d}\mu+\int_{X}(g+f)\mathrm{d}\mu-\int_{X}g\mathrm{d}\mu\\
+ & =\int_{X}(g+f)\mathrm{d}\mu\\
+ & \leq\liminf_{n\to\infty}\int_{X}(g+f_{n})\mathrm{d}\mu\\
+ & =\liminf_{n\to\infty}(\int_{X}g\mathrm{d}\mu+\int_{X}(g+f_{n})\mathrm{d}\mu-\int_{X}g\mathrm{d}\mu)\\
+ & =\liminf_{n\to\infty}(\int_{X}g\mathrm{d}\mu+\int_{X}((g+f_{n})-g)\mathrm{d}\mu)\\
+ & =\liminf_{n\to\infty}(\int_{X}g\mathrm{d}\mu+\int_{X}f_{n}\mathrm{d}\mu)\\
+ & =\int_{X}g\mathrm{d}\mu+\liminf_{n\to\infty}\int_{X}f_{n}\mathrm{d}\mu.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\int_{X}g\mathrm{d}\mu<\infty$
+\end_inset
+
+, we can cancel it from both sides to obtain
+\begin_inset Formula 
+\[
+\int_{X}f\mathrm{d}\mu\leq\liminf_{n\to\infty}\int_{X}f_{n}\mathrm{d}\mu.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 8
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\end_layout
+
+\end_inset
+
+ Compute the following integrals
+\begin_inset Formula 
+\begin{equation}
+\lim_{n\to\infty}\int_{0}^{\infty}\frac{\sin(x/n)}{(1+x/n)^{n}}\mathrm{d}x\label{eq:integral1}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\lim_{n\to\infty}\int_{0}^{1}\frac{1+nx^{2}}{(1+x^{2})^{n}}\mathrm{d}x\label{eq:integral2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\end_layout
+
+\end_inset
+
+ We first compute 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:integral1})
+\end_layout
+
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, let 
+\begin_inset Formula $f_{n}=\sin(x/n)(1+x/n)^{-n}$
+\end_inset
+
+.
+ Observe that each 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is measurable since each 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is continuous (the denominator is only zero when 
+\begin_inset Formula $x=-n$
+\end_inset
+
+).
+ Let us check that each 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is integrable: we have
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{\infty}|f_{n}|\mathrm{d}x & =\int_{0}^{\infty}\left|\frac{\sin(x/n)}{(1+x/n)^{n}}\right|\\
+ & \leq\int_{0}^{\infty}\left|(1+x/n)^{-n}\right|\mathrm{d}x\\
+ & =\int_{0}^{\infty}(1+x/n)^{-n}\mathrm{d}x\\
+ & \leq\int_{0}^{\infty}e^{-x}\mathrm{d}x\\
+ & =1.
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ Thus each 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is integrable.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we observe that 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ converges pointwise to 
+\begin_inset Formula $0$
+\end_inset
+
+ since 
+\begin_inset Formula $(1+x/n)^{n}\to e^{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sin(x/n)\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in\mathbb{R}$
+\end_inset
+
+.
+ Finally, note that the 
+\begin_inset Formula $e^{-x}\geq|f_{n}|$
+\end_inset
+
+ pointwise and 
+\begin_inset Formula $e^{-x}$
+\end_inset
+
+ is integrable (
+\begin_inset Formula $\int_{0}^{\infty}|e^{-x}|\mathrm{d}x=1$
+\end_inset
+
+).
+ It follows from the Lebesgue Dominated Convergence Theorem that
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}\int_{0}^{\infty}\frac{\sin(x/n)}{(1+x/n)^{n}}\mathrm{d}x=\int_{0}^{\infty}0\mathrm{d}x=0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we compute 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:integral2})
+\end_layout
+
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, let 
+\begin_inset Formula $f_{n}=(1+nx^{2})(1+x^{2})^{-n}$
+\end_inset
+
+.
+ Observe that each 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is measurable since each 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is continuous (the denominator is never zero for any 
+\begin_inset Formula $x\in\mathbb{R}$
+\end_inset
+
+).
+ Furthermore, each 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is nonnegative (since taking squares makes everything nonnegative).
+ We claim that 
+\begin_inset Formula $f_{n}$
+\end_inset
+
+ is a decreasing sequence.
+ Indeed
+\begin_inset Formula 
+\begin{align*}
+\frac{f_{n}}{f_{n+1}} & =\left(\frac{1+nx^{2}}{(1+x^{2})^{n}}\right)\left(\frac{(1+x^{2})^{n+1}}{1+(n+1)x^{2}}\right)\\
+ & =\frac{(1+nx^{2})(1+x^{2})}{1+(n+1)x^{2}}\\
+ & =\frac{nx^{4}+(n+1)x^{2}+1}{(n+1)x^{2}+1}\\
+ & \geq\frac{(n+1)x^{2}+1}{(n+1)x^{2}+1}\\
+ & =1.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ is a decreasing sequence which is bounded below, so it must converge pointwise
+ to some function.
+ For 
+\begin_inset Formula $x=0$
+\end_inset
+
+, it's easy to see that 
+\begin_inset Formula $f_{n}(0)\to0$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $x\neq0$
+\end_inset
+
+, we use L'Hopital's rule to get
+\begin_inset Formula 
+\begin{align*}
+\lim_{n\to\infty}f_{n} & =\lim_{n\to\infty}\frac{1+nx^{2}}{(1+x^{2})^{n}}\\
+ & =\lim_{n\to\infty}\frac{x^{2}}{\ln(1+x^{2})(1+x^{2})^{n}}\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ converges pointwise to 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Since
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{1}f_{1}\mathrm{d}x & =\int_{0}^{1}\frac{1+x^{2}}{1+x^{2}}\mathrm{d}x\\
+ & =\int_{0}^{1}\mathrm{d}x\\
+ & =1\\
+ & <\infty,
+\end{align*}
+
+\end_inset
+
+it follows from problem 6 that
+\begin_inset Formula 
+\begin{align*}
+\lim_{n\to\infty}\int_{0}^{1}\frac{1+nx^{2}}{(1+x^{2})^{n}}\mathrm{d}x & =\lim_{n\to\infty}\int_{0}^{1}f_{n}\mathrm{d}x\\
+ & =\int_{0}^{1}0\mathrm{d}x\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

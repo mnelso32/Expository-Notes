@@ -1,0 +1,2975 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Homological Algebra
+\end_layout
+
+\begin_layout Subsection
+Chain Complexes over 
+\begin_inset Formula $R$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring.
+ A 
+\series bold
+chain complex
+\series default
+ 
+\begin_inset Formula $A:=(A_{\bullet},d_{\bullet})$
+\end_inset
+
+ 
+\series bold
+over
+\series default
+ 
+\begin_inset Formula $R$
+\end_inset
+
+, or simply a 
+\series bold
+chain complex 
+\series default
+if the context is clear, is a sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ and morphisms 
+\begin_inset Formula $d_{i}:A_{i}\to A_{i-1}$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{diagramA}
+\backslash
+begin{tikzcd} (A,d) := 
+\backslash
+cdots 
+\backslash
+arrow[r] & A_{i+1} 
+\backslash
+arrow[r,"d _{i+1}"] & A_i  
+\backslash
+arrow[r," d _i "] & A_{i-1} 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+such that 
+\begin_inset Formula $d_{i}\circ d_{i+1}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ The condition 
+\begin_inset Formula $d_{i}\circ d_{i+1}=0$
+\end_inset
+
+ is equivalent to the condition 
+\begin_inset Formula $\text{Ker}(d_{i})\supset\text{Im}(d_{i+1})$
+\end_inset
+
+.
+ With this in mind, we define the 
+\series bold
+
+\begin_inset Formula $i$
+\end_inset
+
+th
+\series default
+ 
+\series bold
+homology of the chain complex
+\series default
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ to be 
+\begin_inset Formula 
+\[
+H_{i}(A):=\text{Ker}(d_{i})/\text{Im}(d_{i+1}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A 
+\series bold
+chain map
+\series default
+ between two complexes 
+\begin_inset Formula $A=(A_{\bullet},d_{\bullet})$
+\end_inset
+
+ and 
+\begin_inset Formula $A'=(A'_{\bullet},d'_{\bullet})$
+\end_inset
+
+ is a sequence 
+\begin_inset Formula $\varphi_{\bullet}$
+\end_inset
+
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphisms 
+\begin_inset Formula $\varphi_{i}:A_{i}\to A'_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula $d_{i}\varphi_{i-1}=\varphi_{i}d_{i-1}'$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ It follows from the definition that a chain map 
+\begin_inset Formula $\varphi:A\to A'$
+\end_inset
+
+ induces map of homologies 
+\begin_inset Formula $\varphi_{i}:H_{i}(A)\to H_{i}(A')$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To simplify notation in what follows, we think of 
+\begin_inset Formula $R$
+\end_inset
+
+ as a trivially graded ring.
+ If 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{diagramA}
+\backslash
+begin{tikzcd} A := 
+\backslash
+cdots 
+\backslash
+arrow[r] & A_{i+1} 
+\backslash
+arrow[r,"d _{i+1}"] & A_i  
+\backslash
+arrow[r," d _i "] & A_{i-1} 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+ is a chain complex over 
+\begin_inset Formula $R$
+\end_inset
+
+, then we can think of 
+\begin_inset Formula $A$
+\end_inset
+
+ as a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module together with an graded endomorphism 
+\begin_inset Formula $d:A\to A$
+\end_inset
+
+ of degree 
+\begin_inset Formula $-1$
+\end_inset
+
+ such that 
+\begin_inset Formula $d^{2}=0$
+\end_inset
+
+.
+ We think of 
+\begin_inset Formula $d_{i}$
+\end_inset
+
+ as being the restriction of 
+\begin_inset Formula $d$
+\end_inset
+
+ to 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+.
+ We define the 
+\series bold
+homology 
+\series default
+of 
+\begin_inset Formula $A$
+\end_inset
+
+ to be 
+\begin_inset Formula $H(A):=\text{Ker}(d)/\text{Im}(d)$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $H(A)=\bigoplus_{i\in\mathbb{Z}}H_{i}(A)$
+\end_inset
+
+.
+ An element in 
+\begin_inset Formula $\text{Ker}(d)$
+\end_inset
+
+ is called a 
+\series bold
+cycle 
+\series default
+of 
+\begin_inset Formula $A$
+\end_inset
+
+ and an element in 
+\begin_inset Formula $\text{Im}(d)$
+\end_inset
+
+ is called a 
+\series bold
+boundary 
+\series default
+of
+\series bold
+ 
+\series default
+
+\begin_inset Formula $A$
+\end_inset
+
+.
+
+\series bold
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $A'$
+\end_inset
+
+ be chain complexes over 
+\begin_inset Formula $R$
+\end_inset
+
+ with differentials 
+\begin_inset Formula $d$
+\end_inset
+
+ and 
+\begin_inset Formula $d'$
+\end_inset
+
+ respectively.
+ A chain map 
+\begin_inset Formula $\varphi:A\to A'$
+\end_inset
+
+ can be thought of as a homogeneous homomorphism of graded 
+\begin_inset Formula $R$
+\end_inset
+
+-modules such that 
+\begin_inset Formula $\varphi d=d'\varphi$
+\end_inset
+
+.
+ It follows from the definition that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ takes 
+\begin_inset Formula $\text{Ker}(d)$
+\end_inset
+
+ to 
+\begin_inset Formula $\text{Ker}(d')$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{Im}(d)$
+\end_inset
+
+ to 
+\begin_inset Formula $\text{Im}(d')$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ gies rise to an 
+\series bold
+induced map on homology
+\series default
+, which we also call 
+\begin_inset Formula $\varphi:H(A)\to H(A')$
+\end_inset
+
+.
+ Note that the restriction of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ to 
+\begin_inset Formula $H_{i}(A)$
+\end_inset
+
+ is 
+\begin_inset Formula $\varphi_{i}:H_{i}(A)\to H_{i}(A')$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Homotopy Equivalence
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+ be chain maps of chain complexes 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $A'$
+\end_inset
+
+ with differentials 
+\begin_inset Formula $d$
+\end_inset
+
+ and 
+\begin_inset Formula $d'$
+\end_inset
+
+ respectively.
+ We say 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is 
+\series bold
+homotopic 
+\series default
+to 
+\begin_inset Formula $\psi$
+\end_inset
+
+ if there is a graded homomorphism 
+\begin_inset Formula $h:A\to A'$
+\end_inset
+
+ of degree 
+\begin_inset Formula $1$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi-\psi=d'h+hd$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+ be chain maps of chain complexes 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $A'$
+\end_inset
+
+ with differentials 
+\begin_inset Formula $d$
+\end_inset
+
+ and 
+\begin_inset Formula $d'$
+\end_inset
+
+ respectively such that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is homotopic to 
+\begin_inset Formula $\psi$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+ induce the same map on homology.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ It suffices to show that 
+\begin_inset Formula $\varphi-\psi$
+\end_inset
+
+ induces the 
+\begin_inset Formula $0$
+\end_inset
+
+ map on homology.
+ Thus we may simplify the notation by replacing 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ by 
+\begin_inset Formula $\varphi-\psi$
+\end_inset
+
+, and assume from the outset that 
+\begin_inset Formula $\psi=0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $h$
+\end_inset
+
+ be a homotopy, so 
+\begin_inset Formula $\varphi=d'h+dh$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $a\in\text{Ker}(d)$
+\end_inset
+
+ be a cycle of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ From the formula for the homotopy 
+\begin_inset Formula $h$
+\end_inset
+
+ we get 
+\begin_inset Formula 
+\begin{align*}
+\varphi(a) & =d'(h(a))+h(d(a))\\
+ & =d'(h(a))+h(0)\\
+ & =d'(h(a)).
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\varphi(a)$
+\end_inset
+
+ is a boundary of 
+\begin_inset Formula $A'$
+\end_inset
+
+.
+ This implies that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ induces the 
+\begin_inset Formula $0$
+\end_inset
+
+ map on homology.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Exact Sequences of Chain Complexes over 
+\begin_inset Formula $R$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $A'$
+\end_inset
+
+, and 
+\begin_inset Formula $A''$
+\end_inset
+
+ be chain complexes over 
+\begin_inset Formula $R$
+\end_inset
+
+ with differentials 
+\begin_inset Formula $d$
+\end_inset
+
+,
+\begin_inset Formula $d'$
+\end_inset
+
+, and 
+\begin_inset Formula $d''$
+\end_inset
+
+ respectively, and let 
+\begin_inset Formula $\varphi:A'\to A$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi:A\to A''$
+\end_inset
+
+ be chain maps.
+ Then we say that
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & A' 
+\backslash
+arrow[r, "
+\backslash
+varphi "]  & A 
+\backslash
+arrow[r, "
+\backslash
+psi "]  & A'' 
+\backslash
+arrow[r]  & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+is a 
+\series bold
+short exact sequence 
+\series default
+of chain complexes if 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & A'_i 
+\backslash
+arrow[r, "
+\backslash
+varphi _i"]  & A_i 
+\backslash
+arrow[r, "
+\backslash
+psi _i"]  & A'' _i 
+\backslash
+arrow[r]  & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+is exact for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ In other words, the rows in the diagram below are exact.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[row sep=30] & 
+\backslash
+vdots 
+\backslash
+arrow[d, "d' _{i+2}"]  & 
+\backslash
+vdots 
+\backslash
+arrow[d, "d _{i+2}" ]   & 
+\backslash
+vdots 
+\backslash
+arrow[d , "d'' _{i+2}"] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0 
+\backslash
+arrow[r] & A'_{i+1}   
+\backslash
+arrow[r, "
+\backslash
+varphi _{i+1}"] 
+\backslash
+arrow[d, "d' _{i+1} " ] & A_{i+1}   
+\backslash
+arrow[r, "
+\backslash
+psi _{i+1}"] 
+\backslash
+arrow[d, "d _{i+1} " ] & A''_{i+1}   
+\backslash
+arrow[r] 
+\backslash
+arrow[d, "d'' _{i+1} " ] & 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0 
+\backslash
+arrow[r] & A'_{i}   
+\backslash
+arrow[r, "
+\backslash
+varphi _{i}"] 
+\backslash
+arrow[d, "d' _{i} " ] & A_{i}   
+\backslash
+arrow[r, "
+\backslash
+psi _{i}"] 
+\backslash
+arrow[d, "d _{i} " ] & A''_{i}   
+\backslash
+arrow[r] 
+\backslash
+arrow[d, "d'' _{i} " ] & 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0 
+\backslash
+arrow[r] & A'_{i-1}   
+\backslash
+arrow[r, "
+\backslash
+varphi _{i-1}"] 
+\backslash
+arrow[d, "d' _{i-1} " ] & A_{i-1}   
+\backslash
+arrow[r, "
+\backslash
+psi _{i-1}"] 
+\backslash
+arrow[d, "d _{i-1} " ] & A''_{i-1}   
+\backslash
+arrow[r] 
+\backslash
+arrow[d, "d'' _{i-1} " ] & 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+   & 
+\backslash
+vdots & 
+\backslash
+vdots  & 
+\backslash
+vdots 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Given such a short exact sequence, we get induced maps 
+\begin_inset Formula $\varphi_{i}:H_{i}(A')\to H_{i}(A)$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{i}:H_{i}(A)\to H_{i}(A'')$
+\end_inset
+
+, and 
+\series bold
+connecting homomorphisms
+\series default
+ 
+\begin_inset Formula $\gamma_{i}:H_{i}(A'')\to H_{i-1}(A')$
+\end_inset
+
+ which gives rise a long exact sequence in homology:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[row sep=40]  && 
+\backslash
+cdots 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & H_{i+1} (A'') 
+\backslash
+arrow[dll, " 
+\backslash
+gamma _{i+1} ", swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+  & H_{i} (A') 
+\backslash
+arrow[r, "
+\backslash
+varphi _i "] & H_{i} (A) 
+\backslash
+arrow[r, " 
+\backslash
+psi _i"] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z}] & H_{i} (A'') 
+\backslash
+arrow[dll, " 
+\backslash
+gamma _i  ", swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z) [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ & H_{i-1} (A') 
+\backslash
+arrow[r, "
+\backslash
+varphi _{i-1} "] & H_{i-1} (A) 
+\backslash
+arrow[r, "
+\backslash
+psi _{i-1} "] & 
+\backslash
+cdots 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+deRham Cohomology
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Suppose 
+\begin_inset Formula $F(x,y)=\langle P(x,y),Q(x,y)\rangle$
+\end_inset
+
+ is a smooth vector field representing a force on an open subset 
+\begin_inset Formula $U$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $C$
+\end_inset
+
+ is a parametrized curve 
+\begin_inset Formula $c(t)=(x(t),y(t))$
+\end_inset
+
+ in 
+\begin_inset Formula $U$
+\end_inset
+
+ from a point 
+\begin_inset Formula $p$
+\end_inset
+
+ to a point 
+\begin_inset Formula $q$
+\end_inset
+
+ with 
+\begin_inset Formula $a\leq t\leq b$
+\end_inset
+
+.
+ Then the work done by the force in moving a particle from 
+\begin_inset Formula $p$
+\end_inset
+
+ to 
+\begin_inset Formula $q$
+\end_inset
+
+ along 
+\begin_inset Formula $C$
+\end_inset
+
+ is given by the line integral 
+\begin_inset Formula $\int_{C}Pdx+Qdy$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Such a line integral is easy to compute if the vector field 
+\begin_inset Formula $F$
+\end_inset
+
+ is the gradient of a scalar function 
+\begin_inset Formula $f(x,y):$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+F=\text{grad}f=\langle\partial_{x}f,\partial_{y}f\rangle.
+\]
+
+\end_inset
+
+By Stoke's theorem, the line integral is simply 
+\begin_inset Formula 
+\[
+\int_{C}\partial_{x}fdx+\partial_{y}fdy=\int_{C}df=f(q)-f(p).
+\]
+
+\end_inset
+
+A necessary condition for the vector field 
+\begin_inset Formula $F=\langle P,Q\rangle$
+\end_inset
+
+ to be a gradient is that 
+\begin_inset Formula 
+\[
+P_{y}=\partial_{y}\partial_{x}f=\partial_{x}\partial_{y}f=Q_{x}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The question is now the following: if 
+\begin_inset Formula $P_{y}-Q_{x}=0$
+\end_inset
+
+, is the vector field 
+\begin_inset Formula $F=\langle P,Q\rangle$
+\end_inset
+
+ on 
+\begin_inset Formula $U$
+\end_inset
+
+ the gradient of some scalar function 
+\begin_inset Formula $f(x,y)$
+\end_inset
+
+ on 
+\begin_inset Formula $U$
+\end_inset
+
+? In terms of differential forms, the question becomes the following: if
+ the 
+\begin_inset Formula $1$
+\end_inset
+
+-form 
+\begin_inset Formula $\omega=Pdx+Qdy$
+\end_inset
+
+ is closed on 
+\begin_inset Formula $U$
+\end_inset
+
+, is it exact? The answer to this question is sometimes yes and sometimes
+ no, depending on the topology of 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+de Rham Complex
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a manifold and let 
+\begin_inset Formula $R$
+\end_inset
+
+ denote the ring 
+\begin_inset Formula $\Omega^{0}(M):=C^{\infty}(M)$
+\end_inset
+
+.
+ Then we have the following cochain complex over 
+\begin_inset Formula $R$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{diagramomega}
+\backslash
+begin{tikzcd} ( 
+\backslash
+Omega (M),d) := & 0 
+\backslash
+arrow[r] & 
+\backslash
+Omega ^0 (M) 
+\backslash
+arrow[r,"d"] & 
+\backslash
+Omega ^1 (M)  
+\backslash
+arrow[r," d  "] & 
+\backslash
+Omega ^2 (M) 
+\backslash
+arrow[r, "d" ] & 
+\backslash
+cdots, 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset Formula $d$
+\end_inset
+
+ denotes the exterior derivative.
+ We denote 
+\begin_inset Formula $H_{\text{dR}}(M)$
+\end_inset
+
+ to be the cohomology of 
+\begin_inset Formula $(\Omega(M),d)$
+\end_inset
+
+ and call it the 
+\series bold
+deRham cohomology 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ We denote by 
+\begin_inset Formula $Z(M)$
+\end_inset
+
+ to be the cycles of 
+\begin_inset Formula $(\Omega(M),d)$
+\end_inset
+
+ and 
+\begin_inset Formula $B(M)$
+\end_inset
+
+ to be the boundaries of 
+\begin_inset Formula $(\Omega(M),d)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ If the manifold 
+\begin_inset Formula $M$
+\end_inset
+
+ has 
+\begin_inset Formula $r$
+\end_inset
+
+ connected components, then its de Rham cohomology in degree 
+\begin_inset Formula $0$
+\end_inset
+
+ is 
+\begin_inset Formula $H^{0}(M)=\mathbb{R}^{r}$
+\end_inset
+
+.
+ An element of 
+\begin_inset Formula $H^{0}(M)$
+\end_inset
+
+ is specified by an ordered- 
+\begin_inset Formula $r$
+\end_inset
+
+-tuple of real numbers, each real number representing a constant function
+ on a connected component of 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Since there are no nonzero exact 
+\begin_inset Formula $0$
+\end_inset
+
+-forms, 
+\begin_inset Formula 
+\[
+H^{0}(M)=Z^{0}(M).
+\]
+
+\end_inset
+
+Suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is a closed 
+\begin_inset Formula $0$
+\end_inset
+
+-form on 
+\begin_inset Formula $M$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ is a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ function on 
+\begin_inset Formula $M$
+\end_inset
+
+ such that 
+\begin_inset Formula $df=0$
+\end_inset
+
+.
+ On any chart 
+\begin_inset Formula $(U,x_{1},\dots,x_{n})$
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\[
+df=\sum_{\lambda=1}^{n}(\partial_{x_{\lambda}}f)dx_{\lambda}.
+\]
+
+\end_inset
+
+Thus 
+\begin_inset Formula $df=0$
+\end_inset
+
+ on 
+\begin_inset Formula $U$
+\end_inset
+
+ if and only if all the partial derivatives 
+\begin_inset Formula $\partial_{x_{\lambda}}f$
+\end_inset
+
+ vanish identically on 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ This in turn is equivalent to 
+\begin_inset Formula $f$
+\end_inset
+
+ being locally constant on 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ Hence, the closed 
+\begin_inset Formula $0$
+\end_inset
+
+-forms on 
+\begin_inset Formula $M$
+\end_inset
+
+ are precisely the locally constant functions on 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Such a function must be constant on each connected component on 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $M$
+\end_inset
+
+ has 
+\begin_inset Formula $r$
+\end_inset
+
+ connected components, then a locally constant function on 
+\begin_inset Formula $M$
+\end_inset
+
+ can be specified by an ordered set of 
+\begin_inset Formula $r$
+\end_inset
+
+ real numbers.
+ Thus, 
+\begin_inset Formula $Z^{0}(M)=\mathbb{R}^{r}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ On a manifold 
+\begin_inset Formula $M$
+\end_inset
+
+ of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+, the de Rham cohomology 
+\begin_inset Formula $H^{k}(M)$
+\end_inset
+
+ vanishes for 
+\begin_inset Formula $k>n$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ At any point 
+\begin_inset Formula $p\in M$
+\end_inset
+
+, then tangent space 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+ is a vector space of dimension 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is a 
+\begin_inset Formula $k$
+\end_inset
+
+-form on 
+\begin_inset Formula $M$
+\end_inset
+
+, then 
+\begin_inset Formula $\omega_{p}\in A_{k}(T_{p}M)$
+\end_inset
+
+, the space of alternating 
+\begin_inset Formula $k$
+\end_inset
+
+-linear functions on 
+\begin_inset Formula $T_{p}M$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $k>n$
+\end_inset
+
+, then 
+\begin_inset Formula $A_{k}(T_{p}M)=0$
+\end_inset
+
+.
+ Hence, for 
+\begin_inset Formula $k>n$
+\end_inset
+
+, the only 
+\begin_inset Formula $k$
+\end_inset
+
+-form on 
+\begin_inset Formula $M$
+\end_inset
+
+ is the zero form.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Examples of de Rham Cohomology
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ (De Rham cohomology of the real line) Since the real line 
+\begin_inset Formula $\mathbb{R}^{1}$
+\end_inset
+
+ is connected, we have 
+\begin_inset Formula 
+\[
+H^{0}(\mathbb{R}^{1})=\mathbb{R}.
+\]
+
+\end_inset
+
+For dimensional reasons, there are no nonzero 
+\begin_inset Formula $2$
+\end_inset
+
+-forms on 
+\begin_inset Formula $\mathbb{R}^{1}$
+\end_inset
+
+.
+ This implies that every 
+\begin_inset Formula $1$
+\end_inset
+
+-form on 
+\begin_inset Formula $\mathbb{R}^{1}$
+\end_inset
+
+ is closed.
+ A 
+\begin_inset Formula $1$
+\end_inset
+
+-form 
+\begin_inset Formula $f(x)dx$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{R}^{1}$
+\end_inset
+
+ is exact if and only if three is a 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ function 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{R}^{1}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f(x)dx=dg=g'(x)dx,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $g'(x)$
+\end_inset
+
+ is the calculus derivative of 
+\begin_inset Formula $g$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Such a function 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ is simply an antiderivative of 
+\begin_inset Formula $f(x)$
+\end_inset
+
+, for example 
+\begin_inset Formula 
+\[
+g(x)=\int_{0}^{x}f(t)dt.
+\]
+
+\end_inset
+
+This proves that every 
+\begin_inset Formula $1$
+\end_inset
+
+-form on 
+\begin_inset Formula $\mathbb{R}^{1}$
+\end_inset
+
+ is exact.
+ Therefore, 
+\begin_inset Formula $H^{1}(\mathbb{R}^{1})=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ (De Rham cohomology of the circle) Let 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ be the unit circle in the 
+\begin_inset Formula $xy$
+\end_inset
+
+-plane.
+ Since 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ is connected, we have 
+\begin_inset Formula $H^{0}(S^{1})=\mathbb{R}$
+\end_inset
+
+, and since 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ is one-dimensional, we have 
+\begin_inset Formula $H^{k}(S^{1})=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\geq2$
+\end_inset
+
+.
+ It remains to compute 
+\begin_inset Formula $H^{1}(S^{1})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $h:\mathbb{R}\to S^{1}$
+\end_inset
+
+ be given by 
+\begin_inset Formula $h(t)=(\cos t,\sin t)$
+\end_inset
+
+ for all 
+\begin_inset Formula $t\in\mathbb{R}$
+\end_inset
+
+ and let 
+\begin_inset Formula $i:[0,2\pi]\to\mathbb{R}$
+\end_inset
+
+ be the inclusion map.
+ Restricting the domain of 
+\begin_inset Formula $h$
+\end_inset
+
+ to 
+\begin_inset Formula $[0,2\pi]$
+\end_inset
+
+ gives a parametrization 
+\begin_inset Formula $F:=h\circ i:[0,2\pi]\to S^{1}$
+\end_inset
+
+ of the circle.
+ A nowhere-vanishing 
+\begin_inset Formula $1$
+\end_inset
+
+-form on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\omega=-ydx+xdy$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\begin{align*}
+h^{*}\omega & =-\sin td(\cos t)+\cos td(\sin t)\\
+ & =(\sin^{2}t+\cos^{2}t)dt\\
+ & =dt.
+\end{align*}
+
+\end_inset
+
+Thus
+\begin_inset Formula 
+\begin{align*}
+F^{*}\omega & =i^{*}h^{*}\omega\\
+ & =i^{*}dt\\
+ & =dt,
+\end{align*}
+
+\end_inset
+
+and so 
+\begin_inset Formula 
+\begin{align*}
+\int_{S^{1}}\omega & =\int_{F([0,2\pi])}\omega\\
+ & =\int_{[0,2\pi]}F^{*}\omega\\
+ & =\int_{0}^{2\pi}dt\\
+ & =2\pi.
+\end{align*}
+
+\end_inset
+
+Since the cirle has dimension 
+\begin_inset Formula $1$
+\end_inset
+
+, all 
+\begin_inset Formula $1$
+\end_inset
+
+-forms on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ are closed, so 
+\begin_inset Formula $\Omega^{1}(S^{1})=Z^{1}(S^{1})$
+\end_inset
+
+.
+ The integration of 
+\begin_inset Formula $1$
+\end_inset
+
+-forms on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ defines a linear map 
+\begin_inset Formula 
+\[
+\varphi:Z^{1}(S^{1})=\Omega^{1}(S^{1})\to\mathbb{R},\quad\varphi(\alpha)=\int_{S^{1}}\alpha.
+\]
+
+\end_inset
+
+Because 
+\begin_inset Formula $\varphi(\omega)=2\pi\neq0$
+\end_inset
+
+, the linear map 
+\begin_inset Formula $\varphi:\Omega^{1}(S^{1})\to\mathbb{R}$
+\end_inset
+
+ is onto.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+By Stokes's theorem, the exact 
+\begin_inset Formula $1$
+\end_inset
+
+-forms on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ are in 
+\begin_inset Formula $\text{Ker}(\varphi)$
+\end_inset
+
+.
+ Conversely, we will show that all 
+\begin_inset Formula $1$
+\end_inset
+
+-forms in 
+\begin_inset Formula $\text{Ker}(\varphi)$
+\end_inset
+
+ are exact.
+ Suppose 
+\begin_inset Formula $\alpha=f\omega$
+\end_inset
+
+ is a smooth 
+\begin_inset Formula $1$
+\end_inset
+
+-form on 
+\begin_inset Formula $S^{1}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi(\alpha)=0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\overline{f}=h^{*}f=f\circ h\in\Omega^{0}(\mathbb{R})$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\overline{f}$
+\end_inset
+
+ is periodic of period 
+\begin_inset Formula $2\pi$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\begin{align*}
+0 & =\int_{S^{1}}\alpha\\
+ & =\int_{F([0,2\pi])}F^{*}\alpha\\
+ & =\int_{[0,2\pi]}(i^{*}h^{*}f)(t)\cdot F^{*}\omega\\
+ & =\int_{0}^{2\pi}\overline{f}(t)dt.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The 
+\begin_inset Formula $C^{\infty}$
+\end_inset
+
+ Hairy Ball Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Consider the unit sphere 
+\begin_inset Formula $S^{n}\subseteq\mathbb{R}^{n+1}$
+\end_inset
+
+ with 
+\begin_inset Formula $n>0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $n$
+\end_inset
+
+ is odd then there exists a nowhere-vanishing smooth vector field on 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $n=2k+1$
+\end_inset
+
+ the consider the vector field 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{R}^{n+1}=\mathbb{R}^{2k+2}$
+\end_inset
+
+ given by 
+\begin_inset Formula 
+\[
+\vec{v}=(-x_{2}\partial_{x_{1}}+x_{1}\partial_{x_{2}})+\cdots+(-x_{2k+2}\partial_{x_{2k+1}}+x_{2k+1}\partial_{x_{2k+2}})=\sum_{j=0}^{k}(-x_{2j+2}\partial_{x_{2j+1}}+x_{2j+1}\partial_{x_{2j+2}}).
+\]
+
+\end_inset
+
+For any point 
+\begin_inset Formula $p\in S^{n}$
+\end_inset
+
+ it is easy to see that 
+\begin_inset Formula $\vec{v}(p)\in T_{p}(\mathbb{R}^{2k+2})$
+\end_inset
+
+ is perpendicular to the line spanned by 
+\begin_inset Formula $\sum_{i}x_{i}(p)\partial_{x_{i}}|_{p}$
+\end_inset
+
+, so it lies in the hyperplane 
+\begin_inset Formula $T_{p}(S^{n})$
+\end_inset
+
+ orthogonal to this line.
+ In other words, the smooth section 
+\begin_inset Formula $\vec{v}|_{S^{n}}$
+\end_inset
+
+ of the pullback bundle 
+\begin_inset Formula $(T(\mathbb{R}^{n+1}))|_{S^{n}}$
+\end_inset
+
+ over 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ takes values in the subbundle 
+\begin_inset Formula $T(S^{n})$
+\end_inset
+
+, which is to say that 
+\begin_inset Formula $\vec{v}|_{S^{n}}$
+\end_inset
+
+ is a smooth vector field on the manifold 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+.
+ This is a visibly nowhere-vanishing vector field.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The above construction does not work if 
+\begin_inset Formula $n$
+\end_inset
+
+ is even, so there arises the question of whether there exists a nowhere-vanishi
+ng smooth vector field on 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ for even 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ The answer is negative, and is called the 
+\series bold
+hairy ball 
+\series default
+theorem.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ A smooth vector field on 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ must vanish somewhere if 
+\begin_inset Formula $n$
+\end_inset
+
+ is even.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+ be a smooth vector field on 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+, and assume that it is nowhere-vanishing.
+ For each 
+\begin_inset Formula $p\in S^{n}$
+\end_inset
+
+, let 
+\begin_inset Formula $\gamma_{p}:[0,\pi/\|\vec{v}(p)\|]\to S^{n}$
+\end_inset
+
+ be the smooth parametric great circle (with constant speed) going from
+ 
+\begin_inset Formula $p$
+\end_inset
+
+ to 
+\begin_inset Formula $-p$
+\end_inset
+
+ with velocity vector 
+\begin_inset Formula $\gamma_{p}'(0)=\vec{v}(p)\neq0$
+\end_inset
+
+ at 
+\begin_inset Formula $t=0$
+\end_inset
+
+ (This would not make sense if 
+\begin_inset Formula $\vec{v}(p)=0$
+\end_inset
+
+).
+ Working in the plane spanned by 
+\begin_inset Formula $p\in\mathbb{R}^{n+1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{v}(p)\in T_{p}(\mathbb{R}^{n+1})$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{R}^{n+1}$
+\end_inset
+
+, we get the formula 
+\begin_inset Formula 
+\[
+\gamma_{p}(t)=\cos\left(t\|\vec{v}(p)\|\right)p+\sin\left(t\|\vec{v}(p)\right)\frac{\vec{v}(p)}{\|\vec{v}(p)\|}\in S^{n}\subseteq\mathbb{R}^{n+1}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(These algebraic formulas would not make sense if 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+ vanishes somewhere on 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+).
+ Consider the 
+\begin_inset Quotes eld
+\end_inset
+
+flow
+\begin_inset Quotes erd
+\end_inset
+
+ mapping 
+\begin_inset Formula 
+\[
+F:S^{n}\times[0,1]\to S^{n},
+\]
+
+\end_inset
+
+defined by 
+\begin_inset Formula $(p,t)\mapsto\gamma_{p}(\pi t/\|\vec{v}(p)\|)$
+\end_inset
+
+.
+ The formula for 
+\begin_inset Formula $\gamma_{p}(t)$
+\end_inset
+
+ makes it clear that 
+\begin_inset Formula $F$
+\end_inset
+
+ is a smooth map (and is continuous if 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+ is merely continuous and nowhere-vanishing).
+ Now obviously 
+\begin_inset Formula $F(p,0)=p$
+\end_inset
+
+ for all 
+\begin_inset Formula $p\in S^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $F(p,1)=-p$
+\end_inset
+
+ for all 
+\begin_inset Formula $p\in S^{n}$
+\end_inset
+
+.
+ Hence, 
+\begin_inset Formula $F$
+\end_inset
+
+ defines a smooth homotopy from the identity map on 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ to the antipodal map 
+\begin_inset Formula $p\mapsto-p$
+\end_inset
+
+ on 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ (and is a continuous homotopy if 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+ is merely continuous and nowhere-vanishing).
+ Thus, to prove the hairy ball theorem we just have to prove that if 
+\begin_inset Formula $n$
+\end_inset
+
+ is even then the identity and antipodal maps 
+\begin_inset Formula $S^{n}\to S^{n}$
+\end_inset
+
+ are not smoothly homotopic to each other; likewise to get the continuous
+ version we just need to prove that there is no continuous homotopy deforming
+ one of these maps into the other.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To prove the 
+\emph on
+non-existence 
+\emph default
+of such a homotopy, we shall use the (smooth) homotopy invariance of deRham
+ cohomology.
+ Indeed, by this homotopy-invariance we get that under the existence of
+ such a 
+\begin_inset Formula $\vec{v}$
+\end_inset
+
+ the antipodal map 
+\begin_inset Formula $A:S^{n}\to S^{n}$
+\end_inset
+
+ induces the identity map 
+\begin_inset Formula $A^{*}:\text{H}_{\text{dR}}^{k}(S^{n})\to\text{H}_{\text{dR}}^{k}(S^{n})$
+\end_inset
+
+ on the 
+\begin_inset Formula $k$
+\end_inset
+
+th deRham cohomology of 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\geq0$
+\end_inset
+
+.
+ Let us focus on the case 
+\begin_inset Formula $k=n$
+\end_inset
+
+.
+ To get a contradiction, we just have to prove that if 
+\begin_inset Formula $n$
+\end_inset
+
+ is even then 
+\begin_inset Formula $A^{*}$
+\end_inset
+
+ as a self-map of 
+\begin_inset Formula $\text{H}_{\text{dR}}^{n}(S^{n})$
+\end_inset
+
+ is 
+\emph on
+not 
+\emph default
+the identity map.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Consider the 
+\begin_inset Formula $n$
+\end_inset
+
+-form on 
+\begin_inset Formula $\mathbb{R}^{n+1}$
+\end_inset
+
+ defined by 
+\begin_inset Formula 
+\[
+\omega=\sum_{i=1}^{n+1}(-1)^{i-1}x_{i}dx_{1}\wedge\cdots\wedge\widehat{dx}_{i}\wedge\cdots\wedge dx_{n+1}.
+\]
+
+\end_inset
+
+Clearly 
+\begin_inset Formula $d\omega=(n+1)dx_{1}\wedge\cdots\wedge dx_{n+1}$
+\end_inset
+
+, so for the unit ball 
+\begin_inset Formula $B^{n+1}\subseteq\mathbb{R}^{n+1}$
+\end_inset
+
+ with its standard orientation we have 
+\begin_inset Formula 
+\[
+\int_{B^{n+1}}d\omega=(n+1)\text{vol}(B^{n+1})\neq0.
+\]
+
+\end_inset
+
+By Stokes' theorem for 
+\begin_inset Formula $B^{n+1}$
+\end_inset
+
+, if we let 
+\begin_inset Formula $\eta=\omega|_{S^{n}}$
+\end_inset
+
+ and we give 
+\begin_inset Formula $S^{n}=\partial B^{n+1}$
+\end_inset
+
+ the induced boundary orientation, then 
+\begin_inset Formula 
+\[
+\int_{S^{n}}\eta=\int_{B^{n+1}}d\omega\neq0.
+\]
+
+\end_inset
+
+Hence, by Stokes' theorem for the boundaryless smooth compact oriented manifold
+ 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ we conclude that the top-degree differential form 
+\begin_inset Formula $\eta$
+\end_inset
+
+ on 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ is not exact.
+ That is, its deRham cohomology class 
+\begin_inset Formula $[\eta]\in H_{\text{dR}}^{n}(S^{n})$
+\end_inset
+
+ is non-zero.
+ (Note that 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is not closed as an 
+\begin_inset Formula $n$
+\end_inset
+
+-form on 
+\begin_inset Formula $\mathbb{R}^{n+1}$
+\end_inset
+
+, but its pullback 
+\begin_inset Formula $\eta$
+\end_inset
+
+ on 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ is necessarily closed on 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ purely for elementary reasons, as 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ is 
+\begin_inset Formula $n$
+\end_inset
+
+-dimensional.) 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+By the existence of the smooth homotopy between 
+\begin_inset Formula $A$
+\end_inset
+
+ and the identity map, it follows that 
+\begin_inset Formula $A^{*}$
+\end_inset
+
+ on 
+\begin_inset Formula $H_{\text{dR}}^{n}(S^{n})$
+\end_inset
+
+ is the identity map, so 
+\begin_inset Formula $[A^{*}(\eta)]=A^{*}([\eta])$
+\end_inset
+
+ is equal to 
+\begin_inset Formula $[\eta]$
+\end_inset
+
+.
+ That is, the top-degree differential forms 
+\begin_inset Formula $A^{*}(\eta)$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta$
+\end_inset
+
+ on 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ differ by an exact form.
+ But the antipodal map 
+\begin_inset Formula $A:S^{n}\to S^{n}$
+\end_inset
+
+ is induced by the negation map 
+\begin_inset Formula $N:\mathbb{R}^{n+1}\to\mathbb{R}^{n+1}$
+\end_inset
+
+, and by inspection of the definition of 
+\begin_inset Formula $\omega\in\Omega_{\mathbb{R}^{n+1}}^{n}(\mathbb{R}^{n+1})$
+\end_inset
+
+ we have 
+\begin_inset Formula $N^{*}(\omega)=(-1)^{n+1}\omega$
+\end_inset
+
+.
+ Hence, pulling back this equality to the sphere gives 
+\begin_inset Formula $A^{*}(\eta)=(-1)^{n+1}\eta$
+\end_inset
+
+ in 
+\begin_inset Formula $\Omega_{S^{n}}^{n}(S^{n})$
+\end_inset
+
+.
+ Thus, in 
+\begin_inset Formula $H_{\text{dR}}^{n}(S^{n})$
+\end_inset
+
+ we have 
+\begin_inset Formula 
+\[
+[\eta]=A^{*}([\eta])=[A^{*}(\eta)]=[(-1)^{n+1}\eta]=(-1)^{n+1}[\eta].
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $n$
+\end_inset
+
+ is even we therefore have 
+\begin_inset Formula $[\eta]=-[\eta]$
+\end_inset
+
+, so 
+\begin_inset Formula $[\eta]=0.$
+\end_inset
+
+ But we have already seen via Stokes' theorem for the boundaryless manifold
+ 
+\begin_inset Formula $S^{n}$
+\end_inset
+
+ and for the manifold with boundary 
+\begin_inset Formula $B^{n+1}$
+\end_inset
+
+ that 
+\begin_inset Formula $[\eta]$
+\end_inset
+
+ is nonzero.
+ This completes the proof.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

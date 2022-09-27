@@ -1,0 +1,4212 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Ideal Classes and Matrix Conjugation Over 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+In this presentation, we will describe a relationship between conjugacy
+ classes of matrices with integer coefficients and 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-ideal classes of fractional 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-ideals where 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ is an order in a number field 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ This presentation was inspired by Keith Conrad's expository notes 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{KCnotes}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Conjugacy Classes of Matrices in 
+\begin_inset Formula $\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ be matrices in 
+\begin_inset Formula $\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\series bold
+conjugate
+\series default
+ to 
+\begin_inset Formula $B$
+\end_inset
+
+, denoted by 
+\begin_inset Formula $A\sim_{\mathrm{c}}B$
+\end_inset
+
+, if there exists a 
+\begin_inset Formula $U\in\mathrm{GL}_{n}(\mathbb{Z})$
+\end_inset
+
+ such that 
+\begin_inset Formula $UAU^{-1}=B$
+\end_inset
+
+.
+ It is straightforward to check that 
+\begin_inset Formula $\sim_{\mathrm{c}}$
+\end_inset
+
+ is an equivalence relation.
+ We will denote by 
+\begin_inset Formula $[A]_{\mathrm{c}}$
+\end_inset
+
+ to be the equivalence class which is represented by the matrix 
+\begin_inset Formula $A\in\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+.
+ We call these equivalence classes 
+\series bold
+conjugacy classes
+\series default
+.
+ We denote by 
+\begin_inset Formula $\mathrm{C}_{n}(\mathbb{Z})$
+\end_inset
+
+ to be set of all conjugacy classes of matrices in 
+\begin_inset Formula $\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+.
+ Recall the characteristic polynomial of a matrix 
+\begin_inset Formula $A\in\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+ is defined by
+\begin_inset Formula 
+\[
+\chi_{A}(T)=\det(T\mathrm{I}_{n}-A).
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $A\sim_{\mathrm{c}}B$
+\end_inset
+
+, then there exists 
+\begin_inset Formula $U\in\mathrm{GL}_{n}(\mathbb{Z})$
+\end_inset
+
+ such that 
+\begin_inset Formula $UAU^{-1}=B$
+\end_inset
+
+, and hence
+\begin_inset Formula 
+\begin{align*}
+\chi_{B}(T) & =\det(T\mathrm{I}_{n}-B)\\
+ & =\det(T\mathrm{I}_{n}-UAU^{-1})\\
+ & =\det(U(T\mathrm{I}_{n}-A)U^{-1})\\
+ & =\det(U)\det(T\mathrm{I}_{n}-A)\det(U^{-1})\\
+ & =\det(T\mathrm{I}_{n}-A)\\
+ & =\chi_{A}(T).
+\end{align*}
+
+\end_inset
+
+Therefore it makes sense to assign a characteristic polynomial to a conjugacy
+ class of matrices in 
+\begin_inset Formula $\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+.
+ For any monic polynomial 
+\begin_inset Formula $f(T)\in\mathbb{Z}[T]$
+\end_inset
+
+ of degree 
+\begin_inset Formula $n$
+\end_inset
+
+, we will denote by 
+\begin_inset Formula $\mathrm{C}_{n}(\mathbb{Z},f)$
+\end_inset
+
+ to be the set of all conjugacy classes of matrices in 
+\begin_inset Formula $\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+ with characteristic polynomial 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Fractional 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-Ideals
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ be an order in a number field 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ That is, 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ is a subring of 
+\begin_inset Formula $K$
+\end_inset
+
+ that is finitely generated as a 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module and contains a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-basis of 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ A typical example of an order is 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+ where 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is an algebraic integer over 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+.
+ A 
+\series bold
+fractional 
+\series default
+
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+
+\series bold
+-ideal 
+\series default
+is a nonzero finitely generated 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-module in 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $I$
+\end_inset
+
+ an 
+\begin_inset Formula $J$
+\end_inset
+
+ be two fractional 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-ideals.
+ We say 
+\begin_inset Formula $I$
+\end_inset
+
+ and 
+\begin_inset Formula $J$
+\end_inset
+
+ are 
+\series bold
+equivalent
+\series default
+, denoted 
+\begin_inset Formula $I\sim J$
+\end_inset
+
+, if 
+\begin_inset Formula $I=xJ$
+\end_inset
+
+ for some 
+\begin_inset Formula $x\in K^{\times}$
+\end_inset
+
+.
+ It is straightforward to check that this is an equivalence relation.
+ We will denote by 
+\begin_inset Formula $[I]$
+\end_inset
+
+ to be the equivalence class which is represented by the 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-fractional ideal 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ We call these equivalence classes 
+\series bold
+
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-ideal classes
+\series default
+.
+ We denote by 
+\begin_inset Formula $\mathrm{Cl}(\mathcal{O})$
+\end_inset
+
+ to be the set of all 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-ideal classes.
+ In fact, it is easy to show that 
+\begin_inset Formula $\mathrm{Cl}(\mathcal{O})$
+\end_inset
+
+ is none other than the set of isomorphism classes of 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-fractional ideals.
+ That is, the relation 
+\begin_inset Formula $I\sim J$
+\end_inset
+
+ is equivalent to saying 
+\begin_inset Formula $I$
+\end_inset
+
+ is isomorphic to 
+\begin_inset Formula $J$
+\end_inset
+
+ as 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-modules.
+ Indeed, if 
+\begin_inset Formula $I\sim J$
+\end_inset
+
+, then 
+\begin_inset Formula $I=xJ$
+\end_inset
+
+ for some 
+\begin_inset Formula $x\in K^{\times}$
+\end_inset
+
+.
+ Then the multiplication by 
+\begin_inset Formula $x$
+\end_inset
+
+ map 
+\begin_inset Formula $\mathrm{m}_{x}\colon I\to J$
+\end_inset
+
+, given by
+\begin_inset Formula 
+\[
+\mathrm{m}_{x}(y)=xy
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $y\in I$
+\end_inset
+
+ is an 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-module isomorphism from 
+\begin_inset Formula $I$
+\end_inset
+
+ to 
+\begin_inset Formula $J$
+\end_inset
+
+.
+ Conversely, if 
+\begin_inset Formula $\varphi\colon I\to J$
+\end_inset
+
+ is an 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-module isomorphism, then we claim that 
+\begin_inset Formula $\varphi(y)/y=\varphi(z)/z$
+\end_inset
+
+ for all nonzero 
+\begin_inset Formula $y,z\in I$
+\end_inset
+
+.
+ To see this, first choose a nonzero 
+\begin_inset Formula $\gamma\in\mathcal{O}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\gamma y,\gamma z\in\mathcal{O}$
+\end_inset
+
+ (such a choice is possible since 
+\begin_inset Formula $I$
+\end_inset
+
+ is a fractional 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-ideal).
+ Then observe that
+\begin_inset Formula 
+\begin{align*}
+\gamma\left(\frac{\varphi(y)}{y}-\frac{\varphi(z)}{z}\right) & =\gamma\left(\frac{z\varphi(y)-y\varphi(z)}{yz}\right)\\
+ & =\frac{\gamma z\varphi(y)-\gamma y\varphi(z)}{yz}\\
+ & =\frac{\varphi(\gamma zy)-\varphi(\gamma yz)}{yz}\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+This implies 
+\begin_inset Formula $\varphi(y)/y=\varphi(z)/z$
+\end_inset
+
+ since 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+ is an integral domain.
+ Now write 
+\begin_inset Formula $x=\varphi(y)/y$
+\end_inset
+
+ for some nonzero 
+\begin_inset Formula $y\in I$
+\end_inset
+
+.
+ Then for any nonzero 
+\begin_inset Formula $z\in I$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\varphi(z) & =\frac{\varphi(z)}{z}z\\
+ & =\frac{\varphi(y)}{y}z\\
+ & =xz\\
+ & =\mathrm{m}_{x}(z),
+\end{align*}
+
+\end_inset
+
+and since clearly 
+\begin_inset Formula $\varphi(0)=\mathrm{m}_{x}(0)$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\varphi=\mathrm{m}_{x}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $I\sim J$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section*
+Main Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremconjclassidealclassll}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f(T)\in\mathbb{Z}[T]$
+\end_inset
+
+ be a monic irreducible polynomial of degree 
+\begin_inset Formula $n$
+\end_inset
+
+ and let 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ be a root of 
+\begin_inset Formula $f(T)$
+\end_inset
+
+.
+ Then we have a bijection 
+\begin_inset Formula 
+\[
+\mathrm{C}_{n}(\mathbb{Z},f)\cong\mathrm{Cl}(\mathbb{Z}[\alpha]).
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We define 
+\begin_inset Formula $\Psi\colon\mathrm{Cl}(\mathbb{Z}[\alpha])\to\mathrm{C}_{n}(\mathbb{Z},f)$
+\end_inset
+
+ as follows: let 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ be a 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-fractional ideal.
+ From the structure of finitely-generated torsion-free modules over 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+, we know that 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ is a finitely-generated free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module of rank 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Choose an ordered basis of 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ as a free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module, say 
+\begin_inset Formula $\mathbf{a}=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathrm{m}_{\alpha}\colon\mathfrak{a}\to\mathfrak{a}$
+\end_inset
+
+ be the multiplication by 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ map, given by
+\begin_inset Formula 
+\[
+\mathrm{m}_{\alpha}(x)=\alpha x
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in\mathfrak{a}$
+\end_inset
+
+ and let 
+\begin_inset Formula $[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}\in\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+ denote the matrix representation of 
+\begin_inset Formula $\mathrm{m}_{\alpha}$
+\end_inset
+
+ with respect to the basis 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+.
+ That is, the 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+'th entry in 
+\begin_inset Formula $[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}$
+\end_inset
+
+ is given by 
+\begin_inset Formula $a_{ji}\in\mathbb{Z}$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+\mathrm{m}_{\alpha}(\alpha_{i})=\sum_{j=1}^{n}a_{ji}\alpha_{j}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\mathbf{a}'=(\alpha_{1}',\dots,\alpha_{n}')$
+\end_inset
+
+ is another ordered basis of 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ as a free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module, then the change of basis matrix from 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{a}'$
+\end_inset
+
+ is given by 
+\begin_inset Formula $[1_{\mathfrak{a}}]_{\mathbf{a}'}^{\mathbf{a}}\in\mathrm{GL}_{n}(\mathbb{Z})$
+\end_inset
+
+, and we have
+\begin_inset Formula 
+\begin{align*}
+[1_{\mathfrak{a}}]_{\mathbf{a}'}^{\mathbf{a}}[\mathrm{m}_{\alpha}]_{\mathbf{a}'}^{\mathbf{a}'}\left([1_{\mathfrak{a}}]_{\mathbf{a}'}^{\mathbf{a}}\right)^{-1} & =[1_{\mathfrak{a}}]_{\mathbf{a}'}^{\mathbf{a}}[\mathrm{m}_{\alpha}]_{\mathbf{a}'}^{\mathbf{a}'}[1_{\mathfrak{a}}]_{\mathbf{a}}^{\mathbf{a}'}\\
+ & =[1_{\mathfrak{a}}\circ\mathrm{m}_{\alpha}\circ1_{\mathfrak{a}}]_{\mathbf{a}}^{\mathbf{a}}.\\
+ & =[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}
+\end{align*}
+
+\end_inset
+
+Thus changing the basis from 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{a}'$
+\end_inset
+
+ corresponds to conjugating the matrix 
+\begin_inset Formula $[\mathrm{m}_{\alpha}]_{\mathbf{a}'}^{\mathbf{a}'}$
+\end_inset
+
+ to 
+\begin_inset Formula $[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We are now ready to define 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ We set
+\begin_inset Formula 
+\begin{equation}
+\Psi([\mathfrak{a}])=[[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}]_{\mathrm{c}}.\label{eq:welldefinedfractionalideal}
+\end{equation}
+
+\end_inset
+
+We must check that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedfractionalideal})
+\end_layout
+
+\end_inset
+
+ is in fact well-defined.
+ Our construction of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ involved two choices.
+ One choice that we made was in the choice of a basis for 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ as free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module (where we chose 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+).
+ By what was mentioned above, changing this basis to another basis would
+ result in a matrix which is conjugate to 
+\begin_inset Formula $[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}$
+\end_inset
+
+ and hence would result in the same conjugacy class 
+\begin_inset Formula $[[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}]_{\mathrm{c}}$
+\end_inset
+
+.
+ The other choice that we made was in the choice of a representative of
+ the 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-ideal class 
+\begin_inset Formula $[\mathfrak{a}]$
+\end_inset
+
+ (where we chose 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+) So let 
+\begin_inset Formula $\mathfrak{b}$
+\end_inset
+
+ be another another coset representative of the coset 
+\begin_inset Formula $[\mathfrak{a}]$
+\end_inset
+
+, so 
+\begin_inset Formula $\mathfrak{b}\sim\mathfrak{a}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $x\in\mathbb{Q}(\alpha)^{\times}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathfrak{b}=x\mathfrak{a}$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $x\mathbf{a}$
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $\mathfrak{b}$
+\end_inset
+
+ as a free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module! Indeed, it clearly spans 
+\begin_inset Formula $\mathfrak{b}$
+\end_inset
+
+ as a 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module since 
+\begin_inset Formula $\mathfrak{b}=x\mathfrak{a}$
+\end_inset
+
+.
+ Also, it is 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-linearly independent since it is 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-linearly independent (since multiplication by 
+\begin_inset Formula $x$
+\end_inset
+
+ is a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-isomorphism).
+ Furthermore, it is easy to check that since 
+\begin_inset Formula $\mathrm{m}_{x}\mathrm{m}_{\alpha}=\mathrm{m}_{\alpha}\mathrm{m}_{x}$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}} & =[\mathrm{m}_{\alpha}]_{x\mathbf{a}}^{x\mathbf{a}}\\
+ & =[\mathrm{m}_{\alpha}]_{\mathbf{b}}^{\mathbf{b}}.
+\end{align*}
+
+\end_inset
+
+ Thus 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedfractionalideal})
+\end_layout
+
+\end_inset
+
+ is well-defined.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we show that 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is injective.
+ Let 
+\begin_inset Formula $[\mathfrak{a}]$
+\end_inset
+
+ and 
+\begin_inset Formula $[\mathfrak{a}']$
+\end_inset
+
+ be two fractional 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-ideals and let 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{a}'$
+\end_inset
+
+ be ordered bases for 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{a}'$
+\end_inset
+
+ as free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-modules respectively.
+ Suppose 
+\begin_inset Formula $\Psi([\mathfrak{a}])=\Psi([\mathfrak{a}'])$
+\end_inset
+
+, that is suppose
+\begin_inset Formula 
+\[
+U[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}U^{-1}=[\mathrm{m}_{\alpha}]_{\mathbf{a}'}^{\mathbf{a}'}
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $U\in\mathrm{GL}_{n}(\mathbb{Z})$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $[\cdot]_{\mathbf{a}}\colon\mathfrak{a}\to\mathbb{Z}^{n}$
+\end_inset
+
+ be the standard column representation map for 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+.
+ That is 
+\begin_inset Formula $[\cdot]_{\mathbf{a}}$
+\end_inset
+
+ is the unique 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-linear map which sends 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ to 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{e}=(e_{1},\dots,e_{n})$
+\end_inset
+
+ is the standard ordered column basis for 
+\begin_inset Formula $\mathbb{Z}^{n}$
+\end_inset
+
+ as a free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module.
+ Similarly, let 
+\begin_inset Formula $[\cdot]_{\mathbf{a}'}\colon\mathfrak{a}'\to\mathbb{Z}^{n}$
+\end_inset
+
+ be the standard column representation map for 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $[\cdot]_{\mathbf{a}'}^{-1}U[\cdot]_{\mathbf{a}}\colon\mathfrak{a}\to\mathfrak{a}'$
+\end_inset
+
+ gives us an isomorphism of 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{a}'$
+\end_inset
+
+ as 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-modules.
+ In fact, this is a 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-isomorphism since it commutes with 
+\begin_inset Formula $\mathrm{m}_{\alpha}$
+\end_inset
+
+.
+ Indeed, we have
+\begin_inset Formula 
+\begin{align*}
+[\cdot]_{\mathbf{a}'}^{-1}U[\cdot]_{\mathbf{a}}\mathrm{m}_{\alpha} & =[\cdot]_{\mathbf{a}'}^{-1}U[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}[\cdot]_{\mathbf{a}}\\
+ & =[\cdot]_{\mathbf{a}'}^{-1}[\mathrm{m}_{\alpha}]_{\mathbf{a}'}^{\mathbf{a}'}U[\cdot]_{\mathbf{a}}\\
+ & =\mathrm{m}_{\alpha}[\cdot]_{\mathbf{a}'}^{-1}U[\cdot]_{\mathbf{a}}.
+\end{align*}
+
+\end_inset
+
+Isomorphic fractional 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-ideals are scalar multiples of each other, so 
+\begin_inset Formula $\mathfrak{a}'=x\mathfrak{a}$
+\end_inset
+
+ for some 
+\begin_inset Formula $x\in\text{\ensuremath{\mathbb{Q}(\alpha)^{\times}}}$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $[\mathfrak{a}]=[\mathfrak{a}']$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is injective.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now let us show that 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is surjective.
+ Let 
+\begin_inset Formula $A=(a_{ij})$
+\end_inset
+
+ be in 
+\begin_inset Formula $\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+ such that 
+\begin_inset Formula $\chi_{A}(T)=f(T)$
+\end_inset
+
+.
+ We will find a 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-fractional ideal 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ and a ordered basis 
+\begin_inset Formula $\mathbf{a}=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ as a free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module such that 
+\begin_inset Formula $A=[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}$
+\end_inset
+
+.
+ First, we make 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ into a 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+-vector space as follows: Let 
+\begin_inset Formula $x\in\mathbb{Q}(\alpha)$
+\end_inset
+
+ and let 
+\begin_inset Formula $v\in\mathbb{Q}^{n}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $g(T)\in\mathbb{Q}[T]$
+\end_inset
+
+ such that 
+\begin_inset Formula $g(\alpha)=x$
+\end_inset
+
+ (such a choice is possible since 
+\begin_inset Formula $\mathbb{Q}(\alpha)=\mathbb{Q}[\alpha]$
+\end_inset
+
+).
+ We define scalar multiplication of 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\begin{equation}
+x\cdot v=g(A)v.\label{eq:welldefinedaction}
+\end{equation}
+
+\end_inset
+
+We need to check that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedaction})
+\end_layout
+
+\end_inset
+
+ is well-defined.
+ In our construction of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedaction})
+\end_layout
+
+\end_inset
+
+, we made a choice, namely 
+\begin_inset Formula $g(T)\in\mathbb{Q}[T]$
+\end_inset
+
+ such that 
+\begin_inset Formula $g(\alpha)=x$
+\end_inset
+
+, so suppose 
+\begin_inset Formula $h(T)\in\mathbb{Q}[T]$
+\end_inset
+
+ such that 
+\begin_inset Formula $h(\alpha)=x$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(g-h)(\alpha)=0$
+\end_inset
+
+ and this implies 
+\begin_inset Formula $f\mid(g-h)$
+\end_inset
+
+ (since 
+\begin_inset Formula $f$
+\end_inset
+
+ is the minimal polynomial of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ over 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+ since it is monic and irreducible with root 
+\begin_inset Formula $\alpha$
+\end_inset
+
+) and therefore 
+\begin_inset Formula $g(A)=h(A)$
+\end_inset
+
+ as matrices, so 
+\begin_inset Formula $g(A)v=h(A)v$
+\end_inset
+
+ for all 
+\begin_inset Formula $v\in\mathbb{Q}^{n}$
+\end_inset
+
+.
+ Thus 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedaction})
+\end_layout
+
+\end_inset
+
+ is well-defined.
+ It is straightforward to check that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedaction})
+\end_layout
+
+\end_inset
+
+ gives 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ a 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+-vector space structure.
+ By restricting scalars, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedaction})
+\end_layout
+
+\end_inset
+
+ also gives 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ a 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-module structure.
+ In fact, if 
+\begin_inset Formula $v\in\mathbb{Z}^{n}$
+\end_inset
+
+, then 
+\begin_inset Formula $\alpha\cdot v=Av$
+\end_inset
+
+ is in 
+\begin_inset Formula $\mathbb{Z}^{n}$
+\end_inset
+
+ since 
+\begin_inset Formula $A$
+\end_inset
+
+ has integral entries, so 
+\begin_inset Formula $\mathbb{Z}^{n}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+.
+ Treating 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ as both a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-vector space and as a 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+-vector space, we have
+\begin_inset Formula 
+\begin{align*}
+n & =\dim_{\mathbb{Q}}(\mathbb{Q}^{n})\\
+ & =[\mathbb{Q}(\alpha):\mathbb{Q}]\dim_{\mathbb{Q}(\alpha)}(\mathbb{Q}^{n})\\
+ & =n\dim_{\mathbb{Q}(\alpha)}(\mathbb{Q}^{n}),
+\end{align*}
+
+\end_inset
+
+so 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ is 
+\begin_inset Formula $1$
+\end_inset
+
+-dimensional as a 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+-vector space.
+ In particular, this means that for any nonzero 
+\begin_inset Formula $v_{0}\in\mathbb{Q}^{n}$
+\end_inset
+
+, the 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+-linear map 
+\begin_inset Formula $\varphi_{v_{0}}\colon\mathbb{Q}(\alpha)\to\mathbb{Q}^{n}$
+\end_inset
+
+ given by
+\begin_inset Formula 
+\[
+\varphi_{v_{0}}(x)=x\cdot v_{0}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in\mathbb{Q}(\alpha)$
+\end_inset
+
+ is an isomorphism of 
+\begin_inset Formula $1$
+\end_inset
+
+-dimensional 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+-vector spaces.
+ Thus, letting 
+\begin_inset Formula $\mathbf{e}=(e_{1},\dots,e_{n})$
+\end_inset
+
+ denote the standard ordered column basis for 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ as a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-vector space, there exists unique 
+\begin_inset Formula $\alpha_{i}\in\mathbb{Q}(\alpha)$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi_{v_{0}}(\alpha_{i})=e_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $\mathbf{a}=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+ is an ordered basis for 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+ as a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-vector space.
+ Let 
+\begin_inset Formula 
+\[
+\mathfrak{a}=\bigoplus_{i=1}^{n}\mathbb{Z}\alpha_{i}.
+\]
+
+\end_inset
+
+Observe that 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-fractional ideal.
+ Indeed, it suffices to show that 
+\begin_inset Formula $\alpha\alpha_{i}\in\mathfrak{a}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+, and this follows from the fact that
+\begin_inset Formula 
+\begin{align*}
+\varphi_{v_{0}}\left(\alpha\alpha_{i}-\sum_{j=1}^{n}a_{ji}\alpha_{i}\right) & =\alpha\cdot\varphi_{v_{0}}(\alpha_{i})-\sum_{j=1}^{n}a_{ji}\varphi_{v_{0}}(\alpha_{i})\\
+ & =\alpha\cdot e_{i}-\sum_{j=1}^{n}a_{ji}e_{i}\\
+ & =Ae_{i}-Ae_{i}\\
+ & =0,
+\end{align*}
+
+\end_inset
+
+which implies
+\begin_inset Formula 
+\begin{equation}
+\alpha\alpha_{i}=\sum_{j=1}^{n}a_{ji}\alpha_{i}\label{eq:matrixrepofalpha}
+\end{equation}
+
+\end_inset
+
+since 
+\begin_inset Formula $\varphi_{v_{0}}$
+\end_inset
+
+ is injective.
+ In fact, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:matrixrepofalpha})
+\end_layout
+
+\end_inset
+
+ also shows that 
+\begin_inset Formula $A=[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}$
+\end_inset
+
+.
+ So we have realized 
+\begin_inset Formula $A$
+\end_inset
+
+ as a matrix representation for 
+\begin_inset Formula $\mathrm{m}_{\alpha}$
+\end_inset
+
+ on a fractional 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-ideal 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is onto.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Example
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{exampleconjidealsqrt-5}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f(T)=T^{2}+5$
+\end_inset
+
+.
+ We will count 
+\begin_inset Formula $\#\mathrm{C}_{2}(\mathbb{Z},f)$
+\end_inset
+
+ and we will find a coset representative for each conjugacy class in 
+\begin_inset Formula $\mathrm{C}_{2}(\mathbb{Z},f)$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $f$
+\end_inset
+
+ is a monic irreducible polynomial over 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sqrt{-5}$
+\end_inset
+
+ is a root of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ The ring 
+\begin_inset Formula $\mathbb{Z}[\sqrt{-5}]$
+\end_inset
+
+ has class number 
+\begin_inset Formula $2$
+\end_inset
+
+, and so by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremconjclassidealclassll})
+\end_layout
+
+\end_inset
+
+, we see that 
+\begin_inset Formula $\#\mathrm{C}_{2}(\mathbb{Z},f)=2$
+\end_inset
+
+.
+ The ideal classes in 
+\begin_inset Formula $\mathbb{Z}[\sqrt{-5}]$
+\end_inset
+
+ can be represented by 
+\begin_inset Formula $\mathbb{Z}[\sqrt{-5}]=\langle1\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{p}_{2}=\langle2,1+\sqrt{-5}\rangle$
+\end_inset
+
+.
+ An ordered basis for 
+\begin_inset Formula $\mathbb{Z}[\sqrt{-5}]$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\mathbf{a}_{1}=(1,\sqrt{-5})$
+\end_inset
+
+ and an ordered basis for 
+\begin_inset Formula $\mathfrak{p}_{2}$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\mathbf{a}_{2}=(2,1+\sqrt{-5})$
+\end_inset
+
+.
+ We calculate
+\begin_inset Formula 
+\begin{align*}
+\sqrt{-5}\cdot1 & =0\cdot1+1\cdot\sqrt{-5}\\
+\sqrt{-5}\cdot\sqrt{-5} & =-5\cdot1+0\cdot\sqrt{-5}.
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $[\mathrm{m}_{\sqrt{-5}}]_{\mathbf{a}_{1}}^{\mathbf{a}_{1}}=\left(\begin{smallmatrix}0 & -5\\
+1 & 0
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Similarly, we calculate
+\begin_inset Formula 
+\begin{align*}
+\sqrt{-5}\cdot2 & =-1\cdot2+2\cdot(1+\sqrt{-5})\\
+\sqrt{-5}\cdot(1+\sqrt{-5}) & =-3\cdot2+1\cdot(1+\sqrt{-5}).
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $[\mathrm{m}_{\sqrt{-5}}]_{\mathbf{a}_{2}}^{\mathbf{a}_{2}}=\left(\begin{smallmatrix}-1 & -3\\
+2 & 1
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Thus if 
+\begin_inset Formula $A\in\mathrm{M}_{2}(\mathbb{Z})$
+\end_inset
+
+ has characteristic polynomial 
+\begin_inset Formula $f(T)$
+\end_inset
+
+, then 
+\begin_inset Formula $A\sim_{\mathrm{c}}\left(\begin{smallmatrix}0 & -5\\
+1 & 0
+\end{smallmatrix}\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $A\sim_{\mathrm{c}}\left(\begin{smallmatrix}-1 & -3\\
+2 & 1
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Now let 
+\begin_inset Formula $\mathfrak{p}_{7}=\langle7,3+\sqrt{-5}\rangle$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathfrak{p}_{7}\sim\mathfrak{p}_{2}$
+\end_inset
+
+ since
+\begin_inset Formula 
+\[
+\mathfrak{p}_{7}=\left(\frac{3-\sqrt{-5}}{2}\right)\mathfrak{p}_{2}
+\]
+
+\end_inset
+
+An ordered basis for 
+\begin_inset Formula $\mathfrak{p}_{7}$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\mathbf{a}_{7}=(7,3-\sqrt{-5})$
+\end_inset
+
+.
+ By a straightforward calculation, we have 
+\begin_inset Formula $[\mathrm{m}_{\sqrt{-5}}]_{\mathbf{a}_{7}}^{\mathbf{a}_{7}}=\left(\begin{smallmatrix}3 & 2\\
+-7 & -3
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\left(\begin{smallmatrix}-3 & -2\\
+7 & 3
+\end{smallmatrix}\right)\sim_{\mathrm{c}}\left(\begin{smallmatrix}-1 & -3\\
+2 & 1
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ To find the matrix which conjugates 
+\begin_inset Formula $\left(\begin{smallmatrix}-3 & -2\\
+7 & 3
+\end{smallmatrix}\right)$
+\end_inset
+
+ to 
+\begin_inset Formula $\left(\begin{smallmatrix}-1 & -3\\
+2 & 1
+\end{smallmatrix}\right)$
+\end_inset
+
+ we first change the ordered 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-basis 
+\begin_inset Formula $\mathbf{a}_{2}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathfrak{p}_{2}$
+\end_inset
+
+ to the ordered 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-basis 
+\begin_inset Formula $\mathbf{a}_{2}'=(2,3+\sqrt{-5})$
+\end_inset
+
+.
+ The change of basis matrix from 
+\begin_inset Formula $\mathbf{a}_{2}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{a}_{2}'$
+\end_inset
+
+ is given by 
+\begin_inset Formula $[1_{\mathfrak{p}_{2}}]_{\mathbf{a}_{2}'}^{\mathbf{a}_{2}}=\left(\begin{smallmatrix}1 & 1\\
+0 & 1
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Similarly, we change the ordered 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-basis 
+\begin_inset Formula $\mathbf{a}_{7}$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathfrak{p}_{7}$
+\end_inset
+
+ to the ordered 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-basis 
+\begin_inset Formula $\mathbf{a}_{7}'=(3-\sqrt{-5},7)$
+\end_inset
+
+.
+ The change of basis matrix from 
+\begin_inset Formula $\mathbf{a}_{7}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{a}_{7}'$
+\end_inset
+
+ is given by 
+\begin_inset Formula $[1_{\mathfrak{p}_{7}}]_{\mathbf{a}_{7}'}^{\mathbf{a}_{7}}=\left(\begin{smallmatrix}0 & 1\\
+1 & 0
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Next we observe that
+\begin_inset Formula 
+\begin{align*}
+\left(\frac{3-\sqrt{-5}}{2}\right)\mathbf{a}_{2}' & =\left(\frac{3-\sqrt{-5}}{2}\right)\left(2,3+\sqrt{-5}\right)\\
+ & =(3-\sqrt{-5},7)\\
+ & =\mathbf{a}_{7}'.
+\end{align*}
+
+\end_inset
+
+Therefore we have
+\begin_inset Formula 
+\begin{align*}
+\begin{pmatrix}-1 & -3\\
+2 & 1
+\end{pmatrix} & =[\mathrm{m}_{\sqrt{-5}}]_{\mathbf{a}_{2}}^{\mathbf{a}_{2}}\\
+ & =[1_{\mathfrak{p}_{2}}]_{\mathbf{a}_{2}'}^{\mathbf{a}_{2}}[\mathrm{m}_{\sqrt{-5}}]_{\mathbf{a}_{2}'}^{\mathbf{a}_{2}'}[1_{\mathfrak{p}_{2}}]_{\mathbf{a}_{2}}^{\mathbf{a}_{2}'}\\
+ & =[1_{\mathfrak{p}_{2}}]_{\mathbf{a}_{2}'}^{\mathbf{a}_{2}}[\mathrm{m}_{\sqrt{-5}}]_{\mathbf{a}_{7}'}^{\mathbf{a}_{7}'}[1_{\mathfrak{p}_{2}}]_{\mathbf{a}_{2}}^{\mathbf{a}_{2}'}\\
+ & =[1_{\mathfrak{p}_{2}}]_{\mathbf{a}_{2}'}^{\mathbf{a}_{2}}[1_{\mathfrak{p}_{7}}]_{\mathbf{a}_{7}}^{\mathbf{a}_{7}'}[\mathrm{m}_{\sqrt{-5}}]_{\mathbf{a}_{7}}^{\mathbf{a}_{7}}[1_{\mathfrak{p}_{7}}]_{\mathbf{a}_{7}'}^{\mathbf{a}_{7}}[1_{\mathfrak{p}_{2}}]_{\mathbf{a}_{2}}^{\mathbf{a}_{2}'}\\
+ & =\left([1_{\mathfrak{p}_{2}}]_{\mathbf{a}_{2}'}^{\mathbf{a}_{2}}[1_{\mathfrak{p}_{7}}]_{\mathbf{a}_{7}}^{\mathbf{a}_{7}'}\right)[\mathrm{m}_{\sqrt{-5}}]_{\mathbf{a}_{7}}^{\mathbf{a}_{7}}\left([1_{\mathfrak{p}_{7}}]_{\mathbf{a}_{2}'}^{\mathbf{a}_{2}}[1_{\mathfrak{p}_{2}}]_{\mathbf{a}_{7}}^{\mathbf{a}_{7}'}\right)^{-1}.\\
+ & =\left(\begin{pmatrix}1 & 1\\
+0 & 1
+\end{pmatrix}\begin{pmatrix}0 & 1\\
+1 & 0
+\end{pmatrix}\right)\begin{pmatrix}3 & 2\\
+-7 & -3
+\end{pmatrix}\left(\begin{pmatrix}1 & 1\\
+0 & 1
+\end{pmatrix}\begin{pmatrix}0 & 1\\
+1 & 0
+\end{pmatrix}\right)^{-1}\\
+ & =\begin{pmatrix}1 & 1\\
+1 & 0
+\end{pmatrix}\begin{pmatrix}3 & 2\\
+-7 & -3
+\end{pmatrix}\begin{pmatrix}1 & 1\\
+1 & 0
+\end{pmatrix}^{-1}.
+\end{align*}
+
+\end_inset
+
+The table below summarizes our calculations
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fractional Ideal
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $[\mathrm{m}_{\sqrt{-5}}]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ordered 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-Basis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sim$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\langle1\rangle=\mathbb{Z}[\sqrt{-5}]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\begin{pmatrix}0 & -5\\
+1 & 0
+\end{pmatrix}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbf{a}_{1}=(1,\sqrt{-5})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\langle1\rangle=\langle1\rangle$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathfrak{p}_{2}=\langle2,1+\sqrt{-5}\rangle$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\begin{pmatrix}-1 & -3\\
+2 & 1
+\end{pmatrix}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbf{a}_{2}=(2,1+\sqrt{-5})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathfrak{p}_{2}=\left(\frac{2}{3-\sqrt{-5}}\right)\mathfrak{p}_{7}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathfrak{p}_{7}=\langle7,3-\sqrt{-5}\rangle$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\begin{pmatrix}3 & 2\\
+-7 & -3
+\end{pmatrix}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbf{a}_{7}=(7,3+\sqrt{-5})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathfrak{p}_{7}=\left(\frac{3-\sqrt{-5}}{2}\right)\mathfrak{p}_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Generalizations
+\end_layout
+
+\begin_layout Standard
+We now would like to generalize our results in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremconjclassidealclassll})
+\end_layout
+
+\end_inset
+
+.
+ Let us consider the following example.
+ Let 
+\begin_inset Formula $f(T)=T^{2}+2$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is monic irreducible polynomial over 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sqrt{-2}$
+\end_inset
+
+ is a root of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ We compute a table similar to the one in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Example~(
+\backslash
+ref{exampleconjidealsqrt-5})
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fractional Ideal
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $[\mathrm{m}_{\sqrt{-2}}]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ordered 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-Basis
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbb{Z}[\sqrt{-2}]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\begin{pmatrix}0 & -2\\
+1 & 0
+\end{pmatrix}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbf{a}=\{1,\sqrt{-2}\}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\mathbb{Z}[\sqrt{-2}]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\begin{pmatrix}0 & 2\\
+-1 & 0
+\end{pmatrix}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\overline{\mathbf{a}}=(1,-\sqrt{-2})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now 
+\begin_inset Formula $\mathbb{Z}[\sqrt{-2}]$
+\end_inset
+
+ has class number 
+\begin_inset Formula $1$
+\end_inset
+
+, so 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremconjclassidealclassll})
+\end_layout
+
+\end_inset
+
+ tells us that the matrices 
+\begin_inset Formula $\left(\begin{smallmatrix}0 & -2\\
+1 & 0
+\end{smallmatrix}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\begin{smallmatrix}0 & 2\\
+-1 & 0
+\end{smallmatrix}\right)$
+\end_inset
+
+ are conjugate.
+ However, more specifically, when we say conjugate, we mean they 
+\begin_inset Formula $\mathrm{GL}_{2}(\mathbb{Z})$
+\end_inset
+
+-conjugate.
+ In fact, the matrix 
+\begin_inset Formula $\left(\begin{smallmatrix}1 & 0\\
+0 & -1
+\end{smallmatrix}\right)\in\mathrm{GL}_{2}(\mathbb{Z})$
+\end_inset
+
+ conjugates 
+\begin_inset Formula $\left(\begin{smallmatrix}0 & 2\\
+-1 & 0
+\end{smallmatrix}\right)$
+\end_inset
+
+ to 
+\begin_inset Formula $\left(\begin{smallmatrix}0 & -2\\
+1 & 0
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Indeed, we have
+\begin_inset Formula 
+\[
+\begin{pmatrix}1 & 0\\
+0 & -1
+\end{pmatrix}\begin{pmatrix}0 & 2\\
+-1 & 0
+\end{pmatrix}\begin{pmatrix}1 & 0\\
+0 & -1
+\end{pmatrix}^{-1}=\begin{pmatrix}0 & -2\\
+1 & 0
+\end{pmatrix}.
+\]
+
+\end_inset
+
+However note that 
+\begin_inset Formula $\det\left(\begin{smallmatrix}1 & 0\\
+0 & -1
+\end{smallmatrix}\right)=-1$
+\end_inset
+
+, and so 
+\begin_inset Formula $\left(\begin{smallmatrix}1 & 0\\
+0 & -1
+\end{smallmatrix}\right)\notin\mathrm{SL}_{2}(\mathbb{Z})$
+\end_inset
+
+.
+ It's natural wonder if 
+\begin_inset Formula $\left(\begin{smallmatrix}0 & -2\\
+1 & 0
+\end{smallmatrix}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\left(\begin{smallmatrix}0 & 2\\
+-1 & 0
+\end{smallmatrix}\right)$
+\end_inset
+
+ are 
+\begin_inset Formula $\mathrm{SL}_{2}(\mathbb{Z})$
+\end_inset
+
+-conjugate.
+ It turns out that they are not even conjugate by an element of 
+\begin_inset Formula $\mathrm{SL}_{2}(\mathbb{Q})$
+\end_inset
+
+.
+ However, they are 
+\begin_inset Formula $\mathrm{SL_{2}(\mathbb{Z}[i])}$
+\end_inset
+
+-conjugate.
+ The matrix 
+\begin_inset Formula $\left(\begin{smallmatrix}i & 0\\
+0 & -i
+\end{smallmatrix}\right)\in\mathrm{SL}_{2}(\mathbb{Z}[i])$
+\end_inset
+
+ conjugates 
+\begin_inset Formula $\left(\begin{smallmatrix}0 & 2\\
+-1 & 0
+\end{smallmatrix}\right)$
+\end_inset
+
+ to 
+\begin_inset Formula $\left(\begin{smallmatrix}0 & -2\\
+1 & 0
+\end{smallmatrix}\right)$
+\end_inset
+
+.
+ Indeed, we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\begin{pmatrix}i & 0\\
+0 & -i
+\end{pmatrix}\begin{pmatrix}0 & 2\\
+-1 & 0
+\end{pmatrix}\begin{pmatrix}i & 0\\
+0 & -i
+\end{pmatrix}^{-1}=\begin{pmatrix}0 & -2\\
+1 & 0
+\end{pmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula $\mathrm{SL}_{n}(\mathbb{Z})$
+\end_inset
+
+-Conjugacy Classes of Matrices in 
+\begin_inset Formula $\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To improve 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{theoremconjclassidealclassll})
+\end_layout
+
+\end_inset
+
+, we introduce the following notation.
+ We denote by 
+\begin_inset Formula $\mathrm{C}_{\mathrm{SL}_{n}(\mathbb{Z})}(\mathbb{Z},f)$
+\end_inset
+
+ to be the set of all 
+\begin_inset Formula $\mathrm{SL}_{n}(\mathbb{Z})$
+\end_inset
+
+-conjugacy classes of matrices in 
+\begin_inset Formula $\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+.
+ Similarly, if 
+\begin_inset Formula $f(T)\in\mathbb{Z}[T]$
+\end_inset
+
+ is a nonzero monic polynomial, then we denote by 
+\begin_inset Formula $\mathrm{C}_{\mathrm{SL}_{n}(\mathbb{Z})}(\mathbb{Z},f)$
+\end_inset
+
+ to be the set of all 
+\begin_inset Formula $\mathrm{SL}_{n}(\mathbb{Z})$
+\end_inset
+
+-conjugacy classes of matrices in 
+\begin_inset Formula $\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+ with characteristic polynomial 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Orientations
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $V$
+\end_inset
+
+ be a nonzero 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-vector space with 
+\begin_inset Formula $n$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathbf{a}=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+ be an ordered basis of 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ This gives rise to a nonzero vector
+\begin_inset Formula 
+\[
+\wedge(\mathbf{a})=\alpha_{1}\wedge\cdots\wedge\alpha_{n}\in\Lambda^{n}(V)
+\]
+
+\end_inset
+
+in the line 
+\begin_inset Formula $\Lambda^{n}(V)$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mathbf{a}'=(\alpha_{1}',\dots,\alpha_{n}')$
+\end_inset
+
+ is a second ordered basis, then 
+\begin_inset Formula $\wedge(\mathbf{a}')$
+\end_inset
+
+ is another nonzero vector in the same line 
+\begin_inset Formula $\Lambda^{n}(V)$
+\end_inset
+
+, so 
+\begin_inset Formula $\wedge(\mathbf{a}')=c\wedge(\mathbf{a})$
+\end_inset
+
+ for a unique 
+\begin_inset Formula $c\in\mathbb{R}^{\times}$
+\end_inset
+
+.
+ Concretely, if 
+\begin_inset Formula $T_{\mathbf{a},\mathbf{a'}}\colon V\to V$
+\end_inset
+
+ is the unique linear automorphism satisfying 
+\begin_inset Formula $\alpha_{i}'=T(\alpha_{i})$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+ (it is the 
+\begin_inset Quotes eld
+\end_inset
+
+change of basis matrix
+\begin_inset Quotes erd
+\end_inset
+
+ from 
+\begin_inset Formula $\mathbf{a}'$
+\end_inset
+
+-coordinates to 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+-coordinates), then 
+\begin_inset Formula $c=\det T_{\mathbf{a},\mathbf{a}'}$
+\end_inset
+
+ and 
+\begin_inset Formula $1/c=\det T_{\mathbf{a}',\mathbf{a}}^{-1}$
+\end_inset
+
+.
+ Hence 
+\begin_inset Formula $c>0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\wedge(\mathbf{a})$
+\end_inset
+
+ and 
+\begin_inset Formula $\wedge(\mathbf{a}')$
+\end_inset
+
+ lie in the same connected component of 
+\begin_inset Formula $\Lambda^{n}(V)\backslash\{0\}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ An 
+\series bold
+orientation 
+\series default
+
+\begin_inset Formula $\mu$
+\end_inset
+
+ on 
+\begin_inset Formula $V$
+\end_inset
+
+ is a choice of connected component of 
+\begin_inset Formula $\Lambda^{n}(V)\backslash\{0\}$
+\end_inset
+
+, called the 
+\series bold
+positive component 
+\series default
+with respect to 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ An 
+\series bold
+oriented vector space 
+\series default
+is a nonzero vector space 
+\begin_inset Formula $V$
+\end_inset
+
+ equipped with a choice of orientation 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $V$
+\end_inset
+
+ be a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-vector space and let 
+\begin_inset Formula $\mathbf{a}=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{a}'=(\alpha_{1}',\dots,\alpha_{n})$
+\end_inset
+
+ be two ordered bases of 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{a}'$
+\end_inset
+
+ are 
+\series bold
+similarly oriented
+\series default
+, denoted 
+\begin_inset Formula $\mathbf{a}\sim_{+}\mathbf{a}'$
+\end_inset
+
+, if the change of basis matrix from 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{a}'$
+\end_inset
+
+ has positive determinant, that is if 
+\begin_inset Formula 
+\[
+\det[1_{V}]_{\mathbf{a}'}^{\mathbf{a}}>0.
+\]
+
+\end_inset
+
+It is straightforward to check that 
+\begin_inset Formula $\sim_{+}$
+\end_inset
+
+ is an equivalence relation.
+ Indeed, reflexivity and symmetry of 
+\begin_inset Formula $\sim_{+}$
+\end_inset
+
+ are clear.
+ For transitivity, suppose 
+\begin_inset Formula $\mathbf{a}\sim_{+}\mathbf{a}'$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{a}'\sim_{+}\mathbf{a}''$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\det[1_{V}]_{\mathbf{a}''}^{\mathbf{a}} & =\det\left([1_{V}]_{\mathbf{a}'}^{\mathbf{a}}[1_{V}]_{\mathbf{a}''}^{\mathbf{a}'}\right)\\
+ & =\det[1_{V}]_{\mathbf{a}'}^{\mathbf{a}}\det[1_{V}]_{\mathbf{a}''}^{\mathbf{a}'}\\
+ & >0
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $\mathbf{a}\sim_{+}\mathbf{a}''$
+\end_inset
+
+.
+ We shall denote by 
+\begin_inset Formula $[\mathbf{a}]_{\mathrm{o}}$
+\end_inset
+
+ to by the 
+\begin_inset Formula $\sim_{+}$
+\end_inset
+
+-equivalence class which is represented by the ordered basis 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+.
+ Clearly, there are just two 
+\begin_inset Formula $\sim_{\mathrm{o}}$
+\end_inset
+
+-equivalence classes.
+ An oriented 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-vector space 
+\begin_inset Formula $(V,\mu_{+})$
+\end_inset
+
+ is a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-vector space 
+\begin_inset Formula $V$
+\end_inset
+
+ equipped with the choice of a 
+\begin_inset Formula $\sim_{\mathrm{o}}$
+\end_inset
+
+-equivalence class, which we shall call the
+\series bold
+ positive
+\series default
+ 
+\series bold
+orientation
+\series default
+.
+ We shall also denote this equivalence class by 
+\begin_inset Formula $\mu_{+}$
+\end_inset
+
+.
+ In this case, the other 
+\begin_inset Formula $\sim_{\mathrm{o}}$
+\end_inset
+
+-equivalence class will be denoted by 
+\begin_inset Formula $\mu_{-}$
+\end_inset
+
+.
+ Note that if 
+\begin_inset Formula $[\mathbf{a}]_{\mathrm{o}}=\mu_{+}$
+\end_inset
+
+, then 
+\begin_inset Formula $[-\mathbf{a}]_{\mathrm{o}}=\mu_{-}$
+\end_inset
+
+.
+ If an ordered basis represents 
+\begin_inset Formula $\mu_{+}$
+\end_inset
+
+, then we say it is 
+\series bold
+positively oriented
+\series default
+.
+ If an ordered basis represents 
+\begin_inset Formula $\mu_{-}$
+\end_inset
+
+, then we say it is 
+\series bold
+negatively oriented
+\series default
+.
+ If 
+\begin_inset Formula $(V,\mu_{+})$
+\end_inset
+
+ and 
+\begin_inset Formula $(W,\nu_{+})$
+\end_inset
+
+ are two oriented 
+\begin_inset Formula $n$
+\end_inset
+
+-dimensional 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-vector spaces and 
+\begin_inset Formula $T\colon V\to W$
+\end_inset
+
+ is a linear isomorphism, then we say 
+\begin_inset Formula $T$
+\end_inset
+
+ is 
+\series bold
+orientation-preserving 
+\series default
+if 
+\begin_inset Formula $\det[T]_{\mathbf{a}}^{\mathbf{b}}>0$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ represents 
+\begin_inset Formula $\mu_{+}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{b}$
+\end_inset
+
+ represents 
+\begin_inset Formula $\nu_{+}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Generalized Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremconjclassidealclassll}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f(T)\in\mathbb{Z}[T]$
+\end_inset
+
+ be a monic irreducible polynomial of degree 
+\begin_inset Formula $n$
+\end_inset
+
+ and let 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ be a root of 
+\begin_inset Formula $f(T)$
+\end_inset
+
+.
+ Then we have a bijection 
+\begin_inset Formula 
+\[
+\mathrm{C}_{\mathrm{SL}_{n}(\mathbb{Z})}(\mathbb{Z},f)\cong\mathrm{Cl}_{+}(\mathbb{Z}[\alpha]).
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We define 
+\begin_inset Formula $\Psi\colon\mathrm{Cl}_{+}(\mathbb{Z}[\alpha])\to\mathrm{C}_{\mathrm{SL}_{n}(\mathbb{Z})}(\mathbb{Z},f)$
+\end_inset
+
+ as follows: let 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ be a 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-fractional ideal.
+ From the structure of finitely-generated torsion-free modules over 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+, we know that 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ is a finitely-generated free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module of rank 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Choose a positive ordered basis of 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ as a free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module, say 
+\begin_inset Formula $\mathbf{a}=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathrm{m}_{\alpha}\colon\mathfrak{a}\to\mathfrak{a}$
+\end_inset
+
+ be the multiplication by 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ map and let 
+\begin_inset Formula $[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}\in\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+ denote the matrix representation of 
+\begin_inset Formula $\mathrm{m}_{\alpha}$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mathbf{a}'=(\alpha_{1}',\dots,\alpha_{n}')$
+\end_inset
+
+ is another positive ordered basis of 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ as a free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module, then the change of basis matrix from 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{a}'$
+\end_inset
+
+ is given by 
+\begin_inset Formula $[1_{\mathfrak{a}}]_{\mathbf{a}'}^{\mathbf{a}}\in\mathrm{SL}_{n}(\mathbb{Z})$
+\end_inset
+
+ since both 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{a}'$
+\end_inset
+
+ are positive, and hence 
+\begin_inset Formula $\det[1_{\mathfrak{a}}]_{\mathbf{a}'}^{\mathbf{a}}>0$
+\end_inset
+
+ which implies 
+\begin_inset Formula $\det[1_{\mathfrak{a}}]_{\mathbf{a}'}^{\mathbf{a}}=1$
+\end_inset
+
+.
+ Furthermore, we have
+\begin_inset Formula 
+\begin{align*}
+[1_{\mathfrak{a}}]_{\mathbf{a}'}^{\mathbf{a}}[\mathrm{m}_{\alpha}]_{\mathbf{a}'}^{\mathbf{a}'}\left([1_{\mathfrak{a}}]_{\mathbf{a}'}^{\mathbf{a}}\right)^{-1} & =[1_{\mathfrak{a}}]_{\mathbf{a}'}^{\mathbf{a}}[\mathrm{m}_{\alpha}]_{\mathbf{a}'}^{\mathbf{a}'}[1_{\mathfrak{a}}]_{\mathbf{a}}^{\mathbf{a}'}\\
+ & =[1_{\mathfrak{a}}\circ\mathrm{m}_{\alpha}\circ1_{\mathfrak{a}}]_{\mathbf{a}}^{\mathbf{a}}.\\
+ & =[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}.
+\end{align*}
+
+\end_inset
+
+Thus changing the positive basis from 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{a}'$
+\end_inset
+
+ corresponds to a 
+\begin_inset Formula $\mathrm{SL}_{n}(\mathbb{Z})$
+\end_inset
+
+-conjugate matrix of 
+\begin_inset Formula $[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We are now ready to define 
+\begin_inset Formula $\Psi$
+\end_inset
+
+.
+ We set
+\begin_inset Formula 
+\begin{equation}
+\Psi([\mathfrak{a}])=[[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}]_{\mathrm{c}}.\label{eq:welldefinedfractionalideal-1}
+\end{equation}
+
+\end_inset
+
+We must check that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedfractionalideal})
+\end_layout
+
+\end_inset
+
+ is in fact well-defined.
+ Our construction of 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ involved two choices.
+ One choice that we made was in the choice of a positive orderd basis for
+ 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ as free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module (where we chose 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+).
+ By what was mentioned above, changing this basis to another basis would
+ result in a matrix which is 
+\begin_inset Formula $\mathrm{SL}_{n}(\mathbb{Z})$
+\end_inset
+
+-conjugate to 
+\begin_inset Formula $[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}$
+\end_inset
+
+ and hence would result in the same conjugacy class 
+\begin_inset Formula $[[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}]_{\mathrm{c}}$
+\end_inset
+
+.
+ The other choice that we made was in the choice of a representative of
+ the 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-ideal class 
+\begin_inset Formula $[\mathfrak{a}]$
+\end_inset
+
+ (where we chose 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+) So let 
+\begin_inset Formula $\mathfrak{b}$
+\end_inset
+
+ be another another coset representative of the coset 
+\begin_inset Formula $[\mathfrak{a}]$
+\end_inset
+
+, so 
+\begin_inset Formula $\mathfrak{b}\sim\mathfrak{a}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $x\in\mathbb{Q}(\alpha)^{\times}$
+\end_inset
+
+ such 
+\begin_inset Formula $\mathrm{N}_{\mathbb{Q}(\alpha)\slash\mathbb{Q}}(x)>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{b}=x\mathfrak{a}$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $x\mathbf{a}$
+\end_inset
+
+ is a positively oriented ordered basis for 
+\begin_inset Formula $\mathfrak{b}$
+\end_inset
+
+ as a free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module! Indeed, it clearly spans 
+\begin_inset Formula $\mathfrak{b}$
+\end_inset
+
+ as a 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module since 
+\begin_inset Formula $\mathfrak{b}=x\mathfrak{a}$
+\end_inset
+
+.
+ Also, it is 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-linearly independent since it is 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-linearly independent (since multiplication by 
+\begin_inset Formula $x$
+\end_inset
+
+ is a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-isomorphism).
+ It is also positively oriented precisely because 
+\begin_inset Formula $\mathrm{N}_{\mathbb{Q}(\alpha)\slash\mathbb{Q}}(x)>0$
+\end_inset
+
+.
+ Furthermore, it is easy to check that since 
+\begin_inset Formula $\mathrm{m}_{x}\mathrm{m}_{\alpha}=\mathrm{m}_{\alpha}\mathrm{m}_{x}$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}} & =[\mathrm{m}_{\alpha}]_{x\mathbf{a}}^{x\mathbf{a}}\\
+ & =[\mathrm{m}_{\alpha}]_{\mathbf{b}}^{\mathbf{b}}.
+\end{align*}
+
+\end_inset
+
+ Thus 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedfractionalideal})
+\end_layout
+
+\end_inset
+
+ is well-defined.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we show that 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is injective.
+ Let 
+\begin_inset Formula $[\mathfrak{a}]$
+\end_inset
+
+ and 
+\begin_inset Formula $[\mathfrak{a}']$
+\end_inset
+
+ be two fractional 
+\begin_inset Formula $\mathcal{O}$
+\end_inset
+
+-ideals and let 
+\begin_inset Formula $\mathbf{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{a}'$
+\end_inset
+
+ be ordered bases for 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{a}'$
+\end_inset
+
+ as free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-modules respectively.
+ Suppose 
+\begin_inset Formula $\Psi([\mathfrak{a}])=\Psi([\mathfrak{a}'])$
+\end_inset
+
+, that is suppose
+\begin_inset Formula 
+\[
+U[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}U^{-1}=[\mathrm{m}_{\alpha}]_{\mathbf{a}'}^{\mathbf{a}'}
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $U\in\mathrm{SL}_{n}(\mathbb{Z})$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $[\cdot]_{\mathbf{a}}\colon\mathfrak{a}\to\mathbb{Z}^{n}$
+\end_inset
+
+ be the standard column representation map for 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+.
+ That is 
+\begin_inset Formula $[\cdot]_{\mathbf{a}}$
+\end_inset
+
+ is the unique 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-linear map which sends 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ to 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{e}=(e_{1},\dots,e_{n})$
+\end_inset
+
+ is the standard ordered column basis for 
+\begin_inset Formula $\mathbb{Z}^{n}$
+\end_inset
+
+ as a free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module.
+ Similarly, let 
+\begin_inset Formula $[\cdot]_{\mathbf{a}'}\colon\mathfrak{a}'\to\mathbb{Z}^{n}$
+\end_inset
+
+ be the standard column representation map for 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $[\cdot]_{\mathbf{a}'}^{-1}U[\cdot]_{\mathbf{a}}\colon\mathfrak{a}\to\mathfrak{a}'$
+\end_inset
+
+ gives us an isomorphism of 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{a}'$
+\end_inset
+
+ as 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-modules.
+ In fact, this is a 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-isomorphism since it commutes with 
+\begin_inset Formula $\mathrm{m}_{\alpha}$
+\end_inset
+
+.
+ Indeed, we have
+\begin_inset Formula 
+\begin{align*}
+\sigma[\cdot]_{\mathbf{a}'}^{-1}U[\cdot]_{\mathbf{a}}\sigma^{-1} & =[\cdot]_{\sigma\mathbf{a}'}^{-1}[\sigma]_{\mathbf{a}'}^{\sigma\mathbf{a}'}U[\sigma^{-1}]_{\sigma\mathbf{a}}^{\mathbf{a}}[\cdot]_{\sigma\mathbf{a}}\\
+\\
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+[\cdot]_{\mathbf{a}'}^{-1}U[\cdot]_{\mathbf{a}}\mathrm{m}_{\alpha} & =[\cdot]_{\mathbf{a}'}^{-1}U[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}[\cdot]_{\mathbf{a}}\\
+ & =[\cdot]_{\mathbf{a}'}^{-1}[\mathrm{m}_{\alpha}]_{\mathbf{a}'}^{\mathbf{a}'}U[\cdot]_{\mathbf{a}}\\
+ & =\mathrm{m}_{\alpha}[\cdot]_{\mathbf{a}'}^{-1}U[\cdot]_{\mathbf{a}}.
+\end{align*}
+
+\end_inset
+
+Isomorphic fractional 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-ideals are scalar multiples of each other, so 
+\begin_inset Formula $\mathfrak{a}'=x\mathfrak{a}$
+\end_inset
+
+ for some 
+\begin_inset Formula $x\in\text{\ensuremath{\mathbb{Q}(\alpha)^{\times}}}$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $[\mathfrak{a}]=[\mathfrak{a}']$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is injective.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now let us show that 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is surjective.
+ Let 
+\begin_inset Formula $A=(a_{ij})$
+\end_inset
+
+ be in 
+\begin_inset Formula $\mathrm{M}_{n}(\mathbb{Z})$
+\end_inset
+
+ such that 
+\begin_inset Formula $\chi_{A}(T)=f(T)$
+\end_inset
+
+.
+ We will find a 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-fractional ideal 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ and a ordered basis 
+\begin_inset Formula $\mathbf{a}=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ as a free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module such that 
+\begin_inset Formula $A=[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}$
+\end_inset
+
+.
+ First, we make 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ into a 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+-vector space as follows: Let 
+\begin_inset Formula $x\in\mathbb{Q}(\alpha)$
+\end_inset
+
+ and let 
+\begin_inset Formula $v\in\mathbb{Q}^{n}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $g(T)\in\mathbb{Q}[T]$
+\end_inset
+
+ such that 
+\begin_inset Formula $g(\alpha)=x$
+\end_inset
+
+ (such a choice is possible since 
+\begin_inset Formula $\mathbb{Q}(\alpha)=\mathbb{Q}[\alpha]$
+\end_inset
+
+).
+ We define scalar multiplication of 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\begin{equation}
+x\cdot v=g(A)v.\label{eq:welldefinedaction-1}
+\end{equation}
+
+\end_inset
+
+We need to check that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedaction})
+\end_layout
+
+\end_inset
+
+ is well-defined.
+ In our construction of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedaction})
+\end_layout
+
+\end_inset
+
+, we made a choice, namely 
+\begin_inset Formula $g(T)\in\mathbb{Q}[T]$
+\end_inset
+
+ such that 
+\begin_inset Formula $g(\alpha)=x$
+\end_inset
+
+, so suppose 
+\begin_inset Formula $h(T)\in\mathbb{Q}[T]$
+\end_inset
+
+ such that 
+\begin_inset Formula $h(\alpha)=x$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(g-h)(\alpha)=0$
+\end_inset
+
+ and this implies 
+\begin_inset Formula $f\mid(g-h)$
+\end_inset
+
+ (since 
+\begin_inset Formula $f$
+\end_inset
+
+ is the minimal polynomial of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ over 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+ since it is monic and irreducible with root 
+\begin_inset Formula $\alpha$
+\end_inset
+
+) and therefore 
+\begin_inset Formula $g(A)=h(A)$
+\end_inset
+
+ as matrices, so 
+\begin_inset Formula $g(A)v=h(A)v$
+\end_inset
+
+ for all 
+\begin_inset Formula $v\in\mathbb{Q}^{n}$
+\end_inset
+
+.
+ Thus 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedaction})
+\end_layout
+
+\end_inset
+
+ is well-defined.
+ It is straightforward to check that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedaction})
+\end_layout
+
+\end_inset
+
+ gives 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ a 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+-vector space structure.
+ By restricting scalars, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedaction})
+\end_layout
+
+\end_inset
+
+ also gives 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ a 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-module structure.
+ In fact, if 
+\begin_inset Formula $v\in\mathbb{Z}^{n}$
+\end_inset
+
+, then 
+\begin_inset Formula $\alpha\cdot v=Av$
+\end_inset
+
+ is in 
+\begin_inset Formula $\mathbb{Z}^{n}$
+\end_inset
+
+ since 
+\begin_inset Formula $A$
+\end_inset
+
+ has integral entries, so 
+\begin_inset Formula $\mathbb{Z}^{n}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+.
+ Treating 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ as both a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-vector space and as a 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+-vector space, we have
+\begin_inset Formula 
+\begin{align*}
+n & =\dim_{\mathbb{Q}}(\mathbb{Q}^{n})\\
+ & =[\mathbb{Q}(\alpha):\mathbb{Q}]\dim_{\mathbb{Q}(\alpha)}(\mathbb{Q}^{n})\\
+ & =n\dim_{\mathbb{Q}(\alpha)}(\mathbb{Q}^{n}),
+\end{align*}
+
+\end_inset
+
+so 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ is 
+\begin_inset Formula $1$
+\end_inset
+
+-dimensional as a 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+-vector space.
+ In particular, this means that for any nonzero 
+\begin_inset Formula $v_{0}\in\mathbb{Q}^{n}$
+\end_inset
+
+, the 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+-linear map 
+\begin_inset Formula $\varphi_{v_{0}}\colon\mathbb{Q}(\alpha)\to\mathbb{Q}^{n}$
+\end_inset
+
+ given by
+\begin_inset Formula 
+\[
+\varphi_{v_{0}}(x)=x\cdot v_{0}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in\mathbb{Q}(\alpha)$
+\end_inset
+
+ is an isomorphism of 
+\begin_inset Formula $1$
+\end_inset
+
+-dimensional 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+-vector spaces.
+ Thus, letting 
+\begin_inset Formula $\mathbf{e}=(e_{1},\dots,e_{n})$
+\end_inset
+
+ denote the standard ordered column basis for 
+\begin_inset Formula $\mathbb{Q}^{n}$
+\end_inset
+
+ as a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-vector space, there exists unique 
+\begin_inset Formula $\alpha_{i}\in\mathbb{Q}(\alpha)$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi_{v_{0}}(\alpha_{i})=e_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $\mathbf{a}=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+ is an ordered basis for 
+\begin_inset Formula $\mathbb{Q}(\alpha)$
+\end_inset
+
+ as a 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+-vector space.
+ Let 
+\begin_inset Formula 
+\[
+\mathfrak{a}=\bigoplus_{i=1}^{n}\mathbb{Z}\alpha_{i}.
+\]
+
+\end_inset
+
+Observe that 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-fractional ideal.
+ Indeed, it suffices to show that 
+\begin_inset Formula $\alpha\alpha_{i}\in\mathfrak{a}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+, and this follows from the fact that
+\begin_inset Formula 
+\begin{align*}
+\varphi_{v_{0}}\left(\alpha\alpha_{i}-\sum_{j=1}^{n}a_{ji}\alpha_{i}\right) & =\alpha\cdot\varphi_{v_{0}}(\alpha_{i})-\sum_{j=1}^{n}a_{ji}\varphi_{v_{0}}(\alpha_{i})\\
+ & =\alpha\cdot e_{i}-\sum_{j=1}^{n}a_{ji}e_{i}\\
+ & =Ae_{i}-Ae_{i}\\
+ & =0,
+\end{align*}
+
+\end_inset
+
+which implies
+\begin_inset Formula 
+\begin{equation}
+\alpha\alpha_{i}=\sum_{j=1}^{n}a_{ji}\alpha_{i}\label{eq:matrixrepofalpha-1}
+\end{equation}
+
+\end_inset
+
+since 
+\begin_inset Formula $\varphi_{v_{0}}$
+\end_inset
+
+ is injective.
+ In fact, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:matrixrepofalpha})
+\end_layout
+
+\end_inset
+
+ also shows that 
+\begin_inset Formula $A=[\mathrm{m}_{\alpha}]_{\mathbf{a}}^{\mathbf{a}}$
+\end_inset
+
+.
+ So we have realized 
+\begin_inset Formula $A$
+\end_inset
+
+ as a matrix representation for 
+\begin_inset Formula $\mathrm{m}_{\alpha}$
+\end_inset
+
+ on a fractional 
+\begin_inset Formula $\mathbb{Z}[\alpha]$
+\end_inset
+
+-ideal 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ is onto.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{thebibliography}{9}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibitem{KCnotes}   Keith Conrad,   
+\backslash
+href{https://kconrad.math.uconn.edu/blurbs/gradnumthy/matrixconj.pdf}{Expository
+ Notes on Ideal Class and Matrix Conjugation}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{thebibliography}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

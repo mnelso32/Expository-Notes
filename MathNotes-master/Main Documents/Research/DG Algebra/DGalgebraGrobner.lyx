@@ -1,0 +1,1993 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+DG Algebra Gröbner
+\end_layout
+
+\begin_layout Section
+Preliminary Material
+\end_layout
+
+\begin_layout Standard
+Throughout this note, let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field of characteristic 
+\begin_inset Formula $2$
+\end_inset
+
+ and let 
+\begin_inset Formula $S$
+\end_inset
+
+ denote the polynomial ring 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Monomial orderings on 
+\begin_inset Formula $S$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\series bold
+monomial
+\series default
+ in 
+\begin_inset Formula $S$
+\end_inset
+
+ is a product of the form
+\begin_inset Formula 
+\[
+x^{\alpha}=x_{1}^{\alpha_{1}}\cdots x_{n}^{\alpha_{n}},
+\]
+
+\end_inset
+
+where all of the exponents 
+\begin_inset Formula $\alpha_{1},\dots,\alpha_{n}$
+\end_inset
+
+ are nonnegative integers.
+ Here we view 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ as the ordered 
+\begin_inset Formula $n$
+\end_inset
+
+-tuple 
+\begin_inset Formula $\alpha=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+.
+ We denote by 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ to be the set of all monomials in 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ A 
+\series bold
+monomial ordering
+\series default
+ on 
+\begin_inset Formula $S$
+\end_inset
+
+ is a total ordering 
+\begin_inset Formula $>$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ which satisfies the following property: 
+\begin_inset Formula 
+\[
+x^{\alpha}>x^{\beta}\text{ implies }x^{\gamma}x^{\alpha}>x^{\gamma}x^{\beta},
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x^{\alpha},x^{\beta},x^{\gamma}\in\mathcal{M}$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $>$
+\end_inset
+
+ is a 
+\series bold
+global 
+\series default
+if 
+\begin_inset Formula $x^{\alpha}>1$
+\end_inset
+
+ for all 
+\begin_inset Formula $x^{\alpha}\in\mathcal{M}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Multidegree, Leading Coefficients, Leading Monomials, and Leading Terms
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f=\sum_{\alpha}c_{\alpha}x^{\alpha}$
+\end_inset
+
+ be a nonzero polynomial in 
+\begin_inset Formula $S$
+\end_inset
+
+ and let 
+\begin_inset Formula $>$
+\end_inset
+
+ be a monomial ordering on 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+multidegree 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\mathrm{multdeg}\,f=\max\{x^{\alpha}\in\mathcal{M}\mid c_{\alpha}\neq0\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+leading coefficient 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\mbox{LC}(f)=c_{\mathrm{multdeg}\,f}\in K.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+leading monomial 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\mbox{LM}(f)=x^{\mathrm{multdeg}\,f}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+leading term 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\mbox{LT}(f)=\mbox{LC}(f)\cdot\mbox{LM}(f).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Gröbner Bases
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be a nonzero ideal in 
+\begin_inset Formula $S$
+\end_inset
+
+ and let 
+\begin_inset Formula $>$
+\end_inset
+
+ be a monomial ordering on 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ We denote by 
+\begin_inset Formula $\mbox{LT}(I)$
+\end_inset
+
+ the set of leading terms of nonzero elements of 
+\begin_inset Formula $I$
+\end_inset
+
+, that is, 
+\begin_inset Formula 
+\[
+\mathrm{LT}(I)=\{cx^{\alpha}\mid\mbox{there exists }f\in I\setminus\{0\}\mbox{ with LT}(f)=cx^{\alpha}\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A finite subset 
+\begin_inset Formula $G=\{g_{1},\dots,g_{r}\}$
+\end_inset
+
+ is said to be a 
+\series bold
+reduced Gröbner basis 
+\series default
+if 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\langle\mbox{LT}(g_{1}),\dots,\mbox{LT}(g_{r})\rangle=\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mbox{LC}(g)=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $g\in G$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For all 
+\begin_inset Formula $g\in G$
+\end_inset
+
+, no monomial of 
+\begin_inset Formula $g$
+\end_inset
+
+ lies in 
+\begin_inset Formula $\langle\mbox{LT}(G\setminus\{g\}\rangle$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Algorithmic computations in the 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra 
+\begin_inset Formula $S\slash I$
+\end_inset
+
+ using Gröbner bases
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal in 
+\begin_inset Formula $S$
+\end_inset
+
+, let 
+\begin_inset Formula $>$
+\end_inset
+
+ be a global monomial ordering on 
+\begin_inset Formula $S$
+\end_inset
+
+, and let 
+\begin_inset Formula $G=\{g_{1},\dots,g_{r}\}$
+\end_inset
+
+ be the reduced Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+ with respect to this monomial ordering.
+ Given a polynomial 
+\begin_inset Formula $f$
+\end_inset
+
+ in 
+\begin_inset Formula $S$
+\end_inset
+
+, there are unique polynomials 
+\begin_inset Formula $\pi(f)$
+\end_inset
+
+ and 
+\begin_inset Formula $f^{G}$
+\end_inset
+
+ in 
+\begin_inset Formula $S$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f=\pi(f)+f^{G}
+\]
+
+\end_inset
+
+and such that no term of 
+\begin_inset Formula $f^{G}$
+\end_inset
+
+ is divisible by any of 
+\begin_inset Formula $\mbox{LT}(g_{1}),\dots,\mbox{LT}(g_{r})$
+\end_inset
+
+.
+ We call 
+\begin_inset Formula $f^{G}$
+\end_inset
+
+ the 
+\series bold
+normal form of 
+\begin_inset Formula $f$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $G$
+\end_inset
+
+
+\series default
+.
+ It follows from uniqueness of 
+\begin_inset Formula $f^{G}$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi(f)$
+\end_inset
+
+ that taking the normal form of a polynomial is a 
+\begin_inset Formula $K$
+\end_inset
+
+-linear map:
+\begin_inset Formula 
+\begin{equation}
+c_{1}f_{1}^{G}+c_{2}f_{2}^{G}=(c_{1}f_{1}+c_{2}f_{2})^{G}\label{eq:Klinearity}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $c_{1},c_{2}\in K$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{1},f_{2}\in S$
+\end_inset
+
+.
+ We will denote this map by 
+\begin_inset Formula $-^{G}\colon S\to S_{I}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Another important property of 
+\begin_inset Formula $-^{G}$
+\end_inset
+
+ is that it preserves homogeneity.
+ In particular, assume that 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal.
+ Then 
+\begin_inset Formula $S\slash I$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra, where the 
+\begin_inset Formula $i$
+\end_inset
+
+th homogeneous component 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ is the 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space of all homogeneous polynomials 
+\begin_inset Formula $f\in S$
+\end_inset
+
+ of degree 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula 
+\[
+S_{I}:=\mathrm{span}_{K}\{x^{\alpha}\mid x^{\alpha}\notin\langle\text{LT}(I)\rangle\}
+\]
+
+\end_inset
+
+There is an obvious decompostion of 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ into 
+\begin_inset Formula $K$
+\end_inset
+
+-vector spaces 
+\begin_inset Formula $(S_{I})_{i}$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\[
+(S_{I})_{i}=\mathrm{span}_{K}\{x^{\alpha}\mid x^{\alpha}\notin\langle\text{LT}(I)\rangle\text{ and }\deg x^{\alpha}=i\}.
+\]
+
+\end_inset
+
+We claim that 
+\begin_inset Formula $S\slash I$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ are isomorphic as graded 
+\begin_inset Formula $K$
+\end_inset
+
+-modules.
+ Indeed, define 
+\begin_inset Formula $\lambda_{G}\colon S\slash I\to S_{I}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\lambda_{G}(\overline{f})=f^{G}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\overline{f}\in S\slash I$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In fact, 
+\begin_inset Formula $S\slash I$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ are isomorphic as graded 
+\begin_inset Formula $K$
+\end_inset
+
+-modules.
+ The isomorphism is given by mapping 
+\begin_inset Formula $\overline{f}\in S\slash I$
+\end_inset
+
+ to 
+\begin_inset Formula $f^{G}\in S_{I}$
+\end_inset
+
+.
+ Indeed, well-definedness of this map follows from the fact that 
+\begin_inset Formula $f^{G}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $f\in I$
+\end_inset
+
+.
+ Also 
+\begin_inset Formula $K$
+\end_inset
+
+-linearity follows from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:Klinearity})
+\end_layout
+
+\end_inset
+
+, and the grading is preserved since 
+\begin_inset Formula $-^{G}$
+\end_inset
+
+ preserves homogeneity.
+ This makes 
+\begin_inset Formula $S\slash I$
+\end_inset
+
+ isomorphic to 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ as graded 
+\begin_inset Formula $K$
+\end_inset
+
+-modules.
+ Using this isomorphism, we can carry multiplication from 
+\begin_inset Formula $S\slash I$
+\end_inset
+
+ over to 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ to turn 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ into a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra: multiplication in 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ is defined by
+\begin_inset Formula 
+\begin{equation}
+f_{1}\cdot f_{2}=(f_{1}f_{2})^{G}.\label{eq:SImult}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $f_{1},f_{2}\in S_{I}$
+\end_inset
+
+.
+ Defining multilpication in this way makes 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ isomorphic to 
+\begin_inset Formula $S\slash I$
+\end_inset
+
+ as graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebras.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{examplediffalgSI}
+\end_layout
+
+\end_inset
+
+ Consider 
+\begin_inset Formula $S=\mathbb{F}_{2}[x,y]$
+\end_inset
+
+ and 
+\begin_inset Formula $I=\langle xy^{2}+y^{3},x^{3}+x^{2}y\rangle$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $G=\{xy^{2}+y^{3},x^{3}+x^{2}y\}$
+\end_inset
+
+ is the reduced Gröbner basis with respect to graded reverse lexicographical
+ order.
+ Thus 
+\begin_inset Formula $\text{LT}(I)=\langle xy^{2},x^{3}\rangle$
+\end_inset
+
+.
+ Let's do some computations in 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+.
+ First, let's write the first few homogeneous terms of 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+(S_{I})_{0} & =\mathbb{F}_{2}\\
+(S_{I})_{1} & =\mathbb{F}_{2}x+\mathbb{F}_{2}y\\
+(S_{I})_{2} & =\mathbb{F}_{2}x^{2}+\mathbb{F}_{2}xy+\mathbb{F}_{2}y^{2}\\
+(S_{I})_{3} & =\mathbb{F}_{2}x^{2}y+\mathbb{F}_{2}y^{3}\\
+(S_{I})_{4} & =\mathbb{F}_{2}y^{4}\\
+(S_{I})_{5} & =\mathbb{F}_{2}y^{5}\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Next, we multiply some elements together in 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ in the multiplication table below
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdot$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x^{2}y$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{6}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x^{2}y$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x^{2}y$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $xy$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Setup
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be an 
+\begin_inset Formula $n$
+\end_inset
+
+-dimensional graded 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space and let 
+\begin_inset Formula $\star\colon A\otimes_{K}A\to A$
+\end_inset
+
+ be a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-linear map.
+ So 
+\begin_inset Formula $(A,\star)$
+\end_inset
+
+ is a (not necessarily associative) graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra.
+ Suppose 
+\begin_inset Formula $\{e_{1},\dots,e_{n}\}$
+\end_inset
+
+ is a basis for 
+\begin_inset Formula $A$
+\end_inset
+
+ as graded 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space.
+ Then for each 
+\begin_inset Formula $1\leq i,j\leq n$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+e_{i}\star e_{j}=\sum_{1\leq k\leq n}c_{i,j}^{k}e_{k}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{i,j}^{k}\in K$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq k\leq n$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{i,j}^{k}=0$
+\end_inset
+
+ if 
+\begin_inset Formula $|e_{i}|+|e_{j}|\neq|e_{k}|$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be the homogeneous ideal in 
+\begin_inset Formula $S$
+\end_inset
+
+ generated by the set
+\begin_inset Formula 
+\begin{equation}
+\left\{ x_{i}x_{j}-\sum_{k}c_{i,j}^{k}x_{k}\mid1\leq i,j\leq n\right\} \cup\left\{ x_{i}^{2}\mid1\leq i\leq n\right\} \label{eq:generatingset}
+\end{equation}
+
+\end_inset
+
+We give 
+\begin_inset Formula $S$
+\end_inset
+
+ a weighted lexicographical ordering where 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is assigned the weight 
+\begin_inset Formula $n+1-|e_{i}|$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+the reason we assign 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ the weight 
+\begin_inset Formula $n+1-|e_{i}|$
+\end_inset
+
+ and not 
+\begin_inset Formula $|e_{i}|$
+\end_inset
+
+ is so that this becomes a global ordering.
+ 
+\end_layout
+
+\end_inset
+
+ as follows: we say 
+\begin_inset Formula $x^{\alpha}>_{\mathrm{Wp}}x^{\beta}$
+\end_inset
+
+ if either
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $|\alpha|>|\beta|$
+\end_inset
+
+ where 
+\begin_inset Formula $|\alpha|=\sum_{i=1}^{n}\alpha_{i}|e_{i}|$
+\end_inset
+
+ and 
+\begin_inset Formula $|\beta|=\sum_{i=1}^{n}\beta_{i}|e_{i}|$
+\end_inset
+
+ or;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $|\alpha|=|\beta|$
+\end_inset
+
+ and there exists 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+ such that 
+\begin_inset Formula $\alpha_{i}=\beta_{i}$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{eqnarray*}
+\alpha_{1} & = & \beta_{1}\\
+ & \vdots\\
+\alpha_{i-1} & = & \beta_{i-1}\\
+\beta_{i-1} & = & \beta_{i}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $G=\{g_{1},\dots,g_{r}\}$
+\end_inset
+
+ be the reduced Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+ with respect to this monomial ordering.
+ Observe that for each 
+\begin_inset Formula $1\leq i,j\le n$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+\mathrm{LT}\left(x_{i}x_{j}-\sum_{k}c_{i,j}^{k}x_{k}\right)=x_{i}x_{j}.
+\]
+
+\end_inset
+
+In particular, the set of monomials which do not belong to 
+\begin_inset Formula $\mathrm{LT}(I)$
+\end_inset
+
+ will form a subset of 
+\begin_inset Formula $\{x_{1},\dots,x_{n}\}$
+\end_inset
+
+.
+ Let us denote this subset by 
+\begin_inset Formula $\mathcal{M}_{I}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Finally, let 
+\begin_inset Formula $\varphi\colon A\to S\slash I$
+\end_inset
+
+ be the unique graded 
+\begin_inset Formula $K$
+\end_inset
+
+-linear map defined by
+\begin_inset Formula 
+\[
+\varphi(e_{i})=\overline{x}_{i}
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ Observe that 
+\begin_inset Formula $\varphi\colon A\to S\slash I$
+\end_inset
+
+ is a 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra homomorphism.
+ Indeed, for all 
+\begin_inset Formula $1\leq i,j\leq n$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\varphi(e_{i}\star e_{j}) & =\varphi\left(\sum_{k}c_{i,j}^{k}e_{k}\right)\\
+ & =\sum_{k}c_{i,j}^{k}\varphi(e_{k})\\
+ & =\sum_{k}c_{i,j}^{k}\overline{x}_{k}\\
+ & =\overline{\sum_{k}c_{i,j}^{k}x_{k}}\\
+ & =\overline{x_{i}x_{j}}\\
+ & =\overline{x}_{i}\overline{x}_{j}\\
+ & =\varphi(e_{i})\varphi(e_{j}).
+\end{align*}
+
+\end_inset
+
+We are now ready to state and prove the main theorem.
+\end_layout
+
+\begin_layout Subsection
+Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ The multiplication map 
+\begin_inset Formula $\star$
+\end_inset
+
+ is associative if and only if 
+\begin_inset Formula $\mathcal{M}_{I}=\{x_{1},\dots,x_{n}\}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $\star$
+\end_inset
+
+ is associative.
+ To show that 
+\begin_inset Formula $\mathcal{M}_{I}=\{x_{1},\dots,x_{n}\}$
+\end_inset
+
+, it suffices to show that 
+\begin_inset Formula $\mathrm{S}(f_{i,j},f_{i',j'})^{G}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i,j,i',j'\leq n$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\[
+f_{i,j}=x_{i}x_{j}-\sum_{k}c_{i,j}^{k}x_{k}.
+\]
+
+\end_inset
+
+It follows from the the fact that 
+\begin_inset Formula $\star$
+\end_inset
+
+ is associative and 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is an 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra homomorphism that
+\begin_inset Formula 
+\begin{align*}
+0 & =(-^{G}\circ\varphi)(0)\\
+ & =(-^{G}\circ\varphi)((e_{i'}\star e_{j'})\star(e_{i}\star e_{j})-(e_{i}\star e_{j})\star(e_{i'}\star e_{j'}))\\
+ & =(-^{G}\circ\varphi)\left((e_{i'}\star e_{j'})\star\left(\sum_{k}c_{i,j}^{k}e_{k}\right)-(e_{i}\star e_{j})\star\left(\sum_{k}c_{i',j'}^{k}e_{k}\right)\right)\\
+ & =\left(x_{i'}x_{j'}\left(\sum_{k}c_{i,j}^{k}x_{k}\right)-x_{i}x_{j}\left(\sum_{k}c_{i',j'}^{k}x_{k}\right)\right)^{G}\\
+ & =\mathrm{S}(f_{i,j},f_{i',j'})^{G}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Conversely, suppose 
+\begin_inset Formula $\mathcal{M}_{I}=\{x_{1},\dots,x_{n}\}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\psi\colon S_{I}\to A$
+\end_inset
+
+ be the unique graded 
+\begin_inset Formula $K$
+\end_inset
+
+-linear map defined by
+\begin_inset Formula 
+\[
+\psi(x_{i})=e_{i}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathcal{M}_{I}=\{x_{1},\dots,x_{n}\}$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\psi$
+\end_inset
+
+ and 
+\begin_inset Formula $-^{G}\circ\varphi$
+\end_inset
+
+ are inverses to each other.
+ Thus for any 
+\begin_inset Formula $1\leq i,j,\leq n$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{align*}
+\psi(x_{i})\star\psi(x_{j}) & =e_{i}\star e_{j}\\
+ & =(\psi\circ-^{G}\circ\varphi)(e_{i}\star e_{j})\\
+ & =(\psi\circ-^{G})(\overline{x_{i}x_{j}})\\
+ & =\psi((x_{i}x_{j})^{G})\\
+ & =\psi(x_{i}\cdot x_{j}).
+\end{align*}
+
+\end_inset
+
+In particular, for all 
+\begin_inset Formula $1\leq i,j,k\leq n$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+e_{i}\star(e_{j}\star e_{k}) & =\psi(x_{i})\star(\psi(x_{j})\star\psi(x_{k}))\\
+ & =\psi(x_{i})\star\psi(x_{j}\cdot x_{k})\\
+ & =\psi(x_{i}\cdot(x_{j}\cdot x_{k}))\\
+ & =\psi((x_{i}\cdot x_{j})\cdot x_{k})\\
+ & =\psi(x_{i}\cdot x_{j})\star\psi(x_{k})\\
+ & =(\psi(x_{i})\star\psi(x_{j}))\star\psi(x_{k})\\
+ & =(e_{i}\star e_{j})\star e_{k}.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $\star$
+\end_inset
+
+ is associative.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Leibniz Law
+\end_layout
+
+\begin_layout Standard
+With the notation as above, let 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ denote the differential on 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Then for each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}(e_{i}) & =\sum_{k=1}^{n}a_{i}^{k}e_{k},
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $a_{i}^{k}\in K$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{i}^{k}=0$
+\end_inset
+
+ if 
+\begin_inset Formula $|e_{k}|\neq|e_{i}|-1$
+\end_inset
+
+.
+ The Leibniz law says that for each 
+\begin_inset Formula $i,j$
+\end_inset
+
+, on the one hand we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}(e_{i}\star e_{j}) & =\mathrm{d}\left(\sum_{k}c_{i,j}^{k}e_{k}\right)\\
+ & =\sum_{k}c_{i,j}^{k}\mathrm{d}(e_{k})\\
+ & =\sum_{k,m}c_{i,j}^{k}a_{k}^{m}e_{m}
+\end{align*}
+
+\end_inset
+
+and on the other hand, we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}(e_{i})\star e_{j}+e_{i}\star\mathrm{d}(e_{j}) & =\left(\sum_{l}a_{i}^{l}e_{l}\right)\star e_{j}+e_{i}\star\left(\sum_{l'}a_{j}^{l'}e_{l'}\right)\\
+ & =\sum_{l}a_{i}^{l}(e_{l}\star e_{j})+\sum_{l'}a_{j}^{l'}(e_{i}\star e_{l'})\\
+ & =\sum_{l,m}(a_{i}^{l}\left(\sum_{m}c_{l,j}^{m}e_{m}\right)+\sum_{l',m}a_{j}^{l'}\left(\sum_{m}c_{i,l'}^{m}e_{m}\right)\\
+ & =\sum_{l,m}(c_{l,j}^{m}a_{i}^{l}+c_{i,l}^{m}a_{j}^{l})e_{m}.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}(e_{i})\star e_{j}+e_{i}\star\mathrm{d}(e_{j}) & =\left(\sum_{k}a_{i}^{k}e_{k}\right)\star e_{j}+e_{i}\star\left(\sum_{k}a_{j}^{k}e_{k}\right)\\
+ & =\sum_{k}a_{i}^{k}(e_{k}\star e_{j})+\sum_{k}a_{j}^{k}(e_{i}\star e_{k})\\
+ & =\sum_{k,m}(a_{i}^{k}c_{k,j}^{m}+a_{j}^{k}c_{i,k}^{m})e_{m}
+\end{align*}
+
+\end_inset
+
+Thus for each 
+\begin_inset Formula $m$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+\sum_{k}c_{i,j}^{k}a_{k}^{m}=\sum_{k}(a_{i}^{k}c_{k,j}^{m}+a_{j}^{k}c_{i,k}^{m})
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sum_{k}c_{i,j}^{k}a_{k}^{m}=\sum_{l}c_{l,j}^{m}a_{i}^{l}+\sum_{l'}c_{i,l'}^{m}a_{j}^{l'}
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $c_{i,j}^{k}a_{k}^{m}\neq0$
+\end_inset
+
+, then we must have
+\begin_inset Formula 
+\begin{align*}
+|e_{i}|+|e_{j}| & =|e_{k}|\\
+|e_{k}|-|e_{m}| & =1
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $c_{l,j}^{m}a_{i}^{l}\neq0$
+\end_inset
+
+, then we must have
+\begin_inset Formula 
+\begin{align*}
+|e_{j}|+|e_{l}| & =|e_{m}|\\
+|e_{i}|-|e_{l}| & =1
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $c_{i,l}^{m}a_{j}^{l}\neq0$
+\end_inset
+
+, then we must have
+\begin_inset Formula 
+\begin{align*}
+|e_{i}|+|e_{l}| & =|e_{m}|\\
+|e_{j}|-|e_{l}| & =1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Observe that 
+\begin_inset Formula $c_{i,j}^{k}a_{k}^{m}\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{k,j}^{m}a_{i}^{k}\neq0$
+\end_inset
+
+ implies 
+\begin_inset Formula $c_{i,k}^{m}a_{j}^{k}=0$
+\end_inset
+
+.
+ Indeed, observe that
+\begin_inset Formula 
+\begin{align*}
+|e_{i}|+|e_{k}| & =|e_{i}|+|e_{j}|-|e_{j}|+|e_{k}|\\
+ & =|e_{k}|-|e_{j}|+|e_{k}|\\
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+|e_{i}|+|e_{k}| & =
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Temp
+\end_layout
+
+\begin_layout Standard
+With the notation as above, let 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ denote the differential on 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Then for each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}(e_{i}) & =\sum_{k=1}^{n}a_{i}^{k}e_{k},
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $a_{i}^{k}\in K$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{i}^{k}=0$
+\end_inset
+
+ if 
+\begin_inset Formula $|e_{k}|\neq|e_{i}|-1$
+\end_inset
+
+.
+ Observe that on the one hand we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}(e_{i}\star e_{j}) & =\mathrm{d}\left(\sum_{k}c_{i,j}^{k}e_{k}\right)\\
+ & =\sum_{k}c_{i,j}^{k}\mathrm{d}(e_{k})\\
+ & =\sum_{k,m}c_{i,j}^{k}a_{k}^{m}e_{m}
+\end{align*}
+
+\end_inset
+
+and on the other hand, we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}(e_{i})\star e_{j}+e_{i}\star\mathrm{d}(e_{j}) & =\left(\sum_{k}a_{i}^{k'}e_{k'}\right)\star e_{j}+e_{i}\star\left(\sum_{k''}a_{j}^{k''}e_{k''}\right)\\
+ & =\sum_{k}a_{i}^{k'}(e_{k'}\star e_{j})+\sum_{k}a_{j}^{k''}(e_{i}\star e_{k''})\\
+ & =\sum_{k',m}a_{i}^{k'}c_{k',j}^{m}e_{m}+\sum_{k'',m}a_{j}^{k''}c_{i,k''}^{m}e_{m}.
+\end{align*}
+
+\end_inset
+
+The Leibniz law says that for each 
+\begin_inset Formula $i,j,m$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+\sum_{k}c_{i,j}^{k}a_{k}^{m}=\sum_{k'}c_{k',j}^{m}a_{i}^{k'}+\sum_{k''}c_{i,k''}^{m}a_{j}^{k''}.
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $c_{i,j}^{k}a_{k}^{m}\neq0$
+\end_inset
+
+, then we must have
+\begin_inset Formula 
+\begin{align*}
+|e_{i}|+|e_{j}| & =|e_{k}|\\
+|e_{k}|-|e_{m}| & =1
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $c_{k',j}^{m}a_{i}^{k'}\neq0$
+\end_inset
+
+, then we must have
+\begin_inset Formula 
+\begin{align*}
+|e_{j}|+|e_{k'}| & =|e_{m}|\\
+|e_{i}|-|e_{k'}| & =1
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $c_{i,k''}^{m}a_{j}^{k''}\neq0$
+\end_inset
+
+, then we must have
+\begin_inset Formula 
+\begin{align*}
+|e_{i}|+|e_{k''}| & =|e_{m}|\\
+|e_{j}|-|e_{k''}| & =1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+DG Ideal Test
+\end_layout
+
+\end_body
+\end_document

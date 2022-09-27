@@ -1,0 +1,133 @@
+<d,c,b2,ab,a2>
+
+
+intvec w=(5,5,5,5,4,4,4,4,4,4,3,3,3,3,2,1,1,1,1);
+ring A=2,(e1,e2,e3,e4,e5
+e12,e34,e45,e13,e23,e14,e24,e15,e25,
+e134,e234,e145,e245,e123,e124,e125,
+e1234,e1245,
+,a,b,c,d),
+Wp(w);
+
+// define multiplication ideal
+
+ideal I = x1^2,x2^2,x3^2,x4^2,
+x12^2,x13^2,x14^2,x23^2,x24^2,x34^2,
+x123^2,x124^2,x134^2,x234^2,
+x1234^2,
+
+x1*x2+a*b*c*d*x12, x1*x3+a*b*c^2*x14+a^2*b*c*x34, x1*x4+a*b*c*d*x14,
+x2*x3+a*b*c*d*x23, x2*x4+a*b*c*d*x24,
+x3*x4+a*b*c*d*x34,
+
+x1*x23+a*b*c*d*x123+a*b^2*c*x134, x1*x24+a*b*c*d*x124,x1*x34,
+x2*x14+a*b*c*d*x124,x2*x34+a*b*c*d*x234,
+x3*x12+a*c*d^2*x123+a*b*c*d*x134,x3*x24+a*b*c*d*x234,x3*x14,
+x4*x14,
+
+x1*x234+a*b*c*d*x1234,x3*x234,x4*x234,x3*x124+a*b*c*d*x1234,
+
+x12*x23
+
+;
+
+ideal M = x1,x2,x3,x4,x12,x13,x14,x23,x24,x34,x123,x124,x134,x234,x1234;
+ideal J = std(I);
+
+// build K
+
+ideal K;
+int n = size(J);
+int i = 1;
+while (i <= n)
+{
+    poly f(i) = J[i];
+    poly m(i) = lead(f(i));
+    if ( NF(m(i),M^2) != 0 )
+        {K = K + f(i);}
+    i = i+1;    
+    continue;
+}
+K;
+
+// build L
+
+ideal L;
+int j = 1;
+while (j <= n)
+{
+    poly r(j) = f(j)-m(j);
+    if ( NF(r(j),M^2) == 0 and r(j) != 0)
+        {L = L + f(j);}
+    j = j+1;    
+    continue;
+}
+L;
+
+---------------------------------------------------------------------------
+
+intvec w=(4,4,4,4,3,3,3,3,3,3,2,2,2,2,1);
+ring A=(2,a,b,c,d),(x1,x2,x3,x4,
+x12,x13,x14,x23,x24,x34,
+x123,x124,x134,x234,
+x1234),Wp(w);
+
+// define multiplication ideal
+
+ideal I = x1^2,x2^2,x3^2,x4^2,
+x12^2,x13^2,x14^2,x23^2,x24^2,x34^2,
+x123^2,x124^2,x134^2,x234^2,
+x1234^2,
+
+x1*x2+a*b*c*d*x12, x1*x3+a*b*c^2*x14+a^2*b*c*x34, x1*x4+a*b*c*d*x14,
+x2*x3+a*b*c*d*x23, x2*x4+a*b*c*d*x24,
+x3*x4+a*b*c*d*x34,
+
+x1*x23+a*b*c*d*x123+a*b^2*c*x134, x1*x24+a*b*c*d*x124,x1*x34,
+x2*x14+a*b*c*d*x124,x2*x34+a*b*c*d*x234,
+x3*x12+a*c*d^2*x123+a*b*c*d*x134,x3*x24+a*b*c*d*x234,x3*x14,
+x4*x14,
+
+x1*x234+a*b*c*d*x1234,x3*x234,x4*x234,x3*x124+a*b*c*d*x1234,
+
+x12*x23
+
+;
+
+
+ideal M = x1,x2,x3,x4,x12,x13,x14,x23,x24,x34,x123,x124,x134,x234,x1234;
+ideal J = std(I);
+
+// build K
+
+ideal K;
+int n = size(J);
+int i = 1;
+while (i <= n)
+{
+    poly f(i) = J[i];
+    poly m(i) = lead(f(i));
+    if ( NF(m(i),M^2) != 0 )
+        {K = K + f(i);}
+    i = i+1;    
+    continue;
+}
+K;
+
+// build L
+
+ideal L;
+int j = 1;
+while (j <= n)
+{
+    poly r(j) = f(j)-m(j);
+    if ( NF(r(j),M^2) == 0 and r(j) != 0)
+        {L = L + f(j);}
+    j = j+1;    
+    continue;
+}
+L;
+
+
+
+

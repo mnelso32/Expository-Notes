@@ -1,0 +1,54 @@
+ring R = 0,(x,y,z),dp;     // polynomial ring (global ordering)
+poly f = y4z3+2x2y2z2+4z4+5y2+1;
+f;                         // display f in a degrevlex-ordered way
+==> y4z3+2x2y2z2+4z4+5y2+1
+
+ring r = 0,(x,y,z),ds;     // local ring (local ordering)
+poly f = fetch(R,f);
+f;                         // terms of f sorted by degree
+==> 1+5y2+4z4+2x2y2z2+y4z3
+
+
+(K[y]_<y>)[x]
+
+int n,m=2,3;
+ring A1 = 0,(x(1..n),y(1..m)),(dp(n),ds(m));
+poly f  = x(1)*x(2)^2+1+y(1)^10+x(1)*y(2)^5+y(3);
+leadmonom(f);
+==> x(1)*x(2)^2
+leadmonom(1+y(1));         // unit
+==> 1
+leadmonom(1+x(1));         // no unit
+==> x(1)
+
+
+// 2)  some ring in between (K[x]_<x>)[y] and K[x,y]_<x>
+//
+ring A2 = 0,(x(1..n),y(1..m)),(ds(n),dp(m));
+leadmonom(1+x(1));       // unit
+==> 1
+leadmonom(1+x(1)*y(1));  // unit
+==> 1
+leadmonom(1+y(1));       // no unit
+==> y(1)
+
+//
+// 3)  K[x,y]_<x>
+//
+ring A4 = (0,y(1..m)),(x(1..n)),ds;
+leadmonom(1+y(1));       // in ground field
+==> 1
+leadmonom(1+x(1)*y(1));  // unit
+==> 1
+leadmonom(1+x(1));       // unit
+==> 1
+
+
+ring A = (0,s,t),(x,y,z),ds;
+ideal I = x-yz,x-s,y-t;
+std(I);
+
+ring A = (0,s,t),(x,y,z),dp;
+ideal I = x-yz,x-s,y-t;
+std(I);
+

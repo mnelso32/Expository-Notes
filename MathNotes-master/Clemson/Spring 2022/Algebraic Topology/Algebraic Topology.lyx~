@@ -1,0 +1,385 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Algebraic Topology
+\end_layout
+
+\begin_layout Section
+Motivation
+\end_layout
+
+\begin_layout Standard
+The general idea in algebraic topology is to take a topological space 
+\begin_inset Formula $X$
+\end_inset
+
+ and assign to an algebraic object 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+We want to prove the following theorems:
+\end_layout
+
+\begin_layout Enumerate
+Brower's fixed point theorem: every continuous map from a disk in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ to itself has a fixed point.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Borsuk-Ulam theorem: suppose 
+\begin_inset Formula $f$
+\end_inset
+
+ is a continuous function from an 
+\begin_inset Formula $n$
+\end_inset
+
+-dimensional sphere to 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ There exists a point 
+\begin_inset Formula $x$
+\end_inset
+
+ on the sphere such that 
+\begin_inset Formula $f(x)=f(-x)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Hedgehog theorem: there does not exist a nowhere vanishing tangent vector
+ field on even-dimensional spheres.
+\end_layout
+
+\begin_layout Standard
+There are some theorems in algebra which have easy proofs from topology:
+\end_layout
+
+\begin_layout Enumerate
+Fundamental theorem of algebra: every positive-degree polynomial with complex
+ coefficients has a complex root.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Nielsen-Schrier theorem: every subgroup of a free group is free.
+\end_layout
+
+\begin_layout Standard
+Obstruction theory: there are numbers called Stiefel-Whitney numbers of
+ a manifold are values in 
+\begin_inset Formula $\mathbb{Z}\slash2\mathbb{Z}$
+\end_inset
+
+ that come from evaluating cohomological elements.
+ Pontryagin proved that if 
+\begin_inset Formula $M$
+\end_inset
+
+ is a boundary of a manifold, then all S-W numbers are zero.
+ Then proved if all S-W numbers vanish for 
+\begin_inset Formula $M$
+\end_inset
+
+, then 
+\begin_inset Formula $M$
+\end_inset
+
+ is a bondary.
+\end_layout
+
+\begin_layout Subsection
+Point-set topology review 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a subspace of a topological space 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Write 
+\begin_inset Formula $\iota\colon A\to X$
+\end_inset
+
+ for the inclusion map.
+ A 
+\series bold
+retraction 
+\series default
+from 
+\begin_inset Formula $X$
+\end_inset
+
+ to 
+\begin_inset Formula $A$
+\end_inset
+
+ is a is a continuous function 
+\begin_inset Formula $r\colon X\to A$
+\end_inset
+
+ such that 
+\begin_inset Formula $r\circ\iota=1_{A}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $A\neq X$
+\end_inset
+
+, then we obviously don't have 
+\begin_inset Formula $\iota\circ r=1_{X}$
+\end_inset
+
+ (they are different maps), but we still might have 
+\begin_inset Formula $\iota\circ r\sim1_{X}$
+\end_inset
+
+.
+ When this happens, we call 
+\begin_inset Formula $A$
+\end_inset
+
+ a 
+\series bold
+dermormation retract 
+\series default
+of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $F\colon X\times I\to X$
+\end_inset
+
+ is a homotopy from 
+\begin_inset Formula $\iota\circ r$
+\end_inset
+
+ to 
+\begin_inset Formula $1_{X}$
+\end_inset
+
+, then we call 
+\begin_inset Formula $F$
+\end_inset
+
+ a 
+\series bold
+deformation retraction
+\series default
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

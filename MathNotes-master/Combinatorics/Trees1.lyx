@@ -1,0 +1,13956 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Trees
+\end_layout
+
+\begin_layout Section
+Basic Definitions
+\end_layout
+
+\begin_layout Subsection
+Trees
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset Formula $\textbf{tree}$
+\end_inset
+
+ is an undirected graph in which any two vertices are connected by exactly
+ one path.
+ It is common to refer to the vertices of a tree as 
+\series bold
+nodes
+\series default
+.
+ This is the convention we will take.
+ If 
+\begin_inset Formula $T$
+\end_inset
+
+ is a tree, then we denote the set of all nodes of 
+\begin_inset Formula $T$
+\end_inset
+
+ as 
+\begin_inset Formula $\text{N}(T)$
+\end_inset
+
+.
+ A 
+\begin_inset Formula $\textbf{rooted tree}$
+\end_inset
+
+ is a tree in which a special vertex is singled out.
+ This singled out vertex is called the 
+\begin_inset Formula $\textbf{root}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a rooted tree.
+ We say 
+\begin_inset Formula $\ell\in\text{N}(T)$
+\end_inset
+
+ is a 
+\begin_inset Formula $\textbf{leaf}$
+\end_inset
+
+ of 
+\begin_inset Formula $T$
+\end_inset
+
+ if 
+\begin_inset Formula $\ell$
+\end_inset
+
+ is not the root and 
+\begin_inset Formula $\deg(\ell)=1$
+\end_inset
+
+.
+ We denote the set of leaves of 
+\begin_inset Formula $T$
+\end_inset
+
+ as 
+\begin_inset Formula $\text{L}(T)$
+\end_inset
+
+.
+ An 
+\series bold
+internal node
+\series default
+ of a rooted tree is a node which isn't a leaf.
+ We say a tree is 
+\series bold
+finite 
+\series default
+if it has finitely many nodes.
+ From here on out, we will assume that all trees discussed in this article
+ are finite.
+\end_layout
+
+\begin_layout Subsubsection
+Height
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a rooted tree and let 
+\begin_inset Formula $v\in\text{N}(T)$
+\end_inset
+
+.
+ The 
+\series bold
+height 
+\series default
+of 
+\begin_inset Formula $v$
+\end_inset
+
+ in 
+\begin_inset Formula $T$
+\end_inset
+
+, denoted 
+\begin_inset Formula $h_{T}(v)$
+\end_inset
+
+, is the number of edges along the unique path between 
+\begin_inset Formula $v$
+\end_inset
+
+ and the root.
+ The 
+\series bold
+height 
+\series default
+of 
+\begin_inset Formula $T$
+\end_inset
+
+, denoted 
+\begin_inset Formula $h_{T}$
+\end_inset
+
+ (or simply 
+\begin_inset Formula $h$
+\end_inset
+
+ if context is clear), is 
+\begin_inset Formula 
+\[
+h:=\max_{\ell\in\text{L}(T)}h_{T}(\ell).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For all 
+\begin_inset Formula $i\in\mathbb{N}$
+\end_inset
+
+, we define
+\begin_inset Formula 
+\[
+\text{N}_{i}(T):=\left\{ v\in\text{N}(T)\mid h_{T}(v)=i\right\} .
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $T$
+\end_inset
+
+ is assumed to be finite, it is clear that 
+\begin_inset Formula $h_{T}$
+\end_inset
+
+ is finite and that 
+\begin_inset Formula $\text{N}_{i}(T)=\emptyset$
+\end_inset
+
+ for all 
+\begin_inset Formula $i>h$
+\end_inset
+
+.
+ Moreover, we claim that 
+\begin_inset Formula $\text{N}_{i}(T)\neq\emptyset$
+\end_inset
+
+ for all 
+\begin_inset Formula $i=0,1,\dots,h$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $\ell$
+\end_inset
+
+ is a leaf of 
+\begin_inset Formula $T$
+\end_inset
+
+ such that 
+\begin_inset Formula $h_{T}(\ell)=h$
+\end_inset
+
+, then there is a unique path 
+\begin_inset Formula $r\to v_{1}\to v_{2}\to\cdots\cdots\to\ell$
+\end_inset
+
+ from 
+\begin_inset Formula $r$
+\end_inset
+
+ to 
+\begin_inset Formula $\ell$
+\end_inset
+
+.
+ Then setting 
+\begin_inset Formula $v_{0}=r$
+\end_inset
+
+ and 
+\begin_inset Formula $v_{h_{T}}=\ell$
+\end_inset
+
+, we see that 
+\begin_inset Formula $v_{i}\in\text{N}_{i}(T)$
+\end_inset
+
+ for all 
+\begin_inset Formula $i=0,1,\dots,h$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Ancestors and Descendants
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a rooted tree and let 
+\begin_inset Formula $v_{1},v_{2}\in\text{N}(T)$
+\end_inset
+
+ such that 
+\begin_inset Formula $h_{T}(v_{2})\geq h_{T}(v_{1})$
+\end_inset
+
+.
+ If the unique path from 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ to 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+ does not contain the root, then we say 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ is an 
+\series bold
+ancestor 
+\series default
+of 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+ is a 
+\series bold
+descedant 
+\series default
+of 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $h_{T}(v_{2})=h_{T}(v_{1})+1$
+\end_inset
+
+, then we say 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ is a 
+\series bold
+parent 
+\series default
+of 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+ is a 
+\series bold
+child 
+\series default
+of 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+.
+ We say a node 
+\begin_inset Formula $v$
+\end_inset
+
+ in 
+\begin_inset Formula $T$
+\end_inset
+
+ is 
+\series bold
+prolific 
+\series default
+if it has more than one child.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Ancestory gives rise to a partial order on the set of nodes of a tree.
+ If 
+\begin_inset Formula $T$
+\end_inset
+
+ is a rooted tree with 
+\begin_inset Formula $v_{1},v_{2}\in\text{N}(T)$
+\end_inset
+
+, then we say 
+\begin_inset Formula $v_{1}\leq v_{2}$
+\end_inset
+
+ if 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ is an ancestor of 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+.
+ The pair 
+\begin_inset Formula $(\text{N}(T),\leq)$
+\end_inset
+
+ forms a partially ordered set.
+ We say a node 
+\begin_inset Formula $v$
+\end_inset
+
+ is the 
+\series bold
+greatest common ancestor
+\series default
+ of 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $v_{2}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $v=\text{gcd}(v_{1},v_{2})$
+\end_inset
+
+, if
+\begin_inset Formula $v\leq v_{1},v_{2}$
+\end_inset
+
+ and for all other nodes 
+\begin_inset Formula $w$
+\end_inset
+
+ such that 
+\begin_inset Formula $w\leq v_{1},v_{2}$
+\end_inset
+
+, we have 
+\begin_inset Formula $w\leq v$
+\end_inset
+
+.
+ Since the root of a tree is an ancestor to all other nodes, a common ancestor
+ always exists.
+ Moreover, a greatest common ancestor always exists since 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+ is well-ordered.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Ordered Trees
+\end_layout
+
+\begin_layout Standard
+An 
+\begin_inset Formula $\textbf{ordered tree}$
+\end_inset
+
+ is a rooted tree in which a total ordering is specified for the children
+ of each vertex.
+ This is sometimes called a 
+\begin_inset Quotes eld
+\end_inset
+
+plane tree
+\begin_inset Quotes erd
+\end_inset
+
+ because an ordering of the children is equivalent to an embedding of the
+ tree in the plane, with the root at the top and the children of each vertex
+ lower than that vertex.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Here is a visual representation of an ordered tree: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (1,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a3) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a4) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a5) at (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a6) at (5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a7) at (6,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a8) at (7,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b1) at (0.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b2) at (2.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b3) at (4.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b4) at (6.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c1) at (1.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c2) at (5.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d1) at (3.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a5) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a6) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a7) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a8) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b4) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Given an ordered tree 
+\begin_inset Formula $T$
+\end_inset
+
+, we get an induced total ordering 
+\begin_inset Formula $\text{L}(T)$
+\end_inset
+
+: Let 
+\begin_inset Formula $\ell,\ell'\in\text{L}(T)$
+\end_inset
+
+, 
+\begin_inset Formula $v=\text{gcd}(\ell,\ell')$
+\end_inset
+
+, and let 
+\begin_inset Formula $\ell\to v_{1}\cdots\to v_{k}\to v$
+\end_inset
+
+ and 
+\begin_inset Formula $\ell'\to v'_{1}\cdots\to v'_{k'}\to v$
+\end_inset
+
+ be the unique paths from 
+\begin_inset Formula $\ell$
+\end_inset
+
+ to 
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $\ell'$
+\end_inset
+
+ to 
+\begin_inset Formula $v$
+\end_inset
+
+ respectively (so 
+\begin_inset Formula $v_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $v'_{k'}$
+\end_inset
+
+ are children of 
+\begin_inset Formula $v$
+\end_inset
+
+).
+ We say 
+\begin_inset Formula $\ell\leq\ell'$
+\end_inset
+
+ if 
+\begin_inset Formula $v_{k}\leq v'_{k'}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $|\text{L}(T)|=n$
+\end_inset
+
+, then often denote the leaves of 
+\begin_inset Formula $T$
+\end_inset
+
+ as 
+\begin_inset Formula $\ell_{1},\dots,\ell_{n}$
+\end_inset
+
+, where it is understood that 
+\begin_inset Formula $\ell_{i}\leq\ell_{j}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq j\leq n$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Permutohedra and Associahedra
+\end_layout
+
+\begin_layout Subsubsection
+The Permutohedron
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+permutohedron 
+\series default
+
+\begin_inset Formula $\mathbf{P}_{n}$
+\end_inset
+
+
+\series bold
+ 
+\series default
+is the 
+\begin_inset Formula $(n-1$
+\end_inset
+
+)-dimensional polytope in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ defined as the convex hull of all vectors obtained from all permutations
+ of the vector 
+\begin_inset Formula $(1,2\dots,n)$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mathbf{P}_{n}:=\mbox{ConvexHull}((\sigma(1),\dots,\sigma(n))\mid\sigma\in S_{n}),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ is the symmetric group.
+ For each 
+\begin_inset Formula $0\leq k\leq n-1$
+\end_inset
+
+, we denote by 
+\begin_inset Formula $\Delta_{k}(\mathbf{P}_{n})$
+\end_inset
+
+ to be the set of 
+\begin_inset Formula $k$
+\end_inset
+
+-cells of 
+\begin_inset Formula $\mathbf{P}_{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+The Associahedron
+\end_layout
+
+\begin_layout Standard
+An 
+\series bold
+associahedron 
+\series default
+
+\begin_inset Formula $K_{n}$
+\end_inset
+
+ is an 
+\begin_inset Formula $(n-2)$
+\end_inset
+
+-dimensional polytope whose 
+\begin_inset Formula $(n-k)$
+\end_inset
+
+-cells correspond to 
+\begin_inset Formula $A$
+\end_inset
+
+-trees on 
+\begin_inset Formula $n$
+\end_inset
+
+ leaves and with 
+\begin_inset Formula $k-1$
+\end_inset
+
+ internal nodes.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Jean-Louis Loday gave a simple formula for realizing the Stasheff polytopes
+ as a convex hull of integer coordinates in Euclidean space (Loday 2004).
+ Let 
+\begin_inset Formula $Y_{n}$
+\end_inset
+
+ denote the set of (rooted planar) binary trees with 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves (and hence 
+\begin_inset Formula $n$
+\end_inset
+
+ internal vertices).
+ For any binary tree 
+\begin_inset Formula $T\in Y_{n}$
+\end_inset
+
+, enumerate the leaves by left-to-right order, denoted 
+\begin_inset Formula $\ell_{1},\dots,\ell_{n+1}$
+\end_inset
+
+ and enumerate the internal vertices as 
+\begin_inset Formula $v_{1},\dots,v_{n}$
+\end_inset
+
+ where 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ is the greatest common ancestor of 
+\begin_inset Formula $\ell_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\ell_{i+1}$
+\end_inset
+
+.
+ Define a vector 
+\begin_inset Formula $M(T)\in\mathbb{R}^{n}$
+\end_inset
+
+ whose 
+\begin_inset Formula $i$
+\end_inset
+
+th coordinate is the product 
+\begin_inset Formula $a_{i}b_{i}$
+\end_inset
+
+ of the number 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ of leaves that are left descendants of 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ and the number 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ of leaves that are right descendants of 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\end_layout
+
+\end_inset
+
+.
+ (Loday).
+ The convex hull of the points 
+\begin_inset Formula $\{M(T)\in\mathbb{R}^{n}\mid T\in Y_{n}\}$
+\end_inset
+
+ is a realization of the Stasheff polytope of dimension 
+\begin_inset Formula $n-1$
+\end_inset
+
+, and is included in the affine hyperplane 
+\begin_inset Formula $\{x_{1},\dots,x_{n}\mid x_{1}+\cdots+x_{n}=n^{2}\}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\begin_inset Formula $P$
+\end_inset
+
+-trees and 
+\begin_inset Formula $A$
+\end_inset
+
+-trees
+\end_layout
+
+\begin_layout Standard
+We now discuss two special trees which we call 
+\begin_inset Formula $P$
+\end_inset
+
+-trees and 
+\begin_inset Formula $A$
+\end_inset
+
+-trees.
+ We will see that there is a bijection between the set of 
+\begin_inset Formula $P$
+\end_inset
+
+-trees on 
+\begin_inset Formula $n$
+\end_inset
+
+ leaves and the set of cells of 
+\begin_inset Formula $\mathbf{P}_{n}$
+\end_inset
+
+.
+ We will also see that there is a bijection between the set of 
+\begin_inset Formula $A$
+\end_inset
+
+-trees on 
+\begin_inset Formula $n$
+\end_inset
+
+ leaves and the set of cells of the associahedron 
+\begin_inset Formula $\mathbf{K}_{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+\begin_inset Formula $P$
+\end_inset
+
+-trees 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be an ordered tree.
+ We say 
+\begin_inset Formula $T$
+\end_inset
+
+ is a 
+\begin_inset Formula $P$
+\end_inset
+
+-
+\series bold
+tree 
+\series default
+if
+\end_layout
+
+\begin_layout Enumerate
+Every leaf of 
+\begin_inset Formula $T$
+\end_inset
+
+ has the same height.
+\end_layout
+
+\begin_layout Enumerate
+For all 
+\begin_inset Formula $i=0,1,\dots,h_{T}-1$
+\end_inset
+
+, there exists at least one prolific node in 
+\begin_inset Formula $\text{N}_{i}(T)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Here we illustrate a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree of height 
+\begin_inset Formula $6$
+\end_inset
+
+ and with 
+\begin_inset Formula $8$
+\end_inset
+
+ leaves, a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree of height 
+\begin_inset Formula $3$
+\end_inset
+
+ and with 
+\begin_inset Formula $9$
+\end_inset
+
+ leaves, and an ordered tree which is not a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}[scale=0.8]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (x1) at (20,1) {}; 
+\backslash
+node[] (x2) at (21,1) {}; 
+\backslash
+node[] (x3) at (22,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (y1) at (20,2) {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (y2) at (21,2) {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (y3) at (22,2) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (z1) at (20.5,3) {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (z2) at (22,3) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (m1) at (21.25,4) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (x1) -- (y1); 
+\backslash
+draw (x2) -- (y2); 
+\backslash
+draw (x3) -- (y3); 
+\backslash
+draw (y1) -- (z1); 
+\backslash
+draw (y2) -- (z1); 
+\backslash
+draw (y3) -- (z2); 
+\backslash
+draw (z1) -- (m1); 
+\backslash
+draw (z2) -- (m1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a1') at (10,1) {}; 
+\backslash
+node[] (a2') at (11,1) {}; 
+\backslash
+node[] (a9') at (11.5,1) {}; 
+\backslash
+node[] (a3') at (12,1) {}; 
+\backslash
+node[] (a4') at (13,1) {}; 
+\backslash
+node[] (a5') at (14,1) {}; 
+\backslash
+node[] (a6') at (15,1) {}; 
+\backslash
+node[] (a7') at (16,1) {}; 
+\backslash
+node[] (a8') at (17,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b1') at (10.5,2)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b5') at (11.5,2)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b2') at (12.5,2)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b3') at (14.5,2)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b4') at (16.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c1') at (11.5,3)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c2') at (15.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d1') at (13.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1') -- (b1'); 
+\backslash
+draw (a2') -- (b1'); 
+\backslash
+draw (a9') -- (b5'); 
+\backslash
+draw (a3') -- (b2'); 
+\backslash
+draw (a4') -- (b2'); 
+\backslash
+draw (a5') -- (b3'); 
+\backslash
+draw (a6') -- (b3'); 
+\backslash
+draw (a7') -- (b4'); 
+\backslash
+draw (a8') -- (b4');
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1') -- (c1'); 
+\backslash
+draw (b5') -- (c1'); 
+\backslash
+draw (b2') -- (c1'); 
+\backslash
+draw (b3') -- (c2'); 
+\backslash
+draw (b4') -- (c2');
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1') -- (d1'); 
+\backslash
+draw (c2') -- (d1');
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (b0) at (0,1) {}; 
+\backslash
+node[] (b1) at (1,1) {}; 
+\backslash
+node[] (b2) at (2,1) {}; 
+\backslash
+node[] (b3) at (3,1) {}; 
+\backslash
+node[] (b4) at (4,1) {}; 
+\backslash
+node[] (b5) at (5,1) {}; 
+\backslash
+node[] (b6) at (6,1) {}; 
+\backslash
+node[] (b7) at (7,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c1) at (0.5,2)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c2) at (2.5,2)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c3) at (4,2)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c4) at (5,2)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c5) at (6,2)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c6) at (7,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d1) at (0.5,3)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d2) at (2.5,3)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d3) at (4,3)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d4) at (5,3)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d5) at (6.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e1) at (0.5,4)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e2) at (2.5,4)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e3) at (4.5,4)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e4) at (6.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f1) at (1.5,5)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f2) at (4.5,5)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f3) at (6.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (g1) at (1.5,6)
+ {}; 
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (g2) at (5.5,6)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (h1) at (3.5,7)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b0) -- (c1); 
+\backslash
+draw (b1) -- (c1); 
+\backslash
+draw (b2) -- (c2); 
+\backslash
+draw (b3) -- (c2); 
+\backslash
+draw (b4) -- (c3); 
+\backslash
+draw (b5) -- (c4); 
+\backslash
+draw (b6) -- (c5); 
+\backslash
+draw (b7) -- (c6);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1); 
+\backslash
+draw (c2) -- (d2); 
+\backslash
+draw (c3) -- (d3); 
+\backslash
+draw (c4) -- (d4); 
+\backslash
+draw (c5) -- (d5); 
+\backslash
+draw (c6) -- (d5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d1) -- (e1); 
+\backslash
+draw (d2) -- (e2); 
+\backslash
+draw (d3) -- (e3); 
+\backslash
+draw (d4) -- (e3); 
+\backslash
+draw (d5) -- (e4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e1) -- (f1); 
+\backslash
+draw (e2) -- (f1); 
+\backslash
+draw (e3) -- (f2); 
+\backslash
+draw (e4) -- (f3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f1) -- (g1); 
+\backslash
+draw (f2) -- (g2); 
+\backslash
+draw (f3) -- (g2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (g1) -- (h1); 
+\backslash
+draw (g2) -- (h1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset Formula $P$
+\end_inset
+
+-Trees and Total Preorders
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a set.
+ A 
+\series bold
+total preorder 
+\series default
+on 
+\begin_inset Formula $X$
+\end_inset
+
+ is a binary relation 
+\begin_inset Formula $\leq$
+\end_inset
+
+ which satisfies the following properties
+\end_layout
+
+\begin_layout Enumerate
+(reflexive) 
+\begin_inset Formula $x\leq x$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+(transitive) If 
+\begin_inset Formula $x\leq y$
+\end_inset
+
+ and 
+\begin_inset Formula $y\leq z$
+\end_inset
+
+, then 
+\begin_inset Formula $x\leq z$
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y,z\in X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+(total) Either 
+\begin_inset Formula $x\leq y$
+\end_inset
+
+ or 
+\begin_inset Formula $y\leq x$
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y\in X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Note that 
+\begin_inset Formula $x\leq y$
+\end_inset
+
+ and 
+\begin_inset Formula $y\leq x$
+\end_inset
+
+ does not imply 
+\begin_inset Formula $x=y$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Given a total preorder 
+\begin_inset Formula $\leq$
+\end_inset
+
+ on 
+\begin_inset Formula $X$
+\end_inset
+
+, we say 
+\begin_inset Formula $x$
+\end_inset
+
+ is a 
+\series bold
+maximal element 
+\series default
+if 
+\begin_inset Formula $y\leq x$
+\end_inset
+
+ for every 
+\begin_inset Formula $y\in X$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ be the set of all maximal elements in 
+\begin_inset Formula $(X,\leq)$
+\end_inset
+
+.
+ Intuitively, these are the elements which 
+\begin_inset Quotes eld
+\end_inset
+
+come in first place
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The total preorder 
+\begin_inset Formula $\leq$
+\end_inset
+
+ on 
+\begin_inset Formula $X$
+\end_inset
+
+ induces a total preorder, which we again denote by 
+\begin_inset Formula $\leq$
+\end_inset
+
+, on 
+\begin_inset Formula $X\backslash X_{1}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $X_{2}$
+\end_inset
+
+ be the set of all maximal elements in 
+\begin_inset Formula $(X\backslash X_{1},\leq)$
+\end_inset
+
+.
+ Intuitively, these are the elements which 
+\begin_inset Quotes eld
+\end_inset
+
+come in second place
+\begin_inset Quotes erd
+\end_inset
+
+.
+ We proceed inductively on 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+ and obtain 
+\begin_inset Formula 
+\[
+X_{k}:=\left\{ \text{maximal elements in }X\backslash\left(\bigcup_{i=1}^{k-1}X_{i}\right)\right\} .
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Intuitively, these are the elements which 
+\begin_inset Quotes eld
+\end_inset
+
+come in 
+\begin_inset Formula $k$
+\end_inset
+
+th place
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now assume 
+\begin_inset Formula $X$
+\end_inset
+
+ is finite.
+ We define the 
+\series bold
+height 
+\series default
+of 
+\begin_inset Formula $(X,\leq)$
+\end_inset
+
+, denoted 
+\begin_inset Formula $h_{(X,\leq)}$
+\end_inset
+
+ (or simply 
+\begin_inset Formula $h$
+\end_inset
+
+ if context is clear), to be the least 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $X_{k}\neq\emptyset$
+\end_inset
+
+.
+ The collection 
+\begin_inset Formula $\{X_{1},\dots,X_{h}\}$
+\end_inset
+
+ forms an ordered set partition of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Conversely, if we are given an ordered set partition 
+\begin_inset Formula $\{X_{1},\dots,X_{h}\}$
+\end_inset
+
+ of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Then there is a unique total preorder 
+\begin_inset Formula $\leq$
+\end_inset
+
+ on 
+\begin_inset Formula $X$
+\end_inset
+
+ such that 
+\begin_inset Formula $X_{k}$
+\end_inset
+
+ is the set of all elements in 
+\begin_inset Formula $(X,\leq)$
+\end_inset
+
+ which 
+\begin_inset Quotes eld
+\end_inset
+
+come in 
+\begin_inset Formula $k$
+\end_inset
+
+th place
+\begin_inset Quotes erd
+\end_inset
+
+, for all 
+\begin_inset Formula $1\leq k\leq h$
+\end_inset
+
+.
+ Thus, we arrive at:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{T}_{X}$
+\end_inset
+
+ be the set of all total preorders on 
+\begin_inset Formula $X$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathcal{S}_{X}$
+\end_inset
+
+ be the set of all ordered set partitions of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Then we have a bijection 
+\begin_inset Formula $\mathcal{T}_{X}\cong\mathcal{S}_{X}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\begin_inset Formula $\leq$
+\end_inset
+
+-consecutive
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $X=\{1,2,\dots,n\}$
+\end_inset
+
+,
+\begin_inset Formula $\leq$
+\end_inset
+
+ be a total preorder on 
+\begin_inset Formula $X$
+\end_inset
+
+, and let 
+\begin_inset Formula $\{X_{1},\dots,X_{h}\}$
+\end_inset
+
+ be the corresponding ordered set partition.
+ For each 
+\begin_inset Formula $k=1,\dots,h$
+\end_inset
+
+, let 
+\begin_inset Formula $\lambda_{k}:=|X_{k}|$
+\end_inset
+
+, and let us list the elements in 
+\begin_inset Formula $X_{k}$
+\end_inset
+
+ in increasing order as 
+\begin_inset Formula $x_{k,1},\dots,x_{k,\lambda_{k}}$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+By increasing order, we mean 
+\begin_inset Formula $x_{k,1}<\cdots<x_{k,\lambda_{k}}$
+\end_inset
+
+ where 
+\begin_inset Formula $<$
+\end_inset
+
+ denotes the usual order on the set 
+\begin_inset Formula $[n]$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For 
+\begin_inset Formula $1\leq i,j\leq\lambda_{k}$
+\end_inset
+
+, we say 
+\begin_inset Formula $x_{k,i}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{k,j}$
+\end_inset
+
+ are 
+\begin_inset Formula $\leq$
+\end_inset
+
+
+\series bold
+-consecutive 
+\series default
+if for all 
+\begin_inset Formula $x\in X$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+x_{k,i}<x<x_{k,j}\text{ implies }x\in\bigcup_{i\in1}^{k-1}X_{i}.
+\]
+
+\end_inset
+
+ Being 
+\begin_inset Formula $\leq$
+\end_inset
+
+-consecutive is easily seen to be an equivalence relation, and therefore
+ we obtain a set partition 
+\begin_inset Formula $\{X_{k,1},\dots,X_{k,\mu_{k}}\}$
+\end_inset
+
+of 
+\begin_inset Formula $X_{k}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{P}_{n}$
+\end_inset
+
+ be the set of all 
+\begin_inset Formula $P$
+\end_inset
+
+-trees with 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves and let 
+\begin_inset Formula $\mathcal{T}_{n}$
+\end_inset
+
+ be the set of all total preorders on the set 
+\begin_inset Formula $X=\{1,2,\dots,n\}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathcal{P}_{n}\cong\mathcal{T}_{n}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree with leaves 
+\begin_inset Formula $\ell_{1},\dots,\ell_{n+1}$
+\end_inset
+
+ and let 
+\begin_inset Formula $v_{i}=\text{gcd}(\ell_{i},\ell_{i+1})$
+\end_inset
+
+ for all 
+\begin_inset Formula $i=1,\dots,n$
+\end_inset
+
+.
+ We define a total preorder 
+\begin_inset Formula $\leq_{_{T}}$
+\end_inset
+
+ on 
+\begin_inset Formula $X$
+\end_inset
+
+ as follows: for all 
+\begin_inset Formula $i,j\in[n]$
+\end_inset
+
+ we say
+\begin_inset Formula 
+\[
+i\leq_{_{T}}j\mbox{ if and only if }h_{T}(v_{i})\leq h_{T}(v_{j}).
+\]
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Conversely, let 
+\begin_inset Formula $\leq$
+\end_inset
+
+ be a total preorder on 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ We construct a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree 
+\begin_inset Formula $T$
+\end_inset
+
+ with 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves from the bottom up as follows: We first want to decompose the first
+ factor 
+\begin_inset Formula $[x_{11}\cdots x_{1\lambda_{1}}]$
+\end_inset
+
+ even further.
+ We can write 
+\begin_inset Formula $[x_{11}\cdots x_{1\lambda_{1}}]=[\langle x_{11}\cdots x_{1t_{1}}\rangle\langle x_{1(t_{1}+1)}\cdots x_{1t_{2}}\rangle\cdots\langle x_{1(t_{r}+1)}\cdots x_{1\lambda_{1}}\rangle]$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $\text{N}_{h}(\leq)=\{\ell_{1},\ell_{2}\dots,\ell_{n+1}\}$
+\end_inset
+
+.
+ Let us show how to construct 
+\begin_inset Formula $\text{N}_{h-1}(\leq)$
+\end_inset
+
+.
+ List the elements in 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ as 
+\begin_inset Formula $x_{1,1},x_{1,2},\dots,x_{1,\lambda_{1}}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\{X_{1,1},$
+\end_inset
+
+We want to partition 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ into its consecutive parts.
+ This means 
+\end_layout
+
+\begin_layout Standard
+denote the leaves of 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+if we have a total preorder on the set 
+\begin_inset Formula $[n]$
+\end_inset
+
+, then we can construct a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves whose gaps 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ are appropriately placed using the total preorder.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves and let 
+\begin_inset Formula $\leq_{_{T}}$
+\end_inset
+
+ be the corresponding total preorder on the set 
+\begin_inset Formula $[n]$
+\end_inset
+
+.
+ Denote 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ to be the number of elements in 
+\begin_inset Formula $[n]$
+\end_inset
+
+ which come in 
+\begin_inset Formula $i$
+\end_inset
+
+th place under 
+\begin_inset Formula $\leq_{_{T}}$
+\end_inset
+
+, and list these elements in increasing order as 
+\begin_inset Formula $a_{i1},\dots,a_{i\lambda_{i}}$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+By increasing order, we mean 
+\begin_inset Formula $a_{11}<\cdots<a_{1\lambda_{1}}$
+\end_inset
+
+ where 
+\begin_inset Formula $<$
+\end_inset
+
+ denotes the usual order on the set 
+\begin_inset Formula $[n]$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,2,\dots,h_{T}$
+\end_inset
+
+.
+ We use the notation 
+\begin_inset Formula $(a_{11}\cdots a_{1\lambda_{1}})(a_{21}\cdots a_{2\lambda_{2}})\cdots(a_{h_{T}1}\cdots a_{h_{T}\lambda_{h_{T}}})$
+\end_inset
+
+ to refer to this total preorder.
+ Let us demonstrate with a few examples: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{P}_{n}$
+\end_inset
+
+ be the set of all 
+\begin_inset Formula $P$
+\end_inset
+
+-trees on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves and let 
+\begin_inset Formula $\mathcal{T}_{n}$
+\end_inset
+
+ be the set of all total preorders on the set 
+\begin_inset Formula $[n]:=\{1,2,\dots,n\}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathcal{P}_{n}\cong\mathcal{T}_{n}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves 
+\begin_inset Formula $\ell_{1},\dots,\ell_{n+1}$
+\end_inset
+
+ and let 
+\begin_inset Formula $g_{i}=\text{gcd}(\ell_{i},\ell_{i+1})$
+\end_inset
+
+.
+ We define a total preorder 
+\begin_inset Formula $\leq_{_{T}}$
+\end_inset
+
+ on 
+\begin_inset Formula $[n]$
+\end_inset
+
+ as follows: for all 
+\begin_inset Formula $i,j\in[n]$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+i\leq_{_{T}}j\mbox{ if and only if }h_{T}(g_{i})\leq h_{T}(g_{j}).
+\]
+
+\end_inset
+
+Conversely, if we have a total preorder on the set 
+\begin_inset Formula $[n]$
+\end_inset
+
+, then we can construct a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves whose gaps 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ are appropriately placed using the total preorder.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree with 
+\begin_inset Formula $n$
+\end_inset
+
+ leaves 
+\begin_inset Formula $\ell_{1},\dots,\ell_{n}$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $i=1,2\dots,n-1$
+\end_inset
+
+, we define the 
+\begin_inset Formula $i$
+\end_inset
+
+'th 
+\series bold
+gap 
+\series default
+
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ of 
+\begin_inset Formula $T$
+\end_inset
+
+ to be
+\begin_inset Formula 
+\[
+g_{i}:=\{\ell_{i},\ell_{i+1}\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+height 
+\series default
+of a gap 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ in 
+\begin_inset Formula $T$
+\end_inset
+
+ is the height of the greatest common ancestor of 
+\begin_inset Formula $\ell_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\ell_{i+1}$
+\end_inset
+
+ in 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ We denote the height of a gap 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ in 
+\begin_inset Formula $T$
+\end_inset
+
+ as 
+\begin_inset Formula $h_{T}(g_{i})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves and let 
+\begin_inset Formula $\leq_{_{T}}$
+\end_inset
+
+ be the corresponding total preorder on the set 
+\begin_inset Formula $[n]$
+\end_inset
+
+.
+ Denote 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ to be the number of elements in 
+\begin_inset Formula $[n]$
+\end_inset
+
+ which come in 
+\begin_inset Formula $i$
+\end_inset
+
+th place under 
+\begin_inset Formula $\leq_{_{T}}$
+\end_inset
+
+, and list these elements in increasing order as 
+\begin_inset Formula $a_{i1},\dots,a_{i\lambda_{i}}$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+By increasing order, we mean 
+\begin_inset Formula $a_{11}<\cdots<a_{1\lambda_{1}}$
+\end_inset
+
+ where 
+\begin_inset Formula $<$
+\end_inset
+
+ denotes the usual order on the set 
+\begin_inset Formula $[n]$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,2,\dots,h_{T}$
+\end_inset
+
+.
+ We use the notation 
+\begin_inset Formula $(a_{11}\cdots a_{1\lambda_{1}})(a_{21}\cdots a_{2\lambda_{2}})\cdots(a_{h_{T}1}\cdots a_{h_{T}\lambda_{h_{T}}})$
+\end_inset
+
+ to refer to this total preorder.
+ Let us demonstrate with a few examples: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ The non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $8$
+\end_inset
+
+ leaves below corresponds to the total preorder given by 
+\begin_inset Formula $(1357)(26)(5)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (1,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a3) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a4) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a5) at (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a6) at (5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a7) at (6,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a8) at (7,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b1) at (0.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b2) at (2.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b3) at (4.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b4) at (6.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c1) at (1.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c2) at (5.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d1) at (3.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a5) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a6) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a7) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a8) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b4) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+The non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $9$
+\end_inset
+
+ leaves below corresponds to the total preorder given by 
+\begin_inset Formula $(1468)(237)(5)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (1,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a9) at (1.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a3) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a4) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a5) at (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a6) at (5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a7) at (6,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a8) at (7,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b1) at (0.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b5) at (1.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b2) at (2.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b3) at (4.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b4) at (6.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c1) at (1.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c2) at (5.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d1) at (3.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a9) -- (b5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a5) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a6) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a7) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a8) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b5) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b4) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ The non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $8$
+\end_inset
+
+ leaves below corresponds to the total preorder given by 
+\begin_inset Formula $(1)(3)(7)(5)(2)(6)(4)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (1,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a3) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a4) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a5) at (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a6) at (5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a7) at (6,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a8) at (7,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b1) at (0.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b2) at (2,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b3) at (3,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b4) at (4,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b5) at (5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b6) at (6,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b7) at (7,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c1) at (0.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c2) at (2.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c3) at (4,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c4) at (5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c5) at (6,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c6) at (7,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d1) at (0.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d2) at (2.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d3) at (4,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d4) at (5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d5) at (6.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e1) at (0.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e2) at (2.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e3) at (4.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e4) at (6.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f1) at (1.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f2) at (4.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f3) at (6.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (g1) at (1.5,6)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (g2) at (5.5,6)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (h1) at (3.5,7)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a5) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a6) -- (b5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a7) -- (b6);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a8) -- (b7);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b4) -- (c3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b5) -- (c4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b6) -- (c5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b7) -- (c6);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c3) -- (d3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c4) -- (d4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c5) -- (d5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c6) -- (d5);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d1) -- (e1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d2) -- (e2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d3) -- (e3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d4) -- (e3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d5) -- (e4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e1) -- (f1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e2) -- (f1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e3) -- (f2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e4) -- (f3);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f1) -- (g1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f2) -- (g2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f3) -- (g2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (g1) -- (h1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (g2) -- (h1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ The non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $8$
+\end_inset
+
+ leaves below corresponds to the total preorder given by 
+\begin_inset Formula $(13)(7)(5)(2)(6)(4)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (b0) at (0,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (b1) at (1,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (b2) at (2,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (b3) at (3,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (b4) at (4,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (b5) at (5,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (b6) at (6,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (b7) at (7,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c1) at (0.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c2) at (2.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c3) at (4,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c4) at (5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c5) at (6,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c6) at (7,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d1) at (0.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d2) at (2.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d3) at (4,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d4) at (5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d5) at (6.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e1) at (0.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e2) at (2.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e3) at (4.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e4) at (6.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f1) at (1.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f2) at (4.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f3) at (6.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (g1) at (1.5,6)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (g2) at (5.5,6)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (h1) at (3.5,7)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b0) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b4) -- (c3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b5) -- (c4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b6) -- (c5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b7) -- (c6);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c3) -- (d3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c4) -- (d4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c5) -- (d5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c6) -- (d5);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d1) -- (e1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d2) -- (e2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d3) -- (e3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d4) -- (e3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d5) -- (e4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e1) -- (f1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e2) -- (f1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e3) -- (f2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e4) -- (f3);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f1) -- (g1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f2) -- (g2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f3) -- (g2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (g1) -- (h1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (g2) -- (h1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ The non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $8$
+\end_inset
+
+ leaves below corresponds to the total preorder given by 
+\begin_inset Formula $(3)(1)(7)(5)(2)(6)(4)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (1,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a3) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a4) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a5) at (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a6) at (5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a7) at (6,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a8) at (7,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b1) at (0,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b2) at (1,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b3) at (2.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b4) at (4,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b5) at (5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b6) at (6,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b7) at (7,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c1) at (0.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c2) at (2.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c3) at (4,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c4) at (5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c5) at (6,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c6) at (7,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d1) at (0.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d2) at (2.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d3) at (4,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d4) at (5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d5) at (6.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e1) at (0.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e2) at (2.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e3) at (4.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e4) at (6.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f1) at (1.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f2) at (4.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f3) at (6.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (g1) at (1.5,6)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (g2) at (5.5,6)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (h1) at (3.5,7)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a5) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a6) -- (b5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a7) -- (b6);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a8) -- (b7);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b4) -- (c3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b5) -- (c4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b6) -- (c5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b7) -- (c6);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c3) -- (d3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c4) -- (d4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c5) -- (d5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c6) -- (d5);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d1) -- (e1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d2) -- (e2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d3) -- (e3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d4) -- (e3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d5) -- (e4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e1) -- (f1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e2) -- (f1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e3) -- (f2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e4) -- (f3);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f1) -- (g1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f2) -- (g2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f3) -- (g2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (g1) -- (h1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (g2) -- (h1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves and let 
+\begin_inset Formula $(a_{11}\cdots a_{1\lambda_{1}})(a_{21}\cdots a_{2\lambda_{2}})\cdots(a_{h_{T}1}\cdots a_{h_{T}\lambda_{h_{T}}})$
+\end_inset
+
+ be its corresponding total preorder on 
+\begin_inset Formula $[n]$
+\end_inset
+
+.
+ Fix 
+\begin_inset Formula $i\in\{1,\dots,h_{T}\}$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $j\in\{1,\dots,\lambda_{i}\}$
+\end_inset
+
+, we say 
+\begin_inset Formula $a_{ij}$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{i(j+1)}$
+\end_inset
+
+ are 
+\begin_inset Formula $T$
+\end_inset
+
+-
+\series bold
+consecutive 
+\series default
+if for every 
+\begin_inset Formula $a_{rs}$
+\end_inset
+
+ where 
+\begin_inset Formula $i<r\leq h_{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $1\leq s\leq\lambda_{r}$
+\end_inset
+
+, either 
+\begin_inset Formula $a_{rs}<a_{ij}$
+\end_inset
+
+ or 
+\begin_inset Formula $a_{i(j+1)}<a_{rs}$
+\end_inset
+
+.
+ We denote 
+\begin_inset Formula $[a_{ij}a_{i(j+1)}\cdots a_{i(j+m)}]$
+\end_inset
+
+ to mean 
+\begin_inset Formula $a_{i(j+k)}$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{i(j+k+1)}$
+\end_inset
+
+ are 
+\begin_inset Formula $T$
+\end_inset
+
+-consecutive for every 
+\begin_inset Formula $0\leq k<m\leq\lambda_{i}$
+\end_inset
+
+, and we call it a 
+\begin_inset Formula $T$
+\end_inset
+
+-
+\series bold
+consecutive sequence
+\series default
+ 
+\series bold
+of
+\series default
+ 
+\series bold
+length 
+\begin_inset Formula $m$
+\end_inset
+
+
+\series default
+.
+ By counting 
+\begin_inset Formula $T$
+\end_inset
+
+-consecutive sequences and their corresponding lengths, we obtain a complete
+ picture of the branching nodes at height 
+\begin_inset Formula $h_{T}-i$
+\end_inset
+
+.
+ Maximal 
+\begin_inset Formula $T$
+\end_inset
+
+-consecutive sequences give rise to a partition of the set 
+\begin_inset Formula $(a_{i1}\cdots a_{i\lambda_{i}})$
+\end_inset
+
+ as follows: Write 
+\begin_inset Formula 
+\[
+(a_{i1}\cdots a_{i\lambda_{i}})=([a_{i1}\cdots a_{im_{1}}][a_{i(m_{1}+1)}\cdots a_{im_{2}}]\cdots[a_{i(m_{i}+1)}\cdots a_{i\lambda_{i}}]),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $1\leq m_{1}\leq m_{2}\cdots\leq m_{i}\leq\lambda_{i}$
+\end_inset
+
+, and 
+\begin_inset Formula $a_{im_{k}}$
+\end_inset
+
+ is not 
+\begin_inset Formula $T$
+\end_inset
+
+-consecutive to 
+\begin_inset Formula $a_{im_{k+1}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq k\leq i$
+\end_inset
+
+.
+ This tells us that there are 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+ branching nodes at height 
+\begin_inset Formula $h_{T}-i$
+\end_inset
+
+.
+ Writing the nodes from left to right as 
+\begin_inset Formula $n_{1},\dots,n_{m_{i}}$
+\end_inset
+
+, the corresponding number of children for each node is then 
+\begin_inset Formula $m_{1}+1,\dots,m_{i}+1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be the non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $17$
+\end_inset
+
+ leaves whose corresponding total preorder is given by 
+\begin_inset Formula $(3\,5\,6\,8\,10\,12\,14)(1\,2\,4\,7\,11\,15\,16)(9\,13)$
+\end_inset
+
+.
+ Let's decompose this into its 
+\begin_inset Formula $T$
+\end_inset
+
+-consecutive parts:
+\begin_inset Formula 
+\[
+(3\,5\,6\,8\,10\,12\,14)(1\,2\,4\,7\,11\,15\,16)(9\,13)=([3][5\,6][8][10][12][14])([1\,2\,4\,7][11][15\,16])([9\,13])
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At height 
+\begin_inset Formula $2$
+\end_inset
+
+, there are 
+\begin_inset Formula $6$
+\end_inset
+
+ branching nodes, and the number of children associated to each branching
+ node from left to right is 
+\begin_inset Formula $2,3,2,2,2,2$
+\end_inset
+
+.
+ At height 
+\begin_inset Formula $1$
+\end_inset
+
+, there are 
+\begin_inset Formula $3$
+\end_inset
+
+ branching nodes, and the number of children associated to each branching
+ from left to right is 
+\begin_inset Formula $5,2,3$
+\end_inset
+
+.
+ At height 
+\begin_inset Formula $0$
+\end_inset
+
+, there is only one branching node, i.e.
+ the root, and it has 
+\begin_inset Formula $3$
+\end_inset
+
+ children: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (1,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a3) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a4) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a5) at (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a6) at (5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a7) at (6,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a8) at (7,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a9) at (8,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a10) at (9,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a11) at (10,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a12) at (11,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a13) at (12,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a14) at (13,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a15) at (14,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a16) at (15,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a17) at (16,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b1) at (0,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b2) at (1,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b3) at (2.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b4) at (5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b5) at (7.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b6) at (9.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b7) at (11.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b8) at (13.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b9) at (15,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b10) at (16,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c1) at (3,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c2) at (10.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c3) at (15,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d1) at (8,6)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a5) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a6) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a7) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a8) -- (b5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a9) -- (b5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a10) -- (b6);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a11) -- (b6);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a12) -- (b7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a13) -- (b7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a14) -- (b8);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a15) -- (b8);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a16) -- (b9);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a17) -- (b10);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b4) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b5) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b6) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b7) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b8) -- (c3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b9) -- (c3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b10) -- (c3);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c3) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\begin_inset Formula $P$
+\end_inset
+
+-tree polynomial
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ be the set of all 
+\begin_inset Formula $P$
+\end_inset
+
+-trees.
+ Define a map 
+\begin_inset Formula $\varphi:\mathcal{P}\to\mathbb{Z}[x]$
+\end_inset
+
+, denoted 
+\begin_inset Formula $T\mapsto\varphi_{T}(x)$
+\end_inset
+
+, as follows: given a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree 
+\begin_inset Formula $T$
+\end_inset
+
+ on 
+\begin_inset Formula $n$
+\end_inset
+
+-leaves 
+\begin_inset Formula $\ell_{1},\dots,\ell_{n}$
+\end_inset
+
+, assign the value 
+\begin_inset Formula $1$
+\end_inset
+
+ to 
+\begin_inset Formula $\ell_{i}$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ If a node has two or more children, then assign to it the sum of the values
+ assigned to each child.
+ If a node has only one child, then assign to it the value of its child
+ multiplied by 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ If we do this to each node in 
+\begin_inset Formula $T$
+\end_inset
+
+, we will get a polynomial assigned to the root.
+ We set 
+\begin_inset Formula $\varphi_{T}(x)$
+\end_inset
+
+ to be this polynomial.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be the 
+\begin_inset Formula $P$
+\end_inset
+
+-tree corresponding to 
+\begin_inset Formula $(3)(1)(7)(5)(2)(6)(4)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi_{T}(x)=8x^{4}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a2) at (1,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a3) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a4) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a5) at (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a6) at (5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a7) at (6,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a8) at (7,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x$}, inner sep=6.5pt] (b1) at (0,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x$}, inner sep=6.5pt] (b2) at (1,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2$}, inner sep=6.5pt] (b3) at (2.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x$}, inner sep=6.5pt] (b4) at (4,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x$}, inner sep=6.5pt] (b5) at (5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x$}, inner sep=6.5pt] (b6) at (6,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x$}, inner sep=6.5pt] (b7) at (7,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2x$}, inner sep=6.5pt] (c1) at (0.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2x$}, inner sep=6.5pt] (c2) at (2.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x^2 $}, inner sep=6.5pt] (c3) at (4,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x^2 $}, inner sep=6.5pt] (c4) at (5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x^2 $}, inner sep=6.5pt] (c5) at (6,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x^2 $}, inner sep=6.5pt] (c6) at (7,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2x^2 $}, inner sep=6.5pt] (d1) at (0.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2x^2 $}, inner sep=6.5pt] (d2) at (2.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x^3 $}, inner sep=6.5pt] (d3) at (4,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x^3 $}, inner sep=6.5pt] (d4) at (5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2x^2 $}, inner sep=6.5pt] (d5) at (6.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2x^3 $}, inner sep=6.5pt] (e1) at (0.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2x^3 $}, inner sep=6.5pt] (e2) at (2.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2x^3 $}, inner sep=6.5pt] (e3) at (4.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2x^3 $}, inner sep=6.5pt] (e4) at (6.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$4x^3 $}, inner sep=6.5pt] (f1) at (1.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2x^4 $}, inner sep=6.5pt] (f2) at (4.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2x^4 $}, inner sep=6.5pt] (f3) at (6.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$4x^4 $}, inner sep=7pt] (g1) at (1.5,6)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$4x^4 $}, inner sep=7pt] (g2) at (5.5,6)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$8x^4 $}, inner sep=6.5pt] (h1) at
+ (3.5,7) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a5) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a6) -- (b5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a7) -- (b6);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a8) -- (b7);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b4) -- (c3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b5) -- (c4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b6) -- (c5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b7) -- (c6);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c3) -- (d3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c4) -- (d4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c5) -- (d5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c6) -- (d5);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d1) -- (e1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d2) -- (e2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d3) -- (e3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d4) -- (e3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d5) -- (e4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e1) -- (f1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e2) -- (f1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e3) -- (f2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e4) -- (f3);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f1) -- (g1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f2) -- (g2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f3) -- (g2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (g1) -- (h1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (g2) -- (h1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be the 
+\begin_inset Formula $P$
+\end_inset
+
+-tree corresponding to 
+\begin_inset Formula $(1468)(237)(5)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi_{T}(x)=8+x$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a2) at (1,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a9) at (1.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a3) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a4) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a5) at (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a6) at (5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a7) at (6,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$1$}] (a8) at (7,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2$}, inner sep=6.5pt] (b1) at (0.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$x$}, inner sep=6.5pt] (b5) at (1.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2$}, inner sep=6.5pt] (b2) at (2.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2$}, inner sep=6.5pt] (b3) at (4.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$2$}, inner sep=6.5pt] (b4) at (6.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.52cm]90:$4+x$}, inner sep=6.5pt] (c1) at (1.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.52cm]90:$4$}, inner sep=6.5pt] (c2) at (5.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$8+x$}, inner sep=6.5pt] (d1) at (3.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a9) -- (b5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a5) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a6) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a7) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a8) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b5) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b4) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree with root 
+\begin_inset Formula $r$
+\end_inset
+
+ and let 
+\begin_inset Formula $v_{1},\dots,v_{k}$
+\end_inset
+
+ be the children of 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $T_{1},\dots,T_{k}$
+\end_inset
+
+ be the subtrees of 
+\begin_inset Formula $T$
+\end_inset
+
+ such that 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ is the root of 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,2\dots,k$
+\end_inset
+
+.
+ It is not necessarily true that the 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+ are 
+\begin_inset Formula $P$
+\end_inset
+
+-trees; there may be degenerate levels, but it turns out that we can always
+ move the degenerate levels to the bottom.
+ This is because for all 
+\begin_inset Formula $f,g\in\mathbb{Z}[x]$
+\end_inset
+
+, we have 
+\begin_inset Formula $x(f+g)=xf+xg$
+\end_inset
+
+.
+ We can visualize this identity in terms of trees:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$f$}] (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$g$}] (a2) at (1,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$f$}] (a3) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$g$}] (a4) at (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$f + g$}, inner sep=7pt] (b1) at (0.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$xf$}, inner sep=7pt] (b2) at (3,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$xg$}, inner sep=7pt] (b3) at (4,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.52cm]90:$x(f+g)$}, inner sep=6.5pt] (c1) at
+ (0.5,2) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.52cm]90:$xf+ xg$}, inner sep=6.5pt] (c2) at
+ (3.5,2) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={$=$}] (a) at (2,0.6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So each tree 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+ can be thought of as a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree 
+\begin_inset Formula $\tilde{T}_{i}$
+\end_inset
+
+ with some degenerate levels attached to the bottom.
+ With this in mind, we arrive at the following identity:
+\begin_inset Formula 
+\begin{equation}
+\varphi_{T}(x)=\sum_{i=1}^{k}\varphi_{\tilde{T}_{i}}(x)x^{h_{T}-h_{\tilde{T}_{i}}-1}.\label{eq:ptreepolynomial}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:ptreepolynomial})
+\end_layout
+
+\end_inset
+
+, we can prove many things about 
+\begin_inset Formula $P$
+\end_inset
+
+-trees using induction on the height of the root.
+ For instance, 
+\end_layout
+
+\begin_layout Subsubsection
+k-ary trees
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree.
+ We say 
+\begin_inset Formula $T$
+\end_inset
+
+ is 
+\begin_inset Formula $(1,k)$
+\end_inset
+
+-
+\series bold
+ary 
+\series default
+if every node which isn't a leaf has either 
+\begin_inset Formula $k$
+\end_inset
+
+ children or 
+\begin_inset Formula $1$
+\end_inset
+
+ child.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Here's a 
+\begin_inset Formula $(1,3)$
+\end_inset
+
+-ary 
+\begin_inset Formula $P$
+\end_inset
+
+-tree:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (1,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a3) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a4) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a5) at (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a6) at (5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a7) at (6,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a8) at (7,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a9) at (8,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b1) at (1,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b2) at (3,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b3) at (4,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b4) at (5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b5) at (6,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b6) at (7,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b7) at (8,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c1) at (1,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c2) at (4,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c3) at (7,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d1) at (4,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a5) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a6) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a7) -- (b5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a8) -- (b6);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a9) -- (b7);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b4) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b5) -- (c3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b6) -- (c3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b7) -- (c3);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c3) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{karytree}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a 
+\begin_inset Formula $(1,k)$
+\end_inset
+
+-ary 
+\begin_inset Formula $P$
+\end_inset
+
+-tree.
+ Then 
+\begin_inset Formula $\varphi_{T}(k)=k^{h_{T}}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We prove this by induction on the height of a 
+\begin_inset Formula $(1,k)$
+\end_inset
+
+-ary 
+\begin_inset Formula $P$
+\end_inset
+
+-tree.
+ Suppose 
+\begin_inset Formula $T$
+\end_inset
+
+ is a 
+\begin_inset Formula $(1,k)$
+\end_inset
+
+-ary 
+\begin_inset Formula $P$
+\end_inset
+
+-tree with 
+\begin_inset Formula $h_{T}=1$
+\end_inset
+
+.
+ Then the root of 
+\begin_inset Formula $T$
+\end_inset
+
+ either has one child or 
+\begin_inset Formula $k$
+\end_inset
+
+ children.
+ If the root has one child, then 
+\begin_inset Formula $\varphi_{T}(x)=x$
+\end_inset
+
+.
+ Therefore, 
+\begin_inset Formula $\varphi_{T}(k)=k$
+\end_inset
+
+.
+ If the root has 
+\begin_inset Formula $k$
+\end_inset
+
+ children, then 
+\begin_inset Formula $\varphi_{T}(x)=k$
+\end_inset
+
+.
+ Therefore the base case is true.
+ Now assume for all 
+\begin_inset Formula $(1,k)$
+\end_inset
+
+-ary 
+\begin_inset Formula $P$
+\end_inset
+
+-trees 
+\begin_inset Formula $T$
+\end_inset
+
+ with 
+\begin_inset Formula $h_{T}\leq n$
+\end_inset
+
+, we have 
+\begin_inset Formula $\varphi_{T}(k)=k^{h_{T}}$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $T$
+\end_inset
+
+ is a 
+\begin_inset Formula $(1,k)$
+\end_inset
+
+-ary tree with 
+\begin_inset Formula $h_{T}=n+1$
+\end_inset
+
+ and denote the root of 
+\begin_inset Formula $T$
+\end_inset
+
+ as 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 1
+\series default
+: Suppose 
+\begin_inset Formula $r$
+\end_inset
+
+ has one child.
+ Denote the child of 
+\begin_inset Formula $r$
+\end_inset
+
+ as 
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $\tilde{T}$
+\end_inset
+
+ as the subtree of 
+\begin_inset Formula $T$
+\end_inset
+
+ whose root is 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\tilde{T}$
+\end_inset
+
+ has height 
+\begin_inset Formula $n$
+\end_inset
+
+ and 
+\begin_inset Formula $\varphi_{T}=x\varphi_{\tilde{T}}$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\begin{align*}
+\varphi_{T}(k) & =k\varphi_{\tilde{T}}(k)\\
+ & =k\cdot k^{n}\\
+ & =k^{n+1}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 2
+\series default
+: Suppose 
+\begin_inset Formula $r$
+\end_inset
+
+ has 
+\begin_inset Formula $k$
+\end_inset
+
+ children.
+ Denote 
+\begin_inset Formula $v_{1},\dots,v_{k}$
+\end_inset
+
+ the children of 
+\begin_inset Formula $r$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{1},\dots,T_{k}$
+\end_inset
+
+ the subtrees of 
+\begin_inset Formula $T$
+\end_inset
+
+ such that the root of 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+ is 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq k$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+ has height 
+\begin_inset Formula $n$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq k$
+\end_inset
+
+ and 
+\begin_inset Formula $\varphi_{T}=\varphi_{T_{1}}+\cdots+\varphi_{T_{k}}$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\begin{align*}
+\varphi_{T}(k) & =\varphi_{T_{1}}(k)+\cdots+\varphi_{T_{k}}(k)\\
+ & =k^{n}+\cdots+k^{n}\\
+ & =k\cdot k^{n}\\
+ & =k^{n+1}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ Intuitively, when we set 
+\begin_inset Formula $x=k$
+\end_inset
+
+, we are 
+\begin_inset Quotes eld
+\end_inset
+
+splitting
+\begin_inset Quotes erd
+\end_inset
+
+ the stretching nodes into branching nodes with 
+\begin_inset Formula $k$
+\end_inset
+
+ children: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node (a2) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node (a3) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node (a4) at (5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b1) at (0,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b2) at (3.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={$ 
+\backslash
+to $}] (x) at (1.2,0.2) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={$ 
+\backslash
+cdots $}] (y) at (3.7,0.1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree.
+ The coefficient 
+\begin_inset Formula $c_{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $x^{m}$
+\end_inset
+
+ in 
+\begin_inset Formula $\varphi_{T}$
+\end_inset
+
+ counts the number of root-to-leaf paths which pass through 
+\begin_inset Formula $m$
+\end_inset
+
+ nodes with one child.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We prove this by induction on the height of a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree.
+ Suppose 
+\begin_inset Formula $T$
+\end_inset
+
+ is a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree with 
+\begin_inset Formula $h_{T}=1$
+\end_inset
+
+.
+ Then the root of 
+\begin_inset Formula $T$
+\end_inset
+
+ either has one child or 
+\begin_inset Formula $k$
+\end_inset
+
+ children where 
+\begin_inset Formula $k\geq1$
+\end_inset
+
+.
+ If the root has one child, then 
+\begin_inset Formula $\varphi_{T}(x)=x$
+\end_inset
+
+.
+ There is only one root-to-leaf path.
+ This path passes through exactly one node with one child, namely the root
+ itself.
+ If the root has 
+\begin_inset Formula $k$
+\end_inset
+
+ children where 
+\begin_inset Formula $k\geq1$
+\end_inset
+
+, then 
+\begin_inset Formula $\varphi_{T}(x)=k$
+\end_inset
+
+.
+ There are 
+\begin_inset Formula $k$
+\end_inset
+
+ root-to-leaf paths, all of them pass through zero nodes with one child.
+ Therefore the base case is true.
+ Now assume the statement in the theorem is true for all 
+\begin_inset Formula $P$
+\end_inset
+
+ trees 
+\begin_inset Formula $T$
+\end_inset
+
+ with 
+\begin_inset Formula $h_{T}\leq n$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $T$
+\end_inset
+
+ is a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree with 
+\begin_inset Formula $h_{T}=n+1$
+\end_inset
+
+ and denote the root of 
+\begin_inset Formula $T$
+\end_inset
+
+ as 
+\begin_inset Formula $r$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 1
+\series default
+: Suppose 
+\begin_inset Formula $r$
+\end_inset
+
+ has one child.
+ Denote the child of 
+\begin_inset Formula $r$
+\end_inset
+
+ as 
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $\tilde{T}$
+\end_inset
+
+ as the subtree of 
+\begin_inset Formula $T$
+\end_inset
+
+ whose root is 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\tilde{T}$
+\end_inset
+
+ has height 
+\begin_inset Formula $n$
+\end_inset
+
+ and 
+\begin_inset Formula $\varphi_{T}=x\varphi_{\tilde{T}}$
+\end_inset
+
+.
+ Writing the coefficient of 
+\begin_inset Formula $x^{m}$
+\end_inset
+
+ in 
+\begin_inset Formula $\varphi_{\tilde{T}}$
+\end_inset
+
+ as 
+\begin_inset Formula $\tilde{c}_{m}$
+\end_inset
+
+, then 
+\begin_inset Formula $c_{m}=\tilde{c}_{m-1}$
+\end_inset
+
+.
+ The number of root-to-leaf paths in 
+\begin_inset Formula $T$
+\end_inset
+
+ which pass through 
+\begin_inset Formula $m$
+\end_inset
+
+ nodes with one child is the same as the number of root-to-leaf paths in
+ 
+\begin_inset Formula $\tilde{T}$
+\end_inset
+
+ which pass through 
+\begin_inset Formula $m-1$
+\end_inset
+
+ nodes with one child, since the root of 
+\begin_inset Formula $T$
+\end_inset
+
+ adds an extra node with one child to every root-to-leaf path in 
+\begin_inset Formula $\tilde{T}$
+\end_inset
+
+.
+ Therefore the statement is true in this case.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 2
+\series default
+: Suppose 
+\begin_inset Formula $r$
+\end_inset
+
+ has 
+\begin_inset Formula $k$
+\end_inset
+
+ children.
+ Denote 
+\begin_inset Formula $v_{1},\dots,v_{k}$
+\end_inset
+
+ the children of 
+\begin_inset Formula $r$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{1},\dots,T_{k}$
+\end_inset
+
+ the subtrees of 
+\begin_inset Formula $T$
+\end_inset
+
+ such that the root of 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+ is 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq k$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+ has height 
+\begin_inset Formula $n$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq k$
+\end_inset
+
+ and 
+\begin_inset Formula $\varphi_{T}=\varphi_{T_{1}}+\cdots+\varphi_{T_{k}}$
+\end_inset
+
+.
+ Writing the coefficient of 
+\begin_inset Formula $x^{m}$
+\end_inset
+
+ in 
+\begin_inset Formula $\varphi_{T_{i}}$
+\end_inset
+
+ as 
+\begin_inset Formula $c_{m,i}$
+\end_inset
+
+, then 
+\begin_inset Formula $c_{m}=c_{m,1}+\cdots+c_{m,k}$
+\end_inset
+
+.
+ The number of root-to-leaf paths in 
+\begin_inset Formula $T$
+\end_inset
+
+ which pass through 
+\begin_inset Formula $m$
+\end_inset
+
+ nodes with one child is the same as the number of root-to-leaf paths in
+ 
+\begin_inset Formula $T_{1}$
+\end_inset
+
+ which pass through 
+\begin_inset Formula $m$
+\end_inset
+
+ nodes with one child, plus the number of root-to-leaf paths in 
+\begin_inset Formula $T_{2}$
+\end_inset
+
+ which pass through 
+\begin_inset Formula $m$
+\end_inset
+
+ nodes with one child, etc..., since the root of 
+\begin_inset Formula $T$
+\end_inset
+
+ does not add an extra node with one child to any root-to-leaf path in 
+\begin_inset Formula $T_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq i\leq k$
+\end_inset
+
+.
+ Therefore the statement is true in this case too.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Symmetric Group Action
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The correspondence between total preorders and 
+\begin_inset Formula $P$
+\end_inset
+
+-trees allows us to define an action of the symmetric group on the set of
+ 
+\begin_inset Formula $P$
+\end_inset
+
+-trees: Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves and let 
+\begin_inset Formula $(x_{11}\cdots x_{1\lambda_{1}})(x_{21}\cdots x_{2\lambda_{2}})\cdots(x_{k1}\cdots x_{k\lambda_{k}})$
+\end_inset
+
+ be the corresponding total preorder on 
+\begin_inset Formula $[n]$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $\sigma\in S_{n}$
+\end_inset
+
+, set 
+\begin_inset Formula $\sigma\cdot T$
+\end_inset
+
+ to be the 
+\begin_inset Formula $P$
+\end_inset
+
+-tree which corresponds to the total preorder 
+\begin_inset Formula $(\sigma(x_{11})\cdots\sigma(x_{1\lambda_{1}}))(\sigma(x_{21})\cdots\sigma(x_{2\lambda_{2}}))\cdots(\sigma(x_{k1})\cdots\sigma(x_{k\lambda_{k}}))$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Differential
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree with root 
+\begin_inset Formula $r$
+\end_inset
+
+ and denote 
+\begin_inset Formula $\partial_{i}T$
+\end_inset
+
+ to be the tree obtained from 
+\begin_inset Formula $T$
+\end_inset
+
+ by shrinking all edges at level 
+\begin_inset Formula $i$
+\end_inset
+
+ to their endpoints for 
+\begin_inset Formula $i=0,1,\dots,r-1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\partial_{i}T$
+\end_inset
+
+ is a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\partial_{i}T$
+\end_inset
+
+ is clearly a non-planted ordered tree.
+ For all nodes 
+\begin_inset Formula $v$
+\end_inset
+
+ such that 
+\begin_inset Formula $d_{T}(v)\ge i$
+\end_inset
+
+, we have 
+\begin_inset Formula $d_{\partial_{i}T}(v)=d_{T}(v)-1$
+\end_inset
+
+.
+ In particular, for all leaves 
+\begin_inset Formula $\ell$
+\end_inset
+
+, we have 
+\begin_inset Formula $d_{\partial_{i}T}(\ell)=d_{T}(\ell)-1$
+\end_inset
+
+.
+ So all leaves have the same depth in 
+\begin_inset Formula $\partial_{i}T$
+\end_inset
+
+.
+ For all nodes 
+\begin_inset Formula $v$
+\end_inset
+
+ such that 
+\begin_inset Formula $d_{T}(v)<i$
+\end_inset
+
+, we have 
+\begin_inset Formula $d_{\partial_{i}T}(v)=d_{T}(v)$
+\end_inset
+
+.
+ So the number of nodes at height 
+\begin_inset Formula $k$
+\end_inset
+
+ in 
+\begin_inset Formula $\partial_{i}T$
+\end_inset
+
+ is strictly smaller than the number of nodes at height 
+\begin_inset Formula $i-1$
+\end_inset
+
+ in 
+\begin_inset Formula $\partial_{i}T$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,2,\dots,r$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree of height 
+\begin_inset Formula $n$
+\end_inset
+
+, and let 
+\begin_inset Formula 
+\[
+\varphi_{_{T}}(x)=c_{n-1}x^{n-1}+c_{n-2}x^{n-2}+\cdots+c_{0}
+\]
+
+\end_inset
+
+be its tree polynomial.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\varphi_{_{\partial_{i}T}}(x) & =\varphi_{_{T}}(x)-c_{n-1}(x^{n-1}-x^{n-2})-c_{n-2}(x^{n-2}-x^{n-3})-\cdots-c_{n-i}(x^{n-i}-x^{n-i-1})\\
+ & =c_{n-1}x^{n-2}+c_{n-2}x^{n-3}+\cdots+(c_{n-i}+c_{n-i-1})x^{n-i-1}+c_{n-i-2}x^{n-i-2}+\cdots+c_{0}.
+\end{align*}
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\begin_inset Formula $A$
+\end_inset
+
+-trees
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be an ordered tree.
+ We say 
+\begin_inset Formula $T$
+\end_inset
+
+ is an 
+\begin_inset Formula $A$
+\end_inset
+
+
+\series bold
+-tree 
+\series default
+if every internal node is prolific.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+There is a natural way to obtain an 
+\begin_inset Formula $A$
+\end_inset
+
+-tree from a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree; simply delete the internal nodes which are not prolific.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Here's the 
+\begin_inset Formula $A$
+\end_inset
+
+-tree obtained from the 
+\begin_inset Formula $P$
+\end_inset
+
+-tree 
+\begin_inset Formula $(1468)(237)(5)$
+\end_inset
+
+ by deleting a single node of degree 
+\begin_inset Formula $2$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (1,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a3) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a4) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a5) at (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a6) at (5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a7) at (6,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a8) at (7,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b1) at (0.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (b5) at (1.5,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b2) at (2.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b3) at (4.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b4) at (6.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c1) at (1.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c2) at (5.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d1) at (3.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a5) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a6) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a7) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a8) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b5) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b4) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+There is a unique way to turn a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree into an 
+\begin_inset Formula $A$
+\end_inset
+
+-tree: simply delete the nodes of degree 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ However there are many ways to turn an 
+\begin_inset Formula $A$
+\end_inset
+
+-tree into a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree.
+ 
+\end_layout
+
+\begin_layout Section
+Symmetric Group Action and the Permutohedron
+\end_layout
+
+\begin_layout Subsection
+Symmetric Group Action
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The bijection between non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-trees on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves and total preorders allows us to define an action of the symmetric
+ group on the set of non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-trees on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves as follows: Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves and let 
+\begin_inset Formula $(a_{11}\cdots a_{1\lambda_{1}})(a_{21}\cdots a_{2\lambda_{2}})\cdots(a_{h_{T}1}\cdots a_{h_{T}\lambda_{k}})$
+\end_inset
+
+ be the corresponding total preorder on 
+\begin_inset Formula $[n]$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $\sigma\in S_{n}$
+\end_inset
+
+, set 
+\begin_inset Formula $\sigma\cdot T$
+\end_inset
+
+ to be the non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves whose corresponding total preorder on 
+\begin_inset Formula $[n]$
+\end_inset
+
+ is given by 
+\begin_inset Formula $(\sigma(a_{11})\cdots\sigma(a_{1\lambda_{1}}))(\sigma(a_{21})\cdots\sigma(a_{2\lambda_{2}}))\cdots(\sigma(a_{k1})\cdots\sigma(a_{k\lambda_{k}}))$
+\end_inset
+
+.
+ Using the symmetric group action, we can give a nice way to describe every
+ non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves.
+ Before we explain how this works, we need some notation.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\series bold
+composition 
+\series default
+of an integer 
+\begin_inset Formula $n$
+\end_inset
+
+ is a sequence 
+\begin_inset Formula $(m_{1},m_{2}\dots,m_{k})$
+\end_inset
+
+ of strictly positive integers 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq i\le k$
+\end_inset
+
+, such that 
+\begin_inset Formula $m_{1}+m_{2}+\cdots+m_{k}=n$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(m_{1},m_{2}\dots,m_{k})$
+\end_inset
+
+ be a composition of an integer 
+\begin_inset Formula $n$
+\end_inset
+
+ and set 
+\begin_inset Formula $s_{i}=m_{1}+m_{2}+\cdots+m_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq i\le k$
+\end_inset
+
+.
+ We denote 
+\begin_inset Formula $T_{(m_{1},m_{2},\dots,m_{k})}$
+\end_inset
+
+ to be the non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves whose corresponding total preorder on 
+\begin_inset Formula $[n]$
+\end_inset
+
+ is given by 
+\begin_inset Formula $(1\cdots s_{1})(s_{1}+1\cdots s_{2})\cdots(s_{k-1}+1\cdots s_{k})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ The non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree 
+\begin_inset Formula $T_{(3,4,2)}$
+\end_inset
+
+ corresponds to the total preorder on 
+\begin_inset Formula $[n]$
+\end_inset
+
+ given by 
+\begin_inset Formula $(123)(4567)(89)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves.
+ We denote 
+\begin_inset Formula $\mbox{Stab}(T)$
+\end_inset
+
+ to be the stabilizer of 
+\begin_inset Formula $T$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula 
+\[
+\mbox{Stab}(T)=\{\sigma\in S_{n}\mid\sigma\cdot T=T\}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(m_{1},m_{2}\dots,m_{k})$
+\end_inset
+
+ be a composition of an integer 
+\begin_inset Formula $n$
+\end_inset
+
+ and set 
+\begin_inset Formula $s_{i}=m_{1}+m_{2}+\cdots+m_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq i\le k$
+\end_inset
+
+.
+ .
+ Then 
+\begin_inset Formula $\mbox{Stab}(T_{(m_{1},m_{2},\dots,m_{k})})$
+\end_inset
+
+ is generated by elementary transpositions of the form 
+\begin_inset Formula $(\ell,\ell+1)$
+\end_inset
+
+, where 
+\begin_inset Formula $\ell\in[n]-\{s_{1},s_{2},\dots,s_{k}\}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We are now ready to give a nice way to describe every non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves using the symmetric group 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\end_layout
+
+\end_inset
+
+ Every non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves has the form 
+\begin_inset Formula 
+\[
+\overline{\sigma}\cdot T_{(m_{1},m_{2},\dots,m_{k})},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $(m_{1},m_{2},\dots m_{k})$
+\end_inset
+
+ is a composition of 
+\begin_inset Formula $n$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{\sigma}\in S_{n}/\mbox{Stab}(T_{(m_{1},m_{2},\dots,m_{k})})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Follows from Orbit-Stabilizer Theorem.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The Permutohedron
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ The 
+\series bold
+permutohedron 
+\series default
+
+\begin_inset Formula $\mathbf{P}_{n}$
+\end_inset
+
+
+\series bold
+ 
+\series default
+is the 
+\begin_inset Formula $(n-1$
+\end_inset
+
+)-dimensional polytope in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ defined as the convex hull of all vectors obtained from all permutations
+ of the vector 
+\begin_inset Formula $(1,2\dots,n)$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mathbf{P}_{n}:=\mbox{ConvexHull}((\sigma(1),\dots,\sigma(n))\mid\sigma\in S_{n}),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ is the symmetric group.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For each 
+\begin_inset Formula $0\leq k\leq n-1$
+\end_inset
+
+, let 
+\begin_inset Formula $\Delta_{k}(\mathbf{P}_{n})$
+\end_inset
+
+ be the set of 
+\begin_inset Formula $k$
+\end_inset
+
+-cells of the 
+\begin_inset Formula $n$
+\end_inset
+
+-dimensional permutohedron and let 
+\begin_inset Formula $\mathcal{P}_{n}^{k}$
+\end_inset
+
+ be the set of non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-trees on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves with height 
+\begin_inset Formula $n-k$
+\end_inset
+
+ .
+ We construct a bijection 
+\begin_inset Formula $\Psi:\mathcal{P}_{n}^{k}\to\Delta_{k}(\mathbf{P}_{n})$
+\end_inset
+
+ as follows: We assign 
+\begin_inset Formula $\overline{\sigma}\cdot T_{(m_{1},m_{2},\dots,m_{n-k})}$
+\end_inset
+
+ to the 
+\begin_inset Formula $k$
+\end_inset
+
+-cell whose center of mass is given by the coordinate 
+\begin_inset Formula 
+\[
+\frac{1}{m_{1}!m_{2}!\cdots m_{k}!|}\sum_{\tau\in\mbox{Stab}(T_{id,\lambda_{1},\lambda_{2},\dots,\lambda_{h_{T}}})}((\tau\sigma)^{-1}(1),(\tau\sigma)^{-1}(2),\cdots,(\tau\sigma)^{-1}(n))
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ For 
+\begin_inset Formula $\sigma\in S_{n}$
+\end_inset
+
+, the non-degenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-tree on 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves given by 
+\begin_inset Formula $\overline{\sigma}\cdot T_{(1,2,\dots,n)}$
+\end_inset
+
+ is assigned to the 
+\begin_inset Formula $0$
+\end_inset
+
+-cell which corresponds to the coordinate 
+\begin_inset Formula $(\sigma^{-1}(1),\sigma^{-1}(2),\dots,\sigma^{-1}(n))$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+The Associahedron
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ An 
+\series bold
+associahedron 
+\series default
+
+\begin_inset Formula $K_{n}$
+\end_inset
+
+ is an 
+\begin_inset Formula $(n-2)$
+\end_inset
+
+-dimensional polytope whose 
+\begin_inset Formula $(n-k)$
+\end_inset
+
+-cells correspond to 
+\begin_inset Formula $A$
+\end_inset
+
+-trees on 
+\begin_inset Formula $n$
+\end_inset
+
+ leaves and with 
+\begin_inset Formula $k-1$
+\end_inset
+
+ internal nodes.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Jean-Louis Loday gave a simple formula for realizing the Stasheff polytopes
+ as a convex hull of integer coordinates in Euclidean space (Loday 2004).
+ Let 
+\begin_inset Formula $Y_{n}$
+\end_inset
+
+ denote the set of (rooted planar) binary trees with 
+\begin_inset Formula $n+1$
+\end_inset
+
+ leaves (and hence 
+\begin_inset Formula $n$
+\end_inset
+
+ internal vertices).
+ For any binary tree 
+\begin_inset Formula $T\in Y_{n}$
+\end_inset
+
+, enumerate the leaves by left-to-right order, denoted 
+\begin_inset Formula $\ell_{1},\dots,\ell_{n+1}$
+\end_inset
+
+ and enumerate the internal vertices as 
+\begin_inset Formula $v_{1},\dots,v_{n}$
+\end_inset
+
+ where 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ is the greatest common ancestor of 
+\begin_inset Formula $\ell_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\ell_{i+1}$
+\end_inset
+
+.
+ Define a vector 
+\begin_inset Formula $M(T)\in\mathbb{R}^{n}$
+\end_inset
+
+ whose 
+\begin_inset Formula $i$
+\end_inset
+
+th coordinate is the product 
+\begin_inset Formula $a_{i}b_{i}$
+\end_inset
+
+ of the number 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ of leaves that are left descendants of 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ and the number 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ of leaves that are right descendants of 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\end_layout
+
+\end_inset
+
+.
+ (Loday).
+ The convex hull of the points 
+\begin_inset Formula $\{M(T)\in\mathbb{R}^{n}\mid T\in Y_{n}\}$
+\end_inset
+
+ is a realization of the Stasheff polytope of dimension 
+\begin_inset Formula $n-1$
+\end_inset
+
+, and is included in the affine hyperplane 
+\begin_inset Formula $\{x_{1},\dots,x_{n}\mid x_{1}+\cdots+x_{n}=n^{2}\}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Number of 
+\begin_inset Formula $P$
+\end_inset
+
+-trees which collapse to an 
+\begin_inset Formula $A$
+\end_inset
+
+-tree.
+ 
+\end_layout
+
+\begin_layout Standard
+The permutohedron 
+\begin_inset Formula $\mathbf{P}_{3}$
+\end_inset
+
+ with 
+\begin_inset Formula $P$
+\end_inset
+
+-trees on 
+\begin_inset Formula $4$
+\end_inset
+
+ leaves attached to each 
+\begin_inset Formula $k$
+\end_inset
+
+-cell of 
+\begin_inset Formula $\mathbf{P}_{3}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}[scale = 0.5]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (x1) at (-13,-6)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (x2) at (-8,-6)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (x1) -- (x2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w1) at (0.5,-1)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w2) at (7.5,-1)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w3) at (10,-6)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w4) at (7.5,-11)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w5) at (0.5,-11)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w6) at (-2,-6)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w7) at (4,-1)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w1)[color=red] -- (w7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w7)[color=red] -- (w2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w2) -- (w3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w3) -- (w4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w4) -- (w5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w5) -- (w6);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w6) -- (w1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w7) -- (w3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w7) -- (w6);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The associahedron 
+\begin_inset Formula $\mathbf{K}_{2}$
+\end_inset
+
+ with 
+\begin_inset Formula $A$
+\end_inset
+
+-trees on 
+\begin_inset Formula $4$
+\end_inset
+
+ leaves attached to each 
+\begin_inset Formula $k$
+\end_inset
+
+-cell of 
+\begin_inset Formula $\mathbf{K}_{2}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}[scale = 0.5]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a'1) at (2.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a'2) at (3.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a'3) at (4.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a'4) at (5.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (b'1) at (3,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (b'2) at (5,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (c'1) at (4,2) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a'1) -- (b'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a'2) -- (b'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a'3) -- (b'2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a'4) -- (b'2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b'1) -- (c'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b'2) -- (c'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aa'3) at (9,-3.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aa'4) at (10,-3.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (bb'1) at (7.5,-2.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (bb'2) at (8.5,-2.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bb'3) at (9.5,-2.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (cc'1) at (8.5,-1.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aa'3) -- (bb'3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aa'4) -- (bb'3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bb'1) -- (cc'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bb'2) -- (cc'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bb'3) -- (cc'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa3) at (13.5,-7.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa4) at (14.5,-7.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bbb1) at (14,-6.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (bbb3) at (12.5,-6.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (ccc1) at (13,-5.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (ccc2) at (11.5,-5.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (ddd1) at (12,-4.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa3) -- (bbb1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa4) -- (bbb1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb1) -- (ccc1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb3) -- (ccc1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (ccc1) -- (ddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (ccc2) -- (ddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa'2) at (10.5,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa'3) at (11.5,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa'4) at (12.5,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (bbb'1) at (9.5,-10) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bbb'2) at (11.5,-10) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (ccc'1) at (10.5,-9) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa'2) -- (bbb'2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa'3) -- (bbb'2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa'4) -- (bbb'2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb'1) -- (ccc'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb'2) -- (ccc'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaaa2) at (8,-15) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaaa3) at (9,-15) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaaa4) at (10.5,-15) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bbbb1) at (10.5,-14) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bbbb3) at (8.5,-14) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (cccc1) at (9.5,-13) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (cccc2) at (7.5,-13) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (dddd1) at (8.5,-12) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaa2) -- (bbbb3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaa3) -- (bbbb3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaa4) -- (bbbb1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbb1) -- (cccc1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbb3) -- (cccc1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (cccc1) -- (dddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (cccc2) -- (dddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaaa'2) at (3.5,-14) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaaa'3) at (4.5,-14) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (bbbb'1) at (2.5,-13) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bbbb'2) at (4,-13) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (bbbb'3) at (5.5,-13) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (cccc'1) at (4,-12) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaa'2) -- (bbbb'2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaa'3) -- (bbbb'2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbb'1) -- (cccc'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbb'2) -- (cccc'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbb'3) -- (cccc'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaaaa1) at (-2.5,-15) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaaaa2) at (-1,-15) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaaaa3) at (0,-15) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bbbbb2) at (-2.5,-14) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bbbbb3) at (-0.5,-14) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (ccccc1) at (0.5,-13) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (ccccc2) at (-1.5,-13) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (ddddd1) at (-0.5,-12) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaaa1) -- (bbbbb2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaaa2) -- (bbbbb3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaaa3) -- (bbbbb3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbbb2) -- (ccccc2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbbb3) -- (ccccc2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (ccccc1) -- (ddddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (ccccc2) -- (ddddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaaaa'1) at (-4.5,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaaaa'2) at (-3.5,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaaaa'3) at (-2.5,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bbbbb'1) at (-3.5,-10) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (bbbbb'2) at (-1.5,-10) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (ccccc'1) at (-2.5,-9) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaaa'1) -- (bbbbb'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaaa'2) -- (bbbbb'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaaa'3) -- (bbbbb'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbbb'1) -- (ccccc'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbbb'2) -- (ccccc'1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa1) at (-6.5,-7.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa2) at (-5.5,-7.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa3) at (-4.5,-7.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bbb2) at (-6,-6.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bbb3) at (-4.5,-6.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (ccc1) at (-3,-5.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (ccc2) at (-5,-5.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (ddd1) at (-4,-4.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa1) -- (bbb2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa2) -- (bbb2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa3) -- (bbb3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb2) -- (ccc2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb3) -- (ccc2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (ccc1) -- (ddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (ccc2) -- (ddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa''1) at (-2,-3.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa''2) at (-1,-3.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bbb''1) at (-1.5,-2.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (bbb''2) at (-0.5,-2.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (bbb''3) at (0.5,-2.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (ccc''1) at (-0.5,-1.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa''1) -- (bbb''1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa''2) -- (bbb''1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb''1) -- (ccc''1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb''2) -- (ccc''1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb''3) -- (ccc''1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa'''1) at (2.5,-7) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa'''2) at (3.5,-7) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa'''3) at (4.5,-7) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (aaa'''4) at (5.5,-7) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt] (bbb'''1) at (4,-6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa'''1) -- (bbb'''1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa'''2) -- (bbb'''1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa'''3) -- (bbb'''1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa'''4) -- (bbb'''1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w3) at (10,-6)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w4) at (7.5,-11)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w5) at (0.5,-11)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w6) at (-2,-6)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w7) at (4,-1)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w7) -- (w3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w3) -- (w4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w4) -- (w5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w5) -- (w6);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w3) -- (w7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w6) -- (w7);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In this section, we count the number of 
+\begin_inset Formula $k$
+\end_inset
+
+-cells on the 
+\begin_inset Formula $n$
+\end_inset
+
+-dimensional permutohedron 
+\begin_inset Formula $\mathbf{P}_{n}$
+\end_inset
+
+ which collapse to a 
+\begin_inset Formula $0$
+\end_inset
+
+-cell on an associahedron 
+\begin_inset Formula $K_{n-1}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $x_{1},\dots,x_{m},y_{1},\dots,y_{n}$
+\end_inset
+
+ be elements of some set.
+ Then there are 
+\begin_inset Formula ${m \choose k}{m+n-k \choose m}$
+\end_inset
+
+ ways of ordering these elements such that 
+\begin_inset Formula $x_{i}<x_{j}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}<y_{j}$
+\end_inset
+
+ whenever 
+\begin_inset Formula $i<j$
+\end_inset
+
+, and 
+\begin_inset Formula $k$
+\end_inset
+
+ of the 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+'s are tied with 
+\begin_inset Formula $k$
+\end_inset
+
+ of the 
+\begin_inset Formula $x_{j}'s$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ There are 
+\begin_inset Formula ${m \choose k}$
+\end_inset
+
+ ways to select 
+\begin_inset Formula $k$
+\end_inset
+
+ of the 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+'s to be tied with and 
+\begin_inset Formula ${m+n-k \choose m}$
+\end_inset
+
+ ways of rearranging everything else.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Here is a way to order the list 
+\begin_inset Formula $x_{1},x_{2},x_{3},x_{4},x_{5},y_{1},y_{2},y_{3},y_{4}$
+\end_inset
+
+ such that 
+\begin_inset Formula $x_{i}<x_{j}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}<y_{j}$
+\end_inset
+
+ whenever 
+\begin_inset Formula $i<j$
+\end_inset
+
+, and 
+\begin_inset Formula $2$
+\end_inset
+
+ of the 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+'s are tied with 
+\begin_inset Formula $2$
+\end_inset
+
+ of the 
+\begin_inset Formula $x_{j}'s$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+x_{1}<x_{2}<y_{1}<x_{3}=y_{2}<y_{3}<x_{4}=y_{4}<x_{5}
+\]
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a binary 
+\begin_inset Formula $A$
+\end_inset
+
+-tree, 
+\begin_inset Formula $L$
+\end_inset
+
+ be the subtree whose root is the left child of the root of 
+\begin_inset Formula $T$
+\end_inset
+
+, and 
+\begin_inset Formula $R$
+\end_inset
+
+ be the subtree whose root is the right child of the root of 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $n_{T}$
+\end_inset
+
+, 
+\begin_inset Formula $n_{L},$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{R}$
+\end_inset
+
+ be the number of internal nodes of each tree respectively.
+ Finally, let 
+\begin_inset Formula $P_{k}(T)$
+\end_inset
+
+, 
+\begin_inset Formula $P_{k}(L)$
+\end_inset
+
+, and 
+\begin_inset Formula $P_{k}(R)$
+\end_inset
+
+ be the number of 
+\begin_inset Formula $k$
+\end_inset
+
+-cells on the permutohedron which collapse to the 
+\begin_inset Formula $0$
+\end_inset
+
+-cell on the associahedron which corresponds to each binary tree respectively.
+ Then 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sum_{i=0}^{k}\sum_{j=0}^{k-i}{n_{L}-i \choose k-i-j}{n_{L}+n_{R}-k \choose n_{L}-i}P_{i}(L)P_{j}(R)=P_{k}(T)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a1) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a2) at (1,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a3) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a4) at (3,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a5) at (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[] (a6) at (5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b1) at (0.5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b2) at (1.25,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b3) at (2.15,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b4) at (4,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b5) at (5,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b6) at (6,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (b7) at (7,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c1) at (0.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c2) at (2.5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c3) at (4,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c4) at (5,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c5) at (6,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (c6) at (7,2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d1) at (0.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d2) at (2.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d3) at (4,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d4) at (5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (d5) at (6.5,3)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e1) at (0.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e2) at (2.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e3) at (4.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (e4) at (6.5,4)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f1) at (1.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f2) at (4.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (f3) at (6.5,5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (g1) at (1.5,6)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (g2) at (5.5,6)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (h1) at (3.5,7)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a5) -- (b4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a6) -- (b5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a7) -- (b6);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a8) -- (b7);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b4) -- (c3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b5) -- (c4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b6) -- (c5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b7) -- (c6);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c3) -- (d3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c4) -- (d4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c5) -- (d5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c6) -- (d5);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d1) -- (e1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d2) -- (e2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d3) -- (e3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d4) -- (e3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d5) -- (e4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e1) -- (f1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e2) -- (f1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e3) -- (f2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e4) -- (f3);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f1) -- (g1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f2) -- (g2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f3) -- (g2);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (g1) -- (h1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (g2) -- (h1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We want to count the number of nondegenerate 
+\begin_inset Formula $P$
+\end_inset
+
+-trees which collapse to an 
+\begin_inset Formula $A$
+\end_inset
+
+-tree.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+d_{2}((g_{1}g_{2})(g_{3})(g_{4}g_{5}))((g_{6}g_{7})(g_{8}g_{9}))=(g_{1}g_{2}g_{3}g_{4}g_{5})(g_{6}g_{7}g_{8}g_{9})-(g_{1}g_{2})(g_{3})(g_{4}g_{5})(g_{6}g_{7})(g_{8}g_{9})
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\prod_{i\in\mathbb{N}}g_{i}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\prod_{j\in\mathbb{N}}\left(\prod_{g_{ij}\in G}g_{ij}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\prod_{k\in\mathbb{N}}\left(\prod_{j\in\mathbb{N}}\left(\prod_{i\in\mathbb{N}}g_{ijk}\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left(\left(g_{111}g_{211}g_{311}g_{411}\right)\left(g_{121}g_{221}g_{321}\right)\right)\left(\left(g_{112}\right)\left(g_{122}g_{222}g_{322}g_{422}\right)\left(g_{132}g_{232}\right)\right)\left(\left(g_{113}g_{213}\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\prod_{k=1}^{3}\left(\prod_{j=1}^{2}\left(\prod_{i=1}^{4}g_{ijk}\right)\right)=\left(\left(g_{111}g_{211}g_{311}g_{411}\right)\left(g_{121}g_{221}g_{321}g_{421}\right)\right)\left(\left(g_{112}g_{212}g_{312}g_{412}\right)\left(g_{122}g_{222}g_{322}g_{422}\right)\right)\left(\left(g_{113}g_{213}g_{313}g_{413}\right)\left(g_{123}g_{223}g_{323}g_{423}\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+d_{2}\prod_{k\in\mathbb{N}}\left(\prod_{j\in\mathbb{N}}\left(\prod_{i\in\mathbb{N}}g_{ijk}\right)\right)=\prod_{k\in\mathbb{N}}\left(\prod_{j\in\mathbb{N}}\prod_{i\in\mathbb{N}}g_{ijk}\right)-\prod_{k\in\mathbb{N}}\prod_{j\in\mathbb{N}}\left(\prod_{i\in\mathbb{N}}g_{ijk}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=left:$ (1)(2)(3)(5)(6)(4)$]
+ (a) at (-11,11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=above right:$ (1)(2)(5)(3)(6)(4)$
+] (b) at (-8,8) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$ (1)(2)(5)(6)(3)(4)$]
+ (c) at (-10,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=above right:$ (1)(5)(2)(6)(3)(4)$
+] (d) at (-2,7) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=right:$ (1)(2)(5)(6)(3)(4)$]
+ (e) at (-4,5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=above left:$ (5)(1)(2)(6)(3)(4)$]
+ (f) at (-5,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=left:$ (1)(2)(5)(6)(3)(4)$]
+ (g) at (-7,4) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$ (5)(1)(2)(6)(3)(4)$]
+ (h) at (-4,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=right:$ (1)(5)(6)(2)(3)(4)$]
+ (i) at (-1,2) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=right:$ (5)(6)(1)(2)(3)(4)$]
+ (j) at (2,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a) -- (b);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b) -- (c);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b) -- (d);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d) -- (e);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c) -- (e);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (d) -- (f);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (f) -- (g);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e) -- (g);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (h) -- (g);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (i) -- (e);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (i) -- (h);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (h) -- (j);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}[scale = 0.4]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=left:$a(bc)$] (w3') at (-17,-6)
+ {$$}; 
+\backslash
+node[circle, fill=black, inner sep=1pt, label=right:$(ab)c$] (w4') at (-13,-6)
+ {$$}; 
+\backslash
+draw (w3') -- (w4');
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=right:$ a(b(cd))$] (w3) at
+ (10,-6) {$$}; 
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below right:$ a((bc)d)$] (w4)
+ at (7.5,-11) {$$}; 
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below left:$ (a(bc))d$] (w5)
+ at (0.5,-11) {$$}; 
+\backslash
+node[circle, fill=black, inner sep=1pt, label=left:$((ab)c)d$] (w6) at (-2,-6)
+ {$$}; 
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$ (ab)(cd)$] (w7) at
+ (4,-1) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w7) -- (w3); 
+\backslash
+draw (w3) -- (w4); 
+\backslash
+draw (w4) -- (w5); 
+\backslash
+draw (w5) -- (w6); 
+\backslash
+draw (w3) -- (w7); 
+\backslash
+draw (w6) -- (w7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Finite Reflection Groups
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Throughout this section we consider a finite dimensional 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-Eucliden space 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem1}
+\end_layout
+
+\end_inset
+
+ For any nonzero vector 
+\begin_inset Formula $w\in V$
+\end_inset
+
+, let 
+\begin_inset Formula $s_{w}:V\to V$
+\end_inset
+
+ be the reflection across the plane through the origin orthogonal to 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{equation}
+s_{w}(v)=v-2\frac{v\cdot w}{w\cdot w}w\label{eq:reflection}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $v\in V$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The reflection 
+\begin_inset Formula $s_{w}$
+\end_inset
+
+ should be linear, fix the plane through the origin orthogonal to 
+\begin_inset Formula $w$
+\end_inset
+
+, and negate vectors on the line through 
+\begin_inset Formula $w$
+\end_inset
+
+.
+ Writing any 
+\begin_inset Formula $v\in V$
+\end_inset
+
+ as 
+\begin_inset Formula $aw+u$
+\end_inset
+
+ with 
+\begin_inset Formula $a\in\mathbb{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $u\perp w$
+\end_inset
+
+, we need 
+\begin_inset Formula 
+\[
+s_{w}(v)=s_{w}(aw)+s_{w}(u)=-aw+u=aw+u-2aw=v-2aw.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $v\cdot w=(aw+u)\cdot w=a(w\cdot w)$
+\end_inset
+
+, we can solve for 
+\begin_inset Formula $a$
+\end_inset
+
+ and obtain 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:reflection})
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn1}
+\end_layout
+
+\end_inset
+
+ A 
+\series bold
+finite reflection group 
+\series default
+is a finite subgroup of the orthogonal group 
+\begin_inset Formula $O(V)$
+\end_inset
+
+ generated by reflections.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example1}
+\end_layout
+
+\end_inset
+
+ The basic example of finite reflection groups are the dihedral groups.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example1}
+\end_layout
+
+\end_inset
+
+ Symmetric groups are another example of finite reflection groups.
+ They are the isometry groups of standard regular simplexes.
+ Let us describe this representation.
+ We consider 
+\begin_inset Formula $V=\mathbb{R}^{n}$
+\end_inset
+
+, together with its canonical basis 
+\begin_inset Formula $\beta=\{e_{1},\dots,e_{n}\}$
+\end_inset
+
+ on which the symmetric group 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ acts (right action) linearly by permutation of the coordinates:
+\begin_inset Formula 
+\[
+\sigma\cdot(x_{1},\dots,x_{n})=(x_{\sigma(1)},\dots,x_{\sigma(n)}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The transposition 
+\begin_inset Formula $s_{ij}=(ij)$
+\end_inset
+
+ where 
+\begin_inset Formula $1\leq i<j\leq n$
+\end_inset
+
+ acts therefore as the orthogonal reflection that fixes pointwise the hyperplane
+ 
+\begin_inset Formula $H_{ij}=\{(x_{1},\dots,x_{n})\in\mathbb{R}^{n}\mid x_{i}=x_{j}\}$
+\end_inset
+
+ and maps 
+\begin_inset Formula $\alpha_{ij}:=e_{j}-e_{i}$
+\end_inset
+
+ to 
+\begin_inset Formula $-\alpha_{ij}:=e_{i}-e_{j}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ is generated by transpositions, 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ is a finite reflection group in 
+\begin_inset Formula $O(\mathbb{R}^{n})$
+\end_inset
+
+.
+ It is well-known that this representation of 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+, as a subgroup of 
+\begin_inset Formula $O(\mathbb{R}^{n})$
+\end_inset
+
+, is faithful, but not irreducible, since 
+\begin_inset Formula $S_{n}$
+\end_inset
+
+ fixes the line spanned by the vector 
+\begin_inset Formula $(1,1,\dots,1)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Reduced Form
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a 
+\begin_inset Formula $P$
+\end_inset
+
+-tree.
+ We say 
+\begin_inset Formula $T$
+\end_inset
+
+ is in 
+\series bold
+reduced form 
+\series default
+if it satisfies the following property: if 
+\begin_inset Formula $v\in\mathbf{N}(T)$
+\end_inset
+
+ has one one child, then its descendant has at most one child.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

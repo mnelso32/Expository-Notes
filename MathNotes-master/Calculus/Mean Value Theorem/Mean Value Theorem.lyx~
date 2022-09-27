@@ -1,0 +1,925 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Rolle's Theorem and the Mean Value Theorem
+\end_layout
+
+\begin_layout Subsection*
+Rolle's Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ (Rolle's Theorem) Let 
+\begin_inset Formula $f$
+\end_inset
+
+ be a continuous real-valued function defined on the closed interval 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+ such that 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable on the open interval 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+ and such that 
+\begin_inset Formula $f(a)=f(b)$
+\end_inset
+
+.
+ Then there exists 
+\begin_inset Formula $c\in(a,b)$
+\end_inset
+
+ such that 
+\begin_inset Formula $f'(c)=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $f$
+\end_inset
+
+ is a constant function, then the theorem is obvious, so assume 
+\begin_inset Formula $f$
+\end_inset
+
+ is non-constant.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is continuous on the compact interval 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+, it attains either a maximum or minimum value.
+ By swapping 
+\begin_inset Formula $f$
+\end_inset
+
+ with 
+\begin_inset Formula $-f$
+\end_inset
+
+ if necessary, we may assume 
+\begin_inset Formula $f$
+\end_inset
+
+ attains a maximum value, say at 
+\begin_inset Formula $c\in[a,b]$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is non-constant, we must have 
+\begin_inset Formula $c\in(a,b)$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable at 
+\begin_inset Formula $c$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $f'(c)=0$
+\end_inset
+
+.
+ Indeed, since 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable at 
+\begin_inset Formula $c$
+\end_inset
+
+, there exists 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ and such that 
+\begin_inset Formula $(c-\varepsilon,c+\varepsilon)\subseteq[a,b]$
+\end_inset
+
+ and there exists 
+\begin_inset Formula $\psi\colon(-\varepsilon,\varepsilon)\to\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\psi(h)\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $h\to0$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{equation}
+f(c+h)=f(c)+h(f'(c)+\psi(h)),\label{eq:differentiable}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $h\in(-\varepsilon,\varepsilon)$
+\end_inset
+
+.
+ Choose such 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 1: 
+\series default
+Assume that 
+\begin_inset Formula $f'(c)>0$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $h\in(0,\varepsilon)$
+\end_inset
+
+ such that 
+\begin_inset Formula $f'(c)+\psi(h)>0$
+\end_inset
+
+ (we can do this since 
+\begin_inset Formula $\psi(h)\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $h\to0$
+\end_inset
+
+).
+ Then by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:differentiable})
+\end_layout
+
+\end_inset
+
+, it follows that 
+\begin_inset Formula $f(c+h)>f(c)$
+\end_inset
+
+, which is a contradiction.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 2: 
+\series default
+Assume that 
+\begin_inset Formula $f'(c)<0$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $h\in(-\varepsilon,0)$
+\end_inset
+
+ such that 
+\begin_inset Formula $f'(c)+\psi(h)<0$
+\end_inset
+
+ (we can do this since 
+\begin_inset Formula $\psi(h)\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $h\to0$
+\end_inset
+
+).
+ Then by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:differentiable})
+\end_layout
+
+\end_inset
+
+, it follows that 
+\begin_inset Formula $f(c+h)>f(c)$
+\end_inset
+
+, which is a contradiction.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It follows that 
+\begin_inset Formula $f'(c)=0$
+\end_inset
+
+, and the theorem is proved.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ It may not seem obvious but our proof of Rolle's Theorem uses the fact
+ that 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ is complete.
+ Indeed, in our proof, we used the fact that the closed interval 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+ is 
+\emph on
+compact
+\emph default
+, which relies on the fact that 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ is complete.
+ For instance, 
+\begin_inset Formula $\mathbb{Q}\cap[a,b]$
+\end_inset
+
+ is 
+\emph on
+not 
+\emph default
+a compact subspace of the rational numbers because 
+\begin_inset Formula $\mathbb{Q}$
+\end_inset
+
+ is not complete! 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Mean Value Theorem
+\end_layout
+
+\begin_layout Standard
+The Mean Value Theorem can be seen as a direct consequence of Rolle's Theorem:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ (Mean Value Theorem) Let 
+\begin_inset Formula $f$
+\end_inset
+
+ be a continuous real-valued function defined on the closed interval 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+ such that 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable on the open interval 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+.
+ Then there exists 
+\begin_inset Formula $c\in(a,b)$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f'(c)=\frac{f(b)-f(a)}{b-a}.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Define 
+\begin_inset Formula $g\colon[a,b]\to\mathbb{R}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+g(x)=f(x)-\left(\frac{f(b)-f(a)}{b-a}\right)x
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in[a,b]$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $g$
+\end_inset
+
+ is continuous on 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+ and differentiable on 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+ since 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable on 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+.
+ Moreover we have 
+\begin_inset Formula $g(a)=g(b)$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $g$
+\end_inset
+
+ satisfies the conditions stated in Rolle's Theorem.
+ Thus there exists 
+\begin_inset Formula $c\in(a,b)$
+\end_inset
+
+ such that 
+\begin_inset Formula $g'(c)=0$
+\end_inset
+
+.
+ In other words, there exists 
+\begin_inset Formula $c\in(a,b)$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+f'(c)=\frac{f(b)-f(a)}{b-a}.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Consequences of the Mean Value Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propderivative0equalsconstant}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f$
+\end_inset
+
+ be a continuous real-valued function defined on the closed interval 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+.
+ Suppose that 
+\begin_inset Formula $f'$
+\end_inset
+
+ exists and is equal to 
+\begin_inset Formula $0$
+\end_inset
+
+ on 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is constant on 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ It suffices to show that 
+\begin_inset Formula $f$
+\end_inset
+
+ is constant on 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+, since continuity of 
+\begin_inset Formula $f$
+\end_inset
+
+ would then imply that 
+\begin_inset Formula $f$
+\end_inset
+
+ is constant on 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+.
+ We will prove that 
+\begin_inset Formula $f$
+\end_inset
+
+ is constant on 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+ by contradiction.
+ To obtain a contradiction, assume that there exists 
+\begin_inset Formula $c,d\in(a,b)$
+\end_inset
+
+ such that 
+\begin_inset Formula $c\ne d$
+\end_inset
+
+ and 
+\begin_inset Formula $f(c)\ne f(d)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+\frac{f(d)-f(c)}{d-c}\neq0.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable on 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+, it is certainly differentiable on 
+\begin_inset Formula $(c,d)$
+\end_inset
+
+.
+ Thus, by the Mean Value Theorem, there exists 
+\begin_inset Formula $e\in(c,d)$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+f'(e)=\frac{f(d)-f(c)}{d-c}.
+\]
+
+\end_inset
+
+So we choose 
+\begin_inset Formula $e\in(c,d)$
+\end_inset
+
+ such that the equation above holds.
+ But this is a contradiction since 
+\begin_inset Formula $f'(e)=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_body
+\end_document

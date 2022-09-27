@@ -1,0 +1,7115 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Preliminary Material
+\end_layout
+
+\begin_layout Section
+Gröbner Bases
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Throughout this section, let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field, and let 
+\begin_inset Formula $S$
+\end_inset
+
+ denote the polynomial ring 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ In this section, we state all of our lemmas, propositions, and theorems
+ without proof.
+ All of the proofs can be found in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{CLO15}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{GP08}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Monomials and Polynomials in 
+\begin_inset Formula $S$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A 
+\series bold
+monomial 
+\series default
+
+\begin_inset Formula $m$
+\end_inset
+
+ in 
+\begin_inset Formula $S$
+\end_inset
+
+ is a product in 
+\begin_inset Formula $S$
+\end_inset
+
+ of the form
+\begin_inset Formula 
+\[
+m=x_{1}^{\alpha_{1}}\cdots x_{n}^{\alpha_{n}},
+\]
+
+\end_inset
+
+where all of the exponents 
+\begin_inset Formula $\alpha_{1},\dots,\alpha_{n}$
+\end_inset
+
+ are nonnegative integers.
+ Sometimes we will use the notation 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+ to denote a monomial, where 
+\begin_inset Formula $\alpha=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+ is an 
+\begin_inset Formula $n$
+\end_inset
+
+-tuple of nonnegative integers.
+ Note that 
+\begin_inset Formula $x^{\alpha}=1$
+\end_inset
+
+ when 
+\begin_inset Formula $\alpha=(0,\dots,0)$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $m=x^{\alpha}$
+\end_inset
+
+ is a monomial in 
+\begin_inset Formula $S$
+\end_inset
+
+ then the 
+\series bold
+degree 
+\series default
+of 
+\begin_inset Formula $m$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\text{deg}(m)$
+\end_inset
+
+ or 
+\begin_inset Formula $|x^{\alpha}|$
+\end_inset
+
+ , is the sum 
+\begin_inset Formula $\alpha_{1}+\cdots+\alpha_{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A 
+\series bold
+polynomial 
+\series default
+
+\begin_inset Formula $f$
+\end_inset
+
+ in 
+\begin_inset Formula $S$
+\end_inset
+
+ is a finite linear combination of monomials.
+ We will write a polynomial 
+\begin_inset Formula $f$
+\end_inset
+
+ in the form 
+\begin_inset Formula 
+\[
+f=\sum_{\alpha}a_{\alpha}x^{\alpha},\quad a_{\alpha}\in K,
+\]
+
+\end_inset
+
+where the sum is over a finite number of 
+\begin_inset Formula $n$
+\end_inset
+
+-tuples 
+\begin_inset Formula $\alpha=(\alpha_{1},\dots,\alpha_{n})$
+\end_inset
+
+.
+ We call 
+\begin_inset Formula $a_{\alpha}$
+\end_inset
+
+ the 
+\series bold
+coefficient 
+\series default
+of the monomial 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $a_{\alpha}\neq0$
+\end_inset
+
+, then we call 
+\begin_inset Formula $a_{\alpha}x^{\alpha}$
+\end_inset
+
+ a 
+\series bold
+term
+\series default
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ The 
+\series bold
+total degree 
+\series default
+of 
+\begin_inset Formula $f\neq0$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\mbox{deg}(f)$
+\end_inset
+
+, is the maximum 
+\begin_inset Formula $|\alpha|$
+\end_inset
+
+ such that the coefficient 
+\begin_inset Formula $a_{\alpha}$
+\end_inset
+
+ is nonzero.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ If we replace the field 
+\begin_inset Formula $K$
+\end_inset
+
+ with a ring 
+\begin_inset Formula $R$
+\end_inset
+
+, then the same terminology applies to 
+\begin_inset Formula $R[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ For instance, a 
+\series bold
+monomial 
+\series default
+
+\begin_inset Formula $m$
+\end_inset
+
+ in 
+\begin_inset Formula $R[x_{1},\dots,x_{n}]$
+\end_inset
+
+ is a product of the form 
+\begin_inset Formula $m=x_{1}^{\alpha_{1}}\cdots x_{n}^{\alpha_{n}}$
+\end_inset
+
+, and etc...
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Monomial Orderings on 
+\begin_inset Formula $S$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A 
+\series bold
+monomial ordering
+\series default
+ on 
+\begin_inset Formula $S$
+\end_inset
+
+ is a total ordering 
+\begin_inset Formula $>$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+, or equivalently, a total ordering on the set of monomials 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+, 
+\begin_inset Formula $\alpha\in\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+, satisfying
+\begin_inset Formula 
+\[
+x^{\alpha}>x^{\beta}\implies x^{\gamma}x^{\alpha}>x^{\gamma}x^{\beta},
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\alpha,\beta,\gamma\in\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $>$
+\end_inset
+
+ is a 
+\series bold
+global monomial ordering 
+\series default
+if 
+\begin_inset Formula $x^{\alpha}>1$
+\end_inset
+
+ for all 
+\begin_inset Formula $\alpha\neq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem} 
+\end_layout
+
+\end_inset
+
+ By a total ordering, we mean for all distinct pairs of monomials 
+\begin_inset Formula $x^{\alpha}$
+\end_inset
+
+ and 
+\begin_inset Formula $x^{\beta}$
+\end_inset
+
+, we either have 
+\begin_inset Formula $x^{\alpha}>x^{\beta}$
+\end_inset
+
+ or 
+\begin_inset Formula $x^{\beta}>x^{\alpha}$
+\end_inset
+
+.
+ This property is used in induction arguments.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $>$
+\end_inset
+
+ be a monomial ordering, then the following conditions are equivalent.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $>$
+\end_inset
+
+ is a well-ordering, i.e.
+ every nonempty set of monomials has a smallest element, or equivalently,
+ every decreasing sequence 
+\begin_inset Formula 
+\[
+x^{\alpha(1)}>x^{\alpha(2)}>x^{\alpha(3)}>\cdots
+\]
+
+\end_inset
+
+eventually terminates.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $x_{i}>1$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,\dots,n$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $>$
+\end_inset
+
+ is global.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\alpha\geq_{\mbox{nat}}\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha\neq\beta$
+\end_inset
+
+ implies 
+\begin_inset Formula $x^{\alpha}>x^{\beta}$
+\end_inset
+
+, where 
+\begin_inset Formula $\geq_{\mbox{nat}}$
+\end_inset
+
+ is a partial order on 
+\begin_inset Formula $\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+ defined by 
+\begin_inset Formula 
+\[
+(\alpha_{1},\dots,\alpha_{n})\geq_{\mbox{nat}}(\beta_{1},\dots,\beta_{n})\mbox{ if and only if }\alpha_{i}\geq\beta_{i}\mbox{ for all }i.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Examples of Monomial Orderings
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We now describe some important examples of global monomial orderings: Let
+ 
+\begin_inset Formula $\alpha,\beta\in\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+(Lexicographical ordering): We say 
+\begin_inset Formula $x^{\alpha}>_{lp}x^{\beta}$
+\end_inset
+
+ if 
+\begin_inset Formula 
+\[
+\mbox{there exists \ensuremath{1\leq i\leq n} such that \ensuremath{\alpha_{1}=\beta_{1},\dots,\alpha_{i-1}=\beta_{i-1},\alpha_{i}>\beta_{i}}.}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+(Degree reverse lexicographical ordering) We say 
+\begin_inset Formula $x^{\alpha}>_{dp}x^{\beta}$
+\end_inset
+
+ if 
+\begin_inset Formula 
+\[
+|\alpha|=\sum_{i=1}^{n}\alpha_{i}>|\beta|=\sum_{i=1}^{n}\beta_{i},\quad\mbox{or}\quad|\alpha|=|\beta|\mbox{ and there exists }1\leq i\leq n\mbox{ such that }\alpha_{n}=\beta_{n},\dots,\alpha_{i+1}=\beta_{i+1},\alpha_{i}<\beta_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+(Degree lexicographical ordering) We say 
+\begin_inset Formula $x^{\alpha}>_{Dp}x^{\beta}$
+\end_inset
+
+ if 
+\begin_inset Formula 
+\[
+|\alpha|=\sum_{i=1}^{n}\alpha_{i}>|\beta|=\sum_{i=1}^{n}\beta_{i},\quad\mbox{or}\quad|\alpha|=|\beta|\mbox{ and there exists }1\leq i\leq n\mbox{ such that }\alpha_{1}=\beta_{1},\dots,\alpha_{i-1}=\beta_{i-1},\alpha_{i}>\beta_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ With respect to the lexicographical ordering on 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+, we have 
+\begin_inset Formula $x^{3}y^{2}z>_{lp}x^{3}yz^{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $xy^{2}z>_{lp}xyz^{2}$
+\end_inset
+
+.
+ With respect to the degree reverse lexicographical ordering on 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+, we have 
+\begin_inset Formula $x^{2}y^{2}z^{2}>_{dp}x^{3}yz^{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $z^{2}>_{dp}x$
+\end_inset
+
+.
+ With respect to the degree lexicographical ordering on 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+, we have 
+\begin_inset Formula $x^{3}yz^{3}>_{Dp}x^{2}y^{2}z^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $z^{2}>_{Dp}x$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Multidegree, Leading Coefficients, Leading Monomials, and Leading Terms
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $f=\sum_{\alpha}c_{\alpha}x^{\alpha}$
+\end_inset
+
+ be a nonzero polynomial in 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ and let 
+\begin_inset Formula $>$
+\end_inset
+
+ be a monomial order.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+multidegree 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\mbox{multdeg}(f)=\mbox{max}(\alpha\in\mathbb{Z}_{\geq0}^{n}\mid c_{\alpha}\neq0).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+leading coefficient 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\mbox{LC}(f)=c_{\mbox{multdeg}(f)}\in K.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+leading monomial 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\mbox{LM}(f)=x^{\mbox{multdeg}(f)}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+leading term 
+\series default
+of 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\mbox{LT}(f)=\mbox{LC}(f)\cdot\mbox{LM}(f).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f=4xy^{2}z+4z^{2}-5x^{3}+7x^{2}z^{2}$
+\end_inset
+
+.
+ With respect to lexicographical ordering we have 
+\begin_inset Formula 
+\begin{align*}
+\mbox{multdeg}(f) & =(3,0,0)\\
+\mbox{LC}(f) & =-5\\
+\mbox{LM}(f) & =x^{3}\\
+\mbox{LT}(f) & =-5x^{3}.
+\end{align*}
+
+\end_inset
+
+With respect to degree reverse lexicographical ordering we have 
+\begin_inset Formula 
+\begin{align*}
+\mbox{multdeg}(f) & =(2,0,2)\\
+\mbox{LC}(f) & =7\\
+\mbox{LM}(f) & =x^{2}z^{2}\\
+\mbox{LT}(f) & =7x^{2}z^{2}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Monomial Ideals
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+An ideal 
+\begin_inset Formula $I\subseteq S$
+\end_inset
+
+ is a called a 
+\series bold
+monomial ideal 
+\series default
+if there is a subset 
+\begin_inset Formula $A\subset\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+ (possibly infinite) such that 
+\begin_inset Formula $I$
+\end_inset
+
+ consists of all polynomials which are finite sums of the form 
+\begin_inset Formula $\sum_{\alpha\in A}h_{\alpha}x^{\alpha}$
+\end_inset
+
+, where 
+\begin_inset Formula $h_{\alpha}\in K[x_{1},\dots,x_{n}]$
+\end_inset
+
+.
+ In this case, we write 
+\begin_inset Formula $I=\langle x^{\alpha}\mid\alpha\in A\rangle$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ An example of a monomial ideal is given by 
+\begin_inset Formula $I=\langle x^{4}y^{2},x^{3}y^{4},x^{2}y^{5}\rangle\subseteq K[x,y]$
+\end_inset
+
+.
+ A nontrivial example of a monomial ideal is given by 
+\begin_inset Formula $J=\langle f_{1},f_{2},f_{3},f_{4}\rangle=\langle x^{2}+x^{2}y^{3},-x^{2}y^{3}+y^{3},x^{4},y^{6}\rangle$
+\end_inset
+
+.
+ It's easy to see that 
+\begin_inset Formula $J\subset\langle x^{2},y^{3}\rangle$
+\end_inset
+
+.
+ For the reverse inclusion, note that 
+\begin_inset Formula 
+\begin{align*}
+x^{2} & =f_{1}-x^{2}f_{2}-y^{3}f_{3}\\
+y^{3} & =f_{1}+y^{3}f_{2}-x^{2}f_{4}.
+\end{align*}
+
+\end_inset
+
+So 
+\begin_inset Formula $\langle x^{2},y^{3}\rangle\subset J$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $J=\langle x^{2},y^{3}\rangle$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Monomials Ideals are Finitely-Generated 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The next theorem tells us that monomials ideals are finitely generated.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{dicksonlemma}
+\end_layout
+
+\end_inset
+
+ (Dickson's Lemma.) Let 
+\begin_inset Formula $I=\langle x^{\alpha}\mid\alpha\in A\rangle$
+\end_inset
+
+ be a monomial ideal.
+ Then 
+\begin_inset Formula $I$
+\end_inset
+
+ can be written as 
+\begin_inset Formula $I=\langle x^{\alpha(1)},\dots,x^{\alpha(s)}\rangle$
+\end_inset
+
+ where 
+\begin_inset Formula $\alpha(1),\dots,\alpha(s)\in A$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+Hilbert Basis Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Throughout the rest of this section, fix a monomial ordering on 
+\begin_inset Formula $S$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Lead Term Ideal
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be a nonzero ideal in 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+We denote by 
+\begin_inset Formula $\mbox{LT}(I)$
+\end_inset
+
+ the set of leading terms of nonzero elements of 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ Thus, 
+\begin_inset Formula 
+\[
+\mbox{LT}(I)=\{cx^{\alpha}\mid\mbox{there exists }f\in I\setminus\{0\}\mbox{ with LT}(f)=cx^{\alpha}\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+We denote by 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+ be the ideal generated by the elements of 
+\begin_inset Formula $\mbox{LT}(I)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+It is easy to see that 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+ is a monomial ideal.
+ Therefore 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Theorem~(
+\backslash
+ref{dicksonlemma})
+\end_layout
+
+\end_inset
+
+ implies that it is finitely-generated.
+ Thus, there are 
+\begin_inset Formula $g_{1},\dots,g_{t}\in I$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mbox{LT}(I)=\langle\mbox{LT}(g_{1}),\dots,\mbox{LT}(g_{t})\rangle$
+\end_inset
+
+.
+ If we are given an arbitrary finite generating set for 
+\begin_inset Formula $I$
+\end_inset
+
+, say 
+\begin_inset Formula $I=\langle f_{1},\dots,f_{s}\rangle$
+\end_inset
+
+, then 
+\begin_inset Formula $\langle\mbox{LT}(f_{1}),\dots,\mbox{LT}(f_{s})\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+ may be 
+\emph on
+different 
+\emph default
+ideals.
+ To see this, consider the following example.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I=\langle f_{1},f_{2}\rangle$
+\end_inset
+
+, where 
+\begin_inset Formula $f_{1}=x^{3}-2xy$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=x^{2}y-2y^{2}+x$
+\end_inset
+
+, and use grlex ordering on monomials in 
+\begin_inset Formula $K[x,y]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\[
+x\cdot(x^{2}y-2y^{2}+x)-y\cdot(x^{3}-2xy)=x^{2},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so that 
+\begin_inset Formula $x^{2}\in I$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $x^{2}=\mbox{LT}(x^{2})\in\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+.
+ However 
+\begin_inset Formula $x^{2}$
+\end_inset
+
+ is not divisible by 
+\begin_inset Formula $\mbox{LT}(f_{1})=x^{3}$
+\end_inset
+
+ or 
+\begin_inset Formula $\mbox{LT}(f_{2})=x^{2}y$
+\end_inset
+
+, so that 
+\begin_inset Formula $x^{2}\notin\langle\mbox{LT}(f_{1}),\mbox{LT}(f_{2})\rangle$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Hilbert Basis Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\end_layout
+
+\end_inset
+
+ (Hilbert Basis Theorem).
+ Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal in 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $I$
+\end_inset
+
+ is finitely-generated.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Gröbner Bases
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be a nonzero ideal in 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ A finite subset 
+\begin_inset Formula $G=\{g_{1},\dots,g_{t}\}$
+\end_inset
+
+ is said to be a 
+\series bold
+reduced Gröbner basis 
+\series default
+if 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\langle\mbox{LT}(g_{1}),\dots,\mbox{LT}(g_{t})\rangle=\langle\mbox{LT}(I)\rangle$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mbox{LC}(g)=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $g\in G$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For all 
+\begin_inset Formula $g\in G$
+\end_inset
+
+, no monomial of 
+\begin_inset Formula $g$
+\end_inset
+
+ lies in 
+\begin_inset Formula $\langle\mbox{LT}(G\setminus\{g\}\rangle$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal in 
+\begin_inset Formula $S$
+\end_inset
+
+ and let 
+\begin_inset Formula $G=\{g_{1},\dots,g_{t}\}$
+\end_inset
+
+ be the reduced Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ Then given a polynomial 
+\begin_inset Formula $f$
+\end_inset
+
+ in 
+\begin_inset Formula $S$
+\end_inset
+
+, it can be shown that there are unique polynomials 
+\begin_inset Formula $\pi(f)$
+\end_inset
+
+ and 
+\begin_inset Formula $f^{G}$
+\end_inset
+
+ in 
+\begin_inset Formula $S$
+\end_inset
+
+ such that 
+\begin_inset Formula $f=\pi(f)+f^{G}$
+\end_inset
+
+ and no term of 
+\begin_inset Formula $f^{G}$
+\end_inset
+
+ is divisible by any of 
+\begin_inset Formula $\mbox{LT}(g_{1}),\dots,\mbox{LT}(g_{t})$
+\end_inset
+
+.
+ We call 
+\begin_inset Formula $f^{G}$
+\end_inset
+
+ the 
+\series bold
+normal form of 
+\begin_inset Formula $f$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $G$
+\end_inset
+
+
+\series default
+.
+ It follows from uniqueness of 
+\begin_inset Formula $f^{G}$
+\end_inset
+
+ and 
+\begin_inset Formula $\pi(f)$
+\end_inset
+
+ that taking the normal form of a polynomial is a 
+\begin_inset Formula $K$
+\end_inset
+
+-linear map:
+\begin_inset Formula 
+\begin{equation}
+c_{1}f_{1}^{G}+c_{2}f_{2}^{G}=(c_{1}f_{1}+c_{2}f_{2})^{G}\label{eq:Klinearity}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $c_{1},c_{2}\in K$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{1},f_{2}\in S$
+\end_inset
+
+.
+ We will denote this map as 
+\begin_inset Formula $-^{G}$
+\end_inset
+
+.
+ An important property of 
+\begin_inset Formula $-^{G}$
+\end_inset
+
+ is that it preserves homogeneity.
+ The details can be found in 
+\backslash
+cite{GP08} and 
+\backslash
+cite{CLO15}.
+\end_layout
+
+\begin_layout Section
+Graded Rings and Modules
+\end_layout
+
+\begin_layout Subsection
+Graded Rings
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A 
+\begin_inset Formula $\textbf{graded ring}$
+\end_inset
+
+ 
+\begin_inset Formula $R$
+\end_inset
+
+ is a ring together with a direct sum decomposition 
+\begin_inset Formula 
+\[
+R=\bigoplus_{i\in\mathbb{Z}_{\geq0}}R_{i},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+ are abelian groups which satisfies the condition that if 
+\begin_inset Formula $r_{i}\in R_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{j}\in R_{j}$
+\end_inset
+
+, then 
+\begin_inset Formula $r_{i}r_{j}\in R_{i+j}$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+ are called 
+\series bold
+homogeneous components 
+\series default
+of 
+\begin_inset Formula $R$
+\end_inset
+
+ and the elements of 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+ are called 
+\series bold
+homogeneous elements 
+\series default
+of 
+\series bold
+degree 
+\series default
+
+\begin_inset Formula $i$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $r$
+\end_inset
+
+ is a homogeneous element in 
+\begin_inset Formula $R$
+\end_inset
+
+, then we denote the degree of 
+\begin_inset Formula $r$
+\end_inset
+
+ as 
+\begin_inset Formula $\text{deg}(r)$
+\end_inset
+
+.
+ When we say 
+\begin_inset Quotes eld
+\end_inset
+
+let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a graded ring
+\begin_inset Quotes erd
+\end_inset
+
+, we denote the homogeneous components of 
+\begin_inset Formula $R$
+\end_inset
+
+ as 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ The condition that 
+\begin_inset Formula $r_{i}\in R_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{j}\in R_{j}$
+\end_inset
+
+, then 
+\begin_inset Formula $r_{i}r_{j}\in R_{i+j}$
+\end_inset
+
+ is equivalent to the condition that 
+\begin_inset Formula $R_{i}R_{j}\subset R_{i+j}$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ An important example of a graded ring is a ring 
+\begin_inset Formula $R$
+\end_inset
+
+ endowed with the 
+\series bold
+trivial grading
+\series default
+: The homogoneeous components of 
+\begin_inset Formula $R$
+\end_inset
+
+ being 
+\begin_inset Formula $R_{0}:=R$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{i}:=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i>0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $R$
+\end_inset
+
+ is a field, then will 
+\emph on
+always
+\emph default
+ assume that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a graded ring endowed with the trivial grading.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring and let 
+\begin_inset Formula $Q$
+\end_inset
+
+ be an ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ The 
+\series bold
+associated graded ring of 
+\begin_inset Formula $R$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $Q$
+\end_inset
+
+ 
+\series default
+is 
+\begin_inset Formula 
+\[
+\mbox{Gr}_{Q}(R):=\bigoplus_{i=0}^{\infty}Q^{i}/Q^{i+1}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Multiplication in 
+\begin_inset Formula $\mbox{Gr}_{Q}(R)$
+\end_inset
+
+ is induced by the multiplication 
+\begin_inset Formula $Q^{i}\times Q^{j}\to Q^{i+j}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Weighted Polynomial Rings
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $w:=(w_{1},\dots,w_{n})$
+\end_inset
+
+ be an 
+\begin_inset Formula $n$
+\end_inset
+
+-tuple of positive integers.
+ We define the 
+\series bold
+weighted polynomial ring
+\series default
+ 
+\begin_inset Formula $S_{w}$
+\end_inset
+
+ with respect to the 
+\series bold
+weighted vector 
+\begin_inset Formula $w$
+\end_inset
+
+ 
+\series default
+to be the polynomial ring 
+\begin_inset Formula $R[x_{1},\dots,x_{n}]$
+\end_inset
+
+ endowed with the unique grading such that 
+\begin_inset Formula $\text{deg}(x_{\lambda})=\alpha_{\lambda}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda=1,\dots,n$
+\end_inset
+
+.
+ We define the 
+\series bold
+weighted degree 
+\series default
+of a monomial 
+\begin_inset Formula $m=x_{1}^{\alpha_{1}}\cdots x_{n}^{\alpha_{n}}$
+\end_inset
+
+ in 
+\begin_inset Formula $S_{w}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\text{deg}_{w}(m)$
+\end_inset
+
+, to be 
+\begin_inset Formula 
+\[
+\text{deg}_{w}(m):=\sum_{\lambda=1}^{n}w_{\lambda}\alpha_{\lambda}.
+\]
+
+\end_inset
+
+This grading gives 
+\begin_inset Formula $S_{w}$
+\end_inset
+
+ the structure of a graded ring, where the homogeneous components are given
+ by 
+\begin_inset Formula 
+\[
+(S_{w})_{i}:=\text{Span}_{R}\langle m\in S_{w}\mid m\text{ is monomial of weighted degree }i\rangle.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $w=(1,\dots,1)$
+\end_inset
+
+, then we recover the polynomial ring 
+\begin_inset Formula $R[x_{1},\dots,x_{n}]$
+\end_inset
+
+ with the usual grading.
+ If the context is clear, we simply use the letter 
+\begin_inset Formula $S$
+\end_inset
+
+ to denote this graded ring.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field and let 
+\begin_inset Formula $S_{w}$
+\end_inset
+
+ denote the weighted polynomial ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ with respect to the weighted vector 
+\begin_inset Formula $w:=(1,2,3)$
+\end_inset
+
+.
+ The first few homogeneous components of 
+\begin_inset Formula $S_{w}$
+\end_inset
+
+ start out as
+\begin_inset Formula 
+\begin{align*}
+(S_{w})_{0} & =K\\
+(S_{w})_{1} & =Kx\\
+(S_{w})_{2} & =Kx^{2}+Ky\\
+(S_{w})_{3} & =Kx^{3}+Kxy+Kz\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Graded 
+\begin_inset Formula $R$
+\end_inset
+
+-Modules
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a graded ring.
+ An 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $M$
+\end_inset
+
+, together with a direct sum decomposition 
+\begin_inset Formula 
+\[
+M=\bigoplus_{i\in\mathbb{Z}}M_{i}
+\]
+
+\end_inset
+
+into abelian groups 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ is called a 
+\series bold
+graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\series default
+if 
+\begin_inset Formula $R_{i}M_{j}\subset M_{i+j}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i,j\in\mathbb{Z}$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ are called 
+\series bold
+homogeneous components
+\series default
+ of 
+\begin_inset Formula $M$
+\end_inset
+
+ and the elements of 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+ are called 
+\series bold
+homogeneous 
+\series default
+of 
+\series bold
+degree 
+\series default
+
+\begin_inset Formula $i$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $m$
+\end_inset
+
+ is a homogeneous element in 
+\begin_inset Formula $M$
+\end_inset
+
+, then we denote the degree of 
+\begin_inset Formula $m$
+\end_inset
+
+ as 
+\begin_inset Formula $\text{deg}(m)$
+\end_inset
+
+.
+ When we say 
+\begin_inset Quotes eld
+\end_inset
+
+Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module
+\begin_inset Quotes erd
+\end_inset
+
+, then the homogeneous components of 
+\begin_inset Formula $M$
+\end_inset
+
+ are denoted 
+\begin_inset Formula $M_{i}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ Unlike in the case of graded rings, we do 
+\emph on
+not 
+\emph default
+usually assume that 
+\begin_inset Formula $M_{i}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i<0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Here's an important example of a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module where we do not necessarily have 
+\begin_inset Formula $M_{i}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i<0$
+\end_inset
+
+: If 
+\begin_inset Formula $M$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module, then for 
+\begin_inset Formula $j\in\mathbb{Z}$
+\end_inset
+
+, we define the 
+\begin_inset Formula $j$
+\end_inset
+
+'
+\series bold
+th
+\series default
+ 
+\series bold
+twist 
+\series default
+or the 
+\begin_inset Formula $j$
+\end_inset
+
+'
+\series bold
+th shift 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+ to be the graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula 
+\[
+M(j):=\bigoplus_{i\in\mathbb{Z}}M(j)_{i}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $M(j)_{i}:=M_{i+j}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Graded 
+\begin_inset Formula $R$
+\end_inset
+
+-Submodules
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{gradedsubmodule}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module and 
+\begin_inset Formula $N\subset M$
+\end_inset
+
+ a submodule.
+ The following conditions are equivalent:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $N$
+\end_inset
+
+ is graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module whose homogeneous components are 
+\begin_inset Formula $M_{i}\cap N$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $N$
+\end_inset
+
+ is generated by homogeneous elements.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $m=\sum m_{i}$
+\end_inset
+
+ with 
+\begin_inset Formula $m_{i}\in M_{i}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $m\in N$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $m_{i}\in N$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The proof is straightforward and can be found in 
+\backslash
+cite{GP08}.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A submodule 
+\begin_inset Formula $N\subset M$
+\end_inset
+
+ satisfying the equivalent conditions of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{gradedsubmodule})
+\end_layout
+
+\end_inset
+
+ is called a 
+\series bold
+graded 
+\series default
+(or 
+\series bold
+homogeneous
+\series default
+) 
+\begin_inset Formula $R$
+\end_inset
+
+-submodule.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field, 
+\begin_inset Formula $S_{w}$
+\end_inset
+
+ be the polynoimal ring 
+\begin_inset Formula $K[x,y,z]$
+\end_inset
+
+ with respect to the weight 
+\begin_inset Formula $w=(5,6,15)$
+\end_inset
+
+, and let 
+\begin_inset Formula $I=\langle y^{5}-z^{2},x^{3}-z,x^{6}-y^{5}\rangle$
+\end_inset
+
+ be an ideal 
+\begin_inset Formula $S_{w}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal in 
+\begin_inset Formula $S_{w}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a graded ring, and let 
+\begin_inset Formula $I$
+\end_inset
+
+ be a homogeneous ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then the quotient 
+\begin_inset Formula $R/I$
+\end_inset
+
+ has an induced structure as a graded ring, where the homogeneous component
+ of 
+\begin_inset Formula $R/I$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+(R/I)_{i}:=(R_{i}+I)/I\cong R_{i}/I\cap R_{i}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Homomorphisms of Graded 
+\begin_inset Formula $R$
+\end_inset
+
+-Modules
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $M$
+\end_inset
+
+ and 
+\begin_inset Formula $N$
+\end_inset
+
+ be graded 
+\begin_inset Formula $R$
+\end_inset
+
+-modules.
+ A homomorphism 
+\begin_inset Formula $\varphi:M\to N$
+\end_inset
+
+ is called 
+\series bold
+homogeneous 
+\series default
+(or 
+\series bold
+graded
+\series default
+) of degree 
+\begin_inset Formula $j$
+\end_inset
+
+ if 
+\begin_inset Formula $\varphi(M_{i})\subset N_{i+j}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is homogeneous of degree zero then we will simply say 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is 
+\series bold
+homogeneous
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ denote the polynomial ring 
+\begin_inset Formula $K[x,y,z,t]$
+\end_inset
+
+ with the natural grading.
+ Then the matrix
+\begin_inset Formula 
+\[
+U:=\begin{pmatrix}x+y+z & w^{2}-x^{2} & x^{3}\\
+1 & x & xy+z^{2}
+\end{pmatrix}
+\]
+
+\end_inset
+
+defines a homomorphism 
+\begin_inset Formula $U:R(-1)\oplus R(-2)\oplus R(-3)\to R\oplus R(-1)$
+\end_inset
+
+ which is graded of degree zero.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Graded 
+\begin_inset Formula $R$
+\end_inset
+
+-Algebras
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a graded ring and let 
+\begin_inset Formula $A$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ We say 
+\begin_inset Formula $A$
+\end_inset
+
+ is a 
+\series bold
+graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra 
+\series default
+if 
+\begin_inset Formula $A$
+\end_inset
+
+ is graded as a ring and 
+\begin_inset Formula $A_{0}=R$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ We do not require 
+\begin_inset Formula $A$
+\end_inset
+
+ to be a 
+\emph on
+commutative 
+\emph default
+ring.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $Q$
+\end_inset
+
+ be an ideal in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ The 
+\series bold
+blowup algebra of 
+\begin_inset Formula $Q$
+\end_inset
+
+ in 
+\begin_inset Formula $R$
+\end_inset
+
+ 
+\series default
+is the 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra
+\begin_inset Formula 
+\[
+B_{Q}(R):=R+tQ+t^{2}Q^{2}+t^{3}Q^{3}+\cdots\cong R\oplus Q\oplus Q^{2}\oplus Q^{3}\oplus\cdots.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The multiplication in 
+\begin_inset Formula $B_{Q}(A)$
+\end_inset
+
+ is induced by the multiplication 
+\begin_inset Formula $Q^{i}\times Q^{j}\to Q^{i+j}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Homomorphisms of Graded 
+\begin_inset Formula $R$
+\end_inset
+
+-Algebras
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $A'$
+\end_inset
+
+ be graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras.
+ We say 
+\begin_inset Formula $\varphi:A\to A'$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism if 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is a homomorphism when viewed as a map of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules.
+ In other words, 
+\begin_inset Formula 
+\[
+\varphi(r_{1}a_{1}+r_{2}a_{2})=r_{1}\varphi(a_{1})+r_{2}\varphi(a_{2})
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $r_{1},r_{2}\in R$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{1},a_{2}\in A$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\varphi$
+\end_inset
+
+ preserves the algebra structure.
+ In other words 
+\begin_inset Formula 
+\[
+\varphi(ab)=\varphi(a)\varphi(b)
+\]
+
+\end_inset
+
+ for all 
+\begin_inset Formula $a,b\in A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Moreover, we say 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is 
+\series bold
+graded 
+\series default
+if 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is a graded homomorphism when viewed as a map of graded 
+\begin_inset Formula $R$
+\end_inset
+
+-modules.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Finitely-Generated Graded 
+\begin_inset Formula $R$
+\end_inset
+
+-Algebras
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+An graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra 
+\begin_inset Formula $A$
+\end_inset
+
+ is said to be 
+\series bold
+finitely-generated 
+\series default
+if it is finitely-generated as an 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ The next proposition gives a classification of all finitely-generated commutati
+ve 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propclassificationoffgRalgebras}
+\end_layout
+
+\end_inset
+
+ Every finitely-generated commutative graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra is isomorphic to 
+\begin_inset Formula $S_{w}/I$
+\end_inset
+
+, where 
+\begin_inset Formula $S_{w}$
+\end_inset
+
+ denotes the polynomial ring 
+\begin_inset Formula $R[x_{1},\dots,x_{n}]$
+\end_inset
+
+ with respect to the weighted vector 
+\begin_inset Formula $w\in\mathbb{Z}_{\geq0}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $I$
+\end_inset
+
+ is a homogeneous ideal in 
+\begin_inset Formula $S_{w}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a finitely-generated commutative 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra with generators 
+\begin_inset Formula $a_{1},\dots,a_{n}$
+\end_inset
+
+.
+ Then for each 
+\begin_inset Formula $\lambda=1,\dots,n$
+\end_inset
+
+ we have 
+\begin_inset Formula $a_{\lambda}\in A_{w_{\lambda}}$
+\end_inset
+
+, where 
+\begin_inset Formula $w_{\lambda}\in\mathbb{Z}_{\geq0}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\varphi:S_{w}\to A$
+\end_inset
+
+ be the unique morphism of graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras such that 
+\begin_inset Formula $\varphi(x_{\lambda})=a_{\lambda}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda=1,\dots,n$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A$
+\end_inset
+
+ is isomorphic to 
+\begin_inset Formula $S_{w}/\text{Ker}(\varphi)$
+\end_inset
+
+ as graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Algorithmic Computations in the 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra 
+\begin_inset Formula $S/I$
+\end_inset
+
+ using Gröbner Bases
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $K$
+\end_inset
+
+ be a field, 
+\begin_inset Formula $S$
+\end_inset
+
+ denote the polynomials ring 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+, and 
+\begin_inset Formula $I$
+\end_inset
+
+ be a homogeneous ideal in 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $S/I$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra, where the homogeneous component 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ is the 
+\begin_inset Formula $K$
+\end_inset
+
+-vector space of all homogeneous polynomials 
+\begin_inset Formula $f\in S$
+\end_inset
+
+ of degree 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Now fix a monomial ordering and let 
+\begin_inset Formula $G$
+\end_inset
+
+ be the reduced Gröbner basis of 
+\begin_inset Formula $I$
+\end_inset
+
+ with respect to this ordering.
+ Define 
+\begin_inset Formula 
+\[
+S_{I}:=\text{Span}_{K}(x^{\alpha}\mid x^{\alpha}\notin\langle\text{LT}(I)\rangle)
+\]
+
+\end_inset
+
+There is an obvious decompostion of 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ into 
+\begin_inset Formula $K$
+\end_inset
+
+-vector spaces 
+\begin_inset Formula $(S_{I})_{i}$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\[
+(S_{I})_{i}=\text{Span}_{K}(x^{\alpha}\mid x^{\alpha}\notin\langle\text{LT}(I)\rangle\text{ and }\text{deg}(x^{\alpha})=i).
+\]
+
+\end_inset
+
+In fact, 
+\begin_inset Formula $S/I$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ are isomorphic as graded 
+\begin_inset Formula $K$
+\end_inset
+
+-modules.
+ The isomorphism is given by mapping 
+\begin_inset Formula $\overline{f}\in S/I$
+\end_inset
+
+ to 
+\begin_inset Formula $f^{G}\in S_{I}$
+\end_inset
+
+.
+ Indeed, 
+\begin_inset Formula $K$
+\end_inset
+
+-linearity follows from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:Klinearity})
+\end_layout
+
+\end_inset
+
+, and the grading is preserved since 
+\begin_inset Formula $-^{G}$
+\end_inset
+
+ preserves homogeneity.
+ This makes 
+\begin_inset Formula $S/I$
+\end_inset
+
+ isomorphic to 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ as graded 
+\begin_inset Formula $K$
+\end_inset
+
+-modules.
+ Using this isomorphism, we can carry multiplication from 
+\begin_inset Formula $S/I$
+\end_inset
+
+ over to 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ to turn 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ into a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebra: For 
+\begin_inset Formula $f_{1},f_{2}\in S_{I}$
+\end_inset
+
+, we define multiplication as
+\begin_inset Formula 
+\begin{equation}
+f_{1}\cdot f_{2}=(f_{1}f_{2})^{G}.\label{eq:SImult}
+\end{equation}
+
+\end_inset
+
+Defining multilpication this way makes 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ isomorphic to 
+\begin_inset Formula $S/I$
+\end_inset
+
+ as graded 
+\begin_inset Formula $K$
+\end_inset
+
+-algebras.
+ For computational purposes, it is easier to work with 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ rather than 
+\begin_inset Formula $S/I$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{examplediffalgSI}
+\end_layout
+
+\end_inset
+
+ Consider 
+\begin_inset Formula $S=K[x,y]$
+\end_inset
+
+ and 
+\begin_inset Formula $I=\langle xy^{2}+y^{3},x^{3}+x^{2}y\rangle$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $G=\{xy^{2}+y^{3},x^{3}+x^{2}y\}$
+\end_inset
+
+ is the reduced Gröbner basis with respect to graded reverse lexicographical
+ order.
+ Thus 
+\begin_inset Formula $\text{LT}(I)=\langle xy^{2},x^{3}\rangle$
+\end_inset
+
+.
+ Let's do some computations in 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+.
+ First, let's write the first few homogeneous terms of 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+(S_{I})_{0} & =K\\
+(S_{I})_{1} & =Kx+Ky\\
+(S_{I})_{2} & =Kx^{2}+Kxy+Ky^{2}\\
+(S_{I})_{3} & =Kx^{2}y+Ky^{3}\\
+(S_{I})_{4} & =Ky^{4}\\
+(S_{I})_{5} & =Ky^{5}\\
+ & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Next, we multiply some elements together in 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ in the multiplication table below
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\cdot$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x^{2}y$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{6}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x^{2}y$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x^{2}y$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $xy$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y^{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Consider 
+\begin_inset Formula $S=K[x,y]$
+\end_inset
+
+ and 
+\begin_inset Formula $I=\langle xy+y^{2},x^{3}\rangle$
+\end_inset
+
+.
+ We first use Singular to compute a Gröbner basis 
+\begin_inset Formula $G$
+\end_inset
+
+ of 
+\begin_inset Formula $I$
+\end_inset
+
+ with respect to graded reverse lexicographical ordering.
+ We obtain 
+\begin_inset Formula $G=\{g_{1},g_{2},g_{3}\}$
+\end_inset
+
+.
+ where 
+\begin_inset Formula $g_{1}=xy+y^{2}$
+\end_inset
+
+, 
+\begin_inset Formula $g_{2}=x^{3}$
+\end_inset
+
+, and 
+\begin_inset Formula $g_{3}=y^{4}$
+\end_inset
+
+.
+ Then the first few homogeneous components of 
+\begin_inset Formula $I$
+\end_inset
+
+, 
+\begin_inset Formula $S/I$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{I}$
+\end_inset
+
+ are given below
+\begin_inset Formula 
+\begin{align*}
+I_{0} & =0 & (S/I)_{0} & =K\cdot\overline{1} & (S_{I})_{0} & =K\\
+I_{1} & =0 & (S/I)_{1} & =K\overline{x}+K\overline{y} & (S_{I})_{1} & =Kx+Ky\\
+I_{2} & =Kg_{1} & (S/I)_{2} & =K\overline{x}^{2}+K\overline{y}^{2} & (S_{I})_{2} & =Kx^{2}+Ky^{2}\\
+I_{3} & =Kxg_{1}+Kyg_{1}+Kg_{2} & (S/I)_{3} & =K\overline{y}^{3} & (S_{I})_{3} & =Ky^{3}\\
+I_{4} & =S_{4} & (S/I)_{4} & =0 & (S_{I})_{4} & =0\\
+ & \vdots &  & \vdots &  & \vdots
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Homological Algebra
+\end_layout
+
+\begin_layout Standard
+Throughout this section, let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring.
+ 
+\end_layout
+
+\begin_layout Subsection
+Chain Complexes over 
+\begin_inset Formula $R$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A 
+\series bold
+chain complex
+\series default
+ 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ 
+\series bold
+over
+\series default
+ 
+\begin_inset Formula $R$
+\end_inset
+
+, or simply a 
+\series bold
+chain complex 
+\series default
+if the base ring 
+\begin_inset Formula $R$
+\end_inset
+
+ is understood from context, is a sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ and morphisms 
+\begin_inset Formula $d_{i}:A_{i}\to A_{i-1}$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} (A,d) := 
+\backslash
+cdots 
+\backslash
+arrow[r] & A_{i+1} 
+\backslash
+arrow[r,"d _{i+1}"] & A_i  
+\backslash
+arrow[r," d _i "] & A_{i-1} 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+such that 
+\begin_inset Formula $d_{i}\circ d_{i+1}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ The condition 
+\begin_inset Formula $d_{i}\circ d_{i+1}=0$
+\end_inset
+
+ is equivalent to the condition 
+\begin_inset Formula $\text{Ker}(d_{i})\supset\text{Im}(d_{i+1})$
+\end_inset
+
+.
+ With this in mind, we define the 
+\series bold
+
+\begin_inset Formula $i$
+\end_inset
+
+th
+\series default
+ 
+\series bold
+homology of the chain complex
+\series default
+ 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ to be 
+\begin_inset Formula 
+\[
+H_{i}(A,d):=\text{Ker}(d_{i})/\text{Im}(d_{i+1}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ and 
+\begin_inset Formula $(A',d')$
+\end_inset
+
+ be two chain complexes.
+ A 
+\series bold
+chain map
+\series default
+ 
+\begin_inset Formula $\varphi:(A,d)\to(A',d')$
+\end_inset
+
+ is a sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomoprhisms 
+\begin_inset Formula $\varphi_{i}:A_{i}\to A'_{i}$
+\end_inset
+
+ such that 
+\begin_inset Formula $d_{i}'\varphi_{i}=\varphi_{i-1}d_{i}'$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ We can view a chain map visually as illustrated in the diagram below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} (A,d) := 
+\backslash
+cdots 
+\backslash
+arrow[r] & A_{i+1} 
+\backslash
+arrow[r,"d _{i+1}"] 
+\backslash
+arrow[d,"
+\backslash
+varphi _{i+1} "] & A_i  
+\backslash
+arrow[r," d _i "]  
+\backslash
+arrow[d,"
+\backslash
+varphi _{i} "] & A_{i-1} 
+\backslash
+arrow[r] 
+\backslash
+arrow[d,"
+\backslash
+varphi _{i-1} "] & 
+\backslash
+cdots 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+(A',d') := 
+\backslash
+cdots 
+\backslash
+arrow[r] & A_{i+1}' 
+\backslash
+arrow[r,"d _{i+1}'"] & A_{i}'  
+\backslash
+arrow[r," d _i ' "] & A_{i-1}' 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Simplifying Notation
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To simplify notation in what follows, we think of 
+\begin_inset Formula $R$
+\end_inset
+
+ as a trivially graded ring.
+ If 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ is a chain complex over 
+\begin_inset Formula $R$
+\end_inset
+
+, then we think of 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ as a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $A$
+\end_inset
+
+ together with a graded endomorphism 
+\begin_inset Formula $d:A\to A$
+\end_inset
+
+ of degree 
+\begin_inset Formula $-1$
+\end_inset
+
+ such that 
+\begin_inset Formula $d^{2}=0$
+\end_inset
+
+.
+ We think of 
+\begin_inset Formula $d_{i}$
+\end_inset
+
+ as being the restriction of 
+\begin_inset Formula $d$
+\end_inset
+
+ to 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ and we often refer to 
+\begin_inset Formula $d$
+\end_inset
+
+ as the 
+\series bold
+differential
+\series default
+.
+ An element in 
+\begin_inset Formula $\text{Ker}(d)$
+\end_inset
+
+ is called a 
+\series bold
+cycle 
+\series default
+of 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ and an element in 
+\begin_inset Formula $\text{Im}(d)$
+\end_inset
+
+ is called a 
+\series bold
+boundary 
+\series default
+of
+\series bold
+ 
+\series default
+
+\begin_inset Formula $(A,d)$
+\end_inset
+
+.
+ We define the 
+\series bold
+homology 
+\series default
+of 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ to be 
+\begin_inset Formula 
+\[
+H(A,d):=\text{Ker}(d)/\text{Im}(d)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $H(A,d)=\bigoplus_{i\in\mathbb{Z}}H_{i}(A,d)$
+\end_inset
+
+.
+ We sometimes write 
+\begin_inset Formula $H(A)$
+\end_inset
+
+ instead of 
+\begin_inset Formula $H(A,d)$
+\end_inset
+
+ if the differential is understood from context.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ and 
+\begin_inset Formula $(A',d')$
+\end_inset
+
+ be chain complexes.
+ A chain map 
+\begin_inset Formula $\varphi:(A,d)\to(A',d')$
+\end_inset
+
+ can be thought of as a homogeneous homomorphism of graded 
+\begin_inset Formula $R$
+\end_inset
+
+-modules such that 
+\begin_inset Formula $\varphi d=d'\varphi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Homotopy Equivalence
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+ be chain maps of chain complexes 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ and 
+\begin_inset Formula $(A',d')$
+\end_inset
+
+.
+ We say 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is 
+\series bold
+homotopic 
+\series default
+to 
+\begin_inset Formula $\psi$
+\end_inset
+
+ if there is a graded homomorphism 
+\begin_inset Formula $h:A\to A'$
+\end_inset
+
+ of degree 
+\begin_inset Formula $1$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi-\psi=d'h+hd$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+ be chain maps of chain complexes 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ and 
+\begin_inset Formula $(A',d')$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi$
+\end_inset
+
+ induce the same map on homology.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ The proof is straightforward and can be found in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{E99}
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Exact Sequences of Chain Complexes over 
+\begin_inset Formula $R$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+, 
+\begin_inset Formula $(A',d')$
+\end_inset
+
+, and 
+\begin_inset Formula $(A'',d'')$
+\end_inset
+
+ be chain complexes and let 
+\begin_inset Formula $\varphi:(A',d')\to(A,d)$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi:(A,d)\to(A'',d'')$
+\end_inset
+
+ be chain maps.
+ Then we say that
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] & A' 
+\backslash
+arrow[r, "
+\backslash
+varphi "]  & A 
+\backslash
+arrow[r, "
+\backslash
+psi "]  & A'' 
+\backslash
+arrow[r]  & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+is a 
+\series bold
+short exact sequence 
+\series default
+of chain complexes if the following diagram is commutative with exact rows:
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[row sep=30] & 
+\backslash
+vdots 
+\backslash
+arrow[d, "d' _{i+2}"]  & 
+\backslash
+vdots 
+\backslash
+arrow[d, "d _{i+2}" ]   & 
+\backslash
+vdots 
+\backslash
+arrow[d , "d'' _{i+2}"] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0 
+\backslash
+arrow[r] & A'_{i+1}   
+\backslash
+arrow[r, "
+\backslash
+varphi _{i+1}"] 
+\backslash
+arrow[d, "d' _{i+1} " ] & A_{i+1}   
+\backslash
+arrow[r, "
+\backslash
+psi _{i+1}"] 
+\backslash
+arrow[d, "d _{i+1} " ] & A''_{i+1}   
+\backslash
+arrow[r] 
+\backslash
+arrow[d, "d'' _{i+1} " ] & 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0 
+\backslash
+arrow[r] & A'_{i}   
+\backslash
+arrow[r, "
+\backslash
+varphi _{i}"] 
+\backslash
+arrow[d, "d' _{i} " ] & A_{i}   
+\backslash
+arrow[r, "
+\backslash
+psi _{i}"] 
+\backslash
+arrow[d, "d _{i} " ] & A''_{i}   
+\backslash
+arrow[r] 
+\backslash
+arrow[d, "d'' _{i} " ] & 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0 
+\backslash
+arrow[r] & A'_{i-1}   
+\backslash
+arrow[r, "
+\backslash
+varphi _{i-1}"] 
+\backslash
+arrow[d, "d' _{i-1} " ] & A_{i-1}   
+\backslash
+arrow[r, "
+\backslash
+psi _{i-1}"] 
+\backslash
+arrow[d, "d _{i-1} " ] & A''_{i-1}   
+\backslash
+arrow[r] 
+\backslash
+arrow[d, "d'' _{i-1} " ] & 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+   & 
+\backslash
+vdots & 
+\backslash
+vdots  & 
+\backslash
+vdots 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Given such a short exact sequence, we get induced maps 
+\begin_inset Formula $\varphi_{i}:H_{i}(A')\to H_{i}(A)$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{i}:H_{i}(A)\to H_{i}(A'')$
+\end_inset
+
+, and 
+\series bold
+connecting homomorphisms
+\series default
+ 
+\begin_inset Formula $\gamma_{i}:H_{i}(A'')\to H_{i-1}(A')$
+\end_inset
+
+ which gives rise a long exact sequence in homology:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[row sep=40]  && 
+\backslash
+cdots 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & H_{i+1} (A'') 
+\backslash
+arrow[dll, " 
+\backslash
+gamma _{i+1} ", swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+  & H_{i} (A') 
+\backslash
+arrow[r, "
+\backslash
+varphi _i "] & H_{i} (A) 
+\backslash
+arrow[r, " 
+\backslash
+psi _i"] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z}] & H_{i} (A'') 
+\backslash
+arrow[dll, " 
+\backslash
+gamma _i  ", swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z) [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ & H_{i-1} (A') 
+\backslash
+arrow[r, "
+\backslash
+varphi _{i-1} "] & H_{i-1} (A) 
+\backslash
+arrow[r, "
+\backslash
+psi _{i-1} "] & 
+\backslash
+cdots 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ It is a nice exercise in homological algebra to work out the details of
+ the connecting map.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Differential Graded 
+\begin_inset Formula $R$
+\end_inset
+
+-Algebras
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A 
+\series bold
+differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra
+\series default
+ is a chain complex 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ such that 
+\begin_inset Formula $A$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra and the differential 
+\begin_inset Formula $d$
+\end_inset
+
+ satisfies the 
+\series bold
+Leibniz law
+\series default
+ with respect to this algebra structure: 
+\begin_inset Formula 
+\begin{equation}
+d(ab)=d(a)b+(-1)^{\text{deg}(a)}ad(b).\label{eq:leibniz1-1}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $a,b\in A$
+\end_inset
+
+.
+ We say that the differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra is 
+\series bold
+commutative 
+\series default
+if 
+\begin_inset Formula $ab=(-1)^{\deg(a)\deg(b)}ba$
+\end_inset
+
+.
+ We say that the differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra is 
+\series bold
+strictly commutative 
+\series default
+if in addition 
+\begin_inset Formula $a^{2}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $\text{deg}(a)$
+\end_inset
+
+ odd.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Homomorphisms of Differential Graded 
+\begin_inset Formula $R$
+\end_inset
+
+-Algebras
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ and 
+\begin_inset Formula $(A',d')$
+\end_inset
+
+ be differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras.
+ We say 
+\begin_inset Formula $\varphi:(A,d)\to(A',d')$
+\end_inset
+
+ is 
+\series bold
+homomorphism of differential graded
+\series default
+ 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras if 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is both a chain map and an 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Differential Graded 
+\begin_inset Formula $A$
+\end_inset
+
+-Modules
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ be a differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ A
+\series bold
+ differential graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module 
+\begin_inset Formula $(M,d)$
+\end_inset
+
+
+\series default
+ is a chain complex 
+\begin_inset Formula $(M,d)$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+ such that 
+\begin_inset Formula $M$
+\end_inset
+
+ is an 
+\begin_inset Formula $A$
+\end_inset
+
+-module and such that the differential 
+\begin_inset Formula $d$
+\end_inset
+
+ satisfies the 
+\series bold
+Leibniz law
+\series default
+ with respect to the algebra structure in 
+\begin_inset Formula $A$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+d(am)=d(a)m+(-1)^{\text{deg}(a)}ad(m).\label{eq:leibniz1-1-1}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $a\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $m\in M$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Obtaining a Differential Graded 
+\begin_inset Formula $A$
+\end_inset
+
+-Module from a Chain Complex over 
+\begin_inset Formula $R$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $(A,d_{A})$
+\end_inset
+
+ be a differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ If we start with a chain complex over 
+\begin_inset Formula $R$
+\end_inset
+
+, then we can construct a differential graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+ Indeed, suppose that 
+\begin_inset Formula $(B,d_{B})$
+\end_inset
+
+ is a chain complex over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $A\otimes_{R}B$
+\end_inset
+
+ is an 
+\begin_inset Formula $A$
+\end_inset
+
+-module and a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module whose homogeneous component in degree 
+\begin_inset Formula $k$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+(A\otimes_{R}B)_{k}:=\bigoplus_{i+j=k}A_{i}\otimes_{R}B_{j}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We define a differential 
+\begin_inset Formula $d$
+\end_inset
+
+ on 
+\begin_inset Formula $A\otimes_{R}B$
+\end_inset
+
+ by first definining it on the elementary tensors as
+\begin_inset Formula 
+\[
+d(a\otimes b):=d_{A}(a)\otimes b+(-1)^{\text{deg}(a)}a\otimes d_{B}(b),
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $b\in B$
+\end_inset
+
+, and then extending it 
+\begin_inset Formula $R$
+\end_inset
+
+-linearly everywhere else.
+ A straightforward calculation shows that 
+\begin_inset Formula $d^{2}=0$
+\end_inset
+
+ and that the differential satisfies Leibniz law 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:leibniz1-1-1})
+\end_layout
+
+\end_inset
+
+.
+ Moreover, if 
+\begin_inset Formula $B$
+\end_inset
+
+ is a differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra, then 
+\begin_inset Formula $A\otimes_{R}B$
+\end_inset
+
+ can realized as a differential graded 
+\begin_inset Formula $A$
+\end_inset
+
+-algebra and a differential graded 
+\begin_inset Formula $B$
+\end_inset
+
+-algebra.
+ Multiplication in 
+\begin_inset Formula $A\otimes_{R}B$
+\end_inset
+
+ is defined by 
+\begin_inset Formula 
+\[
+(a\otimes b)(a'\otimes b')=(-1)^{\text{deg}(a')\text{deg}(b)}aa'\otimes bb'.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for all 
+\begin_inset Formula $a,a'\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $b,b\in B$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\end_layout
+
+\end_inset
+
+ In particular, if 
+\begin_inset Formula $M$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-module endowed with the trivial grading, then 
+\begin_inset Formula $(A\otimes_{R}M,d)$
+\end_inset
+
+ is a differential graded 
+\begin_inset Formula $A$
+\end_inset
+
+-module where the homogeneous componenet of degree 
+\begin_inset Formula $k$
+\end_inset
+
+ in 
+\begin_inset Formula $A\otimes_{R}M$
+\end_inset
+
+ is 
+\begin_inset Formula $(A\otimes_{R}M)_{k}:=A_{k}\otimes_{R}M$
+\end_inset
+
+, and 
+\begin_inset Formula $d$
+\end_inset
+
+ acts on elementary tensors as 
+\begin_inset Formula $d(a\otimes m)=d(a)\otimes m$
+\end_inset
+
+.
+  
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Exterior Algebras and Koszul Complexes
+\end_layout
+
+\begin_layout Subsubsection
+Exterior Algebras
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring and 
+\begin_inset Formula $M$
+\end_inset
+
+ an 
+\begin_inset Formula $R$
+\end_inset
+
+-module.
+ For 
+\begin_inset Formula $k\geq2$
+\end_inset
+
+, the 
+\begin_inset Formula $k$
+\end_inset
+
+th 
+\series bold
+exteror power 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\Lambda^{k}(M)$
+\end_inset
+
+, is the 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $M^{\otimes k}/J_{k}$
+\end_inset
+
+ where 
+\begin_inset Formula $J_{k}$
+\end_inset
+
+ is the submodule of 
+\begin_inset Formula $M^{\otimes k}$
+\end_inset
+
+ spanned by all 
+\begin_inset Formula $m_{1}\otimes\cdots\otimes m_{k}$
+\end_inset
+
+ with 
+\begin_inset Formula $m_{i}=m_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+.
+ For any 
+\begin_inset Formula $m_{1},\dots,m_{k}\in M$
+\end_inset
+
+, the coset of 
+\begin_inset Formula $m_{1}\otimes\cdots\otimes m_{k}$
+\end_inset
+
+ in 
+\begin_inset Formula $\Lambda^{k}(M)$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $m_{1}\wedge\cdots\wedge m_{k}$
+\end_inset
+
+.
+ For completeness, we set 
+\begin_inset Formula $\Lambda^{0}(M)=R$
+\end_inset
+
+ and 
+\begin_inset Formula $\Lambda^{1}(M)=M$
+\end_inset
+
+.
+ A general element in 
+\begin_inset Formula $\Lambda^{k}(M)$
+\end_inset
+
+ will be denoted as 
+\begin_inset Formula $\omega$
+\end_inset
+
+ or 
+\begin_inset Formula $\eta$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $M^{\otimes k}$
+\end_inset
+
+ is spanned by tensors 
+\begin_inset Formula $m_{1}\otimes\cdots\otimes m_{k}$
+\end_inset
+
+, the quotient module 
+\begin_inset Formula $M^{\otimes k}/J_{k}=\Lambda^{k}(M)$
+\end_inset
+
+ is spanned by their images 
+\begin_inset Formula $m_{1}\wedge\cdots\wedge m_{k}$
+\end_inset
+
+.
+ That is, any 
+\begin_inset Formula $\omega\in\Lambda^{k}(M)$
+\end_inset
+
+ is a finite 
+\begin_inset Formula $R$
+\end_inset
+
+-linear combination
+\begin_inset Formula 
+\[
+\omega=\sum r_{i_{1},\dots,i_{k}}m_{i_{1}}\wedge\cdots\wedge m_{i_{k}},
+\]
+
+\end_inset
+
+where there coefficients 
+\begin_inset Formula $r_{i_{1},\dots,i_{k}}$
+\end_inset
+
+ are in 
+\begin_inset Formula $R$
+\end_inset
+
+ and the 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+'s are in 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ We call 
+\begin_inset Formula $m_{1}\wedge\cdots\wedge m_{k}$
+\end_inset
+
+ an 
+\series bold
+elementary wedge product
+\series default
+.
+ Since 
+\begin_inset Formula $r(m_{1}\wedge\cdots\wedge m_{k})=(rm_{1})\wedge\cdots\wedge m_{k}$
+\end_inset
+
+, every element of 
+\begin_inset Formula $\Lambda^{k}(M)$
+\end_inset
+
+ is a sum (not just a linear combination) of elementary wedge products.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We define the 
+\series bold
+exterior algebra 
+\series default
+of 
+\begin_inset Formula $M$
+\end_inset
+
+ to
+\series bold
+ 
+\series default
+be 
+\begin_inset Formula 
+\[
+\Lambda(M):=\bigoplus_{k\geq0}\Lambda^{k}(M),
+\]
+
+\end_inset
+
+where the multiplication rule given by the wedge product.
+ The exterior algebra of 
+\begin_inset Formula $M$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra, where the degree 
+\begin_inset Formula $k$
+\end_inset
+
+ homogeneous component is 
+\begin_inset Formula $\Lambda^{k}(M)$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $R$
+\end_inset
+
+ does not have characteristic 
+\begin_inset Formula $2$
+\end_inset
+
+, then the exterior algebra of 
+\begin_inset Formula $M$
+\end_inset
+
+ is 
+\series bold
+skew commutative
+\series default
+.
+ This means that if 
+\begin_inset Formula $\omega_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\omega_{2}$
+\end_inset
+
+ are homogeneous elements, then 
+\begin_inset Formula 
+\[
+\omega_{1}\wedge\omega_{2}=(-1)^{\text{deg}(\omega_{1})\deg(\omega_{2})}\omega_{2}\wedge\omega_{1}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The construction of 
+\begin_inset Formula $\Lambda(M)$
+\end_inset
+
+ is functioral in 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ This means that if 
+\begin_inset Formula $N$
+\end_inset
+
+ is another 
+\begin_inset Formula $R$
+\end_inset
+
+-module and 
+\begin_inset Formula $\varphi:M\to N$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism.
+ Then 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ induces a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $\wedge\varphi:\Lambda(M)\to\Lambda(N)$
+\end_inset
+
+, where 
+\begin_inset Formula $\wedge\varphi$
+\end_inset
+
+ takes the elementary wedge product 
+\begin_inset Formula $m_{1}\wedge\cdots\wedge m_{k}$
+\end_inset
+
+ in 
+\begin_inset Formula $\Lambda(M)$
+\end_inset
+
+ and maps it to the wedge product 
+\begin_inset Formula $\varphi(m_{1})\wedge\cdots\wedge\varphi(m_{k})$
+\end_inset
+
+ in 
+\begin_inset Formula $\Lambda(N)$
+\end_inset
+
+.
+ We will write 
+\begin_inset Formula $\wedge^{k}\varphi$
+\end_inset
+
+ to be the induced 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism from 
+\begin_inset Formula $\Lambda^{k}(M)$
+\end_inset
+
+ to 
+\begin_inset Formula $\Lambda^{k}(N)$
+\end_inset
+
+.
+ In particular, if 
+\begin_inset Formula $N$
+\end_inset
+
+ is free of rank 
+\begin_inset Formula $n$
+\end_inset
+
+, then 
+\begin_inset Formula $\Lambda^{n}(N)\cong R$
+\end_inset
+
+, and if 
+\begin_inset Formula $\varphi:N\to N$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism, then 
+\begin_inset Formula $\wedge^{n}\varphi$
+\end_inset
+
+ is multiplication by the determinant of any matrix representing 
+\begin_inset Formula $\varphi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring, 
+\begin_inset Formula $M=Rx_{1}\oplus Rx_{2}\oplus Rx_{3}\cong R^{3}$
+\end_inset
+
+, and let 
+\begin_inset Formula $\varphi:M\to M$
+\end_inset
+
+ be the 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism induced by setting 
+\begin_inset Formula $\varphi(x_{\mu})=\sum_{\lambda=1}^{n}a_{\lambda\mu}x_{\lambda}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq\lambda,\mu\leq3$
+\end_inset
+
+.
+ The matrix representation of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ with respect to the ordered basis 
+\begin_inset Formula $\beta_{1}=\{x_{1},x_{2},x_{3}\}$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+[\varphi]_{\beta_{1}}^{\beta_{1}}:=\begin{pmatrix}a_{11} & a_{12} & a_{13}\\
+a_{21} & a_{22} & a_{23}\\
+a_{31} & a_{32} & a_{33}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To calculate 
+\begin_inset Formula $\wedge^{2}\varphi$
+\end_inset
+
+, we need to see how it acts on the basis vectors 
+\begin_inset Formula $x_{\lambda}\wedge x_{\mu}$
+\end_inset
+
+ where 
+\begin_inset Formula $1\leq\lambda<\mu\leq3$
+\end_inset
+
+: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\varphi(x_{1})\wedge\varphi(x_{2}) & =(a_{11}x_{1}+a_{21}x_{2}+a_{31}x_{3})\wedge(a_{12}x_{1}+a_{22}x_{2}+a_{32}x_{3})\\
+ & =(a_{11}a_{22}-a_{21}a_{12})x_{1}\wedge x_{2}+(a_{11}a_{32}-a_{31}a_{12})x_{1}\wedge x_{3}+(a_{21}a_{32}-a_{31}a_{22})x_{2}\wedge x_{3}\\
+\\
+\varphi(x_{1})\wedge\varphi(x_{3}) & =(a_{11}x_{1}+a_{21}x_{2}+a_{31}x_{3})\wedge(a_{13}x_{1}+a_{23}x_{2}+a_{33}x_{3})\\
+ & =(a_{11}a_{23}-a_{21}a_{13})x_{1}\wedge x_{2}+(a_{11}a_{33}-a_{31}a_{13})x_{1}\wedge x_{3}+(a_{21}a_{33}-a_{31}a_{23})x_{2}\wedge x_{3}\\
+\\
+\varphi(x_{2})\wedge\varphi(x_{3}) & =(a_{12}x_{1}+a_{22}x_{2}+a_{32}x_{3})\wedge(a_{13}x_{1}+a_{23}x_{2}+a_{33}x_{3})\\
+ & =(a_{12}a_{23}-a_{22}a_{13})x_{1}\wedge x_{2}+(a_{12}a_{33}-a_{32}a_{13})x_{1}\wedge x_{3}+(a_{22}a_{33}-a_{32}a_{23})x_{2}\wedge x_{3}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So the matrix representation of 
+\begin_inset Formula $\wedge^{2}\varphi$
+\end_inset
+
+ with respect to the ordered basis 
+\begin_inset Formula $\beta_{2}=\{x_{1}\wedge x_{2},x_{1}\wedge x_{3},x_{2}\wedge x_{3}\}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+[\varphi]_{\beta_{2}}^{\beta_{2}}=\begin{pmatrix}a_{11}a_{22}-a_{21}a_{12} & a_{11}a_{23}-a_{21}a_{13} & a_{12}a_{23}-a_{22}a_{13}\\
+a_{11}a_{32}-a_{31}a_{12} & a_{11}a_{33}-a_{31}a_{13} & a_{12}a_{33}-a_{32}a_{13}\\
+a_{21}a_{32}-a_{31}a_{22} & a_{21}a_{33}-a_{31}a_{23} & a_{22}a_{33}-a_{32}a_{23}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To calculate 
+\begin_inset Formula $\wedge^{3}\varphi$
+\end_inset
+
+, we need to see how it acts on the basis vector 
+\begin_inset Formula $x_{1}\wedge x_{2}\wedge x_{3}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\varphi(x_{1})\wedge\varphi(x_{2})\wedge\varphi(x_{3}) & =(a_{11}x_{1}+a_{21}x_{2}+a_{31}x_{3})\wedge(a_{12}x_{1}+a_{22}x_{2}+a_{32}x_{3})\wedge(a_{13}x_{1}+a_{23}x_{2}+a_{33}x_{3})\\
+ & =(a_{11}a_{22}a_{33}-a_{11}a_{32}a_{23}+a_{21}a_{32}a_{13}-a_{21}a_{12}a_{33}+a_{31}a_{12}a_{23}-a_{31}a_{22}a_{13})x_{1}\wedge x_{2}\wedge x_{3}\\
+ & =\det\left([\varphi]_{\beta_{1}}^{\beta_{1}}\right)e_{1}\wedge e_{2}\wedge e_{3}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Koszul Complexes
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring, 
+\begin_inset Formula $M$
+\end_inset
+
+ an 
+\begin_inset Formula $R$
+\end_inset
+
+-module, and 
+\begin_inset Formula $\varphi:M\to R$
+\end_inset
+
+ an 
+\begin_inset Formula $R$
+\end_inset
+
+-module homomorphism.
+ The assignment
+\begin_inset Formula 
+\[
+(m_{1},\dots,m_{k})\mapsto\sum_{i=1}^{k}(-1)^{i+1}\varphi(m_{i})m_{1}\wedge\cdots\wedge\widehat{m}_{i}\wedge\cdots\wedge m_{k}
+\]
+
+\end_inset
+
+defines an alternating 
+\begin_inset Formula $n$
+\end_inset
+
+-linear map 
+\begin_inset Formula $M^{k}\to\Lambda^{k-1}(M)$
+\end_inset
+
+.
+ By the universal property of the 
+\begin_inset Formula $k$
+\end_inset
+
+th exterior power, there exists an 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map 
+\begin_inset Formula $d_{\varphi}^{(k)}:\Lambda^{k}(M)\to\Lambda^{k-1}(M)$
+\end_inset
+
+ with 
+\begin_inset Formula 
+\[
+d_{\varphi}^{(k)}(m_{1}\wedge\cdots\wedge m_{k})=\sum_{i=1}^{n}(-1)^{i+1}\varphi(m_{i})m_{1}\wedge\cdots\wedge\widehat{m}_{i}\wedge\cdots\wedge m_{k}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $m_{1},\dots,m_{k}\in L$
+\end_inset
+
+.
+ The collection of the maps 
+\begin_inset Formula $d_{\varphi}^{(k)}$
+\end_inset
+
+ defines a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-homomorphism 
+\begin_inset Formula 
+\[
+d_{\varphi}:\Lambda(M)\to\Lambda(M)
+\]
+
+\end_inset
+
+of degree 
+\begin_inset Formula $-1$
+\end_inset
+
+.
+ A straightforward calculation shows that 
+\begin_inset Formula $d_{\varphi}$
+\end_inset
+
+ gives 
+\begin_inset Formula $\Lambda(M)$
+\end_inset
+
+ the structure of a differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ This differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra is called the 
+\series bold
+Koszul complex 
+\series default
+of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ and is denoted 
+\begin_inset Formula $\mathcal{K}_{\bullet}(\varphi)$
+\end_inset
+
+.
+ The 
+\series bold
+dual
+\series default
+ 
+\series bold
+Koszul complex 
+\series default
+of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\mathcal{K}^{\bullet}(\varphi)$
+\end_inset
+
+, is the chain complex over 
+\begin_inset Formula $R$
+\end_inset
+
+ whose underlying graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module is 
+\begin_inset Formula $\text{Hom}_{R}(\mathcal{K}_{\bullet}(\varphi),R)$
+\end_inset
+
+ and whose differential is 
+\begin_inset Formula $d^{\star}$
+\end_inset
+
+, where 
+\begin_inset Formula $d^{\star}$
+\end_inset
+
+ is obtained by applying the functor 
+\begin_inset Formula $\text{Hom}_{R}(-,R)$
+\end_inset
+
+ to 
+\begin_inset Formula $d$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{examplekoszulcomplex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring of characteristic 
+\begin_inset Formula $2$
+\end_inset
+
+, 
+\begin_inset Formula $S$
+\end_inset
+
+ denote the polynomial ring 
+\begin_inset Formula $R[x_{1},\dots,x_{n}]$
+\end_inset
+
+, and let 
+\begin_inset Formula $\varphi:S_{1}:=\bigoplus_{\lambda=1}^{n}Rx_{\lambda}\to R$
+\end_inset
+
+ be the unique 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map such that 
+\begin_inset Formula $\varphi(x_{\lambda})=r_{\lambda}\in R$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda=1,\dots,n$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\Lambda(S_{1})$
+\end_inset
+
+ is isomorphic to 
+\begin_inset Formula $S/\langle x_{1}^{2},\dots,x_{n}^{2}\rangle$
+\end_inset
+
+ as graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebras.
+ Using this isomorphism, we give 
+\begin_inset Formula $S/\langle x_{1}^{2},\dots,x_{n}^{2}\rangle$
+\end_inset
+
+ the structure of a differential graded 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra by carrying over the differential 
+\begin_inset Formula $d_{\varphi}$
+\end_inset
+
+ for 
+\begin_inset Formula $\Lambda(S_{1})$
+\end_inset
+
+ to a differential 
+\begin_inset Formula $d$
+\end_inset
+
+ for 
+\begin_inset Formula $S/\langle x_{1}^{2},\dots,x_{n}^{2}\rangle$
+\end_inset
+
+.
+ A straightforward calculation shows that 
+\begin_inset Formula $d=\sum_{\lambda=1}^{n}r_{\lambda}\partial_{x_{\lambda}}$
+\end_inset
+
+.
+ We denote this Koszul complex as 
+\begin_inset Formula $\mathcal{K}(r_{1},\dots,r_{n})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Simplicial Complexes
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A 
+\series bold
+simplicial complex 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ 
+\series default
+on the set 
+\begin_inset Formula $\{x_{1},\dots,x_{n}\}$
+\end_inset
+
+ is a collection of subsets of 
+\begin_inset Formula $\{x_{1},\dots,x_{n}\}$
+\end_inset
+
+ such that
+\end_layout
+
+\begin_layout Enumerate
+The simplicial complex 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ contains all singletons: 
+\begin_inset Formula $\{x_{\lambda}\}\in\Delta$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda=1,\dots,n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The simplicial complex 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ is closed under containment: if 
+\begin_inset Formula $\sigma\subseteq\{x_{1},\dots,x_{n}\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\tau\supset\sigma$
+\end_inset
+
+, then 
+\begin_inset Formula $\tau\in\Delta$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+An element of a simplicial complex is called a 
+\series bold
+face 
+\series default
+or 
+\series bold
+simplex
+\series default
+, and a simplex of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ not properly contained in another simplex of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ is called a 
+\series bold
+facet
+\series default
+.
+ A simplex 
+\begin_inset Formula $\sigma\in\Delta$
+\end_inset
+
+ of cardinality 
+\begin_inset Formula $i+1$
+\end_inset
+
+ is called an 
+\begin_inset Formula $i$
+\end_inset
+
+-dimensional face or an 
+\begin_inset Formula $i$
+\end_inset
+
+-face of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+.
+ The empty set 
+\begin_inset Formula $\emptyset$
+\end_inset
+
+, is the unique face of dimension 
+\begin_inset Formula $-1$
+\end_inset
+
+, as long as 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ is not the 
+\series bold
+void complex 
+\series default
+
+\begin_inset Formula $\{\}$
+\end_inset
+
+ consisting of no subsets of 
+\begin_inset Formula $\{1,\dots,n\}$
+\end_inset
+
+.
+ The 
+\series bold
+dimension 
+\series default
+of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\text{dim}(\Delta)$
+\end_inset
+
+, is defined to be the maximum of the dimensions of its faces (or 
+\begin_inset Formula $-\infty$
+\end_inset
+
+ if 
+\begin_inset Formula $\Delta=\{\}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{examplesimplicialcomplex}
+\end_layout
+
+\end_inset
+
+ The simplicial complex 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ on 
+\begin_inset Formula $\{x_{1},x_{2},x_{3},x_{4},x_{5}\}$
+\end_inset
+
+ consisting of all subsets of 
+\begin_inset Formula $\{x_{1},x_{2},x_{3}\}$
+\end_inset
+
+, 
+\begin_inset Formula $\{x_{2},x_{4}\}$
+\end_inset
+
+, 
+\begin_inset Formula $\{x_{3},x_{4}\}$
+\end_inset
+
+, and 
+\begin_inset Formula $\{x_{4}\}$
+\end_inset
+
+ is pictured below
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[fill=gray!20] (0,0) -- (2,2) -- (4,0)-- (0,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (2,2) -- (6,2) -- (4,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=2pt, label=below left:$x_1 $] (a) at
+ (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=2pt, label=above left:$x_3 $] (b) at
+ (2,2) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=2pt, label=below right:$x_2 $] (c) at
+ (4,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=2pt, label=above right:$x_4 $] (c) at
+ (6,2) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=2pt, label=below right:$x_5 $] (c) at
+ (8,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+Simplicial Homology
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ be a simplicial complex on 
+\begin_inset Formula $\{x_{1},\dots,x_{n}\}$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+, let 
+\begin_inset Formula 
+\[
+S_{i}(\Delta):=\text{Span}_{K}\left(\sigma\in\Delta\mid\text{dim}(\sigma)=i\right)\quad\text{and}\quad S(\Delta):=\bigoplus_{i\in\mathbb{Z}}S_{i}(\Delta).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then 
+\begin_inset Formula $S(\Delta)$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $K$
+\end_inset
+
+-module.
+ Let 
+\begin_inset Formula $\partial:S(\Delta)\to S(\Delta)$
+\end_inset
+
+ be the unique graded endomorphism of degree 
+\begin_inset Formula $-1$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+\partial(\sigma)=\sum_{\lambda\in\sigma}\sigma\backslash\{\lambda\}.
+\]
+
+\end_inset
+
+By a direct calculation, we have 
+\begin_inset Formula $\partial^{2}=0$
+\end_inset
+
+, and so 
+\begin_inset Formula $(S(\Delta),\partial)$
+\end_inset
+
+ forms a chain complex over 
+\begin_inset Formula $K$
+\end_inset
+
+; it is called the (
+\series bold
+augmented 
+\series default
+or 
+\series bold
+reduced
+\series default
+) 
+\series bold
+chain complex of
+\series default
+ 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ 
+\series bold
+over 
+\begin_inset Formula $K$
+\end_inset
+
+
+\series default
+.
+ The 
+\begin_inset Formula $i$
+\end_inset
+
+th homology of 
+\begin_inset Formula $(S(\Delta),\partial)$
+\end_inset
+
+ is called the 
+\begin_inset Formula $i$
+\end_inset
+
+
+\series bold
+th reduced homology 
+\series default
+of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ over 
+\begin_inset Formula $K$
+\end_inset
+
+, and is commonly denoted as 
+\begin_inset Formula $\widetilde{H}_{i}(\Delta,K)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ For 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ as in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Example~(
+\backslash
+ref{examplesimplicialcomplex})
+\end_layout
+
+\end_inset
+
+, we have 
+\begin_inset Formula 
+\begin{align*}
+S_{2}(\Delta) & =\{\{1,2,3\}\}\\
+S_{1}(\Delta) & =\{\{1,2\},\{1,3\},\{2,3\},\{2,4\},\{3,4\}\}\\
+S_{0}(\Delta) & =\{\{1\},\{2\},\{3\},\{4\},\{5\}\}\\
+S_{-1}(\Delta) & =\{\emptyset\}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Choosing bases for the 
+\begin_inset Formula $S_{i}(\Delta)$
+\end_inset
+
+ as suggested by the ordering of the faces listed above, the chain complex
+ for 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ becomes 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[ampersand replacement=
+\backslash
+&] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0 
+\backslash
+arrow[r] 
+\backslash
+& K 
+\backslash
+arrow[swap]{rr}{
+\backslash
+begin{pmatrix} 1 
+\backslash
+
+\backslash
+ 1 
+\backslash
+
+\backslash
+ 1 
+\backslash
+
+\backslash
+ 0 
+\backslash
+
+\backslash
+ 0 
+\backslash
+end{pmatrix} } 
+\backslash
+& 
+\backslash
+& K^5 
+\backslash
+arrow[swap]{rrrr}{ 
+\backslash
+begin{pmatrix} 1 & 1 & 0 & 0 & 0 
+\backslash
+
+\backslash
+ 1 & 0 & 1 & 1 & 0 
+\backslash
+
+\backslash
+ 0 & 1 & 1 & 0 & 1  
+\backslash
+
+\backslash
+ 0 & 0 & 0 & 1 & 1 
+\backslash
+
+\backslash
+ 0 & 0 & 0 & 0 & 0 
+\backslash
+end{pmatrix} } 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& K^5 
+\backslash
+arrow[swap]{rrr}{
+\backslash
+begin{pmatrix} 1 & 1 & 1 & 1 & 1 
+\backslash
+end{pmatrix} } 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& K 
+\backslash
+arrow[r] 
+\backslash
+& 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For example, 
+\begin_inset Formula $\partial_{2}(e_{\{1,2,3\}})=e_{\{2,3\}}+e_{\{1,3\}}+e_{\{1,2\}}$
+\end_inset
+
+, which we identify with the vector 
+\begin_inset Formula $(1,1,1,0,0)$
+\end_inset
+
+.
+ The mapping 
+\begin_inset Formula $\partial_{1}$
+\end_inset
+
+ has rank 
+\begin_inset Formula $3$
+\end_inset
+
+, so 
+\begin_inset Formula $\widetilde{H}_{0}(\Delta;K)\cong\widetilde{H}_{1}(\Delta;K)\cong K$
+\end_inset
+
+ and the other homology groups are 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Geometrically, 
+\begin_inset Formula $\widetilde{H}_{0}(\Delta;K)$
+\end_inset
+
+ is nontrivial since 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ is disconnected and 
+\begin_inset Formula $\widetilde{H}_{1}(\Delta;K)$
+\end_inset
+
+ is nontrivial since 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ contains a triangle which is not the boundary of an element of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_body
+\end_document

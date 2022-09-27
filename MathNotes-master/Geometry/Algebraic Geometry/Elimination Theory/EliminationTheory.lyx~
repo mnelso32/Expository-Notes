@@ -1,0 +1,839 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Elimination Theory
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To get a sense of how elmination works, let us look at an example.
+ We will solve the system of equations 
+\begin_inset Formula 
+\begin{align}
+x^{2}+y+z & =1,\nonumber \\
+x+y^{2}+z & =1,\label{eq:1}\\
+x+y+z^{2} & =1.\nonumber 
+\end{align}
+
+\end_inset
+
+ If we let 
+\begin_inset Formula $I$
+\end_inset
+
+ be the ideal 
+\begin_inset Formula 
+\begin{equation}
+I=\langle x^{2}+y+z-1,x+y^{2}+z-1,x+y+z^{2}-1\rangle,\label{eq:ideal}
+\end{equation}
+
+\end_inset
+
+then a Gröbner basis for 
+\begin_inset Formula $I$
+\end_inset
+
+ with respect to lex order (where 
+\begin_inset Formula $x>y>z$
+\end_inset
+
+) is given by the four polynomials
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}g_{1} & =x+y+z^{2}-1\\
+g_{2} & =y^{2}-y-z^{2}+z\\
+g_{3} & =2yz^{2}+z^{4}-z^{2},\\
+g_{4} & =z^{6}-4z^{4}+4z^{3}-z^{2}.
+\end{aligned}
+\label{eq:2}
+\end{equation}
+
+\end_inset
+
+It follows that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:1})
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:2})
+\end_layout
+
+\end_inset
+
+ have the same solutions.
+ However, since 
+\begin_inset Formula 
+\[
+g_{4}=z^{6}-4z^{4}+4z^{3}-z^{2}=z^{2}(z-1)^{2}(z^{2}+2z-1)
+\]
+
+\end_inset
+
+involves only 
+\begin_inset Formula $z$
+\end_inset
+
+, we see that the possible 
+\begin_inset Formula $z$
+\end_inset
+
+'s are 
+\begin_inset Formula $0$
+\end_inset
+
+, 
+\begin_inset Formula $1$
+\end_inset
+
+, and 
+\begin_inset Formula $-1\pm\sqrt{2}$
+\end_inset
+
+.
+ Substituting these values into 
+\begin_inset Formula $g_{2}=y^{2}-y-z^{2}+z=0$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{3}=2yz^{2}+z^{4}-z^{2}=0$
+\end_inset
+
+, we can determine the possible 
+\begin_inset Formula $y$
+\end_inset
+
+'s, and then finally 
+\begin_inset Formula $g_{1}=x+y+z^{2}-1=0$
+\end_inset
+
+ gives the corresponding 
+\begin_inset Formula $x$
+\end_inset
+
+'s.
+ In this way, one can check that equations 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:1})
+\end_layout
+
+\end_inset
+
+ have exactly five solutions:
+\begin_inset Formula 
+\[
+(1,0,0),\qquad(0,1,0),\qquad(0,0,1),\qquad(-1+\sqrt{2},-1+\sqrt{2},-1+\sqrt{2}),\qquad(-1-\sqrt{2},-1-\sqrt{2},-1-\sqrt{2}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+What enabled us to find these solutions? There were two things that made
+ our success possible:
+\end_layout
+
+\begin_layout Enumerate
+(Elimination Step) We could find a consequence 
+\begin_inset Formula $g_{4}=z^{6}-4z^{4}+4z^{3}-z^{2}=0$
+\end_inset
+
+ of our original equations which involved only 
+\begin_inset Formula $z$
+\end_inset
+
+, i.e.
+ we eliminated 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ from the system of equations.
+\end_layout
+
+\begin_layout Enumerate
+(Extension Step) Once we solved the simpler equation 
+\begin_inset Formula $g_{4}=0$
+\end_inset
+
+ to determine the values of 
+\begin_inset Formula $z$
+\end_inset
+
+, we could extend these solutions to solutions of the original equations.
+ 
+\end_layout
+
+\begin_layout Standard
+The basic idea of 
+\series bold
+elimination theory 
+\series default
+is that both the Elimination Step and the Extension Step can be done in
+ great generality.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To see how the Elimination Step works, notice that our observation concerning
+ 
+\begin_inset Formula $g_{4}$
+\end_inset
+
+ can be written as 
+\begin_inset Formula 
+\[
+g_{4}\in I\cap\mathbb{C}[z],
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $I$
+\end_inset
+
+ is the ideal given in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+equation~(
+\backslash
+ref{eq:ideal})
+\end_layout
+
+\end_inset
+
+.
+ Generalizing this idea leads to the following definition.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn1}
+\end_layout
+
+\end_inset
+
+ Given 
+\begin_inset Formula $I=\langle f_{1},\dots,f_{s}\rangle\subseteq K[x_{1},\dots,x_{n}]$
+\end_inset
+
+, the 
+\begin_inset Formula $l$
+\end_inset
+
+th 
+\series bold
+elimination ideal 
+\series default
+
+\begin_inset Formula $I_{l}$
+\end_inset
+
+ is the ideal of 
+\begin_inset Formula $K[x_{l+1},\dots,x_{n}]$
+\end_inset
+
+ defined by 
+\begin_inset Formula 
+\[
+I_{l}=I\cap K[x_{l+1},\dots,x_{n}].
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem1}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I\subset K[x_{1},\dots,x_{n}]$
+\end_inset
+
+ be an ideal and let 
+\begin_inset Formula $G$
+\end_inset
+
+ be a Gröbner basis of 
+\begin_inset Formula $I$
+\end_inset
+
+ with respect to lex order where 
+\begin_inset Formula $x_{1}>x_{2}>\cdots>x_{n}$
+\end_inset
+
+.
+ Then for every 
+\begin_inset Formula $0\leq l\le n$
+\end_inset
+
+, the set 
+\begin_inset Formula 
+\[
+G_{l}=G\cap K[x_{l+1},\dots,x_{n}]
+\]
+
+\end_inset
+
+is a Gröbner basis of the 
+\begin_inset Formula $l$
+\end_inset
+
+th elimination ideal 
+\begin_inset Formula $I_{l}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ We need to show 
+\begin_inset Formula $L(I_{l})=L(G_{l})$
+\end_inset
+
+.
+ One inclusion is obvious: 
+\begin_inset Formula $L(I_{l})\supseteq L(G_{l})$
+\end_inset
+
+.
+ To show the reverse inclusion, let 
+\begin_inset Formula $f\in I_{l}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f\in I_{l}\subseteq I$
+\end_inset
+
+, and 
+\begin_inset Formula $G$
+\end_inset
+
+ is a Gröbner basis of 
+\begin_inset Formula $I$
+\end_inset
+
+, 
+\begin_inset Formula $\mbox{LM}(f)$
+\end_inset
+
+ is divisible by 
+\begin_inset Formula $\mbox{LM}(g)$
+\end_inset
+
+ for some 
+\begin_inset Formula $g\in G$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f\in I_{l}$
+\end_inset
+
+, this means that 
+\begin_inset Formula $\mbox{LM}(g)$
+\end_inset
+
+ involves only the variables 
+\begin_inset Formula $x_{l+1},\dots,x_{n}$
+\end_inset
+
+.
+ Now comes the crucial observation: since we are using lex order with 
+\begin_inset Formula $x_{1}>x_{2}>\cdots>x_{n}$
+\end_inset
+
+, any monomial involving only 
+\begin_inset Formula $x_{1},\dots,x_{l}$
+\end_inset
+
+ is greater than all monomials in 
+\begin_inset Formula $K[x_{1},\dots,x_{n}]$
+\end_inset
+
+, so that 
+\begin_inset Formula $\mbox{LM}(g)\in K[x_{l+1},\cdots,x_{n}]$
+\end_inset
+
+ implies 
+\begin_inset Formula $g\in K[x_{l+1},\dots,x_{n}]$
+\end_inset
+
+.
+ This shows that 
+\begin_inset Formula $g\in G_{l}$
+\end_inset
+
+, and the theorem is proved.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example1}
+\end_layout
+
+\end_inset
+
+ Let us return to the example at the beginning of this section.
+ Here, 
+\begin_inset Formula $I=\langle x^{2}+y+z-1,x+y^{2}+z-1,x+y+z^{2}-1\rangle$
+\end_inset
+
+, and a Gröbner basis with respect to lex order is given in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:2})
+\end_layout
+
+\end_inset
+
+.
+ It follows from the Elimination Theorem that 
+\begin_inset Formula 
+\begin{align*}
+I_{0} & =\langle x+y+z^{2}-1,y^{2}-y-z^{2}+z,2yz^{2}+z^{4}-z^{2},z^{6}-4z^{4}+4z^{3}-z^{2}\rangle\\
+I_{1} & =\langle y^{2}-y-z^{2}+z,2yz^{2}+z^{4}-z^{2},z^{6}-4z^{4}+4z^{3}-z^{2}\rangle\\
+I_{2} & =\langle z^{6}-4z^{4}+4z^{3}-z^{2}\rangle.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A=K[x,y,z]$
+\end_inset
+
+ and 
+\begin_inset Formula $I=\langle x^{2}+y,x-y^{2}+z^{2},xy-z\rangle$
+\end_inset
+
+.
+ A Gröbner basis of 
+\begin_inset Formula $I$
+\end_inset
+
+ with respect to lex order is 
+\begin_inset Formula $G=\{g_{1},g_{2},g_{3}\}$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\begin{align*}
+g_{1} & =z^{6}-z^{4}-3z^{3}-3z^{2}-z\\
+g_{2} & =4y+5z^{6}-8z^{5}-z^{4}-7z^{3}+5z^{2}+7z\\
+g_{3} & =x-y^{2}+z^{2}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Consider 
+\begin_inset Formula $I=\langle f_{1},f_{2},f_{3}\rangle$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{F}_{2}[x,y,z,w]$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\begin{align*}
+f_{1} & =x^{2}+yw+zw+yz\\
+f_{2} & =yw^{2}+zw^{2}\\
+f_{3} & =xzw^{2}+xyw^{2}+yzw^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Gröbner basis of 
+\begin_inset Formula $I$
+\end_inset
+
+ with respect lex order (where 
+\begin_inset Formula $x>y>z>w)$
+\end_inset
+
+ is 
+\begin_inset Formula $G=\{g_{1},g_{2},g_{3}\}$
+\end_inset
+
+, where 
+\begin_inset Formula 
+\begin{align*}
+g_{1} & =z^{2}w^{2}\\
+g_{2} & =yw^{2}+zw^{2}\\
+g_{3} & =x^{2}+yz+yw+zw.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,1574 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Mathematical Programming Project
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+An index is a number that represents the aggregate value of a group of items.
+ In particular, a financial index is composed of a collection of assets,
+ such as stocks or bonds, which captures the value of a specific market
+ or a segment of it.
+ A stock or a bond market index is effectively equivalent to a hypothetical
+ portfolio of assets in the sense that we cannot invest directly on it,
+ i.e., an index is not a financial instrument that we can trade.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ The S&P 500 Index, or Standard & Poor's 500 Index, is a market-capitalization-w
+eighted index of 500 leading publicly traded companies in the U.S.
+ It is not an exact list of the top 500 U.S.
+ companies by market cap because there are other criteria that the index
+ includes.
+ Still, the S&P 500 index is regarded as one of the best gauges of prominent
+ American equities' performance, and by extension, that of the stock market
+ overall.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename S&P500.jpg
+	lyxscale 75
+	scale 125
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Index Tracking
+\end_layout
+
+\begin_layout Standard
+It is not possible to trade an index directly.
+ In order to gain access to an index we need to use other financial instruments
+ such as options, futures, and exchange traded funds (ETFs), or create a
+ portfolio of assets that tracks closely a given index.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ The SPDR S&P 500 ETF Trust, also known as the SPY ETF, is one of the most
+ popular funds that aims to track the Standard & Poor’s (S&P) 500 index.
+ These stocks are selected by a committee based on market size, liquidity,
+ and industry.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename SPY.jpg
+	lyxscale 80
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Its top 10 holdings are heavily weighted in technology companies such as
+ Apple, Microsoft, and Amazon.
+ Approximately one-quarter of the SPY ETF is invested in the technology
+ sector.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename SPYholdings.jpg
+	lyxscale 80
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+The Goal of the Paper
+\end_layout
+
+\begin_layout Standard
+With this background material understood, here's the abstract of the paper
+ that my project is based on, which perfectly summarizes the goal of that
+ work:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quote
+\begin_inset Quotes eld
+\end_inset
+
+We consider the problem of reproducing the performance of a stock market
+ index, but without purchasing all of the stocks that make up the index,
+ index tracking.
+ We also consider the problem of outperforming the index, enhanced indexation.
+ We present mixed-integer linear programming formulations of these problems.
+ Our formulations include transaction costs, a constraint limiting the number
+ of stocks that can be purchased and a limit on the total transaction cost
+ that can be incurred.
+ As our formulations of these problems are mixed-integer linear programs
+ we can use a standard solver (Cplex).
+ Numeric results are presented for eight data sets drawn from major markets.
+ The largest of these data sets involves over 2000 stocks
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+In particular, we want to create our own Tracking Portfolio (denoted TP)
+ which is optimized with respect to some mixed-integer linear program.
+ We use regression analysis in order to determine how successful our TP
+ is.
+ For instance, if 
+\begin_inset Formula $X$
+\end_inset
+
+ represents the monthly return of the S&P 500 and 
+\begin_inset Formula $Y$
+\end_inset
+
+ represents the monthly return of our TP, then the least squares regression
+ line (where we are regressing the returns from the portfolio against the
+ returns from the index) has the form
+\begin_inset Formula 
+\[
+Y=\alpha+\beta X.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note here that if our TP perfectly tracks the index, then we would have
+ a regression intercept (alpha) of zero, and a regression slope (beta) of
+ one.
+ Enhanced indexation (sometimes referred to as enhanced index tracking)
+ aims to reproduce the performance of a stock market index, but to generate
+ excess return (return over and above the return achieved by the index).
+ One phrase often encountered with regard to enhanced indexation is ‘‘adding
+ alpha”.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem Formulation
+\end_layout
+
+\begin_layout Standard
+Let us now introduce notation which is used in the paper.
+ We observe over time 
+\begin_inset Formula $0,1,2,\dots,T$
+\end_inset
+
+ the value of 
+\begin_inset Formula $N$
+\end_inset
+
+ stocks, as well as the index we are tracking.
+ We are interested in deciding the best set of 
+\begin_inset Formula $K$
+\end_inset
+
+ stocks to hold (where 
+\begin_inset Formula $K<N$
+\end_inset
+
+), as well as their appropriate quantities.
+ Let
+\begin_inset Formula 
+\begin{align*}
+\varepsilon_{i} & =\text{ be the minimum proportion of the TP\text{ that must be held in stock \ensuremath{i} if any of the stock is held} }\\
+\delta_{i} & =\text{ be the maximum proportion of the TP that can be held in stock \ensuremath{i} if any of the stock is held}\\
+X_{i} & =\text{ be the number of units of stock \ensuremath{i} in the current TP}\\
+V_{i,t} & =\text{ be the value (price) of one unit of stock \ensuremath{i} at time \ensuremath{t}}\\
+I_{t} & =\text{ be the value of the index at time \ensuremath{t}}\\
+R_{t} & =\text{ be the single period continuous time return for the index at time \ensuremath{t}, i.e. \ensuremath{R_{t}=\ln(I_{t}/I_{t-1})}}\\
+r_{i,t} & =\text{ be the single period continuous time return for stock \ensuremath{i} at time \ensuremath{t}, i.e. \ensuremath{r_{i,t}=\ln(V_{i,t}/V_{i,t-1})}}\\
+C & =\text{ the total value (\ensuremath{\geq0}) of the current TP at time \ensuremath{T}, i.e. \ensuremath{C=\sum_{i=1}^{n}X_{i}V_{i,T}} plus cash change ;}\\
+f_{i}^{s} & =\text{ be the fractional cost of selling one unit of stock \ensuremath{i} at time \ensuremath{T}}\\
+f_{i}^{b} & =\text{ be the fractional cost of buying one unit of stock \ensuremath{i} at time \ensuremath{T}}\\
+\gamma & =\text{ be the limit \ensuremath{(0\leq\gamma\leq1)} on the proportion of \ensuremath{C} that can be consumed by transaction cost}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Decision Variables
+\end_layout
+
+\begin_layout Standard
+Our decision variables are:
+\begin_inset Formula 
+\begin{align*}
+x_{i} & =\text{ the number of units (\ensuremath{\geq0}) of stock \ensuremath{i} that we choose to hold in the new TP}\\
+G_{i} & =\text{ the transaction cost (\ensuremath{\geq0}) incurred in selling/buying stock \ensuremath{i}}\\
+z_{i} & =\text{ \ensuremath{=1} if any stock of \ensuremath{i} is held in the new TP, \ensuremath{=0} otherwise}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Without significant loss of generality (since the sums of money involved
+ are large) we allow 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ to take fractional values.
+\end_layout
+
+\begin_layout Subsubsection*
+Constraints associated with index tracking problem
+\end_layout
+
+\begin_layout Standard
+The constraints associated with the index tracking problem are:
+\begin_inset Formula 
+\begin{align}
+\sum_{i=1}^{N}z_{i}=K\label{eq:1}\\
+\varepsilon_{i}z_{i}\leq x_{i}V_{i,T}\leq\delta_{i}z_{i} &  & 1\leq i\leq N\label{eq:2}\\
+G_{i}\geq f_{i}^{s}(X_{i}-x_{i})V_{i,T} &  & 1\leq i\leq N\label{eq:3}\\
+G_{i}\geq f_{i}^{b}(x_{i}-X_{i})V_{i,T} &  & 1\leq i\leq N\label{eq:4}\\
+\sum_{i=1}^{N}G_{i}\leq\gamma C\label{eq:5}\\
+\sum_{i=1}^{N}x_{i}V_{i,T}=C-\sum_{i=1}^{N}G_{i}\label{eq:6}\\
+x_{i},G_{i}\geq0 &  & 1\leq i\leq N\label{eq:7}\\
+z_{i}\in[0,1] &  & 1\leq i\leq N\label{eq:8}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Equation~(
+\backslash
+ref{eq:1})
+\end_layout
+
+\end_inset
+
+ ensures that there are exactly 
+\begin_inset Formula $K$
+\end_inset
+
+ stocks in the new TP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Equation~(
+\backslash
+ref{eq:2})
+\end_layout
+
+\end_inset
+
+ ensures that if a stock 
+\begin_inset Formula $i$
+\end_inset
+
+ is not in the new TP 
+\begin_inset Formula $(z_{i}=0$
+\end_inset
+
+) then 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is also zero; it also ensures that if the stock is chosen to be in the
+ new TP (
+\begin_inset Formula $z_{i}=1$
+\end_inset
+
+) then the amount of the stock held satisfies the proportion limits defined.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Equations~(
+\backslash
+ref{eq:3}) and (
+\backslash
+ref{eq:4})
+\end_layout
+
+\end_inset
+
+ define the transaction cost and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Equation~(
+\backslash
+ref{eq:5})
+\end_layout
+
+\end_inset
+
+ limits the total transaction cost incurred.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Equation~(
+\backslash
+ref{eq:6})
+\end_layout
+
+\end_inset
+
+ is a balance constraint such that the total value of the new TP at time
+ 
+\begin_inset Formula $T$
+\end_inset
+
+ equals the value of the current TP at time 
+\begin_inset Formula $T$
+\end_inset
+
+ plus the cash change (i.e.
+ 
+\begin_inset Formula $C$
+\end_inset
+
+) minus the total transaction cost.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Index Tracking Objective
+\end_layout
+
+\begin_layout Standard
+Adopting the regression viewpoint for index tracking we have that ideally
+ our TP would be chosen such that when we perform a regression of TP returns
+ against index returns we would find that the regression line has an intercept
+ (alpha) of zero, and a slope (beta) of one.
+ However achieving this ideal is not straightforward.
+ There are a number of complications to achieving this ideal within the
+ context of a linear (or linearisable) formulation, as will become apparent
+ below.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The single period continuous time return for the TP in period 
+\begin_inset Formula $t$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\ln\left(\sum_{i=1}^{N}x_{i}V_{i,t}/\sum_{i=1}^{N}x_{i}V_{i,t-1}\right).
+\]
+
+\end_inset
+
+This is a nonlinear function of the decision variables.
+ In the paper, the authors show how to approximate this nonlinear function
+ by a linear one; namely the (linear approximate) return for the TP in period
+ 
+\begin_inset Formula $t$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\sum_{i=1}^{N}w_{i}r_{i,t}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $r_{i,t}$
+\end_inset
+
+ represents the return for stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at time 
+\begin_inset Formula $t$
+\end_inset
+
+ and is given by the formula 
+\begin_inset Formula $r_{i,t}=\ln(V_{i,t}/V_{i,t-1})$
+\end_inset
+
+ and where 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ represents the proportion invested in stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at time 
+\begin_inset Formula $T$
+\end_inset
+
+ and is given by 
+\begin_inset Formula 
+\begin{equation}
+w_{i}=x_{i}V_{i,T}/(C-\gamma C)\qquad1\leq i\leq N\label{eq:9}
+\end{equation}
+
+\end_inset
+
+(see the Appendix for more details as to how this is done).
+ Using the log-sum inequality it is possible to prove (assuming we spend
+ 
+\begin_inset Formula $\gamma C$
+\end_inset
+
+ in transaction cost) that the average return from this approximation 
+\begin_inset Formula 
+\[
+\sum_{t=1}^{T}\sum_{i=1}^{N}w_{i}r_{i.t}/T
+\]
+
+\end_inset
+
+ over-estimates average tracking portfolio 
+\begin_inset Formula 
+\[
+\sum_{t=1}^{T}\ln\left(\sum_{i=1}^{N}x_{i}V_{i,t}/\sum_{i=1}^{N}x_{i}V_{i,t-1}\right)/T
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If we regress these TP returns from standard regression theory that the
+ ordinary least-squares estimates, 
+\begin_inset Formula $\widehat{\alpha}$
+\end_inset
+
+ and 
+\begin_inset Formula $\widehat{\beta}$
+\end_inset
+
+, for the intercept and slope of the regression line are given by:
+\begin_inset Formula 
+\begin{align}
+\alpha & =\sum_{i=1}^{N}w_{i}\alpha_{i}\label{eq:10}\\
+\beta & =\sum_{i=1}^{N}w_{i}\beta_{i}\label{eq:11}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta_{i}$
+\end_inset
+
+ are the ordinary least-squares regression intercept and slope when we regress
+ the returns from stock 
+\begin_inset Formula $i$
+\end_inset
+
+ (
+\begin_inset Formula $r_{i,t}$
+\end_inset
+
+) against the index returns (
+\begin_inset Formula $R_{t}$
+\end_inset
+
+).
+ Ideally we would like, for index tracking, to choose 
+\begin_inset Formula $K$
+\end_inset
+
+ stocks and their associated quantities 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq i\leq N$
+\end_inset
+
+ such that we achieve 
+\begin_inset Formula $\alpha=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta=1$
+\end_inset
+
+.
+ For real life data this may not, however, be achievable.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Mixed-Integer Linear Program
+\end_layout
+
+\begin_layout Standard
+In order to acheive this, the authors adopted a two stage approach: where
+ the primary objective is to achieve the desired slope of one and the secondary
+ objective is to achieve the desired intercept of zero, i.e.
+\begin_inset Formula 
+\[
+\text{first minimize }|\beta-1|\text{ and then minimize }|\alpha-0|.
+\]
+
+\end_inset
+
+The modulus objectives above are not linear, however there is a standard
+ way to linearize them: introduce variables 
+\begin_inset Formula $D$
+\end_inset
+
+ and 
+\begin_inset Formula $E$
+\end_inset
+
+ where
+\begin_inset Formula 
+\begin{align}
+D & \geq\alpha\label{eq:12}\\
+D & \geq-\alpha\label{eq:1-1}\\
+E & \geq\beta-1\label{eq:14}\\
+E & \geq-(\beta-1)\label{eq:15}\\
+D,E & \geq0\label{eq:16}
+\end{align}
+
+\end_inset
+
+Then our full mixed-integer linear programming formulation for solving the
+ index tracking problem in the first-stage (primary objective to achieve
+ the desired intercept of zero) is
+\begin_inset Formula 
+\begin{align*}
+\text{minimize } & D\\
+\text{subject to } & \text{Equations 1-16}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This formulation (neglecting any algebraic substitution to eliminate variables/c
+onstraints) has approximately 
+\begin_inset Formula $3N$
+\end_inset
+
+ continuous variables, 
+\begin_inset Formula $N$
+\end_inset
+
+ zero-one variables and approximately 
+\begin_inset Formula $4N$
+\end_inset
+
+ constraints.
+ For 
+\begin_inset Formula $N=2000$
+\end_inset
+
+, for example, this equates to 
+\begin_inset Formula $6000$
+\end_inset
+
+ continuous variables, 
+\begin_inset Formula $2000$
+\end_inset
+
+ zero-one variables and 
+\begin_inset Formula $8000$
+\end_inset
+
+ constraints.
+ In modern mathematical programming terms this is not a large mixed-integer
+ linear program.
+ Logorithmically our formulation can be tackled using a standard solver
+ such as Cplex.
+ In the second-stage, where the emphasis is on achieving the desired slope
+ of one, then when we solve we constrain the intercept 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ so that it retains the value that it achieved at the first-stage.
+ Formally let 
+\begin_inset Formula $\alpha^{\mathrm{opt}}$
+\end_inset
+
+ be the numeric value for 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ when our first minimization problem is solved.
+ Then in the second-stage we
+\begin_inset Formula 
+\begin{align*}
+\text{minimize } & E\\
+\text{subject to } & \text{Equations 1-16}\\
+ & \,\alpha=\alpha^{\mathrm{opt}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ The authors also discussed a single-stage and three-stage approach as well,
+ but for sake of time we will not cover them in this talk.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Computational Results
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename table2.jpg
+	lyxscale 90
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Replication
+\end_layout
+
+\begin_layout Standard
+In this section, I will try to replicate the results from the paper.
+ Let
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{r}_{i} & =(r_{1,1},r_{1,2},\dots,r_{1,T})^{\top}\\
+\boldsymbol{R} & =(R_{1},R_{2},\dots,R_{T})^{\top}.
+\end{align*}
+
+\end_inset
+
+We want to
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $K=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename SP500.jpg
+	lyxscale 80
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We first calculate the the index returns.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{I} & =(3756,3714,3811,3973,4181,4204,4298,4395,4523,4308,4605,4567,4495)^{\top}\\
+\boldsymbol{V}_{1} & =(3257,3206,3093,3094,3467,3223,3440,3328,3471,3285,3372,3507,3304)^{\top}\\
+\boldsymbol{V}_{2} & =(133,132,121,122,131,125,137,146,152,141,150,165,178)^{\top}
+\end{align*}
+
+\end_inset
+
+Therefore
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Standard
+Adopting the regression viewpoint for index tracking we have that ideally
+ our TP would be chosen such that when we perform a regression of TP returns
+ against index returns we would find that the regression line has an intercept
+ (alpha) of zero, and a slope (beta) of one.
+ However achieving this ideal is not straightforward.
+ There are a number of complications to achieving this ideal within the
+ context of a linear (or linearisable) formulation, as will become apparent
+ below.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The single period continuous time return for the TP in period 
+\begin_inset Formula $t$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\ln\left(\sum_{i=1}^{N}x_{i}V_{i,t}/\sum_{i=1}^{N}x_{i}V_{i,t-1}\right).
+\]
+
+\end_inset
+
+This is a nonlinear function of the decision variables.
+ In order to linearize (in an approximate fashion) this return we shall
+ assume that it can be expressed as a linear weighted sum of individual
+ stock returns, where the weights, summing to one, reflect the proportion
+ invested in each stock at time 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ The assumption that portfolio return can be expressed as a linear weighted
+ sum of individual stock returns is a common assumption in finance.
+ Hence the return on the TP at time 
+\begin_inset Formula $t$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\sum_{i=1}^{N}W_{i,t}r_{i,t}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $r_{i,t}=\ln(V_{i,t}/V_{i,t-1})$
+\end_inset
+
+ and where
+\begin_inset Formula 
+\[
+W_{i,t}=x_{i}V_{i,t}/\sum_{j=1}^{N}x_{j}V_{j,t}
+\]
+
+\end_inset
+
+is the weight associated with investment in stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at time 
+\begin_inset Formula $t$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{i=1}^{N}W_{i,t}=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Now the 
+\begin_inset Formula $W_{i,t}$
+\end_inset
+
+ are nonlinear expressions involving our decision variables 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+, as well as the value 
+\begin_inset Formula $\sum_{j=1}^{N}x_{j}V_{j,t}$
+\end_inset
+
+ of the TP at time 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ In order to proceed, we shall approximate 
+\begin_inset Formula $W_{i,t}$
+\end_inset
+
+ by a constant term which is independent of time; namely replace 
+\begin_inset Formula $W_{i,t}$
+\end_inset
+
+ by 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+w_{i}=x_{i}V_{i,T}/\sum_{j=1}^{N}x_{j}V_{j,T}
+\]
+
+\end_inset
+
+represents the proportion invested in stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at time 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ Hence the return on the TP at time 
+\begin_inset Formula $t$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\sum_{i=1}^{N}w_{i}r_{i,t}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The expresssion for 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ is still nonlinear in the 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ so to linearize it we use the constraint 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:6})
+\end_layout
+
+\end_inset
+
+ to replace 
+\begin_inset Formula $\sum_{j=1}^{N}x_{j}V_{j,T}$
+\end_inset
+
+ by 
+\begin_inset Formula $C-\sum_{j=1}^{N}G_{j}$
+\end_inset
+
+.
+ This is also a function of our variables, but we know from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:5})
+\end_layout
+
+\end_inset
+
+ that 
+\begin_inset Formula $\sum_{j=1}^{N}G_{j}$
+\end_inset
+
+ is bounded above by 
+\begin_inset Formula $\gamma C$
+\end_inset
+
+.
+ Hence we approximate 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ using the linear expression:
+\begin_inset Formula 
+\[
+w_{i}=x_{i}V_{i,T}/(C-\gamma C)\quad1\leq i\leq N.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally therefore we have a linear expression (approximation) for the returns
+ on the TP as
+\begin_inset Formula 
+\[
+\sum_{i=1}^{N}w_{i}r_{i,t}\qquad1\leq t\leq T
+\]
+
+\end_inset
+
+Using the log-sum inequality it is possible to prove (assuming we spend
+ 
+\begin_inset Formula $\gamma C$
+\end_inset
+
+ in transaction cost) that the average return from this approximation 
+\begin_inset Formula 
+\[
+\sum_{t=1}^{T}\sum_{i=1}^{N}w_{i}r_{i.t}/T
+\]
+
+\end_inset
+
+ over-estimates average tracking portfolio 
+\begin_inset Formula 
+\[
+\sum_{t=1}^{T}\ln\left(\sum_{i=1}^{N}x_{i}V_{i,t}/\sum_{i=1}^{N}x_{i}V_{i,t-1}\right)/T
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

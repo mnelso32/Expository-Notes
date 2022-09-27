@@ -1,0 +1,705 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\tikzset{->-/.style={decoration={
+  markings,
+  mark=at position #1 with {\arrow{>}}},postaction={decorate}}}
+\pgfplotsset{compat=1.9}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Duality
+\end_layout
+
+\begin_layout Section*
+Notation
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\underline{r}=r_{1},\dots,r_{n}\in R$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Koszul Complex
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\end_layout
+
+\end_inset
+
+ The 
+\series bold
+Koszul complex 
+\series default
+of 
+\begin_inset Formula $\underline{r}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $(\mathcal{K}(\underline{r}),d^{\mathcal{K}(\underline{r})})$
+\end_inset
+
+ is the 
+\begin_inset Formula $R$
+\end_inset
+
+-complex whose graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $\mathcal{K}(\underline{r})$
+\end_inset
+
+ has
+\begin_inset Formula 
+\begin{align*}
+\mathcal{K}_{i}(\underline{r}) & :=\begin{cases}
+R & \text{if }i=0\\
+\bigoplus_{1\leq\lambda_{1}<\cdots<\lambda_{i}\leq n}Re_{\lambda_{1}\cdots\lambda_{i}} & \text{if }1\leq i\leq n\\
+0 & \text{if }i>n.
+\end{cases}
+\end{align*}
+
+\end_inset
+
+as its 
+\begin_inset Formula $i$
+\end_inset
+
+th homogeneous component, and whose differential 
+\begin_inset Formula $d^{\mathcal{K}(\underline{r})}$
+\end_inset
+
+ is uniquely determined by 
+\begin_inset Formula 
+\[
+d^{\mathcal{K}(\underline{r})}(e_{\lambda_{1}\cdots\lambda_{i}})=\sum_{\mu=1}^{i}(-1)^{\mu-1}r_{\lambda_{\mu}}e_{\lambda_{1}\cdots\widehat{\lambda}_{\mu}\cdots\lambda_{i}}\quad\text{and}\quad d^{\mathcal{K}(\underline{r})}(1)=0
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq\lambda_{1}<\cdots<\lambda_{i}\leq n$
+\end_inset
+
+, where the hat symbol means omit that subscript.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Dual Coszul Complex
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ The 
+\series bold
+dual Koszul complex 
+\series default
+on 
+\begin_inset Formula $\underline{r}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $(\mathcal{K}^{\star}(\underline{r}),d^{\mathcal{K}^{\star}(\underline{r})})$
+\end_inset
+
+, is the 
+\begin_inset Formula $R$
+\end_inset
+
+-complex whose graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $\mathcal{K}^{\star}(\underline{r})$
+\end_inset
+
+ has
+\begin_inset Formula 
+\begin{align*}
+\mathcal{K}_{i}^{\star}(\underline{r}) & :=\begin{cases}
+R & \text{if }i\geq0\\
+\bigoplus_{1\leq\lambda_{1}<\cdots<\lambda_{i}\leq n}Re_{\lambda_{1}\cdots\lambda_{i}}^{\star} & \text{if }-1\leq i\leq-n\\
+0 & \text{if }i<-n.
+\end{cases}
+\end{align*}
+
+\end_inset
+
+as its 
+\begin_inset Formula $i$
+\end_inset
+
+th homogeneous component, where
+\begin_inset Formula 
+\[
+e_{\lambda_{1}\cdots\lambda_{i}}^{\star}(e_{\mu_{1}\cdots\mu_{j}})=\begin{cases}
+1 & \text{if }i=j\text{ and }\lambda_{\kappa}=\mu_{\kappa}\text{ for all \ensuremath{1\leq\kappa\leq i}}\\
+0 & \text{else}.
+\end{cases}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq\lambda_{1}<\cdots<\lambda_{i}\leq n$
+\end_inset
+
+ and 
+\begin_inset Formula $1\leq\mu_{1}<\cdots<\mu_{j}\leq n$
+\end_inset
+
+ To describe how the differential 
+\begin_inset Formula $d^{\mathcal{K}^{\star}(\underline{r})}$
+\end_inset
+
+ works, we introduce the following notation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $\boldsymbol{\lambda}=\{\lambda_{1},\dots,\lambda_{i}\mid1\leq\lambda_{1}<\cdots<\lambda_{i}\leq n\}$
+\end_inset
+
+ be a subset of 
+\begin_inset Formula $\boldsymbol{n}=\{1,2,\dots,n\}$
+\end_inset
+
+.
+ Then the complement of 
+\begin_inset Formula $\boldsymbol{\lambda}$
+\end_inset
+
+ in 
+\begin_inset Formula $\boldsymbol{n}$
+\end_inset
+
+ is denoted by
+\begin_inset Formula 
+\[
+\boldsymbol{\lambda}'=\{\lambda_{1}',\dots,\lambda_{n-i}'\mid1\leq\lambda_{1}'<\cdots<\lambda_{n-i}'\leq n\}=\mathbf{n}\backslash\boldsymbol{\lambda}.
+\]
+
+\end_inset
+
+With this notation understood, the differential 
+\begin_inset Formula $d^{\mathcal{K}^{\star}(\underline{r})}$
+\end_inset
+
+ is uniquely determined by
+\begin_inset Formula 
+\[
+d^{\mathcal{K}^{\star}(\underline{r})}(e_{\lambda_{1}\cdots\lambda_{i}}^{\star})=\sum_{\mu=1}^{n-i}(-1)^{\mu-1}r_{\lambda_{\mu}}e_{\lambda_{1}\cdots\lambda_{\mu}'\cdots\lambda_{i}}^{\star}\quad\text{and}\quad d^{\mathcal{K}^{\star}(\underline{r})}(1)=\sum_{\mu=1}^{n}(-1)^{\mu-1}r_{\mu}e_{\mu}^{\star}
+\]
+
+\end_inset
+
+for al 
+\begin_inset Formula $1\leq\lambda_{1}<\cdots<\lambda_{i}\leq n$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Shifting an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex.
+ We define the 
+\series bold
+shift 
+\series default
+of 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ to be the 
+\begin_inset Formula $R$
+\end_inset
+
+-complex
+\begin_inset Formula 
+\[
+\Sigma(A,d):=(A(-1),-d).
+\]
+
+\end_inset
+
+More generally, let 
+\begin_inset Formula $k\in\mathbb{Z}$
+\end_inset
+
+.
+ We define the 
+\begin_inset Formula $k$
+\end_inset
+
+th 
+\series bold
+shift 
+\series default
+of 
+\begin_inset Formula $(A,d)$
+\end_inset
+
+ to be the 
+\begin_inset Formula $R$
+\end_inset
+
+-complex 
+\begin_inset Formula 
+\[
+\Sigma^{k}(A,d)=(\Sigma^{k}A,d^{\Sigma^{k}A}).
+\]
+
+\end_inset
+
+whose graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $\Sigma^{k}A$
+\end_inset
+
+ has 
+\begin_inset Formula 
+\[
+(\Sigma^{k}A)_{i}=A_{i-k}
+\]
+
+\end_inset
+
+as its 
+\begin_inset Formula $i$
+\end_inset
+
+th homogeneous component and whose differential 
+\begin_inset Formula $d^{\Sigma^{k}A}$
+\end_inset
+
+ is simply
+\begin_inset Formula 
+\[
+d^{\Sigma^{k}A}=(-1)^{k}d
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Duality
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremduality}
+\end_layout
+
+\end_inset
+
+ There exists an isomorphism of 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes
+\begin_inset Formula 
+\[
+\Sigma^{n}(\mathcal{K}^{\star}(\underline{r}),d^{\mathcal{K}^{\star}(\underline{r})})\cong(\mathcal{K}(\underline{r}),d^{\mathcal{K}(\underline{r})}).
+\]
+
+\end_inset
+
+In particular, we have an isomorphism of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules
+\begin_inset Formula 
+\[
+H_{i}(\mathcal{K}(\underline{r}))\cong H_{i-n}(\mathcal{K}^{\star}(\underline{r}))
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $i>n$
+\end_inset
+
+ or 
+\begin_inset Formula $i<0$
+\end_inset
+
+, then theorem is obvious, so we may assume that 
+\begin_inset Formula $0\leq i\leq n$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\varphi\colon\Sigma^{n}(\mathcal{K}^{\star}(\underline{r}),d^{\mathcal{K}^{\star}(\underline{r})})\to(\mathcal{K}(\underline{r}),d^{\mathcal{K}(\underline{r})})$
+\end_inset
+
+ be the unique 
+\begin_inset Formula $R$
+\end_inset
+
+-module graded homomorphism such that 
+\begin_inset Formula 
+\[
+\varphi(e_{\lambda_{1}\cdots\lambda_{i}}^{\star})=e_{\lambda_{1}'\cdots\lambda_{n-i}'}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for all 
+\begin_inset Formula $1\leq\lambda_{1}<\cdots<\lambda_{i}\leq n$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is an isomorphism of graded 
+\begin_inset Formula $R$
+\end_inset
+
+-modules since it restricts to a bijection of basis sets.
+ To see that 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is an isomorphism of 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes, we need to show that it commutes with the differentials.
+ To do this, we first simplify notation by denoting 
+\begin_inset Formula $d^{\star}:=(d^{\mathcal{K}^{\star}(\underline{r})})^{\Sigma^{n}}$
+\end_inset
+
+ and 
+\begin_inset Formula $d:=d^{\mathcal{K}(\underline{r})}$
+\end_inset
+
+.
+ Now we have
+\begin_inset Formula 
+\begin{align*}
+d\varphi(e_{\lambda_{1}\cdots\lambda_{i}}^{\star}) & =d(e_{\lambda_{1}'\cdots\lambda_{n-i}'})\\
+ & =\sum_{\mu=1}^{n-i}(-1)^{\mu-1}r_{\mu}e_{\lambda_{1}'\cdots\widehat{\lambda'}_{\mu}\cdots\lambda_{n-i}'}\\
+\\
+\\
+\\
+ & =\sum_{\mu=1}^{n-i}(-1)^{n+\mu-1}r_{\lambda_{\mu}}e_{\lambda_{1}'\cdots\widehat{\lambda'}_{\mu}\cdots\lambda_{n-i}'}\\
+ & =\sum_{\mu=1}^{n-i}(-1)^{n+\mu-1}r_{\lambda_{\mu}}\varphi(e_{\lambda_{1}\cdots\lambda_{\mu}'\cdots\lambda_{i}}^{\star})\\
+ & =\varphi\sum_{\mu=1}^{n-i}(-1)^{n+\mu-1}r_{\lambda_{\mu}}e_{\lambda_{1}\cdots\lambda_{\mu}'\cdots\lambda_{i}}^{\star}\\
+ & =\varphi d^{\star}(e_{\lambda_{1}\cdots\lambda_{i}}^{\star})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,185 @@
+LIB "ncalg.lib"; 
+
+intvec v= 1:4, 2:6, 3:4, 4:1; 
+ring A=(0,a,b,c,d),(e1,e2,e3,e4,e12,e13,e14,e23,e24,e34,e123,e124,e134,e234,e1234),Wp(v);
+
+matrix C[15][15]; matrix D[15][15]; int i; int j; 
+for (i=1; i<=15; i++) {for (j=1; j<=15; j++) {C[i,j]=(-1)^(v[i]*v[j]);}} 
+ncalgebra(C,D);
+
+poly m = abcd;
+poly f(1)(2) = e1*e2-m*(b/c)*e13-m*(a/c)*e23;
+poly f(1)(3) = e1*e3-m*(c/d)*e14-m*(a/d)*e34;
+poly f(1)(4) = e1*e4-m*(d/b)*e12-m*(a/b)*e24;
+poly f(2)(3) = e2*e3-m*(c/a)*e12-m*(bc/ad)*e14-m*(b/d)*e34;
+poly f(2)(4) = e2*e4-m*(d/c)*e23-m*(b/c)*e34;
+poly f(3)(4) = e3*e4-m*e34;
+
+list odd = (e1,e2,e3,e4,e123,e124,e134,e234); 
+ideal I; for (i=1; i<=8; i++) {I = I + odd[i]*odd[i];}
+I = I + f(1)(2),f(1)(3),f(1)(4),f(2)(3),f(2)(4),f(3)(4);
+I = twostd(I);
+
+
+-------------------------------------------------------------------------------------------------------------
+
+LIB "ncalg.lib"; 
+
+intvec v= 1:4, 2:6, 3:4, 4:1; 
+ring A=(0,a,b,c,d),(e1,e2,e3,e4,e12,e13,e14,e23,e24,e34,e123,e124,e134,e234,e1234),Wp(v);
+
+matrix C[15][15]; matrix D[15][15]; int i; int j; 
+for (i=1; i<=15; i++) {for (j=1; j<=15; j++) {C[i,j]=(-1)^(v[i]*v[j]);}} 
+ncalgebra(C,D);
+
+poly m = abcd;
+poly f(1)(2) = e1*e2-m*(b/c)*e13+m*(a/c)*e23;
+poly f(1)(3) = e1*e3-m*(c/d)*e14+m*(a/d)*e34;
+poly f(1)(4) = e1*e4-m*(d/b)*e12-m*(a/b)*e24;
+poly f(2)(3) = e2*e3+m*(c/a)*e12-m*(bc/ad)*e14+m*(b/d)*e34;
+poly f(2)(4) = e2*e4-m*(d/c)*e23-m*(b/c)*e34;
+poly f(3)(4) = e3*e4-m*e34;
+poly f(1)(12) = e1*e12-m*(a/c)*e123;
+poly f(1)(13) = e1*e13-m*(a/d)*e134;
+poly f(1)(14) = e1*e14+m*(a/b)*e124;
+poly f(1)(23) = e1*e23-m*(b/d)*e134;
+poly f(1)(24) = e1*e24+m*(d/c)*e123;
+poly f(1)(34) = e1*e34+m*(c/b)*e124;
+
+list odd = (e1,e2,e3,e4,e123,e124,e134,e234); 
+ideal I; for (i=1; i<=8; i++) {I = I + odd[i]*odd[i];}
+I = I + f(1)(2),f(1)(3),f(1)(4),f(2)(3),f(2)(4),f(3)(4);
+I = I + f(1)(12),f(1)(13),f(1)(14),f(1)(23),f(1)(24),f(1)(34);
+
+poly E(1)(1)(2) = reduce(e1*f(1)(2),I);
+poly E(1)(1)(3) = reduce(e1*f(1)(3),I);
+poly E(1)(1)(4) = reduce(e1*f(1)(4),I);
+poly E(1)(2)(3) = reduce(f(1)(2)*e3-e1*f(2)(3),I);
+poly E(1)(2)(4) = reduce(f(1)(2)*e4-e1*f(2)(4),I);
+poly E(1)(3)(4) = reduce(f(1)(3)*e4-e1*f(3)(4),I);
+
+E(1)(1)(2);
+E(1)(1)(3);
+E(1)(1)(4);
+E(1)(2)(3);
+E(1)(2)(4);
+E(1)(3)(4); 
+
+----------------------------------------------------------------------------------------------------
+
+LIB "ncalg.lib"; 
+
+intvec v= 1:4, 2:6, 3:4, 4:1; 
+ring A=(0,a,b,c,d),(e1,e2,e3,e4,e12,e13,e14,e23,e24,e34,e123,e124,e134,e234,e1234),Wp(v);
+
+matrix C[15][15]; matrix D[15][15]; int i; int j; 
+for (i=1; i<=15; i++) {for (j=1; j<=15; j++) {C[i,j]=(-1)^(v[i]*v[j]);}} 
+ncalgebra(C,D);
+
+poly m = abcd;
+poly f(1)(2) = e1*e2-m*(b/c)*e13+m*(a/c)*e23;
+poly f(1)(3) = e1*e3-m*(c/d)*e14+m*(a/d)*e34;
+poly f(1)(4) = e1*e4-m*(d/b)*e12-m*(a/b)*e24;
+poly f(2)(3) = e2*e3+m*(c/a)*e12-m*(bc/ad)*e14+m*(b/d)*e34;
+poly f(2)(4) = e2*e4-m*(d/c)*e23-m*(b/c)*e34;
+poly f(3)(4) = e3*e4-m*e34;
+poly f(1)(12) = e1*e12-m*(a/c)*e123;
+poly f(1)(13) = e1*e13-m*(a/d)*e134;
+poly f(1)(14) = e1*e14+m*(a/b)*e124;
+poly f(1)(23) = e1*e23-m*(b/d)*e134;
+poly f(1)(24) = e1*e24+m*(d/c)*e123;
+poly f(1)(34) = e1*e34+m*(c/b)*e124;
+poly f(2)(13) = e2*e13-m*e123+m*(b/d)*e134;
+
+list L = (e1,e2,e3,e4,e12,e13,e14,e23,e24,e34,e123,e124,e134,e234,e1234); 
+ideal I; for (i=1; i<=15; i++) {I = I + L[i]*L[i];}
+I = I + f(1)(2),f(1)(3),f(1)(4),f(2)(3),f(2)(4),f(3)(4);
+I = I + f(1)(12),f(1)(13),f(1)(14),f(1)(23),f(1)(24),f(1)(34),f(2)(13);
+
+option(redSB);
+option(redTail);
+I = twostd(I);
+
+for (i=1; i<=15; i++) {for (j=i; j<=15; j++) {L[i]*L[j], "=" , reduce(L[i]*L[j],I);}}
+
+
+-----------------------------------------------------------------------------------------------
+
+
+Charastic Two Check:
+
+
+intvec v= 1:4, 2:6, 3:4, 4:1; 
+ring A=(2,a,b,c,d),(e1,e2,e3,e4,e12,e13,e14,e23,e24,e34,e123,e124,e134,e234,e1234),Wp(v);
+
+
+poly m = abcd;
+poly f(1)(2) = e1*e2-m*(b/c)*e13-m*(a/c)*e23;
+poly f(1)(3) = e1*e3-m*(c/d)*e14-m*(a/d)*e34;
+poly f(1)(4) = e1*e4-m*(d/b)*e12-m*(a/b)*e24;
+poly f(2)(3) = e2*e3-m*(c/a)*e12-m*(bc/ad)*e14-m*(b/d)*e34;
+poly f(2)(4) = e2*e4-m*(d/c)*e23-m*(b/c)*e34;
+poly f(3)(4) = e3*e4-m*e34;
+poly f(1)(12) = e1*e12-m*(a/c)*e123;
+poly f(1)(13) = e1*e13-m*(a/d)*e134;
+poly f(1)(14) = e1*e14-m*(a/b)*e124;
+poly f(1)(23) = e1*e23-m*(b/d)*e134;
+poly f(1)(24) = e1*e24-m*(d/c)*e123;
+poly f(1)(34) = e1*e34-m*(c/b)*e124;
+
+list odd = (e1,e2,e3,e4,e123,e124,e134,e234); 
+ideal I; for (i=1; i<=8; i++) {I = I + odd[i]*odd[i];}
+I = I + f(1)(2),f(1)(3),f(1)(4),f(2)(3),f(2)(4),f(3)(4);
+I = I + f(1)(12),f(1)(13),f(1)(14),f(1)(23),f(1)(24),f(1)(34);
+
+
+poly E(1)(1)(2) = reduce(e1*f(1)(2),I);
+poly E(1)(1)(3) = reduce(e1*f(1)(3),I);
+poly E(1)(1)(4) = reduce(e1*f(1)(4),I);
+poly E(1)(2)(3) = reduce(f(1)(2)*e3-e1*f(2)(3),I);
+poly E(1)(2)(4) = reduce(f(1)(2)*e4-e1*f(2)(4),I);
+poly E(1)(3)(4) = reduce(f(1)(3)*e4-e1*f(3)(4),I);
+
+
+
+
+option(redSB);
+option(redTail);
+std(I);
+
+
+
+
+
+
+
+
+
+
+
+
+LIB "ncalg.lib"; 
+
+intvec v= 1:4, 2:6, 3:4, 4:1; 
+ring A=(0,a,b,c,d),(e1,e2,e3,e4,e12,e13,e14,e23,e24,e34,e123,e124,e134,e234,e1234),Wp(v);
+
+matrix C[15][15]; matrix D[15][15]; int i; int j; 
+for (i=1; i<=15; i++) {for (j=1; j<=15; j++) {C[i,j]=(-1)^(v[i]*v[j]);}} 
+ncalgebra(C,D);
+
+poly m = abcd;
+poly f(1)(2) = e1*e2-m*(b/c)*e13+m*(a/c)*e23;
+poly f(1)(3) = e1*e3-m*(c/d)*e14+m*(a/d)*e34;
+poly f(1)(4) = e1*e4-m*(d/b)*e12-m*(a/b)*e24;
+poly f(2)(3) = e2*e3+m*(c/a)*e12-m*(bc/ad)*e14+m*(b/d)*e34;
+poly f(2)(4) = e2*e4-m*(d/c)*e23-m*(b/c)*e34;
+poly f(3)(4) = e3*e4-m*e34;
+
+list odd = (e1,e2,e3,e4,e123,e124,e134,e234); 
+ideal I; for (i=1; i<=8; i++) {I = I + odd[i]*odd[i];}
+I = I + f(1)(2),f(1)(3),f(1)(4),f(2)(3),f(2)(4),f(3)(4);
+
+option(redSB);
+option(redTail);
+twostd(I);
+

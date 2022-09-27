@@ -1,0 +1,3523 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Linear Analysis Homework 4
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Subsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ be a hilbert space and let 
+\begin_inset Formula $T\colon\mathcal{H\to\mathcal{H}}$
+\end_inset
+
+ be a bounded operator.
+ Then
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\|T\|=\sup\{\|Tx\|\mid\|x\|=1\}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\|T\|=\sup\left\{ \frac{\|Tx\|}{\|x\|}\mid x\in\mathcal{H}\backslash\{0\}\right\} .$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+1.
+ First note that
+\begin_inset Formula 
+\begin{align*}
+\sup\{\|Tx\|\mid\|x\|=1\} & \leq\sup\{\|Tx\|\mid\|x\|\leq1\}\\
+ & =\|T\|.
+\end{align*}
+
+\end_inset
+
+We prove the reverse inequality by contradiction.
+ Assume that 
+\begin_inset Formula $\|T\|>\sup\{\|Tx\|\mid\|x\|=1\}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\begin{equation}
+\|T\|-\varepsilon>\sup\{\|Tx\|\mid\|x\|=1\}\label{eq:contra}
+\end{equation}
+
+\end_inset
+
+Next, choose 
+\begin_inset Formula $x\in\mathcal{H}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|x\|\leq1$
+\end_inset
+
+ and 
+\begin_inset Formula $\|Tx\|\geq\|T\|-\varepsilon$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $\|x\|\leq1$
+\end_inset
+
+ and 
+\begin_inset Formula $\left\Vert \frac{x}{\|x\|}\right\Vert =1$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\|T\| & \geq\left\Vert T\left(\frac{x}{\|x\|}\right)\right\Vert \\
+ & =\frac{\|Tx\|}{\|x\|}\\
+ & \geq\|Tx\|\\
+ & >\|T\|-\varepsilon,
+\end{align*}
+
+\end_inset
+
+and this contradicts 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:contra})
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\sup\left\{ \frac{\|Tx\|}{\|x\|}\mid x\in\mathcal{H}\backslash\{0\}\right\}  & =\sup\left\{ \left\Vert T\left(\frac{x}{\|x\|}\right)\right\Vert \mid x\in\mathcal{H}\backslash\{0\}\right\} \\
+ & =\sup\left\{ \left\Vert Ty\right\Vert \mid\|y\|=1\right\} \\
+ & =\|T\|,
+\end{align*}
+
+\end_inset
+
+where the last equality follows from 1.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $k\in C[a,b]$
+\end_inset
+
+.
+ Then the operator 
+\begin_inset Formula $T\colon C[a,b]\to C[a,b]$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\[
+Tf=kf
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C[a,b]$
+\end_inset
+
+ is bounded.
+ It's norm will be explicitly computed in the proof below.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ We first show it is linear.
+ Let 
+\begin_inset Formula $f,g\in C[a,b]$
+\end_inset
+
+ and let 
+\begin_inset Formula $\lambda,\mu\in\mathbb{C}$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+T(\lambda f+\mu g) & =k(\lambda f+\mu g)\\
+ & =\lambda kf+\mu kg\\
+ & =\lambda T(f)+\mu T(g).
+\end{align*}
+
+\end_inset
+
+Thus, 
+\begin_inset Formula $T$
+\end_inset
+
+ is linear.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we show it is bounded.
+ If 
+\begin_inset Formula $k=0$
+\end_inset
+
+, then 
+\begin_inset Formula $\|T\|=0$
+\end_inset
+
+, so assume 
+\begin_inset Formula $k\neq0$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $k$
+\end_inset
+
+ is continuous on the compact interval 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+, there exists 
+\begin_inset Formula $c\in[a,b]$
+\end_inset
+
+ such that 
+\begin_inset Formula $|k(x)|\leq|k(c)|$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in[a,b]$
+\end_inset
+
+.
+ Choose such a 
+\begin_inset Formula $c\in[a,b]$
+\end_inset
+
+ and let 
+\begin_inset Formula $f\in C[a,b]$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|f\|\leq1$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\|Tf\| & =\|kf\|\\
+ & =\sqrt{\int_{a}^{b}|k(x)|^{2}|f(x)|^{2}dx}\\
+ & \leq|k(c)|\sqrt{\int_{a}^{b}|f(x)|^{2}dx}\\
+ & \leq|k(c)|.
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $\|T\|\leq|k(c)|$
+\end_inset
+
+, and hence 
+\begin_inset Formula $T$
+\end_inset
+
+ is bounded.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+To find the norm of 
+\begin_inset Formula $T$
+\end_inset
+
+, let 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varepsilon<|k(c)|$
+\end_inset
+
+.
+ Without loss of generality, assume that 
+\begin_inset Formula $c<b$
+\end_inset
+
+ (if 
+\begin_inset Formula $c=b$
+\end_inset
+
+, then we swap the role of 
+\begin_inset Formula $b$
+\end_inset
+
+ with 
+\begin_inset Formula $a$
+\end_inset
+
+ in the argument which follows).
+ Choose 
+\begin_inset Formula $c'\in(c,b)$
+\end_inset
+
+ such that 
+\begin_inset Formula $|k(x)|\geq|k(c)|-\varepsilon$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in(c,c')$
+\end_inset
+
+ (such a 
+\begin_inset Formula $c'$
+\end_inset
+
+ must exist since 
+\begin_inset Formula $k$
+\end_inset
+
+ is continuous) and choose 
+\begin_inset Formula $f$
+\end_inset
+
+ to be a nonzero continuous function in 
+\begin_inset Formula $C[a,b]$
+\end_inset
+
+ which vanishes outside the interval 
+\begin_inset Formula $(c,c')$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+|k(x)||f(x)|\geq(|k(c)|-\varepsilon)|f(x)|
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in(a,b)$
+\end_inset
+
+.
+ In particular, this implies
+\begin_inset Formula 
+\begin{align*}
+\|Tf\| & =\|kf\|\\
+ & =\sqrt{\int_{a}^{b}|k(x)f(x)|^{2}dx}\\
+ & \geq\sqrt{\int_{a}^{b}(|k(c)|-\varepsilon)|f(x)|^{2}dx}\\
+ & =(|k(c)|-\varepsilon)\sqrt{\int_{a}^{b}|f(x)|^{2}dx}\\
+ & =(|k(c)|-\varepsilon)\|f\|.
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\|T(f/\|f\|)\|\geq|k(c)|-\varepsilon$
+\end_inset
+
+, and this implies
+\begin_inset Formula 
+\begin{equation}
+\|T\|\geq|k(c)|-\varepsilon\label{ini}
+\end{equation}
+
+\end_inset
+
+Since 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{ini})
+\end_layout
+
+\end_inset
+
+ holds for all 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, we must have 
+\begin_inset Formula $\|T\|\geq|k(c)|$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\|T\|=|k(c)|$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\{x_{n}\mid n\in\mathbb{N}\}$
+\end_inset
+
+ be a linearly independent set of vectors in a Hilbert space 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+.
+ Consider the so called Gram-Schmidt process: set 
+\begin_inset Formula $e_{1}=\frac{1}{\|x_{1}\|}x_{1}$
+\end_inset
+
+.
+ Proceed inductively.
+ If 
+\begin_inset Formula $e_{1},e_{2},\dots,e_{n-1}$
+\end_inset
+
+ are computed, compute 
+\begin_inset Formula $e_{n}$
+\end_inset
+
+ in two steps by
+\begin_inset Formula 
+\[
+f_{n}:=x_{n}-\sum_{k=1}^{n-1}\langle x_{n},e_{k}\rangle e_{k},\text{ and then set }e_{n}:=\frac{1}{\|f_{n}\|}f_{n}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then
+\end_layout
+
+\begin_layout Enumerate
+for every 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ we have 
+\begin_inset Formula $\text{span}\{x_{1},x_{2},\dots,x_{N}\}=\text{span}\{e_{1},e_{2},\dots,e_{N}\}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+the set 
+\begin_inset Formula $\{e_{n}\mid n\in\mathbb{N}\}$
+\end_inset
+
+ is an orthonormal set in 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+if 
+\begin_inset Formula $\overline{\text{span}}\{x_{n}\mid n\in\mathbb{N}\}=\mathcal{H}$
+\end_inset
+
+, then 
+\begin_inset Formula $\{e_{n}\mid n\in\mathbb{N}\}$
+\end_inset
+
+ is an orthonormal basis for 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+1.
+ Let 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+.
+ Then for each 
+\begin_inset Formula $1\leq n\leq N$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+x_{n}=\sum_{k=1}^{n-1}\langle x_{n},e_{k}\rangle e_{k}+\|f_{n}\|e_{n}.
+\]
+
+\end_inset
+
+This implies 
+\begin_inset Formula $\text{span}\{x_{1},x_{2},\dots,x_{N}\}\subseteq\text{span}\{e_{1},e_{2},\dots,e_{N}\}$
+\end_inset
+
+.
+ We show the reverse inclusion by induction on 
+\begin_inset Formula $n$
+\end_inset
+
+ such that 
+\begin_inset Formula $1\leq n\leq N$
+\end_inset
+
+.
+ The base case 
+\begin_inset Formula $n=1$
+\end_inset
+
+ being 
+\begin_inset Formula $\text{span}\{x_{1}\}\supseteq\text{span}\{e_{1}\}$
+\end_inset
+
+, which holds since 
+\begin_inset Formula $e_{1}=\frac{1}{\|x_{1}\|}x_{1}$
+\end_inset
+
+.
+ Now suppose for some 
+\begin_inset Formula $n$
+\end_inset
+
+ such that 
+\begin_inset Formula $1\leq n<N$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{equation}
+\text{span}\{x_{1},x_{2},\dots,x_{k}\}\supseteq\text{span}\{e_{1},e_{2},\dots,e_{k}\}\label{eq:inductionstep}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq k\leq n$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+e_{n+1}=\frac{1}{\|f_{n}\|}x_{n}-\sum_{k=1}^{n}\frac{1}{\|f_{n}\|}\langle x_{n},e_{k}\rangle e_{k}\in\text{span}\{x_{1},x_{2},\dots,x_{n}\}.
+\]
+
+\end_inset
+
+where we used the induction step 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:inductionstep})
+\end_layout
+
+\end_inset
+
+ on the 
+\begin_inset Formula $e_{k}$
+\end_inset
+
+'s (
+\begin_inset Formula $1\leq k\leq n$
+\end_inset
+
+).
+ Therefore
+\begin_inset Formula 
+\[
+\text{span}\{x_{1},x_{2},\dots,x_{k}\}\supseteq\text{span}\{e_{1},e_{2},\dots,e_{k}\}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq k\leq n+1$
+\end_inset
+
+, and this proves our claim.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ By construction, we have 
+\begin_inset Formula $\langle e_{n},e_{n}\rangle=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ Thus, it remains to show that 
+\begin_inset Formula $\langle e_{m},e_{n}\rangle=0$
+\end_inset
+
+ whenever 
+\begin_inset Formula $m\neq n$
+\end_inset
+
+.
+ We prove by induction on 
+\begin_inset Formula $n\geq2$
+\end_inset
+
+ that 
+\begin_inset Formula $\langle e_{n},e_{m}\rangle=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $m<n$
+\end_inset
+
+.
+ Proving this also give us 
+\begin_inset Formula $\langle e_{m},e_{n}\rangle=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $m<n$
+\end_inset
+
+, since
+\begin_inset Formula 
+\begin{align*}
+\langle e_{m},e_{n}\rangle & =\overline{\langle e_{n},e_{m}\rangle}\\
+ & =\overline{0}\\
+ & =0.
+\end{align*}
+
+\end_inset
+
+The base case is
+\begin_inset Formula 
+\begin{align*}
+\langle e_{2},e_{1}\rangle & =\frac{1}{\|x_{1}\|\|f_{2}\|}\left\langle \left(x_{2}-\frac{\langle x_{2},x_{1}\rangle}{\langle x_{1},x_{1}\rangle}x_{1}\right),x_{1}\right\rangle \\
+ & =\frac{1}{\|x_{1}\|\|f_{2}\|}\left(\langle x_{2},x_{1}\rangle-\langle x_{2},x_{1}\rangle\right)\\
+ & =0
+\end{align*}
+
+\end_inset
+
+Now suppose that 
+\begin_inset Formula $n>2$
+\end_inset
+
+ and that 
+\begin_inset Formula $\langle e_{n},e_{m}\rangle=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $m<n$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\langle e_{n+1},e_{m}\rangle & =\frac{1}{\|f_{n+1}\|}\langle x_{n+1}-\sum_{k=1}^{n}\langle x_{n+1},e_{k}\rangle e_{k},e_{m}\rangle\\
+ & =\frac{1}{\|f_{n+1}\|}\left(\langle x_{n+1},e_{m}\rangle-\sum_{k=1}^{n}\langle x_{n+1},e_{k}\rangle\langle e_{k},e_{m}\rangle\right)\\
+ & =\frac{1}{\|f_{n+1}\|}\left(\langle x_{n+1},e_{m}\rangle-\langle x_{n+1},e_{m}\rangle\langle e_{m},e_{m}\rangle\right)\\
+ & =\frac{1}{\|f_{n+1}\|}\left(\langle x_{n+1},e_{m}\rangle-\langle x_{n+1},e_{m}\rangle\right)\\
+ & =0,
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $m<n+1$
+\end_inset
+
+, where we used the induction hypothesis to get from the second line to
+ the third line.
+ This proves the induction step, which finishes the proof of part 2 of the
+ proposition.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ By 2, we know that 
+\begin_inset Formula $\{e_{n}\mid n\in\mathbb{N}\}$
+\end_inset
+
+ is an orthonormal set.
+ Thus, it suffices to show that 
+\begin_inset Formula $\{e_{n}\mid n\in\mathbb{N}\}$
+\end_inset
+
+ is complete.
+ To do this, we use the criterion that the set 
+\begin_inset Formula $\{e_{n}\mid n\in\mathbb{N}\}$
+\end_inset
+
+ is complete if and only if the only 
+\begin_inset Formula $x\in\mathcal{H}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\langle x,e_{n}\rangle=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ is 
+\begin_inset Formula $x=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $x\in\mathcal{H}$
+\end_inset
+
+ and suppose 
+\begin_inset Formula $\langle x,e_{n}\rangle=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\langle x,x_{n}\rangle & =\left\langle x,\sum_{k=1}^{n-1}\langle x_{n},e_{k}\rangle e_{k}+\|f_{n}\|e_{n}\right\rangle \\
+ & =\sum_{k=1}^{n-1}\langle x_{n},e_{k}\rangle\langle x,e_{k}\rangle+\|f_{n}\|\langle x,e_{n}\rangle\\
+ & =0
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\{x_{n}\mid n\in\mathbb{N}\}$
+\end_inset
+
+ is complete, this implies 
+\begin_inset Formula $x=0$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $\{e_{n}\mid n\in\mathbb{N}\}$
+\end_inset
+
+ is complete.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ The first three Legendre polynomials are
+\begin_inset Formula 
+\[
+P_{1}(x)=1,\quad P_{2}(x)=x,\quad,P_{3}(x)=\frac{1}{2}(3x^{2}-1).
+\]
+
+\end_inset
+
+We apply Gram-Schmidt process to the polynomials 
+\begin_inset Formula $1,x,x^{2}$
+\end_inset
+
+ in the space 
+\begin_inset Formula $C[-1,1]$
+\end_inset
+
+ to get scalar multiples of the Legendre polynomials above.
+ First we set 
+\begin_inset Formula $f_{1}(x)=1$
+\end_inset
+
+ and then calculate
+\begin_inset Formula 
+\begin{align*}
+\|f_{1}(x)\| & =\sqrt{\int_{-1}^{1}dx}\\
+ & =\sqrt{2}.
+\end{align*}
+
+\end_inset
+
+Thus we set 
+\begin_inset Formula $e_{1}(x)=1/\sqrt{2}$
+\end_inset
+
+.
+ Next we calculate
+\begin_inset Formula 
+\begin{align*}
+f_{1}(x) & =x-\left\langle x,\frac{1}{\sqrt{2}}\right\rangle \frac{1}{\sqrt{2}}\\
+ & =x-\frac{1}{2}\int_{-1}^{1}xdx\\
+ & =x.
+\end{align*}
+
+\end_inset
+
+Next we calculate
+\begin_inset Formula 
+\begin{align*}
+\|f_{1}(x)\| & =\sqrt{\int_{-1}^{1}x^{2}dx}\\
+ & =\sqrt{\frac{2}{3}}.
+\end{align*}
+
+\end_inset
+
+Thus we set 
+\begin_inset Formula $e_{2}(x)=\sqrt{3/2}x$
+\end_inset
+
+.
+ Next we calculate
+\begin_inset Formula 
+\begin{align*}
+f_{2}(x) & =x^{2}-\left\langle x^{2},\sqrt{\frac{3}{2}}x\right\rangle \sqrt{\frac{3}{2}}x-\left\langle x^{2},\sqrt{\frac{1}{2}}\right\rangle \sqrt{\frac{1}{2}}\\
+ & =x^{2}-\frac{3}{2}x\int_{-1}^{1}x^{3}dx-\frac{1}{2}\int_{-1}^{1}x^{2}dx\\
+ & =x^{2}-\frac{1}{3}.
+\end{align*}
+
+\end_inset
+
+Then we finally calculate
+\begin_inset Formula 
+\begin{align*}
+\|f_{2}(x)\| & =\sqrt{\int_{-1}^{1}\left(x^{2}-\frac{1}{3}\right)^{2}dx}\\
+ & =\sqrt{\int_{-1}^{1}\left(x^{4}-\frac{2}{3}x^{2}+\frac{1}{9}\right)dx}\\
+ & =\sqrt{\int_{-1}^{1}x^{4}dx-\frac{2}{3}\int_{-1}^{1}x^{2}dx+\frac{1}{9}\int_{-1}^{1}dx}\\
+ & =\sqrt{\frac{2}{5}-\frac{4}{9}+\frac{2}{9}}\\
+ & =\sqrt{\frac{8}{45}}.
+\end{align*}
+
+\end_inset
+
+Thus we set 
+\begin_inset Formula $e_{3}(x)=\sqrt{45/8}(x^{2}-1/3)$
+\end_inset
+
+.
+ Now observe that
+\begin_inset Formula 
+\begin{align*}
+P_{1}(x) & =\sqrt{2}e_{1}(x)\\
+P_{2}(x) & =\sqrt{\frac{2}{3}}e_{2}(x)\\
+P_{3}(x) & =\sqrt{\frac{2}{5}}e_{3}(x)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+For this problem, we needed to establish some basic results which we proved
+ in the Appendix.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ The expression
+\begin_inset Formula 
+\begin{equation}
+\int_{-1}^{1}|x^{3}-a-bx-cx^{2}|^{2}dx.\label{eq:min}
+\end{equation}
+
+\end_inset
+
+is minimized in 
+\begin_inset Formula $a,b,c\in\mathbb{C}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $a=0$
+\end_inset
+
+, 
+\begin_inset Formula $b=3/5$
+\end_inset
+
+, and 
+\begin_inset Formula $c=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula 
+\[
+\mathcal{H}=\{p(x)\in\mathbb{C}[x]\mid\deg(p(x))\leq3\}\quad\text{and}\quad\mathcal{K}=\{p(x)\in\mathbb{C}[x]\mid\deg(p(x))\leq2\}.
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{K}$
+\end_inset
+
+ are subspaces of 
+\begin_inset Formula $C[-1,1]$
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propsubspace})
+\end_layout
+
+\end_inset
+
+ implies they are inner-product spaces with the inner-product inherited
+ from 
+\begin_inset Formula $C[-1,1]$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ is finite dimensional, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propfinistrivial})
+\end_layout
+
+\end_inset
+
+ implies 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ is a separable Hilbert space.
+ Since 
+\begin_inset Formula $\mathcal{K}$
+\end_inset
+
+ is a finite dimensional subspace of 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propfinsubisclosed})
+\end_layout
+
+\end_inset
+
+ implies 
+\begin_inset Formula $\mathcal{K}$
+\end_inset
+
+ is closed in 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\{e_{1},e_{2},e_{3}\}$
+\end_inset
+
+ be the orthonormal basis computed in problem 4.
+ A proposition proved in class implies
+\begin_inset Formula 
+\begin{align*}
+\text{P}_{\mathcal{K}}(x^{3}) & =\langle x^{3},e_{1}\rangle e_{1}+\langle x^{3},e_{2}\rangle e_{2}+\langle x^{3},e_{3}\rangle e_{3}\\
+ & =\frac{1}{2}\int_{-1}^{1}x^{3}dx+\frac{3}{2}x\int_{-1}^{1}x^{4}dx+\frac{45}{8}\left(x^{2}-\frac{1}{3}\right)\int_{-1}^{1}x^{3}\left(x^{2}-\frac{1}{3}\right)dx\\
+ & =\frac{3}{5}x.
+\end{align*}
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $x^{3}(x^{2}-1/3)$
+\end_inset
+
+ is an odd function to get 
+\begin_inset Formula $\int_{-1}^{1}x^{3}(x^{2}-1/3)dx=0$
+\end_inset
+
+.
+ Therefore
+\begin_inset Formula 
+\begin{align*}
+\int_{-1}^{1}\left|x^{3}-\frac{3}{5}x\right|^{2}dx & =\|x^{3}-\text{P}_{\mathcal{K}}(x^{3})\|^{2}\\
+ & =\inf\left\{ \|x^{3}-(a+bx+cx^{2})\|^{2}\mid a+bx+cx^{2}\in\mathcal{K}\right\} \\
+ & =\inf\left\{ \int_{-1}^{1}|x^{3}-a-bx-cx^{2}|^{2}dx\mid a,b,c\in\mathbb{C}\right\} .
+\end{align*}
+
+\end_inset
+
+By uniqueness of 
+\begin_inset Formula $\text{P}_{\mathcal{K}}x^{3}$
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:min})
+\end_layout
+
+\end_inset
+
+ is minimized in 
+\begin_inset Formula $a,b,c\in\mathbb{C}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $a=0$
+\end_inset
+
+, 
+\begin_inset Formula $b=3/5$
+\end_inset
+
+, and 
+\begin_inset Formula $c=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 6
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\ell^{2}(\mathbb{N})$
+\end_inset
+
+ is a Hilbert space.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(a^{n})_{n\in\mathbb{N}}$
+\end_inset
+
+ be a Cauchy sequence in 
+\begin_inset Formula $\ell^{2}(\mathbb{N})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 1: 
+\series default
+We show that for each 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+, the sequence of 
+\begin_inset Formula $k$
+\end_inset
+
+th coordinates 
+\begin_inset Formula $(a_{k}^{n})_{n\in\mathbb{N}}$
+\end_inset
+
+ is a Cauchy sequence of complex numbers, and hence must converge (as 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ is complete).
+ Let 
+\begin_inset Formula $k\in\mathbb{N}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $m,n\geq N$
+\end_inset
+
+ implies 
+\begin_inset Formula $\|a^{n}-a^{m}\|<\varepsilon^{2}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $n,m\geq N$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\begin{align*}
+|a_{k}^{n}-a_{k}^{m}|^{2} & \leq\sum_{i=1}^{\infty}|a_{i}^{n}-a_{i}^{m}|^{2}\\
+ & =\|a^{n}-a^{m}\|\\
+ & <\varepsilon^{2},
+\end{align*}
+
+\end_inset
+
+which implies 
+\begin_inset Formula $|a_{k}^{n}-a_{k}^{m}|<\varepsilon$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $(a_{k}^{n})_{n\in\mathbb{N}}$
+\end_inset
+
+ is a Cauchy sequence of complex numbers.
+ In particular, the sequence 
+\begin_inset Formula $(a_{k}^{n})_{n\in\mathbb{N}}$
+\end_inset
+
+ converges to some element, say 
+\begin_inset Formula $a_{k}^{n}\to a_{k}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 2: 
+\series default
+We show that the sequence 
+\begin_inset Formula $(a_{k})_{k\in\mathbb{N}}$
+\end_inset
+
+ defined in step 1 is square summable.
+ Since 
+\begin_inset Formula $(a^{n})$
+\end_inset
+
+ is a Cauchy sequence of elements in 
+\begin_inset Formula $\ell^{2}(\mathbb{N})$
+\end_inset
+
+, there exists an 
+\begin_inset Formula $M>0$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|a^{n}\|<M$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+ (see 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~((
+\backslash
+ref{lemmacauchybound})
+\end_layout
+
+\end_inset
+
+ for a proof of this).
+ Choose such an 
+\begin_inset Formula $M>0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ and let 
+\begin_inset Formula $K\in\mathbb{N}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+|a_{k}|^{2}<|a_{k}^{N}|^{2}+\varepsilon/K
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq k\leq K$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\sum_{k=1}^{K}|a_{k}|^{2} & <\sum_{k=1}^{K}|a_{k}^{N}|^{2}+\varepsilon\\
+ & \leq\|a^{N}\|+\varepsilon\\
+ & \leq M+\varepsilon.
+\end{align*}
+
+\end_inset
+
+Taking the limit 
+\begin_inset Formula $K\to\infty$
+\end_inset
+
+, we see that
+\begin_inset Formula 
+\begin{align*}
+\|a\| & =\sum_{k=1}^{\infty}|a_{k}|^{2}\\
+ & \leq M+\varepsilon\\
+ & \leq0.
+\end{align*}
+
+\end_inset
+
+In particular, 
+\begin_inset Formula $a$
+\end_inset
+
+ is square summable.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 3: 
+\series default
+Let 
+\begin_inset Formula $a$
+\end_inset
+
+ be the sequence 
+\begin_inset Formula $(a_{k})_{k\in\mathbb{N}}$
+\end_inset
+
+ defined in step 1.
+ We show that 
+\begin_inset Formula $a^{n}\to a$
+\end_inset
+
+ in the 
+\begin_inset Formula $\ell^{2}$
+\end_inset
+
+ norm.
+ Let 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ and let 
+\begin_inset Formula $K\in\mathbb{N}$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $m,n\geq N$
+\end_inset
+
+ implies 
+\begin_inset Formula $\|a^{n}-a^{m}\|^{2}<\varepsilon/2$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\sum_{k=1}^{K}|a_{k}^{n}-a_{k}^{m}|^{2} & \leq\sum_{k=1}^{\infty}|a_{k}^{n}-a_{k}^{m}|^{2}\\
+ & =\|a^{n}-a^{m}\|^{2}\\
+ & <\varepsilon/2
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $n,m\geq N$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $a_{k}^{m}\to a_{k}$
+\end_inset
+
+ as 
+\begin_inset Formula $m\to\infty$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\[
+\sum_{k=1}^{K}|a_{k}^{n}-a_{k}^{m}|^{2}\to\sum_{k=1}^{K}|a_{k}^{n}-a_{k}|^{2}
+\]
+
+\end_inset
+
+as 
+\begin_inset Formula $m\to\infty$
+\end_inset
+
+, we see that after taking the limit 
+\begin_inset Formula $m\to\infty$
+\end_inset
+
+ , we have
+\begin_inset Formula 
+\begin{equation}
+\sum_{k=1}^{K}|a_{k}^{n}-a_{k}|^{2}\leq\varepsilon/2.\label{lim}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\geq N$
+\end_inset
+
+.
+ Taking the limit 
+\begin_inset Formula $K\to\infty$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{lim})
+\end_layout
+
+\end_inset
+
+ gives us
+\begin_inset Formula 
+\[
+\|a^{n}-a\|^{2}<\varepsilon
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\geq N$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $a^{n}\to a$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 7
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $C[a,b]$
+\end_inset
+
+ is not a Hilbert space.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, define 
+\begin_inset Formula $f_{n}\in C[a,b]$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+f_{n}(x)=\begin{cases}
+0 & x\in[a,c-\frac{1}{n}]\\
+nx+1-nc & x\in[c-\frac{1}{n},c]\\
+1 & x\in[c,b],
+\end{cases}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $c=\frac{a+b}{2}$
+\end_inset
+
+.
+ We will show that the sequence 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ is a Cauchy sequence which is not convergent.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 1:
+\series default
+ We first show that the sequence 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ is a Cauchy sequence.
+ Let 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ and let 
+\begin_inset Formula $m,n\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $n\geq m$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\|f_{n}-f_{m}\|^{2} & =\int_{c-\frac{1}{m}}^{c-\frac{1}{n}}\left|mx+1-mc\right|^{2}dx+\int_{c-\frac{1}{n}}^{c}\left|nx+1-nc-\left(mx+1-mc\right)\right|^{2}dx\\
+ & =\int_{c-\frac{1}{m}}^{c-\frac{1}{n}}\left|m(x-c)+1\right|^{2}dx+(n-m)^{2}\int_{c-\frac{1}{n}}^{c}\left|x-c\right|^{2}dx\\
+ & \leq\left(\frac{1}{m}-\frac{1}{n}\right)\left|1-\frac{m}{n}\right|^{2}+\frac{(n-m)^{2}}{n^{3}}\\
+ & \leq\frac{1}{m}-\frac{1}{n}+\frac{(n-m)^{2}}{n^{3}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Choose 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $n\geq m\geq N$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\[
+\frac{1}{m}-\frac{1}{n}+\frac{(n-m)^{2}}{n^{3}}<\varepsilon^{2}.
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $n\geq m\geq N$
+\end_inset
+
+ implies 
+\begin_inset Formula $\|f_{n}-f_{m}\|<\varepsilon$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ is a Cauchy sequence.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Step 2: 
+\series default
+We show that the sequence 
+\begin_inset Formula $(f_{n})$
+\end_inset
+
+ is not convergent.
+ Assume for a contradiction that 
+\begin_inset Formula $f_{n}\to f$
+\end_inset
+
+ where 
+\begin_inset Formula $f\in C[a,b]$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\|f_{n}-f\|^{2} & =\int_{a}^{c-\frac{1}{n}}|f(x)|^{2}dx+\int_{c-\frac{1}{n}}^{c}|f(x)-f_{n}(x)|^{2}dx+\int_{c}^{b}|f(x)-1|^{2}dx\\
+ & \leq(c-a-\frac{1}{n})\sup_{x\in[a,c-\frac{1}{n}]}|f(x)|^{2}+\int_{c-\frac{1}{n}}^{c}|f(x)-f_{n}(x)|^{2}dx+(b-c)\sup_{x\in[c,c-\frac{1}{n}]}|f(x)-1|^{2}dx.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\|f_{n}-f\|\to0$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+, we see that (after taking the limit 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+) we must have
+\begin_inset Formula 
+\[
+f(x)=\begin{cases}
+0 & \text{if }x\in[a,c]\\
+1 & \text{if }x\in[c,b]
+\end{cases}
+\]
+
+\end_inset
+
+but this is not a continuous function.
+ Thus we obtain a contradiction.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propsubspace}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(V,\langle\cdot,\cdot\rangle)$
+\end_inset
+
+ be an inner-product space and let 
+\begin_inset Formula $W$
+\end_inset
+
+ be a subspace of 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(W,\langle\cdot,\cdot\rangle|_{W\times W}\rangle$
+\end_inset
+
+ is an inner-product space, where 
+\begin_inset Formula $\langle\cdot,\cdot\rangle|_{W\times W}\colon W\times W\to\mathbb{C}$
+\end_inset
+
+ is the restriction of 
+\begin_inset Formula $\langle\cdot,\cdot\rangle$
+\end_inset
+
+ to 
+\begin_inset Formula $W\times W$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ All of the required properties for 
+\begin_inset Formula $\langle\cdot,\cdot\rangle|_{W\times W}$
+\end_inset
+
+ to be an inner-product are 
+\emph on
+inherited 
+\emph default
+by 
+\begin_inset Formula $\langle\cdot,\cdot\rangle$
+\end_inset
+
+ since 
+\begin_inset Formula $W$
+\end_inset
+
+ is a subset of 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ For instance, let 
+\begin_inset Formula $x,y,z\in V$
+\end_inset
+
+ and let 
+\begin_inset Formula $\lambda\in\mathbb{C}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\langle x+\lambda y,z\rangle|_{W\times W} & =\langle x+\lambda y,z\rangle\\
+ & =\langle x,z\rangle+\lambda\langle y,z\rangle\\
+ & =\langle x,z\rangle|_{W\times W}+\lambda\langle y,z\rangle|_{W\times W}
+\end{align*}
+
+\end_inset
+
+gives us linearity in the first argument.
+ The other properties follow similarly.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ As long as context is clear, then we denote 
+\begin_inset Formula $\langle\cdot,\cdot\rangle|_{W\times W}$
+\end_inset
+
+ simply by 
+\begin_inset Formula $\langle\cdot,\cdot\rangle$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propfinistrivial}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(V,\langle\cdot,\cdot\rangle)$
+\end_inset
+
+ be an 
+\begin_inset Formula $n$
+\end_inset
+
+-dimensional inner-product space.
+ Then 
+\begin_inset Formula $(V,\langle\cdot,\cdot\rangle)$
+\end_inset
+
+ is unitarily equivalent to 
+\begin_inset Formula $(\mathbb{C}^{n},\langle\cdot,\cdot\rangle_{\text{e}}\rangle$
+\end_inset
+
+, where 
+\begin_inset Formula $\langle\cdot,\cdot\rangle_{\text{e}}$
+\end_inset
+
+ is the standard Euclidean inner-product on 
+\begin_inset Formula $\mathbb{C}^{n}$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $(V,\langle\cdot,\cdot\rangle)$
+\end_inset
+
+ is a separable Hilbert space.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\{v_{1},\dots,v_{n}\}$
+\end_inset
+
+ be a basis for 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ By applying the Gram-Schmidt process to 
+\begin_inset Formula $\{v_{1},\dots,v_{n}\}$
+\end_inset
+
+, we can get an orthonormal basis, say 
+\begin_inset Formula $\{u_{1},\dots,u_{n}\}$
+\end_inset
+
+, of 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\varphi\colon V\to\mathbb{C}^{n}$
+\end_inset
+
+ be the unique linear isomorphism such that
+\begin_inset Formula 
+\[
+\varphi(u_{i})=e_{i}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ is the standard 
+\begin_inset Formula $i$
+\end_inset
+
+th coordinate vector in 
+\begin_inset Formula $\mathbb{C}^{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is a unitary equivalence.
+ Indeed, it is an isomorphism since it restricts to a bijection on basis
+ sets.
+ Moreover we have
+\begin_inset Formula 
+\begin{align*}
+\langle u_{i},u_{j}\rangle & =\langle\varphi(u_{i}),\varphi(u_{j})\rangle_{\text{e}}=\langle e_{i},e_{j}\rangle_{\text{e}}
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq i,j\leq n$
+\end_inset
+
+.
+ This implies
+\begin_inset Formula 
+\[
+\langle x,y\rangle=\langle\varphi(x),\varphi(y)\rangle_{\text{e}}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x,y\in V$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propfinsubisclosed}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ be an inner-product space over 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathcal{W}$
+\end_inset
+
+ be a finite dimensional subspace of 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathcal{W}$
+\end_inset
+
+ is a closed.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\{w_{1},\dots,w_{k}\}$
+\end_inset
+
+ be an orthonormal basis for 
+\begin_inset Formula $\mathcal{W}$
+\end_inset
+
+ and let 
+\begin_inset Formula $(x_{n})$
+\end_inset
+
+ be a sequence of vectors in 
+\begin_inset Formula $\mathcal{W}$
+\end_inset
+
+ such that 
+\begin_inset Formula $x_{n}\to x$
+\end_inset
+
+ where 
+\begin_inset Formula $x\in\mathcal{V}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+, express 
+\begin_inset Formula $x_{n}$
+\end_inset
+
+ in terms of the basis 
+\begin_inset Formula $\{w_{1},\dots,w_{k}\}$
+\end_inset
+
+ say as
+\begin_inset Formula 
+\[
+x_{n}=\lambda_{1n}w_{1}+\cdots+\lambda_{kn}w_{k},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\lambda_{1n},\dots,\lambda_{kn}\in\mathbb{C}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $x_{n}\to x$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+, the sequence 
+\begin_inset Formula $(x_{n})$
+\end_inset
+
+ is a Cauchy sequence.
+ This implies the sequence 
+\begin_inset Formula $(\lambda_{jn})_{n\in\mathbb{N}}$
+\end_inset
+
+ of complex numbers is a Cauchy sequence, for each 
+\begin_inset Formula $1\leq j\leq k$
+\end_inset
+
+.
+ Indeed, letting 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, choose 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $n,m\geq N$
+\end_inset
+
+ implies 
+\begin_inset Formula $\|x_{n}-x_{m}\|<\varepsilon$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $n,m\geq N$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\begin{align*}
+|\lambda_{jn}-\lambda_{jm}| & \leq|\lambda_{1n}-\lambda_{1m}|+\cdots+|\lambda_{kn}-\lambda_{km}|\\
+ & =\|(\lambda_{1n}-\lambda_{1m})w_{1}+\cdots+(\lambda_{kn}-\lambda_{km})w_{k}\|\\
+ & =\|x_{n}-x_{m}\|\\
+ & <\varepsilon
+\end{align*}
+
+\end_inset
+
+for each 
+\begin_inset Formula $1\leq j\leq k$
+\end_inset
+
+.
+ Now since 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ is complete, we must have 
+\begin_inset Formula $\lambda_{jn}\to\lambda_{j}$
+\end_inset
+
+ as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+ for some 
+\begin_inset Formula $\lambda_{j}\in\mathbb{C}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq j\leq n$
+\end_inset
+
+.
+ In particular, we have
+\begin_inset Formula 
+\begin{align*}
+x & =\lim_{n\to\infty}x_{n}\\
+ & =\lim_{n\to\infty}\left(\lambda_{1n}w_{1}+\cdots+\lambda_{kn}w_{k}\right)\\
+ & =\lim_{n\to\infty}(\lambda_{1n}w_{1})+\cdots+\lim_{n\to\infty}(\lambda_{kn}w_{k})\\
+ & =\lambda_{1}w_{1}+\cdots+\lambda_{k}w_{k},
+\end{align*}
+
+\end_inset
+
+and this implies 
+\begin_inset Formula $x\in\mathcal{W}$
+\end_inset
+
+, which implies 
+\begin_inset Formula $\mathcal{W}$
+\end_inset
+
+ is closed.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemmacauchybound}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(x_{n})$
+\end_inset
+
+ be a Cauchy sequence in 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(x_{n})$
+\end_inset
+
+ is bounded.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $m,n\geq N$
+\end_inset
+
+ implies 
+\begin_inset Formula $\|x_{n}-x_{m}\|<\varepsilon$
+\end_inset
+
+.
+ Thus, fixing 
+\begin_inset Formula $m\in\mathbb{N}$
+\end_inset
+
+, we see that 
+\begin_inset Formula $n\geq N$
+\end_inset
+
+ implies 
+\begin_inset Formula 
+\[
+\|x_{n}\|<\|x_{m}\|+\varepsilon.
+\]
+
+\end_inset
+
+Now we let 
+\begin_inset Formula 
+\[
+M=\max\{\|x_{1}\|,\|x_{2}\|,\dots,\|x_{m}\|+\varepsilon\}.
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $M$
+\end_inset
+
+ is a bound for 
+\begin_inset Formula $(x_{n})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{propcauchy}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(x_{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $(y_{n})$
+\end_inset
+
+ be Cauchy sequences of vectors in 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(\langle x_{n},y_{n}\rangle)$
+\end_inset
+
+ is a Cauchy sequence of complex numbers.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $M_{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $M_{y}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|x_{n}\|<M_{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\|y_{n}\|<M_{y}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ We can do this by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{lemmacauchybound})
+\end_layout
+
+\end_inset
+
+.
+ Next, choose 
+\begin_inset Formula $N\in\mathbb{N}$
+\end_inset
+
+ such that 
+\begin_inset Formula $n,m\geq N$
+\end_inset
+
+ implies 
+\begin_inset Formula $\|x_{n}-x_{m}\|<\frac{\varepsilon}{2M_{y}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\|y_{n}-y_{m}\|<\frac{\varepsilon}{2M_{x}}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $n,m\geq M$
+\end_inset
+
+ implies 
+\begin_inset Formula 
+\begin{align*}
+|\langle x_{n},y_{n}\rangle-\langle x_{m},y_{m}\rangle| & =|\langle x_{n},y_{n}\rangle-\langle x_{m},y_{n}\rangle+\langle x_{m},y_{n}\rangle-\langle x_{m},y_{m}\rangle|\\
+ & =|\langle x_{n}-x_{m},y_{n}\rangle+\langle x_{m},y_{n}-y_{m}\rangle|\\
+ & \leq|\langle x_{n}-x_{m},y_{n}\rangle|+|\langle x_{m},y_{n}-y_{m}\rangle|\\
+ & \leq\|x_{n}-x_{m}\|\|y_{n}\|+\|x_{m}\|\|y_{n}-y_{m}\|\\
+ & \leq\|x_{n}-x_{m}\|M_{y}+M_{x}\|y_{n}-y_{m}\|\\
+ & <\varepsilon.
+\end{align*}
+
+\end_inset
+
+This implies 
+\begin_inset Formula $(\langle x_{n},y_{n}\rangle)$
+\end_inset
+
+ is a Cauchy sequence of complex numbers in 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+.
+ The latter statement in the proposition follows from the fact that 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ is complete.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Homework 2, Problem 5 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ be an inner-product space, let 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ be a subspace of 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+, let 
+\begin_inset Formula $x\in\mathcal{V}$
+\end_inset
+
+, and let 
+\begin_inset Formula $\lambda\in\mathbb{C}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+d(\lambda x,\mathcal{A})=|\lambda|d(x,\mathcal{A}).
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Choose a sequence 
+\begin_inset Formula $(y_{n})$
+\end_inset
+
+ of elements in 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\|x-y_{n}\|<d(x,\mathcal{A})+\frac{1}{|\lambda n|}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is a subspace, we have
+\begin_inset Formula 
+\begin{align*}
+d(\lambda x,\mathcal{A}) & \leq\|\lambda x-\lambda y_{n}\|\\
+ & =|\lambda|\|x-y_{n}\|\\
+ & <|\lambda|\left(d(x,\mathcal{A})+\frac{1}{|\lambda n|}\right)\\
+ & =|\lambda|d(x,\mathcal{A})+\frac{1}{n}
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ In particular, this implies 
+\begin_inset Formula $d(\lambda x,\mathcal{A})\leq|\lambda|d(x,\mathcal{A})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Conversely, choose a sequence 
+\begin_inset Formula $(z_{n})$
+\end_inset
+
+ of elements in 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\|\lambda x-z_{n}\|<d(\lambda x,\mathcal{A})+\frac{1}{n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then since 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is a subspace, we have
+\begin_inset Formula 
+\begin{align*}
+|\lambda|d(x,\mathcal{A}) & \leq|\lambda|\|x-z_{n}/|\lambda|\|\\
+ & =\|\lambda x-z_{n}\|\\
+ & <d(\lambda x,\mathcal{A})+\frac{1}{n}
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ In particular, this implies 
+\begin_inset Formula $|\lambda|d(x,\mathcal{A})\leq d(\lambda x,\mathcal{A})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ be an inner-product space, let 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ be a subspace of 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+, and let 
+\begin_inset Formula $x,y\in\mathcal{V}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+d(x+y,\mathcal{A})\leq d(x,\mathcal{A})+d(y,\mathcal{A}).
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Choose a sequences 
+\begin_inset Formula $(w_{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $(z_{n})$
+\end_inset
+
+ of elements in 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\|x-w_{n}\|<d(x,\mathcal{A})+\frac{1}{2n}\quad\text{and}\quad\|y-z_{n}\|<d(y,\mathcal{A})+\frac{1}{2n}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is a subspace, we have
+\begin_inset Formula 
+\begin{align*}
+d(x+y,\mathcal{A}) & \leq\|(x+y)-(w_{n}+z_{n})\|\\
+ & \leq\|x-w_{n}\|+\|y-z_{n}\|\\
+ & <d(x,\mathcal{A})+\frac{1}{2n}+d(y,\mathcal{A})+\frac{1}{2n}\\
+ & =d(x,\mathcal{A})+d(y,\mathcal{A})+\frac{1}{n}
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $n\in\mathbb{N}$
+\end_inset
+
+.
+ In particular, this implies 
+\begin_inset Formula $d(x+y,\mathcal{A})\leq d(x,\mathcal{A})+d(y,\mathcal{A})$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

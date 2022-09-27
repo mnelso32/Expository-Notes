@@ -1,0 +1,274 @@
+	
+proc ext(int n, ideal I)
+{
+  resolution rs = mres(I,n+1);
+  module tAn    = transpose(rs[n+1]);
+  module tAn_1  = transpose(rs[n]);
+  module ext_n  = modulo(syz(tAn),tAn_1);
+  return(ext_n);
+}
+
+	
+ring r5 = 32003,(a,b,c,d,e),dp;
+ideal I = a2b2+ab2c+b2cd, a2c2+ac2d+c2de,a2d2+ad2e+bd2e,a2e2+abe2+bce2;
+print(ext(2,I));
+==> 1,0,0,0,0,0,0,
+==> 0,1,0,0,0,0,0,
+==> 0,0,1,0,0,0,0,
+==> 0,0,0,1,0,0,0,
+==> 0,0,0,0,1,0,0,
+==> 0,0,0,0,0,1,0,
+==> 0,0,0,0,0,0,1
+ext(3,I);   // too big to be displayed here
+
+
+	
+intvec w=(3,5,6,7,8,10,11,12,13,14,16,17,18);
+ring R=0,(x3,x5,x6,x7,x8,x10,x11,x12,x13,x14,x16,x17,x18),(C,wp(w));
+ideal I= x3*x3-x6,x3*x5-x8,x3*x7-x10,x3*x11-x14,x3*x13-x16,
+x5*x5-x10,x5*x7-x12,x5*x11-x16,x5*x13-x18,
+x7*x7-x14,x7*x11-x18;
+I=std(I);
+homog(I); //ideal is homogeneous w.r.t. weights
+
+
+
+proc ext(int n, ideal I)
+{
+  resolution rs = mres(I,n+1);
+  module tAn    = transpose(rs[n+1]);
+  module tAn_1  = transpose(rs[n]);
+  module ext_n  = modulo(syz(tAn),tAn_1);
+  return(ext_n);
+}
+
+
+
+option(prot);
+int t=timer;
+system("--ticks-per-sec", 100); // give time in 1/100 sec
+
+print(ext(1,I));
+
+1
+
+print(ext(2,I));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+LIB "homolog.lib";
+intvec w=(3,5,6,7,8,10,11,12,13,14,16,17,18);
+ring R=0,(x3,x5,x6,x7,x8,x10,x11,x12,x13,x14,x16,x17,x18),(C,wp(w));
+ideal I= x3*x3-x6,x3*x5-x8,x3*x7-x10,x3*x11-x14,x3*x13-x16,
+x5*x5-x10,x5*x7-x12,x5*x11-x16,x5*x13-x18,
+x7*x7-x14,x7*x11-x18;
+option(prot);
+int t=timer;
+system("--ticks-per-sec", 100); // give time in 1/100 sec
+
+Ext(10,I,maxideal(1));
+
+_[1]=x3*gen(1)
+_[2]=x5*gen(1)
+_[3]=x6*gen(1)
+_[4]=x7*gen(1)
+_[5]=x8*gen(1)
+_[6]=x10*gen(1)
+_[7]=x11*gen(1)
+_[8]=x12*gen(1)
+_[9]=x13*gen(1)
+_[10]=x14*gen(1)
+_[11]=x16*gen(1)
+_[12]=x17*gen(1)
+_[13]=x18*gen(1)
+_[14]=x3*gen(2)
+_[15]=x5*gen(2)
+_[16]=x6*gen(2)
+_[17]=x7*gen(2)
+_[18]=x8*gen(2)
+_[19]=x10*gen(2)
+_[20]=x11*gen(2)
+_[21]=x12*gen(2)
+_[22]=x13*gen(2)
+_[23]=x14*gen(2)
+_[24]=x16*gen(2)
+_[25]=x17*gen(2)
+_[26]=x18*gen(2)
+
+
+print(re[10]);
+
+
+x11,        x13,
+-x5,        -x7,
+-x5*x13+x18,0,
+x3*x13,     x18,
+-x16,       -x5*x13,
+0,          x3*x13-x16,
+-x14,       -x5*x11,
+0,          x3*x11-x14,
+-x7^2,      -x5*x11,
+0,          -x7^2+x3*x11,
+-x5*x7+x12, 0,
+x3*x7,      x12,
+-x10,       -x5*x7,
+0,          x3*x7-x10,
+x8,         x5^2,
+0,          -x3*x5+x8,
+-x6,        -x3*x5,
+0,          x3^2-x6,
+x3,         x5
+
+
+Ext(13,maxideal(1),I);
+
+
+_[1]=x3*gen(1)
+_[2]=x5*gen(1)
+_[3]=x6*gen(1)
+_[4]=x7*gen(1)
+_[5]=x8*gen(1)
+_[6]=x10*gen(1)
+_[7]=x11*gen(1)
+_[8]=x12*gen(1)
+_[9]=x13*gen(1)
+_[10]=x14*gen(1)
+_[11]=x16*gen(1)
+_[12]=x17*gen(1)
+_[13]=x18*gen(1)
+
+
+
+
+
+	
+LIB "homolog.lib";
+int p      = printlevel;
+printlevel = 1;
+intvec w=(3,5,6,7,8,10,11,12,13,14,16,17,18);
+ring R=0,(x3,x5,x6,x7,x8,x10,x11,x12,x13,x14,x16,x17,x18),(C,wp(w));
+ideal I= x3*x3-x6,x3*x5-x8,x3*x7-x10,x3*x11-x14,x3*x13-x16,
+x5*x5-x10,x5*x7-x12,x5*x11-x16,x5*x13-x18,
+x7*x7-x14,x7*x11-x18;
+list E     = Ext(0..2,I,maxideal(1));
+
+
+
+
+
+
+    // Ext^k(r/i,r/j) for k=0,1,2 over r
+==> // Computing Ext^0 (help Ext; gives an explanation):
+==> // Let 0<--coker(M)<--F0<--F1<--F2<--... be a resolution of coker(M),
+==> // and 0<--coker(N)<--G0<--G1 a presentation of coker(N),
+==> // then Hom(F0,G0)-->Hom(F1,G0) is given by:
+==> y3-x2
+==> // and Hom(F-1,G0) + Hom(F0,G1)-->Hom(F0,G0) is given by:
+==> 0,-y5+x2
+==> 
+==> // dimension of Ext^0:  -1
+==> 
+==> // Computing Ext^1 (help Ext; gives an explanation):
+==> // Let 0<--coker(M)<--F0<--F1<--F2<--... be a resolution of coker(M),
+==> // and 0<--coker(N)<--G0<--G1 a presentation of coker(N),
+==> // then Hom(F1,G0)-->Hom(F2,G0) is given by:
+==> 0
+==> // and Hom(F0,G0) + Hom(F1,G1)-->Hom(F1,G0) is given by:
+==> y3-x2,-y5+x2
+==> 
+==> // dimension of Ext^1:  0
+==> // vdim of Ext^1:       10
+==> 
+==> // Computing Ext^2 (help Ext; gives an explanation):
+==> // Let 0<--coker(M)<--F0<--F1<--F2<--... be a resolution of coker(M),
+==> // and 0<--coker(N)<--G0<--G1 a presentation of coker(N),
+==> // then Hom(F2,G0)-->Hom(F3,G0) is given by:
+==> 1
+==> // and Hom(F1,G0) + Hom(F2,G1)-->Hom(F2,G0) is given by:
+==> 0,-y5+x2
+==> 
+==> // dimension of Ext^2:  -1
+==> 
+qring R    = std(i);
+ideal j    = fetch(r,j);
+module M   = [-x,y],[-y2,x];
+printlevel = 2;
+module E1  = Ext(1,M,j);       // Ext^1(R^2/M,R/j) over R=r/i
+==> // Computing Ext^1 (help Ext; gives an explanation):
+==> // Let 0<--coker(M)<--F0<--F1<--F2<--... be a resolution of coker(M),
+==> // and 0<--coker(N)<--G0<--G1 a presentation of coker(N),
+==> // then Hom(F1,G0)-->Hom(F2,G0) is given by:
+==> x, -y,
+==> y2,-x 
+==> // and Hom(F0,G0) + Hom(F1,G1)-->Hom(F1,G0) is given by:
+==> x, -y,-y5+x2,0,    
+==> y2,-x,0,     -y5+x2
+==> 
+==> // dimension of Ext^1:  -1
+==> 
+list l     = Ext(4,M,M,1);     // Ext^4(R^2/M,R^2/M) over R=r/i
+==> // Computing Ext^4 (help Ext; gives an explanation):
+==> // Let 0<--coker(M)<--F0<--F1<--F2<--... be a resolution of coker(M),
+==> // and 0<--coker(N)<--G0<--G1 a presentation of coker(N),
+==> // then Hom(F4,G0)-->Hom(F5,G0) is given by:
+==> x, -y,0, 0, 
+==> y2,-x,0, 0, 
+==> 0, 0, x, -y,
+==> 0, 0, y2,-x 
+==> // and Hom(F3,G0) + Hom(F4,G1)-->Hom(F4,G0) is given by:
+==> x, -y,0, 0, -x,0, -y2,0,  
+==> y2,-x,0, 0, 0, -x,0,  -y2,
+==> 0, 0, x, -y,y, 0, x,  0,  
+==> 0, 0, y2,-x,0, y, 0,  x   
+==> 
+==> // dimension of Ext^4:  0
+==> // vdim of Ext^4:       2
+==> 
+==> // columns of matrix are kbase of Ext^4 in Hom(F4,G0)
+==> 1,0,
+==> 0,y,
+==> 0,1,
+==> 1,0 
+==> 
+==> // element 1 of kbase of Ext^4 in Hom(F4,G0)
+==> // as matrix: F4-->G0
+==> 1,0,
+==> 0,1 
+==> // element 2 of kbase of Ext^4 in Hom(F4,G0)
+==> // as matrix: F4-->G0
+==> 0,y,
+==> 1,0 
+==> 
+printlevel = p;
+
+
+
+
+
+
+
+
+
+
+
+

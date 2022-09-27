@@ -1,0 +1,1678 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Cohomology Homework
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+In this homework, we will make use of the universal coefficient theorem
+ for cohomology involving the Ext functor says that if 
+\begin_inset Formula $G$
+\end_inset
+
+ is an abelian group, then there is a short exact sequence
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{eq:uctgen}
+\backslash
+begin{tikzcd}  0 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Ext}^1 (
+\backslash
+mathrm{H}_{n-1} (X),G) 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{H}^{n} (X;G) 
+\backslash
+arrow[r,
+\begin_inset Quotes erd
+\end_inset
+
+
+\backslash
+text{[}
+\backslash
+text{[}  
+\backslash
+cdot 
+\backslash
+text{]} 
+\backslash
+text{]} 
+\begin_inset Quotes erd
+\end_inset
+
+] & 
+\backslash
+mathrm{Hom} (
+\backslash
+mathrm{H}_n (X),G)  
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset Formula $[[\cdot]]$
+\end_inset
+
+ is defined as follows: if 
+\begin_inset Formula $[\varphi]\in\mathrm{H}^{n}(X;G)$
+\end_inset
+
+ where 
+\begin_inset Formula $\varphi\colon C_{n}(X)\to G$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $\varphi\partial=0$
+\end_inset
+
+, and if 
+\begin_inset Formula $[a]\in\mathrm{H}_{n}(X)$
+\end_inset
+
+ where 
+\begin_inset Formula $a\in C_{n}(X)$
+\end_inset
+
+ satisfes 
+\begin_inset Formula $\partial(a)=0$
+\end_inset
+
+, then we set 
+\begin_inset Formula $[[\varphi]]$
+\end_inset
+
+ to be the map from 
+\begin_inset Formula $\mathrm{H}_{n}(X)\to G$
+\end_inset
+
+ given by
+\begin_inset Formula 
+\[
+[[\varphi]][a]=\varphi(a).
+\]
+
+\end_inset
+
+This is well-defined since if 
+\begin_inset Formula $[\varphi]=[\varphi+\psi\partial]$
+\end_inset
+
+ where 
+\begin_inset Formula $\psi\colon C_{n-1}(X)\to G$
+\end_inset
+
+ and 
+\begin_inset Formula $[a]=[a+\partial(b)]$
+\end_inset
+
+ where 
+\begin_inset Formula $b\in C_{n+1}(X)$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\begin{align*}
+[[\varphi+\psi\partial]][a+\partial b] & =(\varphi+\psi\partial)(a+\partial b)\\
+ & =\varphi(a)+\varphi\partial(b)+\psi\partial(a)+\psi\partial\partial(b)\\
+ & =\varphi(a).
+\end{align*}
+
+\end_inset
+
+Moreover, the map 
+\begin_inset Formula $[[\cdot]]=[[\cdot]]_{_{X}}$
+\end_inset
+
+ is 
+\emph on
+natural 
+\emph default
+in 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ This means that if 
+\begin_inset Formula $f\colon X\to Y$
+\end_inset
+
+ is a continuous map, then we have a commutative diagram
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep=50, row sep=50]  
+\backslash
+mathrm{H}^{n} (Y;G) 
+\backslash
+arrow[r,
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\backslash
+text{[} 
+\backslash
+text{[}  
+\backslash
+cdot 
+\backslash
+text{]} 
+\backslash
+text{]}_Y 
+\begin_inset Quotes erd
+\end_inset
+
+] 
+\backslash
+arrow[d, "
+\backslash
+mathrm{H}( f^{
+\backslash
+star })  ",swap] & 
+\backslash
+mathrm{Hom} (
+\backslash
+mathrm{H}_n (Y),G)  
+\backslash
+arrow[d, 
+\begin_inset Quotes eld
+\end_inset
+
+(
+\backslash
+mathrm{H}(f_{
+\backslash
+star } ))^* 
+\begin_inset Quotes erd
+\end_inset
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+mathrm{H}^{n} (X;G) 
+\backslash
+arrow[r,
+\begin_inset Quotes erd
+\end_inset
+
+
+\backslash
+text{[}
+\backslash
+text{[}  
+\backslash
+cdot 
+\backslash
+text{]} 
+\backslash
+text{]} _X 
+\begin_inset Quotes erd
+\end_inset
+
+,swap]  & 
+\backslash
+mathrm{Hom} (
+\backslash
+mathrm{H}_n (X),G) 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Indeed, if 
+\begin_inset Formula $[a]\in\mathrm{H}_{n}(X)$
+\end_inset
+
+ and 
+\begin_inset Formula $[\psi]\in\mathrm{H}^{n}(Y;G)$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\begin{align*}
+((f_{\star})^{*}([[\psi]]_{_{Y}})[a] & =[[\psi]]_{_{Y}}[f_{\star}(a)]\\
+ & =\psi(f_{\star}(a))\\
+ & =(f^{\star}\psi)(a)\\
+ & =[[f^{\star}\psi]]_{_{X}}[a].
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $[[\cdot]]_{X}\circ\mathrm{H}(f^{\star})=(\mathrm{H}(f_{\star}))^{*}\circ[[\cdot]]_{Y}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Note that in our notation, we use the 
+\begin_inset Formula $\star$
+\end_inset
+
+ symbol to denote chain maps.
+ For instance, a continuous map 
+\begin_inset Formula $f\colon X\to Y$
+\end_inset
+
+ induces a chain map 
+\begin_inset Formula $f_{\star}\colon C_{\star}(X)\to C_{\star}(Y)$
+\end_inset
+
+ which is defined on singular chains 
+\begin_inset Formula $a=\sum r_{i}\sigma_{i}\in C_{\star}(X)$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+f_{\star}(a)=\sum r_{i}(f\circ\sigma).
+\]
+
+\end_inset
+
+This in turn induces a cochain map 
+\begin_inset Formula $f^{\star}\colon C^{\star}(Y)\to C^{\star}(X)$
+\end_inset
+
+ which is defined by mapping the singular cochain 
+\begin_inset Formula $\varphi\in C^{\star}(Y)$
+\end_inset
+
+ to the singular cochain 
+\begin_inset Formula $f^{\star}(\varphi)\in C^{\star}(X)$
+\end_inset
+
+ which is defined on chains 
+\begin_inset Formula $a\in C_{\star}(X)$
+\end_inset
+
+ by 
+\begin_inset Formula 
+\[
+f^{\star}(\varphi)(a)=\varphi(f_{\star}(a)).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be the torus, let 
+\begin_inset Formula $K$
+\end_inset
+
+ be the Klein bottle, and let 
+\begin_inset Formula $P$
+\end_inset
+
+ be the real projective plane.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Use the universal coefficient theorem to compute the cohomology of 
+\begin_inset Formula $T$
+\end_inset
+
+, 
+\begin_inset Formula $K$
+\end_inset
+
+, and 
+\begin_inset Formula $P$
+\end_inset
+
+ over 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Use the definition to compute the simplicial cohomology of 
+\begin_inset Formula $T$
+\end_inset
+
+, 
+\begin_inset Formula $K$
+\end_inset
+
+, and 
+\begin_inset Formula $K$
+\end_inset
+
+ over 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+ using the 
+\begin_inset Formula $\Delta$
+\end_inset
+
+-complex structure on a square formed from two triangles.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ When we set 
+\begin_inset Formula $G=\mathbb{Z}$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:uctgen})
+\end_layout
+
+\end_inset
+
+, then the universal coefficient theorem takes the form:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{eq:uct}
+\backslash
+begin{tikzcd}  0 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Ext}^1 (
+\backslash
+mathrm{H}_{n-1} (X), 
+\backslash
+mathbb {Z} ) 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{H}^{n} (X) 
+\backslash
+arrow[r ] & 
+\backslash
+mathrm{Hom} (
+\backslash
+mathrm{H}_n (X),
+\backslash
+mathbb{Z} )  
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We will use this short exact sequence to compute the cohomologies of 
+\begin_inset Formula $T$
+\end_inset
+
+, 
+\begin_inset Formula $K$
+\end_inset
+
+, and 
+\begin_inset Formula $P$
+\end_inset
+
+ over 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+.
+ We first consider 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ Recall that
+\begin_inset Formula 
+\[
+\mathrm{H}_{i}(T)=\begin{cases}
+\mathbb{Z} & \text{if }i=0\\
+\mathbb{Z}\oplus\mathbb{Z} & \text{if }i=1\\
+\mathbb{Z} & \text{if }i=2\\
+0 & \text{else}
+\end{cases}
+\]
+
+\end_inset
+
+In each case, we have 
+\begin_inset Formula $\mathrm{Ext}^{1}(\mathrm{H}_{i-1}(T),\mathbb{Z})=0$
+\end_inset
+
+ since 
+\begin_inset Formula $\mathrm{H}_{i-1}(T)$
+\end_inset
+
+ is a free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-module for all 
+\begin_inset Formula $i$
+\end_inset
+
+ (note that 
+\begin_inset Formula $0$
+\end_inset
+
+ is the free module with empty set as basis).
+ Therefore 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:uct})
+\end_layout
+
+\end_inset
+
+ gives us
+\begin_inset Formula 
+\[
+\mathrm{H}^{i}(T)\simeq\mathrm{Hom}(\mathrm{H}_{i}(T),\mathbb{Z})=\begin{cases}
+\mathbb{Z} & \text{if }i=0\\
+\mathbb{Z}\oplus\mathbb{Z} & \text{if }i=1\\
+\mathbb{Z} & \text{if }i=2\\
+0 & \text{else}
+\end{cases}
+\]
+
+\end_inset
+
+Now we first consider 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Recall that
+\begin_inset Formula 
+\[
+\mathrm{H}_{i}(K)=\begin{cases}
+\mathbb{Z} & \text{if }i=0\\
+\mathbb{Z}\oplus\mathbb{Z}\slash2\mathbb{Z} & \text{if }i=1\\
+0 & \text{else}
+\end{cases}
+\]
+
+\end_inset
+
+This time 
+\begin_inset Formula $\mathrm{H}_{i-1}(K)$
+\end_inset
+
+ is free for all 
+\begin_inset Formula $i$
+\end_inset
+
+ 
+\emph on
+expect 
+\emph default
+
+\begin_inset Formula $i=2$
+\end_inset
+
+.
+ Therefore 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:uct})
+\end_layout
+
+\end_inset
+
+ gives us
+\begin_inset Formula 
+\[
+\mathrm{H}^{i}(K)\simeq\mathrm{Hom}(\mathrm{H}_{i}(K),\mathbb{Z})=\begin{cases}
+\mathbb{Z} & \text{if }i=0\\
+\mathbb{Z} & \text{if }i=1\\
+0 & i\neq0,1,2
+\end{cases}
+\]
+
+\end_inset
+
+where we used the fact that
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Hom}(\mathbb{Z}\oplus(\mathbb{Z}\slash2\mathbb{Z}),\mathbb{Z}) & =\mathrm{Hom}(\mathbb{Z},\mathbb{Z})\oplus\mathrm{Hom}(\mathbb{Z}\slash2\mathbb{Z},\mathbb{Z})\\
+ & =\mathbb{Z}\oplus0\\
+ & =\mathbb{Z}.
+\end{align*}
+
+\end_inset
+
+It remains to calculate 
+\begin_inset Formula $\mathrm{H}^{2}(K)$
+\end_inset
+
+.
+ In this case, the short exact sequence 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:uct})
+\end_layout
+
+\end_inset
+
+ gives us
+\begin_inset Formula 
+\[
+0\to\mathrm{Ext}^{1}(\mathbb{Z}\oplus\mathbb{Z}\slash2\mathbb{Z},\mathbb{Z})\to\mathrm{H}^{2}(K)\to0\to0
+\]
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $\mathrm{H}_{2}(X)=0$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathrm{Ext}$
+\end_inset
+
+ takes finite direct sums in the first variable to direct sum (more generally
+ it takes direct sums in the first variable to products), we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Ext}^{1}(\mathbb{Z}\oplus\mathbb{Z}\slash2\mathbb{Z},\mathbb{Z}) & =\mathrm{Ext}^{1}(\mathbb{Z},\mathbb{Z})\oplus\mathrm{Ext}^{1}(\mathbb{Z}\slash2\mathbb{Z},\mathbb{Z})\\
+ & =0\oplus\mathbb{Z}\slash2\mathbb{Z}\\
+ & =\mathbb{Z}\slash2\mathbb{Z}.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\mathrm{H}^{2}(K)=\mathbb{Z}\slash2\mathbb{Z}$
+\end_inset
+
+.
+ Finally, we consider 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ Recall that
+\begin_inset Formula 
+\[
+\mathrm{H}_{i}(P)=\begin{cases}
+\mathbb{Z} & \text{if }i=0\\
+\mathbb{Z}\slash2\mathbb{Z} & \text{if }i=1\\
+0 & \text{else}
+\end{cases}
+\]
+
+\end_inset
+
+Again, 
+\begin_inset Formula $\mathrm{H}_{i-1}(P)$
+\end_inset
+
+ is free for all 
+\begin_inset Formula $i$
+\end_inset
+
+ 
+\emph on
+expect 
+\emph default
+
+\begin_inset Formula $i=2$
+\end_inset
+
+.
+ Therefore 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:uct})
+\end_layout
+
+\end_inset
+
+ gives us
+\begin_inset Formula 
+\[
+\mathrm{H}^{i}(P)\simeq\mathrm{Hom}(\mathrm{H}_{i}(P),\mathbb{Z})=\begin{cases}
+\mathbb{Z} & \text{if }i=0\\
+0 & i\neq0,2
+\end{cases}
+\]
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $\mathrm{Hom}(\mathbb{Z}\slash2\mathbb{Z},\mathbb{Z})=0$
+\end_inset
+
+.
+ It remains to calculate 
+\begin_inset Formula $\mathrm{H}^{2}(P)$
+\end_inset
+
+.
+ In this case, the short exact sequence 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:uct})
+\end_layout
+
+\end_inset
+
+ gives us
+\begin_inset Formula 
+\[
+0\to\mathrm{Ext}^{1}(\mathbb{Z}\slash2\mathbb{Z},\mathbb{Z})\to\mathrm{H}^{2}(P)\to0\to0
+\]
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $\mathrm{H}_{2}(P)=0$
+\end_inset
+
+.
+ In particular, this imlpies 
+\begin_inset Formula $\mathrm{H}^{2}(P)=\mathbb{Z}\slash2\mathbb{Z}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ First we calculate the cohomology of the Torus below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename TorusCohomology.jpg
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Next we calculate the cohomology of the Klein bottle below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename KleinBottleCohomology.jpg
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally we calculate the cohomology of the real projective plane below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename RealProjectivePlaneCohomology.jpg
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Show that if 
+\begin_inset Formula $f\colon S^{n}\to S^{n}$
+\end_inset
+
+ has degree 
+\begin_inset Formula $d$
+\end_inset
+
+, then 
+\begin_inset Formula $f^{*}\colon\mathrm{H}^{n}(S^{n};G)\to\mathrm{H}^{n}(S^{n};G)$
+\end_inset
+
+ is multiplication by 
+\begin_inset Formula $d$
+\end_inset
+
+ map.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We prove this in a more general situation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f\colon X\to X$
+\end_inset
+
+ be a continuous map such that 
+\begin_inset Formula $\mathrm{H}(f_{\star})=d$
+\end_inset
+
+ where 
+\begin_inset Formula $d\in\mathbb{Z}$
+\end_inset
+
+ (that is, 
+\begin_inset Formula $\mathrm{H}(f_{\star})\colon\mathrm{H}_{\star}(X)\to\mathrm{H}_{\star}(X)$
+\end_inset
+
+ is the multiplication by 
+\begin_inset Formula $d$
+\end_inset
+
+ map).
+ Furthermore, assume that 
+\begin_inset Formula $\mathrm{H}_{i}(X)$
+\end_inset
+
+ is free for all 
+\begin_inset Formula $i\in\mathbb{Z}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathrm{H}(f^{\star})=d$
+\end_inset
+
+ (that is, 
+\begin_inset Formula $\mathrm{H}(f^{\star})\colon\mathrm{H}^{\star}(X;G)\to\mathrm{H}^{\star}(X;G)$
+\end_inset
+
+ is the multiplication by 
+\begin_inset Formula $d$
+\end_inset
+
+ map).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Since each 
+\begin_inset Formula $\mathrm{H}_{i}(X)$
+\end_inset
+
+ is free, the universal coefficient theorem gives us the following commutative
+ diagram
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[column sep=50, row sep=50]  
+\backslash
+mathrm{H}^{n} (X;G) 
+\backslash
+arrow[r,
+\begin_inset Quotes erd
+\end_inset
+
+
+\backslash
+text{[}
+\backslash
+text{[}  
+\backslash
+cdot 
+\backslash
+text{]} 
+\backslash
+text{]}
+\begin_inset Quotes erd
+\end_inset
+
+] 
+\backslash
+arrow[d, "
+\backslash
+mathrm{H}(f^{
+\backslash
+star }) ",swap] & 
+\backslash
+mathrm{Hom} (
+\backslash
+mathrm{H}_n (X),G)  
+\backslash
+arrow[d, 
+\begin_inset Quotes eld
+\end_inset
+
+d^* 
+\begin_inset Quotes erd
+\end_inset
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+mathrm{H}^{n} (X;G) 
+\backslash
+arrow[r,
+\begin_inset Quotes erd
+\end_inset
+
+
+\backslash
+text{[}
+\backslash
+text{[}  
+\backslash
+cdot 
+\backslash
+text{]} 
+\backslash
+text{]} 
+\begin_inset Quotes erd
+\end_inset
+
+,swap]  & 
+\backslash
+mathrm{Hom} (
+\backslash
+mathrm{H}_n (X),G) 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset Formula $\text{[}\text{[}\cdot\text{]}\text{]}$
+\end_inset
+
+ is an isomorphism.
+ In particular, we have 
+\begin_inset Formula 
+\[
+\mathrm{H}(f^{\star})=[[\cdot]]^{-1}\circ d^{*}\circ[[\cdot]].
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $d^{*}=d$
+\end_inset
+
+ since all maps are 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-linear and 
+\begin_inset Formula $d$
+\end_inset
+
+ is an integer.
+ Next note that 
+\begin_inset Formula $d\circ[[\cdot]]=[[\cdot]]\circ d$
+\end_inset
+
+ since 
+\begin_inset Formula $d$
+\end_inset
+
+ is an integer and 
+\begin_inset Formula $[[\cdot]]$
+\end_inset
+
+ is a 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-linear isomorphism.
+ Thus we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{H}(f^{\star}) & =[[\cdot]]^{-1}\circ d^{*}\circ[[\cdot]]\\
+ & =[[\cdot]]^{-1}\circ d\circ[[\cdot]]\\
+ & =[[\cdot]]^{-1}\circ[[\cdot]]\circ d\\
+ & =d.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Use cup products over 
+\begin_inset Formula $\mathbb{Z}\slash2\mathbb{Z}$
+\end_inset
+
+ to show that 
+\begin_inset Formula $\mathbb{RP}^{3}$
+\end_inset
+
+ is not homotopy equivalent to 
+\begin_inset Formula $\mathbb{RP}^{2}\lor S^{3}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ On the one hand, we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{H}^{\star}(\mathbb{RP}^{2}\lor S^{3};\mathbb{Z}\slash2\mathbb{Z}) & =\mathrm{H}^{\star}(\mathbb{RP}^{2};\mathbb{Z}\slash2\mathbb{Z})\times\mathrm{H}^{\star}(S^{3};\mathbb{Z}\slash2\mathbb{Z})\\
+ & =\mathbb{F}_{2}[x]\slash\langle x^{3}\rangle\times\mathbb{F}_{2}[y]\slash\langle y^{2}\rangle,
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $|x|=1$
+\end_inset
+
+ and 
+\begin_inset Formula $|y|=3$
+\end_inset
+
+.
+ On the other hand, we have
+\begin_inset Formula 
+\[
+\mathrm{H}^{\star}(\mathbb{RP}^{3};\mathbb{Z}\slash2\mathbb{Z})=\mathbb{F}_{2}[z]\slash\langle z^{4}\rangle
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $|z|=1$
+\end_inset
+
+.
+ These rings are not isomorphic.
+ For instance,
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Spec}(\mathbb{F}_{2}[x]\slash\langle x^{3}\rangle\times\mathbb{F}_{2}[y]\slash\langle y^{2}\rangle) & =\{\langle\overline{x}\rangle,\langle\overline{y}\rangle,\langle\overline{x},\overline{y}\rangle\}
+\end{align*}
+
+\end_inset
+
+consists of three points, however 
+\begin_inset Formula 
+\[
+\mathrm{Spec}(\mathbb{F}_{2}[z]\slash\langle z^{4}\rangle)=\{\langle\overline{z}\rangle\}
+\]
+
+\end_inset
+
+only has one point.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Standard
+We calculate 
+\begin_inset Formula $\mathrm{Ext}^{1}(\mathbb{Z}\slash2\mathbb{Z},\mathbb{Z})$
+\end_inset
+
+ as follows: let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the free 
+\begin_inset Formula $\mathbb{Z}$
+\end_inset
+
+-complex below
+\begin_inset Formula 
+\[
+F=0\to\mathbb{Z}\xrightarrow{\cdot2}\mathbb{Z}\to0,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $F_{0}=\mathbb{Z}=F_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $F_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\neq0,1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $F$
+\end_inset
+
+ is a free resolution of 
+\begin_inset Formula $\mathbb{Z}\slash2\mathbb{Z}$
+\end_inset
+
+.
+ Next we set 
+\begin_inset Formula $F^{\star}:=\mathrm{Hom}^{\star}(F,\mathbb{Z})$
+\end_inset
+
+ (this is the hom-complex where
+\begin_inset Formula 
+\[
+F_{i}^{\star}=\{\text{graded homomorphisms of degree }i\text{ from }F\text{ to }\mathbb{Z}\}.
+\]
+
+\end_inset
+
+In particular,
+\begin_inset Formula 
+\begin{align*}
+F_{0}^{\star} & =\{\text{homomorphisms from }F_{0}\text{ to }\mathbb{Z}\}=\mathbb{Z}\\
+F_{-1}^{\star} & =\{\text{homomorphisms from }F_{1}\text{ to }\mathbb{Z}\}=\mathbb{Z}
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $F_{-1}^{\star}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\neq0,-1$
+\end_inset
+
+.
+ The differential 
+\begin_inset Formula $\mathrm{d}_{0}^{\star}\colon F_{0}\to F_{-1}$
+\end_inset
+
+ is easily seen to be the multiplication by 
+\begin_inset Formula $2$
+\end_inset
+
+ map, so
+\begin_inset Formula 
+\[
+F^{\star}=0\to\mathbb{Z}\xrightarrow{\cdot2}\mathbb{Z}\to0.
+\]
+
+\end_inset
+
+Finally we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Ext}^{1}(\mathbb{Z}\slash2\mathbb{Z},\mathbb{Z}) & =\mathrm{H}_{-1}(F^{\star})=\mathbb{Z}\slash2\mathbb{Z}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

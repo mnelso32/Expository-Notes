@@ -1,0 +1,603 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Some Infinite Minimal Free Resolutions
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $S=\Bbbk[x,y]\slash\langle y^{2}-x^{3}+x^{2}\rangle$
+\end_inset
+
+, let 
+\begin_inset Formula $\mathfrak{m}=\langle\overline{x},\overline{y}\rangle$
+\end_inset
+
+, and let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the minimal 
+\begin_inset Formula $S$
+\end_inset
+
+-free resolution of 
+\begin_inset Formula $S\slash\mathfrak{m}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mathrm{char}\,\Bbbk=0$
+\end_inset
+
+, then 
+\begin_inset Formula $F$
+\end_inset
+
+ is the DG 
+\begin_inset Formula $S$
+\end_inset
+
+-algebra 
+\begin_inset Formula $S=R[e_{1},e_{2},e_{3}]$
+\end_inset
+
+ where 
+\begin_inset Formula $|e_{1}|=1=|e_{2}|$
+\end_inset
+
+ and 
+\begin_inset Formula $|e_{3}|$
+\end_inset
+
+ and where
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}(e_{1}) & =\overline{x}\\
+\mathrm{d}(e_{2}) & =\overline{y}\\
+\mathrm{d}(e_{3}) & =(\overline{x}^{2}-\overline{x})e_{1}-\overline{y}e_{2}.
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\mathrm{char}\,\Bbbk=p$
+\end_inset
+
+ where 
+\begin_inset Formula $p>0$
+\end_inset
+
+, then this doesn't work since 
+\begin_inset Formula $\mathrm{d}(e_{3}^{p})=p\mathrm{d}(e_{3})e_{3}^{p-1}=0$
+\end_inset
+
+.
+ Instead we need to consider divider powers.
+ Thus for each 
+\begin_inset Formula $n\geq2$
+\end_inset
+
+, we adjoin a new variable 
+\begin_inset Formula $e_{3}^{(n)}$
+\end_inset
+
+ (where intuitively 
+\begin_inset Formula $e_{3}^{(n)}=e_{3}^{n}/n!$
+\end_inset
+
+) where 
+\begin_inset Formula $|e_{3}^{(n)}|=n|e_{3}|$
+\end_inset
+
+ and where 
+\begin_inset Formula $\mathrm{d}(e_{3}^{(n)})=\mathrm{d}(e_{3})e_{3}^{(n-1)}$
+\end_inset
+
+.
+ The Betti numbers start out as:
+\begin_inset Formula 
+\[
+1,2,2,2,2,,\dots
+\]
+
+\end_inset
+
+Therefore we have 
+\begin_inset Formula $\mathrm{cx}_{S}(\Bbbk)=1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $S=\Bbbk[x,y]\slash\langle x^{2},y^{2}\rangle$
+\end_inset
+
+, let 
+\begin_inset Formula $\mathfrak{m}=\langle\overline{x},\overline{y}\rangle$
+\end_inset
+
+, and let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the minimal 
+\begin_inset Formula $S$
+\end_inset
+
+-free resolution of 
+\begin_inset Formula $S\slash\mathfrak{m}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mathrm{char}\,\Bbbk=0$
+\end_inset
+
+, then 
+\begin_inset Formula $F$
+\end_inset
+
+ is the DG 
+\begin_inset Formula $S$
+\end_inset
+
+-algebra 
+\begin_inset Formula $S=R[e_{1},e_{2},e_{3},e_{4}]$
+\end_inset
+
+ where 
+\begin_inset Formula $|e_{1}|=1=|e_{2}|$
+\end_inset
+
+ and 
+\begin_inset Formula $|e_{3}|=2=|e_{4}|$
+\end_inset
+
+ and where
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}(e_{1}) & =\overline{x}\\
+\mathrm{d}(e_{2}) & =\overline{y}\\
+\mathrm{d}(e_{3}) & =\overline{x}e_{1}.\\
+\mathrm{d}(e_{4}) & =\overline{y}e_{2}
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\mathrm{char}\,\Bbbk\neq0$
+\end_inset
+
+, we use divided powers again.
+ The Betti numbers start out as:
+\begin_inset Formula 
+\[
+1,2,3,4,5,\dots
+\]
+
+\end_inset
+
+Therefore we have 
+\begin_inset Formula $\mathrm{cx}_{S}(\Bbbk)=2$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $S=\Bbbk[x,y]\slash\langle x^{2},xy,y^{2}\rangle$
+\end_inset
+
+, let 
+\begin_inset Formula $\mathfrak{m}=\langle\overline{x},\overline{y}\rangle$
+\end_inset
+
+, and let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the minimal 
+\begin_inset Formula $S$
+\end_inset
+
+-free resolution of 
+\begin_inset Formula $S\slash\mathfrak{m}=\Bbbk$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mathrm{char}\,\Bbbk=0$
+\end_inset
+
+, then 
+\begin_inset Formula $F$
+\end_inset
+
+ is the DG 
+\begin_inset Formula $S$
+\end_inset
+
+-algebra 
+\begin_inset Formula $S=R[e_{1},e_{2},e_{3},e_{4},e_{5},e_{6}]$
+\end_inset
+
+ where 
+\begin_inset Formula $|e_{1}|=1=|e_{2}|$
+\end_inset
+
+ and 
+\begin_inset Formula $|e_{3}|=|e_{4}|=|e_{5}|=|e_{6}|$
+\end_inset
+
+ and where
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}(e_{1}) & =\overline{x}\\
+\mathrm{d}(e_{2}) & =\overline{y}\\
+\mathrm{d}(e_{3}) & =\overline{x}e_{1}.\\
+\mathrm{d}(e_{4}) & =\overline{x}e_{2}\\
+\mathrm{d}(e_{5}) & =\overline{y}e_{1}\\
+\mathrm{d}(e_{6}) & =\overline{y}e_{2}.
+\end{align*}
+
+\end_inset
+
+Now consider short exact sequence of 
+\begin_inset Formula $S$
+\end_inset
+
+-modules:
+\begin_inset Formula 
+\[
+0\to\mathfrak{m}\to S\to\Bbbk\to0.
+\]
+
+\end_inset
+
+Applying 
+\begin_inset Formula $-\otimes_{S}\Bbbk$
+\end_inset
+
+ to this short exact and considering the long exact sequence in Tor, we
+ obtain isomorphisms
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Tor}_{i}^{S}(\Bbbk,\Bbbk) & \cong\mathrm{Tor}_{i+1}^{S}(\mathfrak{m},\Bbbk)\\
+ & \cong\mathrm{Tor}_{i+1}^{S}(\Bbbk^{2},\Bbbk)\\
+ & \cong\mathrm{Tor}_{i}^{S}(\Bbbk,\Bbbk)\oplus\mathrm{Tor}_{i}^{S}(\Bbbk,\Bbbk)
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $i\geq1$
+\end_inset
+
+, where we used the fact that 
+\begin_inset Formula $\mathfrak{m}\cong\Bbbk^{2}$
+\end_inset
+
+ as 
+\begin_inset Formula $S$
+\end_inset
+
+-modules.
+ Therefore, since 
+\begin_inset Formula 
+\[
+\beta_{i}(M)=\beta_{i}^{S}(M)=\dim_{\Bbbk}(\mathrm{Tor}_{i}^{S}(M,\Bbbk))
+\]
+
+\end_inset
+
+for all finitely generated 
+\begin_inset Formula $S$
+\end_inset
+
+-modules 
+\begin_inset Formula $M$
+\end_inset
+
+ and for all 
+\begin_inset Formula $i\geq1$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\beta_{i+1}(\Bbbk)=2\beta_{i}(\Bbbk)$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\geq1$
+\end_inset
+
+, and thus 
+\begin_inset Formula $\beta_{i}(\Bbbk)=2^{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\geq1$
+\end_inset
+
+.
+ The Betti numbers start out as:
+\begin_inset Formula 
+\[
+1,2,4,8,16,\dots
+\]
+
+\end_inset
+
+Therefore we have 
+\begin_inset Formula $\mathrm{cx}_{S}(\Bbbk)=\infty$
+\end_inset
+
+.
+ Thus we need to consider the curvature of 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\mathrm{curv}_{S}(\Bbbk) & =\limsup_{n\to\infty}\beta_{n}(\Bbbk)^{1/n}\\
+ & =\limsup_{n\to\infty}(2^{n})^{1/n}\\
+ & =2.
+\end{align*}
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
