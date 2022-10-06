@@ -1,0 +1,2884 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Algebro-Geometric Classification
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+ be a commutative ring and let 
+\begin_inset Formula $F$
+\end_inset
+
+ be a finite free graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-module such that 
+\begin_inset Formula $F_{0}=\Bbbk$
+\end_inset
+
+, 
+\begin_inset Formula $F_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i<0$
+\end_inset
+
+, and 
+\begin_inset Formula $F_{+}\neq0$
+\end_inset
+
+.
+ In this note, we give an algebro-geometric classification of various structures
+ we can attach to 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ We begin by classifying all 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex structures on 
+\begin_inset Formula $F$
+\end_inset
+
+ which fixed the identity element 
+\begin_inset Formula $1\in\Bbbk=F_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Classifying 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-Complex Structures on 
+\begin_inset Formula $F$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let us state up front what we wish to prove:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ We have the following bijection of sets:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left\{ \mathrm{GL}_{n}(\Bbbk)\text{-orbits of }h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(\Bbbk)\right\} \longleftrightarrow\left\{ \begin{array}{c}
+\text{isomorphism classes of }\text{\ensuremath{\Bbbk}-complex}\\
+\text{structures on }F\text{ with fixed identity}
+\end{array}\right\} 
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)$
+\end_inset
+
+ is a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra (to be constructed below) and where
+\begin_inset Formula 
+\[
+h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(\Bbbk):=\mathrm{Hom}_{\Bbbk\text{-alg}}(\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F),\Bbbk)
+\]
+
+\end_inset
+
+is the 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-valued points of 
+\begin_inset Formula $\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)$
+\end_inset
+
+.
+ Two 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex structures 
+\begin_inset Formula $(F,\mathrm{d})$
+\end_inset
+
+ and 
+\begin_inset Formula $(F,\mathrm{d}')$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ are said to be isomorphic with fixed identity if there exists a chain map
+ 
+\begin_inset Formula $\varphi\colon F\to F$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi(1)=1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The proof of this theorem mostly involves setting up our notation which
+ will be used later on when we wish to classify other algebraic structures
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ be a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-linear differential on 
+\begin_inset Formula $F$
+\end_inset
+
+, meaning 
+\begin_inset Formula $\mathrm{d}\colon F\to F$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-linear map of degree 
+\begin_inset Formula $-1$
+\end_inset
+
+ which satisfies 
+\begin_inset Formula $\mathrm{d}^{2}=0$
+\end_inset
+
+.
+ Choose an ordered homogeneous basis 
+\begin_inset Formula $\boldsymbol{e}=(e_{0},e_{1},\dots,e_{n})$
+\end_inset
+
+ of 
+\begin_inset Formula $F$
+\end_inset
+
+ where we set 
+\begin_inset Formula $e_{0}=1$
+\end_inset
+
+ and let 
+\begin_inset Formula $\boldsymbol{d}=(d_{j}^{i})$
+\end_inset
+
+ be the matrix representation of the differential 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ with respect to the ordered homogeneous basis 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula $\mathrm{d}\boldsymbol{e}=\boldsymbol{e}\boldsymbol{d}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathrm{d}\boldsymbol{e}=(0,\mathrm{d}e_{1},\dots,\mathrm{d}e_{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{e}\boldsymbol{d}$
+\end_inset
+
+ is the product of the row vector 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ on the left with the matrix 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+ on the right.
+ Alternatively we could express this in terms of the matrix entries of 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+: for each 
+\begin_inset Formula $0\leq j\leq n$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\[
+\mathrm{d}e_{j}=\sum_{0\leq i\leq n}d_{j}^{i}e_{i}.
+\]
+
+\end_inset
+
+Note that since 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ is graded of degree 
+\begin_inset Formula $-1$
+\end_inset
+
+, we necessarily have 
+\begin_inset Formula $d_{j}^{i}=0$
+\end_inset
+
+ whenever 
+\begin_inset Formula $|e_{i}|\neq|e_{j}|-1$
+\end_inset
+
+.
+ Also note that since 
+\begin_inset Formula $\mathrm{d}^{2}=0$
+\end_inset
+
+, we have 
+\begin_inset Formula $\boldsymbol{d}^{2}=0$
+\end_inset
+
+.
+ Again we can express this in terms of matrix entries of 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+: for each 
+\begin_inset Formula $0\leq i,j\leq n$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{equation}
+\sum_{0\leq\iota\leq n}d_{j}^{\iota}d_{\iota}^{i}=0\label{eq:differential}
+\end{equation}
+
+\end_inset
+
+Now consider the following polynomial ring following polynomial ring
+\begin_inset Formula 
+\[
+\Bbbk[\boldsymbol{D}]=\Bbbk[\{D_{j}^{i}\mid0\leq i,j\leq n\}]
+\]
+
+\end_inset
+
+where the 
+\begin_inset Formula $D_{j}^{i}$
+\end_inset
+
+ are coordinates which correspond to the matrix entries of 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{d}}\colon\Bbbk[\boldsymbol{D}]\twoheadrightarrow\Bbbk$
+\end_inset
+
+ be the 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra homomorphism given by 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{d}}(\boldsymbol{D})=\boldsymbol{d}$
+\end_inset
+
+ and set 
+\begin_inset Formula $\mathfrak{q}_{\boldsymbol{d}}=\langle\boldsymbol{D}-\boldsymbol{d}\rangle$
+\end_inset
+
+ to be the kernel of this evaluation map: it is the 
+\begin_inset Formula $\Bbbk[\boldsymbol{D}]$
+\end_inset
+
+-ideal generated by 
+\begin_inset Formula $D_{j}^{i}-d_{j}^{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $0\leq i,j\leq n$
+\end_inset
+
+.
+ Note that if 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+ is an integral domain, then 
+\begin_inset Formula $\mathfrak{q}_{\boldsymbol{d}}$
+\end_inset
+
+ is a prime ideal since 
+\begin_inset Formula $\Bbbk[\boldsymbol{D}]\slash\mathfrak{q}_{\boldsymbol{d}}\cong\Bbbk$
+\end_inset
+
+, and if 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+ is a field, then 
+\begin_inset Formula $\mathfrak{q}_{\boldsymbol{d}}$
+\end_inset
+
+ is a maximal ideal of 
+\begin_inset Formula $\Bbbk[\boldsymbol{D}]$
+\end_inset
+
+ and 
+\begin_inset Formula $\Bbbk\to\Bbbk[\boldsymbol{D}]\slash\mathfrak{q}_{\boldsymbol{d}}$
+\end_inset
+
+ is a finite extension of fields.
+ For each 
+\begin_inset Formula $0\leq i,j\leq n$
+\end_inset
+
+ we define the quadratic polynomials 
+\begin_inset Formula $\Delta_{j}^{i}\in\Bbbk[\boldsymbol{D}]$
+\end_inset
+
+ by:
+\begin_inset Formula 
+\[
+\Delta_{j}^{i}:=\sum\limits _{0\leq\iota\leq n}D_{j}^{\iota}D_{\iota}^{i}.
+\]
+
+\end_inset
+
+Then we see that the evaluation map 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{d}}\colon\Bbbk[\boldsymbol{D}]\twoheadrightarrow R$
+\end_inset
+
+ factors through a unique 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $\overline{\mathrm{e}}_{\boldsymbol{d}}\colon\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)\twoheadrightarrow\Bbbk$
+\end_inset
+
+ where we set
+\begin_inset Formula 
+\[
+\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F):=\Bbbk[\boldsymbol{D}]\slash\langle\boldsymbol{\Delta}\rangle\cup\langle\{D_{j}^{i}\mid|e_{i}|\neq|e_{j}|-1\}\rangle
+\]
+
+\end_inset
+
+where we set 
+\begin_inset Formula $\boldsymbol{\Delta}=(\Delta_{j}^{i})$
+\end_inset
+
+.
+ Conversely, suppose 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{r}}\colon\Bbbk[\boldsymbol{D}]\twoheadrightarrow\Bbbk$
+\end_inset
+
+ is another 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra homomorphism where 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{r}}(\boldsymbol{D})=\boldsymbol{r}$
+\end_inset
+
+ where 
+\begin_inset Formula $\boldsymbol{r}=(r_{j}^{i})$
+\end_inset
+
+.
+ Then we define a differential 
+\begin_inset Formula $\mathrm{d}_{\boldsymbol{r}}$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ by 
+\begin_inset Formula $\mathrm{d}_{\boldsymbol{r}}\boldsymbol{e}:=\boldsymbol{e}\boldsymbol{r}$
+\end_inset
+
+.
+ Thus if we set 
+\begin_inset Formula $\mathrm{Diff}_{\Bbbk}(F)$
+\end_inset
+
+ be the set of all 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-linear differentials on 
+\begin_inset Formula $F$
+\end_inset
+
+, then we have a bijection of sets:
+\begin_inset Formula 
+\[
+h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(\Bbbk):=\mathrm{Hom}_{\Bbbk\text{-alg}}(\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F),\Bbbk)\simeq\mathrm{Diff}_{\Bbbk}(F).
+\]
+
+\end_inset
+
+Now suppose that 
+\begin_inset Formula $\boldsymbol{e}'=(1,e_{1}',\dots,e_{n}')$
+\end_inset
+
+ is another ordered homogeneous basis of 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ Thus there is a graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-linear isomorphism 
+\begin_inset Formula $\varphi\colon F\to F$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi\boldsymbol{e}=\boldsymbol{e}'$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\widetilde{\gamma}_{\varphi}=\left(\begin{smallmatrix}1 & 0\\
+0 & \gamma_{\varphi}
+\end{smallmatrix}\right)$
+\end_inset
+
+ be the matrix representation of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ where 
+\begin_inset Formula $\gamma_{\varphi}\in\mathrm{GL}_{n}(\Bbbk)$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula $\varphi\boldsymbol{e}=\boldsymbol{e}'=\boldsymbol{e}\widetilde{\gamma}_{\varphi}$
+\end_inset
+
+.
+ Then the matrix representation of 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ in the 
+\begin_inset Formula $\boldsymbol{e}'$
+\end_inset
+
+ coordinates is given by 
+\begin_inset Formula $\boldsymbol{d}'=\widetilde{\gamma}_{\varphi}^{-1}\boldsymbol{d}\widetilde{\gamma}_{\varphi}$
+\end_inset
+
+ since
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}\boldsymbol{e}' & =\mathrm{d}\boldsymbol{e}\widetilde{\gamma}_{\varphi}\\
+ & =\boldsymbol{e}\boldsymbol{d}\widetilde{\gamma}_{\varphi}\\
+ & =\boldsymbol{e}'\widetilde{\gamma}_{\varphi}^{-1}\boldsymbol{d}\widetilde{\gamma}_{\varphi}\\
+ & =\boldsymbol{e}'\boldsymbol{d}'.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus we see that 
+\begin_inset Formula $\mathrm{GL}_{n}(\Bbbk)$
+\end_inset
+
+ acts on 
+\begin_inset Formula $h_{\mathrm{A}_{R}^{\mathrm{d}}(F)}(\Bbbk)$
+\end_inset
+
+ by conjugation 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{d}}\mapsto\mathrm{e}_{\widetilde{\gamma}_{\varphi}^{-1}\boldsymbol{d}\widetilde{\gamma}_{\varphi}}$
+\end_inset
+
+.
+ On the other hand, if we define 
+\begin_inset Formula $\mathrm{d}'\colon F\to F$
+\end_inset
+
+ by 
+\begin_inset Formula $\mathrm{d}'=\varphi^{-1}\mathrm{d}\varphi$
+\end_inset
+
+, then we obtain 
+\begin_inset Formula $\mathrm{d}'\boldsymbol{e}=\boldsymbol{e}\boldsymbol{d}'$
+\end_inset
+
+, hence 
+\begin_inset Formula $\mathrm{d}'$
+\end_inset
+
+ is the differential on 
+\begin_inset Formula $F$
+\end_inset
+
+ whose matrix representation with respect to our original ordered basis
+ 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ is 
+\begin_inset Formula $\boldsymbol{d}'$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{d}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{d}'}$
+\end_inset
+
+ belong to the same 
+\begin_inset Formula $\mathrm{GL}_{n}(\Bbbk)$
+\end_inset
+
+-orbit in 
+\begin_inset Formula $h_{\mathrm{A}_{R}^{\mathrm{d}}(F)}(\Bbbk)$
+\end_inset
+
+ if and only if the corresponding differentials 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{d}'$
+\end_inset
+
+ give isomorphic 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex structures on 
+\begin_inset Formula $F$
+\end_inset
+
+ with fixed identity.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Base Change
+\end_layout
+
+\begin_layout Standard
+Suppose that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra.
+ Then 
+\begin_inset Formula $G:=F\otimes_{\Bbbk}A$
+\end_inset
+
+ is a finite free graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module with 
+\begin_inset Formula $G_{0}\simeq R$
+\end_inset
+
+, 
+\begin_inset Formula $G_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i<0$
+\end_inset
+
+, and 
+\begin_inset Formula $G_{+}\neq0$
+\end_inset
+
+.
+ We set 
+\begin_inset Formula 
+\[
+\mathrm{A}_{R}^{\mathrm{d}}(G):=\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)\otimes_{\Bbbk}R\simeq R[\boldsymbol{D}]\slash\langle\boldsymbol{\Delta}\rangle\cup\langle\{D_{j}^{i}\mid|e_{i}|\neq|e_{j}|-1\}\rangle.
+\]
+
+\end_inset
+
+It is clear that we have an inclusion of sets 
+\begin_inset Formula $h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(R)\subseteq h_{\mathrm{A}_{R}^{\mathrm{d}}(G)}(R).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $G=\mathrm{Aut}(R\slash\Bbbk)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $G$
+\end_inset
+
+ acts on 
+\begin_inset Formula $h_{\mathrm{A}_{R}^{\mathrm{d}}(G)}(R)$
+\end_inset
+
+ and the set of all fixed points is precisely 
+\begin_inset Formula $h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(R)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section*
+Classifying Other Algebraic Structures on 
+\begin_inset Formula $F$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\lambda\colon F\to F$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu\colon F\otimes_{R}F\to F$
+\end_inset
+
+ be graded 
+\begin_inset Formula $R$
+\end_inset
+
+-linear maps.
+ With 
+\begin_inset Formula $F$
+\end_inset
+
+ equipped with 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+ as above, we make the following definitions:
+\end_layout
+
+\begin_layout Enumerate
+We say 
+\begin_inset Formula $F$
+\end_inset
+
+ is 
+\series bold
+unital 
+\series default
+if 
+\begin_inset Formula $\lambda(1)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu(1\otimes a)=a=\mu(a\otimes1)$
+\end_inset
+
+ for all 
+\begin_inset Formula $a\in F$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+We say 
+\begin_inset Formula $F$
+\end_inset
+
+ is 
+\series bold
+graded-commutative 
+\series default
+(or 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is 
+\series bold
+graded-commutative
+\series default
+) if
+\begin_inset Formula 
+\[
+ab=(-1)^{|a|b|}ba
+\]
+
+\end_inset
+
+for all homogeneous 
+\begin_inset Formula $a,b\in F$
+\end_inset
+
+.
+ We say it is 
+\series bold
+strictly graded-commutative 
+\series default
+if it is graded-commutative and satisfies the additional property that
+\begin_inset Formula 
+\[
+a^{2}=0
+\]
+
+\end_inset
+
+for all homogeneous 
+\begin_inset Formula $a\in F$
+\end_inset
+
+ whenever 
+\begin_inset Formula $|a|$
+\end_inset
+
+ is odd.
+\end_layout
+
+\begin_layout Enumerate
+We say 
+\begin_inset Formula $F$
+\end_inset
+
+ is 
+\series bold
+multiplicative 
+\series default
+(or 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is 
+\series bold
+
+\begin_inset Formula $\mu$
+\end_inset
+
+-multiplicative
+\series default
+)
+\series bold
+ 
+\series default
+if it satisfies the 
+\series bold
+multiplicative law
+\series default
+:
+\begin_inset Formula 
+\[
+\lambda(ab)=\lambda(a)\lambda(b)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a,b\in F$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+We say 
+\begin_inset Formula $F$
+\end_inset
+
+ is 
+\series bold
+hom-associative 
+\series default
+(or 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is 
+\begin_inset Formula $\lambda$
+\end_inset
+
+-
+\series bold
+associative
+\series default
+) if it satisfies the 
+\series bold
+hom-associative law
+\series default
+:
+\begin_inset Formula 
+\[
+(ab)\lambda(c)=\lambda(a)(bc)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a,b,c\in F$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+We say 
+\begin_inset Formula $F$
+\end_inset
+
+ is 
+\series bold
+permutative 
+\series default
+(or 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is 
+\series bold
+
+\begin_inset Formula $\lambda$
+\end_inset
+
+-permutative
+\series default
+)
+\series bold
+ 
+\series default
+if it satisfies the 
+\series bold
+permutative law
+\series default
+:
+\begin_inset Formula 
+\begin{equation}
+(\lambda(a)\lambda(b))\lambda(cd)=\lambda(ab)(\lambda(c)\lambda(d))\label{eq:permutativelaw}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $a,b,c,d\in F$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Why are we interested in these definitions? Basically we view permutativity
+ as a mixture between hom-associativity and multiplicativity.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{proppermutativeequalsmultiplicative}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $F=(F,\mathrm{d},\lambda,\mu)$
+\end_inset
+
+ be an MLDG algebra.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $F$
+\end_inset
+
+ is multiplicative, then 
+\begin_inset Formula $F$
+\end_inset
+
+ is permutative.
+ The converse is true if 
+\begin_inset Formula $F$
+\end_inset
+
+ is unital.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $F$
+\end_inset
+
+ is hom-associative, then 
+\begin_inset Formula $F$
+\end_inset
+
+ is permutative.
+ In particular, if 
+\begin_inset Formula $F$
+\end_inset
+
+ is unital, then hom-associativity implies multiplicativity.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ 1.
+ It is clear that if 
+\begin_inset Formula $F$
+\end_inset
+
+ is multiplicative, then 
+\begin_inset Formula $F$
+\end_inset
+
+ is permutative.
+ Now suppose that 
+\begin_inset Formula $F$
+\end_inset
+
+ is unital and permutative.
+ Then setting 
+\begin_inset Formula $c=1=d$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:permutativelaw})
+\end_layout
+
+\end_inset
+
+ shows that 
+\begin_inset Formula $F$
+\end_inset
+
+ is multiplicative.
+ In the general case where 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is not necessarily unital, we have 
+\begin_inset Formula $\lambda(1)=e$
+\end_inset
+
+ where 
+\begin_inset Formula $e\in F_{0}$
+\end_inset
+
+.
+ In this case, the permutative law would imply that 
+\begin_inset Formula $e$
+\end_inset
+
+ associates with all of the other elements, and furthermore it would tell
+ us that 
+\begin_inset Formula $e\lambda(ab)=e^{2}\lambda(a)\lambda(b)$
+\end_inset
+
+ for all 
+\begin_inset Formula $a,b\in A$
+\end_inset
+
+ (which is not quite the same as 
+\begin_inset Formula $F$
+\end_inset
+
+ being multiplicative).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Suppose 
+\begin_inset Formula $F$
+\end_inset
+
+ is hom-associative.
+ Then for all 
+\begin_inset Formula $a,b,c,d\in F$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\lambda(ab)(\lambda(c)\lambda(d)) & =((ab)\lambda(c))\lambda^{2}(d)\\
+ & =(\lambda(a)(bc))\lambda^{2}(d)\\
+ & =\lambda^{2}(a)((bc)\lambda(d))\\
+ & =\lambda^{2}(a)(\lambda(b)(cd))\\
+ & =(\lambda(a)\lambda(b))\lambda(cd).
+\end{align*}
+
+\end_inset
+
+There's a cute way to visualize this by tracing the edges of the permutohedron
+ (the hexagon) below: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$a$}] (a1) at (-0.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$b$}] (a2) at (0.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$c$}] (a3) at (1.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$d$}] (a4) at (2.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$ab$}, inner sep=6.5pt] (b1) at (0,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(c)$}, inner sep=6.5pt] (b2) at (1.5,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(d)$}, inner sep=6.5pt] (b3) at (2.5,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(ab)$}, inner sep=6.5pt] (c1) at (0,2) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(c)
+\backslash
+lambda(d)$}, inner sep=6.5pt] (c2) at (2,2) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$
+\backslash
+lambda(ab)(
+\backslash
+lambda (c)
+\backslash
+lambda(d))$}, inner sep=6.5pt] (d1) at (1,3) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a1) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a2) -- (b1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a3) -- (b2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (a4) -- (b3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b1) -- (c1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b2) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (b3) -- (c2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c1) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (c2) -- (d1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$a$}] (aa1) at (5.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$b$}] (aa2) at (6.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$c$}] (aa3) at (7.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$d$}] (aa4) at (8.5,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$cd$}, inner sep=6.5pt] (bb1) at (8,1)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(a)$}, inner sep=6.5pt] (bb2) at (5.5,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(b)$}, inner sep=6.5pt] (bb3) at (6.5,1) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(cd)$}, inner sep=6.5pt] (cc1) at (8,2) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(a)
+\backslash
+lambda(b)$}, inner sep=6.5pt] (cc2) at (6,2) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$
+\backslash
+lambda(ab)(
+\backslash
+lambda(c)
+\backslash
+lambda(d))$}, inner sep=6.5pt] (dd1) at (7,3) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aa1) -- (bb2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aa2) -- (bb3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aa3) -- (bb1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aa4) -- (bb1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bb1) -- (cc1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bb2) -- (cc2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bb3) -- (cc2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (cc1) -- (dd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (cc2) -- (dd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$a$}] (aaa1) at (9,-5.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$b$}] (aaa2) at (10.5,-5.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$c$}] (aaa3) at (11.5,-5.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$d$}] (aaa4) at (12.5,-5.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$cd$}, inner sep=6.5pt] (bbb1) at (12,-4.5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(a)$}, inner sep=6.5pt] (bbb2) at (9,-4.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(b)$}, inner sep=6.5pt] (bbb3) at (10.5,-4.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(b)(cd)$}, inner sep=6.5pt] (ccc1) at (11,-3.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda^2 (a)$}, inner sep=6.5pt] (ccc2) at (9,-3.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$
+\backslash
+lambda^2 (a)(
+\backslash
+lambda(b)(cd))$}, inner sep=6.5pt] (ddd1) at (10,-2.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa1) -- (bbb2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa2) -- (bbb3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa3) -- (bbb1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa4) -- (bbb1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb1) -- (ccc1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb2) -- (ccc2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb3) -- (ccc1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (ccc1) -- (ddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (ccc2) -- (ddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$a$}] (aaaa1) at (5.5,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$b$}] (aaaa2) at (6.5,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$c$}] (aaaa3) at (7.5,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$d$}] (aaaa4) at (9,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$
+\backslash
+lambda(d)$}, inner sep=6.5pt] (bbbb1) at (9,-10) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(a)$}, inner sep=6.5pt] (bbbb2) at (5.5,-10) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$bc$}, inner sep=6.5pt] (bbbb3) at
+ (7,-10) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$(bc)
+\backslash
+lambda(d)$}, inner sep=6.5pt] (cccc1) at (8,-9) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.6cm]90:$
+\backslash
+lambda^2 (a)$}, inner sep=7pt] (cccc2) at (5.5,-9) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$
+\backslash
+lambda^2 (a)((bc)
+\backslash
+lambda(d))$}, inner sep=6.5pt] (dddd1) at (7,-8) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaa1) -- (bbbb2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaa2) -- (bbbb3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaa3) -- (bbbb3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaa4) -- (bbbb1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbb1) -- (cccc1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbb2) -- (cccc2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbb3) -- (cccc1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (cccc1) -- (dddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (cccc2) -- (dddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$a$}] (aaaaa1) at (-1,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$b$}] (aaaaa2) at (0.5,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$c$}] (aaaaa3) at (1.5,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$d$}] (aaaaa4) at (2.5,-11) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$
+\backslash
+lambda(d)$}, inner sep=6.5pt] (bbbbb1) at (2.5,-10) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(a)$}, inner sep=6.5pt] (bbbbb2) at (-1,-10) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$bc$}, inner sep=6.5pt] (bbbbb3) at
+ (1,-10) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.6cm]90:$
+\backslash
+lambda^2 (d)$}, inner sep=7pt] (ccccc1) at (2.5,-9) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(a)(bc)$}, inner sep=6.5pt] (ccccc2) at (0,-9) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$(
+\backslash
+lambda(a)(bc))
+\backslash
+lambda^2 (d)$}, inner sep=6.5pt] (ddddd1) at (1,-8) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaaa1) -- (bbbbb2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaaa2) -- (bbbbb3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaaa3) -- (bbbbb3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaaaa4) -- (bbbbb1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbbb1) -- (ccccc1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbbb2) -- (ccccc2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbbbb3) -- (ccccc2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (ccccc1) -- (ddddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (ccccc2) -- (ddddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$a$}] (aaa1) at (-4.5,-5.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$b$}] (aaa2) at (-3.5,-5.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$c$}] (aaa3) at (-2.5,-5.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.45cm]90:$d$}] (aaa4) at (-1,-5.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$
+\backslash
+lambda(d)$}, inner sep=6.5pt] (bbb1) at (-1,-4.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$ab$}, inner sep=6.5pt] (bbb2) at (-4,-4.5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda(c)$}, inner sep=6.5pt] (bbb3) at (-2.5,-4.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$
+\backslash
+lambda^2 (d)$}, inner sep=6.5pt] (ccc1) at (-1,-3.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.55cm]90:$(ab)
+\backslash
+lambda(c)$}, inner sep=6.5pt] (ccc2) at (-3,-3.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[label={[label distance=-0.5cm]90:$((ab)
+\backslash
+lambda(c))
+\backslash
+lambda^2 (d)$}, inner sep=6.5pt] (ddd1) at (-2,-2.5) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa1) -- (bbb2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa2) -- (bbb2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa3) -- (bbb3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (aaa4) -- (bbb1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb1) -- (ccc1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb2) -- (ccc2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (bbb3) -- (ccc2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (ccc1) -- (ddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (ccc2) -- (ddd1);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w1) at (2.2,-1)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w2) at (5.8,-1)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w3) at (7.5,-4)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w4) at (5.8,-7)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w5) at (2.2,-7)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w6) at (0.5,-4)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1.5pt, label=below left:$$] (w7) at (4,-1)
+ {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w1)[color=red] -- (w7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=red] (w7) -- (w2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w2) -- (w3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w3) -- (w4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w4) -- (w5);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w5) -- (w6);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w6) -- (w1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w3) -- (w7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (w6) -- (w7);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that the red edge 
+\begin_inset Quotes eld
+\end_inset
+
+collapses
+\begin_inset Quotes erd
+\end_inset
+
+ to the associahedra (the pentagon) if 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\lambda\in R$
+\end_inset
+
+ and let 
+\begin_inset Formula $A$
+\end_inset
+
+ be an MLDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra with 
+\begin_inset Formula $\lambda_{A}=\mathrm{m}_{\lambda}$
+\end_inset
+
+ being the multilpication by 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ map given by 
+\begin_inset Formula $a\mapsto\lambda a$
+\end_inset
+
+.
+ Recall that 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\begin_inset Formula $R$
+\end_inset
+
+-linear, so in particular the element 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ must associative with all pairs of elements of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $A$
+\end_inset
+
+ is permutative since
+\begin_inset Formula 
+\begin{align*}
+\lambda(ab)(\lambda(c)\lambda(d)) & =\lambda^{3}((ab)(cd))\\
+ & =(\lambda(a)\lambda(b))\lambda(cd).
+\end{align*}
+
+\end_inset
+
+On the other hand, 
+\begin_inset Formula $A$
+\end_inset
+
+ is not necessarily hom-associative.
+ Indeed, we have
+\begin_inset Formula 
+\begin{align*}
+\lambda(a)(bc)=(ab)\lambda(c) & \iff\lambda(a(bc)-(ab)c)
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $a,b,c\in A$
+\end_inset
+
+ and the righthand side need not be zero.
+ It is easy to see though that 
+\begin_inset Formula $A$
+\end_inset
+
+ is hom-associative if and only if 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ kills 
+\begin_inset Formula $\mathrm{im}\,[\cdot,\cdot,\cdot]$
+\end_inset
+
+ where 
+\begin_inset Formula $[\cdot,\cdot,\cdot]$
+\end_inset
+
+ is the usual associator map defined by 
+\begin_inset Formula $[a,b,c]=a(bc)-(ab)c$
+\end_inset
+
+ for all 
+\begin_inset Formula $a,b,c\in A$
+\end_inset
+
+.
+ Similarly, 
+\begin_inset Formula $A$
+\end_inset
+
+ is not necessarily multiplicative.
+ Indeed, we have
+\begin_inset Formula 
+\begin{align*}
+\lambda(ab)-\lambda(a)\lambda(b) & =\lambda(ab-\lambda ab)\\
+ & =\lambda(1-\lambda)ab
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $a,b\in A$
+\end_inset
+
+.
+ If we assume that 
+\begin_inset Formula $R$
+\end_inset
+
+ is local and that 
+\begin_inset Formula $\lambda\in\mathfrak{m}$
+\end_inset
+
+, then 
+\begin_inset Formula $1-\lambda$
+\end_inset
+
+ is a unit.
+ Then in this case, it is easy to see that 
+\begin_inset Formula $A$
+\end_inset
+
+ is multiplicative if and only if 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ kills 
+\begin_inset Formula $\mathrm{im}\,\mu$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We now repeat the same procedure that we did when classifying 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex structures on 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\boldsymbol{\lambda}=(\ell_{j}^{i})$
+\end_inset
+
+ and let 
+\begin_inset Formula $\boldsymbol{m}=(m_{i,j}^{k})$
+\end_inset
+
+ be their matrix representations with respect to 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ respectively.
+ Thus we have 
+\begin_inset Formula $\lambda\boldsymbol{e}=\boldsymbol{e}\boldsymbol{\lambda}$
+\end_inset
+
+ we have 
+\begin_inset Formula $\mu(\boldsymbol{e}^{\top}\otimes\boldsymbol{e})=\boldsymbol{e}^{\top}\boldsymbol{m}\boldsymbol{e}$
+\end_inset
+
+.
+ In terms of the matrix entries, these are given by
+\begin_inset Formula 
+\[
+\lambda(e_{j})=\sum_{i}\ell_{j}^{i}e_{i}\quad\text{and}\quad\mu(e_{i}\otimes e_{j})=\sum_{k}m_{i,j}^{k}e_{k}.
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $i,j$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\Bbbk[\boldsymbol{L},\boldsymbol{M}]=\Bbbk[\{L_{i}^{j},M_{i,j}^{k}\}]$
+\end_inset
+
+.
+ We express the algebraic laws introduced above in terms of coordinates
+ in the table below:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Algebraic Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Equation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Graded-Commutative Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Gamma_{i,j}^{k}=M_{i,j}^{k}-(-1)^{|e_{i}||e_{j}|}M_{j,i}^{k}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Leibniz Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Lambda_{i,j}^{k}=\sum\limits _{\iota}(M_{i,j}^{\iota}D_{\iota}^{k}-D_{i}^{\iota}M_{\iota,j}^{k}-(-1)^{|e_{i}||e_{j}|}D_{j}^{\iota}M_{i,\iota}^{k})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Multiplicative Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Theta_{i,j}^{k}=\sum\limits _{\iota}M_{i,j}^{\iota}L_{\iota}^{k}-\sum\limits _{\iota_{1},\iota_{2}}L_{i}^{\iota_{1}}L_{j}^{\iota_{2}}M_{\iota_{1},\iota_{2}}^{k}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hom-Associative Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $H_{i,j,k}^{l}=\sum\limits _{\iota_{1},\iota_{2}}(M_{i,j}^{\iota_{1}}L_{k}^{\iota_{2}}M_{\iota_{1},\iota_{2}}^{l}-M_{j,k}^{\iota_{1}}L_{i}^{\iota_{2}}M_{\iota_{2},\iota_{1}}^{l})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Permutative Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Pi_{i,j,k,l}^{m}=\sum\limits _{\iota_{1},\iota_{2},\iota_{3},\iota_{4},\iota_{5}}(M_{i,j}^{\iota_{1}}L_{k}^{\iota_{2}}L_{l}^{\iota_{3}}-M_{k,l}^{\iota_{1}}L_{i}^{\iota_{2}}L_{j}^{\iota_{3}})M_{\iota_{2},\iota_{3}}^{\iota_{4}}L_{\iota_{1}}^{\iota_{5}}M_{\iota_{5},\iota_{4}}^{k}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We define
+\begin_inset Formula 
+\begin{align*}
+\mathrm{A}_{\Bbbk}^{\mathrm{p}}(F) & =\Bbbk[\boldsymbol{L},\boldsymbol{M}]\slash\langle\boldsymbol{\Pi}\rangle.\\
+\mathrm{A}_{\Bbbk}^{\mathrm{pd}}(F) & =\Bbbk[\boldsymbol{D},\boldsymbol{L},\boldsymbol{M}]\slash\langle\boldsymbol{\Delta},\boldsymbol{\Pi}\rangle\\
+\mathrm{A}_{\Bbbk}^{\mathrm{h}}(F) & =\Bbbk[\boldsymbol{L},\boldsymbol{M}]\slash\langle\boldsymbol{H}\rangle\\
+\mathrm{A}_{\Bbbk}^{\mathrm{\theta}}(F) & =\Bbbk[\boldsymbol{L},\boldsymbol{M}]\slash\langle\boldsymbol{\Theta}\rangle\\
+\mathrm{A}_{\Bbbk}^{\mathrm{c}}(F) & =\Bbbk[\boldsymbol{M}]\slash\langle\boldsymbol{\Gamma}\rangle,
+\end{align*}
+
+\end_inset
+
+and so on.
+ 
+\end_layout
+
+\end_body
+\end_document

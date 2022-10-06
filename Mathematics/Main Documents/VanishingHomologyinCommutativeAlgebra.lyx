@@ -164,16 +164,21 @@ commutative diagrams/.cd,
 \begin_body
 
 \begin_layout Title
-Vanishing Homology in Commutative Algebra
+Calculus of Ext and Tor
 \end_layout
 
 \begin_layout Standard
-Let 
+Unless otherwise specified, let 
 \begin_inset Formula $(R,\mathfrak{m},\Bbbk)$
 \end_inset
 
  be a local noetherian ring.
- In commutative algebra, one is often presented with an 
+ Ext and Tor show up all over the place in commutative algebra.
+ 
+\end_layout
+
+\begin_layout Standard
+one is often presented with an 
 \begin_inset Formula $R$
 \end_inset
 
@@ -215,14 +220,331 @@ does
 Vanishing in Ext
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Section
 Shifting and Antishifting
 \end_layout
 
 \begin_layout Standard
 In order to get a better understanding of Ext and Tor, the first step is
  to understand their shifting/antishifting properties.
- Let us explain what we mean: let 
+ The lesson that we shall learn is that covariant left exact functors typically
+ satisfy the shift property whereas everything else usually satisfies the
+ antishift property.
+ 
+\end_layout
+
+\begin_layout Subsection
+Shifting and Antishifting Depth
+\end_layout
+
+\begin_layout Subsubsection
+Antishift Property of Koszul Homology and Depth
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a noetherian ring, let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+ such that 
+\begin_inset Formula $I=\sqrt{\langle x_{1},\dots,x_{n}\rangle}=\sqrt{\langle\boldsymbol{x}\rangle}$
+\end_inset
+
+ where 
+\begin_inset Formula $x_{1},\dots,x_{n}\in I$
+\end_inset
+
+, and let 
+\begin_inset Formula $N$
+\end_inset
+
+ a finitely-generated 
+\begin_inset Formula $R$
+\end_inset
+
+-module such that 
+\begin_inset Formula $N\neq IN$
+\end_inset
+
+.
+ Set 
+\begin_inset Formula $\delta=\sup\{i\in\mathbb{Z}\mid\mathrm{H}_{i}(\boldsymbol{x},N)\neq0\}$
+\end_inset
+
+ and let 
+\begin_inset Formula $y$
+\end_inset
+
+ be an 
+\begin_inset Formula $N$
+\end_inset
+
+-regular sequence contained in 
+\begin_inset Formula $\langle\boldsymbol{x}\rangle$
+\end_inset
+
+.
+ Then we have an isomorphism
+\begin_inset Formula 
+\begin{equation}
+\mathrm{H}_{\delta}(\boldsymbol{x},N)\simeq\mathrm{H}_{\delta+1}(\boldsymbol{x},N\slash yN)\label{eq:antishiftkoszuldepth}
+\end{equation}
+
+\end_inset
+
+We think of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:antishiftkoszuldepth})
+\end_layout
+
+\end_inset
+
+ as an 
+\series bold
+antishift property
+\series default
+ of Koszul homology with respect to depth in the sense that 
+\begin_inset Formula $\delta$
+\end_inset
+
+ increases by one when we replace it by 
+\begin_inset Formula $\delta+1$
+\end_inset
+
+ whereas the 
+\begin_inset Formula $\langle\boldsymbol{x}\rangle$
+\end_inset
+
+-depth (and hence 
+\begin_inset Formula $I$
+\end_inset
+
+-depth) of 
+\begin_inset Formula $N$
+\end_inset
+
+ decreases by one when we replace 
+\begin_inset Formula $N$
+\end_inset
+
+ by 
+\begin_inset Formula $N\slash yN$
+\end_inset
+
+ (slogan: homological degree goes up, depth goes down).
+ This antishift property is derived by considering the short exact sequence
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules
+\begin_inset Formula 
+\[
+0\to N\xrightarrow{y}N\to N\slash yN\to0.
+\]
+
+\end_inset
+
+Then applying the right exact Koszul functor 
+\begin_inset Formula $\mathrm{H}(\mathcal{K}(\boldsymbol{x},-))$
+\end_inset
+
+ to this short exact sequence and using the fact that 
+\begin_inset Formula $y$
+\end_inset
+
+ kills 
+\begin_inset Formula $\mathrm{H}(\boldsymbol{x},N)$
+\end_inset
+
+, we obtain the short exact sequence of Koszul homologies
+\begin_inset Formula 
+\[
+0\to\mathrm{H}_{i}(\boldsymbol{x},N)\to\mathrm{H}_{i}(\boldsymbol{x},N\slash yN)\to\mathrm{H}_{i-1}(\boldsymbol{x},N)\to0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Shift Property of Ext and Depth
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a noetherian local ring, let 
+\begin_inset Formula $I$
+\end_inset
+
+ be an ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+, let 
+\begin_inset Formula $N$
+\end_inset
+
+ be a finitely-generated 
+\begin_inset Formula $R$
+\end_inset
+
+-module such that 
+\begin_inset Formula $IN\neq N$
+\end_inset
+
+, and let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a finitely generated 
+\begin_inset Formula $R$
+\end_inset
+
+-module such that 
+\begin_inset Formula $\mathrm{V}(\mathrm{Ann}\,M)=\mathrm{V}(I)$
+\end_inset
+
+ (for instance one may take 
+\begin_inset Formula $M=R\slash I$
+\end_inset
+
+ or 
+\begin_inset Formula $M=R\slash\sqrt{I}$
+\end_inset
+
+).
+ Set 
+\begin_inset Formula $\varepsilon=\inf\{i\in\mathbb{Z}\mid\mathrm{Ext}_{R}(M,N)\neq0\}$
+\end_inset
+
+ and let 
+\begin_inset Formula $y$
+\end_inset
+
+ be an 
+\begin_inset Formula $N$
+\end_inset
+
+-regular element contained in 
+\begin_inset Formula $\mathrm{Ann}\,M$
+\end_inset
+
+.
+ Then we have an isomorphism
+\begin_inset Formula 
+\begin{equation}
+\mathrm{Ext}_{R}^{\varepsilon}(M,N)\simeq\mathrm{Ext}_{R}^{\varepsilon-1}(M,N\slash yN)\label{eq:extandti}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We think of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:extandti})
+\end_layout
+
+\end_inset
+
+ as a 
+\series bold
+shift property 
+\series default
+of Ext with respect to depth in the sense that 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ decreases by one when we replace it by 
+\begin_inset Formula $\varepsilon-1$
+\end_inset
+
+ whereas the 
+\begin_inset Formula $I$
+\end_inset
+
+-depth of the second component also decreases by one when replace 
+\begin_inset Formula $N$
+\end_inset
+
+ by 
+\begin_inset Formula $N\slash yN$
+\end_inset
+
+.
+ This shift property is derived by considering the short exact sequence
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules
+\begin_inset Formula 
+\[
+0\to N\xrightarrow{y}N\to N\slash yN\to0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then applying the left exact covariant functor 
+\begin_inset Formula $\mathrm{Ext}_{R}(M,-)$
+\end_inset
+
+ to this short exact sequence and using the fact that 
+\begin_inset Formula $y$
+\end_inset
+
+ kills 
+\begin_inset Formula $\mathrm{Ext}_{R}(M,N)$
+\end_inset
+
+, we obtain the short exact sequence of Ext modules:
+\begin_inset Formula 
+\[
+0\to\mathrm{Ext}_{R}^{i}(M,N)\to\mathrm{Ext}_{R}^{i}(M,N\slash yN)\to\mathrm{Ext}_{R}^{i+1}(M,N)\to0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Shifting and Antishifting Syzigies
+\end_layout
+
+\begin_layout Standard
+Let us explain what we mean: let 
 \begin_inset Formula $M$
 \end_inset
 
