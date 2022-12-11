@@ -1,0 +1,2797 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Homework 5
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f_{1}(x)=x-1$
+\end_inset
+
+ and let 
+\begin_inset Formula $f_{2}(x)=(x-3)^{2}+1$
+\end_inset
+
+.
+ For this problem, we consider the following BOP:
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad[f_{1}(x),f_{2}(x)]\label{eq:BOP1}\\
+\text{subject to} & \quad x\geq1.\nonumber 
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Formulate the Benson problem 
+\begin_inset Formula $\mathrm{P}(\boldsymbol{\ell},x^{0})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $x^{0}=1$
+\end_inset
+
+.
+ Use any method of your choice and find an optimal solution to 
+\begin_inset Formula $\mathrm{P}(\boldsymbol{\ell},x^{0})$
+\end_inset
+
+.
+ What do you conclude?
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $x^{0}=5$
+\end_inset
+
+.
+ Use any method of your choice and find an optimal solution to 
+\begin_inset Formula $\mathrm{P}(\boldsymbol{\ell},x^{0})$
+\end_inset
+
+.
+ What do you conclude?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Benson's problem 
+\begin_inset Formula $\mathrm{P}(\boldsymbol{\ell},x^{0})$
+\end_inset
+
+ is
+\begin_inset Formula 
+\begin{align*}
+\text{maximize} & \quad\ell_{1}+\ell_{2}\\
+\text{subject to} & \quad f_{1}(x^{0})-f_{1}(x)-\ell_{1}=0\\
+ & \quad f_{2}(x^{0})-f_{2}(x)-\ell_{2}=0\\
+ & \quad\boldsymbol{\ell}\geqq0\\
+ & \quad x\geq1.
+\end{align*}
+
+\end_inset
+
+Using the fact that 
+\begin_inset Formula $f_{1}(x)=x-1$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}(x)=(x-3)^{2}+1$
+\end_inset
+
+, we can rewrite this as
+\begin_inset Formula 
+\begin{align*}
+\text{maximize} & \quad\ell_{1}+\ell_{2}\\
+\text{subject to} & \quad x^{0}-x-\ell_{1}=0\\
+ & \quad(x^{0}-3)^{2}-(x-3)^{2}-\ell_{2}=0\\
+ & \quad\boldsymbol{\ell}\geqq0\\
+ & \quad x\geq1.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Suppose 
+\begin_inset Formula $x^{0}=1$
+\end_inset
+
+.
+ Then Benson's problem simplifies to
+\begin_inset Formula 
+\begin{align}
+\text{maximize} & \quad\ell_{1}+\ell_{2}\nonumber \\
+\text{subject to} & \quad1-x-\ell_{1}=0\nonumber \\
+ & \quad4-(x-3)^{2}-\ell_{2}=0\label{eq:1}\\
+ & \quad\boldsymbol{\ell}\geqq0\nonumber \\
+ & \quad x\geq1.\nonumber 
+\end{align}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\ell_{1}=1-x$
+\end_inset
+
+, 
+\begin_inset Formula $x\geq1$
+\end_inset
+
+, and 
+\begin_inset Formula $\ell_{1}\geq0$
+\end_inset
+
+, we see that 
+\begin_inset Formula $x=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\ell_{1}=0$
+\end_inset
+
+.
+ Then from 
+\begin_inset Formula $4-(x-3)^{2}-\ell_{2}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $x=1$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\ell_{2}=0$
+\end_inset
+
+.
+ Therefore 
+\begin_inset Formula $x^{*}=1$
+\end_inset
+
+ is an optimal solution to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:1})
+\end_layout
+
+\end_inset
+
+, and since the optimal objective value is 
+\begin_inset Formula $0$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $x^{0}=1$
+\end_inset
+
+ is an efficient solution to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:BOP1})
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Suppose 
+\begin_inset Formula $x^{0}=5$
+\end_inset
+
+.
+ Then Benson's problem simplifies to
+\begin_inset Formula 
+\begin{align}
+\text{maximize} & \quad\ell_{1}+\ell_{2}\nonumber \\
+\text{subject to} & \quad5-x-\ell_{1}=0\nonumber \\
+ & \quad4-(x-3)^{2}-\ell_{2}=0\label{eq:2}\\
+ & \quad\boldsymbol{\ell}\geqq0\nonumber \\
+ & \quad x\geq1.\nonumber 
+\end{align}
+
+\end_inset
+
+Observe that 
+\begin_inset Formula $\boldsymbol{\ell}\geq0$
+\end_inset
+
+ and 
+\begin_inset Formula $x\geq1$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $1\leq x\le4$
+\end_inset
+
+.
+ Therefore since 
+\begin_inset Formula $\ell_{1}=5-x$
+\end_inset
+
+ and 
+\begin_inset Formula $\ell_{2}=4-(x-3)^{2}$
+\end_inset
+
+, we can simplify 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:2})
+\end_layout
+
+\end_inset
+
+ to
+\begin_inset Formula 
+\begin{align}
+\text{maximize} & \quad9-x-(x-3)^{2}\label{eq:3}\\
+\text{subject to} & \quad1\leq x\leq4\nonumber 
+\end{align}
+
+\end_inset
+
+This is easily seen to have a global maximum at 
+\begin_inset Formula $x^{*}=5/2$
+\end_inset
+
+ with optimal objective value being 
+\begin_inset Formula $25/4$
+\end_inset
+
+ (the graph of 
+\begin_inset Formula $9-x-(x-3)^{2}$
+\end_inset
+
+ is an upside down parabola with vertex 
+\begin_inset Formula $(5/2,25/4)$
+\end_inset
+
+).
+ It follows that 
+\begin_inset Formula $x^{*}=5/2$
+\end_inset
+
+ is an efficient solution to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:BOP1})
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ In this problem, we consider the MOP:
+\begin_inset Formula 
+\begin{equation}
+\min_{x\in X}(f_{1}(\boldsymbol{x}),\dots,f_{m}(\boldsymbol{x}))\label{eq:MOP1}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $X\subseteq\mathbb{R}^{n}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\boldsymbol{w}\in\mathbb{R}_{>}^{m}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\boldsymbol{y}^{\mathrm{U}}=\boldsymbol{y}^{\mathrm{I}}-\boldsymbol{\varepsilon}$
+\end_inset
+
+ be a utopian point of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:MOP1})
+\end_layout
+
+\end_inset
+
+ where 
+\begin_inset Formula $\boldsymbol{y}^{\mathrm{I}}$
+\end_inset
+
+ is the ideal point of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:MOP1})
+\end_layout
+
+\end_inset
+
+ and where 
+\begin_inset Formula $\boldsymbol{\varepsilon}\in\mathbb{R}_{>}^{m}$
+\end_inset
+
+.
+ Consider the weighted-norm problem:
+\begin_inset Formula 
+\begin{equation}
+\min_{\boldsymbol{x}\in X}\max_{1\leq i\leq m}\left\{ \omega_{i}(f_{i}(\boldsymbol{x})-y_{i}^{\mathrm{U}})\right\} \label{eq:MOP1-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Prove that if 
+\begin_inset Formula $\boldsymbol{x}^{*}\in X$
+\end_inset
+
+ is a unique optimal solution to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:MOP1-1})
+\end_layout
+
+\end_inset
+
+, then 
+\begin_inset Formula $\boldsymbol{x}^{*}$
+\end_inset
+
+ is an efficient solution to MOP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Assume for a contradiction that 
+\begin_inset Formula $\boldsymbol{x}^{*}$
+\end_inset
+
+ is the unique optimal solution to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:MOP1-1})
+\end_layout
+
+\end_inset
+
+ but that 
+\begin_inset Formula $\boldsymbol{x}^{*}$
+\end_inset
+
+ is not an efficient solution to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:MOP1})
+\end_layout
+
+\end_inset
+
+.
+ Then there exists some 
+\begin_inset Formula $\boldsymbol{x}'\in X$
+\end_inset
+
+ which is not equal to 
+\begin_inset Formula $\boldsymbol{x}^{*}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f(\boldsymbol{x}')\leq f(\boldsymbol{x}^{*})$
+\end_inset
+
+.
+ Then we have that
+\begin_inset Formula 
+\[
+\omega_{i}(f_{i}(\boldsymbol{x}')-y_{i}^{\mathrm{U}})\leq\omega_{i}(f_{i}(\boldsymbol{x}^{*})-y_{i}^{\mathrm{U}})
+\]
+
+\end_inset
+
+for each 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ Now suppose that
+\begin_inset Formula 
+\[
+\max_{1\leq i\leq m}\left\{ \omega_{i}(f_{i}(\boldsymbol{x})-y_{i}^{\mathrm{U}})\right\} =\omega_{i_{0}}(f_{i_{0}}(\boldsymbol{x})-y_{i_{0}}^{\mathrm{U}})
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $1\leq i_{0}\leq m$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+\max_{1\leq i\leq m}\left\{ \omega_{i}(f_{i}(\boldsymbol{x}')-y_{i}^{\mathrm{U}})\right\}  & =\omega_{i_{0}}(f_{i_{0}}(\boldsymbol{x}')-y_{i_{0}}^{\mathrm{U}})\\
+ & \leq\omega_{i_{0}}(f_{i_{0}}(\boldsymbol{x}^{*})-y_{i_{0}}^{\mathrm{U}})\\
+ & \leq\max_{1\leq i\leq m}\left\{ \omega_{i}(f_{i}(\boldsymbol{x}^{*})-y_{i}^{\mathrm{U}})\right\} .
+\end{align*}
+
+\end_inset
+
+However this contradicts our assumption that 
+\begin_inset Formula $\boldsymbol{x}^{*}$
+\end_inset
+
+ is the unique optimal solution to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:MOP1-1})
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\boldsymbol{w}=(1/4,3/4)$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho=1/4$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Derive the equations of the set of points in 
+\begin_inset Formula $\mathbb{R}_{\geqq}^{2}$
+\end_inset
+
+ whose augmented weighted Chebyshev distance 
+\begin_inset Formula $3$
+\end_inset
+
+ away from the origin 
+\begin_inset Formula $\boldsymbol{0}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Consider the modified weighted Chebyshev metric.
+ Derive the equations of the set of points in 
+\begin_inset Formula $\mathbb{R}_{\geqq}^{2}$
+\end_inset
+
+ of distance 
+\begin_inset Formula $3$
+\end_inset
+
+ away from the origin 
+\begin_inset Formula $\boldsymbol{0}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Draw both sets in the same figure.
+ Find and plot all extreme points of each set.
+ Make sure that your figure is clear and precise.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Recall the augmented weighted Chebyshev norm (with respect to 
+\begin_inset Formula $\boldsymbol{w}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+) defined by
+\begin_inset Formula 
+\[
+\|\boldsymbol{y}\|_{\infty}^{\boldsymbol{w},\rho}=\max\{w_{1}|y_{1}|,w_{2}|y_{2}|\}+\rho(|y_{1}|+|y_{2}|)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\boldsymbol{y}\in\mathbb{R}^{2}$
+\end_inset
+
+.
+ Finding the set of all points in 
+\begin_inset Formula $\mathbb{R}_{\geqq}^{2}$
+\end_inset
+
+ whose augmented weighted Chebyshev distance from the origin is 
+\begin_inset Formula $3$
+\end_inset
+
+ is equivalent to finding the set of all points in 
+\begin_inset Formula $\mathbb{R}_{\geqq}^{2}$
+\end_inset
+
+ whose augmented weighted Chebyshev norm is 
+\begin_inset Formula $3$
+\end_inset
+
+.
+ Now suppose 
+\begin_inset Formula $\boldsymbol{y}\in\mathbb{R}_{\geqq}^{2}$
+\end_inset
+
+ and let 
+\begin_inset Formula $A$
+\end_inset
+
+ be set of all points in 
+\begin_inset Formula $\mathbb{R}_{\geqq}^{2}$
+\end_inset
+
+ whose augmented weighted Chebyshev norm is 
+\begin_inset Formula $3$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{y}\in A & \iff\max\{w_{1}y_{1},w_{2}y_{2}\}+\rho(y_{1}+y_{2})=3\\
+ & \iff\max\left\{ \frac{y_{1}}{4},\frac{3y_{2}}{4}\right\} +\frac{y_{1}+y_{2}}{4}=3.
+\end{align*}
+
+\end_inset
+
+Now note that
+\begin_inset Formula 
+\begin{align*}
+\max\left\{ \frac{y_{1}}{4},\frac{3y_{2}}{4}\right\} =\frac{y_{1}}{4} & \iff\frac{y_{1}}{4}\geq\frac{3y_{2}}{4}\\
+ & \iff y_{1}\geq3y_{2}
+\end{align*}
+
+\end_inset
+
+Thus if 
+\begin_inset Formula $y_{1}\geq3y_{2}$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{y}\in A & \iff\frac{y_{1}}{4}+\frac{y_{1}+y_{2}}{4}=3.\\
+ & \iff2y_{1}+y_{2}-12=0,
+\end{align*}
+
+\end_inset
+
+and if 
+\begin_inset Formula $y_{1}<3y_{2}$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{y}\in A & \iff\frac{3y_{2}}{4}+\frac{y_{1}+y_{2}}{4}=3.\\
+ & \iff y_{1}+4y_{2}-12=0.
+\end{align*}
+
+\end_inset
+
+Therefore we conclude that
+\begin_inset Formula 
+\[
+A=\{\boldsymbol{y}\in\mathbb{R}_{\geqq}^{2}\mid y_{1}\geq3y_{2}\text{ and }2y_{1}+y_{2}-12=0\}\cup\{\boldsymbol{y}\in\mathbb{R}_{\geqq}^{2}\mid y_{1}<3y_{2}\text{ and }y_{1}+4y_{2}-12=0\}.
+\]
+
+\end_inset
+
+Thet set 
+\begin_inset Formula $A$
+\end_inset
+
+ consists of two segments colored in red below:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-4,xmax=12,ymin=-4,ymax=12,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick=
+\backslash
+empty ,ytick=
+\backslash
+empty ,
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $y_1 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $y_2 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+axis equal,
+\end_layout
+
+\begin_layout Plain Layout
+
+legend style={draw=none},
+\end_layout
+
+\begin_layout Plain Layout
+
+legend pos = south west,
+\end_layout
+
+\begin_layout Plain Layout
+
+scale=1.5]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=36/7:6,samples=100,color=red,thick] {-2*x+12}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=0:36/7,samples=100,color=red,thick] {-(1/4)*x+3};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above right:$ 
+\backslash
+boldsymbol{a}_1 $] (x) at (axis cs:0,3) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above right:$ 
+\backslash
+boldsymbol{a}_2 $] (x) at (axis cs:36/7,12/7) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above right:$ 
+\backslash
+boldsymbol{a}_3 $] (x) at (axis cs:6,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\boldsymbol{a}_{1}=(0,3)$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{a}_{2}=(36/7,12/7)$
+\end_inset
+
+, and 
+\begin_inset Formula $\boldsymbol{a}_{3}=(6,0)$
+\end_inset
+
+ are the extreme points.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Recall the modified weighted Chebyshev norm (with respect to 
+\begin_inset Formula $\boldsymbol{w}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+) is defined by
+\begin_inset Formula 
+\[
+\|\boldsymbol{y}\|_{\infty}^{\boldsymbol{w},\rho,\mathrm{m}}=\max\left\{ w_{1}\left(|y_{1}|+\rho(|y_{1}|+|y_{2}|)\right),w_{2}\left(|y_{2}|+\rho(|y_{1}|+|y_{2}|)\right)\right\} 
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\boldsymbol{y}\in\mathbb{R}^{2}$
+\end_inset
+
+.
+ Finding the set of all points in 
+\begin_inset Formula $\mathbb{R}_{\geqq}^{2}$
+\end_inset
+
+ whose modified weighted Chebyshev distance from the origin is 
+\begin_inset Formula $3$
+\end_inset
+
+ is equivalent to finding the set of all points in 
+\begin_inset Formula $\mathbb{R}_{\geqq}^{2}$
+\end_inset
+
+ whose modified weighted Chebyshev norm is 
+\begin_inset Formula $3$
+\end_inset
+
+.
+ Suppose 
+\begin_inset Formula $\boldsymbol{y}\in\mathbb{R}_{\geqq}^{2}$
+\end_inset
+
+ and let 
+\begin_inset Formula $B$
+\end_inset
+
+ be set of all points in 
+\begin_inset Formula $\mathbb{R}_{\geqq}^{2}$
+\end_inset
+
+ whose modified weighted Chebyshev norm is 
+\begin_inset Formula $3$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{y}\in B & \iff\max\left\{ w_{1}\left(y_{1}+\rho(y_{1}+y_{2})\right),w_{2}\left(y_{2}+\rho(y_{1}+y_{2})\right)\right\} =3.\\
+ & \iff\max\left\{ \frac{1}{4}\left(y_{1}+\frac{1}{4}(y_{1}+y_{2})\right),\frac{3}{4}\left(y_{2}+\frac{1}{4}(y_{1}+y_{2})\right)\right\} =3.\\
+ & \iff\max\left\{ \frac{5y_{1}+y_{2}}{16},\frac{3y_{1}+15y_{2}}{16}\right\} =3
+\end{align*}
+
+\end_inset
+
+Now note that
+\begin_inset Formula 
+\begin{align*}
+\max\left\{ \frac{5y_{1}+y_{2}}{16},\frac{3y_{1}+15y_{2}}{16}\right\} =\frac{5y_{1}+y_{2}}{16} & \iff\frac{5y_{1}+y_{2}}{16}\geq\frac{3y_{1}+15y_{2}}{16}\\
+ & \iff5y_{1}+y_{2}\geq3y_{1}+15y_{2}\\
+ & \iff y_{1}\geq7y_{2}.
+\end{align*}
+
+\end_inset
+
+Thus if 
+\begin_inset Formula $y_{1}\geq7y_{2}$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{y}\in B & \iff\frac{5y_{1}+y_{2}}{16}=3.\\
+ & \iff5y_{1}+y_{2}-48=0,
+\end{align*}
+
+\end_inset
+
+and if 
+\begin_inset Formula $y_{1}<7y_{2}$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{y}\in B & \iff\frac{3y_{1}+15y_{2}}{16}=3.\\
+ & \iff3y_{1}+15y_{2}-48=0,
+\end{align*}
+
+\end_inset
+
+Therefore we conclude that
+\begin_inset Formula 
+\[
+B=\{\boldsymbol{y}\in\mathbb{R}_{\geqq}^{2}\mid y_{1}\geq7y_{2}\text{ and }5y_{1}+y_{2}-48=0\}\cup\{\boldsymbol{y}\in\mathbb{R}_{\geqq}^{2}\mid y_{1}<7y_{2}\text{ and }3y_{1}+15y_{2}-48=0\}.
+\]
+
+\end_inset
+
+Thet set 
+\begin_inset Formula $B$
+\end_inset
+
+ consists of two segments colored in blue below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-4,xmax=12,ymin=-4,ymax=12,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick=
+\backslash
+empty ,ytick=
+\backslash
+empty ,
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $y_1 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $y_2 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+axis equal,
+\end_layout
+
+\begin_layout Plain Layout
+
+legend style={draw=none},
+\end_layout
+
+\begin_layout Plain Layout
+
+legend pos = south west,
+\end_layout
+
+\begin_layout Plain Layout
+
+scale=1.5]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=28/3:48/5,samples=100,color=blue,thick] {-5*x+48}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=0:28/3,samples=100,color=blue,thick] {-(1/5)*x+(48/15)};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above right:$ 
+\backslash
+boldsymbol{b}_1 $] (x) at (axis cs:0,48/15) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above right:$ 
+\backslash
+boldsymbol{b}_2 $] (x) at (axis cs:28/3,4/3) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below right:$ 
+\backslash
+boldsymbol{b}_3 $] (x) at (axis cs:48/5,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\boldsymbol{b}_{1}=(0,48/15)$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{b}_{2}=(28/3,4/3)$
+\end_inset
+
+, and 
+\begin_inset Formula $\boldsymbol{b}_{3}=(48/5,0)$
+\end_inset
+
+ are the extreme points.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ We draw both 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ together:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-4,xmax=12,ymin=-4,ymax=12,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick=
+\backslash
+empty ,ytick=
+\backslash
+empty ,
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $y_1 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $y_2 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+axis equal,
+\end_layout
+
+\begin_layout Plain Layout
+
+legend style={draw=none},
+\end_layout
+
+\begin_layout Plain Layout
+
+legend pos = south west,
+\end_layout
+
+\begin_layout Plain Layout
+
+scale=1.5]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=36/7:6,samples=100,color=red,thick] {-2*x+12}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=0:36/7,samples=100,color=red,thick] {-(1/4)*x+3};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below right:$ 
+\backslash
+boldsymbol{a}_1 $] (x) at (axis cs:0,3) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below left:$ 
+\backslash
+boldsymbol{a}_2 $] (x) at (axis cs:36/7,12/7) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below left:$ 
+\backslash
+boldsymbol{a}_3 $] (x) at (axis cs:6,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=28/3:48/5,samples=100,color=blue,thick] {-5*x+48}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=0:28/3,samples=100,color=blue,thick] {-(1/5)*x+(48/15)};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above right:$ 
+\backslash
+boldsymbol{b}_1 $] (x) at (axis cs:0,48/15) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above right:$ 
+\backslash
+boldsymbol{b}_2 $] (x) at (axis cs:28/3,4/3) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below right:$ 
+\backslash
+boldsymbol{b}_3 $] (x) at (axis cs:48/5,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\boldsymbol{a}_{1}=(0,3)$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{a}_{2}=(36/7,12/7)$
+\end_inset
+
+, and 
+\begin_inset Formula $\boldsymbol{a}_{3}=(6,0)$
+\end_inset
+
+ are the extreme points for 
+\begin_inset Formula $A$
+\end_inset
+
+, and where 
+\begin_inset Formula $\boldsymbol{b}_{1}=(0,48/15)$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{b}_{2}=(28/3,4/3)$
+\end_inset
+
+, and 
+\begin_inset Formula $\boldsymbol{b}_{3}=(48/5,0)$
+\end_inset
+
+ are the extreme points for 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f_{1}(\boldsymbol{x})=3x_{1}+x_{2}$
+\end_inset
+
+, let 
+\begin_inset Formula $f_{2}(\boldsymbol{x})=x_{1}+2x_{2}$
+\end_inset
+
+, and let
+\begin_inset Formula 
+\[
+X=\{\boldsymbol{x}\in\mathbb{R}^{2}\mid x_{1}+x_{2}\leq7,0\leq x_{1}\leq5,0\leq x_{2}\leq5\}.
+\]
+
+\end_inset
+
+For this problem we consider the following BOP:
+\begin_inset Formula 
+\begin{align*}
+\text{maximize} & \quad[f_{1}(\boldsymbol{x}),f_{2}(\boldsymbol{x})]\\
+\text{subject to} & \quad\boldsymbol{x}\in X.
+\end{align*}
+
+\end_inset
+
+Use any method or software of your choice to answer the following questions.
+\end_layout
+
+\begin_layout Enumerate
+Find the ideal point for this BOP and use it as the reference point in parts
+ b), c), d) below.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\series bold
+
+\begin_inset Formula $\boldsymbol{w}=(1/4,3/4)$
+\end_inset
+
+ 
+\series default
+and 
+\begin_inset Formula $p=1$
+\end_inset
+
+.
+ Formulate the weighted norm problem 
+\begin_inset Formula $\mathrm{P}(\boldsymbol{w},p)$
+\end_inset
+
+ and find all optimal solutions to this problem.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\series bold
+
+\begin_inset Formula $\boldsymbol{w}=(1/4,3/4)$
+\end_inset
+
+ 
+\series default
+and 
+\begin_inset Formula $p=2$
+\end_inset
+
+.
+ Formulate the weighted norm problem 
+\begin_inset Formula $\mathrm{P}(\boldsymbol{w},p)$
+\end_inset
+
+ and find all optimal solutions to this problem.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\series bold
+
+\begin_inset Formula $\boldsymbol{w}=(1/4,3/4)$
+\end_inset
+
+ 
+\series default
+and 
+\begin_inset Formula $p=\infty$
+\end_inset
+
+.
+ Formulate the weighted norm problem 
+\begin_inset Formula $\mathrm{P}(\boldsymbol{w},p)$
+\end_inset
+
+ and find all optimal solutions to this problem.
+\end_layout
+
+\begin_layout Enumerate
+Compare the optimal solutions you obtained in parts 2-4.
+ What do you observe?
+\end_layout
+
+\begin_layout Enumerate
+Are the optimal solutions to the weighted norm problems 
+\begin_inset Formula $\mathrm{P}(\boldsymbol{w},p)$
+\end_inset
+
+ efficient to the BOP? Explain.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ The feasible set 
+\begin_inset Formula $X$
+\end_inset
+
+ is the region shaded in grey below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-4,xmax=8,ymin=-4,ymax=8,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick=
+\backslash
+empty ,ytick=
+\backslash
+empty ,
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $x_1 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $x_2 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+axis equal,
+\end_layout
+
+\begin_layout Plain Layout
+
+legend style={draw=none},
+\end_layout
+
+\begin_layout Plain Layout
+
+legend pos = south west,
+\end_layout
+
+\begin_layout Plain Layout
+
+scale=1.5]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-9:9,samples=100,color=blue,thick] {-x+7}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$x_1 + x_2 = 7 $};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-9:9,samples=100,color=red,thick] {5}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$ x_2 = 5 $};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-9:9,samples=100,color=green,thick] ({5},{x}); 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$x_1 = 5 $}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[color=gray,fill=gray!30]coordinates {(0,0) (0,5) (2,5) (5,2) (5,0)
+ (0,0)};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-9:9,samples=100,color=blue,thick] {-x+7}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-9:9,samples=100,color=red,thick] {5}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [domain=-9:9,samples=100,color=green,thick] ({5},{x});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below left:$ 
+\backslash
+boldsymbol{a}_1 $] (x) at (axis cs:0,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below left:$ 
+\backslash
+boldsymbol{a}_2 $] (x) at (axis cs:0,5) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$ 
+\backslash
+boldsymbol{a}_3 $] (x) at (axis cs:2,5) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above right:$ 
+\backslash
+boldsymbol{a}_4 $] (x) at (axis cs:5,2) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below right:$ 
+\backslash
+boldsymbol{a}_5 $] (x) at (axis cs:5,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the extreme points of 
+\begin_inset Formula $X$
+\end_inset
+
+ are
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{a}_{1} & =(0,0)\\
+\boldsymbol{a}_{2} & =(0,5)\\
+\boldsymbol{a}_{3} & =(2,5)\\
+\boldsymbol{a}_{4} & =(5,2)\\
+\boldsymbol{a}_{5} & =(5,0)
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ are linear, we can determine where 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ are maximized by evaluating them at the extreme points and comparing them
+ with each other.
+ We find that 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ is maximized at 
+\begin_inset Formula $\boldsymbol{a}_{4}$
+\end_inset
+
+ with maximum objective value being 
+\begin_inset Formula $y_{1}^{I}:=f_{1}(\boldsymbol{a}_{4})=17$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ is maximized at 
+\begin_inset Formula $\boldsymbol{a}_{3}$
+\end_inset
+
+ with maximum objective value being 
+\begin_inset Formula $y_{2}^{I}:=f_{2}(\boldsymbol{a}_{3})=12$
+\end_inset
+
+.
+ Therefore the ideal point is 
+\begin_inset Formula $\boldsymbol{y}^{I}=(y_{1}^{I},y_{2}^{I})=(17,12)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ The weighted norm problem is
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad\frac{1}{4}(17-3x_{1}-x_{2})+\frac{3}{4}(12-x_{1}-2x_{2})\\
+\text{subject to} & \quad\boldsymbol{x}\in X.
+\end{align*}
+
+\end_inset
+
+We can simplify this as
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad\frac{1}{4}(53-6x_{1}-7x_{2})\\
+\text{subject to} & \quad\boldsymbol{x}\in X.
+\end{align*}
+
+\end_inset
+
+Since the objective is linear and the feasible set is bounded and convex,
+ we can determine where the objective is minimized by evaluating it at the
+ extreme points and comparing each value with each other.
+ We find that the objective has a unique minimizer at 
+\begin_inset Formula $\boldsymbol{a}_{3}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ The weighted norm problem is
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad\left(\frac{1}{4}(17-3x_{1}-x_{2})^{2}+\frac{3}{4}(12-x_{1}-2x_{2})^{2}\right)^{1/2}\\
+\text{subject to} & \quad\boldsymbol{x}\in X.
+\end{align*}
+
+\end_inset
+
+The optimal solutions to this problem will be the same as the optimal solutions
+ to the following problem:
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad\frac{1}{4}(17-3x_{1}-x_{2})^{2}+\frac{3}{4}(12-x_{1}-2x_{2})^{2}\\
+\text{subject to} & \quad\boldsymbol{x}\in X.
+\end{align*}
+
+\end_inset
+
+Indeed, this follow from the fact that
+\begin_inset Formula 
+\[
+\psi(\boldsymbol{x}):=\frac{1}{4}(17-3x_{1}-x_{2})^{2}+\frac{3}{4}(12-x_{1}-2x_{2})^{2}
+\]
+
+\end_inset
+
+is always nonnegatve, being a sum of two squares.
+ A quick calculation shows that, among the extreme points, 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is minimized at 
+\begin_inset Formula $\boldsymbol{a}_{4}$
+\end_inset
+
+ with objective value given by 
+\begin_inset Formula $\psi(\boldsymbol{a}_{4})=27/4$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $\boldsymbol{a}_{4}$
+\end_inset
+
+ is the unique minimizer to the problem.
+ Indeed, first note that the gradient of 
+\begin_inset Formula $\psi$
+\end_inset
+
+ at 
+\begin_inset Formula $\boldsymbol{a}_{4}$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+\nabla\psi(\boldsymbol{x})\Big|_{\boldsymbol{x}=\boldsymbol{a}_{4}}=\begin{pmatrix}\frac{3}{2}(4x_{1}+3x_{2}-29)\\
+\frac{1}{2}(9x_{1}+13x_{2}-89)
+\end{pmatrix}\Big|_{\boldsymbol{x}=\boldsymbol{a}_{4}}=\begin{pmatrix}-9/2\\
+-9
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Furthermore, the tangent line of the level set 
+\begin_inset Formula $\{\psi=27/4\}$
+\end_inset
+
+ at the point 
+\begin_inset Formula $\boldsymbol{a}_{4}$
+\end_inset
+
+ is precisely the blue line given by the equation 
+\begin_inset Formula $x_{1}+x_{2}=7$
+\end_inset
+
+.
+ In particular, since 
+\begin_inset Formula $\psi$
+\end_inset
+
+ is globally strictly convex with positive Hessian and since the direction
+ 
+\begin_inset Formula $(-9/2,-9)^{\top}$
+\end_inset
+
+ points towards the feasible set from 
+\begin_inset Formula $X$
+\end_inset
+
+, we see that moving along any direction from 
+\begin_inset Formula $\boldsymbol{a}_{4}$
+\end_inset
+
+ to another point in the feasible set 
+\begin_inset Formula $X$
+\end_inset
+
+ will only increase the objective.
+ It follows that 
+\begin_inset Formula $\boldsymbol{a}_{4}$
+\end_inset
+
+ is the unique minimizer to our problem.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ The weighted norm problem is
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad\max\left\{ \frac{1}{4}(17-3x_{1}-x_{2}),\frac{3}{4}(12-x_{1}-2x_{2})\right\} \label{eq:max0}\\
+\text{subject to} & \quad\boldsymbol{x}\in X.\nonumber 
+\end{align}
+
+\end_inset
+
+Set 
+\begin_inset Formula $g_{1}(\boldsymbol{x})=\frac{1}{4}(17-3x_{1}-x_{2})$
+\end_inset
+
+ and set 
+\begin_inset Formula $g_{2}(\boldsymbol{x})=\frac{3}{4}(12-x_{1}-2x_{2})$
+\end_inset
+
+.
+ Observe that
+\begin_inset Formula 
+\begin{align*}
+g_{1}(\boldsymbol{x})\geq g_{2}(\boldsymbol{x}) & \iff\frac{1}{4}(17-3x_{1}-x_{2})\geq\frac{3}{4}(12-x_{1}-2x_{2})\\
+ & \iff17-3x_{1}-x_{2}\geq36-3x_{1}-6x_{2}\\
+ & \iff x_{2}\geq19/5.
+\end{align*}
+
+\end_inset
+
+In particular, if 
+\begin_inset Formula $x_{2}\leq19/5$
+\end_inset
+
+, then the problem becomes
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad\frac{1}{4}(17-3x_{1}-x_{2})\label{eq:max1}\\
+\text{subject to} & \quad\boldsymbol{x}\in X_{\leq19/5}\nonumber 
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $X_{\leq19/5}=X\cap\{x_{2}\leq19/5\}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $X_{\leq19/5}$
+\end_inset
+
+ has the same extreme points as 
+\begin_inset Formula $X$
+\end_inset
+
+ except we replace 
+\begin_inset Formula $\boldsymbol{a}_{2}$
+\end_inset
+
+ with 
+\begin_inset Formula $\boldsymbol{b}_{2}=(0,19/5)$
+\end_inset
+
+ and we replace 
+\begin_inset Formula $\boldsymbol{a}_{3}$
+\end_inset
+
+ with 
+\begin_inset Formula $\boldsymbol{b}_{3}=(16/5,19/5)$
+\end_inset
+
+.
+ After evaluating and comparing the objective at the extreme points, we
+ find that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:max1})
+\end_layout
+
+\end_inset
+
+ has a unique minimizer at 
+\begin_inset Formula $\boldsymbol{a}_{4}$
+\end_inset
+
+ with objective value being 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ On the other hand, if 
+\begin_inset Formula $x_{2}\geq19/5$
+\end_inset
+
+, then the problem becomes
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \frac{3}{4}(12-x_{1}-2x_{2})\label{eq:max1-1}\\
+\text{subject to} & \quad\boldsymbol{x}\in X_{\geq19/5}\nonumber 
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $X_{\geq19/5}=X\cap\{x_{2}\geq19/5\}$
+\end_inset
+
+.
+ Note that the extreme points of 
+\begin_inset Formula $X_{\geq19/5}$
+\end_inset
+
+ are 
+\begin_inset Formula $\boldsymbol{a}_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{a}_{3}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{b}_{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $\boldsymbol{b}_{3}$
+\end_inset
+
+.
+ After evaluating and comparing the objective at the extreme points, we
+ find that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:max1-1})
+\end_layout
+
+\end_inset
+
+ has a unique minimizer at 
+\begin_inset Formula $\boldsymbol{a}_{4}$
+\end_inset
+
+ with objective value being 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Altogether, we see that 
+\begin_inset Formula $\{\boldsymbol{a}_{3},\boldsymbol{a}_{4}\}$
+\end_inset
+
+ is the set of all optimal solutions to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:max0})
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ Each method gave us different answer, either 
+\begin_inset Formula $\boldsymbol{a}_{3}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{a}_{4}$
+\end_inset
+
+, or both 
+\begin_inset Formula $\boldsymbol{a}_{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{a}_{4}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+5.
+ Yes because the first condition of Theorem 4.21 in the book by Ehrgott (the
+ one that the class is referencing) holds for both part 2 and 3, showing
+ that both 
+\begin_inset Formula $\boldsymbol{a}_{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{a}_{4}$
+\end_inset
+
+ are efficient solutions.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Consider the lexicographic method and prove the following: If 
+\begin_inset Formula $\boldsymbol{x}^{*}\in X$
+\end_inset
+
+ is an optimal solution to problem 
+\begin_inset Formula $\mathrm{P}(\Pi(p))$
+\end_inset
+
+, then 
+\begin_inset Formula $\boldsymbol{x}^{*}$
+\end_inset
+
+ is an efficient solution to the MOP.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Assume for a contradiction that 
+\begin_inset Formula $\boldsymbol{x}^{*}\in X$
+\end_inset
+
+ is an optimal solution to 
+\begin_inset Formula $\mathrm{P}(\Pi(p))$
+\end_inset
+
+ but is not efficient to the MOP.
+ Then there exists 
+\begin_inset Formula $\boldsymbol{x}\in X$
+\end_inset
+
+ such that 
+\begin_inset Formula $f(\boldsymbol{x})\le f(\boldsymbol{x}^{*})$
+\end_inset
+
+.
+ In particular, there exists some 
+\begin_inset Formula $i\in\{1,\dots,p\}$
+\end_inset
+
+ such that 
+\begin_inset Formula $f_{i}(\boldsymbol{x})<f_{i}(\boldsymbol{x}^{*})$
+\end_inset
+
+.
+ Set
+\begin_inset Formula 
+\[
+i_{0}:=\min\{i\mid f_{i}(\boldsymbol{x})<f_{i}(\boldsymbol{x}^{*})\}.
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $f_{i}(\boldsymbol{x})=f_{i}(\boldsymbol{x}^{*})$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,\dots,i_{0}-1$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{i_{0}}(\boldsymbol{x})<f_{i_{0}}(\boldsymbol{x}^{*})$
+\end_inset
+
+ implies 
+\begin_inset Formula $f(\boldsymbol{x})<_{\mathrm{lex}}f(\boldsymbol{x}^{*})$
+\end_inset
+
+ which contradicts our assumption that 
+\begin_inset Formula $\boldsymbol{x}^{*}$
+\end_inset
+
+ an optimal solution to 
+\begin_inset Formula $\mathrm{P}(\Pi(p))$
+\end_inset
+
+.
+ Note that the same argument holds if we permute the indices by any permutation
+ 
+\begin_inset Formula $\sigma\in S_{p}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

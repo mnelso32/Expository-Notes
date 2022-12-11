@@ -1,0 +1,1111 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Methodology
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+In this project, we study 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JTMW99"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection*
+The Weighted Quadratic Approach
+\end_layout
+
+\begin_layout Standard
+In the weighted quadratic approach a quadratic function of the objective
+ functions
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad\boldsymbol{f}(\boldsymbol{x})^{\top}Q\boldsymbol{f}(\boldsymbol{x})+\boldsymbol{q}^{\top}\boldsymbol{f}(\boldsymbol{x})\nonumber \\
+\text{subject to} & \quad\boldsymbol{x}\in X\label{eq:p21-3-1}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $Q$
+\end_inset
+
+ is a 
+\begin_inset Formula $p\times p$
+\end_inset
+
+ matrix and where 
+\begin_inset Formula $\boldsymbol{q}$
+\end_inset
+
+ is a vector in 
+\begin_inset Formula $\mathbb{R}^{p}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Under conditions of a quadratic Lagrangian duality, if 
+\begin_inset Formula $\widehat{\boldsymbol{x}}\in X$
+\end_inset
+
+ is efficient, then there exist a symmetric 
+\begin_inset Formula $p\times p$
+\end_inset
+
+ matrix 
+\begin_inset Formula $Q$
+\end_inset
+
+ and a vector 
+\begin_inset Formula $\boldsymbol{q}\in\mathbb{R}^{p}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is an optimal solution to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:p21-3-1})
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+MOP Formulation
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\boldsymbol{f}\colon\mathbb{R}^{n}\to\mathbb{R}^{m}$
+\end_inset
+
+ be a vector-valued objective function.
+ Thus we have
+\begin_inset Formula 
+\[
+\boldsymbol{f}(\boldsymbol{x})=(f_{1}(\boldsymbol{x}),\dots,f_{m}(\boldsymbol{x}))^{\top}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\boldsymbol{x}\in\mathbb{R}^{n}$
+\end_inset
+
+, where 
+\begin_inset Formula $f_{k}\colon\mathbb{R}^{n}\to\mathbb{R}$
+\end_inset
+
+ are the component objective functions of 
+\begin_inset Formula $\boldsymbol{f}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq k\leq m$
+\end_inset
+
+.
+ Next, let 
+\begin_inset Formula $\boldsymbol{h}\colon\mathbb{R}^{n}\to\mathbb{R}^{p}$
+\end_inset
+
+ be a vector-valued constraint function.
+ Thus we have
+\begin_inset Formula 
+\[
+\boldsymbol{h}(\boldsymbol{x})=(h_{1}(\boldsymbol{x}),\dots,h_{p}(\boldsymbol{x}))^{\top}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $\boldsymbol{x}\in\mathbb{R}^{n}$
+\end_inset
+
+, where 
+\begin_inset Formula $h_{j}\colon\mathbb{R}^{n}\to\mathbb{R}$
+\end_inset
+
+ are the component constraint functions of 
+\begin_inset Formula $\boldsymbol{h}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq j\leq m$
+\end_inset
+
+.
+ Finally, let
+\begin_inset Formula 
+\[
+X=\{\boldsymbol{x}\in\mathbb{R}^{n}\mid\boldsymbol{h}(\boldsymbol{x})=0\}.
+\]
+
+\end_inset
+
+We consider the following multi objective program (MOP) below:
+\begin_inset Formula 
+\begin{align}
+\text{maximize} & \quad\boldsymbol{f}(\boldsymbol{x})\nonumber \\
+\text{subject to} & \quad\boldsymbol{x}\in X\label{eq:1}
+\end{align}
+
+\end_inset
+
+A point 
+\begin_inset Formula $\boldsymbol{x}^{0}\in X$
+\end_inset
+
+ is called an efficient solution of this MOP if there is no other point
+ 
+\begin_inset Formula $\boldsymbol{x}\in X$
+\end_inset
+
+ such that 
+\begin_inset Formula $\boldsymbol{f}(\boldsymbol{x})\geq\boldsymbol{f}(\boldsymbol{x}^{0})$
+\end_inset
+
+ with strict inequality holding for at least one component (i.e.
+ 
+\begin_inset Formula $f_{k}(\boldsymbol{x})>f_{k}(\boldsymbol{x}^{0})$
+\end_inset
+
+ for some 
+\begin_inset Formula $1\leq k\leq m$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection*
+Tchebycheff Approach
+\end_layout
+
+\begin_layout Standard
+We first use the Tchebycheff approach to find the efficient solutions to
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:1})
+\end_layout
+
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\boldsymbol{\lambda}\in\mathbb{R}^{m}$
+\end_inset
+
+ be a weight vector and let 
+\begin_inset Formula $\boldsymbol{z}^{*}\in\mathbb{R}^{m}$
+\end_inset
+
+ be the ideal point whose 
+\begin_inset Formula $i$
+\end_inset
+
+-th component is given by 
+\begin_inset Formula $z_{i}^{*}=\varepsilon_{i}+\max_{\boldsymbol{x}\in X}f_{i}(\boldsymbol{x})$
+\end_inset
+
+ where 
+\begin_inset Formula $\varepsilon_{i}>0$
+\end_inset
+
+.
+ Now consider the problem
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad\max_{1\leq i\leq m}\left\{ \lambda_{i}(z_{i}^{*}-f_{i}(\boldsymbol{x}))\right\} \nonumber \\
+\text{subject to} & \quad\boldsymbol{x}\in X\label{eq:3}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\boldsymbol{\lambda}\geq0$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{i=1}^{m}\lambda_{i}=1$
+\end_inset
+
+.
+ Then the efficient solutions of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:1})
+\end_layout
+
+\end_inset
+
+ can be found as optimal solutions of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:3})
+\end_layout
+
+\end_inset
+
+ by considering various 
+\begin_inset Formula $\boldsymbol{\lambda}$
+\end_inset
+
+-values.
+  For instance in the case where 
+\begin_inset Formula $\lambda_{1}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $2\leq i\leq m$
+\end_inset
+
+, the problem 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:3})
+\end_layout
+
+\end_inset
+
+ simplifies to
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad z_{1}^{*}-f_{1}(\boldsymbol{x})+\varepsilon_{1}\nonumber \\
+\text{subject to} & \quad\boldsymbol{x}\in X\label{eq:3-1}
+\end{align}
+
+\end_inset
+
+In this case, any optimal solutio
+\end_layout
+
+\begin_layout Standard
+in the alternative form:
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad\alpha\nonumber \\
+\text{subject to} & \quad\boldsymbol{g}(\boldsymbol{x},\alpha)\leq0\label{eq:5}\\
+ & \quad\boldsymbol{x}\in X\nonumber 
+\end{align}
+
+\end_inset
+
+where we set
+\begin_inset Formula 
+\[
+\boldsymbol{g}(\boldsymbol{x},\alpha)=\boldsymbol{\lambda}^{\top}(\boldsymbol{z}^{*}-\boldsymbol{f}(\boldsymbol{x}))-\alpha.
+\]
+
+\end_inset
+
+Assume that 
+\begin_inset Formula $\boldsymbol{\lambda}>0$
+\end_inset
+
+ and let 
+\begin_inset Formula $(\overline{\boldsymbol{x}},\overline{\alpha})$
+\end_inset
+
+ denote an optimal solution of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:5})
+\end_layout
+
+\end_inset
+
+ so that all the inequality constraints are binding at 
+\begin_inset Formula $(\overline{\boldsymbol{x}},\overline{\alpha})$
+\end_inset
+
+.
+ Hence we may restrict all the inequalities to equalities and consider the
+ following primal problem:
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad\alpha\nonumber \\
+\text{subject to} & \quad\boldsymbol{g}(\boldsymbol{x},\alpha)=0\label{eq:6}\\
+ & \quad\boldsymbol{x}\in X.\nonumber 
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+The dual augmented Lagrange problem 
+\end_layout
+
+\begin_layout Standard
+We introduce dual variables 
+\begin_inset Formula $(a,\boldsymbol{y})$
+\end_inset
+
+ where 
+\begin_inset Formula $a\in\mathbb{R}_{>0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{y}\in\mathbb{R}^{m}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be the 
+\begin_inset Formula $m\times m$
+\end_inset
+
+ diagonal matrix whose diagonal entries are all equal to 
+\begin_inset Formula $a$
+\end_inset
+
+, and define the augmented Lagrange function:
+\begin_inset Formula 
+\[
+L_{Q}(\boldsymbol{x},\alpha,a,\boldsymbol{y})=\alpha+\boldsymbol{g}(\boldsymbol{x},\alpha)^{\top}A\boldsymbol{g}(\boldsymbol{x},\alpha)+\boldsymbol{y}^{\top}\boldsymbol{g}(\boldsymbol{x},\alpha),
+\]
+
+\end_inset
+
+and the following dual program:
+\begin_inset Formula 
+\begin{equation}
+\max_{a>0,\boldsymbol{y}}\min_{\boldsymbol{x}\in X,\alpha}L_{Q}(\boldsymbol{x},\alpha,a,\boldsymbol{y}).\label{eq:8}
+\end{equation}
+
+\end_inset
+
+Then we have the following duality result:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Assume that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:6})
+\end_layout
+
+\end_inset
+
+ satisfies the quadratic growth condition and is stable of degree 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ Then program 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:6})
+\end_layout
+
+\end_inset
+
+ has an optimal solution 
+\begin_inset Formula $(\boldsymbol{x},\alpha)$
+\end_inset
+
+ if and only if its dual 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:8})
+\end_layout
+
+\end_inset
+
+ has an optimal solution 
+\begin_inset Formula $(a,\boldsymbol{y})$
+\end_inset
+
+, and in this case the objective values of both programs are equal.
+ Furthermore, 
+\begin_inset Formula $L_{Q}(\boldsymbol{x},\alpha,a,\boldsymbol{y})$
+\end_inset
+
+ has a saddle point in the primal variables 
+\begin_inset Formula $(\boldsymbol{x},\alpha)$
+\end_inset
+
+ and the dual variables 
+\begin_inset Formula $(a,\boldsymbol{y})$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ The proposition above implies that an optimal solution 
+\begin_inset Formula $(\boldsymbol{x},\alpha)$
+\end_inset
+
+ can be found as an optimal solution of the inner problem of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:8})
+\end_layout
+
+\end_inset
+
+ keeping the dual solution 
+\begin_inset Formula $(a,\boldsymbol{y})$
+\end_inset
+
+ fixed at the optimal values.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Assume that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:6})
+\end_layout
+
+\end_inset
+
+ satisfies the quadratic growth condition and is stable of degree 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $(\overline{\boldsymbol{x}},\overline{\alpha})$
+\end_inset
+
+ is an optimal solution of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:6})
+\end_layout
+
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\overline{\boldsymbol{x}}$
+\end_inset
+
+ is an optimal solution of the following quadratic program:
+\begin_inset Formula 
+\begin{align}
+\text{maximize} & \quad\boldsymbol{f}(\boldsymbol{x})^{\top}Q\boldsymbol{f}(\boldsymbol{x})+\boldsymbol{p}^{\top}\boldsymbol{f}(\boldsymbol{x})\nonumber \\
+\text{subject to} & \quad\boldsymbol{x}\in X\label{eq:9}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $Q$
+\end_inset
+
+ is a symmetric 
+\begin_inset Formula $m\times m$
+\end_inset
+
+ matrix and where 
+\begin_inset Formula $\boldsymbol{p}\in\mathbb{R}^{m}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ We give a sketch of the proof.
+ Let 
+\begin_inset Formula $(\overline{a},\overline{\boldsymbol{y}})$
+\end_inset
+
+ denote an optimal solution of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:8})
+\end_layout
+
+\end_inset
+
+.
+ The idea is to show that 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ can be eliminated from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:8})
+\end_layout
+
+\end_inset
+
+ and that we can obtain an optimal solution of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:6})
+\end_layout
+
+\end_inset
+
+ by solving 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:9})
+\end_layout
+
+\end_inset
+
+.
+ The matrix 
+\begin_inset Formula $Q$
+\end_inset
+
+ and the vector 
+\begin_inset Formula $\boldsymbol{p}$
+\end_inset
+
+ are derived from 
+\begin_inset Formula $(\overline{a},\overline{\boldsymbol{y}})$
+\end_inset
+
+ as follows: let 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ be the 
+\begin_inset Formula $m\times m$
+\end_inset
+
+ symmetric matrix whose 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+-entry is given by 
+\begin_inset Formula $(\overline{a}/m)\lambda_{i}\lambda_{j}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\overline{\Lambda}$
+\end_inset
+
+ be the 
+\begin_inset Formula $m\times m$
+\end_inset
+
+ diagonal matrix whose 
+\begin_inset Formula $i$
+\end_inset
+
+th diagonal entry is 
+\begin_inset Formula $\overline{a}\lambda_{i}^{2}$
+\end_inset
+
+.
+ Also let 
+\begin_inset Formula $\boldsymbol{\tau}$
+\end_inset
+
+ be the vector in 
+\begin_inset Formula $\mathbb{R}^{m}$
+\end_inset
+
+ whose 
+\begin_inset Formula $i$
+\end_inset
+
+th component is 
+\begin_inset Formula $\tau_{i}=(2\overline{a}\lambda_{i}z_{i}^{*}+\overline{y}_{i})\lambda_{i}$
+\end_inset
+
+.
+ We set
+\begin_inset Formula 
+\[
+Q=\Lambda-\overline{\Lambda}\quad\text{and}\quad\boldsymbol{p}=\boldsymbol{\tau}-2\Lambda^{\top}\boldsymbol{z}^{*}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Example
+\end_layout
+
+\begin_layout Standard
+We now consider the bicriteria case.
+ Thus
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{f} & =(f_{1},f_{2})^{\top}\\
+Q & =\frac{1}{2}\overline{a}\begin{pmatrix}-\lambda_{1}^{2} & \lambda_{1}\lambda_{2}\\
+\lambda_{1}\lambda_{2} & -\lambda_{2}^{2}
+\end{pmatrix}\\
+\boldsymbol{p} & =(\overline{a}\lambda_{1}^{2}z_{1}^{*}-\overline{a}\lambda_{1}\lambda_{2}z_{2}^{*}+\lambda_{1}\overline{y}_{1},\overline{a}\lambda_{2}^{2}z_{2}^{*}-\overline{a}\lambda_{1}\lambda_{2}z_{1}^{*}+\lambda_{2}\overline{y}_{2})^{\top}\\
+q(\boldsymbol{f}) & =\boldsymbol{f}^{\top}Q\boldsymbol{f}+\boldsymbol{p}^{\top}\boldsymbol{f}.
+\end{align*}
+
+\end_inset
+
+The ideal point and the 
+\begin_inset Formula 
+\begin{align*}
+\end{align*}
+
+\end_inset
+
+Let 
+\begin_inset Formula $q(\boldsymbol{f})=\boldsymbol{f}^{\top}Q\boldsymbol{f}+$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Conclusion
+\end_layout
+
+\begin_layout Section*
+References
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "JTMW99"
+key "JTMW99"
+literal "false"
+
+\end_inset
+
+ JØRGEN TIND1 and MARGARET M.
+ WIECEK.
+ “Augmented Lagrangian and Tchebycheff Approaches in Multiple Objective
+ Programming”.
+ In: Journal of Global Optimization 14: 251–266, 1999
+\end_layout
+
+\end_body
+\end_document
