@@ -1,0 +1,2482 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Methodology
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+In this project, we use the weighted-sum and epsilon-constraint methods
+ to solve four biobjective optimization problems.
+\end_layout
+
+\begin_layout Section
+Non-convex BOP with non-connected Pareto set
+\end_layout
+
+\begin_layout Standard
+For this problem, let
+\begin_inset Formula 
+\begin{align*}
+f_{1}(\boldsymbol{x}) & =x_{1}\\
+f_{2}(\boldsymbol{x}) & =x_{2}\\
+c_{1}(\boldsymbol{x}) & =1+0.1\cos\left(16\arctan\frac{x_{1}}{x_{2}}\right)-x_{1}^{2}-x_{2}^{2}\\
+c_{2}(\boldsymbol{x}) & =(x_{1}-0.5)^{2}+(x_{2}-0.5)^{2}-0.5\\
+X & =\{\boldsymbol{x}\in[0,\pi]^{2}\subseteq\mathbb{R}^{2}\mid\boldsymbol{c}(\boldsymbol{x})\leqq\boldsymbol{0}\}.
+\end{align*}
+
+\end_inset
+
+We consider the following BOP:
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad[f_{1}(x),f_{2}(x)]\label{eq:BOP1-1-2}\\
+\text{subject to} & \quad\boldsymbol{x}\in X.\nonumber 
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This problem is considered as a test problem in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DPM02"
+literal "false"
+
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $x_{1}=f_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}=f_{2}$
+\end_inset
+
+, the feasible and objective space coincide and is shown in the figure below:
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename BOP3.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In particular, the feasible set 
+\begin_inset Formula $X$
+\end_inset
+
+ is not convex set and the Pareto front 
+\begin_inset Formula $Y_{N}$
+\end_inset
+
+ is disconnected, so this is a non-convex non-connected Pareto set BOP.
+ 
+\end_layout
+
+\begin_layout Subsection
+Weighted-Sum Method
+\end_layout
+
+\begin_layout Standard
+We first solve 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:BOP1-1-2})
+\end_layout
+
+\end_inset
+
+ using the weighted-sum method.
+ In other words, we solve the single objective problem
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad F_{w}(\boldsymbol{x})\label{eq:BOP1-2-1}\\
+\text{subject to} & \quad\boldsymbol{x}\in X\nonumber \\
+ & \quad0\leq w\leq1\nonumber 
+\end{align}
+
+\end_inset
+
+where we set
+\begin_inset Formula 
+\[
+F_{w}(\boldsymbol{x})=wf_{1}(\boldsymbol{x})+(1-w)f_{2}(\boldsymbol{x})
+\]
+
+\end_inset
+
+We will find optimals solutions to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:BOP1-2-1})
+\end_layout
+
+\end_inset
+
+ using the MATLAB function 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+x = fmincon(fun,x0,lb,ub,nonlcon)
+\end_layout
+
+\end_inset
+
+ where the programming solver assumes that the programming has the form
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad F_{w}(\boldsymbol{x})\\
+\text{subject to} & \quad\boldsymbol{c}(\boldsymbol{x})\leqq\boldsymbol{0}\\
+ & \quad\boldsymbol{lb}\leqq\boldsymbol{x}\leqq\boldsymbol{ub}.
+\end{align*}
+
+\end_inset
+
+The function starts at an initial guess 
+\begin_inset Formula $\boldsymbol{x}^{0}$
+\end_inset
+
+ and attempts to find a 
+\emph on
+local
+\emph default
+ optimal solution 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+.
+ Further analysis will be needed in order to determine whether or not 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is 
+\emph on
+global 
+\emph default
+optimal solution.
+ Let us begin by using 
+\begin_inset Formula $\boldsymbol{x}^{0}=(0.8,0.8)^{\top}$
+\end_inset
+
+ to be our initial guess.
+ After setting up the correct MATLAB code (which is given in the Appendix),
+ MATLAB gives us the following table:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename table1.jpg
+	lyxscale 80
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let us explain what this table is telling us since we will be using the
+ same format throughout the rest of the paper.
+ We are using the weights 
+\begin_inset Formula $w=0,0.1,0.2,\dots,1$
+\end_inset
+
+ which is given in the first column in the table above.
+ Consider the row corresponding to the weight 
+\begin_inset Formula $w=0.5$
+\end_inset
+
+.
+ The (approximate) local optimal solution that we found corresponding to
+ the weight 
+\begin_inset Formula $w=0.5$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\widehat{\boldsymbol{x}}=(0.74162,0.74162)^{\top}$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+-value of 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is 
+\begin_inset Formula $f_{1}(\widehat{\boldsymbol{x}})=0.74162$
+\end_inset
+
+ and the 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+-value of 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is 
+\begin_inset Formula $f_{2}(\widehat{\boldsymbol{x}})=0.74162$
+\end_inset
+
+.
+ Finally, the exit flag value is equal to 
+\begin_inset Formula $1$
+\end_inset
+
+, which tells us that 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is a very good approximate to the local optimal solution.
+ In general, positive exit flags correspond to successful outcomes, negative
+ exit flags correspond to unsuccessful outcomes, and zero exit flag corresponds
+ to the solver being halted by exceeding an iteration limit or limit on
+ the number of function evaluations.
+ This explains everything about the row corresponding to 
+\begin_inset Formula $w=0.5$
+\end_inset
+
+.
+ The other rows in the table have similar interpretations as well.
+ We now plot the objective values corresponding to the local optimal solutions
+ that we found above:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename plot1.jpg
+	lyxscale 80
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In order to determine which of these points are guaranteed to be Pareto
+ points, we will appeal to Proposition 3.9 on page 71 in the course text
+ book which we will recall here (keeping the notation as given in the book):
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop1}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is a (global) optimal solution of the weighted sum optimization problem
+\begin_inset Formula 
+\begin{equation}
+\min_{\boldsymbol{x}\in X}\sum_{k=1}^{p}w_{k}f_{k}(\boldsymbol{x})\label{eq:prop1}
+\end{equation}
+
+\end_inset
+
+with 
+\begin_inset Formula $\boldsymbol{w}\in\mathbb{R}_{\geq}^{p}$
+\end_inset
+
+.
+ Then the following statement hold:
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\boldsymbol{w}\in\mathbb{R}_{\geq}^{p}$
+\end_inset
+
+, then 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is weakly efficient;
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\boldsymbol{w}\in\mathbb{R}_{>}^{p}$
+\end_inset
+
+ and 
+\begin_inset Formula $Y:=\boldsymbol{f}(X)$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathbb{R}_{\geqq}^{p}$
+\end_inset
+
+-convex, then 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is efficient (so 
+\begin_inset Formula $\widehat{\boldsymbol{y}}=\boldsymbol{f}(\widehat{\boldsymbol{x}})$
+\end_inset
+
+ is a Pareto point or a non-dominated point);
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\boldsymbol{w}\in\mathbb{R}_{\geq}^{p}$
+\end_inset
+
+, 
+\begin_inset Formula $Y$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathbb{R}_{\geqq}^{p}$
+\end_inset
+
+-convex, and 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is the 
+\emph on
+unique 
+\emph default
+optimal solution of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:prop1})
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is strictly efficient.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Recall that this proposition only applies to 
+\emph on
+global 
+\emph default
+optimal solutions, and the MATLAB function that we used only calculates
+ local optimal solutions.
+ In fact, it's easy to check that if 
+\begin_inset Formula $0\leq w<1/2$
+\end_inset
+
+ then there's a unique global optimal solution (approximately) at 
+\begin_inset Formula $\boldsymbol{a}:=(1.0384,0.041665)^{\top}$
+\end_inset
+
+, if 
+\begin_inset Formula $w=1/2$
+\end_inset
+
+ then there are two global optimal solutions (approximately) at 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{b}:=(0.041665,1.0384)^{\top}$
+\end_inset
+
+, and finally if 
+\begin_inset Formula $1/2<w\leq1$
+\end_inset
+
+, then there's a unique global optimal solution (approximately) at 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+.
+ In any case, 
+\begin_inset Formula $Y$
+\end_inset
+
+ is not 
+\begin_inset Formula $\mathbb{R}_{\geqq}^{p}$
+\end_inset
+
+-convex, and so at the moment, we can only deduce that these global optimal
+ solutions are merely weakly efficient (we shall see that they are indeed
+ efficient using the epsilon-constraint method).
+\end_layout
+
+\begin_layout Subsection
+Epsilon-Constraint Method
+\end_layout
+
+\begin_layout Standard
+Next we solve 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:BOP1-1-2})
+\end_layout
+
+\end_inset
+
+ using the epsilon-constraint method.
+ First let us recall Proposition 4.3, Proposition 4.4, and Theorem 4.5 on pages
+ 99-100 in the course text book which we summarize in the proposition below
+ (keeping the notation the same as given in the book):
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop2}
+\end_layout
+
+\end_inset
+
+ For each 
+\begin_inset Formula $j=1,\dots,p$
+\end_inset
+
+, we consider the 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+-constraint problem:
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad f_{j}(\boldsymbol{x})\nonumber \\
+\text{subject to} & \quad\boldsymbol{x}\in X\label{eq:e11-1}\\
+ & \quad f_{k}(\boldsymbol{x})\leq\varepsilon_{k}\quad k=1,\dots,p\quad k\neq j\nonumber 
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\boldsymbol{\varepsilon}\in\mathbb{R}^{p}$
+\end_inset
+
+.
+ The following statements hold:
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is an optimal solution of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:e11-1})
+\end_layout
+
+\end_inset
+
+ for some 
+\begin_inset Formula $j$
+\end_inset
+
+, then 
+\series bold
+
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ 
+\series default
+is weakly efficient;
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is the unique optimal solution to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:e11-1})
+\end_layout
+
+\end_inset
+
+ for some 
+\begin_inset Formula $j$
+\end_inset
+
+, then 
+\series bold
+
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ 
+\series default
+is strictly efficient (and hence 
+\series bold
+
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ 
+\series default
+is efficient);
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is efficient if and only if there exists an 
+\begin_inset Formula $\widehat{\boldsymbol{\varepsilon}}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ is an optimal solution of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:e11-1})
+\end_layout
+
+\end_inset
+
+ for all 
+\begin_inset Formula $j$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case, we only need to consider the following epsilon-constraint
+ problem
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad f_{1}(\boldsymbol{x})\nonumber \\
+\text{subject to} & \quad\boldsymbol{x}\in X\label{eq:e1}\\
+ & \quad f_{2}(\boldsymbol{x})-\varepsilon\leq0\nonumber 
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $0.1\leq\varepsilon\leq1$
+\end_inset
+
+.
+ Indeed, it is straightforward to check that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:e1})
+\end_layout
+
+\end_inset
+
+ will have a unique optimal solution for each such 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ and so we can apply part 2 of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop2})
+\end_layout
+
+\end_inset
+
+.
+ Furthermore, this unique optimal solution will be the only 
+\emph on
+local 
+\emph default
+optimal solution, so we can use the MATLAB function fmincon to obtain the
+ optimal solutions to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:e1})
+\end_layout
+
+\end_inset
+
+ for each such 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+.
+ MATLAB produces the following table and plot for this method:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename table2.jpg
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset Graphics
+	filename plot2.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We found much more success using the epsilon-constraint method over the
+ weighted-sum method for this problem thanks to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop2})
+\end_layout
+
+\end_inset
+
+ which tells us that these points are indeed efficient.
+\end_layout
+
+\begin_layout Section
+Non-convex BOP with connected Pareto set
+\end_layout
+
+\begin_layout Standard
+For this problem, let
+\begin_inset Formula 
+\begin{align*}
+f_{1}(\boldsymbol{x}) & =2+(x_{1}-2)^{2}+(x_{2}-1)^{2}\\
+f_{2}(\boldsymbol{x}) & =9x_{1}-(x_{2}-1)^{2}\\
+c_{1}(\boldsymbol{x}) & =x_{1}^{2}+x_{2}^{2}-225\\
+c_{2}(\boldsymbol{x}) & =x_{1}-3x_{2}+10\\
+X & =\{\boldsymbol{x}\in[-20,20]^{2}\subseteq\mathbb{R}^{2}\mid\boldsymbol{c}(\boldsymbol{x})\leqq0\}.
+\end{align*}
+
+\end_inset
+
+we consider the following BOP:
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad[f_{1}(x),f_{2}(x)]\label{eq:BOP1-1-2-1}\\
+\text{subject to} & \quad\boldsymbol{x}\in X.\nonumber 
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This problem is considered as a test problem in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DPM02-1"
+literal "false"
+
+\end_inset
+
+.
+ The feasible set 
+\begin_inset Formula $X$
+\end_inset
+
+ as well as the objective outcome set 
+\begin_inset Formula $Y=\boldsymbol{f}(X)$
+\end_inset
+
+ is illustrated below: 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename BOP2.jpg
+	lyxscale 60
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that the Pareto front 
+\begin_inset Formula $Y_{N}$
+\end_inset
+
+ is connected.
+ Also note that the Hessian of 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ is 
+\begin_inset Formula $\left(\begin{smallmatrix}2 & 0\\
+0 & 2
+\end{smallmatrix}\right)$
+\end_inset
+
+ and the Hessian of 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ is 
+\begin_inset Formula $\left(\begin{smallmatrix}0 & 0\\
+0 & -2
+\end{smallmatrix}\right)$
+\end_inset
+
+ .
+ In particular, 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ is strictly convex, however 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ is not convex (it is concave instead).
+ Thus this is a non-convex BOP whose Pareto front is connected.
+\end_layout
+
+\begin_layout Subsection
+Weighted-Sum Method
+\end_layout
+
+\begin_layout Standard
+We first solve 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:BOP1-1-2-1})
+\end_layout
+
+\end_inset
+
+ using the weighted-sum method.
+ In other words, we solve the single objective problem
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad F_{w}(\boldsymbol{x})\label{eq:BOP1-2-1-2}\\
+\text{subject to} & \quad\boldsymbol{x}\in X\nonumber \\
+ & \quad0\leq w\leq1\nonumber 
+\end{align}
+
+\end_inset
+
+where we set
+\begin_inset Formula 
+\[
+F_{w}(\boldsymbol{x})=wf_{1}(\boldsymbol{x})+(1-w)f_{2}(\boldsymbol{x}).
+\]
+
+\end_inset
+
+Just like in the previous problem, we will find local optimal solutions
+ to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:BOP1-2-1-2})
+\end_layout
+
+\end_inset
+
+ (corresponding to each 
+\begin_inset Formula $w$
+\end_inset
+
+) using the MATLAB function 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fmincon
+\end_layout
+
+\end_inset
+
+ (all of our MATLAB can be found in the Appendix).
+ MATLAB produces the following table and plot:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename table3.jpg
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset Graphics
+	filename plot3.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note however that all we can say is that these give weakly efficient solutions
+ (with the exception of the point corresponding to weight 
+\begin_inset Formula $w=0.5$
+\end_inset
+
+).
+ Indeed, 
+\begin_inset Formula $Y$
+\end_inset
+
+ is not 
+\begin_inset Formula $\mathbb{R}_{\geqq}^{2}$
+\end_inset
+
+-convex, and so we cannot apply the full strength of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop1})
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Epsilon-Constraint Method
+\end_layout
+
+\begin_layout Standard
+Next we solve 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:BOP1-1-2-1})
+\end_layout
+
+\end_inset
+
+ using the epsilon-constraint method.
+ In this case, we only need to consider the following epsilon-constraint
+ problem
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad f_{2}(\boldsymbol{x})\nonumber \\
+\text{subject to} & \quad\boldsymbol{x}\in X\label{eq:e1-1}\\
+ & \quad f_{1}(\boldsymbol{x})-\varepsilon\leq0\nonumber 
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $-400\leq\varepsilon\leq-100$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ is convex in the new feasible region remains convex, so this just becomes
+ a convex problem.
+ Furthermore one can show that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:e1-1})
+\end_layout
+
+\end_inset
+
+ has a unique (local and global) optimal solution in this case, and so we
+ can apply part 2 of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop2})
+\end_layout
+
+\end_inset
+
+.
+ MATLAB produces the following table and plot:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename table4.jpg
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset Graphics
+	filename plot4.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The epsilon-constraint method prevails over the the weighted-sum method
+ yet again!
+\end_layout
+
+\begin_layout Section
+Convex BOP with connected Pareto set
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f_{1}(x)=x^{2}$
+\end_inset
+
+, let 
+\begin_inset Formula $f_{2}(x)=(x-2)^{2}$
+\end_inset
+
+, and let 
+\begin_inset Formula $X=[-5,5]$
+\end_inset
+
+.
+ We consider the following BOP:
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad[f_{1}(x),f_{2}(x)]\label{eq:BOP1-2-1-2-1}\\
+\text{subject to} & \quad x\in X.\nonumber 
+\end{align}
+
+\end_inset
+
+This problem is considered as a test problem in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HHBW"
+literal "false"
+
+\end_inset
+
+.
+ In the image below, we draw the graphs of 
+\begin_inset Formula $f_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+, and we also draw the efficient set 
+\begin_inset Formula $X_{E}=[0,2]$
+\end_inset
+
+ (shaded in red):
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $x $,  
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-5,xmax=6,ymin=-1,ymax=7,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick={-4,-2,2,4},ytick={2,4}]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=black,thick,samples=100,domain=-10:10] ({x},{ x^2 });
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=black,thick,samples=100,domain=-10:10] ({x},{ (x-2)^2 });
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100,domain=0:2] ({x},{0});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Next we draw the outcome set 
+\begin_inset Formula $Y=\boldsymbol{f}(X)$
+\end_inset
+
+ together with the Pareto front 
+\begin_inset Formula $Y_{N}$
+\end_inset
+
+ (shaded in red):
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $ y_1 $,  
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $
+\backslash
+quad y_2 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-5,xmax=6,ymin=-1,ymax=7,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick={-4,-2,2,4},ytick={2,4}]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=black,thick,samples=100,domain=-5:5] ({x^2 },{ (x-2)^2 });
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100,domain=0:2] ({x^2 },{ (x-2)^2 });
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+Weighted-Sum Method
+\end_layout
+
+\begin_layout Standard
+We first solve 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:BOP1-2-1-2-1})
+\end_layout
+
+\end_inset
+
+ using the weighted-sum method.
+ In other words, we solve the single objective problem
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad F_{w}(x)\label{eq:BOP1-2-1-3}\\
+\text{subject to} & \quad x\in X\nonumber 
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $0\leq w\leq1$
+\end_inset
+
+ and where
+\begin_inset Formula 
+\[
+F_{w}(x)=wf_{1}(x)+(1-w)f_{2}(x)
+\]
+
+\end_inset
+
+We can easily solve this BOP by hand.
+ Indeed, note that
+\begin_inset Formula 
+\[
+F_{w}'(x)=2(2w+x-2).
+\]
+
+\end_inset
+
+In particular, 
+\begin_inset Formula $F_{w}$
+\end_inset
+
+ has exactly one critical point: 
+\begin_inset Formula $c_{w}=2(1-w)$
+\end_inset
+
+.
+ Furthermore observe that 
+\begin_inset Formula $F_{w}''(x)=2$
+\end_inset
+
+.
+ In particular, the graph of 
+\begin_inset Formula $F_{w}$
+\end_inset
+
+ is a parabola whose global minimum occurs at the critical point 
+\begin_inset Formula $c_{w}=2(1-w)$
+\end_inset
+
+.
+ The value of 
+\begin_inset Formula $F_{w}$
+\end_inset
+
+ at that critical point is given by
+\begin_inset Formula 
+\[
+y_{w}:=F_{w}(c_{w})=4w(1-w).
+\]
+
+\end_inset
+
+Thus we have found all optimal solutions to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:BOP1-2-1-3})
+\end_layout
+
+\end_inset
+
+.
+ We can verify our work using MATLAB which gives us the following table
+ and plot:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename table5.jpg
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset Graphics
+	filename plot5.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Epsilon-constraint Method
+\end_layout
+
+\begin_layout Standard
+Next we solve 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:BOP1-2-1-3})
+\end_layout
+
+\end_inset
+
+ using the epsilon-constraint method.
+ In this case, we only need to consider the following epsilon-constraint
+ problem
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad f_{1}(x)\nonumber \\
+\text{subject to} & \quad x\in X\label{eq:e1-1-1}\\
+ & \quad f_{2}(x)-\varepsilon\leq0\nonumber 
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $0\leq\varepsilon\leq4$
+\end_inset
+
+ by the exact same argument as in the previous two cases.
+ .
+ Then 
+\begin_inset Formula $f_{2}$
+\end_inset
+
+ is convex in the new feasible region remains convex, so this just becomes
+ a convex problem.
+ Furthermore one can show that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:1-1-1})
+\end_layout
+
+\end_inset
+
+ has a unique (local and global) optimal solution in this case, and so we
+ can apply part 2 of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{prop2})
+\end_layout
+
+\end_inset
+
+.
+ MATLAB produces the following table and plot:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename table6.jpg
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset Graphics
+	filename plot6.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+My BOP
+\end_layout
+
+\begin_layout Standard
+For this problem, we want to create our own BOP which can be used for testing
+ purposes.
+ Let 
+\begin_inset Formula $f_{1}=f_{1}(\boldsymbol{x})$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=f_{2}(\boldsymbol{x})$
+\end_inset
+
+ be functions on 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+ which are to be determined, and let
+\begin_inset Formula 
+\begin{align*}
+e_{1} & =f_{2}\\
+e_{2} & =f_{2}-f_{1}\\
+e_{3} & =f_{1}+f_{2}-2\\
+S & =(f_{1}-1)^{2}+(f_{2}-1/2)^{2}-1/4\\
+s & =(f_{1}-1)^{2}+(f_{2}-1/2)^{2}-1/16.
+\end{align*}
+
+\end_inset
+
+Consider the following BOP:
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad[f_{1}(\boldsymbol{x}),f_{2}(\boldsymbol{x})]\nonumber \\
+\text{subject to} & \quad e_{1}\geq0\nonumber \\
+ & \quad e_{2}\leq0\nonumber \\
+ & \quad e_{3}\leq0\label{eq:mybop}\\
+ & \quad S\leq0\nonumber \\
+ & \quad s\geq0\nonumber \\
+ & \quad0\leqq\boldsymbol{x}\leqq2\nonumber 
+\end{align}
+
+\end_inset
+
+Thus the feasible region for this BOP is just 
+\begin_inset Formula $X=[0,2]^{2}$
+\end_inset
+
+.
+ We draw the outcome space 
+\begin_inset Formula $Y=\boldsymbol{f}(X)$
+\end_inset
+
+ below shaded in blue together with the Pareto front 
+\begin_inset Formula $Y_{N}$
+\end_inset
+
+ shaded in red:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $f_1 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $f_2 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-1,xmax=3,ymin=-1,ymax=2,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick={-1,1,2,3,4,5},ytick={-1,1,2,3,4,5}]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=black,thick] (axis cs:0,0) -- (axis cs:2,0) -- (axis cs:1,1)
+ -- (axis cs:0,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100,fill=blue,opacity=0.4] ({(0.5)*cos(deg(x))+1}
+,{(0.5)*sin(deg(x))+0.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=black,thick,samples=100] ({(0.5)*cos(deg(x))+1},{(0.5)*sin(deg(x))+
+0.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100,fill=white,opacity=1] ({(0.25)*cos(deg(x))+1
+},{(0.25)*sin(deg(x))+0.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=black,thick,samples=100] ({(0.25)*cos(deg(x))+1},{(0.25)*sin(deg(x)
+)+0.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100,domain=-pi/2:-pi] ({(0.5)*cos(deg(x))+1},{(0.
+5)*sin(deg(x))+0.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[fill=white!100] (axis cs:0,0) -- (axis cs:1,1) -- (axis cs:0,1) --
+ (axis cs:0,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[fill=white!100] (axis cs:1,1) -- (axis cs:2,1) -- (axis cs:2,0) --
+ (axis cs:1,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white,thick] (axis cs:0,1) -- (axis cs:2,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white,thick] (axis cs:2,1) -- (axis cs:2,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white,thick] (axis cs:0,1) -- (axis cs:2,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white,thick] (axis cs:2,1) -- (axis cs:2,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white,thick] (axis cs:0,1) -- (axis cs:2,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white,thick] (axis cs:2,1) -- (axis cs:2,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One reason why we think this BOP is interesting and could serve as a good
+ test problem is because of the freedom we have in choosing the outcome
+ set 
+\begin_inset Formula $Y$
+\end_inset
+
+ together with the Pareto front 
+\begin_inset Formula $Y_{N}$
+\end_inset
+
+.
+ For example, by changing 
+\begin_inset Formula $S\leq0$
+\end_inset
+
+ to 
+\begin_inset Formula $s\geq0$
+\end_inset
+
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:mybop})
+\end_layout
+
+\end_inset
+
+, then instead we get this for 
+\begin_inset Formula $Y$
+\end_inset
+
+ and 
+\begin_inset Formula $Y_{N}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $f_1 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $f_2 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-1,xmax=3,ymin=-1,ymax=2,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick={-1,1,2,3,4,5},ytick={-1,1,2,3,4,5}]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=black,thick,fill=blue!30] (axis cs:0,0) -- (axis cs:2,0) -- (axis
+ cs:1,1) -- (axis cs:0,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100,fill=white,opacity=1] ({(0.5)*cos(deg(x))+1}
+,{(0.5)*sin(deg(x))+0.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=black,thick,samples=100] ({(0.5)*cos(deg(x))+1},{(0.5)*sin(deg(x))+
+0.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[fill=white!100] (axis cs:0,0) -- (axis cs:1,1) -- (axis cs:0,1) --
+ (axis cs:0,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[fill=white!100] (axis cs:1,1) -- (axis cs:2,1) -- (axis cs:2,0) --
+ (axis cs:1,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white,thick] (axis cs:0,1) -- (axis cs:2,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white,thick] (axis cs:2,1) -- (axis cs:2,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white,thick] (axis cs:0,1) -- (axis cs:2,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white,thick] (axis cs:2,1) -- (axis cs:2,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white,thick] (axis cs:0,1) -- (axis cs:2,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=white,thick] (axis cs:2,1) -- (axis cs:2,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=black,thick] (axis cs:0,0) -- (axis cs:1,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=black,thick] (axis cs:1,1) -- (axis cs:2,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=red, inner sep=1pt, label=below left:$$] (x) at (axis
+ cs:0,0) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are many other choices we can make to get other interesting regions
+ like this.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Finally, let 
+\begin_inset Formula $f_{1}=x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{2}=x_{2}$
+\end_inset
+
+ and let's verify in MATLAB that the red segment which we drew above is
+ indeed the Pareto front for 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:mybop})
+\end_layout
+
+\end_inset
+
+.
+ First let's do this using the weighted-sum method:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename table7.jpg
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset Graphics
+	filename plot7.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Next let's do this using the epsilon-constraint method:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename table8.jpg
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset Graphics
+	filename plot8.jpg
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section*
+Concluding Remarks
+\end_layout
+
+\begin_layout Standard
+We end with some concluding remarks.
+ Even though we've found more success calculating Pareto fronts using the
+ epsilon-constraint method over the weighted-sum method, we note that BOP2
+ and BOP4 points to one advantage that the weighted-sum method has over
+ the epsilon-constraint: one can often choose the weighted vector 
+\begin_inset Formula $\boldsymbol{w}$
+\end_inset
+
+ to be uniformally distributed in 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+ (i.e.
+ the 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ partition 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+ into equal parts) in the weighted-sum method, however there is no obvious
+ way of choosing 
+\begin_inset Formula $\boldsymbol{\varepsilon}$
+\end_inset
+
+ like this in the epsilon-constraint method.
+ Indeed, one often has to work out what the right choice is for a particular
+ problem (for instance, choosing 
+\begin_inset Formula $\varepsilon\geq0$
+\end_inset
+
+ would not have worked in the epsilon-constraint method BOP2, we really
+ did need to pick 
+\begin_inset Formula $\varepsilon\leq-100$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Appendix 
+\end_layout
+
+\begin_layout Standard
+We coded a lot in this project, so instead of overfilling this Appendix
+ with tons of code, we decided to post all of our MATLAB code at our github
+ page where the reader can view or download the code for themselves via
+ this URL:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/mnelso32/Expository-Notes/tree/main/Mathematics/MATLAB
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "DPM02"
+key "DPM02"
+literal "false"
+
+\end_inset
+
+Kalyanmoy Deb, Amrit Pratap, and T.
+ Meyarivan.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Constrained Test Problems for Multi-Objective Evolutionary Optimization
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Page 4.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "DPM02-1"
+key "DPM02-1"
+literal "false"
+
+\end_inset
+
+Kalyanmoy Deb, Amrit Pratap, and T.
+ Meyarivan.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Constrained Test Problems for Multi-Objective Evolutionary Optimization
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Page 3.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "HHBW"
+key "HHBW"
+literal "false"
+
+\end_inset
+
+ Simon Huband, Philip Hingston, Luigi Barone, Lyndon While.
+ A Review of Multi-Objective Test Problems and a Scalable Test Problem Toolkit
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Page 491.
+\end_layout
+
+\end_body
+\end_document
