@@ -2406,179 +2406,21 @@ Appendix
 \end_layout
 
 \begin_layout Standard
-We will find an optimal solution to this MILP problem using MATLAB, which
- has a built-in function whose purpose is to solve MILP problems like this.
- The syntax for this function is 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-x = fmincon(fun,x0,Ain,bin,Aeq,beq,lb,ub,nonlcon)
-\end_layout
-
-\end_inset
-
-, where the MILP solver assumes that the MILP has the form:
-\begin_inset Formula 
-\begin{align*}
-\text{minimize} & \quad F(\boldsymbol{x})\\
-\text{subject to} & \quad c(\boldsymbol{x})\leq0\\
- & \quad c_{\mathrm{eq}}(\boldsymbol{x})=0\\
- & \quad A_{\mathrm{in}}\boldsymbol{x}\leq\boldsymbol{b}_{\mathrm{in}}\\
- & \quad A_{\mathrm{eq}}\boldsymbol{x}=\boldsymbol{b}_{eq}\\
- & \quad\boldsymbol{lb}\leq\boldsymbol{x}\leq\boldsymbol{ub}\\
- & \quad\boldsymbol{x}(\mathrm{intcon})\text{ are integers}
-\end{align*}
-
-\end_inset
-
-where 
-\begin_inset Formula $c(\boldsymbol{x})$
-\end_inset
-
- and 
-\begin_inset Formula $c_{\mathrm{eq}}(\boldsymbol{x})$
-\end_inset
-
- are functions that return vectors, where 
-\begin_inset Formula $\boldsymbol{b}_{\mathrm{in}}$
-\end_inset
-
-, 
-\begin_inset Formula $\boldsymbol{b}_{\mathrm{eq}}$
-\end_inset
-
-, 
-\begin_inset Formula $\boldsymbol{lb}$
-\end_inset
-
-, 
-\begin_inset Formula $\boldsymbol{ub}$
-\end_inset
-
- are vectors, where 
-\begin_inset Formula $A_{\mathrm{in}}$
-\end_inset
-
- and 
-\begin_inset Formula $A_{\mathrm{eq}}$
-\end_inset
-
- are matrices, and where 
-\begin_inset Formula $F(\boldsymbol{x})$
-\end_inset
-
- is a function that returns a scalar.
- 
+We coded a lot in this project, so instead of overfilling this Appendix
+ with tons of code, we decided all of our MATLAB code at our github page
+ where the reader can view or download the code for themselves via this
+ URL:
 \end_layout
 
 \begin_layout Standard
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="1" columns="1">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset listings
-inline false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-w = 0.5;
-\end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-function F = myfun(x)
-\end_layout
-
-\begin_layout Plain Layout
-
-f(1) = x(1);
-\end_layout
-
-\begin_layout Plain Layout
-
-f(2) = x(2);
-\end_layout
-
-\begin_layout Plain Layout
-
-F = w*f(1)+(1-w)*f(2);
-\end_layout
-
-\begin_layout Plain Layout
-
-end
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-function [c,ceq] = mycon(x) 
-\end_layout
-
-\begin_layout Plain Layout
-
-c(1) = 1+0.1*cos(16*arctan(x(1)/x(2)))-x(1)^2-x(2)^2; 
-\end_layout
-
-\begin_layout Plain Layout
-
-c(2) = (x(1)-0.5)^2 + (x(2)-0.5)^2 - 0.5; 
-\end_layout
-
-\begin_layout Plain Layout
-
-ceq = []; 
-\end_layout
-
-\begin_layout Plain Layout
-
-end
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-fun = @myfun;
-\end_layout
-
-\begin_layout Plain Layout
-
-nonlcon = @mycon;
-\end_layout
-
-\begin_layout Plain Layout
-
-x0 = [1,0.2];
-\end_layout
-
-\begin_layout Plain Layout
-
-lb = [0,0]; 
-\end_layout
-
-\begin_layout Plain Layout
-
-ub = [pi,pi];
+\backslash
+hfill
 \end_layout
 
 \end_inset
@@ -2586,10 +2428,14 @@ ub = [pi,pi];
 
 \end_layout
 
-\end_inset
-</cell>
-</row>
-</lyxtabular>
+\begin_layout Standard
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/mnelso32/Expository-Notes/tree/main/Mathematics/MATLAB
+\end_layout
 
 \end_inset
 
