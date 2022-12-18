@@ -1,0 +1,971 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section*
+Classifying MDG Algebras 
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $F=(F,\mathrm{d})$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-complex such that the underlying graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module of 
+\begin_inset Formula $F$
+\end_inset
+
+ is finite and free and such that 
+\begin_inset Formula $F_{0}=R$
+\end_inset
+
+, 
+\begin_inset Formula $F_{i}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i<0$
+\end_inset
+
+, and 
+\begin_inset Formula $F_{+}\neq0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\boldsymbol{e}=(e_{0},e_{1},\dots,e_{n})=(1,e_{1},\dots,e_{n})$
+\end_inset
+
+ be an ordered homogeneous basis of 
+\begin_inset Formula $F$
+\end_inset
+
+, where we set 
+\begin_inset Formula $e_{0}=1\in R$
+\end_inset
+
+, and where the ordering is chosen such that if 
+\begin_inset Formula $|e_{i}|\leq|e_{j}|$
+\end_inset
+
+ then 
+\begin_inset Formula $i\leq j$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\boldsymbol{d}=(d_{j}^{i})_{i,j}$
+\end_inset
+
+ be the matrix representation of the differential 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula $\mathrm{d}\boldsymbol{e}=\boldsymbol{e}\boldsymbol{d}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathrm{d}\boldsymbol{e}=(0,\mathrm{d}e_{1},\dots,\mathrm{d}e_{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{e}\boldsymbol{d}$
+\end_inset
+
+ is the product of the row vector 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ on the left with the matrix 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+ on the right.
+ Alternatively, we could express this in terms of the matrix entries of
+ 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+: for each 
+\begin_inset Formula $0\leq j\leq n$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\[
+\mathrm{d}e_{j}=\sum_{0\leq i\leq n}d_{j}^{i}e_{i}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now suppose 
+\begin_inset Formula $(\mu,\star)$
+\end_inset
+
+ is a multiplication on 
+\begin_inset Formula $F$
+\end_inset
+
+ denoted 
+\begin_inset Formula 
+\[
+a\otimes b\mapsto\mu(a\otimes b)\quad\text{or}\quad(a,b)\mapsto a\star b
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a,b\in F$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\boldsymbol{m}=(m_{i,j}^{k})$
+\end_inset
+
+ be the matrix representation of 
+\begin_inset Formula $\mu$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula $\mu(\boldsymbol{e}^{\top}\otimes\boldsymbol{e})=\boldsymbol{e}^{\top}\boldsymbol{m}\boldsymbol{e}$
+\end_inset
+
+.
+ Alternatively, we could express this in terms of the matrix entries of
+ 
+\begin_inset Formula $\boldsymbol{m}$
+\end_inset
+
+: for each 
+\begin_inset Formula $0\leq i,j\leq n$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\[
+\mu(e_{i}\otimes e_{j})=\sum_{0\leq k\leq n}m_{i,j}^{k}e_{k}.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is multiplication, it satisfies the following algebraic laws:
+\end_layout
+
+\begin_layout Enumerate
+(Graded Law) it respects the homological grading, meaning
+\begin_inset Formula 
+\[
+|a\star b|=|a|+|b|
+\]
+
+\end_inset
+
+for all homogeneous elements 
+\begin_inset Formula $a,b\in F$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+(Unital Law) it is unital, meaning
+\begin_inset Formula 
+\[
+1\star a=a=a\star1
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a\in F$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+(Graded-Commutative Law) it is graded-commutative meaning
+\begin_inset Formula 
+\[
+a\star b=(-1)^{|a|b|}b\star a\quad\text{and}\quad c^{2}=0
+\]
+
+\end_inset
+
+for all homogeneous 
+\begin_inset Formula $a,b\in F$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+(Leibniz Law) it is a chain map, meaning 
+\begin_inset Formula $\mu\mathrm{d}=\mathrm{d}\mu$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+These algebraic laws can be expressed in terms of equations which the entries
+ of the matrix represenation 
+\begin_inset Formula $\boldsymbol{m}$
+\end_inset
+
+.
+ For instance, the graded-commutative law tells us that
+\begin_inset Formula 
+\[
+m_{i,j}^{k}=(-1)^{|e_{i}||e_{j}|}m_{j,i}^{k}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $0\leq i,j,k\leq n$
+\end_inset
+
+.
+ Now consider the polynomial ring
+\begin_inset Formula 
+\[
+R[\boldsymbol{M}]=R[\{M_{i,j}^{k}\mid0\leq i,j,k\leq n\}]
+\]
+
+\end_inset
+
+where the 
+\begin_inset Formula $M_{i,j}^{k}$
+\end_inset
+
+ are thought of as coordinate functions (i.e.
+ 
+\begin_inset Formula $M_{i,j}^{k}(\boldsymbol{m})=m_{i,j}^{k}$
+\end_inset
+
+).
+ Let 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{m}}\colon R[\boldsymbol{M}]\to R$
+\end_inset
+
+ be the evaluation by 
+\begin_inset Formula $\boldsymbol{m}$
+\end_inset
+
+ map defined by 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{m}}(\boldsymbol{M})=\boldsymbol{m}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $0\leq i,j,k\leq n$
+\end_inset
+
+ we define linear polynomials 
+\begin_inset Formula $\Gamma_{i,j}^{k}\in R[\boldsymbol{M}]$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\Gamma_{i,j}^{k}:=M_{i,j}^{k}-(-1)^{|e_{i}||e_{j}|}M_{j,i}^{k}.
+\]
+
+\end_inset
+
+Then we see that the evaluation map 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{m}}\colon R[\boldsymbol{M}]\twoheadrightarrow R$
+\end_inset
+
+ factors through a unique 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $\overline{\mathrm{e}}_{\boldsymbol{m}}\colon R[\boldsymbol{M}]\slash\langle\boldsymbol{\Gamma}\rangle\twoheadrightarrow R$
+\end_inset
+
+ where we set 
+\begin_inset Formula $\boldsymbol{\Delta}=(\Delta_{j}^{i})$
+\end_inset
+
+.
+ More generally, for each 
+\begin_inset Formula $0\leq i,j\leq n$
+\end_inset
+
+, consider the following polynomials introduced in the table below:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Algebraic Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Polynomial
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Condition
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Grading Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $G_{i,j}^{k}:=M_{i,j}^{k}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+for all 
+\begin_inset Formula $|e_{k}|\neq|e_{i}|+|e_{j}|$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Unital Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $U_{i}^{k}:=M_{i,0}^{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{i}^{i}:=M_{i,0}^{i}-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+for all 
+\begin_inset Formula $k\neq i$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Graded-Commutative Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Gamma_{i,j}^{k}:=M_{i,j}^{k}-(-1)^{|e_{i}||e_{j}|}M_{j,i}^{k}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+for all 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Leibniz Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Lambda_{i,j}^{k}:=\sum\limits _{\varepsilon}(M_{i,j}^{\varepsilon}d_{\varepsilon}^{k}-d_{i}^{\varepsilon}M_{\varepsilon,j}^{k}-(-1)^{|e_{i}||e_{j}|}d_{j}^{\varepsilon}M_{i,\varepsilon}^{k})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+for all 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Furthermore, set 
+\begin_inset Formula $A=R[\boldsymbol{M}]\slash\langle\boldsymbol{G},\boldsymbol{U},\boldsymbol{\Gamma},\boldsymbol{\Lambda}\rangle$
+\end_inset
+
+.
+ Then we see that the evaluation map 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{m}}\colon R[\boldsymbol{M}]\twoheadrightarrow R$
+\end_inset
+
+ factors through a unique 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $\overline{\mathrm{e}}_{\boldsymbol{m}}\colon A\twoheadrightarrow R$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Conversely, suppose 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{r}}\colon R[\boldsymbol{D}]\twoheadrightarrow R$
+\end_inset
+
+ is the evalutation by 
+\begin_inset Formula $\boldsymbol{r}=(r_{i,j}^{k})$
+\end_inset
+
+ map where the 
+\begin_inset Formula $r_{i,j}^{k}$
+\end_inset
+
+ are arbitrary elements in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ We define a multiplication 
+\begin_inset Formula $\mu_{\boldsymbol{r}}$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ by 
+\begin_inset Formula $\mu_{\boldsymbol{r}}(\boldsymbol{e}^{\top}\otimes\boldsymbol{e}):=\boldsymbol{e}^{\top}\boldsymbol{r}\boldsymbol{e}$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{r}}$
+\end_inset
+
+ factors uniquely through an 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homorphism 
+\begin_inset Formula $\overline{\mathrm{e}}_{\boldsymbol{r}}\colon A\to R$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\mu_{\boldsymbol{r}}$
+\end_inset
+
+ is a multiplication on 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ Thus we have a bijection of sets:
+\begin_inset Formula 
+\[
+\mathrm{Mult}(F)\cong\mathrm{Hom}_{\Bbbk\text{-alg}}(A,R)
+\]
+
+\end_inset
+
+given by 
+\begin_inset Formula $\mu\mapsto\mathrm{e}_{\boldsymbol{m}}$
+\end_inset
+
+.
+ Now suppose that 
+\begin_inset Formula $\boldsymbol{e}'=(1,e_{1}',\dots,e_{n}')$
+\end_inset
+
+ is another ordered homogeneous basis of 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ Thus there is a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-linear isomorphism 
+\begin_inset Formula $\varphi\colon F\to F$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi\boldsymbol{e}=\boldsymbol{e}'$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\widetilde{\boldsymbol{\phi}}=\left(\begin{smallmatrix}1 & 0\\
+0 & \boldsymbol{\phi}
+\end{smallmatrix}\right)$
+\end_inset
+
+ be the matrix representation of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ where 
+\begin_inset Formula $\boldsymbol{\phi}\in\mathrm{GL}_{n}(R)$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula $\varphi\boldsymbol{e}=\boldsymbol{e}'=\boldsymbol{e}\widetilde{\boldsymbol{\phi}}$
+\end_inset
+
+.
+ Then the matrix representation of 
+\begin_inset Formula $\mu$
+\end_inset
+
+ in the 
+\begin_inset Formula $\boldsymbol{e}'$
+\end_inset
+
+ coordinates is given by 
+\begin_inset Formula $\boldsymbol{m}'=\widetilde{\boldsymbol{\phi}}^{-1}\boldsymbol{m}\boldsymbol{\phi}$
+\end_inset
+
+.
+ Thus we see that 
+\begin_inset Formula $\mathrm{GL}_{n}(R)$
+\end_inset
+
+ acts on 
+\begin_inset Formula $\mathrm{Hom}_{\Bbbk\text{-alg}}(A,R)$
+\end_inset
+
+ by conjugation 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{m}}\mapsto\mathrm{e}_{\widetilde{\boldsymbol{\phi}}^{-1}\boldsymbol{m}\boldsymbol{\phi}}$
+\end_inset
+
+.
+ On the other hand, if we define 
+\begin_inset Formula $\mu':=\varphi^{-1}\mu\varphi^{\otimes2}$
+\end_inset
+
+, then we see that 
+\begin_inset Formula $\mu'$
+\end_inset
+
+ is the multiplication on 
+\begin_inset Formula $F$
+\end_inset
+
+ whose matrix representation with respect to our original ordered basis
+ 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ is 
+\begin_inset Formula $\boldsymbol{m}'$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{m}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{m}'}$
+\end_inset
+
+ belong to the same 
+\begin_inset Formula $\mathrm{GL}_{n}(R)$
+\end_inset
+
+-orbit in 
+\begin_inset Formula $\mathrm{Hom}_{\Bbbk\text{-alg}}(A,R)$
+\end_inset
+
+ if and only if the corresponding multiplicaitons 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu'$
+\end_inset
+
+ give isomorphic MDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra structures on 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ We have the following bijection of sets:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left\{ \text{Isomorphism classes of MDG Algebras on }F\right\} \longleftrightarrow\left\{ \mathrm{GL}_{n}(R)\text{-orbits of }\mathrm{Hom}_{\Bbbk\text{-alg}}(A,R)\right\} 
+\]
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
