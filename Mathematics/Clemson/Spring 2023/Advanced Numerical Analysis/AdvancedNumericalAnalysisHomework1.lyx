@@ -1,0 +1,742 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Numerical Analysis Homework 1
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Solve the following:
+\end_layout
+
+\begin_layout Enumerate
+Find the absolute and relative condition numbers of 
+\begin_inset Formula $f(x)=e^{-2x}$
+\end_inset
+
+ and 
+\begin_inset Formula $g(x)=\ln^{3}x$
+\end_inset
+
+.
+ For what values of 
+\begin_inset Formula $x$
+\end_inset
+
+ are these functions sensitive to perturbations?
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $x_{1},x_{2}\in\mathbb{R}^{+}$
+\end_inset
+
+ and let 
+\begin_inset Formula $f(\boldsymbol{x})=f(x_{1},x_{2})=x_{1}^{x_{2}}$
+\end_inset
+
+.
+ Find the relative condition number of 
+\begin_inset Formula $f(\boldsymbol{x})$
+\end_inset
+
+.
+ For what range of values of 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ is the problem ill-conditioned?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ First we find the absolute condition number of 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ at 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ are differentiable everywhere they are defined, we see that
+\begin_inset Formula 
+\begin{align*}
+\widehat{\kappa}_{f}(x) & =|f'(x)| & \widehat{\kappa}_{g}(x) & =|g'(x)|\\
+ & =|-2e^{-2x}| &  & =|(3/x)\ln^{2}x|\\
+ & =2e^{-2x} &  & =\frac{3\ln^{2}x}{|x|}.
+\end{align*}
+
+\end_inset
+
+Next we find the relative condition numbers of 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ at 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g$
+\end_inset
+
+ are differentiable everywhere they are defined, we see that
+\begin_inset Formula 
+\begin{align*}
+\kappa_{f}(x) & =\frac{|f'(x)||x|}{|f(x)|} & \kappa_{g}(x) & =\frac{|g'(x)||x|}{|g(x)|}\\
+ & =\frac{2e^{-2x}|x|}{e^{-2x}} &  & =\frac{\frac{3\ln^{2}x}{|x|}|x|}{\left|\ln^{3}x\right|}\\
+ & =2|x|. &  & =\frac{3}{\left|\ln x\right|}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In particular, 
+\begin_inset Formula $g$
+\end_inset
+
+ is sensitive to perturbations when 
+\begin_inset Formula $x$
+\end_inset
+
+ is near 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable we see that
+\begin_inset Formula 
+\begin{align*}
+\kappa_{f}(\boldsymbol{x}) & =\frac{\|\mathrm{J}_{f}(\boldsymbol{x})\|\|\boldsymbol{x}\|}{|f(\boldsymbol{x})|}\\
+ & =\frac{\left\Vert \begin{pmatrix}x_{2}x_{1}^{x_{2}-1} & x_{1}^{x_{2}}\ln x_{1}\end{pmatrix}\right\Vert \|\boldsymbol{x}\|}{\left|x_{1}^{x_{2}}\right|}\\
+ & =\frac{\left(\left|x_{2}x_{1}^{x_{2}-1}\right|+\left|x_{1}^{x_{2}}\ln x_{1}\right|\right)\max\{|x_{1}|,|x_{2}|\}}{\left|x_{1}^{x_{2}}\right|.}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Consider the following recurrence:
+\begin_inset Formula 
+\[
+x_{k+1}=111-\frac{1130-\frac{3000}{x_{k-1}}}{x_{k}},
+\]
+
+\end_inset
+
+whose general solution is
+\begin_inset Formula 
+\[
+x_{k}=\frac{100^{k+1}a+6^{k+1}b+5^{k+1}c}{100^{k}a+6^{k}b+5^{k}c},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $a,b,c$
+\end_inset
+
+ depend on the initial values.
+ Given 
+\begin_inset Formula $x_{0}=11/2$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{1}=61/11$
+\end_inset
+
+, we have 
+\begin_inset Formula $a=0$
+\end_inset
+
+ and 
+\begin_inset Formula $b=1=c$
+\end_inset
+
+.
+ So in this case we have
+\begin_inset Formula 
+\[
+x_{k}=\frac{6^{k+1}+5^{k+1}}{6^{k}+5^{k}},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Show that this gives a monotonically increasing sequence to the limit of
+ value 
+\begin_inset Formula $6$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Implement this recurrence in MATLAB.
+ Plot 
+\begin_inset Formula $(x_{k})$
+\end_inset
+
+ and compare it with the exact solution.
+ Explain any major discrepancies you see.
+ What is the condition number of the limit of this particular sequence as
+ a function of 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ To see that it is monotonically increasing, let 
+\begin_inset Formula $f_{k}(x,y)=(x^{k+1}+y^{k+1})/(x^{k}+y^{k})$
+\end_inset
+
+ and observe that
+\begin_inset Formula 
+\begin{align*}
+\partial_{k}f_{k}(x,y)=\partial_{k}\left(\frac{x^{k+1}+y^{k+1}}{x^{k}+y^{k}}\right) & =\frac{(y-x)x^{k}y^{k}\ln(y/x)}{(x^{k}+y^{k})^{2}}.
+\end{align*}
+
+\end_inset
+
+So in particular, we have
+\begin_inset Formula 
+\begin{align*}
+\partial_{k}f_{k}(5,6) & =\frac{5^{k}6^{k}\ln(6/5)}{(5^{k}+6^{k})^{2}}>0.
+\end{align*}
+
+\end_inset
+
+So in particular, 
+\begin_inset Formula $f_{k}(5,6)=x_{k}$
+\end_inset
+
+ is strictly increasing in 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ Next observe that
+\begin_inset Formula 
+\begin{align*}
+\lim_{k\to\infty}x_{k} & =\lim_{k\to\infty}\left(\frac{6^{k+1}+5^{k+1}}{6^{k}+5^{k}}\right)\\
+ & =\lim_{k\to\infty}\left(\frac{6^{k+1}}{6^{k}+5^{k}}\right)+\lim_{k\to\infty}\left(\frac{5^{k+1}}{6^{k}+5^{k}}\right)\\
+ & =\lim_{k\to\infty}\left(\frac{6^{k+1}}{6^{k}}\right)+\lim_{k\to\infty}\left(\frac{5^{k+1}}{6^{k}}\right)\\
+ & =\lim_{k\to\infty}\left(\frac{6^{k+1}}{6^{k}}\right)+\lim_{k\to\infty}\left(\frac{5^{k+1}}{6^{k}}\right)\\
+ & =6,
+\end{align*}
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $\lim\limits _{k\to\infty}(6^{k}/5^{k})=\infty$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $6^{k}$
+\end_inset
+
+ grows much faster than 
+\begin_inset Formula $5^{k}$
+\end_inset
+
+ which is why we are allowed to remove 
+\begin_inset Formula $5^{k}$
+\end_inset
+
+ from the denominator in the third line).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let
+\begin_inset Formula 
+\[
+p_{24}(x)=(x-1)(x-2)\cdots(x-24)=x^{24}+a_{23}x^{23}+\cdots+a_{1}x+a_{0},
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\begin{align*}
+a_{14} & =9.2447\times10^{16}\\
+a_{15} & =-5.7006\times10^{15}\\
+a_{16} & \approx2.9089\times10^{14}\\
+a_{17} & \approx-1.2191\times10^{13}\\
+a_{18} & \approx4.1491\times10^{11}.
+\end{align*}
+
+\end_inset
+
+Evaluate the relative condition number of the 
+\begin_inset Formula $k$
+\end_inset
+
+th root 
+\begin_inset Formula $x_{k}=k$
+\end_inset
+
+ subject to the perturbation of 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ for 
+\begin_inset Formula $k=14,15,\dots,18$
+\end_inset
+
+ and find the root that is most sensitive to perturbation of the corresponding
+ coefficient.
+ Use the attached MATLAB data file wilk24mc.mat containing the coefficients
+ 
+\begin_inset Formula $a_{24},a_{23},\dots,a_{1},a_{0}$
+\end_inset
+
+ and use MATLAB's roots function to find the roots.
+ Compare with the true roots and comment on what you see.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

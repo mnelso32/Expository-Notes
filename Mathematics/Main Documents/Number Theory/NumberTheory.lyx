@@ -22669,17 +22669,6 @@ Modular Forms
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
 The notion of modularity can be set in quite a general context, but for
  now we consider functions defined on the upper half plane
 \begin_inset Formula 
@@ -22694,7 +22683,7 @@ The notion of modularity can be set in quite a general context, but for
 
 \begin_layout Standard
 We denote by 
-\begin_inset Formula $SL_{2}(\mathbb{R})$
+\begin_inset Formula $\mathrm{SL}_{2}(\mathbb{R})$
 \end_inset
 
  the group of 
@@ -22724,29 +22713,19 @@ Möbius transformations
 \begin_inset Formula $\tau\in\mathfrak{h}$
 \end_inset
 
-, then 
-\begin_inset Formula $\gamma(\tau)$
+, then we set
+\begin_inset Formula 
+\[
+\gamma\tau=\frac{a\tau+b}{c\tau+d}.
+\]
+
 \end_inset
 
- is defined as 
-\begin_inset Formula $(a\tau+b)/(c\tau+d)$
+Indeed, that 
+\begin_inset Formula $\gamma\tau\in\mathfrak{h}$
 \end_inset
 
-.
- Observe that 
-\begin_inset Formula $\gamma$
-\end_inset
-
- and 
-\begin_inset Formula $-\gamma$
-\end_inset
-
- gives the same action, thus it is more natural to consider the group 
-\begin_inset Formula $PSL_{2}(\mathbb{R})$
-\end_inset
-
-.
- 
+ follows from the following proposition:
 \end_layout
 
 \begin_layout Standard
@@ -22757,16 +22736,15 @@ status open
 
 
 \backslash
-begin{ex}
+begin{prop}
 \backslash
-label{ex1}
+label{prop}
 \end_layout
 
 \end_inset
 
-.
- Check that 
-\begin_inset Formula $\mbox{Im}(\gamma(\tau))=\mbox{Im}(\gamma(\tau))/|c\tau+d|^{2}$
+ We have 
+\begin_inset Formula $\mathrm{Im}(\gamma\tau)=\mathrm{Im}(\tau)/|c\tau+d|^{2}$
 \end_inset
 
 .
@@ -22778,11 +22756,65 @@ status open
 
 
 \backslash
-hyperlink{ex1}{Solution}
+end{prop}
 \end_layout
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Write 
+\begin_inset Formula $\tau=r+it$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\gamma\tau & =\frac{a\tau+b}{c\tau+d}\\
+ & =\frac{a(r+it)+b}{c(r+it)+d}\\
+ & =\frac{(ar+b)+iat}{(cr+d)+ict}\\
+ & =\frac{(ar+b)(cr+d)+act^{2}}{(cr+d)^{2}+(ct)^{2}}+i\frac{at(cr+d)-ct(ar+b)}{(cr+d)^{2}+(ct)^{2}}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Im}(\gamma\tau) & =\frac{at(cr+d)-ct(ar+b)}{(cr+d)^{2}+(ct)^{2}}\\
+ & =\frac{t}{|c\tau+d|^{2}}(a(cr+d)-c(ar+b))\\
+ & =\frac{t}{|c\tau+d|^{2}}\\
+ & =\frac{\mathrm{Im}(\tau)}{|c\tau+d|^{2}}.
+\end{align*}
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $\det\gamma=ad-bc=1$
+\end_inset
+
+ in order to get the third line from the second line.
  
 \begin_inset ERT
 status open
@@ -22791,12 +22823,29 @@ status open
 
 
 \backslash
-end{ex}
+end{proof}
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Observe that 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ and 
+\begin_inset Formula $-\gamma$
+\end_inset
+
+ gives the same action, thus it is more natural to consider the group 
+\begin_inset Formula $\mathrm{PSL}_{2}(\mathbb{R})$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -23202,7 +23251,7 @@ begin{defn}
 \end_inset
 
  be a cofinite Fuchsian group of the first kind, and let 
-\begin_inset Formula $\nu$
+\begin_inset Formula $\chi$
 \end_inset
 
  be a homomorphism from 
@@ -23222,11 +23271,19 @@ begin{defn}
 \series bold
 weakly modular 
 \series default
-of weight 
+of
+\series bold
+ weight
+\series default
+ 
 \begin_inset Formula $k$
 \end_inset
 
- with multiplier system 
+ with 
+\series bold
+multiplier system
+\series default
+ 
 \begin_inset Formula $\chi$
 \end_inset
 
@@ -23236,10 +23293,10 @@ c & d
 \end{smallmatrix}\right)\in G$
 \end_inset
 
- we have 
+ we have
 \begin_inset Formula 
 \[
-f\mid_{k}\gamma(\tau):=j(\gamma,\tau)^{-k}f(\gamma\tau)=\chi(\gamma)f(\tau),
+(f|_{k}\gamma)\tau:=j(\gamma,\tau)^{-k}f(\gamma\tau)=\chi(\gamma)f(\tau),
 \]
 
 \end_inset
@@ -23253,10 +23310,71 @@ where
 \end_inset
 
 , and we use 
-\begin_inset Formula $M_{k}^{\omega}(G,\nu)$
+\begin_inset Formula $\mathrm{M}_{k}^{w}(G,\chi)$
 \end_inset
 
  to denote the space of all such functions.
+ When 
+\begin_inset Formula $k$
+\end_inset
+
+ is not an integer it is understood that 
+\begin_inset Formula $j(\gamma,\tau)^{k}$
+\end_inset
+
+ is evaluated using the principal branch of the argument.
+ The action of 
+\begin_inset Formula $\gamma\in\mathrm{SL}_{2}(\mathbb{R})$
+\end_inset
+
+ given by 
+\begin_inset Formula $f|_{k}\gamma$
+\end_inset
+
+ (called the 
+\series bold
+weight 
+\begin_inset Formula $k$
+\end_inset
+
+ slash-action
+\series default
+) will also be used for 
+\begin_inset Formula $\gamma\in\mathrm{GL}_{2}(\mathbb{R})$
+\end_inset
+
+ by the more general formula
+\begin_inset Formula 
+\[
+(f|_{k}\gamma)\tau:=\det(\gamma)^{k/2}j(\gamma,\tau)^{-k}f(\gamma\tau).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The reason for using the term 
+\begin_inset Quotes eld
+\end_inset
+
+weakly
+\begin_inset Quotes erd
+\end_inset
+
+ above is that we have not yet specified any holomorphy or meromorphy condition.
  We will say that a weakly modular function 
 \begin_inset Formula $f$
 \end_inset
@@ -23327,15 +23445,15 @@ if
 
 \begin_layout Standard
 The spaces of functions defined above are denoted by 
-\begin_inset Formula $M_{k}^{!}(G,\nu)$
+\begin_inset Formula $\mathrm{M}_{k}^{!}(G,\chi)$
 \end_inset
 
 , 
-\begin_inset Formula $M_{k}(G,\nu)$
+\begin_inset Formula $\mathrm{M}_{k}(G,\chi)$
 \end_inset
 
 , and 
-\begin_inset Formula $S_{k}(G,\nu)$
+\begin_inset Formula $\mathrm{S}_{k}(G,\chi)$
 \end_inset
 
  respectively.
@@ -23370,7 +23488,7 @@ differential forms
 \end_inset
 
  and trivial multiplier, then 
-\begin_inset Formula $f(z)(dz)^{k}$
+\begin_inset Formula $f(z)(\mathrm{d}z)^{k}$
 \end_inset
 
  is invariant under 
@@ -23382,7 +23500,7 @@ differential forms
 \end_inset
 
 .
- For instace, 
+ For instance, 
 \begin_inset Formula $f$
 \end_inset
 
@@ -23390,19 +23508,11 @@ differential forms
 \begin_inset Formula $2k$
 \end_inset
 
- means
-\begin_inset Formula 
-\[
-f(\gamma\tau)=j(\gamma,\tau)^{2k}f(\tau)
-\]
-
+ means 
+\begin_inset Formula $f(\gamma\tau)=j(\gamma,\tau)^{2k}f(\tau)$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-for all 
+ for all 
 \begin_inset Formula $\gamma\in G$
 \end_inset
 
@@ -23411,10 +23521,10 @@ for all
 \end_inset
 
 .
- Also, 
+ Also,
 \begin_inset Formula 
 \[
-d(\gamma\tau)^{k}=\det(\gamma)^{k}j(\gamma,\tau)^{-2k}d\tau^{k}
+\mathrm{d}(\gamma\tau)^{k}=\det(\gamma)^{k}j(\gamma,\tau)^{-2k}\mathrm{d}\tau^{k}
 \]
 
 \end_inset
@@ -23423,18 +23533,12 @@ d(\gamma\tau)^{k}=\det(\gamma)^{k}j(\gamma,\tau)^{-2k}d\tau^{k}
 \end_layout
 
 \begin_layout Standard
-So
-\begin_inset Formula 
-\[
-f(\gamma\tau)d(\gamma\tau)^{k}=f(\tau)d\tau
-\]
-
+So 
+\begin_inset Formula $f(\gamma\tau)\mathrm{d}(\gamma\tau)^{k}=f(\tau)\mathrm{d}\tau$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
+.
+ 
 \begin_inset ERT
 status open
 
@@ -23592,58 +23696,6 @@ Note that
 \[
 \gamma\tau+1=(e_{12}\gamma)\tau
 \]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section*
-Solutions
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-Exercise~(
-\backslash
-ref{ex1})
-\backslash
-hypertarget{ex1}{}
-\end_layout
-
-\end_inset
-
- Write 
-\begin_inset Formula $\tau=r+is$
-\end_inset
-
-.
- Then 
-\begin_inset Formula 
-\begin{align*}
-\gamma(\tau) & =\frac{a\tau+b}{c\tau+d}\\
- & =\frac{a(r+it)+b}{c(r+it)+d}\\
- & =\frac{(ar+b)+iat}{(cr+d)+ict}\\
- & =\frac{(ar+b)(cr+d)+act^{2}+i(at(cr+d)-ct(ar+b))}{(cr+d)^{2}+(ct)^{2}}.
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Therefore
-\begin_inset Formula 
-\begin{align*}
-\mbox{Im}(\gamma(\tau)) & =\frac{at(cr+d)-ct(ar+b)}{(cr+d)^{2}+(ct)^{2}}\\
- & =\frac{t(a(cr+d)-c(ar+b))}{|c\tau+d|^{2}}\\
- & =\frac{t}{|c\tau+d|^{2}}.
-\end{align*}
 
 \end_inset
 
