@@ -1,0 +1,1923 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Cryptography
+\end_layout
+
+\begin_layout Section
+\begin_inset Formula $1/17$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Message Authentication Codes (MAC)
+\end_layout
+
+\begin_layout Standard
+Alice and Bob must share a secret key.
+ Alice creates a tag from the message and the secret key and appends the
+ tag to her message.
+ Bob receives the message and tag.
+ He uses the message and secret key to recompute the tag and check that
+ is matches the tag Alice sent.
+\end_layout
+
+\begin_layout Subsubsection
+Encrypt then MAC
+\end_layout
+
+\begin_layout Standard
+If we wanted to keep the message confidential, then we'd encrypt the message
+ and then MAC.
+ Alice would encrypt the message, create tag using cipher text and secret
+ key.
+ Then Bob will first check the tag, if this is correct, then he will then
+ decrypt the message.
+\end_layout
+
+\begin_layout Subsubsection
+Security
+\end_layout
+
+\begin_layout Standard
+A MAC is said to be 
+\series bold
+secure 
+\series default
+if it is infeasible for an adversary to compute a correct tag for any message
+ for which they have not already seen a valid tag.
+ 
+\end_layout
+
+\begin_layout Subsection
+Signature Schemes (PKC)
+\end_layout
+
+\begin_layout Standard
+Alice's private key specifies a signing algorithm for Alice to sign messages.
+ Alice uses her secret key and the message to create her signature.
+ Bob (or anyone else) takes the message and signature and uses Alice's public
+ key to verify.
+\end_layout
+
+\begin_layout Subsubsection
+Sign then Encrypt
+\end_layout
+
+\begin_layout Standard
+Alice will create a signature for her plaintext then encrypt plaintext using
+ Bob's public key.
+ She will then send Bob the ciphertext and signature.
+ Bob will first decrypt the message using his secret key and then checks
+ the validity of the signature.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Security
+\end_layout
+
+\begin_layout Standard
+A SS is said to be 
+\series bold
+secure 
+\series default
+if it is infeasible for an adversary to compute a correct signature for
+ any message for which they have not already seen a valid signature
+\end_layout
+
+\begin_layout Subsection
+Nonrepudiation Property
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Nonrepudiation property 
+\series default
+is a protection against an individual falsely denying having performed a
+ particular action.
+ Signature schemes have this property.
+ The reason for this is that Alice is the only one that can create a signature
+ but anyone can verify.
+ On the other hand, MAC does not have this property: one reason for this
+ is that anything Alice can do, Bob can do also.
+ There is no third party verification since only Alice and Bob share the
+ secret key.
+ 
+\end_layout
+
+\begin_layout Subsection
+Certificates
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+certificate 
+\series default
+is a set of data that uniquely identifies a key pair owner that is authorized
+ to use the key pair.
+ The goal of a certificate is to verify the authenticity of public keys.
+ You need a third party for this to work.
+ A certificate contains a public key, other information, and digitally signed
+ by a certification authority (CA, trusted third party).
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Hash Functions
+\end_layout
+
+\begin_layout Standard
+Signature schemes are good for short messages however they are not good
+ for long messages.
+ A 
+\series bold
+cryptographic hash function 
+\series default
+is used to compress a message of arbitrary length to a short (fixed length)
+ random looking message digest.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Hash then Sign
+\end_layout
+
+\begin_layout Standard
+Alice has message 
+\begin_inset Formula $m$
+\end_inset
+
+, compute 
+\begin_inset Formula $h:=H(m)$
+\end_inset
+
+, creates signature for message digest 
+\begin_inset Formula $h$
+\end_inset
+
+ (not the actual message itself).
+ Bob recieves message 
+\begin_inset Formula $m$
+\end_inset
+
+ and signature.
+ He will then check that the signature is valid for 
+\begin_inset Formula $h=H(m)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Hash then Sign then Encrypt
+\end_layout
+
+\begin_layout Standard
+Message hashed, then message digest is signed, then signature and message
+ are encrypted.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Security and Important Properties
+\end_layout
+
+\begin_layout Standard
+Computationally infeasible to find collisions.
+ Not invertible.
+ No keys.
+\end_layout
+
+\begin_layout Section
+\begin_inset Formula $1/19$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Cryptograph's Protocols
+\end_layout
+
+\begin_layout Standard
+Definitions (page 9 read).
+\end_layout
+
+\begin_layout Subsubsection
+Security
+\end_layout
+
+\begin_layout Standard
+Three different aspects:
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Attack Model: 
+\series default
+The adversary knows the scheme or protocol being used and the public key
+ in a PKC (Kerckhoff's Principle).
+ Additional information provided to the adversary should be specified in
+ the attack model.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\series bold
+Known ciphertext attack: 
+\series default
+the adversary has access to some amount of ciphertext that is all encrypted
+ with the same unknown key.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Known plaintext attack
+\series default
+: the adversary has access to some amount of plaintext as well as the correspond
+ing ciphertext (all of which is encrypted witht he same key).
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Chosen plaintext attack: 
+\series default
+the adversary is allowed to choose plaintext, and then they are given the
+ corresponding ciphertext.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Chosen ciphertext attack: 
+\series default
+the adversary chooses some ciphertext and they are then given the corresponding
+ plaintext.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Adversary Goal:
+\series default
+ Defines 
+\begin_inset Quotes eld
+\end_inset
+
+break
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+successful attack
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\series bold
+Complete break: 
+\series default
+the adversary determines the private (or secret) key.
+ 
+\end_layout
+
+\begin_layout Enumerate
+the adversary might be able to decrypt a previously unseen ciphertext with
+ some specified nonzero probability.
+\end_layout
+
+\begin_layout Enumerate
+the adversary might be able to determine some partial information about
+ the plaintext, given a previously unseen ciphertext, with some specified
+ nonzero probability.
+\end_layout
+
+\begin_layout Enumerate
+the adversary might be able to distinguish between encryptions of two given
+ plaintexts.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Security Level
+\series default
+: Specifies the quantity the effort required to break the cryptosystem and
+ the resources of the adversary.
+ There are three main levels:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\series bold
+Computational security: 
+\series default
+A specific algorithm to break the system is computationally infeasible,
+ i.e.
+ it cannot be accomplished in a reasonable amount of time using currently
+ available computational resources.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Provable security: 
+\series default
+breaking the cryptosystem can be reduced in a complexity-theoretic sense
+ to solving some underlying mathematical problem.
+ This would show that breaking the cryptosystem is at least as difficult
+ as solving the given hard problem.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Unconditional security: 
+\series default
+the cryptosystem cannot be broken even with unlimited computational resources,
+ because there is not enough information available to the adversary.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Good Cryptographic Scheme: the adversary cannot achieve a 
+\series bold
+weak
+\series default
+ adversarial goal in a 
+\series bold
+strong
+\series default
+ attack model, given 
+\series bold
+significant
+\series default
+ computational resources.
+\end_layout
+
+\begin_layout Section
+Classical Cryptography
+\end_layout
+
+\begin_layout Subsection
+Introduction: Some Simple Cryptosystems
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+cryptosystem 
+\series default
+is a five-tuple 
+\begin_inset Formula $(\mathcal{P},\mathcal{C},\mathcal{K},\mathcal{E},\mathcal{D})$
+\end_inset
+
+ where the following conditions are satisfied:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ is a finite set of possible plaintexts;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ is a finite set of possible ciphertexts;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathcal{K}$
+\end_inset
+
+, the keyspace, is a finite set of possible keys;
+\end_layout
+
+\begin_layout Enumerate
+For each 
+\begin_inset Formula $K\in\mathcal{K}$
+\end_inset
+
+, there is an encryption rule 
+\begin_inset Formula $e_{K}\in\mathcal{K}$
+\end_inset
+
+ and a corresponding decryption rule 
+\begin_inset Formula $d_{K}\in\mathcal{D}$
+\end_inset
+
+.
+ Each 
+\begin_inset Formula $e_{K}\colon\mathcal{P}\to\mathcal{C}$
+\end_inset
+
+ and 
+\begin_inset Formula $d_{K}\colon\mathcal{C}\to\mathcal{P}$
+\end_inset
+
+ are functions such that 
+\begin_inset Formula $d_{K}e_{K}(x)=x$
+\end_inset
+
+ for every plaintext element 
+\begin_inset Formula $x\in\mathcal{P}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}label{example}
+\end_layout
+
+\end_inset
+
+ (affine cipher) Let 
+\begin_inset Formula $\mathcal{P}=\mathcal{C}=\mathbb{Z}\slash26\mathbb{Z}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathcal{K}=(\mathbb{Z}\slash26\mathbb{Z})^{\times}\times\mathbb{Z}\slash26\mathbb{Z}$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $K=(a,b)\in\mathcal{K}$
+\end_inset
+
+ define
+\begin_inset Formula 
+\[
+e_{K}(x)=ax+b\text{ mod }26\quad\text{and}\quad d_{K}(x)=a^{-1}(y-b)\text{ mod }26
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $x,y\in\mathbb{Z}\slash26\mathbb{Z}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}label{example}
+\end_layout
+
+\end_inset
+
+ (vigenere cipher) Let 
+\begin_inset Formula $\mathcal{P}=\mathcal{C}=\mathcal{K}=(\mathbb{Z}\slash26\mathbb{Z})^{m}$
+\end_inset
+
+.
+ For a key 
+\begin_inset Formula $K=(k_{1},\dots,k_{m})=\boldsymbol{k}$
+\end_inset
+
+ define
+\begin_inset Formula 
+\[
+e_{K}(\boldsymbol{x})=\boldsymbol{x}+\boldsymbol{k}\quad\text{and}\quad d_{K}(\boldsymbol{y})=\boldsymbol{y}-\boldsymbol{k}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\boldsymbol{x},\boldsymbol{y}\in(\mathbb{Z}\slash26\mathbb{Z})^{m}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}label{example}
+\end_layout
+
+\end_inset
+
+ (hill cipher) Let 
+\begin_inset Formula $\mathcal{P}=\mathcal{C}=(\mathbb{Z}\slash26\mathbb{Z})^{m}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathcal{K}=\mathrm{GL}_{m}(\mathbb{Z}\slash26\mathbb{Z})$
+\end_inset
+
+.
+ For a key 
+\begin_inset Formula $K\in K$
+\end_inset
+
+ define
+\begin_inset Formula 
+\[
+e_{K}(\boldsymbol{x})=K\boldsymbol{x}\quad\text{and}\quad d_{K}(\boldsymbol{y})=K^{-1}\boldsymbol{y}.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}label{example}
+\end_layout
+
+\end_inset
+
+ (permutation cipher) Let 
+\begin_inset Formula $\mathcal{P}=\mathcal{C}=(\mathbb{Z}\slash26\mathbb{Z})^{m}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathcal{K}=S_{m}$
+\end_inset
+
+ (set of all permutations of 
+\begin_inset Formula $\{1,\dots,m\}$
+\end_inset
+
+).
+ For a key 
+\begin_inset Formula $K=\pi$
+\end_inset
+
+ define
+\begin_inset Formula 
+\[
+e_{K}(\boldsymbol{x})=(x_{\pi(1)},\dots,x_{\pi(m)})\quad\text{and}\quad d_{K}(\boldsymbol{y})=(y_{\pi^{-1}(1)},\dots,y_{\pi^{-1}(m)}).
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}label{example}
+\end_layout
+
+\end_inset
+
+ (RSA) Let 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $q$
+\end_inset
+
+ be primes and set 
+\begin_inset Formula $m=pq$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $e\geq1$
+\end_inset
+
+ such that 
+\begin_inset Formula $(e,\varphi(m))=1$
+\end_inset
+
+ and compute 
+\begin_inset Formula $d\geq1$
+\end_inset
+
+ such that 
+\begin_inset Formula $ed\equiv1\text{ mod}\,\text{\ensuremath{\varphi(m)}.}$
+\end_inset
+
+ Define
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+e_{K}(x)=x^{e}\quad\text{and}\quad d_{K}(y)=y^{d}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $x,y\in\mathbb{Z}\slash m\mathbb{Z}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Stream Ciphers
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\series bold
+synchronous stream cipher 
+\series default
+is a tuple 
+\begin_inset Formula $(\mathcal{P},\mathcal{C},\mathcal{K},\mathcal{L},\mathcal{E},\mathcal{D})$
+\end_inset
+
+ together with a function 
+\begin_inset Formula $g$
+\end_inset
+
+ such that
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ is the set of all possible plaintexts;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ is the set of all possible ciphertexts;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathcal{K}$
+\end_inset
+
+ is the set of possible keys;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ is the key stream alphabet;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $g$
+\end_inset
+
+ is the key stream generator (this will take your key string and make it
+ the same length as the message);
+\end_layout
+
+\begin_layout Enumerate
+for each 
+\begin_inset Formula $z\in\mathcal{L}$
+\end_inset
+
+ there is an encryption rule 
+\begin_inset Formula $e_{z}\in\mathcal{E}$
+\end_inset
+
+ and a corresponding decryption rule 
+\begin_inset Formula $d_{z}\in\mathcal{D}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+e_{z}\colon\mathcal{P}\to\mathcal{C}\quad\text{and}\quad d_{z}\colon\mathcal{C}\to\mathcal{P}
+\]
+
+\end_inset
+
+such that 
+\begin_inset Formula $d_{z}(e_{z}(x))=x$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in\mathcal{P}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}label{example}
+\end_layout
+
+\end_inset
+
+ Vigenere cryptosystem where key length = message length.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}label{example}
+\end_layout
+
+\end_inset
+
+ Generate a keystream using deg 
+\begin_inset Formula $m$
+\end_inset
+
+ linear recurrence.
+ Start with a key 
+\begin_inset Formula $\boldsymbol{k}=(k_{1},\dots,k_{m})$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $z_{i}=k_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+.
+ Then set 
+\begin_inset Formula 
+\[
+z_{i+m}=\sum_{j=0}^{m-1}c_{j}z_{i+j}\text{ mod }2
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{0},\dots,c_{m-1}\in\mathbb{Z}\slash2\mathbb{Z}$
+\end_inset
+
+ are fixed constants.
+ So
+\begin_inset Formula 
+\[
+z_{m+1}=c_{0}z_{1}+c_{1}z_{2}+\cdots+c_{m-1}z_{m}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z_{m+2}=c_{0}z_{2}+c_{1}z_{3}+\cdots+c_{m-1}z_{m+1}
+\]
+
+\end_inset
+
+and so on.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\series bold
+nonsychronous stream cipher 
+\series default
+is a stream cipher in which each keystream element 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ depends on
+\end_layout
+
+\begin_layout Enumerate
+The key 
+\begin_inset Formula $K$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+The previous plaintext or ciphertext elements (
+\begin_inset Formula $x_{1},\dots,x_{i-1}$
+\end_inset
+
+ and/or 
+\begin_inset Formula $y_{1},\dots,y_{i-1}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}label{example}
+\end_layout
+
+\end_inset
+
+ (auto key cipher) Let 
+\begin_inset Formula $\mathcal{P}=\mathcal{C}=\mathcal{L}=\mathbb{Z}\slash26\mathbb{Z}$
+\end_inset
+
+ and let 
+\begin_inset Formula $K=z_{1}$
+\end_inset
+
+.
+ Define 
+\begin_inset Formula $z_{i}=x_{i-1}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\geq2$
+\end_inset
+
+.
+ We set
+\begin_inset Formula 
+\[
+e_{z}(x)=x+z\quad\text{and}\quad d_{z}(x)=x-z.
+\]
+
+\end_inset
+
+For instance, take PT = 
+\begin_inset Formula $0\,3\,1\,5\,2\,6$
+\end_inset
+
+ and key = 
+\begin_inset Formula $14$
+\end_inset
+
+.
+ Then keystream = 
+\begin_inset Formula $14,0,3,1,5,2$
+\end_inset
+
+ and CT = 
+\begin_inset Formula $14\,3\,4\,6\,7\,8$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Shannon's Theory, Perfect Secrecy, and One Time Pad
+\end_layout
+
+\begin_layout Standard
+Assume a cryptosystem 
+\begin_inset Formula $(\mathcal{P},\mathcal{C},\mathcal{K},\mathcal{E},\mathcal{D})$
+\end_inset
+
+ is specified.
+ Each key 
+\begin_inset Formula $k\in\mathcal{K}$
+\end_inset
+
+ is used for one encryption.
+ Furthermore, there is a probability distribution associated 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+; we consider 
+\begin_inset Formula $\overline{x}$
+\end_inset
+
+ to be the random variable on 
+\begin_inset Formula $\mathcal{P}\to\mathrm{P}(\overline{x}=x)$
+\end_inset
+
+.
+ There is a probability distribution associated with 
+\begin_inset Formula $\mathcal{K}$
+\end_inset
+
+; we consider 
+\begin_inset Formula $\overline{k}$
+\end_inset
+
+ to be the random variable on 
+\begin_inset Formula $\mathcal{K}\to\mathrm{P}(\overline{k}=k)$
+\end_inset
+
+.
+ Assume that 
+\begin_inset Formula $\overline{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{k}$
+\end_inset
+
+ are independent.
+ For a key 
+\begin_inset Formula $k\in\mathcal{K}$
+\end_inset
+
+, we define 
+\begin_inset Formula 
+\[
+\mathcal{C}(k)=\{e_{k}(x)\mid x\in\mathcal{P}\}.
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\overline{y}$
+\end_inset
+
+ be the induced random variable on 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\mathrm{P}(\overline{y}=y)=\sum_{k\mid y\in\mathcal{C}(k)}\mathrm{P}(\overline{k}=k)\mathrm{P}(\overline{x}=d_{k}(y)).
+\]
+
+\end_inset
+
+For any 
+\begin_inset Formula $x\in\mathcal{P}$
+\end_inset
+
+ and 
+\begin_inset Formula $y\in\mathcal{C}$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\[
+\mathrm{P}(\overline{y}=y\mid\overline{x}=x)=\sum_{k\mid x=d_{k}(y)}\mathrm{P}(\overline{k}=k).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using Bayes Theorem, we have
+\begin_inset Formula 
+\[
+\mathrm{P}(\overline{y}=y\mid\overline{x}=x)=\frac{\mathrm{P}(\overline{x}=x)\sum_{k\mid x=d_{k}(y)}\mathrm{P}(\overline{k}=k)}{\sum_{k\mid y\in\mathcal{C}(k)}\mathrm{P}(\overline{k}=k).\mathrm{P}(\overline{x}=d_{k}(y))}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{P}=\{a,b\}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathrm{P}(a)=1/4$
+\end_inset
+
+, 
+\begin_inset Formula $\mathrm{P}(b)=3/4$
+\end_inset
+
+, and let 
+\begin_inset Formula $\mathcal{K}=\{k_{1},k_{2},k_{3}\}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathrm{P}(k_{1})=1/2$
+\end_inset
+
+, 
+\begin_inset Formula $\mathrm{P}(k_{2})=\mathrm{P}(k_{3})=1/4$
+\end_inset
+
+.
+ Also let 
+\begin_inset Formula $\mathcal{C}=\{1,2,3,4\}$
+\end_inset
+
+ and define the following encryption matrix:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $b$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then
+\begin_inset Formula 
+\begin{align*}
+\mathrm{P}(\overline{y}=1) & =\mathrm{P}(a\mid k_{1})\mathrm{P}(k_{1})\\
+ & =\frac{1}{4}\cdot\frac{1}{2}\\
+ & =\frac{1}{8}.
+\end{align*}
+
+\end_inset
+
+Note also that 
+\begin_inset Formula $\mathrm{P}(b\mid4)=1$
+\end_inset
+
+.
+ This wouldn't be a good encryption since anytime we see a 
+\begin_inset Formula $4$
+\end_inset
+
+ we know that it is the encryption of 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ A cryptosystem has 
+\series bold
+perfect secrecy 
+\series default
+if 
+\begin_inset Formula $\mathrm{P}(x\mid y)=\mathrm{P}(x)$
+\end_inset
+
+ for all 
+\begin_inset Formula $x\in\mathcal{P}$
+\end_inset
+
+ and 
+\begin_inset Formula $y\in\mathcal{C}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ The point is that even if I were to give you the ciphertext 
+\begin_inset Formula $y$
+\end_inset
+
+, you would obtain zero information about which plaintext 
+\begin_inset Formula $x$
+\end_inset
+
+ maps to 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Perfect Secrecy of the Shift Cipher
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Suppose the 
+\begin_inset Formula $26$
+\end_inset
+
+ keys in the shift cipher are used with equal probability 
+\begin_inset Formula $1/26$
+\end_inset
+
+.
+ Then for any plaintext probability distribution, the shift cipher has perfect
+ secrecy.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Recall that 
+\begin_inset Formula $\mathcal{P}=\mathcal{C}=\mathcal{K}=\mathbb{Z}\slash26\mathbb{Z}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{k}(x)=x+k$
+\end_inset
+
+ and 
+\begin_inset Formula $d_{k}(y)=y-k$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\begin{align*}
+\mathrm{P}(\overline{y}=y) & =\sum_{k\in\mathbb{Z}\slash26\mathbb{Z}}\mathrm{P}(\overline{k}=k)\mathrm{P}(\overline{x}=d_{k}(y))\\
+ & =\sum_{k\in\mathbb{Z}\slash26\mathbb{Z}}\frac{1}{26}\cdot\frac{1}{26}\\
+ & =26\cdot\frac{1}{26}\cdot\frac{1}{26}\\
+ & =\frac{1}{26}.
+\end{align*}
+
+\end_inset
+
+Similarly, we have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{P}(\overline{y}=y\mid\overline{x}=x) & =\sum_{k\mid x=d_{k}(y)}\mathrm{P}(\overline{k}=k)\\
+ & =\frac{1}{26}.
+\end{align*}
+
+\end_inset
+
+Now we use Bayes Theorem:
+\begin_inset Formula 
+\begin{align*}
+\mathrm{P}(x\mid y) & =\frac{\mathrm{P}(x)\mathrm{P}(y\mid x)}{\mathrm{P}(y)}\\
+ & =\frac{\frac{1}{26}\cdot\frac{1}{26}}{\frac{1}{26}}\\
+ & =\frac{1}{26}\\
+ & =\mathrm{P}(x).
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Perfect Secrecy in General
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\mathrm{P}(x_{1})=0$
+\end_inset
+
+ for some 
+\begin_inset Formula $x_{1}\in\mathcal{P}$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathrm{P}(x_{1}\mid y)=\mathrm{P}(x_{1})$
+\end_inset
+
+.
+ We only need to consider 
+\begin_inset Formula $x\in\mathcal{P}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathrm{P}(x)>0$
+\end_inset
+
+.
+ Using Bayes Theorem, 
+\begin_inset Formula $\mathrm{P}(x\mid y)=\mathrm{P}(x)$
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in\mathcal{C}$
+\end_inset
+
+ is equivalent to saying 
+\begin_inset Formula $\mathrm{P}(y\mid x)=\mathrm{P}(y)$
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in\mathcal{C}$
+\end_inset
+
+.
+ Assume that 
+\begin_inset Formula $\mathrm{P}(y)>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in\mathcal{C}$
+\end_inset
+
+ and for some 
+\begin_inset Formula $x\in\mathcal{P}$
+\end_inset
+
+ we have 
+\begin_inset Formula $\mathrm{P}(y\mid x)=\mathrm{P}(y)>0$
+\end_inset
+
+.
+ Hence there exists a 
+\begin_inset Formula $k\in\mathcal{K}$
+\end_inset
+
+ such that 
+\begin_inset Formula $e_{k}(x)=y$
+\end_inset
+
+.
+ If we have perfect secrecy, then we must have
+\begin_inset Formula 
+\[
+|\mathcal{K}|\geq|\mathcal{C}|\geq|\mathcal{P}|.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
