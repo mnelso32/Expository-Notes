@@ -131,7 +131,7 @@ commutative diagrams/.cd,
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
-\suppress_date false
+\suppress_date true
 \justification true
 \use_refstyle 1
 \use_minted 0
@@ -320,7 +320,7 @@ Next we find the relative condition numbers of
 \begin_inset Formula $g$
 \end_inset
 
- are differentiable everywhere they are defined, we see that
+ are differentiable everywhere they are defined, we see tha
 \begin_inset Formula 
 \begin{align*}
 \kappa_{f}(x) & =\frac{|f'(x)||x|}{|f(x)|} & \kappa_{g}(x) & =\frac{|g'(x)||x|}{|g(x)|}\\
@@ -330,15 +330,44 @@ Next we find the relative condition numbers of
 
 \end_inset
 
+Recall that 
+\begin_inset Formula $f$
+\end_inset
 
-\end_layout
-
-\begin_layout Standard
-In particular, 
+ and 
 \begin_inset Formula $g$
 \end_inset
 
- is sensitive to perturbations when 
+ are sensitive to perturbations (in a relative sense) at 
+\begin_inset Formula $x$
+\end_inset
+
+ whenever the (relative) condition number 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ at 
+\begin_inset Formula $x$
+\end_inset
+
+ is large.
+ In particular, 
+\begin_inset Formula $f$
+\end_inset
+
+ is sensitive to perturbations (in a relative sense) when 
+\begin_inset Formula $|x|$
+\end_inset
+
+ is large (say 
+\begin_inset Formula $|x|\geq10^{6}$
+\end_inset
+
+) and 
+\begin_inset Formula $g$
+\end_inset
+
+ is sensitive to perturbations (in a relative sense) when 
 \begin_inset Formula $x$
 \end_inset
 
@@ -368,6 +397,15 @@ hfill
 
 \begin_layout Standard
 2.
+ In this problem, we use the 
+\begin_inset Formula $\ell_{\infty}$
+\end_inset
+
+ norm 
+\begin_inset Formula $\|\cdot\|_{\infty}=\|\cdot\|$
+\end_inset
+
+.
  Since 
 \begin_inset Formula $f$
 \end_inset
@@ -377,8 +415,44 @@ hfill
 \begin{align*}
 \kappa_{f}(\boldsymbol{x}) & =\frac{\|\mathrm{J}_{f}(\boldsymbol{x})\|\|\boldsymbol{x}\|}{|f(\boldsymbol{x})|}\\
  & =\frac{\left\Vert \begin{pmatrix}x_{2}x_{1}^{x_{2}-1} & x_{1}^{x_{2}}\ln x_{1}\end{pmatrix}\right\Vert \|\boldsymbol{x}\|}{\left|x_{1}^{x_{2}}\right|}\\
- & =\frac{\left(\left|x_{2}x_{1}^{x_{2}-1}\right|+\left|x_{1}^{x_{2}}\ln x_{1}\right|\right)\max\{|x_{1}|,|x_{2}|\}}{\left|x_{1}^{x_{2}}\right|.}
+ & =\frac{\left(\left|x_{2}x_{1}^{x_{2}-1}\right|+\left|x_{1}^{x_{2}}\ln x_{1}\right|\right)\max\{|x_{1}|,|x_{2}|\}}{\left|x_{1}^{x_{2}}\right|.}\\
+ & =\frac{\left(x_{2}x_{1}^{x_{2}-1}+x_{1}^{x_{2}}|\ln x_{1}|\right)\max\{x_{1},x_{2}\}}{x_{1}^{x_{2}}.},\\
+ & =\left(\frac{x_{2}}{x_{1}}+|\ln x_{1}|\right)\max\{x_{1},x_{2}\},
 \end{align*}
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $x_{1},x_{2}\geq0$
+\end_inset
+
+ to remove some of the absolute values.
+ Now we find the range of values of 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ for which the problem is ill-conditioned (or in other words, when 
+\begin_inset Formula $\kappa_{f}(\boldsymbol{x})$
+\end_inset
+
+ is large).
+ We split this into two cases:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
 
 \end_inset
 
@@ -386,6 +460,223 @@ hfill
 \end_layout
 
 \begin_layout Standard
+
+\series bold
+Case 1: 
+\series default
+Assume 
+\begin_inset Formula $x_{2}\geq x_{1}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\kappa_{f}(\boldsymbol{x})=\frac{x_{2}^{2}}{x_{1}}+x_{2}|\ln x_{1}|.
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ is large (say 
+\begin_inset Formula $x_{1}\geq10^{6}$
+\end_inset
+
+), then 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ will be large as well (since 
+\begin_inset Formula $x_{2}\geq x_{1})$
+\end_inset
+
+, and in this case the term 
+\begin_inset Formula $x_{2}|\ln x_{1}|$
+\end_inset
+
+ will be large which will cause 
+\begin_inset Formula $\kappa_{f}(\boldsymbol{x})$
+\end_inset
+
+ to be large as well.
+ If 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ is large and 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ is small (say 
+\begin_inset Formula $x_{2}\geq10^{6}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{1}\leq1$
+\end_inset
+
+), then the term 
+\begin_inset Formula $x_{2}^{2}/x_{1}$
+\end_inset
+
+ will be large which again will contribute to a large value of 
+\begin_inset Formula $\kappa_{f}(\boldsymbol{x})$
+\end_inset
+
+.
+ Finally, if 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ is small and 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ is not much smaller than 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+, then 
+\begin_inset Formula $\kappa_{f}(\boldsymbol{x})$
+\end_inset
+
+ will be small (if 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ is much smaller than 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+, then both terms in 
+\begin_inset Formula $\kappa_{f}(\boldsymbol{x})$
+\end_inset
+
+ will be large which will cause 
+\begin_inset Formula $\kappa_{f}(\boldsymbol{x})$
+\end_inset
+
+ to be large).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 2: 
+\series default
+Assume 
+\begin_inset Formula $x_{1}\geq x_{2}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\kappa_{f}(\boldsymbol{x})=x_{2}+x_{1}|\ln x_{1}|.
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ is large (say 
+\begin_inset Formula $x_{2}\geq10^{6}$
+\end_inset
+
+), then 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ will be large as well (since 
+\begin_inset Formula $x_{1}\geq x_{2})$
+\end_inset
+
+, and each term in 
+\begin_inset Formula $\kappa_{f}(\boldsymbol{x})$
+\end_inset
+
+ will be large which implies 
+\begin_inset Formula $\kappa_{f}(\boldsymbol{x})$
+\end_inset
+
+ will be large.
+ If 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ is large (say 
+\begin_inset Formula $x_{1}\geq10^{6}$
+\end_inset
+
+), then the term 
+\begin_inset Formula $x_{1}\ln|x_{1}|$
+\end_inset
+
+ will be large and this will contribute to a large value of 
+\begin_inset Formula $\kappa_{f}(\boldsymbol{x})$
+\end_inset
+
+, regardless of whether or not 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ is small or not.
+ Finally, if 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ is small (say 
+\begin_inset Formula $x_{1}\leq1$
+\end_inset
+
+), then 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ will be small as well since 
+\begin_inset Formula $x_{2}\leq x_{1}$
+\end_inset
+
+, and in this case, both terms 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{1}|\ln x_{1}|$
+\end_inset
+
+ in 
+\begin_inset Formula $\kappa_{f}(\boldsymbol{x})$
+\end_inset
+
+ will be small, so overall 
+\begin_inset Formula $\kappa_{f}(\boldsymbol{x})$
+\end_inset
+
+ will be small.
+ 
 \begin_inset ERT
 status open
 
@@ -430,9 +721,9 @@ x_{k+1}=111-\frac{1130-\frac{3000}{x_{k-1}}}{x_{k}},
 
 whose general solution is
 \begin_inset Formula 
-\[
-x_{k}=\frac{100^{k+1}a+6^{k+1}b+5^{k+1}c}{100^{k}a+6^{k}b+5^{k}c},
-\]
+\begin{equation}
+x_{k}=\frac{100^{k+1}a+6^{k+1}b+5^{k+1}c}{100^{k}a+6^{k}b+5^{k}c},\label{eq:formula1}
+\end{equation}
 
 \end_inset
 
@@ -522,17 +813,23 @@ status open
 
 
 \backslash
-begin{sol}label{sol}
+begin{sol}
+\backslash
+label{sol}
 \end_layout
 
 \end_inset
 
  1.
- To see that it is monotonically increasing, let 
-\begin_inset Formula $f_{k}(x,y)=(x^{k+1}+y^{k+1})/(x^{k}+y^{k})$
+ To see that it is monotonically increasing, let
+\begin_inset Formula 
+\[
+f_{k}(x,y)=\frac{x^{k+1}+y^{k+1}}{x^{k}+y^{k}}
+\]
+
 \end_inset
 
- and observe that
+and observe that
 \begin_inset Formula 
 \begin{align*}
 \partial_{k}f_{k}(x,y)=\partial_{k}\left(\frac{x^{k+1}+y^{k+1}}{x^{k}+y^{k}}\right) & =\frac{(y-x)x^{k}y^{k}\ln(y/x)}{(x^{k}+y^{k})^{2}}.
@@ -540,7 +837,7 @@ begin{sol}label{sol}
 
 \end_inset
 
-So in particular, we have
+In particular, we have
 \begin_inset Formula 
 \begin{align*}
 \partial_{k}f_{k}(5,6) & =\frac{5^{k}6^{k}\ln(6/5)}{(5^{k}+6^{k})^{2}}>0.
@@ -548,7 +845,7 @@ So in particular, we have
 
 \end_inset
 
-So in particular, 
+This implies 
 \begin_inset Formula $f_{k}(5,6)=x_{k}$
 \end_inset
 
@@ -563,7 +860,7 @@ So in particular,
 \lim_{k\to\infty}x_{k} & =\lim_{k\to\infty}\left(\frac{6^{k+1}+5^{k+1}}{6^{k}+5^{k}}\right)\\
  & =\lim_{k\to\infty}\left(\frac{6^{k+1}}{6^{k}+5^{k}}\right)+\lim_{k\to\infty}\left(\frac{5^{k+1}}{6^{k}+5^{k}}\right)\\
  & =\lim_{k\to\infty}\left(\frac{6^{k+1}}{6^{k}}\right)+\lim_{k\to\infty}\left(\frac{5^{k+1}}{6^{k}}\right)\\
- & =\lim_{k\to\infty}\left(\frac{6^{k+1}}{6^{k}}\right)+\lim_{k\to\infty}\left(\frac{5^{k+1}}{6^{k}}\right)\\
+ & =6+0\\
  & =6,
 \end{align*}
 
@@ -608,10 +905,276 @@ hfill
 
 \begin_layout Standard
 2.
+ We implement the following code in MATLAB:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+t(0) = 1; t(1) = 2; x(0) = 11/2; x(1) = 61/11; 
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 2:20   
+\end_layout
+
+\begin_layout Plain Layout
+
+    t(i) = i;   x(i) = 111 - (1130 - 3000/x(i-2))/x(i-1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(t,x,'*--') 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+MATLAB gives us the following plot:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename plot1.jpg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So initially, MATLAB's plot seems as if it's converging to 
+\begin_inset Formula $6$
+\end_inset
+
+ (the true limit), however around 
+\begin_inset Formula $t=14$
+\end_inset
+
+ it starts to converge to 
+\begin_inset Formula $100$
+\end_inset
+
+.
+ To see what's going on, let 
+\begin_inset Formula $L$
+\end_inset
+
+ be the limit of the sequence 
+\begin_inset Formula $(x_{k})$
+\end_inset
+
+ where 
+\begin_inset Formula $x_{k}$
+\end_inset
+
+ is given in the fomula 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:formula1})
+\end_layout
+
+\end_inset
+
+.
+ Then observe that
+\begin_inset Formula 
+\begin{align*}
+L & =\begin{cases}
+100 & \text{if }a\neq0\\
+6 & \text{if }a=0\text{ and }b\neq0\\
+5 & \text{if }a=b=0\text{ and }c\neq0.
+\end{cases}
+\end{align*}
+
+\end_inset
+
+The key is that MATLAB does not store 
+\begin_inset Formula $x_{1}=61/11$
+\end_inset
+
+ as it's true value because 
+\begin_inset Formula $61/11=5.\overline{54}$
+\end_inset
+
+ is a number with a repeated decimal.
+ Instead MATLAB stores 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ at 
+\begin_inset Formula $\widehat{x}_{1}=5.4545\dots456$
+\end_inset
+
+ (a finite number of digits after the decimal).
+ If we replace 
+\begin_inset Formula $x_{1}=61/11$
+\end_inset
+
+ with 
+\begin_inset Formula $\widehat{x}_{1}$
+\end_inset
+
+ as MATLAB does, then we will find that 
+\begin_inset Formula $\widehat{a}\neq0$
+\end_inset
+
+.
+ In this case, the limit 
+\begin_inset Formula $\widehat{L}$
+\end_inset
+
+ will be 
+\begin_inset Formula $100$
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now let us find the relative condition number of 
+\begin_inset Formula $L$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $\boldsymbol{x}=(x_{0},x_{1})$
+\end_inset
+
+.
+ In particular, we will find the relative condition number of 
+\begin_inset Formula $L$
+\end_inset
+
+ at the point 
+\begin_inset Formula $\boldsymbol{p}:=(p_{0},p_{1}):=(11/2,61/11)$
+\end_inset
+
+.
+ Recall that this is given by
+\begin_inset Formula 
+\begin{equation}
+\widehat{\kappa}(\boldsymbol{p}):=\frac{\|\boldsymbol{p}\|}{|L(\boldsymbol{p})|}\lim_{\delta\to0}\sup_{\boldsymbol{h}\leq\delta}\frac{|L(\boldsymbol{p}+\boldsymbol{h})-L(\boldsymbol{p})|}{\|\boldsymbol{h}\|}.\label{eq:relative}
+\end{equation}
+
+\end_inset
+
+Note that for each 
+\begin_inset Formula $\delta>0$
+\end_inset
+
+, we can always find an 
+\begin_inset Formula $\boldsymbol{h}\in\mathbb{R}^{2}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|\boldsymbol{h}\|\leq\delta$
+\end_inset
+
+ and 
+\begin_inset Formula $L(\boldsymbol{p}+\boldsymbol{h})=100$
+\end_inset
+
+.
+ Indeed, the point is that we can always an find 
+\begin_inset Formula $\boldsymbol{h}=(h_{0},h_{1})^{\top}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\|\boldsymbol{h}\|\leq\delta$
+\end_inset
+
+ and such that when we solve for the system of equations
+\begin_inset Formula 
+\begin{equation}
+p_{0}+h_{0}=\frac{100a+6b+5c}{a+b+c}\quad\text{and}\quad p_{1}+h_{1}=\frac{10000a+36b+25c}{100a+6b+5c},\label{eq:systemofequations}
+\end{equation}
+
+\end_inset
+
+we will have 
+\begin_inset Formula $a\neq0$
+\end_inset
+
+.
+ In this case, we will have 
+\begin_inset Formula $|L(\boldsymbol{p}+\boldsymbol{h})-L(\boldsymbol{p})|=94$
+\end_inset
+
+, and thus taking the limit in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:relative})
+\end_layout
+
+\end_inset
+
+ will give us 
+\begin_inset Formula $\widehat{\kappa}(\boldsymbol{p})=\infty$
+\end_inset
+
+.
+ 
 \begin_inset ERT
 status open
 
@@ -722,7 +1285,130 @@ label{sol}
 
 \end_inset
 
+ Recall from class that the relative condition number of the root 
+\begin_inset Formula $x_{k}$
+\end_inset
 
+ subject to the perturbation of 
+\begin_inset Formula $a_{k}$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\kappa_{k}:=\left|\frac{a_{k}x_{k}^{k-1}}{p'(x_{k})}\right|.
+\]
+
+\end_inset
+
+In particular, we have
+\begin_inset Formula 
+\begin{align*}
+\kappa_{14} & =\frac{9.2447\cdot10^{16}\cdot14^{13}}{13!10!}\approx3.2472\cdot10^{15}\\
+\kappa_{15} & =\frac{5.7006\cdot10^{15}\cdot15^{14}}{14!9!}\approx5.2608\cdot10^{15}\\
+\kappa_{16} & \approx\frac{2.9089\cdot10^{14}\cdot16^{15}}{15!8!}\approx6.3608\cdot10^{15}\\
+\kappa_{17} & \approx\frac{1.2191\cdot10^{13}\cdot17^{16}}{16!7!}\approx5.6256\cdot10^{15}\\
+\kappa_{18} & \approx\frac{4.1491\cdot10^{11}\cdot18^{17}}{17!6!}\approx3.5415\cdot10^{15}.
+\end{align*}
+
+\end_inset
+
+Thus the root that is most sensitive to the corresponding coefficient is
+ 
+\begin_inset Formula $x_{16}=16$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we use variable containing the coefficients 
+\begin_inset Formula $a_{24},a_{23},\dots,a_{1},a_{0}$
+\end_inset
+
+ and we use MATLAB's roots function to find the roots:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename root1.jpg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We find that the roots start splitting into conjugate pairs starting at
+ the 
+\begin_inset Formula $10$
+\end_inset
+
+th and 
+\begin_inset Formula $11$
+\end_inset
+
+th root 
+\begin_inset Formula $x_{10}=10$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{11}=11$
+\end_inset
+
+.
+ For instance, the pair 
+\begin_inset Formula $(x_{10},x_{11})$
+\end_inset
+
+ becomes
+\begin_inset Formula 
+\begin{align*}
+(\widehat{x}_{10},\widehat{x}_{11}) & \approx(10.2453-0.5708i,10.2453+0.5708i).
+\end{align*}
+
+\end_inset
+
+Similarly, the pair 
+\begin_inset Formula $(x_{16},x_{17})$
+\end_inset
+
+ which becomes
+\begin_inset Formula 
+\[
+(\widehat{x}_{16},\widehat{x}_{17})\approx(16.2606-2.2741i,16.2606+2.2741i),
+\]
+
+\end_inset
+
+and so on.
+ The point is that the relative conditions numbers 
+\begin_inset Formula $\kappa_{10},\kappa_{11},\dots,\kappa_{24}$
+\end_inset
+
+ are very large and thus the roots 
+\begin_inset Formula $x_{10},x_{11},\dots,x_{24}$
+\end_inset
+
+ are sensitive to small perturbations in the 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+.
+ 
 \begin_inset ERT
 status open
 

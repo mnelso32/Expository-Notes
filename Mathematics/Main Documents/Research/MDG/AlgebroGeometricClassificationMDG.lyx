@@ -1,0 +1,1387 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\branch tikzpicture
+\selected 1
+\filename_suffix 0
+\color #faf0e6
+\end_branch
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Algebro-Geometric Classification
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+ be a commutative ring and let 
+\begin_inset Formula $F$
+\end_inset
+
+ be a finite free graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-module such that 
+\begin_inset Formula $F_{0}=\Bbbk$
+\end_inset
+
+, 
+\begin_inset Formula $F_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i<0$
+\end_inset
+
+, and 
+\begin_inset Formula $F_{+}\neq0$
+\end_inset
+
+.
+ In this note, we give an algebro-geometric classification of various structures
+ we can attach to 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ We begin by classifying all 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex structures on 
+\begin_inset Formula $F$
+\end_inset
+
+ which fixed the identity element 
+\begin_inset Formula $1\in\Bbbk=F_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection*
+Classifying 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-Complex Structures on 
+\begin_inset Formula $F$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let us state up front what we wish to prove:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ We have the following bijection of sets:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left\{ \mathrm{GL}_{n}(\Bbbk)\text{-orbits of }h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(\Bbbk)\right\} \longleftrightarrow\left\{ \begin{array}{c}
+\text{isomorphism classes of }\text{\ensuremath{\Bbbk}-complex}\\
+\text{structures on }F\text{ with fixed identity}
+\end{array}\right\} 
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)$
+\end_inset
+
+ is a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra (to be constructed below) and where
+\begin_inset Formula 
+\[
+h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(\Bbbk):=\mathrm{Hom}_{\Bbbk\text{-alg}}(\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F),\Bbbk)
+\]
+
+\end_inset
+
+is the 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-valued points of 
+\begin_inset Formula $\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)$
+\end_inset
+
+.
+ Two 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex structures 
+\begin_inset Formula $(F,\mathrm{d})$
+\end_inset
+
+ and 
+\begin_inset Formula $(F,\mathrm{d}')$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ are said to be isomorphic with fixed identity if there exists a chain map
+ 
+\begin_inset Formula $\varphi\colon F\to F$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi(1)=1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The proof of this theorem mostly involves setting up our notation which
+ will be used later on when we wish to classify other algebraic structures
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ be a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-linear differential on 
+\begin_inset Formula $F$
+\end_inset
+
+, meaning 
+\begin_inset Formula $\mathrm{d}\colon F\to F$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-linear map of degree 
+\begin_inset Formula $-1$
+\end_inset
+
+ which satisfies 
+\begin_inset Formula $\mathrm{d}^{2}=0$
+\end_inset
+
+.
+ Choose an ordered homogeneous basis 
+\begin_inset Formula $\boldsymbol{e}=(e_{0},e_{1},\dots,e_{n})$
+\end_inset
+
+ of 
+\begin_inset Formula $F$
+\end_inset
+
+ where we set 
+\begin_inset Formula $e_{0}=1$
+\end_inset
+
+ and let 
+\begin_inset Formula $\boldsymbol{d}=(d_{j}^{i})$
+\end_inset
+
+ be the matrix representation of the differential 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ with respect to the ordered homogeneous basis 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula $\mathrm{d}\boldsymbol{e}=\boldsymbol{e}\boldsymbol{d}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathrm{d}\boldsymbol{e}=(0,\mathrm{d}e_{1},\dots,\mathrm{d}e_{n})$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{e}\boldsymbol{d}$
+\end_inset
+
+ is the product of the row vector 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ on the left with the matrix 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+ on the right.
+ Alternatively we could express this in terms of the matrix entries of 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+: for each 
+\begin_inset Formula $0\leq j\leq n$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\[
+\mathrm{d}e_{j}=\sum_{0\leq i\leq n}d_{j}^{i}e_{i}.
+\]
+
+\end_inset
+
+Note that since 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ is graded of degree 
+\begin_inset Formula $-1$
+\end_inset
+
+, we necessarily have 
+\begin_inset Formula $d_{j}^{i}=0$
+\end_inset
+
+ whenever 
+\begin_inset Formula $|e_{i}|\neq|e_{j}|-1$
+\end_inset
+
+.
+ Also note that since 
+\begin_inset Formula $\mathrm{d}^{2}=0$
+\end_inset
+
+, we have 
+\begin_inset Formula $\boldsymbol{d}^{2}=0$
+\end_inset
+
+.
+ Again we can express this in terms of matrix entries of 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+: for each 
+\begin_inset Formula $0\leq i,j\leq n$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{equation}
+\sum_{0\leq\iota\leq n}d_{j}^{\iota}d_{\iota}^{i}=0\label{eq:differential}
+\end{equation}
+
+\end_inset
+
+Now consider the following polynomial ring following polynomial ring
+\begin_inset Formula 
+\[
+\Bbbk[\boldsymbol{D}]=\Bbbk[\{D_{j}^{i}\mid0\leq i,j\leq n\}]
+\]
+
+\end_inset
+
+where the 
+\begin_inset Formula $D_{j}^{i}$
+\end_inset
+
+ are coordinates which correspond to the matrix entries of 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{d}}\colon\Bbbk[\boldsymbol{D}]\twoheadrightarrow\Bbbk$
+\end_inset
+
+ be the 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra homomorphism given by 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{d}}(\boldsymbol{D})=\boldsymbol{d}$
+\end_inset
+
+ and set 
+\begin_inset Formula $\mathfrak{q}_{\boldsymbol{d}}=\langle\boldsymbol{D}-\boldsymbol{d}\rangle$
+\end_inset
+
+ to be the kernel of this evaluation map: it is the 
+\begin_inset Formula $\Bbbk[\boldsymbol{D}]$
+\end_inset
+
+-ideal generated by 
+\begin_inset Formula $D_{j}^{i}-d_{j}^{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $0\leq i,j\leq n$
+\end_inset
+
+.
+ Note that if 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+ is an integral domain, then 
+\begin_inset Formula $\mathfrak{q}_{\boldsymbol{d}}$
+\end_inset
+
+ is a prime ideal since 
+\begin_inset Formula $\Bbbk[\boldsymbol{D}]\slash\mathfrak{q}_{\boldsymbol{d}}\cong\Bbbk$
+\end_inset
+
+, and if 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+ is a field, then 
+\begin_inset Formula $\mathfrak{q}_{\boldsymbol{d}}$
+\end_inset
+
+ is a maximal ideal of 
+\begin_inset Formula $\Bbbk[\boldsymbol{D}]$
+\end_inset
+
+ and 
+\begin_inset Formula $\Bbbk\to\Bbbk[\boldsymbol{D}]\slash\mathfrak{q}_{\boldsymbol{d}}$
+\end_inset
+
+ is a finite extension of fields.
+ For each 
+\begin_inset Formula $0\leq i,j\leq n$
+\end_inset
+
+ we define the quadratic polynomials 
+\begin_inset Formula $\Delta_{j}^{i}\in\Bbbk[\boldsymbol{D}]$
+\end_inset
+
+ by:
+\begin_inset Formula 
+\[
+\Delta_{j}^{i}:=\sum\limits _{0\leq\iota\leq n}D_{j}^{\iota}D_{\iota}^{i}.
+\]
+
+\end_inset
+
+Then we see that the evaluation map 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{d}}\colon\Bbbk[\boldsymbol{D}]\twoheadrightarrow R$
+\end_inset
+
+ factors through a unique 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra homomorphism 
+\begin_inset Formula $\overline{\mathrm{e}}_{\boldsymbol{d}}\colon\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)\twoheadrightarrow\Bbbk$
+\end_inset
+
+ where we set
+\begin_inset Formula 
+\[
+\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F):=\Bbbk[\boldsymbol{D}]\slash\langle\boldsymbol{\Delta}\rangle\cup\langle\{D_{j}^{i}\mid|e_{i}|\neq|e_{j}|-1\}\rangle
+\]
+
+\end_inset
+
+where we set 
+\begin_inset Formula $\boldsymbol{\Delta}=(\Delta_{j}^{i})$
+\end_inset
+
+.
+ Conversely, suppose 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{r}}\colon\Bbbk[\boldsymbol{D}]\twoheadrightarrow\Bbbk$
+\end_inset
+
+ is another 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra homomorphism where 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{r}}(\boldsymbol{D})=\boldsymbol{r}$
+\end_inset
+
+ where 
+\begin_inset Formula $\boldsymbol{r}=(r_{j}^{i})$
+\end_inset
+
+.
+ Then we define a differential 
+\begin_inset Formula $\mathrm{d}_{\boldsymbol{r}}$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ by 
+\begin_inset Formula $\mathrm{d}_{\boldsymbol{r}}\boldsymbol{e}:=\boldsymbol{e}\boldsymbol{r}$
+\end_inset
+
+.
+ Thus if we set 
+\begin_inset Formula $\mathrm{Diff}_{\Bbbk}(F)$
+\end_inset
+
+ be the set of all 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-linear differentials on 
+\begin_inset Formula $F$
+\end_inset
+
+, then we have a bijection of sets:
+\begin_inset Formula 
+\[
+h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(\Bbbk):=\mathrm{Hom}_{\Bbbk\text{-alg}}(\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F),\Bbbk)\simeq\mathrm{Diff}_{\Bbbk}(F).
+\]
+
+\end_inset
+
+Now suppose that 
+\begin_inset Formula $\boldsymbol{e}'=(1,e_{1}',\dots,e_{n}')$
+\end_inset
+
+ is another ordered homogeneous basis of 
+\begin_inset Formula $F$
+\end_inset
+
+.
+ Thus there is a graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-linear isomorphism 
+\begin_inset Formula $\varphi\colon F\to F$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi\boldsymbol{e}=\boldsymbol{e}'$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\widetilde{\gamma}_{\varphi}=\left(\begin{smallmatrix}1 & 0\\
+0 & \gamma_{\varphi}
+\end{smallmatrix}\right)$
+\end_inset
+
+ be the matrix representation of 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ where 
+\begin_inset Formula $\gamma_{\varphi}\in\mathrm{GL}_{n}(\Bbbk)$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula $\varphi\boldsymbol{e}=\boldsymbol{e}'=\boldsymbol{e}\widetilde{\gamma}_{\varphi}$
+\end_inset
+
+.
+ Then the matrix representation of 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ in the 
+\begin_inset Formula $\boldsymbol{e}'$
+\end_inset
+
+ coordinates is given by 
+\begin_inset Formula $\boldsymbol{d}'=\widetilde{\gamma}_{\varphi}^{-1}\boldsymbol{d}\widetilde{\gamma}_{\varphi}$
+\end_inset
+
+ since
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}\boldsymbol{e}' & =\mathrm{d}\boldsymbol{e}\widetilde{\gamma}_{\varphi}\\
+ & =\boldsymbol{e}\boldsymbol{d}\widetilde{\gamma}_{\varphi}\\
+ & =\boldsymbol{e}'\widetilde{\gamma}_{\varphi}^{-1}\boldsymbol{d}\widetilde{\gamma}_{\varphi}\\
+ & =\boldsymbol{e}'\boldsymbol{d}'.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus we see that 
+\begin_inset Formula $\mathrm{GL}_{n}(\Bbbk)$
+\end_inset
+
+ acts on 
+\begin_inset Formula $h_{\mathrm{A}_{R}^{\mathrm{d}}(F)}(\Bbbk)$
+\end_inset
+
+ by conjugation 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{d}}\mapsto\mathrm{e}_{\widetilde{\gamma}_{\varphi}^{-1}\boldsymbol{d}\widetilde{\gamma}_{\varphi}}$
+\end_inset
+
+.
+ On the other hand, if we define 
+\begin_inset Formula $\mathrm{d}'\colon F\to F$
+\end_inset
+
+ by 
+\begin_inset Formula $\mathrm{d}'=\varphi^{-1}\mathrm{d}\varphi$
+\end_inset
+
+, then we obtain 
+\begin_inset Formula $\mathrm{d}'\boldsymbol{e}=\boldsymbol{e}\boldsymbol{d}'$
+\end_inset
+
+, hence 
+\begin_inset Formula $\mathrm{d}'$
+\end_inset
+
+ is the differential on 
+\begin_inset Formula $F$
+\end_inset
+
+ whose matrix representation with respect to our original ordered basis
+ 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ is 
+\begin_inset Formula $\boldsymbol{d}'$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{d}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{e}_{\boldsymbol{d}'}$
+\end_inset
+
+ belong to the same 
+\begin_inset Formula $\mathrm{GL}_{n}(\Bbbk)$
+\end_inset
+
+-orbit in 
+\begin_inset Formula $h_{\mathrm{A}_{R}^{\mathrm{d}}(F)}(\Bbbk)$
+\end_inset
+
+ if and only if the corresponding differentials 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{d}'$
+\end_inset
+
+ give isomorphic 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex structures on 
+\begin_inset Formula $F$
+\end_inset
+
+ with fixed identity.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Base Change
+\end_layout
+
+\begin_layout Standard
+Suppose that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra.
+ Then 
+\begin_inset Formula $G:=F\otimes_{\Bbbk}A$
+\end_inset
+
+ is a finite free graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module with 
+\begin_inset Formula $G_{0}\simeq R$
+\end_inset
+
+, 
+\begin_inset Formula $G_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i<0$
+\end_inset
+
+, and 
+\begin_inset Formula $G_{+}\neq0$
+\end_inset
+
+.
+ We set 
+\begin_inset Formula 
+\[
+\mathrm{A}_{R}^{\mathrm{d}}(G):=\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)\otimes_{\Bbbk}R\simeq R[\boldsymbol{D}]\slash\langle\boldsymbol{\Delta}\rangle\cup\langle\{D_{j}^{i}\mid|e_{i}|\neq|e_{j}|-1\}\rangle.
+\]
+
+\end_inset
+
+It is clear that we have an inclusion of sets 
+\begin_inset Formula $h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(R)\subseteq h_{\mathrm{A}_{R}^{\mathrm{d}}(G)}(R).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $G=\mathrm{Aut}(R\slash\Bbbk)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $G$
+\end_inset
+
+ acts on 
+\begin_inset Formula $h_{\mathrm{A}_{R}^{\mathrm{d}}(G)}(R)$
+\end_inset
+
+ and the set of all fixed points is precisely 
+\begin_inset Formula $h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(R)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection*
+Classifying MDG 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-Algebras on 
+\begin_inset Formula $F$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing single
+We now fix a differential 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ giving it the structure of a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex and we are interested in giving an algebro-geometric classification
+ all multiplications on 
+\begin_inset Formula $F$
+\end_inset
+
+ (up to isomorphism).
+ Let 
+\begin_inset Formula $\mu\in\mathrm{Mult}(F)$
+\end_inset
+
+ and let 
+\begin_inset Formula $\boldsymbol{m}=(m_{i_{1},i_{2}}^{k})$
+\end_inset
+
+ be its matrix representation with respect to 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula $\mu(\boldsymbol{e}^{\top}\otimes\boldsymbol{e})=\boldsymbol{e}^{\top}\boldsymbol{m}\boldsymbol{e}$
+\end_inset
+
+.
+ In terms of the matrix entries, these are given by
+\begin_inset Formula 
+\[
+\mu(e_{i_{1}}\otimes e_{i_{2}})=\sum_{k}m_{i_{1},i_{2}}^{k}e_{k}.
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $1\leq i_{1},i_{2}\leq n$
+\end_inset
+
+.
+ Furthermore, let 
+\begin_inset Formula $\varepsilon\in\mathbb{N}\cup\{\infty\}$
+\end_inset
+
+ and assume that 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+
+\series bold
+-associative 
+\series default
+meaning it is associative in homological degree 
+\begin_inset Formula $i$
+\end_inset
+
+ for all 
+\begin_inset Formula $i<\varepsilon$
+\end_inset
+
+ (thus 
+\begin_inset Formula $\infty$
+\end_inset
+
+-associative means associative).
+ In the table below, we translate the algebraic laws which 
+\begin_inset Formula $\mu$
+\end_inset
+
+ satisfies into equations which 
+\begin_inset Formula $\boldsymbol{m}$
+\end_inset
+
+ satisfies:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Algebraic Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Equation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Graded
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $G_{\boldsymbol{i}}^{k}=M_{i_{1},i_{2}}^{k}$
+\end_inset
+
+ if 
+\begin_inset Formula $|e_{i}|+|e_{j}|\neq|e_{k}|$
+\end_inset
+
+ (else 
+\begin_inset Formula $G_{\boldsymbol{i}}^{k}=0$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Graded-Commutative Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Gamma_{\boldsymbol{i}}^{k}=M_{i_{1},i_{2}}^{k}-(-1)^{|e_{i_{1}}||e_{i_{2}}|}M_{i_{2},i_{1}}^{k}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Leibniz Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Lambda_{\boldsymbol{i}}^{k}=\sum_{j}(M_{i_{1},i_{2}}^{j}d_{j}^{k}-d_{i_{1}}^{j}M_{j,i_{2}}^{k}-(-1)^{|e_{i_{1}}||e_{i_{2}}|}d_{i_{2}}^{j}M_{i_{1},j}^{k})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Associative Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $H_{\varepsilon,\boldsymbol{i}}^{k}=\sum\nolimits _{j}(M_{i_{1},i_{2}}^{j}M_{j,i_{3}}^{k}-M_{i_{2},i_{3}}^{j}M_{i_{1},j}^{k})$
+\end_inset
+
+ if 
+\begin_inset Formula $|e_{i_{1}}|+|e_{i_{2}}|+|e_{i_{3}}|<\varepsilon$
+\end_inset
+
+ (else 
+\series bold
+
+\begin_inset Formula $H_{\varepsilon,\boldsymbol{i}}^{k}=0$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We set 
+\begin_inset Formula $A_{\varepsilon}=\Bbbk[\boldsymbol{M}]\slash\langle\boldsymbol{G},\boldsymbol{\Gamma},\boldsymbol{\Lambda},\boldsymbol{H}_{\varepsilon}\rangle$
+\end_inset
+
+ and we set 
+\begin_inset Formula $X_{\varepsilon}=\mathrm{Spec}\,A_{\varepsilon}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ We have the following bijection of sets:
+\begin_inset Formula 
+\[
+\left\{ \mathrm{GL}_{n}(\Bbbk)\text{-orbits of }\mathrm{Hom}_{\Bbbk\text{-alg}}(A_{\varepsilon},R)\right\} \longleftrightarrow\left\{ \begin{array}{c}
+\text{isomorphism classes of \ensuremath{\varepsilon}-associative multiplications on }F\end{array}\right\} .
+\]
+
+\end_inset
+
+Thus the 
+\begin_inset Formula $\mathrm{GL}_{n}(\Bbbk)$
+\end_inset
+
+-orbits of the 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-valued points of 
+\begin_inset Formula $X_{\varepsilon}$
+\end_inset
+
+ are in bijection 
+\begin_inset Formula $[\mathrm{Mult}_{\varepsilon}(F)]:=\mathrm{Mult}_{\varepsilon}(F)\slash\sim$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathrm{Mult}_{\varepsilon}(F)$
+\end_inset
+
+ denotes the set of all 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+-associative multiplications on 
+\begin_inset Formula $F$
+\end_inset
+
+ and where 
+\begin_inset Formula $\sim$
+\end_inset
+
+ is the isomorphism equivalence relation.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now suppose that 
+\begin_inset Formula $R$
+\end_inset
+
+ is a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra.
+ Then 
+\begin_inset Formula $G:=R\otimes_{\Bbbk}F$
+\end_inset
+
+ is a finite free graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module with 
+\begin_inset Formula $G_{0}\simeq R$
+\end_inset
+
+, 
+\begin_inset Formula $G_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i<0$
+\end_inset
+
+, and 
+\begin_inset Formula $G_{+}\neq0$
+\end_inset
+
+.
+ We set
+\begin_inset Formula 
+\[
+\mathrm{A}_{R}^{\mathrm{d}}(G):=\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)\otimes_{\Bbbk}R\simeq R[\boldsymbol{D}]\slash\langle\boldsymbol{\Delta}\rangle\cup\langle\{D_{j}^{i}\mid|e_{i}|\neq|e_{j}|-1\}\rangle.
+\]
+
+\end_inset
+
+It is clear that we have an inclusion of sets 
+\begin_inset Formula $h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(R)\subseteq h_{\mathrm{A}_{R}^{\mathrm{d}}(G)}(R).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $G=\mathrm{Aut}(R\slash\Bbbk)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $G$
+\end_inset
+
+ acts on 
+\begin_inset Formula $h_{\mathrm{A}_{R}^{\mathrm{d}}(G)}(R)$
+\end_inset
+
+ and the set of all fixed points is precisely 
+\begin_inset Formula $h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(R)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_body
+\end_document

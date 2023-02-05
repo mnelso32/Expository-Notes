@@ -1,0 +1,2240 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Research Project
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be an 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-vector space, let 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ be an algebra of subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ (we definition of an algebra 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is assumed to be nonempty), and let 
+\begin_inset Formula $\mu\colon\mathcal{A}\to[0,\infty]$
+\end_inset
+
+ be a function such that
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mu$
+\end_inset
+
+ is 
+\series bold
+normalized 
+\series default
+meaning 
+\begin_inset Formula $\mu(\emptyset)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mu$
+\end_inset
+
+ is 
+\series bold
+monotone 
+\series default
+(or has the 
+\series bold
+monotonicity
+\series default
+ property)
+\series bold
+ 
+\series default
+meaning 
+\begin_inset Formula $A\subseteq B$
+\end_inset
+
+ implies 
+\begin_inset Formula $\mu(A)\leq\mu(B)$
+\end_inset
+
+ for all 
+\begin_inset Formula $A,B\in\mathcal{A}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mu$
+\end_inset
+
+ is 
+\series bold
+finitely subadditive 
+\series default
+(or has the
+\series bold
+ finite subadditivit
+\series default
+y property) meaning 
+\begin_inset Formula $\mu(A\cup B)\leq\mu(A)+\mu(B)$
+\end_inset
+
+ for all 
+\begin_inset Formula $A,B\in\mathcal{A}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The map 
+\begin_inset Formula $\mathrm{d}_{\mu}\colon\mathcal{A}\times\mathcal{A}\to[0,\infty)$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\[
+\mathrm{d}_{\mu}(A,B)=\mu(A\Delta B)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $A,B\in\mathcal{A}$
+\end_inset
+
+ gives 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ the structure of a pseudometric space (where the pseudometric 
+\begin_inset Formula $\mathrm{d}_{\mu}$
+\end_inset
+
+ is allowed to take infinite values).
+ If 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is understood from context, we simplify notation and write 
+\begin_inset Formula $\mathrm{d}=\mathrm{d}_{\mu}$
+\end_inset
+
+ and we refer to the psuedometric space 
+\begin_inset Formula $(\mathcal{A},\mathrm{d})$
+\end_inset
+
+ via its underlying set 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+.
+ The reason 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ is a pseudometric and not a metric is because we not have identity of indiscern
+ibles: we may have 
+\begin_inset Formula $\mu(A\Delta B)=0$
+\end_inset
+
+ with 
+\begin_inset Formula $A\neq B$
+\end_inset
+
+.
+ All is not lost however as every pseudometric space induces a metric space
+ in a natural way.
+ Let us briefly describe the metric space induced by the pseudometric space
+ 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+.
+ We introduce an equivalence relation 
+\begin_inset Formula $\sim$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ as follows: let 
+\begin_inset Formula $A,B\in\mathcal{A}$
+\end_inset
+
+.
+ Then we say
+\begin_inset Formula 
+\begin{equation}
+A\sim B\text{ if and only if }\mathrm{d}(A,B)=0.\label{eq:equivalencerelation}
+\end{equation}
+
+\end_inset
+
+One checks that 
+\begin_inset Formula $\sim$
+\end_inset
+
+ is an equivalence relation on 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ and so we may consider quotient space 
+\begin_inset Formula 
+\[
+[\mathcal{A}]:=\mathcal{A}\slash\sim.
+\]
+
+\end_inset
+
+We denote 
+\begin_inset Formula $[A]$
+\end_inset
+
+ to be the coset in 
+\begin_inset Formula $[\mathcal{A}]$
+\end_inset
+
+ with 
+\begin_inset Formula $A\in\mathcal{A}$
+\end_inset
+
+ as a particular representative.
+ We define a metric 
+\begin_inset Formula $[\mathrm{d}]$
+\end_inset
+
+ on 
+\begin_inset Formula $[\mathcal{A}]$
+\end_inset
+
+ by
+\begin_inset Formula 
+\begin{equation}
+[\mathrm{d}]([A],[B])=\mathrm{d}(A,B)\label{eq:metricwelldefined-1}
+\end{equation}
+
+\end_inset
+
+One checks that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:metricwelldefined})
+\end_layout
+
+\end_inset
+
+ is well-defined and satisfies all of the properties required for it to
+ be a metric.
+ Also the difference operator 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ induces a map 
+\begin_inset Formula $[\Delta]\colon[\mathcal{M}]\times[\mathcal{M}]\to[\mathcal{M}]$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\begin{equation}
+[\Delta]([A],[B])=[A\Delta B].\label{eq:additionwelldefined}
+\end{equation}
+
+\end_inset
+
+One checks that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:additionwelldefined})
+\end_layout
+
+\end_inset
+
+ is well-defined and gives 
+\begin_inset Formula $[A]$
+\end_inset
+
+ the structure of an abelian group.
+ To clean notation in what follows, we will simply write 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ instead of 
+\begin_inset Formula $[\mathcal{A}]$
+\end_inset
+
+ with the understanding that elements in 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ are really equivalence classes via the equivalence relation 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:equivalencerelation})
+\end_layout
+
+\end_inset
+
+.
+ Similarly we drop the brackets around 
+\begin_inset Formula $[A]$
+\end_inset
+
+, 
+\begin_inset Formula $[\mathrm{d}]$
+\end_inset
+
+, and 
+\begin_inset Formula $[\Delta]$
+\end_inset
+
+ and simply write 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+, and 
+\begin_inset Formula $\Delta$
+\end_inset
+
+.
+ In particular, a map 
+\begin_inset Formula $f\colon\mathcal{A}\to Y$
+\end_inset
+
+ is well-defined only if it respects the equivalence relation (
+\begin_inset Formula $A\sim B$
+\end_inset
+
+, then 
+\begin_inset Formula $f(A)=f(B)$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Subsection
+Giving 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ the structure of an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-module
+\end_layout
+
+\begin_layout Standard
+We want to give 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ the structure of a normed vector space over 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ with 
+\begin_inset Formula $\mu$
+\end_inset
+
+ being the norm.
+ In fact, we won't be able to do this since 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is an 
+\begin_inset Formula $\mathbb{F}_{2}$
+\end_inset
+
+-vector space (
+\begin_inset Formula $2\cdot A=A\Delta A=\emptyset)$
+\end_inset
+
+.
+ However we can still get very close to doing this.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ An 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+
+\series bold
+-module
+\series default
+ 
+\begin_inset Formula $V$
+\end_inset
+
+ is an abelian group equipped with a map 
+\begin_inset Formula $\mathbb{R}_{>0}\times V\to V$
+\end_inset
+
+ denoted 
+\begin_inset Formula $(\alpha,v)\mapsto\alpha v$
+\end_inset
+
+ such that the following identities hold:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $1v=v$
+\end_inset
+
+ for all 
+\begin_inset Formula $v\in V$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $(\alpha\beta)v=\alpha(\beta v)$
+\end_inset
+
+ for all 
+\begin_inset Formula $\alpha,\beta\in\mathbb{R}_{>0}$
+\end_inset
+
+ and 
+\begin_inset Formula $v\in V$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\alpha(v+w)=\alpha v+\alpha w$
+\end_inset
+
+ for all 
+\begin_inset Formula $\alpha\in\mathbb{R}_{>0}$
+\end_inset
+
+ and 
+\begin_inset Formula $v,w\in V$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ In particular, an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-module 
+\begin_inset Formula $V$
+\end_inset
+
+ is like an 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+-vector space except we don't require 
+\begin_inset Formula $(\alpha+\beta)v=\alpha v+\beta v$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $V$
+\end_inset
+
+ be an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-module.
+ An 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+
+\series bold
+-norm
+\series default
+ on 
+\begin_inset Formula $V$
+\end_inset
+
+ (or norm for short) is a function 
+\begin_inset Formula $\|\cdot\|\colon V\to[0,\infty]$
+\end_inset
+
+ which satisfies the following properties:
+\end_layout
+
+\begin_layout Enumerate
+(positive-definiteness) 
+\begin_inset Formula $\|v\|=0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $v=0$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+(homogeneity) 
+\begin_inset Formula $\|\alpha v\|=\alpha\|v\|$
+\end_inset
+
+ for all 
+\begin_inset Formula $\alpha\in\mathbb{R}_{>0}$
+\end_inset
+
+ and 
+\begin_inset Formula $v\in V$
+\end_inset
+
+;
+\end_layout
+
+\begin_layout Enumerate
+(subadditivity) 
+\begin_inset Formula $\|v+w\|\leq\|v\|+\|w\|$
+\end_inset
+
+ for all 
+\begin_inset Formula $v,w\in V$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the case where 
+\begin_inset Formula $\|\cdot\|$
+\end_inset
+
+ is only homogeneous and subadditive (but not necessarily positive-definite),
+ then we call 
+\begin_inset Formula $\|\cdot\|$
+\end_inset
+
+ an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+
+\series bold
+-pseudonorm
+\series default
+.
+ An 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+
+\series bold
+-normed space 
+\series default
+is an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-module 
+\begin_inset Formula $V$
+\end_inset
+
+ equipped with an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-norm.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $V$
+\end_inset
+
+ is an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-normed space, then we need not have the identity 
+\begin_inset Formula $(\alpha+\beta)v=\alpha v+\beta v$
+\end_inset
+
+, however one can still show that 
+\begin_inset Formula $\|(\alpha+\beta)v\|\geq\|\alpha v+\beta v\|$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We now wish to give 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ the structure of an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-module.
+ In order to this, we will need to make further assumptions on 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ For all 
+\begin_inset Formula $\alpha\in\mathbb{R}_{>0}$
+\end_inset
+
+ and 
+\begin_inset Formula $A\in\mathcal{M}$
+\end_inset
+
+, we set
+\begin_inset Formula 
+\[
+\alpha A=\{\alpha a\mid a\in A\},
+\]
+
+\end_inset
+
+By replacing 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ with a larger algebra if necessary, we assume that 
+\begin_inset Formula $\alpha A\in\mathcal{A}$
+\end_inset
+
+ for all 
+\begin_inset Formula $\alpha\in\mathbb{R}_{>0}$
+\end_inset
+
+ and 
+\begin_inset Formula $A\in\mathcal{A}$
+\end_inset
+
+.
+ We also assume that 
+\begin_inset Formula $\mu(\alpha A)=\alpha\mu(A)$
+\end_inset
+
+ for all 
+\begin_inset Formula $\alpha\in\mathbb{R}_{>0}$
+\end_inset
+
+ and 
+\begin_inset Formula $A\in\mathcal{A}$
+\end_inset
+
+.
+ With these assumptions in place, we claim that the map 
+\begin_inset Formula $\mathbb{R}_{>0}\times\mathcal{A}\to\mathcal{A}$
+\end_inset
+
+ given by 
+\begin_inset Formula $(\alpha,A)\mapsto\alpha A$
+\end_inset
+
+ gives 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ the structure of an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-vector space which, when equipped with 
+\begin_inset Formula $\mu$
+\end_inset
+
+, is further given the structure of an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-normed space.
+ Before showing this, we record the following lemma:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemmaidentities}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ be subsets of 
+\begin_inset Formula $X$
+\end_inset
+
+ and let 
+\begin_inset Formula $\alpha\in\mathbb{R}_{>0}$
+\end_inset
+
+.
+ The following identities hold.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\alpha(A\cup B)=\alpha A\cup\alpha B$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\alpha(A\backslash B)=\alpha A\backslash\alpha B$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\alpha(A\Delta B)=(\alpha A)\Delta(\alpha B)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ 1.
+ Let 
+\begin_inset Formula $\alpha x\in\alpha(A\cup B)$
+\end_inset
+
+ where 
+\begin_inset Formula $x\in A\cup B$
+\end_inset
+
+.
+ Without loss of generality, we may assume 
+\begin_inset Formula $x\in A$
+\end_inset
+
+.
+ Then clearly 
+\begin_inset Formula $\alpha x\in\alpha A\cup\alpha B$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula 
+\[
+\alpha(A\cup B)\subseteq\alpha A\cup\alpha B.
+\]
+
+\end_inset
+
+Conversely, suppose 
+\begin_inset Formula $y\in\alpha A\cup\alpha B$
+\end_inset
+
+.
+ Without loss of generality, we may assume 
+\begin_inset Formula $y\in\alpha A$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $y=\alpha x$
+\end_inset
+
+ for some 
+\begin_inset Formula $x\in A$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $y=\alpha x\in\alpha(A\cup B)$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula 
+\[
+\alpha(A\cup B)\supseteq\alpha A\cup\alpha B.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Let 
+\begin_inset Formula $\alpha a\in\alpha(A\backslash B)$
+\end_inset
+
+ where 
+\begin_inset Formula $a\in A\backslash B$
+\end_inset
+
+.
+ Then observe that 
+\begin_inset Formula $\alpha a\in\alpha A$
+\end_inset
+
+ but 
+\begin_inset Formula $\alpha a\notin\alpha B$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $\alpha a=\alpha b$
+\end_inset
+
+ for some 
+\begin_inset Formula $b\in B$
+\end_inset
+
+, then 
+\begin_inset Formula $a=b$
+\end_inset
+
+ since 
+\begin_inset Formula $\alpha\neq0$
+\end_inset
+
+, which contradicts the assumption that 
+\begin_inset Formula $a\notin B$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\alpha a\in\alpha A\backslash\alpha B$
+\end_inset
+
+ which implies
+\begin_inset Formula 
+\[
+\alpha(A\backslash B)\subseteq\alpha A\backslash\alpha B.
+\]
+
+\end_inset
+
+Conversely, suppose 
+\begin_inset Formula $x\in\alpha A\backslash\alpha B$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $x\in\alpha A$
+\end_inset
+
+, we have 
+\begin_inset Formula $x=\alpha a$
+\end_inset
+
+ for some 
+\begin_inset Formula $a\in A$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $x\notin\alpha B$
+\end_inset
+
+, it follows that 
+\begin_inset Formula $a\notin B$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $x=\alpha a\in\alpha(A\backslash B)$
+\end_inset
+
+ which implies
+\begin_inset Formula 
+\[
+\alpha(A\backslash B)\supseteq\alpha A\backslash\alpha B.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ By 2 and 3, we have
+\begin_inset Formula 
+\begin{align*}
+\alpha(A\Delta B) & =\alpha((A\backslash B)\cup(B\backslash A))\\
+ & =\alpha(A\backslash B)\cup\alpha(B\backslash A)\\
+ & =\alpha A\backslash\alpha B\cup\alpha B\backslash\alpha A\\
+ & =(\alpha A)\Delta(\alpha B).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ The map 
+\begin_inset Formula $\mathbb{R}_{>0}\times[\mathcal{A}]\to[\mathcal{A}]$
+\end_inset
+
+ given by 
+\begin_inset Formula $(\alpha,[A])\mapsto[\alpha A]$
+\end_inset
+
+ gives 
+\begin_inset Formula $[\mathcal{A}]$
+\end_inset
+
+ the structure of an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-module.
+ Furthermore, the map 
+\begin_inset Formula $[\mu]\colon[\mathcal{A}]\to[0,\infty]$
+\end_inset
+
+ given by 
+\begin_inset Formula $[A]\mapsto\mu(A)$
+\end_inset
+
+ is an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-norm on 
+\begin_inset Formula $[\mathcal{A}]$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{lemmaidentities})
+\end_layout
+
+\end_inset
+
+ shows that the action 
+\begin_inset Formula $\mathbb{R}_{>0}\times\mathcal{A}\to\mathcal{A}$
+\end_inset
+
+ given by 
+\begin_inset Formula $(\alpha,A)\mapsto\alpha A$
+\end_inset
+
+ gives 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ the structure of an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-module.
+ It is straightforward to check that the map 
+\begin_inset Formula $\mu\colon\mathcal{A}\to[0,\infty]$
+\end_inset
+
+ is an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-pseudonorm.
+ Thus we just need to check that the induced maps 
+\begin_inset Formula $\mathbb{R}_{>0}\times[\mathcal{A}]\to[\mathcal{A}]$
+\end_inset
+
+ and 
+\begin_inset Formula $[\mu]\colon[\mathcal{A}]\to[0,\infty]$
+\end_inset
+
+ are well-defined.
+ Suppose 
+\begin_inset Formula $A\sim B$
+\end_inset
+
+ (so 
+\begin_inset Formula $\mu(A\Delta B)=0$
+\end_inset
+
+).
+ Then
+\begin_inset Formula 
+\begin{align*}
+\mu(\alpha A\Delta\alpha B) & =\mu\alpha(A\Delta B))\\
+ & =\alpha\mu(A\Delta B)\\
+ & =0,
+\end{align*}
+
+\end_inset
+
+shows that 
+\begin_inset Formula $\alpha A\sim\alpha B$
+\end_inset
+
+.
+ Thus the map 
+\begin_inset Formula $\mathbb{R}_{>0}\times[\mathcal{A}]\to[\mathcal{A}]$
+\end_inset
+
+ is well-defined.
+ A similar argument shows that 
+\begin_inset Formula $[\mu]$
+\end_inset
+
+ is well-defined as well.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Marcel Riesz Extension Theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $V$
+\end_inset
+
+ be an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-module.
+ A set 
+\begin_inset Formula $P\subseteq V$
+\end_inset
+
+ is said to be a 
+\series bold
+convex cone 
+\series default
+if
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $x,y\in P$
+\end_inset
+
+ implies 
+\begin_inset Formula $x+y\in P$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+if 
+\begin_inset Formula $x\in P$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha\in\mathbb{R}_{>0}$
+\end_inset
+
+, then 
+\begin_inset Formula $\alpha x\in P$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ (Marcel Riesz Extension Theorem) Let 
+\begin_inset Formula $V$
+\end_inset
+
+ be an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-module, let 
+\begin_inset Formula $W\subseteq V$
+\end_inset
+
+ be a subspace of 
+\begin_inset Formula $V$
+\end_inset
+
+, and let 
+\begin_inset Formula $P\subseteq V$
+\end_inset
+
+ be a convex cone.
+ Suppose 
+\begin_inset Formula $V=W+P$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi\colon W\to\mathbb{R}$
+\end_inset
+
+ is a linear functional such that 
+\begin_inset Formula $\psi|_{P\cap W}\geq0$
+\end_inset
+
+.
+ Then there exists a linear functional 
+\begin_inset Formula $\widetilde{\psi}\colon V\to\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widetilde{\psi}|_{W}=\psi$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{\psi}|_{P}\geq0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $v\in V\backslash W$
+\end_inset
+
+.
+ We will first show that we can extend 
+\begin_inset Formula $\psi$
+\end_inset
+
+ to a linear functional 
+\begin_inset Formula $\widetilde{\psi}\colon W+\mathbb{R}v\to\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widetilde{\psi}$
+\end_inset
+
+ preserves the positivity condition.
+ Define two sets 
+\begin_inset Formula $A=\{x\in W\mid-x\leq_{P}v\}$
+\end_inset
+
+ and 
+\begin_inset Formula $B=\{y\in W\mid v\leq_{P}y\}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ are nonempty since 
+\begin_inset Formula $V=W+P$
+\end_inset
+
+.
+ We claim that
+\begin_inset Formula 
+\begin{equation}
+\sup\{-\psi(x)\mid x\in A\}\leq\inf\{\psi(y)\mid y\in B\}.\label{eq:convexconeineq-1-1}
+\end{equation}
+
+\end_inset
+
+Indeed, let 
+\begin_inset Formula $x\in A$
+\end_inset
+
+ and let 
+\begin_inset Formula $y\in B$
+\end_inset
+
+.
+ Then note that 
+\begin_inset Formula $-x\leq_{P}v\leq_{P}y$
+\end_inset
+
+ implies 
+\begin_inset Formula $x+y\in C$
+\end_inset
+
+.
+ It follows that
+\begin_inset Formula 
+\begin{align*}
+0 & \leq\psi(x+y)\\
+ & =\psi(x)+\psi(y).
+\end{align*}
+
+\end_inset
+
+In other words, 
+\begin_inset Formula $-\psi(x)\leq\psi(y)$
+\end_inset
+
+, which implies 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:convexconeineq-1-1})
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We set 
+\begin_inset Formula $\widetilde{\psi}(v)$
+\end_inset
+
+ to be any number between 
+\begin_inset Formula $\sup\{-\psi(x)\mid x\in A\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\inf\{\psi(y)\mid y\in B\}$
+\end_inset
+
+ and we define we define 
+\begin_inset Formula $\widetilde{\psi}\colon W+\mathbb{R}v\to\mathbb{R}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\begin{equation}
+\widetilde{\psi}(w+\lambda v)=\psi(w)+\lambda\widetilde{\psi}(v)\label{eq:welldefinedpsitilde-1-1-1}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $w+\lambda v\in W+\mathbb{R}v$
+\end_inset
+
+.
+ Note that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedpsitilde-1-1-1})
+\end_layout
+
+\end_inset
+
+ is well-defined since 
+\begin_inset Formula $v$
+\end_inset
+
+ is linearly independent from 
+\begin_inset Formula $W$
+\end_inset
+
+.
+ It is easy to check that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:welldefinedpsitilde-1-1-1})
+\end_layout
+
+\end_inset
+
+ gives us a linear functional 
+\begin_inset Formula $\widetilde{\psi}\colon W+\mathbb{R}v\to\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widetilde{\psi}|_{W}=\psi$
+\end_inset
+
+.
+ Furthermore we have
+\begin_inset Formula 
+\[
+-\psi(x)\leq\widetilde{\psi}(v)\leq\psi(y)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in A$
+\end_inset
+
+ and 
+\begin_inset Formula $y\in B$
+\end_inset
+
+.
+ The only thing left is to check that 
+\begin_inset Formula $\widetilde{\psi}$
+\end_inset
+
+ satisfies the positivity condition.
+ Let 
+\begin_inset Formula $w+\lambda v\in P\cap(W+\mathbb{R}v)$
+\end_inset
+
+.
+ We consider the following cases:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 1: 
+\series default
+Assume that 
+\begin_inset Formula $\lambda>0$
+\end_inset
+
+.
+ Then note that 
+\begin_inset Formula $(1/\lambda)w+v=(1/\lambda)(w+\lambda v)\in P$
+\end_inset
+
+ since 
+\begin_inset Formula $P$
+\end_inset
+
+ is a convex cone.
+ This implies 
+\begin_inset Formula $(1/\lambda)w\in A$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\begin{align*}
+0 & \leq\lambda(\psi((1/\lambda)w)+\widetilde{\psi}(v))\\
+ & =\psi(w)+\lambda\widetilde{\psi}(v)\\
+ & =\widetilde{\psi}(w+\lambda v).
+\end{align*}
+
+\end_inset
+
+
+\series bold
+Case 2: 
+\series default
+Assume that 
+\begin_inset Formula $\lambda<0$
+\end_inset
+
+.
+ Then note that 
+\begin_inset Formula $(-1/\lambda)w-v=(-1/\lambda)(w+\lambda v)\in P$
+\end_inset
+
+ since 
+\begin_inset Formula $P$
+\end_inset
+
+ is a convex cone.
+ This implies 
+\begin_inset Formula $(-1/\lambda)w\in B$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula 
+\begin{align*}
+0 & \leq-\lambda(\psi((-1/\lambda)w)-\widetilde{\psi}(v))\\
+ & =\psi(w)+\lambda\widetilde{\psi}(v)\\
+ & =\widetilde{\psi}(w+\lambda v).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 3: 
+\series default
+Assume that 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $w\in P\cap W$
+\end_inset
+
+, and hence 
+\begin_inset Formula $0\leq\psi(w)=\widetilde{\psi}(w)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In all three cases, we see that the positivity condition is satisfied.
+ Thus we can extend 
+\begin_inset Formula $\psi$
+\end_inset
+
+ to a linear functional on 
+\begin_inset Formula $W+\mathbb{R}v$
+\end_inset
+
+ while preserving the positivity condition.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now to extend 
+\begin_inset Formula $\psi$
+\end_inset
+
+ to all of 
+\begin_inset Formula $V$
+\end_inset
+
+, we must appeal to Zorn's Lemma.
+ More specifically, we define a partially ordered set 
+\begin_inset Formula $(\mathcal{F},\leq)$
+\end_inset
+
+ as follows: the underlying set 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\mathcal{F}=\{\text{linear functionals }\psi'\colon W'\to\mathbb{R}\mid W'\supseteq W,\text{ }\psi'|_{W}=\psi\text{, and }\psi'|_{W'\cap C=P}\geq0\}.
+\]
+
+\end_inset
+
+A member of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is denoted by an ordered pair: 
+\begin_inset Formula $(\psi',W')$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $(\psi_{1},W_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $(\psi_{2},W_{2})$
+\end_inset
+
+ are two members of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ then we say 
+\begin_inset Formula $(\psi_{1},W_{1})\leq(\psi_{2},W_{2})$
+\end_inset
+
+ if 
+\begin_inset Formula $W_{1}\subseteq W_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\psi_{2}|_{W_{1}}=\psi_{1}$
+\end_inset
+
+.
+ Observe that every totally ordered subset in 
+\begin_inset Formula $(\mathcal{F},\leq)$
+\end_inset
+
+ has an upper bound.
+ Indeed, suppose 
+\begin_inset Formula $\{(\psi_{i},W_{i})\}_{i\in I}$
+\end_inset
+
+ is a totally ordered subset in 
+\begin_inset Formula $(\mathcal{F},\leq)$
+\end_inset
+
+.
+ Then if we set 
+\begin_inset Formula $W'=\bigcup_{i\in I}W_{i}$
+\end_inset
+
+ and if we define 
+\begin_inset Formula $\psi'\colon W\to\mathbb{R}$
+\end_inset
+
+ as follows: if 
+\begin_inset Formula $x\in W$
+\end_inset
+
+, then 
+\begin_inset Formula $x\in W_{i}$
+\end_inset
+
+ for some 
+\begin_inset Formula $i$
+\end_inset
+
+ and we set 
+\begin_inset Formula $\psi'(x)=\psi_{i}(x)$
+\end_inset
+
+.
+ Then it is easy to check that 
+\begin_inset Formula $(\psi',W')$
+\end_inset
+
+ is a member of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ and that it is an upper bound of 
+\begin_inset Formula $\{(\psi_{i},W_{i})\}_{i\in I}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is nonempty (it contains 
+\begin_inset Formula $(\psi,W)$
+\end_inset
+
+) and every totally ordered subset of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ has an upper bound, we can apply Zorn's Lemma to obtain a 
+\emph on
+maximal 
+\emph default
+element in 
+\begin_inset Formula $(\mathcal{F},\leq)$
+\end_inset
+
+.
+ This maximal element 
+\emph on
+must 
+\emph default
+be defined on all of 
+\begin_inset Formula $V$
+\end_inset
+
+, otherwise we can extend it to a larger subspace as shown above and obtain
+ a contradiction.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $V$
+\end_inset
+
+ be an 
+\begin_inset Formula $\mathbb{R}_{>0}$
+\end_inset
+
+-normed space and let 
+\begin_inset Formula $U$
+\end_inset
+
+ be a subspace of 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ Furthermore, let 
+\begin_inset Formula $\ell\colon U\to\mathbb{R}_{\geq0}$
+\end_inset
+
+ be a positive linear functional which satisfies 
+\begin_inset Formula $\ell(u)\leq\|u\|$
+\end_inset
+
+ for all 
+\begin_inset Formula $u\in U$
+\end_inset
+
+.
+ Then there exists a positive linear functional 
+\begin_inset Formula $\widetilde{\ell}\colon V\to\mathbb{R}_{\geq0}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\widetilde{\ell}|_{U}=\ell$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{\ell}(v)\leq\|v\|$
+\end_inset
+
+ for all 
+\begin_inset Formula $v\in V$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

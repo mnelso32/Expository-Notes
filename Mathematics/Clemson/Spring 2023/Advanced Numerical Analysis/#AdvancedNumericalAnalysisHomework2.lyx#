@@ -1,0 +1,751 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Numerical Analysis Homework 2
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+Throughout this homework, 
+\begin_inset Formula $\|\cdot\|$
+\end_inset
+
+ denotes the 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+-norm.
+\end_layout
+
+\begin_layout Section
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $a_{0},a_{1},\dots,a_{n}$
+\end_inset
+
+ be 
+\begin_inset Formula $n+1$
+\end_inset
+
+ equispaced points on 
+\begin_inset Formula $[-1,1]$
+\end_inset
+
+, where 
+\begin_inset Formula $a_{0}=-1$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{n}=1$
+\end_inset
+
+.
+ Assemble these 
+\begin_inset Formula $n+1$
+\end_inset
+
+ values into a column vector 
+\begin_inset Formula $\boldsymbol{u}$
+\end_inset
+
+, and use MATLAB’s vander to generate Vandermonde matrices 
+\begin_inset Formula $A$
+\end_inset
+
+ from vector 
+\begin_inset Formula $\boldsymbol{u}$
+\end_inset
+
+ f 
+\begin_inset Formula $n=9,19,29,39$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\boldsymbol{x}=(1,1,\dots,1)^{\top}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{b}=A\boldsymbol{x}$
+\end_inset
+
+.
+ Pretend that we do not know 
+\begin_inset Formula $\boldsymbol{x}$
+\end_inset
+
+ and use numerical algorithms to solve this linear system for 
+\begin_inset Formula $\boldsymbol{x}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\widehat{\boldsymbol{x}}$
+\end_inset
+
+ be the computed solution.
+ Compute the relative forward errors 
+\begin_inset Formula $\|\widehat{\boldsymbol{x}}-\boldsymbol{x}\|/\|\boldsymbol{x}\|$
+\end_inset
+
+ and the smallest relative backward errors
+\begin_inset Formula 
+\[
+\frac{\|\boldsymbol{b}-A\widehat{\boldsymbol{x}}\|}{\|A\|\|\widehat{\boldsymbol{x}}\|}=\min\left\{ \frac{\|\delta A\|}{\|A\|}\mid(A+\delta A)\widehat{\boldsymbol{x}}=\boldsymbol{b}\right\} ,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\|\cdot\|$
+\end_inset
+
+ denotes the 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+-norm, for the following:
+\end_layout
+
+\begin_layout Enumerate
+GEPP (MATLAB's backlash)
+\end_layout
+
+\begin_layout Enumerate
+QR factorization of 
+\begin_inset Formula $A$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Cramer's rule
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $A^{-1}$
+\end_inset
+
+ multiplied by 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+GE without pivoting
+\end_layout
+
+\begin_layout Standard
+Comment on the forward/backward stability of these methods.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Consider the eigenvalue problem 
+\begin_inset Formula $A\boldsymbol{v}=\lambda\boldsymbol{v}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $(\widehat{\lambda},\widehat{\boldsymbol{v}})$
+\end_inset
+
+ be a computed eigenpair, which is assumed to be the exact eigenpair of
+ a perturbed matrix 
+\begin_inset Formula $A+\delta A$
+\end_inset
+
+.
+ Show that the minimum 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+-norm of all such 
+\begin_inset Formula $\delta A$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+\frac{\|A\widehat{\boldsymbol{v}}-\widehat{\lambda}\widehat{\boldsymbol{v}}\|}{\|\widehat{\boldsymbol{v}}\|},
+\]
+
+\end_inset
+
+and find a particular 
+\begin_inset Formula $\delta A$
+\end_inset
+
+ whose 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+-norm is the minimum.
+ (Note that this result can help us experimentally determine if an eigenvalue
+ algorithm is backward stable).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We have 
+\begin_inset Formula $(A+\delta A)\widehat{\boldsymbol{v}}=\widehat{\lambda}\widehat{\boldsymbol{v}}$
+\end_inset
+
+ implies 
+\begin_inset Formula $(\delta A)\widehat{\boldsymbol{v}}=\widehat{\lambda}\widehat{\boldsymbol{v}}-A\widehat{\boldsymbol{v}}$
+\end_inset
+
+ which implies 
+\begin_inset Formula $\|$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Give a proof that the worst-case growth factor 
+\begin_inset Formula $\rho_{n}=2^{n-1}$
+\end_inset
+
+ for GEPP.
+ Compared to 
+\begin_inset Formula $\rho_{n}\leq Cn^{\frac{1}{2}+\frac{1}{4}\ln n}$
+\end_inset
+
+ with complete pivoting and 
+\begin_inset Formula $\rho_{n}\leq1.5n^{\frac{3}{4}\ln n}$
+\end_inset
+
+ with rook pivoting, this is much larger.
+ However, we construct matrices with random elements, each are independent
+ samples from the normal distribution of mean 0 and standard deviation 
+\begin_inset Formula $\frac{1}{\sqrt{n}}$
+\end_inset
+
+ (
+\begin_inset Formula $\mathrm{A=randn(n,n)/sqrt(n))}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $n=32,64,\dots,512$
+\end_inset
+
+, and for each 
+\begin_inset Formula $n$
+\end_inset
+
+, repeat the experiment 
+\begin_inset Formula $1000$
+\end_inset
+
+ times.
+ Find the percentage of experiments when 
+\begin_inset Formula $\rho_{n}>\sqrt{n}$
+\end_inset
+
+.
+ Make brief comments on the chance of having a large 
+\begin_inset Formula $\rho_{n}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Though pivoting is needed for factorizing general matrices, it is not needed
+ for symmetric positive definite and diagonally dominant matrices.
+ 
+\end_layout
+
+\begin_layout Enumerate
+For a symmetric positive definite 
+\begin_inset Formula $A$
+\end_inset
+
+, with the one-step Cholesky factorization
+\begin_inset Formula 
+\[
+A=\begin{pmatrix}a_{11} & w^{\top}\\
+w & K
+\end{pmatrix}=\begin{pmatrix}\sqrt{a_{11}} & 0\\
+\frac{w}{\sqrt{a_{11}}} & I
+\end{pmatrix}\begin{pmatrix}1 & 0\\
+0 & K-\frac{ww^{\top}}{a_{11}}
+\end{pmatrix}\begin{pmatrix}\sqrt{a_{11}} & \frac{w^{\top}}{\sqrt{a_{11}}}\\
+0 & I
+\end{pmatrix}=R_{1}^{\top}A_{1}R_{1},
+\]
+
+\end_inset
+
+show that the submatrix 
+\begin_inset Formula $K-(ww^{\top})/a_{11}$
+\end_inset
+
+ is symmetric positive definite.
+ Consequently, the factorization can be completed without break-down.
+ Then, show that 
+\begin_inset Formula $\|R\|=\|A\|^{1/2}$
+\end_inset
+
+ , which means the element in 
+\begin_inset Formula $R$
+\end_inset
+
+ are uniformly bounded by that of 
+\begin_inset Formula $\|A\|$
+\end_inset
+
+.
+ Explain why this observation leads to the backward stability of Cholesky
+ factorization.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Suppose that 
+\begin_inset Formula $A=\left(\begin{smallmatrix}\alpha & w^{\top}\\
+v & C
+\end{smallmatrix}\right)$
+\end_inset
+
+ is column diagonally dominant, with one-step LU factorization 
+\begin_inset Formula 
+\[
+A=\begin{pmatrix}1 & 0\\
+\frac{v}{\alpha} & I
+\end{pmatrix}\begin{pmatrix}1 & 0\\
+0 & C-\frac{vw^{\top}}{\alpha}
+\end{pmatrix}\begin{pmatrix}\alpha & w^{\top}\\
+0 & I
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Show that the sub-matirx 
+\begin_inset Formula $C-(vw^{\top})/\alpha$
+\end_inset
+
+ is also column diagonally dominant, and no pivoting is needed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
