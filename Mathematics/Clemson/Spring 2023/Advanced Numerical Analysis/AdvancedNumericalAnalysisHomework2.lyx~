@@ -181,6 +181,24 @@ Throughout this homework,
 \end_inset
 
 -norm.
+ Also if 
+\begin_inset Formula $\boldsymbol{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{y}$
+\end_inset
+
+ are two column vectors in 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+, then we write 
+\begin_inset Formula $\langle\boldsymbol{x},\boldsymbol{y}\rangle:=\boldsymbol{x}^{\top}\boldsymbol{y}$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Section
@@ -239,7 +257,7 @@ label{ex}
 \begin_inset Formula $\boldsymbol{u}$
 \end_inset
 
- f 
+ for 
 \begin_inset Formula $n=9,19,29,39$
 \end_inset
 
@@ -291,7 +309,7 @@ where
 \end_layout
 
 \begin_layout Enumerate
-GEPP (MATLAB's backlash)
+GEPP (MATLAB's backslash);
 \end_layout
 
 \begin_layout Enumerate
@@ -299,11 +317,11 @@ QR factorization of
 \begin_inset Formula $A$
 \end_inset
 
-
+;
 \end_layout
 
 \begin_layout Enumerate
-Cramer's rule
+Cramer's rule;
 \end_layout
 
 \begin_layout Enumerate
@@ -314,11 +332,11 @@ Cramer's rule
 \begin_inset Formula $\boldsymbol{b}$
 \end_inset
 
-
+;
 \end_layout
 
 \begin_layout Enumerate
-GE without pivoting
+GE without pivoting.
 \end_layout
 
 \begin_layout Standard
@@ -354,7 +372,1075 @@ label{sol}
 
 \end_inset
 
- 
+ 1.
+ We work in MATLAB below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+% initialize data
+\end_layout
+
+\begin_layout Plain Layout
+
+n = [9,19,29,39];
+\end_layout
+
+\begin_layout Plain Layout
+
+ForwardErrors = zeros(4,4);
+\end_layout
+
+\begin_layout Plain Layout
+
+BackwardErrors = zeros(4,4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for k = 1:4 
+\end_layout
+
+\begin_layout Plain Layout
+
+  u=(-1:2/n(k):1)'; 
+\end_layout
+
+\begin_layout Plain Layout
+
+  x = ones(n(k)+1,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  A = vander(u); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  b = A*x;
+\end_layout
+
+\begin_layout Plain Layout
+
+  [Q,R] = qr(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  xh = zeros(n(k)+1,4);
+\end_layout
+
+\begin_layout Plain Layout
+
+  xh(:,1) = A
+\backslash
+b;
+\end_layout
+
+\begin_layout Plain Layout
+
+  xh(:,2) = R
+\backslash
+(Q'*b);
+\end_layout
+
+\begin_layout Plain Layout
+
+  for j = 1:length(A)    
+\end_layout
+
+\begin_layout Plain Layout
+
+      C = A;     
+\end_layout
+
+\begin_layout Plain Layout
+
+      C(:,j) = b;     
+\end_layout
+
+\begin_layout Plain Layout
+
+      xh(j,3) = det(C)/det(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  end
+\end_layout
+
+\begin_layout Plain Layout
+
+  xh(:,4) = inv(A)*b; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  for j = 1:4
+\end_layout
+
+\begin_layout Plain Layout
+
+     ForwardErrors(k,j) = norm(xh(:,j)-x)/norm(x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+     BackwardErrors(k,j) = norm(b-A*xh(:,j))/(norm(A)*norm(xh(:,j))); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  end;
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ForwardErrorGEPP = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+ForwardErrorQR = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+ForwardErrorCR = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+ForwardErrorI = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+ForwardErrorGE = zeros(1,4);
+\end_layout
+
+\begin_layout Plain Layout
+
+BackwardErrorGEPP = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+BackwardErrorQR = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+BackwardErrorCR = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+BackwardErrorI = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+BackwardErrorGE = zeros(1,4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:4 
+\end_layout
+
+\begin_layout Plain Layout
+
+  u=(-1:2/(n(i)+1):1)'; 
+\end_layout
+
+\begin_layout Plain Layout
+
+  x = ones(n(i)+1,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  A = vander(u); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  b = A*x;
+\end_layout
+
+\begin_layout Plain Layout
+
+  [Q,R] = qr(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  xGEPP = A
+\backslash
+b; 
+\end_layout
+
+\begin_layout Plain Layout
+
+  xQR = R
+\backslash
+(Q*b); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  ForwardErrorGEPP(i) = norm(xh-x)/norm(x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  BackwardErrorGEPP(i) = norm(b-A*xh)/(norm(A)*norm(xh)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  %QR Factorization 
+\end_layout
+
+\begin_layout Plain Layout
+
+  [Q,R] = qr(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  xh = R
+\backslash
+(Q*b); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  ForwardErrorQR(i) = norm(xh-x)/norm(x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  BackwardErrorQR(i) = norm(b-A*xh)/(norm(A)*norm(xh)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  %Cramer’s Rule
+\end_layout
+
+\begin_layout Plain Layout
+
+  for j = 1:length(A)     
+\end_layout
+
+\begin_layout Plain Layout
+
+      C = A;     
+\end_layout
+
+\begin_layout Plain Layout
+
+      C(:,j) = b;     
+\end_layout
+
+\begin_layout Plain Layout
+
+      xh(j) = det(C)/det(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  end
+\end_layout
+
+\begin_layout Plain Layout
+
+  ForwardErrorCramer(i) = norm(xh-x)/norm(x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  BackwardErrorCramer(i) = norm(b-A*xh)/(norm(A)*norm(xh)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  %A inverse b 
+\end_layout
+
+\begin_layout Plain Layout
+
+  xh = inv(A)*b; 
+\end_layout
+
+\begin_layout Plain Layout
+
+  ForwardErrorAinverseb(i) = norm(xh-x)/norm(x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  BackwardErrorAinverseb(i) = norm(b-A*xh)/(norm(A)*norm(xh)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  %Gaussian Elimination Without Pivoting 
+\end_layout
+
+\begin_layout Plain Layout
+
+  xhat = matSolve(A,b); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  ForwardErrorGE(i) = norm(xh-x)/norm(x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  BackwardErrorGE(i) = norm(b-A*xh)/(norm(A)*norm(xh)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+end 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(n,log10(ForwardErrorGE),’g--’)
+\end_layout
+
+\begin_layout Plain Layout
+
+hold on
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(n,log10(ForwardErrorAinverseb),’r-.’) 
+\end_layout
+
+\begin_layout Plain Layout
+
+hold on
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(n,log10(ForwardErrorGEPP),’b:’) 
+\end_layout
+
+\begin_layout Plain Layout
+
+hold on 
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(n,log10(ForwardErrorQR),’k-’)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+title(’Semilogy Plot of Forward Errors’) 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel(’n’) 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel(’Log(Forward Error)’)
+\end_layout
+
+\begin_layout Plain Layout
+
+legend(’GE’, ’inv(A)b’,’GEPP’,’QR’,’location’,’best’)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+% initialize data
+\end_layout
+
+\begin_layout Plain Layout
+
+n = [9,19,29,39];
+\end_layout
+
+\begin_layout Plain Layout
+
+ForwardErrors = zeros(4,4);
+\end_layout
+
+\begin_layout Plain Layout
+
+BackwardErrors = zeros(4,4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:4 
+\end_layout
+
+\begin_layout Plain Layout
+
+  u=(-1:2/(n(i)+1):1)'; 
+\end_layout
+
+\begin_layout Plain Layout
+
+  x = ones(n(i)+1,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  xh = zeros(n(i)+1,4);
+\end_layout
+
+\begin_layout Plain Layout
+
+  A = vander(u); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  b = A*x;
+\end_layout
+
+\begin_layout Plain Layout
+
+  [Q,R] = qr(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+ForwardErrorGEPP = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+ForwardErrorQR = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+ForwardErrorCR = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+ForwardErrorI = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+ForwardErrorGE = zeros(1,4);
+\end_layout
+
+\begin_layout Plain Layout
+
+BackwardErrorGEPP = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+BackwardErrorQR = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+BackwardErrorCR = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+BackwardErrorI = zeros(1,4); 
+\end_layout
+
+\begin_layout Plain Layout
+
+BackwardErrorGE = zeros(1,4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:4 
+\end_layout
+
+\begin_layout Plain Layout
+
+  u=(-1:2/(n(i)+1):1)'; 
+\end_layout
+
+\begin_layout Plain Layout
+
+  x = ones(n(i)+1,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  A = vander(u); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  b = A*x;
+\end_layout
+
+\begin_layout Plain Layout
+
+  [Q,R] = qr(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  xGEPP = A
+\backslash
+b; 
+\end_layout
+
+\begin_layout Plain Layout
+
+  xQR = R
+\backslash
+(Q*b); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  ForwardErrorGEPP(i) = norm(xh-x)/norm(x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  BackwardErrorGEPP(i) = norm(b-A*xh)/(norm(A)*norm(xh)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  %QR Factorization 
+\end_layout
+
+\begin_layout Plain Layout
+
+  [Q,R] = qr(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  xh = R
+\backslash
+(Q*b); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  ForwardErrorQR(i) = norm(xh-x)/norm(x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  BackwardErrorQR(i) = norm(b-A*xh)/(norm(A)*norm(xh)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  %Cramer’s Rule
+\end_layout
+
+\begin_layout Plain Layout
+
+  for j = 1:length(A)     
+\end_layout
+
+\begin_layout Plain Layout
+
+      C = A;     
+\end_layout
+
+\begin_layout Plain Layout
+
+      C(:,j) = b;     
+\end_layout
+
+\begin_layout Plain Layout
+
+      xh(j) = det(C)/det(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  end
+\end_layout
+
+\begin_layout Plain Layout
+
+  ForwardErrorCramer(i) = norm(xh-x)/norm(x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  BackwardErrorCramer(i) = norm(b-A*xh)/(norm(A)*norm(xh)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  %A inverse b 
+\end_layout
+
+\begin_layout Plain Layout
+
+  xh = inv(A)*b; 
+\end_layout
+
+\begin_layout Plain Layout
+
+  ForwardErrorAinverseb(i) = norm(xh-x)/norm(x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  BackwardErrorAinverseb(i) = norm(b-A*xh)/(norm(A)*norm(xh)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  %Gaussian Elimination Without Pivoting 
+\end_layout
+
+\begin_layout Plain Layout
+
+  xhat = matSolve(A,b); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  ForwardErrorGE(i) = norm(xh-x)/norm(x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+  BackwardErrorGE(i) = norm(b-A*xh)/(norm(A)*norm(xh)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+end 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(n,log10(ForwardErrorGE),’g--’)
+\end_layout
+
+\begin_layout Plain Layout
+
+hold on
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(n,log10(ForwardErrorAinverseb),’r-.’) 
+\end_layout
+
+\begin_layout Plain Layout
+
+hold on
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(n,log10(ForwardErrorGEPP),’b:’) 
+\end_layout
+
+\begin_layout Plain Layout
+
+hold on 
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(n,log10(ForwardErrorQR),’k-’)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+title(’Semilogy Plot of Forward Errors’) 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel(’n’) 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel(’Log(Forward Error)’)
+\end_layout
+
+\begin_layout Plain Layout
+
+legend(’GE’, ’inv(A)b’,’GEPP’,’QR’,’location’,’best’)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+MATLAB gives us the following plot:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Relative Forward Error
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Relative Backward Error
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GEPP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+QR Factorization
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cramer's Rule
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A^{-1}$
+\end_inset
+
+ multiplied by 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GE Without Pivoting.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -414,9 +1500,9 @@ label{ex}
 
  is
 \begin_inset Formula 
-\[
-\frac{\|A\widehat{\boldsymbol{v}}-\widehat{\lambda}\widehat{\boldsymbol{v}}\|}{\|\widehat{\boldsymbol{v}}\|},
-\]
+\begin{equation}
+\frac{\|A\widehat{\boldsymbol{v}}-\widehat{\lambda}\widehat{\boldsymbol{v}}\|}{\|\widehat{\boldsymbol{v}}\|},\label{eq:minimum}
+\end{equation}
 
 \end_inset
 
@@ -462,7 +1548,36 @@ label{sol}
 
 \end_inset
 
- 
+ Given such 
+\begin_inset Formula $\delta A$
+\end_inset
+
+, we have 
+\begin_inset Formula $\delta A\widehat{\boldsymbol{v}}=\widehat{\lambda}\widehat{\boldsymbol{v}}-A\widehat{\boldsymbol{v}}$
+\end_inset
+
+.
+ Therefore since 
+\begin_inset Formula $\|\delta A\|\|\widehat{\boldsymbol{v}}\|\geq\|\delta A\widehat{\boldsymbol{v}}\|$
+\end_inset
+
+, we see that
+\begin_inset Formula 
+\[
+\|\delta A\|\geq\frac{\|A\widehat{\boldsymbol{v}}-\widehat{\lambda}\widehat{\boldsymbol{v}}\|}{\|\widehat{\boldsymbol{v}}\|}.
+\]
+
+\end_inset
+
+The norm is minimized when
+\begin_inset Formula 
+\[
+\delta A=\frac{(\widehat{\lambda}\widehat{\boldsymbol{v}}-A\widehat{\boldsymbol{v}})\widehat{\boldsymbol{v}}^{\top}}{\|v\|^{2}}.
+\]
+
+\end_inset
+
+
 \begin_inset ERT
 status open
 
@@ -512,7 +1627,11 @@ label{ex}
 
  with rook pivoting, this is much larger.
  However, we construct matrices with random elements, each are independent
- samples from the normal distribution of mean 0 and standard deviation 
+ samples from the normal distribution of mean 
+\begin_inset Formula $0$
+\end_inset
+
+ and standard deviation 
 \begin_inset Formula $\frac{1}{\sqrt{n}}$
 \end_inset
 
@@ -576,6 +1695,141 @@ label{sol}
 \end_inset
 
  
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+clear 
+\end_layout
+
+\begin_layout Plain Layout
+
+clc 
+\end_layout
+
+\begin_layout Plain Layout
+
+close all; 
+\end_layout
+
+\begin_layout Plain Layout
+
+tic 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+exp = 5:11;
+\end_layout
+
+\begin_layout Plain Layout
+
+n = 2.^exp; 
+\end_layout
+
+\begin_layout Plain Layout
+
+k = length(n); 
+\end_layout
+
+\begin_layout Plain Layout
+
+trials = 5000; 
+\end_layout
+
+\begin_layout Plain Layout
+
+counts = zeros(1,k); 
+\end_layout
+
+\begin_layout Plain Layout
+
+saveFreq = 100; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:trials 
+\end_layout
+
+\begin_layout Plain Layout
+
+   for j = 1:k 
+\end_layout
+
+\begin_layout Plain Layout
+
+      A = randn(n(j),n(j))/sqrt(n(j)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+      [~,~,growth] = pluFact(A,’pivot’);
+\end_layout
+
+\begin_layout Plain Layout
+
+      if growth > sqrt(n(j)) 
+\end_layout
+
+\begin_layout Plain Layout
+
+         counts(j) = counts(j) + 1; 
+\end_layout
+
+\begin_layout Plain Layout
+
+      end 
+\end_layout
+
+\begin_layout Plain Layout
+
+   end 
+\end_layout
+
+\begin_layout Plain Layout
+
+   if mod(i,saveFreq) == 0 
+\end_layout
+
+\begin_layout Plain Layout
+
+      save(’results’) 
+\end_layout
+
+\begin_layout Plain Layout
+
+   end 
+\end_layout
+
+\begin_layout Plain Layout
+
+end 
+\end_layout
+
+\begin_layout Plain Layout
+
+time = toc; 
+\end_layout
+
+\begin_layout Plain Layout
+
+save(’results’)
+\end_layout
+
+\end_inset
+
+
 \begin_inset ERT
 status open
 
@@ -616,20 +1870,20 @@ label{ex}
 \end_layout
 
 \begin_layout Enumerate
-For a symmetric positive definite 
-\begin_inset Formula $A$
+For a symmetric positive definite matrix 
+\begin_inset Formula $A=(a_{ij})$
 \end_inset
 
 , with the one-step Cholesky factorization
 \begin_inset Formula 
 \[
-A=\begin{pmatrix}a_{11} & w^{\top}\\
-w & K
+A=\begin{pmatrix}a_{11} & \boldsymbol{w}^{\top}\\
+\boldsymbol{w} & K
 \end{pmatrix}=\begin{pmatrix}\sqrt{a_{11}} & 0\\
-\frac{w}{\sqrt{a_{11}}} & I
+\frac{\boldsymbol{w}}{\sqrt{a_{11}}} & I
 \end{pmatrix}\begin{pmatrix}1 & 0\\
-0 & K-\frac{ww^{\top}}{a_{11}}
-\end{pmatrix}\begin{pmatrix}\sqrt{a_{11}} & \frac{w^{\top}}{\sqrt{a_{11}}}\\
+0 & K-\frac{\boldsymbol{w}\boldsymbol{w}^{\top}}{a_{11}}
+\end{pmatrix}\begin{pmatrix}\sqrt{a_{11}} & \frac{\boldsymbol{w}^{\top}}{\sqrt{a_{11}}}\\
 0 & I
 \end{pmatrix}=R_{1}^{\top}A_{1}R_{1},
 \]
@@ -637,7 +1891,7 @@ w & K
 \end_inset
 
 show that the submatrix 
-\begin_inset Formula $K-(ww^{\top})/a_{11}$
+\begin_inset Formula $K-(\boldsymbol{w}\boldsymbol{w}^{\top})/a_{11}$
 \end_inset
 
  is symmetric positive definite.
@@ -662,8 +1916,8 @@ show that the submatrix
 
 \begin_layout Enumerate
 Suppose that 
-\begin_inset Formula $A=\left(\begin{smallmatrix}\alpha & w^{\top}\\
-v & C
+\begin_inset Formula $A=\left(\begin{smallmatrix}\alpha & \boldsymbol{w}^{\top}\\
+\boldsymbol{v} & C
 \end{smallmatrix}\right)$
 \end_inset
 
@@ -671,18 +1925,18 @@ v & C
 \begin_inset Formula 
 \[
 A=\begin{pmatrix}1 & 0\\
-\frac{v}{\alpha} & I
+\frac{\boldsymbol{v}}{\alpha} & I
 \end{pmatrix}\begin{pmatrix}1 & 0\\
-0 & C-\frac{vw^{\top}}{\alpha}
-\end{pmatrix}\begin{pmatrix}\alpha & w^{\top}\\
+0 & C-\frac{\boldsymbol{v}\boldsymbol{w}^{\top}}{\alpha}
+\end{pmatrix}\begin{pmatrix}\alpha & \boldsymbol{w}^{\top}\\
 0 & I
 \end{pmatrix}.
 \]
 
 \end_inset
 
-Show that the sub-matirx 
-\begin_inset Formula $C-(vw^{\top})/\alpha$
+Show that the sub-matrix 
+\begin_inset Formula $C-(\boldsymbol{v}\boldsymbol{w}^{\top})/\alpha$
 \end_inset
 
  is also column diagonally dominant, and no pivoting is needed.
@@ -719,6 +1973,122 @@ label{sol}
 
 \end_inset
 
+ 1.
+ Clearly both 
+\begin_inset Formula $K$
+\end_inset
+
+ and 
+\begin_inset Formula $-(\boldsymbol{w}\boldsymbol{w}^{\top})/a_{11}$
+\end_inset
+
+ are symmetric, so their sum 
+\begin_inset Formula $K-(\boldsymbol{w}\boldsymbol{w}^{\top})/a_{11}$
+\end_inset
+
+ is symmetric also.
+ To see that it is positive-definite, observe that for nonzero 
+\begin_inset Formula $\boldsymbol{x}\in\mathbb{R}^{n-1}$
+\end_inset
+
+ where 
+\begin_inset Formula $\boldsymbol{x}=(x_{2},\dots,x_{n})^{\top}$
+\end_inset
+
+, positive-definiteness of 
+\begin_inset Formula $A$
+\end_inset
+
+ implies
+\begin_inset Formula 
+\begin{align*}
+0 & \leq(x_{1},\boldsymbol{x}^{\top})\begin{pmatrix}a_{11} & \boldsymbol{w}^{\top}\\
+\boldsymbol{w} & K
+\end{pmatrix}\begin{pmatrix}x_{1}\\
+\boldsymbol{x}
+\end{pmatrix}\\
+ & =a_{11}x_{1}^{2}+x_{1}2\langle\boldsymbol{w},\boldsymbol{x}\rangle+\boldsymbol{x}^{\top}K\boldsymbol{x}.
+\end{align*}
+
+\end_inset
+
+In particular, setting 
+\begin_inset Formula $x_{1}=-\langle\boldsymbol{w},\boldsymbol{x}\rangle/a_{11}$
+\end_inset
+
+ gives us
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{x}^{\top}\left(K-\frac{\boldsymbol{w}^{\top}\boldsymbol{w}}{a_{11}}\right)\boldsymbol{x} & =\boldsymbol{x}^{\top}K\boldsymbol{x}-\frac{\langle\boldsymbol{w},\boldsymbol{x}\rangle^{2}}{a_{11}}\geq0,
+\end{align*}
+
+\end_inset
+
+which implies 
+\begin_inset Formula $K-(\boldsymbol{w}\boldsymbol{w}^{\top})/a_{11}$
+\end_inset
+
+ is positive-definite.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we show that 
+\begin_inset Formula $\|R\|^{2}=\|A\|$
+\end_inset
+
+.
+ On the one hand we have 
+\begin_inset Formula $\|R^{\top}R\|=\|R\|^{2}$
+\end_inset
+
+.
+ On the other hand, we have 
+\begin_inset Formula $A=R^{\top}R$
+\end_inset
+
+, so 
+\begin_inset Formula $\|A\|=\|R^{\top}R\|$
+\end_inset
+
+.
+ To see why this explains backward stability of the Cholesky factorization,
+ note that
+\begin_inset Formula 
+\[
+\frac{\|\delta A\|}{\|A\|}=\frac{\|\delta A\|}{\|R\|^{2}}=\frac{\|\delta A\|}{\|R^{\top}\|\|R\|}=O(\varepsilon),
+\]
+
+\end_inset
+
+where the last equality is a theorem from class.
  
 \begin_inset ERT
 status open
@@ -733,6 +2103,45 @@ end{sol}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+We are interested in 
+\begin_inset Formula $\mathrm{Aut}_{K}(F_{K}):=\mathrm{Hom}_{K\text{-alg}}(F_{K},F_{K})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+We consider
+\begin_inset Formula 
+\[
+\mathrm{A}=\mathbb{Z}[\boldsymbol{M},\boldsymbol{L},\boldsymbol{D}]\slash\langle\boldsymbol{G},\Gamma,\boldsymbol{\Lambda},\text{\ensuremath{\Theta}},\boldsymbol{H},\boldsymbol{\Pi}\rangle
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $F_{+}=\mathbb{Z}^{n}$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\[
+\mathrm{A}\otimes_{\mathbb{Z}}R=R[\boldsymbol{M},\boldsymbol{L},\boldsymbol{D}]\slash\langle\boldsymbol{G},\Gamma,\boldsymbol{\Lambda},\text{\ensuremath{\Theta}},\boldsymbol{H},\boldsymbol{\Pi}\rangle
+\]
+
+\end_inset
+
+which classifies MLDG structures on 
+\begin_inset Formula $F\otimes_{\mathbb{Z}}R=R^{n}$
+\end_inset
+
+.
+ Similarly, 
 \end_layout
 
 \end_body

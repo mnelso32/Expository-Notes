@@ -172,7 +172,256 @@ Definitions
 \end_layout
 
 \begin_layout Subsection
-Trees in a Ring
+Trees
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\begin_inset Formula $\textbf{tree}$
+\end_inset
+
+ 
+\begin_inset Formula $T$
+\end_inset
+
+ is an undirected graph in which any two vertices are connected by exactly
+ one path.
+ We often refer to the vertices of a tree as 
+\series bold
+nodes
+\series default
+.
+ We denote by 
+\begin_inset Formula $\mathrm{N}(T)$
+\end_inset
+
+ to be the set of all nodes of 
+\begin_inset Formula $T$
+\end_inset
+
+ and we denote by 
+\begin_inset Formula $\mathrm{E}(T)$
+\end_inset
+
+ to be the set of all edges of 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Throughout this document, we only consider trees which at most countably
+ many nodes and edges.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ A 
+\begin_inset Formula $\textbf{rooted tree}$
+\end_inset
+
+ is a tree 
+\begin_inset Formula $T$
+\end_inset
+
+ in which a special node is singled out.
+ In this case, we refer to the singled out node as the 
+\begin_inset Formula $\textbf{root}$
+\end_inset
+
+ of 
+\begin_inset Formula $T$
+\end_inset
+
+ and we often denote it by 
+\begin_inset Formula $\mathrm{r}$
+\end_inset
+
+ (if context isn't clear, then we will denote it by 
+\begin_inset Formula $\mathrm{r}_{T}$
+\end_inset
+
+).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn} 
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a rooted tree.
+ We say 
+\begin_inset Formula $\ell\in\mathrm{N}(T)$
+\end_inset
+
+ is a 
+\begin_inset Formula $\textbf{leaf}$
+\end_inset
+
+ of 
+\begin_inset Formula $T$
+\end_inset
+
+ if 
+\begin_inset Formula $\ell$
+\end_inset
+
+ is not the root and if 
+\begin_inset Formula $\deg\ell=1$
+\end_inset
+
+ (meaning it is the boundary of exactly one edge in 
+\begin_inset Formula $T$
+\end_inset
+
+).
+ We denote by 
+\begin_inset Formula $\mathrm{L}(T)$
+\end_inset
+
+ to be the set of leaves of 
+\begin_inset Formula $T$
+\end_inset
+
+ by 
+\begin_inset Formula $\text{L}(T)$
+\end_inset
+
+.
+ An 
+\series bold
+internal node
+\series default
+ of 
+\begin_inset Formula $T$
+\end_inset
+
+ a node which isn't a leaf.
+ We denote by 
+\begin_inset Formula $\mathrm{N}^{\circ}(T)$
+\end_inset
+
+ to be the set of all internal nodes of 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Height, Ancestors, and Descendants
 \end_layout
 
 \begin_layout Standard
@@ -191,85 +440,677 @@ label{defn}
 \end_inset
 
  Let 
-\begin_inset Formula $R$
+\begin_inset Formula $T$
 \end_inset
 
- be a ring.
- An 
-\begin_inset Formula $R$
-\end_inset
-
--tree 
-\begin_inset Formula $\mathcal{R}=(\mathcal{R},f)$
-\end_inset
-
- consists of a sequence 
-\begin_inset Formula $(\mathcal{R}_{n})_{n\geq0}$
-\end_inset
-
- of subsets of 
-\begin_inset Formula $R$
-\end_inset
-
- together with a sequence 
-\begin_inset Formula $(f_{n})_{n\geq1}$
-\end_inset
-
- of polynomials in 
-\begin_inset Formula $R[X]$
-\end_inset
-
- such that 
-\begin_inset Formula $f_{n}$
-\end_inset
-
- restricts to a surjective map from 
-\begin_inset Formula $\mathcal{R}_{n}$
-\end_inset
-
- to 
-\begin_inset Formula $\mathcal{R}_{n-1}$
-\end_inset
-
- for each 
-\begin_inset Formula $n\geq1$
+ be a rooted tree and let 
+\begin_inset Formula $\mathrm{n}\in\mathrm{N}(T)$
 \end_inset
 
 .
- We say 
-\begin_inset Formula $\mathcal{R}$
+ The 
+\series bold
+height 
+\series default
+of 
+\begin_inset Formula $\mathrm{n}$
+\end_inset
+
+ in 
+\begin_inset Formula $T$
+\end_inset
+
+, denoted 
+\begin_inset Formula $h_{T}(\mathrm{n})$
+\end_inset
+
+ (or more simply 
+\begin_inset Formula $h(\mathrm{n})$
+\end_inset
+
+ if 
+\begin_inset Formula $T$
+\end_inset
+
+ is understood from context), is the number of edges along the unique path
+ between 
+\begin_inset Formula $\mathrm{n}$
+\end_inset
+
+ and the root (if there are countably infinitely many edges along the unique
+ path from 
+\begin_inset Formula $\mathrm{n}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathrm{r}$
+\end_inset
+
+, then we say 
+\begin_inset Formula $\mathrm{n}$
+\end_inset
+
+ has height infinity and we write 
+\begin_inset Formula $h(\mathrm{n})=\infty$
+\end_inset
+
+).
+ The 
+\series bold
+height 
+\series default
+of the root of 
+\begin_inset Formula $T$
 \end_inset
 
  is 
+\begin_inset Formula $h(\mathrm{r})=0$
+\end_inset
+
+.
+ For all 
+\begin_inset Formula $i\in\mathbb{N}\cup\{\infty\}$
+\end_inset
+
+, we denote
+\begin_inset Formula 
+\[
+\mathrm{N}_{i}(T):=\left\{ \mathrm{n}\in\mathrm{N}(T)\mid h(\mathrm{n})=i\right\} .
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $\mathrm{e}$
+\end_inset
+
+ is an edge of 
+\begin_inset Formula $T$
+\end_inset
+
+ whose endpoints are 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+ which have heights 
+\begin_inset Formula $h_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $h_{2}$
+\end_inset
+
+ respectively, then the 
 \series bold
-rooted 
+height 
 \series default
-if 
-\begin_inset Formula $\mathcal{R}_{0}=\{r\}$
+of 
+\begin_inset Formula $\mathrm{e}$
 \end_inset
 
- is a singleton set.
- We say 
-\begin_inset Formula $\mathcal{R}$
+ is given by 
+\begin_inset Formula $h(\mathrm{e})=\max\{h_{1},h_{2}\}$
 \end_inset
 
- is 
+.
+ For all 
+\begin_inset Formula $i\in\mathbb{N}_{\geq1}\cup\{\infty\}$
+\end_inset
+
+, we denote
+\begin_inset Formula 
+\[
+\mathrm{E}_{i}(T):=\left\{ \mathrm{e}\in\mathrm{E}(T)\mid h(\mathrm{e})=i\right\} .
+\]
+
+\end_inset
+
+The 
 \series bold
-finite 
+height 
 \series default
-if each 
-\begin_inset Formula $\mathcal{R}_{n}$
+of 
+\begin_inset Formula $T$
 \end_inset
 
- is a finite set.
- We can picture a finite rooted 
-\begin_inset Formula $\mathcal{R}$
+, denoted 
+\begin_inset Formula $h(T)$
 \end_inset
 
--tree as below:
+, is the supremum of the heights of all nodes of 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a rooted tree and let 
+\begin_inset Formula $\mathrm{n}_{1},\mathrm{n}_{2}\in\mathrm{N}(T)$
+\end_inset
+
+ such that 
+\begin_inset Formula $h(\mathrm{n}_{2})>h(\mathrm{n}_{1})$
+\end_inset
+
+.
+ If the unique path from 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+ does not contain the root, then we say 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ is an 
+\series bold
+ancestor 
+\series default
+of 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+, and similarly we say 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+ is a 
+\series bold
+descedant 
+\series default
+of 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $h(\mathrm{n}_{2})=h(\mathrm{n}_{1})+1$
+\end_inset
+
+, then we say 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ is a 
+\series bold
+parent 
+\series default
+of 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+, and similarly we say 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+ is a 
+\series bold
+child 
+\series default
+of 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+.
+ We say a node 
+\begin_inset Formula $\mathrm{n}$
+\end_inset
+
+ in 
+\begin_inset Formula $T$
+\end_inset
+
+ is 
+\series bold
+prolific 
+\series default
+if it has more than one child.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Ancestory gives rise to a partial order on 
+\begin_inset Formula $\mathrm{N}(T)$
+\end_inset
+
+: if 
+\begin_inset Formula $\mathrm{n}_{1},\mathrm{n}_{2}\in\mathrm{N}(T)$
+\end_inset
+
+, then we write 
+\begin_inset Formula $\mathrm{n}_{1}\leq\mathrm{n}_{2}$
+\end_inset
+
+ if 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ is an ancestor of 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+.
+ The pair 
+\begin_inset Formula $(\mathrm{N}(T),\leq)$
+\end_inset
+
+ is easily seen to form a partially ordered set.
+ We say a node 
+\begin_inset Formula $\mathrm{n}$
+\end_inset
+
+ is the 
+\series bold
+greatest common ancestor
+\series default
+ of nodes 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\mathrm{n}=\gcd(\mathrm{n}_{1},\mathrm{n}_{2})$
+\end_inset
+
+ if 
+\begin_inset Formula $\mathrm{n}\leq\mathrm{n}_{1},\mathrm{n}_{2}$
+\end_inset
+
+ and for all other nodes 
+\begin_inset Formula $\mathrm{n}'$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathrm{n}'\leq\mathrm{n}_{1},\mathrm{n}_{2}$
+\end_inset
+
+, we have 
+\begin_inset Formula $\mathrm{n}'\leq\mathrm{n}$
+\end_inset
+
+.
+ Note that greatest common ancestors need not exist when 
+\begin_inset Formula $T$
+\end_inset
+
+ has infinite height.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Ancestors and Descendants
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be a rooted tree and let 
+\begin_inset Formula $\mathrm{n}_{1},\mathrm{n}_{2}\in\mathrm{N}(T)$
+\end_inset
+
+ such that 
+\begin_inset Formula $h(\mathrm{n}_{2})\geq h(\mathrm{n}_{1})$
+\end_inset
+
+.
+ If the unique path from 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+ does not contain the root, then we say 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ is an 
+\series bold
+ancestor 
+\series default
+of 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+, and similarly we say 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+ is a 
+\series bold
+descedant 
+\series default
+of 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ (if 
+\begin_inset Formula $\mathrm{n}_{1}=\mathrm{n}=\mathrm{n}_{2}$
+\end_inset
+
+, then we say 
+\begin_inset Formula $\mathrm{n}$
+\end_inset
+
+ is an ancestor and descendant of itself).
+ If 
+\begin_inset Formula $h(\mathrm{n}_{2})=h(\mathrm{n}_{1})+1$
+\end_inset
+
+, then we say 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ is a 
+\series bold
+parent 
+\series default
+of 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+, and similarly we say 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+ is a 
+\series bold
+child 
+\series default
+of 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+.
+ In this case, the unique path from 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+ is an edge 
+\begin_inset Formula $\mathrm{e}$
+\end_inset
+
+, and we say 
+\begin_inset Formula $\mathrm{e}$
+\end_inset
+
+ has 
+\series bold
+height 
+\begin_inset Formula $h(\mathrm{n}_{1})$
+\end_inset
+
+ 
+\series default
+(we also denote this by 
+\begin_inset Formula $h(\mathrm{e})$
+\end_inset
+
+).
+ We say a node 
+\begin_inset Formula $\mathrm{n}$
+\end_inset
+
+ in 
+\begin_inset Formula $T$
+\end_inset
+
+ is 
+\series bold
+prolific 
+\series default
+if it has more than one child.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Ancestory gives rise to a partial order on 
+\begin_inset Formula $\mathrm{N}(T)$
+\end_inset
+
+: if 
+\begin_inset Formula $\mathrm{n}_{1},\mathrm{n}_{2}\in\mathrm{N}(T)$
+\end_inset
+
+, then we write 
+\begin_inset Formula $\mathrm{n}_{1}\leq\mathrm{n}_{2}$
+\end_inset
+
+ if 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ is an ancestor of 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+ (if 
+\begin_inset Formula $\mathrm{n}_{1}\neq\mathrm{n}_{2}$
+\end_inset
+
+, then we also write 
+\begin_inset Formula $\mathrm{n}_{1}<\mathrm{n}_{2}$
+\end_inset
+
+).
+ The pair 
+\begin_inset Formula $(\mathrm{N}(T),\leq)$
+\end_inset
+
+ is easily seen to form a partially ordered set.
+ We say a node 
+\begin_inset Formula $\mathrm{n}$
+\end_inset
+
+ is the 
+\series bold
+greatest common ancestor
+\series default
+ of nodes 
+\begin_inset Formula $\mathrm{n}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{n}_{2}$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\mathrm{n}=\gcd(\mathrm{n}_{1},\mathrm{n}_{2})$
+\end_inset
+
+, if 
+\begin_inset Formula $\mathrm{n}\leq\mathrm{n}_{1},\mathrm{n}_{2}$
+\end_inset
+
+ and for all other nodes 
+\begin_inset Formula $\mathrm{n}'$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathrm{n}'\leq\mathrm{n}_{1},\mathrm{n}_{2}$
+\end_inset
+
+, we have 
+\begin_inset Formula $\mathrm{n}'\leq\mathrm{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Ordered Trees
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ An 
+\begin_inset Formula $\textbf{ordered tree}$
+\end_inset
+
+ is a rooted tree 
+\begin_inset Formula $T$
+\end_inset
+
+ in which a total ordering is specified for the children of each internal
+ node.
+ This is sometimes called a 
+\begin_inset Quotes eld
+\end_inset
+
+plane tree
+\begin_inset Quotes erd
+\end_inset
+
+ because an ordering of the children is equivalent to an embedding of the
+ tree in the plane, with the root being at the bottom and the children of
+ each internal node being above that internal node (or sometimes we represent
+ the root being on the top and the children of each internal node being
+ below that node).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Here is a visual representation of an ordered tree: 
 \begin_inset ERT
 status open
 
@@ -290,7 +1131,9 @@ begin{tikzpicture}
 
 
 \backslash
-node[circle, fill=black, inner sep=1pt, label=below:$r $] (r) at (0,0) {};
+node[circle, fill=black, inner sep=1pt, label=below:$
+\backslash
+mathrm{r} $] (r) at (0,0) {};
 \end_layout
 
 \begin_layout Plain Layout
@@ -309,155 +1152,54 @@ node[circle, fill=black, inner sep=1pt, label=below:$r $] (r) at (0,0) {};
 
 
 \backslash
-node[circle, fill=black, inner sep=1pt, label=above:$r_1 $] (r1) at (-4,3)
- {};
+node[circle, fill=black, inner sep=1pt, label=above:$
+\backslash
+mathrm{n}_1 $] (r1) at (-5,3) {};
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-node[circle, fill=black, inner sep=1pt, label=above:$r_i $] (r2) at (0,3)
- {};
+node[circle, fill=black, inner sep=1pt, label=above:$
+\backslash
+mathrm{n}_i $] (r2) at (0,3) {};
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-node[circle, fill=black, inner sep=1pt, label=above:$r_k $] (r3) at (4,3)
- {};
+node[circle, fill=black, inner sep=1pt, label=above:$
+\backslash
+mathrm{n}_k $] (r3) at (5,3) {};
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-draw[] (r1) edge[out=-90, in=160] node[below] {} (r);
+draw[] (r1) edge[out=-90, in=160] node[label=below left:$
+\backslash
+mathrm{e}_1 $] {} (r);
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-draw[] (r2) edge[out=-90, in=90] node[below] {} (r);
+draw[] (r2) edge[out=-90, in=90] node[label=left:$
+\backslash
+mathrm{e}_i $] {} (r);
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-draw[] (r3) edge[out=-90, in=20] node[below] {} (r);
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
+draw[] (r3) edge[out=-90, in=20] node[label=below right:$
 \backslash
-node[circle, fill=black, inner sep=1pt, label=above:$r_{11} $] (r11) at
- (-5,6) {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=above:$r_{l1} $] (rl1) at
- (-3,6) {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=above:$r_{1i} $] (r1i) at
- (-1,6) {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=above:$r_{mi} $] (rmi) at
- (1,6) {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=above:$r_{1k} $] (r1k) at
- (3,6) {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=above:$r_{nk} $] (rnk) at
- (5,6) {};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[] (r11) edge[out=-90, in=150] node[below] {} (r1);
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[] (rl1) edge[out=-90, in=30] node[below] {} (r1);
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[] (r1i) edge[out=-90, in=150] node[below] {} (r2);
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[] (rmi) edge[out=-90, in=30] node[below] {} (r2);
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[] (r1k) edge[out=-90, in=150] node[below] {} (r3);
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[] (rnk) edge[out=-90, in=30] node[below] {} (r3);
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
+mathrm{e}_k $] {} (r);
 \end_layout
 
 \begin_layout Plain Layout
@@ -472,27 +1214,54 @@ draw[] (rnk) edge[out=-90, in=30] node[below] {} (r3);
 
 
 \backslash
-node[] (R2) at (-8,6.3) {$
+node[circle, fill=black, inner sep=1pt, label=above:$
 \backslash
-mathcal{R}_2  $};
+mathrm{n}_{11} $] (r11) at (-6,6) {};
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-node[] (R1) at (-8,3.3) {$
+node[circle, fill=black, inner sep=1pt, label=above:$
 \backslash
-mathcal{R}_1  $};
+mathrm{n}_{1l} $] (rl1) at (-4,6) {};
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-node[] (R0) at (-8,0.3) {$
+node[circle, fill=black, inner sep=1pt, label=above:$
 \backslash
-mathcal{R}_0  $};
+mathrm{n}_{i1} $] (r1i) at (-1,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$
+\backslash
+mathrm{n}_{im} $] (rmi) at (1,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$
+\backslash
+mathrm{n}_{k1} $] (r1k) at (4,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$
+\backslash
+mathrm{n}_{kn} $] (rnk) at (6,6) {};
 \end_layout
 
 \begin_layout Plain Layout
@@ -503,16 +1272,62 @@ mathcal{R}_0  $};
 
 
 \backslash
-draw[-{Straight Barb[length=3pt,width=3pt]}] (R2) edge[out=-90, in=90] node[left
-] {$f_2 $} (R1);
+draw[] (r11) edge[out=-90, in=150] node[label=above left:$
+\backslash
+mathrm{e}_{11,1} $] {} (r1);
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-draw[-{Straight Barb[length=3pt,width=3pt]}] (R1) edge[out=-90, in=90] node[left
-] {$f_1 $} (R0);
+draw[] (rl1) edge[out=-90, in=30] node[label=above right:$
+\backslash
+mathrm{e}_{1l,1} $] {} (r1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (r1i) edge[out=-90, in=150] node[label=above left:$
+\backslash
+mathrm{e}_{i1,i} $] {} (r2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (rmi) edge[out=-90, in=30] node[label=above right:$
+\backslash
+mathrm{e}_{im,i} $] {} (r2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (r1k) edge[out=-90, in=150] node[label=above left:$
+\backslash
+mathrm{e}_{k1,k} $] {} (r3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (rnk) edge[out=-90, in=30] node[label=above right:$
+\backslash
+mathrm{e}_{kn,k} $] {} (r3);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -588,16 +1403,7 @@ cdots  $};
 
 
 \backslash
-node[] (a2) at (-8,7.5) {$
-\backslash
-vdots  $};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[] (a2) at (-4,7.5) {$
+node[] (a2) at (-5,7.5) {$
 \backslash
 vdots  $};
 \end_layout
@@ -615,7 +1421,7 @@ vdots  $};
 
 
 \backslash
-node[] (a2) at (4,7.5) {$
+node[] (a2) at (5,7.5) {$
 \backslash
 vdots  $};
 \end_layout
@@ -651,6 +1457,149 @@ end{center}
 \end_layout
 
 \begin_layout Standard
+The children of 
+\begin_inset Formula $\mathrm{n}_{i}$
+\end_inset
+
+ are 
+\begin_inset Formula $\mathrm{n}_{i1},\dots,\mathrm{n}_{im}$
+\end_inset
+
+.
+ The way the tree is embedded in the plane indicates that 
+\begin_inset Formula $\mathrm{n}_{i1}<\cdots<\mathrm{n}_{im}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\begin_inset Formula $R$
+\end_inset
+
+-Trees
+\end_layout
+
+\begin_layout Standard
+Throughout this subsection, let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring, let 
+\begin_inset Formula $A$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ An 
+\begin_inset Formula $R$
+\end_inset
+
+
+\series bold
+-tree in
+\series default
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ is a rooted tree 
+\begin_inset Formula $T$
+\end_inset
+
+ equipped with labeling functions
+\begin_inset Formula 
+\[
+\eta_{T}\colon\mathrm{N}(T)\to A\quad\text{and}\quad\varepsilon_{T}\colon\mathrm{E}(T)\to R[X],
+\]
+
+\end_inset
+
+such that the following property holds: if 
+\begin_inset Formula $\mathrm{e}\in\mathrm{E}(T)$
+\end_inset
+
+ is an edge with boundary nodes 
+\begin_inset Formula $\mathrm{n}<\mathrm{n}'$
+\end_inset
+
+ (so 
+\begin_inset Formula $\mathrm{n}'$
+\end_inset
+
+ is a child of 
+\begin_inset Formula $\mathrm{n}$
+\end_inset
+
+), then
+\begin_inset Formula 
+\begin{equation}
+\varepsilon_{T}(\mathrm{e})(\eta_{T}(\mathrm{n}'))=\eta_{T}(\mathrm{n}).\label{eq:cleanernotation}
+\end{equation}
+
+\end_inset
+
+If 
+\begin_inset Formula $T$
+\end_inset
+
+ is understood from context, then we simplify our notation and write 
+\begin_inset Formula $\eta=\eta_{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $\varepsilon=\varepsilon_{T}$
+\end_inset
+
+.
+ Also for each 
+\begin_inset Formula $h\geq0$
+\end_inset
+
+ we denote 
+\begin_inset Formula 
+\[
+\mathcal{N}_{\eta,h}=\mathcal{N}_{h}=\eta(\mathrm{N}_{h}(T))\quad\text{and}\quad\mathcal{E}_{\varepsilon,h}=\mathcal{E}_{h}=\varepsilon(\mathrm{E}_{h}(T)).
+\]
+
+\end_inset
+
+
 \begin_inset ERT
 status open
 
@@ -681,11 +1630,61 @@ label{rem}
 
 \end_inset
 
- Unless otherwise specified, we assume all 
-\begin_inset Formula $R$
+ If 
+\begin_inset Formula $\eta(\mathrm{n})=a$
 \end_inset
 
--trees are finite and rooted.
+, 
+\begin_inset Formula $\eta(\mathrm{n}')=a'$
+\end_inset
+
+, and 
+\begin_inset Formula $\varepsilon(\mathrm{e})=f$
+\end_inset
+
+, then we often say 
+\begin_inset Formula $\mathrm{n}$
+\end_inset
+
+ is labeled by 
+\begin_inset Formula $a$
+\end_inset
+
+, 
+\begin_inset Formula $\mathrm{n}'$
+\end_inset
+
+ is labeled by 
+\begin_inset Formula $a'$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathrm{e}$
+\end_inset
+
+ is labeled by 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ In this case, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:cleanernotation})
+\end_layout
+
+\end_inset
+
+ says 
+\begin_inset Formula $f(a')=a$
+\end_inset
+
+.
  
 \begin_inset ERT
 status open
@@ -710,6 +1709,108 @@ status open
 
 
 \backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-tree in 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $B$
+\end_inset
+
+ is another 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra and 
+\begin_inset Formula $\sigma\colon A\to B$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra homomorphism, then we obtain a tree 
+\begin_inset Formula $\sigma T$
+\end_inset
+
+ in 
+\begin_inset Formula $B$
+\end_inset
+
+ where 
+\begin_inset Formula $(\sigma T)_{n}=\{\sigma a\mid a\in T_{n}\}$
+\end_inset
+
+.
+ For instance, if 
+\begin_inset Formula $\mathfrak{a}$
+\end_inset
+
+ is an ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+, then we obtain an 
+\begin_inset Formula $R$
+\end_inset
+
+-tree 
+\begin_inset Formula $\overline{T}$
+\end_inset
+
+ in 
+\begin_inset Formula $A\slash\mathfrak{a}$
+\end_inset
+
+ where 
+\begin_inset Formula $\overline{T}_{n}=\{\overline{a}\mid a\in T_{n}\}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Galois Trees
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
 begin{defn}
 \backslash
 label{defn}
@@ -718,93 +1819,76 @@ label{defn}
 \end_inset
 
  Let 
-\begin_inset Formula $\mathcal{R}$
+\begin_inset Formula $T$
 \end_inset
 
  be an 
 \begin_inset Formula $R$
 \end_inset
 
--tree and let 
-\begin_inset Formula $G$
-\end_inset
-
- be a subgroup of 
-\begin_inset Formula $\mathrm{Aut}(R)$
-\end_inset
-
-, the group of all automorphisms of 
-\begin_inset Formula $R$
+-tree in 
+\begin_inset Formula $A$
 \end_inset
 
 .
  We say 
-\begin_inset Formula $\mathcal{R}$
+\begin_inset Formula $T$
 \end_inset
 
- is an 
-\begin_inset Formula $G$
-\end_inset
-
-
+ is 
 \series bold
--tree 
+Galois 
 \series default
-in 
-\begin_inset Formula $R$
+if the following conditions hold:
+\end_layout
+
+\begin_layout Enumerate
+The labeling function 
+\begin_inset Formula $\eta\colon\mathrm{N}(T)\to A$
 \end_inset
 
- if
-\begin_inset Formula 
-\[
-\sigma f_{n}=f_{n}\sigma
-\]
-
+ is injective with 
+\begin_inset Formula $\eta(\mathrm{r})=0$
 \end_inset
 
-for each 
-\begin_inset Formula $\sigma\in G$
+;
+\end_layout
+
+\begin_layout Enumerate
+For each 
+\begin_inset Formula $n\geq1$
 \end_inset
 
- and for each 
-\begin_inset Formula $n\in\mathbb{N}$
+, we have 
+\begin_inset Formula $\mathcal{E}_{n}=\{f_{n}\}$
 \end_inset
 
-.
- We say 
-\begin_inset Formula $(\mathcal{R}_{n},f_{n})$
+ for some non-constant monic polynomial 
+\begin_inset Formula $f_{n}\in R[X]$
 \end_inset
 
- is a 
-\series bold
-transitive 
-\begin_inset Formula $G$
+ of degree 
+\begin_inset Formula $d_{n}\geq2$
 \end_inset
 
-
-\series default
--tree if the natural action of 
-\begin_inset Formula $G$
+ (every edge with height 
+\begin_inset Formula $n$
 \end_inset
 
- on 
-\begin_inset Formula $R$
+ is labeled by 
+\begin_inset Formula $f_{n}$
 \end_inset
 
- restricts to a transitive action of 
-\begin_inset Formula $G$
-\end_inset
-
- on 
-\begin_inset Formula $\mathcal{R}_{n}$
-\end_inset
-
- for each 
-\begin_inset Formula $n\in\mathbb{N}$
+).
+ Furthermore, we have 
+\begin_inset Formula $\mathcal{N}_{n+1}=f_{n}^{-1}(\mathcal{N}_{n})$
 \end_inset
 
 .
  
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -820,8 +1904,78 @@ end{defn}
 
 \end_layout
 
-\begin_layout Subsection
-Galois Trees
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Let 
+\begin_inset Formula $T$
+\end_inset
+
+ be an 
+\begin_inset Formula $R$
+\end_inset
+
+-tree in 
+\begin_inset Formula $A$
+\end_inset
+
+ which is Galois and let 
+\begin_inset Formula $G$
+\end_inset
+
+ be a subgroup of 
+\begin_inset Formula $\mathrm{Aut}_{R}(A)$
+\end_inset
+
+, the group of all 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra automorphisms of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Then we get a tree representation of 
+\begin_inset Formula $G$
+\end_inset
+
+ on 
+\begin_inset Formula $T$
+\end_inset
+
+ which can be described as follows: Let 
+\begin_inset Formula $\sigma\in G$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathrm{n}\in\mathrm{N}_{n}(T)$
+\end_inset
+
+.
+ We set 
+\begin_inset Formula $\sigma\mathrm{n}$
+\end_inset
+
+ to be the unique node in 
+\begin_inset Formula $\mathrm{N}_{n}(T)$
+\end_inset
+
+ such that 
+\begin_inset Formula $\eta(\sigma\mathrm{n})=\sigma(\eta(\mathrm{n}))$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -857,10 +2011,10 @@ label{theoremgaloistreeconstruction}
 
 .
  Suppose 
-\begin_inset Formula $(f_{n})$
+\begin_inset Formula $f_{1},\dots,f_{n}$
 \end_inset
 
- be a sequence of polynomials in 
+ is a sequence of polynomials in 
 \begin_inset Formula $K[X]$
 \end_inset
 
@@ -876,37 +2030,53 @@ is separable and irreducible over
 \begin_inset Formula $K$
 \end_inset
 
- for each 
-\begin_inset Formula $n\geq1$
-\end_inset
-
 .
  Let 
-\begin_inset Formula $\mathcal{R}_{n}$
+\begin_inset Formula $T$
 \end_inset
 
- be the set of roots of 
-\begin_inset Formula $f_{[n]}$
-\end_inset
-
- in 
-\begin_inset Formula $\overline{K}$
-\end_inset
-
-.
- Then 
-\begin_inset Formula $(\mathcal{R}_{n},f_{n})$
-\end_inset
-
- is a transitive 
-\begin_inset Formula $G$
+ be the 
+\begin_inset Formula $K$
 \end_inset
 
 -tree in 
 \begin_inset Formula $\overline{K}$
 \end_inset
 
+ whose nodes of height 
+\begin_inset Formula $m$
+\end_inset
+
+ are in bijection with (and labeled by) the set of roots of 
+\begin_inset Formula $f_{[m]}$
+\end_inset
+
+ in 
+\begin_inset Formula $\overline{K}$
+\end_inset
+
+ and whose edges of height 
+\begin_inset Formula $m$
+\end_inset
+
+ are labeled by 
+\begin_inset Formula $f_{m}$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq m\leq n$
+\end_inset
+
 .
+ Then 
+\begin_inset Formula $T$
+\end_inset
+
+ is a transitive 
+\begin_inset Formula $G$
+\end_inset
+
+-tree.
  
 \begin_inset ERT
 status open
@@ -958,16 +2128,16 @@ begin{proof}
 \end_inset
 
  map from 
-\begin_inset Formula $\mathcal{R}_{n}$
+\begin_inset Formula $\mathcal{N}_{n}$
 \end_inset
 
  to 
-\begin_inset Formula $\mathcal{R}_{n-1}$
+\begin_inset Formula $\mathcal{N}_{n-1}$
 \end_inset
 
 .
  To see that it does, let 
-\begin_inset Formula $\alpha\in\mathcal{R}_{n-1}$
+\begin_inset Formula $\alpha\in\mathcal{N}_{n-1}$
 \end_inset
 
  and note that 
@@ -1924,6 +3094,240 @@ we can solve
 \end_inset
 
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below:$0 $] (r) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below right:$ 
+\backslash
+zeta _3 $] (r1) at (-4,3) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below left:$ 
+\backslash
+zeta _3 ^2  $] (r4) at (4,3) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (r1) edge[out=-90, in=160] node[label=below left:$
+\backslash
+Phi _3 $] {} (r);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (r4) edge[out=-90, in=20] node[label=below right:$
+\backslash
+Phi _3 $] {} (r);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$
+\backslash
+zeta _9 $] (a) at (-6,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$
+\backslash
+zeta _9 ^4 $] (b) at (-4,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$
+\backslash
+zeta _9 ^7 $] (c) at (-2,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$
+\backslash
+zeta _9 ^2 $] (d) at (2,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$
+\backslash
+zeta _9 ^5 $] (e) at (4,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$
+\backslash
+zeta _9 ^8 $] (f) at (6,6) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (a) edge[out=-90, in=150] node[label=left:$ x^3 $] {} (r1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (b) edge[out=-90, in=90] node[label=above left:$ x^3 $] {} (r1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (c) edge[out=-90, in=30] node[label=right:$ x^3 $] {} (r1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (d) edge[out=-90, in=150] node[label=left:$ x^3 $] {} (r4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (e) edge[out=-90, in=90] node[label=above left:$ x^3 $] {} (r4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (f) edge[out=-90, in=30] node[label=right:$ x^3 $] {} (r4);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
