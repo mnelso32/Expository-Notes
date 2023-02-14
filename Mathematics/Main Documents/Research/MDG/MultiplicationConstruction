@@ -1,0 +1,157 @@
+ring R = 0,(x,y,z,w),dp;
+ideal I = x2,w2,zw,xy,y2z2;
+resolution re = mres(I,0);
+
+
+proc MultiplicationConstruction (resolution re)
+{
+
+LIB "matrix.lib";
+int p = size(re); 
+int i;
+int j;
+matrix d(1..p);
+intvec v(1..p);
+int n(1..p);
+
+for (i=1;i<=p;i++) {d(i) = matrix(re[i]);};
+for (i=1;i<=p;i++) {n(i) = ncols(d(i));};
+for (i=1;i<=p;i++) {v(i) = i:n(i) ;};
+matrix D = dsum(d(1..p));
+intvec V = v(1..p);
+int N = ncols(D);
+
+intmat M[N][N];
+for (i=1; i<=N; i++)
+{
+   for (j=1; j<=N; j++)
+   { 
+      if(D[i,j]!=0 ){ M[i,j]=1 ;};
+      };
+   };
+
+
+ring S = 2,e(1..N),Wp(V);
+poly f(1..N)(1..N);
+poly g(1..N)(1..N);
+for (i=1;i<=N;i++) {f(i)(i) = e(i)*e(i);};
+ideal J; 
+for (i=1; i<=N; i++) {J = J + f(i)(i);};
+
+
+
+poly h(1..N);
+for (j=1;j<=n(1);j++) 
+{  
+   h(j) = 1;
+};
+for (j=n(1)+1;j<=N;j++) 
+{  
+   for (i=1;i<=N;i++)
+   {
+      h(j) = h(j)+ M[i,j]*e(i);
+   };
+};
+map d = S, h(1..N);
+poly t(1..N);
+for (i=1;i<=N;i++) {t(i)=e(i);};
+
+
+for (i=1;i<=N;i++) 
+{  
+   for (j=1;j<=N;j++)
+   {
+      g(i)(j) = d(t(i))*t(j)+t(i)*d(t(j));
+   };
+};
+
+poly ev(1..N);
+
+
+
+for (i=1;i<=N;i++)
+{
+   map G(i) = S, 0:(i-1), 1:1, 0:(N-i);
+};
+matrix Q[N][1];
+for (i=1;i<=N;i++)
+{
+   Q[i,1] = G(i)(g(1)(2));
+};
+
+
+
+
+map EV(i) = S, 0:i-1,1,0:N-i;
+poly t(1..N);
+for (i=1;i<=N;i++) {t(i)=e(i);};
+
+
+for (i=1;i<=N;i++) 
+{  
+   for (j=1;j<=N;j++)
+   {
+      g(i)(j) = d(t(i))*t(j)+t(i)*d(t(j));
+   };
+};
+
+ideal K = g(1)(2);
+
+preimage(S,d,K);
+
+
+
+
+
+
+
+
+
+
+LIB "ncalg.lib"; 
+
+intvec v= 1:5, 2:8, 3:5, 4:1; 
+ring A=(0,x,y,z,w),(e1,e2,e3,e4,e5,e12,e13,e14,e23,e24,e34,e35,e45,e123,e124,e134,e234,e345,e1234),Wp(v);
+
+matrix C[19][19]; matrix D[19][19]; int i; int j; 
+for (i=1; i<=19; i++) {for (j=1; j<=19; j++) {C[i,j]=(-1)^(v[i]*v[j]);}} 
+ncalgebra(C,D);
+  
+poly f(1)(2) = e1*e2-e12;
+poly f(1)(3) = e1*e3-e13;
+poly f(1)(4) = e1*e4-x*e14;
+poly f(1)(5) = e1*e5-yz2*e14-x*e45;
+poly f(2)(3) = e2*e3-w*e23;
+poly f(2)(4) = e2*e4-e24;
+poly f(2)(5) = e2*e5-y2z*e23-w*e35;  
+poly f(2)(45) = e2*e45+yz*e234-w*e345;  
+poly f(1)(35) = e1*e35-yz*e134+x*e345;  
+poly f(1)(23) = e1*e23-e123;
+poly f(1)(24) = e1*e24-x*e124;
+poly f(2)(13) = e2*e13-w*e123;
+poly f(3)(45) = e3*e45-w*e345;
+poly f(4)(12) = e4*e12-x*e124;
+poly f(4)(13) = e4*e13-x*e134;
+poly f(4)(23) = e4*e23-e234;
+poly f(4)(35) = e4*e35-z*e345;
+poly f(2)(14) = e2*e14+e124;
+poly f(5)(12) = e5*e12-yz2*e124-xyz*e234+xw*e345;
+poly f(5)(23) = e5*e23;
+poly f(5)(14) = e5*e14;
+
+poly S(1)(5)(2) = f(1)(5)*e2+e1*f(2)(5);
+poly S(1)(2)(5) = f(1)(2)*e5-e1*f(2)(5);
+poly S(2)(5)(1) = f(2)(5)*e1-e2*f(1)(5);
+
+list L = (e1,e2,e3,e4,e5,e12,e13,e14,e23,e24,e34,e35,e45,e123,e124,e134,e234,e345,e1234); 
+ideal I; for (i=1; i<=19; i++) {I = I + L[i]*L[i];}
+I = I + f(1)(2),f(1)(3),f(1)(4),f(1)(5),f(2)(3),f(2)(4),f(2)(5),f(2)(45),f(1)(35),f(1)(23),f(2)(14),f(5)(12),f(5)(23),f(5)(14),f(4)(23),f(4)(35),f(3)(45),f(4)(13),f(2)(13),f(4)(12),f(1)(24);
+
+option(redSB);
+option(redTail);
+I = twostd(I);
+I;
+
+
+
+
