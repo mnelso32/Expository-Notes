@@ -1,15 +1,23 @@
-ring R = 0,(x,y,z,w),dp;
-ideal I = x2,w2,zw,xy,y2z2;
-resolution re = mres(I,0);
+
 
 
 proc MultiplicationConstruction (resolution re)
 {
 
+
+
+
+ring R = 0,(x,y,z,w),dp;
+ideal I = x2,w2,zw,xy,y2z2;
+resolution re = mres(I,0);
+
+
 LIB "matrix.lib";
-int p = size(re); 
-int i;
-int j;
+
+
+
+
+int p = size(re); int i; int j;
 matrix d(1..p);
 intvec v(1..p);
 int n(1..p);
@@ -21,14 +29,10 @@ matrix D = dsum(d(1..p));
 intvec V = v(1..p);
 int N = ncols(D);
 
-intmat M[N][N];
-for (i=1; i<=N; i++)
-{
-   for (j=1; j<=N; j++)
-   { 
-      if(D[i,j]!=0 ){ M[i,j]=1 ;};
-      };
-   };
+
+
+int n = size(ringlist(basering)[2]);
+for (i=1;i<=p;i++) {d(i) = matrix(re[i]);};
 
 
 ring S = 2,e(1..N),Wp(V);
@@ -38,7 +42,7 @@ for (i=1;i<=N;i++) {f(i)(i) = e(i)*e(i);};
 ideal J; 
 for (i=1; i<=N; i++) {J = J + f(i)(i);};
 
-
+def D = imap(R,D);
 
 poly h(1..N);
 for (j=1;j<=n(1);j++) 
@@ -53,6 +57,9 @@ for (j=n(1)+1;j<=N;j++)
    };
 };
 map d = S, h(1..N);
+
+
+
 poly t(1..N);
 for (i=1;i<=N;i++) {t(i)=e(i);};
 
@@ -98,6 +105,61 @@ for (i=1;i<=N;i++)
 ideal K = g(1)(2);
 
 preimage(S,d,K);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EXTRA
+
+
+
+intmat M[N][N];
+for (i=1; i<=N; i++)
+{
+   for (j=1; j<=N; j++)
+   { 
+      if(D[i,j]!=0 ){ M[i,j]=1 ;};
+      };
+   };
+
+
+
+
+
+
+
+
+proc PolyFromIntVec (intvec u)
+poly f;
+for (i=1;i<=N;i++)
+{
+   f = f + u[i]*e(i);
+};
+
+
+
+
+
+poly F;
+for (i=1;i<=2;i++)
+{
+   F = F + u[i]*e(i);
+};
+
 
 
 

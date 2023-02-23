@@ -1,0 +1,278 @@
+// I'm using this example as a test case to see if my code works:
+
+
+ring R = 0,(x,y,z,w),dp;
+ideal I = x2,w2,zw,xy,y2z2;
+resolution re = mres(I,0);
+
+
+// Here's the start of the procedure MultiplicationConstruction.  In general, this 
+will input a free R-complex (at the moment I'm inputing resolutions) and this will
+output a multiplication on that R-complex.
+
+
+proc MultiplicationConstruction (resolution re)
+{
+
+
+// I think I need access to functions described int his library, so I include them here.
+
+
+LIB "matrix.lib";
+
+
+// I need to extract various things from the resolution (like the differential, the grading, etc..).  
+This is what I'm doing here.
+
+
+int p = dim(re); int i; int j; matrix d(1..p); intvec v(1..p); int n(1..p);
+for (i=1;i<=p;i++) {d(i) = matrix(re[i]);};
+for (i=1;i<=p;i++) {n(i) = ncols(d(i));};
+for (i=1;i<=p;i++) {v(i) = i:n(i) ;};
+matrix D = dsum(d(1..p));
+intvec V = v(1..p);
+int N = ncols(D);
+
+
+// D is the matrix representation of the differential.  Here's what it looks like:
+
+
+w2,zw,xy,x2,y2z2,0, 0, 0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0,   z, 0, xy, 0,  x2, 0,  0,  0,  0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0,   -w,0, 0,  xy, 0,  x2, 0,  y2z,0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0,   0, x, -w2,-zw,0,  0,  yz2,0,  0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0,   0, -y,0,  0,  -w2,-zw,0,  0,  0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  -x, -w, 0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  0, 0, 0, xy,x2,0,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  w2,zw,0, 0, 0, 0,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  x, 0, 0, -z,0, 0,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  0, x, yz,w, 0, 0,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  -y,0, 0, 0, -z,0,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  0, -y,0, 0, w, 0,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  0, 0, w, 0, 0, 0,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  0, 0, -x,0, 0, 0,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, z,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, -w,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, x,
+0, 0, 0, 0, 0,   0, 0, 0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, -y
+
+
+// V is a weight vector whose entries represent the grading of the resolution.  Here's what it looks like:
+
+
+1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,4
+
+
+
+// I may or may not need this next part, but I also want to construct an integer matrix M which is essentially 
+obtained by replacing the nonzero entries in D with 1.
+
+
+
+intmat M[N][N];
+for (i=1; i<=N; i++)
+{
+   for (j=1; j<=N; j++)
+   { 
+      if(D[i,j]!=0 ){ M[i,j]=1 ;};
+   };
+};
+
+
+// At this point, I'm going to change to a new ring and I'm going to work over characteristic 2 (for simplicity at the moment).  
+This ring will be S = K[e1,e2,...,eN] where K = F2.  Ideally, I want K = F2(x,y,z,w) so that I can fetch D (defined over R) to 
+being defined over S.  At the moment, I just have the intehger matrix M and the integer vector V.  Finally, note the monomial ordering Wp(V).
+This monomial ordering will allow us to calculate associators as well as the maximal associative quotient.
+
+
+ring S = 2,e(1..N),Wp(V);
+
+
+// The goal is to define polynomials f(i)(j) = e(i)e(j) + e(i)*e(j) where * is the multiplication I'm trying to define.
+We begin by defining f(i)(j) = e(i)e(i) (which means I want e(i)*e(i) = 0 for all i).  I store all of these polynomials in
+an ideal I:
+
+
+poly f(1..N)(1..N); ideal J; 
+for (i=1;i<=N;i++) {f(i)(i) = e(i)*e(i);};
+for (i=1; i<=N; i++) {J = J + f(i)(i);};
+
+
+
+// I now wish to define f(i)(j) = e(i)e(j) + e(i)*e(j) where i<j.  This is the tricky part (and my code can probably be simplified here).
+The basic idea here is that e(i)*e(j) needs to satisfy the Leibniz law: 
+
+d(e(i)*e(j)) = d(e(i))*e(j) + e(i)*d(e(j)) =: g(i)(j)
+
+Here's the cool part: the reduce command will help us calculate e(i)*e(j). In particular, let g = reduce(J,g(i)(j)).  There are three possibilities:
+
+1) If g = 0, I set f(i)(j) = e(i)e(j) (i.e. I set e(i)*e(j) = 0)
+
+2) If deg(LM(g)) = 2, then I skip defining f(i)(j) for now and try to define it for another pair.
+
+3) If g =/= 0 and deg(LM(g)) = 1, then has the form g = e(i1) + ... + e(ik) and furthermore g lives in homological degree |e(i)|+|e(j)| = V[i]+V[j] = c.
+I need to find an h = e(j1) + ... + e(jm) which lives in homological degree c+1 and which satisfies d(h) = g.  There will usually be more than one such h which
+does the trick, but I'd like for m to minimal (later on, I will also require that h satisfies some multidegree condition, but for now I'm not focusing on that).  
+Once this h is found, I set f(i)(j) = e(i)e(j) + h (i.e. I set e(i)*e(j) = h).
+
+My approach to (3) is to try to solve the following linear algebra problem:
+
+M*H = G
+
+where M was defined earlier in terms of D, where G is a vector which represents g, and where H is a vector I'm trying to solve.
+
+
+
+// Here's my attempt at trying to do this:
+
+
+
+
+poly g(1..N)(1..N); poly t(1..N);
+for (i=1;i<=N;i++) {t(i)=e(i);};
+for (i=1;i<=N;i++) 
+{  
+   for (j=1;j<=N;j++)
+   {
+      g(i)(j) = d(t(i))*t(j)+t(i)*d(t(j));
+   };
+};
+
+
+
+
+
+
+
+poly t(1..N);
+for (i=1;i<=N;i++) {t(i)=e(i);};
+
+
+for (i=1;i<=N;i++) 
+{  
+   for (j=1;j<=N;j++)
+   {
+      g(i)(j) = d(t(i))*t(j)+t(i)*d(t(j));
+   };
+};
+
+poly ev(1..N);
+
+
+
+for (i=1;i<=N;i++)
+{
+   map G(i) = S, 0:(i-1), 1:1, 0:(N-i);
+};
+matrix Q[N][1];
+for (i=1;i<=N;i++)
+{
+   Q[i,1] = G(i)(g(1)(2));
+};
+
+
+
+
+
+
+poly h(1..N);
+for (j=1;j<=n(1);j++) 
+{  
+   h(j) = 1;
+};
+for (j=n(1)+1;j<=N;j++) 
+{  
+   for (i=1;i<=N;i++)
+   {
+      h(j) = h(j)+ M[i,j]*e(i);
+   };
+};
+map d = S, h(1..N);
+
+
+
+
+
+
+
+
+proc PolyFromIntVec (intvec u)
+poly f;
+for (i=1;i<=N;i++)
+{
+   f = f + u[i]*e(i);
+};
+
+
+
+
+
+poly F;
+for (i=1;i<=2;i++)
+{
+   F = F + u[i]*e(i);
+};
+
+
+
+
+
+
+
+
+
+
+
+LIB "ncalg.lib"; 
+
+intvec v= 1:5, 2:8, 3:5, 4:1; 
+ring A=(0,x,y,z,w),(e1,e2,e3,e4,e5,e12,e13,e14,e23,e24,e34,e35,e45,e123,e124,e134,e234,e345,e1234),Wp(v);
+
+matrix C[19][19]; matrix D[19][19]; int i; int j; 
+for (i=1; i<=19; i++) {for (j=1; j<=19; j++) {C[i,j]=(-1)^(v[i]*v[j]);}} 
+ncalgebra(C,D);
+  
+poly f(1)(2) = e1*e2-e12;
+poly f(1)(3) = e1*e3-e13;
+poly f(1)(4) = e1*e4-x*e14;
+poly f(1)(5) = e1*e5-yz2*e14-x*e45;
+poly f(2)(3) = e2*e3-w*e23;
+poly f(2)(4) = e2*e4-e24;
+poly f(2)(5) = e2*e5-y2z*e23-w*e35;  
+poly f(2)(45) = e2*e45+yz*e234-w*e345;  
+poly f(1)(35) = e1*e35-yz*e134+x*e345;  
+poly f(1)(23) = e1*e23-e123;
+poly f(1)(24) = e1*e24-x*e124;
+poly f(2)(13) = e2*e13-w*e123;
+poly f(3)(45) = e3*e45-w*e345;
+poly f(4)(12) = e4*e12-x*e124;
+poly f(4)(13) = e4*e13-x*e134;
+poly f(4)(23) = e4*e23-e234;
+poly f(4)(35) = e4*e35-z*e345;
+poly f(2)(14) = e2*e14+e124;
+poly f(5)(12) = e5*e12-yz2*e124-xyz*e234+xw*e345;
+poly f(5)(23) = e5*e23;
+poly f(5)(14) = e5*e14;
+
+poly S(1)(5)(2) = f(1)(5)*e2+e1*f(2)(5);
+poly S(1)(2)(5) = f(1)(2)*e5-e1*f(2)(5);
+poly S(2)(5)(1) = f(2)(5)*e1-e2*f(1)(5);
+
+list L = (e1,e2,e3,e4,e5,e12,e13,e14,e23,e24,e34,e35,e45,e123,e124,e134,e234,e345,e1234); 
+ideal I; for (i=1; i<=19; i++) {I = I + L[i]*L[i];}
+I = I + f(1)(2),f(1)(3),f(1)(4),f(1)(5),f(2)(3),f(2)(4),f(2)(5),f(2)(45),f(1)(35),f(1)(23),f(2)(14),f(5)(12),f(5)(23),f(5)(14),f(4)(23),f(4)(35),f(3)(45),f(4)(13),f(2)(13),f(4)(12),f(1)(24);
+
+option(redSB);
+option(redTail);
+I = twostd(I);
+I;
+
+
+
+
+
+
+int n = size(ringlist(basering)[2]);
+for (i=1;i<=p;i++) {d(i) = matrix(re[i]);};
+
