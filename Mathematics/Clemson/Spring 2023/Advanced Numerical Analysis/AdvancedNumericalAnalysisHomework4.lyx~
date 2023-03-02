@@ -1,0 +1,1455 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Numerical Analysis Homework 4
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+Throughout this homework, 
+\begin_inset Formula $\|\cdot\|$
+\end_inset
+
+ denotes the 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+-norm.
+\end_layout
+
+\begin_layout Section
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Suppose the 
+\begin_inset Formula $m\times n$
+\end_inset
+
+ matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ has the form
+\begin_inset Formula 
+\[
+A=\begin{pmatrix}A_{1}\\
+A_{2}
+\end{pmatrix}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ is a nonsingular matrix of dimension 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+ is an arbitrary matrix of dimension 
+\begin_inset Formula $(m-n)\times n$
+\end_inset
+
+.
+ Prove that 
+\begin_inset Formula $\|A^{+}\|\leq\|A_{1}^{-1}\|$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+\|A^{+}\| & =\|(A^{*}A)^{-1}A^{*}\|=\frac{1}{\sigma_{\mathrm{min}}(A)}.
+\end{align*}
+
+\end_inset
+
+Similarly, we have
+\begin_inset Formula 
+\[
+\|A_{1}^{-1}\|=\frac{1}{\sigma_{\mathrm{min}}(A_{1})}.
+\]
+
+\end_inset
+
+Observe that since 
+\begin_inset Formula $\|Ax\|^{2}=\|A_{1}x\|^{2}+\|A_{2}x\|^{2}\geq\|A_{1}x\|^{2}$
+\end_inset
+
+, we have 
+\begin_inset Formula $\|A\|\geq\|A_{1}\|$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\begin{align*}
+\sigma_{\mathrm{min}}\begin{pmatrix}A_{1}\\
+A_{2}
+\end{pmatrix} & =\min_{x\neq0}\frac{\|\begin{pmatrix}A_{1}\\
+A_{2}
+\end{pmatrix}x\|}{\|x\|}\geq\min_{x\neq0}\frac{\|A_{1}x\|}{\|x\|}
+\end{align*}
+
+\end_inset
+
+So
+\begin_inset Formula 
+\[
+\sigma_{\mathrm{min}}(A)\geq\sigma_{\mathrm{min}}(A_{1})\implies\frac{1}{\sigma_{\mathrm{min}}(A_{1})}\geq\frac{1}{\sigma_{\mathrm{min}}(A)}\iff\|A_{1}^{-1}\|\geq\|A^{+}\|.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Take 
+\begin_inset Formula $m=50$
+\end_inset
+
+ and 
+\begin_inset Formula $n=12$
+\end_inset
+
+.
+ Using MATLAB's linspace, define 
+\begin_inset Formula $t$
+\end_inset
+
+ to be the 
+\begin_inset Formula $m$
+\end_inset
+
+-vector corresponding to linearly spaced grid points from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Using MATLAB's vander and fliplr, define 
+\begin_inset Formula $A$
+\end_inset
+
+ to be the 
+\begin_inset Formula $m\times n$
+\end_inset
+
+ matrix associated with least squares fitting on this grid by a polynomial
+ of degree 
+\begin_inset Formula $n-1$
+\end_inset
+
+.
+ Take 
+\begin_inset Formula $b$
+\end_inset
+
+ to be the function 
+\begin_inset Formula $\cos(4t)$
+\end_inset
+
+ evaluated on the grid.
+ Now, calculate and print (to sixteen-digit precision) the least squares
+ coefficient vector 
+\begin_inset Formula $x$
+\end_inset
+
+ by six methods:
+\end_layout
+
+\begin_layout Enumerate
+Formation and solution of the normal equations, using MATLAB's 
+\backslash
+,
+\end_layout
+
+\begin_layout Enumerate
+QR factorization computed by mgs;
+\end_layout
+
+\begin_layout Enumerate
+QR factorization computed by house;
+\end_layout
+
+\begin_layout Enumerate
+QR factorization computed by MATLAB's qr;
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $x=A\backslash b$
+\end_inset
+
+ in MATLAB;
+\end_layout
+
+\begin_layout Enumerate
+SVD, using MATLAB's svd;
+\end_layout
+
+\begin_layout Enumerate
+The calculations above will produce six lists of twelve coefficients.
+ In each list, shade with red pen the digits that appear to be wrong (affected
+ by rounding error).
+ Comment on what differences you observe.
+ Do the normal equations exhibit instability? You do not have to explain
+ your observations.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We first set up our problem in MATLAB as the problem instructed:
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+m = 50;
+\end_layout
+
+\begin_layout Plain Layout
+
+n = 12;
+\end_layout
+
+\begin_layout Plain Layout
+
+t = linspace(0,1,m)';
+\end_layout
+
+\begin_layout Plain Layout
+
+A = fliplr(vander(t));
+\end_layout
+
+\begin_layout Plain Layout
+
+A = A(:,1:n);
+\end_layout
+
+\begin_layout Plain Layout
+
+b = cos(4*t);
+\end_layout
+
+\begin_layout Plain Layout
+
+x = zeros(n,6);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now that the problem is set up, we solve (1-7):
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+1.
+ We work in MATLAB below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Bval = A'*A;
+\end_layout
+
+\begin_layout Plain Layout
+
+Rval = chol(Bval);
+\end_layout
+
+\begin_layout Plain Layout
+
+x(:,1) = Rval
+\backslash
+(Rval'
+\backslash
+(A'*b));
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ We work in MATLAB below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+[Qval,Rval] = mgs(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+x(:,2) = backsubs(Rval,Qval'*b);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ We work in MATLAB below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ We work in MATLAB below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+[Qval,Rval] = qr(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+x(:,4) = backsubs(Rval,Qval'*b);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+5.
+ We work in MATLAB below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+x(:,5) = A
+\backslash
+b ;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+6.
+ We work in MATLAB below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+[Uval,Sval,Vval] = svd(A,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+c = Uval'*b;
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:n
+\end_layout
+
+\begin_layout Plain Layout
+
+   c(i) = c(i)/Sval(i,i);
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\begin_layout Plain Layout
+
+x(:,6) = Vval*c;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+7.
+ We work in MATLAB below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Bval = A'*A;
+\end_layout
+
+\begin_layout Plain Layout
+
+Rval = chol(Bval);
+\end_layout
+
+\begin_layout Plain Layout
+
+x(:,1) = Rval
+\backslash
+(Rval'
+\backslash
+(A'*b));
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+7.
+ The normal equations exhibit instability.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Implement Householder reduced QR factorization with column pivoting.
+ At step 
+\begin_inset Formula $k$
+\end_inset
+
+, consider columns 
+\begin_inset Formula $k$
+\end_inset
+
+ through 
+\begin_inset Formula $n$
+\end_inset
+
+ of the current 
+\begin_inset Formula $A$
+\end_inset
+
+ (has been up- dated in previous steps), find the column 
+\begin_inset Formula $j$
+\end_inset
+
+ (
+\begin_inset Formula $k\leq j\leq n$
+\end_inset
+
+) such that 
+\begin_inset Formula $\|A(k:m:j)\|=\max_{k\leq l\leq n}\|A(k:m:l)\|$
+\end_inset
+
+, and switch columns 
+\begin_inset Formula $k$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Similar to GEPP, we need a permutation matrix 
+\begin_inset Formula $P$
+\end_inset
+
+ to record column swapping, such that 
+\begin_inset Formula $AP=QR$
+\end_inset
+
+ numerically.
+ Generate a new test matrix as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+U = randn(1024,10);
+\end_layout
+
+\begin_layout Plain Layout
+
+A4 = U*randn(10,15);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Test your code on 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $A_{3}$
+\end_inset
+
+, and 
+\begin_inset Formula $A_{4}$
+\end_inset
+
+, compare your upper triangular matrices with those generated by MATLAB's
+ command [Q,R,P] = qr(A,0);
+\end_layout
+
+\begin_layout Enumerate
+Show that the diagonal elements of 
+\begin_inset Formula $R$
+\end_inset
+
+ are monotonically decreasing in modulus.
+\end_layout
+
+\begin_layout Enumerate
+Comment on the use of this algorithm to extract a set of numerically linearly
+ independent columns from a matrix with numerically linearly dependent columns.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Subsection*
+Classical Gram-Schmidt
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Q,R] = gs(A)     
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+Q = A;    
+\end_layout
+
+\begin_layout Plain Layout
+
+R = zeros(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+Q(:,1) = Q(:,1) / norm(Q(:,1)) ;
+\end_layout
+
+\begin_layout Plain Layout
+
+R(1,1) = Q(:,1)'*Q(:,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+for j = 2:m
+\end_layout
+
+\begin_layout Plain Layout
+
+   for i = 1:j-1 
+\end_layout
+
+\begin_layout Plain Layout
+
+      R(i,j) = Q(:,i)'*Q(:,j); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   end 
+\end_layout
+
+\begin_layout Plain Layout
+
+   for i = 1:j-1 
+\end_layout
+
+\begin_layout Plain Layout
+
+      Q(:,j) = Q(:,j) - R(i,j)*Q(:,i); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   end
+\end_layout
+
+\begin_layout Plain Layout
+
+   Q(:,j) = Q(:,j) / norm(Q(:,j)) ; 
+\end_layout
+
+\begin_layout Plain Layout
+
+   R(j,j) = Q(:,j)'*Q(:,j) ;
+\end_layout
+
+\begin_layout Plain Layout
+
+   end
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Modified Gram-Schmidt
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Q,R] = mgs(A)     
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+Q = zeros(m,n);    
+\end_layout
+
+\begin_layout Plain Layout
+
+R = zeros(n,n);
+\end_layout
+
+\begin_layout Plain Layout
+
+for j = 1:n 
+\end_layout
+
+\begin_layout Plain Layout
+
+   Q(:,1) = A(:,1) / norm(A(:,1)) ;
+\end_layout
+
+\begin_layout Plain Layout
+
+   R(1,1) = Q(:,1)'*(A:,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+   for j = 2:m
+\end_layout
+
+\begin_layout Plain Layout
+
+      for i = 1:j-1 
+\end_layout
+
+\begin_layout Plain Layout
+
+         R(i,j) = Q(:,i)'*A(:,j); 
+\end_layout
+
+\begin_layout Plain Layout
+
+      end 
+\end_layout
+
+\begin_layout Plain Layout
+
+      Q(:,j) = A(:,j)
+\end_layout
+
+\begin_layout Plain Layout
+
+      for i = 1:j-1 
+\end_layout
+
+\begin_layout Plain Layout
+
+         Q(:,j) = Q(:,j) - R(i,j)*Q(:,i); 
+\end_layout
+
+\begin_layout Plain Layout
+
+      end
+\end_layout
+
+\begin_layout Plain Layout
+
+      Q(:,j) = Q(:,j) / norm(Q(:,j)) ; 
+\end_layout
+
+\begin_layout Plain Layout
+
+      R(j,j) = Q(:,j)'*A(:,j) ;
+\end_layout
+
+\begin_layout Plain Layout
+
+   end
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Double Modified Gram-Schmidt
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Q,R] = qrmgs2(A) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[Q1,R1] = qrmgs(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+[Q,R2] = qrmgs(Q1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+R = R2*R1;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Householder Factorization
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [v,R] = house(A) 
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+v = zeros(m,n); 
+\end_layout
+
+\begin_layout Plain Layout
+
+for j = 1:n 
+\end_layout
+
+\begin_layout Plain Layout
+
+   x = A(j:m,j); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   v(j:m,j) = x + sign(x(1))*norm(x)*eye(m-j+1,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   v(j:m,j) = v(j:m,j)/norm(v(j:m,j)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   A(j:m,j:n) = A(j:m,j:n) - 2*v(j:m,j)*(v(j:m,j)'*A(j:m,j:n)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end 
+\end_layout
+
+\begin_layout Plain Layout
+
+R = A(1:n,:); 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

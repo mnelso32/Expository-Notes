@@ -68210,15 +68210,15 @@ Case 2
 \end_inset
 
  is separable over 
-\begin_inset Formula $\overline{\Bbbk_{0}}$
+\begin_inset Formula $\overline{\Bbbk}_{0}$
 \end_inset
 
-: this is the only place in the argument where we use that the field has
+ (this is the only place in the argument where we use that the field has
  characteristic 
 \begin_inset Formula $0$
 \end_inset
 
-.
+).
  Thus Hensel's Lemma implies there exists a unique 
 \begin_inset Formula $t\in R$
 \end_inset
@@ -70710,18 +70710,49 @@ begin{theorem}
 \end_inset
 
  Let 
-\begin_inset Formula $A=K[x_{1},\dots,x_{n}]_{\langle x_{1},\dots,x_{n}\rangle}$
+\begin_inset Formula $R=\Bbbk[x_{1},\dots,x_{n}]=\Bbbk[\boldsymbol{x}]$
 \end_inset
 
- and let 
-\begin_inset Formula $I=\langle f_{1},\dots,f_{m}\rangle$
+, let 
+\begin_inset Formula $\mathfrak{m}=\langle x_{1},\dots,x_{n}\rangle$
+\end_inset
+
+, let 
+\begin_inset Formula $\boldsymbol{f}=f_{1},\dots,f_{m}$
+\end_inset
+
+ be a sequence of polynomials in 
+\begin_inset Formula $R$
+\end_inset
+
+, and let 
+\begin_inset Formula $A=R_{\mathfrak{m}}\slash\boldsymbol{f}$
 \end_inset
 
 .
- Then 
+ Set 
+\begin_inset Formula $\mathrm{J}_{\boldsymbol{f}}=(\partial_{x_{i}}f_{j})$
+\end_inset
+
+ to be the Jacobian matrix of 
+\begin_inset Formula $\boldsymbol{f}$
+\end_inset
+
+:
 \begin_inset Formula 
 \[
-\mbox{edim}(A/I)=n-\mbox{rank}\left(\frac{\partial f_{i}}{\partial x_{j}}(0)\right).
+\mathrm{J}_{\boldsymbol{f}}=\mathrm{J}_{\boldsymbol{f}}(\boldsymbol{x})=\begin{pmatrix}\partial_{x_{1}}f_{1} & \cdots & \partial_{x_{n}}f_{1}\\
+\vdots & \ddots & \vdots\\
+\partial_{x_{1}}f_{m} & \cdots & \partial_{x_{n}}f_{m}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\[
+\mathrm{edim}\,A=n-\mathrm{rank}\,\,\mathrm{J}_{\boldsymbol{f}}(0).
 \]
 
 \end_inset
@@ -70755,48 +70786,24 @@ begin{proof}
 
 \end_inset
 
- By definition, we have 
-\begin_inset Formula $\mbox{edim}(A)=\mbox{dim}_{K}(\mathfrak{m}/\mathfrak{m}^{2})$
-\end_inset
-
-.
  Let 
-\begin_inset Formula $\mathfrak{n}=\langle x_{1},\dots,x_{n}\rangle\subset A$
+\begin_inset Formula $\mathfrak{n}$
+\end_inset
+
+ be the maximal ideal of 
+\begin_inset Formula $A$
 \end_inset
 
 .
- Then the maximal ideal 
-\begin_inset Formula $\mathfrak{m}$
-\end_inset
-
- in 
-\begin_inset Formula $A/I$
-\end_inset
-
- has the form 
-\begin_inset Formula $\mathfrak{n}/I$
-\end_inset
-
-, and the ideal 
-\begin_inset Formula $\mathfrak{m}^{2}$
-\end_inset
-
- in 
-\begin_inset Formula $A/I$
-\end_inset
-
- has the form 
-\begin_inset Formula $(\mathfrak{n}^{2}+I)/I$
-\end_inset
-
-, and
+ We have
 \begin_inset Formula 
 \begin{align*}
-\mbox{dim}_{K}(\mathfrak{m}/\mathfrak{m}^{2}) & =\mbox{dim}_{K}((\mathfrak{n}/I)/(\mathfrak{n}^{2}+I)/I))\\
- & =\mbox{dim}_{K}(\mathfrak{n}/(\mathfrak{n}^{2}+I))\\
- & =\mbox{dim}_{K}((\mathfrak{n}/\mathfrak{n}^{2})/((\mathfrak{n}^{2}+I)/\mathfrak{n}^{2}))\\
- & =\mbox{dim}_{K}(\mathfrak{n}/\mathfrak{n}^{2})-\mbox{dim}_{K}((\mathfrak{n}^{2}+I)/\mathfrak{n}^{2})\\
- & =n-\mbox{dim}_{K}((\mathfrak{n}^{2}+I)/\mathfrak{n}^{2}).
+\mathrm{edim}\,A & =\mbox{dim}_{\Bbbk}(\mathfrak{n}/\mathfrak{n}^{2})\\
+ & =\mbox{dim}_{\Bbbk}((\mathfrak{m}/\boldsymbol{f})/(\mathfrak{m}^{2}+\boldsymbol{f})/\boldsymbol{f}))\\
+ & =\mbox{dim}_{\Bbbk}(\mathfrak{m}/(\mathfrak{m}^{2}+\boldsymbol{f}))\\
+ & =\mbox{dim}_{\Bbbk}((\mathfrak{m}/\mathfrak{m}^{2})/((\mathfrak{m}^{2}+\boldsymbol{f})/\mathfrak{m}^{2}))\\
+ & =\mbox{dim}_{\Bbbk}(\mathfrak{m}/\mathfrak{m}^{2})-\dim_{\Bbbk}((\mathfrak{m}^{2}+\boldsymbol{f})/\mathfrak{m}^{2})\\
+ & =n-\dim_{\Bbbk}((\mathfrak{m}^{2}+\boldsymbol{f})/\mathfrak{m}^{2}).
 \end{align*}
 
 \end_inset
@@ -70807,12 +70814,101 @@ begin{proof}
 \begin_layout Standard
 The last dimension is equal to the number of linearly independent linear
  forms among the 
-\begin_inset Formula $f_{i}\mbox{ mod }\mathfrak{n}^{2}$
+\begin_inset Formula $f_{i}\mbox{ mod }\mathfrak{m}^{2}$
 \end_inset
 
 .
  This is equal to 
-\begin_inset Formula $\mbox{rank}\left(\frac{\partial f_{i}}{\partial x_{j}}(0)\right)$
+\begin_inset Formula $\mathrm{rank}\,\,\mathrm{J}_{\boldsymbol{f}}(0)$
+\end_inset
+
+.
+ Indeed, for each 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+, we break up 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ into a sum of its homogeneous pieces:
+\begin_inset Formula 
+\[
+f_{i}=f_{i,0}+f_{i,1}+\cdots+f_{i,d_{i}},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $f_{i,j}$
+\end_inset
+
+ is the degree 
+\begin_inset Formula $j$
+\end_inset
+
+ part of 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ (in particular note that 
+\begin_inset Formula $f_{i,0}=f_{i}(0)=0$
+\end_inset
+
+ since 
+\begin_inset Formula $f_{i}\in\mathfrak{m}$
+\end_inset
+
+).
+ The 
+\begin_inset Formula $f_{i,1}$
+\end_inset
+
+ are the linear forms of the 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ (i.e.
+ the components of degree 
+\begin_inset Formula $1$
+\end_inset
+
+).
+ Write
+\begin_inset Formula 
+\[
+f_{i,1}=c_{i,1}x_{1}+c_{i,2}x_{2}+\cdots+c_{i,n}x_{n}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{i,j}\in\Bbbk$
+\end_inset
+
+.
+ Then note that
+\begin_inset Formula 
+\[
+\mathrm{J}_{\boldsymbol{f}}(0)=\begin{pmatrix}c_{1,1} & \cdots & c_{1,n}\\
+\vdots & \ddots & \vdots\\
+c_{m,1} & \cdots & c_{m,n}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Then the rank of 
+\begin_inset Formula $\mathrm{J}_{f}(\boldsymbol{0})$
+\end_inset
+
+ is precisely equal ot the number of linearly independent forms among the
+ 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ mod 
+\begin_inset Formula $\mathfrak{m}^{2}$
 \end_inset
 
 .
@@ -70888,26 +70984,36 @@ begin{example}
 \end_inset
 
  Let 
-\begin_inset Formula $A=\mathbb{Q}[x,y,z]_{\langle x,y,z\rangle}$
+\begin_inset Formula $R=\mathbb{Q}[x,y,z]_{\langle x,y,z\rangle}$
 \end_inset
 
  and let 
-\begin_inset Formula $I=\langle x+y^{3},y+xyz,y+z+x^{2}\rangle$
+\begin_inset Formula $\boldsymbol{f}=f_{1},f_{2},f_{3}$
 \end_inset
 
-.We want to find out whether 
-\begin_inset Formula $A/I$
+ where
+\begin_inset Formula 
+\begin{align*}
+f_{1} & =x+y^{3}\\
+f_{2} & =y+xyz\\
+f_{3} & =y+z+x^{2}.
+\end{align*}
+
+\end_inset
+
+We want to find out whether 
+\begin_inset Formula $A=R\slash\boldsymbol{f}$
 \end_inset
 
  is regular.
  First we calculate the Jacobian matrix of the ideal 
-\begin_inset Formula $I$
+\begin_inset Formula $\boldsymbol{f}$
 \end_inset
 
 :
 \begin_inset Formula 
 \[
-\mbox{Jacob}(I)=\begin{pmatrix}1 & 3y^{2} & 0\\
+\mathrm{J}_{\boldsymbol{f}}=\mathrm{J}_{\boldsymbol{f}}(x,y,z)=\begin{pmatrix}1 & 3y^{2} & 0\\
 0 & 1 & xy\\
 2x & 1 & 1
 \end{pmatrix}.
@@ -70925,17 +71031,16 @@ The rank of this matrix evalulated at the point
 
 .
  This implies that 
-\begin_inset Formula $\mbox{edim}(A/I)=0$
+\begin_inset Formula $\mathrm{edim}\,A=0$
 \end_inset
 
 .
  Next, observe that
 \begin_inset Formula 
 \begin{align*}
-I & =\langle x+y^{3},y+xyz,y+z+x^{2}\rangle\\
+\langle\boldsymbol{f}\rangle & =\langle x+y^{3},y+xyz,y+z+x^{2}\rangle\\
  & =\langle x+y^{3},y(1+xz),y+z+x^{2}\rangle\\
  & =\langle x+y^{3},y,y+z+x^{2}\rangle\\
- & =\langle x,y,z+x^{2}\rangle\\
  & =\langle x,y,z\rangle
 \end{align*}
 
@@ -70950,27 +71055,27 @@ since
 \end_inset
 
  is a unit in 
-\begin_inset Formula $A$
+\begin_inset Formula $R$
 \end_inset
 
 .
- Therefore, 
+ Therefore,
 \begin_inset Formula 
 \begin{align*}
-A/I & =\mathbb{Q}[x,y,z]_{\langle x,y,z\rangle}/\langle x+y^{3},y+xyz,y+z+x^{2}\rangle\\
+A & =\mathbb{Q}[x,y,z]_{\langle x,y,z\rangle}/\langle x+y^{3},y+xyz,y+z+x^{2}\rangle\\
  & =\mathbb{Q}[x,y,z]_{\langle x,y,z\rangle}/\langle x,y,z\rangle\\
  & \cong\mathbb{Q}.
 \end{align*}
 
 \end_inset
 
-Thus, 
-\begin_inset Formula $\text{dim}(A/I)=0=\text{edim}(A/I)$
+Thus 
+\begin_inset Formula $\dim A=0=\mathrm{edim}\,A$
 \end_inset
 
 .
  Hence 
-\begin_inset Formula $A/I$
+\begin_inset Formula $A$
 \end_inset
 
  is a regular local ring.
@@ -71640,16 +71745,16 @@ label{example}
 
 \end_inset
 
- Let's use Krull's Principal Ideal theorem to find the dimension of 
-\begin_inset Formula $A=K[x,y,z]/\langle xy,xz\rangle$
+ Let's use Krull's Principal Ideal Theorem to find the dimension of 
+\begin_inset Formula $A=\Bbbk[x,y,z]/\langle xy,xz\rangle$
 \end_inset
 
 .
  Since 
-\begin_inset Formula $\text{Ass}\left(\langle xz,yz\rangle\right)=\left\{ \langle x,y\rangle,\langle z\rangle\right\} $
+\begin_inset Formula $\mathrm{Ass}\left(\langle xz,yz\rangle\right)=\left\{ \langle x,y\rangle,\langle z\rangle\right\} $
 \end_inset
 
-, a nonzerodivisor in 
+, a nonzerodivisor of 
 \begin_inset Formula $A$
 \end_inset
 
@@ -71663,7 +71768,7 @@ label{example}
 \end_inset
 
  are 
-\begin_inset Formula $\text{Ass}\left(\langle xz,yz,x-z\rangle\right)=\left\{ \langle x,z\rangle,\langle x,y,z\rangle\right\} $
+\begin_inset Formula $\mathrm{Ass}\left(\langle xz,yz,x-z\rangle\right)=\left\{ \langle x,z\rangle,\langle x,y,z\rangle\right\} $
 \end_inset
 
 , with the minimal associated prime being 
@@ -71672,10 +71777,10 @@ label{example}
 
 .
  Krull's Principal Ideal Theorem tells us that the prime 
-\begin_inset Formula $\langle z,x-z\rangle$
+\begin_inset Formula $\langle x,z\rangle$
 \end_inset
 
- contains exactly one prime in 
+ contains exactly one prime of 
 \begin_inset Formula $A$
 \end_inset
 
@@ -71685,7 +71790,7 @@ label{example}
 
 .
  Next we pass to the quotient 
-\begin_inset Formula $A/\langle xz,yz,x-z\rangle$
+\begin_inset Formula $A\slash\langle xz,yz,x-z\rangle$
 \end_inset
 
 .
@@ -71708,7 +71813,7 @@ label{example}
 \end_inset
 
  contains exactly one prime 
-\begin_inset Formula $A/\langle xz,yz,x-z\rangle$
+\begin_inset Formula $A\slash\langle xz,yz,x-z\rangle$
 \end_inset
 
 , namely 
@@ -71840,7 +71945,7 @@ Something interesting happens when we localize at
 \end_inset
 
 , but now every element in 
-\begin_inset Formula $A_{\langle x,y,z\rangle}/\langle xz,yz,x-z\rangle$
+\begin_inset Formula $A_{\langle x,y,z\rangle}\slash\langle xz,yz,x-z\rangle$
 \end_inset
 
  is a zerodivisor.
@@ -72457,11 +72562,261 @@ end{proof}
 \end_layout
 
 \begin_layout Subsubsection
+Jacobian Criterion
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R=\Bbbk[x_{1},\dots,x_{n}]=\Bbbk[\boldsymbol{x}]$
+\end_inset
+
+, let 
+\begin_inset Formula $\mathfrak{m}=\langle x_{1},\dots,x_{n}\rangle$
+\end_inset
+
+, let 
+\begin_inset Formula $\boldsymbol{f}=f_{1},\dots,f_{m}$
+\end_inset
+
+ be a sequence of polynomials in 
+\begin_inset Formula $R$
+\end_inset
+
+, and let 
+\begin_inset Formula $A=R_{\mathfrak{m}}\slash\boldsymbol{f}$
+\end_inset
+
+.
+ Set 
+\begin_inset Formula $\mathrm{J}_{\boldsymbol{f}}=(\partial_{x_{i}}f_{j})$
+\end_inset
+
+ to be the Jacobian matrix of 
+\begin_inset Formula $\boldsymbol{f}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mathrm{J}_{\boldsymbol{f}}=\mathrm{J}_{\boldsymbol{f}}(\boldsymbol{x})=\begin{pmatrix}\partial_{x_{1}}f_{1} & \cdots & \partial_{x_{n}}f_{1}\\
+\vdots & \ddots & \vdots\\
+\partial_{x_{1}}f_{m} & \cdots & \partial_{x_{n}}f_{m}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Then
+\begin_inset Formula 
+\[
+\mathrm{edim}\,A=n-\mathrm{rank}\,\,\mathrm{J}_{\boldsymbol{f}}(0).
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathfrak{n}$
+\end_inset
+
+ be the maximal ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\mathrm{edim}\,A & =\mbox{dim}_{\Bbbk}(\mathfrak{n}/\mathfrak{n}^{2})\\
+ & =\mbox{dim}_{\Bbbk}((\mathfrak{m}/\boldsymbol{f})/(\mathfrak{m}^{2}+\boldsymbol{f})/\boldsymbol{f}))\\
+ & =\mbox{dim}_{\Bbbk}(\mathfrak{m}/(\mathfrak{m}^{2}+\boldsymbol{f}))\\
+ & =\mbox{dim}_{\Bbbk}((\mathfrak{m}/\mathfrak{m}^{2})/((\mathfrak{m}^{2}+\boldsymbol{f})/\mathfrak{m}^{2}))\\
+ & =\mbox{dim}_{\Bbbk}(\mathfrak{m}/\mathfrak{m}^{2})-\dim_{\Bbbk}((\mathfrak{m}^{2}+\boldsymbol{f})/\mathfrak{m}^{2})\\
+ & =n-\dim_{\Bbbk}((\mathfrak{m}^{2}+\boldsymbol{f})/\mathfrak{m}^{2}).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The last dimension is equal to the number of linearly independent linear
+ forms among the 
+\begin_inset Formula $f_{i}\mbox{ mod }\mathfrak{m}^{2}$
+\end_inset
+
+.
+ This is equal to 
+\begin_inset Formula $\mathrm{rank}\,\,\mathrm{J}_{\boldsymbol{f}}(0)$
+\end_inset
+
+.
+ Indeed, for each 
+\begin_inset Formula $1\leq i\leq m$
+\end_inset
+
+, we break up 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ into a sum of its homogeneous pieces:
+\begin_inset Formula 
+\[
+f_{i}=f_{i,0}+f_{i,1}+\cdots+f_{i,d_{i}},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $f_{i,j}$
+\end_inset
+
+ is the degree 
+\begin_inset Formula $j$
+\end_inset
+
+ part of 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ (in particular note that 
+\begin_inset Formula $f_{i,0}=f_{i}(0)=0$
+\end_inset
+
+ since 
+\begin_inset Formula $f_{i}\in\mathfrak{m}$
+\end_inset
+
+).
+ The 
+\begin_inset Formula $f_{i,1}$
+\end_inset
+
+ are the linear forms of the 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ (i.e.
+ the components of degree 
+\begin_inset Formula $1$
+\end_inset
+
+).
+ Write
+\begin_inset Formula 
+\[
+f_{i,1}=c_{i,1}x_{1}+c_{i,2}x_{2}+\cdots+c_{i,n}x_{n}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{i,j}\in\Bbbk$
+\end_inset
+
+.
+ Then note that
+\begin_inset Formula 
+\[
+\mathrm{J}_{\boldsymbol{f}}(0)=\begin{pmatrix}c_{1,1} & \cdots & c_{1,n}\\
+\vdots & \ddots & \vdots\\
+c_{m,1} & \cdots & c_{m,n}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Then the rank of 
+\begin_inset Formula $\mathrm{J}_{f}(\boldsymbol{0})$
+\end_inset
+
+ is precisely equal ot the number of linearly independent forms among the
+ 
+\begin_inset Formula $f_{i}$
+\end_inset
+
+ mod 
+\begin_inset Formula $\mathfrak{m}^{2}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
 Associated Graded Ring
 \end_layout
 
 \begin_layout Standard
-Let 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
 \begin_inset Formula $(R,\mathfrak{m},\Bbbk)$
 \end_inset
 
@@ -72483,24 +72838,57 @@ Let
 \end_inset
 
 .
- The goal of this subsection is to show that 
-\begin_inset Formula 
-\[
-\mathrm{gr}(R)=\Bbbk[t_{1},\dots,t_{d}],
-\]
+ The following conditions are equivalent:
+\end_layout
 
+\begin_layout Enumerate
+\begin_inset Formula $\mathrm{gr}\,R=\Bbbk[t_{1},\dots,t_{d}]$
 \end_inset
 
-where 
-\begin_inset Formula $\mathrm{gr}(R)$
+ is a polynomial ring in 
+\begin_inset Formula $d$
 \end_inset
 
- is the associated graded ring of 
+ variables;
+\end_layout
+
+\begin_layout Enumerate
 \begin_inset Formula $R$
+\end_inset
+
+ is regular of dimension 
+\begin_inset Formula $d$
 \end_inset
 
 .
  
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+ can be generated by 
+\begin_inset Formula $d$
+\end_inset
+
+ elements.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Part
@@ -174985,8 +175373,10 @@ begin{proof}
 \end_inset
 
  is flat.
- Let
-\end_layout
+ Let 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
 
 \begin_layout Standard
 \begin_inset ERT
@@ -175022,8 +175412,9 @@ end{center}
 
 \end_layout
 
-\begin_layout Standard
-be an exact sequence of 
+\end_inset
+
+ be an exact sequence of 
 \begin_inset Formula $R$
 \end_inset
 
@@ -175032,8 +175423,10 @@ be an exact sequence of
 \begin_inset Formula $F\otimes_{R}-$
 \end_inset
 
- is right exact, we only need to check that
-\end_layout
+ is right exact, we only need to check that 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
 
 \begin_layout Standard
 \begin_inset ERT
@@ -175066,7 +175459,12 @@ end{center}
 
 \end_inset
 
-is exact at 
+
+\end_layout
+
+\end_inset
+
+ is exact at 
 \begin_inset Formula $F\otimes_{R}M_{1}$
 \end_inset
 
@@ -175142,6 +175540,11 @@ Faithful flatness can also be characterized in terms of short exact sequences.
 \end_inset
 
  is faithfully flat if it satisfies the following property: 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -175175,9 +175578,12 @@ end{center}
 
 \end_layout
 
-\begin_layout Standard
-is exact if and only if
-\end_layout
+\end_inset
+
+ is exact if and only if 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
 
 \begin_layout Standard
 \begin_inset ERT
@@ -175220,6 +175626,11 @@ end{center}
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
  Here's an alternative characterization of faithful flatness:
 \end_layout
 
@@ -175233,7 +175644,7 @@ status open
 \backslash
 begin{prop}
 \backslash
-label{prop}
+label{propflatchar}
 \end_layout
 
 \end_inset
@@ -175370,7 +175781,12 @@ Conversely, suppose
 \begin_inset Formula $F$
 \end_inset
 
- is flat, the short exact sequence
+ is flat, the short exact sequence 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -175413,8 +175829,15 @@ end{center}
 
 \end_inset
 
-induces the short exact sequence
+
 \end_layout
+
+\end_inset
+
+ induces the short exact sequence 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
 
 \begin_layout Standard
 \begin_inset ERT
@@ -175469,6 +175892,11 @@ end{center}
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
 which implies 
 \begin_inset Formula $\ker\varphi\otimes_{R}F=0$
 \end_inset
@@ -175483,6 +175911,195 @@ which implies
 \end_inset
 
 .
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(R,\mathfrak{m},\Bbbk)$
+\end_inset
+
+ be a local noetherian ring and let 
+\begin_inset Formula $F$
+\end_inset
+
+ be a flat 
+\begin_inset Formula $R$
+\end_inset
+
+-module such that 
+\begin_inset Formula $F_{\Bbbk}\neq0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $F$
+\end_inset
+
+ is faithfully flat.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ One direction is trivial.
+ To prove the other direction, assume that 
+\begin_inset Formula $F$
+\end_inset
+
+ is flat.
+ To show 
+\begin_inset Formula $F$
+\end_inset
+
+ is faithfully, it suffices to show that if 
+\begin_inset Formula $F\otimes_{R}M=0$
+\end_inset
+
+ then 
+\begin_inset Formula $M=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $R$
+\end_inset
+
+-modules 
+\begin_inset Formula $M$
+\end_inset
+
+ by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Proposition~(
+\backslash
+ref{propflatchar})
+\end_layout
+
+\end_inset
+
+.
+ In fact, it suffices to prove this property for all finitely generated
+ 
+\begin_inset Formula $R$
+\end_inset
+
+-modules 
+\begin_inset Formula $M$
+\end_inset
+
+, so let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a finitely generated 
+\begin_inset Formula $R$
+\end_inset
+
+-module such that 
+\begin_inset Formula $F\otimes_{R}M=0$
+\end_inset
+
+.
+ Then note that 
+\begin_inset Formula $F_{\Bbbk}\otimes_{\Bbbk}M_{\Bbbk}=0$
+\end_inset
+
+ where 
+\begin_inset Formula $F_{\Bbbk}=F\otimes_{R}\Bbbk=F\slash\mathfrak{m}F$
+\end_inset
+
+ and where 
+\begin_inset Formula $M_{\Bbbk}=M\otimes_{R}\Bbbk=M\slash\mathfrak{m}M$
+\end_inset
+
+.
+ Then either 
+\begin_inset Formula $F_{\Bbbk}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $M_{\Bbbk}=0$
+\end_inset
+
+ since these are vector spaces over 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+, but our original assumption was that 
+\begin_inset Formula $F_{\Bbbk}\neq0$
+\end_inset
+
+, so we must have 
+\begin_inset Formula $M_{\Bbbk}=0$
+\end_inset
+
+.
+ However 
+\begin_inset Formula $M_{\Bbbk}=0$
+\end_inset
+
+ implies 
+\begin_inset Formula $M=0$
+\end_inset
+
+ by Nakayma's lemma.
  
 \begin_inset ERT
 status open
@@ -176285,8 +176902,10 @@ label{proof}
 \end_inset
 
 .
- Then we obtain an exact sequence of Tor modules:
-\end_layout
+ Then we obtain an exact sequence of Tor modules: 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
 
 \begin_layout Standard
 \begin_inset ERT
@@ -176321,8 +176940,9 @@ end{center}
 
 \end_layout
 
-\begin_layout Standard
-where we used the fact that 
+\end_inset
+
+ where we used the fact that 
 \begin_inset Formula $G$
 \end_inset
 
@@ -176353,6 +176973,94 @@ status open
 
 \backslash
 end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{cor}
+\backslash
+label{cor}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{equation}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  F_1 
+\backslash
+arrow[r] &  F_2 
+\backslash
+arrow[r] &  F_3 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ be a short exact sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules such that 
+\begin_inset Formula $F_{3}$
+\end_inset
+
+ is flat.
+ Then 
+\begin_inset Formula $F_{1}$
+\end_inset
+
+ is flat if and only if 
+\begin_inset Formula $F_{2}$
+\end_inset
+
+ is flat.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{cor}
 \end_layout
 
 \end_inset
@@ -195531,7 +196239,7 @@ begin{proof}
 \begin_inset Formula $M$
 \end_inset
 
-, then t is contained in an associated prime of 
+, then it is contained in an associated prime of 
 \begin_inset Formula $M$
 \end_inset
 
@@ -200748,8 +201456,10 @@ begin{defn}
 \series bold
 projective dimension 
 \series default
-if there exists an exact sequence (a free resolution)
-\end_layout
+if there exists an exact sequence (a free resolution) 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
 
 \begin_layout Standard
 \begin_inset ERT
@@ -200793,8 +201503,9 @@ end{equation}
 
 \end_layout
 
-\begin_layout Standard
-with finitely generated free 
+\end_inset
+
+ with finitely generated free 
 \begin_inset Formula $A$
 \end_inset
 
@@ -200857,23 +201568,726 @@ label{lemma7.8.9}
 \end_inset
 
  Let 
-\begin_inset Formula $(R,\mathfrak{m})$
+\begin_inset Formula $(R,\mathfrak{m},\Bbbk)$
 \end_inset
 
- be a Noetherian local ring and let
-\begin_inset Formula 
-\[
-0\to M_{1}\to M_{2}\to M_{3}\to0
-\]
+ be a noetherian local ring and let 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{equationfsdfddds33}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  M_1 
+\backslash
+arrow[r, ] &  M_2 
+\backslash
+arrow[r, ] &  M_3 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
 
 \end_inset
 
-be a short exact sequence of 
+
+\end_layout
+
+\end_inset
+
+ be a short exact sequence of 
 \begin_inset Formula $R$
 \end_inset
 
 -modules.
+ Set 
+\begin_inset Formula $\delta_{i}:=\mathrm{depth}\,M_{i}$
+\end_inset
+
+ for each 
+\begin_inset Formula $i=1,2,3$
+\end_inset
+
+.
+ Then we have the following inequalities:
+\begin_inset Formula 
+\begin{align}
+\delta_{1} & \geq\min\{\delta_{2},\delta_{3}+1\}\nonumber \\
+\delta_{2} & \geq\min\{\delta_{1},\delta_{3}\}\label{eq:dgsdv}\\
+\delta_{3} & \geq\min\{\delta_{1}-1,\delta_{2}\}.\nonumber 
+\end{align}
+
+\end_inset
+
+In particular, the triple 
+\begin_inset Formula $(\delta_{1},\delta_{2},\delta_{3})$
+\end_inset
+
+ has one of the following forms:
+\begin_inset Formula 
+\begin{align*}
+(\delta_{1},\delta_{2},\delta_{3}) & =(1,\varepsilon,0)+(\delta,\delta,\delta)\\
+(\delta_{1},\delta_{2},\delta_{3}) & =(\varepsilon,0,0)+(\delta,\delta,\delta)\\
+(\delta_{1},\delta_{2},\delta_{3}) & =(0,0,\varepsilon)+(\delta,\delta,\delta)
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta\geq0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Applying 
+\begin_inset Formula $\mathrm{Ext}_{R}(\Bbbk,-)$
+\end_inset
+
+ to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{equationfsdfddds33})
+\end_layout
+
+\end_inset
+
+ gives us a long exact sequence in Ext modules: 
+\begin_inset Branch tikzcd
+inverted 0
+status open
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} & 
+\backslash
+cdots 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z}] & 
+\backslash
+mathrm{Ext}^{i-1} _R ( 
+\backslash
+Bbbk , M_3 ) 
+\backslash
+arrow[dll, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z) [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+mathrm{Ext}^i _R (
+\backslash
+Bbbk , M_1 ) 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Ext}^i _R (
+\backslash
+Bbbk , M_2 ) 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Y}] 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Ext}^i _R (
+\backslash
+Bbbk , M_3 ) 
+\backslash
+arrow[dll, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Y) [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+ 
+\backslash
+mathrm{Ext}^{i+1} _R (
+\backslash
+Bbbk , M_1 ) 
+\backslash
+arrow[r] & 
+\backslash
+cdots .
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Observe that 
+\begin_inset Formula $\mathrm{Ext}_{R}^{i}(\Bbbk,M_{2})=0$
+\end_inset
+
+ if both 
+\begin_inset Formula $\mathrm{Ext}_{R}^{i}(\Bbbk,M_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{Ext}_{R}^{i}(\Bbbk,M_{3})$
+\end_inset
+
+ vanish.
+ Therefore the first inequality in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:dgsdv})
+\end_layout
+
+\end_inset
+
+ follows from the Ext characterization of depth.
+ Similar arguments show the other inequalities.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\end_layout
+
+\end_inset
+
+ First assume all three modules have positive depth.
+ Observe that we can find a common nonzerodivisor 
+\begin_inset Formula $x\in\mathfrak{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $M_{1},M_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $M_{3}$
+\end_inset
+
+.
+ Indeed, the set of all zerodivisors of 
+\begin_inset Formula $M_{j}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\bigcup_{\mathfrak{p}\in\text{Ass}(M_{j})}\mathfrak{p}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assuming for a contradiction that we cannot find a common nonzerodivisor
+ 
+\begin_inset Formula $x\in\mathfrak{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+,
+\begin_inset Formula $M_{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $M_{3}$
+\end_inset
+
+, then we would have
+\begin_inset Formula 
+\[
+\bigcup_{\substack{\mathfrak{p}\in\text{Ass}(M_{j})\\
+j=1,2,3
+}
+}\mathfrak{p}=\mathfrak{m}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since the number associated primes is finite, we must have 
+\begin_inset Formula $\mathfrak{m}=\mathfrak{p}$
+\end_inset
+
+ for some 
+\begin_inset Formula $\mathfrak{p}\in\text{Ass}(M_{j})$
+\end_inset
+
+ and 
+\begin_inset Formula $j\in\{1,2,3\}$
+\end_inset
+
+, by prime avoidance.
+ However this is a contradiction, since it would imply that every 
+\begin_inset Formula $x\in\mathfrak{m}$
+\end_inset
+
+ is a zerodivisor for 
+\begin_inset Formula $M_{j}$
+\end_inset
+
+.
+ Thus we can find a common nonzerodivisor 
+\begin_inset Formula $x\in\mathfrak{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $M_{3}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Since 
+\begin_inset Formula $x$
+\end_inset
+
+ is 
+\begin_inset Formula $M_{3}$
+\end_inset
+
+-regular, we obtain a short exact sequence
+\begin_inset Formula 
+\[
+0\to M_{1}\slash xM_{1}\to M_{2}\slash xM_{2}\to M_{3}\slash xM_{3}\to0
+\]
+
+\end_inset
+
+Since depth drops by one when we divide by 
+\begin_inset Formula $x$
+\end_inset
+
+, we see that the proof of the lemma can be reduced to the case that the
+ depth of one of the 
+\begin_inset Formula $M_{j}$
+\end_inset
+
+ is zero.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 1: 
+\series default
+Suppose that 
+\begin_inset Formula $\mathrm{depth}\,M_{1}=0$
+\end_inset
+
+.
  Then 
+\begin_inset Formula $\mathrm{depth}\,M_{2}=0$
+\end_inset
+
+, because any nonzerodivisor of 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ is a nonzerodivisor of 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+.
+ The lemma is proved in this case.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 2: 
+\series default
+Suppose that 
+\begin_inset Formula $\mathrm{depth}\,M_{2}=0$
+\end_inset
+
+ and assume for a contradiction that 
+\begin_inset Formula $\mathrm{depth}\,M_{1}>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{depth}\,M_{3}>0$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $x\in\mathfrak{m}$
+\end_inset
+
+ be a common nonzerodivisor of 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $M_{3}$
+\end_inset
+
+.
+ From the snake lemma we obtain that 
+\begin_inset Formula $x$
+\end_inset
+
+ is a nonzerodivisor for 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ too.
+ This is a contradiction.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Case 3: 
+\series default
+Suppose that 
+\begin_inset Formula $\mathrm{depth}\,M_{3}=0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mathrm{depth}\,M_{2}>0$
+\end_inset
+
+, let 
+\begin_inset Formula $x\in\mathfrak{m}$
+\end_inset
+
+ be a nonzerodivisor of 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+.
+ This is also a nonzero divisor for 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+, and therefore 
+\begin_inset Formula $\mathrm{depth}\,M_{1}>0$
+\end_inset
+
+.
+ Using the snake lemma, we obtain an injective map
+\begin_inset Formula 
+\[
+\ker(M_{3}\xrightarrow{x}M_{3})\rightarrowtail M_{1}\slash xM_{1}.
+\]
+
+\end_inset
+
+As 
+\begin_inset Formula $\mathrm{depth}\,M_{3}=0$
+\end_inset
+
+, we have 
+\begin_inset Formula $\ker(M_{3}\xrightarrow{x}M_{3})\neq0$
+\end_inset
+
+.
+ Any nonzerodivisor of 
+\begin_inset Formula $M_{1}\slash xM_{1}$
+\end_inset
+
+ would give a nonzerodivisor of 
+\begin_inset Formula $\ker(M_{3}\xrightarrow{x}M_{3})$
+\end_inset
+
+.
+ But this is not possible, and therefore 
+\begin_inset Formula $\mathrm{depth}\,M_{1}=1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma7.8.9}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(R,\mathfrak{m},\Bbbk)$
+\end_inset
+
+ be a Noetherian local ring and let 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{equation}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  M_1 
+\backslash
+arrow[r, ] &  M_2 
+\backslash
+arrow[r, ] &  M_3 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ be a short exact sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules.
+ Then
 \begin_inset Formula 
 \[
 \mathrm{depth}\,M_{2}\geq\mathrm{min}(\mathrm{depth}\,M_{1},\mathrm{depth}\,M_{3}).
@@ -200885,7 +202299,7 @@ be a short exact sequence of
 \end_layout
 
 \begin_layout Standard
-If the inequality is strict, then 
+If the inequality is strict, then
 \begin_inset Formula 
 \[
 \mathrm{depth}\,M_{1}=\mathrm{depth}\,M_{3}+1.
@@ -201259,6 +202673,184 @@ status open
 
 \backslash
 end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R=\Bbbk[x,y,z,w]$
+\end_inset
+
+ and let 
+\begin_inset Formula $I=\langle x^{2},xy,xz,xw\rangle$
+\end_inset
+
+.
+ Then we have 
+\begin_inset Formula $I:x=\langle x,y,z,w\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle I,x\rangle=\langle x\rangle$
+\end_inset
+
+, so we have a short exact sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{equation}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  
+\backslash
+Bbbk  
+\backslash
+arrow[r, ] &  R 
+\backslash
+slash I 
+\backslash
+arrow[r, ] &  
+\backslash
+Bbbk [y,z,w] 
+\backslash
+arrow[r] & 0.
+ 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+We have 
+\begin_inset Formula $\mathrm{depth}\,\Bbbk=0=\mathrm{depth}\,R\slash I$
+\end_inset
+
+ but 
+\begin_inset Formula $\mathrm{depth}\,\Bbbk[y,z,w]=3$
+\end_inset
+
+.
+ On the other hand, we have 
+\begin_inset Formula $I:y=\langle x\rangle$
+\end_inset
+
+ and 
+\begin_inset Formula $\langle I,y\rangle=\langle x^{2},y,xz,xw\rangle$
+\end_inset
+
+, so we have a short exact sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{equation}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  
+\backslash
+Bbbk [y,z,w]  
+\backslash
+arrow[r, ] &  R 
+\backslash
+slash I 
+\backslash
+arrow[r, ] &  R 
+\backslash
+slash 
+\backslash
+langle I, y 
+\backslash
+rangle 
+\backslash
+arrow[r] & 0.
+ 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ This time we have 
+\begin_inset Formula $\mathrm{depth}\,R\slash I=0=\mathrm{depth}\,R\slash\langle I,y\rangle$
+\end_inset
+
+ but 
+\begin_inset Formula $\mathrm{depth}\,\Bbbk[y,z,w]=3$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
 \end_layout
 
 \end_inset
@@ -208836,12 +210428,16 @@ label{prop}
  We have
 \begin_inset Formula 
 \[
-\Omega_{A\slash\Bbbk}=\frac{A\mathrm{d}x_{1}\oplus\cdots\oplus A\mathrm{d}x_{n}}{(\mathrm{J}_{\boldsymbol{f}}\mathrm{d}\boldsymbol{x})^{\top}}=\frac{A\mathrm{d}x_{1}\oplus\cdots\oplus A\mathrm{d}x_{n}}{\langle\mathrm{J}_{f_{1}}\mathrm{d}\boldsymbol{x},\dots,\mathrm{J}_{f_{m}}\mathrm{d}\boldsymbol{x}\rangle}
+\Omega_{A\slash\Bbbk}=\frac{A\mathrm{d}x_{1}\oplus\cdots\oplus A\mathrm{d}x_{n}}{(\mathrm{J}_{\boldsymbol{f}}\mathrm{d}\boldsymbol{x})^{\top}}=\frac{A\mathrm{d}x_{1}\oplus\cdots\oplus A\mathrm{d}x_{n}}{\langle\mathrm{J}_{f_{1}}\mathrm{d}\boldsymbol{x},\dots,\mathrm{J}_{f_{m}}\mathrm{d}\boldsymbol{x}\rangle},
 \]
 
 \end_inset
 
-Where 
+where 
+\begin_inset Formula $\mathrm{d}\boldsymbol{x}=(\mathrm{d}x_{1},\dots,\mathrm{d}x_{n})^{\top}$
+\end_inset
+
+ and where 
 \begin_inset Formula $\mathrm{J}_{\boldsymbol{f}}=(\partial_{x_{i}}f_{j})$
 \end_inset
 
@@ -208851,7 +210447,7 @@ Where
 \mathrm{J}_{\boldsymbol{f}}=\begin{pmatrix}\partial_{x_{1}}f_{1} & \cdots & \partial_{x_{n}}f_{1}\\
 \vdots & \ddots & \vdots\\
 \partial_{x_{1}}f_{m} & \cdots & \partial_{x_{n}}f_{m}
-\end{pmatrix}
+\end{pmatrix}.
 \]
 
 \end_inset
@@ -208947,48 +210543,6 @@ status open
 \backslash
 end{example}
 \end_layout
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}x^{n} & =[n]_{q}x^{n-1}\mathrm{d}x\\
-\mathrm{d}f & =\frac{f(qx)-f(x)}{qx-x}\mathrm{d}x
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\mathrm{d}a=\frac{aq'}{q'}\frac{\mathrm{d}x}{x}
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}^{2}a & =\mathrm{d}\left(\frac{aq'}{q'}\frac{\mathrm{d}x}{x}\right)\\
- & =\frac{\left(\frac{aq'}{q'}\right)q'}{q'}\frac{\mathrm{d}x}{x}\frac{\mathrm{d}x}{x}+\left(\frac{aq'}{q'}\right)q'\mathrm{d}\left(\frac{\mathrm{d}x}{x}\right)\\
- & =\frac{\left(\frac{aq'}{q'}\right)q'}{q'}\frac{\mathrm{d}x}{x}\frac{\mathrm{d}x}{x}+\left(\frac{aq'}{q'}\right)q'\mathrm{d}\left(\frac{\mathrm{d}x}{x}\right)\\
-\end{align*}
 
 \end_inset
 
