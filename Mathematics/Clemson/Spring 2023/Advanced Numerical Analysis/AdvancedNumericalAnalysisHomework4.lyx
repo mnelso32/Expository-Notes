@@ -520,7 +520,7 @@ n = 12;
 
 \begin_layout Plain Layout
 
-t = linspace(0,1,m)';
+t = (0:1/(m-1):1)';
 \end_layout
 
 \begin_layout Plain Layout
@@ -580,19 +580,19 @@ status open
 
 \begin_layout Plain Layout
 
-Bval = A'*A;
+B = A'*A;
 \end_layout
 
 \begin_layout Plain Layout
 
-Rval = chol(Bval);
+R = chol(B);
 \end_layout
 
 \begin_layout Plain Layout
 
-x(:,1) = Rval
+x(:,1) = R
 \backslash
-(Rval'
+(R'
 \backslash
 (A'*b));
 \end_layout
@@ -630,12 +630,12 @@ status open
 
 \begin_layout Plain Layout
 
-[Qval,Rval] = mgs(A);
+[Q,R] = mgs(A);
 \end_layout
 
 \begin_layout Plain Layout
 
-x(:,2) = backsubs(Rval,Qval'*b);
+x(:,2) = backsubs(R,Q'*b);
 \end_layout
 
 \end_inset
@@ -671,6 +671,12 @@ status open
 
 \begin_layout Plain Layout
 
+[Q,R] = house(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+x(:,3) = backsubs(R,Q'*b);
 \end_layout
 
 \end_inset
@@ -706,12 +712,12 @@ status open
 
 \begin_layout Plain Layout
 
-[Qval,Rval] = qr(A);
+[Q,R] = qr(A);
 \end_layout
 
 \begin_layout Plain Layout
 
-x(:,4) = backsubs(Rval,Qval'*b);
+x(:,4) = backsubs(R,Q'*b);
 \end_layout
 
 \end_inset
@@ -785,12 +791,12 @@ status open
 
 \begin_layout Plain Layout
 
-[Uval,Sval,Vval] = svd(A,0);
+[U,s,V] = svd(A,0);
 \end_layout
 
 \begin_layout Plain Layout
 
-c = Uval'*b;
+c = U'*b;
 \end_layout
 
 \begin_layout Plain Layout
@@ -800,7 +806,7 @@ for i=1:n
 
 \begin_layout Plain Layout
 
-   c(i) = c(i)/Sval(i,i);
+   c(i) = c(i)/s(i,i);
 \end_layout
 
 \begin_layout Plain Layout
@@ -810,7 +816,7 @@ end;
 
 \begin_layout Plain Layout
 
-x(:,6) = Vval*c;
+x(:,6) = V*c;
 \end_layout
 
 \end_inset
@@ -846,19 +852,19 @@ status open
 
 \begin_layout Plain Layout
 
-Bval = A'*A;
+B = A'*A;
 \end_layout
 
 \begin_layout Plain Layout
 
-Rval = chol(Bval);
+R = chol(Bval);
 \end_layout
 
 \begin_layout Plain Layout
 
-x(:,1) = Rval
+x(:,1) = R
 \backslash
-(Rval'
+(R'
 \backslash
 (A'*b));
 \end_layout
@@ -1026,13 +1032,6 @@ Comment on the use of this algorithm to extract a set of numerically linearly
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\end{align*}
-
-\end_inset
-
-
 \begin_inset ERT
 status open
 
@@ -1072,390 +1071,6 @@ status open
 
 \backslash
 end{sol}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Problem 4
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{ex}
-\backslash
-label{ex}
-\end_layout
-
-\end_inset
-
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{ex}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{sol}
-\backslash
-label{sol}
-\end_layout
-
-\end_inset
-
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{sol}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section*
-Appendix
-\end_layout
-
-\begin_layout Subsection*
-Classical Gram-Schmidt
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-function [Q,R] = gs(A)     
-\end_layout
-
-\begin_layout Plain Layout
-
-[m,n] = size(A);
-\end_layout
-
-\begin_layout Plain Layout
-
-Q = A;    
-\end_layout
-
-\begin_layout Plain Layout
-
-R = zeros(n);
-\end_layout
-
-\begin_layout Plain Layout
-
-Q(:,1) = Q(:,1) / norm(Q(:,1)) ;
-\end_layout
-
-\begin_layout Plain Layout
-
-R(1,1) = Q(:,1)'*Q(:,1);
-\end_layout
-
-\begin_layout Plain Layout
-
-for j = 2:m
-\end_layout
-
-\begin_layout Plain Layout
-
-   for i = 1:j-1 
-\end_layout
-
-\begin_layout Plain Layout
-
-      R(i,j) = Q(:,i)'*Q(:,j); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   end 
-\end_layout
-
-\begin_layout Plain Layout
-
-   for i = 1:j-1 
-\end_layout
-
-\begin_layout Plain Layout
-
-      Q(:,j) = Q(:,j) - R(i,j)*Q(:,i); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   end
-\end_layout
-
-\begin_layout Plain Layout
-
-   Q(:,j) = Q(:,j) / norm(Q(:,j)) ; 
-\end_layout
-
-\begin_layout Plain Layout
-
-   R(j,j) = Q(:,j)'*Q(:,j) ;
-\end_layout
-
-\begin_layout Plain Layout
-
-   end
-\end_layout
-
-\begin_layout Plain Layout
-
-end
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Modified Gram-Schmidt
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-function [Q,R] = mgs(A)     
-\end_layout
-
-\begin_layout Plain Layout
-
-[m,n] = size(A);
-\end_layout
-
-\begin_layout Plain Layout
-
-Q = zeros(m,n);    
-\end_layout
-
-\begin_layout Plain Layout
-
-R = zeros(n,n);
-\end_layout
-
-\begin_layout Plain Layout
-
-for j = 1:n 
-\end_layout
-
-\begin_layout Plain Layout
-
-   Q(:,1) = A(:,1) / norm(A(:,1)) ;
-\end_layout
-
-\begin_layout Plain Layout
-
-   R(1,1) = Q(:,1)'*(A:,1);
-\end_layout
-
-\begin_layout Plain Layout
-
-   for j = 2:m
-\end_layout
-
-\begin_layout Plain Layout
-
-      for i = 1:j-1 
-\end_layout
-
-\begin_layout Plain Layout
-
-         R(i,j) = Q(:,i)'*A(:,j); 
-\end_layout
-
-\begin_layout Plain Layout
-
-      end 
-\end_layout
-
-\begin_layout Plain Layout
-
-      Q(:,j) = A(:,j)
-\end_layout
-
-\begin_layout Plain Layout
-
-      for i = 1:j-1 
-\end_layout
-
-\begin_layout Plain Layout
-
-         Q(:,j) = Q(:,j) - R(i,j)*Q(:,i); 
-\end_layout
-
-\begin_layout Plain Layout
-
-      end
-\end_layout
-
-\begin_layout Plain Layout
-
-      Q(:,j) = Q(:,j) / norm(Q(:,j)) ; 
-\end_layout
-
-\begin_layout Plain Layout
-
-      R(j,j) = Q(:,j)'*A(:,j) ;
-\end_layout
-
-\begin_layout Plain Layout
-
-   end
-\end_layout
-
-\begin_layout Plain Layout
-
-end
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Double Modified Gram-Schmidt
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-function [Q,R] = qrmgs2(A) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-[Q1,R1] = qrmgs(A); 
-\end_layout
-
-\begin_layout Plain Layout
-
-[Q,R2] = qrmgs(Q1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-R = R2*R1;
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Householder Factorization
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-function [v,R] = house(A) 
-\end_layout
-
-\begin_layout Plain Layout
-
-[m,n] = size(A); 
-\end_layout
-
-\begin_layout Plain Layout
-
-v = zeros(m,n); 
-\end_layout
-
-\begin_layout Plain Layout
-
-for j = 1:n 
-\end_layout
-
-\begin_layout Plain Layout
-
-   x = A(j:m,j); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   v(j:m,j) = x + sign(x(1))*norm(x)*eye(m-j+1,1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   v(j:m,j) = v(j:m,j)/norm(v(j:m,j)); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   A(j:m,j:n) = A(j:m,j:n) - 2*v(j:m,j)*(v(j:m,j)'*A(j:m,j:n)); 
-\end_layout
-
-\begin_layout Plain Layout
-
-end 
-\end_layout
-
-\begin_layout Plain Layout
-
-R = A(1:n,:); 
 \end_layout
 
 \end_inset

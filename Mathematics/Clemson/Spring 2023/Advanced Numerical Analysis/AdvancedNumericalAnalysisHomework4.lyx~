@@ -281,48 +281,60 @@ label{sol}
 
 \end_inset
 
- We have
-\begin_inset Formula 
-\begin{align*}
-\|A^{+}\| & =\|(A^{*}A)^{-1}A^{*}\|=\frac{1}{\sigma_{\mathrm{min}}(A)}.
-\end{align*}
-
+ Note that 
+\begin_inset Formula $A$
 \end_inset
 
-Similarly, we have
-\begin_inset Formula 
-\[
-\|A_{1}^{-1}\|=\frac{1}{\sigma_{\mathrm{min}}(A_{1})}.
-\]
-
+ has full column-rank so all of its singular values are strictly positive.
+ Let 
+\begin_inset Formula $\sigma_{1}\geq\cdots\geq\sigma_{n}$
 \end_inset
 
-Observe that since 
-\begin_inset Formula $\|Ax\|^{2}=\|A_{1}x\|^{2}+\|A_{2}x\|^{2}\geq\|A_{1}x\|^{2}$
-\end_inset
-
-, we have 
-\begin_inset Formula $\|A\|\geq\|A_{1}\|$
+ be the singular values of 
+\begin_inset Formula $A$
 \end_inset
 
 .
- 
+ Then
 \begin_inset Formula 
-\begin{align*}
-\sigma_{\mathrm{min}}\begin{pmatrix}A_{1}\\
-A_{2}
-\end{pmatrix} & =\min_{x\neq0}\frac{\|\begin{pmatrix}A_{1}\\
-A_{2}
-\end{pmatrix}x\|}{\|x\|}\geq\min_{x\neq0}\frac{\|A_{1}x\|}{\|x\|}
-\end{align*}
+\[
+\|A\|=\sigma_{1},\quad\text{and}\quad\|A^{+}\|=\sigma_{n}^{-1}.
+\]
 
 \end_inset
 
-So
+Next let 
+\begin_inset Formula $\tau_{1}\geq\cdots\geq\tau_{n}$
+\end_inset
+
+ be the singular values of 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\|A_{1}\|^{-1}=\tau_{n}^{-1}$
+\end_inset
+
+.
+ Thus to show 
 \begin_inset Formula 
 \[
-\sigma_{\mathrm{min}}(A)\geq\sigma_{\mathrm{min}}(A_{1})\implies\frac{1}{\sigma_{\mathrm{min}}(A_{1})}\geq\frac{1}{\sigma_{\mathrm{min}}(A)}\iff\|A_{1}^{-1}\|\geq\|A^{+}\|.
+\sigma_{n}^{-1}=\|A^{+}\|\leq\|A_{1}^{-1}\|=\tau_{n}^{-1},
 \]
+
+\end_inset
+
+it suffices to show that 
+\begin_inset Formula $\sigma_{n}\geq\tau_{n}$
+\end_inset
+
+.
+ This follows since
+\begin_inset Formula 
+\begin{align*}
+\sigma_{n} & =\min_{x\neq0}\frac{\|Ax\|}{\|x\|}\geq\min_{x\neq0}\frac{\|A_{1}x\|}{\|x\|}=\tau_{n}.
+\end{align*}
 
 \end_inset
 
@@ -508,7 +520,7 @@ n = 12;
 
 \begin_layout Plain Layout
 
-t = linspace(0,1,m)';
+t = (0:1/(m-1):1)';
 \end_layout
 
 \begin_layout Plain Layout
@@ -568,19 +580,19 @@ status open
 
 \begin_layout Plain Layout
 
-Bval = A'*A;
+B = A'*A;
 \end_layout
 
 \begin_layout Plain Layout
 
-Rval = chol(Bval);
+R = chol(B);
 \end_layout
 
 \begin_layout Plain Layout
 
-x(:,1) = Rval
+x(:,1) = R
 \backslash
-(Rval'
+(R'
 \backslash
 (A'*b));
 \end_layout
@@ -618,12 +630,12 @@ status open
 
 \begin_layout Plain Layout
 
-[Qval,Rval] = mgs(A);
+[Q,R] = mgs(A);
 \end_layout
 
 \begin_layout Plain Layout
 
-x(:,2) = backsubs(Rval,Qval'*b);
+x(:,2) = backsubs(R,Q'*b);
 \end_layout
 
 \end_inset
@@ -659,6 +671,12 @@ status open
 
 \begin_layout Plain Layout
 
+[Q,R] = house(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+x(:,3) = backsubs(R,Q'*b);
 \end_layout
 
 \end_inset
@@ -694,12 +712,12 @@ status open
 
 \begin_layout Plain Layout
 
-[Qval,Rval] = qr(A);
+[Q,R] = qr(A);
 \end_layout
 
 \begin_layout Plain Layout
 
-x(:,4) = backsubs(Rval,Qval'*b);
+x(:,4) = backsubs(R,Q'*b);
 \end_layout
 
 \end_inset
@@ -773,12 +791,12 @@ status open
 
 \begin_layout Plain Layout
 
-[Uval,Sval,Vval] = svd(A,0);
+[U,s,V] = svd(A,0);
 \end_layout
 
 \begin_layout Plain Layout
 
-c = Uval'*b;
+c = U'*b;
 \end_layout
 
 \begin_layout Plain Layout
@@ -788,7 +806,7 @@ for i=1:n
 
 \begin_layout Plain Layout
 
-   c(i) = c(i)/Sval(i,i);
+   c(i) = c(i)/s(i,i);
 \end_layout
 
 \begin_layout Plain Layout
@@ -798,7 +816,7 @@ end;
 
 \begin_layout Plain Layout
 
-x(:,6) = Vval*c;
+x(:,6) = V*c;
 \end_layout
 
 \end_inset
@@ -834,19 +852,19 @@ status open
 
 \begin_layout Plain Layout
 
-Bval = A'*A;
+B = A'*A;
 \end_layout
 
 \begin_layout Plain Layout
 
-Rval = chol(Bval);
+R = chol(Bval);
 \end_layout
 
 \begin_layout Plain Layout
 
-x(:,1) = Rval
+x(:,1) = R
 \backslash
-(Rval'
+(R'
 \backslash
 (A'*b));
 \end_layout
@@ -1014,13 +1032,6 @@ Comment on the use of this algorithm to extract a set of numerically linearly
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\end{align*}
-
-\end_inset
-
-
 \begin_inset ERT
 status open
 
