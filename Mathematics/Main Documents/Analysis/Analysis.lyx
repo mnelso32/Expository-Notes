@@ -134,6 +134,11 @@ commutative diagrams/.cd,
 \justification true
 \use_refstyle 1
 \use_minted 0
+\branch SchurTestForBoundedness
+\selected 0
+\filename_suffix 0
+\color #faf0e6
+\end_branch
 \index Index
 \shortcut idx
 \color #008000
@@ -26611,7 +26616,7 @@ label{theoremorthogonalprojectionexist}
 \begin_inset Formula $\mathcal{H}$
 \end_inset
 
- be a Hilbert space and let 
+ be a Hilbert space, let 
 \begin_inset Formula $\mathcal{K}$
 \end_inset
 
@@ -26619,9 +26624,8 @@ label{theoremorthogonalprojectionexist}
 \begin_inset Formula $\mathcal{H}$
 \end_inset
 
-.
- Suppose 
-\begin_inset Formula $x\in\mathcal{H}\backslash\mathcal{K}$
+, and let 
+\begin_inset Formula $x\in\mathcal{H}$
 \end_inset
 
 .
@@ -26665,6 +26669,20 @@ label{proof}
 
 \end_inset
 
+ We first show existence.
+ If 
+\begin_inset Formula $x\in\mathcal{K}$
+\end_inset
+
+, then clearly 
+\begin_inset Formula $a=x$
+\end_inset
+
+ works, so assume that 
+\begin_inset Formula $x\notin\mathcal{K}$
+\end_inset
+
+.
  Choose a sequence 
 \begin_inset Formula $(a_{n})$
 \end_inset
@@ -26730,9 +26748,8 @@ ref{eq:paralleltoprove})
 \begin_inset Formula 
 \begin{align*}
 \|a_{m}-a_{n}\|^{2} & =2\|x-a_{m}\|^{2}+2\|x-a_{n}\|^{2}-\|(x-a_{m})+(x-a_{n})\|^{2}\\
- & <2(\mathrm{d}(x,\mathcal{K})+1/m)^{2}+2(\mathrm{d}(x,\mathcal{K})+1/n)^{2}-\|(2(x-(a_{n}-a_{m})/2))\|^{2}\\
- & =4\mathrm{d}(x,\mathcal{K})^{2}+(4/m+4/n)\mathrm{d}(x,\mathcal{K})+2/m^{2}+2/n^{2}-4\|(x-(a_{n}-a_{m})/2\|^{2}\\
- & \leq4\mathrm{d}(x,\mathcal{K})^{2}+(4/m+4/n)\mathrm{d}(x,\mathcal{K})+2/m^{2}+2/n^{2}-4\mathrm{d}(x,\mathcal{K})^{2}\\
+ & =2\|x-a_{m}\|^{2}+2\|x-a_{n}\|^{2}-4\|x-(a_{m}-a_{n})/2\|^{2}\\
+ & <2(\mathrm{d}(x,\mathcal{K})+1/m)^{2}+2(\mathrm{d}(x,\mathcal{K})+1/n)^{2}-4\mathrm{d}(x,\mathcal{K})^{2}\\
  & =(4/n+4/m)\mathrm{d}(x,\mathcal{K})+2/n^{2}+2/m^{2}.
 \end{align*}
 
@@ -26753,12 +26770,16 @@ Thus if
  implies
 \begin_inset Formula 
 \[
-(4/n+4/m)\mathrm{d}(x,\mathcal{K})+2/n^{2}+2/m^{2}<\varepsilon^{2}.
+(4/n+4/m)\mathrm{d}(x,\mathcal{K})+2/n^{2}+2/m^{2}<\varepsilon^{2},
 \]
 
 \end_inset
 
-which implies 
+then 
+\begin_inset Formula $m,n\geq N$
+\end_inset
+
+ implies 
 \begin_inset Formula $\|a_{m}-a_{n}\|<\varepsilon$
 \end_inset
 
@@ -26820,11 +26841,8 @@ ref{eq:inequalityinf})
 \begin_inset space ~
 \end_inset
 
-To see uniqueness of 
-\begin_inset Formula $a$
-\end_inset
-
-, let 
+Now we show uniqueness.
+ Let 
 \begin_inset Formula $b$
 \end_inset
 
@@ -26837,13 +26855,11 @@ To see uniqueness of
 \end_inset
 
 .
- We again use the parallelogram identity.
- We have
+ We again use the parallelogram identity: we have
 \begin_inset Formula 
 \begin{align*}
 \|b-a\|^{2} & =\|(x-a)-(x-b)\|^{2}\\
  & =2\|x-a\|^{2}+2\|x-b\|^{2}-\|(x-a)+(x-b)\|^{2}\\
- & =4\mathrm{d}(x,\mathcal{K})^{2}-\|2x-(a+b)\|^{2}\\
  & =4\mathrm{d}(x,\mathcal{K})^{2}-4\|x-(a+b)/2\|^{2}\\
  & \leq0,
 \end{align*}
@@ -27103,18 +27119,16 @@ So the function
 \begin_inset Formula $t=0$
 \end_inset
 
-, we have
+, we have 
 \begin_inset Formula 
-\begin{align*}
-0 & =f'(t)\Big|_{t=0}\\
- & =\left(2\mathrm{Re}(\langle x-\mathrm{P}_{\mathcal{K}}x,y\rangle)+2t\|y\|^{2}\right)\Big|_{t=0}\\
- & =2\mathrm{Re}(\langle x-\mathrm{P}_{\mathcal{K}}x,y\rangle).
-\end{align*}
+\[
+0=f'(0)=2\mathrm{Re}\langle x-\mathrm{P}_{\mathcal{K}}x,y\rangle.
+\]
 
 \end_inset
 
 Therefore 
-\begin_inset Formula $\mathrm{Re}(\langle x-\mathrm{P}_{\mathcal{K}}x,y\rangle)=0$
+\begin_inset Formula $\mathrm{Re}\langle x-\mathrm{P}_{\mathcal{K}}x,y\rangle=0$
 \end_inset
 
  for all 
@@ -27125,8 +27139,8 @@ Therefore
  Note that this also implies
 \begin_inset Formula 
 \begin{align*}
-\mathrm{Im}(\langle x-\mathrm{P}_{\mathcal{K}}x,y\rangle) & =-\mathrm{Re}(i\langle x-\mathrm{P}_{\mathcal{K}}x,y\rangle)\\
- & =-\mathrm{Re}(\langle x-\mathrm{P}_{\mathcal{K}}x,-iy\rangle)\\
+\mathrm{Im}\langle x-\mathrm{P}_{\mathcal{K}}x,y\rangle & =\mathrm{Re}(-i\langle x-\mathrm{P}_{\mathcal{K}}x,y\rangle)\\
+ & =\mathrm{Re}(\langle x-\mathrm{P}_{\mathcal{K}}x,iy\rangle)\\
  & =0
 \end{align*}
 
@@ -27146,7 +27160,6 @@ for all
 \end_inset
 
 .
- This proves existence.
  
 \end_layout
 
@@ -27162,11 +27175,23 @@ for all
 \begin_inset space ~
 \end_inset
 
-To prove uniqueness, let 
+To see why 
+\begin_inset Formula $\mathrm{P}_{\mathcal{K}}x$
+\end_inset
+
+ is the unique point which satisfies 
+\begin_inset Formula $\langle x-\mathrm{P}_{\mathcal{K}}x,y\rangle=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $y\in\mathcal{K}$
+\end_inset
+
+, suppose 
 \begin_inset Formula $a\in\mathcal{K}$
 \end_inset
 
- such that 
+ is another point such that 
 \begin_inset Formula $\langle x-a,y\rangle=0$
 \end_inset
 
@@ -27242,11 +27267,6 @@ of
 \end_inset
 
 .
- with respect to 
-\begin_inset Formula $\mathcal{K}$
-\end_inset
-
-.
  Actually in linear analysis, the words 
 \begin_inset Quotes eld
 \end_inset
@@ -27255,8 +27275,8 @@ orthogonal projection
 \begin_inset Quotes erd
 \end_inset
 
- describe a certain class of linear maps, so we should make sure that our
- terminology is consistent here.
+ already describe a certain class of linear maps, so we should make sure
+ that our terminology is consistent here.
  First, let's recall the definition of an orthgonal projection:
 \end_layout
 
@@ -27314,7 +27334,7 @@ if it is a projection and it satisfies
 \end_inset
 
 for all 
-\begin_inset Formula $x,y\in V$
+\begin_inset Formula $x,y\in\mathcal{V}$
 \end_inset
 
 .
@@ -27433,12 +27453,7 @@ label{prop}
 \end_layout
 
 \begin_layout Enumerate
-Let 
-\begin_inset Formula $x\in\mathcal{H}$
-\end_inset
-
-.
- Then 
+We have 
 \begin_inset Formula $\mathrm{P}_{\mathcal{K}}x=x$
 \end_inset
 
@@ -27450,10 +27465,7 @@ Let
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $\mathrm{P}_{\mathcal{K}}$
-\end_inset
-
- is an orthogonal projection, that is, 
+We have 
 \begin_inset Formula $\mathrm{P}_{\mathcal{K}}(\mathrm{P}_{\mathcal{K}}x)=\mathrm{P}_{\mathcal{K}}x$
 \end_inset
 
@@ -27466,6 +27478,11 @@ Let
 \end_inset
 
 .
+ In particular, 
+\begin_inset Formula $\mathrm{P}_{\mathcal{K}}$
+\end_inset
+
+ is an orthogonal projection.
 \end_layout
 
 \begin_layout Standard
@@ -32195,7 +32212,7 @@ if it is an isomorphism as
 -vector spaces and it satisfies
 \begin_inset Formula 
 \[
-\langle U(x),U(y)\rangle=\langle x,y\rangle
+\langle Ux,Uy\rangle=\langle x,y\rangle
 \]
 
 \end_inset
@@ -33121,6 +33138,11 @@ Schur's test for boundedness
 \end_layout
 
 \begin_layout Standard
+\begin_inset Branch SchurTestForBoundedness
+inverted 0
+status collapsed
+
+\begin_layout Standard
 Let 
 \begin_inset Formula $T\colon\ell^{2}(\mathbb{N})\to\ell^{2}(\mathbb{N})$
 \end_inset
@@ -33239,6 +33261,11 @@ for all
 .
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Adjoint of an Operator
 \end_layout
@@ -33278,7 +33305,7 @@ label{theoremadjoint}
  such that
 \begin_inset Formula 
 \[
-\langle Tx,y\rangle_{\mathcal{H}_{2}}=\langle x,T^{*}y\rangle_{\mathcal{H}_{1}}
+\langle Tx,y\rangle=\langle x,T^{*}y\rangle
 \]
 
 \end_inset
@@ -33289,6 +33316,19 @@ for all
 
  and 
 \begin_inset Formula $y\in\mathcal{H}_{2}$
+\end_inset
+
+.
+ In this case we call 
+\begin_inset Formula $T^{*}$
+\end_inset
+
+ the 
+\series bold
+adjoint 
+\series default
+of 
+\begin_inset Formula $T$
 \end_inset
 
 .
@@ -33327,12 +33367,12 @@ label{proof}
 \begin_inset Formula $T^{*}\colon\mathcal{H}_{2}\to\mathcal{H}_{1}$
 \end_inset
 
- as follows: Let 
-\begin_inset Formula $z\in\mathcal{H}_{2}$
+ as follows: let 
+\begin_inset Formula $y\in\mathcal{H}_{2}$
 \end_inset
 
  and set 
-\begin_inset Formula $\ell=\ell_{z}\circ T$
+\begin_inset Formula $\ell=\ell_{y}\circ T$
 \end_inset
 
 .
@@ -33340,15 +33380,11 @@ label{proof}
 \begin_inset Formula $\ell\colon\mathcal{H}_{2}\to\mathbb{C}$
 \end_inset
 
- is defined by
-\begin_inset Formula 
-\[
-\ell(x)=\langle Tx,z\rangle_{\mathcal{H}_{2}}
-\]
-
+ is defined by 
+\begin_inset Formula $\ell(x)=\langle Tx,y\rangle$
 \end_inset
 
-for all 
+ for all 
 \begin_inset Formula $x\in\mathcal{H}_{1}$
 \end_inset
 
@@ -33359,79 +33395,23 @@ for all
 
  is a composition of bounded operators, it must also be a bounded operator
  with 
-\begin_inset Formula 
-\[
-\|\ell\|\leq\|T\|\|\ell_{z}\|=\|T\|\|z\|.
-\]
-
+\begin_inset Formula $\|\ell\|\leq\|T\|\|\ell_{y}\|=\|T\|\|y\|$
 \end_inset
 
-By the Riesz representation theorem, there exists a unique 
-\begin_inset Formula $y\in\mathcal{H}_{1}$
+.
+ By the Riesz representation theorem, there exists a unique 
+\begin_inset Formula $T^{*}y\in\mathcal{H}_{1}$
 \end_inset
 
  such that 
-\begin_inset Formula $\ell=\ell_{y}$
+\begin_inset Formula $\ell=T^{*}y$
 \end_inset
 
 .
- We set
-\begin_inset Formula 
-\[
-T^{*}z=y.
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Observe that 
-\begin_inset Formula $T^{*}$
-\end_inset
-
- is well-defined because of the uniqueness part of the Riesz representation
- theorem!
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-Let us show that 
-\begin_inset Formula $T^{*}$
-\end_inset
-
- is 
-\begin_inset Formula $\mathbb{C}$
-\end_inset
-
--linear.
- Let 
-\begin_inset Formula $\alpha,\alpha'\in\mathbb{C}$
-\end_inset
-
- and let 
-\begin_inset Formula $z,z'\in\mathcal{H}_{2}$
-\end_inset
-
-.
- Then we have
+ Thus we have
 \begin_inset Formula 
 \begin{align*}
-\langle x,T^{*}(\alpha z+\alpha'z')\rangle & =\langle Tx,\alpha z+\alpha'z'\rangle\\
- & =\overline{\alpha}\langle Tx,z\rangle+\overline{\alpha}'\langle Tx,z'\rangle\\
- & =\overline{\alpha}\langle x,T^{*}z\rangle+\overline{\alpha}'\langle x,T^{*}z'\rangle\\
- & =\langle x,\alpha T^{*}z+\alpha'T^{*}z'\rangle
+\langle Tx,y\rangle & =\ell_{T^{*}y}(x)=\langle x,T^{*}y\rangle
 \end{align*}
 
 \end_inset
@@ -33441,15 +33421,7 @@ for all
 \end_inset
 
 .
- It follows that 
-\begin_inset Formula 
-\[
-T^{*}(\alpha z+\alpha'z')=\alpha T^{*}z+\alpha'T^{*}z',
-\]
-
-\end_inset
-
-which implies 
+ It is straightforward to check that 
 \begin_inset Formula $T^{*}$
 \end_inset
 
@@ -33458,43 +33430,23 @@ which implies
 \end_inset
 
 -linear.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
+ To see why it is bounded, note that for any 
+\begin_inset Formula $y\in\mathcal{H}_{2}$
 \end_inset
 
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-Next let us show that 
-\begin_inset Formula $T^{*}$
-\end_inset
-
- is bounded.
- For any 
-\begin_inset Formula $z\in\mathcal{H}_{2}$
-\end_inset
-
-, we have
+ we have
 \begin_inset Formula 
 \begin{align*}
-\|T^{*}z\|^{2} & =\langle T^{*}z,T^{*}z\rangle\\
- & =\langle TT^{*}z,z\rangle\\
- & \leq\|T(T^{*}z)\|\|z\|\\
- & \leq\|T\|\|T^{*}z\|\|z\|.
+\|T^{*}y\|^{2} & =\langle T^{*}y,T^{*}y\rangle\\
+ & =\langle TT^{*}y,y\rangle\\
+ & \leq\|T(T^{*}y)\|\|y\|\\
+ & \leq\|T\|\|T^{*}y\|\|y\|.
 \end{align*}
 
 \end_inset
 
 It follows that 
-\begin_inset Formula $\|T^{*}z\|\leq\|T\|\|z\|$
+\begin_inset Formula $\|T^{*}y\|\leq\|T\|\|y\|$
 \end_inset
 
  which implies 
@@ -33506,6 +33458,7 @@ It follows that
 \end_inset
 
 .
+ 
 \begin_inset ERT
 status open
 

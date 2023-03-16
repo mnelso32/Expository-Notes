@@ -135,6 +135,11 @@ commutative diagrams/.cd,
 \justification true
 \use_refstyle 1
 \use_minted 0
+\branch tikzcd
+\selected 1
+\filename_suffix 0
+\color #faf0e6
+\end_branch
 \index Index
 \shortcut idx
 \color #008000
@@ -79813,18 +79818,22 @@ label{prop}
 \end_inset
 
  Let 
-\begin_inset Formula $X$
+\begin_inset Formula $Y$
 \end_inset
 
- be a locally ringed space and let 
-\begin_inset Formula $Y=\mathrm{Spec}\,A$
+ be a locally ringed space, let 
+\begin_inset Formula $X=\mathrm{Spec}\,A$
 \end_inset
 
- be an affine scheme.
+ be an affine scheme, and let 
+\begin_inset Formula $B=\Gamma(Y,\mathcal{O}_{Y})$
+\end_inset
+
+.
  Then the natural map
 \begin_inset Formula 
 \[
-\mathrm{Hom}_{\mathbf{Sch}}(X,Y)\to\mathrm{Hom}_{\mathbf{Ring}}(A,\Gamma(X,\mathcal{O}_{X}))
+\mathrm{Hom}_{\mathbf{Sch}}(Y,X)\to\mathrm{Hom}_{\mathbf{Ring}}(A,B)
 \]
 
 \end_inset
@@ -79866,23 +79875,27 @@ label{proof}
 \end_inset
 
  We will only prove this in the case where 
-\begin_inset Formula $X$
+\begin_inset Formula $Y$
 \end_inset
 
  is a scheme.
  Let 
-\begin_inset Formula $X=\bigcup_{i}U_{i}$
+\begin_inset Formula $Y=\bigcup_{i}V_{i}$
 \end_inset
 
- be an affine open covering.
+ be an affine open covering and set 
+\begin_inset Formula $B_{i}=\Gamma(V_{i},\mathcal{O}_{Y})$
+\end_inset
+
+.
  For all 
-\begin_inset Formula $U_{i}$
+\begin_inset Formula $V_{i}$
 \end_inset
 
  the natural map
 \begin_inset Formula 
 \[
-\mathrm{Hom}_{\mathbf{Sch}}(U_{i},Y)\to\mathrm{Hom}_{\mathbf{Ring}}(A,\Gamma(U_{i},\mathcal{O}_{X}))
+\mathrm{Hom}_{\mathbf{Sch}}(V_{i},X)\to\mathrm{Hom}_{\mathbf{Ring}}(A,B_{i})
 \]
 
 \end_inset
@@ -79906,11 +79919,17 @@ ref{theoremantiequivspecgamma})
 
 .
  For an affine open 
-\begin_inset Formula $V\subseteq U_{i}\cap U_{j}$
+\begin_inset Formula $V_{i,j}\subseteq V_{i}\cap V_{j}$
 \end_inset
 
- the diagram
-\end_layout
+ where 
+\begin_inset Formula $V_{i,j}=\mathrm{Spec}\,B_{i,j}$
+\end_inset
+
+, the diagram 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
 
 \begin_layout Standard
 \begin_inset ERT
@@ -79924,23 +79943,13 @@ begin{center}
 \backslash
 begin{tikzcd} 
 \backslash
-mathrm{Hom} (U_i 
-\backslash
-text{,} Y) 
+mathrm{Hom} (V_i , X) 
 \backslash
 arrow[r] 
 \backslash
 arrow[d] & 
 \backslash
-mathrm{Hom} (A 
-\backslash
-text{,} 
-\backslash
-Gamma (U_i 
-\backslash
-text{,} 
-\backslash
-mathcal{O} _X )) 
+mathrm{Hom} (A , B_i ) 
 \backslash
 arrow[d] 
 \end_layout
@@ -79966,21 +79975,11 @@ arrow[d]
 
 
 \backslash
-mathrm{Hom} (V 
-\backslash
-text{,} Y) 
+mathrm{Hom} (V_{i,j} , X) 
 \backslash
 arrow[r] & 
 \backslash
-mathrm{Hom} (A 
-\backslash
-text{,} 
-\backslash
-Gamma (V 
-\backslash
-text{,} 
-\backslash
-mathcal{O} _X ))
+mathrm{Hom} (A , B_{i,j} )
 \end_layout
 
 \begin_layout Plain Layout
@@ -80005,8 +80004,9 @@ end{center}
 
 \end_layout
 
-\begin_layout Standard
-is commutative, since 
+\end_inset
+
+ is commutative, since 
 \begin_inset Formula $\Gamma(-)$
 \end_inset
 
@@ -80054,28 +80054,306 @@ label{prop}
 
  be locally ringed spaces.
  For every 
-\begin_inset Formula $U\subseteq X$
+\begin_inset Formula $V\subseteq Y$
 \end_inset
 
  open, let 
-\begin_inset Formula $\mathrm{Hom}(U,Y)$
+\begin_inset Formula $\mathrm{Hom}(V,X)$
 \end_inset
 
  be the set of morphisms 
-\begin_inset Formula $U\to Y$
+\begin_inset Formula $V\to X$
 \end_inset
 
  of locally ringed spaces.
  Then 
-\begin_inset Formula $U\mapsto\mathrm{Hom}(U,Y)$
+\begin_inset Formula $V\mapsto\mathrm{Hom}(V,X)$
 \end_inset
 
  is a sheaf of sets on 
-\begin_inset Formula $X$
+\begin_inset Formula $Y$
 \end_inset
 
 .
  
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Attributes of Morphisms
+\end_layout
+
+\begin_layout Subsubsection
+Finiteness Conditions
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f\colon Y\to X$
+\end_inset
+
+ be a morphism of schemes.
+\end_layout
+
+\begin_layout Enumerate
+We say 
+\begin_inset Formula $f$
+\end_inset
+
+ is of 
+\series bold
+finite type 
+\series default
+if for every 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ there is an open affine neighborhood 
+\begin_inset Formula $U=\mathrm{Spec}\,A\subseteq X$
+\end_inset
+
+ of 
+\begin_inset Formula $x$
+\end_inset
+
+ and a finite covering
+\begin_inset Formula 
+\[
+f^{-1}(U)=\bigcup_{i=1}^{n}V_{i}
+\]
+
+\end_inset
+
+of its inverse image by affine open sets 
+\begin_inset Formula $V_{i}=\mathrm{Spec}\,B_{i}$
+\end_inset
+
+ such that the ring homomorphism 
+\begin_inset Formula $\varphi_{i}\colon A\to B_{i}$
+\end_inset
+
+, corresponding to the morphism of affine schemes 
+\begin_inset Formula $f|_{V_{i}}\colon V_{i}\to U$
+\end_inset
+
+, gives 
+\begin_inset Formula $B_{i}$
+\end_inset
+
+ the structure of a finitely generated 
+\begin_inset Formula $A$
+\end_inset
+
+-algebra for each 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+We say 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\series bold
+finite 
+\series default
+if for every 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ there is an open affine neighborhood 
+\begin_inset Formula $U=\mathrm{Spec}\,A\subseteq X$
+\end_inset
+
+ of 
+\begin_inset Formula $x$
+\end_inset
+
+ such that the inverse image 
+\begin_inset Formula $V:=f^{-1}(U)=\mathrm{Spec}\,B$
+\end_inset
+
+ is itself affine and the ring homomorphism 
+\begin_inset Formula $\varphi\colon A\to B$
+\end_inset
+
+, corresponding to the morphism of affine schemes 
+\begin_inset Formula $f|_{V}\colon V\to U$
+\end_inset
+
+, gives 
+\begin_inset Formula $B$
+\end_inset
+
+ the structure of a finite 
+\begin_inset Formula $A$
+\end_inset
+
+-module.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a ring and let 
+\begin_inset Formula $B=A[t]\slash\pi$
+\end_inset
+
+ where 
+\begin_inset Formula $\pi\in A[t]$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $X=\mathrm{Spec}\,A$
+\end_inset
+
+ and 
+\begin_inset Formula $Y=\mathrm{Spec}\,B$
+\end_inset
+
+, and let 
+\begin_inset Formula $f\colon Y\to X$
+\end_inset
+
+ be the morphism of affine schemes which corresponds to the morphism of
+ rings 
+\begin_inset Formula $\varphi\colon A\to B$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $f$
+\end_inset
+
+ is finite if and only if the leading coefficient of 
+\begin_inset Formula $\pi$
+\end_inset
+
+ is a unit in 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f\colon Y\to X$
+\end_inset
+
+ be a finite morphism of schemes.
+ Then we have the following:
+\end_layout
+
+\begin_layout Enumerate
+The fibers of 
+\begin_inset Formula $f$
+\end_inset
+
+ are finite.
+\end_layout
+
+\begin_layout Enumerate
+The underlying continuous map 
+\begin_inset Formula $f\colon Y\to X$
+\end_inset
+
+ is closed.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -80106,54 +80384,46 @@ label{proof}
 
 \end_inset
 
- 
-\begin_inset Formula $\mathrm{Hom}(-,Y)$
-\end_inset
-
- is clearly a presheaf.
+ 1.
  Let 
-\begin_inset Formula $\{U_{i}\}_{i\in I}$
+\begin_inset Formula $x\in X$
 \end_inset
 
- be an open cover of 
-\begin_inset Formula $U$
+ and choose an affine open 
+\begin_inset Formula $U=\mathrm{Spec}\,A$
 \end_inset
 
- and let 
-\begin_inset Formula $\{f_{i}\}_{i\in I}$
+ of 
+\begin_inset Formula $x$
 \end_inset
 
- be a compatible collection local sections: so 
-\begin_inset Formula $f_{i}\in\mathrm{Hom}(U_{i},Y)$
+ such that 
+\begin_inset Formula $f^{-1}(U):=V=\mathrm{Spec}\,B$
 \end_inset
 
- for each 
-\begin_inset Formula $i\in I$
+ is affine where the corresponding map 
+\begin_inset Formula $\varphi\colon A\to B$
 \end_inset
 
- and compatibility means
-\begin_inset Formula 
-\[
-f_{i}|_{U_{ij}}=f_{j}|_{U_{ij}}\quad\text{and}\quad f_{i}^{\flat}|
-\]
-
+ gives 
+\begin_inset Formula $B$
 \end_inset
 
- and 
-\begin_inset Formula $f_{i}^{\flat}$
+ the structure of a finite 
+\begin_inset Formula $A$
 \end_inset
 
- for each 
-\begin_inset Formula $i,j\in I$
+-module.
+ In this case, 
+\begin_inset Formula $x$
 \end_inset
 
-.
- Recall that the morphisms 
-\begin_inset Formula $f_{i}=(f_{i},f_{i}^{\flat})$
+ corresponds to a prime ideal 
+\begin_inset Formula $\mathfrak{p}$
 \end_inset
 
- consists of two parts: the continuo where 
-\begin_inset Formula $f_{i}\colon$
+ of 
+\begin_inset Formula $A$
 \end_inset
 
  
@@ -80170,6 +80440,10 @@ end{proof}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Properness and Separation
 \end_layout
 
 \begin_layout Subsection
@@ -82468,7 +82742,7 @@ label{defn}
 \end_inset
 
  Let 
-\begin_inset Formula $f\colon X\to Y$
+\begin_inset Formula $f\colon Y\to X$
 \end_inset
 
  be a morphism of schemes and let 
@@ -82491,21 +82765,21 @@ smooth of relative dimension
 \end_inset
 
  at 
-\begin_inset Formula $x\in X$
+\begin_inset Formula $y\in Y$
 \end_inset
 
 
 \series default
 , if there exists affine open neighborhoods 
-\begin_inset Formula $U$
+\begin_inset Formula $V=\mathrm{Spec}\,B$
 \end_inset
 
  of 
-\begin_inset Formula $x$
+\begin_inset Formula $y$
 \end_inset
 
  and 
-\begin_inset Formula $V=\mathrm{Spec}\,R$
+\begin_inset Formula $U=\mathrm{Spec}\,R$
 \end_inset
 
  of 
@@ -82519,7 +82793,7 @@ smooth of relative dimension
 , and open immersion 
 \begin_inset Formula 
 \[
-j\colon U\hookrightarrow\mathrm{Spec}\,R[T_{1},\dots,T_{n}]\slash\langle f_{1},\dots,f_{n-d}\rangle:=\mathrm{Spec}\,A
+j\colon V\hookrightarrow\mathrm{Spec}\,R[T_{1},\dots,T_{n}]\slash\langle f_{1},\dots,f_{n-d}\rangle:=\mathrm{Spec}\,A
 \]
 
 \end_inset
@@ -82539,7 +82813,7 @@ of
 , such that the Jacobian matrix
 \begin_inset Formula 
 \[
-\mathrm{J}_{\boldsymbol{f}}(x)=\left(\partial_{T_{j}}f_{i}(x)\right)_{i,j}\in\mathrm{M}_{(n-d)\times n}(\kappa(x))
+\mathrm{J}_{\boldsymbol{f}}(y)=\left(\partial_{T_{j}}f_{i}(y)\right)_{i,j}\in\mathrm{M}_{(n-d)\times n}(\kappa(y))
 \]
 
 \end_inset
@@ -82549,17 +82823,12 @@ has rank
 \end_inset
 
 .
- Suppose that 
-\begin_inset Formula $U=\mathrm{Spec}\,B$
-\end_inset
-
-.
- Then the morphism of schemes 
-\begin_inset Formula $f\colon X\to Y$
+ Thus the morphism of schemes 
+\begin_inset Formula $f\colon Y\to X$
 \end_inset
 
  restricts to a morphism of affine schemes 
-\begin_inset Formula $f|_{U}\colon U\to V$
+\begin_inset Formula $f|_{V}\colon V\to U$
 \end_inset
 
  which corresponds to a morphism of rings 
@@ -82576,7 +82845,7 @@ has rank
 
 -algebra.
  The the morphism 
-\begin_inset Formula $j\colon U\hookrightarrow\mathrm{Spec}\,A$
+\begin_inset Formula $j\colon V\hookrightarrow\mathrm{Spec}\,A$
 \end_inset
 
  of 
@@ -82614,7 +82883,7 @@ has rank
 
 \begin_layout Enumerate
 We say that 
-\begin_inset Formula $f\colon X\to Y$
+\begin_inset Formula $f\colon Y\to X$
 \end_inset
 
  is 
@@ -82622,13 +82891,13 @@ We say that
 smooth
 \series default
 , or that 
-\begin_inset Formula $X$
+\begin_inset Formula $Y$
 \end_inset
 
  is 
 \series bold
 smooth over 
-\begin_inset Formula $Y$
+\begin_inset Formula $X$
 \end_inset
 
  
@@ -82642,7 +82911,7 @@ smooth over
 \end_inset
 
 ) at all points 
-\begin_inset Formula $x\in X$
+\begin_inset Formula $y\in Y$
 \end_inset
 
 .

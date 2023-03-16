@@ -1,0 +1,707 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Numerical Analysis Homework 6
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+Throughout this homework, 
+\begin_inset Formula $\|\cdot\|$
+\end_inset
+
+ denotes the 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+-norm.
+ We also denote by 
+\begin_inset Formula $\varepsilon=\varepsilon_{\mathrm{mach}}$
+\end_inset
+
+ to be the machine coefficient.
+\end_layout
+
+\begin_layout Section
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $P\in\mathbb{C}^{m\times m}$
+\end_inset
+
+ be a nonzero projector.
+ Show that 
+\begin_inset Formula $\|P\|\geq1$
+\end_inset
+
+, with equality if and only if 
+\begin_inset Formula $P$
+\end_inset
+
+ is an orthogonal projector.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Choose 
+\begin_inset Formula $x\in\mathbb{C}^{m}$
+\end_inset
+
+ such that 
+\begin_inset Formula $Px\neq0$
+\end_inset
+
+.
+ Then note that
+\begin_inset Formula 
+\begin{align*}
+\|Px\| & =\|P(Px)\|\leq\|P\|\|Px\|
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $\|P\|\geq1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now we show that 
+\begin_inset Formula $P$
+\end_inset
+
+ is an orthogonal projector if and only if 
+\begin_inset Formula $\|P\|=1$
+\end_inset
+
+.
+ First assume that 
+\begin_inset Formula $P$
+\end_inset
+
+ is an orthogonal projector.
+ Then by the pythagorean theorem, we have
+\begin_inset Formula 
+\begin{align*}
+\|x\|^{2} & =\|Px\|^{2}+\|x-Px\|^{2}\ge\|Px\|^{2}
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in\mathbb{C}^{m}$
+\end_inset
+
+.
+ In particular, this implies 
+\begin_inset Formula $\|P\|\leq1$
+\end_inset
+
+, which implies 
+\begin_inset Formula $\|P\|=1$
+\end_inset
+
+ since we've already show 
+\begin_inset Formula $\|P\|\leq1$
+\end_inset
+
+.
+ Conversely, suppose 
+\begin_inset Formula $\|P\|=1$
+\end_inset
+
+.
+ We wish to show that 
+\begin_inset Formula $P$
+\end_inset
+
+ is an orthogonal projection.
+ It suffices to show that 
+\begin_inset Formula $P=P^{*}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Review our analysis of the bound on the relative forward error of singular
+ value computation by using a backward stable eigenvalue algorithm for 
+\begin_inset Formula $A^{\top}A$
+\end_inset
+
+.
+ That is,
+\begin_inset Formula 
+\[
+\frac{|\widetilde{\sigma}_{k}-\sigma_{k}|}{\sigma_{k}}\leq O((\sigma_{1}/\sigma_{k})^{2}\varepsilon),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\widetilde{\sigma}_{k}=\sqrt{\widetilde{\lambda}_{k}}$
+\end_inset
+
+ where 
+\begin_inset Formula $\widetilde{\lambda}_{k}$
+\end_inset
+
+ denotes the 
+\begin_inset Formula $k$
+\end_inset
+
+th largest eigenvalue of 
+\begin_inset Formula $A^{\top}A$
+\end_inset
+
+.
+ Instead, if we use a backward stable eigenvalue algorithm for 
+\begin_inset Formula $\left(\begin{smallmatrix}0 & A^{\top}\\
+A & 0
+\end{smallmatrix}\right)$
+\end_inset
+
+, show that the relative forward error of singular value computation would
+ be bounded by 
+\begin_inset Formula $O((\sigma_{1}/\sigma_{k})\varepsilon)$
+\end_inset
+
+, assuming that square root computation is exact.
+ Explain the advantage of the new error bound.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Read the introduction to the Golub-Kahan-Lanczos method, at http://www.netlib.org
+/utk/people/JackDongarra/etemplates/node198.html and the uploaded code implementa
+tion HW6 GKLsvds.m.
+\end_layout
+
+\begin_layout Enumerate
+Give a general description of the functionality of GKL; describe the main
+ difference between the original GKL and the code.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Download the zipped file HW6 pics.zip, unzip it, load the first jpeg file
+ by
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+picA = double(imread('picA.jpg'));
+\end_layout
+
+\end_inset
+
+and run
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+rk = 160; 
+\end_layout
+
+\begin_layout Plain Layout
+
+tic; [Us1,Ss1,Vs1] = HW6 GKLsvds(picA(:,:,1),rk); toc; 
+\end_layout
+
+\begin_layout Plain Layout
+
+tic; [Us2,Ss2,Vs2] = HW6 GKLsvds(picA(:,:,2),rk); toc; 
+\end_layout
+
+\begin_layout Plain Layout
+
+tic; [Us3,Ss3,Vs3] = HW6 GKLsvds(picA(:,:,3),rk); toc; 
+\end_layout
+
+\begin_layout Plain Layout
+
+tic; [U1,S1,V1] = svd(picA(:,:,1),0); toc; 
+\end_layout
+
+\begin_layout Plain Layout
+
+tic; [U2,S2,V2] = svd(picA(:,:,2),0); toc; 
+\end_layout
+
+\begin_layout Plain Layout
+
+tic; [U3,S3,V3] = svd(picA(:,:,3),0); toc;
+\end_layout
+
+\end_inset
+
+Then, run MATLAB’s command whos to see the memory used by picA, and by Us1,Vs1,U
+s2,Vs2,Us3 and Vs3 all together.
+ Compare the timing used for comput- ing and the memory used for storing
+ the full and partial SVD of this picture.
+ (Note: we are competing MATLAB code with the built-in C/FORTRAN code in
+ tim- ing, and our timing should improve considerably if our GKL code is
+ in C/FORTRAN ).
+\end_layout
+
+\begin_layout Enumerate
+Finally, run MATLAB's command
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+picAh = zeros(size(picA)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+picAh(:,:,1) = Us1*Ss1*Vs1'; 
+\end_layout
+
+\begin_layout Plain Layout
+
+picAh(:,:,2) = Us2*Ss2*Vs2';
+\end_layout
+
+\begin_layout Plain Layout
+
+picAh(:,:,3) = Us3*Ss3*Vs3'; 
+\end_layout
+
+\begin_layout Plain Layout
+
+disp([norm(picAh(:,:,1)-picA(:,:,1),'fro')/norm(picA(:,:,1),'fro') ...
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+norm(picAh(:,:,2)-picA(:,:,2),'fro')/norm(picA(:,:,2),'fro') ...
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+norm(picAh(:,:,3)-picA(:,:,3),'fro')/norm(picA(:,:,3),'fro')]);
+\end_layout
+
+\begin_layout Plain Layout
+
+figure(1); imshow(uint8(picA)); axis equal; 
+\end_layout
+
+\begin_layout Plain Layout
+
+figure(2); imshow(uint8(picAh)); axis equal;
+\end_layout
+
+\end_inset
+
+Repeat the above procedure for the other three pictures.
+ Make some general com- ments on the computation and use of partial SVD
+ for compressing images.
+ In particu- lar, give an estimate of the arithmetic cost of this partial
+ SVD and full SVD applied to an image of dimension m-by-n, in a form of
+ 
+\begin_inset Formula $O(-)$
+\end_inset
+
+.
+ For a given rank rk ≪ min{m, n}, how does the cost of partial SVD compared
+ to full SVD as min{m, n} increases? In a recent development by random sketching
+, fulll orthogonalization of rk vectors of elements m or n (rk ≪ min{m,
+ n}) needs only O(rk3) + O(max{m, n}rk) flops.
+ Compare the cost of partial and full SVD if such a fast orthogonalization
+ can be used.
+\end_layout
+
+\begin_layout Enumerate
+Search the title of each artwork, the name of the artist, the approximate
+ year of creation, and the current location of the artwork.
+ Info of 4 paintings qualifies full extra credit.
+ Do your own research, instead of using others’ findings, even for this
+ leisure problem.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

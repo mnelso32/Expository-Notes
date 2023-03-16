@@ -1,0 +1,1661 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Midterm
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+Throughout this homework, 
+\begin_inset Formula $\|\cdot\|$
+\end_inset
+
+ denotes the 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+-norm (except in part 1 of problem 1 where we use the 
+\begin_inset Formula $\ell_{\infty}$
+\end_inset
+
+ norm).
+ If 
+\begin_inset Formula $v,w\in\mathbb{R}^{n}$
+\end_inset
+
+, then we set 
+\begin_inset Formula $\langle v,w\rangle=v^{\top}w$
+\end_inset
+
+.
+ Also we set 
+\begin_inset Formula $\varepsilon=\varepsilon_{\mathrm{mach}}$
+\end_inset
+
+ to be the machine coefficient.
+ The exam took me roughly 
+\begin_inset Formula $4$
+\end_inset
+
+ hours to finish.
+\end_layout
+
+\begin_layout Section*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Solve the following.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $f(\boldsymbol{x})=x_{1}^{2}\ln x_{2}$
+\end_inset
+
+ where 
+\begin_inset Formula $x_{2}>0$
+\end_inset
+
+.
+ Find the relative condition number of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $x_{1}\approx1$
+\end_inset
+
+, for what values of 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ is this evaluation ill-conditioned?
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $A\in\mathbb{R}^{n\times n}$
+\end_inset
+
+ and 
+\begin_inset Formula $(\lambda,v)$
+\end_inset
+
+ be an eigenpair such that 
+\begin_inset Formula $Av=\lambda v$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $(\widehat{\lambda},\widehat{v})$
+\end_inset
+
+ be a numerically computed approximation to 
+\begin_inset Formula $(\lambda,v)$
+\end_inset
+
+.
+ Assume that 
+\begin_inset Formula $\|v\|=\|\widehat{v}\|=1$
+\end_inset
+
+.
+ Find the vector 
+\begin_inset Formula $x$
+\end_inset
+
+ such that 
+\begin_inset Formula $(\widehat{\lambda},\widehat{v})$
+\end_inset
+
+ is an eigenpair of 
+\begin_inset Formula $A+\Delta A$
+\end_inset
+
+, where 
+\begin_inset Formula $\Delta A=x\widehat{v}^{H}$
+\end_inset
+
+.
+ Give the expression of 
+\begin_inset Formula $\|\Delta A\|$
+\end_inset
+
+ (should not contain 
+\begin_inset Formula $x$
+\end_inset
+
+), and explain why 
+\begin_inset Formula $\|A\widehat{v}-\widehat{\lambda}\widehat{v}\|\leq O(\|A\|\varepsilon)$
+\end_inset
+
+ means 
+\begin_inset Formula $(\widehat{\lambda},\widehat{v})$
+\end_inset
+
+ is computed by a backward stable algorithm.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ In this part of the problem, we use the 
+\begin_inset Formula $\ell_{\infty}$
+\end_inset
+
+ norm 
+\begin_inset Formula $\|\cdot\|_{\infty}=\|\cdot\|$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $f$
+\end_inset
+
+ is differentiable we see that
+\begin_inset Formula 
+\begin{align*}
+\kappa_{f}(\boldsymbol{x}) & =\frac{\|\mathrm{J}_{f}(\boldsymbol{x})\|\|\boldsymbol{x}\|}{|f(\boldsymbol{x})|}\\
+ & =\frac{\left\Vert \begin{pmatrix}2x_{1}\ln x_{2} & x_{1}^{2}/x_{2}\end{pmatrix}\right\Vert \|\boldsymbol{x}\|}{\left|x_{1}^{2}\ln x_{2}\right|}\\
+ & =\frac{\left(\left|2x_{1}\ln x_{2}\right|+\left|x_{1}^{2}/x_{2}\right|\right)\max\{|x_{1}|,|x_{2}|\}}{\left|x_{1}^{2}\ln x_{2}\right|}\\
+ & =\frac{\left(\left|2\ln x_{2}\right|+\left|x_{1}/x_{2}\right|\right)\max\{|x_{1}|,|x_{2}|\}}{\left|x_{1}\ln x_{2}\right|},\\
+ & =\frac{2\max\{|x_{1}|,|x_{2}|\}}{\left|x_{1}\right|}+\frac{\max\{|x_{1}|,|x_{2}|\}}{\left|x_{2}\ln x_{2}\right|},
+\end{align*}
+
+\end_inset
+
+Thus we have
+\begin_inset Formula 
+\[
+\kappa_{f}(\boldsymbol{x})=\begin{cases}
+\frac{2x_{2}}{|x_{1}|}+\frac{1}{\ln x_{2}} & \text{if }x_{2}\geq|x_{1}|\\
+2+\frac{|x_{1}|}{x_{2}\left|\ln x_{2}\right|} & \text{if }|x_{1}|\geq x_{2}
+\end{cases}
+\]
+
+\end_inset
+
+Now we assume that 
+\begin_inset Formula $x_{1}\approx1$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\[
+\kappa_{f}(\boldsymbol{x})\approx\begin{cases}
+2x_{2}+\frac{1}{\ln x_{2}} & \text{if }x_{2}\ge x_{1}\approx1\\
+2+\frac{1}{x_{2}\left|\ln x_{2}\right|} & \text{if }x_{2}\leq x_{1}\approx1
+\end{cases}
+\]
+
+\end_inset
+
+Let us analyze for which 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ is this problem is ill-conditioned.
+ First we consider the case where 
+\begin_inset Formula $x_{2}\geq x_{1}\approx1$
+\end_inset
+
+.
+ Then the problem is ill-conditioned if and only if
+\begin_inset Formula 
+\[
+\kappa_{f}(\boldsymbol{x})=2x_{2}+\frac{1}{\ln x_{2}}
+\]
+
+\end_inset
+
+is large, which happens if and only if 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ is large.
+ Next we consider the case where 
+\begin_inset Formula $0<x_{2}\leq x_{1}\approx1$
+\end_inset
+
+.
+ Then the problem is ill-conditioned if and only if
+\begin_inset Formula 
+\[
+2+\frac{1}{x_{2}\left|\ln x_{2}\right|}
+\]
+
+\end_inset
+
+is large, which happens if and only if 
+\begin_inset Formula $\frac{1}{x_{2}\left|\ln x_{2}\right|}$
+\end_inset
+
+ is large which happens if 
+\begin_inset Formula $x_{2}\approx0$
+\end_inset
+
+ or 
+\begin_inset Formula $x_{2}\approx1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ We have
+\begin_inset Formula 
+\begin{align*}
+(A+\Delta A)\widehat{v}=\widehat{\lambda}\widehat{v} & \iff(A+x\widehat{v}^{\top})\widehat{v}=\widehat{\lambda}\widehat{v}\\
+ & \iff A\widehat{v}+x\|\widehat{v}\|^{2}=\widehat{\lambda}\widehat{v}\\
+ & \iff A\widehat{v}+x=\widehat{\lambda}\widehat{v}\\
+ & \iff x=\widehat{\lambda}\widehat{v}-A\widehat{v}.
+\end{align*}
+
+\end_inset
+
+Thus we have
+\begin_inset Formula 
+\begin{align*}
+\|\Delta A\| & =\|x\|\|\widehat{v}\|\\
+ & =\|x\|\\
+ & =\|\widehat{\lambda}\widehat{v}-A\widehat{v}\|.
+\end{align*}
+
+\end_inset
+
+In particular, 
+\begin_inset Formula $\|\widehat{\lambda}\widehat{v}-A\widehat{v}||=O(\|A\|\varepsilon)$
+\end_inset
+
+ means
+\begin_inset Formula 
+\begin{align*}
+\frac{\|\Delta A\|}{\|A\|} & =\frac{\|\widehat{\lambda}\widehat{v}-A\widehat{v}||}{\|A\|}=O(\varepsilon),
+\end{align*}
+
+\end_inset
+
+which shows that 
+\begin_inset Formula $(\widehat{\lambda},\widehat{v})$
+\end_inset
+
+ is computed by a backward stable algorithm.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 2 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Solve the following:
+\end_layout
+
+\begin_layout Enumerate
+Assume that 
+\begin_inset Formula $U,V\in\mathbb{R}^{n\times p}$
+\end_inset
+
+ (
+\begin_inset Formula $p<n)$
+\end_inset
+
+ have full rank, and 
+\begin_inset Formula $V^{\top}U$
+\end_inset
+
+ is nonsingular.
+ Show that 
+\begin_inset Formula $P=1-U(V^{\top}U)^{-1}V^{\top}$
+\end_inset
+
+ is a projector, and find the range and null space of 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ What can we say about 
+\begin_inset Formula $P$
+\end_inset
+
+ and 
+\begin_inset Formula $\|P\|$
+\end_inset
+
+ if 
+\begin_inset Formula $\mathrm{range}(U)=\mathrm{range}(V)$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $x\in\mathbb{R}^{n}$
+\end_inset
+
+ and consider the vector 
+\begin_inset Formula $z=(0_{n-1},\|x\|,x)^{\top}\in\mathbb{R}^{2n}$
+\end_inset
+
+.
+ Find the Householder reflector 
+\begin_inset Formula $H=1-2vv^{\top}$
+\end_inset
+
+ that reduces 
+\begin_inset Formula $z$
+\end_inset
+
+ such that 
+\begin_inset Formula $Hz$
+\end_inset
+
+ is a multiple of 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+ (sufficient to find the expression of 
+\begin_inset Formula $v$
+\end_inset
+
+).
+ For 
+\begin_inset Formula $y=(0_{n},x)^{\top}\in\mathbb{R}^{2n}$
+\end_inset
+
+, give the simplified expression of 
+\begin_inset Formula $Hy$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Given a 
+\begin_inset Formula $6\times4$
+\end_inset
+
+ matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ with all nonzero entries, illustrate the procedure of Golub-Kahan bidiagonaliza
+tion, and explain how to compute all singular values of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Observe that
+\begin_inset Formula 
+\begin{align*}
+P^{2} & =(1-U(V^{\top}U)^{-1}V^{\top})(1-U(V^{\top}U)^{-1}V^{\top})\\
+ & =1-2U(V^{\top}U)^{-1}V^{\top}+(U(V^{\top}U)^{-1}V^{\top})(U(V^{\top}U)^{-1}V^{\top})\\
+ & =1-2U(V^{\top}U)^{-1}V^{\top}+U(V^{\top}U)^{-1}(V^{\top}U)(V^{\top}U)^{-1}V^{\top}\\
+ & =1-2U(V^{\top}U)^{-1}V^{\top}+U(V^{\top}U)^{-1}V^{\top}\\
+ & =1-U(V^{\top}U)^{-1}V^{\top}\\
+ & =P.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $P$
+\end_inset
+
+ is a projector.
+ We have
+\begin_inset Formula 
+\begin{align*}
+x\in\mathrm{range}(P) & \iff Px=x & \text{since }P\text{ is a projector}\\
+ & \iff x-U(V^{\top}U)^{-1}V^{\top}x=x\\
+ & \iff U(V^{\top}U)^{-1}V^{\top}x=0\\
+ & \iff(V^{\top}U)^{-1}V^{\top}x=0 & \text{since }U\colon\mathbb{R}^{p}\to\mathbb{R}^{n}\text{ is injective}\\
+ & \iff V^{\top}x=0 & \text{since }(V^{\top}U)^{-1}\colon\mathbb{R}^{p}\to\mathbb{R}^{p}\text{ is injective}\\
+ & \iff x\in\mathrm{null}(V^{\top}).
+\end{align*}
+
+\end_inset
+
+Thus we have 
+\begin_inset Formula $\mathrm{range}(P)=\mathrm{null}(V^{\top})$
+\end_inset
+
+.
+ Similarly we claim that 
+\begin_inset Formula $\mathrm{null}(P)=\mathrm{range}(U)$
+\end_inset
+
+.
+ To see this, first suppose 
+\begin_inset Formula $x\in\mathrm{range}(U)$
+\end_inset
+
+, so 
+\begin_inset Formula $x=Uy$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+Px & =x-U(V^{\top}U)^{-1}V^{\top}x\\
+ & =Uy-U(V^{\top}U)^{-1}V^{\top}x\\
+ & =U(y-(V^{\top}U)^{-1}V^{\top}x)\\
+ & =U(y-(V^{\top}U)^{-1}V^{\top}Uy)\\
+ & =U(y-y)\\
+ & =0
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $x\in\mathrm{null}(P)$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathrm{range}(U)\subseteq\mathrm{null}(P)$
+\end_inset
+
+.
+ Conversely, suppose that 
+\begin_inset Formula $x\in\mathrm{null}(P)$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+0 & =Px\\
+ & =x-U(V^{\top}U)^{-1}V^{\top}x\\
+ & =x-Uy
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $y=(V^{\top}U)^{-1}V^{\top}x$
+\end_inset
+
+ implies 
+\begin_inset Formula $x\in\mathrm{range}(U)$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathrm{null}(P)\subseteq\mathrm{range}(U)$
+\end_inset
+
+.
+ Thus we have shown
+\begin_inset Formula 
+\[
+\mathrm{range}(P)=\mathrm{null}(V^{\top})\quad\text{and}\quad\mathrm{null}(P)=\mathrm{range}(U).
+\]
+
+\end_inset
+
+We now assume that 
+\begin_inset Formula $\mathrm{range}(U)=\mathrm{range}(V)$
+\end_inset
+
+.
+ In this case, one has the decomposition
+\begin_inset Formula 
+\begin{equation}
+\mathbb{R}^{n}\cong\mathrm{null}(P)\oplus\mathrm{range}(P)=\mathrm{range}(V)\oplus\mathrm{null}(V^{\top}).\label{eq:orthogonaldecomp}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Indeed, suppose 
+\begin_inset Formula $x\in\mathrm{range}(V)\cap\mathrm{null}(V^{\top})$
+\end_inset
+
+.
+ Choose 
+\begin_inset Formula $y$
+\end_inset
+
+ such that 
+\begin_inset Formula $Vy=x$
+\end_inset
+
+.
+ Then note that
+\begin_inset Formula 
+\begin{align*}
+\|x\|^{2} & =\|Vy\|^{2}\\
+ & =(Vy)^{\top}Vy\\
+ & =y^{\top}V^{\top}Vy\\
+ & =y^{\top}V^{\top}x\\
+ & =0
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $x=0$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\mathrm{range}(V)\cap\mathrm{null}(V^{\top})=0$
+\end_inset
+
+.
+ Furthermore, note that
+\begin_inset Formula 
+\[
+\mathrm{dim}(\mathrm{range}(V))=p\quad\text{and}\quad\dim(\mathrm{null}(V^{\top}))=n-p
+\]
+
+\end_inset
+
+since 
+\begin_inset Formula $V$
+\end_inset
+
+ has full rank.
+ Thus we obtain the decomposition 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:orthogonaldecomp})
+\end_layout
+
+\end_inset
+
+ as claimed.
+ So every 
+\begin_inset Formula $x\in\mathbb{R}^{n}$
+\end_inset
+
+ can be expressed uniquely as 
+\begin_inset Formula $x=Vy+z$
+\end_inset
+
+ where 
+\begin_inset Formula $y\in\mathbb{R}^{p}$
+\end_inset
+
+ and where 
+\begin_inset Formula $z\in\mathrm{null}(V^{\top})$
+\end_inset
+
+.
+ In fact, we claim 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:orthogonaldecomp})
+\end_layout
+
+\end_inset
+
+ is an orthogonal decomposition.
+ Indeed, suppose 
+\begin_inset Formula $Vy\in\mathrm{range}(V)$
+\end_inset
+
+ and 
+\begin_inset Formula $z\in\mathrm{null}(V^{\top})$
+\end_inset
+
+.
+ Then note that
+\begin_inset Formula 
+\[
+\langle Vy,z\rangle=(Vy)^{\top}z=y^{\top}V^{\top}z=0.
+\]
+
+\end_inset
+
+Thus 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:orthogonaldecomp})
+\end_layout
+
+\end_inset
+
+ is an orthogonal decomposition and 
+\begin_inset Formula $P$
+\end_inset
+
+ is the orthogonal projection map onto 
+\begin_inset Formula $\mathrm{null}(V^{\top}).$
+\end_inset
+
+ In this case, we have 
+\begin_inset Formula $\|P\|=1$
+\end_inset
+
+.
+ Indeed,
+\begin_inset Formula 
+\begin{align*}
+\|Px\| & =\|P^{2}x\|\\
+ & \leq\|P\|\|Px\|
+\end{align*}
+
+\end_inset
+
+shows 
+\begin_inset Formula $\|P\|\geq1$
+\end_inset
+
+.
+ Conversely, by the Pythagorean theorem we have
+\begin_inset Formula 
+\begin{align*}
+\|x\|^{2} & =\|Px\|^{2}+\|x-Px\|^{2}\\
+ & \geq\|Px\|^{2},
+\end{align*}
+
+\end_inset
+
+which implies 
+\begin_inset Formula $\|Px\|\leq x$
+\end_inset
+
+ which implies 
+\begin_inset Formula $\|P\|\leq1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Let 
+\begin_inset Formula $\widehat{z}=z/\|z\|$
+\end_inset
+
+ and let 
+\begin_inset Formula $v=\widehat{z}-e_{1}$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\begin{align*}
+\langle v,\widehat{z}\rangle & =\langle\widehat{z}-e_{1},\widehat{z}\rangle\\
+ & =\langle\widehat{z},\widehat{z}\rangle-\langle e_{1},\widehat{z}\rangle\\
+ & =1-0\\
+ & =1.
+\end{align*}
+
+\end_inset
+
+Similarly note that since 
+\begin_inset Formula $\langle\widehat{z},e_{1}\rangle=0$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\|v\|^{2} & =\|\widehat{z}\|^{2}+\|e_{1}\|^{2}\\
+ & =1+1\\
+ & =2,
+\end{align*}
+
+\end_inset
+
+Therefore we have
+\begin_inset Formula 
+\begin{align*}
+H_{v}(z) & =\|z\|H_{v}(\widehat{z})\\
+ & =\|z\|\left(\widehat{z}-2\frac{\langle v,\widehat{z}\rangle}{\|v\|^{2}}v\right)\\
+ & =\|z\|\left(\widehat{z}-v\right)\\
+ & =\|z\|(\widehat{z}-(\widehat{z}-e_{1}))\\
+ & =\|z\|e_{1}\\
+ & =\sqrt{2}\|x\|e_{1}, & \text{since }\|z\|^{2}=2\|x\|^{2}.
+\end{align*}
+
+\end_inset
+
+In other words, 
+\begin_inset Formula $H=H_{v}=1-2\widehat{v}\widehat{v}^{\top}$
+\end_inset
+
+ where 
+\begin_inset Formula $\widehat{v}=v/||v\|$
+\end_inset
+
+ is the Hausdorff reflector which reduces 
+\begin_inset Formula $z$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+Hz=\sqrt{2}\|x\|e_{1}.
+\]
+
+\end_inset
+
+Now suppose that 
+\begin_inset Formula $y=(0_{n},x)^{\top}\in\mathbb{R}^{2n}$
+\end_inset
+
+, then we have
+\begin_inset Formula 
+\begin{align*}
+\langle v,y\rangle & =\langle\widehat{z}-e_{1},y\rangle\\
+ & =\langle\widehat{z},y\rangle-\langle e_{1},y\rangle & \text{since }\langle e_{1},y\rangle=0\\
+ & =\langle\widehat{z},y\rangle\\
+ & =\frac{1}{\|z\|}\langle z,y\rangle\\
+ & =\frac{1}{\sqrt{2}\|x\|}\|x\|^{2} & \text{since }\langle z,y\rangle=\|x\|^{2}\\
+ & =\frac{1}{\sqrt{2}}\|x\|,
+\end{align*}
+
+\end_inset
+
+Thus we have
+\begin_inset Formula 
+\begin{align*}
+H_{v}(y) & =y-2\frac{\langle v,y\rangle}{\|v\|^{2}}v\\
+ & =y-\langle v,y\rangle v\\
+ & =y-\frac{1}{\sqrt{2}}\|x\|\left(\frac{z}{\|z\|}-e_{1}\right)\\
+ & =y-\frac{1}{\sqrt{2}}\|x\|\left(\frac{z}{\sqrt{2}\|x\|}-e_{1}\right)\\
+ & =y-\frac{z}{2}+\frac{1}{\sqrt{2}}\|x\|e_{1}\\
+ & =\begin{pmatrix}\|x\|/\sqrt{2}\\
+0_{n-2}\\
+-\|x\|/2\\
+x/2
+\end{pmatrix}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a 
+\begin_inset Formula $6\times4$
+\end_inset
+
+ matrix with nonzero entries:
+\begin_inset Formula 
+\[
+A=\begin{pmatrix}\star & \star & \star & \star\\
+\star & \star & \star & \star\\
+\star & \star & \star & \star\\
+\star & \star & \star & \star\\
+\star & \star & \star & \star\\
+\star & \star & \star & \star
+\end{pmatrix},
+\]
+
+\end_inset
+
+where the 
+\begin_inset Formula $\star$
+\end_inset
+
+'s indicate nonzero entries.
+ The Golub-Kahan bidiagonalization procedure is illustrated as follows:
+\begin_inset Formula 
+\begin{align*}
+A=\begin{pmatrix}\star & \star & \star & \star\\
+\star & \star & \star & \star\\
+\star & \star & \star & \star\\
+\star & \star & \star & \star\\
+\star & \star & \star & \star\\
+\star & \star & \star & \star
+\end{pmatrix} & \to\begin{pmatrix}\star & \star & \star & \star\\
+0 & \star & \star & \star\\
+0 & \star & \star & \star\\
+0 & \star & \star & \star\\
+0 & \star & \star & \star\\
+0 & \star & \star & \star
+\end{pmatrix}=U_{1}A\\
+ & \to\begin{pmatrix}\star & \star & 0 & 0\\
+0 & \star & \star & \star\\
+0 & \star & \star & \star\\
+0 & \star & \star & \star\\
+0 & \star & \star & \star\\
+0 & \star & \star & \star
+\end{pmatrix}=U_{1}AV_{1}^{\top}\\
+ & \to\begin{pmatrix}\star & \star & 0 & 0\\
+0 & \star & \star & \star\\
+0 & 0 & \star & \star\\
+0 & 0 & \star & \star\\
+0 & 0 & \star & \star\\
+0 & 0 & \star & \star
+\end{pmatrix}=U_{2}U_{1}AV_{1}^{\top}\\
+ & \to\begin{pmatrix}\star & \star & 0 & 0\\
+0 & \star & \star & 0\\
+0 & 0 & \star & \star\\
+0 & 0 & \star & \star\\
+0 & 0 & \star & \star\\
+0 & 0 & \star & \star
+\end{pmatrix}=U_{2}U_{1}AV_{1}^{\top}V_{2}^{\top}\\
+ & \to\begin{pmatrix}\star & \star & 0 & 0\\
+0 & \star & \star & 0\\
+0 & 0 & \star & \star\\
+0 & 0 & 0 & \star\\
+0 & 0 & 0 & \star\\
+0 & 0 & 0 & \star
+\end{pmatrix}=U_{3}U_{2}U_{1}AV_{1}^{\top}V_{2}^{\top}\\
+ & \to\begin{pmatrix}\star & \star & 0 & 0\\
+0 & \star & \star & 0\\
+0 & 0 & \star & \star\\
+0 & 0 & 0 & \star\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0
+\end{pmatrix}=U_{4}U_{3}U_{2}U_{1}AV_{1}^{\top}V_{2}^{\top}\\
+ & =\begin{pmatrix}B\\
+0
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+where the 
+\begin_inset Formula $U_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{j}$
+\end_inset
+
+ are appropriately chosen Householder transformations.
+ Thus we obtain
+\begin_inset Formula 
+\[
+\begin{pmatrix}B\\
+0
+\end{pmatrix}=UAV^{\top},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $B$
+\end_inset
+
+ is a bidiagonal matrix:
+\begin_inset Formula 
+\[
+B=\begin{pmatrix}b_{1} & c_{1} & 0 & 0\\
+0 & b_{2} & c_{2} & 0\\
+0 & 0 & b_{3} & c_{3}\\
+0 & 0 & 0 & b_{4}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Thus to obtain the singular values of 
+\begin_inset Formula $A$
+\end_inset
+
+, we just need to calculate the eigenvalues of
+\begin_inset Formula 
+\[
+B^{\top}B=\begin{pmatrix}b_{1}^{2} & b_{1}c_{1} & 0 & 0\\
+b_{1}c_{1} & b_{2}^{2}+c_{1}^{2} & b_{2}c_{2} & 0\\
+0 & b_{2}c_{2} & b_{3}^{2}+c_{2}^{2} & b_{3}c_{3}\\
+0 & 0 & b_{3}c_{3} & b_{4}^{2}+c_{3}^{3}
+\end{pmatrix},
+\]
+
+\end_inset
+
+and the singular values of 
+\begin_inset Formula $A$
+\end_inset
+
+ will be the square root of the eigenvalues of 
+\begin_inset Formula $B^{\top}B$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 3 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Solve the following:
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $A\in\mathbb{R}^{m\times n}$
+\end_inset
+
+ (
+\begin_inset Formula $m\geq n$
+\end_inset
+
+), let 
+\begin_inset Formula $A^{\dagger}=(A^{\top}A)^{-1}A^{\top}$
+\end_inset
+
+.
+ Show that 
+\begin_inset Formula $\|A^{\dagger}\|=1/\sigma_{n}(A)$
+\end_inset
+
+ (assume that 
+\begin_inset Formula $A$
+\end_inset
+
+ has full column rank).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $A=\begin{pmatrix}A_{1} & A_{2}\end{pmatrix}^{\top}$
+\end_inset
+
+ where 
+\begin_inset Formula $A_{1}\in\mathbb{R}^{n\times n}$
+\end_inset
+
+ is nonsingular.
+ Show that 
+\begin_inset Formula $\sigma_{n}(A)\geq\sigma_{n}(A_{1})$
+\end_inset
+
+ (explore the relation between 
+\begin_inset Formula $\|Ax\|/\|x\|$
+\end_inset
+
+ and 
+\begin_inset Formula $\|A_{1}x\|/\|x\|$
+\end_inset
+
+) and 
+\begin_inset Formula $\|A^{\dagger}\|\leq\|A_{1}^{-1}\|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Define the numerial rank of 
+\begin_inset Formula $A\in\mathbb{R}^{m\times n}$
+\end_inset
+
+ (
+\begin_inset Formula $m\geq n$
+\end_inset
+
+) as 
+\begin_inset Formula $\mathrm{rank}(A,\varepsilon)=\max\{k\mid\sigma_{k}\geq\varepsilon\}$
+\end_inset
+
+ (
+\begin_inset Formula $\sigma_{1}\geq\sigma_{2}\geq\cdots\geq\sigma_{n})$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $A$
+\end_inset
+
+ has numerical rank 
+\begin_inset Formula $k<n$
+\end_inset
+
+ for a given 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+, find a numerically full rank 
+\begin_inset Formula $B$
+\end_inset
+
+ satisfying 
+\begin_inset Formula $\inf_{\mathrm{rank}(B,\varepsilon)=n}\|A-B\|_{\mathrm{F}}$
+\end_inset
+
+ and show that 
+\begin_inset Formula $\|B-A\|_{\mathrm{F}}\leq\varepsilon\sqrt{n-k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Let 
+\begin_inset Formula $A=U\Sigma V^{\top}$
+\end_inset
+
+ be an SVD of 
+\begin_inset Formula $A$
+\end_inset
+
+ where 
+\begin_inset Formula $\Sigma=\mathrm{diag}(\sigma_{1},\dots,\sigma_{n},0_{m-n})$
+\end_inset
+
+ where 
+\begin_inset Formula $\sigma_{1}\geq\cdots\geq\sigma_{n}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+A^{\dagger} & =(A^{\top}A)^{-1}A^{\top}\\
+ & =(V\Sigma^{\top}U^{\top}U\Sigma V^{\top})^{-1}(V\Sigma^{\top}U^{\top})\\
+ & =(V\Sigma^{\top}\Sigma V^{\top})^{-1}(V\Sigma^{\top}U^{\top})\\
+ & =(\Sigma^{\top}\Sigma VV^{\top})^{-1}(V\Sigma^{\top}U^{\top})\\
+ & =(\Sigma^{\top}\Sigma)^{-1}(V\Sigma^{\top}U^{\top})\\
+ & =V((\Sigma^{\top}\Sigma)^{-1}\Sigma^{\top})U^{\top}\\
+ & =V\Sigma^{\dagger}U^{\top},
+\end{align*}
+
+\end_inset
+
+shows that 
+\begin_inset Formula $A^{\dagger}=V\Sigma^{\dagger}U^{\top}$
+\end_inset
+
+ is an SVD of 
+\begin_inset Formula $A^{\dagger}$
+\end_inset
+
+, where we used the fact that 
+\begin_inset Formula $\Sigma^{\top}\Sigma$
+\end_inset
+
+ is a diagonal matrix (and thus commutes with all other matrices) and where
+ we set 
+\begin_inset Formula $\Sigma^{\dagger}=(\Sigma^{\top}\Sigma)^{-1}\Sigma^{\top}$
+\end_inset
+
+.
+ A straightforward computation shows that 
+\begin_inset Formula $\Sigma^{\dagger}$
+\end_inset
+
+ has the form:
+\begin_inset Formula 
+\[
+\Sigma^{\dagger}=\begin{pmatrix}\mathrm{diag}(\sigma_{1}^{-1},\dots,\sigma_{n}^{-1}) & 0_{m-n}\end{pmatrix}.
+\]
+
+\end_inset
+
+Thus the singular values of 
+\begin_inset Formula $A^{\dagger}$
+\end_inset
+
+ are 
+\begin_inset Formula $\sigma_{1}^{-1},\dots,\sigma_{n}^{-1}$
+\end_inset
+
+.
+ In particular, we have
+\begin_inset Formula 
+\[
+\|A^{\dagger}\|=\max\{\sigma_{1}^{-1},\dots,\sigma_{n}^{-1}\}=\sigma_{n}^{-1}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Observe that
+\begin_inset Formula 
+\begin{align*}
+\|Ax\|^{2} & =\|A_{1}x\|^{2}+\|A_{2}x\|^{2}\geq\|A_{1}x\|^{2}
+\end{align*}
+
+\end_inset
+
+implies 
+\begin_inset Formula $\|Ax\|\geq\|A_{1}x\|$
+\end_inset
+
+ for all 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\begin{align*}
+\sigma_{n}(A) & =\min\left\{ \|Ax\|/\|x\|\mid x\neq0\right\} \\
+ & \geq\min\left\{ \|A_{1}x\|/\|x\|\mid x\neq0\right\} \\
+ & =\sigma_{n}(A_{1}).
+\end{align*}
+
+\end_inset
+
+In particular, this implies
+\begin_inset Formula 
+\[
+\|A^{\dagger}\|=\sigma_{n}(A)^{-1}\leq\sigma_{n}(A_{1})^{-1}=\|A_{1}^{-1}\|
+\]
+
+\end_inset
+
+by part 1 of this problem.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Let 
+\begin_inset Formula $A=U\Sigma V^{\top}$
+\end_inset
+
+ be an SVD of 
+\begin_inset Formula $A$
+\end_inset
+
+ and set 
+\begin_inset Formula $B=U\widetilde{\Sigma}V^{\top}$
+\end_inset
+
+ where 
+\begin_inset Formula $\widetilde{\Sigma}=\mathrm{diag}(\sigma_{1},\dots,\sigma_{k},\varepsilon,\dots,\varepsilon)$
+\end_inset
+
+.
+ Then note that
+\begin_inset Formula 
+\[
+B-A=U(\widetilde{\Sigma}-\Sigma)V^{\top}
+\]
+
+\end_inset
+
+is an SVD of 
+\begin_inset Formula $B-A$
+\end_inset
+
+ where 
+\begin_inset Formula $\widetilde{\Sigma}-\Sigma=\mathrm{diag}(0_{k},\varepsilon-\sigma_{k+1},\dots,\varepsilon-\sigma_{n})$
+\end_inset
+
+.
+ In particular, note that
+\begin_inset Formula 
+\begin{align*}
+\|B-A\|_{\mathrm{F}} & =\sqrt{(\varepsilon-\sigma_{k+1})^{2}+\cdots+(\varepsilon-\sigma_{n})^{2}}\\
+ & \leq\sqrt{\varepsilon^{2}+\cdots+\varepsilon^{2}}\\
+ & =(\sqrt{n-k})\varepsilon.
+\end{align*}
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
