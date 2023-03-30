@@ -348,10 +348,98 @@ for all
 \end_inset
 
 .
- 
-\end_layout
+ In other words, we want to show
+\begin_inset Formula 
+\begin{align*}
+\langle Px,y\rangle & =\langle x,Py\rangle
+\end{align*}
 
-\begin_layout Standard
+\end_inset
+
+for all 
+\begin_inset Formula $x,y\in\mathbb{C}^{m}$
+\end_inset
+
+.
+ We claim that 
+\begin_inset Formula $(\ker P)^{\perp}=\mathrm{im}\,P$
+\end_inset
+
+.
+ Indeed, suppose 
+\begin_inset Formula $x\in(\ker P)^{\perp}$
+\end_inset
+
+.
+ Then note that 
+\begin_inset Formula $x-Px\in\ker P$
+\end_inset
+
+ since 
+\begin_inset Formula $P$
+\end_inset
+
+ is a projector, thus by the pythagorean theorem, we have
+\begin_inset Formula 
+\begin{align*}
+\|x\|^{2} & \leq\|x\|^{2}+\|Px-x\|^{2}\\
+ & =\|Px\|^{2}\\
+ & \leq\|x\|^{2}.
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $Px=x$
+\end_inset
+
+, thus 
+\begin_inset Formula $x\in\mathrm{im}\,P$
+\end_inset
+
+.
+ This shows that 
+\begin_inset Formula $(\ker P)^{\perp}\subseteq\mathrm{im}\,P$
+\end_inset
+
+.
+ For the reverse inclusion, note that
+\begin_inset Formula 
+\begin{align*}
+\dim((\ker P)^{\perp}) & =m-\dim(\ker P)\\
+ & =m-(m-\dim(\mathrm{im}\,P))\\
+ & =\dim(\mathrm{im}\,P).
+\end{align*}
+
+\end_inset
+
+Thus we must have inclusion 
+\begin_inset Formula $(\ker P)^{\perp}=\mathrm{im}\,P$
+\end_inset
+
+.
+ To see why this implies 
+\begin_inset Formula $P$
+\end_inset
+
+ is self-adjoint, note that
+\begin_inset Formula 
+\begin{align*}
+0 & =\langle x-Px,Py\rangle\\
+ & =\langle x,Py\rangle-\langle Px,Py\rangle\\
+ & =\langle x,Py\rangle-\langle Px,Py-y+y\rangle\\
+ & =\langle x,Px\rangle-\langle Px,Py-y\rangle-\langle Px,y\rangle\\
+ & =\langle x,Py\rangle-\langle Px,y\rangle
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $x,y\in\mathbb{C}^{m}$
+\end_inset
+
+.
+ 
 \begin_inset ERT
 status open
 
@@ -394,9 +482,9 @@ label{ex}
 .
  That is,
 \begin_inset Formula 
-\[
-\frac{|\widetilde{\sigma}_{k}-\sigma_{k}|}{\sigma_{k}}\leq O((\sigma_{1}/\sigma_{k})^{2}\varepsilon),
-\]
+\begin{equation}
+\frac{|\widetilde{\sigma}_{k}-\sigma_{k}|}{\sigma_{k}}\leq O((\sigma_{1}/\sigma_{k})^{2}\varepsilon),\label{eq:dsf}
+\end{equation}
 
 \end_inset
 
@@ -418,7 +506,7 @@ th largest eigenvalue of
 
 .
  Instead, if we use a backward stable eigenvalue algorithm for 
-\begin_inset Formula $\left(\begin{smallmatrix}0 & A^{\top}\\
+\begin_inset Formula $H:=\left(\begin{smallmatrix}0 & A^{\top}\\
 A & 0
 \end{smallmatrix}\right)$
 \end_inset
@@ -461,10 +549,182 @@ label{sol}
 
 \end_inset
 
- 
+ First, let us recall why one obtains 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:dsf})
 \end_layout
 
-\begin_layout Standard
+\end_inset
+
+ when computing the singular values 
+\begin_inset Formula $\sigma_{k}$
+\end_inset
+
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+ via the eigenvalues 
+\begin_inset Formula $\lambda_{k}$
+\end_inset
+
+ of 
+\begin_inset Formula $A^{\top}A$
+\end_inset
+
+.
+ When 
+\begin_inset Formula $\lambda_{k}$
+\end_inset
+
+ is computed stably, then we expect errors of order
+\begin_inset Formula 
+\begin{equation}
+|\widetilde{\lambda}_{k}-\lambda_{k}|=O(\varepsilon\|A^{\top}A\|)=O(\varepsilon\|A\|^{2}).\label{eq:kk}
+\end{equation}
+
+\end_inset
+
+Thus when we square root to obtain 
+\begin_inset Formula $\sigma_{k}$
+\end_inset
+
+, we have errors of order
+\begin_inset Formula 
+\begin{equation}
+|\widetilde{\sigma}_{k}-\sigma_{k}|=O(|\widetilde{\lambda}_{k}-\lambda_{k}|/\sqrt{\lambda_{k}})=O(\varepsilon\|A\|^{2}/\sigma_{k}),\label{eq:fdj}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:fdj})
+\end_layout
+
+\end_inset
+
+ is equivalent to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:dsf})
+\end_layout
+
+\end_inset
+
+ since 
+\begin_inset Formula $\|A\|^{2}=\sigma_{1}$
+\end_inset
+
+.
+ On the other hand, note that the singular values of 
+\begin_inset Formula $A$
+\end_inset
+
+ are precisely the absolute values of the eigenvalues of 
+\begin_inset Formula $H$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $A=U\Sigma V^{\top}$
+\end_inset
+
+ is an SVD for 
+\begin_inset Formula $A$
+\end_inset
+
+, then
+\begin_inset Formula 
+\[
+H=\begin{pmatrix}0 & A^{\top}\\
+A & 0
+\end{pmatrix}=\begin{pmatrix}V & V\\
+U & -U
+\end{pmatrix}\begin{pmatrix}\Sigma & 0\\
+0 & -\Sigma
+\end{pmatrix}\begin{pmatrix}V & V\\
+U & -U
+\end{pmatrix}^{\top}
+\]
+
+\end_inset
+
+is an eigenvalue decomposition of 
+\begin_inset Formula $H$
+\end_inset
+
+.
+ Thus if we calculate the eigenvalues of 
+\begin_inset Formula $H$
+\end_inset
+
+, then we obtain errors of the form 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:kk})
+\end_layout
+
+\end_inset
+
+, and since these are already the singular values of 
+\begin_inset Formula $A$
+\end_inset
+
+ (in absolute value), we do not need to take square roots and obtain an
+ error of the form 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:fdj})
+\end_layout
+
+\end_inset
+
+.
+ The adavantage for the new error bound is that the singular values which
+ are far away from 
+\begin_inset Formula $\sigma_{1}$
+\end_inset
+
+ (i.e.
+ the smallest singular values of 
+\begin_inset Formula $A$
+\end_inset
+
+) are computed to a higher relative accuracy than the previous algorithm.
+ This is because the square term in 
+\begin_inset Formula $(\sigma_{1}/\sigma_{k})^{2}$
+\end_inset
+
+ is removed.
+ 
 \begin_inset ERT
 status open
 
@@ -568,8 +828,8 @@ tic; [U3,S3,V3] = svd(picA(:,:,3),0); toc;
 
 Then, run MATLAB’s command whos to see the memory used by picA, and by Us1,Vs1,U
 s2,Vs2,Us3 and Vs3 all together.
- Compare the timing used for comput- ing and the memory used for storing
- the full and partial SVD of this picture.
+ Compare the timing used for computing and the memory used for storing the
+ full and partial SVD of this picture.
  (Note: we are competing MATLAB code with the built-in C/FORTRAN code in
  tim- ing, and our timing should improve considerably if our GKL code is
  in C/FORTRAN ).
@@ -631,9 +891,9 @@ figure(2); imshow(uint8(picAh)); axis equal;
 \end_inset
 
 Repeat the above procedure for the other three pictures.
- Make some general com- ments on the computation and use of partial SVD
- for compressing images.
- In particu- lar, give an estimate of the arithmetic cost of this partial
+ Make some general comments on the computation and use of partial SVD for
+ compressing images.
+ In particular, give an estimate of the arithmetic cost of this partial
  SVD and full SVD applied to an image of dimension m-by-n, in a form of
  
 \begin_inset Formula $O(-)$
@@ -687,7 +947,109 @@ label{sol}
 
 \end_inset
 
+ 1.
+ The Golub-Kahan-Lanczos technique is an algorithm designed to execute the
+ initial stage of SVD approximation.
+ This method is employed to determine orthogonal matrices 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ such that 
+\begin_inset Formula $UAV^{\top}$
+\end_inset
+
+ is bidagonal.
+ In Dr.
+ Xue's implementation, supplementary calculations are incorporated to preserve
+ stability.
+ For-loop initiations on lines 31 and 39 seem to guarantee the orthogonality
+ of matrices 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Firstly, it is important to highlight the remarkable low-rank approximation
+ that SVD offers.
+ Although visual illustrations would be helpful, they cannot be included
+ here since color printing is not available.
+ Nonetheless, the full SVD computation duration is nearly triple that of
+ the partial SVD, with rk equaling 160.
+ This achievement is undoubtedly noteworthy, but the more significant metric
+ may be that the full SVD consumes ten times more bytes than its approximate
+ counterpart.
+ Comprehensive results can be found in Tables 1 and 2.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 

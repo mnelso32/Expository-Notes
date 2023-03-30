@@ -186,6 +186,23 @@ Throughout this homework,
 \end_inset
 
 -norm.
+ We also let 
+\begin_inset Formula $\langle\cdot,\cdot\rangle$
+\end_inset
+
+ denote the standard Euclidean inner-product on 
+\begin_inset Formula $\mathbb{R}^{m}$
+\end_inset
+
+ (thus 
+\begin_inset Formula $\langle v,w\rangle=v^{\top}w$
+\end_inset
+
+ for all 
+\begin_inset Formula $v,w\in\mathbb{R}^{m}$
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Section
@@ -387,7 +404,11 @@ In particular we have
 \begin_inset Formula $H_{v}$
 \end_inset
 
- are just the absolute values of the eigenvalues, so 
+ are just the absolute values of the eigenvalues since 
+\begin_inset Formula $[H_{v}]$
+\end_inset
+
+ is a diagonal matrix, so 
 \begin_inset Formula $\sigma_{i}=1$
 \end_inset
 
@@ -449,7 +470,7 @@ Thus
 \end_inset
 
  and 
-\begin_inset Formula $\mathrm{tr}G_{\theta}=2\cos\theta$
+\begin_inset Formula $\mathrm{tr}\,G_{\theta}=2\cos\theta$
 \end_inset
 
 .
@@ -464,12 +485,12 @@ Thus
  are solutions to the equation:
 \begin_inset Formula 
 \[
-\lambda^{2}-2\cos\theta\lambda+1=0.
+\lambda^{2}-2\cos(\theta)\lambda+1=0.
 \]
 
 \end_inset
 
-By the quadratic formula the solutions to this quadratic equation are given
+By the quadratic formula, the solutions to this quadratic equation are given
  by 
 \begin_inset Formula $\lambda=\cos\theta\pm i\sin\theta=e^{\pm i\theta}$
 \end_inset
@@ -483,7 +504,7 @@ By the quadratic formula the solutions to this quadratic equation are given
 \begin_inset Formula $G_{\theta}$
 \end_inset
 
- are the (necessarily positive) square roots of the eigenvalues of
+ are the positive square roots of the eigenvalues of
 \begin_inset Formula 
 \[
 G_{\theta}^{\top}G_{\theta}=\begin{pmatrix}\cos\theta & -\sin\theta\\
@@ -620,7 +641,7 @@ A3 = u.^(0:40); % (full Vandermonde)
 For each matrix, run the algorithms, then compute
 \begin_inset Formula 
 \[
-\frac{\|A-\widehat{Q}\widehat{R}\|_{F}}{\|A\|_{F}}\text{ and }\|\widehat{Q}^{\top}\widehat{Q}-1\|.
+\frac{\|A-\widehat{Q}\widehat{R}\|_{F}}{\|A\|_{F}}\quad\text{ and }\quad\|\widehat{Q}^{\top}\widehat{Q}-1\|.
 \]
 
 \end_inset
@@ -662,277 +683,13 @@ label{sol}
 
 \end_inset
 
- We use the MATLAB code below:
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-n = [15 9:4:41]; 
-\end_layout
-
-\begin_layout Plain Layout
-
-matrixCount = 10; 
-\end_layout
-
-\begin_layout Plain Layout
-
-A = cell(matrixCount,1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-A{1} = rand(2^20,n(1)); 
-\end_layout
-
-\begin_layout Plain Layout
-
-u = (-1:2/40:1)’; 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-condition= zeros(matrixCount,1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-condition(1:2) = [cond(A{1}) cond(A{2})]; 
-\end_layout
-
-\begin_layout Plain Layout
-
-for i = 2:matrixCount 
-\end_layout
-
-\begin_layout Plain Layout
-
-   A{i} = u.^(0:4*i); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   condition(i) = cond(A{i}); 
-\end_layout
-
-\begin_layout Plain Layout
-
-end
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-cgs.forErr = zeros(matrixCount,1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-cgs.ortho = zeros(matrixCount,1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-mgs.forErr = zeros(matrixCount,1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-mgs.ortho = zeros(matrixCount,1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-mgs2.forErr = zeros(matrixCount,1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-mgs2.ortho = zeros(matrixCount,1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-hHolder.forErr = zeros(matrixCount,1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-hHolder.ortho = zeros(matrixCount,1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-%% Classical GS 
-\end_layout
-
-\begin_layout Plain Layout
-
-for i = 1:matrixCount 
-\end_layout
-
-\begin_layout Plain Layout
-
-   [Q,R] = gs(A{i});
-\end_layout
-
-\begin_layout Plain Layout
-
-   cgs.forErr(i) = norm(A{i}-Q*R,’fro’)/norm(A{i},’fro’); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   cgs.ortho(i) = norm(Q’*Q-eye(n(i)),2); 
-\end_layout
-
-\begin_layout Plain Layout
-
-end 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-%% Modified GS 
-\end_layout
-
-\begin_layout Plain Layout
-
-for i = 1:matrixCount 
-\end_layout
-
-\begin_layout Plain Layout
-
-   [Q,R] = qrmgs(A{i});
-\end_layout
-
-\begin_layout Plain Layout
-
-   mgs.forErr(i) = norm(A{i}-Q*R,’fro’)/norm(A{i},’fro’); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   mgs.ortho(i) = norm(Q’*Q-eye(n(i)),2); 
-\end_layout
-
-\begin_layout Plain Layout
-
-end 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-%% Double Modified GS 
-\end_layout
-
-\begin_layout Plain Layout
-
-for i = 1:matrixCount 
-\end_layout
-
-\begin_layout Plain Layout
-
-   [Q,R] = qrmgs2(A{i}); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   mgs2.forErr(i) = norm(A{i}-Q*R,’fro’)/norm(A{i},’fro’); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   mgs2.ortho(i) = norm(Q’*Q-eye(n(i)),2); 
-\end_layout
-
-\begin_layout Plain Layout
-
-end 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-%% Householder Transformation 
-\end_layout
-
-\begin_layout Plain Layout
-
-for i = 1:matrixCount 
-\end_layout
-
-\begin_layout Plain Layout
-
-   [v,R] = house(A{i}); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   Q = formQ(v); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   hHolder.forErr(i) = norm(A{i}-Q*R,’fro’)/norm(A{i},’fro’); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   hHolder.ortho(i) = norm(Q’*Q-eye(n(i)),2); 
-\end_layout
-
-\begin_layout Plain Layout
-
-end
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
+ We implemented each of the four QR factorizations in MATLAB using the code
+ found the in the appendix.
+ In matlab, we found that We collect our results for 
+\begin_inset Formula $\|A-\widehat{Q}\widehat{R}\|_{F}/\|A\|_{F}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-ne can see from Figure 1 that MGS2 and Householder factorizations reli-
- ably produce orthogonal Q factors, even for matrices of incredibly large
- condition num- bers.
- On the other hand, CGS and MGS fail to do.
- CGS shows its numerical instability by how much more quickly it produces
- completely unusable Q factors.
- However as shown in Table 1, all the algorithms produce respectable forward
- errors.
+ in the table below:
 \end_layout
 
 \begin_layout Standard
@@ -981,7 +738,7 @@ MGS
 \begin_inset Text
 
 \begin_layout Plain Layout
-MGS2
+MGSD
 \end_layout
 
 \end_inset
@@ -990,7 +747,7 @@ MGS2
 \begin_inset Text
 
 \begin_layout Plain Layout
-HR
+HOUSE
 \end_layout
 
 \end_inset
@@ -1013,16 +770,7 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $1.4173e-16$
+\begin_inset Formula $1.4169e-16$
 \end_inset
 
 
@@ -1034,6 +782,21 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $1.4173\mathrm{e}-16$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.4411e-16$
+\end_inset
+
 
 \end_layout
 
@@ -1043,6 +806,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $1.4252e-15$
+\end_inset
+
 
 \end_layout
 
@@ -1066,6 +832,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $1.1050e-16$
+\end_inset
+
 
 \end_layout
 
@@ -1075,6 +844,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $9.8748e-17$
+\end_inset
+
 
 \end_layout
 
@@ -1084,6 +856,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $1.2877e-16$
+\end_inset
+
 
 \end_layout
 
@@ -1093,6 +868,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $3.6771e-16$
+\end_inset
+
 
 \end_layout
 
@@ -1116,6 +894,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $1.4014e-16$
+\end_inset
+
 
 \end_layout
 
@@ -1125,6 +906,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $1.2570e-16$
+\end_inset
+
 
 \end_layout
 
@@ -1134,6 +918,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $1.7105e-16$
+\end_inset
+
 
 \end_layout
 
@@ -1143,6 +930,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $4.1221e-16$
+\end_inset
+
 
 \end_layout
 
@@ -1154,10 +944,19 @@ HR
 \end_inset
 
 
-\begin_inset Formula $\qquad\qquad$
+\end_layout
+
+\begin_layout Standard
+Similarly, we collect our results for 
+\begin_inset Formula $\|\widehat{Q}^{\top}\widehat{Q}-1\|$
 \end_inset
 
+ in the table below:
+\end_layout
 
+\begin_layout Standard
+\paragraph_spacing double
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="5">
 <features tabularvalignment="middle">
@@ -1201,7 +1000,7 @@ MGS
 \begin_inset Text
 
 \begin_layout Plain Layout
-MGS2
+MGSD
 \end_layout
 
 \end_inset
@@ -1210,7 +1009,7 @@ MGS2
 \begin_inset Text
 
 \begin_layout Plain Layout
-HR
+HOUSE
 \end_layout
 
 \end_inset
@@ -1233,6 +1032,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $2.7756e-15$
+\end_inset
+
 
 \end_layout
 
@@ -1242,6 +1044,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $2.7757e-15$
+\end_inset
+
 
 \end_layout
 
@@ -1251,6 +1056,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $3.4417e-15$
+\end_inset
+
 
 \end_layout
 
@@ -1260,6 +1068,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $2.8867e-16$
+\end_inset
+
 
 \end_layout
 
@@ -1283,6 +1094,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $1.9466$
+\end_inset
+
 
 \end_layout
 
@@ -1292,6 +1106,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $1.3845e-08$
+\end_inset
+
 
 \end_layout
 
@@ -1301,6 +1118,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $7.5919e-16$
+\end_inset
+
 
 \end_layout
 
@@ -1310,6 +1130,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $8.4959e-16$
+\end_inset
+
 
 \end_layout
 
@@ -1333,6 +1156,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $10.2844$
+\end_inset
+
 
 \end_layout
 
@@ -1342,6 +1168,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $0.9760$
+\end_inset
+
 
 \end_layout
 
@@ -1351,6 +1180,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $1.2392e-15$
+\end_inset
+
 
 \end_layout
 
@@ -1360,6 +1192,9 @@ HR
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $1.2460e-15$
+\end_inset
+
 
 \end_layout
 
@@ -1374,6 +1209,71 @@ HR
 \end_layout
 
 \begin_layout Standard
+All of the algorithms produce small relative forward errors (i.e the relative
+ frobenius-norm difference of 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $\widehat{Q}\widehat{R}$
+\end_inset
+
+ is very small in each algorithm).
+ However there are notable differences in these algorithms when it comes
+ to the orthogonality of the computed 
+\begin_inset Formula $Q$
+\end_inset
+
+ factors.
+ Indeed, the 
+\begin_inset Formula $Q$
+\end_inset
+
+ factors from MGSD and HOUSE were always extremely close to being orthogonal
+ for each of the matrices, however both CGS and MGS produced 
+\begin_inset Formula $Q$
+\end_inset
+
+-factors of 
+\begin_inset Formula $A_{3}$
+\end_inset
+
+ which weren't close to being orthogonal (MGS did better for 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+ but was still off by an order of 
+\begin_inset Formula $10^{8}$
+\end_inset
+
+).
+ Having said that, both MGSD and HOUSE were still able to produce 
+\begin_inset Formula $Q$
+\end_inset
+
+-factors of 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ which were close to being orthogonal (only off by a factor of 
+\begin_inset Formula $10$
+\end_inset
+
+).
+ This is related to the fact that 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ is well-conditioned (the condition number of 
+\begin_inset Formula $A$
+\end_inset
+
+ is 
+\begin_inset Formula $1.0064$
+\end_inset
+
+).
+ 
 \begin_inset ERT
 status open
 
@@ -1452,73 +1352,40 @@ label{sol}
 
 \end_inset
 
- We focus on the Householder algorithm since the analysis of the Givens
+ It suffices the Householder algorithm since the analysis of the Givens
  algorithm is the same.
- In the first phase, one constructs a sequence of unitary matrices 
-\begin_inset Formula $H_{1},\dots,H_{n}$
-\end_inset
-
- such that
-\begin_inset Formula 
-\[
-A=Q_{L}R=Q_{L}H_{n}\cdots H_{1}A,
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $R=H_{n}\cdots H_{1}A$
-\end_inset
-
-.
- Thus to find 
+ In order to retrieve 
 \begin_inset Formula $Q_{L}$
 \end_inset
 
-, we just apply 
-\begin_inset Formula $H_{n}\cdots H_{1}$
-\end_inset
-
- to the left of the identity matrix 
-\begin_inset Formula $I_{n}$
+, one calculates 
+\begin_inset Formula $Qe_{1},Qe_{2},\dots,Qe_{n}$
 \end_inset
 
 .
- The cost to do this is essentially the same as the cost when applying 
-\begin_inset Formula $H_{n}\cdots H_{1}$
+ The calculation of 
+\begin_inset Formula $Qe_{i}$
 \end_inset
 
- to the left of 
-\begin_inset Formula $A$
+ is of the order 
+\begin_inset Formula $O(mn)$
 \end_inset
 
- which is the cost of phase 1.
- Thus we would double our cost if we wanted to retrieve 
+, so the calculation of 
 \begin_inset Formula $Q_{L}$
 \end_inset
 
-.
+ is of the order 
+\begin_inset Formula $O(mn^{2})$
+\end_inset
+
+, which is precisely the same order as the cost of the first phase.
+ Thus retrieving 
+\begin_inset Formula $Q_{L}$
+\end_inset
+
+ amounts to doubling our cost.
  
-\begin_inset Formula 
-\[
-H_{n}\cdots H_{1}A=\begin{pmatrix}R\\
-0
-\end{pmatrix}=Q\begin{pmatrix}R\\
-0
-\end{pmatrix}=\begin{pmatrix}Q_{L}\\
-Q_{R}
-\end{pmatrix}\begin{pmatrix}R\\
-0
-\end{pmatrix}=Q_{L}R,
-\]
-
-\end_inset
-
-To obtain 
-\begin_inset Formula $Q_{L}$
-\end_inset
-
-, we apply 
 \begin_inset ERT
 status open
 
@@ -1629,6 +1496,176 @@ label{sol}
 
 \end_inset
 
+ The code we used for the Householder QR algorithm is in the Appendix.
+ We report our results in the table below:
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\|b-A\widehat{x}\|/\|A\|\|\widehat{x}\|$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+BACKSLASH
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+HOUSE
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3.1026e-08$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3.1026e-08$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $5.4432e-17$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3.3642e-17$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Both algorithms gives us the same least squares solution in the case of
+ 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+.
+ Below we plot the polynomial which corresponds to this solution (i.e.
+ the degree 
+\begin_inset Formula $23$
+\end_inset
+
+ polynomial interpolant to the 41 data points 
+\begin_inset Formula $b$
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename h3p1.jpg
+	lyxscale 70
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On the other hand, the quantity 
+\begin_inset Formula $\|b-A\widehat{x}\|/(\|A\|\|\widehat{x}\|)$
+\end_inset
+
+ for backslash is almost double that of the corresponding quantity for the
+ Householder QR method when it comes to 
+\begin_inset Formula $A_{3}$
+\end_inset
+
+.
  
 \begin_inset ERT
 status open
@@ -1661,87 +1698,70 @@ status open
 
 \begin_layout Plain Layout
 
-function [Q,R] = gs(A)     
+function [Q,R] = gs(A)      
 \end_layout
 
 \begin_layout Plain Layout
 
-[m,n] = size(A);
 \end_layout
 
 \begin_layout Plain Layout
 
-Q = A;    
+[m,n] = size(A); Q = zeros(m,n); V = zeros(m,n); R = zeros(m,n);
 \end_layout
 
 \begin_layout Plain Layout
 
-R = zeros(n);
 \end_layout
 
 \begin_layout Plain Layout
 
-Q(:,1) = Q(:,1) / norm(Q(:,1)) ;
+for j = 1:n    
 \end_layout
 
 \begin_layout Plain Layout
 
-R(1,1) = Q(:,1)'*Q(:,1);
+   V(:,j) = A(:,j);    
 \end_layout
 
 \begin_layout Plain Layout
 
-for j = 2:m
+   for i = 1:j-1      
 \end_layout
 
 \begin_layout Plain Layout
 
-   for i = 1:j-1 
+      R(i,j) = Q(:,i)'*A(:,j);        
 \end_layout
 
 \begin_layout Plain Layout
 
-      R(i,j) = Q(:,i)'*Q(:,j); 
+      V(:,j) = V(:,j) - R(i,j)*Q(:,i);   
 \end_layout
 
 \begin_layout Plain Layout
 
-   end 
+   end; 
 \end_layout
 
 \begin_layout Plain Layout
 
-   for i = 1:j-1 
+   R(j,j) = norm(V(:,j)) ;    
 \end_layout
 
 \begin_layout Plain Layout
 
-      Q(:,j) = Q(:,j) - R(i,j)*Q(:,i); 
+   Q(:,j) = V(:,j) / R(j,j) ;     
 \end_layout
 
 \begin_layout Plain Layout
 
-   end
+   end; 
 \end_layout
 
 \begin_layout Plain Layout
 
-   Q(:,j) = Q(:,j) / norm(Q(:,j)) ; 
-\end_layout
-
-\begin_layout Plain Layout
-
-   R(j,j) = Q(:,j)'*Q(:,j) ;
-\end_layout
-
-\begin_layout Plain Layout
-
-   end
-\end_layout
-
-\begin_layout Plain Layout
-
-end
+end;
 \end_layout
 
 \end_inset
@@ -1761,97 +1781,61 @@ status open
 
 \begin_layout Plain Layout
 
-function [Q,R] = mgs(A)     
+function [Q,R] = mgs(A)  
 \end_layout
 
 \begin_layout Plain Layout
 
-[m,n] = size(A);
+   
 \end_layout
 
 \begin_layout Plain Layout
 
-Q = zeros(m,n);    
+[m,n] = size(A); Q = zeros(m,n); V = A; R = zeros(n,n);
 \end_layout
 
 \begin_layout Plain Layout
 
-R = zeros(n,n);
 \end_layout
 
 \begin_layout Plain Layout
 
-for j = 1:n 
+for i = 1:n    
 \end_layout
 
 \begin_layout Plain Layout
 
-   Q(:,1) = A(:,1) / norm(A(:,1)) ;
+   R(i,i) = norm(V(:,i));    
 \end_layout
 
 \begin_layout Plain Layout
 
-   R(1,1) = Q(:,1)'*(A:,1);
+   Q(:,i) = V(:,i) / R(i,i);  
 \end_layout
 
 \begin_layout Plain Layout
 
-   for j = 2:m
+   for j = (i+1):n     
 \end_layout
 
 \begin_layout Plain Layout
 
-      for i = 1:j-1 
+      R(i,j) = Q(:,i)'*V(:,j);  
 \end_layout
 
 \begin_layout Plain Layout
 
-         R(i,j) = Q(:,i)'*A(:,j); 
+      V(:,j) = V(:,j) - R(i,j)*Q(:,i); 
 \end_layout
 
 \begin_layout Plain Layout
 
-      end 
+   end; 
 \end_layout
 
 \begin_layout Plain Layout
 
-      Q(:,j) = A(:,j)
-\end_layout
-
-\begin_layout Plain Layout
-
-      for i = 1:j-1 
-\end_layout
-
-\begin_layout Plain Layout
-
-         Q(:,j) = Q(:,j) - R(i,j)*Q(:,i); 
-\end_layout
-
-\begin_layout Plain Layout
-
-      end
-\end_layout
-
-\begin_layout Plain Layout
-
-      Q(:,j) = Q(:,j) / norm(Q(:,j)) ; 
-\end_layout
-
-\begin_layout Plain Layout
-
-      R(j,j) = Q(:,j)'*A(:,j) ;
-\end_layout
-
-\begin_layout Plain Layout
-
-   end
-\end_layout
-
-\begin_layout Plain Layout
-
-end
+end;
 \end_layout
 
 \end_inset
@@ -1871,7 +1855,7 @@ status open
 
 \begin_layout Plain Layout
 
-function [Q,R] = qrmgs2(A) 
+function [Q,R] = mgsd(A) 
 \end_layout
 
 \begin_layout Plain Layout
@@ -1880,12 +1864,12 @@ function [Q,R] = qrmgs2(A)
 
 \begin_layout Plain Layout
 
-[Q1,R1] = qrmgs(A); 
+[Q1,R1] = mgs(A); 
 \end_layout
 
 \begin_layout Plain Layout
 
-[Q,R2] = qrmgs(Q1); 
+[Q,R2] = mgs(Q1); 
 \end_layout
 
 \begin_layout Plain Layout
@@ -1910,42 +1894,45 @@ status open
 
 \begin_layout Plain Layout
 
-function [v,R] = house(A) 
+function [V,R] = house(A) 
 \end_layout
 
 \begin_layout Plain Layout
 
-[m,n] = size(A); 
 \end_layout
 
 \begin_layout Plain Layout
 
-v = zeros(m,n); 
+[m,n] = size(A); V = zeros(m,n);
 \end_layout
 
 \begin_layout Plain Layout
 
-for j = 1:n 
 \end_layout
 
 \begin_layout Plain Layout
 
-   x = A(j:m,j); 
+for k = 1:n   
 \end_layout
 
 \begin_layout Plain Layout
 
-   v(j:m,j) = x + sign(x(1))*norm(x)*eye(m-j+1,1); 
+   x = A(k:m,k);     
 \end_layout
 
 \begin_layout Plain Layout
 
-   v(j:m,j) = v(j:m,j)/norm(v(j:m,j)); 
+   V(k:m,k) = sign(x(1))*norm(x)*eye(m-k+1,1)+x;     
 \end_layout
 
 \begin_layout Plain Layout
 
-   A(j:m,j:n) = A(j:m,j:n) - 2*v(j:m,j)*(v(j:m,j)'*A(j:m,j:n)); 
+   V(k:m,k) = V(k:m,k)/norm(V(k:m,k));     
+\end_layout
+
+\begin_layout Plain Layout
+
+   A(k:m,k:n) = A(k:m,k:n) - 2*V(k:m,k)*(V(k:m,k)'*A(k:m,k:n));  
 \end_layout
 
 \begin_layout Plain Layout
@@ -1955,7 +1942,205 @@ end
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
 R = A(1:n,:); 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Evaluate 
+\begin_inset Formula $Qb$
+\end_inset
+
+ or 
+\begin_inset Formula $Q^{*}b$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [b] = houseev(V,b,transpose) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(V);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+if transpose    
+\end_layout
+
+\begin_layout Plain Layout
+
+   for k = 1:n       
+\end_layout
+
+\begin_layout Plain Layout
+
+     b(k:m) = b(k:m) - 2*V(k:m,k)*(V(k:m,k)'*b(k:m));    
+\end_layout
+
+\begin_layout Plain Layout
+
+   end; 
+\end_layout
+
+\begin_layout Plain Layout
+
+else    
+\end_layout
+
+\begin_layout Plain Layout
+
+   for k = n:-1:1       
+\end_layout
+
+\begin_layout Plain Layout
+
+      b(k:m) = b(k:m) - 2*V(k:m,k)*(V(k:m,k)'*b(k:m)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   end; 
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Form 
+\begin_inset Formula $\widehat{Q}$
+\end_inset
+
+ From House
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function Q = houseformQ(V) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(V); Q = zeros(m,n);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for j = 1:n    
+\end_layout
+
+\begin_layout Plain Layout
+
+   x = zeros(m,1);    
+\end_layout
+
+\begin_layout Plain Layout
+
+   x(j,1) = 1;    
+\end_layout
+
+\begin_layout Plain Layout
+
+   Q(:,j) = houseev(V,x,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Least Squares via Householder QR
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function x = leastsquareshouseQR(A,b)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[V,R] = house(A);
+\end_layout
+
+\begin_layout Plain Layout
+
+y  = houseev(V,b,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+y  = y(1:n);
+\end_layout
+
+\begin_layout Plain Layout
+
+x = R
+\backslash
+y;
 \end_layout
 
 \end_inset

@@ -185,8 +185,25 @@ Throughout this homework,
 \begin_inset Formula $\ell_{2}$
 \end_inset
 
--norm.
- We also denote by 
+-norm and we also denote 
+\begin_inset Formula $\langle\cdot,\cdot\rangle$
+\end_inset
+
+ to be the standard Euclidean product on 
+\begin_inset Formula $\mathbb{C}^{n}$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $\langle x,y\rangle=x^{\top}y$
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y\in\mathbb{C}^{n}$
+\end_inset
+
+).
+ We also denote 
 \begin_inset Formula $\varepsilon=\varepsilon_{\mathrm{mach}}$
 \end_inset
 
@@ -307,7 +324,23 @@ Now we show that
 \end_inset
 
  is an orthogonal projector.
- Then by the pythagorean theorem, we have
+ Then
+\begin_inset Formula 
+\begin{align*}
+\langle Px,x-Px\rangle & =\langle Px,Px\rangle-\langle Px,x\rangle\\
+ & =\langle P^{2}x,x\rangle-\langle Px,x\rangle\\
+ & =\langle Px,x\rangle-\langle Px,x\rangle\\
+ & =0
+\end{align*}
+
+\end_inset
+
+for all 
+\begin_inset Formula $x\in\mathbb{C}^{m}$
+\end_inset
+
+.
+ Thus by the pythagorean theorem, we have
 \begin_inset Formula 
 \begin{align*}
 \|x\|^{2} & =\|Px\|^{2}+\|x-Px\|^{2}\ge\|Px\|^{2}
@@ -403,7 +436,7 @@ It follows that
 \end_inset
 
 .
- For the reverse inclusion, note that
+ In fact, we must have equality since they have the same dimension:
 \begin_inset Formula 
 \begin{align*}
 \dim((\ker P)^{\perp}) & =m-\dim(\ker P)\\
@@ -413,11 +446,11 @@ It follows that
 
 \end_inset
 
-Thus we must have inclusion 
+Thus we have 
 \begin_inset Formula $(\ker P)^{\perp}=\mathrm{im}\,P$
 \end_inset
 
-.
+ as claimed.
  To see why this implies 
 \begin_inset Formula $P$
 \end_inset
@@ -482,9 +515,9 @@ label{ex}
 .
  That is,
 \begin_inset Formula 
-\[
-\frac{|\widetilde{\sigma}_{k}-\sigma_{k}|}{\sigma_{k}}\leq O((\sigma_{1}/\sigma_{k})^{2}\varepsilon),
-\]
+\begin{equation}
+\frac{|\widetilde{\sigma}_{k}-\sigma_{k}|}{\sigma_{k}}\leq O((\sigma_{1}/\sigma_{k})^{2}\varepsilon),\label{eq:dsf}
+\end{equation}
 
 \end_inset
 
@@ -506,7 +539,7 @@ th largest eigenvalue of
 
 .
  Instead, if we use a backward stable eigenvalue algorithm for 
-\begin_inset Formula $\left(\begin{smallmatrix}0 & A^{\top}\\
+\begin_inset Formula $H:=\left(\begin{smallmatrix}0 & A^{\top}\\
 A & 0
 \end{smallmatrix}\right)$
 \end_inset
@@ -549,6 +582,181 @@ label{sol}
 
 \end_inset
 
+ First, let us recall why one obtains 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:dsf})
+\end_layout
+
+\end_inset
+
+ when computing the singular values 
+\begin_inset Formula $\sigma_{k}$
+\end_inset
+
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+ via the eigenvalues 
+\begin_inset Formula $\lambda_{k}$
+\end_inset
+
+ of 
+\begin_inset Formula $A^{\top}A$
+\end_inset
+
+.
+ When 
+\begin_inset Formula $\lambda_{k}$
+\end_inset
+
+ is computed stably, then we expect errors of order
+\begin_inset Formula 
+\begin{equation}
+|\widetilde{\lambda}_{k}-\lambda_{k}|=O(\varepsilon\|A^{\top}A\|)=O(\varepsilon\|A\|^{2}).\label{eq:kk}
+\end{equation}
+
+\end_inset
+
+Thus when we square root to obtain 
+\begin_inset Formula $\sigma_{k}$
+\end_inset
+
+, we have errors of order
+\begin_inset Formula 
+\begin{equation}
+|\widetilde{\sigma}_{k}-\sigma_{k}|=O(|\widetilde{\lambda}_{k}-\lambda_{k}|/\sqrt{\lambda_{k}})=O(\varepsilon\|A\|^{2}/\sigma_{k}),\label{eq:fdj}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:fdj})
+\end_layout
+
+\end_inset
+
+ is equivalent to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:dsf})
+\end_layout
+
+\end_inset
+
+ since 
+\begin_inset Formula $\|A\|^{2}=\sigma_{1}$
+\end_inset
+
+.
+ On the other hand, note that the singular values of 
+\begin_inset Formula $A$
+\end_inset
+
+ are precisely the absolute values of the eigenvalues of 
+\begin_inset Formula $H$
+\end_inset
+
+.
+ Indeed, if 
+\begin_inset Formula $A=U\Sigma V^{\top}$
+\end_inset
+
+ is an SVD for 
+\begin_inset Formula $A$
+\end_inset
+
+, then
+\begin_inset Formula 
+\[
+H=\begin{pmatrix}0 & A^{\top}\\
+A & 0
+\end{pmatrix}=\begin{pmatrix}V & V\\
+U & -U
+\end{pmatrix}\begin{pmatrix}\Sigma & 0\\
+0 & -\Sigma
+\end{pmatrix}\begin{pmatrix}V & V\\
+U & -U
+\end{pmatrix}^{\top}
+\]
+
+\end_inset
+
+is an eigenvalue decomposition of 
+\begin_inset Formula $H$
+\end_inset
+
+.
+ Thus if we calculate the eigenvalues of 
+\begin_inset Formula $H$
+\end_inset
+
+, then we obtain errors of the form 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:kk})
+\end_layout
+
+\end_inset
+
+, and since these are already the singular values of 
+\begin_inset Formula $A$
+\end_inset
+
+ (in absolute value), we do not need to take square roots and obtain an
+ error of the form 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:fdj})
+\end_layout
+
+\end_inset
+
+.
+ The adavantage for the new error bound is that the singular values which
+ are far away from 
+\begin_inset Formula $\sigma_{1}$
+\end_inset
+
+ (i.e.
+ the smallest singular values of 
+\begin_inset Formula $A$
+\end_inset
+
+) are computed to a higher relative accuracy than the previous algorithm.
+ This is because the square term in 
+\begin_inset Formula $(\sigma_{1}/\sigma_{k})^{2}$
+\end_inset
+
+ is removed.
  
 \begin_inset ERT
 status open
@@ -653,11 +861,11 @@ tic; [U3,S3,V3] = svd(picA(:,:,3),0); toc;
 
 Then, run MATLAB’s command whos to see the memory used by picA, and by Us1,Vs1,U
 s2,Vs2,Us3 and Vs3 all together.
- Compare the timing used for comput- ing and the memory used for storing
- the full and partial SVD of this picture.
+ Compare the timing used for computing and the memory used for storing the
+ full and partial SVD of this picture.
  (Note: we are competing MATLAB code with the built-in C/FORTRAN code in
- tim- ing, and our timing should improve considerably if our GKL code is
- in C/FORTRAN ).
+ timing, and our timing should improve considerably if our GKL code is in
+ C/FORTRAN).
 \end_layout
 
 \begin_layout Enumerate
@@ -716,9 +924,9 @@ figure(2); imshow(uint8(picAh)); axis equal;
 \end_inset
 
 Repeat the above procedure for the other three pictures.
- Make some general com- ments on the computation and use of partial SVD
- for compressing images.
- In particu- lar, give an estimate of the arithmetic cost of this partial
+ Make some general comments on the computation and use of partial SVD for
+ compressing images.
+ In particular, give an estimate of the arithmetic cost of this partial
  SVD and full SVD applied to an image of dimension m-by-n, in a form of
  
 \begin_inset Formula $O(-)$
@@ -772,7 +980,152 @@ label{sol}
 
 \end_inset
 
+ 1.
+ The GKL algorithm is performed in the first phase of SVD computation.
+ In particular, we apply Householder reflectors alternately from left and
+ right to the matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ until we arrive at a bidiagonal matrix 
+\begin_inset Formula $UAV^{\top}$
+\end_inset
+
+.
+ The total cost of GKL is approximately
+\begin_inset Formula 
+\[
+4mn^{2}-\frac{4}{3}n^{3}\text{ flops}.
+\]
+
+\end_inset
+
+In Dr.
+ Xue's code, supplementary calculations are incorporated in order to preserve
+ stability.
+ For instance, the for-loops on lines 31 and 39 seem to guarantee the orthogonal
+ity of matrices 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ We give brief description for each of the paintings below:
+\end_layout
+
+\begin_layout Enumerate
+The Last Judgment: Michelangelo, 1536-1541.
+ A large fresco depicting the Second Coming of Christ and final judgment.
+ Located at Sistine Chapel, Vatican City.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The Last Supper: Leonardo da Vinci, c.
+ 1495-1498.
+ Jesus and his disciples at the final meal before his crucifixion.
+ Located at Santa Maria delle Grazie, Milan.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Dance at Bougival: Pierre-Auguste Renoir, 1883.
+ A couple dancing outdoors at a party.
+ Located at Museum of Fine Arts, Boston.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The Night Watch: Rembrandt van Rijn, 1642.
+ A group of civic guards led by Captain Frans Banning Cocq.
+ Located at Rijksmuseum, Amsterdam.
+\end_layout
+
+\begin_layout Enumerate
+Girl with a Pearl Earring: Johannes Vermeer, c.
+ 1665.
+ A young girl wearing a turban and a pearl earring.
+ Located at Mauritshuis, The Hague.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The Potato Eaters: Vincent van Gogh, 1885.
+ A group of peasants sharing a meal of potatoes.
+ Located at Van Gogh Museum, Amsterdam.
+\end_layout
+
+\begin_layout Enumerate
+The Starry Night: Vincent van Gogh, 1889.
+ A swirling night sky over the village of Saint-Rémy-de-Provence.
+ Located at Museum of Modern Art, New York.
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 

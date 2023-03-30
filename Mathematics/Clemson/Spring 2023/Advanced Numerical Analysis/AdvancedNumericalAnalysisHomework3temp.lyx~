@@ -1,0 +1,1910 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Numerical Analysis Homework 3
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+Throughout this homework, 
+\begin_inset Formula $\|\cdot\|$
+\end_inset
+
+ denotes the 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+-norm.
+\end_layout
+
+\begin_layout Section
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Determine the eigenvalues, determinant, and singular values of a Householder
+ reflection 
+\begin_inset Formula $H_{v}=1-2\frac{vv^{\top}}{v^{\top}v}$
+\end_inset
+
+.
+ For the eigenvalues, give a geometric argument as well as an algebraic
+ proof.
+\end_layout
+
+\begin_layout Enumerate
+Consider the Givens rotation
+\begin_inset Formula 
+\[
+G_{\theta}=\begin{pmatrix}\cos\theta & \sin\theta\\
+-\sin\theta & \cos\theta
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Give a geometric interpretation of the action of 
+\begin_inset Formula $G_{\theta}$
+\end_inset
+
+ on a vector in 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+.
+ Do the same analysis as part 1 for 
+\begin_inset Formula $G$
+\end_inset
+
+, but no geometric interpretation is needed for the eigenvalues.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Let 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ be the hyperplane which is orthogonal to 
+\begin_inset Formula $v$
+\end_inset
+
+, i.e.
+\begin_inset Formula 
+\[
+\Gamma=\{w\in\mathbb{R}^{n}\mid\langle w,v\rangle=0\}.
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $\dim\Gamma=n-1$
+\end_inset
+
+; let 
+\begin_inset Formula $w_{1},\dots,w_{n-1}$
+\end_inset
+
+ be a basis for 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\boldsymbol{e}:=w_{1},\dots,w_{n-1},v$
+\end_inset
+
+ is an eigenbasis for 
+\begin_inset Formula $H_{v}$
+\end_inset
+
+.
+ Indeed, clearly 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ is linearly independent and spans 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+.
+ Furthermore, we have 
+\begin_inset Formula $H_{v}(w_{i})=w_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n-1$
+\end_inset
+
+ and similarly we have 
+\begin_inset Formula $H_{v}(v)=-v$
+\end_inset
+
+.
+ Thus the eigenvalues for 
+\begin_inset Formula $H_{v}$
+\end_inset
+
+ are 
+\begin_inset Formula $\pm1$
+\end_inset
+
+, and 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ is a corresponding eigenbasis.
+ The matrix representation of 
+\begin_inset Formula $H_{v}$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\boldsymbol{e}$
+\end_inset
+
+ is the diagonal matrix:
+\begin_inset Formula 
+\[
+[H_{v}]:=\begin{pmatrix}1 & 0 & 0 & \cdots & 0\\
+0 & 1 & 0 & \cdots & 0\\
+0 & 0 & \ddots & \ddots & \vdots\\
+\vdots & \vdots & \ddots & 1 & 0\\
+0 & 0 & \cdots & 0 & -1
+\end{pmatrix}.
+\]
+
+\end_inset
+
+In particular we have 
+\begin_inset Formula $\det H_{v}=-1$
+\end_inset
+
+.
+ Finally, the singular values 
+\begin_inset Formula $\sigma_{i}$
+\end_inset
+
+ of 
+\begin_inset Formula $H_{v}$
+\end_inset
+
+ are just the absolute values of the eigenvalues, so 
+\begin_inset Formula $\sigma_{i}=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ The action of 
+\begin_inset Formula $G_{\theta}$
+\end_inset
+
+ on a vector 
+\begin_inset Formula $v$
+\end_inset
+
+ is a counter-clockwise rotation by the angle 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ The matrix representation of 
+\begin_inset Formula $G_{\theta}$
+\end_inset
+
+ with respect to the standard basis is
+\begin_inset Formula 
+\[
+G_{\theta}=\begin{pmatrix}\cos\theta & \sin\theta\\
+-\sin\theta & \cos\theta
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\det G_{\theta}=\cos^{2}\theta+\sin^{2}\theta=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{tr}G_{\theta}=2\cos\theta$
+\end_inset
+
+.
+ Thus the eigenvalues 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ of 
+\begin_inset Formula $G_{\theta}$
+\end_inset
+
+ are solutions to the equation:
+\begin_inset Formula 
+\[
+\lambda^{2}-2\cos\theta\lambda+1=0.
+\]
+
+\end_inset
+
+By the quadratic formula the solutions to this quadratic equation are given
+ by 
+\begin_inset Formula $\lambda=\cos\theta\pm i\sin\theta=e^{\pm i\theta}$
+\end_inset
+
+.
+ The singular values 
+\begin_inset Formula $\sigma_{i}$
+\end_inset
+
+ of 
+\begin_inset Formula $G_{\theta}$
+\end_inset
+
+ are the (necessarily positive) square roots of the eigenvalues of
+\begin_inset Formula 
+\[
+G_{\theta}^{\top}G_{\theta}=\begin{pmatrix}\cos\theta & -\sin\theta\\
+\sin\theta & \cos\theta
+\end{pmatrix}\begin{pmatrix}\cos\theta & \sin\theta\\
+-\sin\theta & \cos\theta
+\end{pmatrix}=\begin{pmatrix}1 & 0\\
+0 & 1
+\end{pmatrix},
+\]
+
+\end_inset
+
+clearly 
+\begin_inset Formula $\sigma_{1}=1=\sigma_{2}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Implement QR factorizations in MATLAB based on:
+\end_layout
+
+\begin_layout Enumerate
+classical Gram-Schmidt (CGS)
+\end_layout
+
+\begin_layout Enumerate
+modified Gram-Schmidt (MGS)
+\end_layout
+
+\begin_layout Enumerate
+MGS with double orthogonalization, and
+\end_layout
+
+\begin_layout Enumerate
+Householder reflectors (for Householder 
+\begin_inset Formula $H=1-\frac{2vv^{\top}}{v^{\top}v}$
+\end_inset
+
+, let 
+\begin_inset Formula $v=x+\mathrm{sign}(x_{1})\|x\|_{2}e_{1}$
+\end_inset
+
+ with 
+\begin_inset Formula $\mathrm{sign}(z)=1$
+\end_inset
+
+ for 
+\begin_inset Formula $z=0$
+\end_inset
+
+ and 
+\begin_inset Formula $e^{i\theta}$
+\end_inset
+
+ for 
+\begin_inset Formula $z=\rho e^{i\theta}\neq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Then we construct three matrices as follows.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+A1 = randn(2^20,15); % (large but well-conditioned) 
+\end_layout
+
+\begin_layout Plain Layout
+
+u = (-1:2/40:1)'; 
+\end_layout
+
+\begin_layout Plain Layout
+
+A2 = u.^(0:23); % (partial Vandermonde) 
+\end_layout
+
+\begin_layout Plain Layout
+
+A3 = u.^(0:40); % (full Vandermonde) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For each matrix, run the algorithms, then compute
+\begin_inset Formula 
+\[
+\frac{\|A-\widehat{Q}\widehat{R}\|_{F}}{\|A\|_{F}}\quad\text{and}\quad\|\widehat{Q}^{\top}\widehat{Q}-1\|.
+\]
+
+\end_inset
+
+Draw conclusions about the backward stability of these algorithms, and the
+ orthogonality of the computed 
+\begin_inset Formula $Q$
+\end_inset
+
+ factors, probably related to the condition numbers of the matrices.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We use the MATLAB code below:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+n = [15 9:4:41];
+\end_layout
+
+\begin_layout Plain Layout
+
+matrixCount = 10; 
+\end_layout
+
+\begin_layout Plain Layout
+
+A = cell(matrixCount,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+A{1} = rand(2^20,n(1)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+u = (-1:2/40:1)’; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+condition= zeros(matrixCount,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+condition(1:2) = [cond(A{1}) cond(A{2})]; 
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 2:matrixCount 
+\end_layout
+
+\begin_layout Plain Layout
+
+   A{i} = u.^(0:4*i); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   condition(i) = cond(A{i}); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+cgs.forErr = zeros(matrixCount,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+cgs.ortho = zeros(matrixCount,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+mgs.forErr = zeros(matrixCount,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+mgs.ortho = zeros(matrixCount,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+mgs2.forErr = zeros(matrixCount,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+mgs2.ortho = zeros(matrixCount,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+hHolder.forErr = zeros(matrixCount,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+hHolder.ortho = zeros(matrixCount,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%% Classical GS 
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:matrixCount 
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Q,R] = gs(A{i});
+\end_layout
+
+\begin_layout Plain Layout
+
+   cgs.forErr(i) = norm(A{i}-Q*R,’fro’)/norm(A{i},’fro’); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   cgs.ortho(i) = norm(Q’*Q-eye(n(i)),2); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%% Modified GS 
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:matrixCount 
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Q,R] = qrmgs(A{i});
+\end_layout
+
+\begin_layout Plain Layout
+
+   mgs.forErr(i) = norm(A{i}-Q*R,’fro’)/norm(A{i},’fro’); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   mgs.ortho(i) = norm(Q’*Q-eye(n(i)),2); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%% Double Modified GS 
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:matrixCount 
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Q,R] = qrmgs2(A{i}); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   mgs2.forErr(i) = norm(A{i}-Q*R,’fro’)/norm(A{i},’fro’); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   mgs2.ortho(i) = norm(Q’*Q-eye(n(i)),2); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%% Householder Transformation 
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:matrixCount 
+\end_layout
+
+\begin_layout Plain Layout
+
+   [v,R] = house(A{i}); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   Q = formQ(v); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   hHolder.forErr(i) = norm(A{i}-Q*R,’fro’)/norm(A{i},’fro’); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   hHolder.ortho(i) = norm(Q’*Q-eye(n(i)),2); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ne can see from Figure 1 that MGS2 and Householder factorizations reli-
+ ably produce orthogonal Q factors, even for matrices of incredibly large
+ condition num- bers.
+ On the other hand, CGS and MGS fail to do.
+ CGS shows its numerical instability by how much more quickly it produces
+ completely unusable Q factors.
+ However as shown in Table 1, all the algorithms produce respectable forward
+ errors.
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing double
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\|A-\widehat{Q}\widehat{R}\|_{F}/\|A\|_{F}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CGS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MGS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MGS2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+HR
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.4173e-16$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Formula $\qquad\qquad$
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\|\widehat{Q}^{\top}\widehat{Q}-1\|$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CGS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MGS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MGS2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+HR
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $A_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Evaluate the arithmetic work needed to retrieve the reduced factor 
+\begin_inset Formula $Q_{L}\in\mathbb{R}^{m\times n}$
+\end_inset
+
+ from the Householder and Givens reduction of 
+\begin_inset Formula $A$
+\end_inset
+
+ to 
+\begin_inset Formula $R$
+\end_inset
+
+, respectively (second phase of QR).
+ Compare the cost with that for the first phase.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We focus on the Householder algorithm since the analysis of the Givens
+ algorithm is the same.
+ In the first phase, one constructs a sequence of unitary matrices 
+\begin_inset Formula $H_{1},\dots,H_{n}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+A=Q_{L}R=Q_{L}H_{n}\cdots H_{1}A,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $R=H_{n}\cdots H_{1}A$
+\end_inset
+
+.
+ Thus to find 
+\begin_inset Formula $Q_{L}$
+\end_inset
+
+, we just apply 
+\begin_inset Formula $H_{n}\cdots H_{1}$
+\end_inset
+
+ to the left of the identity matrix 
+\begin_inset Formula $I_{n}$
+\end_inset
+
+.
+ The cost to do this is essentially the same as the cost when applying 
+\begin_inset Formula $H_{n}\cdots H_{1}$
+\end_inset
+
+ to the left of 
+\begin_inset Formula $A$
+\end_inset
+
+ which is the cost of phase 1.
+ Thus we would double our cost if we wanted to retrieve 
+\begin_inset Formula $Q_{L}$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\[
+H_{n}\cdots H_{1}A=\begin{pmatrix}R\\
+0
+\end{pmatrix}=Q\begin{pmatrix}R\\
+0
+\end{pmatrix}=\begin{pmatrix}Q_{L}\\
+Q_{R}
+\end{pmatrix}\begin{pmatrix}R\\
+0
+\end{pmatrix}=Q_{L}R,
+\]
+
+\end_inset
+
+To obtain 
+\begin_inset Formula $Q_{L}$
+\end_inset
+
+, we apply 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Implement the algorithm for solving linear system 
+\begin_inset Formula $Ax=b$
+\end_inset
+
+ or linear least squares problem 
+\begin_inset Formula $\min\|b-Ax\|$
+\end_inset
+
+ based on Householder QR.
+ Make sure that the reduced 
+\begin_inset Formula $Q$
+\end_inset
+
+ factor is NOT formed explicitly to save the cost of the second phase.
+ Then solve the linear least squares problem 
+\begin_inset Formula $\min\|b-Ax\|$
+\end_inset
+
+ where 
+\begin_inset Formula $A=A_{2}$
+\end_inset
+
+, and the linear system 
+\begin_inset Formula $Ax=b$
+\end_inset
+
+, where 
+\begin_inset Formula $A=A_{3}$
+\end_inset
+
+ in [Q2], and 
+\begin_inset Formula $b=[1,-1,1,-1,\dots]^{\top}$
+\end_inset
+
+.
+ Report your 
+\begin_inset Formula 
+\[
+\frac{\|b-A\widehat{x}\|}{\|A\|\|\widehat{x}\|}
+\]
+
+\end_inset
+
+for both solves, and compare with this quantity associated with the solutions
+ obtained by MATLAB’s backslash.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Subsection*
+Classical Gram-Schmidt
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Q,R] = gs(A)  
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(A); Q = zeros(m,n); V = zeros(m,n); R = zeros(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for j = 1:n
+\end_layout
+
+\begin_layout Plain Layout
+
+   V(:,j) = A(:,j)
+\end_layout
+
+\begin_layout Plain Layout
+
+   for i = 1:j-1
+\end_layout
+
+\begin_layout Plain Layout
+
+      R(i,j) = Q(:,i)'*A(:,j); 
+\end_layout
+
+\begin_layout Plain Layout
+
+      V(:,j) = V(:,j) - R(i,j)*Q(:,i); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   end
+\end_layout
+
+\begin_layout Plain Layout
+
+   R(j,j) = norm(V(:,j)) ;
+\end_layout
+
+\begin_layout Plain Layout
+
+   Q(:,j) = V(:,j) / R(j,j) ; 
+\end_layout
+
+\begin_layout Plain Layout
+
+   end
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Modified Gram-Schmidt
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Q,R] = mgs(A)
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(A); Q = zeros(m,n); V = A; R = zeros(n,n);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:n 
+\end_layout
+
+\begin_layout Plain Layout
+
+   R(i,i) = norm(V(:,i))
+\end_layout
+
+\begin_layout Plain Layout
+
+   Q(:,i) = V(:,i) / R(i,i)
+\end_layout
+
+\begin_layout Plain Layout
+
+   for j = (i+1):n
+\end_layout
+
+\begin_layout Plain Layout
+
+      R(i,j) = Q(:,i)'*V(:,j)
+\end_layout
+
+\begin_layout Plain Layout
+
+      V(:,j) = V(:,j) - R(i,j)*Q(:,i)
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Double Modified Gram-Schmidt
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Q,R] = qrmgs2(A) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[Q1,R1] = qrmgs(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+[Q,R2] = qrmgs(Q1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+R = R2*R1;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Householder Factorization
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [v,R] = house(A) 
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+v = zeros(m,n); 
+\end_layout
+
+\begin_layout Plain Layout
+
+for j = 1:n 
+\end_layout
+
+\begin_layout Plain Layout
+
+   x = A(j:m,j); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   v(j:m,j) = x + sign(x(1))*norm(x)*eye(m-j+1,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   v(j:m,j) = v(j:m,j)/norm(v(j:m,j)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   A(j:m,j:n) = A(j:m,j:n) - 2*v(j:m,j)*(v(j:m,j)'*A(j:m,j:n)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end 
+\end_layout
+
+\begin_layout Plain Layout
+
+R = A(1:n,:); 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
