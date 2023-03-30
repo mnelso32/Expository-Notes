@@ -1011,7 +1011,128 @@ label{sol}
 
 \end_inset
 
- table
+ 1.
+ Suppose 
+\begin_inset Formula $A=QR$
+\end_inset
+
+ is a reduced QR factorization of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ If the 
+\begin_inset Formula $i$
+\end_inset
+
+th column of 
+\begin_inset Formula $Q$
+\end_inset
+
+ is multiplied by 
+\begin_inset Formula $\zeta$
+\end_inset
+
+ and the 
+\begin_inset Formula $i$
+\end_inset
+
+th row of 
+\begin_inset Formula $R$
+\end_inset
+
+ is multiplied by 
+\begin_inset Formula $\zeta^{-1}$
+\end_inset
+
+, where 
+\begin_inset Formula $\zeta\in\mathbb{C}^{\times}$
+\end_inset
+
+ such that 
+\begin_inset Formula $|\zeta|=1$
+\end_inset
+
+, then we obtain another reduced QR factorization.
+ In particular, if 
+\begin_inset Formula $R$
+\end_inset
+
+ is real and 
+\begin_inset Formula $r_{ii}<0$
+\end_inset
+
+, then we should multiply the 
+\begin_inset Formula $i$
+\end_inset
+
+th row of 
+\begin_inset Formula $R$
+\end_inset
+
+ by 
+\begin_inset Formula $-1$
+\end_inset
+
+ and we should multiply the 
+\begin_inset Formula $i$
+\end_inset
+
+th column of 
+\begin_inset Formula $Q$
+\end_inset
+
+ by 
+\begin_inset Formula $-1$
+\end_inset
+
+.
+ Doing this for each 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $r_{ii}<0$
+\end_inset
+
+ will give us a reduced QR factorization of 
+\begin_inset Formula $A$
+\end_inset
+
+ such that 
+\begin_inset Formula $r_{ii}\geq0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+\end_layout
+
+\begin_layout Standard
+table
 \end_layout
 
 \begin_layout Standard
@@ -1251,7 +1372,26 @@ label{sol}
 
 \end_inset
 
- 
+ 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -1272,7 +1412,7 @@ Appendix
 \end_layout
 
 \begin_layout Subsection*
-Classical Gram-Schmidt
+Simultaneous Iteration
 \end_layout
 
 \begin_layout Standard
@@ -1283,70 +1423,6 @@ status open
 
 \begin_layout Plain Layout
 
-function [Q,R] = gs(A)      
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-[m,n] = size(A); Q = zeros(m,n); V = zeros(m,n); R = zeros(m,n);
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-for j = 1:n    
-\end_layout
-
-\begin_layout Plain Layout
-
-   V(:,j) = A(:,j);    
-\end_layout
-
-\begin_layout Plain Layout
-
-   for i = 1:j-1      
-\end_layout
-
-\begin_layout Plain Layout
-
-      R(i,j) = Q(:,i)'*A(:,j);        
-\end_layout
-
-\begin_layout Plain Layout
-
-      V(:,j) = V(:,j) - R(i,j)*Q(:,i);   
-\end_layout
-
-\begin_layout Plain Layout
-
-   end; 
-\end_layout
-
-\begin_layout Plain Layout
-
-   R(j,j) = norm(V(:,j)) ;    
-\end_layout
-
-\begin_layout Plain Layout
-
-   Q(:,j) = V(:,j) / R(j,j) ;     
-\end_layout
-
-\begin_layout Plain Layout
-
-   end; 
-\end_layout
-
-\begin_layout Plain Layout
-
-end;
 \end_layout
 
 \end_inset
@@ -1355,7 +1431,7 @@ end;
 \end_layout
 
 \begin_layout Subsection*
-Modified Gram-Schmidt
+Unshifted QR Algorithm
 \end_layout
 
 \begin_layout Standard
@@ -1366,366 +1442,6 @@ status open
 
 \begin_layout Plain Layout
 
-function [Q,R] = mgs(A)  
-\end_layout
-
-\begin_layout Plain Layout
-
-   
-\end_layout
-
-\begin_layout Plain Layout
-
-[m,n] = size(A); Q = zeros(m,n); V = A; R = zeros(n,n);
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-for i = 1:n    
-\end_layout
-
-\begin_layout Plain Layout
-
-   R(i,i) = norm(V(:,i));    
-\end_layout
-
-\begin_layout Plain Layout
-
-   Q(:,i) = V(:,i) / R(i,i);  
-\end_layout
-
-\begin_layout Plain Layout
-
-   for j = (i+1):n     
-\end_layout
-
-\begin_layout Plain Layout
-
-      R(i,j) = Q(:,i)'*V(:,j);  
-\end_layout
-
-\begin_layout Plain Layout
-
-      V(:,j) = V(:,j) - R(i,j)*Q(:,i); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   end; 
-\end_layout
-
-\begin_layout Plain Layout
-
-end;
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Double Modified Gram-Schmidt
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-function [Q,R] = mgsd(A) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-[Q1,R1] = mgs(A); 
-\end_layout
-
-\begin_layout Plain Layout
-
-[Q,R2] = mgs(Q1); 
-\end_layout
-
-\begin_layout Plain Layout
-
-R = R2*R1;
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Householder Factorization
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-function [V,R] = house(A) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-[m,n] = size(A); V = zeros(m,n);
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-for k = 1:n   
-\end_layout
-
-\begin_layout Plain Layout
-
-   x = A(k:m,k);     
-\end_layout
-
-\begin_layout Plain Layout
-
-   V(k:m,k) = sign(x(1))*norm(x)*eye(m-k+1,1)+x;     
-\end_layout
-
-\begin_layout Plain Layout
-
-   V(k:m,k) = V(k:m,k)/norm(V(k:m,k));     
-\end_layout
-
-\begin_layout Plain Layout
-
-   A(k:m,k:n) = A(k:m,k:n) - 2*V(k:m,k)*(V(k:m,k)'*A(k:m,k:n));  
-\end_layout
-
-\begin_layout Plain Layout
-
-end 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-R = A(1:n,:); 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Evaluate 
-\begin_inset Formula $Qb$
-\end_inset
-
- or 
-\begin_inset Formula $Q^{*}b$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-function [b] = houseev(V,b,transpose) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-[m,n] = size(V);
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-if transpose    
-\end_layout
-
-\begin_layout Plain Layout
-
-   for k = 1:n       
-\end_layout
-
-\begin_layout Plain Layout
-
-     b(k:m) = b(k:m) - 2*V(k:m,k)*(V(k:m,k)'*b(k:m));    
-\end_layout
-
-\begin_layout Plain Layout
-
-   end; 
-\end_layout
-
-\begin_layout Plain Layout
-
-else    
-\end_layout
-
-\begin_layout Plain Layout
-
-   for k = n:-1:1       
-\end_layout
-
-\begin_layout Plain Layout
-
-      b(k:m) = b(k:m) - 2*V(k:m,k)*(V(k:m,k)'*b(k:m)); 
-\end_layout
-
-\begin_layout Plain Layout
-
-   end; 
-\end_layout
-
-\begin_layout Plain Layout
-
-end;
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Form 
-\begin_inset Formula $\widehat{Q}$
-\end_inset
-
- From House
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-function Q = houseformQ(V) 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-[m,n] = size(V); Q = zeros(m,n);
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-for j = 1:n    
-\end_layout
-
-\begin_layout Plain Layout
-
-   x = zeros(m,1);    
-\end_layout
-
-\begin_layout Plain Layout
-
-   x(j,1) = 1;    
-\end_layout
-
-\begin_layout Plain Layout
-
-   Q(:,j) = houseev(V,x,0);
-\end_layout
-
-\begin_layout Plain Layout
-
-end;
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Least Squares via Householder QR
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-function x = leastsquareshouseQR(A,b)
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-[V,R] = house(A);
-\end_layout
-
-\begin_layout Plain Layout
-
-y  = houseev(V,b,1);
-\end_layout
-
-\begin_layout Plain Layout
-
-y  = y(1:n);
-\end_layout
-
-\begin_layout Plain Layout
-
-x = R
-\backslash
-y;
 \end_layout
 
 \end_inset
