@@ -197,7 +197,7 @@ Throughout this homework,
  (thus 
 \begin_inset Formula 
 \[
-\langle x,y\rangle=x^{*}y=\sum_{i=1}^{m}\overline{x}_{i}y_{i}
+\langle x,y\rangle=\sum_{i=1}^{m}x_{i}\overline{y}_{i}
 \]
 
 \end_inset
@@ -1044,7 +1044,7 @@ status open
 
 \begin_layout Plain Layout
 
-rng(default); H0 = triu(randn(7,7),-1);
+rng('default'); H0 = triu(randn(7,7),-1);
 \end_layout
 
 \end_inset
@@ -1206,7 +1206,11 @@ th row of
 \begin_inset Formula $|\zeta|=1$
 \end_inset
 
-, then we obtain another reduced QR factorization.
+, then we obtain another reduced QR factorization of 
+\begin_inset Formula $A$
+\end_inset
+
+.
  In particular, if 
 \begin_inset Formula $R$
 \end_inset
@@ -1261,7 +1265,7 @@ th column of
 \end_inset
 
 .
- 
+ In the appendix, we write a MATLAB function which will do this for us.
 \end_layout
 
 \begin_layout Standard
@@ -1282,17 +1286,34 @@ hfill
 
 \begin_layout Standard
 2.
-\end_layout
+ We implemented the QR and Simultaneous Iteration algorithms using the codes
+ in the Appendix of this homework.
+ We write 
+\begin_inset Formula $\lambda_{SI}^{(k)}$
+\end_inset
 
-\begin_layout Standard
-table
+ (respectively 
+\begin_inset Formula $\lambda_{QR}^{(k)}$
+\end_inset
+
+) for the sequence of eigenvalues of 
+\begin_inset Formula $H_{SI}^{(k)}$
+\end_inset
+
+ (respectively 
+\begin_inset Formula $H_{QR}^{(k)}$
+\end_inset
+
+) computed in MATLAB and sorted from least to greatest in terms of absolute
+ value.
+ We summarize our findings in the table below:
 \end_layout
 
 \begin_layout Standard
 \paragraph_spacing double
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="3">
+<lyxtabular version="3" rows="5" columns="3">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -1302,9 +1323,6 @@ table
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\|b-A\widehat{x}\|/\|A\|\|\widehat{x}\|$
-\end_inset
-
 
 \end_layout
 
@@ -1314,7 +1332,10 @@ table
 \begin_inset Text
 
 \begin_layout Plain Layout
-BACKSLASH
+\begin_inset Formula $\|H_{SI}^{(k)}-H_{QR}^{(k)}\|_{F}/\|H_{SI}^{(k)}\|_{F}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1323,7 +1344,10 @@ BACKSLASH
 \begin_inset Text
 
 \begin_layout Plain Layout
-HOUSE
+\begin_inset Formula $\|\lambda_{SI}^{(k)}-\lambda_{QR}^{(k)}\|/\|\lambda_{SI}^{(k)}\|$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1334,7 +1358,7 @@ HOUSE
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $A_{2}$
+\begin_inset Formula $k=3$
 \end_inset
 
 
@@ -1346,7 +1370,7 @@ HOUSE
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $3.1026e-08$
+\begin_inset Formula $1.0271e-15$
 \end_inset
 
 
@@ -1358,7 +1382,83 @@ HOUSE
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $3.1026e-08$
+\begin_inset Formula $8.3918e-16$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k=30$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $6.0713e-15$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $9.2711e-16$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $k=300$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.4307e-13$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.2240e-15$
 \end_inset
 
 
@@ -1372,7 +1472,7 @@ HOUSE
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $A_{3}$
+\begin_inset Formula $k=3000$
 \end_inset
 
 
@@ -1384,7 +1484,7 @@ HOUSE
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $5.4432e-17$
+\begin_inset Formula $5.9057e-12$
 \end_inset
 
 
@@ -1396,7 +1496,7 @@ HOUSE
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $3.3642e-17$
+\begin_inset Formula $1.2425e-15$
 \end_inset
 
 
@@ -1406,6 +1506,88 @@ HOUSE
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As we can see, the outputs for both algorithms are extremely close to each
+ other in a relative.
+ On the other, if we removed the post-process step, then at the 
+\begin_inset Formula $3000$
+\end_inset
+
+th iteration, we would obtain
+\begin_inset Formula 
+\[
+\frac{\|H_{SI}^{(3000)}-H_{QR}^{(3000)}\|_{F}}{\|H_{SI}^{(3000)}\|_{F}}=1.0167\quad\text{and}\quad\frac{\|\lambda_{SI}^{(3000)}-\lambda_{QR}^{(3000)}\|}{\|\lambda_{SI}^{(3000)}\|}=1.2425e-15.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So in this case, 
+\begin_inset Formula $H_{SI}^{(3000)}$
+\end_inset
+
+ and 
+\begin_inset Formula $H_{QR}^{(3000)}$
+\end_inset
+
+ are not close to each other in the relative sense, but the relative norm
+ difference between 
+\begin_inset Formula $\lambda_{SI}^{(3000)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda_{QR}^{(3000)}$
+\end_inset
+
+ is the same.
+ This isn't surprising however since our post-process step involved changing
+ the signs of the entries of these matrices via a unitary transformation
+ (so the eigenvalues don't change, but the matrices themselves change quite
+ a bit).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Using MATLAB, we find the absolute values of 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ are
+\begin_inset Formula 
+\begin{align*}
+\lambda_{1} & =0.8736-0.1122i\\
+\lambda_{2} & =0.8736+0.1122i\\
+\lambda_{4} & =-1.287\\
+\lambda_{5} & =-0.9373-0.9955i\\
+\lambda_{6} & =-0.9373+0.9955i\\
+\lambda_{7} & =1.7794\\
+\lambda_{8} & =3.8798.
+\end{align*}
 
 \end_inset
 
@@ -1526,25 +1708,216 @@ label{sol}
 \end_inset
 
  1.
- 
+ Let us illustrate this for a 
+\begin_inset Formula $5\times5$
+\end_inset
+
+ upper Hessenberg matrix of full rank: suppose we have the following reduced
+ QR factorization:
 \begin_inset Formula 
 \[
-\begin{pmatrix}h_{11} & h_{12} & h_{13} & h_{14} & h_{15}\\
+H=\begin{pmatrix}h_{11} & h_{12} & h_{13} & h_{14} & h_{15}\\
 h_{21} & h_{22} & h_{23} & h_{24} & h_{25}\\
 0 & h_{32} & h_{33} & h_{34} & h_{35}\\
 0 & 0 & h_{43} & h_{44} & h_{45}\\
 0 & 0 & 0 & h_{54} & h_{55}
-\end{pmatrix}=\begin{pmatrix}q_{1} & q_{2} & q_{3} & q_{4} & q_{5}\end{pmatrix}\begin{pmatrix}r_{11} & r_{12} & r_{13} & r_{14} & r_{15}\\
+\end{pmatrix}=\begin{pmatrix}q_{11} & q_{12} & q_{13} & q_{14} & q_{15}\\
+q_{21} & q_{22} & q_{23} & q_{24} & q_{25}\\
+q_{31} & q_{32} & q_{33} & q_{34} & q_{35}\\
+q_{41} & q_{42} & q_{43} & q_{44} & q_{45}\\
+q_{51} & q_{52} & q_{53} & q_{54} & q_{55}
+\end{pmatrix}\begin{pmatrix}r_{11} & r_{12} & r_{13} & r_{14} & r_{15}\\
 0 & r_{22} & r_{23} & r_{24} & r_{25}\\
 0 & 0 & r_{33} & r_{34} & r_{35}\\
 0 & 0 & 0 & r_{44} & r_{45}\\
 0 & 0 & 0 & 0 & r_{55}
-\end{pmatrix}
+\end{pmatrix}=QR,
 \]
 
 \end_inset
 
+where 
+\begin_inset Formula $r_{11},r_{22},r_{33},r_{44},r_{55}\neq0$
+\end_inset
 
+ (as we assumed 
+\begin_inset Formula $H$
+\end_inset
+
+ to have full rank).
+ Thus we have
+\begin_inset Formula 
+\begin{align*}
+0 & =q_{31}r_{11}\\
+0 & =q_{41}r_{11}\\
+0 & =q_{51}r_{11}\\
+0 & =q_{41}r_{12}+q_{42}r_{22}\\
+0 & =q_{51}r_{12}+q_{52}r_{22}\\
+0 & =q_{51}r_{13}+q_{52}r_{23}+q_{53}r_{33}.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $r_{11}\neq0$
+\end_inset
+
+, we immediately see that 
+\begin_inset Formula $q_{31}=q_{41}=q_{51}=0$
+\end_inset
+
+.
+ Thus we have
+\begin_inset Formula 
+\begin{align*}
+0 & =q_{42}r_{22}\\
+0 & =q_{52}r_{22}\\
+0 & =q_{52}r_{23}+q_{53}r_{33}.
+\end{align*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $r_{22}\neq0$
+\end_inset
+
+, we immediately see that 
+\begin_inset Formula $q_{42}=q_{52}=0$
+\end_inset
+
+.
+ Thus we have
+\begin_inset Formula 
+\[
+0=q_{53}r_{33}.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $r_{33}\neq0$
+\end_inset
+
+, we immediately see that 
+\begin_inset Formula $q_{53}=0$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $Q$
+\end_inset
+
+ has the form
+\begin_inset Formula 
+\[
+Q=\begin{pmatrix}q_{11} & q_{12} & q_{13} & q_{14} & q_{15}\\
+q_{21} & q_{22} & q_{23} & q_{24} & q_{25}\\
+0 & q_{32} & q_{33} & q_{34} & q_{35}\\
+0 & 0 & q_{43} & q_{44} & q_{45}\\
+0 & 0 & 0 & q_{54} & q_{55}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+In particular 
+\begin_inset Formula $Q$
+\end_inset
+
+ is also upper hessenberg.
+ More generally, if 
+\begin_inset Formula $H=QR$
+\end_inset
+
+ is a QR factorization of an 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ upper Hessenberg matrix 
+\begin_inset Formula $H$
+\end_inset
+
+ of full rank, then one can show that 
+\begin_inset Formula $Q$
+\end_inset
+
+ itself is upper Hessengberg.
+ Next let 
+\begin_inset Formula $\boldsymbol{q}_{i}$
+\end_inset
+
+ denote the 
+\begin_inset Formula $i$
+\end_inset
+
+th column of 
+\begin_inset Formula $Q$
+\end_inset
+
+ and let 
+\begin_inset Formula $\boldsymbol{r}_{i}$
+\end_inset
+
+ denote the 
+\begin_inset Formula $i$
+\end_inset
+
+th row of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $RQ=(\langle\boldsymbol{r}_{i},\boldsymbol{q}_{j}\rangle)$
+\end_inset
+
+ (that is, the 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+th entry of 
+\begin_inset Formula $RQ$
+\end_inset
+
+ is 
+\begin_inset Formula $\langle\boldsymbol{r}_{i},\boldsymbol{q}_{j}\rangle$
+\end_inset
+
+).
+ If 
+\begin_inset Formula $i\geq j+2$
+\end_inset
+
+, then
+\begin_inset Formula 
+\begin{align*}
+\langle\boldsymbol{r}_{i},\boldsymbol{q}_{j}\rangle & =\sum_{k=1}^{n}r_{ik}q_{kj}=0,
+\end{align*}
+
+\end_inset
+
+since 
+\begin_inset Formula $r_{ik}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k<i$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{kj}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $k\geq i\geq j+2$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $RQ$
+\end_inset
+
+ is also upper Hessenberg.
 \end_layout
 
 \begin_layout Standard
@@ -1564,6 +1937,58 @@ hfill
 \end_layout
 
 \begin_layout Standard
+2.
+ We consider the Householder case since the Givens case is similar.
+ The cost of computing 
+\begin_inset Formula $RQ$
+\end_inset
+
+ is the same as the cost of computing 
+\begin_inset Formula 
+\[
+Q^{*}R^{*}=Q_{n}\cdots Q_{2}Q_{1}R^{*},
+\]
+
+\end_inset
+
+where the 
+\begin_inset Formula $Q_{i}$
+\end_inset
+
+ are the Householder reflectors which we obtain in phase 
+\begin_inset Formula $1$
+\end_inset
+
+ of the Householder orthogonalization.
+ However note that this is essentially performing the Householder orthogonalizat
+ion to 
+\begin_inset Formula $R^{*}$
+\end_inset
+
+.
+ The cost of performing Householder orthogonalization to 
+\begin_inset Formula $H$
+\end_inset
+
+ was shown to be 
+\begin_inset Formula $O(n^{3})$
+\end_inset
+
+, however as 
+\begin_inset Formula $R^{*}$
+\end_inset
+
+ is lower triangular (hence has zero entries in the upper quadrant), the
+ cost of producing Householder orthogonalization to 
+\begin_inset Formula $R^{*}$
+\end_inset
+
+ is reduced to being 
+\begin_inset Formula $O(n^{2})$
+\end_inset
+
+.
+ 
 \begin_inset ERT
 status open
 
@@ -1584,6 +2009,137 @@ Appendix
 \end_layout
 
 \begin_layout Subsection*
+QR Post Process
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Q,R] = QRpostprocess(Q,R)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(Q);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:n   
+\end_layout
+
+\begin_layout Plain Layout
+
+   if R(i,i) < 0 
+\end_layout
+
+\begin_layout Plain Layout
+
+      R(i,:) = -R(i,:);   
+\end_layout
+
+\begin_layout Plain Layout
+
+      Q(:,i) = -Q(:,i);    
+\end_layout
+
+\begin_layout Plain Layout
+
+   end;
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+QR Algorithm
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Qk,Rk,Ak] = QRalgorithm(A,k)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(A); Ak = A; Rk = eye(n); Qk = eye(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:k    
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Q,R] = qr(Ak); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Q,R] = QRpostprocess(Q,R);
+\end_layout
+
+\begin_layout Plain Layout
+
+   Ak = R*Q;    
+\end_layout
+
+\begin_layout Plain Layout
+
+   Qk = Qk*Q;    
+\end_layout
+
+\begin_layout Plain Layout
+
+   Rk = R*Rk; 
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
 Simultaneous Iteration
 \end_layout
 
@@ -1595,25 +2151,55 @@ status open
 
 \begin_layout Plain Layout
 
+function [Qk,Rk,Ak] = SimultaneousIteration(A,k)
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Unshifted QR Algorithm
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset listings
-inline false
-status open
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(A); Qk = eye(n); Rk = eye(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:k   
+\end_layout
+
+\begin_layout Plain Layout
+
+   Z = A*Qk;    
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Qk,R] = qr(Z); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Qk,R] = QRpostprocess(Qk,R);  
+\end_layout
+
+\begin_layout Plain Layout
+
+   Ak = Qk'*A*Qk;   
+\end_layout
+
+\begin_layout Plain Layout
+
+   Rk = R*Rk;
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
 \end_layout
 
 \end_inset
