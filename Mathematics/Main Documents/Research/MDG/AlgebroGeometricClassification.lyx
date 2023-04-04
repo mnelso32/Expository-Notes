@@ -135,6 +135,11 @@ commutative diagrams/.cd,
 \justification true
 \use_refstyle 1
 \use_minted 0
+\branch tikzcd
+\selected 1
+\filename_suffix 0
+\color #faf0e6
+\end_branch
 \index Index
 \shortcut idx
 \color #008000
@@ -1380,7 +1385,9 @@ hfill
 
 There's a cute way to visualize this by tracing the edges of the permutohedron
  (the hexagon) below: 
-\end_layout
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
 
 \begin_layout Standard
 \begin_inset ERT
@@ -1627,13 +1634,13 @@ lambda(b)$}, inner sep=6.5pt] (cc2) at (6,2) {};
 
 
 \backslash
-node[label={[label distance=-0.5cm]90:$
+node[label={[label distance=-0.5cm]90:$(
 \backslash
-lambda(ab)(
+lambda(a)
 \backslash
-lambda(c)
+lambda(b))(
 \backslash
-lambda(d))$}, inner sep=6.5pt] (dd1) at (7,3) {};
+lambda(cd))$}, inner sep=6.5pt] (dd1) at (7,3) {};
 \end_layout
 
 \begin_layout Plain Layout
@@ -2444,8 +2451,9 @@ end{center}
 
 \end_layout
 
-\begin_layout Standard
-Note that the red edge 
+\end_inset
+
+ Note that the red edge 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2490,7 +2498,7 @@ label{example}
 \end_inset
 
  Let 
-\begin_inset Formula $\lambda\in R$
+\begin_inset Formula $\lambda\in R\backslash\{0\}$
 \end_inset
 
  and let 
@@ -2518,15 +2526,15 @@ label{example}
 \begin_inset Formula $A$
 \end_inset
 
- is 
+ is an 
 \begin_inset Formula $R$
 \end_inset
 
--linear, so in particular the element 
+-algebra, so in particular the element 
 \begin_inset Formula $\lambda$
 \end_inset
 
- must associative with all pairs of elements of 
+ belongs to the nucleus of 
 \begin_inset Formula $A$
 \end_inset
 
@@ -2538,8 +2546,7 @@ label{example}
  is permutative since
 \begin_inset Formula 
 \begin{align*}
-\lambda(ab)(\lambda(c)\lambda(d)) & =\lambda^{3}((ab)(cd))\\
- & =(\lambda(a)\lambda(b))\lambda(cd).
+\lambda(ab)(\lambda(c)\lambda(d)) & =\lambda^{3}((ab)(cd))=(\lambda(a)\lambda(b))\lambda(cd).
 \end{align*}
 
 \end_inset
@@ -2552,7 +2559,7 @@ On the other hand,
  Indeed, we have
 \begin_inset Formula 
 \begin{align*}
-\lambda(a)(bc)=(ab)\lambda(c) & \iff\lambda(a(bc)-(ab)c)
+\lambda(a)(bc)=(ab)\lambda(c) & \iff\lambda[a,b,c]=0
 \end{align*}
 
 \end_inset
@@ -2562,28 +2569,12 @@ for all
 \end_inset
 
  and the righthand side need not be zero.
- It is easy to see though that 
+ In particular, 
 \begin_inset Formula $A$
 \end_inset
 
  is hom-associative if and only if 
-\begin_inset Formula $\lambda$
-\end_inset
-
- kills 
-\begin_inset Formula $\mathrm{im}\,[\cdot,\cdot,\cdot]$
-\end_inset
-
- where 
-\begin_inset Formula $[\cdot,\cdot,\cdot]$
-\end_inset
-
- is the usual associator map defined by 
-\begin_inset Formula $[a,b,c]=a(bc)-(ab)c$
-\end_inset
-
- for all 
-\begin_inset Formula $a,b,c\in A$
+\begin_inset Formula $\lambda\in\mathrm{Ann}([A])$
 \end_inset
 
 .
@@ -2595,8 +2586,7 @@ for all
  Indeed, we have
 \begin_inset Formula 
 \begin{align*}
-\lambda(ab)-\lambda(a)\lambda(b) & =\lambda(ab-\lambda ab)\\
- & =\lambda(1-\lambda)ab
+\lambda(ab)=\lambda(a)\lambda(b) & \iff\lambda(1-\lambda)ab=0
 \end{align*}
 
 \end_inset
@@ -2619,16 +2609,12 @@ for all
 \end_inset
 
  is a unit.
- Then in this case, it is easy to see that 
+ In this case, we see that 
 \begin_inset Formula $A$
 \end_inset
 
  is multiplicative if and only if 
-\begin_inset Formula $\lambda$
-\end_inset
-
- kills 
-\begin_inset Formula $\mathrm{im}\,\mu$
+\begin_inset Formula $\lambda\in\mathrm{Ann}(\mathrm{im}\,\mu)$
 \end_inset
 
 .
@@ -2648,18 +2634,19 @@ end{example}
 
 \end_layout
 
+\begin_layout Subsection*
+Classifying MLDG 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-Algebras on 
+\begin_inset Formula $F$
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
 We now repeat the same procedure that we did when classifying 
 \begin_inset Formula $\Bbbk$
 \end_inset
@@ -2699,45 +2686,15 @@ We now repeat the same procedure that we did when classifying
 
 \end_inset
 
-for all 
-\begin_inset Formula $i,j$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-hfill
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $\Bbbk[\boldsymbol{D},\boldsymbol{L},\boldsymbol{M}]=\Bbbk[\{D_{i}^{j},L_{i}^{j},M_{i,j}^{k}\}]$
-\end_inset
-
-.
- We express the algebraic laws introduced above in terms of coordinates
- in the table below:
+We express the algebraic laws introduced above in terms of coordinates in
+ the table below:
 \end_layout
 
 \begin_layout Standard
 \paragraph_spacing double
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="2">
+<lyxtabular version="3" rows="7" columns="2">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -2766,6 +2723,37 @@ Equation
 \begin_inset Text
 
 \begin_layout Plain Layout
+Graded Law
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $G_{\boldsymbol{i}}^{k}=M_{i_{1},i_{2}}^{k}$
+\end_inset
+
+ if 
+\begin_inset Formula $|e_{i}|+|e_{j}|\neq|e_{k}|$
+\end_inset
+
+ (else 
+\begin_inset Formula $G_{\boldsymbol{i}}^{k}=0$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 Graded-Commutative Law
 \end_layout
 
@@ -2775,7 +2763,7 @@ Graded-Commutative Law
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\Gamma_{i,j}^{k}=M_{i,j}^{k}-(-1)^{|e_{i}||e_{j}|}M_{j,i}^{k}$
+\begin_inset Formula $\Gamma_{\boldsymbol{i}}^{k}=M_{i_{1},i_{2}}^{k}-(-1)^{|e_{i_{1}}||e_{i_{2}}|}M_{i_{2},i_{1}}^{k}$
 \end_inset
 
 
@@ -2798,169 +2786,9 @@ Leibniz Law
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\Lambda_{i,j}^{k}=\sum\limits _{\iota}(M_{i,j}^{\iota}D_{\iota}^{k}-D_{i}^{\iota}M_{\iota,j}^{k}-(-1)^{|e_{i}||e_{j}|}D_{j}^{\iota}M_{i,\iota}^{k})$
+\begin_inset Formula $\Lambda_{\boldsymbol{i}}^{k}=\sum_{j}(M_{i_{1},i_{2}}^{j}D_{j}^{k}-D_{i_{1}}^{j}M_{j,i_{2}}^{k}-(-1)^{|e_{i_{1}}||e_{i_{2}}|}D_{i_{2}}^{j}M_{i_{1},j}^{k})$
 \end_inset
 
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Multiplicative Law
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\Theta_{i,j}^{k}=\sum\limits _{\iota}M_{i,j}^{\iota}L_{\iota}^{k}-\sum\limits _{\iota_{1},\iota_{2}}L_{i}^{\iota_{1}}L_{j}^{\iota_{2}}M_{\iota_{1},\iota_{2}}^{k}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Hom-Associative Law
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $H_{i,j,k}^{l}=\sum\limits _{\iota_{1},\iota_{2}}(M_{i,j}^{\iota_{1}}L_{k}^{\iota_{2}}M_{\iota_{1},\iota_{2}}^{l}-M_{j,k}^{\iota_{1}}L_{i}^{\iota_{2}}M_{\iota_{2},\iota_{1}}^{l})$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Permutative Law
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\Pi_{i,j,k,l}^{m}=\sum\limits _{\iota_{1},\iota_{2},\iota_{3},\iota_{4},\iota_{5}}(M_{i,j}^{\iota_{1}}L_{k}^{\iota_{2}}L_{l}^{\iota_{3}}-M_{k,l}^{\iota_{1}}L_{i}^{\iota_{2}}L_{j}^{\iota_{3}})M_{\iota_{2},\iota_{3}}^{\iota_{4}}L_{\iota_{1}}^{\iota_{5}}M_{\iota_{5},\iota_{4}}^{k}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We define
-\begin_inset Formula 
-\begin{align*}
-\mathrm{A}_{\Bbbk}^{\mathrm{p}}(F) & =\Bbbk[\boldsymbol{L},\boldsymbol{M}]\slash\langle\boldsymbol{\Pi}\rangle.\\
-\mathrm{A}_{\Bbbk}^{\mathrm{pd}}(F) & =\Bbbk[\boldsymbol{D},\boldsymbol{L},\boldsymbol{M}]\slash\langle\boldsymbol{\Delta},\boldsymbol{\Pi}\rangle\\
-\mathrm{A}_{\Bbbk}^{\mathrm{h}}(F) & =\Bbbk[\boldsymbol{L},\boldsymbol{M}]\slash\langle\boldsymbol{H}\rangle\\
-\mathrm{A}_{\Bbbk}^{\mathrm{\theta}}(F) & =\Bbbk[\boldsymbol{L},\boldsymbol{M}]\slash\langle\boldsymbol{\Theta}\rangle\\
-\mathrm{A}_{\Bbbk}^{\mathrm{c}}(F) & =\Bbbk[\boldsymbol{M}]\slash\langle\boldsymbol{\Gamma}\rangle,
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing double
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="2">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Algebraic Law
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Equation
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Graded-Commutative Law
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Leibniz Law
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -2984,7 +2812,7 @@ Multiplicative Law
 \begin_inset Formula $\Theta_{\boldsymbol{i}}^{k}=\sum\limits _{j}M_{i_{1},i_{2}}^{j}L_{j}^{k}-\sum\limits _{\boldsymbol{j}}L_{i_{1}}^{j_{1}}L_{i_{2}}^{j_{2}}M_{j_{1},j_{2}}^{k}$
 \end_inset
 
-
+ 
 \end_layout
 
 \end_inset
@@ -3004,7 +2832,7 @@ Hom-Associative Law
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $H_{\boldsymbol{i}}^{k}=\sum\limits _{\boldsymbol{j}}(M_{i_{1},i_{2}}^{j_{1}}L_{i_{3}}^{j_{2}}M_{j_{1},j_{2}}^{k}-L_{i_{1}}^{j_{1}}M_{i_{2},i_{3}}^{j_{2}}M_{j_{1},j_{2}}^{k})$
+\begin_inset Formula $H_{\boldsymbol{i}}^{k}=\sum\limits _{\boldsymbol{j}}(M_{i_{1},i_{2}}^{j_{1}}L_{i_{3}}^{j_{2}}M_{j_{1},j_{2}}^{k}-M_{i_{2},i_{3}}^{j_{1}}L_{i_{1}}^{j_{2}}M_{j_{2},j_{1}}^{k})$
 \end_inset
 
 
@@ -3027,7 +2855,7 @@ Permutative Law
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $P_{\boldsymbol{i}}^{k}=\sum\limits _{\boldsymbol{j}}(M_{i_{1},i_{2}}^{j_{1}}L_{i_{3}}^{j_{2}}L_{i_{4}}^{j_{3}}L_{j_{1}}^{j_{4}}M_{j_{2},j_{3}}^{j_{5}}M_{j_{4},j_{5}}^{k}-L_{i_{1}}^{j_{1}}L_{i_{2}}^{j_{2}}M_{i_{3},i_{4}}^{j_{3}}M_{j_{1},j_{2}}^{j_{4}}L_{j_{3}}^{j_{5}}M_{j_{4},j_{5}}^{k})$
+\begin_inset Formula $\Pi_{\boldsymbol{i}}^{k}=\sum\limits _{\boldsymbol{j}}(M_{i_{1},i_{2}}^{j_{1}}L_{i_{3}}^{j_{2}}L_{i_{4}}^{j_{3}}-M_{i_{3},i_{4}}^{j_{1}}L_{i_{1}}^{j_{2}}L_{i_{2}}^{j_{3}})M_{j_{2},j_{3}}^{j_{4}}L_{j_{1}}^{j_{5}}M_{j_{5},j_{4}}^{k}$
 \end_inset
 
 
@@ -3044,39 +2872,124 @@ Permutative Law
 \end_layout
 
 \begin_layout Standard
-Test
+We define
 \begin_inset Formula 
 \begin{align*}
-\sum\limits _{\boldsymbol{j}}(M_{1,1}^{j_{1}}-M_{1,1}^{j_{2}})M_{j_{1},j_{2}}^{1}
+ & =\mathrm{A}=\mathbb{Z}[\boldsymbol{M},\boldsymbol{L}]\slash\langle\boldsymbol{G},\boldsymbol{\Gamma},\boldsymbol{\Lambda},\boldsymbol{\Theta},\boldsymbol{H},\boldsymbol{\Pi}\rangle\\
+\\
 \end{align*}
 
 \end_inset
 
 
+\begin_inset Formula 
+\[
+\mathrm{A}^{(n)}=\mathrm{A}=\mathbb{Z}[\boldsymbol{M},\boldsymbol{L},\boldsymbol{D}]\slash\langle\boldsymbol{G},\boldsymbol{\Gamma},\boldsymbol{\Lambda},\boldsymbol{\Theta},\boldsymbol{H},\boldsymbol{\Pi}\rangle.
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $F_{+}=\mathbb{Z}^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theorem}
+\end_layout
+
+\end_inset
+
+ We have the following bijection of sets:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-(M_{1,1}^{1}-M_{1,1}^{2})M_{1,2}^{1}+(M_{1,1}^{2}-M_{1,1}^{1})M_{2,1}^{1}
+\left\{ \mathrm{GL}_{n}(\Bbbk)\text{-orbits of }h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(\Bbbk)\right\} \longleftrightarrow\left\{ \begin{array}{c}
+\text{isomorphism classes of }\text{\ensuremath{\Bbbk}-complex}\\
+\text{structures on }F\text{ with fixed identity}
+\end{array}\right\} 
 \]
 
 \end_inset
 
+where 
+\begin_inset Formula $\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)$
+\end_inset
 
+ is a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra (to be constructed below) and where
 \begin_inset Formula 
 \[
--2M_{1,2}^{1}M_{1,1}^{2}+2M_{2,1}^{1}M_{1,1,}^{2}
+h_{\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)}(\Bbbk):=\mathrm{Hom}_{\Bbbk\text{-alg}}(\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F),\Bbbk)
 \]
 
 \end_inset
 
+is the 
+\begin_inset Formula $\Bbbk$
+\end_inset
 
-\end_layout
+-valued points of 
+\begin_inset Formula $\mathrm{A}_{\Bbbk}^{\mathrm{d}}(F)$
+\end_inset
 
-\begin_layout Standard
-and so on.
+.
+ Two 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex structures 
+\begin_inset Formula $(F,\mathrm{d})$
+\end_inset
+
+ and 
+\begin_inset Formula $(F,\mathrm{d}')$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ are said to be isomorphic with fixed identity if there exists a chain map
  
+\begin_inset Formula $\varphi\colon F\to F$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi(1)=1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
