@@ -1,0 +1,1944 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Numerical Analysis Homework 8
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+Throughout this homework, 
+\begin_inset Formula $\|\cdot\|$
+\end_inset
+
+ denotes the 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+-norm.
+ We also let 
+\begin_inset Formula $\langle\cdot,\cdot\rangle$
+\end_inset
+
+ denote the standard Euclidean inner-product on 
+\begin_inset Formula $\mathbb{C}^{m}$
+\end_inset
+
+ (thus 
+\begin_inset Formula 
+\[
+\langle x,y\rangle=\sum_{i=1}^{m}x_{i}\overline{y}_{i}
+\]
+
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y\in\mathbb{C}^{m}$
+\end_inset
+
+).
+ Finally we set 
+\begin_inset Formula $\varepsilon=\varepsilon_{\mathrm{machine}}$
+\end_inset
+
+ to be the machine coefficient.
+\end_layout
+
+\begin_layout Section
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $H$
+\end_inset
+
+ be the initial input matrix for the shifted QR iteration.
+ Show that 
+\begin_inset Formula 
+\[
+(H-\mu^{(k)}I)\cdots(H-\mu^{(2)}I)(H-\mu^{(1)}I)=\underline{Q}^{(k)}\underline{R}^{(k)}.
+\]
+
+\end_inset
+
+In practice, 
+\begin_inset Formula $H$
+\end_inset
+
+ is upper Hessenberg, but we do not need this assumption here.
+\end_layout
+
+\begin_layout Enumerate
+Other than the Wilkinson shift, we may also let 
+\begin_inset Formula $\mu^{(k)}=h_{nn}^{(k-1)}$
+\end_inset
+
+ if 
+\begin_inset Formula $h_{n,n-1}^{(k-1)}$
+\end_inset
+
+ is small.
+ Assume, for example, that
+\begin_inset Formula 
+\[
+H^{(k-1)}=\begin{pmatrix}\times & \times & \times & \times & \times\\
+\times & \times & \times & \times & \times\\
+0 & \times & \times & \times & \times\\
+0 & 0 & \times & \times & \times\\
+0 & 0 & 0 & \delta & h_{n,n}^{(k-1)}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+After the application of 
+\begin_inset Formula $n-2$
+\end_inset
+
+ Givens rotations to 
+\begin_inset Formula $H^{(k-1)}-h_{n,n}^{(k-1)}I$
+\end_inset
+
+, we have the intermediate matrix
+\begin_inset Formula 
+\[
+H_{\mathrm{tmp}}^{(k-1)}=\begin{pmatrix}\times & \times & \times & \times & \times\\
+0 & \times & \times & \times & \times\\
+0 & 0 & \times & \times & \times\\
+0 & 0 & 0 & a & b\\
+0 & 0 & 0 & \delta & 0
+\end{pmatrix}
+\]
+
+\end_inset
+
+(make sure you understand why it is of this form), and the last Givens rotation
+ is needed on the left before we compute 
+\begin_inset Formula $H^{(k)}$
+\end_inset
+
+ by transposed Givens rotations.
+ Show that the new matrix 
+\begin_inset Formula $H^{(k)}=R^{(k)}Q^{(k)}+h_{n,n}^{(k-1)}I$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $h_{n,n-1}^{(k)}=-b\delta^{2}/(a^{2}+\delta^{2})$
+\end_inset
+
+.
+ What does this observation suggest, if 
+\begin_inset Formula $|h_{n,n-1}^{(k-1)}|=|\delta|\ll1$
+\end_inset
+
+, and either 
+\begin_inset Formula $|b|<2|a|$
+\end_inset
+
+ (
+\begin_inset Formula $\delta$
+\end_inset
+
+ can be arbitrary) or if 
+\begin_inset Formula $|\delta|<a^{2}/|b|$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Enumerate
+What can we say about 
+\begin_inset Formula $h_{n,n-1}^{(k)}$
+\end_inset
+
+ if 
+\begin_inset Formula $A$
+\end_inset
+
+ is real symmetric, such that 
+\begin_inset Formula $H^{(k-1)}$
+\end_inset
+
+ is also real symmetric (hence tridiagonal)? In particular, does this entry
+ decrease more slowly or more rapidly in the symmetric case than in the
+ nonsymmetric case?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ First let us recall that for all 
+\begin_inset Formula $k$
+\end_inset
+
+, the QR algorithms gives us the following relations:
+\begin_inset Formula 
+\begin{align*}
+H^{(k-1)}-\mu^{(k)} & =Q^{(k)}R^{(k)}\\
+H^{(k)}-\mu^{(k)} & =R^{(k)}Q^{(k)}.
+\end{align*}
+
+\end_inset
+
+Using this, we wish to show that for all 
+\begin_inset Formula $k$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{equation}
+\prod_{i=1}^{k}(H-\mu^{(i)})=(H-\mu^{(k)})\cdots(H-\mu^{(2)})(H-\mu^{(1)})=\underline{Q}^{(k)}\underline{R}^{(k)},\label{eq:1}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\underline{Q}^{(k)}=Q^{(1)}Q^{(2)}\cdots Q^{(k)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\underline{R}^{(k)}=R^{(k)}R^{(k-1)}\cdots R^{(1)}$
+\end_inset
+
+.
+ We prove 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:1})
+\end_layout
+
+\end_inset
+
+ by induction on 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ The base 
+\begin_inset Formula $k=1$
+\end_inset
+
+ is clear, so assume we have shown 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:1})
+\end_layout
+
+\end_inset
+
+ for all 
+\begin_inset Formula $j<k$
+\end_inset
+
+ where 
+\begin_inset Formula $k>1$
+\end_inset
+
+, and we wish to show it holds for 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ We have
+\begin_inset Formula 
+\begin{align*}
+\underline{Q}^{(k)}\underline{R}^{(k)} & =\underline{Q}^{(k-1)}Q^{(k)}R^{(k)}\underline{R}^{(k-1)}\\
+ & =\underline{Q}^{(k-1)}(H^{(k-1)}-\mu^{(k)})\underline{R}^{(k-1)}\\
+ & =\underline{Q}^{(k-1)}H^{(k-1)}\underline{R}^{(k-1)}-\mu^{(k)}\underline{Q}^{(k-1)}\underline{R}^{(k-1)}\\
+ & =\underline{Q}^{(k-1)}(R^{(k-1)}Q^{(k-1)}+\mu^{(k-1)})\underline{R}^{(k-1)}-\mu^{(k)}\underline{Q}^{(k-1)}\underline{R}^{(k-1)}\\
+ & =\underline{Q}^{(k-1)}R^{(k-1)}Q^{(k-1)}\underline{R}^{(k-1)}+\mu^{(k-1)}\underline{Q}^{(k-1)}\underline{R}^{(k-1)}-\mu^{(k)}\underline{Q}^{(k-1)}\underline{R}^{(k-1)}\\
+ & =\underline{Q}^{(k-1)}R^{(k-1)}Q^{(k-1)}\underline{R}^{(k-1)}+\mu^{(k-1)}\underline{Q}^{(k-1)}\underline{R}^{(k-1)}-\mu^{(k)}\underline{Q}^{(k-1)}\underline{R}^{(k-1)}\\
+ & =(H-\mu^{(k-1)})\underline{Q}^{(k-1)}\underline{R}^{(k-1)}+\mu^{(k-1)}\underline{Q}^{(k-1)}\underline{R}^{(k-1)}-\mu^{(k)}\underline{Q}^{(k-1)}\underline{R}^{(k-1)}\\
+ & =(H-\mu^{(k)})\underline{Q}^{(k-1)}\underline{R}^{(k-1)}\\
+ & =(H-\mu^{(k)})\prod_{i=1}^{k-1}(H-\mu^{(i)})\\
+ & =\prod_{i=1}^{k}(H-\mu^{(i)}).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ For this part of the problem we simplify notation by setting 
+\begin_inset Formula $H:=H^{(k-1)}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $H':=H-h_{nn}$
+\end_inset
+
+ has the form
+\begin_inset Formula 
+\[
+H'=\begin{pmatrix}\times & \times & \times & \times & \times\\
+\times & \times & \times & \times & \times\\
+0 & \times & \times & \times & \times\\
+0 & 0 & \times & \times & \times\\
+0 & 0 & 0 & \delta & 0
+\end{pmatrix}.
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $G_{1}$
+\end_inset
+
+ is the first givens Gotations, then 
+\begin_inset Formula $G_{1}H'$
+\end_inset
+
+ has the form
+\begin_inset Formula 
+\[
+G_{1}H'=\begin{pmatrix}\times & \times & \times & \times & \times\\
+0 & \times & \times & \times & \times\\
+0 & \times & \times & \times & \times\\
+0 & 0 & \times & \times & \times\\
+0 & 0 & 0 & \delta & 0
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Similarly, if 
+\begin_inset Formula $G_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{3}$
+\end_inset
+
+ are the second and third Givens rotations respectively, then 
+\begin_inset Formula $G_{3}G_{2}G_{1}H'$
+\end_inset
+
+ has the form
+\begin_inset Formula 
+\[
+G_{3}G_{2}G_{1}H'=\begin{pmatrix}\times & \times & \times & \times & \times\\
+0 & \times & \times & \times & \times\\
+0 & 0 & \times & \times & \times\\
+0 & 0 & 0 & a & b\\
+0 & 0 & 0 & \delta & 0
+\end{pmatrix}.
+\]
+
+\end_inset
+
+At this point, we set 
+\begin_inset Formula 
+\[
+G_{4}=\begin{pmatrix}1 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & a/\lambda & \delta/\lambda\\
+0 & 0 & 0 & -\delta/\lambda & a/\lambda
+\end{pmatrix}
+\]
+
+\end_inset
+
+to be the last Givens rotation where 
+\begin_inset Formula $\lambda=\sqrt{a^{2}+\delta^{2}}$
+\end_inset
+
+ and we set 
+\begin_inset Formula $Q^{*}=G_{4}G_{3}G_{2}G_{1}$
+\end_inset
+
+ (thus 
+\begin_inset Formula $Q=G_{1}^{*}G_{2}^{*}G_{3}^{*}G_{4}^{*}$
+\end_inset
+
+ since each 
+\begin_inset Formula $G_{i}$
+\end_inset
+
+ is orthonormal).
+ Then 
+\begin_inset Formula $Q^{*}H'$
+\end_inset
+
+ has the form
+\begin_inset Formula 
+\[
+Q^{*}H'=\begin{pmatrix}\times & \times & \times & \times & \times\\
+0 & \times & \times & \times & \times\\
+0 & 0 & \times & \times & \times\\
+0 & 0 & 0 & \lambda & ab/\lambda\\
+0 & 0 & 0 & 0 & -b\delta/\lambda
+\end{pmatrix}:=R.
+\]
+
+\end_inset
+
+Finally we construct a new matrix 
+\begin_inset Formula $H'':=RQ+h_{nn}$
+\end_inset
+
+ and the goal is to show that
+\begin_inset Formula 
+\[
+h_{n,n-1}''=-b\delta^{2}/(a^{2}+\delta^{2})=-b(\delta/\lambda)^{2}.
+\]
+
+\end_inset
+
+This is clear though since
+\begin_inset Formula 
+\[
+\begin{pmatrix}\lambda & ab/\lambda\\
+0 & -\delta b/\lambda
+\end{pmatrix}\begin{pmatrix}a/\lambda & -\delta/\lambda\\
+\delta/\lambda & a/\lambda
+\end{pmatrix}=\begin{pmatrix}\times & \times\\
+-b(\delta/\lambda)^{2} & \times
+\end{pmatrix}.
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\left(\begin{smallmatrix}\lambda & ab/\lambda\\
+0 & -\delta b/\lambda
+\end{smallmatrix}\right)$
+\end_inset
+
+ is the bottom right 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ submatrix of 
+\begin_inset Formula $R$
+\end_inset
+
+ and where 
+\begin_inset Formula $\left(\begin{smallmatrix}a/\lambda & -\delta/\lambda\\
+\delta/\lambda & a/\lambda
+\end{smallmatrix}\right)$
+\end_inset
+
+ is the bottom right 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ submatrix of 
+\begin_inset Formula $G_{4}^{*}$
+\end_inset
+
+.
+ In particular, if 
+\begin_inset Formula $|\delta|\ll1$
+\end_inset
+
+ and either 
+\begin_inset Formula $|b|<2|a|$
+\end_inset
+
+ (
+\begin_inset Formula $\delta$
+\end_inset
+
+ can be arbitrary) or if 
+\begin_inset Formula $|\delta|<a^{2}/|b|$
+\end_inset
+
+, then 
+\begin_inset Formula $|h_{n,n-1}''|\ll1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ In the symmetric case, we have 
+\begin_inset Formula $b=\delta$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $h_{n,n-1}''=-\delta^{3}/(a^{2}+\delta^{2})$
+\end_inset
+
+.
+ It decreases more rapidly in the symmetric case.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Implement the single-shift QR step in MATLAB; that is, given an upper Hessenber
+g 
+\begin_inset Formula $H^{(k-1)}$
+\end_inset
+
+ and shift 
+\begin_inset Formula $\mu^{(k)}$
+\end_inset
+
+, we compute
+\begin_inset Formula 
+\[
+Q^{(k)}R^{(k)}=H^{(k-1)}-\mu^{(k)}I
+\]
+
+\end_inset
+
+by Givens rotations and then use these Givens rotations to compute
+\begin_inset Formula 
+\[
+H^{(k)}=R^{(k)}Q^{(k)}+\mu^{(k)}I.
+\]
+
+\end_inset
+
+Make simple changes in my code to enforce the use of single (Wilkinson)
+ shift only, even if complex arithmetic is needed.
+ Assemble your single shift code with the up-loaded subroutines.
+ Test it with the matrix obtained by
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+load west0479; 
+\end_layout
+
+\begin_layout Plain Layout
+
+A = full(west0479); 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Compare the eigenvalues of your final 
+\begin_inset Formula $H^{(k)}$
+\end_inset
+
+ (use ordeig) with those of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Be aware that the ordering of eigenvalues must be consistent to make a
+ meaningful comparison.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Implement the Arnoldi’s method without and with reorthogonalization, and
+ test the orthogonality of the column vectors in 
+\begin_inset Formula $U_{50}$
+\end_inset
+
+ for the matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ generated by
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+u = cos((0:2048)/2048*pi); 
+\end_layout
+
+\begin_layout Plain Layout
+
+A = vander(u);
+\end_layout
+
+\end_inset
+
+Is the reorthogonalization effective for generating an orthonormal basis?
+ Use Arnoldi with reorthogonalization to compute the 
+\begin_inset Formula $11$
+\end_inset
+
+ dominant eigenvalues and eigenvectors of aerofoil new, using 
+\begin_inset Formula $m=30,60,100,150$
+\end_inset
+
+ dimensional Krylov subspaces.
+ For each 
+\begin_inset Formula $m$
+\end_inset
+
+, plot all eigenvalues 
+\begin_inset Formula $\{\lambda_{i}\}_{i=1}^{n}$
+\end_inset
+
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+ together with the eigenvalues 
+\begin_inset Formula $\{\mu_{i}\}_{i=1}^{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $H_{m}$
+\end_inset
+
+ on the complex plane.
+ Intuitively, how do 
+\begin_inset Formula $\{\mu_{i}\}_{i=1}^{m}$
+\end_inset
+
+ approximate 
+\begin_inset Formula $\{\lambda_{i}\}_{i=1}^{n}$
+\end_inset
+
+ as 
+\begin_inset Formula $m$
+\end_inset
+
+ increases? Give the relative eigenresidual norm
+\begin_inset Formula 
+\[
+\frac{\|AU_{m}w_{i}-\mu_{i}U_{m}w_{i}\|}{\|AU_{m}w_{i}\|}
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $1\leq i\leq11$
+\end_inset
+
+ of the desired eigenpairs for each 
+\begin_inset Formula $m$
+\end_inset
+
+ in a table.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Table: 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="12" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\|AU_{m}w_{i}-\mu_{i}U_{m}w_{i}\|}{\|AU_{m}w_{i}\|}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $m=30$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $m=60$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $m=100$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $m=150$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i=1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i=2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i=3$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i=4$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i=5$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i=6$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i=7$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i=8$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i=9$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i=10$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i=11$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Read the implicit double-shifted QR step for real nonsymmetric matrices
+ and the overall QR iteration.
+ Then read my codes to see how the described algorithms are implemented.
+ Debug my code to compare numerically if the double shifted QR step gives
+ a new upper Hessenberg matrix that is numerically the same as the upper
+ Hessenberg matrix obtained by using the pair of complex conjugate shifts
+ successively in two single-shifted QR steps.
+ Use your own words to summarize (not to repeat) the overall QR iteration.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Subsection*
+QR Post Process
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Q,R] = QRpostprocess(Q,R)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(Q);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:n   
+\end_layout
+
+\begin_layout Plain Layout
+
+   if R(i,i) < 0 
+\end_layout
+
+\begin_layout Plain Layout
+
+      R(i,:) = -R(i,:);   
+\end_layout
+
+\begin_layout Plain Layout
+
+      Q(:,i) = -Q(:,i);    
+\end_layout
+
+\begin_layout Plain Layout
+
+   end;
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+QR Algorithm
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Qk,Rk,Ak] = QRalgorithm(A,k)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(A); Ak = A; Rk = eye(n); Qk = eye(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:k    
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Q,R] = qr(Ak); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Q,R] = QRpostprocess(Q,R);
+\end_layout
+
+\begin_layout Plain Layout
+
+   Ak = R*Q;    
+\end_layout
+
+\begin_layout Plain Layout
+
+   Qk = Qk*Q;    
+\end_layout
+
+\begin_layout Plain Layout
+
+   Rk = R*Rk; 
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Simultaneous Iteration
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Qk,Rk,Ak] = SimultaneousIteration(A,k)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(A); Qk = eye(n); Rk = eye(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:k   
+\end_layout
+
+\begin_layout Plain Layout
+
+   Z = A*Qk;    
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Qk,R] = qr(Z); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Qk,R] = QRpostprocess(Qk,R);  
+\end_layout
+
+\begin_layout Plain Layout
+
+   Ak = Qk'*A*Qk;   
+\end_layout
+
+\begin_layout Plain Layout
+
+   Rk = R*Rk;
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

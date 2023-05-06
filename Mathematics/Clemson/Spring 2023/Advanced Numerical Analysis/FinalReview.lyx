@@ -1,0 +1,1500 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Numerical Analysis Final Review
+\end_layout
+
+\begin_layout Section*
+Stability
+\end_layout
+
+\begin_layout Standard
+A mathematical 
+\series bold
+problem 
+\series default
+is a function 
+\begin_inset Formula $f\colon X\to Y$
+\end_inset
+
+ from a normed space 
+\begin_inset Formula $X$
+\end_inset
+
+ of data to a normed space 
+\begin_inset Formula $Y$
+\end_inset
+
+ of solutions.
+ An 
+\series bold
+algorithm 
+\series default
+can be viewed as another map 
+\begin_inset Formula $\widetilde{f}\colon X\to Y$
+\end_inset
+
+ between the same two spaces.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\widetilde{f}\colon X\to Y$
+\end_inset
+
+ be an algorithm to a problem 
+\begin_inset Formula $f\colon X\to Y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+We say 
+\begin_inset Formula $\widetilde{f}$
+\end_inset
+
+ is 
+\series bold
+accurate 
+\series default
+if for each 
+\begin_inset Formula $x\in X$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\[
+\frac{\|\widetilde{f}(x)-f(x)\|}{\|f(x)\|}=O(\varepsilon).
+\]
+
+\end_inset
+
+In other words, an accurate algorithm gives nearly the right answer to exactly
+ the right question.
+\end_layout
+
+\begin_layout Enumerate
+We 
+\begin_inset Formula $\widetilde{f}$
+\end_inset
+
+ is 
+\series bold
+stable 
+\series default
+if for each 
+\begin_inset Formula $x\in X$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{equation}
+\frac{\|\widetilde{f}(x)-f(\widetilde{x})\|}{\|f(\widetilde{x})\|}=O(\varepsilon)\label{eq:stability}
+\end{equation}
+
+\end_inset
+
+for some 
+\begin_inset Formula $\widetilde{x}$
+\end_inset
+
+ with
+\begin_inset Formula 
+\[
+\frac{\|\widetilde{x}-x\|}{\|x\|}=O(\varepsilon).
+\]
+
+\end_inset
+
+In other words, a stable algorithm gives nearly the right answer to nearly
+ the right question.
+\end_layout
+
+\begin_layout Enumerate
+We say an algorithm 
+\begin_inset Formula $\widetilde{f}$
+\end_inset
+
+ is 
+\series bold
+backwards stable 
+\series default
+if for each 
+\begin_inset Formula $x\in X$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+\widetilde{f}(x)=f(\widetilde{x})
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $\widetilde{x}$
+\end_inset
+
+ with
+\begin_inset Formula 
+\[
+\frac{\|\widetilde{x}-x\|}{\|x\|}=O(\varepsilon).
+\]
+
+\end_inset
+
+ In other words, a backward stable algorithm gives exactly the right answer
+ to nearly the right question.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be the space of all real symmetric, indefinite, and nonsingular 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ matrices 
+\begin_inset Formula $A$
+\end_inset
+
+ and let 
+\begin_inset Formula $Y=\mathbb{R}^{n\times n}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $f\colon X\to Y$
+\end_inset
+
+ be the inclusion map given by
+\begin_inset Formula 
+\[
+f(A)=LDL^{\top}=A,
+\]
+
+\end_inset
+
+so 
+\begin_inset Formula $f$
+\end_inset
+
+ is thought of as representing Cholesky factorization, and let 
+\begin_inset Formula $\widetilde{f}\colon X\to Y$
+\end_inset
+
+ be an algorithm which computes Cholesky factorization given by
+\begin_inset Formula 
+\[
+\widetilde{f}(A)=\widetilde{L}\widetilde{D}\widetilde{L}^{\top},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\widetilde{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{D}$
+\end_inset
+
+ are computed from 
+\begin_inset Formula $A$
+\end_inset
+
+ (and 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+).
+ Then in order for 
+\begin_inset Formula $\widetilde{f}$
+\end_inset
+
+ to be backwards stable, we need
+\begin_inset Formula 
+\[
+A+\delta A=\widetilde{L}\widetilde{D}\widetilde{L}^{\top}
+\]
+
+\end_inset
+
+for some 
+\begin_inset Formula $\delta A$
+\end_inset
+
+ which satisfies 
+\begin_inset Formula $\|\delta A\|/\|A\|=O(\varepsilon)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Previous Final Problems and Solutions
+\end_layout
+
+\begin_layout Subsubsection*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A\in\mathbb{R}^{n\times n}$
+\end_inset
+
+ be real symmetric, indefinite and nonsingular.
+ Consider a signed Cholesky factorization
+\begin_inset Formula 
+\[
+A=LDL^{\top}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $L$
+\end_inset
+
+ is lower triangular and 
+\begin_inset Formula $D$
+\end_inset
+
+ is a diagonal matrix with 
+\begin_inset Formula $\pm1$
+\end_inset
+
+ diagonal elements.
+ Consider a collection of such matrices for which 
+\begin_inset Formula $\kappa(L):=\|L\|\|L^{-1}\|\leq C_{n}$
+\end_inset
+
+ for some moderate constant 
+\begin_inset Formula $C_{n}>0$
+\end_inset
+
+ (assume 
+\begin_inset Formula $n$
+\end_inset
+
+ is fixed).
+\end_layout
+
+\begin_layout Enumerate
+Show that for these matrices, the Cholesky factor 
+\begin_inset Formula $L$
+\end_inset
+
+ satisfies
+\begin_inset Formula 
+\[
+\|L\|^{2}\leq C_{n}\|A\|.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Suppose a signed Cholesky factorization applied to these matrices gives
+ 
+\begin_inset Formula $\widehat{L}$
+\end_inset
+
+ and diagonal 
+\begin_inset Formula $\widehat{D}$
+\end_inset
+
+ with 
+\begin_inset Formula $\pm1$
+\end_inset
+
+ entries, such that
+\begin_inset Formula 
+\begin{equation}
+A+\Delta A=\widehat{L}\widehat{D}\widehat{L}^{\top},\label{eq:1}
+\end{equation}
+
+\end_inset
+
+with 
+\begin_inset Formula $\kappa(\widehat{L})\leq C_{n}$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{equation}
+\frac{\|\Delta A\|}{\|\widehat{L}\|\|\widehat{L}^{\top}\|}=\mathcal{O}(\varepsilon).\label{eq:2}
+\end{equation}
+
+\end_inset
+
+Show this algorithm is backwards stable for such matrices.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Since 
+\begin_inset Formula $D$
+\end_inset
+
+ is orthogonal and 
+\begin_inset Formula $L^{-1}AL=DL^{\top}L$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\|L\|^{2} & =\|L^{\top}L\|\\
+ & =\|DL^{\top}L\|\\
+ & =\|L^{-1}AL\|\\
+ & \leq\|L^{-1}\|\|L\|\|A\|\\
+ & \leq C_{n}\|A\|.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Given the actual computed signed Cholesky factorization 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:1})
+\end_layout
+
+\end_inset
+
+, the above derivation shows that
+\begin_inset Formula 
+\[
+\|\widehat{L}\|\|\widehat{L}^{\top}\|\leq C_{n}\|A+\Delta A\|\leq C_{n}(\|A\|+\|\Delta A\|).
+\]
+
+\end_inset
+
+Then from the known relation 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:2})
+\end_layout
+
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{equation}
+\frac{\|\Delta A\|}{\|A\|+\|\Delta A\|}\leq\frac{C_{n}\|\Delta A\|}{\|\widehat{L}\|\|\widehat{L}^{\top}||}=\mathcal{O}(\varepsilon).\label{eq:3}
+\end{equation}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $\|\Delta A\|/\|A\|=\mathcal{O}(\varepsilon)$
+\end_inset
+
+.
+ To see this, set 
+\begin_inset Formula $x=\|A\|$
+\end_inset
+
+ and 
+\begin_inset Formula $y=\|\Delta A\|$
+\end_inset
+
+.
+ Then 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:3})
+\end_layout
+
+\end_inset
+
+ says there exists a constant 
+\begin_inset Formula $C>0$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+\frac{y}{x+y}\leq C\varepsilon.
+\]
+
+\end_inset
+
+Thus we have
+\begin_inset Formula 
+\begin{align*}
+\frac{y}{x+y}\leq C\varepsilon & \implies y\leq Cx\varepsilon+Cy\varepsilon\\
+ & \implies(1-C\varepsilon)y\leq Cx\varepsilon\\
+ & \implies\frac{y}{x}\leq\left(\frac{C}{1-C\varepsilon}\right)\varepsilon
+\end{align*}
+
+\end_inset
+
+By choosing 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ small enough, say 
+\begin_inset Formula $1-C\varepsilon\ge1/2$
+\end_inset
+
+, then we get
+\begin_inset Formula 
+\[
+\frac{y}{x}\leq\left(\frac{C}{1-C\varepsilon}\right)\varepsilon\leq2C\varepsilon.
+\]
+
+\end_inset
+
+This shows 
+\begin_inset Formula $y/x\in\mathcal{O}(\varepsilon)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A\in\mathbb{R}^{m\times n}$
+\end_inset
+
+ where 
+\begin_inset Formula $m\geq n$
+\end_inset
+
+ be of full rank 
+\begin_inset Formula $n$
+\end_inset
+
+, with SVD
+\begin_inset Formula 
+\[
+A=U\Sigma V^{\top}=\sum_{j=1}^{n}\sigma_{j}u_{j}v_{j}^{\top},
+\]
+
+\end_inset
+
+with singular values 
+\begin_inset Formula $\sigma_{1}\geq\sigma_{2}\geq\cdots\geq\sigma_{n}>0$
+\end_inset
+
+.
+ Choose and fix index 
+\begin_inset Formula $k$
+\end_inset
+
+ where 
+\begin_inset Formula $1\leq k<n$
+\end_inset
+
+ and define
+\begin_inset Formula 
+\[
+A_{k}=\sum_{j=1}^{k}\sigma_{j}u_{j}v_{j}^{\top}+\sum_{j=k+1}^{n}\frac{\sigma_{k+1}}{2}u_{j}v_{j}^{\top},
+\]
+
+\end_inset
+
+and consider the set
+\begin_inset Formula 
+\[
+S=\left\{ B\mid B\in\mathbb{R}^{m\times n}\mid\sigma_{j}(B)\leq\frac{\sigma_{k+1}}{2}\text{ for all }k+1\leq j\leq n\right\} ,
+\]
+
+\end_inset
+
+where we are assuming that 
+\begin_inset Formula $\sigma_{1}(B)\geq\cdots\geq\sigma_{n}(B)$
+\end_inset
+
+ are the singular values of 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ Show that
+\begin_inset Formula 
+\[
+\|A-A_{k}\|=\inf_{B\in S}\|A-B\|.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Consider unshifted QR applied ot real symmetric tridiagonal matrix 
+\begin_inset Formula $H$
+\end_inset
+
+, described by
+\begin_inset Formula 
+\begin{align*}
+H^{(0)} & =H\\
+H^{(k-1)} & =Q^{(k)}R^{(k)}\\
+H^{(k)} & =R^{(k)}Q^{(k)}\\
+\underline{Q}^{(k)} & =Q^{(1)}Q^{(k)}\cdots Q^{(k)}\\
+\underline{R}^{(k)} & =R^{(k)}R^{(k-1)}\cdots R^{(1)}\\
+H^{k} & =\underline{Q}^{(k)}\underline{R}^{(k)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Is the arithmetic work of each QR iteration 
+\begin_inset Formula $O(n)$
+\end_inset
+
+, 
+\begin_inset Formula $O(n^{2})$
+\end_inset
+
+, or 
+\begin_inset Formula $O(n^{3})$
+\end_inset
+
+, and why? With 
+\begin_inset Formula $H^{k}=Q^{(k)}R^{(k)}$
+\end_inset
+
+ show that under certain mild assumptions, the first and last column of
+ 
+\begin_inset Formula $\underline{Q}^{(k)}$
+\end_inset
+
+ converge to the eigenvector of 
+\begin_inset Formula $H$
+\end_inset
+
+ associated with the largest and smallest (modulus) eigenvalues respectively.
+ Finally, consider shifted QR iteration.
+ Assume the bottom-right 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ block of 
+\begin_inset Formula $H^{(k)}$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+\begin{pmatrix}\times & \eta a\\
+\eta a & a+b & \delta\\
+ & \delta & b
+\end{pmatrix}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $|\delta|$
+\end_inset
+
+ sufficiently small, 
+\begin_inset Formula $|a|$
+\end_inset
+
+ not very small, and 
+\begin_inset Formula $\eta\neq0$
+\end_inset
+
+.
+ Assume that the shift 
+\begin_inset Formula $\mu^{(k+1)}=b$
+\end_inset
+
+ is used to transform 
+\begin_inset Formula $H^{(k)}$
+\end_inset
+
+ to 
+\begin_inset Formula $H^{(k+1)}$
+\end_inset
+
+.
+ Given an upper bound on the 
+\begin_inset Formula $(n,n-1)$
+\end_inset
+
+ entry of 
+\begin_inset Formula $H^{(k+1)}$
+\end_inset
+
+ in modulus.
+ What does this imply?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ If each 
+\begin_inset Formula $H^{(k)}$
+\end_inset
+
+ is tridiagonal, then each Givens rotation applied to the left side of 
+\begin_inset Formula $H^{(k)}$
+\end_inset
+
+ only changes at most 
+\begin_inset Formula $6$
+\end_inset
+
+ entries, and so does each Givens rotation applied to the right side of
+ 
+\begin_inset Formula $R^{(k)}$
+\end_inset
+
+.
+ Therefore, in each QR iteration, the total arithmetic cost to perform QR
+ and compute 
+\begin_inset Formula $RQ$
+\end_inset
+
+ by 
+\begin_inset Formula $n-1$
+\end_inset
+
+ Givens rotations is 
+\begin_inset Formula $O(n)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next, multiply both sides of 
+\begin_inset Formula $H^{k}=\underline{Q}^{(k)}\underline{R}^{(k)}$
+\end_inset
+
+ by 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+ on the right and obtain 
+\begin_inset Formula 
+\[
+H^{k}e_{1}=\underline{Q}^{(k)}\underline{R}^{(k)}e_{1}=r_{11}^{(k)}\underline{Q}^{(k)}e_{1}=r_{11}^{(k)}\underline{q}_{1}^{(k)}.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $H^{k}e_{1}$
+\end_inset
+
+ is the vector obtained in the 
+\begin_inset Formula $k$
+\end_inset
+
+th step of the power method with matrix 
+\begin_inset Formula $H$
+\end_inset
+
+ starting with vector 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+, it typically converes towards the eigenvector associated with the largest
+ (in modulus) eigenvalue of 
+\begin_inset Formula $H$
+\end_inset
+
+, if the eigenvalue of such largest modulus is unique, and 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+ has a nonzero component of this eigenvector; the RHS 
+\begin_inset Formula $\underline{q}_{1}^{(k)}$
+\end_inset
+
+ is the first column of the accumulated Q factor.
+ Similarly, taking the inverse transpose gives
+\begin_inset Formula 
+\[
+H^{-k}=\underline{Q}^{(k)}(\underline{R}^{(k)})^{-\top}.
+\]
+
+\end_inset
+
+Multiplying both sides by 
+\begin_inset Formula $e_{n}$
+\end_inset
+
+ gives 
+\begin_inset Formula $(1/r_{nn}^{(k)})\underline{q}_{n}^{(k)}$
+\end_inset
+
+.
+ Now apply the same analysis as above.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Consider unshifted QR applied ot real symmetric tridiagonal matrix 
+\begin_inset Formula $H$
+\end_inset
+
+, described by
+\begin_inset Formula 
+\begin{align*}
+H^{(0)} & =H\\
+H^{(k-1)} & =Q^{(k)}R^{(k)}\\
+H^{(k)} & =R^{(k)}Q^{(k)}\\
+\underline{Q}^{(k)} & =Q^{(1)}Q^{(k)}\cdots Q^{(k)}\\
+\underline{R}^{(k)} & =R^{(k)}R^{(k-1)}\cdots R^{(1)}\\
+H^{k} & =\underline{Q}^{(k)}\underline{R}^{(k)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Is the arithmetic work of each QR iteration 
+\begin_inset Formula $O(n)$
+\end_inset
+
+, 
+\begin_inset Formula $O(n^{2})$
+\end_inset
+
+, or 
+\begin_inset Formula $O(n^{3})$
+\end_inset
+
+, and why? With 
+\begin_inset Formula $H^{k}=Q^{(k)}R^{(k)}$
+\end_inset
+
+ show that under certain mild assumptions, the first and last column of
+ 
+\begin_inset Formula $\underline{Q}^{(k)}$
+\end_inset
+
+ converge to the eigenvector of 
+\begin_inset Formula $H$
+\end_inset
+
+ associated with the largest and smallest (modulus) eigenvalues respectively.
+ Finally, consider shifted QR iteration.
+ Assume the bottom-right 
+\begin_inset Formula $3\times3$
+\end_inset
+
+ block of 
+\begin_inset Formula $H^{(k)}$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+\begin{pmatrix}\times & \eta a\\
+\eta a & a+b & \delta\\
+ & \delta & b
+\end{pmatrix}
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $|\delta|$
+\end_inset
+
+ sufficiently small, 
+\begin_inset Formula $|a|$
+\end_inset
+
+ not very small, and 
+\begin_inset Formula $\eta\neq0$
+\end_inset
+
+.
+ Assume that the shift 
+\begin_inset Formula $\mu^{(k+1)}=b$
+\end_inset
+
+ is used to transform 
+\begin_inset Formula $H^{(k)}$
+\end_inset
+
+ to 
+\begin_inset Formula $H^{(k+1)}$
+\end_inset
+
+.
+ Given an upper bound on the 
+\begin_inset Formula $(n,n-1)$
+\end_inset
+
+ entry of 
+\begin_inset Formula $H^{(k+1)}$
+\end_inset
+
+ in modulus.
+ What does this imply?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ If each 
+\begin_inset Formula $H^{(k)}$
+\end_inset
+
+ is tridiagonal, then each Givens rotation applied to the left side of 
+\begin_inset Formula $H^{(k)}$
+\end_inset
+
+ only changes at most 
+\begin_inset Formula $6$
+\end_inset
+
+ entries, and so does each Givens rotation applied to the right side of
+ 
+\begin_inset Formula $R^{(k)}$
+\end_inset
+
+.
+ Therefore, in each QR iteration, the total arithmetic cost to perform QR
+ and compute 
+\begin_inset Formula $RQ$
+\end_inset
+
+ by 
+\begin_inset Formula $n-1$
+\end_inset
+
+ Givens rotations is 
+\begin_inset Formula $O(n)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next, multiply both sides of 
+\begin_inset Formula $H^{k}=\underline{Q}^{(k)}\underline{R}^{(k)}$
+\end_inset
+
+ by 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+ on the right and obtain 
+\begin_inset Formula 
+\[
+H^{k}e_{1}=\underline{Q}^{(k)}\underline{R}^{(k)}e_{1}=r_{11}^{(k)}\underline{Q}^{(k)}e_{1}=r_{11}^{(k)}\underline{q}_{1}^{(k)}.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $H^{k}e_{1}$
+\end_inset
+
+ is the vector obtained in the 
+\begin_inset Formula $k$
+\end_inset
+
+th step of the power method with matrix 
+\begin_inset Formula $H$
+\end_inset
+
+ starting with vector 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+, it typically converes towards the eigenvector associated with the largest
+ (in modulus) eigenvalue of 
+\begin_inset Formula $H$
+\end_inset
+
+, if the eigenvalue of such largest modulus is unique, and 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+ has a nonzero component of this eigenvector; the RHS 
+\begin_inset Formula $\underline{q}_{1}^{(k)}$
+\end_inset
+
+ is the first column of the accumulated Q factor.
+ Similarly, taking the inverse transpose gives
+\begin_inset Formula 
+\[
+H^{-k}=\underline{Q}^{(k)}(\underline{R}^{(k)})^{-\top}.
+\]
+
+\end_inset
+
+Multiplying both sides by 
+\begin_inset Formula $e_{n}$
+\end_inset
+
+ gives 
+\begin_inset Formula $(1/r_{nn}^{(k)})\underline{q}_{n}^{(k)}$
+\end_inset
+
+.
+ Now apply the same analysis as above.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

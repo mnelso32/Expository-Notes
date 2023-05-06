@@ -1,0 +1,1135 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Numerical Analysis Homework 9
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+Throughout this homework, 
+\begin_inset Formula $\|\cdot\|$
+\end_inset
+
+ denotes the 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+-norm.
+ We also let 
+\begin_inset Formula $\langle\cdot,\cdot\rangle$
+\end_inset
+
+ denote the standard Euclidean inner-product on 
+\begin_inset Formula $\mathbb{C}^{m}$
+\end_inset
+
+ (thus 
+\begin_inset Formula 
+\[
+\langle x,y\rangle=\sum_{i=1}^{m}x_{i}\overline{y}_{i}
+\]
+
+\end_inset
+
+ for all 
+\begin_inset Formula $x,y\in\mathbb{C}^{m}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Section
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Solve the following:
+\end_layout
+
+\begin_layout Enumerate
+For a generic Krylov subspace method that takes the initial approximation
+ 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+, gets the initial residual 
+\begin_inset Formula $r_{0}=b-Ax_{0}$
+\end_inset
+
+, develops the sequence of Krylov subspaces 
+\begin_inset Formula $\mathcal{K}_{k}(A,r_{0})$
+\end_inset
+
+ and constructs the approximate solution 
+\begin_inset Formula $x_{k}=x_{0}+z_{k}$
+\end_inset
+
+ where 
+\begin_inset Formula $z_{k}\in\mathcal{K}_{k}(A,r_{0})$
+\end_inset
+
+, the residual 
+\begin_inset Formula $r_{k}=b-Ax_{k}$
+\end_inset
+
+ can be written as 
+\begin_inset Formula $r_{k}=p_{k+1}(A)r_{0}$
+\end_inset
+
+, where 
+\begin_inset Formula $p_{k+1}$
+\end_inset
+
+ is a polynomial of degree no greater than 
+\begin_inset Formula $k+1$
+\end_inset
+
+ with 
+\begin_inset Formula $p_{k+1}(0)=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be SPD, and 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{0}=b-Ax_{0}$
+\end_inset
+
+ be the initial approximation and residual, respectively.
+ Consider the Lanczos relation 
+\begin_inset Formula 
+\[
+AU_{k}=U_{k}T_{k}+\beta_{k}u_{k+1}e_{k}^{\top}
+\]
+
+\end_inset
+
+(Arnoldi’s method applied to a symmetric 
+\begin_inset Formula $A$
+\end_inset
+
+), where 
+\begin_inset Formula $u_{1}=r_{0}/\|r_{0}\|$
+\end_inset
+
+.
+ u Show that the 
+\begin_inset Formula $k$
+\end_inset
+
+th iterate of CG can be written as 
+\begin_inset Formula $x_{k}=x_{0}+U_{k}y_{k}$
+\end_inset
+
+, where 
+\begin_inset Formula $y_{k}$
+\end_inset
+
+ satisfies 
+\begin_inset Formula $T_{k}y_{k}=\|r_{0}\|e_{1}$
+\end_inset
+
+ (Hint: use the fact that
+\begin_inset Formula 
+\begin{align*}
+r_{k} & =b-Ax_{k}\\
+ & =x_{0}-AU_{k}y_{k}\\
+ & \perp\mathcal{K}_{k}(A,r_{0})\\
+ & =\mathrm{col}(U_{k}).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Show that the 
+\begin_inset Formula $k$
+\end_inset
+
+th residual of GMRES 
+\begin_inset Formula $r_{k}=b-Ax_{k}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r_{k}\in\mathcal{K}_{k+1}(A,r_{0}),\quad r_{k}\perp A\mathcal{K}_{k}(A,r_{0}),\quad\text{and}\quad(r_{k},r_{k})=(r_{j},r_{k})
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $0\leq j\leq k-1$
+\end_inset
+
+, and therefore 
+\begin_inset Formula $\|r_{k}\|\leq\|r_{j}\|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Solve the following:
+\end_layout
+
+\begin_layout Enumerate
+Trefethen’s book, Prob.
+ 35.2.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $A\in\mathbb{R}^{n\times n}$
+\end_inset
+
+ be nonsymmetric and diagonalizable.
+ Assume that all eigenvalues of 
+\begin_inset Formula $A$
+\end_inset
+
+ lie in the disk centered at 
+\begin_inset Formula $c\in\mathbb{C}^{\times}$
+\end_inset
+
+ with radius 
+\begin_inset Formula $r<|c|$
+\end_inset
+
+.
+ Consider using GMRES to solve the linear system 
+\begin_inset Formula $Ax=b$
+\end_inset
+
+ iteratively.
+ Show that the 
+\begin_inset Formula $k$
+\end_inset
+
+th relative residual satisfies
+\begin_inset Formula 
+\[
+\frac{\|r_{k}\|}{\|r_{0}||}\leq C\left(\frac{r}{|c|}\right)^{k}
+\]
+
+\end_inset
+
+for some constant 
+\begin_inset Formula $C$
+\end_inset
+
+ independent of 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ What if 
+\begin_inset Formula $A$
+\end_inset
+
+ has a small number, say, 
+\begin_inset Formula $m\ll n$
+\end_inset
+
+ eigenvalues outside such a disk? 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $A$
+\end_inset
+
+ is an SPD matrix with the smallest eigenvalue 
+\begin_inset Formula $\lambda_{1}$
+\end_inset
+
+ and the largest eigenvalue 
+\begin_inset Formula $\lambda_{n}$
+\end_inset
+
+, what is the convergence factor obtained in part (2)? Compare this factor
+ with that of CG we learned in class.
+ Which one is better?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 3
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+ be the true solution of 
+\begin_inset Formula $Ax=b$
+\end_inset
+
+ with SPD 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $x_{k}$
+\end_inset
+
+ be the 
+\begin_inset Formula $k$
+\end_inset
+
+th iterate of CG, and 
+\begin_inset Formula 
+\[
+\varphi(x)=\frac{1}{2}x^{\top}Ax-b^{\top}x=\frac{1}{2}\|x\|_{A}-\langle b,x\rangle
+\]
+
+\end_inset
+
+for CG minimization.
+ (a) 
+\end_layout
+
+\begin_layout Enumerate
+Note that 
+\begin_inset Formula $r_{k}\perp r_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $0\leq j\leq k-1$
+\end_inset
+
+, and hence 
+\begin_inset Formula $r_{k}\perp U_{k}=\mathrm{span}\{p_{0},p_{1},\dots,p_{k-1}\}$
+\end_inset
+
+.
+ Also note that 
+\begin_inset Formula $r_{k}=-\nabla\varphi(x_{k})$
+\end_inset
+
+, and any vector 
+\begin_inset Formula $x\in W_{k}=x_{0}+U_{k}$
+\end_inset
+
+.
+ Explain from the optimization point of view, why 
+\begin_inset Formula $x_{k}=\mathrm{argmin}_{x\in W_{k}}\varphi(x)$
+\end_inset
+
+.
+ Hint: one possible (and easier) solution is to show that 
+\begin_inset Formula $W_{k}$
+\end_inset
+
+ is a convex set, and 
+\begin_inset Formula $\varphi(x)$
+\end_inset
+
+ is a convex function defined on 
+\begin_inset Formula $W_{k}$
+\end_inset
+
+; then local minimizer of 
+\begin_inset Formula $\varphi(x)$
+\end_inset
+
+ is necessarily a global minimizer.
+ Please do a little search on convex set/functions yourselves.
+ The condition 
+\begin_inset Formula $r_{k}\perp U_{k}$
+\end_inset
+
+ is crucial to show the optimality here.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Show directly that 
+\begin_inset Formula $x_{k}=\mathrm{argmin}_{x\in W_{k}}\|x-x^{*}\|_{A}$
+\end_inset
+
+, without referring to the connection between 
+\begin_inset Formula $\varphi(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $\|e_{k}\|_{A}$
+\end_inset
+
+.
+ (Hint: consider a different 
+\begin_inset Formula $\widetilde{x}_{k}\in W_{k}$
+\end_inset
+
+ with 
+\begin_inset Formula $d_{k}=\widetilde{x}_{k}-x_{k}\neq0$
+\end_inset
+
+.
+ Show that
+\begin_inset Formula 
+\[
+\|\widetilde{x}_{k}-x^{*}\|_{A}=\|d_{k}+x_{k}-x^{*}\|_{A}\geq\|x_{k}-x^{*}\|_{A}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Solve the following:
+\end_layout
+
+\begin_layout Enumerate
+A common misconception is that Krylov subspace methods solving 
+\begin_inset Formula $Ax=b$
+\end_inset
+
+ converge rapidly if the condition number, say, 
+\begin_inset Formula $\kappa_{2}(A)$
+\end_inset
+
+ is small.
+ This is largely true if 
+\begin_inset Formula $A$
+\end_inset
+
+ is SPD, but in general not true otherwise.
+ To explore this point, construct three matrices as follows
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+rng('default'); n = 1024; A = randn(n,n); [A,R] = qr(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+Ahat = A+1.2*eye(n); E = randn(n,n); E = E+E'; 
+\end_layout
+
+\begin_layout Plain Layout
+
+B = (A+A')/2; B = B+1e-4*E; Bhat = B+1.01*eye(n);
+\end_layout
+
+\end_inset
+
+Check that 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $\widehat{A}$
+\end_inset
+
+ are unsymmetric, 
+\begin_inset Formula $B$
+\end_inset
+
+ is symmetric and indefinite, and 
+\begin_inset Formula $\widehat{B}$
+\end_inset
+
+ is SPD, and find 
+\begin_inset Formula $\kappa_{2}(A)$
+\end_inset
+
+, 
+\begin_inset Formula $\kappa_{2}(\widehat{A})$
+\end_inset
+
+, 
+\begin_inset Formula $\kappa_{2}(B)$
+\end_inset
+
+, and 
+\begin_inset Formula $\kappa_{2}(\widehat{B})$
+\end_inset
+
+.
+ Are these condition numbers really large at all? Use 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+eig
+\end_layout
+
+\end_inset
+
+ to compute all eigenvalues of 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $\widehat{A}$
+\end_inset
+
+, 
+\begin_inset Formula $B$
+\end_inset
+
+, and 
+\begin_inset Formula $\widehat{B}$
+\end_inset
+
+ and plot them on the complex plane.
+ How are these eigenvalues distributed around the origin?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Subsection*
+QR Post Process
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Q,R] = QRpostprocess(Q,R)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(Q);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:n   
+\end_layout
+
+\begin_layout Plain Layout
+
+   if R(i,i) < 0 
+\end_layout
+
+\begin_layout Plain Layout
+
+      R(i,:) = -R(i,:);   
+\end_layout
+
+\begin_layout Plain Layout
+
+      Q(:,i) = -Q(:,i);    
+\end_layout
+
+\begin_layout Plain Layout
+
+   end;
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+QR Algorithm
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Qk,Rk,Ak] = QRalgorithm(A,k)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(A); Ak = A; Rk = eye(n); Qk = eye(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:k    
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Q,R] = qr(Ak); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Q,R] = QRpostprocess(Q,R);
+\end_layout
+
+\begin_layout Plain Layout
+
+   Ak = R*Q;    
+\end_layout
+
+\begin_layout Plain Layout
+
+   Qk = Qk*Q;    
+\end_layout
+
+\begin_layout Plain Layout
+
+   Rk = R*Rk; 
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Simultaneous Iteration
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [Qk,Rk,Ak] = SimultaneousIteration(A,k)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[m,n] = size(A); Qk = eye(n); Rk = eye(n);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:k   
+\end_layout
+
+\begin_layout Plain Layout
+
+   Z = A*Qk;    
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Qk,R] = qr(Z); 
+\end_layout
+
+\begin_layout Plain Layout
+
+   [Qk,R] = QRpostprocess(Qk,R);  
+\end_layout
+
+\begin_layout Plain Layout
+
+   Ak = Qk'*A*Qk;   
+\end_layout
+
+\begin_layout Plain Layout
+
+   Rk = R*Rk;
+\end_layout
+
+\begin_layout Plain Layout
+
+end;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

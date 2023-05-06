@@ -1,0 +1,910 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Numerical Analysis Homework 10
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section
+Problem 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Show that SOR fails to converge for any matrix with 
+\begin_inset Formula $\omega\leq0$
+\end_inset
+
+ or 
+\begin_inset Formula $\omega\geq2$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Recall the SOR iteration is
+\begin_inset Formula 
+\[
+x^{(k+1)}=(D-\omega E)^{-1}((1-\omega)D+\omega F)x^{(k)}+\omega b).
+\]
+
+\end_inset
+
+Multiplying both sides by 
+\begin_inset Formula $D-\omega E$
+\end_inset
+
+ gives us:
+\begin_inset Formula 
+\[
+(D-\omega E)x^{(k+1)}=((1-\omega)D+\omega F)x^{(k)}+\omega b.
+\]
+
+\end_inset
+
+Then multiplying both sides by 
+\begin_inset Formula $D^{-1}$
+\end_inset
+
+ gives us
+\begin_inset Formula 
+\[
+(1-\omega D^{-1}E)x^{(k+1)}=((1-\omega)I+\omega D^{-1}F)x^{(k)}+\omega D^{-1}b.
+\]
+
+\end_inset
+
+Thus the SOR iteration matrix is given by
+\begin_inset Formula 
+\[
+(1-\omega D^{-1}E)^{-1}((1-\omega)I+\omega D^{-1}F).
+\]
+
+\end_inset
+
+Now let 
+\begin_inset Formula $\{\lambda_{i}\}$
+\end_inset
+
+ denote the eigenvalues of the SOR iteration matrix.
+ Then
+\begin_inset Formula 
+\[
+\left|\lambda_{1}\cdots\lambda_{n}\right|=\left|\det((1-\omega)I+\omega D^{-1}F)\right|=|1-\omega|^{n}.
+\]
+
+\end_inset
+
+Therefore at least one eigenvalue 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ must exist such that 
+\begin_inset Formula $|\lambda_{i}|\geq|1-\omega|$
+\end_inset
+
+.
+ In particular, in order for convergence to hold, we must have 
+\begin_inset Formula $|1-\omega|<1$
+\end_inset
+
+.
+ In other words, we must have 
+\begin_inset Formula $0<\omega<2$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Problem 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Consider an 
+\begin_inset Formula $n\times n$
+\end_inset
+
+ symmetric tridiagonal matrix of the form
+\begin_inset Formula 
+\[
+T(\alpha)=\begin{pmatrix}\alpha & -1\\
+-1 & \alpha & -1\\
+ & \ddots & \ddots & \ddots\\
+ &  & -1 & \alpha & -1\\
+ &  &  & -1 & \alpha
+\end{pmatrix},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is a real parameter.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Verify that the eigenvalues of 
+\begin_inset Formula $T(\alpha)$
+\end_inset
+
+ are given by
+\begin_inset Formula 
+\[
+\lambda_{k}=\alpha-2\cos\frac{k\pi}{n+1},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $k=1,\dots,n$
+\end_inset
+
+.
+ Also verify that the eigenvector associated with 
+\begin_inset Formula $\lambda_{k}$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+v_{k}=\left(\sin\frac{k\pi}{n+1},\sin\frac{2k\pi}{n+1},\dots,\sin\frac{nk\pi}{n+1}\right)^{\top}.
+\]
+
+\end_inset
+
+Under what condition on 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is 
+\begin_inset Formula $T(\alpha)$
+\end_inset
+
+ positive-definite?
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\alpha=2$
+\end_inset
+
+.
+ Show that 
+\begin_inset Formula $T(2)$
+\end_inset
+
+ is obtained by setting up a uniform mesh on 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+, namely,
+\begin_inset Formula 
+\[
+x_{k}=a+k\frac{b-a}{n+1}\quad0\leq k\leq n+1
+\]
+
+\end_inset
+
+and applying the 
+\begin_inset Formula $2$
+\end_inset
+
+nd order centered finite difference approximation for the 1D Poisson equation
+ 
+\begin_inset Formula $-u''(x)=f(x)$
+\end_inset
+
+ with Dirichlet boundary condition 
+\begin_inset Formula $u(a)=u_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $u(b)=u_{n+1}$
+\end_inset
+
+ (both values given).
+\end_layout
+
+\begin_layout Enumerate
+Does the Jacobi iteration converge for 
+\begin_inset Formula $T(2)$
+\end_inset
+
+? If so,what is the convergence factor?
+\end_layout
+
+\begin_layout Enumerate
+Does Gauss-Seidel converge for 
+\begin_inset Formula $T(2)$
+\end_inset
+
+? If so, what is the convergence factor?
+\end_layout
+
+\begin_layout Enumerate
+For which values of 
+\begin_inset Formula $\omega$
+\end_inset
+
+ does the SOR iteration converge for 
+\begin_inset Formula $T(2)$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ Write 
+\begin_inset Formula $T=T(\alpha)$
+\end_inset
+
+, 
+\begin_inset Formula $v=v_{k}$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda=\lambda_{k}$
+\end_inset
+
+, and 
+\begin_inset Formula $\theta=k\pi/(n+1)$
+\end_inset
+
+ in order to simplify notation.
+ Note that for each 
+\begin_inset Formula $j\ge1$
+\end_inset
+
+, we have the following trigonometric identity:
+\begin_inset Formula 
+\begin{align}
+2\cos\theta\sin(j\theta) & =\sin((j-1)\theta)+\sin((j+1)\theta).\label{eq:sineidentity}
+\end{align}
+
+\end_inset
+
+Indeed, we have
+\begin_inset Formula 
+\begin{align*}
+\frac{\sin((j-1)\theta)+\sin((j+1)\theta)}{\sin(j\theta)} & =\frac{e^{i(j-1)\theta}-e^{-i(j-1)\theta}+e^{i(j+1)\theta}-e^{-i(j+1)\theta}}{e^{ij\theta}-e^{-ij\theta}}\\
+ & =\frac{e^{ij\theta}e^{-i\theta}-e^{-ij\theta}e^{i\theta}+e^{ij\theta}e^{i\theta}-e^{-ij\theta}e^{-i\theta}}{e^{ij\theta}-e^{-ij\theta}}\\
+ & =\frac{\left(e^{ij\theta}-e^{-ij\theta}\right)\left(e^{i\theta}+e^{-i\theta}\right)}{e^{ij\theta}-e^{-ij\theta}}\\
+ & =e^{i\theta}+e^{-i\theta}\\
+ & =2\cos\theta.
+\end{align*}
+
+\end_inset
+
+In particular, note that in the case were 
+\begin_inset Formula $j=1$
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:sineidentity})
+\end_layout
+
+\end_inset
+
+ simplifies to the usual double sine angle formula, and in the case where
+ 
+\begin_inset Formula $j=n$
+\end_inset
+
+, then 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:sineidentity})
+\end_layout
+
+\end_inset
+
+ simplifies to:
+\begin_inset Formula 
+\[
+2\cos\sin(n\theta)=\sin((n-1)\theta).
+\]
+
+\end_inset
+
+Therefore we have:
+\begin_inset Formula 
+\begin{align*}
+Tv & =\begin{pmatrix}\alpha & -1\\
+-1 & \alpha & -1\\
+ & \ddots & \ddots & \ddots\\
+ &  & -1 & \alpha & -1\\
+ &  &  & -1 & \alpha
+\end{pmatrix}\begin{pmatrix}\sin\theta\\
+\vdots\\
+\sin j\theta\\
+\vdots\\
+\sin n\theta
+\end{pmatrix}\\
+ & =\begin{pmatrix}\alpha\sin\theta-\sin2\theta\\
+\vdots\\
+-\sin((j-1)\theta)+\alpha\sin j\theta-\sin((j+1)\theta)\\
+\vdots\\
+-\sin((n-1)\theta)+\alpha\sin n\theta
+\end{pmatrix}\\
+ & =\begin{pmatrix}\alpha\sin\theta-2\cos\theta\sin\theta\\
+\vdots\\
+\alpha\sin j\theta+2\cos\theta\sin(j\theta)\\
+\vdots\\
+-2\cos\sin(n\theta)+\alpha\sin n\theta
+\end{pmatrix}\\
+ & =\begin{pmatrix}(\alpha-2\cos\theta)\sin\theta\\
+\vdots\\
+(\alpha-2\cos\theta)\sin(j\theta)\\
+\vdots\\
+(\alpha-2\cos\theta)\sin n\theta
+\end{pmatrix}\\
+ & =\lambda v.
+\end{align*}
+
+\end_inset
+
+It follows that the eigenvalues of 
+\begin_inset Formula $T(\alpha)$
+\end_inset
+
+ are 
+\begin_inset Formula $\lambda_{k}$
+\end_inset
+
+ for each 
+\begin_inset Formula $1\leq k\leq n$
+\end_inset
+
+ (indeed the 
+\begin_inset Formula $\lambda_{k}$
+\end_inset
+
+ are all distinct from each other, and since 
+\begin_inset Formula $T$
+\end_inset
+
+ is 
+\begin_inset Formula $n\times n$
+\end_inset
+
+, these must be all of the eigenvalues of 
+\begin_inset Formula $T$
+\end_inset
+
+).
+ Note that
+\begin_inset Formula 
+\begin{align*}
+T(\alpha)\text{ is positive-definite} & \iff\lambda_{k}>0\text{ for all }k\\
+ & \iff\alpha>2\cos\theta_{k}\text{ for all }k\\
+ & \iff\alpha>2\cos\theta_{1}.
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ We now consider 
+\begin_inset Formula $\alpha=2$
+\end_inset
+
+.
+ We also simplify life by considering 
+\begin_inset Formula $a=0$
+\end_inset
+
+ and 
+\begin_inset Formula $b=1$
+\end_inset
+
+ and we assume 
+\begin_inset Formula $f(0)=0=f(1)$
+\end_inset
+
+.
+ In this case, we have 
+\begin_inset Formula $\boldsymbol{x}=(x_{1},\dots,x_{n+1})^{\top}$
+\end_inset
+
+ where 
+\begin_inset Formula $x_{k}=k/(n+1)$
+\end_inset
+
+ for each 
+\begin_inset Formula $0\leq k\leq n+1$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\begin{align*}
+-Tf(\boldsymbol{x}) & =\begin{pmatrix}-2 & 1\\
+1 & -2 & 1\\
+ & \ddots & \ddots & \ddots\\
+ &  & 1 & -2 & 1\\
+ &  &  & 1 & -2
+\end{pmatrix}\begin{pmatrix}f(x_{1})\\
+\vdots\\
+f(x_{k})\\
+\vdots\\
+f(x_{n})
+\end{pmatrix}\\
+ & =\begin{pmatrix}f(x_{2})-2f(x_{1})\\
+\vdots\\
+f(x_{k-1})-2f(x_{k})+f(x_{k+1})\\
+\vdots\\
+f(x_{n-1})-2f(x_{n})
+\end{pmatrix}\\
+ & \approx f''(\boldsymbol{x})/(n+1).
+\end{align*}
+
+\end_inset
+
+In particular, 
+\begin_inset Formula $T$
+\end_inset
+
+ is obtained by setting up a 2nd order finite difference approximation for
+ the Poisson equation
+\begin_inset Formula 
+\[
+-u''(x)=f(x)
+\]
+
+\end_inset
+
+with Dirichlet boundary condition 
+\begin_inset Formula $u(0)=0=u(1)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Note that 
+\begin_inset Formula $T$
+\end_inset
+
+ is symmetric and positive-definite (it is positive-definite because 
+\begin_inset Formula $2\geq2\cos\theta$
+\end_inset
+
+ for any 
+\begin_inset Formula $\theta$
+\end_inset
+
+).
+ Let 
+\begin_inset Formula 
+\[
+C=C_{\omega}=1-(\omega/2)T=(3\omega/2)\begin{pmatrix}0 & 1\\
+1 & 0 & 1\\
+ & \ddots & \ddots & \ddots\\
+ &  & 1 & 0 & 1\\
+ &  &  & 1 & 0
+\end{pmatrix}=-(3\omega/2)S,
+\]
+
+\end_inset
+
+where we set 
+\begin_inset Formula $S=T(0)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula 
+\begin{align*}
+\text{The Jacobi method converges} & \iff\rho(C)<1 & \rho\text{ is spectral radius}\\
+ & \iff0<\omega<4/\lambda_{\mathrm{max}}(T)\\
+ & \iff0<\omega<2/\left(\cos\frac{k\pi}{n+1}\right).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(Yes because 
+\begin_inset Formula $T(2)$
+\end_inset
+
+ is diagonally dominant.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ Yes because 
+\begin_inset Formula $T$
+\end_inset
+
+ is symmetric positive-definite.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+5.
+ SOR convergence is guaranteed if 
+\begin_inset Formula $0<\omega<2$
+\end_inset
+
+ since 
+\begin_inset Formula $T(2)$
+\end_inset
+
+ is positive-definite.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
