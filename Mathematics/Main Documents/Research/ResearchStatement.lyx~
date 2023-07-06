@@ -135,6 +135,16 @@ commutative diagrams/.cd,
 \justification true
 \use_refstyle 1
 \use_minted 0
+\branch ref
+\selected 0
+\filename_suffix 0
+\color #faf0e6
+\end_branch
+\branch tikzpicture
+\selected 1
+\filename_suffix 0
+\color #faf0e6
+\end_branch
 \index Index
 \shortcut idx
 \color #008000
@@ -176,13 +186,14 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-My research focuses on free resolutions.
- More specifically, let 
+My research focuses on algebraic structures that we can attach to free resolutio
+ns.
+ In particular, I'm motivated by the following problem: let 
 \begin_inset Formula $(R,\mathfrak{m},\Bbbk)$
 \end_inset
 
  be a local noetherian (or standard graded) ring, let 
-\begin_inset Formula $I$
+\begin_inset Formula $I\subseteq\mathfrak{m}$
 \end_inset
 
  be an ideal of 
@@ -193,12 +204,12 @@ My research focuses on free resolutions.
 \begin_inset Formula $F=(F,\mathrm{d})$
 \end_inset
 
- be the minimal 
-\begin_inset Formula $R$
+ be the minimal free resolution of 
+\begin_inset Formula $R\slash I$
 \end_inset
 
--free resolution of 
-\begin_inset Formula $R\slash I$
+ over 
+\begin_inset Formula $R$
 \end_inset
 
 .
@@ -226,22 +237,34 @@ My research focuses on free resolutions.
 \begin_inset Formula $\mu$
 \end_inset
 
- is clear from context).
- Up to homotopy, 
+ is clear from context) and we can even choose 
 \begin_inset Formula $\mu$
 \end_inset
 
- is unital, strictly graded-commutative, and associative.
- It is clear that we can always choose 
+ to be unital (with 
+\begin_inset Formula $1\in F_{0}=R$
+\end_inset
+
+ being the identify element) and strictly graded-commutative, in this case
+ we call 
 \begin_inset Formula $\mu$
 \end_inset
 
- to be unital on the nose (with 
-\begin_inset Formula $1\in F$
+ a multilpication on 
+\begin_inset Formula $F$
 \end_inset
 
- being the identity element).
- It was shown in 
+, and when we equip 
+\begin_inset Formula $F$
+\end_inset
+
+ with this multiplication, we refer to it as an MDG algebra (M stands for
+ multiplication, D stands for differential, and G stands for graded).
+ It was first shown that 
+\begin_inset Formula $F$
+\end_inset
+
+ posseses and MDG algebra structure by Buchsbaum and Eisenbud in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BE77"
@@ -249,13 +272,7 @@ literal "false"
 
 \end_inset
 
- that 
-\begin_inset Formula $\mu$
-\end_inset
-
- can even be chosen to be strictly graded-commutative on the nose as well.
- The first part of my research has been dedicated to the following question,
- which we call Question 1:
+, and in that paper they posed the following question:
 \end_layout
 
 \begin_layout Standard
@@ -277,13 +294,17 @@ hfill
 \begin_layout Standard
 
 \series bold
-Question 1: 
+Question: 
 \series default
-Can 
+Does 
+\begin_inset Formula $F$
+\end_inset
+
+ possess the structure of a DG algebra? In other words, can 
 \begin_inset Formula $\mu$
 \end_inset
 
- be chosen such that it is associative on the nose? 
+ be chosen such that it is associative?
 \end_layout
 
 \begin_layout Standard
@@ -314,8 +335,16 @@ hfill
 \begin_inset space ~
 \end_inset
 
-The reason this question is interesting is because we gain a lot of information
- about the 
+One reason this question is interesting is that when we know the answer
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+yes
+\begin_inset Quotes erd
+\end_inset
+
+, then we gain a lot of information about the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -327,36 +356,16 @@ shape
 \begin_inset Formula $F$
 \end_inset
 
- when we know the answer to that question is 
-\begin_inset Quotes eld
-\end_inset
-
-yes
-\begin_inset Quotes erd
-\end_inset
-
 .
- Indeed, it was shown in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "BE77"
-literal "false"
-
-\end_inset
-
- that if we assume 
+ For instance, Buchsbaum and Eisenbud proved that if we further assume 
 \begin_inset Formula $R$
 \end_inset
 
- is a domain and 
-\begin_inset Formula $I$
-\end_inset
-
- is perfect, and we know that an associative multiplication on 
+ is a domain and we know that an associative multiplication on 
 \begin_inset Formula $F$
 \end_inset
 
- exists, then one obtains important lower bounds of the betti numbers 
+ exists, then one obtains important lower bounds of the Betti numbers 
 \begin_inset Formula $\beta_{i}$
 \end_inset
 
@@ -366,7 +375,7 @@ literal "false"
 
 .
  In particular, let 
-\begin_inset Formula $\boldsymbol{t}=t_{1},\dots,t_{m}$
+\begin_inset Formula $\boldsymbol{t}=t_{1},\dots,t_{g}$
 \end_inset
 
  be a maximal 
@@ -381,7 +390,7 @@ literal "false"
 \begin_inset Formula $E=\mathcal{K}(\boldsymbol{t})$
 \end_inset
 
- be the koszul 
+ be the Koszul 
 \begin_inset Formula $R$
 \end_inset
 
@@ -390,30 +399,30 @@ literal "false"
 \end_inset
 
 .
- Then the natural map 
-\begin_inset Formula $R\slash\boldsymbol{t}\to R\slash I$
+ Any expression of the 
+\begin_inset Formula $t_{i}$
 \end_inset
 
- induces an algebra homomorphism 
+ in terms of the generators for 
+\begin_inset Formula $I$
+\end_inset
+
+ yields a canonical comparison map 
 \begin_inset Formula $E\to F$
 \end_inset
 
- which can be shown to be injective, whence we get the lower bound 
+.
+ Buchsbaum and Eisenbud showed that under all of these assumptions, this
+ comparison map 
+\begin_inset Formula $E\to F$
+\end_inset
+
+ is injective, hence we get the lower bound 
 \begin_inset Formula ${m \choose i}\leq\beta_{i}$
 \end_inset
 
  for each 
-\begin_inset Formula $i$
-\end_inset
-
-.
- With this in mind, Buchsbaum and Eisenbud conjectured that the answer to
- Question 1 was always 
-\begin_inset Quotes eld
-\end_inset
-
-yes
-\begin_inset Quotes erd
+\begin_inset Formula $i\leq g$
 \end_inset
 
 .
@@ -426,6 +435,645 @@ literal "false"
 \end_inset
 
 ), and many counterexamples have been found ever since.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+One of the starting points for my research is based on the observation that
+ one can still obtain these lower bounds even in cases where it is known
+ that we can't choose 
+\begin_inset Formula $\mu$
+\end_inset
+
+ to be associative.
+ Indeed, we just need to find a multiplication 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ together with a comparison map 
+\begin_inset Formula $\varphi\colon E\to F$
+\end_inset
+
+ such that 
+\begin_inset Formula $\varphi\colon E\to F$
+\end_inset
+
+ is multiplicative, meaning
+\begin_inset Formula 
+\[
+\varphi(a_{1}a_{2})=\varphi(a_{1})\varphi(a_{2})
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a_{1},a_{2}\in E$
+\end_inset
+
+.
+ The proof given in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BE77"
+literal "false"
+
+\end_inset
+
+ which shows 
+\begin_inset Formula $\varphi\colon E\to F$
+\end_inset
+
+ is injective would still apply in this case.
+ In their proof, Buchsbaum and Eisenbud used a property that the Koszul
+ algebra 
+\begin_inset Formula $E$
+\end_inset
+
+ satisfies, namely that every nonzero DG ideal of 
+\begin_inset Formula $E$
+\end_inset
+
+ intersects the top degree 
+\begin_inset Formula $E_{g}$
+\end_inset
+
+ nontrivially.
+ However there are many other MDG algebras which satisfy this property as
+ well (the property being that their nonzero MDG ideals intersect the top
+ degree nontrivially).
+ Thus one may be able to generalize this result even further by replacing
+ 
+\begin_inset Formula $\boldsymbol{t}$
+\end_inset
+
+ with an ideal 
+\begin_inset Formula $J$
+\end_inset
+
+ such that 
+\begin_inset Formula $\boldsymbol{t}\subseteq J\subseteq I$
+\end_inset
+
+ and such that there exists a multiplication on the minimal 
+\begin_inset Formula $R$
+\end_inset
+
+-free resolution 
+\begin_inset Formula $G$
+\end_inset
+
+ of 
+\begin_inset Formula $R\slash J$
+\end_inset
+
+ which satisfies this property.
+ It is for this and many other reasons why we believe it will be fruitful
+ to initiate the study of MDG algebras and their modules.
+ In general we would like to choose 
+\begin_inset Formula $\mu$
+\end_inset
+
+ such that it is as associative as possible.
+ To this end, we pose the following question:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Question: 
+\series default
+Given a multiplication 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+, how can we measure the failure for 
+\begin_inset Formula $\mu$
+\end_inset
+
+ to being associative? 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The answer to this question involves what's called the maximal associative
+ quotient.
+ In order to explain this further, we first make some notational conventions
+ as introduce some definitions.
+ We equip 
+\begin_inset Formula $F$
+\end_inset
+
+ with a multiplication 
+\begin_inset Formula $\mu$
+\end_inset
+
+ giving it the structure of an MDG algebra.
+ When 
+\begin_inset Formula $\mu$
+\end_inset
+
+ satisfies a property (such as being associative), then we also say 
+\begin_inset Formula $F$
+\end_inset
+
+ satisfies that property.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ With the notation as above, we make the following definitions:
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+associator 
+\series default
+of 
+\begin_inset Formula $F$
+\end_inset
+
+ is the chain map, denoted 
+\begin_inset Formula $[\cdot]_{\mu}$
+\end_inset
+
+ (or more simply by 
+\begin_inset Formula $[\cdot]$
+\end_inset
+
+ if 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is understood from context), from 
+\begin_inset Formula $F\otimes_{R}F\otimes_{R}F$
+\end_inset
+
+ to 
+\begin_inset Formula $F$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\[
+[\cdot]:=\mu(\mu\otimes1-1\otimes\mu).
+\]
+
+\end_inset
+
+We denote by 
+\begin_inset Formula $[\cdot,\cdot,\cdot]\colon F^{3}\to F$
+\end_inset
+
+ to be the unique 
+\begin_inset Formula $R$
+\end_inset
+
+-trilinear map which corresponds to 
+\begin_inset Formula $[\cdot]$
+\end_inset
+
+ via the universal mapping property of tensor products.
+ Thus we have
+\begin_inset Formula 
+\[
+[a_{1}\otimes a_{2}\otimes a_{3}]=(a_{1}\star a_{2})\star a_{3}-a_{1}\star(a_{2}\star a_{3})=[a_{1},a_{2},a_{3}]
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $a_{1},a_{2},a_{3}\in F$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+associator 
+\begin_inset Formula $R$
+\end_inset
+
+-subcomplex 
+\series default
+of 
+\begin_inset Formula $F$
+\end_inset
+
+, denoted 
+\begin_inset Formula $[F]$
+\end_inset
+
+, is the 
+\begin_inset Formula $R$
+\end_inset
+
+-subcomplex of 
+\begin_inset Formula $F$
+\end_inset
+
+ given by the image of the associator of 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ Thus the underlying graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module of 
+\begin_inset Formula $[F]$
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+[F]=\mathrm{span}_{R}\{[a_{1},a_{2},a_{3}]\mid a_{1},a_{2},a_{3}\in F\},
+\]
+
+\end_inset
+
+and the differential of 
+\begin_inset Formula $[F]$
+\end_inset
+
+ is simply the restriction of the differential of 
+\begin_inset Formula $F$
+\end_inset
+
+ to 
+\begin_inset Formula $[F]$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+associator 
+\begin_inset Formula $F$
+\end_inset
+
+-submodule 
+\series default
+of 
+\begin_inset Formula $F$
+\end_inset
+
+, denoted 
+\begin_inset Formula $\langle F\rangle$
+\end_inset
+
+, is defined to be the smallest 
+\begin_inset Formula $F$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $F$
+\end_inset
+
+ which contains 
+\begin_inset Formula $[F]$
+\end_inset
+
+.
+ The underlying graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module of 
+\begin_inset Formula $\langle F\rangle$
+\end_inset
+
+ also has a simple description.
+ Indeed, observe that
+\begin_inset Formula 
+\begin{equation}
+a_{1}(a_{2}[a_{3},a_{4},a_{5}])=(a_{1}a_{2})[a_{3},a_{4},a_{5}]-[a_{1},a_{2},[a_{3},a_{4},a_{5}]]\label{eq:jklfdsm-1-1-1}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $a_{1},a_{2},a_{3},a_{4},a_{5}\in F$
+\end_inset
+
+.
+ Using identities like 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:jklfdsm-1-1-1})
+\end_layout
+
+\end_inset
+
+ together with graded-commutativity, one can show that the underlying graded
+ 
+\begin_inset Formula $R$
+\end_inset
+
+-module of 
+\begin_inset Formula $\langle F\rangle$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\langle F\rangle=\mathrm{span}_{R}\{a_{1}[a_{2},a_{3},a_{4}]\mid a_{1},a_{2},a_{3},a_{4}\in F\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+maximal associative quotient 
+\series default
+of 
+\begin_inset Formula $F$
+\end_inset
+
+, denoted 
+\begin_inset Formula $F^{\mathrm{as}}$
+\end_inset
+
+, is the quotient
+\begin_inset Formula 
+\[
+F^{\mathrm{as}}:=F\slash\langle F\rangle.
+\]
+
+\end_inset
+
+The maximal associative quotient is clearly a DG algebra.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+With these defintions understood, we have the following theorem:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremhomology}
+\end_layout
+
+\end_inset
+
+ With notation as above, the following conditions are equivalent:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $F$
+\end_inset
+
+ is associative, that is 
+\begin_inset Formula $[F]=0=\langle F\rangle$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $F$
+\end_inset
+
+ is homologically associative, that is 
+\begin_inset Formula $\mathrm{H}([F])=0=\mathrm{H}(\langle F\rangle)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Note that we really need minimality of 
+\begin_inset Formula $F$
+\end_inset
+
+ as well as the local and noetherian conditions on 
+\begin_inset Formula $R$
+\end_inset
+
+ in order for this theorem to be true.
+ This theorem tells us that we can study the failure for 
+\begin_inset Formula $F$
+\end_inset
+
+ to being associative by studying the associator homology 
+\begin_inset Formula $\mathrm{H}(\langle F\rangle)$
+\end_inset
+
+.
+ Furthermore, since 
+\begin_inset Formula $F$
+\end_inset
+
+ is a resolution, we have 
+\begin_inset Formula $\mathrm{H}_{i}(\langle F\rangle)=\mathrm{H}_{i+1}(F^{\mathrm{as}})$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\geq0$
+\end_inset
+
+, so we may as well study the homology of 
+\begin_inset Formula $F^{\mathrm{as}}$
+\end_inset
+
+ instead.
+ It turns out that 
+\begin_inset Formula $I$
+\end_inset
+
+ kills 
+\begin_inset Formula $\mathrm{H}(F^{\mathrm{as}})$
+\end_inset
+
+ and thus 
+\begin_inset Formula $\mathrm{H}(F^{\mathrm{as}})$
+\end_inset
+
+ is an 
+\begin_inset Formula $(R\slash I)$
+\end_inset
+
+-module.
+ In some cases, we will even have 
+\begin_inset Formula $\mathrm{Ann}(\mathrm{H}(F^{\mathrm{as}}))=\mathfrak{m}$
+\end_inset
+
+.
+ In this case, 
+\begin_inset Formula $\mathrm{H}(F^{\mathrm{as}})$
+\end_inset
+
+ is a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-vector space and so we can measure the failure for 
+\begin_inset Formula $F$
+\end_inset
+
+ to being associative via the dimension of 
+\begin_inset Formula $\mathrm{H}(F^{\mathrm{as}})$
+\end_inset
+
+ as a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-vector space.
+ Before we continue, we consider an example which involves some of the concepts
+ we introduced above:
 \end_layout
 
 \begin_layout Standard
@@ -460,7 +1108,9 @@ label{firstexample}
 \end_inset
 
 , pictured below:
-\end_layout
+\begin_inset Branch tikzpicture
+inverted 0
+status collapsed
 
 \begin_layout Standard
 \align center
@@ -655,7 +1305,8 @@ end{center}
 
 \end_layout
 
-\begin_layout Standard
+\end_inset
+
 Next suppose 
 \begin_inset Formula $R=\Bbbk[x,y,z,w]$
 \end_inset
@@ -674,7 +1325,9 @@ Next suppose
 \end_inset
 
  which is pictured below:
-\end_layout
+\begin_inset Branch tikzpicture
+inverted 0
+status collapsed
 
 \begin_layout Standard
 \begin_inset ERT
@@ -876,9 +1529,10 @@ end{center}
 
 \end_layout
 
-\begin_layout Standard
+\end_inset
+
 Let 
-\begin_inset Formula $F_{\mathrm{K}}$
+\begin_inset Formula $F$
 \end_inset
 
  be the 
@@ -893,44 +1547,34 @@ Let
 \begin_inset Formula $\Delta$
 \end_inset
 
- (see the Appendix for details on how this is constructed).
- Let's write down the homogeneous components of 
-\begin_inset Formula $F_{\mathrm{K}}$
+ (see the Appendix for details on how this is constructed) Thus, as a graded
+ 
+\begin_inset Formula $R$
 \end_inset
 
- as a graded module: we have
-\begin_inset Formula 
-\begin{align*}
-\end{align*}
-
+-module, the homogeneous components of 
+\begin_inset Formula $F$
 \end_inset
 
-
+ look like:
 \begin_inset Formula 
 \begin{align*}
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-F_{\mathrm{K},0} & =R\\
-F_{\mathrm{K},1} & =Re_{1}+Re_{2}+Re_{3}+Re_{4}+Re_{5}\\
-F_{\mathrm{K},2} & =Re_{12}+Re_{13}+Re_{14}+Re_{23}+Re_{24}+Re_{34}+Re_{35}+Re_{45}\\
-F_{\mathrm{K},3} & =Re_{123}+Re_{124}+Re_{134}+Re_{234}+Re_{345}\\
-F_{\mathrm{K},4} & =Re_{1234}
+F_{0} & =R\\
+F_{1} & =Re_{1}+Re_{2}+Re_{3}+Re_{4}+Re_{5}\\
+F_{2} & =Re_{12}+Re_{13}+Re_{14}+Re_{23}+Re_{24}+Re_{34}+Re_{35}+Re_{45}\\
+F_{3} & =Re_{123}+Re_{124}+Re_{134}+Re_{234}+Re_{345}\\
+F_{4} & =Re_{1234}
 \end{align*}
 
 \end_inset
 
 The differential 
-\begin_inset Formula $\mathrm{d}\colon F_{\mathrm{K}}\to F_{\mathrm{K}}$
+\begin_inset Formula $\mathrm{d}\colon F\to F$
 \end_inset
 
- behaves just like the usual boundary map except some monomials can show
- up as coefficients.
- For instance,
+ behaves just like the usual boundary map of the simplicial complex above
+ except some monomials can show up as coefficients.
+ For instance, we have
 \begin_inset Formula 
 \[
 \mathrm{d}(e_{1234})=-ye_{123}+ze_{124}-we_{134}+xe_{234}.
@@ -943,7 +1587,7 @@ Now, choose a multiplication
 \end_inset
 
  on 
-\begin_inset Formula $F_{\mathrm{K}}$
+\begin_inset Formula $F$
 \end_inset
 
  which respects the multigrading.
@@ -951,7 +1595,7 @@ Now, choose a multiplication
 \begin_inset Formula $\mu$
 \end_inset
 
- respects the multigrading and satisfies Leibniz law, we are forced to have
+ respects the multigrading and satisfies Leibniz law, we are forced to have:
 \begin_inset Formula 
 \begin{align*}
 e_{1}\star e_{5} & =yz^{2}e_{14}+xe_{45}\\
@@ -966,7 +1610,7 @@ e_{2}\star e_{14} & =-e_{124}
 \end_inset
 
 At this point however, one can conclude that 
-\begin_inset Formula $F_{\mathrm{K}}$
+\begin_inset Formula $F$
 \end_inset
 
  is not associative since
@@ -1136,7 +1780,11 @@ reduce(S(1)(5)(2),b);
 
 \begin_layout Plain Layout
 
-// [e1,e5,e2] = (-y^2*z)*e123+(y*z^2)*e124+(-y*z*w)*e134+(x*y*z)*e234
+// [e1,e5,e2] = (y^2*z)*e123-(y*z^2)*e124+(y*z*w)*e134-(x*y*z)*e234
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -1155,1144 +1803,31 @@ reduce(S(1)(5)(2),b);
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
+Now it turns out that we can choose 
+\begin_inset Formula $\mu$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{firstexample}
-\end_layout
-
+ such that 
+\begin_inset Formula $[e_{\sigma},e_{\sigma},e_{\tau}]=0$
 \end_inset
 
- Let 
-\begin_inset Formula $R=\Bbbk[x,y,z,w]$
-\end_inset
-
-, let 
-\begin_inset Formula $\boldsymbol{m}_{\mathrm{A}}=x^{2},w^{2},xy,zw,yz$
-\end_inset
-
-, and let 
-\begin_inset Formula $F_{\mathrm{A}}$
-\end_inset
-
- be the minimal 
-\begin_inset Formula $R$
-\end_inset
-
--free resolution of 
-\begin_inset Formula $R\slash\boldsymbol{m}_{\mathrm{A}}$
+ for all 
+\begin_inset Formula $\sigma,\tau\in\Delta$
 \end_inset
 
 .
- Then 
-\begin_inset Formula $F_{\mathrm{A}}$
-\end_inset
-
- can be realized as the 
-\begin_inset Formula $R$
-\end_inset
-
--complex induced by the 
-\begin_inset Formula $\boldsymbol{m}_{\mathrm{A}}$
-\end_inset
-
--labeled cellular complex pictured below:
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{center}
-\backslash
-begin{tikzpicture}[scale=1]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[fill=gray!20] (0,0) -- (3,-0.5) -- (5,0.2) -- (3.2,1.2)-- (0,0); 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[fill=gray!20] (0,0) -- (1.5,1.5) -- (3.2,1.2)-- (0,0); 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[] (1.5,1.5) -- (3,-0.5); 
-\backslash
-draw[fill=gray!20] (3,-0.5) -- (5,0.2) -- (3.2,1.2);
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[color=black!100] (1.5,1.5) -- (3,-0.5) -- (5,0.2);
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[color=black!100] (0,0) -- (3.2,1.2) -- (5,0.2);
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=left:$x^2 $] (a) at (0,0)
- {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=above:$w^2 $] (b) at (1.5,1.5)
- {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=below:$zw $] (c) at (3,-0.5)
- {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=above:$xy $] (d) at (3.2,1.2)
- {}; 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=right:$yz $] (e) at (5,0.2)
- {};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[] (x) at (-1,1.3) {$ x^2 w^2 $}; 
-\backslash
-node[] (x') at (0.8,0.6) {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[-{Straight Barb[length=3pt,width=3pt]}] (x) edge[out=0, in=130] node[below]
- {} (x');
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[] (y) at (6.5,1.3) {$ x y z $}; 
-\backslash
-node[] (y') at (4.1,0.5) {}; 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[-{Straight Barb[length=3pt,width=3pt]}] (y) edge[out=180, in=45] node[below
-] {} (y');
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[] (z) at (6.5,-0.7) {$ y z w $}; 
-\backslash
-node[] (z') at (4.1,0.05) {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[-{Straight Barb[length=3pt,width=3pt]}] (z) edge[out=180, in=-45] node[belo
-w] {} (z');
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[] (w) at (4.5,2) {$ x y z w^2 $}; 
-\backslash
-node[] (w') at (3.2,0) {}; 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[-{Straight Barb[length=3pt,width=3pt]}] (w) edge[out=-120, in=90] node[belo
-w] {} (w');
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture} 
-\backslash
-end{center}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Let's write down the homogeneous components of 
-\begin_inset Formula $F_{\mathrm{A}}$
-\end_inset
-
- as a graded module: we have
-\begin_inset Formula 
-\begin{align*}
-F_{\mathrm{A},0} & =R\\
-F_{\mathrm{A},1} & =R\varepsilon_{1}+R\varepsilon_{2}+R\varepsilon_{3}+R\varepsilon_{4}+R\varepsilon_{5}\\
-F_{\mathrm{A},2} & =R\varepsilon_{12}+R\varepsilon_{13}+R\varepsilon_{14}+R\varepsilon_{23}+R\varepsilon_{24}+R\varepsilon_{35}+R\varepsilon_{45}\\
-F_{\mathrm{A},3} & =R\varepsilon_{123}+R\varepsilon_{124}+R\varepsilon_{1345}+R\varepsilon_{2345}\\
-F_{\mathrm{A},4} & =R\varepsilon_{12345}
-\end{align*}
-
-\end_inset
-
-The differential 
-\begin_inset Formula $\mathrm{d}\colon F_{\mathrm{A}}\to F_{\mathrm{A}}$
-\end_inset
-
- on the non-simplex faces are given below
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}\varepsilon_{12345} & =x\varepsilon_{2345}-z\varepsilon_{124}+w\varepsilon_{1345}-y\varepsilon_{123}\\
-\mathrm{d}\varepsilon_{1345} & =x^{2}\varepsilon_{35}-xw\varepsilon_{45}-zw\varepsilon_{14}+y\varepsilon_{13}\\
-\mathrm{d}\varepsilon_{2345} & =xw\varepsilon_{35}-w^{2}\varepsilon_{45}-z\varepsilon_{24}+xy\varepsilon_{23}.
-\end{align*}
-
-\end_inset
-
-Note that the canonical map 
-\begin_inset Formula $R\slash\boldsymbol{m}_{\mathrm{K}}\to R\slash\boldsymbol{m}_{\mathrm{A}}$
-\end_inset
-
- induces a comparison map 
-\begin_inset Formula $\varphi\colon F_{\mathrm{K}}\to F_{\mathrm{A}}$
-\end_inset
-
- which we can choose to be multigraded.
- We have
-\begin_inset Formula 
-\begin{align*}
-\varphi(e_{5}) & =yz\varepsilon_{5}\\
-\varphi(e_{35}) & =yz\varepsilon_{35}\\
-\varphi(e_{45}) & =yz\varepsilon_{45}\\
-\varphi(e_{34}) & =x\varepsilon_{35}-w\varepsilon_{45}\\
-\varphi(e_{345}) & =0\\
-\varphi(e_{234}) & =\varepsilon_{2345}\\
-\varphi(e_{134}) & =\varepsilon_{1345}\\
-\varphi(e_{1234}) & =\varepsilon_{12345}
-\end{align*}
-
-\end_inset
-
-and we have 
-\begin_inset Formula $\varphi(e_{\sigma})=\varepsilon_{\sigma}$
-\end_inset
-
- for all other 
-\begin_inset Formula $e_{\sigma}\in F$
-\end_inset
-
-.
- On the other hand, the multiplication by 
-\begin_inset Formula $yz$
-\end_inset
-
- map 
-\begin_inset Formula $R\slash\boldsymbol{m}_{\mathrm{A}}\to R\slash\boldsymbol{m}_{\mathrm{K}}$
-\end_inset
-
- induces a comparison map 
-\begin_inset Formula $\psi\colon F_{\mathrm{A}}\to F_{\mathrm{K}}$
-\end_inset
-
- which we can choose to be multigraded.
- We have
-\begin_inset Formula 
-\begin{align*}
-\psi(\varepsilon_{5}) & =e_{5}\\
-\psi(\varepsilon_{35}) & =e_{35}\\
-\psi(\varepsilon_{45}) & =e_{45}\\
-\psi(\varepsilon_{2345}) & =yze_{234}-e_{345}\\
-\psi(\varepsilon_{1345}) & =yze_{134}-e_{345}
-\end{align*}
-
-\end_inset
-
-and we have 
-\begin_inset Formula $\psi(\varepsilon_{\sigma})=yze_{\sigma}$
-\end_inset
-
- for all other 
-\begin_inset Formula $e_{\sigma}\in F_{\mathrm{A}}$
-\end_inset
-
-.
- We define
+ In this case, one can show that:
 \begin_inset Formula 
 \[
-\varepsilon_{\sigma}\star\varepsilon_{\tau}:=\varphi(\psi(\varepsilon_{\sigma})\star\psi(\varepsilon_{\tau}))
-\]
-
-\end_inset
-
-for all 
-\begin_inset Formula $\varepsilon_{\sigma},\varepsilon_{\tau}$
-\end_inset
-
- in the homogeneous basis of 
-\begin_inset Formula $F_{\mathrm{A}}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Measuring the Failure for 
-\begin_inset Formula $\mu$
-\end_inset
-
- to being Associative
-\end_layout
-
-\begin_layout Standard
-We now equip 
-\begin_inset Formula $F$
-\end_inset
-
- with a fixed multiplication 
-\begin_inset Formula $\mu$
-\end_inset
-
- (which is assumed to be unital and strictly graded-commutative on the nose).
- We simplify our notation by referring to the triple 
-\begin_inset Formula $(F,\mathrm{d},\mu)$
-\end_inset
-
- via its underlying graded 
-\begin_inset Formula $R$
-\end_inset
-
--module 
-\begin_inset Formula $F$
-\end_inset
-
-, where we think of 
-\begin_inset Formula $F$
-\end_inset
-
- as a graded 
-\begin_inset Formula $R$
-\end_inset
-
--module which is equipped with a differential 
-\begin_inset Formula $\mathrm{d}\colon F\to F$
-\end_inset
-
-, giving it the structure of an 
-\begin_inset Formula $R$
-\end_inset
-
--complex, and which is further equipped with a chain map 
-\begin_inset Formula $\mu\colon F\otimes_{R}F\to F$
-\end_inset
-
-.
- For instance, if 
-\begin_inset Formula $\mu$
-\end_inset
-
- satisfies a property (such as being associative), then we also say 
-\begin_inset Formula $F$
-\end_inset
-
- satisfies that property.
- With this notation in mind, we are interested in the following question:
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-hfill
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Question 2: 
-\series default
-How can we measure how far away 
-\begin_inset Formula $F$
-\end_inset
-
- is from being associative?
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-hfill
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-There are several approaches to answering this question and they all involve
- the maximal associative quotient of 
-\begin_inset Formula $F$
-\end_inset
-
-.
- In order to explain this further, we make the following definitions:
-\end_layout
-
-\begin_layout Enumerate
-The 
-\series bold
-associator 
-\series default
-of 
-\begin_inset Formula $F$
-\end_inset
-
- is the chain map, denoted 
-\begin_inset Formula $[\cdot]_{\mu}$
-\end_inset
-
- (or more simply by 
-\begin_inset Formula $[\cdot]$
-\end_inset
-
- if 
-\begin_inset Formula $\mu$
-\end_inset
-
- is understood from context), from 
-\begin_inset Formula $F\otimes_{R}F\otimes_{R}F$
-\end_inset
-
- to 
-\begin_inset Formula $F$
-\end_inset
-
- defined by
-\begin_inset Formula 
-\[
-[\cdot]:=\mu(\mu\otimes1-1\otimes\mu).
-\]
-
-\end_inset
-
-We denote by 
-\begin_inset Formula $[\cdot,\cdot,\cdot]\colon F^{3}\to F$
-\end_inset
-
- to be the unique 
-\begin_inset Formula $R$
-\end_inset
-
--trilinear map which corresponds to 
-\begin_inset Formula $[\cdot]$
-\end_inset
-
- via the universal mapping property of tensor products.
- Thus we have
-\begin_inset Formula 
-\[
-[a_{1}\otimes a_{2}\otimes a_{3}]=(a_{1}\star a_{2})\star a_{3}-a_{1}\star(a_{2}\star a_{3})=[a_{1},a_{2},a_{3}]
-\]
-
-\end_inset
-
-for all 
-\begin_inset Formula $a_{1},a_{2},a_{3}\in F$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-The 
-\series bold
-associator 
-\begin_inset Formula $R$
-\end_inset
-
--subcomplex 
-\series default
-of 
-\begin_inset Formula $F$
-\end_inset
-
-, denoted 
-\begin_inset Formula $[F]$
-\end_inset
-
-, is the 
-\begin_inset Formula $R$
-\end_inset
-
--subcomplex of 
-\begin_inset Formula $F$
-\end_inset
-
- given by the image of the associator of 
-\begin_inset Formula $\mu$
-\end_inset
-
-.
- Thus the underlying graded 
-\begin_inset Formula $R$
-\end_inset
-
--module of 
-\begin_inset Formula $[F]$
-\end_inset
-
- is
-\begin_inset Formula 
-\[
-[F]=\mathrm{span}_{R}\{[a_{1},a_{2},a_{3}]\mid a_{1},a_{2},a_{3}\in F\},
-\]
-
-\end_inset
-
-and the differential of 
-\begin_inset Formula $[F]$
-\end_inset
-
- is simply the restriction of the differential of 
-\begin_inset Formula $F$
-\end_inset
-
- to 
-\begin_inset Formula $[F]$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Enumerate
-The 
-\series bold
-associator 
-\begin_inset Formula $F$
-\end_inset
-
--submodule 
-\series default
-of 
-\begin_inset Formula $F$
-\end_inset
-
-, denoted 
-\begin_inset Formula $\langle F\rangle$
-\end_inset
-
-, is defined to be the smallest 
-\begin_inset Formula $F$
-\end_inset
-
--submodule of 
-\begin_inset Formula $F$
-\end_inset
-
- which contains 
-\begin_inset Formula $[F]$
-\end_inset
-
-.
- The underlying graded 
-\begin_inset Formula $R$
-\end_inset
-
--module of 
-\begin_inset Formula $\langle F\rangle$
-\end_inset
-
- also has a simple description.
- Indeed, observe that
-\begin_inset Formula 
-\begin{equation}
-a_{1}(a_{2}[a_{3},a_{4},a_{5}])=(a_{1}a_{2})[a_{3},a_{4},a_{5}]-[a_{1},a_{2},[a_{3},a_{4},a_{5}]]\label{eq:jklfdsm-1-1}
-\end{equation}
-
-\end_inset
-
-for all 
-\begin_inset Formula $a_{1},a_{2},a_{3},a_{4},a_{5}\in F$
-\end_inset
-
-.
- Using identities like 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-(
-\backslash
-ref{eq:jklfdsm-1})
-\end_layout
-
-\end_inset
-
- together with graded-commutativity, one can show that the underlying graded
- 
-\begin_inset Formula $R$
-\end_inset
-
--module of 
-\begin_inset Formula $\langle F\rangle$
-\end_inset
-
- is given by
-\begin_inset Formula 
-\[
-\langle F\rangle=\mathrm{span}_{R}\{a_{1}[a_{2},a_{3},a_{4}]\mid a_{1},a_{2},a_{3},a_{4}\in F\}.
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-The 
-\series bold
-maximal associative quotient 
-\series default
-of 
-\begin_inset Formula $F$
-\end_inset
-
- is the quotient 
-\begin_inset Formula $F\slash\langle F\rangle$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{theorem}
-\backslash
-label{theoremhomology}
-\end_layout
-
-\end_inset
-
- With notation as above, we have the following:
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $I$
-\end_inset
-
- kills 
-\begin_inset Formula $\mathrm{H}(F\slash\langle F\rangle)$
-\end_inset
-
-.
- In other words, 
-\begin_inset Formula $\mathrm{H}(F\slash\langle F\rangle)$
-\end_inset
-
- is an 
-\begin_inset Formula $(R\slash I)$
-\end_inset
-
--module.
- 
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $F$
-\end_inset
-
- is associative if and only if 
-\begin_inset Formula $\mathrm{H}(F\slash\langle F\rangle)=0$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{theorem}
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{examplefdklds}
-\end_layout
-
-\end_inset
-
- Let us revisit 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-Example~(
-\backslash
-ref{firstexample})
-\end_layout
-
-\end_inset
-
- where 
-\begin_inset Formula $R=\Bbbk[x,y,z,w]$
-\end_inset
-
-, 
-\begin_inset Formula $\boldsymbol{m}=x^{2},w^{2},zw,xy,y^{2}z^{2}$
-\end_inset
-
-, and where 
-\begin_inset Formula $F$
-\end_inset
-
- is the 
-\begin_inset Formula $R$
-\end_inset
-
--complex incuded by the labeled simplicial complex pictured below:
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{center}
-\backslash
-begin{tikzpicture}[scale=1]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[fill=gray!20] (0,0) -- (3,-0.5) -- (3.2,1.2)-- (0,0); 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[fill=gray!20] (0,0) -- (1.5,1.5) -- (3.2,1.2)-- (0,0); 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[] (1.5,1.5) -- (3,-0.5); 
-\backslash
-draw[fill=gray!20] (3,-0.5) -- (5,0.2) -- (3.2,1.2);
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[color=black!100] (1.5,1.5) -- (3,-0.5) -- (5,0.2);
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[color=black!100] (0,0) -- (3.2,1.2) -- (5,0.2);
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=left:$x^2 $] (a) at (0,0)
- {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=above:$w^2 $] (b) at (1.5,1.5)
- {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=below:$zw $] (c) at (3,-0.5)
- {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=above:$xy $] (d) at (3.2,1.2)
- {}; 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[circle, fill=black, inner sep=1pt, label=right:$y^2 z^2 $] (e) at (5,0.2)
- {};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[] (x) at (-1,1.3) {$ x^2 w^2 $}; 
-\backslash
-node[] (x') at (0.8,0.6) {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[-{Straight Barb[length=3pt,width=3pt]}] (x) edge[out=0, in=130] node[below]
- {} (x');
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[] (y) at (6.5,1.3) {$ x y^2 z^2 $}; 
-\backslash
-node[] (y') at (4.1,0.5) {}; 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[-{Straight Barb[length=3pt,width=3pt]}] (y) edge[out=180, in=45] node[below
-] {} (y');
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[] (z) at (6.5,-0.7) {$ y^2 z^2 w $}; 
-\backslash
-node[] (z') at (4.1,0.05) {};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[-{Straight Barb[length=3pt,width=3pt]}] (z) edge[out=180, in=-45] node[belo
-w] {} (z');
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-node[] (w) at (4.5,2) {$ x y^2 z^2 w $}; 
-\backslash
-node[] (w') at (3.8,0) {}; 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-draw[-{Straight Barb[length=3pt,width=3pt]}] (w) edge[out=-120, in=90] node[belo
-w] {} (w');
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture} 
-\backslash
-end{center}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Choose a multiplication 
-\begin_inset Formula $\mu$
-\end_inset
-
- on 
-\begin_inset Formula $F$
-\end_inset
-
- which respects the multigrading.
- Recall that since 
-\begin_inset Formula $\mu$
-\end_inset
-
- respects the multigrading and satisfies Leibniz law, we are forced to have
-\begin_inset Formula 
-\begin{align*}
-e_{1}\star e_{5} & =yz^{2}e_{14}+xe_{45}\\
-e_{1}\star e_{2} & =e_{12}\\
-e_{2}\star e_{5} & =y^{2}ze_{23}+we_{35}\\
-e_{2}\star e_{45} & =-yze_{234}+we_{345}\\
-e_{1}\star e_{35} & =yze_{134}-xe_{345}\\
-e_{1}\star e_{23} & =e_{123}\\
-e_{2}\star e_{14} & =-e_{124}
-\end{align*}
-
-\end_inset
-
-We want to calculate the associator homology of 
-\begin_inset Formula $F$
-\end_inset
-
-.
- Observe that
-\begin_inset Formula 
-\begin{align*}
-\frac{e_{1}}{x}[e_{1},e_{5},e_{2}] & =\frac{1}{x}\left([e_{1}^{2},e_{5},e_{2}]-[e_{1},e_{1}e_{5},e_{2}]+[e_{1},e_{1},e_{5}e_{2}]-[e_{1},e_{1},e_{5}]e_{2}\right)\\
- & =-\frac{1}{x}[e_{1},e_{1}e_{5},e_{2}]\\
- & =-\frac{1}{x}[e_{1},yz^{2}e_{14}+xe_{45},e_{2}]\\
- & =-\frac{yz^{2}}{x}[e_{1},e_{14},e_{2}]-[e_{1},e_{45},e_{2}]\\
- & =-[e_{1},e_{45},e_{2}].
-\end{align*}
-
-\end_inset
-
-It follows that 
-\begin_inset Formula $\mathrm{d}(e_{1}/x)=x$
-\end_inset
-
- annihilates 
-\begin_inset Formula $\mathrm{H}\langle F\rangle$
-\end_inset
-
-.
- Similar calculations likes this shows that 
-\begin_inset Formula $\mathfrak{m}=\langle x,y,z,w\rangle$
-\end_inset
-
- annihilates 
-\begin_inset Formula $\mathrm{H}\langle F\rangle$
-\end_inset
-
-.
- It follows that
-\begin_inset Formula 
-\[
-\mathrm{H}_{i}\langle F\rangle\simeq\begin{cases}
-\Bbbk & \text{if }i=3\\
+\mathrm{H}_{i}(F^{\mathrm{as}})\simeq\begin{cases}
+\Bbbk & \text{if }i=4\\
 0 & \text{else}
 \end{cases}
 \]
 
 \end_inset
 
-One can interpret this as saying that the multiplication 
+We interpret this as saying that the multiplication 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -2302,125 +1837,10 @@ One can interpret this as saying that the multiplication
 \end_inset
 
  to being associative is reflected in the fact that 
-\begin_inset Formula $\ell(\mathrm{H}\langle F\rangle)=1$
+\begin_inset Formula $\ell(\mathrm{H}\langle F\rangle)=1\neq0$
 \end_inset
 
 .
- Note however that 
-\begin_inset Formula $\mu$
-\end_inset
-
- is not associative in homological degree 
-\begin_inset Formula $4$
-\end_inset
-
- since
-\begin_inset Formula 
-\[
-[e_{1},e_{45},e_{2}]=xyze_{1234}\neq0.
-\]
-
-\end_inset
-
-In particular we have 
-\begin_inset Formula $\mathrm{uha}(F)=\mathrm{lha}(F)=3$
-\end_inset
-
-, but 
-\begin_inset Formula $\mathrm{ua}(F)=4$
-\end_inset
-
-.
- In some sense however, the nonzero associator 
-\begin_inset Formula $[e_{1},e_{45},e_{2}]$
-\end_inset
-
- isn't really anything 
-\emph on
-new
-\emph default
-.
- Indeed, we obtained the nonzero associator 
-\begin_inset Formula $[e_{1},e_{45},e_{2}]$
-\end_inset
-
- from the nonzero associator 
-\begin_inset Formula $[e_{1},e_{5},e_{2}]$
-\end_inset
-
-, so one could argue that 
-\begin_inset Formula $[e_{1},e_{45},e_{2}]$
-\end_inset
-
- being nonzero is simply a direct consequence of 
-\begin_inset Formula $[e_{1},e_{5},e_{2}]$
-\end_inset
-
- being nonzero.
- More generally, a nonzero associator 
-\begin_inset Formula $\chi\in\langle F\rangle$
-\end_inset
-
- should only be thought of as contributing something new towards the failure
- for 
-\begin_inset Formula $\mu$
-\end_inset
-
- to being associative if 
-\begin_inset Formula $\mathrm{d}(\chi)=0$
-\end_inset
-
- (otherwise one could argue that 
-\begin_inset Formula $\chi$
-\end_inset
-
- being nonzero is simply a direct consequence of the associators in 
-\begin_inset Formula $\mathrm{d}(\chi)$
-\end_inset
-
- being nonzero).
- Similarly, if 
-\begin_inset Formula $\chi=\mathrm{d}(\chi')$
-\end_inset
-
- for some other nonzero aasociator 
-\begin_inset Formula $\chi'\in\langle F\rangle$
-\end_inset
-
-, then again 
-\begin_inset Formula $\chi$
-\end_inset
-
- isn't contributing anything new towards the failure for 
-\begin_inset Formula $\mu$
-\end_inset
-
- to being associative, since one could argue that 
-\begin_inset Formula $\chi$
-\end_inset
-
- being nonzero is a direct consequence of 
-\begin_inset Formula $\chi'$
-\end_inset
-
- being nonzero.
- Thus the associators which really do contribute something new towards the
- failure for 
-\begin_inset Formula $\mu$
-\end_inset
-
- being associative should be the ones which represent nonzero elements in
- homology.
- In this case, we have precisely one nontrivial nonzero associator 
-\begin_inset Formula $[e_{1},e_{5},e_{2}]$
-\end_inset
-
- which represents a nontrivial element in homology (all other nonzero associator
-s can be derived from the fact that 
-\begin_inset Formula $[e_{1},e_{5},e_{2}]\neq0$
-\end_inset
-
-).
  
 \begin_inset ERT
 status open
@@ -2438,16 +1858,21 @@ end{example}
 \end_layout
 
 \begin_layout Section*
-Presentation of the Maximal Associative Quotient
+A Presentation of the Maximal Associative Quotient
 \end_layout
 
 \begin_layout Standard
-In this section, we will construct the symmetric DG algebra of 
+We now come to the second part of my research.
+ In this section, we will construct the symmetric DG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra of 
 \begin_inset Formula $F$
 \end_inset
 
 , which we denote by 
-\begin_inset Formula $\mathrm{S}(F)$
+\begin_inset Formula $S=\mathrm{S}_{R}(F)$
 \end_inset
 
 .
@@ -2456,7 +1881,7 @@ In this section, we will construct the symmetric DG algebra of
 \end_inset
 
 -module of 
-\begin_inset Formula $\mathrm{S}(F)$
+\begin_inset Formula $S$
 \end_inset
 
  has a bi-graded structure, more specifically, we can decompose 
