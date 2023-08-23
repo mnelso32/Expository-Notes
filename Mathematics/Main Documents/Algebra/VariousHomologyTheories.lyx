@@ -135,6 +135,11 @@ commutative diagrams/.cd,
 \justification true
 \use_refstyle 1
 \use_minted 0
+\branch tikzcd
+\selected 1
+\filename_suffix 0
+\color #faf0e6
+\end_branch
 \index Index
 \shortcut idx
 \color #008000
@@ -173,6 +178,586 @@ We list various cohomology/homology theories in this document.
 
 \begin_layout Section
 Sheaf Cohomology
+\end_layout
+
+\begin_layout Subsection
+Čech cohomology
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a topological space, let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring, let 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ be a sheaf of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules on 
+\begin_inset Formula $X$
+\end_inset
+
+, and let 
+\begin_inset Formula $\mathcal{U}=\{U_{i}\}_{i\in I}$
+\end_inset
+
+ be an open covering of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ For any integer 
+\begin_inset Formula $k\geq0$
+\end_inset
+
+ and for any sequence of indices 
+\begin_inset Formula $i_{0},\dots,i_{p}\in I$
+\end_inset
+
+ we set 
+\begin_inset Formula $U_{i_{0}\cdots i_{k}}=U_{i_{0}}\cap\cdots\cap U_{i_{k}}$
+\end_inset
+
+.
+ We construct a cochain 
+\begin_inset Formula $R$
+\end_inset
+
+-complex, denoted 
+\begin_inset Formula $\mathrm{C}(\mathcal{U},\mathcal{F})$
+\end_inset
+
+ can called the 
+\series bold
+Čech cochain complex 
+\series default
+(with respect to
+\series bold
+ 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+ 
+\series default
+and 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+) as follows: the component in homological degree 
+\begin_inset Formula $k$
+\end_inset
+
+ of the underlying graded module of 
+\begin_inset Formula $C=\mathrm{C}(\mathcal{U},\mathcal{F})$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\[
+C^{k}=\prod_{(i_{0},\dots,i_{k})\in I^{k+1}}\mathcal{F}(U_{i_{0}\cdots i_{k}}).
+\]
+
+\end_inset
+
+Elements in 
+\begin_inset Formula $C$
+\end_inset
+
+ are called 
+\series bold
+cochains
+\series default
+.
+ If 
+\begin_inset Formula $f\in C^{k}$
+\end_inset
+
+, then we write 
+\begin_inset Formula $|f|=k$
+\end_inset
+
+ and say 
+\begin_inset Formula $f$
+\end_inset
+
+ is a 
+\begin_inset Formula $k$
+\end_inset
+
+
+\series bold
+-cochain
+\series default
+.
+
+\series bold
+ 
+\series default
+We say a 
+\begin_inset Formula $k$
+\end_inset
+
+-cochain 
+\begin_inset Formula $f$
+\end_inset
+
+ is 
+\series bold
+alternating 
+\series default
+if 
+\begin_inset Formula $f_{i_{0}\cdots i_{k}}=0$
+\end_inset
+
+ whenever two indices are equal and if for every permutation of indices
+ we have
+\begin_inset Formula 
+\[
+f_{\sigma(i_{0}),\cdots,\sigma(i_{k})}=\mathrm{sign}(\sigma)f_{i_{0},\dots,i_{k}}.
+\]
+
+\end_inset
+
+We denote by 
+\begin_inset Formula $\widetilde{C}$
+\end_inset
+
+ to be the graded 
+\begin_inset Formula $R$
+\end_inset
+
+-submodule of 
+\begin_inset Formula $C$
+\end_inset
+
+ given by the set of all alternating elements of 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ The differential 
+\begin_inset Formula $\delta$
+\end_inset
+
+ of 
+\begin_inset Formula $C$
+\end_inset
+
+ is defined by
+\begin_inset Formula 
+\[
+(\delta f)_{i_{0},\dots,i_{k+1}}=\sum_{j=0}^{k+1}(-1)^{j}f_{i_{0},\dots,\widehat{i}_{j},\dots,i_{k+1}}|_{U_{i_{0},\dots,i_{k+1}}}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $f\in C^{k}$
+\end_inset
+
+.
+ In the case where 
+\begin_inset Formula $k=1$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\[
+(\delta f)_{i_{0},i_{1},i_{2}}=f_{i_{1},i_{2}}|_{U_{i_{0},i_{1},i_{2}}}-f_{i_{0},i_{2}}|_{U_{i_{0},i_{1},i_{2}}}+f_{i_{0},i_{2}}|_{U_{i_{0},i_{1},i_{2}}}
+\]
+
+\end_inset
+
+One check that 
+\begin_inset Formula $\delta^{2}=0$
+\end_inset
+
+ and that if 
+\begin_inset Formula $f$
+\end_inset
+
+ is alternating, then 
+\begin_inset Formula $\delta f$
+\end_inset
+
+ is alternating.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ The canonical injection 
+\begin_inset Formula $\widetilde{C}\to C$
+\end_inset
+
+ induces an isomorphism 
+\begin_inset Formula $\mathrm{H}(\widetilde{C})\simeq\mathrm{H}(C)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ We set 
+\begin_inset Formula $\mathrm{H}(\mathcal{U},\mathcal{F})=\mathrm{H}(\mathrm{C}(\mathcal{U},\mathcal{F}))$
+\end_inset
+
+ and call this the 
+\series bold
+Čech cohomology 
+\series default
+of 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is a sheaf, we have 
+\begin_inset Formula $\mathrm{H}^{0}(\mathcal{U},\mathcal{F})=\mathcal{F}(X)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X=\mathrm{Proj}\,A[t_{1},t_{2}]$
+\end_inset
+
+ and let 
+\begin_inset Formula $\mathcal{U}=\{U_{1},U_{2}\}$
+\end_inset
+
+ where 
+\begin_inset Formula $U_{i}=\mathrm{D}_{+}(t_{i})$
+\end_inset
+
+.
+ Let us set 
+\begin_inset Formula $t=t_{2}/t_{1}$
+\end_inset
+
+.
+ Then the Čech cochain complex looks like:
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{equation}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  A[t] 
+\backslash
+oplus A[1/t] 
+\backslash
+arrow[r, " 
+\backslash
+delta "] &  A[t, 1/t]  
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset Formula $\delta(f,g)=f-g$
+\end_inset
+
+.
+ In particular we have 
+\begin_inset Formula $\mathrm{H}^{0}(\mathcal{U},\mathcal{O}_{X})=A$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{H}^{k}(\mathcal{U},\mathcal{O}_{X})=0$
+\end_inset
+
+ for every 
+\begin_inset Formula $k\geq2$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\delta$
+\end_inset
+
+ is surjective, we also have 
+\begin_inset Formula $\mathrm{H}^{1}(\mathcal{U},\mathcal{O}_{X})=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A morphism of coverings 
+\begin_inset Formula $\mathcal{V}\to\mathcal{U}$
+\end_inset
+
+ of 
+\begin_inset Formula $X$
+\end_inset
+
+ induces comutative diagrams: 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{equation}
+\backslash
+begin{tikzcd} V_i 
+\backslash
+arrow[r]  &  U_{
+\backslash
+alpha (i) } 
+\backslash
+
+\backslash
+ V_i 
+\backslash
+times _V V_j 
+\backslash
+arrow[r] 
+\backslash
+arrow[u] 
+\backslash
+arrow[d] & U_{
+\backslash
+alpha (i) } 
+\backslash
+times _U U_{
+\backslash
+alpha (j) } 
+\backslash
+arrow[u] 
+\backslash
+arrow[d] 
+\backslash
+
+\backslash
+ V_j 
+\backslash
+arrow[r] & U_{
+\backslash
+alpha (j) }    
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+which induces a morpihsm of cochain complexes 
+\begin_inset Formula $\mathrm{C}(\mathcal{U},\mathcal{F})\to\mathrm{C}(\mathcal{V},\mathcal{F})$
+\end_inset
+
+ and this in turn induces a morphism of graded 
+\begin_inset Formula $R$
+\end_inset
+
+-modules 
+\begin_inset Formula $\mathrm{H}(\mathcal{U},\mathcal{F})\to\mathrm{H}(\mathcal{V},\mathcal{F})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ With the notation as above, we set
+\begin_inset Formula 
+\[
+\mathrm{H}(X,\mathcal{F}):=\lim_{\longrightarrow}\mathrm{H}(\mathcal{U},\mathcal{F}),
+\]
+
+\end_inset
+
+where the limit is taken as graded modules and where 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+ runs through the classes of open coverings of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ We call 
+\begin_inset Formula $\mathrm{H}(X,\mathcal{F})$
+\end_inset
+
+ the 
+\series bold
+Čech cohomology 
+\series default
+of 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+.
+
+\series bold
+ 
+\series default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

@@ -171,7 +171,7 @@ Various Homology and Cohomology Theories
 We list various cohomology/homology theories in this document.
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Section
 Sheaf Cohomology
 \end_layout
 
@@ -186,7 +186,7 @@ Sheaf Cohomology
 
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Section
 Commutative Algebra
 \end_layout
 
@@ -202,6 +202,326 @@ Commutative Algebra
 \begin_inset Formula 
 \[
 \mathrm{Ext}_{R}(A,B)=\mathrm{H}(\mathrm{Hom}_{R}^{\star}(A,E))=\mathrm{H}(\mathrm{Hom}_{R}^{\star}(P,B))
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Koszul Homology
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring and let 
+\begin_inset Formula $\boldsymbol{r}=r_{1},\dots,r_{m}$
+\end_inset
+
+ be a sequence of elements in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The Koszul algebra 
+\begin_inset Formula $\mathbb{K}=\mathcal{K}(\boldsymbol{r})$
+\end_inset
+
+ is defined to be the 
+\begin_inset Formula $R$
+\end_inset
+
+-complex whose underlying graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module is given by
+\begin_inset Formula 
+\[
+\mathbb{K}=\bigoplus_{\sigma\subseteq\{1\dots,m\}}e_{\sigma}R,
+\]
+
+\end_inset
+
+where we use the notation 
+\begin_inset Formula $e_{\sigma}=\prod_{i\in\sigma}e_{i}$
+\end_inset
+
+ and where 
+\begin_inset Formula $e_{\sigma}$
+\end_inset
+
+ is homogeneous with 
+\begin_inset Formula $|e_{\sigma}|=\#\sigma$
+\end_inset
+
+.
+ The differential 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ of 
+\begin_inset Formula $E$
+\end_inset
+
+ is defined on the homogeneous basis by 
+\begin_inset Formula $\mathrm{d}e_{i}=r_{i}$
+\end_inset
+
+ and extended everywhere else using the Leibniz law.
+ In particular, we have
+\begin_inset Formula 
+\[
+\mathrm{d}e_{\sigma}=\sum_{i\in\sigma}(-1)^{\mathrm{pos}(i,\sigma)}r_{i}e_{\sigma\backslash i}.
+\]
+
+\end_inset
+
+For example, we haveFor example, if 
+\begin_inset Formula $m=3$
+\end_inset
+
+ then we have
+\begin_inset Formula 
+\begin{align*}
+ &  & \mathrm{d}e_{1} & =r_{1} & \mathrm{d}e_{23} & =e_{3}r_{2}-e_{2}r_{3}\\
+\mathrm{d}(1) & =0 & \mathrm{d}e_{2} & =r_{2} & \mathrm{d}e_{13} & =e_{3}r_{1}-e_{1}r_{3} & \mathrm{d}e_{123} & =e_{23}r_{1}-e_{13}r_{2}+e_{12}r_{3}\\
+ &  & \mathrm{d}e_{3} & =r_{3} & \mathrm{d}e_{12} & =e_{2}r_{1}-e_{1}r_{2}
+\end{align*}
+
+\end_inset
+
+An alternative description of 
+\begin_inset Formula $\mathbb{K}$
+\end_inset
+
+ is the the iterated tensor product of complexes: 
+\begin_inset Formula 
+\[
+\mathbb{K}(\boldsymbol{r})\simeq\mathbb{K}(r_{1})\otimes_{R}\mathbb{K}(r_{2})\otimes_{R}\cdots\otimes_{R}\mathcal{\mathbb{K}}(r_{m}).
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $M$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-module, then we set 
+\begin_inset Formula $\mathbb{K}(\boldsymbol{r},M):=\mathbb{K}\otimes_{R}M$
+\end_inset
+
+ and we denote its homology by 
+\begin_inset Formula $\mathrm{H}(\boldsymbol{x},M)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Another Koszul complex we are interested in is called the 
+\series bold
+dual Koszul complex
+\series default
+: it is given by 
+\begin_inset Formula $\mathbb{K}^{\star}:=\mathrm{Hom}_{R}^{\star}(\mathbb{K},R)$
+\end_inset
+
+.
+ The underlying graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module is given by
+\begin_inset Formula 
+\[
+\mathbb{K}^{\star}=\bigoplus_{\sigma\subseteq\{1,\dots,m\}}Re_{\sigma}^{\star}.
+\]
+
+\end_inset
+
+Here 
+\begin_inset Formula $e_{\sigma}^{\star}\colon E\to R$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map, graded of degree 
+\begin_inset Formula $-(\#\sigma)$
+\end_inset
+
+, which is defined by
+\begin_inset Formula 
+\[
+e_{\sigma}^{\star}(e_{\tau})=\begin{cases}
+1 & \text{if }\sigma=\tau\\
+0 & \text{else}
+\end{cases}
+\]
+
+\end_inset
+
+The differential 
+\begin_inset Formula $\mathrm{d}^{\star}$
+\end_inset
+
+ of 
+\begin_inset Formula $E^{\star}$
+\end_inset
+
+ is defined by 
+\begin_inset Formula $\mathrm{d}^{\star}e_{\sigma}^{\star}=e_{\sigma}^{\star}\mathrm{d}$
+\end_inset
+
+.
+ In particular, we have
+\begin_inset Formula 
+\[
+\mathrm{d}^{\star}e_{\sigma}^{\star}=(-1)^{\#\sigma+1}\sum_{i\in\sigma^{\star}}(-1)^{\mathrm{pos}(i,\sigma^{\star})}r_{i}e_{\sigma\cup i}^{\star},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\sigma^{\star}:=\{1,\dots,m\}\backslash\sigma$
+\end_inset
+
+.
+ For example, if 
+\begin_inset Formula $m=3$
+\end_inset
+
+ then we have
+\begin_inset Formula 
+\begin{align*}
+ &  & \mathrm{d}^{\star}e_{1}^{\star} & =r_{3}e_{13}^{\star}+r_{2}e_{12}^{\star} & \mathrm{d}^{\star}e_{23}^{\star} & =r_{1}e_{123}^{\star}\\
+\mathrm{d}^{\star}(1) & =-r_{1}e_{1}^{\star}-r_{2}e_{2}^{\star}-r_{3}e_{3}^{\star} & \mathrm{d}^{\star}e_{2}^{\star} & =r_{3}e_{23}^{\star}-r_{1}e_{12}^{\star} & \mathrm{d}^{\star}e_{13}^{\star} & =-r_{2}e_{123}^{\star} & \mathrm{d}^{\star}e_{123}^{\star} & =0\\
+ &  & \mathrm{d}^{\star}e_{3}^{\star} & =-r_{2}e_{23}^{\star}-r_{1}e_{13}^{\star} & \mathrm{d}^{\star}e_{12}^{\star} & =r_{3}e_{123}^{\star}
+\end{align*}
+
+\end_inset
+
+Note that the nonzero components of 
+\begin_inset Formula $E^{\star}$
+\end_inset
+
+ live in negative homological degree, that is, if 
+\begin_inset Formula $0<k<m$
+\end_inset
+
+, then 
+\begin_inset Formula $E_{k}^{\star}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{-k}^{\star}\neq0$
+\end_inset
+
+.
+ We often think of 
+\begin_inset Formula $E^{\star}$
+\end_inset
+
+ as a cochain complex using the upper sign convention 
+\begin_inset Formula $E_{-k}^{\star}=E^{\star,k}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{d}_{-k}^{\star}=\mathrm{d}^{\star,k}$
+\end_inset
+
+.
+ Note that the map 
+\begin_inset Formula $\varphi\colon\Sigma^{n}\mathbb{K}^{\star}\to\mathbb{K}$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\[
+\varphi(e_{\sigma}^{\star})=\mathrm{sign}(\sigma^{\star},\sigma)e_{\sigma^{\star}}
+\]
+
+\end_inset
+
+is an isomorphism of 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes.
+ In particular we obtain 
+\begin_inset Formula $\mathrm{H}_{i}(\mathbb{K})\simeq\mathrm{H}_{i-m}(\mathbb{K}^{\star})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+The 
+\series bold
+stable Koszul complex 
+\series default
+
+\begin_inset Formula $\widetilde{\mathbb{K}}$
+\end_inset
+
+ is complex whose underlying graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module is given by
+\begin_inset Formula 
+\[
+\widetilde{\mathbb{K}}=\bigoplus_{\sigma\subseteq\{1,\dots,m\}}\widetilde{e}_{\sigma}R_{r_{\sigma}}
+\]
+
+\end_inset
+
+For example, if 
+\begin_inset Formula $m=3$
+\end_inset
+
+ then we have
+\begin_inset Formula 
+\begin{align*}
+ &  & \widetilde{\mathrm{d}}\widetilde{e}_{1} & =\widetilde{e}_{13}-\widetilde{e}_{12} & \widetilde{\mathrm{d}}\widetilde{e}_{23} & =\widetilde{e}_{123}\\
+\widetilde{\mathrm{d}}(1) & =\widetilde{e}_{1}+\widetilde{e}_{2}+\widetilde{e}_{3} & \widetilde{\mathrm{d}}\widetilde{e}_{2} & =\widetilde{e}_{23}-\widetilde{e}_{12} & \widetilde{\mathrm{d}}e_{13} & =-\widetilde{e}_{123} & \widetilde{\mathrm{d}}\widetilde{e}_{123} & =0\\
+ &  & \widetilde{\mathrm{d}}\widetilde{e}_{3} & =\widetilde{e}_{23}-\widetilde{e}_{13} & \widetilde{\mathrm{d}}\widetilde{e}_{12} & =\widetilde{e}_{123}
+\end{align*}
+
+\end_inset
+
+Observe that
+\begin_inset Formula 
+\[
+\widetilde{\mathbb{K}}=\lim_{\longrightarrow}\mathbb{K}^{\star}(\boldsymbol{r}^{n}),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\boldsymbol{r}^{n}=r_{1}^{n},\dots,r_{m}^{n}$
+\end_inset
+
+.
+ In particular, it follows that
+\begin_inset Formula 
+\[
+\mathrm{H}(\boldsymbol{r}^{\infty},M)=\bigcup_{n\geq0}\mathrm{H}(\boldsymbol{r}^{n},M)=\lim_{\longrightarrow}\mathrm{H}(\boldsymbol{r}^{n},M).
 \]
 
 \end_inset
@@ -234,14 +554,6 @@ Commutative Algebra
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection*
-Sheaf Cohomology
-\end_layout
-
-\begin_layout Subsection*
-Sheaf Cohomology
 \end_layout
 
 \end_body
