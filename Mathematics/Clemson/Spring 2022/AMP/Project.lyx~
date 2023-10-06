@@ -1009,9 +1009,9 @@ In order to acheive this, the authors adopted a two stage approach: where
  the primary objective is to achieve the desired slope of one and the secondary
  objective is to achieve the desired intercept of zero, i.e.
 \begin_inset Formula 
-\[
-\text{first minimize }|\beta-1|\text{ and then minimize }|\alpha-0|.
-\]
+\begin{equation}
+\text{first minimize }|\beta-1|\text{ and then minimize }|\alpha-0|.\label{eq:milp}
+\end{equation}
 
 \end_inset
 
@@ -1178,8 +1178,8 @@ Computational Results
 \align center
 \begin_inset Graphics
 	filename table2.jpg
-	lyxscale 90
-	scale 90
+	lyxscale 70
+	scale 70
 
 \end_inset
 
@@ -1214,17 +1214,341 @@ Replication
 \end_layout
 
 \begin_layout Standard
-In this section, I will try to replicate the results from the paper.
- Let
-\begin_inset Formula 
-\begin{align*}
-\boldsymbol{r}_{i} & =(r_{1,1},r_{1,2},\dots,r_{1,T})^{\top}\\
-\boldsymbol{R} & =(R_{1},R_{2},\dots,R_{T})^{\top}.
-\end{align*}
+We write a MATLAB function called 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+function [R, r, C, alpha, beta] = TrackingPortfolio(I, V, X, cash, gamma)
+\end_layout
 
 \end_inset
 
-We want to
+ given below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [R,r,C,alpha,beta] = TrackingPortfolio(I,V,X,cash,gamma)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% I(t) = value of S&P 500 at time t 
+\end_layout
+
+\begin_layout Plain Layout
+
+% V(i,t) = value of stock i at time t.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% X(i) = number of shares of stock i in the current TP.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% cash = either new cash to be invested or cahs to be taken out.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% gamma = constant in [0,1] which represents risk.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% N = number of stocks 
+\end_layout
+
+\begin_layout Plain Layout
+
+% T = final time.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% R(t) = yield of S&P at time t.
+\end_layout
+
+\begin_layout Plain Layout
+
+% r(i,t) = yield of stock i at time t.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% C = total value of the current TP at time T.
+\end_layout
+
+\begin_layout Plain Layout
+
+% regressing r(i,:) against R.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% p has the form p = bx + a.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+sz = size(V); 
+\end_layout
+
+\begin_layout Plain Layout
+
+N = sz(1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+T = sz(2);
+\end_layout
+
+\begin_layout Plain Layout
+
+Vf = V(:,T); 
+\end_layout
+
+\begin_layout Plain Layout
+
+R = zeros(1,T-1);
+\end_layout
+
+\begin_layout Plain Layout
+
+r = zeros(N,T-1);
+\end_layout
+
+\begin_layout Plain Layout
+
+a = zeros(N,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+b = zeros(N,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+w = zeros(N,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+p = zeros(N,2);
+\end_layout
+
+\begin_layout Plain Layout
+
+C = dot(X,Vf) + cash; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for t = 1:T-1        
+\end_layout
+
+\begin_layout Plain Layout
+
+    R(1,t) = log(I(t+1)/I(t));
+\end_layout
+
+\begin_layout Plain Layout
+
+end; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 1:N     
+\end_layout
+
+\begin_layout Plain Layout
+
+      for t = 1:T-1         
+\end_layout
+
+\begin_layout Plain Layout
+
+         r(i,t) = log(V(i,t+1)/V(i,t));     
+\end_layout
+
+\begin_layout Plain Layout
+
+      end; 
+\end_layout
+
+\begin_layout Plain Layout
+
+end; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for i=1:N     
+\end_layout
+
+\begin_layout Plain Layout
+
+   p(i,:) = polyfit(R,r(i,:),1);  
+\end_layout
+
+\begin_layout Plain Layout
+
+   a(i) = p(i,2);     
+\end_layout
+
+\begin_layout Plain Layout
+
+   b(i) = p(i,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+   w(i) = Vf(i)/(C-gamma*C);
+\end_layout
+
+\begin_layout Plain Layout
+
+end; 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+alpha = w.*a; 
+\end_layout
+
+\begin_layout Plain Layout
+
+beta = w.*b;    
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+one thing to note is that in the code above, we write 
+\begin_inset Formula $\boldsymbol{w}=(w_{1},\dots,w_{N})^{\top}$
+\end_inset
+
+ as a vector where 
+\begin_inset Formula $w_{i}=V_{i,T}/(C-\gamma C)$
+\end_inset
+
+.
+ Similarly, 
+\begin_inset Formula $\boldsymbol{\alpha}=(\alpha_{1},\dots,\alpha_{T})^{\top}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{\beta}=(\beta_{1},\dots,\beta_{N})^{\top}$
+\end_inset
+
+ are vectors.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1243,18 +1567,86 @@ label{example}
 \end_inset
 
  Let 
-\begin_inset Formula $K=1$
+\begin_inset Formula $\boldsymbol{I}=(I_{0},I_{1},\dots,I_{12})^{\top}$
+\end_inset
+
+ be the vector where the component 
+\begin_inset Formula $I_{t}$
+\end_inset
+
+ denotes the value of the S&P 500 at the end of month 
+\begin_inset Formula $t$
+\end_inset
+
+ (where 
+\begin_inset Formula $t=0$
+\end_inset
+
+ corresponds to Dec 2020, 
+\begin_inset Formula $t=1$
+\end_inset
+
+ corresponds to Jan 2021, and so on...).
+ Thus the vector 
+\begin_inset Formula $\boldsymbol{I}$
+\end_inset
+
+ is given (up to rounding to the nearest digit) by
+\begin_inset Formula 
+\[
+\boldsymbol{I}=(3756,3714,3811,3973,4181,4204,4298,4395,4523,4308,4605,4567,4766)^{\top}.
+\]
+
+\end_inset
+
+Next let 
+\begin_inset Formula $\boldsymbol{R}=(R_{1},\dots,R_{12})^{\top}$
+\end_inset
+
+ be the vector where the component 
+\begin_inset Formula $R_{t}$
+\end_inset
+
+ denotes the single period time return fo the S&P 500 at the end of month
+ 
+\begin_inset Formula $t$
+\end_inset
+
+ (where 
+\begin_inset Formula $t=1$
+\end_inset
+
+ corresponds to Jan 2021, 
+\begin_inset Formula $t=2$
+\end_inset
+
+ corresponds to Feb 2021, and so on...).
+ In other words, 
+\begin_inset Formula $R_{t}=\ln(I_{t}/I_{t-1})$
 \end_inset
 
 .
+ Thus the vector 
+\begin_inset Formula $\boldsymbol{R}$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\boldsymbol{R}=(-0.0112,0.0258,0.0416,0.0510,0.0055,0.0221,0.0223,0.0287,-0.0487,0.0667,-0.0083,0.0427)^{\top}.
+\]
+
+\end_inset
+
+Below is the graph of the S&P500 during 2021:
 \end_layout
 
 \begin_layout Standard
 \align center
 \begin_inset Graphics
 	filename SP500.jpg
-	lyxscale 80
-	scale 80
+	lyxscale 50
+	scale 50
 
 \end_inset
 
@@ -1262,18 +1654,207 @@ label{example}
 \end_layout
 
 \begin_layout Standard
-We first calculate the the index returns.
- We have
+For instance, we see that the S&P 500 did poorly in the month of September.
+ This corresopnds to the fact that 
+\begin_inset Formula $R_{9}=-0.0487$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next, let 
+\begin_inset Formula $\boldsymbol{V}_{i}=(V_{i,0},V_{i,1},\dots,V_{i,12})^{\top}$
+\end_inset
+
+ be the vector where the component 
+\begin_inset Formula $V_{i,t}$
+\end_inset
+
+ denotes the value of one share of stock 
+\begin_inset Formula $i$
+\end_inset
+
+ (where 
+\begin_inset Formula $i=1$
+\end_inset
+
+ corresponds to Amazon , 
+\begin_inset Formula $i=2$
+\end_inset
+
+ corresponds to Facebook, and 
+\begin_inset Formula $i=3$
+\end_inset
+
+ corresponds to Apple) at the end of month 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Similarly, let 
+\begin_inset Formula $\boldsymbol{r}_{i}=(r_{i,1},\dots,r_{i,12})$
+\end_inset
+
+ be the vector where the the component 
+\begin_inset Formula $r_{i,t}$
+\end_inset
+
+ denotes the single period time return for stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at the end of month 
+\begin_inset Formula $t$
+\end_inset
+
+ (where 
+\begin_inset Formula $t=1$
+\end_inset
+
+ corresponds to Jan 2021, 
+\begin_inset Formula $t=2$
+\end_inset
+
+ corresponds to Feb 2021, and so on...).
+ In other words, 
+\begin_inset Formula $r_{i,t}=\ln(V_{i,t}/V_{i,t-1})$
+\end_inset
+
+.
+ Thus the vectors 
+\begin_inset Formula $\boldsymbol{V}_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{V}_{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $\boldsymbol{V}_{3}$
+\end_inset
+
+ are given (up to rounding to the nearest digit) by
 \begin_inset Formula 
 \begin{align*}
-\boldsymbol{I} & =(3756,3714,3811,3973,4181,4204,4298,4395,4523,4308,4605,4567,4495)^{\top}\\
 \boldsymbol{V}_{1} & =(3257,3206,3093,3094,3467,3223,3440,3328,3471,3285,3372,3507,3304)^{\top}\\
-\boldsymbol{V}_{2} & =(133,132,121,122,131,125,137,146,152,141,150,165,178)^{\top}
+\boldsymbol{V}_{2} & =(273,259,258,295,325,329,348,356,379,339,323,324,335)^{\top}.\\
+\boldsymbol{V}_{3} & =(133,132,121,122,131,125,137,146,152,141,150,165,178)^{\top}
 \end{align*}
 
 \end_inset
 
-Therefore
+
+\end_layout
+
+\begin_layout Standard
+Finally, suppose 
+\begin_inset Formula $\gamma=0.5$
+\end_inset
+
+ and we have 
+\begin_inset Formula $100000$
+\end_inset
+
+ dollars in cash on hand.
+ Write
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+I = [3756,3714,3811,3973,4181,4204,4298,4395,4523,4308,4605,4567,4766];
+\end_layout
+
+\begin_layout Plain Layout
+
+V = [3257,3206,3093,3094,3467,3223,3440,3328,3471,3285,3372,3507,3304;
+\end_layout
+
+\begin_layout Plain Layout
+
+273,259,258,295,325,329,348,356,379,339,323,324,335; 
+\end_layout
+
+\begin_layout Plain Layout
+
+133,132,121,122,131,125,137,146,152,141,150,165,178];
+\end_layout
+
+\begin_layout Plain Layout
+
+X = [10;50;100];
+\end_layout
+
+\begin_layout Plain Layout
+
+cash = 100000;
+\end_layout
+
+\begin_layout Plain Layout
+
+gamma = 0.5; 
+\end_layout
+
+\begin_layout Plain Layout
+
+[R, r, C, alpha, beta] = TrackingPortfolio(I, V, X, cash, gamma);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1290,6 +1871,276 @@ end{example}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We will find an optimal solution to this linear programming problem using
+ MATLAB, which has a built-in function whose purpose is to solve linear
+ programming problems like this.
+ The syntax for this function is 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+[x,cval] = linprog(c,Ain,bin,Aeq,beq)
+\end_layout
+
+\end_inset
+
+, where the linear program solver assumes that the linear program has the
+ form
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad\boldsymbol{c}^{\top}\boldsymbol{x}\\
+\text{subject to} & \quad A_{\mathrm{eq}}\boldsymbol{x}=\boldsymbol{b}_{\mathrm{eq}}\\
+ & \quad A_{\mathrm{in}}\boldsymbol{x}\leq\boldsymbol{b}_{\mathrm{in}}\\
+ & \quad\boldsymbol{x}\in\mathbb{R}^{22}\\
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly, we have
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{r}_{1} & =(-0.0158,-0.0359,0.0003,0.1138,-0.0730,0.0652,-0.0331,0.0421,-0.0551,0.0261,0.0393,-0.0596)^{\top}\\
+\boldsymbol{r}_{2} & =(-0.0526,-0.0039,0.1340,0.0968,0.0122,0.0561,0.0227,0.0626,-0.1115,-0.0483,0.0031,0.0334)^{\top}.\\
+\boldsymbol{r}_{3} & =(-0.0075,-0.0870,0.0082,0.0712,-0.0469,0.0917,0.0636,0.0403,-0.0751,0.0619,0.0953,0.0758)^{\top}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\boldsymbol{X}=(X_{1},X_{2},X_{3})^{\top}$
+\end_inset
+
+ be the vector where the component 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ denotes the number of units of stock 
+\begin_inset Formula $i$
+\end_inset
+
+ in the current TP.
+ Here, we will assume that
+\begin_inset Formula 
+\begin{align*}
+X_{1} & =10\\
+X_{2} & =50\\
+X_{3} & =100
+\end{align*}
+
+\end_inset
+
+Thus, assuming we have 
+\begin_inset Formula $100000$
+\end_inset
+
+ dollars of cash on hand, the total value of the current TP on Jan 2021
+ is given by
+\begin_inset Formula 
+\begin{align*}
+C & =X_{1}V_{1,12}+X_{2}V_{2,12}+X_{3}V_{3,12}+100000\\
+ & =67590+100000\\
+ & =167590
+\end{align*}
+
+\end_inset
+
+dollars.
+ Let 
+\begin_inset Formula $\boldsymbol{w}=(w_{1},w_{2},w_{3})^{\top}$
+\end_inset
+
+ be the vector whose component 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ represents the proportion invested in stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at the start of Jan 2021 (where 
+\begin_inset Formula $w_{i}=x_{i}V_{i,T}/(C-\gamma C)$
+\end_inset
+
+).
+ Thus if we assume that 
+\begin_inset Formula $\gamma=0.5$
+\end_inset
+
+, then the 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ are given (up to rounding to the third decimal) by
+\begin_inset Formula 
+\begin{align*}
+w_{1} & =0.039x_{1}\\
+w_{2} & =0.004x_{2}\\
+w_{3} & =0.002x_{3}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus if we let 
+\begin_inset Formula $\boldsymbol{T}=(T_{1},\dots,T_{12})^{\top}$
+\end_inset
+
+ be the vector whose component 
+\begin_inset Formula $T_{t}$
+\end_inset
+
+ denotes the linear approximation of the return of our TP at time 
+\begin_inset Formula $t$
+\end_inset
+
+, then
+\begin_inset Formula 
+\[
+T_{t}=\sum_{i=1}^{3}w_{i}r_{i,t}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Finally, let 
+\begin_inset Formula $\boldsymbol{\varepsilon}=(\varepsilon_{1},\varepsilon_{2},\varepsilon_{3})^{\top}$
+\end_inset
+
+ (respectively 
+\begin_inset Formula $\boldsymbol{\delta}=(\delta_{1},\delta_{2},\delta_{3})^{\top}$
+\end_inset
+
+) be the vector whose component 
+\begin_inset Formula $\varepsilon_{i}$
+\end_inset
+
+ (respectively 
+\begin_inset Formula $\delta_{i}$
+\end_inset
+
+) denotes the minimum (respectively maximum) of the TP that must be held
+ in stock 
+\begin_inset Formula $i$
+\end_inset
+
+ if any of the stock is held.
+ Here we will assume that
+\begin_inset Formula 
+\begin{align*}
+\varepsilon_{1} & =5 & \delta_{1} & =20\\
+\varepsilon_{2} & =10 & \delta_{2} & =100\\
+\varepsilon_{3} & =50 & \delta_{3} & =200
+\end{align*}
+
+\end_inset
+
+Finally let 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ be the limit of the proportion of 
+\begin_inset Formula $C$
+\end_inset
+
+ that can be consumed by transaction cost.
+ We will assume that 
+\begin_inset Formula $\gamma=0.5$
+\end_inset
+
+.
+ Thus we have
+\begin_inset Formula 
+\[
+C-\gamma C=83795.
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\boldsymbol{w}=(w_{1},w_{2},w_{3})^{\top}$
+\end_inset
+
+ be the vector whose component 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ represents the proportion invested in stock 
+\begin_inset Formula $i$
+\end_inset
+
+ at the start of Jan 2021 (where 
+\begin_inset Formula $w_{i}=x_{i}V_{i,T}/(C-\gamma C)$
+\end_inset
+
+).
+ Thus we have
+\begin_inset Formula 
+\begin{align*}
+w_{1} & =0.039x_{1}\\
+w_{2} & =0.004x_{2}\\
+w_{3} & =0.002x_{3}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus the return of our tracking portfolio is given by
 \end_layout
 
 \begin_layout Standard
