@@ -1,0 +1,1193 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\branch tikzcd
+\selected 1
+\filename_suffix 0
+\color #faf0e6
+\end_branch
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Mathematics Diary
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+2023
+\end_layout
+
+\begin_layout Subsection
+12/20/2022 - Minimal free resolution of 
+\begin_inset Formula $I\slash J$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma1}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(R,\mathfrak{m},\Bbbk)$
+\end_inset
+
+ be a local noetherian ring, let 
+\begin_inset Formula $J\subseteq I\subseteq\mathfrak{m}$
+\end_inset
+
+ be ideals of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $E$
+\end_inset
+
+ be the minimal free resolution of 
+\begin_inset Formula $R\slash J$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+, let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the minimal free resolution of 
+\begin_inset Formula $R\slash I$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+, and let 
+\begin_inset Formula $\varphi\colon E\to F$
+\end_inset
+
+ be a comparison map which lifts the canonical surjective map 
+\begin_inset Formula $R\slash J\twoheadrightarrow R\slash I$
+\end_inset
+
+.
+ Assume both 
+\begin_inset Formula $\varphi\colon E\to F$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{\varphi}\colon E_{\Bbbk}:=E\otimes_{R}\Bbbk\to F\otimes_{R}\Bbbk:=F_{\Bbbk}$
+\end_inset
+
+ are injective.
+ Then 
+\begin_inset Formula $\Sigma(F\slash E)$
+\end_inset
+
+ is the minimal free resolution of 
+\begin_inset Formula $I\slash J$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Assume both 
+\begin_inset Formula $\varphi\colon E\to F$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{\varphi}\colon E_{\Bbbk}:=E\otimes_{R}\Bbbk\to F\otimes_{R}\Bbbk:=F_{\Bbbk}$
+\end_inset
+
+ are injective.
+ Since 
+\begin_inset Formula $\varphi\colon E\to F$
+\end_inset
+
+ is injective, we have a short exact sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-complexes
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{equation1}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  E 
+\backslash
+arrow[r, "
+\backslash
+varphi  "] &  F 
+\backslash
+arrow[r ] &  F 
+\backslash
+slash E 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+taking homology gives us a long exact sequence
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[row sep=40]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+&& 
+\backslash
+cdots 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & 
+\backslash
+mathrm{H}_{i+1} (F 
+\backslash
+slash E) 
+\backslash
+arrow[dll, swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}]
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+& 
+\backslash
+mathrm{H}_{i} (E ) 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{H}_{i}(F) 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & 
+\backslash
+mathrm{H}_{i} (F 
+\backslash
+slash E) 
+\backslash
+arrow[dll, swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+& 
+\backslash
+mathrm{H}_{i-1} (E) 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Since 
+\begin_inset Formula $E$
+\end_inset
+
+ and 
+\begin_inset Formula $F$
+\end_inset
+
+ are resolutions we conclude that 
+\begin_inset Formula $\mathrm{H}_{i}(F\slash E)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\neq1$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $R\slash J\twoheadrightarrow R\slash I$
+\end_inset
+
+ is surjective we conclude that 
+\begin_inset Formula $\mathrm{H}_{1}(F\slash E)=I\slash J$
+\end_inset
+
+.
+ To see that 
+\begin_inset Formula $F\slash E$
+\end_inset
+
+ is free, note that tensoring the short exact sequence of graded 
+\begin_inset Formula $R$
+\end_inset
+
+-modules 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{equation1})
+\end_layout
+
+\end_inset
+
+ with 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+ gives us the long exact sequence in homology
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[row sep=40]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+&& 
+\backslash
+cdots 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & 
+\backslash
+mathrm{Tor}_{i+1} ^R (E, 
+\backslash
+Bbbk ) 
+\backslash
+arrow[dll, "", swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}]
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+& 
+\backslash
+mathrm{Tor}_{i} ^R(E , 
+\backslash
+Bbbk ) 
+\backslash
+arrow[r ] & 
+\backslash
+mathrm{Tor}_{i} ^R (F , 
+\backslash
+Bbbk ) 
+\backslash
+arrow[r ] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & 
+\backslash
+mathrm{Tor}_{i} ^R (F 
+\backslash
+slash E , 
+\backslash
+Bbbk ) 
+\backslash
+arrow[dll, swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+& 
+\backslash
+mathrm{Tor}_{i-1} ^R (E, 
+\backslash
+Bbbk ) 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Since 
+\begin_inset Formula $E$
+\end_inset
+
+ and 
+\begin_inset Formula $F$
+\end_inset
+
+ are free 
+\begin_inset Formula $R$
+\end_inset
+
+-modules we conclude that 
+\begin_inset Formula $\mathrm{Tor}_{i}(F\slash E,\Bbbk)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\geq1$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\overline{\varphi}\colon E\otimes_{R}\Bbbk\to F\otimes_{R}\Bbbk$
+\end_inset
+
+ is injective we conclude that 
+\begin_inset Formula $\mathrm{Tor}_{1}(F\slash E,\Bbbk)=0$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $F\slash E$
+\end_inset
+
+ must be free.
+ Finally, 
+\begin_inset Formula $F\slash E$
+\end_inset
+
+ is minimal since the differential 
+\begin_inset Formula $\mathrm{d}$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ induces a minimal differential on 
+\begin_inset Formula $F\slash E$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $\mathrm{d}(F\slash E)\subseteq\mathfrak{m}(F\slash E)$
+\end_inset
+
+).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Under the assumptions of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{lemma1})
+\end_layout
+
+\end_inset
+
+, we see that for any 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $M$
+\end_inset
+
+ connecting maps
+\begin_inset Formula 
+\[
+\mathrm{Tor}_{i+1}^{R}(R\slash I,M)\to\mathrm{Tor}_{i}^{R}(I\slash J,M)\quad\text{and}\quad\mathrm{Ext}_{R}^{i}(I\slash J,M)\to\mathrm{Ext}_{R}^{i+1}(R\slash I,M)
+\]
+
+\end_inset
+
+are represented by the chain maps
+\begin_inset Formula 
+\[
+F\otimes_{R}M\to F\slash E\otimes_{R}M\quad\text{and}\quad\mathrm{Hom}_{R}^{\star}(F\slash E,M)\to\mathrm{Hom}_{R}^{\star}(F,M)
+\]
+
+\end_inset
+
+respectively.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Note that under the assumptions we are working with, if 
+\begin_inset Formula $\overline{\varphi}\colon E_{\Bbbk}\to F_{\Bbbk}$
+\end_inset
+
+ is injective, then already 
+\begin_inset Formula $\varphi\colon E\to F$
+\end_inset
+
+ is injective.
+ The converse need not hold.
+  
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+12/21/2023 - Heights of ideals
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative ring and let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be an ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Recall the 
+\series bold
+height 
+\series default
+of 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is defined to be the supremum of lengths of chains of primes which descend
+ from 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mathrm{ht}\,\mathfrak{p}=\sup\{c\in\mathbb{N}\mid\mathfrak{p}=\mathfrak{p}_{0}\supset\mathfrak{p}_{1}\supset\cdots\supset\mathfrak{p}_{c}\}.
+\]
+
+\end_inset
+
+Furthermore, if 
+\begin_inset Formula $I$
+\end_inset
+
+ is an ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+, then the 
+\series bold
+height 
+\series default
+of 
+\begin_inset Formula $I$
+\end_inset
+
+ is defined to be the infimum of the heights of all primes which contain
+ 
+\begin_inset Formula $I$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mathrm{ht}\,I=\inf\{\mathrm{ht}\,\mathfrak{p}\mid\mathfrak{p}\supseteq I\}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $I_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $I_{2}$
+\end_inset
+
+ be ideals of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Set 
+\begin_inset Formula $c=\mathrm{ht}(I_{1}\cap I_{2})$
+\end_inset
+
+, set 
+\begin_inset Formula $c_{1}=\mathrm{ht}\,I_{1}$
+\end_inset
+
+, and set 
+\begin_inset Formula $c_{2}=\mathrm{ht}\,I_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $I_{1}\subseteq I_{2}$
+\end_inset
+
+, then 
+\begin_inset Formula $c_{1}\leq c_{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+We have 
+\begin_inset Formula $c=\min\{c_{1},c_{2}\}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ 1.
+ Let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be a prime which contains 
+\begin_inset Formula $I_{2}$
+\end_inset
+
+ whose height is minimal among all heights of primes which contain 
+\begin_inset Formula $I_{2}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $I_{1}\subseteq I_{2}$
+\end_inset
+
+, we see that 
+\begin_inset Formula $I_{1}\subseteq\mathfrak{p}$
+\end_inset
+
+ also.
+ In particular, it follows that 
+\begin_inset Formula $c_{1}\leq c_{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Note that 
+\begin_inset Formula $I_{1}\cap I_{2}\subseteq I_{1}$
+\end_inset
+
+ implies 
+\begin_inset Formula $c\leq c_{1}$
+\end_inset
+
+.
+ Similarly, 
+\begin_inset Formula $I_{1}\cap I_{2}\subseteq I_{2}$
+\end_inset
+
+ implies 
+\begin_inset Formula $c\leq c_{2}$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $c\leq\min\{c_{1},c_{2}\}$
+\end_inset
+
+.
+ Conversely, let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be a prime which contains 
+\begin_inset Formula $I_{1}\cap I_{2}$
+\end_inset
+
+ whose height is minimal among all heights of primes which contain 
+\begin_inset Formula $I_{1}\cap I_{2}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathfrak{p}\supseteq I_{1}\cap I_{2}$
+\end_inset
+
+ implies either 
+\begin_inset Formula $\mathfrak{p}\supseteq I_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $\mathfrak{p}\supseteq I_{2}$
+\end_inset
+
+ since 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ is a prime.
+ In particular it follows that either 
+\begin_inset Formula $c\geq c_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $c\geq c_{2}$
+\end_inset
+
+ or equivalently 
+\begin_inset Formula $c\geq\min\{c_{1},c_{2}\}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
