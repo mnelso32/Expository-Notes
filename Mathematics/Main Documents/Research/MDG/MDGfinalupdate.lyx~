@@ -110,7 +110,7 @@ commutative diagrams/.cd,
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize 14
+\paperfontsize 12
 \spacing single
 \use_hyperref false
 \papersize custom
@@ -256,7 +256,7 @@ We investigate associativity of multiplications on chain complexes over
  commutative noetherian rings from two perspectives.
  First, we introduce a natural associator subcomplex and show how its homology
  can detect associativity.
- Second, we use Gröbner bases to compute the associator.
+ Second, we use Gröbner bases to compute associators.
  
 \end_layout
 
@@ -904,7 +904,11 @@ submodule of an MDG module
 \begin_inset Formula $A$
 \end_inset
 
- to be the smallest MDG submodule containing all 
+ to be the smallest MDG 
+\begin_inset Formula $A$
+\end_inset
+
+-submodule containing all 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1049,7 +1053,7 @@ ref{theorempresentationsym})
 
  when working over an integral domain where we can see how associators naturally
  arise when performing Buchberger's algorithm to certain set of polynomials
- using this monomial ordering.
+ with respect to this monomial ordering.
 \end_layout
 
 \begin_layout Standard
@@ -1115,7 +1119,7 @@ This paper is organized into five sections, the first section being this
 \begin_inset Formula $R$
 \end_inset
 
--algebra except we don't require the associative law to hold.
+-algebra except we don't require the associative rule to hold.
  We also define the category of MDG 
 \begin_inset Formula $A$
 \end_inset
@@ -1132,7 +1136,7 @@ This paper is organized into five sections, the first section being this
 \begin_inset Formula $A$
 \end_inset
 
--module except we do not require the associative law to hold.
+-module except we do not require the associative rule to hold.
  
 \end_layout
 
@@ -1824,34 +1828,34 @@ ref{theorempresentationsym})
 .
  This presentation also has interesting Gröbner basis applications in the
  case where 
-\begin_inset Formula $R=K$
+\begin_inset Formula $R$
 \end_inset
 
- is a field and 
+ is a domain with fraction field 
+\begin_inset Formula $K$
+\end_inset
+
+ and 
 \begin_inset Formula $F$
 \end_inset
 
  is an MDG 
-\begin_inset Formula $K$
+\begin_inset Formula $R$
 \end_inset
 
 -algebra centered at 
-\begin_inset Formula $K$
+\begin_inset Formula $R$
 \end_inset
 
  such that the underlying graded 
-\begin_inset Formula $K$
+\begin_inset Formula $R$
 \end_inset
 
--vector space of 
+-module of 
 \begin_inset Formula $F$
 \end_inset
 
- is finite and free as a 
-\begin_inset Formula $K$
-\end_inset
-
--vector space.
+ is finite and free.
  Indeed, suppose that
 \begin_inset Formula 
 \[
@@ -1877,7 +1881,7 @@ where
 \end_inset
 
 , and let 
-\begin_inset Formula $K[\boldsymbol{e}]=K[e_{1},\dots,e_{n}]$
+\begin_inset Formula $R[\boldsymbol{e}]=R[e_{1},\dots,e_{n}]$
 \end_inset
 
  be the free non-strict graded-commutative 
@@ -1890,12 +1894,12 @@ where
 
 .
  We will equip 
-\begin_inset Formula $K[\boldsymbol{e}]$
+\begin_inset Formula $K[\boldsymbol{e}]:=K\otimes_{R}R[\boldsymbol{e}]$
 \end_inset
 
  with a specific monomial ordering and show how associators naturally arise
- when performing Buchberger's algorithm to certain set of polynomials using
- this monomial ordering.
+ when performing Buchberger's algorithm to certain set of polynomials with
+ respect to this monomial ordering.
  We further demonstrate in 
 \begin_inset ERT
 status open
@@ -1909,8 +1913,25 @@ ref{example455})
 
 \end_inset
 
- how this monomial ordering can help us find associative multiplications
- on minimal free resolutions.
+ how, with the help of a computer algebra system like Singular, this monomial
+ ordering can help us find associative multiplications on minimal free resolutio
+ns.
+ For instance, we used Singular to find an associative multiplication on
+ the minimal free resolution in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Example~(
+\backslash
+ref{example4})
+\end_layout
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Section
@@ -2303,1288 +2324,12 @@ end{defn}
 
 \end_layout
 
-\begin_layout Subsection
-MDG Algebra Resolutions of a Cyclic Module
-\end_layout
-
-\begin_layout Standard
-In this subsection, we describe the MDG algebras we are mostly interested
- in.
- Throughout this subsection, let 
-\begin_inset Formula $I$
-\end_inset
-
- be an ideal of 
-\begin_inset Formula $R$
-\end_inset
-
-, and let 
-\begin_inset Formula $F$
-\end_inset
-
- be a free resolution of 
-\begin_inset Formula $R\slash I$
-\end_inset
-
- over 
-\begin_inset Formula $R$
-\end_inset
-
- such that 
-\begin_inset Formula $F_{0}=R$
-\end_inset
-
-.
- We denote by 
-\begin_inset Formula $\mathcal{C}(F^{\otimes2},F)$
-\end_inset
-
- to be the set of all chain maps from 
-\begin_inset Formula $F^{\otimes2}:=F\otimes_{R}F$
-\end_inset
-
- to 
-\begin_inset Formula $F$
-\end_inset
-
- (more generally, if 
-\begin_inset Formula $X$
-\end_inset
-
- and 
-\begin_inset Formula $Y$
-\end_inset
-
- are two 
-\begin_inset Formula $R$
-\end_inset
-
--complexes, then we denote by 
-\begin_inset Formula $\mathcal{C}(X,Y)$
-\end_inset
-
- to be the set of all chain maps from 
-\begin_inset Formula $X$
-\end_inset
-
- to 
-\begin_inset Formula $Y$
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{defn}
-\backslash
-label{defn}
-\end_layout
-
-\end_inset
-
- A 
-\series bold
-multiplication 
-\series default
-on
-\series bold
- 
-\begin_inset Formula $F$
-\end_inset
-
-
-\series default
- is a chain map 
-\begin_inset Formula $\mu\in\mathcal{C}(F^{\otimes2},F)$
-\end_inset
-
- which is unital (with 
-\begin_inset Formula $1\in F$
-\end_inset
-
- being the identity element) and strictly graded-commutative (if we decide
- to equip 
-\begin_inset Formula $F$
-\end_inset
-
- with a particular multiplication 
-\begin_inset Formula $\mu$
-\end_inset
-
-, giving it the structure of an MDG 
-\begin_inset Formula $R$
-\end_inset
-
--algebra, then we write 
-\begin_inset Formula $F=(F,\mathrm{d},\mu)$
-\end_inset
-
- and refer to 
-\begin_inset Formula $\mu$
-\end_inset
-
- as 
-\emph on
-the
-\emph default
- multiplication
-\series bold
- 
-\series default
-of 
-\begin_inset Formula $F$
-\end_inset
-
-).
- We denote by 
-\begin_inset Formula $\mathrm{Mult}(F)$
-\end_inset
-
- to be the set of all multiplications on 
-\begin_inset Formula $F$
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{defn}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-We claim that every multiplication on 
-\begin_inset Formula $F$
-\end_inset
-
- is automatically a lift of the usual multiplication 
-\begin_inset Formula $\mathrm{m}$
-\end_inset
-
- on 
-\begin_inset Formula $R\slash I$
-\end_inset
-
-.
- Indeed, first note that 
-\begin_inset Formula $F$
-\end_inset
-
- comes equipped with a canonical quasi-isomorphism 
-\begin_inset Formula $\tau\colon F\to R\slash I$
-\end_inset
-
-.
- Here we view 
-\begin_inset Formula $R\slash I$
-\end_inset
-
- as a trivial 
-\begin_inset Formula $R$
-\end_inset
-
--complex which sits in homological degree 
-\begin_inset Formula $0$
-\end_inset
-
-.
- In homological degree 
-\begin_inset Formula $0$
-\end_inset
-
-, we have 
-\begin_inset Formula $\tau_{0}\colon R\to R\slash I$
-\end_inset
-
- where 
-\begin_inset Formula $\tau_{0}$
-\end_inset
-
- is the canonical projection map.
- In homological degree 
-\begin_inset Formula $i$
-\end_inset
-
- where 
-\begin_inset Formula $i\neq0$
-\end_inset
-
-, we have 
-\begin_inset Formula $\tau_{i}\colon F_{i}\to0$
-\end_inset
-
- is the zero map.
- With this understood, the multiplication 
-\begin_inset Formula $\mu$
-\end_inset
-
- is a lift of 
-\begin_inset Formula $\mathrm{m}$
-\end_inset
-
- if the following diagram of 
-\begin_inset Formula $R$
-\end_inset
-
--complexes commutes:
-\begin_inset Branch tikz
-inverted 0
-status collapsed
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{equation}
-\backslash
-label{equationmuliftm1}
-\backslash
-begin{tikzcd}[column sep=40, row sep=40] F 
-\backslash
-otimes _R F 
-\backslash
-arrow[r, "
-\backslash
-mu "] 
-\backslash
-arrow[d, 
-\begin_inset Quotes eld
-\end_inset
-
-
-\backslash
-tau ^{
-\backslash
-otimes 2 }
-\begin_inset Quotes erd
-\end_inset
-
-, swap] &  F 
-\backslash
-arrow[d, "
-\backslash
-tau " ] 
-\backslash
-
-\backslash
- R 
-\backslash
-slash I 
-\backslash
-otimes _R R
-\backslash
-slash I 
-\backslash
-arrow[r, " 
-\backslash
-mathrm{m} "]  &  R 
-\backslash
-slash I .
- 
-\backslash
-end{tikzcd}
-\backslash
-end{equation}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-In homological degree 
-\begin_inset Formula $i\neq0$
-\end_inset
-
-, this diagram commutes for trivial reasons, so the only thing that we need
- to check is that the diagram commutes in homological degree 
-\begin_inset Formula $0$
-\end_inset
-
-.
- In homological degree 
-\begin_inset Formula $0$
-\end_inset
-
-, the diagram looks like:
-\begin_inset Branch tikz
-inverted 0
-status collapsed
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{equation}
-\backslash
-label{equationmuliftm2}
-\backslash
-begin{tikzcd}[column sep=40, row sep=40] R 
-\backslash
-otimes _R R 
-\backslash
-arrow[r, "
-\backslash
-mu _0 "] 
-\backslash
-arrow[d, 
-\begin_inset Quotes eld
-\end_inset
-
-
-\backslash
-tau _0 ^{
-\backslash
-otimes 2 }
-\begin_inset Quotes erd
-\end_inset
-
-, swap] &  R 
-\backslash
-arrow[d, 
-\begin_inset Quotes eld
-\end_inset
-
-
-\backslash
-tau _0 
-\begin_inset Quotes eld
-\end_inset
-
-] 
-\backslash
-
-\backslash
- R 
-\backslash
-slash I 
-\backslash
-otimes _R R
-\backslash
-slash I 
-\backslash
-arrow[r, " 
-\backslash
-mathrm{m} "]  &  R 
-\backslash
-slash I .
- 
-\backslash
-end{tikzcd}
-\backslash
-end{equation}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-Note that 
-\begin_inset Formula $\mu_{0}$
-\end_inset
-
- is 
-\begin_inset Formula $R$
-\end_inset
-
--linear, so it is completely determined by where it sends 
-\begin_inset Formula $1\otimes1$
-\end_inset
-
-.
- The diagram 
-\begin_inset Branch ref
-inverted 0
-status collapsed
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-(
-\backslash
-ref{equationmuliftm2})
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-
- will commute if and only if 
-\begin_inset Formula $\mu_{0}$
-\end_inset
-
- sends 
-\begin_inset Formula $1\otimes1$
-\end_inset
-
- to 
-\begin_inset Formula $1+x$
-\end_inset
-
- for some 
-\begin_inset Formula $x\in I$
-\end_inset
-
-.
- In fact, 
-\begin_inset Formula $\mu_{0}$
-\end_inset
-
- is already forced to send 
-\begin_inset Formula $1\otimes1$
-\end_inset
-
- to 
-\begin_inset Formula $1$
-\end_inset
-
- since 
-\begin_inset Formula $\mu$
-\end_inset
-
- is assumed to be unital with identity element 
-\begin_inset Formula $1$
-\end_inset
-
-.
- Thus if 
-\begin_inset Formula $r_{1},r_{2}\in R$
-\end_inset
-
-, then
-\begin_inset Formula 
-\[
-r_{1}\star_{\mu}r_{2}=(r_{1}r_{2})(1\star_{\mu}1)=r_{1}r_{2}.
-\]
-
-\end_inset
-
-In other words, 
-\begin_inset Formula $\mu_{0}$
-\end_inset
-
- agrees with the usual multiplication on 
-\begin_inset Formula $R$
-\end_inset
-
-, and the diagram 
-\begin_inset Branch ref
-inverted 0
-status collapsed
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-(
-\backslash
-ref{equationmuliftm2})
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- automatically commutes in this case as well.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-Next, let 
-\begin_inset Formula $J$
-\end_inset
-
- be an ideal contained in 
-\begin_inset Formula $I$
-\end_inset
-
- and let 
-\begin_inset Formula $G$
-\end_inset
-
- be an 
-\begin_inset Formula $R$
-\end_inset
-
--free resolution of 
-\begin_inset Formula $R\slash J$
-\end_inset
-
- such that 
-\begin_inset Formula $G_{0}=R$
-\end_inset
-
-.
- Fix multiplications 
-\begin_inset Formula $\mu$
-\end_inset
-
- on 
-\begin_inset Formula $F$
-\end_inset
-
- and 
-\begin_inset Formula $\nu$
-\end_inset
-
- on 
-\begin_inset Formula $G$
-\end_inset
-
- giving them the structure of MDG 
-\begin_inset Formula $R$
-\end_inset
-
--algebras.
- Choose 
-\begin_inset Formula $\varphi\colon G\to F$
-\end_inset
-
- to be a lift of the map 
-\begin_inset Formula $R\slash J\to R\slash I$
-\end_inset
-
-.
- We claim that if 
-\begin_inset Formula $R$
-\end_inset
-
- is local and 
-\begin_inset Formula $\varphi$
-\end_inset
-
- is multiplicative, then 
-\begin_inset Formula $\varphi$
-\end_inset
-
- is automatically unital.
- Indeed, suppose 
-\begin_inset Formula $\varphi$
-\end_inset
-
- is multiplicative and write 
-\begin_inset Formula $\varphi(1)=r$
-\end_inset
-
- for some 
-\begin_inset Formula $r\in R$
-\end_inset
-
-.
- Since 
-\begin_inset Formula $\varphi$
-\end_inset
-
- is a lift of 
-\begin_inset Formula $R\slash J\to R\slash I$
-\end_inset
-
-, we must have 
-\begin_inset Formula $r=1+x$
-\end_inset
-
- for some 
-\begin_inset Formula $x\in I$
-\end_inset
-
-.
- Since 
-\begin_inset Formula $R$
-\end_inset
-
- is local, this implies 
-\begin_inset Formula $r$
-\end_inset
-
- is a unit.
- However multiplicativity of 
-\begin_inset Formula $\varphi$
-\end_inset
-
- already implies 
-\begin_inset Formula $r^{2}=r$
-\end_inset
-
-, and thus we must have 
-\begin_inset Formula $r=1$
-\end_inset
-
- since 
-\begin_inset Formula $r$
-\end_inset
-
- is a unit.
- Thus under these assumptions, 
-\begin_inset Formula $\varphi\colon G\to F$
-\end_inset
-
- is an MDG algebra homomorphism if and only if it is multiplicative.
-\end_layout
-
-\begin_layout Subsubsection
-Viewing 
-\begin_inset Formula $\mathrm{Mult}(F)$
-\end_inset
-
- as a Convex Subset 
-\end_layout
-
-\begin_layout Standard
-We now want to explain how 
-\begin_inset Formula $\mathrm{Mult}(F)$
-\end_inset
-
- can be viewed as a 
-\begin_inset Quotes eld
-\end_inset
-
-convex
-\begin_inset Quotes erd
-\end_inset
-
- subset of 
-\begin_inset Formula $\mathcal{C}(F^{\otimes2},F)$
-\end_inset
-
-.
- To see what this means, first recall that 
-\begin_inset Formula $\mathcal{C}(F^{\otimes2},F)$
-\end_inset
-
- has a natural 
-\begin_inset Formula $R$
-\end_inset
-
--module structure on it, but this 
-\begin_inset Formula $R$
-\end_inset
-
--module structure does not induce an 
-\begin_inset Formula $R$
-\end_inset
-
--module structure on 
-\begin_inset Formula $\mathrm{Mult}(F)$
-\end_inset
-
- (if 
-\begin_inset Formula $r\in R\backslash\{1\}$
-\end_inset
-
- and 
-\begin_inset Formula $\mu\in\mathrm{Mult}(F)$
-\end_inset
-
-, then 
-\begin_inset Formula $r\mu$
-\end_inset
-
- will not be unital).
- The following lemma shows that it is better to interpret 
-\begin_inset Formula $\mathrm{Mult}(F)$
-\end_inset
-
- as some sort of convex subset of 
-\begin_inset Formula $\mathcal{C}(F^{\otimes2},F)$
-\end_inset
-
-:
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{lemma}
-\backslash
-label{lemma}
-\end_layout
-
-\end_inset
-
- Suppose 
-\begin_inset Formula $\mu,\nu\in\mathrm{Mult}(F)$
-\end_inset
-
- and 
-\begin_inset Formula $\lambda\in\mathcal{C}(F,F)$
-\end_inset
-
-.
- Then 
-\begin_inset Formula $\lambda\mu+(1-\lambda)\nu\in\mathrm{Mult}(F)$
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{lemma}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{proof}
-\backslash
-label{proof}
-\end_layout
-
-\end_inset
-
- Clearly 
-\begin_inset Formula $\lambda\mu+(1-\lambda)\nu$
-\end_inset
-
- is a chain map.
- It is also unital since if 
-\begin_inset Formula $a\in F$
-\end_inset
-
-, then we have
-\begin_inset Formula 
-\begin{align*}
-(\lambda\mu+(1-\lambda)\nu)(1\otimes a) & =\lambda\mu(1\otimes a)+(1-\lambda)\nu(1\otimes a)\\
- & =\lambda a+(1-\lambda)a\\
- & =a.
-\end{align*}
-
-\end_inset
-
-A similar computation shows 
-\begin_inset Formula $(\lambda\mu+(1-\lambda)\nu)(a\otimes1)=a$
-\end_inset
-
-.
- Finally, it is graded-commutative since if 
-\begin_inset Formula $a_{1},a_{2}\in F$
-\end_inset
-
- are homogeneous, then we have
-\begin_inset Formula 
-\begin{align*}
-(\lambda\mu+(1-\lambda)\nu)(a_{1}\otimes a_{2}) & =\lambda\mu(a_{1}\otimes a_{2})+(1-\lambda)\nu(a_{1}\otimes a_{2})\\
- & =(-1)^{|a_{1}||a_{2}|}\lambda\mu(a_{2}\otimes a_{1})+(-1)^{|a_{1}||a_{2}|}(1-\lambda)\nu(a_{2}\otimes a_{1})\\
- & =(-1)^{|a_{1}||a_{2}|}(\lambda\mu+(1-\lambda)\nu)(a_{2}\otimes a_{1}).
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{proof}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Multiplications up to Homotopy
-\end_layout
-
-\begin_layout Standard
-A chain map 
-\begin_inset Formula $\mu\in\mathcal{C}(F^{\otimes2},F)$
-\end_inset
-
- which lifts the usual multiplication map on 
-\begin_inset Formula $R\slash I$
-\end_inset
-
- is unique up to homotopy.
- What this means is that if 
-\begin_inset Formula $\mu'\in\mathcal{C}(F^{\otimes2},F)$
-\end_inset
-
- is another chain map which lifts the multiplication map on 
-\begin_inset Formula $R\slash I$
-\end_inset
-
-, then there exists a graded 
-\begin_inset Formula $R$
-\end_inset
-
--linear map 
-\begin_inset Formula $\nu\colon F^{\otimes2}\to F$
-\end_inset
-
- of degree one, then 
-\begin_inset Formula $\mu'=\mu_{\nu}$
-\end_inset
-
- where
-\begin_inset Formula 
-\begin{equation}
-\mu_{\nu}:=\mu+\mathrm{d}\nu+\nu\mathrm{d}.\label{eq:multiplicationjlkll-1}
-\end{equation}
-
-\end_inset
-
-If 
-\begin_inset Formula $\mu$
-\end_inset
-
- is a multiplication, then we want to determine the conditions 
-\begin_inset Formula $\nu$
-\end_inset
-
- needs to satisfy in order for 
-\begin_inset Formula $\mu_{\nu}$
-\end_inset
-
- to be a multiplication also.
- To this end, write 
-\begin_inset Formula $\star\colon F^{2}\to F$
-\end_inset
-
- for the 
-\begin_inset Formula $R$
-\end_inset
-
--bilinear map associated to 
-\begin_inset Formula $\mu$
-\end_inset
-
-, write 
-\begin_inset Formula $\star_{\nu}\colon F^{2}\to F$
-\end_inset
-
- for the 
-\begin_inset Formula $R$
-\end_inset
-
--bilinear map associated to 
-\begin_inset Formula $\mu_{\nu}$
-\end_inset
-
-, and write 
-\begin_inset Formula $[\cdot,\cdot]_{\nu}\colon F^{2}\to F$
-\end_inset
-
- for the 
-\begin_inset Formula $R$
-\end_inset
-
--bilinear map associated to 
-\begin_inset Formula $\nu$
-\end_inset
-
-.
- Thus for each 
-\begin_inset Formula $a_{1},a_{2}\in F$
-\end_inset
-
- homogeneous, we have
-\begin_inset Formula 
-\begin{equation}
-a_{1}\star_{\nu}a_{2}=a_{1}\star a_{2}+\mathrm{d}[a_{1},a_{2}]_{\nu}+[\mathrm{d}a_{1},a_{2}]_{\nu}+(-1)^{|a_{1}|}[a_{1},\mathrm{d}a_{2}]_{\nu}.\label{eq:sjflkdslsl-1}
-\end{equation}
-
-\end_inset
-
-Let 
-\begin_inset Formula $\sigma\colon F^{\otimes2}\to F^{\otimes2}$
-\end_inset
-
- be the chain map defined on homogeneous elements 
-\begin_inset Formula $a,a_{1},a_{2}\in F$
-\end_inset
-
- by
-\begin_inset Formula 
-\[
-\sigma(a_{1}\otimes a_{2})=a_{1}\otimes a_{2}-(-1)^{|a_{1}||a_{2}|}a_{2}\otimes a_{1}
-\]
-
-\end_inset
-
-Finally, write 
-\begin_inset Formula $[\cdot,\cdot]_{\nu\sigma}\colon F^{2}\to F$
-\end_inset
-
- for the 
-\begin_inset Formula $R$
-\end_inset
-
--bilinear map associated to 
-\begin_inset Formula $\nu\sigma$
-\end_inset
-
-.
- Thus we have
-\begin_inset Formula 
-\[
-[a_{1},a_{2}]_{\nu\sigma}=[a_{1},a_{2}]_{\nu}-(-1)^{|a_{1}||a_{2}|}[a_{2},a_{1}]_{\nu}
-\]
-
-\end_inset
-
-for all homogeneous 
-\begin_inset Formula $a_{1},a_{2}\in F$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{lemma}
-\backslash
-label{lemma}
-\end_layout
-
-\end_inset
-
- With the notation as above we have the following:
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $\mu_{\nu}$
-\end_inset
-
- is graded-commutative if and only if the composite 
-\begin_inset Formula $\nu\sigma$
-\end_inset
-
- is a chain map of degree one, meaning
-\begin_inset Formula 
-\[
-\mathrm{d}[a_{1},a_{2}]_{\nu\sigma}=-[\mathrm{d}a_{1},a_{2}]_{\nu\sigma}-(-1)^{|a_{1}|}[a_{1},\mathrm{d}a_{2}]_{\nu\sigma}
-\]
-
-\end_inset
-
- for all homogeneous 
-\begin_inset Formula $a_{1},a_{2}\in F$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Enumerate
-We have 
-\begin_inset Formula $a_{1}\star_{\nu}a_{2}=a_{1}\star a_{2}$
-\end_inset
-
- if and only if 
-\begin_inset Formula $[\cdot,\cdot]_{\nu}$
-\end_inset
-
- satisfies Leibniz law at the pair 
-\begin_inset Formula $(a_{1},a_{2})$
-\end_inset
-
-, meaning
-\begin_inset Formula 
-\[
-\mathrm{d}[a_{1},a_{2}]_{\nu}=-[\mathrm{d}a_{1},a_{2}]_{\nu}-(-1)^{|a_{1}|}[a_{1},\mathrm{d}a_{2}]_{\nu}.
-\]
-
-\end_inset
-
-In particular, if 
-\begin_inset Formula $\mu_{\nu}$
-\end_inset
-
- is unital if and only if both 
-\begin_inset Formula $\nu|_{F\otimes1}$
-\end_inset
-
- and 
-\begin_inset Formula $\nu|_{1\otimes F}$
-\end_inset
-
- are chain maps of degree one for all 
-\begin_inset Formula $a\in F$
-\end_inset
-
-, meaning
-\begin_inset Formula 
-\[
-\mathrm{d}[a,1]_{\nu}=-[\mathrm{d}a,1]_{\nu}\quad\text{and}\quad\mathrm{d}[1,a]=-[1,\mathrm{d}a]_{\nu},
-\]
-
-\end_inset
-
-for all 
-\begin_inset Formula $a\in F$
-\end_inset
-
-.
- Similarly, 
-\begin_inset Formula $\mu_{\nu}$
-\end_inset
-
- is strictly graded-commutative if and only if 
-\begin_inset Formula $\nu\sigma$
-\end_inset
-
- is a chain map of degree one and
-\begin_inset Formula 
-\[
-\mathrm{d}[a,a]_{\nu}=[\mathrm{d}a,a]_{\nu\sigma}
-\]
-
-\end_inset
-
-for all homogeneous 
-\begin_inset Formula $a\in F$
-\end_inset
-
- such that 
-\begin_inset Formula $|a|$
-\end_inset
-
- is odd.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{lemma}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{proof}
-\backslash
-label{proof}
-\end_layout
-
-\end_inset
-
- Note that 
-\begin_inset Formula $\mu_{\nu}$
-\end_inset
-
- is graded-commutative if and only if 
-\begin_inset Formula $\mu_{\nu}\sigma=0$
-\end_inset
-
-.
- Thus by applying 
-\begin_inset Formula $\sigma$
-\end_inset
-
- to the right on both sides in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-(
-\backslash
-ref{eq:multiplicationjlkll-1})
-\end_layout
-
-\end_inset
-
- and using the fact that 
-\begin_inset Formula $\mu$
-\end_inset
-
- is graded-commutative and 
-\begin_inset Formula $\sigma$
-\end_inset
-
- is a chain map, we see that 
-\begin_inset Formula $\mu_{\nu}$
-\end_inset
-
- is graded-commutative if and only if 
-\begin_inset Formula $\mathrm{d}(\nu\sigma)=-(\nu\sigma)\mathrm{d}$
-\end_inset
-
-, that is, if and only if 
-\begin_inset Formula $\nu\sigma$
-\end_inset
-
- is a chain map of degree one.
- The remaining identities are obtained by considering 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-(
-\backslash
-ref{eq:sjflkdslsl-1})
-\end_layout
-
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{proof}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsubsection
 Examples of Multigraded MDG Algebras
 \end_layout
 
 \begin_layout Standard
-Throughout this subsubsection, let 
-\begin_inset Formula $R=\Bbbk[x,y,z,w]$
-\end_inset
-
-.
- We consider six examples of multigraded MDG 
-\begin_inset Formula $R$
-\end_inset
-
--algebras.
+In this subsubsection, we consider six examples of multigraded MDG algebras.
  The first two examples were considered in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -3601,8 +2346,8 @@ literal "false"
 
 \end_inset
 
- respectively, and were both shown to be examples of minimal free resolutions
- which do not admit a DG algebra structure on them.
+ respectively and were both shown to be examples of minimal free resolutions
+ which do not admit DG algebra structures on them.
 \end_layout
 
 \begin_layout Standard
@@ -3621,11 +2366,15 @@ label{example1}
 \end_inset
 
  Let 
+\begin_inset Formula $R=\Bbbk[x,y,z,w]$
+\end_inset
+
+, let 
 \begin_inset Formula $\boldsymbol{m}_{\mathrm{K}}=\boldsymbol{m}=x^{2},w^{2},xy,zw,y^{2}z^{2}$
 \end_inset
 
  and let 
-\begin_inset Formula $F$
+\begin_inset Formula $F_{\mathrm{K}}=F$
 \end_inset
 
  be the minimal free resolution of 
@@ -3676,13 +2425,9 @@ begin{tikzpicture}[scale=1]
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-
 
 \backslash
-draw[fill=gray!20] (0,0) -- (3,-0.5) -- (5,0.2) -- (3.2,1.2)-- (0,0); 
+draw[fill=gray!20] (0,0) -- (3,-0.5) -- (3.2,1.2)-- (0,0); 
 \end_layout
 
 \begin_layout Plain Layout
@@ -3690,15 +2435,15 @@ draw[fill=gray!20] (0,0) -- (3,-0.5) -- (5,0.2) -- (3.2,1.2)-- (0,0);
 
 \backslash
 draw[fill=gray!20] (0,0) -- (1.5,1.5) -- (3.2,1.2)-- (0,0); 
+\backslash
+draw[] (1.5,1.5) -- (3,-0.5); 
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-draw[] (1.5,1.5) -- (3,-0.5); 
-\backslash
-draw[fill=gray!20] (3,-0.5) -- (5,0.2) -- (3.2,1.2);
+draw[fill=gray!20] (3,-0.5) -- (5,0.2) -- (3.2,1.2); 
 \end_layout
 
 \begin_layout Plain Layout
@@ -3723,45 +2468,40 @@ draw[color=black!100] (0,0) -- (3.2,1.2) -- (5,0.2);
 
 
 \backslash
-node[circle, fill=black, inner sep=1pt, label=left:$
-\backslash
-varepsilon _1 $] (a) at (0,0) {};
+node[circle, fill=black, inner sep=1pt, label=left:$e_1 $] (a) at (0,0)
+ {}; 
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-node[circle, fill=black, inner sep=1pt, label=above:$
-\backslash
-varepsilon _2 $] (b) at (1.5,1.5) {};
+node[circle, fill=black, inner sep=1pt, label=above:$e_2 $] (b) at (1.5,1.5)
+ {}; 
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-node[circle, fill=black, inner sep=1pt, label=below:$
-\backslash
-varepsilon _3 $] (c) at (3,-0.5) {};
+node[circle, fill=black, inner sep=1pt, label=below:$e_3 $] (c) at (3,-0.5)
+ {};
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-node[circle, fill=black, inner sep=1pt, label=above:$
-\backslash
-varepsilon _4 $] (d) at (3.2,1.2) {}; 
+node[circle, fill=black, inner sep=1pt, label=above:$e_4 $] (d) at (3.2,1.2)
+ {}; 
 \end_layout
 
 \begin_layout Plain Layout
 
 
 \backslash
-node[circle, fill=black, inner sep=1pt, label=right:$
-\backslash
-varepsilon _5 $] (e) at (5,0.2) {};
+node[circle, fill=black, inner sep=1pt, label=right:$e_5 $] (e) at (5,0.2)
+ {};
 \end_layout
 
 \begin_layout Plain Layout
@@ -3772,9 +2512,7 @@ varepsilon _5 $] (e) at (5,0.2) {};
 
 
 \backslash
-node[] (x) at (-1,1.3) {$ 
-\backslash
-varepsilon _{12} $}; 
+node[] (x) at (-1,1.3) {$ e_{12} $}; 
 \backslash
 node[] (x') at (0.8,0.6) {};
 \end_layout
@@ -3795,9 +2533,7 @@ draw[-{Straight Barb[length=3pt,width=3pt]}] (x) edge[out=0, in=130] node[below]
 
 
 \backslash
-node[] (y) at (6.5,1.3) {$ 
-\backslash
-varepsilon _{45} $}; 
+node[] (y) at (6.5,1.3) {$ e_{45} $}; 
 \backslash
 node[] (y') at (4.1,0.5) {}; 
 \end_layout
@@ -3818,9 +2554,7 @@ draw[-{Straight Barb[length=3pt,width=3pt]}] (y) edge[out=180, in=45] node[below
 
 
 \backslash
-node[] (z) at (6.5,-0.7) {$ 
-\backslash
-varepsilon _{35} $}; 
+node[] (z) at (6.5,-0.7) {$e_{35} $}; 
 \backslash
 node[] (z') at (4.1,0.05) {};
 \end_layout
@@ -3841,11 +2575,9 @@ w] {} (z');
 
 
 \backslash
-node[] (w) at (4.5,2) {$ 
+node[] (w) at (4.5,2) {$e_{345} $}; 
 \backslash
-varepsilon _{2345} $}; 
-\backslash
-node[] (w') at (3.2,0) {}; 
+node[] (w') at (3.8,0) {};
 \end_layout
 
 \begin_layout Plain Layout
@@ -3854,10 +2586,6 @@ node[] (w') at (3.2,0) {};
 \backslash
 draw[-{Straight Barb[length=3pt,width=3pt]}] (w) edge[out=-120, in=90] node[belo
 w] {} (w');
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -3914,7 +2642,7 @@ begin{tikzpicture}[scale=1]
 
 
 \backslash
-draw[fill=gray!20] (0,0) -- (3,-0.5) -- (5,0.2) -- (3.2,1.2)-- (0,0); 
+draw[fill=gray!20] (0,0) -- (3,-0.5) -- (3.2,1.2)-- (0,0); 
 \end_layout
 
 \begin_layout Plain Layout
@@ -3987,7 +2715,7 @@ node[circle, fill=black, inner sep=1pt, label=above:$xy $] (d) at (3.2,1.2)
 
 
 \backslash
-node[circle, fill=black, inner sep=1pt, label=right:$yz $] (e) at (5,0.2)
+node[circle, fill=black, inner sep=1pt, label=right:$y^2 z^2 $] (e) at (5,0.2)
  {};
 \end_layout
 
@@ -4020,7 +2748,7 @@ draw[-{Straight Barb[length=3pt,width=3pt]}] (x) edge[out=0, in=130] node[below]
 
 
 \backslash
-node[] (y) at (6.5,1.3) {$ x y z $}; 
+node[] (y) at (6.5,1.3) {$ x y^2 z^2 $}; 
 \backslash
 node[] (y') at (4.1,0.5) {}; 
 \end_layout
@@ -4041,7 +2769,7 @@ draw[-{Straight Barb[length=3pt,width=3pt]}] (y) edge[out=180, in=45] node[below
 
 
 \backslash
-node[] (z) at (6.5,-0.7) {$ y z w $}; 
+node[] (z) at (6.5,-0.7) {$ y^2 z^2 w $}; 
 \backslash
 node[] (z') at (4.1,0.05) {};
 \end_layout
@@ -4062,9 +2790,9 @@ w] {} (z');
 
 
 \backslash
-node[] (w) at (4.5,2) {$ x y z w^2 $}; 
+node[] (w) at (4.5,2) {$ x y^2 z^2 w $}; 
 \backslash
-node[] (w') at (3.2,0) {}; 
+node[] (w') at (3.8,0) {}; 
 \end_layout
 
 \begin_layout Plain Layout
@@ -4111,7 +2839,7 @@ In particular, the homogeneous components of
 \begin_inset Formula $R$
 \end_inset
 
--module look like:
+-module are given by
 \begin_inset Formula 
 \begin{align*}
 F_{0} & =R\\
@@ -4151,34 +2879,28 @@ literal "false"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Now equip 
+ We now wish to equip 
 \begin_inset Formula $F$
 \end_inset
 
- with a multiplication 
+ with a multigraded multiplication 
 \begin_inset Formula $\mu_{\mathrm{K}}=\mu$
 \end_inset
 
- which respects the multigrading, giving it the structure of a multigraded
- MDG algebra.
+ giving it the structure of a multigraded MDG algebra.
  Since 
 \begin_inset Formula $\mu$
 \end_inset
 
- respects the multigrading and satisfies Leibniz law, we are forced to have:
+ respects the multigrading and satisfies Leibniz rule, we are forced to
+ have:
 \begin_inset Formula 
-\begin{align*}
-e_{1}\star e_{5} & =yz^{2}e_{14}+xe_{45}\\
-e_{1}\star e_{2} & =e_{12}\\
-e_{2}\star e_{5} & =y^{2}ze_{23}+we_{35}\\
-e_{2}\star e_{45} & =-yze_{234}+we_{345}\\
-e_{1}\star e_{35} & =yze_{134}-xe_{345}\\
-e_{1}\star e_{23} & =e_{123}\\
-e_{2}\star e_{14} & =-e_{124}
-\end{align*}
+\begin{alignat*}{3}
+e_{1}\star e_{5} & =yz^{2}e_{14}+xe_{45} &  &  & e_{2}\star e_{45} & =-yze_{234}+we_{345}\\
+e_{1}\star e_{2} & =e_{12} &  &  & e_{1}\star e_{35} & =yze_{134}-xe_{345}\\
+e_{2}\star e_{5} & =y^{2}ze_{23}+we_{35} &  &  & e_{1}\star e_{23} & =e_{123}\\
+ &  & \qquad\qquad &  & e_{2}\star e_{14} & =-e_{124}
+\end{alignat*}
 
 \end_inset
 
@@ -4231,12 +2953,12 @@ Finally, we would still like for
 \begin_inset Formula $\mu$
 \end_inset
 
- to be as associative as possible (even though we already know it is not
+ to be as associative as possible even though we already know it is not
  associative at the triple 
 \begin_inset Formula $(e_{1},e_{5},e_{2})$
 \end_inset
 
-).
+.
  In particular, we want 
 \begin_inset Formula $\mu$
 \end_inset
@@ -4282,19 +3004,15 @@ label{example2}
 
 \end_inset
 
- (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Avr81"
-literal "false"
-
+ Let 
+\begin_inset Formula $R=\Bbbk[x,y,z,w]$
 \end_inset
 
-) Let 
+, let 
 \begin_inset Formula $\boldsymbol{m}_{\mathrm{A}}=\boldsymbol{m}=x^{2},w^{2},zw,xy,yz$
 \end_inset
 
-, and let 
+ and let 
 \begin_inset Formula $F_{\mathrm{A}}=F$
 \end_inset
 
@@ -4307,19 +3025,15 @@ literal "false"
 \end_inset
 
 .
- Then 
+ One can visualize 
 \begin_inset Formula $F$
 \end_inset
 
- can be realized as the 
-\begin_inset Formula $R$
-\end_inset
-
--complex induced by the 
+ as being supported on the 
 \begin_inset Formula $\boldsymbol{m}$
 \end_inset
 
--labeled cellular complex pictured below: 
+-labeled cellular complex below: 
 \begin_inset Branch tikzpicture
 inverted 0
 status collapsed
@@ -4781,7 +3495,11 @@ We write down the homogeneous components of
 \begin_inset Formula $F$
 \end_inset
 
- as a graded module below:
+ as a graded 
+\begin_inset Formula $R$
+\end_inset
+
+-module below:
 \begin_inset Formula 
 \begin{align*}
 F_{0} & =R\\
@@ -4797,7 +3515,7 @@ The differential
 \begin_inset Formula $\mathrm{d}_{\mathrm{A}}=\mathrm{d}$
 \end_inset
 
- on the non-simplicial faces as below
+ is defined on the non-simplicial faces as below
 \begin_inset Formula 
 \begin{align*}
 \mathrm{d}(\varepsilon_{12345}) & =x\varepsilon_{2345}-z\varepsilon_{124}+w\varepsilon_{1345}-y\varepsilon_{123}\\
@@ -4843,8 +3561,7 @@ and
 \end_inset
 
  for the remaining homogeneous basis elements.
- This map is locally invertible.
- Indeed, by base changing to 
+ Base changing to 
 \begin_inset Formula $R_{yz}$
 \end_inset
 
@@ -4862,7 +3579,7 @@ and
 \end_inset
 
 .
- By considering the multigrading as well as the Leibniz law, we see that
+ By considering the multigrading as well as the Leibniz rule, we see that
 \begin_inset Formula 
 \begin{align*}
 \iota(\varepsilon_{5}) & =e_{5}/yz & \iota(\varepsilon_{2345}) & =-e_{234}+e_{345}/yz\\
@@ -4885,7 +3602,7 @@ and
 \begin_inset Formula $F_{\mathrm{A}}$
 \end_inset
 
- using the multiplication 
+ by transporting the multiplication 
 \begin_inset Formula $\mu_{\mathrm{K}}$
 \end_inset
 
@@ -4894,7 +3611,7 @@ and
 \end_inset
 
  by setting 
-\begin_inset Formula $\mu_{\mathrm{A}}=\pi\mu_{\mathrm{K}}\iota^{\otimes2}$
+\begin_inset Formula $\mu_{\mathrm{A}}:=\pi\mu_{\mathrm{K}}\iota^{\otimes2}$
 \end_inset
 
 .
@@ -4995,10 +3712,14 @@ label{example3}
 \end_inset
 
  Let 
+\begin_inset Formula $R=\Bbbk[x,y,z,w]$
+\end_inset
+
+, let 
 \begin_inset Formula $\boldsymbol{m}_{\mathrm{M}}=\boldsymbol{m}=x^{2},w^{2},zw,xy,y^{2}z,yz^{2}$
 \end_inset
 
-, and let 
+ and let 
 \begin_inset Formula $F_{\mathrm{M}}=F$
 \end_inset
 
@@ -5011,19 +3732,15 @@ label{example3}
 \end_inset
 
 .
- Then 
+ One can visualize 
 \begin_inset Formula $F$
 \end_inset
 
- can be realized as the 
-\begin_inset Formula $R$
-\end_inset
-
--complex induced by the 
+ as being supported on the 
 \begin_inset Formula $\boldsymbol{m}$
 \end_inset
 
--labeled simplicial complex pictured below: 
+-labeled simplicial complex below: 
 \begin_inset Branch tikzpicture
 inverted 0
 status collapsed
@@ -5374,7 +4091,7 @@ end{tikzpicture}
 
 \end_inset
 
-The homogeneous components of 
+We write down the homogeneous components of 
 \begin_inset Formula $F$
 \end_inset
 
@@ -5382,7 +4099,7 @@ The homogeneous components of
 \begin_inset Formula $R$
 \end_inset
 
--module are given below:
+-module below:
 \begin_inset Formula 
 \begin{align*}
 F_{0} & =R\\
@@ -5460,8 +4177,8 @@ and
 \end_inset
 
 .
- Considerations of the Leibniz and multigrading tells us that we are already
- forced to have:
+ Considerations of the Leibniz rule and the multigrading tells us that we
+ are already forced to have:
 \begin_inset Formula 
 \begin{align*}
 \epsilon_{1}\star\epsilon_{5} & =yz\epsilon_{14}+x\epsilon_{45} &  &  & \epsilon_{1}\star\epsilon_{6} & =z^{2}e_{14}+xe_{46}\\
@@ -5480,7 +4197,7 @@ In particular,
 \begin_inset Formula $F_{\mathrm{M}}$
 \end_inset
 
- is not associative) since we will always have:
+ is not associative) since:
 \begin_inset Formula 
 \[
 [\epsilon_{1},\epsilon_{5},\epsilon_{2}]=-y\mathrm{d}(\epsilon_{1234})\neq0\quad\text{and}\quad[\epsilon_{1},\epsilon_{6},\epsilon_{2}]=-z\mathrm{d}(\epsilon_{1234})\neq0.
@@ -5548,10 +4265,10 @@ label{example4}
 \end_inset
 
 , let 
-\begin_inset Formula $\boldsymbol{m}=\boldsymbol{m}_{\mathrm{O}}=x^{2},w^{2},zw,xy,y^{2},z^{2}$
+\begin_inset Formula $\boldsymbol{m}_{\mathrm{O}}=\boldsymbol{m}=x^{2},w^{2},zw,xy,y^{2},z^{2}$
 \end_inset
 
-, and let 
+ and let 
 \begin_inset Formula $F_{\mathrm{O}}=F$
 \end_inset
 
@@ -5564,19 +4281,15 @@ label{example4}
 \end_inset
 
 .
- Then 
+ One can visualize 
 \begin_inset Formula $F$
 \end_inset
 
- can be realized as the 
-\begin_inset Formula $R$
-\end_inset
-
--complex induced by the 
+ as being supported on the 
 \begin_inset Formula $\boldsymbol{m}$
 \end_inset
 
--labeled simplicial complex pictured below:
+-labeled simplicial complex below:
 \begin_inset Branch tikzpicture
 inverted 0
 status collapsed
@@ -6065,7 +4778,7 @@ end{tikzpicture}
 
 \end_inset
 
-The homogeneous components of 
+We write down the homogeneous components of 
 \begin_inset Formula $F$
 \end_inset
 
@@ -6073,7 +4786,7 @@ The homogeneous components of
 \begin_inset Formula $R$
 \end_inset
 
--module are given below:
+-module below:
 \begin_inset Formula 
 \begin{align*}
 F_{0} & =R\\
@@ -6102,16 +4815,16 @@ The canonical map
 \end_inset
 
 .
- This time it is impossible extend the multiplication of 
+ This time it is not possible extend the multiplication of 
 \begin_inset Formula $F_{\mathrm{M}}$
 \end_inset
 
- to a multigraded multiplication on 
+ to a multiplication on 
 \begin_inset Formula $F_{\mathrm{O}}$
 \end_inset
 
 .
- Indeed, assuming we could extend the multiplication, then
+ Indeed, assuming we could extend the multiplication, then we'd have
 \begin_inset Formula 
 \begin{align*}
 z(\mathrm{e}_{2}\star\mathrm{e}_{5}) & =\mathrm{e}_{2}\star(z\mathrm{e}_{5})\\
@@ -6136,12 +4849,12 @@ which would imply
 \end_inset
 
 .
- On the other hand, it turns out that there is a better choice of multigraded
- multiplication that we can use on 
+ On the other hand, it turns out that there is a better choice of a multigraded
+ multiplication on 
 \begin_inset Formula $F_{\mathrm{O}}$
 \end_inset
 
- anyways; namely namely 
+ that we can use anyways: namely 
 \begin_inset Formula $\mathrm{e}_{2}\star\mathrm{e}_{5}=\mathrm{e}_{25}$
 \end_inset
 
@@ -6153,7 +4866,8 @@ tion to be multigraded.
 \end_inset
 
 .
- Using Singular, one can show that this extends to an 
+ Using the computer algebra system Singular, we found that this extends
+ to an 
 \emph on
 associative
 \emph default
@@ -6161,7 +4875,27 @@ associative
 \begin_inset Formula $F_{\mathrm{O}}$
 \end_inset
 
- (see 
+ which has the following minimal presentation:
+\begin_inset Formula 
+\begin{alignat*}{5}
+\mathrm{e}_{1}^{2} & =0 &  &  & \mathrm{e}_{2}\star\mathrm{e}_{5} & =\mathrm{e}_{25} &  &  & \mathrm{e}_{2}\star\mathrm{e}_{16} & =-z\mathrm{e}_{123}-w\mathrm{e}_{136}\\
+\mathrm{e}_{2}^{2} & =0 &  &  & \mathrm{e}_{2}\star\mathrm{e}_{6} & =z\mathrm{e}_{23}+w\mathrm{e}_{36} &  &  & \mathrm{e}_{2}\star\mathrm{e}_{46} & =\mathrm{e}_{234}+\mathrm{e}_{346}\\
+\mathrm{e}_{3}^{2} & =0 &  &  & \mathrm{e}_{3}\star\mathrm{e}_{4} & =\mathrm{e}_{34} &  &  & \mathrm{e}_{2}\star\mathrm{e}_{56} & =-z\mathrm{e}_{235}+w\mathrm{e}_{356}\\
+\mathrm{e}_{4}^{2} & =0 &  &  & \mathrm{e}_{3}\star\mathrm{e}_{5} & =\mathrm{e}_{35} &  &  & \mathrm{e}_{3}\star\mathrm{e}_{45} & =\mathrm{e}_{345}\\
+\mathrm{e}_{5}^{2} & =0 &  &  & \mathrm{e}_{3}\star\mathrm{e}_{6} & =z\mathrm{e}_{36} &  &  & \mathrm{e}_{5}\star\mathrm{e}_{24} & =y\mathrm{e}_{245}\\
+\mathrm{e}_{6}^{2} & =0 &  &  & \mathrm{e}_{4}\star\mathrm{e}_{5} & =y\mathrm{e}_{45} &  &  & \mathrm{e}_{6}\star\mathrm{e}_{13} & =z\mathrm{e}_{136}\\
+\mathrm{e}_{1}\star\mathrm{e}_{2} & =\mathrm{e}_{12} & \qquad\qquad &  & \mathrm{e}_{4}\star\mathrm{e}_{6} & =\mathrm{e}_{46} & \qquad\qquad &  & \mathrm{e}_{6}\star\mathrm{e}_{34} & =z\mathrm{e}_{346}\\
+\mathrm{e}_{1}\star\mathrm{e}_{3} & =\mathrm{e}_{13} &  &  & \mathrm{e}_{5}\star\mathrm{e}_{6} & =\mathrm{e}_{56} &  &  & \mathrm{e}_{6}\star\mathrm{e}_{35} & =z\mathrm{e}_{356}\\
+\mathrm{e}_{1}\star\mathrm{e}_{4} & =x\mathrm{e}_{14} &  &  & \mathrm{e}_{1}\star\mathrm{e}_{25} & =y\mathrm{e}_{124}-x\mathrm{e}_{245} &  &  & \mathrm{e}_{6}\star\mathrm{e}_{45} & =\mathrm{e}_{456}\\
+\mathrm{e}_{1}\star\mathrm{e}_{5} & =y\mathrm{e}_{14}+x\mathrm{e}_{45} &  &  & \mathrm{e}_{1}\star\mathrm{e}_{35} & =y\mathrm{e}_{134}-x\mathrm{e}_{345} &  &  & \mathrm{e}_{1}\star\mathrm{e}_{235} & =y\mathrm{e}_{1234}+x\mathrm{e}_{2345}\\
+\mathrm{e}_{1}\star\mathrm{e}_{6} & =\mathrm{e}_{16} &  &  & \mathrm{e}_{1}\star\mathrm{e}_{56} & =y\mathrm{e}_{146}+x\mathrm{e}_{456} &  &  & \mathrm{e}_{1}\star\mathrm{e}_{346} & =x\mathrm{e}_{1346}\\
+\mathrm{e}_{2}\star\mathrm{e}_{3} & =w\mathrm{e}_{23} &  &  &  &  &  &  & \mathrm{e}_{1}\star\mathrm{e}_{356} & =y\mathrm{e}_{1346}-x\mathrm{e}_{3456}\\
+\mathrm{e}_{2}\star\mathrm{e}_{4} & =\mathrm{e}_{24} &  &  &  &  &  &  & \mathrm{e}_{2}\star\mathrm{e}_{456} & =z\mathrm{e}_{2345}+w\mathrm{e}_{3456}
+\end{alignat*}
+
+\end_inset
+
+In 
 \begin_inset ERT
 status open
 
@@ -6169,27 +4903,14 @@ status open
 
 Example~(
 \backslash
-ref{example456})
+ref{example455})
 \end_layout
 
 \end_inset
 
- for a minimal presentation of this multiplication).
- Here's how the multiplication is defined on some of the homogeneous basis
- elements:
-\begin_inset Formula 
-\begin{align*}
-\mathrm{e}_{1}\star\mathrm{e}_{5} & =y\mathrm{e}_{14}+x\mathrm{e}_{45} & \mathrm{e}_{2}\star\mathrm{e}_{46} & =-z\mathrm{e}_{234}+w\mathrm{e}_{346}\\
-\mathrm{e}_{2}\star\mathrm{e}_{6} & =z\mathrm{e}_{23}+w\mathrm{e}_{35} & \mathrm{e}_{2}\star\mathrm{e}_{56} & =-z\mathrm{e}_{235}+w\mathrm{e}_{356}\\
-\mathrm{e}_{1}\star\mathrm{e}_{25} & =y\mathrm{e}_{124}-x\mathrm{e}_{245} & \mathrm{e}_{2}\star\mathrm{e}_{146} & =\mathrm{e}_{1234}+\mathrm{e}_{1346}\\
-\mathrm{e}_{1}\star\mathrm{e}_{35} & =y\mathrm{e}_{134}-x\mathrm{e}_{345} & \mathrm{e}_{2}\star\mathrm{e}_{456} & =\mathrm{e}_{2345}+\mathrm{e}_{3456}\\
-\mathrm{e}_{1}\star\mathrm{e}_{56} & =y\mathrm{e}_{146}+x\mathrm{e}_{456} & \mathrm{e}_{1}\star\mathrm{e}_{235} & =\mathrm{e}_{1234}+\mathrm{e}_{2345}\\
-\mathrm{e}_{2}\star\mathrm{e}_{16} & =-z\mathrm{e}_{123}-w\mathrm{e}_{136} & \mathrm{e}_{1}\star\mathrm{e}_{356} & =\mathrm{e}_{1346}+\mathrm{e}_{3456}
-\end{align*}
-
-\end_inset
-
-
+, we demonstrate how one can find associative multiplications like this
+ using a computer algebra system like Singular.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -6224,6 +4945,10 @@ label{example5}
 \end_inset
 
  Let 
+\begin_inset Formula $R=\Bbbk[x,y,z,w]$
+\end_inset
+
+, let 
 \begin_inset Formula $\boldsymbol{m}_{\mathrm{N}}=\boldsymbol{m}=x^{2},w^{2},zw,xy,yz,y^{2},z^{2}$
 \end_inset
 
@@ -6240,19 +4965,15 @@ label{example5}
 \end_inset
 
 .
- Then 
+ One can visualize 
 \begin_inset Formula $F$
 \end_inset
 
- can be realized as the 
-\begin_inset Formula $R$
-\end_inset
-
--complex induced by the 
+ as being supported on the 
 \begin_inset Formula $\boldsymbol{m}$
 \end_inset
 
--labeled simplicial complex pictured below: 
+-labeled cellular complex below: 
 \begin_inset Branch tikzpicture
 inverted 0
 status collapsed
@@ -6780,7 +5501,8 @@ It is visibly clear that the map
 \begin_inset Formula $F_{\mathrm{A}}$
 \end_inset
 
- (in particular, there are no monomials showing up in this comparison map).
+ (in particular, there are no monomials showing up in the coefficients in
+ this comparison map).
  Thus we run into the same problem as in 
 \begin_inset ERT
 status open
@@ -6831,6 +5553,10 @@ label{example6}
 \end_inset
 
  Let 
+\begin_inset Formula $R=\Bbbk[x,y,z,w]$
+\end_inset
+
+, let 
 \begin_inset Formula $m=xyzw,$
 \end_inset
 
@@ -6897,10 +5623,21 @@ At this point, no matter how we extend this multiplication, it will not
 
 \end_inset
 
+The point we wish to emphasize here is that there is a 
+\begin_inset Quotes eld
+\end_inset
 
-\end_layout
+better
+\begin_inset Quotes erd
+\end_inset
 
-\begin_layout Standard
+ mutliplication that we can use on 
+\begin_inset Formula $F$
+\end_inset
+
+ anyways, namely the Taylor multiplication.
+ In general we would like to find the best possible multiplication in the
+ sense that it is as associative as possible.
 \begin_inset ERT
 status open
 
@@ -7369,7 +6106,31 @@ MDG
 
 -module 
 \series default
-if it is graded-commutative and unital.
+if it is graded-commutative, and the graded 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map
+\begin_inset Formula 
+\[
+\overline{\mu}_{X}\colon\mathrm{H}(A)\otimes_{R}\mathrm{H}(X)\to\mathrm{H}(X)
+\]
+
+\end_inset
+
+induced by 
+\begin_inset Formula $\mu_{X}$
+\end_inset
+
+ gives 
+\begin_inset Formula $\mathrm{H}(X)$
+\end_inset
+
+ the structure of an associative graded-commutative 
+\begin_inset Formula $\mathrm{H}(A)$
+\end_inset
+
+-module.
  We call 
 \begin_inset Formula $\mu_{X}$
 \end_inset
@@ -7450,32 +6211,6 @@ for all
 \end_inset
 
 .
- We denote by 
-\begin_inset Formula $\mathbf{MDGmod}_{A}$
-\end_inset
-
- to be the category whose objects are MDG 
-\begin_inset Formula $A$
-\end_inset
-
--modules and whose morphisms are MDG 
-\begin_inset Formula $A$
-\end_inset
-
--module homomorphisms.
- Similarly we denote by 
-\begin_inset Formula $\mathbf{DGmod}_{A}$
-\end_inset
-
- to be the category whose objects are DG 
-\begin_inset Formula $A$
-\end_inset
-
--modules and whose morphisms are DG 
-\begin_inset Formula $A$
-\end_inset
-
--module homomorphisms.
  
 \begin_inset ERT
 status open
@@ -7871,6 +6606,22 @@ of
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset space ~
 \end_inset
 
@@ -7927,7 +6678,7 @@ Having said all of this, there are also some notable differences between
 \end_inset
 
  in the usual way.
- Then tensor complex 
+ The tensor complex 
 \begin_inset Formula $X\otimes_{A}Y$
 \end_inset
 
@@ -7957,20 +6708,39 @@ Having said all of this, there are also some notable differences between
 \end_inset
 
 -scalar multiplication in the obvious way.
- Finally, if 
-\begin_inset Formula $S\subseteq A$
+ Nonetheless, one can still show that 
+\begin_inset Formula $\mathrm{Hom}_{A}^{\star}(X,Y)$
 \end_inset
 
- is a multiplicatively closed set, then one can make sense of the localization
- 
-\begin_inset Formula $X_{S}$
+ is still an 
+\begin_inset Formula $R$
 \end_inset
 
-, but only in the case where 
-\begin_inset Formula $S$
+-complex since if 
+\begin_inset Formula $\varphi\colon X\to Y$
 \end_inset
 
- satisfies some extra conditions.
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-linear map of degree 
+\begin_inset Formula $i$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathrm{d}^{\star}(\varphi):=\mathrm{d}\varphi-(-1)^{i}\varphi\mathrm{d}$
+\end_inset
+
+ is a graded 
+\begin_inset Formula $A$
+\end_inset
+
+-linear map of degree 
+\begin_inset Formula $i-1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -8178,7 +6948,7 @@ For all
 \begin_inset Formula $x\in X$
 \end_inset
 
- we have the Leibniz law
+ we have the Leibniz rule
 \begin_inset Formula 
 \begin{equation}
 \mathrm{d}[a_{1},a_{2},x]=[\mathrm{d}a_{1},a_{2},x]+(-1)^{|a_{1}|}[a_{1},\mathrm{d}a_{2},x]+(-1)^{|a_{1}|+|a_{2}|}[a_{1},a_{2},\mathrm{d}x].\label{eq:leibnizlaw7}
@@ -9305,6 +8075,52 @@ status open
 
 
 \backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ In other words, taking the maximal associative quotient extends to a functor
+ from the category of all MDG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules to the category of all DG 
+\begin_inset Formula $A$
+\end_inset
+
+-modules and this functor is left adjoint to the forgetful functor.
+ In particular, the functor 
+\begin_inset Formula $(-)^{\mathrm{as}}$
+\end_inset
+
+ preserves all colimits and the forgetful functor preserves all limits.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
 begin{proof}
 \backslash
 label{proof}
@@ -9394,165 +8210,6 @@ status open
 
 \backslash
 end{proof}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{cor}
-\backslash
-label{cor}
-\end_layout
-
-\end_inset
-
- Taking the maximal associative quotient extends to a functor 
-\begin_inset Formula 
-\[
-(-)^{\mathrm{as}}\colon\mathbf{MDGmod}_{A}\to\mathbf{DGmod}_{A},
-\]
-
-\end_inset
-
-and this functor is left adjoint to the forgetful functor.
- In particular, the functor 
-\begin_inset Formula $(-)^{\mathrm{as}}$
-\end_inset
-
- preserves all colimits and the forgetful functor preserves all limits.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{cor}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Branch Temporary
-inverted 0
-status collapsed
-
-\begin_layout Subsubsection
-From DG algebras to MDG algebras
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $A=(A,\mathrm{d})$
-\end_inset
-
- be a DG 
-\begin_inset Formula $R$
-\end_inset
-
--algebra with 
-\begin_inset Formula $A_{0}=R$
-\end_inset
-
-.
- We set 
-\begin_inset Formula $A\langle\mathrm{d}\rangle$
-\end_inset
-
- to be the MDG 
-\begin_inset Formula $R$
-\end_inset
-
--algebra whose underlying graded algebra is the non-associative algebra
- obtained by adjoining a formal variable 
-\begin_inset Formula $\mathrm{d}$
-\end_inset
-
- of homological degree 
-\begin_inset Formula $-1$
-\end_inset
-
- to 
-\begin_inset Formula $A$
-\end_inset
-
- such that
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $\mathrm{d}^{2}=0$
-\end_inset
-
- and 
-\begin_inset Formula $\mathrm{d}(a)=\mathrm{d}a=(-1)^{|a|}a\mathrm{d}$
-\end_inset
-
- for all 
-\begin_inset Formula $a\in A$
-\end_inset
-
- homogeneous;
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $\mathrm{d}(a_{1}+a_{2})=\mathrm{d}a_{1}+\mathrm{d}a_{2}$
-\end_inset
-
- for all 
-\begin_inset Formula $a_{1},a_{2}\in A$
-\end_inset
-
-;
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $[a_{1},a_{2},\mathrm{d}]=(-1)^{|a_{1}|+|a_{2}|}a_{1}(a_{2}\mathrm{d})$
-\end_inset
-
- for all 
-\begin_inset Formula $a_{1},a_{2}\in A$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The differential of 
-\begin_inset Formula $A\langle\mathrm{d}\rangle$
-\end_inset
-
- is just the multiplication by 
-\begin_inset Formula $\mathrm{d}$
-\end_inset
-
- map, and so 
-\begin_inset Formula $\mathrm{H}(A\langle\mathrm{d}\rangle)=\mathrm{H}(A)$
-\end_inset
-
-.
- Note that property (3) is equivalent to the Leibniz law:
-\begin_inset Formula 
-\[
-\mathrm{d}(a_{1}a_{2})=(\mathrm{d}a_{1})a_{2}-(-1)^{|a_{1}|}a_{1}(\mathrm{d}a_{2}).
-\]
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -10596,30 +9253,21 @@ end{example}
 \end_layout
 
 \begin_layout Standard
-\begin_inset space ~
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
 \end_inset
 
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-We are often also interested in the homology of the maximal associative
+ We are often also interested in the homology of the maximal associative
  quotient of 
 \begin_inset Formula $X$
 \end_inset
@@ -10782,7 +9430,29 @@ which is exact at
 \end_inset
 
 .
+ In particular, if 
+\begin_inset Formula $\mathrm{H}_{i}(X)=0=\mathrm{H}_{i-1}(X)$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathrm{H}_{i}(X^{\mathrm{as}})\cong\mathrm{H}_{i-1}\langle X\rangle$
+\end_inset
+
+.
  
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -10884,229 +9554,6 @@ Computing Annihilators of the Associator Homology
 
 \begin_layout Standard
 In this subsubsection, we assume that 
-\begin_inset Formula $A$
-\end_inset
-
- is centered at 
-\begin_inset Formula $R$
-\end_inset
-
-.
- Set 
-\begin_inset Formula $I$
-\end_inset
-
- to be the image of 
-\begin_inset Formula $\mathrm{d}_{1}\colon A_{1}\to R$
-\end_inset
-
-.
- In particular, we have 
-\begin_inset Formula $\mathrm{H}_{0}(A)=R\slash I$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{prop}
-\backslash
-label{prop}
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Formula $I$
-\end_inset
-
- annihilates 
-\begin_inset Formula $\mathrm{H}(X)$
-\end_inset
-
-, 
-\begin_inset Formula $\mathrm{H}\langle X\rangle$
-\end_inset
-
-, and 
-\begin_inset Formula $\mathrm{H}(X^{\mathrm{as}})$
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{prop}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{proof}
-\backslash
-label{proof}
-\end_layout
-
-\end_inset
-
- Let 
-\begin_inset Formula $t\in I$
-\end_inset
-
-.
- Thus 
-\begin_inset Formula $t=\mathrm{d}(a)$
-\end_inset
-
- where 
-\begin_inset Formula $|a|=1$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $\mathrm{m}_{a}\colon X\to X$
-\end_inset
-
- be the multiplication by 
-\begin_inset Formula $a$
-\end_inset
-
- map given by 
-\begin_inset Formula $\mathrm{m}_{a}(x)=ax$
-\end_inset
-
-.
- In particular, 
-\begin_inset Formula $\mathrm{m}_{a}$
-\end_inset
-
- restricts to an 
-\begin_inset Formula $R$
-\end_inset
-
--linear map 
-\begin_inset Formula $\mathrm{m}_{a}\colon\langle X\rangle\to\langle X\rangle$
-\end_inset
-
- and thus induces an 
-\begin_inset Formula $R$
-\end_inset
-
--linear map 
-\begin_inset Formula $\overline{\mathrm{m}}_{a}\colon X^{\mathrm{as}}\to X^{\mathrm{as}}$
-\end_inset
-
- .
- Observe that if 
-\begin_inset Formula $x\in X$
-\end_inset
-
-, then
-\begin_inset Formula 
-\begin{align*}
-(\mathrm{d}\mathrm{m}_{a}+\mathrm{m}_{a}\mathrm{d})(x) & =\mathrm{d}(ax)+a\mathrm{d}(x)\\
- & =\mathrm{d}(a)x-a\mathrm{d}(x)+a\mathrm{d}(x)\\
- & =tx\\
- & =\mathrm{m}_{t}(x).
-\end{align*}
-
-\end_inset
-
-In particular, we see that 
-\begin_inset Formula $\mathrm{m}_{a}$
-\end_inset
-
- is a homotopy from 
-\begin_inset Formula $\mathrm{m}_{t}$
-\end_inset
-
- to the zero map, which restricts to a homotopy 
-\begin_inset Formula $\mathrm{m}_{a}\colon\langle X\rangle\to\langle X\rangle$
-\end_inset
-
- from 
-\begin_inset Formula $\mathrm{m}_{t}\colon\langle X\rangle\to\langle X\rangle$
-\end_inset
-
- to the zero map.
- A similar argument shows that 
-\begin_inset Formula $\overline{\mathrm{m}}_{a}$
-\end_inset
-
- is a homotopy from 
-\begin_inset Formula $\overline{\mathrm{m}}_{t}\colon X^{\mathrm{as}}\to X^{\mathrm{as}}$
-\end_inset
-
- to the zero map.
- It follows that 
-\begin_inset Formula $t$
-\end_inset
-
- annihilates both 
-\begin_inset Formula $\mathrm{H}(X)$
-\end_inset
-
-, 
-\begin_inset Formula $\mathrm{H}\langle X\rangle$
-\end_inset
-
-, and 
-\begin_inset Formula $\mathrm{H}(X^{\mathrm{as}})$
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{proof}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-We now assume that 
 \begin_inset Formula $R$
 \end_inset
 
@@ -11115,28 +9562,67 @@ We now assume that
 \end_inset
 
 .
- Furthermore we assume both 
-\begin_inset Formula $A$
-\end_inset
-
- and 
-\begin_inset Formula $X$
-\end_inset
-
- are free as graded 
+ We further assume that both of the underlying graded 
 \begin_inset Formula $R$
 \end_inset
 
--modules.
- In this case, we set
+-module of 
+\begin_inset Formula $A$
+\end_inset
+
+ is free.
+ Recall that the 
+\begin_inset Formula $A$
+\end_inset
+
+-scalar multiplication map 
+\begin_inset Formula $\mu_{\langle X\rangle}\colon A\otimes_{R}\langle X\rangle\to\langle X\rangle$
+\end_inset
+
+ induces an 
+\begin_inset Formula $\mathrm{H}(A)$
+\end_inset
+
+-scalar multiplication map 
+\begin_inset Formula $\overline{\mu}_{\langle X\rangle}\colon\mathrm{H}(A)\otimes_{R}\mathrm{H}\langle X\rangle\to\mathrm{H}\langle X\rangle$
+\end_inset
+
+ which gives 
+\begin_inset Formula $\mathrm{H}\langle X\rangle$
+\end_inset
+
+ an 
+\begin_inset Formula $\mathrm{H}(A)$
+\end_inset
+
+-module structure.
+ In particular, 
+\begin_inset Formula $\mathrm{d}A$
+\end_inset
+
+ annihilates 
+\begin_inset Formula $\mathrm{H}\langle X\rangle$
+\end_inset
+
+.
+ However we can often find more annihilators of 
+\begin_inset Formula $\mathrm{H}\langle X\rangle$
+\end_inset
+
+ than just the ones contained in 
+\begin_inset Formula $I$
+\end_inset
+
+.
+ Indeed, set
 \begin_inset Formula 
 \[
-A_{K}=\{a/r\mid a\in A\text{ and }r\in R\backslash\{0\}\}\quad\text{and}\quad X_{K}=\{x/r\mid x\in X\text{ and }r\in R\backslash\{0\}\}.
+A_{K}=\{a/r\mid a\in A\text{ and }r\in R\backslash\{0\}\}\quad\text{and}\quad B=\{b\in A_{K}\mid b\langle X\rangle\subseteq\langle X\rangle\}.
 \]
 
 \end_inset
 
-Note that 
+Then 
 \begin_inset Formula $A_{K}$
 \end_inset
 
@@ -11144,50 +9630,58 @@ Note that
 \begin_inset Formula $K$
 \end_inset
 
--algebra centered at 
-\begin_inset Formula $K$
+-algebra and 
+\begin_inset Formula $B$
+\end_inset
+
+ is an MDG subalgebra of 
+\begin_inset Formula $A_{K}$
+\end_inset
+
+ which contains 
+\begin_inset Formula $A$
 \end_inset
 
 .
- Next we consider the conductor:
+ Furthermore 
+\begin_inset Formula $\langle X\rangle$
+\end_inset
+
+ is an MDG 
+\begin_inset Formula $B$
+\end_inset
+
+-module (in fact 
+\begin_inset Formula $B$
+\end_inset
+
+ is the largest MDG subalgebra of 
+\begin_inset Formula $A_{K}$
+\end_inset
+
+ for which 
+\begin_inset Formula $\langle X\rangle$
+\end_inset
+
+ is an MDG module over).
+ In particular, 
+\begin_inset Formula $A\cap\mathrm{d}B$
+\end_inset
+
+ annihilates 
+\begin_inset Formula $\mathrm{H}\langle X\rangle$
+\end_inset
+
+.
+ In general we have
 \begin_inset Formula 
 \[
-\mathfrak{c}=\{c\in A_{K}\mid c\langle X\rangle\subseteq\langle X\rangle\}.
+\mathrm{d}A\subseteq A\cap\mathrm{d}b\subseteq A,
 \]
 
 \end_inset
 
-The Leibniz law implies 
-\begin_inset Formula $\mathfrak{c}$
-\end_inset
-
- is an 
-\begin_inset Formula $R$
-\end_inset
-
--complex.
- We set 
-\begin_inset Formula $Q=\mathrm{d}(\mathfrak{c}_{1})\cap R$
-\end_inset
-
-.
- Then by the same argument as in the proposition above, we see that 
-\begin_inset Formula $Q$
-\end_inset
-
- annihilates 
-\begin_inset Formula $\mathrm{H}(X)$
-\end_inset
-
-, 
-\begin_inset Formula $\mathrm{H}\langle X\rangle$
-\end_inset
-
-, and 
-\begin_inset Formula $\mathrm{H}(X^{\mathrm{as}})$
-\end_inset
-
-.
+where the inclusions may be strict.
  
 \end_layout
 
@@ -11206,20 +9700,40 @@ label{examplefdklds}
 
 \end_inset
 
- Let us revisit example 
+ Consider 
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-(
+Example~(
 \backslash
 ref{example1})
 \end_layout
 
 \end_inset
 
- where we keep the same notation.
+ where 
+\begin_inset Formula $R=\Bbbk[x,y,z,w]$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{m}=x^{2},w^{2},zw,xy,y^{2}z^{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $F$
+\end_inset
+
+ is the minimal free resolution of 
+\begin_inset Formula $R\slash\boldsymbol{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+.
  Observe that
 \begin_inset Formula 
 \begin{align*}
@@ -11242,7 +9756,7 @@ It follows that
 
 .
  Similar calculations likes this shows that 
-\begin_inset Formula $\mathfrak{m}=\langle x,y,z,w\rangle$
+\begin_inset Formula $\langle x,y,z,w\rangle$
 \end_inset
 
  annihilates 
@@ -11290,34 +9804,37 @@ One can interpret this as saying that the multiplication
 
 \end_inset
 
-In some sense however, the nonzero associator 
+In some sense however, the fact that the associator 
 \begin_inset Formula $[e_{1},e_{45},e_{2}]$
 \end_inset
 
- is not really anything 
+ is nonzero isn't really a 
 \emph on
-new
+new 
 \emph default
-.
+obstruction to 
+\begin_inset Formula $\mu$
+\end_inset
+
+ being associative.
  Indeed, one could argue that 
 \begin_inset Formula $[e_{1},e_{45},e_{2}]$
 \end_inset
 
- being nonzero is simply a direct consequence of 
+ being nonzero is simply a consequence of 
 \begin_inset Formula $[e_{1},e_{5},e_{2}]$
 \end_inset
 
  being nonzero.
- More generally, an element 
+ More generally, in order for a nonzero element 
 \begin_inset Formula $\gamma\in\langle F\rangle$
 \end_inset
 
- should only be thought of as contributing something new towards the failure
- for 
+ to be considered an obstruction for 
 \begin_inset Formula $\mu$
 \end_inset
 
- to being associative if 
+ to be associative, we should have 
 \begin_inset Formula $\mathrm{d}\gamma=0$
 \end_inset
 
@@ -11330,38 +9847,25 @@ new
 \end_inset
 
  being nonzero).
- Similarly, if 
+ Similarly, we shouldn't have 
 \begin_inset Formula $\gamma=\mathrm{d}\gamma'$
 \end_inset
 
- for some 
-\begin_inset Formula $\gamma'\in\langle F\rangle$
-\end_inset
-
-, then again 
+ (otherwise one could argue that 
 \begin_inset Formula $\gamma$
 \end_inset
 
- is not contributing anything new towards the failure for 
-\begin_inset Formula $\mu$
-\end_inset
-
- to being associative since one could argue that 
-\begin_inset Formula $\gamma$
-\end_inset
-
- being nonzero is a direct consequence of 
+ being nonzero is simply a consequence of 
 \begin_inset Formula $\gamma'$
 \end_inset
 
- being nonzero.
- Thus the associators which really do contribute something new towards the
- failure for 
+ being nonzero).
+ Thus the associators which really do contribute new obstructions for 
 \begin_inset Formula $\mu$
 \end_inset
 
- to being associative should be the ones which represent nonzero elements
- in homology.
+ to be associative should be the ones which represent nonzero elements in
+ homology.
  This is how we interpret the associator homology of 
 \begin_inset Formula $F$
 \end_inset
@@ -11377,28 +9881,6 @@ new
 \end_inset
 
 ).
- Finally, let 
-\begin_inset Formula $U\colon R^{4}\to R$
-\end_inset
-
- be the map given by 
-\begin_inset Formula $U=(xyz,y^{2}z,yz^{2},yzw)$
-\end_inset
-
-.
- One can show that
-\begin_inset Formula 
-\begin{align*}
-F_{i}^{\mathrm{as}} & =\begin{cases}
-\mathrm{coker}(U^{\top}) & \text{if }i=4\\
-\mathrm{coker}(U) & \text{if }i=3\\
-F_{i} & \text{else}
-\end{cases}
-\end{align*}
-
-\end_inset
-
- 
 \begin_inset ERT
 status open
 
@@ -11429,21 +9911,54 @@ label{examplefdklds}
 
 \end_inset
 
- Let us revisit example 
+ Consider 
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-(
+Example~(
 \backslash
 ref{example3})
 \end_layout
 
 \end_inset
 
- where we keep the same notation.
- One can check that
+ where 
+\begin_inset Formula $R=\Bbbk[x,y,z,w]$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{m}=x^{2},w^{2},zw,xy,y^{2}z,yz^{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $F$
+\end_inset
+
+ is the minimal free resolution of 
+\begin_inset Formula $R\slash\boldsymbol{m}$
+\end_inset
+
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ By performing similar calculations as in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Example~(
+\backslash
+ref{examplefdklds})
+\end_layout
+
+\end_inset
+
+, one can show that
 \begin_inset Formula 
 \[
 \mathrm{H}_{i}\langle F\rangle\cong\begin{cases}
@@ -11475,23 +9990,20 @@ The Nucleus
 \end_layout
 
 \begin_layout Standard
-Let 
-\begin_inset Formula $A$
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
 \end_inset
 
- be an MDG 
-\begin_inset Formula $R$
-\end_inset
-
--algebra and let 
-\begin_inset Formula $X$
-\end_inset
-
- be an MDG 
-\begin_inset Formula $A$
-\end_inset
-
--module.
  The 
 \series bold
 nuclear subcomplex 
@@ -11520,7 +10032,7 @@ of
 
 \end_inset
 
-Indeed, the Leibniz law implies 
+Indeed, the Leibniz rule implies 
 \begin_inset Formula $\mathrm{d}(\mathrm{N}(X))\subseteq\mathrm{N}(X)$
 \end_inset
 
@@ -14184,7 +12696,7 @@ For all
 \begin_inset Formula $x\in X$
 \end_inset
 
-, we have the Leibniz law:
+, we have the Leibniz rule:
 \begin_inset Formula 
 \[
 \mathrm{d}[a,x]=[\mathrm{d}a,x]+(-1)^{|a|}[a,\mathrm{d}x].
@@ -17174,7 +15686,7 @@ status open
 \backslash
 begin{example}
 \backslash
-label{symmetricdgexample}
+label{symmetricdgexample1}
 \end_layout
 
 \end_inset
@@ -17184,7 +15696,7 @@ label{symmetricdgexample}
 \end_inset
 
 , let 
-\begin_inset Formula $I=\langle x^{2},xy\rangle$
+\begin_inset Formula $\boldsymbol{m}=x^{2},xy$
 \end_inset
 
 , and let 
@@ -17192,7 +15704,11 @@ label{symmetricdgexample}
 \end_inset
 
  be Taylor resolution of 
-\begin_inset Formula $\overline{R}=R\slash I$
+\begin_inset Formula $R\slash\boldsymbol{m}$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
 \end_inset
 
 .
@@ -17224,8 +15740,12 @@ Note that the Taylor resolution usually comes equipped with a multiplication
 \begin_inset Formula $\cdot$
 \end_inset
 
- of 
+ of the symmetric DG algebra 
 \begin_inset Formula $S=\mathrm{S}_{R}(F)$
+\end_inset
+
+ of 
+\begin_inset Formula $F$
 \end_inset
 
 .
@@ -17237,7 +15757,7 @@ Note that the Taylor resolution usually comes equipped with a multiplication
 \begin_inset Formula $R$
 \end_inset
 
--module (with respect to homological degree):
+-module (with respect to homological degree) below:
 \begin_inset Formula 
 \begin{align*}
 S_{0} & =R\\
@@ -17529,7 +16049,7 @@ where the component
 \end_inset
 
 -bilinearly everywhere else.
- This multiplication is easily seen to satisfy Leibniz law, however note
+ This multiplication is easily seen to satisfy Leibniz rule, however note
  that 
 \begin_inset Formula $U$
 \end_inset
@@ -17815,7 +16335,7 @@ In other words, the differential of
 \begin_inset Formula $T$
 \end_inset
 
- satisfies Leibniz law and is 
+ satisfies Leibniz rule and is 
 \begin_inset Formula $\Bbbk$
 \end_inset
 
@@ -18218,2473 +16738,6 @@ The image of a homogeneous elementary tensor
 \end_inset
 
  is generated by elements which are homogeneous with respect to total degree.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Branch Temporary
-inverted 0
-status collapsed
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{example}
-\end_layout
-
-\end_inset
-
- Let 
-\begin_inset Formula $R=\Bbbk[x_{1},\dots,x_{n}]=\Bbbk[\boldsymbol{x}]$
-\end_inset
-
- and let 
-\begin_inset Formula $\overline{R}=R\slash\langle f_{1},\dots,f_{m}\rangle=R\slash\langle\boldsymbol{f}\rangle$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $U$
-\end_inset
-
- be the graded 
-\begin_inset Formula $R$
-\end_inset
-
--module whose component in degree 
-\begin_inset Formula $k$
-\end_inset
-
- is given by
-\begin_inset Formula 
-\[
-U_{k}=\begin{cases}
-\bigoplus_{i=1}^{m}e_{i}R & k=1\\
-R & k=0\\
-\bigoplus_{i=1}^{n}R\varepsilon_{i}\slash\langle\partial f_{1},\dots,\partial f_{m}\rangle & k=-1\\
-\Lambda_{R}^{-k}(U_{-1}) & \text{if }-2\ge k\geq-n\\
-0 & \text{else}
-\end{cases}
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $\partial f=\sum_{j=1}^{n}(\partial_{x_{j}}f)\varepsilon_{j}$
-\end_inset
-
- is the usual gradient of 
-\begin_inset Formula $f$
-\end_inset
-
- expressed in the 
-\begin_inset Formula $\boldsymbol{\varepsilon}$
-\end_inset
-
--basis.
- We define 
-\begin_inset Formula $\mathrm{d}\colon U\to U$
-\end_inset
-
- to be the unique 
-\begin_inset Formula $\Bbbk$
-\end_inset
-
--linear differential given by
-\begin_inset Formula 
-\[
-\mathrm{d}(e_{i}^{\varepsilon}x^{\boldsymbol{\alpha}})=\begin{cases}
-f_{i} & \text{if }\varepsilon=1\text{ and }\boldsymbol{\alpha}=0\\
-0 & \text{if }\varepsilon=1\text{ and }\boldsymbol{\alpha}\neq0\\
-\overline{\partial(x^{\boldsymbol{\alpha}})} & \text{if }\varepsilon=0.
-\end{cases}
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $1\leq i\leq m$
-\end_inset
-
- , where 
-\begin_inset Formula $\boldsymbol{\alpha}\in\mathbb{N}^{n}$
-\end_inset
-
-, and where 
-\begin_inset Formula $\varepsilon\in\{0,1\},$
-\end_inset
-
- and such that
-\begin_inset Formula 
-\[
-\mathrm{d}(x^{\boldsymbol{\alpha}}\varepsilon_{\sigma})=\partial(x^{\boldsymbol{\alpha}})\varepsilon_{\sigma}
-\]
-
-\end_inset
-
-for all 
-\begin_inset Formula $\sigma\subseteq\{1,2,.\dots,n\}$
-\end_inset
-
-.
- Note that 
-\begin_inset Formula $(U\otimes_{R}\overline{R})_{\leq0}=\Omega_{\overline{R}\slash\Bbbk}$
-\end_inset
-
- is just the de Rham complex of 
-\begin_inset Formula $\overline{R}$
-\end_inset
-
- over 
-\begin_inset Formula $\Bbbk$
-\end_inset
-
-.
- In particular, we have
-\begin_inset Formula 
-\[
-\mathrm{H}(U\otimes_{R}\overline{R})=\bigoplus_{i=1}^{m}e_{i}\overline{R}\oplus\mathrm{H}_{\mathrm{dR}}(\Omega_{\overline{R}\slash\Bbbk}).
-\]
-
-\end_inset
-
-Now let 
-\begin_inset Formula $\mathrm{S}=\mathrm{S}(U)$
-\end_inset
-
- be the symmetric DG algebra of 
-\begin_inset Formula $\mathrm{U}$
-\end_inset
-
-.
- Then in 
-\begin_inset Formula $\mathrm{S}$
-\end_inset
-
-, we have the relations 
-\begin_inset Formula $e_{i}\varepsilon_{j}=f_{i}x_{j}$
-\end_inset
-
- for all 
-\begin_inset Formula $i,j$
-\end_inset
-
-, thus in 
-\begin_inset Formula $\mathrm{S}\otimes_{R}S=\mathrm{S}(U\otimes_{R}S)$
-\end_inset
-
- we get the relations 
-\begin_inset Formula $e_{i}\varepsilon_{j}=0$
-\end_inset
-
- for all 
-\begin_inset Formula $i,j$
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Branch Temporary
-inverted 0
-status collapsed
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{example}
-\end_layout
-
-\end_inset
-
- Consider the case where 
-\begin_inset Formula $\Bbbk$
-\end_inset
-
- is a field with 
-\begin_inset Formula $\mathrm{char}\,\Bbbk\neq2$
-\end_inset
-
-, where 
-\begin_inset Formula $R=\Bbbk[x,y]$
-\end_inset
-
- and where 
-\begin_inset Formula $S=R\slash\langle x^{2},xy\rangle$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $F$
-\end_inset
-
- be the usual Taylor algebra resolution of 
-\begin_inset Formula $S$
-\end_inset
-
- over 
-\begin_inset Formula $R$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $U=G\slash\mathfrak{b}$
-\end_inset
-
- as above.
- Then note that
-\begin_inset Formula 
-\begin{align*}
-U_{-2} & =R\varepsilon_{1}\varepsilon_{2}\\
-U_{-1} & =R\varepsilon_{1}+R\varepsilon_{2}+e_{1}R\varepsilon_{1}\varepsilon_{2}+e_{2}R\varepsilon_{1}\varepsilon_{2}\\
-U_{0} & =R+e_{1}R\varepsilon_{1}+e_{1}R\varepsilon_{2}+e_{1}e_{2}R\varepsilon_{1}\varepsilon_{2}+e_{2}R\varepsilon_{1}+e_{2}R\varepsilon_{2}\\
-U_{1} & =e_{1}R+e_{2}R+e_{1}e_{2}R\varepsilon_{1}+e_{1}e_{2}R\varepsilon_{2}\\
-U_{2} & =e_{1}e_{2}R.
-\end{align*}
-
-\end_inset
-
-Now let 
-\begin_inset Formula $V=G\slash\langle\mathfrak{a},\mathfrak{b}\rangle$
-\end_inset
-
- as above.
- Note that
-\begin_inset Formula 
-\begin{align*}
-a_{1} & =2x\varepsilon_{1} & c_{1,j} & =e_{1}\widetilde{\varepsilon}_{j}-x^{2}\\
-a_{2} & =y\varepsilon_{2}+x\varepsilon_{1} & c_{2,j} & =e_{2}\widetilde{\varepsilon}_{j}-xy\\
-a_{12} & =-e_{2}\varepsilon_{1}+e_{1}\varepsilon_{2} & c_{12,j} & =e_{12}\widetilde{\varepsilon}_{j}-xe_{2}+ye_{1}
-\end{align*}
-
-\end_inset
-
-In particular, in 
-\begin_inset Formula $V$
-\end_inset
-
- we have 
-\begin_inset Formula $x\varepsilon_{2}=-y\varepsilon_{1}$
-\end_inset
-
- and
-\begin_inset Formula 
-\begin{align*}
-0:_{R}\varepsilon_{2} & =\langle x^{2},xy\rangle\\
-0:_{R}\varepsilon_{1} & =\langle x\rangle\\
-0:_{R}\varepsilon_{1}\varepsilon_{2} & =\langle x,y\rangle.
-\end{align*}
-
-\end_inset
-
-So we can express the components of 
-\begin_inset Formula $V$
-\end_inset
-
- in a better way using these relations.
- Indeed, set 
-\begin_inset Formula $T=\Bbbk[y]$
-\end_inset
-
- and note that 
-\begin_inset Formula $S=T+xT$
-\end_inset
-
-, thus one can see that 
-\begin_inset Formula $R\varepsilon_{2}=S\varepsilon_{2}$
-\end_inset
-
-, 
-\begin_inset Formula $R\varepsilon_{1}=T\varepsilon_{1}$
-\end_inset
-
-, and 
-\begin_inset Formula $R\varepsilon_{1}\varepsilon_{2}=\Bbbk$
-\end_inset
-
-.
- Using annihilations like these, one can show that
-\begin_inset Formula 
-\begin{align*}
-V_{-2} & =\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-V_{-1} & =T\varepsilon_{1}+T\varepsilon_{2}+e_{1}\Bbbk\varepsilon_{1}\varepsilon_{2}+e_{2}\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-V_{0} & =R+e_{1}T\varepsilon_{1}+e_{1}T\varepsilon_{2}+e_{2}T\varepsilon_{1}+e_{2}T\varepsilon_{2}+e_{1}e_{2}\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-V_{1} & =e_{1}R+e_{2}R+e_{1}e_{2}T\varepsilon_{1}+e_{1}e_{2}T\varepsilon_{2}\\
-V_{2} & =e_{1}e_{2}R.
-\end{align*}
-
-\end_inset
-
-Finally let 
-\begin_inset Formula $W=G\slash\langle\mathfrak{a},\mathfrak{b},\mathfrak{c}\rangle$
-\end_inset
-
-.
- We set 
-\begin_inset Formula $\widetilde{\varepsilon}_{j}=\varepsilon_{j}/(x_{j}-1)$
-\end_inset
-
-.
- In 
-\begin_inset Formula $W$
-\end_inset
-
-, we have
-\begin_inset Formula 
-\begin{align*}
-e_{1}\widetilde{\varepsilon}_{j} & =x^{2} & e_{1}x^{2} & =0 & x^{3} & =0\\
-e_{2}\widetilde{\varepsilon}_{j} & =xy & e_{2}xy & =0 & x^{2}y & =0\\
-e_{1}y=e_{12}\widetilde{\varepsilon}_{j} & =-e_{2}x & e_{2}x^{2} & =-e_{1}xy
-\end{align*}
-
-\end_inset
-
-We have
-\begin_inset Formula 
-\begin{align*}
-e_{1}\varepsilon_{1} & =x^{3} & x^{3}e_{1} & =0 & e_{1}\varepsilon_{1}\varepsilon_{2} & =0 & x^{4} & =0\\
-e_{1}\varepsilon_{2} & =x^{2}y & x^{2}ye_{1} & =0 & e_{2}\varepsilon_{1}\varepsilon_{2} & =0 & x^{3}y & =0\\
-e_{2}\varepsilon_{1} & =x^{2}y & x^{2}ye_{2} & =0 & e_{1}e_{2}\varepsilon_{1} & =0 & x^{2}y^{3} & =0\\
-e_{2}\varepsilon_{2} & =xy^{2} & xy^{2}e_{2} & =0 & e_{1}e_{2}\varepsilon_{2} & =0 & e_{1}e_{2}\varepsilon_{1}\varepsilon_{2} & =0
-\end{align*}
-
-\end_inset
-
-Furthermore we have
-\begin_inset Formula 
-\begin{align*}
-0:_{R}e_{1} & =\langle x^{3},x^{2}y,xy^{2}\rangle=\langle x\rangle\langle x,y\rangle^{2}\\
-0:_{R}e_{2} & =\langle x^{3},x^{2}y,xy^{2}\rangle=\langle x\rangle\langle x,y\rangle^{2}\\
-0:_{R}e_{1}e_{2} & =\langle x^{3},x^{2}y,xy^{2}\rangle=\langle x\rangle\langle x,y\rangle^{2}.
-\end{align*}
-
-\end_inset
-
-Therefore if
-\begin_inset Formula 
-\[
-Q=R\slash\langle x^{3},x^{2}y,xy^{2}\rangle=\Bbbk+\Bbbk x+\Bbbk y+\Bbbk x^{2}+\Bbbk xy+\Bbbk y^{2}+\Bbbk y^{3}\cong\Bbbk\oplus(\Bbbk+\Bbbk x+\Bbbk y),
-\]
-
-\end_inset
-
-then we have
-\begin_inset Formula 
-\begin{align*}
-\overline{V}_{-2} & =\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-\overline{V}_{-1} & =T\varepsilon_{1}+T\varepsilon_{2}\\
-\overline{V}_{0} & =T+Tx+\Bbbk x^{2}+\Bbbk x^{2}y+\Bbbk x^{2}y^{2}+\Bbbk x^{3}\\
-\overline{V}_{1} & =e_{1}T+e_{2}T+e_{1}Q+e_{2}Q+e_{2}x^{3}\Bbbk\\
-\overline{V}_{2} & =e_{1}e_{2}T+e_{1}e_{2}Q.
-\end{align*}
-
-\end_inset
-
-Note that 
-\begin_inset Formula $\mathrm{d}(x^{2})=2x\varepsilon_{1}=0$
-\end_inset
-
- and 
-\begin_inset Formula $\mathrm{d}(x^{2}y)=x^{2}\varepsilon_{2}=0$
-\end_inset
-
-.
- Also note
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e_{1}e_{2}) & =x^{2}e_{2}-xye_{1}\\
-\mathrm{d}(e_{1}e_{2}x) & =e_{2}x^{3}\\
-\mathrm{d}(e_{1}e_{2}y) & =-e_{1}xy^{2}\\
-\mathrm{d}(e_{1}e_{2}xy) & =0\\
-\mathrm{d}(e_{1}e_{2}y^{2}) & =0\\
-\mathrm{d}(e_{1}e_{2}x^{2}) & =0
-\end{align*}
-
-\end_inset
-
-Therefore we see that
-\begin_inset Formula 
-\[
-\mathrm{H}_{2}(\overline{V})=e_{1}e_{2}\Bbbk x^{2}+e_{1}e_{2}\Bbbk xy+e_{1}e_{2}Ty^{2}\cong\Bbbk^{2}\oplus\langle y^{2}\rangle\cong
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We also have
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e_{1}xy) & =\mathrm{d}(e_{1})
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Finally, Observe that
-\begin_inset Formula 
-\[
-V\slash\langle\boldsymbol{\varepsilon}\rangle\simeq\mathrm{S}_{R}(F)=\mathrm{S}(F)\quad\text{and}\quad V\slash\langle\boldsymbol{e},\boldsymbol{f}\rangle\simeq\Omega_{S\slash\Bbbk},
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $\mathrm{S}_{R}(F)$
-\end_inset
-
- is the usual symmetric DG algebra construction applied to 
-\begin_inset Formula $F$
-\end_inset
-
- and where 
-\begin_inset Formula $\Omega_{S\slash\Bbbk}$
-\end_inset
-
- is algebraic de Rham of 
-\begin_inset Formula $S\slash\Bbbk$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-Now for each 
-\begin_inset Formula $1\leq j\leq n$
-\end_inset
-
-, choose a unit 
-\begin_inset Formula $u_{j}\in R^{\times}$
-\end_inset
-
- such that 
-\begin_inset Formula $\mathrm{d}u_{j}=\varepsilon_{j}$
-\end_inset
-
- (for instance if 
-\begin_inset Formula $R$
-\end_inset
-
- is local, then we may choose 
-\begin_inset Formula $u_{j}=x_{j}+1$
-\end_inset
-
-) and we set 
-\begin_inset Formula $\widetilde{\varepsilon}_{j}=\varepsilon_{j}/u_{j}$
-\end_inset
-
-.
- Thus
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(\widetilde{\varepsilon}_{j}) & =\frac{-\varepsilon_{j}^{2}}{u_{j}^{2}}=0
-\end{align*}
-
-\end_inset
-
-Let 
-\begin_inset Formula $\mathfrak{b}$
-\end_inset
-
- be the DG 
-\begin_inset Formula $V$
-\end_inset
-
--ideal generated by all elements of the form 
-\begin_inset Formula $e_{i}\varepsilon_{j}-(\mathrm{d}e_{i})u_{j}$
-\end_inset
-
- for all 
-\begin_inset Formula $i,j$
-\end_inset
-
-.
- Note that
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e_{i}\varepsilon_{j}-(\mathrm{d}e_{i})u_{j}) & =(\mathrm{d}e_{i})\varepsilon_{j}-(\mathrm{d}e_{i})(\mathrm{d}u_{j})\\
- & =(\mathrm{d}e_{i})\varepsilon_{j}-(\mathrm{d}e_{i})\varepsilon_{j}\\
- & =0.
-\end{align*}
-
-\end_inset
-
- Note that
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e_{i}\widetilde{\varepsilon}_{j}-\mathrm{d}e_{i}) & =(\mathrm{d}e_{i})\widetilde{\varepsilon}_{j}-e_{i}\mathrm{d}(\widetilde{\varepsilon}_{j})\\
- & =\\
- & =0.
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e_{i}\widetilde{\varepsilon}_{j}) & =\mathrm{d}(e_{i})\widetilde{\varepsilon}_{j}\\
-\\
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e_{i}\varepsilon_{j}-\mathrm{d}e_{i}) & =\mathrm{d}(e_{i})\varepsilon_{j}
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-e_{i}\varepsilon_{j}-\mathrm{d}e_{i}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Now let 
-\begin_inset Formula $\mathfrak{b}$
-\end_inset
-
- be the DG 
-\begin_inset Formula $V$
-\end_inset
-
--ideal generated by all elements of the form 
-\begin_inset Formula $e_{i}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-As 
-\begin_inset Formula $F$
-\end_inset
-
- was assumed to have a DG algebra structure on it with multiplication denoted
- 
-\begin_inset Formula $\star$
-\end_inset
-
-, we can recover 
-\begin_inset Formula $F$
-\end_inset
-
- again by quotienting out by 
-\begin_inset Formula $\mathrm{S}(F)$
-\end_inset
-
- ideal of multiplicators
-\begin_inset Formula 
-\[
-\mathfrak{b}=\langle\{e_{i}e_{j}-e_{i}\star e_{j}\mid1\leq i,j\leq N\}\rangle.
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We equip 
-\begin_inset Formula $V$
-\end_inset
-
- with a multiplication 
-\begin_inset Formula $\nu$
-\end_inset
-
- which is defined by
-\begin_inset Formula 
-\[
-e_{i}\varepsilon_{j}=f_{i}(x_{j}-1)=f_{i}u_{j},
-\]
-
-\end_inset
-
-where we denote 
-\begin_inset Formula $x_{j}-1=u_{j}$
-\end_inset
-
- for all 
-\begin_inset Formula $i,j$
-\end_inset
-
-.
- This multiplication is not associative for we have
-\begin_inset Formula 
-\begin{align*}
-0 & =[e_{i},\widetilde{\varepsilon}_{k},e_{j}]=e_{j}f_{i}+e_{i}f_{j}\\
-0 & =[e_{i},\widetilde{\varepsilon}_{j},\widetilde{\varepsilon}_{j}]=f_{i}\widetilde{\varepsilon}_{j}\\
-0 & =[\widetilde{\varepsilon}_{j},e_{i},e_{i}]=e_{i}f_{i}.
-\end{align*}
-
-\end_inset
-
-In particular, note that 
-\begin_inset Formula $\langle\boldsymbol{f}\rangle$
-\end_inset
-
- annihilates 
-\begin_inset Formula $\langle\boldsymbol{\varepsilon}\rangle$
-\end_inset
-
-.
- We have identities
-\begin_inset Formula 
-\[
-e_{j}f_{i}=-f_{i}e_{j},\quad e_{i}f_{i}=0,\quad\text{and}\quad f_{i}\varepsilon_{j}=0
-\]
-
-\end_inset
-
-for all 
-\begin_inset Formula $i,j$
-\end_inset
-
-.
- 
-\begin_inset Formula 
-\begin{align*}
-e_{j}f_{i} & =-f_{i}e_{j}\\
-e_{i}f_{i} & =0\\
-f_{i}\varepsilon_{j} & =0
-\end{align*}
-
-\end_inset
-
-for all 
-\begin_inset Formula $ $
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-[e_{i},\varepsilon_{j},e_{k}] & =u_{j}(f_{i}e_{k}+f_{k}e_{i})\\
-0=[\varepsilon_{i},e_{j},\varepsilon_{k}] & =-f_{j}(u_{i}e_{k}+u_{k}e_{i})\\
-0=[\widetilde{\varepsilon}_{j},e_{i},e_{i}] & =f_{i}e_{i}\\
-0=[e_{i},\widetilde{\varepsilon}_{j},\widetilde{\varepsilon}_{j}] & =f_{i}\widetilde{\varepsilon}_{j}
-\end{align*}
-
-\end_inset
-
-for all 
-\begin_inset Formula $i,j,k$
-\end_inset
-
-.
- Thus in the maximal associative quotient 
-\begin_inset Formula $\overline{V}=V\slash\langle V\rangle$
-\end_inset
-
- we get the relations of the form
-\begin_inset Formula 
-\begin{align*}
-\overline{u}_{j}\overline{f}_{i}\overline{e}_{k} & =-\overline{u}_{j}\overline{f}_{k}\overline{e}_{i}\\
-\overline{f}_{j}\overline{u}_{i}\overline{e}_{k} & =-\overline{f}_{j}\overline{u}_{k}\overline{e}_{i}\\
-\overline{u}_{i}\overline{f}_{j}\overline{\varepsilon}_{i} & =0\\
-\overline{u}_{i}\overline{f}_{j}\overline{\varepsilon}_{j} & =0.
-\end{align*}
-
-\end_inset
-
-It turns out that under suitable conditions we have 
-\begin_inset Formula $\mathrm{H}_{+}(\overline{V})=\mathrm{H}_{+}(F\otimes_{R}S)$
-\end_inset
-
- and 
-\begin_inset Formula $\mathrm{H}_{-}(\overline{V})=\mathrm{H}_{\mathrm{d}\mathrm{R}}(\Omega_{S\slash\Bbbk})$
-\end_inset
-
-!
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{theorem}
-\backslash
-label{theorem}
-\end_layout
-
-\end_inset
-
- Suppose each 
-\begin_inset Formula $u_{j}$
-\end_inset
-
- is a unit (we can achieve this by localizing at the prime 
-\begin_inset Formula $\langle\boldsymbol{x}\rangle$
-\end_inset
-
- or by replacing 
-\begin_inset Formula $u_{j}$
-\end_inset
-
- with 
-\begin_inset Formula $v_{j}=a_{j}x_{j}+b_{j}$
-\end_inset
-
- for some 
-\begin_inset Formula $a_{j}\in\Bbbk^{\times}$
-\end_inset
-
- and 
-\begin_inset Formula $b_{j}\in\Bbbk$
-\end_inset
-
- and localizing at the multiplicative set generated by the 
-\begin_inset Formula $v_{j}$
-\end_inset
-
-).
- Then we have
-\begin_inset Formula 
-\[
-\mathrm{H}_{+}(\overline{V})=\mathrm{H}_{+}(F\otimes_{R}S).
-\]
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{theorem}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{proof}
-\backslash
-label{proof}
-\end_layout
-
-\end_inset
-
- Recall that 
-\begin_inset Formula $V\slash\langle\boldsymbol{f},\boldsymbol{\varepsilon}\rangle\simeq F\otimes_{R}S$
-\end_inset
-
-.
- Let 
-\begin_inset Formula $\mathfrak{c}$
-\end_inset
-
- be the DG 
-\begin_inset Formula $V$
-\end_inset
-
--ideal generated by the 
-\begin_inset Formula $e_{i}\varepsilon_{j}-f_{i}u_{j}$
-\end_inset
-
-.
- Note that since 
-\begin_inset Formula $u_{j}$
-\end_inset
-
- is a unit, we have
-\begin_inset Formula 
-\[
-e_{i}\varepsilon_{j}-f_{i}u_{j}\in\langle\boldsymbol{f},\boldsymbol{\varepsilon}\rangle.
-\]
-
-\end_inset
-
-It follows that 
-\begin_inset Formula $\langle\mathfrak{c},\boldsymbol{\varepsilon}\rangle=\langle\boldsymbol{f},\boldsymbol{\varepsilon}\rangle$
-\end_inset
-
-.
- Thus we can quotient out by 
-\begin_inset Formula $\mathfrak{c}$
-\end_inset
-
- first to get 
-\begin_inset Formula $\overline{V}=V\slash\mathfrak{c}$
-\end_inset
-
-, and then we just need to quotient out by 
-\begin_inset Formula $\langle\boldsymbol{\varepsilon}\rangle$
-\end_inset
-
- to get 
-\begin_inset Formula $F$
-\end_inset
-
-.
- However we claim that quotienting out by 
-\begin_inset Formula $\langle\boldsymbol{\varepsilon}\rangle$
-\end_inset
-
- will not affect 
-\begin_inset Formula $\overline{V}_{+}$
-\end_inset
-
-.
- Indeed, by using the multiplication, we can place 
-\begin_inset Formula $\overline{V}_{+}$
-\end_inset
-
- into the form
-\begin_inset Formula 
-\[
-\overline{V}_{+}=\bigoplus_{\boldsymbol{\alpha},\boldsymbol{\beta}}e^{\boldsymbol{\alpha}}\Bbbk x^{\boldsymbol{\beta}},
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $\boldsymbol{\alpha},\boldsymbol{\beta}$
-\end_inset
-
- do not necessarily range over all 
-\begin_inset Formula $\mathbb{N}^{n}$
-\end_inset
-
-.
- We have
-\begin_inset Formula 
-\begin{align*}
-e_{i}\mathrm{d}(x^{\boldsymbol{\alpha}}) & =\alpha_{1}x_{1}^{\alpha_{1}-1}x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}}e_{i}\varepsilon_{1}+\sum_{j=2}^{n}\alpha_{j}x_{1}^{\alpha_{1}}\cdots x_{j-1}^{\alpha_{j-1}}x_{j}^{\alpha_{j}-1}\cdots x_{n}^{\alpha_{n}}e_{i}\varepsilon_{j}\\
- & =\alpha_{1}f_{i}x_{1}^{\alpha_{1}}x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}}+\sum_{j=2}^{n}\alpha_{j}f_{i}x_{1}^{\alpha_{1}}\cdots x_{j-1}^{\alpha_{j-1}}x_{j}^{\alpha_{j}}\cdots x_{n}^{\alpha_{n}}\\
- & =|\boldsymbol{\alpha}|f_{i}x^{\boldsymbol{\alpha}}.
-\end{align*}
-
-\end_inset
-
-Therefore if 
-\begin_inset Formula $e^{\boldsymbol{\alpha}}=e^{\widetilde{\boldsymbol{\alpha}}}e_{l}$
-\end_inset
-
-, then we have
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e^{\boldsymbol{\alpha}}x^{\boldsymbol{\beta}}) & =\mathrm{d}(e^{\boldsymbol{\alpha}})x^{\boldsymbol{\beta}}\pm e^{\boldsymbol{\alpha}}\mathrm{d}(x^{\boldsymbol{\beta}})\\
- & =\mathrm{d}(e^{\boldsymbol{\alpha}})x^{\boldsymbol{\beta}}\pm|\boldsymbol{\beta}|e^{\widetilde{\boldsymbol{\alpha}}}f_{l}x^{\boldsymbol{\beta}}\\
- & =(\mathrm{d}(e^{\boldsymbol{\alpha}})\pm|\boldsymbol{\beta}|e^{\widetilde{\boldsymbol{\alpha}}}f_{l})x^{\boldsymbol{\beta}}\\
- & =(\mathrm{d}(e^{\widetilde{\boldsymbol{\alpha}}}e_{l})\pm|\boldsymbol{\beta}|e^{\widetilde{\boldsymbol{\alpha}}}f_{l})x^{\boldsymbol{\beta}}\\
- & =(\mathrm{d}(e^{\widetilde{\boldsymbol{\alpha}}})e_{l}\pm e^{\widetilde{\boldsymbol{\alpha}}}f_{l}\pm|\boldsymbol{\beta}|e^{\widetilde{\boldsymbol{\alpha}}}f_{l})x^{\boldsymbol{\beta}}\\
- & =(\mathrm{d}(e^{\widetilde{\boldsymbol{\alpha}}})e_{l}\pm(1\pm|\boldsymbol{\beta}|)e^{\widetilde{\boldsymbol{\alpha}}}f_{l})x^{\boldsymbol{\beta}}.\\
- & =(\mathrm{d}(e^{\widetilde{\boldsymbol{\alpha}}})e_{l}x^{\boldsymbol{\beta}}\pm(1\pm|\boldsymbol{\beta}|)e^{\widetilde{\boldsymbol{\alpha}}}f_{l}x^{\boldsymbol{\beta}}
-\end{align*}
-
-\end_inset
-
-thus suppose 
-\begin_inset Formula $v$
-\end_inset
-
- is a cycle in 
-\begin_inset Formula $\overline{V}$
-\end_inset
-
-, say 
-\begin_inset Formula $v=\sum c_{i}e^{\boldsymbol{\alpha}_{i}}x^{\boldsymbol{\beta}_{i}}$
-\end_inset
-
-.
- Then we have
-\begin_inset Formula 
-\begin{align*}
-0 & =\mathrm{d}v\\
- & =\sum c_{i}\mathrm{d}(e^{\boldsymbol{\alpha}_{i}}x^{\boldsymbol{\beta}_{i}})\\
- & =\sum c_{i}\mathrm{d}(e^{\boldsymbol{\alpha}})x^{\boldsymbol{\beta}}\pm\sum c_{i}e^{\boldsymbol{\alpha}}\mathrm{d}(x^{\boldsymbol{\beta}})).
-\end{align*}
-
-\end_inset
-
-It follows that 
-\begin_inset Formula $\sum c_{i}\mathrm{d}(e^{\boldsymbol{\alpha}})x^{\boldsymbol{\beta}}=0$
-\end_inset
-
-.
- Furthermore, note that 
-\begin_inset Formula $\langle\boldsymbol{e}\rangle\langle\boldsymbol{\varepsilon}\rangle+\langle\boldsymbol{c}\rangle=\langle\boldsymbol{f}\rangle$
-\end_inset
-
-.
- We have
-\begin_inset Formula 
-\begin{align*}
-e_{i}\mathrm{d}(x^{\boldsymbol{\alpha}}) & =\alpha_{1}x_{1}^{\alpha_{1}-1}x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}}e_{i}\varepsilon_{1}+\sum_{j=2}^{n}\alpha_{j}x_{1}^{\alpha_{1}}\cdots x_{j-1}^{\alpha_{j-1}}x_{j}^{\alpha_{j}-1}\cdots x_{n}^{\alpha_{n}}e_{i}\varepsilon_{j}\\
- & =\alpha_{1}f_{i}x_{1}^{\alpha_{1}}x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}}+\sum_{j=2}^{n}\alpha_{j}f_{i}x_{1}^{\alpha_{1}}\cdots x_{j-1}^{\alpha_{j-1}}x_{j}^{\alpha_{j}}\cdots x_{n}^{\alpha_{n}}\\
- & =|\boldsymbol{\alpha}|f_{i}x^{\boldsymbol{\alpha}}.
-\end{align*}
-
-\end_inset
-
-We have
-\begin_inset Formula 
-\begin{align*}
-e_{i}\mathrm{d}(x^{\boldsymbol{\alpha}}) & =\alpha_{1}x_{1}^{\alpha_{1}-1}x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}}e_{i}\varepsilon_{1}+\sum_{j=2}^{n}\alpha_{j}x_{1}^{\alpha_{1}}\cdots x_{j-1}^{\alpha_{j-1}}x_{j}^{\alpha_{j}-1}\cdots x_{n}^{\alpha_{n}}e_{i}\varepsilon_{j}\\
- & =\alpha_{1}f_{i}x_{1}^{\alpha_{1}}x_{2}^{\alpha_{2}}\cdots x_{n}^{\alpha_{n}}+\sum_{j=2}^{n}\alpha_{j}f_{i}x_{1}^{\alpha_{1}}\cdots x_{j-1}^{\alpha_{j-1}}x_{j}^{\alpha_{j}}\cdots x_{n}^{\alpha_{n}}\\
- & =|\boldsymbol{\alpha}|f_{i}x^{\boldsymbol{\alpha}}.
-\end{align*}
-
-\end_inset
-
-We have
-\begin_inset Formula 
-\begin{align*}
-e_{j}e_{i}\mathrm{d}(x^{\boldsymbol{\alpha}}) & =|\boldsymbol{\alpha}|f_{i}e_{j}x^{\boldsymbol{\alpha}}.
-\end{align*}
-
-\end_inset
-
-More generally we have
-\begin_inset Formula 
-\begin{align*}
-e^{\boldsymbol{\alpha}}\mathrm{d}(x^{\boldsymbol{\beta}}) & =
-\end{align*}
-
-\end_inset
-
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{proof}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{example}
-\end_layout
-
-\end_inset
-
- Consider the case where 
-\begin_inset Formula $R=\Bbbk[x,y]$
-\end_inset
-
- and 
-\begin_inset Formula $S=R\slash\langle x^{2},xy\rangle$
-\end_inset
-
- where 
-\begin_inset Formula $\mathrm{char}\,\Bbbk\neq2$
-\end_inset
-
-.
- Then
-\begin_inset Formula 
-\begin{align*}
-V_{-2} & =R\varepsilon_{1}\varepsilon_{2}\\
-V_{-1} & =R\varepsilon_{1}+R\varepsilon_{2}+e_{1}R\varepsilon_{1}\varepsilon_{2}+e_{2}R\varepsilon_{1}\varepsilon_{2}\\
-V_{0} & =R+e_{1}R\varepsilon_{1}+e_{1}R\varepsilon_{2}+e_{1}e_{2}R\varepsilon_{1}\varepsilon_{2}+e_{2}R\varepsilon_{1}+e_{2}R\varepsilon_{2}\\
-V_{1} & =e_{1}R+e_{2}R+e_{1}e_{2}R\varepsilon_{1}+e_{1}e_{2}R\varepsilon_{2}\\
-V_{2} & =e_{1}e_{2}R.
-\end{align*}
-
-\end_inset
-
-However we have
-\begin_inset Formula 
-\begin{align*}
-\partial^{2}(e_{1}) & =2x\varepsilon_{1}\\
-\partial^{2}(e_{2}) & =y\varepsilon_{2}+x\varepsilon_{1}\\
-\partial^{2}(e_{1}e_{2}) & =
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\partial^{2}(e_{i}e_{j}) & =\partial^{2}(e_{i})\partial(e_{j})-\partial(e_{i})\partial^{2}(e_{j})\in\langle\partial^{2}(e_{i}),\partial^{2}(e_{j})\rangle
-\end{align*}
-
-\end_inset
-
-I think I need to take 
-\begin_inset Formula $F\slash\partial^{2}F$
-\end_inset
-
-.
- Then note that
-\begin_inset Formula 
-\begin{align*}
-0 & =\partial^{2}(e_{1}e_{2})\\
- & =\partial(x^{2}e_{2}-xye_{1})\\
- & =2x\varepsilon_{1}e_{2}+x^{2}\partial(e_{2})-(y\varepsilon_{1}+x\varepsilon_{2})e_{1}-xy\partial(e_{1})\\
- & =2x\varepsilon_{1}e_{2}-(y\varepsilon_{2}+x\varepsilon_{1})e_{1}.
-\end{align*}
-
-\end_inset
-
-Thus we have
-\begin_inset Formula 
-\[
-2e_{2}x\varepsilon_{1}=e_{1}(y\varepsilon_{1}+x\varepsilon_{2}).
-\]
-
-\end_inset
-
-Therefore
-\begin_inset Formula 
-\begin{align*}
-2x^{2}y(x-1) & =x^{2}y(x-1)+x^{3}(y-1)
-\end{align*}
-
-\end_inset
-
-Thus
-\begin_inset Formula 
-\[
-x^{2}y(x-1)=x^{3}(y-1)
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-x^{3}y-x^{2}y=x^{3}y-x^{3}
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-x^{3}=x^{2}y
-\]
-
-\end_inset
-
-Therefore
-\begin_inset Formula 
-\[
-\]
-
-\end_inset
-
-Then if we set 
-\begin_inset Formula $e_{2}\varepsilon_{1}=$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-we have
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $x\varepsilon_{2}=-y\varepsilon_{1}$
-\end_inset
-
- and
-\begin_inset Formula 
-\begin{align*}
-0:_{R}\varepsilon_{2} & =\langle x^{2},xy\rangle\\
-0:_{R}\varepsilon_{1} & =\langle x\rangle\\
-0:_{R}\varepsilon_{1}\varepsilon_{2} & =\langle x,y\rangle,
-\end{align*}
-
-\end_inset
-
-so we can express the components of 
-\begin_inset Formula $V$
-\end_inset
-
- in a better way using these relations.
- Indeed, set 
-\begin_inset Formula $T=\Bbbk[y]$
-\end_inset
-
- and note that 
-\begin_inset Formula $S=T+xT$
-\end_inset
-
-, thus one can see that 
-\begin_inset Formula $R\varepsilon_{2}=S\varepsilon_{2}$
-\end_inset
-
-, 
-\begin_inset Formula $R\varepsilon_{1}=T\varepsilon_{1}$
-\end_inset
-
-, and 
-\begin_inset Formula $R\varepsilon_{1}\varepsilon_{2}=\Bbbk$
-\end_inset
-
-.
- Using annihilations like these, one can show that
-\begin_inset Formula 
-\begin{align*}
-V_{-2} & =\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-V_{-1} & =T\varepsilon_{1}+T\varepsilon_{2}+e_{1}\Bbbk\varepsilon_{1}\varepsilon_{2}+e_{2}\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-V_{0} & =R+e_{1}T\varepsilon_{1}+e_{1}T\varepsilon_{2}+e_{2}T\varepsilon_{1}+e_{2}T\varepsilon_{2}+e_{1}e_{2}\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-V_{1} & =e_{1}R+e_{2}R+e_{1}e_{2}T\varepsilon_{1}+e_{1}e_{2}T\varepsilon_{2}\\
-V_{2} & =e_{1}e_{2}R.
-\end{align*}
-
-\end_inset
-
-Notice how 
-\begin_inset Formula $T=R\slash\langle x\rangle$
-\end_inset
-
- and 
-\begin_inset Formula $\Bbbk=R\slash\langle x,y\rangle$
-\end_inset
-
- where 
-\begin_inset Formula $\langle x\rangle$
-\end_inset
-
- and 
-\begin_inset Formula $\langle x,y\rangle$
-\end_inset
-
- are the associated primes of 
-\begin_inset Formula $\langle x^{2},xy\rangle$
-\end_inset
-
-.
- Next we consider the maximal associative quotient 
-\begin_inset Formula $\overline{V}=V\slash\langle V\rangle$
-\end_inset
-
-.
- We have
-\begin_inset Formula 
-\begin{align*}
-e_{1}\varepsilon_{1} & =x^{3} & x^{3}e_{1} & =0 & e_{1}\varepsilon_{1}\varepsilon_{2} & =0 & x^{4} & =0\\
-e_{1}\varepsilon_{2} & =x^{2}y & x^{2}ye_{1} & =0 & e_{2}\varepsilon_{1}\varepsilon_{2} & =0 & x^{3}y & =0\\
-e_{2}\varepsilon_{1} & =x^{2}y & x^{2}ye_{2} & =0 & e_{1}e_{2}\varepsilon_{1} & =0 & x^{2}y^{3} & =0\\
-e_{2}\varepsilon_{2} & =xy^{2} & xy^{2}e_{2} & =0 & e_{1}e_{2}\varepsilon_{2} & =0 & e_{1}e_{2}\varepsilon_{1}\varepsilon_{2} & =0
-\end{align*}
-
-\end_inset
-
-Furthermore we have
-\begin_inset Formula 
-\begin{align*}
-0:_{R}e_{1} & =\langle x^{3},x^{2}y,xy^{2}\rangle=\langle x\rangle\langle x,y\rangle^{2}\\
-0:_{R}e_{2} & =\langle x^{3},x^{2}y,xy^{2}\rangle=\langle x\rangle\langle x,y\rangle^{2}\\
-0:_{R}e_{1}e_{2} & =\langle x^{3},x^{2}y,xy^{2}\rangle=\langle x\rangle\langle x,y\rangle^{2}.
-\end{align*}
-
-\end_inset
-
-Therefore if
-\begin_inset Formula 
-\[
-Q=R\slash\langle x^{3},x^{2}y,xy^{2}\rangle=\Bbbk+\Bbbk x+\Bbbk y+\Bbbk x^{2}+\Bbbk xy+\Bbbk y^{2}+\Bbbk y^{3}\cong\Bbbk\oplus(\Bbbk+\Bbbk x+\Bbbk y),
-\]
-
-\end_inset
-
-then we have
-\begin_inset Formula 
-\begin{align*}
-\overline{V}_{-2} & =\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-\overline{V}_{-1} & =T\varepsilon_{1}+T\varepsilon_{2}\\
-\overline{V}_{0} & =T+Tx+\Bbbk x^{2}+\Bbbk x^{2}y+\Bbbk x^{2}y^{2}+\Bbbk x^{3}\\
-\overline{V}_{1} & =e_{1}T+e_{2}T+e_{1}Q+e_{2}Q+e_{2}x^{3}\Bbbk\\
-\overline{V}_{2} & =e_{1}e_{2}T+e_{1}e_{2}Q.
-\end{align*}
-
-\end_inset
-
-Note that 
-\begin_inset Formula $\mathrm{d}(x^{2})=2x\varepsilon_{1}=0$
-\end_inset
-
- and 
-\begin_inset Formula $\mathrm{d}(x^{2}y)=x^{2}\varepsilon_{2}=0$
-\end_inset
-
-.
- Also note
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e_{1}e_{2}) & =x^{2}e_{2}-xye_{1}\\
-\mathrm{d}(e_{1}e_{2}x) & =e_{2}x^{3}\\
-\mathrm{d}(e_{1}e_{2}y) & =-e_{1}xy^{2}\\
-\mathrm{d}(e_{1}e_{2}xy) & =0\\
-\mathrm{d}(e_{1}e_{2}y^{2}) & =0\\
-\mathrm{d}(e_{1}e_{2}x^{2}) & =0
-\end{align*}
-
-\end_inset
-
-Therefore we see that
-\begin_inset Formula 
-\[
-\mathrm{H}_{2}(\overline{V})=e_{1}e_{2}\Bbbk x^{2}+e_{1}e_{2}\Bbbk xy+e_{1}e_{2}Ty^{2}\cong\Bbbk^{2}\oplus\langle y^{2}\rangle\cong
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We also have
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e_{1}xy) & =\mathrm{d}(e_{1})
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{example}
-\end_layout
-
-\end_inset
-
- (Taylor) we set 
-\begin_inset Formula $\widetilde{\varepsilon}_{j}=\varepsilon_{j}/(x_{j}-1)$
-\end_inset
-
-.
- Then we have
-\begin_inset Formula 
-\begin{align*}
-e_{1}\widetilde{\varepsilon}_{j} & =x^{2} & e_{1}x^{2} & =0 & x^{3} & =0\\
-e_{2}\widetilde{\varepsilon}_{j} & =xy & e_{2}xy & =0 & x^{2}y & =0\\
-e_{1}y=e_{12}\widetilde{\varepsilon}_{j} & =-e_{2}x & e_{2}x^{2} & =-e_{1}xy
-\end{align*}
-
-\end_inset
-
-It follows that
-\begin_inset Formula 
-\begin{align*}
-0:_{R}\overline{1} & =\langle x^{3},x^{2}y\rangle & 0:_{R}\varepsilon_{2} & =\langle x^{2},xy\rangle\\
-0:_{R}e_{1} & =\langle x^{2},xy\rangle & 0:_{R}\varepsilon_{1} & =\langle x\rangle\\
-0:_{R}e_{2} & =\langle x^{2},xy\rangle & 0:_{R}\varepsilon_{1}\varepsilon_{2} & =\langle x,y\rangle,\\
-0:_{R}e_{12} & =\langle x^{2},xy\rangle
-\end{align*}
-
-\end_inset
-
-Therefore if 
-\begin_inset Formula $Q=R\slash\langle x^{3},x^{2}y\rangle$
-\end_inset
-
-, then we have
-\begin_inset Formula 
-\begin{align*}
-\overline{V}_{-2} & =\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-\overline{V}_{-1} & =T\varepsilon_{1}+T\varepsilon_{2}\\
-\overline{V}_{0} & =S+\Bbbk x^{2}+\Bbbk xy\\
-\overline{V}_{1} & =e_{1}S+e_{2}S\\
-\overline{V}_{2} & =e_{12}S.
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-Q=R\slash\langle x^{3},x^{2}y\rangle=\Bbbk+\Bbbk x+\Bbbk y+\Bbbk x^{2}+\Bbbk xy+\Bbbk y^{2}+\Bbbk y^{3}\cong\Bbbk\oplus(\Bbbk+\Bbbk x+\Bbbk y),
-\]
-
-\end_inset
-
-then we have
-\begin_inset Formula 
-\begin{align*}
-\overline{V}_{-2} & =\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-\overline{V}_{-1} & =T\varepsilon_{1}+T\varepsilon_{2}\\
-\overline{V}_{0} & =T+Tx+\Bbbk x^{2}+\Bbbk x^{2}y+\Bbbk x^{2}y^{2}+\Bbbk x^{3}\\
-\overline{V}_{1} & =e_{1}T+e_{2}T+e_{1}Q+e_{2}Q+e_{2}x^{3}\Bbbk\\
-\overline{V}_{2} & =e_{1}e_{2}T+e_{1}e_{2}Q.
-\end{align*}
-
-\end_inset
-
-Note that 
-\begin_inset Formula $\mathrm{d}(x^{2})=2x\varepsilon_{1}=0$
-\end_inset
-
- and 
-\begin_inset Formula $\mathrm{d}(x^{2}y)=x^{2}\varepsilon_{2}=0$
-\end_inset
-
-.
- Also note
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e_{1}e_{2}) & =x^{2}e_{2}-xye_{1}\\
-\mathrm{d}(e_{1}e_{2}x) & =e_{2}x^{3}\\
-\mathrm{d}(e_{1}e_{2}y) & =-e_{1}xy^{2}\\
-\mathrm{d}(e_{1}e_{2}xy) & =0\\
-\mathrm{d}(e_{1}e_{2}y^{2}) & =0\\
-\mathrm{d}(e_{1}e_{2}x^{2}) & =0
-\end{align*}
-
-\end_inset
-
-Therefore we see that
-\begin_inset Formula 
-\[
-\mathrm{H}_{2}(\overline{V})=e_{1}e_{2}\Bbbk x^{2}+e_{1}e_{2}\Bbbk xy+e_{1}e_{2}Ty^{2}\cong\Bbbk^{2}\oplus\langle y^{2}\rangle\cong
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We also have
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e_{1}xy) & =\mathrm{d}(e_{1})
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{example}
-\end_layout
-
-\end_inset
-
- (Taylor Resolution) Consider the case where 
-\begin_inset Formula $R=\Bbbk[x,y]$
-\end_inset
-
- and 
-\begin_inset Formula $S=R\slash\langle x^{2},xy\rangle$
-\end_inset
-
- where 
-\begin_inset Formula $\mathrm{char}\,\Bbbk\neq2$
-\end_inset
-
-.
- In the Taylor resolution, we have 
-\begin_inset Formula $e_{1}e_{2}=xe_{12}$
-\end_inset
-
- and so 
-\begin_inset Formula $\mathrm{d}e_{12}=xe_{2}-ye_{1}$
-\end_inset
-
-.
- Then
-\begin_inset Formula 
-\begin{align*}
-V_{-2} & =R\varepsilon_{1}\varepsilon_{2}\\
-V_{-1} & =R\varepsilon_{1}+R\varepsilon_{2}+e_{1}R\varepsilon_{1}\varepsilon_{2}+e_{2}R\varepsilon_{1}\varepsilon_{2}\\
-V_{0} & =R+e_{1}R\varepsilon_{1}+e_{1}R\varepsilon_{2}+e_{1}e_{2}R\varepsilon_{1}\varepsilon_{2}+e_{2}R\varepsilon_{1}+e_{2}R\varepsilon_{2}\\
-V_{1} & =e_{1}R+e_{2}R+e_{1}e_{2}R\varepsilon_{1}+e_{1}e_{2}R\varepsilon_{2}\\
-V_{2} & =e_{12}R.
-\end{align*}
-
-\end_inset
-
-However we have 
-\begin_inset Formula $x\varepsilon_{2}=-y\varepsilon_{1}$
-\end_inset
-
- and
-\begin_inset Formula 
-\begin{align*}
-0:_{R}\varepsilon_{2} & =\langle x^{2},xy\rangle=\langle x\rangle\langle x,y\rangle\\
-0:_{R}\varepsilon_{1} & =\langle x\rangle\\
-0:_{R}\varepsilon_{1}\varepsilon_{2} & =\langle x,y\rangle,
-\end{align*}
-
-\end_inset
-
-so we can express the components of 
-\begin_inset Formula $V$
-\end_inset
-
- in a better way using these relations.
- Indeed, set 
-\begin_inset Formula $T=\Bbbk[y]$
-\end_inset
-
- and note that 
-\begin_inset Formula $S=T+xT$
-\end_inset
-
-, thus one can see that 
-\begin_inset Formula $R\varepsilon_{2}=S\varepsilon_{2}$
-\end_inset
-
-, 
-\begin_inset Formula $R\varepsilon_{1}=T\varepsilon_{1}$
-\end_inset
-
-, and 
-\begin_inset Formula $R\varepsilon_{1}\varepsilon_{2}=\Bbbk$
-\end_inset
-
-.
- Using annihilations like these, one can show that
-\begin_inset Formula 
-\begin{align*}
-V_{-2} & =\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-V_{-1} & =T\varepsilon_{1}+T\varepsilon_{2}+e_{1}\Bbbk\varepsilon_{1}\varepsilon_{2}+e_{2}\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-V_{0} & =R+e_{1}T\varepsilon_{1}+e_{1}T\varepsilon_{2}+e_{2}T\varepsilon_{1}+e_{2}T\varepsilon_{2}+e_{1}e_{2}\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-V_{1} & =e_{1}R+e_{2}R+e_{1}e_{2}T\varepsilon_{1}+e_{1}e_{2}T\varepsilon_{2}\\
-V_{2} & =e_{1}e_{2}R.
-\end{align*}
-
-\end_inset
-
-Notice how 
-\begin_inset Formula $T=R\slash\langle x\rangle$
-\end_inset
-
- and 
-\begin_inset Formula $\Bbbk=R\slash\langle x,y\rangle$
-\end_inset
-
- where 
-\begin_inset Formula $\langle x\rangle$
-\end_inset
-
- and 
-\begin_inset Formula $\langle x,y\rangle$
-\end_inset
-
- are the associated primes of 
-\begin_inset Formula $\langle x^{2},xy\rangle$
-\end_inset
-
-.
- Next we consider 
-\begin_inset Formula $\overline{V}=V\slash\mathfrak{b}$
-\end_inset
-
-.
- We have
-\begin_inset Formula 
-\begin{align*}
-e_{1}\varepsilon_{1} & =x^{3} & x^{3}e_{1} & =0 & e_{i}\varepsilon_{1}\varepsilon_{2} & =0 & x^{4} & =0\\
-e_{1}\varepsilon_{2} & =x^{2}y & x^{2}ye_{1} & =0 & e_{1}e_{2}\varepsilon_{j} & =0 & x^{3}y & =0\\
-e_{2}\varepsilon_{1} & =x^{2}y & x^{2}ye_{2} & =0 & e_{12}\varepsilon_{1} & =xye_{1} & x^{2}y^{3} & =0\\
-e_{2}\varepsilon_{2} & =xy^{2} & xy^{2}e_{2} & =0 & e_{12}\varepsilon_{2} & =y^{2}e_{1} & e_{12}\varepsilon_{1}\varepsilon_{2} & =0
-\end{align*}
-
-\end_inset
-
-and also 
-\begin_inset Formula $xy^{2}e_{1}=-x^{3}e_{2}$
-\end_inset
-
- (or 
-\begin_inset Formula $xy\widetilde{e}_{1}=-x^{2}\widetilde{e}_{2}$
-\end_inset
-
- where 
-\begin_inset Formula $\widetilde{e}_{1}=ye_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $\widetilde{e}_{2}=xe_{2}$
-\end_inset
-
-).
- Using identities likes these, one can check that 
-\begin_inset Formula $x^{4}=0$
-\end_inset
-
-, 
-\begin_inset Formula $x^{3}y=0$
-\end_inset
-
-, and 
-\begin_inset Formula $x^{2}y^{3}=0$
-\end_inset
-
- in 
-\begin_inset Formula $\overline{V}$
-\end_inset
-
-.
- Furthermore we have
-\begin_inset Formula 
-\begin{align*}
-0:_{R}e_{1} & =\langle x^{3},x^{2}y,xy^{2}\rangle=\langle x\rangle\langle x,y\rangle^{2}\\
-0:_{R}e_{2} & =\langle x^{3},x^{2}y,xy^{2}\rangle=\langle x\rangle\langle x,y\rangle^{2}\\
-0:_{R}e_{12} & =\langle x^{3},x^{2}y,xy^{2}\rangle=\langle x\rangle\langle x,y\rangle^{2}.
-\end{align*}
-
-\end_inset
-
-Therefore if
-\begin_inset Formula 
-\[
-Q=R\slash\langle x^{3},x^{2}y,xy^{2}\rangle=\Bbbk+\Bbbk x+\Bbbk y+\Bbbk x^{2}+\Bbbk xy+\Bbbk y^{2}+\Bbbk y^{3}\cong\Bbbk\oplus(\Bbbk+\Bbbk x+\Bbbk y),
-\]
-
-\end_inset
-
-then we have
-\begin_inset Formula 
-\begin{align*}
-\overline{V}_{-2} & =\Bbbk\varepsilon_{1}\varepsilon_{2}\\
-\overline{V}_{-1} & =T\varepsilon_{1}+T\varepsilon_{2}\\
-\overline{V}_{0} & =T+Tx+\Bbbk x^{2}+\Bbbk x^{2}y+\Bbbk x^{2}y^{2}+\Bbbk x^{3}\\
-\overline{V}_{1} & =e_{1}T+e_{2}T+e_{1}Q+e_{2}Q+e_{2}x^{3}\Bbbk\\
-\overline{V}_{2} & =e_{1}e_{2}T+e_{1}e_{2}Q.
-\end{align*}
-
-\end_inset
-
-Note that 
-\begin_inset Formula $\mathrm{d}(x^{2})=2x\varepsilon_{1}=0$
-\end_inset
-
- and 
-\begin_inset Formula $\mathrm{d}(x^{2}y)=x^{2}\varepsilon_{2}=0$
-\end_inset
-
-.
- Also note
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e_{1}e_{2}) & =x^{2}e_{2}-xye_{1}\\
-\mathrm{d}(e_{1}e_{2}x) & =e_{2}x^{3}\\
-\mathrm{d}(e_{1}e_{2}y) & =-e_{1}xy^{2}\\
-\mathrm{d}(e_{1}e_{2}xy) & =0\\
-\mathrm{d}(e_{1}e_{2}y^{2}) & =0\\
-\mathrm{d}(e_{1}e_{2}x^{2}) & =0
-\end{align*}
-
-\end_inset
-
-Therefore we see that
-\begin_inset Formula 
-\[
-\mathrm{H}_{2}(\overline{V})=e_{1}e_{2}\Bbbk x^{2}+e_{1}e_{2}\Bbbk xy+e_{1}e_{2}Ty^{2}\cong\Bbbk^{2}\oplus\langle y^{2}\rangle\cong
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We also have
-\begin_inset Formula 
-\begin{align*}
-\mathrm{d}(e_{1}xy) & =\mathrm{d}(e_{1})
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{example}
-\end_layout
-
-\end_inset
-
- Let 
-\begin_inset Formula $R=\Bbbk[x,y,z,w]$
-\end_inset
-
-, let 
-\begin_inset Formula $\boldsymbol{m}=x^{2},w^{2},zw,xy,y^{2}z^{2}$
-\end_inset
-
-, and let 
-\begin_inset Formula $S=R\slash\boldsymbol{m}$
-\end_inset
-
-.
- Then 
-\begin_inset Formula $\Omega_{S\slash\Bbbk}^{1}$
-\end_inset
-
- has the following presentation as an 
-\begin_inset Formula $S$
-\end_inset
-
--module: 
-\begin_inset Branch tikzcd
-inverted 0
-status collapsed
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{center}
-\backslash
-begin{tikzcd}[ampersand replacement=
-\backslash
-&] 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-S^5 
-\backslash
-arrow{rrrrr}{ 
-\backslash
-begin{pmatrix} 2x & 0 & 0 & y & 0 
-\backslash
-
-\backslash
- 0 & 0 & 0 & x & 2y z^2 
-\backslash
-
-\backslash
- 0 & 0 & w & 0 & y^2 z 
-\backslash
-
-\backslash
- 0 & 2w & z & 0 & 0 
-\backslash
-end{pmatrix} } 
-\backslash
-& 
-\backslash
-& 
-\backslash
-& 
-\backslash
-& 
-\backslash
-& S^4 
-\backslash
-arrow{rrrr}{ 
-\backslash
-begin{pmatrix} 
-\backslash
-mathrm{d}x & 
-\backslash
-mathrm{d}y & 
-\backslash
-mathrm{d}z & 
-\backslash
-mathrm{d}w  
-\backslash
-end{pmatrix} } 
-\backslash
-& 
-\backslash
-& 
-\backslash
-& 
-\backslash
-& 
-\backslash
-Omega ^1 _{S 
-\backslash
-slash 
-\backslash
-Bbbk } 
-\backslash
-end{tikzcd}
-\backslash
-end{center}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-In particular, we ve the following relations in 
-\begin_inset Formula $\Omega_{S\slash\Bbbk}^{1}$
-\end_inset
-
-:
-\begin_inset Formula 
-\begin{align*}
-2x\varepsilon_{1} & =0\\
-2w\varepsilon_{4} & =0\\
-w\varepsilon_{3} & =-z\varepsilon_{4}\\
-y\varepsilon_{1} & =-x\varepsilon_{2}\\
-2yz^{2}\varepsilon_{2} & =-2y^{2}z\varepsilon_{3}.
-\end{align*}
-
-\end_inset
-
-If 
-\begin_inset Formula $\mathrm{char}\,\Bbbk\neq2$
-\end_inset
-
-, then this implies
-\begin_inset Formula 
-\begin{align*}
-x\varepsilon_{1} & =0\\
-w\varepsilon_{4} & =0\\
-w\varepsilon_{3} & =-z\varepsilon_{4}\\
-y\varepsilon_{1} & =-x\varepsilon_{2}\\
-yz^{2}\varepsilon_{2} & =-y^{2}z\varepsilon_{3}.\\
-yz^{2}w\varepsilon_{2} & =y^{2}z^{2}\varepsilon_{4}\\
-xy^{2}z\varepsilon_{3} & =y^{2}z^{2}\varepsilon_{1}\\
-y^{2}z^{2}w\varepsilon_{1} & =xy^{2}z^{2}\varepsilon_{4}
-\end{align*}
-
-\end_inset
-
-On the other hand, if 
-\begin_inset Formula $\mathrm{char}\,\Bbbk=2$
-\end_inset
-
-, then we only get the relations 
-\begin_inset Formula $z\varepsilon_{4}=-w\varepsilon_{3}$
-\end_inset
-
- and 
-\begin_inset Formula $x\varepsilon_{2}=-y\varepsilon_{1}$
-\end_inset
-
-.
- So
-\begin_inset Formula 
-\begin{align*}
-0:\varepsilon_{1} & =\langle x,y^{2}z^{2}w^{2}\rangle & 0:\varepsilon_{1}\varepsilon_{2} & =\langle x,y\rangle & 0:\varepsilon_{1}\varepsilon_{2}\varepsilon_{3} & =\langle x,y,w^{2}\rangle\\
-0:\varepsilon_{2} & =\langle x^{2},yz^{2}w^{2}\rangle & 0:\varepsilon_{1}\varepsilon_{3} & =\langle x,y^{2}z^{2},w^{2}\rangle & 0:\varepsilon_{1}\varepsilon_{2}\varepsilon_{4} & =\langle x,y,w\rangle\\
-0:\varepsilon_{3} & =\langle w^{2},x^{2}y^{2}z\rangle & 0:\varepsilon_{1}\varepsilon_{4} & =\langle x,w\rangle & 0:\varepsilon_{1}\varepsilon_{3}\varepsilon_{4} & =\langle x,z,w\rangle\\
-0:\varepsilon_{4} & =\langle w,x^{2}y^{2}z^{2}\rangle & 0:\varepsilon_{2}\varepsilon_{3} & =\langle x^{2},yz^{2},y^{2}z,w^{2}\rangle & 0:\varepsilon_{2}\varepsilon_{3}\varepsilon_{4} & =\langle x^{2},z,w\rangle\\
- &  & 0:\varepsilon_{2}\varepsilon_{4} & =\langle x^{2},y^{2}z^{2},w\rangle\\
- &  & 0:\varepsilon_{3}\varepsilon_{4} & =\langle w,z\rangle
-\end{align*}
-
-\end_inset
-
-and we also have 
-\begin_inset Formula $0:\varepsilon_{1}\varepsilon_{2}\varepsilon_{3}\varepsilon_{4}=\langle x,y,z,w\rangle$
-\end_inset
-
-.
- Next, in 
-\begin_inset Formula $\overline{V}$
-\end_inset
-
- we have
-\begin_inset Formula 
-\begin{align*}
-e_{1}\varepsilon_{1} & =x^{3}\\
-\\
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{example}
-\end_layout
-
-\end_inset
-
- Let 
-\begin_inset Formula $R=\Bbbk[x,y,z,w]$
-\end_inset
-
-, let 
-\begin_inset Formula $\boldsymbol{f}=f_{1},f_{2},f_{3}$
-\end_inset
-
- where
-\begin_inset Formula 
-\begin{align*}
-f_{1} & =wy-x^{2}\\
-f_{2} & =wz-xy\\
-f_{3} & =xz-y^{2}
-\end{align*}
-
-\end_inset
-
-and let 
-\begin_inset Formula $S=R\slash\boldsymbol{f}$
-\end_inset
-
-.
- The Jacobian matrix of 
-\begin_inset Formula $\boldsymbol{f}$
-\end_inset
-
- is given by
-\begin_inset Formula 
-\[
-\mathrm{J}_{\boldsymbol{f}}=\begin{pmatrix}-2x & -y & z\\
-w & -x & -2y\\
-0 & w & x\\
-y & z & 0
-\end{pmatrix}.
-\]
-
-\end_inset
-
-In particular, 
-\begin_inset Formula $\Omega_{S\slash\Bbbk}$
-\end_inset
-
- has the following presentation as an 
-\begin_inset Formula $S$
-\end_inset
-
--module:: 
-\begin_inset Branch tikzcd
-inverted 0
-status open
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{center}
-\backslash
-begin{tikzcd}[ampersand replacement=
-\backslash
-&] 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-S^3 
-\backslash
-arrow{rrrr}{ 
-\backslash
-begin{pmatrix} -2x & -y & z 
-\backslash
-
-\backslash
- w & -x & -2y 
-\backslash
-
-\backslash
- 0 & w & x 
-\backslash
-
-\backslash
- y & z & 0 
-\backslash
-end{pmatrix} }  
-\backslash
-& 
-\backslash
-& 
-\backslash
-& 
-\backslash
-& S^4 
-\backslash
-arrow{rrr}{ 
-\backslash
-begin{pmatrix} 
-\backslash
-varepsilon _1 & 
-\backslash
-varepsilon _2 & 
-\backslash
-varepsilon _3  & 
-\backslash
-varepsilon _4  
-\backslash
-end{pmatrix} }  
-\backslash
-& 
-\backslash
-& 
-\backslash
-& 
-\backslash
-Omega ^1 _{S 
-\backslash
-slash 
-\backslash
-Bbbk } 
-\backslash
-end{tikzcd}
-\backslash
-end{center}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Now let 
-\begin_inset Formula $\widetilde{S}$
-\end_inset
-
- be the ring corresponding to the open 
-\begin_inset Formula $\mathrm{D}(w)$
-\end_inset
-
- in 
-\begin_inset Formula $X$
-\end_inset
-
-.
- Then 
-\begin_inset Formula $\widetilde{S}\simeq\widetilde{R}\slash\widetilde{\boldsymbol{f}}$
-\end_inset
-
- where 
-\begin_inset Formula $\widetilde{R}=\Bbbk[x,y,z]$
-\end_inset
-
- and where
-\begin_inset Formula 
-\begin{align*}
-\widetilde{f}_{1} & =y-x^{2}\\
-\widetilde{f}_{2} & =z-xy\\
-\widetilde{f}_{3} & =xz-y^{2}.
-\end{align*}
-
-\end_inset
-
-Thne the Jacobian 
-\begin_inset Formula $\widetilde{\boldsymbol{f}}$
-\end_inset
-
- is given by
-\begin_inset Formula 
-\[
-\mathrm{J}_{\widetilde{\boldsymbol{f}}}=\begin{pmatrix}-2x & -y & z\\
-1 & -x & -2y\\
-0 & 1 & x\\
-y & z & 0
-\end{pmatrix}
-\]
-
-\end_inset
-
- we have
-\begin_inset Formula 
-\[
-\]
-
-\end_inset
-
-Then 
-\begin_inset Formula $\Omega_{S\slash\Bbbk}^{1}$
-\end_inset
-
- has the following presentation as an 
-\begin_inset Formula $S$
-\end_inset
-
--module: 
-\begin_inset Branch tikzcd
-inverted 0
-status collapsed
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{center}
-\backslash
-begin{tikzcd}[ampersand replacement=
-\backslash
-&] 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-S^5 
-\backslash
-arrow{rrrrr}{ 
-\backslash
-begin{pmatrix} 2x & 0 & 0 & y & 0 
-\backslash
-
-\backslash
- 0 & 0 & 0 & x & 2y z^2 
-\backslash
-
-\backslash
- 0 & 0 & w & 0 & y^2 z 
-\backslash
-
-\backslash
- 0 & 2w & z & 0 & 0 
-\backslash
-end{pmatrix} } 
-\backslash
-& 
-\backslash
-& 
-\backslash
-& 
-\backslash
-& 
-\backslash
-& S^4 
-\backslash
-arrow{rrrr}{ 
-\backslash
-begin{pmatrix} 
-\backslash
-mathrm{d}x & 
-\backslash
-mathrm{d}y & 
-\backslash
-mathrm{d}z & 
-\backslash
-mathrm{d}w  
-\backslash
-end{pmatrix} } 
-\backslash
-& 
-\backslash
-& 
-\backslash
-& 
-\backslash
-& 
-\backslash
-Omega ^1 _{S 
-\backslash
-slash 
-\backslash
-Bbbk } 
-\backslash
-end{tikzcd}
-\backslash
-end{center}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-In particular, we ve the following relations in 
-\begin_inset Formula $\Omega_{S\slash\Bbbk}^{1}$
-\end_inset
-
-:
-\begin_inset Formula 
-\begin{align*}
-2x\varepsilon_{1} & =0\\
-2w\varepsilon_{4} & =0\\
-w\varepsilon_{3} & =-z\varepsilon_{4}\\
-y\varepsilon_{1} & =-x\varepsilon_{2}\\
-2yz^{2}\varepsilon_{2} & =-2y^{2}z\varepsilon_{3}.
-\end{align*}
-
-\end_inset
-
-If 
-\begin_inset Formula $\mathrm{char}\,\Bbbk\neq2$
-\end_inset
-
-, then this implies
-\begin_inset Formula 
-\begin{align*}
-x\varepsilon_{1} & =0\\
-w\varepsilon_{4} & =0\\
-w\varepsilon_{3} & =-z\varepsilon_{4}\\
-y\varepsilon_{1} & =-x\varepsilon_{2}\\
-yz^{2}\varepsilon_{2} & =-y^{2}z\varepsilon_{3}.\\
-yz^{2}w\varepsilon_{2} & =y^{2}z^{2}\varepsilon_{4}\\
-xy^{2}z\varepsilon_{3} & =y^{2}z^{2}\varepsilon_{1}\\
-y^{2}z^{2}w\varepsilon_{1} & =xy^{2}z^{2}\varepsilon_{4}
-\end{align*}
-
-\end_inset
-
-On the other hand, if 
-\begin_inset Formula $\mathrm{char}\,\Bbbk=2$
-\end_inset
-
-, then we only get the relations 
-\begin_inset Formula $z\varepsilon_{4}=-w\varepsilon_{3}$
-\end_inset
-
- and 
-\begin_inset Formula $x\varepsilon_{2}=-y\varepsilon_{1}$
-\end_inset
-
-.
- So
-\begin_inset Formula 
-\begin{align*}
-0:\varepsilon_{1} & =\langle x,y^{2}z^{2}w^{2}\rangle & 0:\varepsilon_{1}\varepsilon_{2} & =\langle x,y\rangle & 0:\varepsilon_{1}\varepsilon_{2}\varepsilon_{3} & =\langle x,y,w^{2}\rangle\\
-0:\varepsilon_{2} & =\langle x^{2},yz^{2}w^{2}\rangle & 0:\varepsilon_{1}\varepsilon_{3} & =\langle x,y^{2}z^{2},w^{2}\rangle & 0:\varepsilon_{1}\varepsilon_{2}\varepsilon_{4} & =\langle x,y,w\rangle\\
-0:\varepsilon_{3} & =\langle w^{2},x^{2}y^{2}z\rangle & 0:\varepsilon_{1}\varepsilon_{4} & =\langle x,w\rangle & 0:\varepsilon_{1}\varepsilon_{3}\varepsilon_{4} & =\langle x,z,w\rangle\\
-0:\varepsilon_{4} & =\langle w,x^{2}y^{2}z^{2}\rangle & 0:\varepsilon_{2}\varepsilon_{3} & =\langle x^{2},yz^{2},y^{2}z,w^{2}\rangle & 0:\varepsilon_{2}\varepsilon_{3}\varepsilon_{4} & =\langle x^{2},z,w\rangle\\
- &  & 0:\varepsilon_{2}\varepsilon_{4} & =\langle x^{2},y^{2}z^{2},w\rangle\\
- &  & 0:\varepsilon_{3}\varepsilon_{4} & =\langle w,z\rangle
-\end{align*}
-
-\end_inset
-
-and we also have 
-\begin_inset Formula $0:\varepsilon_{1}\varepsilon_{2}\varepsilon_{3}\varepsilon_{4}=\langle x,y,z,w\rangle$
-\end_inset
-
-.
- Next, in 
-\begin_inset Formula $\overline{V}$
-\end_inset
-
- we have
-\begin_inset Formula 
-\begin{align*}
-e_{1}\varepsilon_{1} & =x^{3}\\
-\\
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{example}
-\end_layout
-
-\end_inset
-
- Consider the case where 
-\begin_inset Formula $R=\Bbbk[x,y,z,w]$
-\end_inset
-
- and 
-\begin_inset Formula $S=R\slash\langle x^{2},xy\rangle$
-\end_inset
-
- where 
-\begin_inset Formula $\mathrm{char}\,\Bbbk\neq2$
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-I conjecture that 
-\begin_inset Formula $\overline{V}_{+}=\mathrm{Tor}_{+}^{R}(S,S)$
-\end_inset
-
- in positive degree when 
-\begin_inset Formula $F$
-\end_inset
-
- is a free resolution.
- Indeed, it should be clear that
-\begin_inset Formula 
-\[
-\mathrm{H}_{+}(V\otimes_{R}S)=\mathrm{Tor}_{+}^{R}(S,S).
-\]
-
-\end_inset
-
-Indeed, I definitely have 
-\begin_inset Formula $V\slash\langle\boldsymbol{\varepsilon}\rangle\simeq\mathrm{S}_{R}(F)=\mathrm{S}(F)$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -22198,28 +18251,6 @@ end{equation}
 
 \end_inset
 
-We are especially interested in the case where 
-\begin_inset Formula $A=A'$
-\end_inset
-
- but allow 
-\begin_inset Formula $\mu\neq\mu'$
-\end_inset
-
-.
- In that case, we are basically studying the DG ideals 
-\begin_inset Formula $\mathfrak{s}=\mathfrak{s}(\mu)$
-\end_inset
-
- and 
-\begin_inset Formula $\mathfrak{s}'=\mathrm{s}(\mu')$
-\end_inset
-
- in 
-\begin_inset Formula $S=S'$
-\end_inset
-
-.
  
 \begin_inset ERT
 status open
@@ -22800,888 +18831,6 @@ end{cor}
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{cor}
-\backslash
-label{cor}
-\end_layout
-
-\end_inset
-
- Continuing with the notation as above, assume that 
-\begin_inset Formula $A=F$
-\end_inset
-
- is the minimal free resolution of a cyclic 
-\begin_inset Formula $R$
-\end_inset
-
--module 
-\begin_inset Formula $R\slash I$
-\end_inset
-
- and let 
-\begin_inset Formula $J$
-\end_inset
-
- be an ideal of 
-\begin_inset Formula $R$
-\end_inset
-
-.
- If 
-\begin_inset Formula $F\slash JF$
-\end_inset
-
- has a DG algebra structure on it, then 
-\begin_inset Formula $\mathrm{Tor}^{R}(R\slash I,R\slash J)$
-\end_inset
-
- is a direct summand of 
-\begin_inset Formula $\mathrm{H}(S\slash JS)$
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{cor}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{proof}
-\backslash
-label{proof}
-\end_layout
-
-\end_inset
-
- Since the symmetric DG algebra construction commutes with base change,
- we have 
-\begin_inset Formula $S\slash JS=\mathrm{S}_{R\slash J}(F\slash JF)$
-\end_inset
-
-.
- Since 
-\begin_inset Formula $F\slash JF$
-\end_inset
-
- has a DG algebra structure on it, the canonical map 
-\begin_inset Formula $F\slash JF\to S\slash JF$
-\end_inset
-
- is split.
- Thus 
-\begin_inset Formula $\mathrm{Tor}^{R}(R\slash I,R\slash J)=\mathrm{H}(F\slash JF)$
-\end_inset
-
- is a direct summand of 
-\begin_inset Formula $\mathrm{H}(S\slash JS)$
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{proof}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{example}
-\end_layout
-
-\end_inset
-
- One can check that the multiplication defined on 
-\begin_inset Formula $F$
-\end_inset
-
- in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-Example~(
-\backslash
-ref{example1})
-\end_layout
-
-\end_inset
-
- becomes associative when we tensor with 
-\begin_inset Formula $R\slash yz$
-\end_inset
-
-.
- It follows that 
-\begin_inset Formula $\mathrm{Tor}^{R}(R\slash I,R\slash yz)$
-\end_inset
-
- is a direct summand of 
-\begin_inset Formula $\mathrm{H}(\mathrm{S}_{R}(F))$
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Branch Temporary
-inverted 0
-status collapsed
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{example}
-\end_layout
-
-\end_inset
-
- Consider the Kathan example where 
-\begin_inset Formula $F$
-\end_inset
-
- is the minimal free resolution of 
-\begin_inset Formula $R\slash\langle x^{2},w^{2},zw,xy,y^{2}z^{2}\rangle$
-\end_inset
-
- over 
-\begin_inset Formula $R$
-\end_inset
-
- and where we equip 
-\begin_inset Formula $F$
-\end_inset
-
- with the multiplication 
-\begin_inset Formula $\star$
-\end_inset
-
- defined earlier.
- Let 
-\begin_inset Formula $\mathrm{S}=\mathrm{S}(F)$
-\end_inset
-
- be the symmetric DG algebra.
- If 
-\begin_inset Formula $R$
-\end_inset
-
- has characteristic 
-\begin_inset Formula $2$
-\end_inset
-
-, then the map 
-\begin_inset Formula $\varphi\colon\mathrm{S^{2}\to F}$
-\end_inset
-
- defined by
-\begin_inset Formula 
-\[
-\varphi(a_{1}a_{2})=[a_{1},e_{5},a_{2}]
-\]
-
-\end_inset
-
-is well-defined and nonzero since 
-\begin_inset Formula $\varphi(e_{1}e_{2})=[e_{1},e_{5},e_{2}]\neq0$
-\end_inset
-
-.
- We extend 
-\begin_inset Formula $\varphi$
-\end_inset
-
- to a map 
-\begin_inset Formula $\varphi\colon\mathrm{S^{\geq2}\to F}$
-\end_inset
-
- by setting 
-\begin_inset Formula $\varphi^{2}=\varphi$
-\end_inset
-
- and 
-\begin_inset Formula $\varphi^{\geq3}=0$
-\end_inset
-
-.
- Clearly 
-\begin_inset Formula $\varphi$
-\end_inset
-
- is a degree 
-\begin_inset Formula $1$
-\end_inset
-
- chain map, thus it represents an element in 
-\begin_inset Formula $\mathrm{Ext}_{R}^{1}(\mathrm{S}^{\geq2},A)$
-\end_inset
-
-.
- We claim that it represents a nonzero element in 
-\begin_inset Formula $\mathrm{Ext}_{R}^{1}(\mathrm{S}^{\geq2},A)$
-\end_inset
-
-.
- Indeed, assume for a contradiction that it represents the zero element.
- Then there exists a graded 
-\begin_inset Formula $R$
-\end_inset
-
--linear map 
-\begin_inset Formula $\sigma\colon\mathrm{S}^{\geq2}\to F$
-\end_inset
-
- of degree 
-\begin_inset Formula $2$
-\end_inset
-
- such that
-\begin_inset Formula 
-\[
-\varphi=\mathrm{d}\sigma+\sigma\mathrm{d}.
-\]
-
-\end_inset
-
-Note that 
-\begin_inset Formula $\sigma^{\geq3}=0$
-\end_inset
-
- since 
-\begin_inset Formula $F_{\geq5}=0$
-\end_inset
-
-.
- Furthermore, we have must have 
-\begin_inset Formula $\sigma(e_{12}e_{2})=re_{1234}$
-\end_inset
-
- for some 
-\begin_inset Formula $r\in R$
-\end_inset
-
- since 
-\begin_inset Formula $F_{4}=Re_{1234}$
-\end_inset
-
-.
- 
-\begin_inset Formula 
-\begin{align*}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-of 
-\begin_inset Formula $F$
-\end_inset
-
- and let 
-\begin_inset Formula $\varphi\colon\mathrm{S}^{\ge2}\to F$
-\end_inset
-
- be the graded 
-\begin_inset Formula $R$
-\end_inset
-
--linear map of degree 
-\begin_inset Formula $1$
-\end_inset
-
- given by
-\begin_inset Formula 
-\[
-\varphi(a_{1}a_{2})=[a_{1},e_{5},a_{2}]\text{ and }\varphi(a_{3}a_{4}a_{5})=e_{1}\star[a_{3},a_{4},a_{5}].
-\]
-
-\end_inset
-
-for all 
-\begin_inset Formula $a_{1},a_{2},a_{3},a_{4},a_{5}\in F_{+}$
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Branch Temporary
-inverted 0
-status collapsed
-
-\begin_layout Subsection
-DG Lie Algebra
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $\mathfrak{r}$
-\end_inset
-
- be the DG 
-\begin_inset Formula $\mathrm{S}$
-\end_inset
-
--ideal defined by all elements of the form
-\begin_inset Formula 
-\[
-g_{a_{1},a_{2},a_{3}}=a_{1}a_{2}a_{3}-(a_{1}\star a_{2})a_{3}-(a_{1}a_{2})\star a_{3}-a_{1}\star(a_{2}\star a_{3})
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $a_{1},a_{2},a_{3}\in A$
-\end_inset
-
- are homogeneous.
- Then 
-\begin_inset Formula $[\cdot,\cdot]$
-\end_inset
-
- gives 
-\begin_inset Formula $\mathrm{S}\slash\mathfrak{r}$
-\end_inset
-
- the structure of a DG Lie algebra over 
-\begin_inset Formula $R$
-\end_inset
-
-.
- Indeed we have
-\begin_inset Formula 
-\begin{align*}
-[[a_{1},a_{2}],a_{3}] & =[a_{1}a_{2},a_{3}]-[a_{1}\star a_{2},a_{3}]\\
- & =a_{1}a_{2}a_{2}-(a_{1}a_{2})\star a_{3}-(a_{1}\star a_{2})a_{3}+(a_{1}\star a_{2})\star a_{3}\\
- & =(a_{1}\star a_{2})\star a_{3}-a_{1}\star(a_{2}\star a_{3})\\
- & =[a_{1},a_{2},a_{3}].
-\end{align*}
-
-\end_inset
-
-In particular, the Jacobi identity follows from 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-(
-\backslash
-ref{eq:identity2})
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Classifying DG Algebra Structures
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-Now suppose that 
-\begin_inset Formula $A$
-\end_inset
-
- is associative.
- Then the DG 
-\begin_inset Formula $\mathrm{S}$
-\end_inset
-
--module homomorphisms 
-\begin_inset Formula 
-\[
-\mathrm{S}\xrightarrow{\widetilde{\rho}}A^{\mathrm{as}}=A\quad\text{and}\quad\mathrm{S}\xrightarrow{p}\mathrm{S}\slash\mathrm{S}^{\leq1}\simeq\mathfrak{s}
-\]
-
-\end_inset
-
-splits the inclusion maps 
-\begin_inset Formula $\iota\colon A\to\mathrm{S}$
-\end_inset
-
- and 
-\begin_inset Formula $i\colon\mathfrak{s}\to\mathrm{S}$
-\end_inset
-
- respectively.
- Thus we obtain a canonical decomposition of DG 
-\begin_inset Formula $\mathrm{S}$
-\end_inset
-
--modules in this case:
-\begin_inset Formula 
-\[
-\mathrm{S}=A\oplus\mathfrak{s}.
-\]
-
-\end_inset
-
-In particular, for each homogeneous elementary tensor 
-\begin_inset Formula $a_{1}\cdots a_{m}$
-\end_inset
-
- in 
-\begin_inset Formula $\mathrm{S}^{m}$
-\end_inset
-
-, there is a unique 
-\begin_inset Formula $\psi^{m}(a_{1},\dots,a_{m})\in\mathfrak{s}$
-\end_inset
-
- such that
-\begin_inset Formula 
-\[
-\psi^{m}(a_{1},\dots,a_{m})=a_{1}\star\cdots\star a_{m}-a_{1}\cdots a_{m}.
-\]
-
-\end_inset
-
-We view the 
-\begin_inset Formula $\psi^{m}$
-\end_inset
-
- as chain maps 
-\begin_inset Formula $\psi^{m}\colon A^{\otimes m}\to\mathfrak{s}$
-\end_inset
-
-.
- In particular, 
-\begin_inset Formula $\psi^{2}$
-\end_inset
-
- is the usual multiplicator map we've been considering.
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{prop}
-\backslash
-label{prop}
-\end_layout
-
-\end_inset
-
- Let 
-\begin_inset Formula $R$
-\end_inset
-
- be a commutative ring, let 
-\begin_inset Formula $A$
-\end_inset
-
- be an 
-\begin_inset Formula $R$
-\end_inset
-
--complex centered at 
-\begin_inset Formula $R$
-\end_inset
-
-, and let 
-\begin_inset Formula $I=\mathrm{d}(A_{1})$
-\end_inset
-
- (so 
-\begin_inset Formula $\mathrm{H}_{0}(A)=R\slash I$
-\end_inset
-
-).
- Set 
-\begin_inset Formula $S=\mathrm{S}_{R}(A)$
-\end_inset
-
- to be the symmetric DG algebra of 
-\begin_inset Formula $A$
-\end_inset
-
-.
- Assume further that 
-\begin_inset Formula $\mathrm{d}A\subseteq IA$
-\end_inset
-
-.
- Then the canonical quotient map 
-\begin_inset Formula $\rho\colon S\to S^{\geq2}$
-\end_inset
-
- induces an isomorphism
-\begin_inset Formula 
-\[
-S\slash IS\simeq A\slash IA\oplus S^{\geq2}\slash IS^{\geq2}
-\]
-
-\end_inset
-
-as 
-\begin_inset Formula $R$
-\end_inset
-
--complexes.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{prop}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{proof}
-\backslash
-label{proof}
-\end_layout
-
-\end_inset
-
- Note 
-\begin_inset Formula $S$
-\end_inset
-
- and 
-\begin_inset Formula $S^{\geq2}$
-\end_inset
-
- are the exact same complex in total degree 
-\begin_inset Formula $\geq3$
-\end_inset
-
-, so the only difference between them is how they behave in total degree
- 
-\begin_inset Formula $\leq2$
-\end_inset
-
-.
- In in particular, we obtain 
-\begin_inset Formula $S^{\geq2}$
-\end_inset
-
- from 
-\begin_inset Formula $S$
-\end_inset
-
- by replacing 
-\begin_inset Formula $S^{\leq1}=A$
-\end_inset
-
- with 
-\begin_inset Formula $0$
-\end_inset
-
- and replacing the labeled arrows in the diagram below with zero maps
-\begin_inset Branch tikzcd
-inverted 0
-status collapsed
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{center}
-\backslash
-begin{tikzcd}[column sep = 20, row sep = 30] 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-A_{i+1} 
-\backslash
-arrow[dr, 
-\begin_inset Quotes eld
-\end_inset
-
- 
-\backslash
-eth _{i+1} ^1 
-\begin_inset Quotes eld
-\end_inset
-
-, swap] && S_{i+1} ^2 
-\backslash
-arrow[dl, 
-\begin_inset Quotes eld
-\end_inset
-
-
-\backslash
-partial _{i+1} ^2 
-\begin_inset Quotes erd
-\end_inset
-
-, swap ] 
-\backslash
-arrow[dr] &&  S_{i+1} ^3 
-\backslash
-arrow[dl]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-& A_i 
-\backslash
-arrow[dr, 
-\begin_inset Quotes eld
-\end_inset
-
-
-\backslash
-eth _{i} ^1 
-\begin_inset Quotes eld
-\end_inset
-
-,swap ]  && S_i ^2 
-\backslash
-arrow[dl, 
-\begin_inset Quotes eld
-\end_inset
-
-
-\backslash
-partial _i ^2 
-\begin_inset Quotes erd
-\end_inset
-
-, swap ] 
-\backslash
-arrow[dr] && S_i ^3 
-\backslash
-arrow[dl]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-&& A_{i-1} && S_{i-1} ^2
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzcd}
-\backslash
-end{center}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-Note that 
-\begin_inset Formula $\mathrm{im}(\eth_{i}^{1})=\mathrm{d}A_{i}\subseteq IA_{i}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathrm{im}(\partial_{i})=IA_{i}$
-\end_inset
-
-.
- Thus we obtain 
-\begin_inset Formula $S\slash IS=S\otimes_{R}R\slash I$
-\end_inset
-
- by replacing the labeled arrows above with zero maps.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{proof}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
 Homology of the Symmetric DG Algebra
 \end_layout
@@ -23876,63 +19025,6 @@ status open
 
 
 \backslash
-begin{lemma}
-\backslash
-label{lemma}
-\end_layout
-
-\end_inset
-
- Set 
-\begin_inset Formula $f_{ij}=e_{i}\star e_{j}-e_{i}e_{j}$
-\end_inset
-
- where 
-\begin_inset Formula $|e_{i}|$
-\end_inset
-
- is odd.
- Then we have
-\begin_inset Formula 
-\[
-f_{ij}^{n}=(e_{i}\star e_{j})^{n-1}(e_{i}\star e_{j}-ne_{i}e_{j}),\quad\text{and}\quad e_{i}f_{ij}^{n}=e_{i}(e_{i}\star e_{j})^{n}.
-\]
-
-\end_inset
-
-In particular, if 
-\begin_inset Formula $e_{i}\star e_{j}\in\mathfrak{m}F$
-\end_inset
-
-, then 
-\begin_inset Formula $f_{ij}^{n}\in\mathfrak{m}^{n}F$
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{lemma}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
 begin{example}
 \backslash
 label{symmetricdgexample}
@@ -23948,7 +19040,7 @@ status open
 
 Example~(
 \backslash
-ref{symmetricdgexample})
+ref{symmetricdgexample1})
 \end_layout
 
 \end_inset
@@ -23958,7 +19050,7 @@ ref{symmetricdgexample})
 \end_inset
 
 , 
-\begin_inset Formula $I=\langle x^{2},xy\rangle$
+\begin_inset Formula $\boldsymbol{m}=x^{2},xy$
 \end_inset
 
 , 
@@ -23966,7 +19058,11 @@ ref{symmetricdgexample})
 \end_inset
 
  is the Taylor resolution of 
-\begin_inset Formula $\overline{R}=R\slash I$
+\begin_inset Formula $R\slash\boldsymbol{m}$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
 \end_inset
 
 , and 
@@ -24009,7 +19105,7 @@ Furthermore, one can show that the underlying graded
  looks like
 \begin_inset Formula 
 \[
-\mathrm{H}(S)=\overline{R}[\{f_{_{2k}},g_{_{2k+1}}\mid k\ge1\}]\slash\langle\{xf_{_{2k}},yf_{_{2k}},xg_{_{2k+1}},kg_{_{2k+1}},f_{_{2k}}f_{_{2m}},f_{_{2k}}g_{_{2m+1}},g_{_{2k+1}}g_{_{2m+1}}\mid k,m\ge1\}\rangle,
+\mathrm{H}(S)=(R\slash\boldsymbol{m})[\{f_{_{2k}},g_{_{2k+1}}\mid k\ge1\}]\slash\langle\{xf_{_{2k}},yf_{_{2k}},xg_{_{2k+1}},kg_{_{2k+1}},f_{_{2k}}f_{_{2m}},f_{_{2k}}g_{_{2m+1}},g_{_{2k+1}}g_{_{2m+1}}\mid k,m\ge1\}\rangle,
 \]
 
 \end_inset
@@ -24099,7 +19195,7 @@ and the underlying graded
  looks like:
 \begin_inset Formula 
 \[
-\mathrm{H}(D)=\overline{R}[\{p_{_{2k}}\mid k\ge1\}]\slash\langle\{xp_{_{2k}},yp_{_{2k}},p_{_{2k}}p_{_{2m}}\mid k,m\ge1\}
+\mathrm{H}(D)=(R\slash\boldsymbol{m})[\{p_{_{2k}}\mid k\ge1\}]\slash\langle\{xp_{_{2k}},yp_{_{2k}},p_{_{2k}}p_{_{2m}}\mid k,m\ge1\}
 \]
 
 \end_inset
@@ -24133,7 +19229,7 @@ status open
 \backslash
 begin{example}
 \backslash
-label{symmetricdgexample}
+label{symmetricdgexample2}
 \end_layout
 
 \end_inset
@@ -24678,7 +19774,7 @@ where the component
 \end_inset
 
 -bilinearly everywhere else.
- This multiplication is easily seen to satisfy Leibniz law, however note
+ This multiplication is easily seen to satisfy Leibniz rule, however note
  that 
 \begin_inset Formula $U$
 \end_inset
@@ -25546,11 +20642,7 @@ Throughout this subsection, we assume that
 \begin_inset Formula $F$
 \end_inset
 
- is a finite and free as an 
-\begin_inset Formula $R$
-\end_inset
-
--module.
+ is finite and free.
  Let 
 \begin_inset Formula $e_{1},\dots,e_{n}$
 \end_inset
@@ -25564,11 +20656,11 @@ Throughout this subsection, we assume that
 \end_inset
 
 -module which is ordered in such a way that if 
-\begin_inset Formula $|e_{j}|>|e_{i}|$
+\begin_inset Formula $i<j$
 \end_inset
 
 , then 
-\begin_inset Formula $j>i$
+\begin_inset Formula $|e_{i}|\le|e_{j}|$
 \end_inset
 
 .
@@ -25614,8 +20706,8 @@ in
 \end_inset
 
 .
- The reason we do not allow elements of odd degree to square to zero is
- because we will want to calculate the Gröbner basis of an ideal in 
+ The reason we do not want elements of odd degree to square to zero is because
+ we will want to calculate Gröbner bases in 
 \begin_inset Formula $K[\boldsymbol{e}]$
 \end_inset
 
@@ -25623,7 +20715,7 @@ in
 \begin_inset Formula $K[\boldsymbol{e}]$
 \end_inset
 
- is simpler when we do not have any zero-divisors.
+ is much simpler when we do not have any zerodivisors.
  In any case, one recovers the symmetric DG 
 \begin_inset Formula $R$
 \end_inset
@@ -25640,15 +20732,15 @@ R[\boldsymbol{e}]\slash\langle\{e_{i}^{2}\mid|e_{i}|\text{ is odd}\}\rangle\sime
 
 \end_inset
 
-Finally, let 
-\begin_inset Formula $(\mu,\star)$
-\end_inset
-
- be a multiplication of 
+Finally, equip 
 \begin_inset Formula $F$
 \end_inset
 
-.
+ with a multiplication 
+\begin_inset Formula $\mu$
+\end_inset
+
+ giving it the structure of an MDG algebra.
  Our goal is to compute the maximal associative quotient of 
 \begin_inset Formula $F$
 \end_inset
@@ -25674,16 +20766,12 @@ ref{theorempresentationsym})
 \end_layout
 
 \begin_layout Subsubsection
-Monomials and Monomial Orderings in 
-\begin_inset Formula $K[\boldsymbol{e}]$
-\end_inset
-
-
+Monomials and Monomial Orderings
 \end_layout
 
 \begin_layout Standard
-Before we can do this, we need to introduce some notation for Gröbner basis
- applications in 
+Before we can do this, we first need to introduce some notation for Gröbner
+ basis applications in 
 \begin_inset Formula $K[\boldsymbol{e}]$
 \end_inset
 
@@ -25749,7 +20837,7 @@ total degree
 \series bold
 homological degree
 \series default
- denoted 
+, denoted 
 \begin_inset Formula $|e^{\boldsymbol{\alpha}}|$
 \end_inset
 
@@ -25774,72 +20862,7 @@ By convention we set
 \end_inset
 
 .
- We define the 
-\series bold
-support 
-\series default
-of 
-\begin_inset Formula $e^{\boldsymbol{\alpha}}$
-\end_inset
-
-, denoted 
-\begin_inset Formula $\mathrm{supp}(e^{\boldsymbol{\alpha}})$
-\end_inset
-
-, to be the set
-\begin_inset Formula 
-\[
-\mathrm{supp}(e^{\boldsymbol{\alpha}})=\{e_{i}\mid e_{i}\text{ divides }e^{\boldsymbol{\alpha}}\}=\{e_{i}\mid\alpha_{i}\neq0\}.
-\]
-
-\end_inset
-
-Note that if the support of 
-\begin_inset Formula $e^{\boldsymbol{\alpha}}$
-\end_inset
-
- is empty if and only if 
-\begin_inset Formula $e^{\boldsymbol{\alpha}}=1$
-\end_inset
-
-.
- If 
-\begin_inset Formula $e^{\boldsymbol{\alpha}}$
-\end_inset
-
- has non-empty support, then we define its 
-\series bold
-initial variable 
-\series default
-and 
-\series bold
-terminal variable 
-\series default
-to be the variables 
-\begin_inset Formula $e_{i}$
-\end_inset
-
- and 
-\begin_inset Formula $e_{k}$
-\end_inset
-
- respectively where
-\begin_inset Formula 
-\[
-i=\inf\{j\mid e_{j}\in\mathrm{supp}(e^{\boldsymbol{\alpha}})\}\quad\text{and}\quad k=\max\{j\mid e_{j}\in\mathrm{supp}(e^{\boldsymbol{\alpha}})\}.
-\]
-
-\end_inset
-
-For instance, suppose that 
-\begin_inset Formula $\mathrm{supp}(e^{\boldsymbol{\alpha}})=\{e_{i_{1}},\dots,e_{i_{k}}\}$
-\end_inset
-
- where 
-\begin_inset Formula $1\leq i_{1}<\cdots<i_{k}\leq n$
-\end_inset
-
-, then we can express 
+ Note how the ordering in 
 \begin_inset ERT
 status open
 
@@ -25852,50 +20875,7 @@ ref{eq:monomial})
 
 \end_inset
 
- as
-\begin_inset Formula 
-\[
-e^{\boldsymbol{\alpha}}=e_{i_{1}}^{\alpha_{i_{1}}}\cdots e_{i_{k}}^{\alpha_{k}},
-\]
-
-\end_inset
-
-and in this case, 
-\begin_inset Formula $e_{i_{1}}$
-\end_inset
-
- is the initial variable of 
-\begin_inset Formula $e^{\boldsymbol{\alpha}}$
-\end_inset
-
- and 
-\begin_inset Formula $e_{i_{k}}$
-\end_inset
-
- is the terminal variable of 
-\begin_inset Formula $e^{\boldsymbol{\alpha}}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{rem}
-\backslash
-label{rem}
-\end_layout
-
-\end_inset
-
- Note how the ordering matters.
+ matters.
  In particular, if 
 \begin_inset Formula $i<j$
 \end_inset
@@ -25945,35 +20925,7 @@ On the other hand, if one of the
 \end_inset
 
 .
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{rem}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-We equip 
+ We equip 
 \begin_inset Formula $K[\boldsymbol{e}]$
 \end_inset
 
@@ -26109,7 +21061,7 @@ of
 \begin_inset Formula $f$
 \end_inset
 
-, and the 
+ and the 
 \begin_inset Formula $e^{\boldsymbol{\alpha}_{i}}$
 \end_inset
 
@@ -26268,9 +21220,9 @@ status open
 
 
 \backslash
-begin{prop}
+begin{lemma}
 \backslash
-label{prop}
+label{lemma}
 \end_layout
 
 \end_inset
@@ -26280,7 +21232,7 @@ label{prop}
 \end_inset
 
 , let 
-\begin_inset Formula $f_{ij}=-[e_{i},e_{j}]=e_{i}e_{j}-e_{i}\star e_{j}$
+\begin_inset Formula $f_{ij}=e_{i}e_{j}-e_{i}\star e_{j}$
 \end_inset
 
 .
@@ -26303,7 +21255,7 @@ status open
 
 
 \backslash
-end{prop}
+end{lemma}
 \end_layout
 
 \end_inset
@@ -26330,20 +21282,12 @@ label{proof}
 \begin_inset Formula $e_{i}\star e_{j}=0$
 \end_inset
 
-, then this is clear, otherwise term of 
+, then this is clear, otherwise let 
+\begin_inset Formula $e_{k}$
+\end_inset
+
+ be a monomial of 
 \begin_inset Formula $e_{i}\star e_{j}$
-\end_inset
-
- has the form 
-\begin_inset Formula $r_{i,j}^{k}e_{k}$
-\end_inset
-
- for some 
-\begin_inset Formula $k$
-\end_inset
-
- where 
-\begin_inset Formula $r_{i,j}^{k}\neq0$
 \end_inset
 
 .
@@ -26357,11 +21301,7 @@ label{proof}
 
 .
  It follows that 
-\begin_inset Formula $|e_{k}|>|e_{i}|$
-\end_inset
-
- and 
-\begin_inset Formula $|e_{k}|>|e_{j}|$
+\begin_inset Formula $|e_{k}|>\max\{|e_{i}|,|e_{j}|\}$
 \end_inset
 
  since 
@@ -26369,11 +21309,7 @@ label{proof}
 \end_inset
 
  This implies 
-\begin_inset Formula $k>i$
-\end_inset
-
- and 
-\begin_inset Formula $k>j$
+\begin_inset Formula $k>\max\{i,j\}$
 \end_inset
 
  by our assumption on the ordering of 
@@ -26386,7 +21322,7 @@ label{proof}
 \end_inset
 
  and 
-\begin_inset Formula $k>i$
+\begin_inset Formula $k>\max\{i,j\}$
 \end_inset
 
 , we see that 
@@ -26418,25 +21354,25 @@ Gröbner Basis Calculations
 Our goal is to use the theory of Gröbner bases to help us calculate
 \begin_inset Formula 
 \[
-F^{\mathrm{as}}=\mathrm{S}_{R}(F)\slash\mathfrak{s}(\mu)\simeq R[\boldsymbol{e}]\slash\langle\{f_{i,j}\}\rangle,
+F^{\mathrm{as}}=\mathrm{S}_{R}(F)\slash\mathfrak{s}(\mu)\simeq R[\boldsymbol{e}]\slash\langle\{f_{ij}\}\rangle,
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $f_{i,j}\in R[\boldsymbol{e}]$
+\begin_inset Formula $f_{ij}\in R[\boldsymbol{e}]$
 \end_inset
 
  are defined by
 \begin_inset Formula 
 \[
-f_{i,j}=e_{i}e_{j}-e_{i}\star e_{j}=e_{i}e_{j}-\sum_{k}r_{i,j}^{k}e_{k},
+f_{ij}=e_{i}e_{j}-e_{i}\star e_{j}=e_{i}e_{j}-\sum_{k}c_{ij}^{k}e_{k},
 \]
 
 \end_inset
 
 where the 
-\begin_inset Formula $r_{i,j}^{k}\in R$
+\begin_inset Formula $c_{ij}^{k}\in R$
 \end_inset
 
  are the entries of the matrix representation of 
@@ -26448,21 +21384,25 @@ where the
 \end_inset
 
 .
- In order to do this though, we first need to base change to 
+ In order to do this, we work over 
 \begin_inset Formula $K$
 \end_inset
 
- because that is where the theory of Gröbner basis works best.
+ instead of 
+\begin_inset Formula $R$
+\end_inset
+
+ sinc that is where the theory of Gröbner bases works best.
  Thus we wish to calculate:
 \begin_inset Formula 
 \[
-F_{K}^{\mathrm{as}}:=F^{\mathrm{as}}\otimes_{R}K\simeq K[\boldsymbol{e}]\slash\langle\{f_{i,j}\}\rangle.
+F_{K}^{\mathrm{as}}:=F^{\mathrm{as}}\otimes_{R}K\simeq K[\boldsymbol{e}]\slash\langle\{f_{ij}\}\rangle.
 \]
 
 \end_inset
 
 To this end, let 
-\begin_inset Formula $\mathcal{F}=\{f_{i,j}\mid1\leq i,j\leq n\}$
+\begin_inset Formula $\mathcal{F}=\{f_{ij}\mid1\leq i,j\leq n\}$
 \end_inset
 
  and let 
@@ -26483,15 +21423,7 @@ To this end, let
 \end_inset
 
  (which will turn out to be a two-sided Gröbner basis) via Buchberger's
- algorithm (as described in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "GP02"
-literal "false"
-
-\end_inset
-
-) using the monomial ordering described above.
+ algorithm using the monomial ordering described above.
  Suppose 
 \begin_inset Formula $f,g$
 \end_inset
@@ -26501,11 +21433,11 @@ literal "false"
 \end_inset
 
  with 
-\begin_inset Formula $\mathrm{LT}(f)=re^{\boldsymbol{\alpha}}$
+\begin_inset Formula $\mathrm{LT}(f)=ce^{\boldsymbol{\alpha}}$
 \end_inset
 
  and 
-\begin_inset Formula $\mathrm{LT}(g)=se^{\boldsymbol{\beta}}$
+\begin_inset Formula $\mathrm{LT}(g)=de^{\boldsymbol{\beta}}$
 \end_inset
 
 .
@@ -26513,7 +21445,7 @@ literal "false"
 \begin_inset Formula $\boldsymbol{\gamma}=\mathrm{lcm}(\boldsymbol{\alpha},\boldsymbol{\beta})$
 \end_inset
 
- and the left 
+ and define the left 
 \begin_inset Formula $\mathrm{S}$
 \end_inset
 
@@ -26532,7 +21464,7 @@ of
  to be
 \begin_inset Formula 
 \begin{align}
-\mathrm{S}(f,g) & =e^{\boldsymbol{\gamma}-\boldsymbol{\alpha}}f\pm(r/s)e^{\boldsymbol{\gamma}-\boldsymbol{\beta}}g\label{eq:spolydef}
+\mathrm{S}(f,g) & =e^{\boldsymbol{\gamma}-\boldsymbol{\alpha}}f\pm(c/d)e^{\boldsymbol{\gamma}-\boldsymbol{\beta}}g\label{eq:spolydef}
 \end{align}
 
 \end_inset
@@ -26562,7 +21494,7 @@ ref{eq:spolydef})
 \begin_inset Formula $-$
 \end_inset
 
-, depending on which sign will cancel out the lead terms.
+ depending on which sign will cancel out the lead terms.
  We begin Buchberger's algorithm by calculating the 
 \begin_inset Formula $\mathrm{S}$
 \end_inset
@@ -26577,7 +21509,7 @@ ref{eq:spolydef})
 \end_inset
 
 -polynomials of the form 
-\begin_inset Formula $\mathrm{S}(f_{k,l},f_{i,j})$
+\begin_inset Formula $\mathrm{S}(f_{kl},f_{ij})$
 \end_inset
 
  where 
@@ -26589,35 +21521,33 @@ ref{eq:spolydef})
 \begin_inset Formula $k>l$
 \end_inset
 
-, then
+, then 
+\begin_inset Formula $f_{lk}=(-1)^{|e_{k}||e_{l}|}f_{kl}$
+\end_inset
+
+ implies
 \begin_inset Formula 
 \[
-f_{l,k}=(-1)^{|e_{k}||e_{l}|}f_{k,l},
+\mathrm{S}(f_{lk},f_{ij})=(-1)^{|e_{k}||e_{l}|}\mathrm{S}(f_{kl},f_{ij})=\pm\mathrm{S}(f_{ij},f_{lk}),
 \]
 
 \end_inset
 
-which implies 
-\begin_inset Formula 
-\[
-\mathrm{S}(f_{l,k},f_{i,j})=(-1)^{|e_{k}||e_{l}|}\mathrm{S}(f_{k,l},f_{i,j})=\pm\mathrm{S}(f_{i,j},f_{k,l}).
-\]
-
+where the last equality follows from the fact that the lead coefficient
+ of 
+\begin_inset Formula $f_{ij}$
 \end_inset
 
-Similarly, if 
-\begin_inset Formula $i\geq k$
+ and 
+\begin_inset Formula $f_{lk}$
 \end_inset
 
-, then
-\begin_inset Formula 
-\begin{align*}
-\mathrm{S}(f_{i,j},f_{l,k}) & =\pm\mathrm{S}(f_{k,l},f_{i,j}).
-\end{align*}
-
+ is 
+\begin_inset Formula $\pm1$
 \end_inset
 
-Thus we may assume that 
+.
+ Thus we may assume that 
 \begin_inset Formula $j\geq i$
 \end_inset
 
@@ -26627,7 +21557,7 @@ Thus we may assume that
 
 .
  Obviously we have 
-\begin_inset Formula $\mathrm{S}(f_{i,j},f_{i,j})=0$
+\begin_inset Formula $\mathrm{S}(f_{ij},f_{ij})=0$
 \end_inset
 
  for each 
@@ -26639,11 +21569,11 @@ Thus we may assume that
 \end_inset
 
 -polynomial of 
-\begin_inset Formula $f_{j,k}$
+\begin_inset Formula $f_{jk}$
 \end_inset
 
  and 
-\begin_inset Formula $f_{i,j}$
+\begin_inset Formula $f_{ij}$
 \end_inset
 
  where 
@@ -26659,7 +21589,7 @@ Thus we may assume that
 \end_inset
 
  means taking the left normal form of 
-\begin_inset Formula $\mathrm{S}(f_{j,k},f_{i,j})$
+\begin_inset Formula $\mathrm{S}(f_{jk},f_{ij})$
 \end_inset
 
  with respect to 
@@ -26675,13 +21605,17 @@ literal "false"
 \end_inset
 
 ).
- We have
+ In particular, we obtain the associator 
+\begin_inset Formula $[e_{i},e_{j},e_{k}]$
+\end_inset
+
+! Indeed, we have
 \begin_inset Formula 
 \begin{align*}
-\mathrm{S}(f_{j,k},f_{i,j}) & =e_{i}(e_{j}e_{k}-e_{j}\star e_{k})-(e_{i}e_{j}-e_{i}\star e_{j})e_{k}\\
+\mathrm{S}(f_{jk},f_{ij}) & =e_{i}(e_{j}e_{k}-e_{j}\star e_{k})-(e_{i}e_{j}-e_{i}\star e_{j})e_{k}\\
  & =(e_{i}\star e_{j})e_{k}-e_{i}(e_{j}\star e_{k})\\
- & =\sum_{l}r_{i,j}^{l}e_{l}e_{k}-\sum_{l}r_{j,k}^{l}e_{i}e_{l}\\
- & \to\sum_{l}r_{i,j}^{l}e_{l}\star e_{k}-\sum_{l}r_{j,k}^{l}e_{i}\star e_{l}\\
+ & =\sum_{l}c_{ij}^{l}e_{l}e_{k}-\sum_{l}c_{jk}^{l}e_{i}e_{l}\\
+ & \to\sum_{l}c_{ij}^{l}e_{l}\star e_{k}-\sum_{l}c_{jk}^{l}e_{i}\star e_{l}\\
  & =(e_{i}\star e_{j})\star e_{k}-e_{i}\star(e_{j}\star e_{k})\\
  & =[e_{i},e_{j},e_{k}],
 \end{align*}
@@ -26705,7 +21639,7 @@ where in the fourth line we did division by
 \end_inset
 
 ).
- Finally if 
+ Next suppose that 
 \begin_inset Formula $j>i$
 \end_inset
 
@@ -26717,10 +21651,11 @@ where in the fourth line we did division by
 \begin_inset Formula $j\neq k$
 \end_inset
 
-, then we have
+.
+ Then we have
 \begin_inset Formula 
 \begin{align*}
-\mathrm{S}(f_{k,l},f_{i,j}) & =e_{i}e_{j}f_{k,l}-f_{i,j}e_{k}e_{l}\\
+\mathrm{S}(f_{kl},f_{ij}) & =e_{i}e_{j}f_{kl}-f_{ij}e_{k}e_{l}\\
  & =(e_{i}\star e_{j})e_{k}e_{l}-e_{i}e_{j}(e_{k}\star e_{l})\\
  & \to(e_{i}\star e_{j})\star(e_{k}\star e_{l})-(e_{i}\star e_{l})\star(e_{k}\star e_{l})\\
  & =0
@@ -26736,17 +21671,17 @@ where in the third line we did division by
  Next, suppose that
 \begin_inset Formula 
 \[
-f=re_{k}+r'e_{k'}+\cdots+r''e_{k''}\in\langle F\rangle
+f=ce_{k}+c'e_{k'}+\cdots+c''e_{k''}\in\langle F\rangle
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $r,r',r''\in R$
+\begin_inset Formula $c,c',c''\in R$
 \end_inset
 
  with 
-\begin_inset Formula $r\neq0$
+\begin_inset Formula $c\neq0$
 \end_inset
 
  and where 
@@ -26757,10 +21692,10 @@ where
  Then we have
 \begin_inset Formula 
 \begin{align*}
-\mathrm{S}(f,f_{j,k}) & =e_{j}f-rf_{j,k}\\
- & =r'e_{j}e_{k'}+\cdots+r''e_{j}e_{k''}+re_{j}\star e_{k}\\
- & \to r'e_{j}\star e_{k'}+\cdots+r''e_{j}\star e_{k''}+re_{j}\star e_{k}\\
- & =e_{j}\star(re_{k}+r'e_{k'}+\cdots+r''e_{k''})\\
+\mathrm{S}(f,f_{jk}) & =e_{j}f-cf_{jk}\\
+ & =c'e_{j}e_{k'}+\cdots+c''e_{j}e_{k''}+ce_{j}\star e_{k}\\
+ & \to c'e_{j}\star e_{k'}+\cdots+c''e_{j}\star e_{k''}+ce_{j}\star e_{k}\\
+ & =e_{j}\star(ce_{k}+c'e_{k'}+\cdots+c''e_{k''})\\
  & =e_{j}\star f\\
  & \in\langle F\rangle
 \end{align*}
@@ -26772,17 +21707,17 @@ where in the third line we did division by
 \end_inset
 
 .
- Similarly, we have if 
+ Similarly, if 
 \begin_inset Formula $i\neq k\neq j$
 \end_inset
 
 , then we have
 \begin_inset Formula 
 \begin{align*}
-\mathrm{S}(f,f_{i,j}) & =e_{i}e_{j}f-rf_{i,j}e_{k}\\
- & =r'(e_{i}e_{j})e_{k'}+\cdots+r''(e_{i}e_{j})e_{k''}+r(e_{i}\star e_{j})e_{k}\\
- & \to r'(e_{i}\star e_{j})\star e_{k'}+\cdots+r''(e_{i}\star e_{j})\star e_{k''}+r(e_{i}\star e_{j})\star e_{k}\\
- & =(e_{i}\star e_{j})\star(re_{k}+r'e_{k'}+\cdots+r''e_{k''})\\
+\mathrm{S}(f,f_{ij}) & =e_{i}e_{j}f-cf_{ij}e_{k}\\
+ & =c'(e_{i}e_{j})e_{k'}+\cdots+c''(e_{i}e_{j})e_{k''}+c(e_{i}\star e_{j})e_{k}\\
+ & \to c'(e_{i}\star e_{j})\star e_{k'}+\cdots+c''(e_{i}\star e_{j})\star e_{k''}+c(e_{i}\star e_{j})\star e_{k}\\
+ & =(e_{i}\star e_{j})\star(ce_{k}+c'e_{k'}+\cdots+c''e_{k''})\\
  & =(e_{i}\star e_{j})\star f\\
  & \in\langle F\rangle.
 \end{align*}
@@ -26797,17 +21732,17 @@ where in the third line we did division by
  Finally suppose that
 \begin_inset Formula 
 \[
-g=se_{m}+s'e_{m'}+\cdots+s''e_{m''}\in\langle F\rangle
+g=de_{m}+d'e_{m'}+\cdots+d''e_{m''}\in\langle F\rangle
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $s,s',s''\in R$
+\begin_inset Formula $d,d',d''\in R$
 \end_inset
 
  with 
-\begin_inset Formula $s\neq0$
+\begin_inset Formula $d\neq0$
 \end_inset
 
  and where 
@@ -26822,7 +21757,7 @@ where
 , then we have
 \begin_inset Formula 
 \[
-s\mathrm{S}(f,g)=sf-rg\in\langle F\rangle.
+d\mathrm{S}(f,g)=cf-dg\in\langle F\rangle.
 \]
 
 \end_inset
@@ -26834,13 +21769,13 @@ On the other hand, if
 , then we have
 \begin_inset Formula 
 \begin{align*}
-s\mathrm{S}(f,g) & =se_{m}f-rge_{k}\\
- & =sr'e_{m}e_{k'}+\cdots+sr''e_{m}e_{k''}-rs'e_{m'}e_{k}-\cdots-rs''e_{m''}e_{k}\\
- & \to sr'e_{m}\star e_{k'}+\cdots+sr''e_{m}\star e_{k''}-rs'e_{m'}\star e_{k}-\cdots-rs''e_{m''}\star e_{k}\\
- & =se_{m}\star(r'e_{k'}+\cdots+r''e_{k''})-r(s'e_{m'}+\cdots+s''e_{m''})\star e_{k}\\
- & =se_{m}\star(f-re_{k})-r(g-se_{m})\star e_{k}\\
- & =se_{m}\star f+rg\star e_{k}-sre_{m}\star e_{k}+rse_{m}\star e_{k}\\
- & =se_{m}\star f+rg\star e_{k}\\
+d\mathrm{S}(f,g) & =de_{m}f-cge_{k}\\
+ & =dc'e_{m}e_{k'}+\cdots+dc''e_{m}e_{k''}-cd'e_{m'}e_{k}-\cdots-cd''e_{m''}e_{k}\\
+ & \to dc'e_{m}\star e_{k'}+\cdots+dc''e_{m}\star e_{k''}-cd'e_{m'}\star e_{k}-\cdots-cd''e_{m''}\star e_{k}\\
+ & =de_{m}\star(c'e_{k'}+\cdots+c''e_{k''})-c(d'e_{m'}+\cdots+d''e_{m''})\star e_{k}\\
+ & =de_{m}\star(f-ce_{k})-c(g-de_{m})\star e_{k}\\
+ & =de_{m}\star f+cg\star e_{k}-dce_{m}\star e_{k}+cde_{m}\star e_{k}\\
+ & =de_{m}\star f+cg\star e_{k}\\
  & \in\langle F\rangle.
 \end{align*}
 
@@ -26885,11 +21820,11 @@ label{example455}
 \end_inset
 
  Let 
-\begin_inset Formula $R=\Bbbk[a,b,c,d,e]$
+\begin_inset Formula $R=\Bbbk[x,y,z,u,v]$
 \end_inset
 
 , let 
-\begin_inset Formula $\boldsymbol{m}=ce,be,de,ae,ad,bce$
+\begin_inset Formula $\boldsymbol{m}=zv,yv,uv,xv,xu,yzu$
 \end_inset
 
 , and let 
@@ -26924,6 +21859,18 @@ status collapsed
 
 \begin_layout Standard
 \align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 \begin_inset ERT
 status open
 
@@ -26998,8 +21945,8 @@ node[circle, fill=black, inner sep=1pt, label=left:$e _1 $] (a) at (0,0)
 
 
 \backslash
-node[circle, fill=black, inner sep=1pt, label=above:$e _2 $] (b) at (1.5,1.5)
- {};
+node[circle, fill=black, inner sep=1pt, label=above left:$e _2 $] (b) at
+ (1.5,1.5) {};
 \end_layout
 
 \begin_layout Plain Layout
@@ -27030,7 +21977,7 @@ node[circle, fill=black, inner sep=1pt, label=right:$e _5 $] (e) at (5,0.2)
 
 
 \backslash
-node[circle, fill=black, inner sep=1pt, label=right:$e_6 $] (f) at (3.5,2.5)
+node[circle, fill=black, inner sep=1pt, label=above:$e_6 $] (f) at (3.5,2.5)
  {};
 \end_layout
 
@@ -27073,6 +22020,187 @@ end{tikzpicture}
 \end_layout
 
 \end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[scale=1]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[fill=gray!20] (0,0) -- (3,-0.5) -- (5,0.2) -- (3.2,1.2)-- (0,0); 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[fill=gray!20] (0,0) -- (1.5,1.5) -- (3.2,1.2)-- (0,0); 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (1.5,1.5) -- (3,-0.5); 
+\backslash
+draw[fill=gray!20] (3,-0.5) -- (5,0.2) -- (3.2,1.2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=black!100] (1.5,1.5) -- (3,-0.5) -- (5,0.2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[color=black!100] (0,0) -- (3.2,1.2) -- (5,0.2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[fill=gray!40] (1.5,1.5) -- (3.2,1.2) -- (5,0.2)-- (3.5,2.5) -- (1.5,1.5); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=left:$zv $] (a) at (0,0) {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above left:$yv $] (b) at (1.5,1.5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below:$uv $] (c) at (3,-0.5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$xv $] (d) at (3.2,1.2)
+ {}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=right:$xu $] (e) at (5,0.2)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above:$yzu $] (f) at (3.5,2.5)
+ {};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[] (b) -- (f);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw (e) -- (f);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
 
 We write down the homogeneous components of 
 \begin_inset Formula $F$
@@ -27091,6 +22219,10 @@ F_{4} & =Re_{12345}
 \end_inset
 
 We will use Singular to help us find an associative multigraded multiplication
+ 
+\begin_inset Formula $\mu$
+\end_inset
+
  on 
 \begin_inset Formula $F$
 \end_inset
@@ -27104,42 +22236,33 @@ We will use Singular to help us find an associative multigraded multiplication
 \end_inset
 
 .
- For simplicity, we work in characteristic 
-\begin_inset Formula $2$
-\end_inset
-
- and in the multidegree 
-\begin_inset Formula $0$
-\end_inset
-
- component of 
-\begin_inset Formula $F$
-\end_inset
-
- so that we do not have to worry about signs or monomial coefficients.
- From multidegree and Leibniz rule considerations, we see that 
+ From multidegree and Leibniz rule considerations, we begin constructing
+ 
 \begin_inset Formula $\mu$
 \end_inset
 
- starts out as: 
+ as follows:
 \begin_inset Formula 
 \begin{align*}
-e_{1}e_{2} & =e_{12} & e_{3}e_{5} & =e_{35}\\
-e_{1}e_{3} & =e_{13} & e_{3}e_{6} & =e_{23}+e_{26}\\
-e_{1}e_{4} & =e_{14} & e_{4}e_{5} & =e_{45}\\
-e_{1}e_{5} & =e_{14}+e_{45} & e_{4}e_{6} & =e_{24}+e_{26}\\
-e_{1}e_{6} & =e_{12}+e_{26} & e_{5}e_{6} & =e_{56}\\
-e_{2}e_{3} & =e_{23} & e_{1}e_{23} & =e_{123}\\
-e_{2}e_{4} & =e_{24} & e_{1}e_{24} & =e_{124}\\
-e_{2}e_{5} & =e_{24}+e_{45} & e_{1}e_{35} & =e_{1345}\\
-e_{2}e_{6} & =e_{26} & e_{1}e_{56} & =e_{124}+e_{256}\\
-e_{3}e_{4} & =e_{35}+e_{45} & e_{1}e_{2345} & =e_{12345}.
+e_{1}\star e_{2} & =ve_{12} & e_{3}\star e_{5} & =ue_{35}\\
+e_{1}\star e_{3} & =ve_{13} & e_{3}\star e_{6} & =-zue_{23}+ue_{26}\\
+e_{1}\star e_{4} & =ve_{14} & e_{4}\star e_{5} & =xe_{45}\\
+e_{1}\star e_{5} & =ue_{14}+ze_{45} & e_{4}\star e_{6} & =-zue_{24}+xe_{26}\\
+e_{1}\star e_{6} & =zue_{12}+ze_{26} & e_{5}\star e_{6} & =ue_{56}\\
+e_{2}\star e_{3} & =ve_{23} & e_{1}\star e_{23} & =ve_{123}\\
+e_{2}\star e_{4} & =ve_{24} & e_{1}\star e_{24} & =ve_{124}\\
+e_{2}\star e_{5} & =ue_{24}+ye_{45} & e_{1}\star e_{35} & =-ve_{1345}\\
+e_{2}\star e_{6} & =ye_{26} & e_{1}\star e_{56} & =-uze_{124}+ze_{2456}\\
+e_{3}\star e_{4} & =ve_{35}-ve_{45} & e_{1}\star e_{2345} & =ve_{12345}.
 \end{align*}
 
 \end_inset
 
-At this point, Singular can help us determine what the remaining multiplications
- should be.
+At this point, Singular can help us determine how we should define 
+\begin_inset Formula $\mu$
+\end_inset
+
+ everywhere else.
  First we input the following code into Singular:
 \begin_inset Branch code
 inverted 0
@@ -27162,7 +22285,7 @@ status open
 
 \begin_layout Plain Layout
 
-intvec v = 1:6, 2:9, 3:5, 4:1;  
+LIB "ncalg.lib";
 \end_layout
 
 \begin_layout Plain Layout
@@ -27171,7 +22294,17 @@ intvec v = 1:6, 2:9, 3:5, 4:1;
 
 \begin_layout Plain Layout
 
-ring A = 2,(e1,e2,e3,e4,e5,e6,
+intvec V = 1:6, 2:9, 3:5, 4:1;
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+ring A=(0,x,y,z,u,v),(e1,e2,e3,e4,e5,e6,
 \end_layout
 
 \begin_layout Plain Layout
@@ -27181,7 +22314,7 @@ e12,e13,e14,e23,e24,e26,e35,e45,e56,
 
 \begin_layout Plain Layout
 
-e123,e124,e1345,e2345,e256,e12345),Wp(v);
+e123,e124,e1345,e2345,e2456,e12345),Wp(V);
 \end_layout
 
 \begin_layout Plain Layout
@@ -27190,102 +22323,122 @@ e123,e124,e1345,e2345,e256,e12345),Wp(v);
 
 \begin_layout Plain Layout
 
-poly f(1)(2) = e1*e2 + e12; 
+matrix C[21][21]; matrix D[21][21]; int i; int j;  
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(1)(3) = e1*e3 + e13; 
+for (i=1; i<=21; i++) {for (j=1; j<=21; j++) {C[i,j]=(-1)^(V[i]*V[j]);}}
+  
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(1)(4) = e1*e4 + e14; 
+ncalgebra(C,D);  
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(1)(5) = e1*e5 + e14 + e45; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(1)(6) = e1*e6 + e12 + e26; 
+poly f(1)(2) = e1*e2 - v*e12; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(2)(3) = e2*e3 + e23; 
+poly f(1)(3) = e1*e3 - v*e13; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(2)(4) = e2*e4 + e24; 
+poly f(1)(4) = e1*e4 - v*e14; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(2)(5) = e2*e5 + e24 + e45; 
+poly f(1)(5) = e1*e5 - u*e14 - z*e45; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(2)(6) = e2*e6 + e26; 
+poly f(1)(6) = e1*e6 - zu*e12 - z*e26; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(3)(4) = e3*e4 + e35 + e45;   
+poly f(2)(3) = e2*e3 - v*e23; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(3)(5) = e3*e5 + e35;   
+poly f(2)(4) = e2*e4 - v*e24; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(3)(6) = e3*e6 + e23 + e26; 
+poly f(2)(5) = e2*e5 - u*e24 - y*e45; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(4)(5) = e4*e5 + e45;  
+poly f(2)(6) = e2*e6 - y*e26; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(4)(6) = e4*e6 + e24 + e26; 
+poly f(3)(4) = e3*e4 - v*e35 + v*e45;   
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(5)(6) = e5*e6 + e56;     
+poly f(3)(5) = e3*e5 - u*e35;   
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(1)(23) = e1*e23 + e123;   
+poly f(3)(6) = e3*e6 + zu*e23 - u*e26; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(1)(24) = e1*e24 + e124;  
+poly f(4)(5) = e4*e5 - x*e45;   
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(1)(35) = e1*e35 + e1345; 
+poly f(4)(6) = e4*e6 + zu*e24 - x*e26; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(1)(56) = e1*e56 + e124 + e256; 
+poly f(5)(6) = e5*e6 - u*e56;     
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(1)(2345) = e1*e2345 + e12345;
+poly f(1)(23) = e1*e23 - v*e123;   
+\end_layout
+
+\begin_layout Plain Layout
+
+poly f(1)(24) = e1*e24 - v*e124;  
+\end_layout
+
+\begin_layout Plain Layout
+
+poly f(1)(35) = e1*e35 + v*e1345;  
+\end_layout
+
+\begin_layout Plain Layout
+
+poly f(1)(56) = e1*e56 + uz*e124 - z*e2456; 
+\end_layout
+
+\begin_layout Plain Layout
+
+poly f(1)(2345) = e1*e2345 - v*e12345; 
 \end_layout
 
 \begin_layout Plain Layout
@@ -27304,7 +22457,7 @@ e12,e13,e14,e23,e24,e26,e35,e45,e56,
 
 \begin_layout Plain Layout
 
-e123,e124,e1345,e2345,e256,e12345);  
+e123,e124,e1345,e2345,e2456,e12345);  
 \end_layout
 
 \begin_layout Plain Layout
@@ -27333,15 +22486,6 @@ f(2)(5),f(2)(6),f(3)(4),f(3)(5),f(3)(6),f(4)(5),f(4)(6),
 \begin_layout Plain Layout
 
 f(5)(6),f(1)(23),f(1)(24),f(1)(35),f(1)(56),f(1)(2345); 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-I = std(I);
 \end_layout
 
 \end_inset
@@ -27380,9 +22524,6 @@ std(I)
 
  in Singular.
  Singular gives us the following output:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Branch code
 inverted 0
 status collapsed
@@ -27409,7 +22550,7 @@ _[1]=e6^2
 
 \begin_layout Plain Layout
 
-_[2]=e5*e6+e56 
+_[2]=e5*e6+(-u)*e56 
 \end_layout
 
 \begin_layout Plain Layout
@@ -27419,75 +22560,32 @@ _[3]=e5^2
 
 \begin_layout Plain Layout
 
-_[4]=e4*e6+e24+e26 
-\end_layout
-
-\begin_layout Plain Layout
-
-_[5]=e4*e5+e45 
-\end_layout
-
-\begin_layout Plain Layout
-
-_[6]=e4^2 
-\end_layout
-
-\begin_layout Plain Layout
-
-_[7]=e3*e6+e23+e26 
-\end_layout
-
-\begin_layout Plain Layout
-
-_[8]=e3*e5+e35 
-\end_layout
-
-\begin_layout Plain Layout
-
-_[9]=e3*e4+e35+e45 
-\end_layout
-
-\begin_layout Plain Layout
-
-_[10]=e3^2
-\end_layout
-
-\begin_layout Plain Layout
-
-_[11]=e2*e6+e26 
-\end_layout
-
-\begin_layout Plain Layout
-
-_[12]=e2*e5+e24+e45 
-\end_layout
-
-\begin_layout Plain Layout
-
-_[13]=e2*e4+e24 
-\end_layout
-
-\begin_layout Plain Layout
-
-_[14]=e2*e3+e23
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
 ...
 \end_layout
 
 \begin_layout Plain Layout
 
+_[57]=e2*e56+(-y)*e2456
 \end_layout
 
 \begin_layout Plain Layout
 
-_[208]=e1345*e12345 
+_[58]=e2*e45
+\end_layout
+
+\begin_layout Plain Layout
+
+_[59]=(z*u)*e2*e35+(-v)*e6*e35+(u*v)*e2456
+\end_layout
+
+\begin_layout Plain Layout
+
+_[60]=e2*e26
+\end_layout
+
+\begin_layout Plain Layout
+
+...
 \end_layout
 
 \begin_layout Plain Layout
@@ -27522,7 +22620,7 @@ _[211]=e12345^2
 
 \end_inset
 
- where we omitted most of the Gröbner basis elements due to size constraints.
+where we omitted most of the Gröbner basis elements due to size constraints.
  Since the lead term of each polynomial showing up in the list has total
  degree 
 \begin_inset Formula $>1$
@@ -27531,18 +22629,20 @@ _[211]=e12345^2
 , we conclude that the multiplication we have defined so far is associative.
  Now observe that if we want the multiplication to continue being associative,
  then we need to define 
-\begin_inset Formula $e_{1}e_{12}=0$
+\begin_inset Formula $e_{2}\star e_{26}=0$
 \end_inset
 
- since 
+ since
 \begin_inset Formula 
-\[
-e_{1}e_{12}=e_{1}(e_{1}e_{2})=e_{1}^{2}e_{2}+[e_{1},e_{1},e_{2}]=[e_{1},e_{1},e_{2}].
-\]
+\begin{align*}
+ye_{2}\star e_{26} & =e_{2}\star(e_{2}\star e_{6})\\
+ & =(e_{2}\star e_{2})\star e_{6}-[e_{2},e_{2},e_{6}]\\
+ & =-[e_{2},e_{2},e_{6}].
+\end{align*}
 
 \end_inset
 
-However Singular already tells us this since it is computing the maximal
+In fact, Singular already tells us this since it is computing the maximal
  associative quotient! In particular, setting 
 \begin_inset listings
 inline true
@@ -27562,17 +22662,44 @@ status open
 
 \begin_layout Plain Layout
 
-reduce(e1*e12 , I)
+reduce(e2*e26 , I)
 \end_layout
 
 \end_inset
 
- outputs 0 in Singular which tells us that in the maximal associative quotient
- we have 
-\begin_inset Formula $e_{1}e_{12}=0$
+ outputs 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+0
+\end_layout
+
+\end_inset
+
+ in Singular which tells us that in the maximal associative quotient we
+ have 
+\begin_inset Formula $e_{1}\star e_{12}=0$
 \end_inset
 
 .
+ Alternatively, we could simply read this off the list of polynomials that
+ Singular outputted as the polynomial 
+\begin_inset Formula $e_{2}\star e_{26}$
+\end_inset
+
+ shows up in the Gröbner basis.
+ Similarly, Singular tells us that we should define 
+\begin_inset Formula $e_{2}\star e_{56}=-ye_{2456}$
+\end_inset
+
+ since the polynomial 
+\begin_inset Formula $e_{2}\star e_{56}-ye_{2456}$
+\end_inset
+
+ shows up in the Gröbner basis.
  On the other hand, if we run the command 
 \begin_inset listings
 inline true
@@ -27598,14 +22725,14 @@ e6*e35
 \end_inset
 
  which tells us that we still need to define 
-\begin_inset Formula $e_{6}e_{35}$
+\begin_inset Formula $e_{6}\star e_{35}$
 \end_inset
 
 .
  Upon reflection of the multigrading and Leibniz rule, we define
 \begin_inset Formula 
 \[
-e_{6}e_{35}=e_{2345}+e_{256}.
+e_{6}\star e_{35}=-zue_{2345}+ue_{2456}.
 \]
 
 \end_inset
@@ -27617,14 +22744,14 @@ status open
 
 \begin_layout Plain Layout
 
-poly f(6)(35) = e6*e35 + e2345 + e256
+poly f(6)(35) = e6*e35 + zu*e2345 - y*e2456
 \end_layout
 
 \end_inset
 
  to our ideal in the code.
- We check that our multiplication is still associative by running the command
- 
+ We observe that our multiplication is still associative by running the
+ command 
 \begin_inset listings
 inline true
 status open
@@ -27684,7 +22811,7 @@ for(i=1;i<=21;i++){for(j=i+1;j<=21;j++){reduce(L[i]*L[j],I);};};
 
 \end_inset
 
-shows that the multiplication is defined everywhere now.
+shows that the multiplication is now defined everywhere.
  For instance, the command 
 \begin_inset listings
 inline true
@@ -27704,14 +22831,14 @@ status open
 
 \begin_layout Plain Layout
 
-e12345
+(-v)*e12345
 \end_layout
 
 \end_inset
 
 .
  This tells us that 
-\begin_inset Formula $e_{12}e_{35}=e_{12345}$
+\begin_inset Formula $e_{12}\star e_{35}=-ve_{12345}$
 \end_inset
 
 .
@@ -27766,7 +22893,7 @@ ref{example1})
  using the following Singular code:
 \begin_inset Branch code
 inverted 0
-status collapsed
+status open
 
 \begin_layout Standard
 \align center
@@ -27794,7 +22921,7 @@ LIB "ncalg.lib";
 
 \begin_layout Plain Layout
 
-intvec v= 1:3, 2:5, 3:5; 
+intvec V = 1:3, 2:5, 3:5; 
 \end_layout
 
 \begin_layout Plain Layout
@@ -27803,12 +22930,17 @@ intvec v= 1:3, 2:5, 3:5;
 
 \begin_layout Plain Layout
 
-ring A=(0,x,y,z,w),(e1,e2,e5,e12,e14,e23,e35,e45,
+ring A=(0,x,y,z,w),(e1,e2,e5,
 \end_layout
 
 \begin_layout Plain Layout
 
-e123,e124,e134,e234,e345),Wp(v);
+e12,e14,e23,e35,e45,
+\end_layout
+
+\begin_layout Plain Layout
+
+e123,e124,e134,e234,e345),Wp(V);
 \end_layout
 
 \begin_layout Plain Layout
@@ -27822,7 +22954,7 @@ matrix C[13][13]; matrix D[13][13]; int i; int j;
 
 \begin_layout Plain Layout
 
-for (i=1; i<=13; i++) {for (j=1; j<=13; j++) {C[i,j]=(-1)^(v[i]*v[j]);}}
+for (i=1; i<=13; i++) {for (j=1; j<=13; j++) {C[i,j]=(-1)^(V[i]*V[j]);}}
  
 \end_layout
 
@@ -27837,12 +22969,12 @@ ncalgebra(C,D);
 
 \begin_layout Plain Layout
 
-poly f(1)(5) = e1*e5-yz2*e14-x*e45;  
+poly f(1)(2) = e1*e2-e12; 
 \end_layout
 
 \begin_layout Plain Layout
 
-poly f(1)(2) = e1*e2-e12; 
+poly f(1)(5) = e1*e5-yz2*e14-x*e45;  
 \end_layout
 
 \begin_layout Plain Layout
@@ -27881,16 +23013,12 @@ poly S(1)(5)(2) = f(1)(5)*e2+e1*f(2)(5);
 
 \begin_layout Plain Layout
 
-ideal I = f(2)(14),f(2)(45),f(1)(23),f(1)(35),f(2)(5),f(1)(5);
+ideal I = f(1)(2),f(1)(5),f(2)(5),f(1)(23),f(1)(35),f(2)(14),f(2)(45);
 \end_layout
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-
-reduce(S(1)(5)(2),b); 
+reduce(S(1)(5)(2),I); 
 \end_layout
 
 \begin_layout Plain Layout
@@ -27932,178 +23060,6 @@ status open
 
 \backslash
 end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{example}
-\backslash
-label{example456}
-\end_layout
-
-\end_inset
-
- Consider example 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-Example~(
-\backslash
-ref{example4})
-\end_layout
-
-\end_inset
-
- where 
-\begin_inset Formula $R=\Bbbk[x,y,z,w]$
-\end_inset
-
-, let 
-\begin_inset Formula $\boldsymbol{m}=x^{2},w^{2},zw,xy,y^{2},z^{2}$
-\end_inset
-
-, and let 
-\begin_inset Formula $F$
-\end_inset
-
- is the minimal free resolution of 
-\begin_inset Formula $R\slash\boldsymbol{m}$
-\end_inset
-
- over 
-\begin_inset Formula $R$
-\end_inset
-
-.
- We denote the homogeneous basis elements of 
-\begin_inset Formula $F$
-\end_inset
-
- by 
-\begin_inset Formula $e_{\sigma}$
-\end_inset
-
-.
- Using Singular we verified that the multiplication described in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-Example~(
-\backslash
-ref{example4})
-\end_layout
-
-\end_inset
-
- can be extended to an associative multiplication on all of 
-\begin_inset Formula $F$
-\end_inset
-
-.
- For simplicity, we assume we are working in characteristic 
-\begin_inset Formula $2$
-\end_inset
-
- and in the multidegree 
-\begin_inset Formula $0$
-\end_inset
-
- component of 
-\begin_inset Formula $F$
-\end_inset
-
- so that we don't need to keep track of signs and monomials.
- In this case, Singular gives us the following minimal presentation for
- how the multiplication is defined:
-\begin_inset Formula 
-\begin{alignat*}{5}
-e_{1}^{2} & =0 &  &  & e_{2}e_{5} & =e_{25} &  &  & e_{6}e_{13} & =e_{136}\\
-e_{2}^{2} & =0 &  &  & e_{2}e_{6} & =e_{23}+e_{36} &  &  & e_{1}e_{56} & =e_{146}+e_{456}\\
-e_{3}^{2} & =0 &  &  & e_{3}e_{4} & =e_{34} &  &  & e_{2}e_{46} & =e_{234}+e_{346}\\
-e_{4}^{2} & =0 &  &  & e_{3}e_{5} & =e_{35} &  &  & e_{2}e_{56} & =e_{235}+e_{356}\\
-e_{5}^{2} & =0 &  &  & e_{3}e_{6} & =e_{36} &  &  & e_{5}e_{24} & =e_{245}\\
-e_{6}^{2} & =0 &  &  & e_{4}e_{5} & =e_{45} &  &  & e_{5}e_{34} & =e_{345}\\
-e_{1}e_{2} & =e_{12} & \qquad\qquad &  & e_{4}e_{6} & =e_{46} & \qquad\qquad &  & e_{2}e_{34} & =e_{234}\\
-e_{1}e_{3} & =e_{13} &  &  & e_{5}e_{6} & =e_{56} &  &  & e_{6}e_{35} & =e_{356}\\
-e_{1}e_{4} & =e_{14} &  &  & e_{2}e_{16} & =e_{123}+e_{136} &  &  & e_{6}e_{45} & =e_{456}\\
-e_{1}e_{5} & =e_{14}+e_{45} &  &  & e_{1}e_{25} & =e_{124}+e_{245} &  &  & e_{1}e_{235} & =e_{1234}+e_{2345}\\
-e_{1}e_{6} & =e_{16} &  &  & e_{1}e_{35} & =e_{134}+e_{345} &  &  & e_{2}e_{146} & =e_{1234}+e_{1346}\\
-e_{2}e_{3} & =e_{23} &  &  &  &  &  &  & e_{1}e_{356} & =e_{1346}+e_{3456}\\
-e_{2}e_{4} & =e_{24} &  &  &  &  &  &  & e_{1}e_{346} & =e_{1346}\\
-\\
-\\
-\\
-\\
-\\
-\end{alignat*}
-
-\end_inset
-
-In particular, note that 
-\begin_inset Formula 
-\[
-\beta_{1}^{S\otimes_{R}K}(F\otimes_{R}K)=37\geq35=\sum_{i=1}^{\infty}\beta_{i}^{R}(R\slash I),
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $S=\mathrm{S}_{R}(F)$
-\end_inset
-
- is the symmetric DG algebra of 
-\begin_inset Formula $F$
-\end_inset
-
- and where 
-\begin_inset Formula $K=\Bbbk(x,y,z,w)$
-\end_inset
-
- is the fraction field of 
-\begin_inset Formula $R$
-\end_inset
-
-.
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{example}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-hfill
 \end_layout
 
 \end_inset
