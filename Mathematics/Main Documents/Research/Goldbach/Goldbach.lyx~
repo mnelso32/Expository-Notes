@@ -1,0 +1,2946 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Goldbach Rings
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Abstract
+Let 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+ be a field.
+ We introduce and study an interesting infinite-dimensional 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra 
+\begin_inset Formula $G$
+\end_inset
+
+ which we call the Goldbach ring.
+ As the name suggests, the Goldbach ring is closely related to Goldbach's
+ conjecture.
+ Properties that 
+\begin_inset Formula $G$
+\end_inset
+
+ satisfies as a ring (such as whether or not it is an integral domain) may
+ give us clues about Goldbach's conjecture itself.
+\end_layout
+
+\begin_layout Section
+Introduction 
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+ be a field.
+ We introduce and study an interesting infinite-dimensional 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra which we call the Goldbach ring, which, as the name suggests, is
+ closely related to Goldbach's conjecture.
+ The Goldbach ring 
+\begin_inset Formula $G$
+\end_inset
+
+ is defined to be the quotient 
+\begin_inset Formula $G=R\slash I$
+\end_inset
+
+ where
+\begin_inset Formula 
+\begin{align*}
+R & =\Bbbk[\{x_{p},x_{p+q}\mid p,q\text{ odd primes}\}]\\
+I & =\langle\{x_{p}x_{q}-x_{p+q}\mid p,q\text{ odd primes}\}\rangle
+\end{align*}
+
+\end_inset
+
+The Goldbach ring has the structure of a bi-graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebra meaning it can be decomposed as
+\begin_inset Formula 
+\[
+G=\bigoplus_{n,d\geq0}G_{n,d},
+\]
+
+\end_inset
+
+where the component 
+\begin_inset Formula $G_{n,d}$
+\end_inset
+
+ in bi-degree 
+\begin_inset Formula $(n,d)\in\mathbb{N}^{2}$
+\end_inset
+
+ is a finite-dimensional 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-vector space whose dimension we are interested in counting.
+ For instance, Goldbach's conjecture is equivalent to the statement that
+ 
+\begin_inset Formula $\dim_{\Bbbk}G_{2k,2}=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $k\geq3$
+\end_inset
+
+.
+ However this is really just a restatment of Goldbach's conjecture; what's
+ more interesting and new in our view is the following conjecture that we
+ propose:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{conj}
+\backslash
+label{myconj}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\[
+\dim_{\Bbbk}G_{n,d}\leq1
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $n,d\in\mathbb{N}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{conj}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+A counter-example to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Conjecture~(
+\backslash
+ref{myconj})
+\end_layout
+
+\end_inset
+
+ would be the existence of odd primes 
+\begin_inset Formula $p_{1},\dots,p_{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{1},\dots,q_{d}$
+\end_inset
+
+ such that
+\begin_inset Formula 
+\[
+p_{1}+\cdots+p_{d}=n=q_{1}+\cdots+q_{d}
+\]
+
+\end_inset
+
+but 
+\begin_inset Formula $x_{p_{1}}\cdots x_{p_{d}}\ne x_{q_{1}}\cdots x_{q_{d}}$
+\end_inset
+
+ in 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ However we do not believe such a counter-example exists since there are
+ usually many ways to go from 
+\begin_inset Formula $x_{p_{1}}\cdots x_{p_{d}}$
+\end_inset
+
+ to 
+\begin_inset Formula $x_{q_{1}}\cdots x_{q_{d}}$
+\end_inset
+
+ by applying elementary Goldbach relations of the form 
+\begin_inset Formula $x_{p}x_{q}=x_{p+q}$
+\end_inset
+
+.
+ For instance, in 
+\begin_inset Formula $G_{36,4}$
+\end_inset
+
+ we have 
+\begin_inset Formula $x_{3}^{2}x_{11}x_{19}=x_{5}^{2}x_{13}^{2}$
+\end_inset
+
+ since
+\begin_inset Formula 
+\begin{align*}
+x_{3}^{2}x_{11}x_{19} & =x_{3}x_{11}x_{22}\\
+ & =x_{3}x_{5}x_{11}x_{17}\\
+ & =x_{5}x_{11}x_{20}\\
+ & =x_{5}x_{7}x_{11}x_{13}\\
+ & =x_{5}x_{13}x_{18}\\
+ & =x_{5}^{2}x_{13}^{2}.
+\end{align*}
+
+\end_inset
+
+There are many other paths we can take from 
+\begin_inset Formula $x_{3}^{2}x_{11}x_{19}$
+\end_inset
+
+ to 
+\begin_inset Formula $x_{5}^{2}x_{13}^{2}$
+\end_inset
+
+ however it turns out that this is the shortest path.
+ Ultimately any attempt towards a solution to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Conjecture~(
+\backslash
+ref{myconj})
+\end_layout
+
+\end_inset
+
+ will involve tools and techniques from analytic number theory.
+ What we find interesting is that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Conjecture~(
+\backslash
+ref{myconj})
+\end_layout
+
+\end_inset
+
+ also seems to involve a lot of commutative algebra as well.
+ For example, if 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Conjecture~(
+\backslash
+ref{myconj})
+\end_layout
+
+\end_inset
+
+ is true, then it woud imply that 
+\begin_inset Formula $G$
+\end_inset
+
+ is an integral domain.
+ Conversely, one can show that if 
+\begin_inset Formula $G$
+\end_inset
+
+ is an integral domain and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Conjecture~(
+\backslash
+ref{myconj})
+\end_layout
+
+\end_inset
+
+ holds for 
+\begin_inset Formula $n,d$
+\end_inset
+
+ sufficiently large, then 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Conjecture~(
+\backslash
+ref{myconj})
+\end_layout
+
+\end_inset
+
+ is true.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A deeper relationship between 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Conjecture~(
+\backslash
+ref{myconj})
+\end_layout
+
+\end_inset
+
+, analytic number theory, and commutative algebra is realized when one studies
+ 
+\begin_inset Formula $G$
+\end_inset
+
+ as a direct limit
+\begin_inset Formula 
+\[
+G=\lim\limits _{\longrightarrow}G^{m}
+\]
+
+\end_inset
+
+of bi-graded noetherian 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebras 
+\begin_inset Formula $G^{m}=R^{m}\slash I^{m}$
+\end_inset
+
+, where
+\begin_inset Formula 
+\begin{align*}
+R^{m} & =\Bbbk[x_{1},\dots,x_{m}]\cap R\\
+I^{m} & =\Bbbk[x_{1},\dots,x_{m}]\cap I.
+\end{align*}
+
+\end_inset
+
+Indeed, for each 
+\begin_inset Formula $m$
+\end_inset
+
+ we denote by 
+\begin_inset Formula $\delta(m)$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho(m)$
+\end_inset
+
+ to be the 
+\begin_inset Formula $R^{m}$
+\end_inset
+
+-depth and 
+\begin_inset Formula $R^{m}$
+\end_inset
+
+-projective dimension of 
+\begin_inset Formula $G^{m}$
+\end_inset
+
+ respectively.
+ Then the Auslander-Buchsbaum formula implies
+\begin_inset Formula 
+\begin{equation}
+\delta(2m)+\rho(2m)=\pi(2m)+m-\kappa(2m)-3,\label{eq:pdk}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\pi(2m)$
+\end_inset
+
+ is the usual prime-counting function which counts the number of primes
+ 
+\begin_inset Formula $\leq2m$
+\end_inset
+
+ and where 
+\begin_inset Formula $\kappa(2m)$
+\end_inset
+
+ counts then number of positive even numbers 
+\begin_inset Formula $\leq2m$
+\end_inset
+
+ that are counter-examples to Goldbach's conjecture.
+ 
+\end_layout
+
+\begin_layout Section
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+
+\series bold
+-Supported Goldbach Rings 
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ be a subset of the positive odd integers and set 
+\begin_inset Formula $\mathcal{B}:=\mathcal{A}+\mathcal{A}=\{a_{1}+a_{2}\mid a_{1},a_{2}\in\mathcal{A}\}$
+\end_inset
+
+.
+ We further assume that 
+\begin_inset Formula $\mathcal{A}\cap\mathcal{B}=\emptyset$
+\end_inset
+
+.
+ We set
+\begin_inset Formula 
+\begin{align*}
+R_{\mathcal{A}} & =\Bbbk[\{x_{a},x_{b}\mid a\in\mathcal{A},b\in\mathcal{B}\}]\\
+I_{\mathcal{A}} & =\langle\{x_{a_{1}}x_{a_{2}}-x_{a_{1}+a_{2}}\mid a_{1},a_{2}\in\mathcal{A}\}\rangle\\
+G_{\mathcal{A}} & =R_{\mathcal{A}}\slash I_{\mathcal{A}}.
+\end{align*}
+
+\end_inset
+
+We will refer to 
+\begin_inset Formula $G_{\mathcal{A}}$
+\end_inset
+
+ as the 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+
+\series bold
+-supported Goldbach ring
+\series default
+.
+ We simplify our notation by writing 
+\begin_inset Formula $\{x_{a},x_{b}\}$
+\end_inset
+
+ to denote the set 
+\begin_inset Formula $\{x_{a},x_{b}\mid a\in\mathcal{A},b\in\mathcal{B}\}$
+\end_inset
+
+.
+ Similarly we write 
+\begin_inset Formula $\{x_{a_{1}}x_{a_{2}}-x_{a_{1}+a_{2}}\}$
+\end_inset
+
+ to denote the set 
+\begin_inset Formula $\{x_{a_{1}}x_{a_{2}}-x_{a_{1}+a_{2}}\mid a_{1},a_{2}\in\mathcal{A}\}$
+\end_inset
+
+.
+ We often simplify our notation even further by dropping 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ from our notation whenever it is clear from context.
+ For instance, we write 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $G$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ instead of 
+\begin_inset Formula $"G_{\mathcal{A}}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ when it's understood that 
+\begin_inset Formula $G$
+\end_inset
+
+ is the 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+-supported Goldbach ring.
+ Similarly, if we write 
+\begin_inset Quotes eld
+\end_inset
+
+let 
+\begin_inset Formula $G$
+\end_inset
+
+ be the 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+-supported Golbach ring
+\begin_inset Quotes erd
+\end_inset
+
+, then it's understood that 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is a subset of the positive odd integers and that 
+\begin_inset Formula $\mathcal{B}=\mathcal{A}+\mathcal{A}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Representing Monomials
+\end_layout
+
+\begin_layout Standard
+We will denote by 
+\begin_inset Formula $\mathcal{M}=\mathcal{M}_{\mathcal{A}}$
+\end_inset
+
+ to be the set of all monomials in 
+\begin_inset Formula $R=R_{\mathcal{A}}$
+\end_inset
+
+.
+ There are two ways we can represent monomials in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ The first way is as a finite product of the indeterminates 
+\begin_inset Formula $\{x_{a},x_{b}\}$
+\end_inset
+
+, namely, a monomial can be expressed in the form
+\begin_inset Formula 
+\[
+x_{\boldsymbol{a}}x_{\boldsymbol{b}}:=x_{a_{1}}\cdots x_{a_{r}}x_{b_{1}}\cdots x_{b_{s}}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\boldsymbol{a}=a_{1},\dots,a_{r}$
+\end_inset
+
+ is a sequence of elements in 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ (not necessarily distinct but often we assume 
+\begin_inset Formula $a_{1}\leq\cdots\leq a_{r}$
+\end_inset
+
+) and 
+\begin_inset Formula $\boldsymbol{b}=b_{1},\dots,b_{s}$
+\end_inset
+
+ is a sequence of elements in 
+\begin_inset Formula $\mathcal{B}$
+\end_inset
+
+ (again not necessarily distinct, but often we assume 
+\begin_inset Formula $b_{1}\leq\cdots\leq b_{s}$
+\end_inset
+
+).
+ We will use this way of representing monomials to give 
+\begin_inset Formula $R$
+\end_inset
+
+ a nice bi-graded structure.
+ The second way of representing monomials is described as follows: given
+ a function 
+\begin_inset Formula $\alpha\colon\mathbb{N}\to\mathbb{Z}_{\geq0}$
+\end_inset
+
+, we define its 
+\series bold
+support
+\series default
+, denoted 
+\begin_inset Formula $\mathrm{supp}\,\alpha$
+\end_inset
+
+, to be the set
+\begin_inset Formula 
+\[
+\mathrm{supp}\,\alpha=\{m\in\mathbb{N}\mid\alpha(m)\neq0\}.
+\]
+
+\end_inset
+
+We denote by 
+\begin_inset Formula $\mathcal{F}=\mathcal{F}_{\mathcal{A}}$
+\end_inset
+
+ to be the set
+\begin_inset Formula 
+\[
+\mathcal{F}=\{\alpha\colon\mathbb{N}\to\mathbb{Z}_{\geq0}\mid\mathrm{supp}\,\alpha\text{ is finite and contained in }\mathcal{A}\cup\mathcal{B}\}.
+\]
+
+\end_inset
+
+Thus if 
+\begin_inset Formula $\alpha\in\mathcal{F}$
+\end_inset
+
+, then 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ takes value 
+\begin_inset Formula $0$
+\end_inset
+
+ zero almost everywhere, and the only places where it may be nonzero is
+ at an element in 
+\begin_inset Formula $\mathcal{A}\cup\mathcal{B}$
+\end_inset
+
+.
+ There is a bijection from 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+ given by assigning 
+\begin_inset Formula $\alpha\in\mathcal{F}$
+\end_inset
+
+ to the monomial
+\begin_inset Formula 
+\[
+x^{\alpha}:=\prod_{m\in\mathbb{N}}x_{m}^{\alpha(m)}=\prod_{m\in\mathrm{supp}\,\alpha}x_{m}^{\alpha(m)}.
+\]
+
+\end_inset
+
+For instance, suppose 
+\begin_inset Formula $\alpha\colon\mathbb{N}\to\mathbb{Z}_{\geq0}$
+\end_inset
+
+ is defined by
+\begin_inset Formula 
+\[
+\alpha(m)=\begin{cases}
+2 & \text{if }m=3\\
+2 & \text{if }m=6\\
+4 & \text{if }m=11\\
+0 & \text{if }m\in\mathbb{N}\backslash\{3,6,11\}
+\end{cases}
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $x^{\alpha}=x_{3}^{2}x_{6}^{2}x_{11}^{4}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha}=\{2,6,11\}$
+\end_inset
+
+.
+ This second way of expressing monimals gives us a cleaner way of expressing
+ nonzero polynomials in 
+\begin_inset Formula $R$
+\end_inset
+
+, namely, every nonzero polynomial 
+\begin_inset Formula $f\in R$
+\end_inset
+
+ can be expressed in the form
+\begin_inset Formula 
+\[
+f=c_{1}x^{\alpha_{1}}+\cdots+c_{n}x^{\alpha_{n}}
+\]
+
+\end_inset
+
+for unique 
+\begin_inset Formula $c_{1},\dots c_{n}\in\Bbbk$
+\end_inset
+
+ and for unique 
+\begin_inset Formula $\alpha_{1},\dots,\alpha_{n}\in\mathcal{F}$
+\end_inset
+
+.
+ We often pass back and forth between functions 
+\begin_inset Formula $\alpha\in\mathcal{F}$
+\end_inset
+
+ and monomials 
+\begin_inset Formula $x^{\alpha}\in\mathcal{M}$
+\end_inset
+
+.
+ For instance, given a monomial 
+\begin_inset Formula $x^{\alpha}\in\mathcal{M}$
+\end_inset
+
+, we define its 
+\series bold
+support
+\series default
+, denoted 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha}$
+\end_inset
+
+, to be 
+\begin_inset Formula $\mathrm{supp}\,x^{\alpha}=\mathrm{supp}\,\alpha$
+\end_inset
+
+, and etc...
+\end_layout
+
+\begin_layout Subsection
+The Bi-Graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-Structure on 
+\begin_inset Formula $R$
+\end_inset
+
+ and 
+\begin_inset Formula $G$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We give 
+\begin_inset Formula $R$
+\end_inset
+
+ and 
+\begin_inset Formula $G$
+\end_inset
+
+ bi-graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-structures as follows: we define 
+\begin_inset Formula $\deg_{1}\colon\mathcal{M}\to\mathbb{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $\deg_{2}\colon\mathcal{M}\to\mathbb{N}$
+\end_inset
+
+ by
+\begin_inset Formula 
+\[
+\deg_{1}(x_{\boldsymbol{a}}x_{\boldsymbol{b}})=\sum_{i=1}^{r}a_{i}+\sum_{j=1}^{s}b_{j}\quad\text{and}\quad\deg_{2}(x_{\boldsymbol{a}}x_{\boldsymbol{b}})=r+2s.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+In particular, we have For each 
+\begin_inset Formula $n,d\in\mathbb{N}$
+\end_inset
+
+, we set
+\begin_inset Formula 
+\[
+R_{n,d}=\mathrm{span}_{\Bbbk}\{x^{\alpha}\in\mathcal{M}\mid\deg_{1}(x^{\alpha})=n\text{ and }\deg_{2}(x^{\alpha})=d\}.
+\]
+
+\end_inset
+
+Then we have a decomposition of 
+\begin_inset Formula $R$
+\end_inset
+
+ into 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-vector spaces:
+\begin_inset Formula 
+\[
+R=\bigoplus_{n,d\in\mathbb{N}}R_{n,d},
+\]
+
+\end_inset
+
+which gives 
+\begin_inset Formula $R$
+\end_inset
+
+ a bi-graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-structure.
+ Since 
+\begin_inset Formula $I$
+\end_inset
+
+ is homogeneous with respect to this bi-grading, 
+\begin_inset Formula $G$
+\end_inset
+
+ inherits a bi-graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-structure induced by the one on 
+\begin_inset Formula $R$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+G=\bigoplus_{n,d\in\mathbb{N}}G_{n,d}.
+\]
+
+\end_inset
+
+We set 
+\begin_inset Formula $\Delta_{n,d}=\dim_{\Bbbk}R_{n,d}$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta_{n,d}=\dim_{\Bbbk}G_{n,d}$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $\Delta_{n,d}$
+\end_inset
+
+ counts the number of ways we can express 
+\begin_inset Formula $n$
+\end_inset
+
+ as a sum
+\begin_inset Formula 
+\[
+n=a_{1}+\cdots+a_{r}+c_{1}+\cdots+c_{s}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $a_{1},\dots,a_{r}\in\mathcal{A}$
+\end_inset
+
+, 
+\begin_inset Formula $b_{1},\dots,b_{s}\in\mathcal{B}$
+\end_inset
+
+, and 
+\begin_inset Formula $d=r+s$
+\end_inset
+
+.
+ Whenever we have 
+\begin_inset Formula $\Delta_{n,d}\geq1$
+\end_inset
+
+, then we say 
+\begin_inset Formula $(n,d)$
+\end_inset
+
+ is a 
+\series bold
+good pair
+\series default
+.
+ In this case, we are interested in determining whether or not 
+\begin_inset Formula $\delta_{n,d}=1$
+\end_inset
+
+ for 
+\begin_inset Formula $\delta_{n,d}>1$
+\end_inset
+
+.
+ Intuitively, we have 
+\begin_inset Formula $\delta_{n,d}=1$
+\end_inset
+
+ when 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is sufficiently 
+\begin_inset Quotes eld
+\end_inset
+
+dense
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+ and we have 
+\begin_inset Formula $\delta_{n,d}>1$
+\end_inset
+
+ whenever 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ is very 
+\begin_inset Quotes eld
+\end_inset
+
+sparse
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{N}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Constructing the Minimal Free Resolution of 
+\begin_inset Formula $G$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We now wish to construct the minimal free resolution of 
+\begin_inset Formula $G$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $m\geq1$
+\end_inset
+
+, set
+\begin_inset Formula 
+\begin{align*}
+R^{m} & =\Bbbk[\{x_{a},x_{b}\mid a,b\leq m\}]\\
+I^{m} & =\langle\{x_{a_{1}}x_{a_{2}}-x_{a_{1}+a_{2}}\mid a_{1}+a_{2}\leq m\}\rangle\\
+G^{m} & =R^{m}\slash I^{m}.
+\end{align*}
+
+\end_inset
+
+Note that 
+\begin_inset Formula $R^{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $G^{m}$
+\end_inset
+
+ have bi-graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-structures:
+\begin_inset Formula 
+\[
+R^{m}=\bigoplus_{n,d}R_{n,d}^{m}\quad\text{and}\quad G^{m}=\bigoplus_{n,d}G_{n,d}^{m}.
+\]
+
+\end_inset
+
+Recall that if 
+\begin_inset Formula $x_{a}x_{b}\in R_{n}^{m}$
+\end_inset
+
+, then we must have 
+\begin_inset Formula $a+b=n$
+\end_inset
+
+ and 
+\begin_inset Formula $a,b\leq m$
+\end_inset
+
+.
+ In particular, if 
+\begin_inset Formula $m\geq n$
+\end_inset
+
+ then we have 
+\begin_inset Formula 
+\[
+R_{n}^{m}=R_{n}^{n}=R_{n}\quad\text{and}\quad G_{n}^{m}=G_{n}^{n}=G_{n}.
+\]
+
+\end_inset
+
+Thus we have directed systems 
+\begin_inset Formula 
+\[
+(R^{m})_{m\geq1}\quad\text{and}\quad(G^{m})_{m\geq1}
+\]
+
+\end_inset
+
+of bi-graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-algebras where the bi-graded components 
+\begin_inset Formula $R_{n,d}^{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{n,d}^{m}$
+\end_inset
+
+ in bi-degree 
+\begin_inset Formula $(n,d)$
+\end_inset
+
+ stabilizes to 
+\begin_inset Formula $R_{n,d}$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{n,d}$
+\end_inset
+
+ respectively for 
+\begin_inset Formula $m$
+\end_inset
+
+ sufficiently large (for example 
+\begin_inset Formula $m\geq n$
+\end_inset
+
+).
+ It follows that
+\begin_inset Formula 
+\[
+R=\lim\limits _{\longrightarrow}R^{m}\quad\text{and }\quad G=\lim\limits _{\longrightarrow}G^{m}
+\]
+
+\end_inset
+
+as bi-graded direct limits.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Next we let 
+\begin_inset Formula $F^{m}=F_{\mathcal{A}}^{m}$
+\end_inset
+
+ be the minimal bi-graded free resolution of 
+\begin_inset Formula $G^{m}$
+\end_inset
+
+ over 
+\begin_inset Formula $R^{m}$
+\end_inset
+
+.
+ We set
+\begin_inset Formula 
+\[
+\varepsilon(m)=\varepsilon_{\mathcal{A}}(m):=\mathrm{depth}_{R^{m}}\,G^{m}\quad\text{and}\quad\rho(m)=\rho_{\mathcal{A}}(m):=\mathrm{pd}_{R^{m}}\,G^{m}=\mathrm{length}\,F^{m}.
+\]
+
+\end_inset
+
+Note that these quantities are intrinsic to 
+\begin_inset Formula $R^{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $G^{m}$
+\end_inset
+
+ (and not 
+\begin_inset Formula $R$
+\end_inset
+
+ and 
+\begin_inset Formula $G$
+\end_inset
+
+).
+ By the Auslander-Buchsbaum formula we have
+\begin_inset Formula 
+\begin{equation}
+\rho(m)+\varepsilon(m)=\pi_{\mathcal{A}\cup\mathcal{B}}(m):=\#\{z\in\mathcal{A}\cup\mathcal{B}\mid z\leq m\}.\label{eq:primecounting1}
+\end{equation}
+
+\end_inset
+
+Note that 
+\begin_inset Formula $F^{m}$
+\end_inset
+
+ has the structure of a bi-graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex meaning we have a decomposition of 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complexes:
+\begin_inset Formula 
+\[
+F^{m}=\bigoplus_{n,d}F_{n,d}^{m},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $F_{n,d}^{m}$
+\end_inset
+
+ is a finite 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-subcomplex of 
+\begin_inset Formula $F^{m}$
+\end_inset
+
+ which minimially resolves 
+\begin_inset Formula $G_{n,d}^{m}$
+\end_inset
+
+ in the sense that the augmented complex
+\begin_inset Formula 
+\[
+\widetilde{F}_{n,d}^{m}:=\cdots\to F_{i,n,d}^{m}\to F_{i-1,n,d}^{m}\to\cdots\to F_{1,n,d}^{m}\to R_{n,d}^{m}\to G_{n,d}^{m}\to0
+\]
+
+\end_inset
+
+is exact and where the 
+\begin_inset Formula $i$
+\end_inset
+
+th bi-graded Betti number of 
+\begin_inset Formula $G^{m}$
+\end_inset
+
+ in bi-degree 
+\begin_inset Formula $(n,d)$
+\end_inset
+
+ is given by
+\begin_inset Formula 
+\[
+\beta_{i,n,d}^{m}:=\dim_{\Bbbk}\mathrm{Tor}_{i}^{R^{m}}(G^{m},\Bbbk)_{n,d}=\dim_{\Bbbk}(F_{i,n,d}^{m}).
+\]
+
+\end_inset
+
+The canonical maps 
+\begin_inset Formula $G^{m}\to G^{m+1}$
+\end_inset
+
+ induce bi-graded comparison maps 
+\begin_inset Formula $F^{m}\to F^{m+1}$
+\end_inset
+
+ which we may take to be inclusion maps after identifying 
+\begin_inset Formula $F^{m}$
+\end_inset
+
+ with a subcomplex of 
+\begin_inset Formula $F^{m+1}$
+\end_inset
+
+.
+ Furthermore, since 
+\begin_inset Formula $R_{n}^{m}=R_{n}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{n}^{m}=G_{n}^{n}$
+\end_inset
+
+ whenever 
+\begin_inset Formula $m\geq n$
+\end_inset
+
+, we see that 
+\begin_inset Formula $F_{n}^{m}=F_{n}^{n}$
+\end_inset
+
+ whenever 
+\begin_inset Formula $m\geq n$
+\end_inset
+
+.
+ Thus if we define 
+\begin_inset Formula $F=F_{\mathcal{A}}$
+\end_inset
+
+ to be the direct limit of bi-graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complexes
+\begin_inset Formula 
+\[
+F:=\lim\limits _{\longrightarrow}F^{m},
+\]
+
+\end_inset
+
+then 
+\begin_inset Formula $F$
+\end_inset
+
+ is a free resolution of 
+\begin_inset Formula $G$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+ which has the following bi-graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex structure:
+\begin_inset Formula 
+\[
+F=\bigoplus_{n,d}F_{n,d}=\bigoplus_{n,d}F_{n,d}^{n}.
+\]
+
+\end_inset
+
+In particular, if 
+\begin_inset Formula $m$
+\end_inset
+
+ is sufficiently large, then we see that 
+\begin_inset Formula $\beta_{i,n,d}^{m}=\beta_{i,n,d}$
+\end_inset
+
+ where
+\begin_inset Formula 
+\[
+\beta_{i,n,d}:=\dim_{\Bbbk}\mathrm{Tor}_{i}^{R}(G,\Bbbk)_{n,d}=\dim_{\Bbbk}(F_{i,n,d})
+\]
+
+\end_inset
+
+is the 
+\begin_inset Formula $i$
+\end_inset
+
+th bi-graded Betti number of 
+\begin_inset Formula $G$
+\end_inset
+
+ in bi-degree 
+\begin_inset Formula $(n,d)$
+\end_inset
+
+.
+ Unlike the quantities 
+\begin_inset Formula $\varepsilon(m)$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho(m)$
+\end_inset
+
+, the quantitiy 
+\begin_inset Formula $\beta_{i,n,d}^{m}$
+\end_inset
+
+ is actually intrinsic
+\emph on
+ 
+\emph default
+to 
+\begin_inset Formula $R$
+\end_inset
+
+ and 
+\begin_inset Formula $G$
+\end_inset
+
+ (and not just 
+\begin_inset Formula $R^{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $G^{m}$
+\end_inset
+
+) when 
+\begin_inset Formula $m$
+\end_inset
+
+ is sufficiently large.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{theorem}
+\backslash
+label{theoremmultiplicity}
+\end_layout
+
+\end_inset
+
+ We have
+\begin_inset Formula 
+\begin{align*}
+\delta_{n,d} & =\Delta_{n,d}-\sum_{i=1}^{\infty}(-1)^{i}\beta_{i,n,d}=\sum_{i=0}^{\infty}(-1)^{i}\dim_{\Bbbk}\mathrm{Tor}_{i}^{R}(G,\Bbbk)_{n,d},
+\end{align*}
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+The Goldbach Ring
+\end_layout
+
+\begin_layout Standard
+We now consider the case where 
+\begin_inset Formula $\mathcal{A}=\{\text{positive odd primes}\}$
+\end_inset
+
+.
+ In this case, we have
+\begin_inset Formula 
+\begin{align*}
+R & =\Bbbk[\{x_{p},x_{2k}\mid p\text{ odd prime and }2k\text{ is a sum of two odd primes}\}]\\
+I & =\langle\{x_{p}x_{q}-x_{p+q}\mid p,q\text{ odd primes}\}\rangle\\
+G & =R\slash I.
+\end{align*}
+
+\end_inset
+
+The homogeneous components of the form 
+\begin_inset Formula $R_{18,d}$
+\end_inset
+
+ looks like:
+\begin_inset Formula 
+\begin{align*}
+\vdots & =\vdots\\
+R_{18.7} & =0\\
+R_{18,6} & =\Bbbk x_{3}^{6}+\Bbbk x_{3}^{4}x_{6}+\Bbbk x_{3}^{2}x_{6}^{2}+\Bbbk x_{6}^{3}\\
+R_{18,5} & =0\\
+R_{18,4} & =\Bbbk x_{3}^{2}x_{5}x_{7}+\Bbbk x_{3}x_{5}^{3}+\Bbbk x_{3}^{2}x_{12}+\cdots+\Bbbk x_{5}x_{6}x_{7}+\Bbbk x_{6}x_{12}+\Bbbk x_{8}x_{10}\\
+R_{18,3} & =0\\
+R_{18,2} & =\Bbbk x_{5}x_{13}+\Bbbk x_{7}x_{11}+\Bbbk x_{18}\\
+R_{18,1} & =0\\
+\vdots & =\vdots
+\end{align*}
+
+\end_inset
+
+Similarly, the homogeneous components of the form 
+\begin_inset Formula $R_{17,d}$
+\end_inset
+
+ looks like:
+\begin_inset Formula 
+\begin{align*}
+\vdots & =\vdots\\
+R_{17,6} & =0\\
+R_{17,5} & =\Bbbk x_{3}^{4}x_{5}+\Bbbk x_{3}^{3}x_{8}+\Bbbk x_{3}^{2}x_{5}x_{6}+\Bbbk x_{3}x_{6}x_{8}+\Bbbk x_{5}x_{6}^{2}\\
+R_{17,4} & =0\\
+R_{17,3} & =\Bbbk x_{3}^{2}x_{11}+\Bbbk x_{3}x_{7}^{2}+\Bbbk x_{5}^{2}x_{7}+\Bbbk x_{6}x_{11}+\Bbbk x_{3}x_{14}+\Bbbk x_{7}x_{10}+\Bbbk x_{5}x_{12}\\
+R_{17,2} & =0\\
+R_{17,1} & =\Bbbk x_{17}\\
+R_{17,0} & =0\\
+\vdots & =\vdots
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Staring at the homogeneous components above, we see that 
+\begin_inset Formula $\Delta_{18,4}=9$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta_{17,3}=7$
+\end_inset
+
+.
+ More generally, 
+\begin_inset Formula $\Delta_{n,d}$
+\end_inset
+
+ counts the number of ways we can express 
+\begin_inset Formula $n$
+\end_inset
+
+ as a sum:
+\begin_inset Formula 
+\begin{equation}
+n=p_{1}+\cdots+p_{r}+2(k_{1}+\cdots+k_{s}),\label{eq:partitiondfsd}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $p_{1},\dots,,p_{r}$
+\end_inset
+
+ are odd primes, 
+\begin_inset Formula $2k_{1},\dots,2k_{s}$
+\end_inset
+
+ can be expressed as a sum of two odd primes, and 
+\begin_inset Formula $d=r+2s$
+\end_inset
+
+.
+ Next, the homogeneous components of the form 
+\begin_inset Formula $G_{17,d}$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{18,d}$
+\end_inset
+
+ looks like:
+\begin_inset Formula 
+\[
+\begin{alignedat}{3}\vdots & =\vdots &  &  & \vdots & =\vdots\\
+G_{17,6} & =0 &  &  & G_{18,6} & =\Bbbk\overline{x}_{3}^{6}\\
+G_{17,5} & =\Bbbk\overline{x}_{3}^{4}\overline{x}_{5} &  & \qquad\qquad & G_{18,5} & =0\\
+G_{17,4} & =0 &  &  & G_{18,4} & =\Bbbk\overline{x}_{3}^{2}\overline{x}_{5}\overline{x}_{7}\\
+G_{17,3} & =\Bbbk\overline{x}_{3}^{2}\overline{x}_{11} &  &  & G_{18,3} & =0\\
+G_{17,2} & =0 &  &  & G_{18,2} & =\Bbbk\overline{x}_{5}\overline{x}_{13}\\
+G_{17,1} & =\Bbbk\overline{x}_{17} &  &  & G_{18,1} & =0\\
+\vdots & =\vdots &  &  & \vdots & =\vdots
+\end{alignedat}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From what we've seen above, it is 
+\emph on
+very 
+\emph default
+tempting to consider the following conjecture:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{conj}
+\backslash
+label{conjjklfds}
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $n$
+\end_inset
+
+ is even, then
+\begin_inset Formula 
+\[
+\text{we have }\begin{cases}
+\delta_{n,d}=1 & \text{if \ensuremath{d} is even and }2\leq d\leq\lfloor n/3\rfloor\\
+\delta_{0,0}=1\\
+\delta_{n,d}=0 & \text{else}
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $n$
+\end_inset
+
+ is odd, then
+\begin_inset Formula 
+\[
+\text{we have }\begin{cases}
+\delta_{n,d}=1 & \text{if \ensuremath{d} is odd and }3\leq d\leq\lfloor n/3\rfloor\\
+\delta_{n,d}=1 & \text{if }p\text{ is an odd prime}\\
+\delta_{n,d}=0 & \text{else}
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{conj}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To get an idea of what this conjecture entails, there are two issues we
+ need to consider:
+\end_layout
+
+\begin_layout Enumerate
+First of all, we'd like to represent each basis element in 
+\begin_inset Formula $G_{n,d}$
+\end_inset
+
+ by a monomial of the form 
+\begin_inset Formula $x_{\boldsymbol{p}}=x_{p_{1}}\cdots x_{p_{d}}$
+\end_inset
+
+ where 
+\begin_inset Formula $\boldsymbol{p}=p_{1},\dots,p_{d}$
+\end_inset
+
+ are 
+\begin_inset Formula $d$
+\end_inset
+
+ odd primes such that 
+\begin_inset Formula $n=p_{1}+\cdots+p_{d}$
+\end_inset
+
+.
+ However being able to do this is essentially equivalent to Goldbach's Conjectur
+e being true.
+ In particular, Goldbach's Conjecture is already baked in to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Conjecture~(
+\backslash
+ref{conjjklfds})
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Assume that 
+\begin_inset Formula $\overline{x}^{\alpha}=\overline{x}_{\boldsymbol{p}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{x}^{\beta}=\overline{x}_{\boldsymbol{q}}$
+\end_inset
+
+ where 
+\begin_inset Formula $\boldsymbol{p}=p_{1},\dots,p_{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{q}=q_{1},\dots,q_{d}$
+\end_inset
+
+ are 
+\begin_inset Formula $d$
+\end_inset
+
+ odd primes such that 
+\begin_inset Formula 
+\[
+p_{1}+\cdots+p_{d}=n=q_{1}+\cdots+q_{d}.
+\]
+
+\end_inset
+
+Even in this case, it is not entirely clear why 
+\begin_inset Formula $\overline{x}_{\boldsymbol{p}}=\overline{x}_{\boldsymbol{q}}$
+\end_inset
+
+.
+ Indeed, in 
+\begin_inset Formula $G_{27,3}$
+\end_inset
+
+, we have 
+\begin_inset Formula $\overline{x}_{3}\overline{x}_{11}\overline{x}_{13}=\overline{x}_{5}^{2}\overline{x}_{17}$
+\end_inset
+
+, however it takes some work to show this:
+\begin_inset Formula 
+\begin{align*}
+\overline{x}_{3}\overline{x}_{11}\overline{x}_{13} & =\overline{x}_{11}\overline{x}_{16}\\
+ & =\overline{x}_{5}\overline{x}_{11}\overline{x}_{11}\\
+ & =\overline{x}_{5}\overline{x}_{22}\\
+ & =\overline{x}_{5}^{2}\overline{x}_{17}.
+\end{align*}
+
+\end_inset
+
+Note that at each step in the computation above, we are only allowed to
+ use a relation of the form 
+\begin_inset Formula $\overline{x}_{p}\overline{x}_{q}=\overline{x}_{p+q}$
+\end_inset
+
+.
+ For another example, in 
+\begin_inset Formula $G_{36,4}$
+\end_inset
+
+ we have 
+\begin_inset Formula $\overline{x}_{3}^{2}\overline{x}_{11}\overline{x}_{19}=\overline{x}_{5}^{2}\overline{x}_{13}^{2}$
+\end_inset
+
+ since
+\begin_inset Formula 
+\begin{align*}
+\overline{x}_{3}^{2}\overline{x}_{11}\overline{x}_{19} & =\overline{x}_{3}\overline{x}_{11}\overline{x}_{22}\\
+ & =\overline{x}_{3}\overline{x}_{5}\overline{x}_{11}\overline{x}_{17}\\
+ & =\overline{x}_{5}\overline{x}_{11}\overline{x}_{20}\\
+ & =\overline{x}_{5}\overline{x}_{7}\overline{x}_{11}\overline{x}_{13}\\
+ & =\overline{x}_{5}\overline{x}_{13}\overline{x}_{18}\\
+ & =\overline{x}_{5}^{2}\overline{x}_{13}^{2}.
+\end{align*}
+
+\end_inset
+
+The path we took to get from 
+\begin_inset Formula $\overline{x}_{3}^{2}\overline{x}_{11}\overline{x}_{19}$
+\end_inset
+
+ to 
+\begin_inset Formula $\overline{x}_{5}^{2}\overline{x}_{13}^{2}$
+\end_inset
+
+ was longer than the path we took to get from 
+\begin_inset Formula $\overline{x}_{3}\overline{x}_{11}\overline{x}_{13}$
+\end_inset
+
+ to 
+\begin_inset Formula $\overline{x}_{5}^{2}\overline{x}_{17}$
+\end_inset
+
+, so one can imagine that for 
+\begin_inset Formula $n$
+\end_inset
+
+ and 
+\begin_inset Formula $d$
+\end_inset
+
+ large, the path from 
+\begin_inset Formula $x_{\boldsymbol{p}}$
+\end_inset
+
+ to 
+\begin_inset Formula $x_{\boldsymbol{q}}$
+\end_inset
+
+ may be even longer.
+ At the same time however, there are 
+\emph on
+more 
+\emph default
+ways to get from 
+\begin_inset Formula $\overline{x}_{3}^{2}\overline{x}_{11}\overline{x}_{19}$
+\end_inset
+
+ to 
+\begin_inset Formula $\overline{x}_{5}^{2}\overline{x}_{13}^{2}$
+\end_inset
+
+ than there are to get from 
+\begin_inset Formula $\overline{x}_{3}\overline{x}_{11}\overline{x}_{13}$
+\end_inset
+
+ to 
+\begin_inset Formula $\overline{x}_{5}^{2}\overline{x}_{17}$
+\end_inset
+
+, and hence for 
+\begin_inset Formula $n$
+\end_inset
+
+ and 
+\begin_inset Formula $d$
+\end_inset
+
+ large, our intution tells us that there should be many ways to get from
+ 
+\begin_inset Formula $x_{\boldsymbol{p}}$
+\end_inset
+
+ to 
+\begin_inset Formula $x_{\boldsymbol{q}}$
+\end_inset
+
+ (as there are many such relations of the form 
+\begin_inset Formula $\overline{x}_{p}\overline{x}_{q}=\overline{x}_{p+q}$
+\end_inset
+
+).
+ In order to prove 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Conjecture~(
+\backslash
+ref{conjjklfds})
+\end_layout
+
+\end_inset
+
+, we only need to find 
+\emph on
+one 
+\emph default
+path from 
+\begin_inset Formula $x_{\boldsymbol{p}}$
+\end_inset
+
+ to 
+\begin_inset Formula $x_{\boldsymbol{q}}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Conjecture~(
+\backslash
+ref{conjjklfds})
+\end_layout
+
+\end_inset
+
+ is true, then 
+\begin_inset Formula $G$
+\end_inset
+
+ has a nice property as a ring:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Assume 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Conjecture~(
+\backslash
+ref{conjjklfds})
+\end_layout
+
+\end_inset
+
+ is true.
+ Then 
+\begin_inset Formula $G$
+\end_inset
+
+ is an integral domain.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $f\in G_{n,d}=\Bbbk\overline{x}^{\alpha}$
+\end_inset
+
+ and 
+\begin_inset Formula $f'\in G_{n',d'}=\Bbbk\overline{x}^{\alpha'}$
+\end_inset
+
+ such that 
+\begin_inset Formula $ff'=0$
+\end_inset
+
+.
+ Express 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $f'$
+\end_inset
+
+ as
+\begin_inset Formula 
+\[
+f=c\overline{x}^{\alpha}\quad\text{and}\quad f'=c'\overline{x}^{\alpha'}.
+\]
+
+\end_inset
+
+Then clearly since 
+\begin_inset Formula $\overline{x}^{\alpha+\alpha'}\neq0$
+\end_inset
+
+, so we must have 
+\begin_inset Formula $cc'=0$
+\end_inset
+
+, which implies either 
+\begin_inset Formula $c=0$
+\end_inset
+
+ or 
+\begin_inset Formula $c'=0$
+\end_inset
+
+ which implies either 
+\begin_inset Formula $f=0$
+\end_inset
+
+ or 
+\begin_inset Formula $f'=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Note that for 
+\begin_inset Formula $m$
+\end_inset
+
+ sufficiently large, 
+\begin_inset Formula $G^{m}$
+\end_inset
+
+ tends to have lots of zerodivisors.
+ For instance, in 
+\begin_inset Formula $G^{16}$
+\end_inset
+
+ we have 
+\begin_inset Formula $\overline{x}_{3}\overline{x}_{5}\overline{x}_{13}=\overline{x}_{5}^{2}\overline{x}_{11}=\overline{x}_{3}\overline{x}_{7}\overline{x}_{11}$
+\end_inset
+
+ which implies
+\begin_inset Formula 
+\[
+\overline{x}_{3}(\overline{x}_{5}\overline{x}_{13}-\overline{x}_{7}\overline{x}_{11})=0.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\overline{x}_{3}\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{x}_{5}\overline{x}_{13}-\overline{x}_{7}\overline{x}_{11}\neq0$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\overline{x}_{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{x}_{5}\overline{x}_{13}-\overline{x}_{7}\overline{x}_{11}$
+\end_inset
+
+ form a zerodivisor pair.
+ The ring homomorphism 
+\begin_inset Formula $G^{16}\to G^{18}$
+\end_inset
+
+ kills this zerodivisor pair by sending 
+\begin_inset Formula $\overline{x}_{5}\overline{x}_{13}-\overline{x}_{7}\overline{x}_{11}$
+\end_inset
+
+ to 
+\begin_inset Formula $0$
+\end_inset
+
+, however we pick up another zero-divisor pair in 
+\begin_inset Formula $G^{20}$
+\end_inset
+
+: namely 
+\begin_inset Formula $\overline{x}_{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $\overline{x}_{11}\overline{x}_{11}-\overline{x}_{5}\overline{x}_{17}$
+\end_inset
+
+.
+ Indeed, in 
+\begin_inset Formula $G^{20}$
+\end_inset
+
+ we have
+\begin_inset Formula 
+\begin{align*}
+\overline{x}_{3}\overline{x}_{11}\overline{x}_{11} & =\overline{x}_{7}\overline{x}_{7}\overline{x}_{11}\\
+ & =\overline{x}_{5}\overline{x}_{7}\overline{x}_{13}\\
+ & =\overline{x}_{3}\overline{x}_{5}\overline{x}_{17},
+\end{align*}
+
+\end_inset
+
+but 
+\begin_inset Formula $\overline{x}_{11}\overline{x}_{11}-\overline{x}_{5}\overline{x}_{17}\neq0$
+\end_inset
+
+ in 
+\begin_inset Formula $G^{20}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Expressing the Prime Counting Function in terms of Projective Dimension
+\end_layout
+
+\begin_layout Standard
+In this subsection, we assume that Goldbach's conjecture is true.
+ Let us recall some notation we developed in this case and explain what
+ they look like here.
+ For each 
+\begin_inset Formula $m\geq1$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+R^{m} & =\Bbbk[\{x_{p},x_{2k}\mid p,2k\leq m\}]\\
+I^{m} & =\langle\{x_{p}x_{q}-x_{p+q}\mid p,q\leq m\}\rangle\\
+G^{m} & =R^{m}\slash I^{m}\\
+F^{m} & \text{ is the minimal resolution of }G^{m}\text{ over }R\\
+F & \text{ is the minimal resolution of }G\text{ over }R\\
+\varepsilon(m) & =\mathrm{depth}_{R^{m}}(G^{m})\\
+\rho(m) & =\mathrm{pd}_{R^{m}}(G^{m})=\mathrm{length}(F^{m})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:primecounting1})
+\end_layout
+
+\end_inset
+
+ has a very nice interpretation in this case.
+ Indeed, we have
+\begin_inset Formula 
+\begin{equation}
+\rho(2m)+\varepsilon(2m)=\pi(2m)+m-3,\label{eq:primecounting2}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\pi$
+\end_inset
+
+ is the usual prime-counting function.
+ For 
+\begin_inset Formula $m$
+\end_inset
+
+ sufficiently large, we should have
+\begin_inset Formula 
+\[
+\varepsilon(2m)=\#\{p\mid m\leq p\leq2m\}.
+\]
+
+\end_inset
+
+The idea is that if 
+\begin_inset Formula $p_{1},\dots,p_{d}$
+\end_inset
+
+ are all of the primes between 
+\begin_inset Formula $m$
+\end_inset
+
+ and 
+\begin_inset Formula $2m$
+\end_inset
+
+, then it is easy to check that 
+\begin_inset Formula $\boldsymbol{x}=x_{p_{1}},\dots,x_{p_{d}}$
+\end_inset
+
+ is a 
+\begin_inset Formula $G^{2m}$
+\end_inset
+
+-regular sequence (the hard part is showing that this is in fact a maximal
+ 
+\begin_inset Formula $G^{2m}$
+\end_inset
+
+-regular sequence, however we will assume this is true for the moment).
+ Thus we have 
+\begin_inset Formula $\pi(m)=\pi(2m)-\varepsilon(2m)$
+\end_inset
+
+, and so we should be able to re-express 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:primecounting2})
+\end_layout
+
+\end_inset
+
+ as
+\begin_inset Formula 
+\begin{equation}
+\pi(m)=\rho(2m)-m+3.\label{eq:approximationddd}
+\end{equation}
+
+\end_inset
+
+For example, a calculation using a computer algebra program such as Singular
+ shows 
+\begin_inset Formula $\rho(18)=10$
+\end_inset
+
+.
+ Then since 
+\begin_inset Formula $\pi(9)=4$
+\end_inset
+
+, we have 
+\begin_inset Formula $4=10-9+3$
+\end_inset
+
+, and thus 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:approximationddd})
+\end_layout
+
+\end_inset
+
+ holds on the nose in this case.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Explicit Calculations of the 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-Complex 
+\begin_inset Formula $F_{n,d}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let's describe 
+\begin_inset Formula $\widetilde{F}_{18,2}$
+\end_inset
+
+ as a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex.
+ First, as a graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-vector space, we have
+\begin_inset Formula 
+\begin{align*}
+\widetilde{F}_{1,18,2} & =\Bbbk e_{5,13}+\Bbbk e_{7,11}\\
+\widetilde{F}_{0,18,2} & =R_{18,2}=\Bbbk x_{5}x_{13}+\Bbbk x_{7}x_{11}+\Bbbk x_{18}\\
+\widetilde{F}_{-1,18,2} & =G_{18,2}=\Bbbk\overline{x}_{5}\overline{x}_{13},
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $\widetilde{F}_{i,18,2}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\neq-1,0,1$
+\end_inset
+
+.
+ The differential is the unique 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map defined by 
+\begin_inset Formula $\mathrm{d}(e_{5,13})=x_{5}x_{13}-x_{18}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{d}(e_{7,11})=x_{7}x_{13}-x_{18}$
+\end_inset
+
+.
+ After choosing ordered bases, we can express 
+\begin_inset Formula $\widetilde{F}_{18,2}$
+\end_inset
+
+ in the form
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[ampersand replacement=
+\backslash
+&] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0 
+\backslash
+arrow[r] 
+\backslash
+& 
+\backslash
+Bbbk ^2 
+\backslash
+arrow{rr}{
+\backslash
+begin{pmatrix} 1 & 0 
+\backslash
+
+\backslash
+ 0 & 1 
+\backslash
+
+\backslash
+ -1 & -1 
+\backslash
+end{pmatrix} } 
+\backslash
+& 
+\backslash
+& 
+\backslash
+Bbbk ^3 
+\backslash
+arrow{rr}{ 
+\backslash
+begin{pmatrix} 1 & 1 & 1 
+\backslash
+end{pmatrix} } 
+\backslash
+& 
+\backslash
+& G_{18
+\backslash
+text{,}2} 
+\backslash
+arrow[r] 
+\backslash
+& 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As expected, we have
+\begin_inset Formula 
+\[
+\delta_{18,2}=\chi(F_{18,2})=3-2=1.
+\]
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Next, let's describe 
+\begin_inset Formula $\widetilde{F}_{23,3}$
+\end_inset
+
+ as a 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-complex.
+ First, as a graded 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+-vector space, we have
+\begin_inset Formula 
+\begin{align*}
+\widetilde{F}_{2,23,3} & =\Bbbk e_{5,7,11}\\
+\widetilde{F}_{1,23,3} & =\Bbbk x_{13}e_{3,7}+\Bbbk x_{13}e_{5,5}+\Bbbk x_{7}e_{3,13}+\Bbbk x_{7}e_{5,11}+\Bbbk x_{5}e_{7,11}+\Bbbk x_{5}e_{5,13}\\
+\widetilde{F}_{0,23,3} & =R_{23,3}=\Bbbk x_{13}x_{10}+\Bbbk x_{7}x_{16}+\Bbbk x_{5}x_{18}+\Bbbk x_{5}x_{7}x_{11}+\Bbbk x_{3}x_{7}x_{13}+\Bbbk x_{5}^{2}x_{13}\\
+\widetilde{F}_{-1,23,3} & =G_{23,2}=\Bbbk\overline{x}_{5}\overline{x}_{7}\overline{x}_{11}
+\end{align*}
+
+\end_inset
+
+and 
+\begin_inset Formula $\widetilde{F}_{i,23,3}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\neq-1,0,1,2$
+\end_inset
+
+.
+ The differential is the unique 
+\begin_inset Formula $R$
+\end_inset
+
+-linear map defined by
+\begin_inset Formula 
+\begin{align*}
+\mathrm{d}(e_{5,7,11}) & =x_{5}e_{7,11}-x_{5}e_{5,13}+x_{13}e_{5,5}-x_{13}e_{3,7}+x_{7}e_{3,13}-x_{7}e_{5,11}\\
+\mathrm{d}(e_{3,7}) & =x_{3}x_{7}-x_{10}\\
+\mathrm{d}(e_{5,5}) & =x_{5}x_{5}-x_{10}\\
+\mathrm{d}(e_{3,13}) & =x_{3}x_{13}-x_{16}\\
+\mathrm{d}(e_{5,11}) & =x_{5}x_{11}-x_{16}\\
+\mathrm{d}(e_{7,11}) & =x_{7}x_{11}-x_{18}\\
+\mathrm{d}(e_{5,13}) & =x_{5}x_{13}-x_{18}.
+\end{align*}
+
+\end_inset
+
+ After choosing ordered basis, we can express 
+\begin_inset Formula $\widetilde{F}_{23,3}$
+\end_inset
+
+ in the form
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[ampersand replacement=
+\backslash
+&] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+0 
+\backslash
+arrow[r] 
+\backslash
+& 
+\backslash
+Bbbk 
+\backslash
+arrow{rr}{
+\backslash
+begin{pmatrix} 1  
+\backslash
+
+\backslash
+ -1 
+\backslash
+
+\backslash
+ 1 
+\backslash
+
+\backslash
+ -1 
+\backslash
+
+\backslash
+ 1 
+\backslash
+
+\backslash
+ -1 
+\backslash
+end{pmatrix} } 
+\backslash
+& 
+\backslash
+& 
+\backslash
+Bbbk ^6 
+\backslash
+arrow[r,
+\begin_inset Quotes erd
+\end_inset
+
+M
+\begin_inset Quotes erd
+\end_inset
+
+ ] 
+\backslash
+& 
+\backslash
+Bbbk ^6  
+\backslash
+arrow{rrrr}{
+\backslash
+begin{pmatrix} 1 & 1 & 1 & 1 & 1 & 1
+\backslash
+end{pmatrix} } 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& 
+\backslash
+& G_{23
+\backslash
+text{,}3} 
+\backslash
+arrow[r] 
+\backslash
+& 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $M$
+\end_inset
+
+ is a matrix whose entries are either 
+\begin_inset Formula $-1$
+\end_inset
+
+, 
+\begin_inset Formula $0$
+\end_inset
+
+, or 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "AHH97"
+key "AHH97"
+literal "false"
+
+\end_inset
+
+ H.
+ A.
+ Helfgott.
+ 
+\emph on
+The ternary Goldbach conjecture is true
+\emph default
+.
+ arXiv:1312.7748
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "Eis95"
+key "Eis95"
+literal "false"
+
+\end_inset
+
+ D.
+ Eisenbud.
+ (1995) 
+\emph on
+Commutative Algebra: With a View Toward Algebraic Geometry.
+ 
+\emph default
+New York: Springer-Verlag
+\emph on
+.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "GP02"
+key "GP02"
+literal "false"
+
+\end_inset
+
+ Greuel, G.-M., and Pfister, G.
+ (2008).
+ 
+\emph on
+A Singular Introduction to Commutative Algebra
+\emph default
+ (2nd ed.).
+ Berlin: Springer-Verlag.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "MS05"
+key "MS05"
+literal "false"
+
+\end_inset
+
+ E.
+ Miller and B.
+ Sturmfels
+\emph on
+.
+ Combinatorial commutative algebra, 
+\emph default
+Graduate Texts in Mathematics, Vol.
+ 227, Springer-Verlag, New York, 2005.
+\end_layout
+
+\end_body
+\end_document
