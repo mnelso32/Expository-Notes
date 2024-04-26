@@ -9463,12 +9463,16 @@ Let
 \begin_inset Formula $\mathcal{F}$
 \end_inset
 
- be a sheaf on 
+ be a presheaf of abelian groups on 
 \begin_inset Formula $X$
 \end_inset
 
 .
- Given 
+ Given an open subset 
+\begin_inset Formula $U\subseteq X$
+\end_inset
+
+ and a section 
 \begin_inset Formula $s\in\mathcal{F}(U)$
 \end_inset
 
@@ -9480,11 +9484,146 @@ of
 \begin_inset Formula $s$
 \end_inset
 
- to be the set
+ to be the set 
+\begin_inset Formula $\mathrm{Supp}(s)=\{x\in X\mid s_{x}\neq0\}$
+\end_inset
+
+.
+ The support of 
+\begin_inset Formula $s$
+\end_inset
+
+ is a closed subset of 
+\begin_inset Formula $U$
+\end_inset
+
+.
+ To see this, we show that it's compliment 
+\begin_inset Formula $\mathrm{Supp}(s)^{c}=\{x\in X\mid s_{x}=0\}$
+\end_inset
+
+ is open.
+ If 
+\begin_inset Formula $x\in\mathrm{Supp}(s)^{c}$
+\end_inset
+
+, then there exists an open neighborhood 
+\begin_inset Formula $U'$
+\end_inset
+
+ of 
+\begin_inset Formula $x$
+\end_inset
+
+ contained in 
+\begin_inset Formula $U$
+\end_inset
+
+ such that 
+\begin_inset Formula $s|_{U'}=0$
+\end_inset
+
+.
+ However this means that if 
+\begin_inset Formula $y\in U'$
+\end_inset
+
+, then 
+\begin_inset Formula $s_{y}=0$
+\end_inset
+
+ also.
+ In other words, 
+\begin_inset Formula $U'$
+\end_inset
+
+ is an open neighborhood of 
+\begin_inset Formula $x$
+\end_inset
+
+ which is contained in 
+\begin_inset Formula $\mathrm{Supp}(s)^{c}$
+\end_inset
+
+, hence 
+\begin_inset Formula $\mathrm{Supp}(s)^{c}$
+\end_inset
+
+ is open.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{defn}
+\backslash
+label{defn}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $X$
+\end_inset
+
+ be a topological space, let 
+\begin_inset Formula $W\subseteq X$
+\end_inset
+
+ be a locally closed subspace, and denote 
+\begin_inset Formula $j\colon W\to X$
+\end_inset
+
+ to be the inclusion map.
+ For a sheaf 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ of abelian groups on 
+\begin_inset Formula $W$
+\end_inset
+
+, we define a sheaf 
+\begin_inset Formula $j_{!}\mathcal{G}$
+\end_inset
+
+ on 
+\begin_inset Formula $X$
+\end_inset
+
+ by
 \begin_inset Formula 
 \[
-\mathrm{Supp}\,s=\{x\in X\mid s_{x}\neq0\}.
+j_{!}\mathcal{G}(U):=\{s\in\mathcal{G}(W\cap U)\mid\mathrm{Supp}(s)\text{ is closed in }U\},
 \]
+
+\end_inset
+
+and we call it the 
+\series bold
+proper direct image 
+\series default
+of 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{defn}
+\end_layout
 
 \end_inset
 
@@ -9519,10 +9658,35 @@ label{example}
 \end_inset
 
 .
- Then
+ Then for any prime 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+, we have 
+\begin_inset Formula $a\neq0$
+\end_inset
+
+ in 
+\begin_inset Formula $A_{\mathfrak{p}}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ doesn't contain 
+\begin_inset Formula $0:a$
+\end_inset
+
+.
+ 
 \begin_inset Formula 
 \[
-\mathrm{Supp}\,a=\mathrm{V}(0:a)=\{\mathfrak{p}\in\mathrm{Spec}\,A\mid\mathfrak{p}\supseteq0:a\}.
+\mathrm{Supp}(a)=\mathrm{V}(0:a)=\{\mathfrak{p}\in\mathrm{Spec}\,A\mid\mathfrak{p}\supseteq0:a\}.
 \]
 
 \end_inset
@@ -44723,7 +44887,7 @@ label{lemma}
 \begin_inset Formula $f$
 \end_inset
 
- is a surjective morphism.
+ is a submersive morphism.
  
 \begin_inset ERT
 status open
@@ -44790,7 +44954,7 @@ label{proof}
  we have 
 \begin_inset Formula 
 \[
-(f')^{-1}(T)=f^{-1}(T)\cap X_{1}\coprod\cdots\coprod f^{-1}(T)\cap X_{n}.
+(f')^{-1}(T)=f^{-1}(T)\cap Y_{1}\coprod\cdots\coprod f^{-1}(T)\cap Y_{n}.
 \]
 
 \end_inset
@@ -44799,11 +44963,13 @@ Hence
 \begin_inset Formula $f^{-1}(T)$
 \end_inset
 
- is open if and only if 
+ is open (resp.
+ closed) if and only if 
 \begin_inset Formula $(f')^{-1}(T)$
 \end_inset
 
- is open.
+ is open (resp.
+ closed).
  Thus we may assume both 
 \begin_inset Formula $Y$
 \end_inset
@@ -44859,7 +45025,7 @@ Hence
 \end_inset
 
  is surjective).
- On the other hand, generalizations lift along 
+ On the other hand, generizations lift along 
 \begin_inset Formula $f$
 \end_inset
 
@@ -44872,7 +45038,7 @@ Hence
 \begin_inset Formula $X\backslash T=f(Y\backslash f^{-1}T)$
 \end_inset
 
- is stable under generalization.
+ is stable under generization.
  Hence 
 \begin_inset Formula $T$
 \end_inset
@@ -67645,7 +67811,7 @@ label{example}
 \end_inset
 
  Suppose 
-\begin_inset Formula $X=\mathbb{P}_{\boldsymbol{x}}^{2}$
+\begin_inset Formula $X=\mathbb{P}_{\boldsymbol{x}}^{2}=\mathrm{Proj}(\Bbbk[x_{0},x_{1},x_{2}])$
 \end_inset
 
  and let
