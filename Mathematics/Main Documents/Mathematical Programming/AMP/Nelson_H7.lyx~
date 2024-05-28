@@ -1,0 +1,2560 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Linear Programming Homework 7
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Section*
+Problem 1
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=-x_{1}x_{2}x_{3}$
+\end_inset
+
+ and let 
+\begin_inset Formula $h(\boldsymbol{x})=x_{1}+x_{2}+x_{3}-9$
+\end_inset
+
+.
+ We consider the following NLP
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad f(\boldsymbol{x})\nonumber \\
+\text{subject to} & \quad h(\boldsymbol{x})=0\label{eq:NLP1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(the author sets this up as a maximization problem with 
+\begin_inset Formula $f(\boldsymbol{x})=x_{1}x_{2}x_{3}$
+\end_inset
+
+ however we convert it to a minimization problem as usual by setting 
+\begin_inset Formula $f(\boldsymbol{x})=-x_{1}x_{2}x_{3}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Subsection*
+Problem 1.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Write the KKT FONC to this NLP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ A KKT point for this NLP is a pair 
+\begin_inset Formula $(\boldsymbol{x},\lambda)=(x_{1},x_{2},x_{3},\lambda)\in\mathbb{R}^{4}$
+\end_inset
+
+ which satisfies the following:
+\begin_inset Formula 
+\begin{align}
+\nabla f(\boldsymbol{x})+\lambda\nabla h(\boldsymbol{x}) & =0 &  & \text{Stationary}\nonumber \\
+h(\boldsymbol{x}) & =0 &  & \text{Primal Feasibility}\label{eq:KKT1}
+\end{align}
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathcal{K}\subseteq\mathbb{R}^{4}$
+\end_inset
+
+ denote the set of all KKT points for this NLP.
+ The KKT FONC says that if 
+\begin_inset Formula $\boldsymbol{a}=(a_{1},a_{2},a_{3})\in\mathbb{R}^{3}$
+\end_inset
+
+ is a local minimizer and the NLP satisfies some regularity conditions,
+ then there exists 
+\begin_inset Formula $\alpha\in\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $(\boldsymbol{a},\alpha)\in\mathcal{K}$
+\end_inset
+
+.
+ The regularity condition that we will use is the LCQ condition, which says
+ if 
+\begin_inset Formula $h$
+\end_inset
+
+ is an affine function, then no other condition is needed (here, 
+\begin_inset Formula $h$
+\end_inset
+
+ is affine, so the LCQ regularity condition is satisfied).
+ Now observe that
+\begin_inset Formula 
+\[
+\nabla f(\boldsymbol{x})=\begin{pmatrix}-x_{2}x_{3}\\
+-x_{1}x_{3}\\
+-x_{1}x_{2}
+\end{pmatrix}\quad\text{and}\quad\nabla h(\boldsymbol{x})=\begin{pmatrix}1\\
+1\\
+1
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Thus 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:KKT1})
+\end_layout
+
+\end_inset
+
+ can be rewritten as:
+\begin_inset Formula 
+\begin{align}
+-x_{2}x_{3}+\lambda & =0\nonumber \\
+-x_{1}x_{3}+\lambda & =0\nonumber \\
+-x_{1}x_{2}+\lambda & =0\label{eq:equivalentsetofequations}\\
+x_{1}+x_{2}+x_{3}-9 & =0\nonumber 
+\end{align}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 1.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all solutions 
+\begin_inset Formula $(\boldsymbol{x},\lambda)$
+\end_inset
+
+ to the KKT FONC for this NLP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(\boldsymbol{x},\lambda)\in\mathcal{K}$
+\end_inset
+
+.
+ First we use the computer algebra system Singular to give us a 
+\begin_inset Quotes eld
+\end_inset
+
+nicer
+\begin_inset Quotes erd
+\end_inset
+
+ set of equations which is equivalent to 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:equivalentsetofequations})
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+ring A=0,(x1,x2,x3,lambda),lp;
+\end_layout
+
+\begin_layout Plain Layout
+
+ideal I = lambda-x2*x3,lambda-x1*x3,lambda-x1*x2,x1+x2+x3-9;
+\end_layout
+
+\begin_layout Plain Layout
+
+std(I);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+_[1]=lambda^2-9*lambda 
+\end_layout
+
+\begin_layout Plain Layout
+
+_[2]=x3*lambda-3*lambda 
+\end_layout
+
+\begin_layout Plain Layout
+
+_[3]=x3^2-9*x3+2*lambda 
+\end_layout
+
+\begin_layout Plain Layout
+
+_[4]=2*x2*lambda+x3*lambda-9*lambda 
+\end_layout
+
+\begin_layout Plain Layout
+
+_[5]=x2*x3-lambda _
+\end_layout
+
+\begin_layout Plain Layout
+
+_[6]=x2^2+x2*x3-9*x2+lambda 
+\end_layout
+
+\begin_layout Plain Layout
+
+_[7]=x1+x2+x3-9
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Singular tells us that the system of equations 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:equivalentsetofequations})
+\end_layout
+
+\end_inset
+
+ is equivalent to the following system of equations
+\begin_inset Formula 
+\begin{align}
+(\lambda-9)\lambda & =0\nonumber \\
+(x_{3}-3)\lambda & =0\nonumber \\
+x_{3}^{2}-9x_{3}+2\lambda & =0\nonumber \\
+(2x_{2}+x_{3}-9)\lambda & =0\label{eq:nextequations}\\
+x_{2}x_{3}-\lambda & =0\nonumber \\
+x_{2}^{2}+x_{2}x_{3}-9x_{2}+\lambda & =0\nonumber \\
+x_{1}+x_{2}+x_{3}-9 & =0\nonumber 
+\end{align}
+
+\end_inset
+
+What's nice about the system of equations 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:nextequations})
+\end_layout
+
+\end_inset
+
+ is that we immediately see from 
+\begin_inset Formula $\lambda(\lambda-9)=0$
+\end_inset
+
+ that either 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+ or 
+\begin_inset Formula $\lambda=9$
+\end_inset
+
+.
+ First suppose 
+\begin_inset Formula $\lambda=9$
+\end_inset
+
+.
+ Then from 
+\begin_inset Formula $\lambda=9$
+\end_inset
+
+, the equation 
+\begin_inset Formula $(x_{3}-3)\lambda=0$
+\end_inset
+
+ implies 
+\begin_inset Formula $x_{3}=3$
+\end_inset
+
+.
+ Then from 
+\begin_inset Formula $\lambda=9$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{3}=3$
+\end_inset
+
+, the equation 
+\begin_inset Formula $x_{2}x_{3}-\lambda=0$
+\end_inset
+
+ implies 
+\begin_inset Formula $x_{2}=3$
+\end_inset
+
+.
+ Finally from 
+\begin_inset Formula $\lambda=9$
+\end_inset
+
+, 
+\begin_inset Formula $x_{3}=3$
+\end_inset
+
+, and 
+\begin_inset Formula $x_{2}=3$
+\end_inset
+
+, the equation 
+\begin_inset Formula $x_{1}+x_{2}+x_{3}-9=0$
+\end_inset
+
+ implies 
+\begin_inset Formula $x_{1}=3$
+\end_inset
+
+.
+ This produces the following solution 
+\begin_inset Formula $(\boldsymbol{a},\alpha)\in\mathcal{K}$
+\end_inset
+
+ where we set
+\begin_inset Formula 
+\[
+(\boldsymbol{a},\alpha)=(a_{1},a_{2},a_{3},\alpha)=(3,3,3,0)
+\]
+
+\end_inset
+
+Now suppose that 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+.
+ Then the system of equations 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:equivalentsetofequations})
+\end_layout
+
+\end_inset
+
+ reduces to the following system of equations
+\begin_inset Formula 
+\begin{align}
+x_{2}x_{3} & =0\nonumber \\
+x_{1}x_{3} & =0\nonumber \\
+x_{1}x_{2} & =0\label{eq:equivalentsetofequations-1}\\
+x_{1}+x_{2}+x_{3} & =9\nonumber 
+\end{align}
+
+\end_inset
+
+Assume that 
+\begin_inset Formula $x_{3}\neq0$
+\end_inset
+
+.
+ Then from the equations 
+\begin_inset Formula $x_{2}x_{3}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{1}x_{3}=0$
+\end_inset
+
+, we see that 
+\begin_inset Formula $x_{1}=0=x_{2}$
+\end_inset
+
+.
+ Then from 
+\begin_inset Formula $x_{1}=0=x_{2}$
+\end_inset
+
+, the equation 
+\begin_inset Formula $x_{1}+x_{2}+x_{3}=9$
+\end_inset
+
+ implies 
+\begin_inset Formula $x_{3}=9$
+\end_inset
+
+.
+ A similar argument shows that if 
+\begin_inset Formula $x_{2}\neq0$
+\end_inset
+
+, then 
+\begin_inset Formula $x_{1}=0=x_{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}=9$
+\end_inset
+
+, and if 
+\begin_inset Formula $x_{1}\neq0$
+\end_inset
+
+, then 
+\begin_inset Formula $x_{2}=0=x_{3}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{1}=9$
+\end_inset
+
+.
+ Note that we can't have 
+\begin_inset Formula $x_{1}=x_{2}=x_{3}=0$
+\end_inset
+
+ since this would violate the equation 
+\begin_inset Formula $x_{1}+x_{2}+x_{3}=9$
+\end_inset
+
+.
+ Thus we have produced all solutions in this case, they are 
+\begin_inset Formula $(\boldsymbol{b},\beta),(\boldsymbol{c},\gamma),(\boldsymbol{d},\delta)\in\mathcal{K}$
+\end_inset
+
+ where we set
+\begin_inset Formula 
+\begin{align*}
+(\boldsymbol{b},\beta) & =(9,0,0,0)\\
+(\boldsymbol{c},\gamma) & =(0,9,0,0)\\
+(\boldsymbol{d},\delta) & =(0,0,9,0)
+\end{align*}
+
+\end_inset
+
+Altogether we have 
+\begin_inset Formula $\mathcal{K}=\{(\boldsymbol{a},\alpha),(\boldsymbol{b},\beta),(\boldsymbol{c},\gamma),(\boldsymbol{d},\delta)\}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 1.c
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all optimal solutions to this NLP.
+ Give their properties (choose from local, global, strict local, unique
+ global).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We only need to check the points 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+, 
+\begin_inset Formula $\boldsymbol{c}$
+\end_inset
+
+, and 
+\begin_inset Formula $\boldsymbol{d}$
+\end_inset
+
+ by the KKT FONC.
+ If we set 
+\begin_inset Formula $x_{1}=-x_{2}-x_{3}+9$
+\end_inset
+
+ then
+\begin_inset Formula 
+\begin{align*}
+f(\boldsymbol{x}) & =-x_{1}x_{2}x_{3}\\
+ & =-(9-x_{2}-x_{3})x_{2}x_{3}.
+\end{align*}
+
+\end_inset
+
+In particular, the constrained NLP 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:NLP1})
+\end_layout
+
+\end_inset
+
+ is equivalent to the unconstrained NLP below:
+\begin_inset Formula 
+\begin{align}
+\text{minimize} & \quad\widetilde{f}(\widetilde{\boldsymbol{x}})=-(9-\widetilde{x}_{1}-\widetilde{x}_{2})\widetilde{x}_{1}\widetilde{x}_{2}\nonumber \\
+\text{subject to} & \quad\widetilde{\boldsymbol{x}}\in\mathbb{R}^{2}\label{eq:NLP2}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\widetilde{\boldsymbol{x}}=(\widetilde{x}_{1},\widetilde{x}_{2})=(x_{2},x_{3})$
+\end_inset
+
+.
+ Thus it suffices to find the optimal solutions of the new NLP 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:NLP2})
+\end_layout
+
+\end_inset
+
+ (and classify them accordingly).
+ In these new coordinates, the KKT points become
+\begin_inset Formula 
+\begin{align*}
+\widetilde{\boldsymbol{a}} & =(3,3)\\
+\widetilde{\boldsymbol{b}} & =(0,0)\\
+\widetilde{\boldsymbol{c}} & =(9,0)\\
+\widetilde{\boldsymbol{d}} & =(0,9)
+\end{align*}
+
+\end_inset
+
+Observe that
+\begin_inset Formula 
+\begin{align*}
+\nabla\widetilde{f}(\widetilde{\boldsymbol{x}}) & =\begin{pmatrix}\widetilde{x}_{2}(2\widetilde{x}_{1}+\widetilde{x}_{2}-9)\\
+\widetilde{x}_{1}(\widetilde{x}_{1}+2\widetilde{x}_{2}-9)
+\end{pmatrix}\quad\text{and}\quad\mathrm{H}_{\widetilde{f}}(\widetilde{\boldsymbol{x}})=\begin{pmatrix}2\widetilde{x}_{2} & 2\widetilde{x}_{1}+2\widetilde{x}_{2}-9\\
+2\widetilde{x}_{1}+2\widetilde{x}_{2}-9 & 2\widetilde{x}_{1}
+\end{pmatrix}
+\end{align*}
+
+\end_inset
+
+In particular 
+\begin_inset Formula $\widetilde{\boldsymbol{a}}$
+\end_inset
+
+, 
+\begin_inset Formula $\widetilde{\boldsymbol{b}}$
+\end_inset
+
+, 
+\begin_inset Formula $\widetilde{\boldsymbol{c}}$
+\end_inset
+
+, and 
+\begin_inset Formula $\widetilde{\boldsymbol{d}}$
+\end_inset
+
+ are all critical points and
+\begin_inset Formula 
+\[
+\mathrm{H}_{\widetilde{f}}(\widetilde{\boldsymbol{a}})=\begin{pmatrix}6 & 3\\
+3 & 6
+\end{pmatrix},\quad\mathrm{H}_{\widetilde{f}}(\widetilde{\boldsymbol{b}})=\begin{pmatrix}0 & -9\\
+-9 & 0
+\end{pmatrix},\quad\mathrm{H}_{\widetilde{f}}(\widetilde{\boldsymbol{c}})=\begin{pmatrix}0 & 9\\
+9 & 9
+\end{pmatrix},\text{and}\quad\mathrm{H}_{\widetilde{f}}(\widetilde{\boldsymbol{d}})=\begin{pmatrix}9 & 9\\
+9 & 0
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Only 
+\begin_inset Formula $\mathrm{H}_{\widetilde{f}}(\widetilde{\boldsymbol{a}})$
+\end_inset
+
+ is positive semidefinite (in fact positive definite since its eigenvalues
+ 
+\begin_inset Formula $\lambda_{1}=3$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda_{2}=9$
+\end_inset
+
+ are strictly positive).
+ The other matrices are mixed definite (each has one strictly positive eigenvalu
+e and one strictly negative eigenvalue).
+ It follows that 
+\begin_inset Formula $\widetilde{\boldsymbol{a}}$
+\end_inset
+
+ is a 
+\emph on
+strict 
+\emph default
+local minimum whereas the other points are all saddle points.
+ Note that 
+\begin_inset Formula $\widetilde{\boldsymbol{a}}$
+\end_inset
+
+ can't be a global minimum since 
+\begin_inset Formula $\widetilde{f}$
+\end_inset
+
+ takes arbitrary small values (for instance 
+\begin_inset Formula $\widetilde{f}(t,t)=-(9-2t)t^{2}=2t^{3}+\text{ lower terms in }t$
+\end_inset
+
+, so taking 
+\begin_inset Formula $t\to-\infty$
+\end_inset
+
+ gives us 
+\begin_inset Formula $\widetilde{f}(t,t)\to-\infty$
+\end_inset
+
+).
+ In other words, 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ is a strict local optimal solution for the NLP 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:NLP1})
+\end_layout
+
+\end_inset
+
+ (and the only one at that).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 2
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=x_{1}-x_{2}$
+\end_inset
+
+ and let 
+\begin_inset Formula $h(\boldsymbol{x})=x_{1}^{2}+x_{2}^{2}-1$
+\end_inset
+
+.
+ We consider the following NLP:
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad f(\boldsymbol{x})\\
+\text{subject to} & \quad h(\boldsymbol{x})=0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2.a
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Write the KKT FONC to this NLP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ A KKT point for this NLP is a pair 
+\begin_inset Formula $(\boldsymbol{x},\lambda)=(x_{1},x_{2},\lambda)\in\mathbb{R}^{4}$
+\end_inset
+
+ which satisfies the following:
+\begin_inset Formula 
+\begin{align}
+\nabla f(\boldsymbol{x})+\lambda\nabla h(\boldsymbol{x}) & =0 &  & \text{Stationary}\nonumber \\
+h(\boldsymbol{x}) & =0 &  & \text{Primal Feasibility}\label{eq:KKT1-1}
+\end{align}
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathcal{K}\subseteq\mathbb{R}^{3}$
+\end_inset
+
+ denote the set of all KKT points for this NLP.
+ The KKT FONC says that if 
+\begin_inset Formula $\boldsymbol{a}=(a_{1},a_{2})\in\mathbb{R}^{2}$
+\end_inset
+
+ is a local minimizer and the NLP satisfies some regularity conditions,
+ then there exists 
+\begin_inset Formula $\alpha\in\mathbb{R}$
+\end_inset
+
+ such that 
+\begin_inset Formula $(\boldsymbol{a},\alpha)\in\mathcal{K}$
+\end_inset
+
+.
+ The regularity condition that we will use is the LICQ condition, which
+ says that the gradients of the active inequality constraints and the gradients
+ of the equality constraints are linearly independent at 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+.
+ What this means in this case is that if 
+\begin_inset Formula $h(\boldsymbol{a})=0$
+\end_inset
+
+, then 
+\begin_inset Formula $\nabla h(\boldsymbol{a})\neq0$
+\end_inset
+
+.
+ Now observe that
+\begin_inset Formula 
+\[
+\nabla f(\boldsymbol{x})=\begin{pmatrix}1\\
+-1
+\end{pmatrix}\quad\text{and}\quad\nabla h(\boldsymbol{x})=\begin{pmatrix}2x_{1}\\
+2x_{2}
+\end{pmatrix}.
+\]
+
+\end_inset
+
+In particular, we see that the regularity condition is always satisfied
+ since 
+\begin_inset Formula $\nabla h(\boldsymbol{a})=0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\boldsymbol{a}=(0,0)$
+\end_inset
+
+, and 
+\begin_inset Formula $h(0,0)\neq0$
+\end_inset
+
+.
+ Now 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:KKT1})
+\end_layout
+
+\end_inset
+
+ can be rewritten as:
+\begin_inset Formula 
+\begin{align}
+2\lambda x_{1}+1 & =0\nonumber \\
+2\lambda x_{2}-1 & =0\label{eq:equivalentsetofequations-2}\\
+x_{1}^{2}+x_{2}^{2} & =1\nonumber 
+\end{align}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2.b
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all solutions 
+\begin_inset Formula $(\boldsymbol{x},\lambda)$
+\end_inset
+
+ to the KKT FONC for this NLP.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(\boldsymbol{x},\lambda)\in\mathcal{K}$
+\end_inset
+
+.
+ Then adding the first two equations in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:equivalentsetofequations-2})
+\end_layout
+
+\end_inset
+
+ together gives us 
+\begin_inset Formula $4\lambda(x_{1}+x_{2})=0$
+\end_inset
+
+.
+ It follows that either 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+ or 
+\begin_inset Formula $x_{1}=-x_{2}$
+\end_inset
+
+.
+ We can't have 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+ since this would contradict the equation 
+\begin_inset Formula $2\lambda x_{1}+1=0$
+\end_inset
+
+.
+ Thus we must have 
+\begin_inset Formula $x_{1}=-x_{2}$
+\end_inset
+
+.
+ From 
+\begin_inset Formula $x_{1}=-x_{2}$
+\end_inset
+
+, the third equaiton in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:equivalentsetofequations-2})
+\end_layout
+
+\end_inset
+
+ becomes 
+\begin_inset Formula $2x_{1}^{2}=1$
+\end_inset
+
+.
+ Thus we must have 
+\begin_inset Formula $x_{1}=\pm\sqrt{2}/2$
+\end_inset
+
+, and since 
+\begin_inset Formula $x_{2}=-x_{1}$
+\end_inset
+
+, this implies 
+\begin_inset Formula $x_{2}=\mp\sqrt{2}/2$
+\end_inset
+
+.
+ Finally, From first equation in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{eq:equivalentsetofequations-2})
+\end_layout
+
+\end_inset
+
+, we see that 
+\begin_inset Formula $\lambda=\mp\sqrt{2}/2$
+\end_inset
+
+.
+ Thus we have produced all solutions in this case, they are 
+\begin_inset Formula $\mathcal{K}=\{(\boldsymbol{a},\alpha),(\boldsymbol{b},\beta)\}$
+\end_inset
+
+ where we set
+\begin_inset Formula 
+\begin{align*}
+(\boldsymbol{a},\alpha) & =(\sqrt{2}/2,-\sqrt{2}/2,-\sqrt{2}/2)\\
+(\boldsymbol{b},\beta) & =(-\sqrt{2}/2,\sqrt{2}/2,\sqrt{2}/2)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Problem 2.c
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Find all optimal solutions to this NLP.
+ Give their properties (choose from local, global, strict local, unique
+ global).
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ We solve this problem geometrically:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzpicture}
+\backslash
+begin{axis}[axis lines = middle, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel = $x_1 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel = $x_2 $, 
+\end_layout
+
+\begin_layout Plain Layout
+
+xmin=-2,xmax=2,ymin=-2,ymax=2,
+\end_layout
+
+\begin_layout Plain Layout
+
+xtick={-2,-1,1,2},ytick={-2,-1,1,2},
+\end_layout
+
+\begin_layout Plain Layout
+
+axis equal,]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// circle
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=red,thick,samples=100] ({cos(deg(x))},{sin(deg(x))});
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// contour lines
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-2:2] {x-1.41};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-2:2] {x-1};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-2:2] {x};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-2:2] {x+1};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [color=blue,thick,dashed,samples=1000,domain=-2:2] {x+1.41};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=below right:$ 
+\backslash
+boldsymbol{a}$] (x) at (axis cs:0.71,-0.71) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[circle, fill=black, inner sep=1pt, label=above left:$ 
+\backslash
+boldsymbol{b}$] (x) at (axis cs:-0.71,0.71) {$$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\backslash
+end{tikzpicture}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The feasible region 
+\begin_inset Formula $\{h=0\}$
+\end_inset
+
+ is given by the red circle above.
+ The blue dashed lines above are level sets 
+\begin_inset Formula $\{f=c\}$
+\end_inset
+
+ for various values of 
+\begin_inset Formula $c\in\mathbb{R}$
+\end_inset
+
+ (namely for 
+\begin_inset Formula $c=-\sqrt{2},-1,0,1,\sqrt{2}$
+\end_inset
+
+).
+ We also plotted the points 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+ because we know that these are the only possible points that can be local
+ optimizers.
+ Note that the vector 
+\begin_inset Formula $-\nabla f(\boldsymbol{b})=(-1,1)^{\top}$
+\end_inset
+
+ is normal to the circle 
+\begin_inset Formula $\{h=0\}$
+\end_inset
+
+ at the point 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+.
+ This implies that the level set 
+\begin_inset Formula $\{f=-\sqrt{2}\}$
+\end_inset
+
+ is tangent to the circle 
+\begin_inset Formula $\{h=0\}$
+\end_inset
+
+, which implies 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+ is a strict local minimizer with optimal objective value 
+\begin_inset Formula $f(\boldsymbol{b})=-\sqrt{2}$
+\end_inset
+
+ (in fact 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+ is unique global minimizer).
+ Similarly, that the vector 
+\begin_inset Formula $\nabla f(\boldsymbol{a})=(1,-1)^{\top}$
+\end_inset
+
+ is normal to the circle 
+\begin_inset Formula $\{h=0\}$
+\end_inset
+
+ at the point 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+.
+ This implies that the level set 
+\begin_inset Formula $\{f=\sqrt{2}\}$
+\end_inset
+
+ is tangent to the circle 
+\begin_inset Formula $\{h=0\}$
+\end_inset
+
+, which implies 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ is a strict local maximizer with optimal objective value 
+\begin_inset Formula $f(\boldsymbol{a})=\sqrt{2}$
+\end_inset
+
+ (in fact 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ is unique global maximizer).
+ Note however that in the NLP we consider is a minimization problem, so
+ 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+ is the optimal solution whereas 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ is not.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 3
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f(\boldsymbol{x})=4x_{1}^{2}-9x_{1}+x_{2}^{2}$
+\end_inset
+
+.
+ We consider the following unconstrained problem
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad f(\boldsymbol{x})\\
+\text{subject to} & \quad\boldsymbol{x}\in\mathbb{R}^{2}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\boldsymbol{x}^{0}=(1,1)^{\top}$
+\end_inset
+
+ be the starting point for the method of steepest descent.
+ Use the algorithm to find 
+\begin_inset Formula $\boldsymbol{x}^{1}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ We set 
+\begin_inset Formula $\boldsymbol{x}^{1}=\boldsymbol{x}^{0}-\gamma\nabla f(\boldsymbol{x}^{0})$
+\end_inset
+
+ where the step size 
+\begin_inset Formula $\gamma>0$
+\end_inset
+
+ is chosen to minimize 
+\begin_inset Formula $f(\boldsymbol{x}^{0}-\gamma\nabla f(\boldsymbol{x}^{0}))$
+\end_inset
+
+.
+ We first we calculate
+\begin_inset Formula 
+\begin{align*}
+\nabla f(\boldsymbol{x}) & =\begin{pmatrix}8x_{1}-9\\
+2x_{2}
+\end{pmatrix}.
+\end{align*}
+
+\end_inset
+
+In particular, we have 
+\begin_inset Formula $\nabla f(\boldsymbol{x}^{0})=(-1,2)^{\top}$
+\end_inset
+
+.
+ Thus we have
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{x}^{1} & =\boldsymbol{x}^{0}-\gamma\nabla f(\boldsymbol{x}^{0})\\
+ & =(1,1)^{\top}-\gamma(-1,2)^{\top}\\
+ & =(1+\gamma,1-2\gamma)^{\top}
+\end{align*}
+
+\end_inset
+
+Now to find 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, we first calculate
+\begin_inset Formula 
+\begin{align*}
+f(\boldsymbol{x}^{1}) & =f(\boldsymbol{x}^{0}-\gamma\nabla f(\boldsymbol{x}^{0}))\\
+ & =f((1+\gamma,1-2\gamma)^{\top})\\
+ & =4(1+\gamma)^{2}-9(1+\gamma)+(1-2\gamma)^{2}\\
+ & =8\gamma^{2}-5\gamma-4\\
+ & =\frac{1}{32}(16\gamma-5)^{2}-\frac{153}{32}.
+\end{align*}
+
+\end_inset
+
+Clearly this is minimized when 
+\begin_inset Formula $\gamma=5/16$
+\end_inset
+
+ with objective value being 
+\begin_inset Formula $f(\boldsymbol{x}^{1})=-153/32$
+\end_inset
+
+.
+ Thus we have
+\begin_inset Formula 
+\[
+\boldsymbol{x}^{1}=\left(\frac{21}{16},\frac{3}{8}\right)^{\top}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Problem 4
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Keep the same notation as in question 3.
+\end_layout
+
+\begin_layout Enumerate
+Find 
+\begin_inset Formula $\widetilde{\boldsymbol{x}}^{1}$
+\end_inset
+
+ for the unconstrained problem in question 3 above with the Newton Method.
+\end_layout
+
+\begin_layout Enumerate
+Compare the results you obtained with the steepest descent method and Newton
+ method.
+\end_layout
+
+\begin_layout Enumerate
+Did you obtain an optimal solution? Explain.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ First we calculate
+\begin_inset Formula 
+\[
+\mathrm{H}_{f}(\boldsymbol{x})=\begin{pmatrix}8 & 0\\
+0 & 2
+\end{pmatrix}.
+\]
+
+\end_inset
+
+Next we set
+\begin_inset Formula 
+\begin{align*}
+\widetilde{\boldsymbol{x}}^{1} & =\boldsymbol{x}^{0}-\mathrm{H}_{f}^{-1}(\boldsymbol{x}^{0})\nabla f(\boldsymbol{x}^{0})\\
+ & =\begin{pmatrix}1\\
+1
+\end{pmatrix}+\begin{pmatrix}-1/8 & 0\\
+0 & -1/2
+\end{pmatrix}\begin{pmatrix}-1\\
+2
+\end{pmatrix}\\
+ & =\begin{pmatrix}1\\
+1
+\end{pmatrix}+\begin{pmatrix}1/8\\
+-1
+\end{pmatrix}\\
+ & =\begin{pmatrix}9/8\\
+0
+\end{pmatrix}.
+\end{align*}
+
+\end_inset
+
+Thus 
+\begin_inset Formula $\widetilde{\boldsymbol{x}}^{1}=(9/8,0)^{\top}$
+\end_inset
+
+ with objective value being 
+\begin_inset Formula $f(\widetilde{\boldsymbol{x}}^{1})=-81/16$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ Notice that
+\begin_inset Formula 
+\[
+f(\widetilde{\boldsymbol{x}}^{1})<f(\boldsymbol{x}^{1}),
+\]
+
+\end_inset
+
+so Newton's method produced a better solution than the descent method (which
+ is unsurprising as Newton's method involves the Hessian wheras the descent
+ method only involves the gradient).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Yes: Observe we can rewrite 
+\begin_inset Formula $f(\boldsymbol{x})$
+\end_inset
+
+ as
+\begin_inset Formula 
+\begin{align*}
+f(\boldsymbol{x}) & =4x_{1}^{2}-9x_{1}+x_{2}^{2}\\
+ & =\left(\frac{8x_{1}-9}{4}\right)^{2}+x_{2}^{2}-\frac{81}{16}\\
+ & =\widetilde{x}_{1}^{2}+\widetilde{x}_{2}^{2}-\frac{81}{16}\\
+ & =f(\widetilde{\boldsymbol{x}}),
+\end{align*}
+
+\end_inset
+
+where we used the change of variables 
+\begin_inset Formula $\widetilde{x}_{1}=2x_{1}-9/4$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{x}_{2}=x_{2}$
+\end_inset
+
+.
+ Now observe that since 
+\begin_inset Formula $f(\widetilde{\boldsymbol{x}})$
+\end_inset
+
+ is a sum of squares plus a constant, we have 
+\begin_inset Formula $f(\widetilde{\boldsymbol{x}})>-81/16$
+\end_inset
+
+ for all 
+\begin_inset Formula $\widetilde{\boldsymbol{x}}\ne(0,0)$
+\end_inset
+
+ and we have 
+\begin_inset Formula $f(\widetilde{\boldsymbol{x}})=-81/16$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\widetilde{\boldsymbol{x}}=(0,0)$
+\end_inset
+
+.
+ Thus 
+\begin_inset Formula $f(\widetilde{\boldsymbol{x}})$
+\end_inset
+
+ has a global minimum at 
+\begin_inset Formula $\widetilde{\boldsymbol{x}}=(0,0)^{\top}$
+\end_inset
+
+, that is 
+\begin_inset Formula $\widetilde{x}_{1}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\widetilde{x}_{2}=0$
+\end_inset
+
+ with optimal objective value being 
+\begin_inset Formula $-81/16$
+\end_inset
+
+.
+ In the 
+\begin_inset Formula $\boldsymbol{x}$
+\end_inset
+
+-coordinates, this is given by
+\begin_inset Formula 
+\[
+x_{1}=2\widetilde{x}_{1}+9/8=9/8\quad\text{and}\quad x_{2}=\widetilde{x}_{2}=0,
+\]
+
+\end_inset
+
+thus 
+\begin_inset Formula $f(\boldsymbol{x})$
+\end_inset
+
+ has a global minimum at 
+\begin_inset Formula $\boldsymbol{x}=(9/8,0)=\widetilde{\boldsymbol{x}}^{1}$
+\end_inset
+
+, which is exactly the point we found using Newton's method.
+ (we could have also concluded this by observing that 
+\begin_inset Formula $\nabla f(\boldsymbol{x})=0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\boldsymbol{x}=\widetilde{\boldsymbol{x}}^{1}$
+\end_inset
+
+ and then combining this with the fact that the Hessian is positive definite
+ everywhere).
+\end_layout
+
+\begin_layout Section*
+Problem 5
+\end_layout
+
+\begin_layout Standard
+For this problem, let 
+\begin_inset Formula $f,g_{1},\dots,g_{m}\colon\mathbb{R}^{n}\to\mathbb{R}$
+\end_inset
+
+.
+ We consider the following NLP:
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad f(\boldsymbol{x})\\
+\text{subject to} & \quad g_{i}(\boldsymbol{x})\leq0 & 1\leq i\leq m
+\end{align*}
+
+\end_inset
+
+(this is how the book sets it up and hence what this problem is modelled
+ off of).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ex}
+\backslash
+label{ex}
+\end_layout
+
+\end_inset
+
+ Answer whether each of the following statements is true or false:
+\end_layout
+
+\begin_layout Enumerate
+The Lagrange multiplier corresponding to an inactive constraint is always
+ zero.
+\end_layout
+
+\begin_layout Enumerate
+The Lagrange multiplier corresponding to an active constraint is never zero.
+\end_layout
+
+\begin_layout Enumerate
+A positive semidefinite matrix is never singular
+\end_layout
+
+\begin_layout Enumerate
+A positive definite matrix is never singular.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ are differentiable for 
+\begin_inset Formula $i=1,\dots,m$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{\overline{x}}$
+\end_inset
+
+ is a local minimum, there exists a vector 
+\begin_inset Formula $\boldsymbol{\overline{\mu}}$
+\end_inset
+
+ such that 
+\begin_inset Formula $(\overline{\boldsymbol{x}},\boldsymbol{\overline{\mu}})$
+\end_inset
+
+ satisfies the KKT conditions.
+\end_layout
+
+\begin_layout Enumerate
+If there exists a vector 
+\begin_inset Formula $\boldsymbol{\overline{\mu}}$
+\end_inset
+
+ such that 
+\begin_inset Formula $(\overline{\boldsymbol{x}},\overline{\boldsymbol{\mu}})$
+\end_inset
+
+ satisfies the KKT conditions and if 
+\begin_inset Formula $f$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ are differentiable convex functions for 
+\begin_inset Formula $i=1,\dots,m$
+\end_inset
+
+, then 
+\begin_inset Formula $\overline{\boldsymbol{x}}$
+\end_inset
+
+ is a global minimum.
+  
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sol}
+\backslash
+label{sol}
+\end_layout
+
+\end_inset
+
+ 1.
+ True.
+ By complementary slackness, we must have 
+\begin_inset Formula $\mu_{i}g_{i}(\boldsymbol{x})=0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ is inactive at 
+\begin_inset Formula $\boldsymbol{x}$
+\end_inset
+
+, then this implies 
+\begin_inset Formula $g_{i}(\boldsymbol{x})\neq0$
+\end_inset
+
+ which implies 
+\begin_inset Formula $\mu_{i}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+2.
+ False.
+ Complementary slackness only tells us that 
+\begin_inset Formula $\mu_{i}g_{i}(\boldsymbol{x})=0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $g_{i}$
+\end_inset
+
+ is active at 
+\begin_inset Formula $\boldsymbol{x}$
+\end_inset
+
+, then this means 
+\begin_inset Formula $g_{i}(\boldsymbol{x})=0$
+\end_inset
+
+, but this doesn't necessarily imply that 
+\begin_inset Formula $\mu_{i}\neq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ False.
+ Indeed, a Hermitian matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ is positive semidefinite if and only its eigenvalues 
+\begin_inset Formula $\lambda_{1},\dots,\lambda_{n}$
+\end_inset
+
+ are all greater than or equal to zero.
+ In particular, if one of its eigenvalues is zero, then the matrix will
+ be singular (since 
+\begin_inset Formula $\det A=\lambda_{1}\cdots\lambda_{n}=0$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ True.
+ Indeed, a Hermitian matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ is positive definite if and only its eigenvalues are all strictly greater
+ than zero.
+ In particular, we have 
+\begin_inset Formula $\det A=\lambda_{1}\cdots\lambda_{n}>0$
+\end_inset
+
+, and thus 
+\begin_inset Formula $A$
+\end_inset
+
+ is not singular.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+5.
+ False.
+ We aslo need regularity conditions to hold (LCQ, LICQ, etc...) in order to
+ apply the KKT FONC.
+ If in addition a regularity condition is satisified, then this would be
+ true.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hfill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+6.
+ True.
+ In this case, we can use the KKT SOSC to conclude that 
+\begin_inset Formula $\overline{\boldsymbol{x}}$
+\end_inset
+
+ is a global minimum.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sol}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

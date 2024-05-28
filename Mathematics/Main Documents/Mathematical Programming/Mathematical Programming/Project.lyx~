@@ -1,0 +1,931 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>=latex},
+}
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Mathematical Programming Project
+\end_layout
+
+\begin_layout Author
+Michael Nelson
+\end_layout
+
+\begin_layout Standard
+A quantity 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+ is known to to depend upon another quantity 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+.
+ A set of corresponding values have been collected for 
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+ and are presented in vector format below:
+\begin_inset Formula 
+\begin{align*}
+\boldsymbol{a} & =(0,0.5,1,1.5,1.9,2.5,3,3.5,4,4.5,5,5.5,6,6.6,7,7.6,8.5,9,10)^{\top}\\
+\boldsymbol{b} & =(1,0.9,0.7,1.5,2.0,2.4,3.2,2,2.7,3.5,1,4,3.6,2.7,5.7,4.6,6,6.8,7.3)^{\top}
+\end{align*}
+
+\end_inset
+
+In particular, 
+\series bold
+
+\begin_inset Formula $\boldsymbol{a}$
+\end_inset
+
+ 
+\series default
+and 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+ are vectors in 
+\begin_inset Formula $\mathbb{R}^{19}$
+\end_inset
+
+.
+ We wish to find the quadratic polynomial
+\begin_inset Formula 
+\[
+p_{\boldsymbol{x}}(t)=p_{(x_{1},x_{2},x_{3})}(t)=x_{1}t^{2}+x_{2}t+x_{3}
+\]
+
+\end_inset
+
+whose graph bests fits the set of data points in the sense that it produces
+ the smallest sum of absolute deviations of each observe value of 
+\begin_inset Formula $\boldsymbol{b}$
+\end_inset
+
+ from the predicted value 
+\begin_inset Formula $p_{\boldsymbol{x}}(\boldsymbol{a})$
+\end_inset
+
+.
+ In other words, we wish to solve the following optimization problem:
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad\sum_{i=1}^{19}|p_{\boldsymbol{x}}(a_{i})-b_{i}|\\
+\text{subject to} & \quad\boldsymbol{x}\in\mathbb{R}^{3}.
+\end{align*}
+
+\end_inset
+
+An optimal solution 
+\begin_inset Formula $\boldsymbol{x}^{*}=(x_{1}^{*},x_{2}^{*},x_{3}^{*})^{\top}$
+\end_inset
+
+ to this optimization problem will given us a quadratic polynomial 
+\begin_inset Formula $p_{\boldsymbol{x}^{*}}(t)=x_{1}^{*}t^{2}+x_{2}^{*}t+x_{3}^{*}$
+\end_inset
+
+ whose graph 
+\begin_inset Formula $C_{\boldsymbol{x}^{*}}$
+\end_inset
+
+ best fits the data in the sense described above.
+ By expressing 
+\begin_inset Formula $p_{\boldsymbol{x}}(t)$
+\end_inset
+
+ in terms of its coefficients, we see that this optimization problem has
+ the form:
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad\sum_{i=1}^{19}|a_{i}^{2}x_{1}+a_{i}x_{2}+x_{3}-b_{i}|\\
+\text{subject to} & \quad\boldsymbol{x}\in\mathbb{R}^{3}.
+\end{align*}
+
+\end_inset
+
+At the moment, this optimization problem is not a linear programming problem
+ because there is an absolute value in objective function; however, we can
+ convert the optimization problem into a linear programming problem by indroduci
+ng new variables 
+\begin_inset Formula $x_{4},x_{5},\dots,x_{22}\geq0$
+\end_inset
+
+ and setting 
+\begin_inset Formula $x_{i+3}=a_{i}^{2}x_{1}+a_{i}x_{2}+x_{3}-b_{i}$
+\end_inset
+
+ or all 
+\begin_inset Formula $1\leq i\leq19$
+\end_inset
+
+.
+ We obtain a new optimization problem which has the form:
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad\sum_{i=4}^{22}x_{i}\\
+\text{subject to} & \quad a_{i}^{2}x_{1}+a_{i}x_{2}+x_{3}-x_{i+3}=b_{i} & \quad\text{for all }1\leq i\leq19\\
+ & \quad x_{i+3}\geq0 & \quad\text{for all }1\leq i\leq19\\
+ & \quad x_{1},x_{2},x_{3}\in\mathbb{R}.
+\end{align*}
+
+\end_inset
+
+This new optizimation problem has the correct form for it to be considered
+ a linear programming problem.
+ It is easy to see that 
+\begin_inset Formula $\widetilde{\boldsymbol{x}}^{*}=(x_{1}^{*},x_{2}^{*},x_{3}^{*},\dots,x_{22}^{*})^{\top}$
+\end_inset
+
+ is an optimal solution to the new linear programming problem if and only
+ if 
+\begin_inset Formula $\boldsymbol{x}^{*}=(x_{1}^{*},x_{2}^{*},x_{3}^{*})^{\top}$
+\end_inset
+
+ is an optimal solution to our original optimalization problem.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+We will find an optimal solution to this linear programming problem using
+ MATLAB, which has a built-in function whose purpose is to solve linear
+ programming problems like this.
+ The syntax for this function is 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+[x,cval] = linprog(c,Ain,bin,Aeq,beq)
+\end_layout
+
+\end_inset
+
+, where the linear program solver assumes that the linear program has the
+ form
+\begin_inset Formula 
+\begin{align*}
+\text{minimize} & \quad\boldsymbol{c}^{\top}\boldsymbol{x}\\
+\text{subject to} & \quad A_{\mathrm{eq}}\boldsymbol{x}=\boldsymbol{b}_{\mathrm{eq}}\\
+ & \quad A_{\mathrm{in}}\boldsymbol{x}\leq\boldsymbol{b}_{\mathrm{in}}\\
+ & \quad\boldsymbol{x}\in\mathbb{R}^{22}
+\end{align*}
+
+\end_inset
+
+So in order to use this funciton, we need to place our linear program in
+ to this form.
+ Let 
+\begin_inset Formula $V$
+\end_inset
+
+ be the 
+\begin_inset Formula $19\times3$
+\end_inset
+
+ Vandermonde matrix given by
+\begin_inset Formula 
+\[
+V=\begin{pmatrix}a_{1}^{2} & a_{1} & 1\\
+\vdots & \vdots & \vdots\\
+a_{i}^{2} & a_{i} & 1\\
+\vdots & \vdots & \vdots\\
+a_{19}^{2} & a_{19} & 1
+\end{pmatrix},
+\]
+
+\end_inset
+
+let 
+\begin_inset Formula $A_{\mathrm{eq}}$
+\end_inset
+
+ be the 
+\begin_inset Formula $19\times22$
+\end_inset
+
+ matrix given by 
+\begin_inset Formula $A_{\mathrm{eq}}=\begin{pmatrix}V & -\mathrm{I}_{19}\end{pmatrix}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathrm{I}_{19}$
+\end_inset
+
+ is the 
+\begin_inset Formula $19\times19$
+\end_inset
+
+ identity matrix, and let 
+\begin_inset Formula $\boldsymbol{b}_{\mathrm{eq}}=\boldsymbol{b}\in\mathbb{R}^{19}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+A_{\mathrm{eq}}\boldsymbol{x} & =\begin{pmatrix}a_{1}^{2} & a_{1} & 1 & -1 & 0 & \cdots & \cdots & 0\\
+\vdots & \vdots & \vdots & 0 & \ddots & \ddots &  & \vdots\\
+a_{i}^{2} & a_{i} & 1 & \vdots & \ddots & -1 & \ddots & \vdots\\
+\vdots & \vdots & \vdots & \vdots &  & \ddots & \ddots & 0\\
+a_{19}^{2} & a_{19} & 1 & 0 & \cdots & \cdots & 0 & -1
+\end{pmatrix}\begin{pmatrix}x_{1}\\
+\vdots\\
+x_{i}\\
+\vdots\\
+x_{22}
+\end{pmatrix}=\begin{pmatrix}b_{1}\\
+\vdots\\
+b_{i}\\
+\vdots\\
+b_{19}
+\end{pmatrix}=\boldsymbol{b}_{\mathrm{eq}}
+\end{align*}
+
+\end_inset
+
+gives us our equality constraint.
+ Next, let 
+\begin_inset Formula $A_{\mathrm{in}}$
+\end_inset
+
+ be the 
+\begin_inset Formula $19\times22$
+\end_inset
+
+ matrix 
+\begin_inset Formula $A_{\mathrm{in}}=\begin{pmatrix}0 & 0 & 0 & -\mathrm{I}_{19}\end{pmatrix}$
+\end_inset
+
+ and let 
+\begin_inset Formula $\boldsymbol{b}_{\mathrm{in}}=0\in\mathbb{R}^{19}$
+\end_inset
+
+.
+ Then
+\begin_inset Formula 
+\begin{align*}
+A_{\mathrm{in}}\boldsymbol{x} & =\begin{pmatrix}0 & 0 & 0 & -1 & 0 & \cdots & \cdots & 0\\
+\vdots & \vdots & \vdots & 0 & \ddots & \ddots &  & \vdots\\
+0 & 0 & 0 & \vdots & \ddots & -1 & \ddots & \vdots\\
+\vdots & \vdots & \vdots & \vdots &  & \ddots & \ddots & 0\\
+0 & 0 & 0 & 0 & \cdots & \cdots & 0 & -1
+\end{pmatrix}\begin{pmatrix}x_{1}\\
+\vdots\\
+x_{i}\\
+\vdots\\
+x_{22}
+\end{pmatrix}\leq\begin{pmatrix}0\\
+\vdots\\
+0\\
+\vdots\\
+0
+\end{pmatrix}=\boldsymbol{b}_{\mathrm{in}}
+\end{align*}
+
+\end_inset
+
+gives us our inequality constraints.
+ Finally, let 
+\begin_inset Formula $\boldsymbol{c}$
+\end_inset
+
+ be the vector 
+\begin_inset Formula $\boldsymbol{c}=(0,0,0,1,\dots,1,\dots,1)^{\top}\in\mathbb{R}^{22}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\boldsymbol{c}^{\top}\boldsymbol{z}$
+\end_inset
+
+ gives us our objective function.
+ We are now ready to work in MATLAB.
+ We write a MATLAB function 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+function [x,p1,l1,p2,l2,plot1,plot2] = OptimalPolynomialFittingDataL1L2(a,b,deg)
+\end_layout
+
+\end_inset
+
+ which solves the more general problem (where 
+\begin_inset Formula $\boldsymbol{a},\boldsymbol{b}\in\mathbb{R}^{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{\boldsymbol{x}}(t)$
+\end_inset
+
+ has degree 
+\begin_inset Formula $m$
+\end_inset
+
+ with 
+\begin_inset Formula $m\leq n$
+\end_inset
+
+) and then apply it our special case.
+ The function is given in the code below: 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [x,p1,l1,p2,l2] = OptimalPolynomialFittingDataL1L2(a,b,deg)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% We assume that length(a)=length(b)>=deg.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+m = deg; 
+\end_layout
+
+\begin_layout Plain Layout
+
+n = length(a);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Find optimal l1 solution using linprog.
+ The vector p1 returns the coefficients 
+\end_layout
+
+\begin_layout Plain Layout
+
+% of the polynomial which has optimal l1 distance from b.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+beq = b; 
+\end_layout
+
+\begin_layout Plain Layout
+
+bin = zeros(n,1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+Aeq = [a.^(m:-1:0), -eye(n)]; 
+\end_layout
+
+\begin_layout Plain Layout
+
+Ain = [zeros(n,m+1), -eye(n)]; 
+\end_layout
+
+\begin_layout Plain Layout
+
+c = [zeros(m+1,1); ones(n,1)]; 
+\end_layout
+
+\begin_layout Plain Layout
+
+[x,l1] = linprog(c,Ain,bin,Aeq,beq); 
+\end_layout
+
+\begin_layout Plain Layout
+
+p1 = (x(1:m+1));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Find optimal l2 solution using polyfit.
+ The vector p2 returns the coefficients 
+\end_layout
+
+\begin_layout Plain Layout
+
+% of the polynomial which has optimal l2 distance from b.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[p2,l2] = polyfit(a,b,m); 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let us now make use of this function.
+ First we find the optimal solution to our original problem:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+% Initial data
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+a = [0; 0.5; 1; 1.5; 1.9; 2.5; 3; 3.5; 4; 4.5; 5; 5.5; 6; 6.6; 7; 7.6; 8.5; 9; 10];
+\end_layout
+
+\begin_layout Plain Layout
+
+b = [1; 0.9; 0.7; 1.5; 2; 2.4; 3.2; 2; 2.7; 3.5; 1; 4; 3.6; 2.7; 5.7; 4.6; 6; 6.8; 7.3];
+\end_layout
+
+\begin_layout Plain Layout
+
+deg = 2;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Use OptimalPolynomialFittingDataL1L2 function to find p1 and p2
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[p1,l1,p2,l2] = OptimalPolynomialFittingDataL1L2(a,b,deg);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Plot our optimal solution to visualize how it fits the data
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+t0 = min(a);
+\end_layout
+
+\begin_layout Plain Layout
+
+t1 = max(a);
+\end_layout
+
+\begin_layout Plain Layout
+
+t = linspace(t0,t1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(a,b,'o',t,polyval(p1,t),'r');
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(a,b,'o',t,polyval(p1,t),'r',t,polyval(p2,t),'b');
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+MATLAB tells us that the optimal 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+ solution is given by the polynomial
+\begin_inset Formula 
+\[
+p(t)=-0.0143t^{2}+0.7714t+1.0143,
+\]
+
+\end_inset
+
+corresponding to point 
+\begin_inset Formula $\boldsymbol{x}^{*}=(-0.0143,0.7714,1.0143)$
+\end_inset
+
+.
+ MATLAB also gives us the following plot:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename plot1.jpg
+	lyxscale 50
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the red curve is the graph of 
+\begin_inset Formula $p(t)$
+\end_inset
+
+ and the data points are plotted using blue circles.
+ Our function also returns an optimal 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+ solution, which is given by the polynomial
+\begin_inset Formula 
+\[
+q(t)=0.0458t^{2}+0.168t+1.1036.
+\]
+
+\end_inset
+
+Let's plot the graph of 
+\begin_inset Formula $q(t)$
+\end_inset
+
+ together with the graph of 
+\begin_inset Formula $p(t)$
+\end_inset
+
+ and the data points.
+ MATLAB gives us the following plot: 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename plot2.jpg
+	lyxscale 60
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the blue curve is the graph of 
+\begin_inset Formula $q(t)$
+\end_inset
+
+.
+ Note that our function finds the optimal 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+ and optimal 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+ solutions in the space of degree 
+\begin_inset Formula $\leq m$
+\end_inset
+
+ polynomials where 
+\begin_inset Formula $1\leq m\leq\mathrm{length}(\boldsymbol{a})$
+\end_inset
+
+.
+ Let's see what the degree 
+\begin_inset Formula $\leq9$
+\end_inset
+
+ optimal solutions look like.
+ To do this, we simply set 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+deg=9
+\end_layout
+
+\end_inset
+
+ and run the code agove again.
+ MATLAB outputs the following plot:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename plot3.jpg
+	lyxscale 60
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What's happening here is that the 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+ optimal solution is much more sensisitive to the 
+\begin_inset Quotes eld
+\end_inset
+
+outlier
+\begin_inset Quotes erd
+\end_inset
+
+ data than the 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+ solution is.
+ In fact, the 
+\begin_inset Formula $\ell_{1}$
+\end_inset
+
+ optimal solution is perfectly happy ignoring outliers, so long as stays
+ very close to most of the data points (and the outliers aren't 
+\emph on
+too 
+\emph default
+far away).
+ The 
+\begin_inset Formula $\ell_{2}$
+\end_inset
+
+ optimal solution on the other hand tries to be much more inclusion, taking
+ into account all of the outliers (as well as the majority).
+ 
+\end_layout
+
+\end_body
+\end_document
