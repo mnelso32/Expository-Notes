@@ -19282,12 +19282,17 @@ is defined as follows: given a complex number
 , we set
 \begin_inset Formula 
 \[
-\wp(z;\Lambda)=\frac{1}{z^{2}}+\sum_{\omega\in\Lambda\backslash\{0\}}\left(\frac{1}{(z-\omega)^{2}}-\frac{1}{\omega^{2}}\right).
+\wp(z;\Lambda)=\frac{1}{z^{2}}+\sum_{\omega\in\Lambda^{*}}\left(\frac{1}{(z-\omega)^{2}}-\frac{1}{\omega^{2}}\right)
 \]
 
 \end_inset
 
-When working with a fixed lattice 
+where we set 
+\begin_inset Formula $\Lambda^{*}=\Lambda-\{0\}$
+\end_inset
+
+.
+ When working with a fixed lattice 
 \begin_inset Formula $\Lambda$
 \end_inset
 
@@ -19314,10 +19319,6 @@ end{defn}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsubsection
-Eisenstein Series
 \end_layout
 
 \begin_layout Standard
@@ -19372,7 +19373,7 @@ G_{k}(\Lambda)=\sum_{\omega\in\Lambda^{*}}\frac{1}{\omega^{k}}=\sum_{\substack{m
 \end_inset
 
 where 
-\begin_inset Formula $L^{*}=L-\{0\}$
+\begin_inset Formula $\Lambda^{*}=\Lambda-\{0\}$
 \end_inset
 
  .
@@ -19406,8 +19407,8 @@ label{rem}
 
 \end_inset
 
- 
-\begin_inset Formula $G_{k}(\Lambda)$
+ Observe that 
+\begin_inset Formula $G_{k}=G_{k}(\Lambda)$
 \end_inset
 
  is a function of the lattice 
@@ -19419,13 +19420,13 @@ label{rem}
 \begin_inset Formula $\Lambda$
 \end_inset
 
- is fixed, then 
-\begin_inset Formula $G_{k}=G_{k}(\Lambda)$
+ is fixed, then we can view 
+\begin_inset Formula $G_{k}$
 \end_inset
 
- is a constant.
+ as being a constant.
  For lattices of the form 
-\begin_inset Formula $\Lambda=[1,\tau]$
+\begin_inset Formula $\Lambda_{\tau}=[1,\tau]$
 \end_inset
 
  where 
@@ -19649,7 +19650,7 @@ for an arbitrary element in
  as
 \begin_inset Formula 
 \[
-G_{k}(\Lambda)=\sum_{\boldsymbol{m}}\frac{1}{|\langle\boldsymbol{m},\boldsymbol{\omega}\rangle|^{k}},
+G_{k}(\Lambda)=\sum_{\boldsymbol{m}}\frac{1}{\langle\boldsymbol{m},\boldsymbol{\omega}\rangle^{k}},
 \]
 
 \end_inset
@@ -19709,9 +19710,7 @@ where it is understood that we are summing over
  It follows that
 \begin_inset Formula 
 \begin{align*}
-G_{k}(\Lambda) & =\sum_{\boldsymbol{m}}\frac{1}{|\langle\boldsymbol{m},\boldsymbol{\omega}\rangle|^{k}}\\
- & \leq\frac{1}{C^{k}}\sum_{\boldsymbol{m}}\frac{1}{\|\boldsymbol{m}\|^{k}}\\
- & =\frac{1}{C^{k}}\sum_{\boldsymbol{m}}\frac{1}{(\|\boldsymbol{m}\|^{2})^{k/2}}.
+\sum_{\boldsymbol{m}}\frac{1}{|\langle\boldsymbol{m},\boldsymbol{\omega}\rangle|^{k}} & \leq\frac{1}{C^{k}}\sum_{\boldsymbol{m}}\frac{1}{\|\boldsymbol{m}\|^{k}}
 \end{align*}
 
 \end_inset
@@ -19721,7 +19720,7 @@ Thus in order to show the sum
 \end_inset
 
  converges absolutely, it suffices to show that the series 
-\begin_inset Formula $\sum_{\boldsymbol{m}}\frac{1}{(\|\boldsymbol{m}\|^{2})^{k/2}}$
+\begin_inset Formula $\sum_{\boldsymbol{m}}\frac{1}{\|\boldsymbol{m}\|^{k}}$
 \end_inset
 
  converges.
@@ -19729,12 +19728,12 @@ Thus in order to show the sum
  We have
 \begin_inset Formula 
 \begin{align*}
-\int\limits _{\|\boldsymbol{x}\|^{2}\geq1}\frac{1}{(\|\boldsymbol{x}\|^{2})^{k/2}}\mathrm{d}\boldsymbol{x} & =\int_{0}^{2\pi}\int_{0}^{\infty}\frac{1}{r^{k}}r\mathrm{d}r\mathrm{d}\theta\\
+\int\limits _{\|\boldsymbol{x}\|^{2}\geq1}\frac{1}{\|\boldsymbol{x}\|^{k}}\mathrm{d}\boldsymbol{x} & =\int_{0}^{2\pi}\int_{0}^{\infty}\frac{1}{r^{k}}r\mathrm{d}r\mathrm{d}\theta\\
  & =\int_{0}^{2\pi}\int_{0}^{\infty}r^{1-k}\mathrm{d}r\mathrm{d}\theta\\
- & =\int_{0}^{2\pi}\left(\frac{1}{2-k}r^{2-k}\right)\Big|_{0}^{\infty}\mathrm{d}\theta\\
+ & =\int_{0}^{2\pi}\left(\frac{r^{2-k}}{2-k}\right)\Big|_{0}^{\infty}\mathrm{d}\theta\\
  & =\int_{0}^{2\pi}\frac{1}{k-2}\mathrm{d}\theta\\
  & =\frac{2\pi}{k-2}\\
- & <\infty.
+ & <\infty,
 \end{align*}
 
 \end_inset
@@ -19743,8 +19742,8 @@ where we used the fact that
 \begin_inset Formula $k>2$
 \end_inset
 
- to get from the third line to the fourth line as well as from the sixth
- line to the seventh line.
+ to get from the third line to the fourth line as well as from the fifth
+ line to the sixth line.
  
 \begin_inset ERT
 status open
@@ -20110,15 +20109,15 @@ label{prop}
 \end_inset
 
  Let 
-\begin_inset Formula $\wp(z)$
+\begin_inset Formula $\wp=\wp(z)=\wp(z;\Lambda)$
 \end_inset
 
  be the Weierstrass 
 \begin_inset Formula $\wp$
 \end_inset
 
--function for the lattice 
-\begin_inset Formula $L$
+-function for a fixed lattice 
+\begin_inset Formula $\Lambda$
 \end_inset
 
 .
@@ -20126,50 +20125,42 @@ label{prop}
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $\wp(z)$
+\begin_inset Formula $\wp$
 \end_inset
 
  is an elliptic function for 
-\begin_inset Formula $L$
+\begin_inset Formula $\Lambda$
 \end_inset
 
  whose singularities consist of double poles at the points of 
-\begin_inset Formula $L$
+\begin_inset Formula $\Lambda$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $\wp(z)$
+\begin_inset Formula $\wp$
 \end_inset
 
- satisfies the differential equation
+ satisfies the following differential equation
 \begin_inset Formula 
 \[
-\wp'(z)^{2}=4\wp(z)^{3}-g_{2}(L)\wp(z)-g_{3}(L),
+\wp'^{2}=4\wp^{3}-g_{2}\wp-g_{3},
 \]
 
 \end_inset
 
 where the constants 
-\begin_inset Formula $g_{2}(L)$
+\begin_inset Formula $g_{2}=60G_{4}$
 \end_inset
 
  and 
-\begin_inset Formula $g_{3}(L)$
+\begin_inset Formula $g_{3}=140G_{6}$
 \end_inset
 
- are defined by
-\begin_inset Formula 
-\begin{align*}
-g_{2}(L) & =60\sum_{\omega\in L\backslash\{0\}}\frac{1}{\omega^{4}}\\
-g_{3}(L) & =140\sum_{\omega\in L\backslash\{0\}}\frac{1}{\omega^{6}}
-\end{align*}
-
-\end_inset
-
-
+.
+ 
 \end_layout
 
 \begin_layout Enumerate
