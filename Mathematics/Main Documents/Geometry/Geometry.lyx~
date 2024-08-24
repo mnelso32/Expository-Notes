@@ -638,6 +638,7 @@ Presheaves on
 
 .
  This is where the idea of sheaves come in.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -662,43 +663,64 @@ begin{defn}
 \end_inset
 
 .
- We say 
+ Consider the following two conditions that 
 \begin_inset Formula $\mathcal{F}$
 \end_inset
 
- is a 
-\begin_inset Formula $\textbf{sheaf}$
-\end_inset
+ may satisfy:
+\end_layout
 
- if for every open subset 
+\begin_layout Enumerate
+(Local Uniqueness) For every open subset 
 \begin_inset Formula $U$
-\end_inset
-
- of 
-\begin_inset Formula $X$
 \end_inset
 
  and for every open covering 
 \begin_inset Formula $\{U_{i}\}_{i\in I}$
 \end_inset
 
- the following 
-\begin_inset Formula $\textbf{sheaf axiom}$
+ of 
+\begin_inset Formula $U$
 \end_inset
 
- is satisfied: 
-\end_layout
+, if 
+\begin_inset Formula $s,t\in\mathcal{F}(U)$
+\end_inset
 
-\begin_layout Quote
-Suppose for each 
+ such that 
+\begin_inset Formula $s|_{U_{i}}=t|_{U_{i}}$
+\end_inset
+
+ for all 
 \begin_inset Formula $i\in I$
 \end_inset
 
- we have a section 
-\begin_inset Formula $s_{i}\in\mathcal{F}(U_{i})$
+, then we must have 
+\begin_inset Formula $s=t$
 \end_inset
 
- such that
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+(Gluing of Compatible Local Data) For every open subset 
+\begin_inset Formula $U$
+\end_inset
+
+, for every open covering 
+\begin_inset Formula $\{U_{i}\}_{i\in I}$
+\end_inset
+
+ of 
+\begin_inset Formula $U$
+\end_inset
+
+, and for every tuple 
+\begin_inset Formula $(s_{i})\in\prod_{i}\mathcal{F}(U_{i})$
+\end_inset
+
+ which is locally compatible in the sense that
 \begin_inset Formula 
 \[
 s_{i}|_{U_{i}\cap U_{j}}=s_{j}|_{U_{i}\cap U_{j}}
@@ -710,8 +732,7 @@ for all
 \begin_inset Formula $i,j\in I$
 \end_inset
 
-.
- Then there exists a unique section 
+, there exists a section 
 \begin_inset Formula $s\in\mathcal{F}(U)$
 \end_inset
 
@@ -724,7 +745,68 @@ for all
 \end_inset
 
 .
- 
+\end_layout
+
+\begin_layout Standard
+We say 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is 
+\series bold
+separated 
+\series default
+if it satisfies the local uniqueness condition and we say 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is a 
+\series bold
+sheaf
+\series default
+ if in addition to being separated it also satisfies the gluing of compatible
+ local data condition.
+ In other words, 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is a sheaf if satisfies the following condition:
+\end_layout
+
+\begin_layout Quote
+For every open subset 
+\begin_inset Formula $U$
+\end_inset
+
+, for every open covering 
+\begin_inset Formula $\{U_{i}\}_{i\in I}$
+\end_inset
+
+ of 
+\begin_inset Formula $U$
+\end_inset
+
+, and for every tuple 
+\begin_inset Formula $(s_{i})\in\prod_{i}\mathcal{F}(U_{i})$
+\end_inset
+
+ which is locally compatible, there exists a 
+\emph on
+unique 
+\emph default
+section 
+\begin_inset Formula $s\in\mathcal{F}(U)$
+\end_inset
+
+ such that 
+\begin_inset Formula $s_{i}=s|_{U_{i}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\in I$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1314,16 +1396,180 @@ is exact.
  
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $\mathcal{F}\subseteq\mathcal{G}$
+\end_inset
+
+ be abelian sheaves on 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathcal{G}\slash\mathcal{F}$
+\end_inset
+
+ is separated.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $U$
+\end_inset
+
+ be an open subset of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Suppose that there exists a nonzero 
+\begin_inset Formula $\overline{t}\in\mathcal{G}(U)\slash\mathcal{F}(U)$
+\end_inset
+
+ (represented by 
+\begin_inset Formula $t\in\mathcal{G}(U)$
+\end_inset
+
+) and an open cover 
+\begin_inset Formula $\{U_{i}\}_{i\in I}$
+\end_inset
+
+ of 
+\begin_inset Formula $U$
+\end_inset
+
+ such that 
+\begin_inset Formula $\overline{t}|_{U_{i}}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ This means that 
+\begin_inset Formula $t|_{U_{i}}\in\mathcal{F}(U_{i})$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\in I$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathcal{F}$
+\end_inset
+
+ is a sheaf and since 
+\begin_inset Formula $(t|_{U_{i}})$
+\end_inset
+
+ is locally compatible, the 
+\begin_inset Formula $t|_{U_{i}}$
+\end_inset
+
+ glue to a unique section in 
+\begin_inset Formula $s\in\mathcal{F}(U)$
+\end_inset
+
+, and since 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ is a sheaf, we must have 
+\begin_inset Formula $t=s\in\mathcal{F}(U)$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\overline{t}=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Examples of Sheaves
 \end_layout
 
-\begin_layout Subsubsection
-Sheaf of Continuous Functions
+\begin_layout Standard
+We now discuss several examples of sheaves.
+ 
 \end_layout
 
 \begin_layout Standard
-Let 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
 \begin_inset Formula $X$
 \end_inset
 
@@ -1455,18 +1701,37 @@ Then
 
 .
  
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
 \end_layout
 
-\begin_layout Subsubsection
-Sheaf of 
-\begin_inset Formula $C^{\alpha}$
 \end_inset
 
- Functions
+
 \end_layout
 
 \begin_layout Standard
-Let 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
 \begin_inset Formula $V$
 \end_inset
 
@@ -1531,14 +1796,38 @@ Then
 \end_inset
 
 .
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
 \end_layout
 
-\begin_layout Subsubsection
-Sheaf of Holomorphic Functions
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Let 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
 \begin_inset Formula $V$
 \end_inset
 
@@ -1584,6 +1873,20 @@ Then
 \end_inset
 
 -vector spaces.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -5125,6 +5428,18 @@ end{example}
 \begin_inset space ~
 \end_inset
 
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
 Let 
 \begin_inset Formula $\{U_{i}\}_{i\in I}$
 \end_inset
@@ -7493,21 +7808,7 @@ Direct Image
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{defn}
-\backslash
-label{defn}
-\end_layout
-
-\end_inset
-
- We define 
+We define 
 \begin_inset Formula $f_{*}\mathcal{G}$
 \end_inset
 
@@ -7691,20 +7992,6 @@ Define
 \end_inset
 
 .
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{defn}
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -45960,13 +46247,13 @@ label{proof}
 \end_inset
 
 -tuple 
-\begin_inset Formula $\boldsymbol{b}_{i}=(b_{i,0},\dots,b_{i,n})\in B^{n+1}$
+\begin_inset Formula $\boldsymbol{b}_{i}=(b_{0,i},\dots,b_{n,i})\in B^{n+1}$
 \end_inset
 
  where
 \begin_inset Formula 
 \[
-b_{i,j}=\begin{cases}
+b_{j,i}=\begin{cases}
 \varphi_{i}(x_{j}/x_{i}) & \text{if }j\neq i\\
 1 & \text{if }j=i
 \end{cases}
@@ -46003,13 +46290,13 @@ Note that if
 \end_inset
 
 -tuple 
-\begin_inset Formula $\boldsymbol{b}_{j}=(b_{j,0},\dots,b_{j,n})$
+\begin_inset Formula $\boldsymbol{b}_{j}=(b_{0,j},\dots,b_{n,j})$
 \end_inset
 
  where
 \begin_inset Formula 
 \[
-b_{j,i}=\begin{cases}
+b_{i,j}=\begin{cases}
 \varphi_{j}(x_{i}/x_{j}) & \text{if }i\neq j\\
 1 & \text{if }i=j
 \end{cases}
@@ -46017,16 +46304,28 @@ b_{j,i}=\begin{cases}
 
 \end_inset
 
-however note that 
-\begin_inset Formula $\boldsymbol{b}_{i}=u_{i,j}\boldsymbol{b}_{j}$
-\end_inset
-
- where 
-\begin_inset Formula $u_{i,j}=\varphi_{i}(x_{j}/x_{i})$
+In this case, note that 
+\begin_inset Formula $b_{i,j}$
 \end_inset
 
  is a unit in 
 \begin_inset Formula $B$
+\end_inset
+
+ (whose inverse is 
+\begin_inset Formula $b_{j,i})$
+\end_inset
+
+ and we have 
+\begin_inset Formula $b_{i,j}\boldsymbol{b}_{i}=\boldsymbol{b}_{j}$
+\end_inset
+
+ since 
+\begin_inset Formula $b_{i,j}b_{k,i}=b_{k,j}$
+\end_inset
+
+ for every 
+\begin_inset Formula $k$
 \end_inset
 
 .
@@ -46036,7 +46335,7 @@ however note that
 
 .
  Conversely, given an 
-\begin_inset Formula $n$
+\begin_inset Formula $n+1$
 \end_inset
 
 -tuple 
@@ -46064,7 +46363,7 @@ however note that
 \end_inset
 
  given by 
-\begin_inset Formula $x_{j}/x_{i}\mapsto b_{j}/b_{i}$
+\begin_inset Formula $x_{j}/x_{i}\mapsto b_{i}/b_{j}$
 \end_inset
 
 .
@@ -46568,35 +46867,52 @@ Conversely, suppose that we are given a morphism
 \end_inset
 
  and for each 
-\begin_inset Formula $j$
+\begin_inset Formula $i$
 \end_inset
 
  an element 
-\begin_inset Formula $\boldsymbol{b}_{j}=(b_{j,0},\dots,b_{j,j}=1,\dots,b_{j,n})$
+\begin_inset Formula $\boldsymbol{b}_{i}=(b_{0,i},\dots,b_{i,i}=1,\dots,b_{n,i})$
 \end_inset
 
  of 
-\begin_inset Formula $B^{n+1}|_{V_{j}}$
+\begin_inset Formula $B_{i}^{n+1}$
 \end_inset
 
  such that 
-\begin_inset Formula $b_{i,j}$
-\end_inset
-
- is a unit in 
-\begin_inset Formula $B|_{V_{i}\cap V_{j}}$
-\end_inset
-
- and 
-\begin_inset Formula $b_{i,k}=b_{i,j}b_{j,k}$
+\begin_inset Formula $b_{k,i}=b_{k,j}b_{j,i}$
 \end_inset
 
  in 
-\begin_inset Formula $B|_{V_{i}\cap V_{j}}$
+\begin_inset Formula $B_{ij}$
 \end_inset
 
  for all 
 \begin_inset Formula $i,j,k$
+\end_inset
+
+ where we set 
+\begin_inset Formula $B_{i}=B|_{V_{i}}$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{ij}=B|_{V_{i}\cap V_{j}}$
+\end_inset
+
+.
+ In particular, note that 
+\begin_inset Formula $b_{i,j}$
+\end_inset
+
+ is a unit in 
+\begin_inset Formula $B_{ij}$
+\end_inset
+
+ since 
+\begin_inset Formula $b_{j,i}b_{i,j}=1$
+\end_inset
+
+ in 
+\begin_inset Formula $B_{ij}$
 \end_inset
 
 .
@@ -46606,26 +46922,82 @@ Conversely, suppose that we are given a morphism
 
 -valued points are the same if and only if the corresponding elements of
  
-\begin_inset Formula $B^{n+1}|_{V_{j}}$
+\begin_inset Formula $B_{i}^{n+1}$
 \end_inset
 
  are equal for each 
-\begin_inset Formula $j$
+\begin_inset Formula $i$
 \end_inset
 
 .
  Let 
-\begin_inset Formula $K_{j}$
+\begin_inset Formula $K_{i}$
 \end_inset
 
  be the kernel of the map 
-\begin_inset Formula $\boldsymbol{b}_{j}\colon B^{n+1}|_{V_{j}}\to B|_{V_{j}}$
+\begin_inset Formula $\boldsymbol{b}_{i}\colon B_{i}^{n+1}\to B_{i}$
 \end_inset
 
- and let
+.
+ In particular, note that 
+\begin_inset Formula $K$
+\end_inset
+
+ is generated by 
+\begin_inset Formula $\boldsymbol{w}_{k}=(w_{0,k},\dots,w_{n,k})\in B_{i}^{n+1}$
+\end_inset
+
+ where 
+\begin_inset Formula $k=0,\dots,i-1,i+1,\dots,n$
+\end_inset
+
+ and
 \begin_inset Formula 
 \[
-K=\{\boldsymbol{b}\in B^{n+1}\mid\boldsymbol{b}|_{V_{j}}\in K_{j}\text{ for each }j\}.
+w_{j,k}=\begin{cases}
+1 & \text{if }j=k\\
+-b_{k,i} & \text{if }j=i\\
+0 & \text{else}
+\end{cases}
+\]
+
+\end_inset
+
+In other words, the
+\series bold
+ 
+\begin_inset Formula $\boldsymbol{w}_{k}$
+\end_inset
+
+ 
+\series default
+appear in the column of the 
+\begin_inset Formula $(n+1)\times n$
+\end_inset
+
+ matrix below:
+\begin_inset Formula 
+\[
+\begin{pmatrix}1 & 0 & \cdots & 0 & 0\\
+0 & 1 & \cdots & \vdots & \vdots\\
+\vdots & 0 & \cdots & \vdots & \vdots\\
+\vdots & \vdots & \cdots & \vdots & \vdots\\
+0 & 0 & \cdots & 0 & 0\\
+-b_{0,i} & -b_{1,i} & \cdots & -b_{n-1,i} & -b_{n,i}\\
+0 & 0 & \cdots & 0 & 0\\
+\vdots & \vdots & \cdots & \vdots & \vdots\\
+\vdots & \vdots & \cdots & 0 & \vdots\\
+\vdots & \vdots & \cdots & 1 & 0\\
+0 & 0 & \cdots & 0 & 1
+\end{pmatrix}
+\]
+
+\end_inset
+
+Finally, let 
+\begin_inset Formula 
+\[
+K=\{\boldsymbol{b}\in B^{n+1}\mid\boldsymbol{b}|_{V_{i}}\in K_{i}\text{ for each }i\}.
 \]
 
 \end_inset
@@ -46653,7 +47025,7 @@ To see that
  so the result of localizing the sequence
 \begin_inset Branch tikzcd
 inverted 0
-status open
+status collapsed
 
 \begin_layout Standard
 \begin_inset ERT
@@ -53577,7 +53949,7 @@ at least
 \emph default
  one lift such that the diagram commutes.
  In other words, 
-\begin_inset Formula $X_{Y}(V)\to X_{Y}(K)$
+\begin_inset Formula $Y_{X}(V)\to Y_{X}(K)$
 \end_inset
 
  is surjective.
@@ -63517,6 +63889,138 @@ end{prop}
 
 \end_layout
 
+\begin_layout Subsection
+Étale covers
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $S$
+\end_inset
+
+ be a scheme.
+ An 
+\series bold
+étale cover
+\series default
+ of 
+\begin_inset Formula $S$
+\end_inset
+
+ is a finite étale morphism of schemes 
+\begin_inset Formula $\pi\colon X\to S$
+\end_inset
+
+.
+ A morphism of étale covers of 
+\begin_inset Formula $S$
+\end_inset
+
+ is a morphism of 
+\begin_inset Formula $S$
+\end_inset
+
+-schemes.
+ The category of étale covers of 
+\begin_inset Formula $S$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $\mathrm{FÉt}\slash S$
+\end_inset
+
+ (or by 
+\begin_inset Formula $\mathrm{FÉt}\slash R$
+\end_inset
+
+ if 
+\begin_inset Formula $S=\mathrm{Spec}\,R$
+\end_inset
+
+ is affine).
+ An étale cover 
+\begin_inset Formula $X\to S$
+\end_inset
+
+ is 
+\series bold
+split 
+\series default
+if it is isomorphic as an 
+\begin_inset Formula $S$
+\end_inset
+
+-scheme to 
+\begin_inset Formula $\coprod_{i=1}^{m}S$
+\end_inset
+
+ for some integer 
+\begin_inset Formula $m\geq0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $L\slash K$
+\end_inset
+
+ be a finite separable field extension.
+ Then the corresponding map 
+\begin_inset Formula $\mathrm{Spec}\,L\to\mathrm{Spec}\,K$
+\end_inset
+
+ is an étale cover.
+ More generally, let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a ring and let 
+\begin_inset Formula $f\in R[t]$
+\end_inset
+
+ be a monic polynomial such that 
+\begin_inset Formula $\langle f,f'\rangle=1$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathrm{Spec}(R[t]\slash f)\to\mathrm{Spec}\,R$
+\end_inset
+
+ is an étale cover.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Proj
 \end_layout
@@ -69013,34 +69517,6 @@ Let
 \end_inset
 
  be a scheme.
- We now wish to define Cartier divisors on 
-\begin_inset Formula $X$
-\end_inset
-
-.
- This notion will be easiest in the case where 
-\begin_inset Formula $X$
-\end_inset
-
- is an integral scheme, but let us begin by stating the definition in the
- general case:
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{defn}
-\backslash
-label{defn}
-\end_layout
-
-\end_inset
-
  A 
 \series bold
 Cartier divisor 
@@ -69066,42 +69542,21 @@ where
 \end_inset
 
 .
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{defn}
-\end_layout
-
+ Let us describe such an element in the case where 
+\begin_inset Formula $X$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Subsubsection
-Cartier Divisors on Integral Schemes
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $X=(X,\mathcal{O})$
-\end_inset
-
- be an integral scheme.
- We denote by 
+ is an integral scheme.
+ In this case, 
 \begin_inset Formula $\mathcal{K}$
 \end_inset
 
- to be the constant sheaf on 
+ is the constant sheaf on 
 \begin_inset Formula $X$
 \end_inset
 
  with value 
-\begin_inset Formula $K=K(X)$
+\begin_inset Formula $K=\mathcal{K}(X)$
 \end_inset
 
  the function field of 
@@ -69109,11 +69564,7 @@ Let
 \end_inset
 
 .
- We can describe Cartier divisors on 
-\begin_inset Formula $X$
-\end_inset
-
- as follows: a Cartier divisor 
+ A Cartier divisor 
 \begin_inset Formula $D$
 \end_inset
 
@@ -69126,10 +69577,10 @@ Let
 \end_inset
 
  where 
-\begin_inset Formula $\{U_{i}\}$
+\begin_inset Formula $\{U_{i}\}_{i\in I}$
 \end_inset
 
- forms an open covering of 
+ is an open cover of 
 \begin_inset Formula $X$
 \end_inset
 
@@ -69137,7 +69588,7 @@ Let
 \begin_inset Formula $\alpha_{i}\in K^{\times}$
 \end_inset
 
- are elements such that 
+ such that 
 \begin_inset Formula $\alpha_{i}/\alpha_{i'}\in\mathcal{O}(U_{i}\cap U_{i'})^{\times}$
 \end_inset
 
@@ -69188,7 +69639,7 @@ Let
 \end_inset
 
  is a Cartier divisor which is respresented by the tuple 
-\begin_inset Formula $(\alpha_{i}\beta_{j},U_{i}\cap V_{j})$
+\begin_inset Formula $(U_{i}\cap V_{j},\alpha_{i}\beta_{j})$
 \end_inset
 
  and their difference 
@@ -69196,7 +69647,7 @@ Let
 \end_inset
 
  is a Cartier divisor which is represented by the tuple 
-\begin_inset Formula $(\alpha_{i}/\beta_{j},U_{i}\cap V_{j})$
+\begin_inset Formula $(U_{i}\cap V_{j},\alpha_{i}/\beta_{j})$
 \end_inset
 
 .
@@ -69204,21 +69655,30 @@ Let
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{defn}
-\backslash
-label{defn}
-\end_layout
-
+\begin_inset space ~
 \end_inset
 
- A Cartier divisor is called 
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+A Cartier divisor is called 
 \series bold
 principal 
 \series default
@@ -69305,18 +69765,9 @@ end{equation}
 \end_inset
 
 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{defn}
 \end_layout
 
-\end_inset
-
+\begin_layout Standard
 To a Cartier divisor 
 \begin_inset Formula $D$
 \end_inset
@@ -69346,11 +69797,7 @@ for all open
 \end_inset
 
 .
- Note over 
-\begin_inset Formula $U_{i}$
-\end_inset
-
- we have 
+ Note that 
 \begin_inset Formula $\mathcal{O}(D)|_{U_{i}}$
 \end_inset
 
@@ -69384,7 +69831,7 @@ for all open
 \begin_inset Formula $\alpha\alpha_{i}\in\mathcal{O}(U)$
 \end_inset
 
- or al ternatively 
+ or alternatively 
 \begin_inset Formula $\alpha\in\langle1/\alpha_{i}\rangle_{U}$
 \end_inset
 
@@ -69453,7 +69900,7 @@ label{example}
 \begin_inset Formula $\mathfrak{p}$
 \end_inset
 
- becomes is locally principal:
+ is locally principal:
 \begin_inset Formula 
 \[
 \mathfrak{p}_{U}=\langle1+\sqrt{-5}\rangle_{U}\cong A_{U}\quad\text{and}\quad\mathfrak{p}_{U'}=A_{U'}.
@@ -71598,7 +72045,7 @@ such that for all
 \end_inset
 
  we have 
-\begin_inset Formula $g_{ij}=h_{i}^{-1}g_{ij}'h_{j}$
+\begin_inset Formula $g_{ij}'=h_{i}^{-1}g_{ij}h_{j}$
 \end_inset
 
  in 
@@ -71606,6 +72053,150 @@ such that for all
 \end_inset
 
 .
+ This is easily seen to be an equivalence relation.
+ The equivalence class are called 
+\series bold
+cohomology classes
+\series default
+, and the set of all cohomology classes of 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $\mathrm{}(\mathcal{U},\mathcal{G})$
+\end_inset
+
+.
+ This is a pointed set in which the distinguished class is represented by
+ the element 
+\begin_inset Formula $g=(g_{ij})$
+\end_inset
+
+ where 
+\begin_inset Formula $g_{ij}=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $i,j$
+\end_inset
+
+.
+ An open covering 
+\begin_inset Formula $\mathcal{V}=\{V_{j}\}$
+\end_inset
+
+ of 
+\begin_inset Formula $X$
+\end_inset
+
+ is said to refine the open covering 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+ if there is a map 
+\begin_inset Formula $\tau\colon J\to I$
+\end_inset
+
+ such that 
+\begin_inset Formula $V_{j}\subseteq U_{\tau(j)}$
+\end_inset
+
+ for all 
+\begin_inset Formula $j\in J$
+\end_inset
+
+.
+ Note that if 
+\begin_inset Formula $g=(g_{ii'})$
+\end_inset
+
+ is a Čech 
+\begin_inset Formula $1$
+\end_inset
+
+-cocyle of 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+, then 
+\begin_inset Formula $\tau^{*}g=\widetilde{g}=(\widetilde{g}_{jj'})$
+\end_inset
+
+, where 
+\begin_inset Formula $\widetilde{g}_{jj'}=g_{\tau j,\tau j'}$
+\end_inset
+
+, is a Čech 
+\begin_inset Formula $1$
+\end_inset
+
+-cocyle of 
+\begin_inset Formula $\mathcal{G}$
+\end_inset
+
+ on 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+.
+ In particular, it is easy to check that the map 
+\begin_inset Formula $\tau$
+\end_inset
+
+ induces a 
+\begin_inset Formula $\mathrm{H}^{1}(\mathcal{U},\mathcal{G})\to\mathrm{H}^{1}(\mathcal{V},\mathcal{G})$
+\end_inset
+
+.
+ In fact the map 
+\begin_inset Formula $\mathrm{H}^{1}(\mathcal{U},\mathcal{G})\to\mathrm{H}^{1}(\mathcal{V},\mathcal{G})$
+\end_inset
+
+ does not depend on 
+\begin_inset Formula $\tau$
+\end_inset
+
+, for if we chose another map 
+\begin_inset Formula $\tau'\colon J\to I$
+\end_inset
+
+, then the induced map in cohomology would be the same.
+ Two coverings 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+ are called equivalent if each one refines the other.
+ In this case, we use the canonical isomorphisms induced by any choice of
+ refining maps and identify 
+\begin_inset Formula $\mathrm{H}^{1}(\mathcal{U},\mathcal{G})=\mathrm{H}^{1}(\mathcal{V},\mathcal{G})$
+\end_inset
+
+.
+ Finally, we set
+\begin_inset Formula 
+\[
+\mathrm{H}_{\mathrm{cech}}^{1}(X,\mathcal{G}):=\mathrm{colim}_{\mathcal{U}}(\mathrm{H}^{1}(\mathcal{U},\mathcal{G})),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathcal{U}$
+\end_inset
+
+ runs through the set of equivalence classes of open coverings.
  
 \end_layout
 
@@ -71649,7 +72240,7 @@ Let
 \end_inset
 
 .
- Note that
+ Note that 
 \begin_inset Formula 
 \[
 U_{01}:=U_{0}\cap U_{1}\simeq\mathrm{Spec}\,\Bbbk[x,1/x]=\mathrm{Spec}\,R_{01},
@@ -71718,7 +72309,7 @@ where we set
 \begin_inset Formula $\mathcal{U}$
 \end_inset
 
- is simply given by a single element 
+ is simply given by a single element
 \begin_inset Formula 
 \[
 g=g_{01}\in G(U_{01})=\mathrm{GL}_{n}(R_{01}).
@@ -72367,6 +72958,23 @@ status open
 end{prop}
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assume 
+\begin_inset Formula $f$
+\end_inset
+
+ is flat at 
+\begin_inset Formula $y$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathcal{O}$
 \end_inset
 
 

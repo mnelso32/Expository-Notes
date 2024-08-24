@@ -24,8 +24,8 @@
 \newtheorem{ex}{Exercise}
 \newtheorem{sol}{Solution} 
 \newtheorem{example}{Example}[section]
-\theoremstyle{remark}
 \newtheorem{rem}{Remark}
+\theoremstyle{remark}
 \newtheorem{note}{Note}
 \newtheorem{case}{Case}
 \usepackage{graphicx}
@@ -35,8 +35,11 @@
 \tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
 commutative diagrams/.cd,
   arrow style=tikz,
-  diagrams={>=latex},
+  diagrams={>={Straight Barb[scale=0.8]}},
 }
+
+
+
 
 \usepackage{babel}
 \usepackage{hyperref}
@@ -3927,15 +3930,15 @@ Now observe that
 
 \begin_layout Standard
 Let 
-\begin_inset Formula $A=\Bbbk[\boldsymbol{x}]=\Bbbk[x_{1},\dots,x_{n}]$
+\begin_inset Formula $\Bbbk[\boldsymbol{x}]=\Bbbk[x_{1},\dots,x_{m}]$
 \end_inset
 
 , let 
-\begin_inset Formula $B=\Bbbk[\boldsymbol{y}]=\Bbbk[y_{1},\dots,y_{m}]$
+\begin_inset Formula $\Bbbk[\boldsymbol{y}]=\Bbbk[y_{1},\dots,y_{n}]$
 \end_inset
 
 , and let 
-\begin_inset Formula $\varphi\colon A\to B$
+\begin_inset Formula $\varphi\colon\Bbbk[\boldsymbol{x}]\to\Bbbk[\boldsymbol{y}]$
 \end_inset
 
  be a 
@@ -3943,77 +3946,591 @@ Let
 \end_inset
 
 -algebra homomorphism.
- Next let 
-\begin_inset Formula $Y=\mathrm{Spec}\,B$
+ Then the 
+\begin_inset Formula $\varphi$
 \end_inset
 
-, let 
-\begin_inset Formula $X=\mathrm{Spec}\,A$
+ corresponds to the morpishm of affine schemes 
+\begin_inset Formula $f\colon\mathbb{A}_{\Bbbk}^{n}\to\mathbb{A}_{\Bbbk}^{m}$
 \end_inset
 
-, and let 
-\begin_inset Formula $f\colon Y\to X$
-\end_inset
-
- be given by 
-\begin_inset Formula $f(\mathfrak{q}):=\varphi^{-1}(\mathfrak{q})$
+ given by 
+\begin_inset Formula $f(\mathfrak{q})=\varphi^{-1}(\mathfrak{q})$
 \end_inset
 
  for all 
-\begin_inset Formula $\mathfrak{q}\in Y$
+\begin_inset Formula $\mathfrak{q}\in\mathbb{A}_{\Bbbk}^{n}$
 \end_inset
 
 .
- We want to describe how 
+ We want to give a more geometric description of how 
 \begin_inset Formula $f$
 \end_inset
 
- acts all maximal ideals of 
-\begin_inset Formula $B$
+ acts on the points of 
+\begin_inset Formula $\mathbb{A}_{\Bbbk}^{n}$
 \end_inset
 
- of the form 
-\begin_inset Formula $\mathfrak{n}_{\boldsymbol{q}}=\langle y_{1}-q_{1},\dots,y_{m}-q_{m}\rangle$
+, or in other words, how 
+\begin_inset Formula $\varphi^{-1}$
+\end_inset
+
+ acts on the prime ideals of 
+\begin_inset Formula $\Bbbk[\boldsymbol{y}]$
+\end_inset
+
+.
+ First, note that since 
+\begin_inset Formula $\Bbbk[\boldsymbol{y}]$
+\end_inset
+
+ is Jacobson, we have
+\begin_inset Formula 
+\[
+\varphi^{-1}(\mathfrak{q})=\varphi^{-1}\left(\bigcap_{\substack{\mathfrak{n}\supseteq\mathfrak{q}\\
+\mathfrak{n}\text{ maximal}
+}
+}\mathfrak{n}\right)=\bigcap_{\substack{\mathfrak{n}\supseteq\mathfrak{q}\\
+\mathfrak{n}\text{ maximal}
+}
+}\varphi^{-1}(\mathfrak{n}).
+\]
+
+\end_inset
+
+Thus we may reduce to the case where 
+\begin_inset Formula $\mathfrak{q}=\mathfrak{n}$
+\end_inset
+
+ is a maximal ideal.
+ First let's consider the maximal ideals of the form 
+\begin_inset Formula $\mathfrak{n}_{\boldsymbol{q}}=\langle y_{1}-q_{1},\dots,y_{n}-q_{n}\rangle$
 \end_inset
 
  where 
-\begin_inset Formula $\boldsymbol{q}\in Y(\Bbbk)$
+\begin_inset Formula $\boldsymbol{q}\in\mathbb{A}_{\Bbbk}^{n}(\Bbbk)=\Bbbk^{n}$
 \end_inset
 
 .
  To this end, for each 
-\begin_inset Formula $1\leq j\leq n$
+\begin_inset Formula $1\leq i\leq m$
 \end_inset
 
  let 
 \begin_inset Formula $f_{i}=\varphi(x_{i})$
 \end_inset
 
+, and let 
+\begin_inset Formula $\boldsymbol{f}\colon\Bbbk^{n}\to\Bbbk^{m}$
+\end_inset
+
+ be the map given by 
+\begin_inset Formula $\boldsymbol{f}(\boldsymbol{q})=(f_{1}(\boldsymbol{q}),\dots,f_{m}(\boldsymbol{q}))$
+\end_inset
+
 .
- Then we have
+ Then we claim that
 \begin_inset Formula 
 \[
-\varphi^{-1}(\mathfrak{n}_{\boldsymbol{q}})=\mathfrak{m}_{\boldsymbol{p}}
+\varphi^{-1}(\mathfrak{n}_{\boldsymbol{q}})=\mathfrak{m}_{\boldsymbol{f}(\boldsymbol{q})}=\langle x_{1}-f_{1}(\boldsymbol{q}),\dots,x_{m}-f_{m}(\boldsymbol{q})\rangle.
 \]
 
 \end_inset
 
-where 
-\begin_inset Formula $\boldsymbol{p}=(f_{1}(\boldsymbol{q}),\dots,f_{n}(\boldsymbol{q}))$
+Indeed, observe that
+\begin_inset Formula 
+\begin{align*}
+\varphi(\mathfrak{m}_{\boldsymbol{f}(\boldsymbol{q})}) & =\langle\varphi(x_{1})-f_{1}(\boldsymbol{q}),\dots,\varphi(x_{m})-f_{m}(\boldsymbol{q})\rangle\\
+ & =\langle f_{1}-f_{1}(\boldsymbol{q}),\dots,f_{m}-f_{m}(\boldsymbol{q})\rangle\\
+ & \subseteq\mathfrak{n}_{\boldsymbol{q}}.
+\end{align*}
+
 \end_inset
 
- and where 
-\begin_inset Formula $\mathfrak{m}_{\boldsymbol{p}}=\langle x_{1}-p_{1},\dots,x_{n}-p_{n}\rangle$
+This shows that 
+\begin_inset Formula $\mathfrak{m}_{\boldsymbol{f}(\boldsymbol{q})}\subseteq\varphi^{-1}(\mathfrak{n}_{\boldsymbol{q}})$
 \end_inset
 
 .
- Indeed, observe that
+ We get the reverse inclusion from the fact that 
+\begin_inset Formula $\mathfrak{m}_{\boldsymbol{f}(\boldsymbol{q})}$
+\end_inset
+
+ is a maximal ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ More generally, let 
+\begin_inset Formula $\mathfrak{n}$
+\end_inset
+
+ be an maximal ideal of 
+\begin_inset Formula $\Bbbk[\boldsymbol{y}]$
+\end_inset
+
+.
+ Then there exists a maximal ideal of the form 
+\begin_inset Formula $\mathfrak{n}_{\boldsymbol{q}}$
+\end_inset
+
+ of 
+\begin_inset Formula $\overline{\Bbbk}[\boldsymbol{y}]$
+\end_inset
+
+, where 
+\begin_inset Formula $\boldsymbol{q}\in\overline{\Bbbk}^{n}$
+\end_inset
+
+, which lies over 
+\begin_inset Formula $\mathfrak{n}$
+\end_inset
+
+.
+ Furthermore, there are only finitely many maximal ideals of 
+\begin_inset Formula $\overline{\Bbbk}[\boldsymbol{y}]$
+\end_inset
+
+ which lie over 
+\begin_inset Formula $\mathfrak{n}$
+\end_inset
+
+ and they all have the form 
+\begin_inset Formula $\mathfrak{n}_{\sigma\boldsymbol{q}}$
+\end_inset
+
+ for some 
+\begin_inset Formula $\sigma\in\mathrm{Gal}(\overline{\Bbbk}\slash\Bbbk)$
+\end_inset
+
+ where 
+\begin_inset Formula $\sigma\boldsymbol{q}=(\sigma q_{1},\dots,\sigma q_{n})$
+\end_inset
+
+ (this follows from a general proposition in commutative algebra which we
+ state and proof at the end of this entry below).
+ Then we have 
 \begin_inset Formula 
-\begin{align*}
-\varphi(\mathfrak{m}_{\boldsymbol{p}}) & =\langle\varphi(x_{1})-p_{1},\dots,\varphi(x_{n})-p_{n}\rangle\\
- & =\langle f_{1}-f_{1}(\boldsymbol{q}),\dots,f_{n}-f_{n}(\boldsymbol{q})\rangle\\
- & \subseteq\mathfrak{n}_{\boldsymbol{q}}.
-\end{align*}
+\[
+\varphi^{-1}(\mathfrak{n})=\mathfrak{m}_{\boldsymbol{f}(\boldsymbol{q})}\cap\Bbbk[\boldsymbol{x}]:=\mathfrak{m}.
+\]
+
+\end_inset
+
+Note this does not depend on the choice of maximal ideal which lies over
+ 
+\begin_inset Formula $\mathfrak{n}$
+\end_inset
+
+, for if 
+\begin_inset Formula $\mathfrak{n}_{\sigma\boldsymbol{q}}$
+\end_inset
+
+ where another maximal ideal of 
+\begin_inset Formula $\overline{\Bbbk}[\boldsymbol{y}]$
+\end_inset
+
+ which lies over 
+\begin_inset Formula $\mathfrak{n}$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathfrak{m}_{\boldsymbol{f}(\sigma\boldsymbol{q})}=\mathfrak{m}_{\sigma\boldsymbol{f}(\boldsymbol{q})}$
+\end_inset
+
+ also lies over 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\backslash
+label{example}
+\end_layout
+
+\end_inset
+
+ The maximal ideals 
+\begin_inset Formula $\mathfrak{n}_{i,\zeta_{8}}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathfrak{n}_{i,\zeta_{8}^{5}}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathfrak{n}_{-i,\zeta_{8}^{3}}$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathfrak{n}_{-i,\zeta_{8}^{7}}$
+\end_inset
+
+ lie over 
+\begin_inset Formula $\mathfrak{n}=\langle y_{1}^{2}+1,y_{2}^{2}+y_{1}\rangle$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A$
+\end_inset
+
+ be an integral domain which is integrally closed in its field of fractions
+ 
+\begin_inset Formula $K$
+\end_inset
+
+, let 
+\begin_inset Formula $L$
+\end_inset
+
+ be a normal extension of 
+\begin_inset Formula $K$
+\end_inset
+
+, let 
+\begin_inset Formula $B$
+\end_inset
+
+ be the integral closure of 
+\begin_inset Formula $A$
+\end_inset
+
+ in 
+\begin_inset Formula $L$
+\end_inset
+
+, let 
+\begin_inset Formula $G$
+\end_inset
+
+ be the group of automorphisms of 
+\begin_inset Formula $L$
+\end_inset
+
+ over 
+\begin_inset Formula $K$
+\end_inset
+
+, and let 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ be a prime ideal of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $G$
+\end_inset
+
+ acts transitively on the set of all primes of 
+\begin_inset Formula $B$
+\end_inset
+
+ which lie over 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ We first consider the case where 
+\begin_inset Formula $G$
+\end_inset
+
+ is finite.
+ Let 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{q}'$
+\end_inset
+
+ be two prime ideals of 
+\begin_inset Formula $B$
+\end_inset
+
+ which lie over 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+.
+ Then the 
+\begin_inset Formula $\sigma\mathfrak{q}$
+\end_inset
+
+ (where 
+\begin_inset Formula $\sigma\in G$
+\end_inset
+
+) is an ideal of 
+\begin_inset Formula $B$
+\end_inset
+
+ which lies over 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ since 
+\begin_inset Formula $B$
+\end_inset
+
+ is integrally closed in 
+\begin_inset Formula $L$
+\end_inset
+
+, and it suffices to show that 
+\begin_inset Formula $\mathfrak{q}'$
+\end_inset
+
+ is contained in one of them, or equivalently, in their union by prime avoidance.
+ Let 
+\begin_inset Formula $y\in\mathfrak{q}'$
+\end_inset
+
+ and let 
+\begin_inset Formula $x=\prod\sigma y$
+\end_inset
+
+ where the product runs over 
+\begin_inset Formula $\sigma\in G$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $x$
+\end_inset
+
+ is fixed by 
+\begin_inset Formula $G$
+\end_inset
+
+, thus since 
+\begin_inset Formula $L\slash K$
+\end_inset
+
+ is normal, it follows that there exists a power 
+\begin_inset Formula $q$
+\end_inset
+
+ of the characteristic of 
+\begin_inset Formula $K$
+\end_inset
+
+ such that 
+\begin_inset Formula $x^{q}\in K$
+\end_inset
+
+.
+ In particular, 
+\begin_inset Formula $x^{q}\in K\cap B=A$
+\end_inset
+
+ since 
+\begin_inset Formula $A$
+\end_inset
+
+ is integrally closed.
+ Thus 
+\begin_inset Formula $x^{q}\in\mathfrak{q}'\cap A=\mathfrak{p}$
+\end_inset
+
+, which shows that 
+\begin_inset Formula $x^{q}$
+\end_inset
+
+ is contained in 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+.
+ It follows that there exists a 
+\begin_inset Formula $\sigma\in G$
+\end_inset
+
+ such that 
+\begin_inset Formula $\sigma y\in\mathfrak{q}$
+\end_inset
+
+, whence 
+\begin_inset Formula $y\in\sigma^{-1}\mathfrak{q}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+For the general case, assume 
+\begin_inset Formula $\mathfrak{q}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathfrak{q}'$
+\end_inset
+
+ lie over 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+.
+ For every subfield 
+\begin_inset Formula $E$
+\end_inset
+
+ of 
+\begin_inset Formula $L$
+\end_inset
+
+ which is a finite normal extension over 
+\begin_inset Formula $K$
+\end_inset
+
+, let 
+\begin_inset Formula $G_{E}$
+\end_inset
+
+ be the subset of 
+\begin_inset Formula $G$
+\end_inset
+
+ which consists of all 
+\begin_inset Formula $\sigma\in G$
+\end_inset
+
+ which transform 
+\begin_inset Formula $\mathfrak{q}\cap E$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathfrak{q}'\cap E$
+\end_inset
+
+.
+ This is a closed subspace of 
+\begin_inset Formula $G$
+\end_inset
+
+, hence compact since 
+\begin_inset Formula $G$
+\end_inset
+
+ is compact.
+ Furthermore, each 
+\begin_inset Formula $G_{E}$
+\end_inset
+
+ is non-empty by what was shown above.
+ As the 
+\begin_inset Formula $G_{E}$
+\end_inset
+
+ form a decreasing filtered family, their intersection is non-empty.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
 
 \end_inset
 
@@ -4405,7 +4922,11 @@ end{rem}
 \end_layout
 
 \begin_layout Subsection
-6/15/2024
+6/15/2024 - Associated primes of 
+\begin_inset Formula $\mathrm{Hom}_{R}(M,N)$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4451,7 +4972,7 @@ label{prop}
  Then
 \begin_inset Formula 
 \[
-\mathrm{Ass}(\mathrm{Hom}_{R}(M,N))=\mathrm{Supp}\,M\cap\mathrm{Ass}\,N.
+\mathrm{Ass}(\mathrm{Hom}_{R}(M,N))=\mathrm{Supp}\,M\cap\mathrm{Ass}\,N=\mathrm{V}(\mathrm{Ann}\,M)\cap\mathrm{Ass}\,N.
 \]
 
 \end_inset
@@ -4752,7 +5273,11 @@ end{proof}
 \end_layout
 
 \begin_layout Subsection
-6/25/2024
+6/25/2024 - Inverse limit of 
+\begin_inset Formula $\cdots\to R\xrightarrow{r}R\xrightarrow{r}R$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4898,6 +5423,872 @@ Then we have
 \end_inset
 
  is nilpotent.
+ 
+\end_layout
+
+\begin_layout Subsection
+7/28/2024 - If 
+\begin_inset Formula $\mathrm{Z}G=1$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathrm{Z}(\mathrm{Aut}\,G)=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here's a neat proposition in Group Theory that I proved involving the automorphi
+sm group of a centerless group.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $G$
+\end_inset
+
+ be a group such that 
+\begin_inset Formula $\mathrm{Z}G=1$
+\end_inset
+
+ and let 
+\begin_inset Formula $A=\mathrm{Aut}\,G$
+\end_inset
+
+ be the automorphism group of 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ The only automorphism of 
+\begin_inset Formula $G$
+\end_inset
+
+ which commutes with every inner automorphism of 
+\begin_inset Formula $G$
+\end_inset
+
+ is the identity automorphism.
+ In particular, we have 
+\begin_inset Formula $\mathrm{Z}A=1$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is an automorphism of 
+\begin_inset Formula $G$
+\end_inset
+
+ which commutes with every inner automorphism of 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula 
+\[
+\mathrm{c}_{g}\varphi=\varphi\mathrm{c}_{g}=\mathrm{c}_{\varphi g}\varphi
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $g\in G$
+\end_inset
+
+, or in other words, we have
+\begin_inset Formula 
+\[
+g\varphi(x)g^{-1}=\varphi(gxg^{-1})=\varphi(g)\varphi(x)\varphi(g)^{-1}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x,g\in G$
+\end_inset
+
+.
+ Replacing 
+\begin_inset Formula $x$
+\end_inset
+
+ with 
+\begin_inset Formula $\varphi^{-1}x$
+\end_inset
+
+ above and rearranging terms, we see that 
+\begin_inset Formula 
+\[
+(\varphi g)^{-1}gx=x(\varphi g)^{-1}g
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $x,g\in G$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\mathrm{Z}G=1$
+\end_inset
+
+, we must have 
+\begin_inset Formula $(\varphi g)^{-1}g=1$
+\end_inset
+
+, on in other words, 
+\begin_inset Formula $\varphi g=g$
+\end_inset
+
+ for all 
+\begin_inset Formula $g\in G$
+\end_inset
+
+.
+ It follows that 
+\begin_inset Formula $\varphi=1$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+8/18/2024 - flatness and projectiveness are stable under composition
+\end_layout
+
+\begin_layout Standard
+Today I updated the 5/20/2024 entry.
+ In today's entry, I want to prove the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $A\to B$
+\end_inset
+
+ be a ring homomorphism and let 
+\begin_inset Formula $C$
+\end_inset
+
+ be a 
+\begin_inset Formula $B$
+\end_inset
+
+-module.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $B$
+\end_inset
+
+ is 
+\begin_inset Formula $A$
+\end_inset
+
+-flat and 
+\begin_inset Formula $C$
+\end_inset
+
+ is 
+\begin_inset Formula $B$
+\end_inset
+
+-flat, then 
+\begin_inset Formula $C$
+\end_inset
+
+ is 
+\begin_inset Formula $A$
+\end_inset
+
+-flat.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $B$
+\end_inset
+
+ is 
+\begin_inset Formula $A$
+\end_inset
+
+-projective and 
+\begin_inset Formula $C$
+\end_inset
+
+ is 
+\begin_inset Formula $B$
+\end_inset
+
+-projective, then 
+\begin_inset Formula $C$
+\end_inset
+
+ is 
+\begin_inset Formula $A$
+\end_inset
+
+-projective.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $M\rightarrowtail M'$
+\end_inset
+
+ is an injective 
+\begin_inset Formula $A$
+\end_inset
+
+-module homomorphism.
+ We have a commutative diagram whose vertical arrows are isomorphisms:
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} C 
+\backslash
+otimes _A M 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, 
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\backslash
+simeq 
+\begin_inset Quotes erd
+\end_inset
+
+ ] &  C 
+\backslash
+otimes _A M' 
+\backslash
+arrow[d,  
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\backslash
+simeq 
+\begin_inset Quotes erd
+\end_inset
+
+] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+(C 
+\backslash
+otimes _B B ) 
+\backslash
+otimes _A M 
+\backslash
+arrow[d,  
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\backslash
+simeq 
+\begin_inset Quotes erd
+\end_inset
+
+] 
+\backslash
+arrow[r] & (C 
+\backslash
+otimes _B B) 
+\backslash
+otimes _A M' 
+\backslash
+arrow[d,  
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\backslash
+simeq 
+\begin_inset Quotes erd
+\end_inset
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+C 
+\backslash
+otimes _B (B  
+\backslash
+otimes _A M ) 
+\backslash
+arrow[r, rightarrowtail ] & C 
+\backslash
+otimes _B (B 
+\backslash
+otimes _A M')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The bottom arrow is injective since 
+\begin_inset Formula $B$
+\end_inset
+
+ is 
+\begin_inset Formula $A$
+\end_inset
+
+-flat and 
+\begin_inset Formula $C$
+\end_inset
+
+ is 
+\begin_inset Formula $B$
+\end_inset
+
+-flat.
+ Therefore 
+\begin_inset Formula $C\otimes_{A}M\rightarrowtail C\otimes_{A}M'$
+\end_inset
+
+ is injective; whence 
+\begin_inset Formula $C$
+\end_inset
+
+ is 
+\begin_inset Formula $A$
+\end_inset
+
+-flat.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now suppose that 
+\begin_inset Formula $M\twoheadrightarrow M'$
+\end_inset
+
+ is a surjective 
+\begin_inset Formula $A$
+\end_inset
+
+-module homomorphism.
+ We have a commutative diagram whose vertical arrows are isomorphisms:
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 
+\backslash
+mathrm{Hom}_A (C,M) 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, 
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\backslash
+simeq 
+\begin_inset Quotes erd
+\end_inset
+
+ ] & 
+\backslash
+mathrm{Hom}_A (C,M' ) 
+\backslash
+arrow[d,  
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\backslash
+simeq 
+\begin_inset Quotes erd
+\end_inset
+
+] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+mathrm{Hom}_A (C 
+\backslash
+otimes _B B,M) 
+\backslash
+arrow[d,  
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\backslash
+simeq 
+\begin_inset Quotes erd
+\end_inset
+
+] 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Hom}_A (C 
+\backslash
+otimes _B B ,M') 
+\backslash
+arrow[d,  
+\begin_inset Quotes eld
+\end_inset
+
+ 
+\backslash
+simeq 
+\begin_inset Quotes erd
+\end_inset
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+mathrm{Hom}_B (C,
+\backslash
+mathrm{Hom}_A (B,M)) 
+\backslash
+arrow[r, two heads ] & 
+\backslash
+mathrm{Hom}_B (C,
+\backslash
+mathrm{Hom}_A (B,M')) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The bottom arrow is surjective since 
+\begin_inset Formula $B$
+\end_inset
+
+ is 
+\begin_inset Formula $A$
+\end_inset
+
+-projective and 
+\begin_inset Formula $C$
+\end_inset
+
+ is 
+\begin_inset Formula $B$
+\end_inset
+
+-projective.
+ Therefore 
+\begin_inset Formula $\mathrm{Hom}_{A}(C,M)\rightarrowtail\mathrm{Hom}_{A}(C,M')$
+\end_inset
+
+ is surjective; whence 
+\begin_inset Formula $C$
+\end_inset
+
+ is 
+\begin_inset Formula $A$
+\end_inset
+
+-projective.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+8/24/2024
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a connected ring.
+ Then 
+\begin_inset Formula $R$
+\end_inset
+
+ is an integral domain if and only if 
+\begin_inset Formula $R_{\mathfrak{p}}$
+\end_inset
+
+ is an integral domain for each prime 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+The reason we need 
+\begin_inset Formula $R$
+\end_inset
+
+ to be connected is because the ring 
+\begin_inset Formula $R=K\times K$
+\end_inset
+
+ where 
+\begin_inset Formula $K$
+\end_inset
+
+ is a field is clearly not an integral domain but the localization at each
+ prime of 
+\begin_inset Formula $R$
+\end_inset
+
+ is isomorphic to 
+\begin_inset Formula $K$
+\end_inset
+
+ which is an integral domain.
  
 \end_layout
 
