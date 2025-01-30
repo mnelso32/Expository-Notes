@@ -1,0 +1,2944 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{shapes.geometric}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{xparse,etoolbox}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{ex}{Exercise}
+\newtheorem{sol}{Solution} 
+\newtheorem{example}{Example}[section]
+\newtheorem{rem}{Remark}
+\theoremstyle{remark}
+\newtheorem{note}{Note}
+\newtheorem{case}{Case}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc,arrows,decorations.pathreplacing}
+\tikzset{mydot/.style={circle,fill,inner sep=1.5pt},
+commutative diagrams/.cd,
+  arrow style=tikz,
+  diagrams={>={Straight Barb[scale=0.8]}},
+}
+
+
+
+
+\usepackage{babel}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue
+}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+\pgfplotsset{compat=1.9}
+
+
+\newcommand{\blocktheorem}[1]{%
+  \csletcs{old#1}{#1}% Store \begin
+  \csletcs{endold#1}{end#1}% Store \end
+  \RenewDocumentEnvironment{#1}{o}
+    {\par\addvspace{1.5ex}
+     \noindent\begin{minipage}{\textwidth}
+     \IfNoValueTF{##1}
+       {\csuse{old#1}}
+       {\csuse{old#1}[##1]}}
+    {\csuse{endold#1}
+     \end{minipage}
+     \par\addvspace{1.5ex}}
+}
+
+\raggedbottom
+
+\blocktheorem{theorem}% Make theo into a block
+\blocktheorem{defn}% Make defi into a block
+\blocktheorem{lemma}% Make lem into a block
+\blocktheorem{rem}% Make rem into a block
+\blocktheorem{cor}% Make col into a block
+\blocktheorem{prop}% Make prop into a block
+
+
+\makeatletter
+\newcommand*{\@old@slash}{}\let\@old@slash\slash
+\def\slash{\relax\ifmmode\delimiter"502F30E\mathopen{}\else\@old@slash\fi}
+\makeatother
+
+\def\backslash{\delimiter"526E30F\mathopen{}}
+
+
+
+\usepackage[bottom]{footmisc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\branch tikzcd
+\selected 1
+\filename_suffix 0
+\color #faf0e6
+\end_branch
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\paperwidth 30cm
+\paperheight 35cm
+\topmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation 0bp
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Tor-Persistence
+\end_layout
+
+\begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $R$
+\end_inset
+
+ be a commutative noetherian ring.
+ Recall that a finitely generated 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $M$
+\end_inset
+
+ has finite projective dimension if 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,N)=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ for each finitely generated 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ Indeed, first note that 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,N)=0$
+\end_inset
+
+ if and only if
+\begin_inset Formula 
+\[
+\mathrm{Tor}_{i}^{R_{\mathfrak{p}}}(M_{\mathfrak{p}},N_{\mathfrak{p}})\simeq\mathrm{Tor}_{i}^{R}(M,N)_{\mathfrak{p}}=0
+\]
+
+\end_inset
+
+for all prime ideals 
+\begin_inset Formula $\mathfrak{p}$
+\end_inset
+
+ of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Thus by replacing 
+\begin_inset Formula $R$
+\end_inset
+
+, 
+\begin_inset Formula $M$
+\end_inset
+
+, and 
+\begin_inset Formula $N$
+\end_inset
+
+ with 
+\begin_inset Formula $R_{\mathfrak{p}}$
+\end_inset
+
+, 
+\begin_inset Formula $M_{\mathfrak{p}}$
+\end_inset
+
+, and 
+\begin_inset Formula $N_{\mathfrak{p}}$
+\end_inset
+
+ if necessary, we may assume that 
+\begin_inset Formula $R=(R,\mathfrak{m},\Bbbk)$
+\end_inset
+
+ is local.
+ Now let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the minimal free resolution of 
+\begin_inset Formula $M$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Thus
+\begin_inset Formula 
+\[
+\mathrm{Tor}_{i}^{R}(M,N)=\mathrm{H}_{i}(F\otimes_{R}N).
+\]
+
+\end_inset
+
+We first prove the easy direction: suppose 
+\begin_inset Formula $M$
+\end_inset
+
+ has finite projective dimension, say 
+\begin_inset Formula $\mathrm{pd}_{R}M=p$
+\end_inset
+
+.
+ This means that 
+\begin_inset Formula $F_{p}\neq0$
+\end_inset
+
+ and 
+\begin_inset Formula $F_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i>p$
+\end_inset
+
+.
+ In particular that 
+\begin_inset Formula $(F\otimes_{R}N)_{i}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i>p$
+\end_inset
+
+, which implies 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,N)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i>p$
+\end_inset
+
+.
+ Now we prove the harder direction: suppose 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,N)=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ for each finitely generated 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ In particular, we have 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,\Bbbk)=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $\mathrm{H}_{i}(F_{\Bbbk})=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ where we set 
+\begin_inset Formula $F_{\Bbbk}:=F\otimes_{R}\Bbbk$
+\end_inset
+
+.
+ However 
+\begin_inset Formula $F$
+\end_inset
+
+ is 
+\emph on
+minimal
+\emph default
+, thus 
+\begin_inset Formula $\mathrm{d}_{\Bbbk}=0$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathrm{d}_{\Bbbk}$
+\end_inset
+
+ is the differential of 
+\begin_inset Formula $F_{\Bbbk}$
+\end_inset
+
+.
+ Thus we have 
+\begin_inset Formula $\mathrm{H}_{i}(F_{\Bbbk})=F_{\Bbbk,i}:=F_{i}\otimes_{R}\Bbbk$
+\end_inset
+
+ and this implies 
+\begin_inset Formula $F_{i}\otimes_{R}\Bbbk=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ which implies 
+\begin_inset Formula $F_{i}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ by Nakayama's lemma (here is where we used the fact that 
+\begin_inset Formula $R$
+\end_inset
+
+ is noetherian and 
+\begin_inset Formula $M$
+\end_inset
+
+ is finitely generated).
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Now suppose that the only thing we knew was that 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,M)=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ Can we still conclude that the projective dimension of 
+\begin_inset Formula $M$
+\end_inset
+
+ is finite? This is an open question in general, however it is known to
+ be true for various rings 
+\begin_inset Formula $R$
+\end_inset
+
+: we call such rings 
+\series bold
+Tor-persistent
+\series default
+.
+ It is natural to wonder if in fact every commutative noetherian ring is
+ Tor-persistent.
+ Note that
+\begin_inset Formula 
+\[
+\mathrm{Tor}_{i}^{R}(M,M)=\mathrm{H}_{i}(F\otimes_{R}M)=\mathrm{H}_{i}(F^{\otimes2})
+\]
+
+\end_inset
+
+where we denoted 
+\begin_inset Formula $F^{\otimes2}=F\otimes_{R}F$
+\end_inset
+
+.
+ One of the main reasons why we could conclude that 
+\begin_inset Formula $M$
+\end_inset
+
+ had finite projective dimension if 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,\Bbbk)=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ was because the homology of 
+\begin_inset Formula $F_{\Bbbk}$
+\end_inset
+
+ was extremely simple, namely 
+\begin_inset Formula $\mathrm{H}(F_{\Bbbk})=F_{\Bbbk}$
+\end_inset
+
+.
+ The homology of 
+\begin_inset Formula $F^{\otimes2}$
+\end_inset
+
+ is more complicated however, thus even if we knew that 
+\begin_inset Formula $\mathrm{H}_{i}(F^{\otimes2})=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+, it is not at all clear why this should imply that 
+\begin_inset Formula $F_{i}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ In order to prove this, one would presumably need to use the fact that
+ 
+\begin_inset Formula $R$
+\end_inset
+
+ is noetherian, 
+\begin_inset Formula $M$
+\end_inset
+
+ is finitely generated, and 
+\begin_inset Formula $F$
+\end_inset
+
+ is minimal.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Reduction to Complete Local Ring
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $(R,\mathfrak{m},\Bbbk)$
+\end_inset
+
+ be a local noetherian ring and let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a finitely generated 
+\begin_inset Formula $R$
+\end_inset
+
+-module.
+ Then
+\begin_inset Formula 
+\[
+\mathrm{Tor}_{i}^{R}(M,M)\otimes_{R}\widehat{R}=\mathrm{Tor}_{i}^{\widehat{R}}(\widehat{M},\widehat{M})\quad\text{and}\quad\mathrm{Tor}_{i}^{R}(M,\Bbbk)\otimes_{R}\widehat{R}=\mathrm{Tor}_{i}^{\widehat{R}}(\widehat{M},\Bbbk),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\widehat{R}$
+\end_inset
+
+ and 
+\begin_inset Formula $\widehat{M}$
+\end_inset
+
+ denote the completions of 
+\begin_inset Formula $R$
+\end_inset
+
+ and 
+\begin_inset Formula $M$
+\end_inset
+
+ in the 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+-adic topology.
+ In particular, since 
+\begin_inset Formula $R\to\widehat{R}$
+\end_inset
+
+ is faithfully flat, it follows that 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,M)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\mathrm{Tor}_{i}^{\widehat{R}}(\widehat{M},\widehat{M})=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathrm{pd}_{R}(M)=\mathrm{pd}_{\widehat{R}}(\widehat{M})$
+\end_inset
+
+.
+ Thus we may as well assume that 
+\begin_inset Formula $R$
+\end_inset
+
+ is complete with respect to the 
+\begin_inset Formula $\mathfrak{m}$
+\end_inset
+
+-adic topology in what follows.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Reduction to Depth Zero
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemmadepthtozero}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(R,\mathfrak{m},\Bbbk)$
+\end_inset
+
+ be a local noetherian ring and let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a finitely generated 
+\begin_inset Formula $R$
+\end_inset
+
+-module.
+ Suppose that 
+\begin_inset Formula $x\in\mathfrak{m}$
+\end_inset
+
+ is an 
+\begin_inset Formula $R$
+\end_inset
+
+-regular and 
+\begin_inset Formula $M$
+\end_inset
+
+-regular element.
+ Then 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,M)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R\slash x}(M\slash x,M\slash x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ Furthermore, 
+\begin_inset Formula $M$
+\end_inset
+
+ has finite projective dimension over 
+\begin_inset Formula $R$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $M\slash x$
+\end_inset
+
+ has finite projective dimension over 
+\begin_inset Formula $R\slash x$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Consider the short exact sequence 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{equationtorpersistentlemma}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  M 
+\backslash
+arrow[r, "x "] &  M 
+\backslash
+arrow[r ] &  M 
+\backslash
+slash x 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+After tensoring 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{equationtorpersistentlemma})
+\end_layout
+
+\end_inset
+
+ with 
+\begin_inset Formula $M$
+\end_inset
+
+, we obtain a long exact sequence of Tor modules
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[row sep=40]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+&& 
+\backslash
+cdots 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & 
+\backslash
+mathrm{Tor}^R _{i+1} (M, M
+\backslash
+slash x) 
+\backslash
+arrow[dll,  swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}]
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+& 
+\backslash
+mathrm{Tor}^R _{i} (M, M) 
+\backslash
+arrow[r, "x "] & 
+\backslash
+mathrm{Tor}^R _{i}(M,M) 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & 
+\backslash
+mathrm{Tor}^R _{i} (M, M 
+\backslash
+slash x ) 
+\backslash
+arrow[dll, swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+& 
+\backslash
+mathrm{Tor}^R _{i-1} (M, M) 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+In particular, if 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,M)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,M\slash x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ Conversely, if 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,M\slash x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+, then Nakayama's lemma implies that 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,M)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ Similarly, after tensoring 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{equationtorpersistentlemma})
+\end_layout
+
+\end_inset
+
+ with 
+\begin_inset Formula $M\slash x$
+\end_inset
+
+, we obtain the long exact sequence of Tor modules
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[row sep=40]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+&& 
+\backslash
+cdots 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & 
+\backslash
+mathrm{Tor}^R _{i+1} (M
+\backslash
+slash x , M
+\backslash
+slash x) 
+\backslash
+arrow[dll,  swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}]
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+& 
+\backslash
+mathrm{Tor}^R _{i} (M, M
+\backslash
+slash x) 
+\backslash
+arrow[r, "x "] & 
+\backslash
+mathrm{Tor}^R _{i}(M,M 
+\backslash
+slash x) 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & 
+\backslash
+mathrm{Tor}^R _{i} (M 
+\backslash
+slash x, M 
+\backslash
+slash x ) 
+\backslash
+arrow[dll, swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+& 
+\backslash
+mathrm{Tor}^R _{i-1} (M, M 
+\backslash
+slash x) 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+By the same argument as above, we see that 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,M\slash x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M\slash x,M\slash x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ Now let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the minimal free resolution of 
+\begin_inset Formula $M$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $F\slash x$
+\end_inset
+
+ is the minimal free resolution of 
+\begin_inset Formula $M\slash x$
+\end_inset
+
+ over 
+\begin_inset Formula $R\slash x$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{C}(x)=F\oplus eF$
+\end_inset
+
+ is the minimal free resolution of 
+\begin_inset Formula $M$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ In particular, note that
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Tor}_{i}^{R}(M\slash x,M\slash x) & =\mathrm{H}_{i}((F\oplus eF)\otimes_{R}M\slash x)\\
+ & =\mathrm{H}_{i}((F\slash x)\otimes_{R}M\oplus e((F\slash x)\otimes_{R}M))\\
+ & =\mathrm{H}_{i}(F\slash x\otimes_{R\slash x}M\slash x)\oplus\mathrm{H}_{i+1}(F\slash x\otimes_{R\slash x}M\slash x)\\
+ & =\mathrm{Tor}_{i}^{R\slash x}(M\slash x,M\slash x)\oplus\mathrm{Tor}_{i-1}^{R\slash x}(M\slash x,M\slash x)
+\end{align*}
+
+\end_inset
+
+where we used the fact that 
+\begin_inset Formula $\mathrm{d}e=0$
+\end_inset
+
+ in 
+\begin_inset Formula $F\slash x$
+\end_inset
+
+.
+ It follows at once that 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M\slash x,M\slash x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R\slash x}(M\slash x,M\slash x)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ Finally, note that 
+\begin_inset Formula 
+\[
+\mathrm{pd}_{R}(M)=\mathrm{length}(F)=\mathrm{length}(F\slash x)=\mathrm{pd}_{R\slash x}(M\slash x).
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{rem}
+\backslash
+label{rem}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a finitely generated 
+\begin_inset Formula $R$
+\end_inset
+
+-module and let 
+\begin_inset Formula $M_{n}$
+\end_inset
+
+ denote the 
+\begin_inset Formula $n$
+\end_inset
+
+th syzygy of 
+\begin_inset Formula $M$
+\end_inset
+
+ for each 
+\begin_inset Formula $n\geq0$
+\end_inset
+
+ with 
+\begin_inset Formula $M_{0}=M$
+\end_inset
+
+.
+ Then we have
+\begin_inset Formula 
+\[
+\mathrm{Tor}_{i}^{R}(M_{n},M_{n})=\mathrm{Tor}_{i+2n}^{R}(M,M)\quad\text{and}\quad\mathrm{Tor}_{i}^{R}(M_{n},\Bbbk)=\mathrm{Tor}_{i+n}^{R}(M,\Bbbk).
+\]
+
+\end_inset
+
+Thus 
+\begin_inset Formula $M$
+\end_inset
+
+ satisfies Tor persistence if and only if 
+\begin_inset Formula $M_{n}$
+\end_inset
+
+ satisfies Tor persistence.
+ Furthermore, if 
+\begin_inset Formula $\delta_{M}<\delta_{R}$
+\end_inset
+
+ (where we set 
+\begin_inset Formula $\delta_{M}=\mathrm{depth}\,M$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta_{R}=\mathrm{depth}\,R$
+\end_inset
+
+), then 
+\begin_inset Formula $\delta_{M_{1}}=\delta_{M}+1$
+\end_inset
+
+, so by replacing 
+\begin_inset Formula $M$
+\end_inset
+
+ with 
+\begin_inset Formula $M_{n}$
+\end_inset
+
+ for 
+\begin_inset Formula $n$
+\end_inset
+
+ large enough, we may reduce to the case where 
+\begin_inset Formula $\delta_{M}\geq\delta_{R}$
+\end_inset
+
+.
+ Then by 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Lemma~(
+\backslash
+ref{lemmadepthtozero})
+\end_layout
+
+\end_inset
+
+, we may further reduce to the case where 
+\begin_inset Formula $\delta_{M}\geq\delta_{R}=0$
+\end_inset
+
+.
+ Note that if 
+\begin_inset Formula $\delta_{M}>\delta_{R}$
+\end_inset
+
+, then necessarily 
+\begin_inset Formula $M$
+\end_inset
+
+ must have infinite projective dimension.
+ On the other hand, we also always have the inequality 
+\begin_inset Formula $d_{R}\geq d_{M}\ge\delta_{M}$
+\end_inset
+
+ where we set 
+\begin_inset Formula $d_{R}=\dim R$
+\end_inset
+
+ and 
+\begin_inset Formula $d_{M}=\dim M$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{rem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Note that anytime short exact sequence of the form
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{equationtorpersistentlemmadd}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  M 
+\backslash
+arrow[r] &  E 
+\backslash
+arrow[r ] &  M  
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, then virtually by the same argument as in the lemma above, if 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,M)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+, then 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(E,E)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $E$
+\end_inset
+
+ is called an extension of 
+\begin_inset Formula $M$
+\end_inset
+
+ by 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ The isomorphism classes of extensions of 
+\begin_inset Formula $M$
+\end_inset
+
+ by 
+\begin_inset Formula $M$
+\end_inset
+
+ is in bijection with 
+\begin_inset Formula $\mathrm{Ext}_{R}^{1}(M,M)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $E$
+\end_inset
+
+ be an extension of 
+\begin_inset Formula $M$
+\end_inset
+
+ by 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathrm{pd}_{R}(E)=\mathrm{pd}_{R}(M)$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ After tensoring 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{equationtorpersistentlemmadd})
+\end_layout
+
+\end_inset
+
+ by 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+, we obtain the long exact sequence of Tor modules
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd}[row sep=40]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+&& 
+\backslash
+cdots 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & 
+\backslash
+mathrm{Tor}^R _{i+1} (M , 
+\backslash
+Bbbk ) 
+\backslash
+arrow[dll,  swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}]
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+& 
+\backslash
+mathrm{Tor}^R _{i} (M, 
+\backslash
+Bbbk ) 
+\backslash
+arrow[r] & 
+\backslash
+mathrm{Tor}^R _{i}(E, 
+\backslash
+Bbbk ) 
+\backslash
+arrow[r] 
+\backslash
+arrow[d, phantom, ""{coordinate, name=Z'}] & 
+\backslash
+mathrm{Tor}^R _{i} (M, 
+\backslash
+Bbbk ) 
+\backslash
+arrow[dll, swap, rounded corners, to path={ -- ([xshift=2ex]
+\backslash
+tikztostart.east) |- (Z') [near end]
+\backslash
+tikztonodes -| ([xshift=-2ex]
+\backslash
+tikztotarget.west) -- (
+\backslash
+tikztotarget)}] 
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+& 
+\backslash
+mathrm{Tor}^R _{i-1} (M, 
+\backslash
+Bbbk ) 
+\backslash
+arrow[r] & 
+\backslash
+cdots 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+In particular, suppose 
+\begin_inset Formula $p=\mathrm{pd}_{R}(M)$
+\end_inset
+
+.
+ we see that
+\begin_inset Formula 
+\begin{align*}
+\mathrm{pd}_{R}(M) & =\sup\{\mathrm{Tor}_{i}^{R}(M,\Bbbk)\neq0\mid i\in\mathbb{N}\}\\
+\\
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Reduction to Indecomposable Modules
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(R,\mathfrak{m},\Bbbk)$
+\end_inset
+
+ be a local noetherian ring and let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a finitely generated 
+\begin_inset Formula $R$
+\end_inset
+
+-module such that 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,M)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ and such that 
+\begin_inset Formula $M=M_{1}\oplus M_{2}$
+\end_inset
+
+ where 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+ are 
+\begin_inset Formula $R$
+\end_inset
+
+-modules.
+ Then
+\begin_inset Formula 
+\[
+\mathrm{Tor}_{i}^{R}(M_{1},M_{1})=0,\quad\mathrm{Tor}_{i}^{R}(M_{2},M_{2})=0,\quad\text{and}\quad\mathrm{Tor}_{i}^{R}(M_{1},M_{2})=0
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ Furthermore, we have
+\begin_inset Formula 
+\[
+\mathrm{pd}_{R}(M)=\max\{\mathrm{pd}_{R}(M_{1}),\mathrm{pd}_{R}(M_{2})\}.
+\]
+
+\end_inset
+
+ Then 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(N,N)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ and 
+\begin_inset Formula $N$
+\end_inset
+
+ has finite projective dimension if and only if 
+\begin_inset Formula $M$
+\end_inset
+
+ has finite projective dimension.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ For 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+0 & =\mathrm{Tor}_{i}^{R}(M,M)\\
+ & =\mathrm{Tor}_{i}^{R}(M_{1}\oplus M_{2},M_{1}\oplus M_{2})\\
+ & =\mathrm{Tor}_{i}^{R}(M_{1},M_{1})\oplus\mathrm{Tor}_{i}^{R}(M_{1},M_{2})^{2}\oplus\mathrm{Tor}_{i}^{R}(M_{2},M_{2}).
+\end{align*}
+
+\end_inset
+
+This establishes the first part of the lemma.
+ For the second part, note that
+\begin_inset Formula 
+\begin{align*}
+\mathrm{Tor}_{i}^{R}(M,\Bbbk) & =\mathrm{Tor}_{i}^{R}(M_{1}\oplus M_{2},\Bbbk)\\
+ & =\mathrm{Tor}_{i}^{R}(M_{1},\Bbbk)\oplus\mathrm{Tor}_{i}^{R}(M_{2},\Bbbk).
+\end{align*}
+
+\end_inset
+
+It follows that 
+\begin_inset Formula $\mathrm{pd}_{R}(M)=\max\{\mathrm{pd}_{R}(M_{1}),\mathrm{pd}_{R}(M_{2})\}$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Finite Length Case
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $(R,\mathfrak{m},\Bbbk)$
+\end_inset
+
+ be a local noetherian ring and let 
+\begin_inset Formula $M$
+\end_inset
+
+ be a finitely generated 
+\begin_inset Formula $R$
+\end_inset
+
+-module such that 
+\begin_inset Formula $\ell(M)=2$
+\end_inset
+
+.
+ Thus there is a short exact sequence
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{equationdsssff}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  
+\backslash
+Bbbk 
+\backslash
+arrow[r] &  M 
+\backslash
+arrow[r ] &  
+\backslash
+Bbbk 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M,M)=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+, then 
+\begin_inset Formula $M$
+\end_inset
+
+ has finite projective dimension of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the minimal free resolution of 
+\begin_inset Formula $M$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ After tensoring 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{equationdsssff})
+\end_layout
+
+\end_inset
+
+ with 
+\begin_inset Formula $-\otimes_{R}M$
+\end_inset
+
+ and taking homology, we obtain isomorphisms
+\begin_inset Formula 
+\[
+\mathrm{Tor}_{i}(M,\Bbbk):=F_{\Bbbk,i}\xrightarrow{\partial_{i}}F_{\Bbbk,i-1}:=\mathrm{Tor}_{i-1}(M,\Bbbk)
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ where 
+\begin_inset Formula $\partial_{i}$
+\end_inset
+
+ is the connecting map from the long exact sequence in Tor modules.
+ Next let 
+\begin_inset Formula $E$
+\end_inset
+
+ be the minimal free resolution of 
+\begin_inset Formula $\Bbbk$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Then after tensoring 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+(
+\backslash
+ref{equationdsssff})
+\end_layout
+
+\end_inset
+
+ with 
+\begin_inset Formula $-\otimes_{R}\Bbbk$
+\end_inset
+
+ and taking homology, we see that 
+\begin_inset Formula $\ell(E_{\Bbbk,i})=\ell(E_{\Bbbk,i-1})$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $E_{\Bbbk,i}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ since 
+\begin_inset Formula $E$
+\end_inset
+
+ is a DG algebra.
+ It follows that 
+\begin_inset Formula $F_{\Bbbk,i}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ 
+\begin_inset Formula 
+\[
+\]
+
+\end_inset
+
+ we obtain 
+\end_layout
+
+\begin_layout Standard
+We claim that 
+\begin_inset Formula $\partial_{i}=0$
+\end_inset
+
+.
+ Indeed, the connecting map is defined as follows: let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the minimal free resolution of 
+\begin_inset Formula $M$
+\end_inset
+
+ over 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Given 
+\begin_inset Formula $a\otimes\overline{1}\in F_{\Bbbk}$
+\end_inset
+
+ in homological degree 
+\begin_inset Formula $i$
+\end_inset
+
+, we lift 
+\begin_inset Formula $a\otimes\overline{1}$
+\end_inset
+
+ to 
+\begin_inset Formula $a\otimes1\in F^{\otimes2}$
+\end_inset
+
+ and then we apply the differential to get 
+\begin_inset Formula $\mathrm{d}(a\otimes1)=\mathrm{d}a\otimes1\in F^{\otimes2}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\mathrm{d}a\in\mathfrak{m}F$
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Induction: now suppose we have a short exact sequence 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{equation}
+\backslash
+label{equationdsssff}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  M' 
+\backslash
+arrow[r] &  M 
+\backslash
+arrow[r ] & 
+\backslash
+Bbbk 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{equation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\mathrm{Tor}_{i}^{R}(M',M')=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+, then by induction on length, we would have 
+\begin_inset Formula $F'_{\Bbbk,i}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ where 
+\begin_inset Formula $F'$
+\end_inset
+
+ is the minimal free resolution of 
+\begin_inset Formula $M'$
+\end_inset
+
+.
+ Then this would imply 
+\begin_inset Formula $0=\mathrm{Tor}_{i}(M,M')=F_{\Bbbk,i+1}$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Tor-Persistence
+\end_layout
+
+\begin_layout Standard
+In what follows, we assume 
+\begin_inset Formula $(R,\mathfrak{m},\Bbbk)$
+\end_inset
+
+ is a local noetherian ring.
+ Let 
+\begin_inset Formula $F$
+\end_inset
+
+ be the minimal 
+\begin_inset Formula $R$
+\end_inset
+
+-free resolution of the cyclic 
+\begin_inset Formula $R$
+\end_inset
+
+-module 
+\begin_inset Formula $R\slash I$
+\end_inset
+
+ where 
+\begin_inset Formula $I\subseteq\mathfrak{m}$
+\end_inset
+
+ is an ideal of 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Choose a multiplication 
+\begin_inset Formula $\mu$
+\end_inset
+
+ on 
+\begin_inset Formula $F$
+\end_inset
+
+ giving it the structure of an MDG 
+\begin_inset Formula $R$
+\end_inset
+
+-algebra.
+ We denote 
+\begin_inset Formula $\mu(a_{1}\otimes a_{2})=a_{1}a_{2}$
+\end_inset
+
+ for all 
+\begin_inset Formula $a_{1},a_{2}\in F$
+\end_inset
+
+ in order to simplify notation in what follows.
+ Define a chain map 
+\begin_inset Formula $\{\cdot\}_{\mu}\colon F^{\otimes3}\to F^{\otimes2}$
+\end_inset
+
+ by the formula
+\begin_inset Formula 
+\[
+\{a_{1}\otimes a_{2}\otimes a_{3}\}=a_{1}a_{2}\otimes a_{3}-a_{1}\otimes a_{2}a_{3}=\{a_{1},a_{2},a_{3}\},
+\]
+
+\end_inset
+
+where we remove the subscript 
+\begin_inset Formula $\mu$
+\end_inset
+
+ from 
+\begin_inset Formula $\{\cdot\}_{\mu}$
+\end_inset
+
+ when context is clear and where we set 
+\begin_inset Formula $\{\cdot,\cdot,\cdot\}\colon F^{3}\to F^{\otimes2}$
+\end_inset
+
+ to be the unique 
+\begin_inset Formula $R$
+\end_inset
+
+-trilinear map corresponding to 
+\begin_inset Formula $\{\cdot\}$
+\end_inset
+
+ via the universal mapping property of tensor products.
+ Our goal is to determine what 
+\begin_inset Formula $\ker\{\cdot\}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathrm{im}\,\{\cdot\}$
+\end_inset
+
+ look like.
+ First we consider 
+\begin_inset Formula $\mathrm{im}\,\{\cdot\}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $a_{1},a_{2},a_{3}\in F$
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align*}
+\{a_{1},a_{2},1\} & =a_{1}a_{2}\otimes1-a_{1}\otimes a_{2}\\
+\{1,a_{2},a_{3}\} & =a_{2}\otimes a_{3}-1\otimes a_{2}a_{3}\\
+\{a_{1},1,a_{3}\} & =0\\
+\{a,a,b\} & =a^{2}\otimes b-a\otimes ab
+\end{align*}
+
+\end_inset
+
+Thus if 
+\begin_inset Formula $ab=0$
+\end_inset
+
+, then 
+\begin_inset Formula $a\otimes b\in\mathrm{im}\,\{\cdot\}$
+\end_inset
+
+.
+ Furthermore we have 
+\begin_inset Formula $a\otimes1-1\otimes a\in\mathrm{im}\,\{\cdot\}$
+\end_inset
+
+.
+ Now suppose that
+\begin_inset Formula 
+\[
+\{e_{i_{1}},e_{i_{2}},e_{i_{3}}\}=e_{i_{1}}e_{i_{2}}\otimes e_{i_{3}}-e_{i_{1}}\otimes e_{i_{2}}e_{i_{3}}=0.
+\]
+
+\end_inset
+
+Then we must have 
+\begin_inset Formula $e_{i_{1}}=e_{i_{1}}e_{i_{2}}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{i_{3}}=e_{i_{2}}e_{i_{3}}$
+\end_inset
+
+.
+ Or in other words, we must have 
+\begin_inset Formula $e_{i_{1}}(1-e_{i_{2}})=0$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{i_{3}}(1-e_{i_{2}})=0$
+\end_inset
+
+.
+ By considering homological degrees as well as using the fact that 
+\begin_inset Formula $R$
+\end_inset
+
+ is local, one sees that the only solution to these equations is
+\begin_inset Formula 
+\[
+\{(0,e_{i_{2}},0),(0,1,e_{i_{3}}),(e_{i_{1}},1,0),(e_{i_{1}},1,e_{i_{3}})\}.
+\]
+
+\end_inset
+
+In particular, this spans 
+\begin_inset Formula $F^{\oplus3}\oplus F^{\otimes2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\backslash
+label{prop}
+\end_layout
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $\mathrm{H}_{i}(F)=0=\mathrm{H}_{i}(F^{\otimes2})$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\mathrm{H}_{i}(F^{\otimes n})=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\geq1$
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+ Consider the short exact sequence 
+\begin_inset Formula $0\to F\to F^{\otimes3}\to F^{\otimes2}\to0$
+\end_inset
+
+.
+ Actually this even shows 
+\begin_inset Formula $\mathrm{Tor}_{+}^{R}(S,S)=\mathrm{H}_{+}(F^{\otimes n})$
+\end_inset
+
+ for all 
+\begin_inset Formula $n\geq2$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  M_1 
+\backslash
+arrow[r] &  M_2 
+\backslash
+arrow[r] &  M_3 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+be a short exact sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules and set 
+\begin_inset Formula $T_{i}^{mn}=\mathrm{Tor}_{i}^{R}(M_{m},M_{n})$
+\end_inset
+
+ where 
+\begin_inset Formula $m,n\in\{1,2,3\}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $T_{i}^{mm}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ for all 
+\begin_inset Formula $m\in\{1,2,3\}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $T_{i}^{mn}=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\gg0$
+\end_inset
+
+ for all 
+\begin_inset Formula $m,n\in\{1,2,3\}$
+\end_inset
+
+ with 
+\begin_inset Formula $m\neq n$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $T_{i}^{11}=T_{i-1}^{11}=T_{i}^{22}=T_{i-1}^{22}=T_{i+1}^{33}=T_{i}^{33}=0$
+\end_inset
+
+, then 
+\begin_inset Formula $T_{i}^{21}=T_{i}^{31}=T_{i}^{32}=T_{i-1}^{21}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $T_{i}^{11}=T_{i-1}^{11}=T_{i+1}^{33}=T_{i}^{33}=T_{i}^{mn}=0$
+\end_inset
+
+ where 
+\begin_inset Formula $mn\in\{12,13,23\}$
+\end_inset
+
+, then 
+\begin_inset Formula $T_{i}^{kl}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $kl\in\{12,13,23,22\}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $T_{i}^{11}=T_{i-1}^{11}=T_{i+1}^{22}=T_{i}^{22}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $T_{i+1}^{32}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $T_{i}^{mn}=0$
+\end_inset
+
+ where 
+\begin_inset Formula $mn\in\{12,13\}$
+\end_inset
+
+, then 
+\begin_inset Formula $T_{i}^{kl}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $kl\in\{12,13,23,22\}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $T_{i}^{11}=T_{i-1}^{11}=T_{i+1}^{22}=T_{i}^{33}=T_{i}^{mn}=0$
+\end_inset
+
+ where 
+\begin_inset Formula $m,n\in\{1,2,3\}$
+\end_inset
+
+ and 
+\begin_inset Formula $mn\neq11$
+\end_inset
+
+ or 
+\begin_inset Formula $mn\neq33$
+\end_inset
+
+, then 
+\begin_inset Formula $T_{i}^{lk}=0$
+\end_inset
+
+ for all 
+\begin_inset Formula $l,k\in\{1,2,3\}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+d
+\end_layout
+
+\begin_layout Enumerate
+d
+\end_layout
+
+\begin_layout Enumerate
+d
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{proof}
+\backslash
+label{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{proof}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lemma}
+\backslash
+label{lemma}
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Branch tikzcd
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\backslash
+begin{tikzcd} 0 
+\backslash
+arrow[r] &  M_1 
+\backslash
+arrow[r] &  M_2 
+\backslash
+arrow[r] &  M_3 
+\backslash
+arrow[r] & 0 
+\backslash
+end{tikzcd}
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+be a short exact sequence of 
+\begin_inset Formula $R$
+\end_inset
+
+-modules and set 
+\begin_inset Formula $E_{mn}^{i}=\mathrm{Ext}_{R}^{i}(M_{m},M_{n})$
+\end_inset
+
+ where 
+\begin_inset Formula $m,n\in\{1,2,3\}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $E_{kk}^{i}=E_{mn}^{i}=E_{nm}^{i}=0$
+\end_inset
+
+ where 
+\begin_inset Formula $k,m,n\in\{1,2,3\}$
+\end_inset
+
+ such that 
+\begin_inset Formula $k\neq m\neq n$
+\end_inset
+
+, then 
+\begin_inset Formula $E_{mm}^{i}=E_{nn}^{i}=E_{kn}^{i}=E_{nk}^{i}=0$
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lemma}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
